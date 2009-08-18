@@ -98,7 +98,7 @@ def tex_coef(coef, var, bplus=0, bpn=0, bpc=0):
     # coef est le coefficient à écrire devant la variable var
     # bplus est un booleen : s'il est vrai, il faut ecrire le signe +
     # bpn est un booleen : s'il est vrai, il faut mettre des parentheses autour de l'ecriture si coef est negatif.
-    # bpc est un booleen : s'il est vrai, il faut mettre des parentheses autour de l'ecriture si coef =! 0 ou 1 et var est non vide (sert pour (3x)²)
+    # bpc est un booleen : s'il est vrai, il faut mettre des parentheses autour de l'ecriture si coef =! 0 ou 1 et var est non vide
 
     if coef != 0 and abs(coef) != 1:
         if var == '':

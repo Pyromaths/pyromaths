@@ -1,1 +1,25 @@
- 
+% entete
+\documentclass[a4paper,11pt]{article}
+% \usepackage[latin1]{inputenc}
+% \usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel}
+
+\newcommand*\exercice{%
+  \psset{unit=1cm}
+  \ifthenelse{\equal{\theexo}{0}}{}{\filbreak}
+  \refstepcounter{exo}%
+  \stepcounter{nocalcul}%
+  \par\addvspace{1.5\baselineskip minus 1\baselineskip}%
+  \@ifstar%
+  {\penalty-130\styleexo[Corrige de l'exercice]}%
+  {\filbreak\styleexo[Exercice]}%
+  }
+
+\begin{document}
+% fin entete
+
+##{{EXERCICES}}##
+
+% pied de page
+\end{document}
+% fin pied de page

@@ -1,3 +1,4 @@
+% entete
 \documentclass[a4paper,11pt]{article}
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
@@ -12,7 +13,7 @@
 \setlength\mathindent{0em}
 \setlength{\columnsep}{30pt}
 \usepackage[ps2pdf,pagebackref=true,colorlinks=true,linkcolor=blue,plainpages=true]{hyperref}
-\hypersetup{pdfauthor={J�r�me Ortais},pdfsubject={Exercices de math�matiques},pdftitle={Exercices cr��s par Pyromaths, un programme en Python de J�r\^ome Ortais}}
+\hypersetup{pdfauthor={Jerome Ortais},pdfsubject={Exercices de mathematiques},pdftitle={Exercices crees par Pyromaths, un programme en Python de Jerome Ortais}}
 \makeatletter
 \newcommand\styleexo[1][]{
   \renewcommand{\theenumi}{\arabic{enumi}}
@@ -28,7 +29,7 @@
   \stepcounter{nocalcul}%
   \par\addvspace{1.5\baselineskip minus 1\baselineskip}%
   \@ifstar%
-  {\penalty-130\styleexo[Corrig� de l'exercice]}%
+  {\penalty-130\styleexo[Corrige de l'exercice]}%
   {\filbreak\styleexo[Exercice]}%
   }
 \makeatother
@@ -50,9 +51,9 @@
 }
 \count1=\year \count2=\year \ifnum\month<8\advance\count1by-1\else\advance\count2by1\fi
 \pagestyle{fancy}
-\cfoot{\textsl{\footnotesize{Ann�e \number\count1/\number\count2}}}
+\cfoot{\textsl{\footnotesize{Annee \number\count1/\number\count2}}}
 \rfoot{\textsl{\tiny{http://www.pyromaths.org}}}
-##{{NUMEROTATION}}##
+% ##{{NUMEROTATION}}##
 \begin{document}
 \newcounter{nocalcul}[exo]
 \renewcommand{\thenocalcul}{\Alph{nocalcul}}
@@ -60,7 +61,10 @@
 \setlength{\columnseprule}{0.5pt}
 \chead{\Large{\textsc{##{{TITRE}}##}}}
 \rhead{\textsl{\footnotesize{Classe de 6\ieme}}}
+% fin entete
 
-##{{EXERCICES}}##
+% ##{{EXERCICES}}##
 
-\end{document} 
+% pied de page
+\end{document}
+% fin pied de page

@@ -115,59 +115,91 @@ def creation(parametres):
                             'titre': unicode(self.lineEdit_titre.text()),
                             'niveau': unicode(self.comboBox_niveau.currentText()),
                             }"""
-    f0 = parametres['fiche_exo']
-    f1 = parametres['fiche_cor']
+    exo = parametres['fiche_exo']
+    cor = parametres['fiche_cor']
+    f0 = open( exo, 'w')
+    f1 = open( cor, 'w')
+    titre = parametres['titre']
     creer_pdf = parametres['creer_pdf']
-    fiche_metapost = os.path.splitext(f0)[0] + '.mp'
-    files = WriteFiles(f0, f1, fiche_metapost, creer_pdf)
-    if creer_pdf:
-        files.f0.write(u"\\chead{\\Large{\\textsc{")
-        files.f0.write(parametres['titre'].encode('latin1'))
-        files.f0.write(u"}}}\n")
-        files.f1.write("\\chead{\\Large{\\textsc{")
-        files.f1.write(parametres['titre'].encode('latin1'))
-        files.f1.write(u" - corrigé}}}\n".encode('latin1'))
-        files.f0.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
-        files.f1.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
 
-    for exo in parametres['liste_exos']:
-        print exo
-        LesFiches[exo[0]][1].main(exo[1], files)
-    WriteFiles.close(files)
+    fiche_metapost = os.path.splitext(exo)[0] + '.mp'
+    #files = WriteFiles(f0, f1, fiche_metapost, creer_pdf)
+
+    copie_tronq_modele(f0, parametres, 'entete')
+    copie_tronq_modele(f1, parametres, 'entete')
+    
+    #if creer_pdf:
+        #files.f0.write(u"\\chead{\\Large{\\textsc{")
+        #files.f0.write(parametres['titre'].encode('latin1'))
+        #files.f0.write(u"}}}\n")
+        #files.f1.write("\\chead{\\Large{\\textsc{")
+        #files.f1.write(parametres['titre'].encode('latin1'))
+        #files.f1.write(u" - corrigé}}}\n".encode('latin1'))
+        #files.f0.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
+        #files.f1.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
+    if creer_pdf:
+        f0.write(u"\\chead{\\Large{\\textsc{")
+        f0.write(parametres['titre'].encode('latin1'))
+        f0.write(u"}}}\n")
+        f0.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
+        f1.write("\\chead{\\Large{\\textsc{")
+        f1.write(parametres['titre'].encode('latin1'))
+        f1.write(u" - corrigé}}}\n".encode('latin1'))
+        f1.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
+
+    for exercice in parametres['liste_exos']:
+        LesFiches[exercice[0]][1].main(exercice[1], f0, f1)
+	
+    copie_tronq_modele(f0, parametres, 'pied')
+    copie_tronq_modele(f1, parametres, 'pied')
+    
+    ##WriteFiles.close(files)
+
+    
+    # Dossiers et fichiers d'enregistrement, définitions qui doivent rester avant le if suivant.
+    dir0=os.path.dirname(exo)
+    dir1=os.path.dirname(cor)
+    f0noext=os.path.splitext(exo)[0]
+    f1noext=os.path.splitext(cor)[0]
+    
     if parametres['creer_pdf']:
         from subprocess import call
-        dir0=os.path.dirname(f0)
-        f0noext=os.path.splitext(f0)[0]
-        dir1=os.path.dirname(f1)
-        f1noext=os.path.splitext(f1)[0]
 
         for i in xrange(2):
             os.chdir(dir0)
-            call(["latex", "-interaction=batchmode", str(f0)], env={"PATH": os.path.expandvars('$PATH')})
-            os.chdir(dir1)
-            call(["latex", "-interaction=batchmode", str(f1)],
+            call(["latex", "-interaction=batchmode", str(exo)], env={"PATH": os.path.expandvars('$PATH')})
+            if parametres['corrige']:
+                os.chdir(dir1)
+                call(["latex", "-interaction=batchmode", str(cor)],
                                                          env={"PATH": os.path.expandvars('$PATH')})
         call(["dvips", "-q", "%s.dvi" % (f0noext)], env={"PATH": os.path.expandvars('$PATH')})
-        call(["dvips", "-q", "%s.dvi" % (f1noext)], env={"PATH": os.path.expandvars('$PATH')})
+        if parametres['corrige']:
+            call(["dvips", "-q", "%s.dvi" % (f1noext)], env={"PATH": os.path.expandvars('$PATH')})
         call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % (f0noext), "%s.pdf" % (f0noext)],
                                                                             env={"PATH": os.path.expandvars('$PATH')})
-        call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % (f1noext), "%s.pdf" % (f1noext)],
+        if parametres['corrige']:
+            call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % (f1noext), "%s.pdf" % (f1noext)],
                                                                             env={"PATH": os.path.expandvars('$PATH')})
         if os.name == "nt":  #Cas de Windows.
             os.startfile('%s.pdf' % (f0noext))
-            os.startfile('%s.pdf' % (f1noext))
+            if parametres['corrige']:
+                os.startfile('%s.pdf' % (f1noext))
         else:
             os.system('xdg-open %s.pdf' % (f0noext))
-            os.system('xdg-open %s.pdf' % (f1noext))
+            if parametres['corrige']:
+                os.system('xdg-open %s.pdf' % (f1noext))
         #Supprime les fichiers temporaires créés par LaTeX
         try:
             for ext in ('.aux', '.dvi', '.log', '.out', '.ps'):
                 os.remove(os.path.join(dir0,  f0noext + ext))
-                os.remove(os.path.join(dir1,  f1noext + ext))
+                if parametres['corrige']:
+                    os.remove(os.path.join(dir1,  f1noext + ext))
         except OSError:
             print u"Le fichier %s ou %s n'a pas été supprimé." % (os.path.join(dir0,  f0noext + ext),
                                                                   os.path.join(dir1,  f1noext + ext))
                                                                   #le fichier à supprimer n'existe pas.
+    if not parametres['corrige']:
+        os.remove(os.path.join(dir1,  f1noext + '.tex'))
 
 #================================================================
 #        Gestion du fichier de configuration de Pyromaths
@@ -253,24 +285,76 @@ def modify_config_file(file):
         f.write(etree.tostring(indent(oldroot), pretty_print=True, encoding="UTF-8", xml_declaration=True))
         f.close()
 
-def copie_modele(source, destination):
-    """Copie le contenu d'un modèle dans un nouveau fichier tex, en remplaçant les mots-clés par leur valeur, soit dans le fichier de config, soit les exercices."""
-    fs = open(source, 'r')
-    fd = open(destination, 'w')
-    while 1:
-        txt = fs.readline()
-        if txt =="":
-            break
-        temp = re.findall('##{{[A-Z]*}}##',txt)
+#def copie_modele(source, destination, parametres):
+    #"""Copie le contenu d'un modèle dans un nouveau fichier tex, en remplaçant les mots-clés par leur valeur, soit dans le fichier de config, soit les exercices."""
+
+    ### Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
+    #source = os.path.join(os.getcwd(), 'modeles', source)
+ 
+    ### La destination est le fichier temporaire.
+    
+    ### Les variables à remplacer :
+    #if parametres['numeroter']:
+      #numerotation = '\lhead{\textsl{\footnotesize{Page \thepage/ \pageref{LastPage}}}}'
+    #else:
+      #numerotation = ''
+
+    #titre = parametres['titre']
+    #exercices = 'EXERCICES' ### !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ##for exo in parametres['liste_exos']:
+        ##LesFiches[exo[0]][1].main(exo[1], files)
+
+    
+    #fs = open(source, 'r')
+    #fd = open(destination, 'w')
+    #while 1:
+        #txt = fs.readline()
+        #if txt =="":
+            #break
+        #temp = findall('##{{[A-Z]*}}##',txt)
+        #if temp:
+          #occ = temp[0][4:len(temp)-5].lower()
+	  #txt = sub('##{{[A-Z]*}}##',eval(occ),txt)
+
+        #fd.write(txt)
+    #fs.close()
+    #fd.close()
+    #return
+    
+def copie_tronq_modele(dest, parametres, master):
+    master_fin = '% fin ' + master
+    master = '% ' + master
+    n = 0
+
+    #dest = open(destination, 'w')
+
+    ## Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
+    source = parametres['modele']
+    source = os.path.join(os.getcwd(), 'modeles', source)
+
+    ## La destination est le fichier temporaire.
+
+    ## Les variables à remplacer :
+    #if parametres['numeroter']:
+      #numerotation = u"\\lhead{\\textsl{\\footnotesize{Page \\thepage/ \\pageref{LastPage}}}}"
+    #else:
+      #numerotation = ''
+    numerotation = ""
+
+    titre = parametres['titre']
+    
+    for line in open(source, 'r'):
+      if master_fin in line:
+	break
+      if n > 0:
+	temp = findall('##{{[A-Z]*}}##',line)
         if temp:
           occ = temp[0][4:len(temp)-5].lower()
-        else:
-          occ = ""
-        ### Il faut encore ajouter un filtre pour différencier mots-clés du dico et exercices
-        txt = re.sub('##{{[A-Z]*}}##',occ,txt)
-        fd.write(txt)
-    fs.close()
-    fd.close()
+	  line = sub('##{{[A-Z]*}}##',eval(occ),line)
+	dest.write(line)
+	#print line.strip('\n')
+      if master in line:
+	n = 1
     return
 
 class StartQT4(QtGui.QMainWindow):
@@ -309,8 +393,7 @@ if __name__ == "__main__":
     pyromaths.show()
     sys.exit(app.exec_())
 
-#FIXED: drag&drop - problème de fenêtres
+
 #TODO: modèles
 #TODO: numérotation
-#TODO: créer le corrigé
-#TODO: créer le pdf
+

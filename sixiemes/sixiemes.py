@@ -339,7 +339,7 @@ def mesures_angles(f0, f1):
     angles.mesure_angles(f0, f1)
 
 
-def main(exo,  files):
+def main(exo, f0, f1):
     modules = (
         tex_calcul_mental,
         tex_ecrit_nombre,
@@ -360,4 +360,5 @@ def main(exo,  files):
         mesures_angles,
         )
 
-    modules[exo](files.f0, files.f1)
+    ##modules[exo](files.f0, files.f1)
+    modules[exo](f0, f1)

@@ -26,6 +26,7 @@ import os , sys
 from string import lower
 from dircache import listdir
 from lxml import etree
+import tempfile
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, LesFiches,  configdir):
@@ -430,18 +431,19 @@ class Ui_MainWindow(object):
                                     QtGui.QMessageBox.Ok )
         else:
             parametres = {
-                                    'creer_pdf': unicode(self.checkBox_pdf.isChecked()),
+                                    'creer_pdf': self.checkBox_pdf.isChecked(),
                                     'titre': unicode(self.titre_fiche.text()),
-                                    'corrige': unicode(self.checkBox_corrige.isChecked()),
+                                    'corrige': self.checkBox_corrige.isChecked(),
                                     'numeroter': unicode(self.checkBox_numeroter.isChecked()),
                                     'niveau': unicode(self.comboBox_niveau.currentText()),
                                     'nom_fichier': unicode(self.nom_fichier.text()),
-                                    'chemin_fichier': unicode(self.chemin_fichier.text())
+                                    'chemin_fichier': unicode(self.chemin_fichier.text()),
+				    'modele': unicode(self.comboBox_modele.currentText() + '.tex')
                                     }
             #============================================================
             #        Choix de l'ordre des exercices
             #============================================================
-            list=[]
+	    list=[]
             for i in xrange(len(self.liste_creation)):
                 niveau = self.liste_creation[i][0]
                 exo = self.liste_creation[i][1]
@@ -627,7 +629,7 @@ class ChoixOrdreExos(QtGui.QDialog):
                 item.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable |
                               QtCore.Qt.ItemIsDragEnabled)
                 self.List.addItem(item)
-            self.accept()
+            self.accept(parametres['corrige'])
         else:
             QtGui.QDialog.__init__(self, parent)
             self.setWindowTitle("Choisissez l'ordre des exercices")
@@ -657,7 +659,7 @@ class ChoixOrdreExos(QtGui.QDialog):
             QtCore.QObject.connect(buttonBox, QtCore.SIGNAL("accepted()"), self.accept)
             QtCore.QObject.connect(buttonBox, QtCore.SIGNAL("rejected()"), self.close)
 
-    def accept(self):
+    def accept(self, corrige):
         """Écrit une liste contenant la liste des exercices dans l'ordre choisit par l'utilisateur et demande à
         celui-ci les noms de fichiers pour les exercices et les corrigés"""
         l=[]
@@ -683,18 +685,26 @@ class ChoixOrdreExos(QtGui.QDialog):
         if f0:
             if lower(os.path.splitext(f0)[1]) != '.tex':
                 f0 = f0 + '.tex'
-            f1 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
-                                            os.path.join(os.path.dirname(f0),
-                                            "%s-corrige.tex"  % os.path.splitext(os.path.basename(f0))[0]),
-                                            "Documents Tex (*.tex)"))
+            if corrige:
+                f1 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
+                                                    os.path.join(os.path.dirname(f0),
+                                                    "%s-corrige.tex"  % os.path.splitext(os.path.basename(f0))[0]),
+                                                    "Documents Tex (*.tex)"))
+            else:
+                f1 = os.path.join(os.path.dirname(f0)) + '/temp.tex'                                           
             if f1:
-                if lower(os.path.splitext(f1)[1]) != '.tex':
+                if corrige:
+                  if lower(os.path.splitext(f1)[1]) != '.tex':
                     f1 = f1 + '.tex'
                 from pyromaths import creation
                 self.parametres ['fiche_exo'] = f0
                 self.parametres ['fiche_cor'] = f1
                 self.parametres ['liste_exos'] = self.lesexos
                 creation(self.parametres)
-        if not self.bmono:
+                if not self.bmono:
+                  self.close()
+            elif not self.bmono:
+                self.close()
+        elif not self.bmono:
             self.close()
 

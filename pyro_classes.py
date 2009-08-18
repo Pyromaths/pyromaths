@@ -118,158 +118,20 @@ class Fractions:
 
 
 class Litteral:
-    """Classe permettant d'opérer sur des expressions littérales.
-    Une EXPRESSION littérale est une liste contenant éventuellement :
-    - un opérateur (+, -, *)
-    - une parenthèse ( ou )
-    - un exposant (**)
-    - un monome stocké ainsi : [coeff, variable, exposant, bplus=0] où bplus est un boolean optionnel
-      forçant l'affichage du signe + dans le cas d'un coefficient positif
-    Un OBJET littéral est une liste de termes de la forme :
-      [ [coef0, variable0, exposant0], [coef1, variable1, exposant1], ... ]"""
+
+    """Classe permettant d'op\xc3\xa9rer sur des expressions litt\xc3\xa9rales
+    Une expression litt\xc3\xa9rale est stock\xc3\xa9e ainsi :
+    [(coeff1, variable1, exposant1), (coeff2, variable2, exposant2), ...]"""
 
     def __init__(self, expression):
-        """Définit une EXPRESSION ou un OBJET littéral"""
-        bonformat = False
-        for i in xrange(len(expression)):
-            if isinstance(expression[i],  list):
-                bonformat = True
-        if bonformat:
-            self.e = expression
-        else:
-            self.e= [ expression ]
-
-    def oppose(self):
-        """Retourne l'opposé d'un OBJET littérale"""
-        expr = self.e
-        expression = [ [-expr[i][0], expr[i][1], expr[i][2]] for i in xrange(len(expr)) ]
-        return Litteral(expression)
-
-    def __add__(self, expression):
-        """Additionne deux OBJETS littéraux"""
-        return Litteral.reduit(Litteral(self.e + expression.e))
-
-    def __sub__(self, expression):
-        """Soustrait deux OBJETS littéraux"""
-        if len(expression.e)>1:
-            out= [ Litteral(self.e + Litteral.oppose(expression).e) ]
-        else:
-            out = []
-        out.extend(Litteral.reduit(Litteral(self.e + Litteral.oppose(expression).e)))
-        return out
-
-    def __mul__(self, expression):
-        """Multiplie deux OBJETS littéraux de même variable"""
-        expr1 = self.e
-        expr2 = expression.e
-        out1 = []
-        for i in xrange(len(expr1)):
-            for j in xrange(len(expr2)):
-                if i>0 or i==0 and j>0:
-                    out1.append('+')
-                out1.append(expr1[i])
-                out1.append('*')
-                out1.append(expr2[j])
-        out = [Litteral(out1)]
-        out2 = [ [ expr1[i][0] * expr2[j][0], expr1[i][1], expr1[i][2] + expr2[j][2] ]
-                                                                                        for i in xrange(len(expr1))
-                                                                                        for j in xrange(len(expr2))
-                                                                                        if expr1[i][1] == expr2[j][1]]
-        out.append(Litteral(out2))
-        out.extend(Litteral.reduit(Litteral(out2)))
-        return out
-
-    def __pow__(self,  exposant):
-        """Élève à la puissance exposant l'OBJET littéral self"""
-        expr=self.e
-        var = expr[0][1]
-        print var
-        if len(expr) == 2:
-            #on utilise les identités remarquables vues en classe de troisième
-            out = [ Litteral([ expr[0],  '**',  2,  [2, var, 0,  True],  '*',  expr[0],  '*',  expr[1],
-                              expr[1], '**', 2 ])]
-            print Litteral(expr[0])*Litteral(expr[1])
-            out2= (Litteral(expr[0])*Litteral(expr[0])).e[-1] +\
-                                (Litteral([2,  var,  0])*Litteral(expr[0])*Litteral(expr[1])).e[-1] +\
-                                (Litteral(expr[1])*Litteral(expr[1])).e[-1]
-            out.append(Litteral(out2))
-        return out
-
-    def texify(self):
-        """Formate en TeX une EXPRESSION  littérale"""
-        expr = self.e
-        bexposant = False # gestion des {} pour un exposant
-        text = ''
-        for i in xrange(len(expr)):
-            if isinstance(expr[i], list):
-                coef = expr[i][0]
-                var = expr[i][1]
-                exposant = expr[i][2]
-                if len(expr[i])>3:
-                    bplus=expr[i][3]
-                else:
-                    bplus=0
-                if i < len(expr)-1 and expr[i+1] == "**":
-                    bpc = 1
-                else:
-                    bpc = 0
-                if i > 0:
-                    if isinstance(expr[i-1], list):
-                        # Deux termes à suivre, dans le cas d'un OBJET littéral
-                        if bpc:
-                            text = text + "+" + monome(coef, var, exposant, bpc = 1)
-                        else:
-                            text = text + monome(coef, var, exposant, bplus=1)
-                    elif expr[i-1] == '*':
-                        if bplus:
-                            text = text  + "(" + monome(coef, var, exposant, bpn=1,  bplus = 1) + ") "
-                        else:
-                            text = text  + monome(coef, var, exposant, bpn=1,  bpc = bpc)
-                    else:
-                        if bplus:
-                            text = text + monome(coef, var, exposant,  bplus = 1,  bpc = bpc)
-                        else:
-                            text = text + monome(coef, var, exposant,  bpc = bpc)
-                else:
-                    # Premier élément
-                    text = text + monome(coef, var, exposant,  bpc = bpc)
-            else:
-                if expr[i] == "*":
-                    #On n'écrit pas le signe multiplier devant des parenthèses
-                    if i < len(expr) and expr[i+1] == '(':
-                        text = text + "\\, "
-                    else:
-                        text = text + " \\times "
-                elif expr[i] == "**":
-                    text = text + " ^{ "
-                    bexposant = True
-                    par = 0 # Nombre de parenthèses ouvertes dans l'exposant
-                elif expr[i] == "(":
-                    text = text + " \\left ( "
-                    if bexposant: par = par + 1
-                elif expr[i] == ")":
-                    text = text + " \\right ) "
-                    if bexposant and par == 1:
-                        text = text + " } "
-                        bexposant = False
-                else:
-                    text = text + str(expr[i])
-                    if bexposant and par == 0:
-                        #Il faut fermer les  accolades et réinitialiser bexposant
-                        text = text + " } "
-                        bexposant = False
-        if text != "":
-            return text
+        self.e = expression
 
     def reduit(self):
-        """Retourne l'expression réduite et ordonnée, en supprimant les coefficients nuls,
-        # excepté s'il est de degré 0, d'un OBJET littéral."""
+
+        # retourne l'expression réduite, en supprimant les coefficients nuls,
+        # excepté s'il est de degré 0.
+
         expression = sorted(self.e, key=lambda x: (x[1], -x[2]))
-        if self.e != expression:
-            # Expression a été ordonnée
-            out = [ Litteral(expression) ]
-        else:
-            out = []
         (expr, i) = ([expression[0]], 1)
         for i in xrange(1, len(expression)):
             if expr:
@@ -277,46 +139,55 @@ class Litteral:
                     expression[i][2]:
                     if expr[-1][0] + expression[i][0] or expr[-1][2] == \
                         0:
-                        expr.append([expr.pop(-1)[0] + expression[i][0],
-                                    expression[i][1], expression[i][2]])
+                        expr.append((expr.pop(-1)[0] + expression[i][0],
+                                    expression[i][1], expression[i][2]))
                     else:
                         expr.pop(-1)
                 else:
                     expr.append(expression[i])
             else:
                 expr.append(expression[i])
-        if expr != expression:
-            out.append(Litteral(expr))
-        elif out == []:
-            out = [Litteral(out)]
-        return out
 
-    def developpe(self,  pre_expr=[],  post_expr=[]):
-        """Développe une EXPRESSION littérale.
-        La démarche est la suivante :
-        1/ Développer le contenu des parenthèses,
-        2/ Effectuer les produits (* ou **),
-        3/ Supprimer les parenthèses précédées d'un signe + ou -,
-        4/ Réduire l'expression obtenue"""
+        return Litteral(expr)
+
+    def oppose(self):
+
+        # retourne l'opposé d'une expression littérale
+
         expr = self.e
-        cpt_par = 0
-        while True:
-            if expr.count('(') > cpt_par:
-                pass
+        expression = []
+        for i in xrange(len(expr)):
+            expression.append((-expr[i][0], expr[i][1], expr[i][2]))
+        return Litteral(expression)
 
-#[ [3, 'x', 1], '+', '(', [2, 'x',  1], '-', '(', [3, 'x', 1], +, [6, 'x', 0], ')', ')' ]
-#[ [3, 'x', 1], '+', '(', [2, 'x',  1], [-3, 'x', 1], [-6, 'x', 0], ')' ]
-#[ [3, 'x', 1], [2, 'x',  1], [-3, 'x', 1], [-6, 'x', 0], ')' ]
-#[ [2, 'x', 1], [-6, 'x', 0] ]
+    def __add__(self, expression):
+        expr1 = self.e
+        expr2 = expression.e
+        expr1.extend(expr2)
+        return Litteral.reduit(Litteral(expr1))
 
-    def isReductible(self):
-        """Indique si un OBJET littéral peut être réduit"""
-        expr=self.e
-        expr_reduite = reduit(expr)
-        if len(expr) == len(expr_reduite):
-            return False
-        else:
-            return True
+    def __sub__(self, expression):
+        expr1 = self.e
+        expr2 = Litteral.oppose(expression).e
+        expr1.extend(expr2)
+        return Litteral.reduit(Litteral(expr1))
+
+    def __mul__(self, expression):
+        expr1 = self.e
+        expr2 = expression.e
+        expression = []
+        for i in xrange(len(expr1)):
+            for j in xrange(len(expr2)):
+                if expr1[i][1] == expr2[j][1]:
+                    expression.append((expr1[i][0] * expr2[j][0], expr1[i][1],
+                            expr1[i][2] + expr2[j][2]))
+                else:
+                    pass
+
+                    # TODO: Cas du produit de deux expressions à plusieurs variables
+
+        return Litteral.reduit(Litteral(expression))
+
 
 class Metapost:
 
@@ -615,147 +486,170 @@ class WriteFiles:
         self.mp.write(formule)
 
 
-def sepmilliers(nb, mathenvironment=0):
+    def copie_modele(self, source, destination):
+        """Copie le contenu d'un modèle dans un nouveau fichier tex, en remplaçant les mots-clés par leur valeur, soit dans le fichier de config, soit les exercices."""
+        fs = open(source, 'r')
+        fd = open(destination, 'w')
+        while 1:
+            txt = fs.readline()
+            if txt =="":
+                break
+            temp = re.findall('##{{[A-Z]*}}##',txt)
+            if temp:
+              occ = temp[0][4:len(temp)-5].lower()
+            else:
+              occ = ""
+            ### Il faut encore ajouter un filtre pour différencier mots-clés du dico et exercices
+            txt = re.sub('##{{[A-Z]*}}##',occ,txt)
+            fd.write(txt)
+        fs.close()
+        fd.close()
+        return
 
-    # Insère les espaces fines pour séparer les milliers et remplace le point
-    # décimal par une virgule
 
-    dec = [str(nb)[i] for i in xrange(len(str(nb)))]
-    if dec.count('e'):  #nb ecrit en notation scientifique
-        exposant = int(('').join(dec[dec.index('e') + 1:]))
-        dec = dec[:dec.index('e')]
-        lg = len(dec)
+class TeXMiseEnForme:
+
+    def __init__(self, text):
+        self.text = text
+
+    def monome(self, coef, var, bplus=0, bpn=0, bpc=0):
+
+        # coef est le coefficient à écrire devant la variable var
+        # bplus est un booleen : s'il est vrai, il faut ecrire le signe +
+        # bpn est un booleen : s'il est vrai, il faut mettre des parentheses autour de l'ecriture si coef est negatif.
+        # bpc est un booleen : s'il est vrai, il faut mettre des parentheses autour de l'ecriture si coef =! 0 ou 1 et var est non vide
+
+        if coef != 0 and abs(coef) != 1:
+            if var == "":
+                if abs(coef) >= 1000:
+                    a = '\\nombre{%s}' % coef
+                else:
+                    a = "%s" % coef
+            else:
+                if abs(coef) >= 1000:
+                    a = '\\nombre{%s}\\,%s' % (coef, var)
+                else:
+                    a = '%s\\,%s' % (coef, var)
+            if bplus and coef > 0:
+                a = '+' + a
+        elif coef == 1:
+            if var == "":
+                a = '1'
+            else:
+                a = "%s" % var
+            if bplus:
+                a = '+' + a
+        elif coef == 0:
+            a = ""
+        elif coef == -1:
+            if var == "":
+                a = '-1'
+            else:
+                a = '-%s' % var
+        if bpn and coef < 0 or bpc and coef != 0 and coef != 1 and var != \
+            "":
+            a = '\\left( ' + a + '\\right)'
+        return a
+
+    def sepmilliers(self, nb, mathenvironment=0):
+
+        # Insère les espaces fines pour séparer les milliers et remplace le point
+        # décimal par une virgule
+
+        dec = [str(nb)[i] for i in xrange(len(str(nb)))]
+        if dec.count('e'):  #nb ecrit en notation scientifique
+            exposant = int(("").join(dec[dec.index('e') + 1:]))
+            dec = dec[:dec.index('e')]
+            lg = len(dec)
+            if dec.count('.'):
+                virg = dec.index('.')
+                dec.remove('.')
+            else:
+                virg = len(dec)
+            if virg + exposant < 0:  #L'ecriture decimale du nombre commence par 0,...
+                dec2 = ["0", '.']
+                for i in xrange(-virg - exposant):
+                    dec2.append("0")
+                dec2.extend(dec)
+                dec = dec2
+            elif virg + exposant > lg:
+
+                #L'ecriture decimale du nombre finit par des 0
+
+                for i in xrange(-((lg - virg) - 1) + exposant):
+                    dec.append("0")
+        dec2 = []
         if dec.count('.'):
-            virg = dec.index('.')
-            dec.remove('.')
+            lavtvirg = dec.index('.')
+            laprvirg = (len(dec) - dec.index('.')) - 1
         else:
-            virg = len(dec)
-        if virg + exposant < 0:  #L'ecriture decimale du nombre commence par 0,...
-            dec2 = ['0', '.']
-            for i in xrange(-virg - exposant):
-                dec2.append('0')
-            dec2.extend(dec)
-            dec = dec2
-        elif virg + exposant > lg:
-
-            #L'ecriture decimale du nombre finit par des 0
-
-            for i in xrange(-((lg - virg) - 1) + exposant):
-                dec.append('0')
-    dec2 = []
-    if dec.count('.'):
-        lavtvirg = dec.index('.')
-        laprvirg = (len(dec) - dec.index('.')) - 1
-    else:
-        lavtvirg = len(dec)
-        laprvirg = 0
-    nbsep = lavtvirg // 3 + 1
-    if lavtvirg > 3:
-        cpt = lavtvirg % 3
-        if cpt:
-            dec2 = dec[0:cpt]
+            lavtvirg = len(dec)
+            laprvirg = 0
+        nbsep = lavtvirg // 3 + 1
+        if lavtvirg > 3:
+            cpt = lavtvirg % 3
+            if cpt:
+                dec2 = dec[0:cpt]
+                dec2.append('\\,')
+                nbsep = nbsep - 1
+            for i in xrange(nbsep):
+                dec2.extend(dec[cpt:cpt + 3])
+                if nbsep - i > 1:
+                    dec2.append('\\,')
+                cpt = cpt + 3
+        else:
+            if dec.count('.'):
+                dec2 = dec[0:dec.index('.')]
+            else:
+                dec2 = dec
+        if dec.count('.'):
+            cpt = dec.index('.')
+        else:
+            cpt = len(dec)
+        if laprvirg <= 3:
+            dec2.extend(dec[cpt:])
+        else:
+            nbsep = laprvirg // 3 - 1
+            dec2.extend(dec[cpt:cpt + 4])
             dec2.append('\\,')
-            nbsep = nbsep - 1
-        for i in xrange(nbsep):
-            dec2.extend(dec[cpt:cpt + 3])
-            if nbsep - i > 1:
-                dec2.append('\\,')
-            cpt = cpt + 3
-    else:
-        if dec.count('.'):
-            dec2 = dec[0:dec.index('.')]
+            cpt = cpt + 4
+            for i in xrange(nbsep):
+                dec2.extend(dec[cpt:cpt + 3])
+                if cpt + 3 < len(dec):
+                    dec2.append('\\,')
+                cpt = cpt + 3
+            dec2.extend(dec[cpt:])
+        nb = ("").join(dec2)
+        if nb.endswith('.0'):
+            nb = string.rsplit(nb, '.0')[0]
+        if mathenvironment:
+            return string.join(string.rsplit(nb, sep='.'), '{,}')
         else:
-            dec2 = dec
-    if dec.count('.'):
-        cpt = dec.index('.')
-    else:
-        cpt = len(dec)
-    if laprvirg <= 3:
-        dec2.extend(dec[cpt:])
-    else:
-        nbsep = laprvirg // 3 - 1
-        dec2.extend(dec[cpt:cpt + 4])
-        dec2.append('\\,')
-        cpt = cpt + 4
-        for i in xrange(nbsep):
-            dec2.extend(dec[cpt:cpt + 3])
-            if cpt + 3 < len(dec):
-                dec2.append('\\,')
-            cpt = cpt + 3
-        dec2.extend(dec[cpt:])
-    nb = ('').join(dec2)
-    if nb.endswith('.0'):
-        nb = string.rsplit(nb, '.0')[0]
-    if mathenvironment:
-        return string.join(string.rsplit(nb, sep='.'), '{,}')
-    else:
-        return string.join(string.rsplit(nb, sep='.'), ',')
+            return string.join(string.rsplit(nb, sep='.'), ',')
 
-def monome(coef, var, exposant, bplus=0, bpn=0, bpc=0):
 
-    # coef est le coefficient à écrire devant la variable var
-    # bplus est un booleen : s'il est vrai, il faut ecrire le signe +
-    # bpn est un booleen : s'il est vrai, il faut mettre des parentheses autour de l'ecriture si coef est negatif.
-    # bpc est un booleen : s'il est vrai, il faut mettre des parentheses autour de l'ecriture si coef =! 0 ou 1 et var est non vide
+#a = Fractions(1, 2)
+#b = Fractions(1, 4)
+#c = Fractions(5, 6)
+#d = (a + b) / c
 
-    if exposant == 0:
-        var = ''
-    elif exposant > 1:
-        var = '%s^{%s}' % (var, exposant)
-    if coef != 0 and abs(coef) != 1:
-        if var == '':
-            a = sepmilliers(coef, mathenvironment=1)
-        else:
-            a = '%s\\,%s' % (sepmilliers(coef, mathenvironment=1), var)
-        if bplus and coef > 0:
-            a = '+' + a
-    elif coef == 1:
-        if var == '':
-            a = '1'
-        else:
-            a = '%s' % var
-        if bplus:
-            a = '+' + a
-    elif coef == 0:
-        a = ''
-    elif coef == -1:
-        if var == '':
-            a = '-1'
-        else:
-            a = '-%s' % var
-    if bpn and coef < 0 or bpc and coef != 0 and coef != 1 and var != '':
-        a = '\\left( ' + a + '\\right)'
-    return a
+#print a>b
+#print (c.n,c.d)
+#a=Litteral([(3,'x',0),(2,'x',1)])
+#b=Litteral([(3,'x',0),(-2,'x',1)])
+#print (a*b).e
 
-def test_fractions():
-    a = Fractions(1, 2)
-    b = Fractions(1, 4)
-    c = Fractions(5, 6)
-    d = (a + b) / c
-    print a>b
-    print (c.n,c.d)
+fig = Metapost()
+fig = Metapost.triangle(
+    fig, "A", "B",  "C", a=7, b=5, c=6, rotation=0, angledroit=1)
+fig = Metapost.triangle(
+    fig, "D", "E",  "F", alpha=55, b=4, c=5, rotation=0, angledroit=1)
+fig = Metapost.triangle(
+    fig, "G", "H",  "I", beta=55, b=5, c=4, rotation=0, angledroit=1)
+fig = Metapost.triangle(
+    fig, "J", "K",  "L", alpha=40, beta=75, c=5, rotation=0, angledroit=1)
+fig = Metapost.triangle(
+    fig, "M", "N",  "O", alpha=35, beta=110, b=5, rotation=0, angledroit=1)
 
-def test_litteral():
-    a=Litteral([[-3,'x',3],[-2,'x',1]])
-    b=Litteral([[3,'x',2],[-1,'x',1]])
-    c = a**2
-    print c
-    for i in xrange(len(c)):
-        print Litteral.texify((c[i]))
-
-def test_metapost():
-    fig = Metapost()
-    fig = Metapost.triangle(
-        fig, "A", "B",  "C", a=7, b=5, c=6, rotation=0, angledroit=1)
-    fig = Metapost.triangle(
-        fig, "D", "E",  "F", alpha=55, b=4, c=5, rotation=0, angledroit=1)
-    fig = Metapost.triangle(
-        fig, "G", "H",  "I", beta=55, b=5, c=4, rotation=0, angledroit=1)
-    fig = Metapost.triangle(
-        fig, "J", "K",  "L", alpha=40, beta=75, c=5, rotation=0, angledroit=1)
-    fig = Metapost.triangle(
-        fig, "M", "N",  "O", alpha=35, beta=110, b=5, rotation=0, angledroit=1)
-
-    fig = Metapost.fin(fig)
-
-#test_litteral()
+fig = Metapost.fin(fig)
+#print string.join(fig.text, "")
