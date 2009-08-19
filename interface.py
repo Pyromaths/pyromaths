@@ -196,15 +196,6 @@ class Ui_MainWindow(object):
         self.checkBox_pdf.setChecked(int(self.config['pdf']))
         self.verticalLayout_21.addWidget(self.checkBox_pdf)
 
-        ############## CheckBox "numéroter ou non"
-
-        self.checkBox_numeroter = QtGui.QCheckBox(self.tab_options)
-        self.checkBox_numeroter.setText(u"Numéroter les pages des documents")
-        self.checkBox_numeroter.setToolTip(u"Pyromaths doit-il numéroter les pages des fiches ?")
-        self.checkBox_numeroter.setChecked(int(self.config['numeroter']))
-        #self.checkBox_numeroter.setEnabled(False)
-        self.verticalLayout_21.addWidget(self.checkBox_numeroter)
-
         ############## Espace
 
         self.horizontalLayout_3.addLayout(self.verticalLayout_21)
@@ -434,7 +425,6 @@ class Ui_MainWindow(object):
                                     'creer_pdf': self.checkBox_pdf.isChecked(),
                                     'titre': unicode(self.titre_fiche.text()),
                                     'corrige': self.checkBox_corrige.isChecked(),
-                                    'numeroter': unicode(self.checkBox_numeroter.isChecked()),
                                     'niveau': unicode(self.comboBox_niveau.currentText()),
                                     'nom_fichier': unicode(self.nom_fichier.text()),
                                     'chemin_fichier': unicode(self.chemin_fichier.text()),
@@ -496,7 +486,6 @@ class Ui_MainWindow(object):
         options .find('titre_fiche').text = unicode(self.titre_fiche.text())
         options .find('corrige').text = unicode(self.checkBox_corrige.isChecked())
         options .find('pdf').text  = unicode(self.checkBox_pdf.isChecked())
-        options .find('numeroter').text  = unicode(self.checkBox_numeroter.isChecked())
         options .find('modele').text = unicode(self.comboBox_modele.currentText() + '.tex')
 
         f = open(self.configfile,'w')
@@ -591,7 +580,6 @@ p, li { white-space: pre-wrap; }
         self.config['titre_fiche'] = self.titre_fiche.text()
         self.config['corrige'] = self.checkBox_corrige.isChecked()
         self.config['pdf'] = self.checkBox_pdf.isChecked()
-        self.config['numeroter'] = self.checkBox_numeroter.isChecked()
 
 
 #================================================================
@@ -608,7 +596,6 @@ class ChoixOrdreExos(QtGui.QDialog):
                             'creer_pdf':
                             'titre':
                             'corrige':
-                            'numeroter':
                             'niveau':
                             'nom_fichier':
                             'chemin_fichier':

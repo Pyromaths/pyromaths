@@ -123,24 +123,12 @@ def creation(parametres):
     creer_pdf = parametres['creer_pdf']
 
     fiche_metapost = os.path.splitext(exo)[0] + '.mp'
-    #files = WriteFiles(f0, f1, fiche_metapost, creer_pdf)
 
     copie_tronq_modele(f0, parametres, 'entete')
     copie_tronq_modele(f1, parametres, 'entete')
-    
-    #if creer_pdf:
-        #files.f0.write(u"\\chead{\\Large{\\textsc{")
-        #files.f0.write(parametres['titre'].encode('latin1'))
-        #files.f0.write(u"}}}\n")
-        #files.f1.write("\\chead{\\Large{\\textsc{")
-        #files.f1.write(parametres['titre'].encode('latin1'))
-        #files.f1.write(u" - corrigé}}}\n".encode('latin1'))
-        #files.f0.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
-        #files.f1.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
+
     if creer_pdf:
-        f0.write(u"\\chead{\\Large{\\textsc{")
-        f0.write(parametres['titre'].encode('latin1'))
-        f0.write(u"}}}\n")
+        f0.write(("\\chead{\\Large{\\textsc{" + parametres['titre'] + "}}}\n").encode('latin1'))
         f0.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
         f1.write("\\chead{\\Large{\\textsc{")
         f1.write(parametres['titre'].encode('latin1'))
@@ -153,7 +141,9 @@ def creation(parametres):
     copie_tronq_modele(f0, parametres, 'pied')
     copie_tronq_modele(f1, parametres, 'pied')
     
-    ##WriteFiles.close(files)
+
+    f0.close()
+    f1.close()
 
     
     # Dossiers et fichiers d'enregistrement, définitions qui doivent rester avant le if suivant.
@@ -214,7 +204,6 @@ def create_config_file():
     etree.SubElement(child, u"titre_fiche").text=u"Fiche de révision"
     etree.SubElement(child, u"corrige").text=u"True"
     etree.SubElement(child, u"pdf").text=u"True"
-    etree.SubElement(child, u"numeroter").text=u"True"
     etree.SubElement(child, u"modele").text=u"Défaut"
 
     child = etree.SubElement(root, u"informations")
@@ -284,42 +273,6 @@ def modify_config_file(file):
         f = open(os.path.join(configdir(),  "pyromaths.xml"),'w')
         f.write(etree.tostring(indent(oldroot), pretty_print=True, encoding="UTF-8", xml_declaration=True))
         f.close()
-
-#def copie_modele(source, destination, parametres):
-    #"""Copie le contenu d'un modèle dans un nouveau fichier tex, en remplaçant les mots-clés par leur valeur, soit dans le fichier de config, soit les exercices."""
-
-    ### Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
-    #source = os.path.join(os.getcwd(), 'modeles', source)
- 
-    ### La destination est le fichier temporaire.
-    
-    ### Les variables à remplacer :
-    #if parametres['numeroter']:
-      #numerotation = '\lhead{\textsl{\footnotesize{Page \thepage/ \pageref{LastPage}}}}'
-    #else:
-      #numerotation = ''
-
-    #titre = parametres['titre']
-    #exercices = 'EXERCICES' ### !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    ##for exo in parametres['liste_exos']:
-        ##LesFiches[exo[0]][1].main(exo[1], files)
-
-    
-    #fs = open(source, 'r')
-    #fd = open(destination, 'w')
-    #while 1:
-        #txt = fs.readline()
-        #if txt =="":
-            #break
-        #temp = findall('##{{[A-Z]*}}##',txt)
-        #if temp:
-          #occ = temp[0][4:len(temp)-5].lower()
-	  #txt = sub('##{{[A-Z]*}}##',eval(occ),txt)
-
-        #fd.write(txt)
-    #fs.close()
-    #fd.close()
-    #return
     
 def copie_tronq_modele(dest, parametres, master):
     master_fin = '% fin ' + master
@@ -330,18 +283,12 @@ def copie_tronq_modele(dest, parametres, master):
 
     ## Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
     source = parametres['modele']
-    source = os.path.join(os.getcwd(), 'modeles', source)
+    source = os.path.join(os.getcwd(), 'modeles', source) ### FAUTE !!!!!!! Problème si on lance deux fois la compil, car getcwd change
 
     ## La destination est le fichier temporaire.
 
     ## Les variables à remplacer :
-    #if parametres['numeroter']:
-      #numerotation = u"\\lhead{\\textsl{\\footnotesize{Page \\thepage/ \\pageref{LastPage}}}}"
-    #else:
-      #numerotation = ''
-    numerotation = ""
-
-    titre = parametres['titre']
+    titre = parametres['titre'].encode('latin1')
     
     for line in open(source, 'r'):
       if master_fin in line:
@@ -393,7 +340,6 @@ if __name__ == "__main__":
     pyromaths.show()
     sys.exit(app.exec_())
 
-
-#TODO: modèles
-#TODO: numérotation
-
+#TODO faute copie_tronq_modele
+#TODO drag&drop
+#TODO encoder tous les modèles
