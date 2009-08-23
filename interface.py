@@ -616,7 +616,7 @@ class ChoixOrdreExos(QtGui.QDialog):
                 item.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable |
                               QtCore.Qt.ItemIsDragEnabled)
                 self.List.addItem(item)
-            self.accept(parametres['corrige'])
+            self.accept()
         else:
             QtGui.QDialog.__init__(self, parent)
             self.setWindowTitle("Choisissez l'ordre des exercices")
@@ -646,9 +646,10 @@ class ChoixOrdreExos(QtGui.QDialog):
             QtCore.QObject.connect(buttonBox, QtCore.SIGNAL("accepted()"), self.accept)
             QtCore.QObject.connect(buttonBox, QtCore.SIGNAL("rejected()"), self.close)
 
-    def accept(self, corrige):
+    def accept(self):
         """Écrit une liste contenant la liste des exercices dans l'ordre choisit par l'utilisateur et demande à
         celui-ci les noms de fichiers pour les exercices et les corrigés"""
+	corrige = self.parametres['corrige']
         l=[]
         self.lesexos = []
         for i in xrange(self.List.count()):

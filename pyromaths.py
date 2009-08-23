@@ -283,7 +283,7 @@ def copie_tronq_modele(dest, parametres, master):
 
     ## Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
     source = parametres['modele']
-    source = os.path.join(os.getcwd(), 'modeles', source) ### FAUTE !!!!!!! Problème si on lance deux fois la compil, car getcwd change
+    source = os.path.join(sys.path[0], 'modeles', source)
 
     ## La destination est le fichier temporaire.
 
@@ -340,6 +340,5 @@ if __name__ == "__main__":
     pyromaths.show()
     sys.exit(app.exec_())
 
-#TODO faute copie_tronq_modele
-#TODO drag&drop
-#TODO encoder tous les modèles
+#TODO activer niveaux 5e, 4e et 3e
+#TODO encoder/écrire les modèles
