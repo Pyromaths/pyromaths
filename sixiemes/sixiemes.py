@@ -360,5 +360,4 @@ def main(exo, f0, f1):
         mesures_angles,
         )
 
-    ##modules[exo](files.f0, files.f1)
     modules[exo](f0, f1)

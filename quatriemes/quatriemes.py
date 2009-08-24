@@ -32,8 +32,11 @@ from outils import ecrit_tex, randrange, tex_entete
 from pyro_classes import WriteFiles
 import os.path
 
+def write(f, exos):
+    f.write("\n")
+    f.writelines(x + "\n" for x in exos[0])
 
-def main(exo, files):
+def main(exo, f0, f1):
     modules = (
         calcul_mental.main,
         fractions.exo_sommes_fractions,
@@ -51,5 +54,5 @@ def main(exo, files):
         pythagore.exo_thales,
         pythagore.exo_trigo,
         )
-
-    WriteFiles.write(files, modules[exo]())
+    write(f0, modules[exo]())
+    write(f1, modules[exo]())

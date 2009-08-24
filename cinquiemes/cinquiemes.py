@@ -29,19 +29,15 @@ from outils import tex_entete
 from pyro_classes import WriteFiles
 import os.path
 
+def write(f, exos):
+    f.write("\n")
+    f.writelines(x + "\n" for x in exos[0])
 
-#def main(lst, fiche_exos, fiche_corrige, entete):
-#    modules = (priorites.main, symetrie.main, fractions.fractions_egales,
-#               fractions.sommes_fractions, fractions.produits_fractions,reperage.main)
-#
-#    fiche_metapost = os.path.splitext(fiche_exos)[0] + '.mp'
-#    files = WriteFiles(fiche_exos, fiche_corrige, fiche_metapost, entete)
-#    for j in xrange(len(modules)):
-#        for i in xrange(lst[j]):
-#            WriteFiles.write(files, modules[j]())
-#    WriteFiles.close(files)
-
-def main(exo,files):
+def main(exo,f0, f1):
     modules = (priorites.main, symetrie.main, fractions.fractions_egales,
                fractions.sommes_fractions, fractions.produits_fractions,reperage.main)
-    WriteFiles.write(files,modules[exo]())
+    write(f0, modules[exo]())
+    write(f1, modules[exo]())
+
+
+	    

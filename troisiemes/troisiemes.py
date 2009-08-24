@@ -387,7 +387,7 @@ def tex_trigo(f0, f1):
     pythagore.trigo_init(f0, f1)
 
 
-def main(exo, files):
+def main(exo, f0, f1):
     modules = (
         tex_fractions,
         tex_puissances,
@@ -406,4 +406,4 @@ def main(exo, files):
         tex_trigo,
         )
 
-    modules[exo](files.f0, files.f1)
+    modules[exo](f0, f1)

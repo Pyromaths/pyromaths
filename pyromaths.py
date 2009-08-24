@@ -339,6 +339,3 @@ if __name__ == "__main__":
     pyromaths = StartQT4(LesFiches,  configdir())
     pyromaths.show()
     sys.exit(app.exec_())
-
-#TODO activer niveaux 5e, 4e et 3e
-#TODO encoder/écrire les modèles
