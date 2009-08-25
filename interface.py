@@ -243,8 +243,7 @@ class Ui_MainWindow(object):
 
         self.comboBox_modele = QtGui.QComboBox(self.tab_options)
 
-        modeles = listdir(os.path.split(__file__)[0] + '/modeles')
-
+        modeles = listdir(os.path.join(os.path.dirname((sys.argv)[0]), 'modeles'))
         count = 0
 
         for element in modeles:

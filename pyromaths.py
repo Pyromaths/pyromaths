@@ -23,6 +23,7 @@
 from PyQt4 import QtCore, QtGui
 import sys,  os,  string,  codecs
 from lxml import etree
+from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 from re import sub, findall
 
 from interface import Ui_MainWindow
@@ -207,7 +208,7 @@ def create_config_file():
     etree.SubElement(child, u"modele").text=u"pyromaths.tex"
 
     child = etree.SubElement(root, u"informations")
-    etree.SubElement(child, u"version").text=u"09.03"
+    etree.SubElement(child, u"version").text=u"09.08"
     etree.SubElement(child, u"description").text=u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
     etree.SubElement(child, u"icone").text=u"pyromaths.ico"
 
@@ -283,7 +284,8 @@ def copie_tronq_modele(dest, parametres, master):
 
     ## Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
     source = parametres['modele']
-    source = os.path.join(sys.path[0], 'modeles', source)
+    #source = os.path.join(sys.path[0], 'modeles', source) Ne fonctionne pas avec la version compilée Windows
+    source = os.path.join(os.path.dirname((sys.argv)[0]), 'modeles', source)
 
     ## La destination est le fichier temporaire.
 
