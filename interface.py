@@ -242,7 +242,6 @@ class Ui_MainWindow(object):
         ############## ComboBox modèles
 
         self.comboBox_modele = QtGui.QComboBox(self.tab_options)
-        self.comboBox_modele.addItem(QtCore.QString())
 
         modeles = listdir(os.path.split(__file__)[0] + '/modeles')
 

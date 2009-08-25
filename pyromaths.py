@@ -127,13 +127,13 @@ def creation(parametres):
     copie_tronq_modele(f0, parametres, 'entete')
     copie_tronq_modele(f1, parametres, 'entete')
 
-    if creer_pdf:
-        f0.write(("\\chead{\\Large{\\textsc{" + parametres['titre'] + "}}}\n").encode('latin1'))
-        f0.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
-        f1.write("\\chead{\\Large{\\textsc{")
-        f1.write(parametres['titre'].encode('latin1'))
-        f1.write(u" - corrigé}}}\n".encode('latin1'))
-        f1.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
+    #if creer_pdf:
+        #f0.write(("\\chead{\\Large{\\textsc{" + parametres['titre'] + "}}}\n").encode('latin1'))
+        #f0.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
+        #f1.write("\\chead{\\Large{\\textsc{")
+        #f1.write(parametres['titre'].encode('latin1'))
+        #f1.write(u" - corrigé}}}\n".encode('latin1'))
+        #f1.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
 
     for exercice in parametres['liste_exos']:
         LesFiches[exercice[0]][1].main(exercice[1], f0, f1)
@@ -204,7 +204,7 @@ def create_config_file():
     etree.SubElement(child, u"titre_fiche").text=u"Fiche de révision"
     etree.SubElement(child, u"corrige").text=u"True"
     etree.SubElement(child, u"pdf").text=u"True"
-    etree.SubElement(child, u"modele").text=u"Défaut"
+    etree.SubElement(child, u"modele").text=u"pyromaths.tex"
 
     child = etree.SubElement(root, u"informations")
     etree.SubElement(child, u"version").text=u"09.03"
@@ -289,7 +289,7 @@ def copie_tronq_modele(dest, parametres, master):
 
     ## Les variables à remplacer :
     titre = parametres['titre'].encode('latin1')
-    
+    niveau = parametres['niveau']
     for line in open(source, 'r'):
       if master_fin in line:
 	break

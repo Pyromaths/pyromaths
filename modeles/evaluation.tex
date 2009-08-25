@@ -13,18 +13,24 @@
 \setlength\mathindent{0em}
 \setlength{\columnsep}{30pt}
 \usepackage[ps2pdf,pagebackref=true,colorlinks=true,linkcolor=blue,plainpages=true]{hyperref}
-\hypersetup{pdfauthor={J\'er\^ome Ortais},pdfsubject={Exercices de math\'ematiques},pdftitle={Exercices cr\'e\'es par Pyromaths, un programme en Python de J\'er\^ome Ortais}}
+\hypersetup{pdfauthor={J\'er\^ome Ortais},pdfsubject={Exercices de
+    math\'ematiques},pdftitle={Exercices cr\'e\'es par Pyromaths, un programme en
+    Python de J\'er\^ome Ortais}}
 \makeatletter
 \newcommand\styleexo[1][]{
   \renewcommand{\theenumi}{\arabic{enumi}}
   \renewcommand{\labelenumi}{$\blacktriangleright$\textbf{\theenumi.}}
   \renewcommand{\theenumii}{\alph{enumii}}
   \renewcommand{\labelenumii}{\textbf{\theenumii)}}
-  {\fontfamily{pag}\fontseries{b}\selectfont \underline{#1 \theexo}}
-  \par\@afterheading\vspace{0.5\baselineskip minus 0.2\baselineskip}}
+  {\fontfamily{pag}\fontseries{b}\selectfont \underline{#1 \theexo}
+    }
+  \par\@afterheading\vspace{0.5\baselineskip minus 0.2\baselineskip}
+  }
 \newcommand*\exercice{%
   \psset{unit=1cm}
-  \ifthenelse{\equal{\theexo}{0}}{}{\filbreak}
+  \ifthenelse{\equal{\theexo}{0}}
+    {}
+  {\filbreak}
   \refstepcounter{exo}%
   \stepcounter{nocalcul}%
   \par\addvspace{1.5\baselineskip minus 1\baselineskip}%
@@ -36,7 +42,7 @@
 \newlength{\ltxt}
 \newcounter{fig}
 \newcommand{\figureadroite}[2]{
-\setlength{\ltxt}{\linewidth}
+  \setlength{\ltxt}{\linewidth}
   \setbox\thefig=\hbox{#1}
   \addtolength{\ltxt}{-\wd\thefig}
   \addtolength{\ltxt}{-10pt}
@@ -48,26 +54,30 @@
     #1
   \end{minipage}
   \refstepcounter{fig}
-}
+  }
 \count1=\year \count2=\year \ifnum\month<8\advance\count1by-1\else\advance\count2by1\fi
+
 \pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}% filet en haut de page
+\lhead[]{} \rhead[]{} \chead[]{}
 \cfoot{\textsl{\footnotesize{Ann\'ee \number\count1/\number\count2}}}
 \rfoot{\textsl{\tiny{http://www.pyromaths.org}}}
-\lhead{\textsl{\footnotesize{Page \thepage/ \pageref{LastPage}}}}
+
 \begin{document}
 \newcounter{nocalcul}[exo]
 \renewcommand{\thenocalcul}{\Alph{nocalcul}}
 \raggedcolumns
 \setlength{\columnseprule}{0.5pt}
-\chead{\Large{\textsc{##{{TITRE}}##}}}
-\chead{\Large{\textsc{MODELE 2 !!!!!!!}}}
-\rhead{\textsl{\footnotesize{Classe de 6\ieme}}}
+{\noindent \textbf{NOM :} \hfill \textbf{Classe : ##{{NIVEAU}}##}}\par
+\vskip 0.3cm {\noindent \textbf{Pr\'enom :} \hfill
+\begin{center}
+  {\large \textbf{##{{TITRE}}##}}\par
+\end{center}
+\vskip 0.3cm \hrule\vspace{\baselineskip}
 % fin entete
 
-##{{EXERCICES}}##
+% ##{{EXERCICES}}##
 
-% pied
-VOICI UN MODELE DE TEST PAR ARNAUD !!!!
+% pied de page
 \end{document}
-
-% fin pied
+% fin pied de page
