@@ -457,13 +457,17 @@ class Ui_MainWindow(object):
                 liste = []
                 for i in xrange(len(self.LesFiches[niveau][2])):
                     liste.append((niveau,  i))
+                exo = os.path.join(unicode(f0), "%se.tex" % (6 - niveau))
+                cor = os.path.join(unicode(f0), "%se-corrige.tex" % (6 - niveau))
                 parametres = {
-                                        'fiche_exo': "%s%se.tex" % (f0, unicode(6 - niveau)),
-                                        'fiche_cor': "%s%se-corrige.tex" % (f0,  unicode(6 - niveau)),
+                                        'fiche_exo': exo,
+                                        'fiche_cor': cor,
                                         'liste_exos': liste,
                                         'creer_pdf': '1',
                                         'titre': u"Exemple de fiche",
                                         'niveau': "%s\\ieme" % (6-niveau),
+                                        'modele': unicode(self.comboBox_modele.currentText() + '.tex'),
+                                        'corrige': True
                                         }
                 creation(parametres)
 
@@ -678,7 +682,7 @@ class ChoixOrdreExos(QtGui.QDialog):
                                                     "%s-corrige.tex"  % os.path.splitext(os.path.basename(f0))[0]),
                                                     "Documents Tex (*.tex)"))
             else:
-                f1 = os.path.join(os.path.dirname(f0)) + '/temp.tex'                                           
+                f1 = os.path.join(os.path.dirname(f0)) + 'temp.tex'                                           
             if f1:
                 if corrige:
                   if lower(os.path.splitext(f1)[1]) != '.tex':
