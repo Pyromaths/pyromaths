@@ -24,13 +24,13 @@ from PyQt4 import QtCore, QtGui
 from os.path import isfile, basename
 import os , sys
 from string import lower
-from dircache import listdir
 from lxml import etree
 import tempfile
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, LesFiches,  configdir):
         self.LesFiches = LesFiches
+	self.configdir = configdir
         self.configfile = os.path.join(configdir,  "pyromaths.xml")
         self.liste_creation=[]
         MainWindow.setStyleSheet("background-color: rgb(251, 245, 225);")
@@ -243,10 +243,10 @@ class Ui_MainWindow(object):
 
         self.comboBox_modele = QtGui.QComboBox(self.tab_options)
 
-        modeles = listdir(os.path.split(__file__)[0] + '/modeles')
+        modeles = os.listdir(os.path.join(configdir,  'modeles'))
 
         count = 0
-
+      
         for element in modeles:
           if element[len(element)-3:] == "tex":
              self.comboBox_modele.addItem(QtCore.QString())
@@ -254,6 +254,9 @@ class Ui_MainWindow(object):
              if element == self.config['modele']:
                self.comboBox_modele.setCurrentIndex(count)
              count += 1
+
+	if count == 0 :
+	   print "message d'erreur"
 
         self.verticalLayout_19.addWidget(self.comboBox_modele)
         self.horizontalLayout_2.addLayout(self.verticalLayout_19)
@@ -427,7 +430,8 @@ class Ui_MainWindow(object):
                                     'niveau': unicode(self.comboBox_niveau.currentText()),
                                     'nom_fichier': unicode(self.nom_fichier.text()),
                                     'chemin_fichier': unicode(self.chemin_fichier.text()),
-				    'modele': unicode(self.comboBox_modele.currentText() + '.tex')
+				    'modele': unicode(self.comboBox_modele.currentText() + '.tex'),
+				    'configdir': self.configdir
                                     }
             #============================================================
             #        Choix de l'ordre des exercices
@@ -467,7 +471,8 @@ class Ui_MainWindow(object):
                                         'titre': u"Exemple de fiche",
                                         'niveau': "%s\\ieme" % (6-niveau),
                                         'modele': unicode(self.comboBox_modele.currentText() + '.tex'),
-                                        'corrige': True
+                                        'corrige': True,
+					'configdir': self.configdir
                                         }
                 creation(parametres)
 
