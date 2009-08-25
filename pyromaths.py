@@ -22,6 +22,7 @@
 
 from PyQt4 import QtCore, QtGui
 import sys,  os,  string,  codecs
+from shutil import copy2
 from lxml import etree
 from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 from re import sub, findall
@@ -138,21 +139,21 @@ def creation(parametres):
 
     for exercice in parametres['liste_exos']:
         LesFiches[exercice[0]][1].main(exercice[1], f0, f1)
-	
+
     copie_tronq_modele(f0, parametres, 'pied')
     copie_tronq_modele(f1, parametres, 'pied')
-    
+
 
     f0.close()
     f1.close()
 
-    
+
     # Dossiers et fichiers d'enregistrement, définitions qui doivent rester avant le if suivant.
     dir0=os.path.dirname(exo)
     dir1=os.path.dirname(cor)
     f0noext=os.path.splitext(exo)[0]
     f1noext=os.path.splitext(cor)[0]
-    
+
     if parametres['creer_pdf']:
         from subprocess import call
 
@@ -274,8 +275,9 @@ def modify_config_file(file):
         f = open(os.path.join(configdir(),  "pyromaths.xml"),'w')
         f.write(etree.tostring(indent(oldroot), pretty_print=True, encoding="UTF-8", xml_declaration=True))
         f.close()
-    
+
 def copie_tronq_modele(dest, parametres, master):
+
     master_fin = '% fin ' + master
     master = '% ' + master
     n = 0
@@ -285,7 +287,9 @@ def copie_tronq_modele(dest, parametres, master):
     ## Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
     source = parametres['modele']
     #source = os.path.join(sys.path[0], 'modeles', source) Ne fonctionne pas avec la version compilée Windows
-    source = os.path.join(os.path.dirname((sys.argv)[0]), 'modeles', source)
+    # JEROME :
+    #source = os.path.join(os.path.dirname((sys.argv)[0]), 'modeles', source)
+    source = os.path.join(parametres['configdir'], 'modeles', source)
 
     ## La destination est le fichier temporaire.
 
@@ -312,7 +316,9 @@ class StartQT4(QtGui.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self, LesFiches,  configdir)
 
+
 if __name__ == "__main__":
+    ## Création des chemins suivant les OS
     if os.name == 'nt':
         def home():
             return os.environ['HOMEPATH']
@@ -323,6 +329,8 @@ if __name__ == "__main__":
             return os.environ['HOME']
         def configdir():
             return os.path.join(home(),  ".config", "pyromaths")
+
+    ## Création du fichier de configuration si inexistant
     if not os.access(os.path.join(configdir(),  "pyromaths.xml"), os.R_OK):
         if not os.path.isdir(configdir()):
             os.makedirs(configdir())
@@ -330,6 +338,19 @@ if __name__ == "__main__":
         f.write(create_config_file())
         f.close()
     modify_config_file(os.path.join(configdir(),  "pyromaths.xml"))
+
+    ## Création du dossier "modeles" et copie des modèles si ils n'y sont pas
+    modeledir = os.path.join(configdir(),  "modeles")
+    if not os.path.isdir(modeledir):
+        os.makedirs(modeledir)
+    #modeles_base = os.listdir(os.path.split(__file__)[0] + '/modeles')
+    modeles_base = os.listdir(os.path.join(sys.path[0], 'modeles'))
+
+    for element in modeles_base:
+        if element[len(element)-3:] == "tex":
+	    if not os.path.isfile(os.path.join(modeledir, element)):
+		copy2(os.path.join(sys.path[0], 'modeles', element), modeledir)
+
     app = QtGui.QApplication(sys.argv)
     #Traduction de l'interface dans la langue de l'OS
     locale = QtCore.QLocale.system().name()
