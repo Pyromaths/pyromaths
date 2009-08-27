@@ -282,14 +282,19 @@ def copie_tronq_modele(dest, parametres, master):
     master = '% ' + master
     n = 0
 
-    #dest = open(destination, 'w')
+    ## Liste des modèles pyromaths
+    liste_modeles_pyromaths = ['evaluation.tex', 'pyromaths.tex']
 
     ## Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
     source = parametres['modele']
+
     #source = os.path.join(sys.path[0], 'modeles', source) Ne fonctionne pas avec la version compilée Windows
     # JEROME :
     #source = os.path.join(os.path.dirname((sys.argv)[0]), 'modeles', source)
-    source = os.path.join(parametres['configdir'], 'modeles', source)
+    if source in liste_modeles_pyromaths:
+      source = os.path.join(sys.path[0], 'modeles', source) #os.path.join(os.path.dirname((sys.argv)[0]), 'modeles', source)
+    else:
+      source = os.path.join(parametres['configdir'], 'modeles', source)
 
     ## La destination est le fichier temporaire.
 
@@ -343,13 +348,14 @@ if __name__ == "__main__":
     modeledir = os.path.join(configdir(),  "modeles")
     if not os.path.isdir(modeledir):
         os.makedirs(modeledir)
-    #modeles_base = os.listdir(os.path.split(__file__)[0] + '/modeles')
-    modeles_base = os.listdir(os.path.join(sys.path[0], 'modeles'))
+	
+    ## Copie des modèles de bases dans le dossier $HOME/modeles
+    #modeles_base = os.listdir(os.path.join(os.path.dirname((sys.argv)[0], 'modeles')))
 
-    for element in modeles_base:
-        if element[len(element)-3:] == "tex":
-	    if not os.path.isfile(os.path.join(modeledir, element)):
-		copy2(os.path.join(sys.path[0], 'modeles', element), modeledir)
+    #for element in modeles_base:
+        #if element[len(element)-3:] == "tex":
+	    #if not os.path.isfile(os.path.join(modeledir, element)):
+		#copy2(os.path.join(sys.path[0], 'modeles', element), modeledir)
 
     app = QtGui.QApplication(sys.argv)
     #Traduction de l'interface dans la langue de l'OS

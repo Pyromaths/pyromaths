@@ -244,8 +244,9 @@ class Ui_MainWindow(object):
         self.comboBox_modele = QtGui.QComboBox(self.tab_options)
 
         #JEROME :
-        #modeles = listdir(os.path.join(os.path.dirname((sys.argv)[0]), 'modeles'))
-        modeles = os.listdir(os.path.join(configdir,  'modeles'))
+        modeles = os.listdir(os.path.join(os.path.dirname((sys.argv)[0]), 'modeles'))
+        modeles_home = os.listdir(os.path.join(configdir,  'modeles'))
+	
         count = 0
 
         for element in modeles:
@@ -256,6 +257,16 @@ class Ui_MainWindow(object):
                self.comboBox_modele.setCurrentIndex(count)
              count += 1
 
+	
+	for element in modeles_home:
+          if element[len(element)-3:] == "tex":
+             self.comboBox_modele.addItem(QtCore.QString())
+             self.comboBox_modele.setItemText(count, unicode(element[:len(element)-4]))
+             if element == self.config['modele']:
+               self.comboBox_modele.setCurrentIndex(count)
+             count += 1
+
+	     
 	if count == 0 :
 	   print "message d'erreur"
 
