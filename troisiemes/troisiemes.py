@@ -29,6 +29,8 @@ import racines
 import systemes
 import puissances
 import developpements
+import affine
+
 from fractions import tex_somme_prod, tex_prod_parenth, \
     tex_quotient_frac, valeurs_somme_prod, valeurs_prod_parenth, \
     valeurs_quotient_frac, tex_frac
@@ -386,6 +388,11 @@ def tex_trigo(f0, f1):
     f1.write('\\exercice*\n')
     pythagore.trigo_init(f0, f1)
 
+def tex_affine(f0,f1):
+    f0.write('\\exercice\n')
+    f1.write('\\exercice*\n')
+    affine.affine(f0,f1)
+
 
 def main(exo, files):
     modules = (
@@ -404,6 +411,7 @@ def main(exo, files):
         tex_thales,
         tex_reciproque_thales,
         tex_trigo,
+        tex_affine,
         )
 
     modules[exo](files.f0, files.f1)
