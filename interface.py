@@ -699,7 +699,7 @@ class ChoixOrdreExos(QtGui.QDialog):
                                                     "%s-corrige.tex"  % os.path.splitext(os.path.basename(f0))[0]),
                                                     "Documents Tex (*.tex)"))
             else:
-                f1 = os.path.join(os.path.dirname(f0)) + 'temp.tex'
+                f1 = os.path.join(os.path.dirname(f0), 'temp.tex')
             if f1:
                 if corrige:
                   if lower(os.path.splitext(f1)[1]) != '.tex':
