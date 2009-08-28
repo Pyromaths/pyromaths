@@ -29,12 +29,13 @@ import tempfile
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, LesFiches,  configdir):
+        from pyromaths import module_path
         self.LesFiches = LesFiches
 	self.configdir = configdir
         self.configfile = os.path.join(configdir,  "pyromaths.xml")
         self.liste_creation=[]
         MainWindow.setStyleSheet("background-color: rgb(251, 245, 225);")
-        MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(os.path.dirname((sys.argv)[0]), 'img/pyromaths.png')))
+        MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(module_path(), 'img/pyromaths.png')))
         MainWindow.setWindowTitle(u"Pyromaths")
         MainWindow.setGeometry(300,600, 500, 200)
 
@@ -244,9 +245,9 @@ class Ui_MainWindow(object):
         self.comboBox_modele = QtGui.QComboBox(self.tab_options)
 
         #JEROME :
-        modeles = os.listdir(os.path.join(os.path.dirname((sys.argv)[0]), 'modeles'))
+        modeles = os.listdir(os.path.join(module_path(), 'modeles'))
         modeles_home = os.listdir(os.path.join(configdir,  'modeles'))
-	
+
         count = 0
 
         for element in modeles:
@@ -257,7 +258,7 @@ class Ui_MainWindow(object):
                self.comboBox_modele.setCurrentIndex(count)
              count += 1
 
-	
+
 	for element in modeles_home:
           if element[len(element)-3:] == "tex":
              self.comboBox_modele.addItem(QtCore.QString())

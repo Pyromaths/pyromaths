@@ -276,6 +276,22 @@ def modify_config_file(file):
         f.write(etree.tostring(indent(oldroot), pretty_print=True, encoding="UTF-8", xml_declaration=True))
         f.close()
 
+def we_are_frozen():
+    """Returns whether we are frozen via py2exe.
+    This will affect how we find out where we are located."""
+    return hasattr(sys, "frozen")
+
+def module_path():
+    """ This will get us the program's directory,
+    even if we are frozen using py2exe"""
+
+    if we_are_frozen():
+        return os.path.dirname(unicode(sys.executable,
+                                sys.getfilesystemencoding( )))
+
+    return os.path.dirname(unicode(__file__,
+                                    sys.getfilesystemencoding( )))
+
 def copie_tronq_modele(dest, parametres, master):
 
     master_fin = '% fin ' + master
@@ -292,14 +308,10 @@ def copie_tronq_modele(dest, parametres, master):
     # JEROME :
     #source = os.path.join(os.path.dirname((sys.argv)[0]), 'modeles', source)
     if source in liste_modeles_pyromaths:
-      source = os.path.join(os.path.dirname((sys.argv)[0]), 'modeles', source)
+      source = os.path.join(module_path(), 'modeles', source)
     else:
       source = os.path.join(parametres['configdir'], 'modeles', source)
 
-    print "sys.argv = ", os.path.dirname((sys.argv)[0])
-
-    print "abs.path = ", os.path.abspath((sys.argv)[0])
-    
     ## La destination est le fichier temporaire.
 
     ## Les variables à remplacer :
@@ -352,7 +364,7 @@ if __name__ == "__main__":
     modeledir = os.path.join(configdir(),  "modeles")
     if not os.path.isdir(modeledir):
         os.makedirs(modeledir)
-	
+
     ## Copie des modèles de bases dans le dossier $HOME/modeles
     #modeles_base = os.listdir(os.path.join(os.path.dirname((sys.argv)[0], 'modeles')))
 
