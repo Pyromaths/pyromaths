@@ -29,15 +29,16 @@ from outils import tex_entete
 from pyro_classes import WriteFiles
 import os.path
 
-def write(f, exos):
-    f.write("\n")
-    f.writelines(x + "\n" for x in exos[0])
+def write(f0, f1, exos):
+    f0.write("\n")
+    f1.write("\n")
+    f0.writelines(x + "\n" for x in exos[0])
+    f1.writelines(x + "\n" for x in exos[1])
 
 def main(exo,f0, f1):
     modules = (priorites.main, symetrie.main, fractions.fractions_egales,
                fractions.sommes_fractions, fractions.produits_fractions,reperage.main)
-    write(f0, modules[exo]())
-    write(f1, modules[exo]())
 
+    write(f0, f1, modules[exo]())
 
 	    

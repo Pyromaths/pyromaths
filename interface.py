@@ -34,7 +34,7 @@ class Ui_MainWindow(object):
         self.configfile = os.path.join(configdir,  "pyromaths.xml")
         self.liste_creation=[]
         MainWindow.setStyleSheet("background-color: rgb(251, 245, 225);")
-        MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(os.path.dirname((sys.argv)[0]), 'img/pyromaths.ico')))
+        MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(os.path.dirname((sys.argv)[0]), 'img/pyromaths.png')))
         MainWindow.setWindowTitle(u"Pyromaths")
         MainWindow.setGeometry(300,600, 500, 200)
 
@@ -268,7 +268,7 @@ class Ui_MainWindow(object):
 
 	     
 	if count == 0 :
-	   print "message d'erreur"
+	   QtGui.QMessageBox.warning(None, 'Aucun modèle présent !',  'message',  QtGui.QMessageBox.Ok )
 
         self.verticalLayout_19.addWidget(self.comboBox_modele)
         self.horizontalLayout_2.addLayout(self.verticalLayout_19)

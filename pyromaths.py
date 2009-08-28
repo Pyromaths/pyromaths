@@ -292,7 +292,7 @@ def copie_tronq_modele(dest, parametres, master):
     # JEROME :
     #source = os.path.join(os.path.dirname((sys.argv)[0]), 'modeles', source)
     if source in liste_modeles_pyromaths:
-      source = os.path.join(sys.path[0], 'modeles', source) #os.path.join(os.path.dirname((sys.argv)[0]), 'modeles', source)
+      source = os.path.join(os.path.dirname((sys.argv)[0]), 'modeles', source)
     else:
       source = os.path.join(parametres['configdir'], 'modeles', source)
 
