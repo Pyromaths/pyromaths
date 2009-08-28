@@ -28,7 +28,6 @@ import quotients
 import fractions
 import angles
 import symetrie
-from pyro_classes import WriteFiles
 from random import randrange
 from outils import tex_entete
 

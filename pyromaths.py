@@ -28,7 +28,7 @@ from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 from re import sub, findall
 
 from interface import Ui_MainWindow
-from pyro_classes import WriteFiles
+#from pyro_classes import WriteFiles
 import troisiemes.troisiemes
 import quatriemes.quatriemes
 import cinquiemes.cinquiemes
@@ -122,31 +122,22 @@ def creation(parametres):
     f0 = open( exo, 'w')
     f1 = open( cor, 'w')
     titre = parametres['titre']
-    creer_pdf = parametres['creer_pdf']
 
     fiche_metapost = os.path.splitext(exo)[0] + '.mp'
-
-    copie_tronq_modele(f0, parametres, 'entete')
-    copie_tronq_modele(f1, parametres, 'entete')
-
-    #if creer_pdf:
-        #f0.write(("\\chead{\\Large{\\textsc{" + parametres['titre'] + "}}}\n").encode('latin1'))
-        #f0.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
-        #f1.write("\\chead{\\Large{\\textsc{")
-        #f1.write(parametres['titre'].encode('latin1'))
-        #f1.write(u" - corrigé}}}\n".encode('latin1'))
-        #f1.write(u"\\rhead{\\textsl{\\footnotesize{Classe de %s}}}\n" % parametres['niveau'])
+    
+    if parametres['creer_pdf']:
+	copie_tronq_modele(f0, parametres, 'entete')
+	copie_tronq_modele(f1, parametres, 'entete')
 
     for exercice in parametres['liste_exos']:
         LesFiches[exercice[0]][1].main(exercice[1], f0, f1)
-
-    copie_tronq_modele(f0, parametres, 'pied')
-    copie_tronq_modele(f1, parametres, 'pied')
-
+	
+    if parametres['creer_pdf']:
+        copie_tronq_modele(f0, parametres, 'pied')
+	copie_tronq_modele(f1, parametres, 'pied')
 
     f0.close()
     f1.close()
-
 
     # Dossiers et fichiers d'enregistrement, définitions qui doivent rester avant le if suivant.
     dir0=os.path.dirname(exo)
@@ -293,7 +284,7 @@ def module_path():
                                     sys.getfilesystemencoding( )))
 
 def copie_tronq_modele(dest, parametres, master):
-
+    """Copie des morceaux des modèles, suivant le schéma du master."""
     master_fin = '% fin ' + master
     master = '% ' + master
     n = 0
@@ -304,9 +295,6 @@ def copie_tronq_modele(dest, parametres, master):
     ## Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
     source = parametres['modele']
 
-    #source = os.path.join(sys.path[0], 'modeles', source) Ne fonctionne pas avec la version compilée Windows
-    # JEROME :
-    #source = os.path.join(os.path.dirname((sys.argv)[0]), 'modeles', source)
     if source in liste_modeles_pyromaths:
       source = os.path.join(module_path(), 'modeles', source)
     else:
@@ -326,7 +314,7 @@ def copie_tronq_modele(dest, parametres, master):
           occ = temp[0][4:len(temp)-5].lower()
 	  line = sub('##{{[A-Z]*}}##',eval(occ),line)
 	dest.write(line)
-	#print line.strip('\n')
+
       if master in line:
 	n = 1
     return
@@ -365,13 +353,6 @@ if __name__ == "__main__":
     if not os.path.isdir(modeledir):
         os.makedirs(modeledir)
 
-    ## Copie des modèles de bases dans le dossier $HOME/modeles
-    #modeles_base = os.listdir(os.path.join(os.path.dirname((sys.argv)[0], 'modeles')))
-
-    #for element in modeles_base:
-        #if element[len(element)-3:] == "tex":
-	    #if not os.path.isfile(os.path.join(modeledir, element)):
-		#copy2(os.path.join(sys.path[0], 'modeles', element), modeledir)
 
     app = QtGui.QApplication(sys.argv)
     #Traduction de l'interface dans la langue de l'OS

@@ -36,7 +36,6 @@ from pgcd import valeurs_pgcd, tex_trouve_diviseur, algo_euclide, \
     tex_algo_euclide, tex_simplifie_fraction_pgcd, \
     simplifie_fraction_pgcd
 from outils import ecrit_tex, tex_entete
-from pyro_classes import WriteFiles
 
 def tex_fractions(f0, f1):
     nb_exos = 3

@@ -244,7 +244,6 @@ class Ui_MainWindow(object):
 
         self.comboBox_modele = QtGui.QComboBox(self.tab_options)
 
-        #JEROME :
         modeles = os.listdir(os.path.join(module_path(), 'modeles'))
         modeles_home = os.listdir(os.path.join(configdir,  'modeles'))
 
@@ -567,24 +566,6 @@ class Ui_MainWindow(object):
         import webbrowser
         webbrowser.open('http://www.pyromaths.org')
 
-    def tex_pdf_viewer(self):
-        """Construit une boîte de dialogue qui informe l'utilisateur qu'il ne dispose pas de lecteur pdf ou de
-        distribution LaTeX et lui donne un lien vers la documentation en ligne pour l'installation de
-        Pyromaths"""
-        erreur_pdf = \
-        u"""<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-<html><head><meta name="qrichtext" content="1" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; font-style:normal;">
-<p>Pyromaths ne trouve pas de logiciel installé pour <span style=" font-weight:600;">lire les fichiers pdf</span>.</p>
-<p>Vous devriez lire la documentation sur <a href="http://www.pyromaths.org/3-Documentation/Comment-installer-Pyromaths3"><span style=" text-decoration: underline; color:#0057ae;">http://pyromaths.org</span></a></p></body></html>"""
-        erreur_tex = \
-        u"""<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-<html><head><meta name="qrichtext" content="1" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; font-style:normal;">
-<p>Pyromaths ne trouve pas de <span style=" font-weight:600;">distribution LaTeX</span> installée pour créer les fiches.</p>
-<p>Vous devriez lire la documentation sur <a href="http://www.pyromaths.org/3-Documentation/Comment-installer-Pyromaths3"><span style=" text-decoration: underline; color:#0057ae;">http://pyromaths.org</span></a></p></body></html>"""
 
     def valide_options(self):
         """Synchronise les options éventuellement saisies par l'utilisateur avec le dictionnaire de config"""

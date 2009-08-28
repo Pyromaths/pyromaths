@@ -26,7 +26,6 @@ import symetrie
 import fractions
 import reperage
 from outils import tex_entete
-from pyro_classes import WriteFiles
 import os.path
 
 def write(f0, f1, exos):

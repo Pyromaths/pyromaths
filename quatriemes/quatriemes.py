@@ -29,7 +29,6 @@ import developpements
 import calcul_mental
 import fractions
 from outils import ecrit_tex, randrange, tex_entete
-from pyro_classes import WriteFiles
 import os.path
 
 def write(f0, f1, exos):

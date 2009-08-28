@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from pyro_classes import Fractions, WriteFiles
+from pyro_classes import Fractions
 import random
 import string
 import outils
