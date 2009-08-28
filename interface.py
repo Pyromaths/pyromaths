@@ -266,10 +266,6 @@ class Ui_MainWindow(object):
                self.comboBox_modele.setCurrentIndex(count)
              count += 1
 
-	     
-	if count == 0 :
-	   QtGui.QMessageBox.warning(None, 'Aucun modèle présent !',  'message',  QtGui.QMessageBox.Ok )
-
         self.verticalLayout_19.addWidget(self.comboBox_modele)
         self.horizontalLayout_2.addLayout(self.verticalLayout_19)
         self.verticalLayout_20.addLayout(self.horizontalLayout_2)
@@ -550,10 +546,6 @@ class Ui_MainWindow(object):
                                                        self.config['chemin_fichier'], QtGui.QFileDialog.ShowDirsOnly)
         if d0:
             self.chemin_fichier.setText(d0)
-
-    def programme_manquant(self, message):
-        """Ouvre la boite de dialogue informant qu'il manque un programme pour Pyromaths"""
-        QtGui.QMessageBox.warning(None, 'Logiciel manquant !',  message,  QtGui.QMessageBox.Ok )
 
     def setNbExos(self):
         """Modifie le nombre d'exercices dans la variable liste_creation lorsqu'on  modifie une spinBox

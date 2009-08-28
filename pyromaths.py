@@ -296,6 +296,10 @@ def copie_tronq_modele(dest, parametres, master):
     else:
       source = os.path.join(parametres['configdir'], 'modeles', source)
 
+    print "sys.argv = ", os.path.dirname((sys.argv)[0])
+
+    print "abs.path = ", os.path.abspath((sys.argv)[0])
+    
     ## La destination est le fichier temporaire.
 
     ## Les variables à remplacer :
