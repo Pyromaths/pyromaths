@@ -97,6 +97,7 @@ u'Dévt, factorisat°, calcul et éq° produit',
 u'Équation',
 u'Racines carrées',
 u'Système d\'équations',
+u'Fonctions affines',
 u'Théorème de Pythagore',
 u'Réciproque du théorème de Pythagore',
 u'Cercle et théorème de Pythagore',
@@ -124,14 +125,14 @@ def creation(parametres):
     titre = parametres['titre']
 
     fiche_metapost = os.path.splitext(exo)[0] + '.mp'
-    
+
     if parametres['creer_pdf']:
 	copie_tronq_modele(f0, parametres, 'entete')
 	copie_tronq_modele(f1, parametres, 'entete')
 
     for exercice in parametres['liste_exos']:
         LesFiches[exercice[0]][1].main(exercice[1], f0, f1)
-	
+
     if parametres['creer_pdf']:
         copie_tronq_modele(f0, parametres, 'pied')
 	copie_tronq_modele(f1, parametres, 'pied')

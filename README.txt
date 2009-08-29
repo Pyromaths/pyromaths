@@ -1,5 +1,5 @@
-Version 09.05
-* Création de modèles pour choisir l'apparence des fiches
+Version 09.08
+* Création de modèles pour choisir l'apparence des fiches - par Arnaud Kientz
 * Refonte complète de l'interface graphique :
 ** Passage à PyQt4
 ** Possibilité de choisir le niveau affiché sur la fiche
@@ -8,12 +8,17 @@ Version 09.05
 *** Nom de fichier par défaut
 *** Titre de la fiche
 *** Créer un fichier pdf
+*** Créer ou non le corrigé
 *** Choix du modèle
 ** Choix de l'ordre des exercices
+* Niveau sixième :
+** Correction d'un bug dans produits et quotients par 10, 100, 1000
+* Niveau cinquième :
+** Exercice sur le repérage dans le plan - par Guillaume Barthélémy
 * Niveau quatrième :
 ** Améliorations sur le choix des valeurs dans les exercices sur les fractions
-* Niveau cinquième :
-** Exercice sur le repérage dans le plan - par guillaume Barthélémy
+* Niveau troisième :
+** Exercice sur les fonctions affines - par Guillaume Barthélémy
 
 Version 08.11
 * Niveau sixième :
@@ -24,7 +29,7 @@ Version 08.11
 ** Sommes et différences de fractions (dénominateur de l'une multiple de l'autre)
 ** Produits de fractions
 * Niveau quatrième :
-** Sommes et différences de fractions 
+** Sommes et différences de fractions
 ** Produits et quotients de fractions
 ** Priorités et fractions
 
@@ -49,7 +54,7 @@ Version 08.01
 * Niveau sixième :
 ** Donner l'écriture fractionnaire d'un nombre décimal ou l'inverse ;
 ** Écrire un nombre décimale à partir de sa décomposition décimale.
-** Tracer et reconnaître des droites, demi-droites et segments. 
+** Tracer et reconnaître des droites, demi-droites et segments.
 * Niveau quatrième :
 ** Modification du calcul mental pour que les opérations soient parfois des opérations à trous.
 

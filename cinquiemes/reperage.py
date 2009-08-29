@@ -191,7 +191,7 @@ def main():
          "\\psline[linewidth=1.2pt]{->}(0,-5)(0,5)",
          place_points(coord_pts[0:6],noms_pts[0:6]),
          "\\end{pspicture}}"]
-    cor=["\\exercice",
+    cor=["\\exercice*",
          "\\parbox{0.4\\linewidth}{",
          "\\psset{unit=0.8cm}",
          "\\begin{pspicture}(-5,-5)(5,5)",

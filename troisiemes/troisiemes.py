@@ -404,6 +404,7 @@ def main(exo, f0, f1):
         tex_equations,
         tex_racines,
         tex_systemes,
+        tex_affine,
         tex_pythagore,
         tex_reciproque_pythagore,
         tex_triangle_cercle,
