@@ -29,7 +29,7 @@ import tempfile
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, LesFiches,  configdir):
-        from pyromaths import module_path
+        from outils import module_path
         self.LesFiches = LesFiches
 	self.configdir = configdir
         self.configfile = os.path.join(configdir,  "pyromaths.xml")
@@ -401,13 +401,19 @@ class Ui_MainWindow(object):
       <span style=" font-weight:600;">David Robert</span> pour l'idée de départ ;
       </li>
       <li>
-      <span style=" font-weight:600;">Jacqueline Gouguenheim-Desloy</span> et <span style=" font-weight:600;">Yves Gesnel</span> pour leur aide précieuse sur le portage de Pyromaths sous MacOS ;
+      <span style=" font-weight:600;">Yves Gesnel</span> pour le portage de Pyromaths sous MacOS ;
       </li>
       <li>
-      <span style=" font-weight:600;">Arnaud Kientz</span> pour ses graphismes, ses suggestions pertinentes et son implication dans le code de Pyromaths.
+      <span style=" font-weight:600;">Arnaud Kientz</span> pour ses graphismes, son implication dans le code de Pyromaths et son amitié ;
       </li>
       <li>
-      <span style=" font-weight:600;">Nicolas Pourcelot</span> pour ses conseils et son implication prochaine dans le code de Pyromaths.
+      <span style=" font-weight:600;">Nicolas Pourcelot</span> pour ses conseils et son implication prochaine dans le code de Pyromaths ;
+      </li>
+      <li>
+      <span style=" font-weight:600;">Guillaume Barthélémy</span> pour ses exercices ;
+      </li>
+      <li>
+      <span style=" font-weight:600;">Jacqueline Gouguenheim-Desloy</span> a porté Pyromaths sous MacOS à ses débuts. Son soutien et son amitié nous ont été précieux. C'est une perte douloureuse pour la communauté du logiciel libre.
       </li>
     </ul>
     </p>
@@ -462,9 +468,8 @@ class Ui_MainWindow(object):
         f0 = QtGui.QFileDialog().getExistingDirectory (None, u"Dossier où créer les fiches",
                                                          self.config['chemin_fichier'], QtGui.QFileDialog.ShowDirsOnly)
         i = 0
-        self.tex_pdf_viewer()
         if f0:
-            from pyromaths import creation
+            from outils import creation
             for niveau in xrange(4):
                 liste = []
                 for i in xrange(len(self.LesFiches[niveau][2])):
@@ -472,6 +477,7 @@ class Ui_MainWindow(object):
                 exo = os.path.join(unicode(f0), "%se.tex" % (6 - niveau))
                 cor = os.path.join(unicode(f0), "%se-corrige.tex" % (6 - niveau))
                 parametres = {
+                                        'les_fiches': self.LesFiches,
                                         'fiche_exo': exo,
                                         'fiche_cor': cor,
                                         'liste_exos': liste,
@@ -678,10 +684,11 @@ class ChoixOrdreExos(QtGui.QDialog):
                 if corrige:
                   if lower(os.path.splitext(f1)[1]) != '.tex':
                     f1 = f1 + '.tex'
-                from pyromaths import creation
+                from outils import creation
                 self.parametres ['fiche_exo'] = f0
                 self.parametres ['fiche_cor'] = f1
                 self.parametres ['liste_exos'] = self.lesexos
+                self.parametres ['les_fiches'] =  self.LesFiches
                 creation(self.parametres)
                 if not self.bmono:
                   self.close()
