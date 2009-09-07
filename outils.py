@@ -366,19 +366,32 @@ def creation(parametres):
 
         for i in xrange(2):
             os.chdir(dir0)
-            call(["latex", "-interaction=batchmode", str(exo)], env={"PATH": os.path.expandvars('$PATH')})
+            log = open('pyromaths.log', 'w')
+            call(["latex", "-interaction=batchmode", str(exo)],
+                    env={"PATH": os.path.expandvars('$PATH')},
+                    stdout=log)
             if parametres['corrige']:
                 os.chdir(dir1)
                 call(["latex", "-interaction=batchmode", str(cor)],
-                                                         env={"PATH": os.path.expandvars('$PATH')})
-        call(["dvips", "-q", "%s.dvi" % (f0noext)], env={"PATH": os.path.expandvars('$PATH')})
+                        env={"PATH": os.path.expandvars('$PATH')},
+                        stdout=log)
+        call(["dvips", "-q", "%s.dvi" % (f0noext)],
+                env={"PATH": os.path.expandvars('$PATH')},
+                stdout=log)
         if parametres['corrige']:
-            call(["dvips", "-q", "%s.dvi" % (f1noext)], env={"PATH": os.path.expandvars('$PATH')})
-        call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % (f0noext), "%s.pdf" % (f0noext)],
-                                                                            env={"PATH": os.path.expandvars('$PATH')})
+            call(["dvips", "-q", "%s.dvi" % (f1noext)],
+                    env={"PATH": os.path.expandvars('$PATH')},
+                    stdout=log)
+        call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % (f0noext),
+                    "%s.pdf" % (f0noext)],
+                    env={"PATH": os.path.expandvars('$PATH')},
+                    stdout=log)
         if parametres['corrige']:
-            call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % (f1noext), "%s.pdf" % (f1noext)],
-                                                                            env={"PATH": os.path.expandvars('$PATH')})
+            call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % (f1noext),
+                "%s.pdf" % (f1noext)],
+                env={"PATH": os.path.expandvars('$PATH')},
+                stdout=log)
+        log.close()
         if os.name == "nt":  #Cas de Windows.
             os.startfile('%s.pdf' % (f0noext))
             if parametres['corrige']:
@@ -389,6 +402,7 @@ def creation(parametres):
                 os.system('xdg-open %s.pdf' % (f1noext))
         #Supprime les fichiers temporaires créés par LaTeX
         try:
+            os.remove(os.path.join(dir0, 'pyromaths.log'))
             for ext in ('.aux', '.dvi', '.log', '.out', '.ps'):
                 os.remove(os.path.join(dir0,  f0noext + ext))
                 if parametres['corrige']:
