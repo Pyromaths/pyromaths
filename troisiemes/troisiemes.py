@@ -46,12 +46,10 @@ def tex_fractions(f0, f1):
                     valeurs_quotient_frac)
     ordre_exos = [i for i in xrange(nb_exos)]
     f0.write('''\\exercice
-  \\stepcounter{nocalcul}%
 ''')
     f0.write("  Calculer les expressions suivantes et donner le r\xe9sultat sous la forme d'une fraction irr\xe9ductible.\n")
     f0.write('  \\begin{multicols}{3}\\noindent\n')
     f1.write('''\\exercice*
-  \\stepcounter{nocalcul}
 ''')
     f1.write("  Calculer les expressions suivantes et donner le r\xe9sultat sous la forme d'une fraction irr\xe9ductible.\n")
     f1.write('  \\begin{multicols}{3}\\noindent\n')
@@ -73,12 +71,10 @@ def tex_puissances(f0, f1):
     valeurs = puissances.valeurs_puissances()
     i = random.randrange(2)
     f0.write('''\\exercice
-  \\stepcounter{nocalcul}%
 ''')
     f0.write("  Calculer les expressions suivantes et donner l'\xe9criture scientifique du r\xe9sultat.\n")
     f0.write('  \\begin{multicols}{2}\\noindent\n')
     f1.write('''\\exercice*
-  \\stepcounter{nocalcul}%
 ''')
     f1.write("  Calculer les expressions suivantes et donner l'\xe9criture scientifique du r\xe9sultat.\n")
     f1.write('  \\begin{multicols}{2}\\noindent\n')
@@ -160,12 +156,10 @@ def tex_developpements(f0, f1):
         a = random.randrange(nb_exos - i)
         exo.append(liste_exos[ordre_exos.pop(a)](10))
     f0.write('''\\exercice
-  \\stepcounter{nocalcul}%
 ''')
     f0.write('  D\xe9velopper et r\xe9duire les expressions suivantes.\n')
     f0.write('  \\begin{multicols}{2}\\noindent\n')
     f1.write('''\\exercice*
-  \\stepcounter{nocalcul}%
 ''')
     f1.write('  D\xe9velopper et r\xe9duire les expressions suivantes.\n')
     f1.write('  \\begin{multicols}{2}\\noindent\n')
@@ -203,12 +197,10 @@ def tex_factorisations(f0, f1):
         ordre_exos.append(ordre.pop(random.randrange(nb_exos - i)))
     del ordre
     f0.write('''\\exercice
-  \\stepcounter{nocalcul}%
 ''')
     f0.write('  Factoriser les expressions suivantes.\n')
     f0.write('  \\begin{multicols}{2}\\noindent\n')
     f1.write('''\\exercice*
-  \\stepcounter{nocalcul}%
 ''')
     f1.write('  Factoriser les expressions suivantes.\n')
     f1.write('  \\begin{multicols}{2}\\noindent\n')
@@ -227,7 +219,6 @@ def tex_devfacteq(f0, f1):
     valeurx = developpements.valeur_quotient()
     fact = developpements.fin_fact(expr)
     f0.write('''\\exercice
-  \\stepcounter{nocalcul}
 ''')
     f0.write('  On donne $A=%s$\\,.\n' % developpements.tex_initial(exo,
              expr))
@@ -238,7 +229,6 @@ def tex_devfacteq(f0, f1):
     f0.write("  \\item R\xe9soudre l'\xe9quation $A=0$\\,.\n")  # % developpements.tex_dev0(fact))
     f0.write('  \\end{enumerate}\n')
     f1.write('''\\exercice*
-  \\stepcounter{nocalcul}
 ''')
     f1.write('  On donne $A=%s$\\,.\n' % developpements.tex_initial(exo,
              expr))
@@ -263,13 +253,11 @@ def tex_equations(f0, f1):
 
 def tex_racines(f0, f1):
     f0.write('''\\exercice
-  \\stepcounter{nocalcul}%
 ''')
     f0.write('  \\begin{enumerate}\n')
     f0.write('  \\item Calculer les expressions suivantes et donner le r\xe9sultat sous la forme $a\\,\\sqrt{b}$ avec $a$ et $b$ entiers, $b$ le plus petit possible.\n')
     f0.write('  \\begin{multicols}{2}\\noindent\n')
     f1.write('''\\exercice*
-  \\stepcounter{nocalcul}%
 ''')
     f1.write('  \\begin{enumerate}\n')
     f1.write('  \\item Calculer les expressions suivantes et donner le r\xe9sultat sous la forme $a\\,\\sqrt{b}$ avec $a$ et $b$ entiers, $b$ le plus petit possible.\n')
@@ -349,10 +337,8 @@ def tex_reciproque_pythagore(f0, f1):
             break
     noms = pythagore.noms_sommets(3)
     f0.write('''\\exercice
-  \\stepcounter{nocalcul}%
 ''')
     f1.write('''\\exercice*
-  \\stepcounter{nocalcul}%
 ''')
     pythagore.tex_reciproque_pythagore(f0, f1, noms, longueurs)
 
@@ -411,7 +397,6 @@ def main(exo, f0, f1):
         tex_thales,
         tex_reciproque_thales,
         tex_trigo,
-        tex_affine,
         )
 
     modules[exo](f0, f1)

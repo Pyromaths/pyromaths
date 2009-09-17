@@ -1,3 +1,9 @@
+Version 09.09
+* Correction d'un bug de numérotation des calculs sur le niveau troisième
+* Correction d'un bug de chemin avec Windows Vista et Windows 7
+* Envoi des logs de latex dans un fichier temporaire pour éviter l'ouverture de nombreuses fenêtres sous Windows
+* Permet le téléchargement automatique des paquets MikTeX sous Windows. 
+
 Version 09.08
 * Création de modèles pour choisir l'apparence des fiches - par Arnaud Kientz
 * Refonte complète de l'interface graphique :

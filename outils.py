@@ -368,28 +368,28 @@ def creation(parametres):
             os.chdir(dir0)
             log = open('pyromaths.log', 'w')
             call(["latex", "-interaction=batchmode", str(exo)],
-                    env={"PATH": os.path.expandvars('$PATH')},
+                    #env={"PATH": os.path.expandvars('$PATH')},
                     stdout=log)
             if parametres['corrige']:
                 os.chdir(dir1)
                 call(["latex", "-interaction=batchmode", str(cor)],
-                        env={"PATH": os.path.expandvars('$PATH')},
+                        #env={"PATH": os.path.expandvars('$PATH')},
                         stdout=log)
         call(["dvips", "-q", "%s.dvi" % (f0noext)],
-                env={"PATH": os.path.expandvars('$PATH')},
+                #env={"PATH": os.path.expandvars('$PATH')},
                 stdout=log)
         if parametres['corrige']:
             call(["dvips", "-q", "%s.dvi" % (f1noext)],
-                    env={"PATH": os.path.expandvars('$PATH')},
+                    #env={"PATH": os.path.expandvars('$PATH')},
                     stdout=log)
         call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % (f0noext),
                     "%s.pdf" % (f0noext)],
-                    env={"PATH": os.path.expandvars('$PATH')},
+                    #env={"PATH": os.path.expandvars('$PATH')},
                     stdout=log)
         if parametres['corrige']:
             call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % (f1noext),
                 "%s.pdf" % (f1noext)],
-                env={"PATH": os.path.expandvars('$PATH')},
+                #env={"PATH": os.path.expandvars('$PATH')},
                 stdout=log)
         log.close()
         if os.name == "nt":  #Cas de Windows.
