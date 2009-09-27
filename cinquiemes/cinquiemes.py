@@ -39,5 +39,3 @@ def main(exo,f0, f1):
                fractions.sommes_fractions, fractions.produits_fractions,reperage.main)
 
     write(f0, f1, modules[exo]())
-
-	    

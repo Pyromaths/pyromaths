@@ -28,14 +28,16 @@ from lxml import etree
 import tempfile
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow, LesFiches,  configdir):
+    def setupUi(self, MainWindow, LesFiches,  configdir, iconesdir):
         from outils import module_path
         self.LesFiches = LesFiches
-	self.configdir = configdir
+        self.configdir = configdir
+        self.iconesdir=iconesdir
         self.configfile = os.path.join(configdir,  "pyromaths.xml")
         self.liste_creation=[]
         MainWindow.setStyleSheet("background-color: rgb(251, 245, 225);")
-        MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(module_path(), 'img/pyromaths.png')))
+        MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(iconesdir,
+                'pyromaths.png')))
         MainWindow.setWindowTitle(u"Pyromaths")
         MainWindow.setGeometry(300,600, 500, 200)
 
@@ -413,7 +415,7 @@ class Ui_MainWindow(object):
       <span style=" font-weight:600;">Guillaume Barthélémy</span> pour ses exercices ;
       </li>
       <li>
-      <span style=" font-weight:600;">Jacqueline Gouguenheim-Desloy</span> a porté Pyromaths sous MacOS à ses débuts. Son soutien et son amitié nous ont été précieux. C'est une perte douloureuse pour la communauté du logiciel libre.
+      <span style=" font-weight:600;">Jacqueline Gouguenheim-Desloy</span> a porté Pyromaths sous MacOS à ses débuts. Son soutien et son amitié nous ont été précieux. Sa disparition est une perte douloureuse pour la communauté du logiciel libre.
       </li>
     </ul>
     </p>
@@ -424,9 +426,9 @@ class Ui_MainWindow(object):
     </p>
   </body>
 </html>"""
-        banniere = os.path.join(os.path.dirname((sys.argv)[0]), 'img/pyromaths-banniere.png')
-        QtGui.QMessageBox.about(None,QtCore.QString.fromUtf8('À propos de Pyromaths'),
-                                text % (banniere,  version))
+        banniere = os.path.join(self.iconesdir, 'pyromaths-banniere.png')
+        QtGui.QMessageBox.about(None,QtCore.QString.fromUtf8(
+            'À propos de Pyromaths'), text % (banniere,  version))
 
     def creer_les_exercices(self):
         """Vérifie si la liste d'exercices n'est pas vide puis sélectionne les noms des fichiers exercices et

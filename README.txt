@@ -1,3 +1,7 @@
+Version 09.09-1
+* Ajout de python-lxml à la liste des dépendances pour le paquet deb de Pyromaths (merci à Cedrick)
+* Correction du chemin des icônes pour la version deb de Pyromaths
+
 Version 09.09
 * Correction d'un bug de numérotation des calculs sur le niveau troisième
 * Correction d'un bug de chemin avec Windows Vista et Windows 7

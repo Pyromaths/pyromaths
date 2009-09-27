@@ -430,7 +430,7 @@ def create_config_file():
     etree.SubElement(child, u"modele").text=u"pyromaths.tex"
 
     child = etree.SubElement(root, u"informations")
-    etree.SubElement(child, u"version").text=u"09.08"
+    etree.SubElement(child, u"version").text=u"09.09-1"
     etree.SubElement(child, u"description").text=u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
     etree.SubElement(child, u"icone").text=u"pyromaths.ico"
 
@@ -560,4 +560,3 @@ else:
         return os.environ['HOME']
     def configdir():
         return os.path.join(home(),  ".config", "pyromaths")
-

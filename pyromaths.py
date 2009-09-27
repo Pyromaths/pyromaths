@@ -28,10 +28,18 @@ from shutil import copy2
 #        Cas d'une installation de Pyromaths via deb ou rpm, il faut ajouter les modules au PATH
 #================================================================
 
-if os.name == "posix":
-    if os.path.basename(__file__)=="pyromaths":
-        sys.path.append(os.path.join( os.path.dirname(__file__),
-                        "../lib/pyromaths"))
+if os.name == "posix" and os.path.basename(__file__)=="pyromaths":
+    sys.path.append(os.path.join( os.path.dirname(__file__),
+        "../lib/pyromaths"))
+
+# Dossier des icones
+from outils import module_path
+if os.name == "posix" and os.path.basename(__file__) == "pyromaths":
+    iconesdir="/usr/share/pixmaps"
+else:
+    pathname = os.path.dirname((sys.argv)[0])
+    iconesdir=os.path.join(module_path(), 'img')
+
 
 from interface import Ui_MainWindow
 import outils
@@ -105,10 +113,10 @@ u'Trigonométrie',
 ]]]
 
 class StartQT4(QtGui.QMainWindow):
-    def __init__(self, LesFiches, configdir,  parent=None):
+    def __init__(self, LesFiches, configdir, iconesdir, parent=None):
         QtGui.QWidget.__init__(self, parent)
         self.ui = Ui_MainWindow()
-        self.ui.setupUi(self, LesFiches,  configdir)
+        self.ui.setupUi(self, LesFiches, configdir, iconesdir)
 
 
 if __name__ == "__main__":
@@ -135,6 +143,6 @@ if __name__ == "__main__":
                     QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.TranslationsPath))
     app.installTranslator(translator)
 
-    pyromaths = StartQT4(LesFiches,  outils.configdir())
+    pyromaths = StartQT4(LesFiches,  outils.configdir(), iconesdir)
     pyromaths.show()
     sys.exit(app.exec_())
