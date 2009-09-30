@@ -56,7 +56,7 @@ def pgcd(a, b):  # calcule le pgcd positif des nombres entiers a et b
 
 
 def ppcm(a, b):  # calcule le ppcm positif des nombres entiers a et b
-    return abs((a * b) / pgcd(a, b))
+    return abs((a * b) // pgcd(a, b))
 
 
 def signe(a):  # renvoie 1 si a est>0, -1 si a<0
@@ -122,26 +122,12 @@ def tex_entete(fichier):  #ecrit l'entete du document tex
 ''')
 
 
-#def pyromin(a, b):
-#    if a < b:
-#        return a
-#    else:
-#        return b
-#
-#
-#def pyromax(a, b):
-#    if a > b:
-#        return a
-#    else:
-#        return b
-
-
 def sepmilliers(nb, mathenvironment=0):
 
     # Insère les espaces fines pour séparer les milliers et remplace le point
     # décimal par une virgule
 
-    dec = [str(nb)[i] for i in xrange(len(str(nb)))]
+    dec = [str(nb)[i] for i in range(len(str(nb)))]
     if dec.count('e'):  #nb ecrit en notation scientifique
         exposant = int(('').join(dec[dec.index('e') + 1:]))
         dec = dec[:dec.index('e')]
@@ -153,7 +139,7 @@ def sepmilliers(nb, mathenvironment=0):
             virg = len(dec)
         if virg + exposant < 0:  #L'ecriture decimale du nombre commence par 0,...
             dec2 = ['0', '.']
-            for i in xrange(-virg - exposant):
+            for i in range(-virg - exposant):
                 dec2.append('0')
             dec2.extend(dec)
             dec = dec2
@@ -161,7 +147,7 @@ def sepmilliers(nb, mathenvironment=0):
 
             #L'ecriture decimale du nombre finit par des 0
 
-            for i in xrange(-((lg - virg) - 1) + exposant):
+            for i in range(-((lg - virg) - 1) + exposant):
                 dec.append('0')
     dec2 = []
     if dec.count('.'):
@@ -177,7 +163,7 @@ def sepmilliers(nb, mathenvironment=0):
             dec2 = dec[0:cpt]
             dec2.append('\\,')
             nbsep = nbsep - 1
-        for i in xrange(nbsep):
+        for i in range(nbsep):
             dec2.extend(dec[cpt:cpt + 3])
             if nbsep - i > 1:
                 dec2.append('\\,')
@@ -198,7 +184,7 @@ def sepmilliers(nb, mathenvironment=0):
         dec2.extend(dec[cpt:cpt + 4])
         dec2.append('\\,')
         cpt = cpt + 4
-        for i in xrange(nbsep):
+        for i in range(nbsep):
             dec2.extend(dec[cpt:cpt + 3])
             if cpt + 3 < len(dec):
                 dec2.append('\\,')
@@ -206,12 +192,11 @@ def sepmilliers(nb, mathenvironment=0):
         dec2.extend(dec[cpt:])
     nb = ('').join(dec2)
     if nb.endswith('.0'):
-        nb = string.rsplit(nb, '.0')[0]
+        nb = nb.rsplit('.0')[0]
     if mathenvironment:
-        return string.join(string.rsplit(nb, sep='.'), ',')
+        return '{,}'.join(nb.split('.'))
     else:
-        return string.join(string.rsplit(nb, sep='.'), '{,}')
-
+        return ','.join(nb.split('.'))
 
 def tex_coef(coef, var, bplus=0, bpn=0, bpc=0):
 
@@ -259,9 +244,9 @@ def choix_points(n):
     @type n: integer
     """
 
-    points = [unichr(i + 65) for i in xrange(26)]
+    points = [chr(i + 65) for i in range(26)]
     liste = []
-    for i in xrange(n):
+    for i in range(n):
         liste.append(points.pop(randrange(len(points))))
     return liste
 
@@ -273,7 +258,7 @@ def melange_liste(list):
 
     tmp = []
     lg = len(list)
-    for i in xrange(lg):
+    for i in range(lg):
         tmp.append(list.pop(randrange(len(list))))
     return tmp
 
@@ -299,7 +284,7 @@ def trie_liste_croissant(liste):
     if len(liste) == 1:
         return liste
     else:
-        milieu = len(liste) / 2
+        milieu = len(liste) // 2
         liste_a_trier = fusion(trie_liste_croissant(liste[:milieu]),
                                trie_liste_croissant(liste[milieu:]))
         return liste_a_trier
@@ -321,36 +306,50 @@ def radians(alpha):
 
 def degres(alpha):
     return alpha*180/math.pi
+
+def supprime_extension(filename,  ext):
+    """supprime l'éventuelle extension ext du nom de fichier filename.
+    ext est de la forme '.tex'"""
+    if os.path.splitext(filename)[1].lower():
+        return os.path.splitext(filename)[0]
+    return filename
+
+def ajoute_extension(filename,  ext):
+    """ajoute si nécessaire l'extension ext au nom de fichier filename.
+    ext est de la forme '.tex'"""
+    if os.path.splitext(filename)[1].lower() == ext:
+        return filename
+    return filename + ext
+
 #==============================================================
 #        Vérifie la présence des programmes nécessaires à la compilation des fichiers TeX
 #==============================================================
 def creation(parametres):
     """Création et compilation des fiches d'exercices.
     parametres = {'fiche_exo': f0,
-                            'fiche_cor': f1,
-                            'liste_exos': self.lesexos,
-                            'creer_pdf': self.checkBox_create_pdf.checkState(),
-                            'titre': unicode(self.lineEdit_titre.text()),
-                            'niveau': unicode(self.comboBox_niveau.currentText()),
-                            }"""
+                  'fiche_cor': f1,
+                  'liste_exos': self.lesexos,
+                  'creer_pdf': self.checkBox_create_pdf.checkState(),
+                  'titre': unicode(self.lineEdit_titre.text()),
+                  'niveau': unicode(self.comboBox_niveau.currentText()),
+                }"""
     exo = parametres['fiche_exo']
     cor = parametres['fiche_cor']
-    f0 = open( exo, 'w')
-    f1 = open( cor, 'w')
+    f0 = open( exo, encoding='utf-8', mode='w')
+    f1 = open( cor, encoding='utf-8', mode='w')
     titre = parametres['titre']
-
     fiche_metapost = os.path.splitext(exo)[0] + '.mp'
 
     if parametres['creer_pdf']:
-	copie_tronq_modele(f0, parametres, 'entete')
-	copie_tronq_modele(f1, parametres, 'entete')
+        copie_tronq_modele(f0, parametres, 'entete')
+        copie_tronq_modele(f1, parametres, 'entete')
 
     for exercice in parametres['liste_exos']:
         parametres['les_fiches'][exercice[0]][1].main(exercice[1], f0, f1)
 
     if parametres['creer_pdf']:
         copie_tronq_modele(f0, parametres, 'pied')
-	copie_tronq_modele(f1, parametres, 'pied')
+        copie_tronq_modele(f1, parametres, 'pied')
 
     f0.close()
     f1.close()
@@ -364,7 +363,7 @@ def creation(parametres):
     if parametres['creer_pdf']:
         from subprocess import call
 
-        for i in xrange(2):
+        for i in range(2):
             os.chdir(dir0)
             log = open('pyromaths.log', 'w')
             call(["latex", "-interaction=batchmode", str(exo)],
@@ -408,8 +407,8 @@ def creation(parametres):
                 if parametres['corrige']:
                     os.remove(os.path.join(dir1,  f1noext + ext))
         except OSError:
-            print u"Le fichier %s ou %s n'a pas été supprimé." % (os.path.join(dir0,  f0noext + ext),
-                                                                  os.path.join(dir1,  f1noext + ext))
+            print(("Le fichier %s ou %s n'a pas été supprimé." % (os.path.join(dir0,  f0noext + ext),
+                                                                  os.path.join(dir1,  f1noext + ext))))
                                                                   #le fichier à supprimer n'existe pas.
     if not parametres['corrige']:
         os.remove(os.path.join(dir1,  f1noext + '.tex'))
@@ -419,27 +418,27 @@ def creation(parametres):
 #==============================================================
 def create_config_file():
     """Crée le fichier de configuration au format xml"""
-    root = etree.Element(u"pyromaths")
+    root = etree.Element("pyromaths")
 
-    child = etree.SubElement(root, u"options")
-    etree.SubElement(child, u"nom_fichier").text=u"exercices"
-    etree.SubElement(child, u"chemin_fichier").text=u"%s" % home()
-    etree.SubElement(child, u"titre_fiche").text=u"Fiche de révision"
-    etree.SubElement(child, u"corrige").text=u"True"
-    etree.SubElement(child, u"pdf").text=u"True"
-    etree.SubElement(child, u"modele").text=u"pyromaths.tex"
+    child = etree.SubElement(root, "options")
+    etree.SubElement(child, "nom_fichier").text="exercices"
+    etree.SubElement(child, "chemin_fichier").text="%s" % home()
+    etree.SubElement(child, "titre_fiche").text="Fiche de révisions"
+    etree.SubElement(child, "corrige").text="True"
+    etree.SubElement(child, "pdf").text="True"
+    etree.SubElement(child, "modele").text="pyromaths.tex"
 
-    child = etree.SubElement(root, u"informations")
-    etree.SubElement(child, u"version").text=u"09.09-1"
-    etree.SubElement(child, u"description").text=u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
-    etree.SubElement(child, u"icone").text=u"pyromaths.ico"
+    child = etree.SubElement(root, "informations")
+    etree.SubElement(child, "version").text="09.09-1"
+    etree.SubElement(child, "description").text="Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
+    etree.SubElement(child, "icone").text="pyromaths.ico"
 
-    subchild= etree.SubElement(child, u"auteur")
-    etree.SubElement(subchild, u"nom").text=u"Jérôme Ortais"
-    etree.SubElement(subchild, u"email").text=u"jerome.ortais@pyromaths.org"
-    etree.SubElement(subchild, u"site").text=u"http://www.pyromaths.org"
+    subchild= etree.SubElement(child, "auteur")
+    etree.SubElement(subchild, "nom").text="Jérôme Ortais"
+    etree.SubElement(subchild, "email").text="jerome.ortais@pyromaths.org"
+    etree.SubElement(subchild, "site").text="http://www.pyromaths.org"
 
-    return etree.tostring(root, pretty_print=True, encoding="UTF-8", xml_declaration=True)
+    return etree.tostring(root, pretty_print=True, encoding="UTF-8", xml_declaration=True).decode('utf-8', 'strict')
 
 def indent(elem, level=0):
     """Indente correctement les fichiers xml.
@@ -474,7 +473,7 @@ def modify_config_file(file):
                 parents.insert(0,e)
                 e = e.getparent()
             oldtag = oldroot
-            for i in xrange(1, len(parents)):
+            for i in range(1, len(parents)):
                 if oldtag.find(parents[i].tag) is None and i < len(parents) - 1 :
                     if i > 1:
                         etree.SubElement(oldroot.find(parents[i-1].tag), parents[i].tag)
@@ -507,11 +506,12 @@ def module_path():
     even if we are frozen using py2exe"""
 
     if we_are_frozen():
-        return os.path.dirname(unicode(sys.executable,
+        return os.path.dirname(str(sys.executable,
                                 sys.getfilesystemencoding( )))
 
-    return os.path.dirname(unicode(__file__,
-                                    sys.getfilesystemencoding( )))
+    #return os.path.dirname(str(__file__,
+    #                                sys.getfilesystemencoding( )))
+    return os.path.dirname(str(__file__))
 
 def copie_tronq_modele(dest, parametres, master):
     """Copie des morceaux des modèles, suivant le schéma du master."""
@@ -526,27 +526,30 @@ def copie_tronq_modele(dest, parametres, master):
     source = parametres['modele']
 
     if source in liste_modeles_pyromaths:
-      source = os.path.join(module_path(), 'modeles', source)
+        source = os.path.join(module_path(), 'modeles', source)
     else:
-      source = os.path.join(parametres['configdir'], 'modeles', source)
+        source = os.path.join(parametres['configdir'], 'modeles', source)
 
     ## La destination est le fichier temporaire.
 
     ## Les variables à remplacer :
-    titre = parametres['titre'].encode('latin1')
+    titre = parametres['titre']
     niveau = parametres['niveau']
-    for line in open(source, 'r'):
-      if master_fin in line:
-	break
-      if n > 0:
-	temp = findall('##{{[A-Z]*}}##',line)
-        if temp:
-          occ = temp[0][4:len(temp)-5].lower()
-	  line = sub('##{{[A-Z]*}}##',eval(occ),line)
-	dest.write(line)
+    modele = open(source, encoding='utf-8', mode='r')
+    for line in modele:
+        if master_fin in line:
+            break
+        if n > 0:
+            temp = findall('##{{[A-Z]*}}##',line)
+            if temp:
+                occ = temp[0][4:len(temp)-5].lower()
+                line = sub('##{{[A-Z]*}}##',eval(occ),line)
+            dest.write(line)
 
-      if master in line:
-	n = 1
+        if master in line:
+            n = 1
+
+    modele.close()
     return
 
 ## Création des chemins suivant les OS

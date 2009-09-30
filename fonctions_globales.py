@@ -176,7 +176,7 @@ def Affichage(l):
     """
 
     expr = ""  # résultat
-    for i in xrange(len(l)):  # on parcourt la liste
+    for i in range(len(l)):  # on parcourt la liste
         if ["+", "-", "*", "/", '(', ')'].count(l[i]):  # Un opérateur
             if l[i] == "*":
                 expr = expr + " \\times "
@@ -283,10 +283,10 @@ def valeurs_priorites_decimaux(nb, entier=1):  # renvoie les 2 listes contenant 
         loperateurs.append(')')
         p = p - 1
     if entier:
-        loperandes = [random.randrange(12) + 2 for i in xrange(nb)]
+        loperandes = [random.randrange(12) + 2 for i in range(nb)]
     else:
         loperandes = [((random.randrange(88) + 12) * 1.0) / 10 for i in
-                      xrange(nb)]
+                      range(nb)]
     exercice = [loperandes[0]]
     i = 1
     j = 0

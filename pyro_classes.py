@@ -42,7 +42,7 @@ class Fractions:
         # retourne la fraction rendue irréductible
 
         pgcd = outils.pgcd(self.n, self.d)
-        return Fractions(self.n / pgcd, self.d / pgcd)
+        return Fractions(self.n // pgcd, self.d // pgcd)
 
     def TeX(self, signe=0, coef=None):
         """Permet d'\xc3\xa9crire une fraction au format TeX.
@@ -52,7 +52,7 @@ class Fractions:
         """
 
         if signe:
-            (self.n, self.d) = ((self.n * abs(self.d)) / self.d, abs(self.d))
+            (self.n, self.d) = ((self.n * abs(self.d)) // self.d, abs(self.d))
         if self.n:
             if coef and coef != 1:
                 text = "\\dfrac{%s_{\\times %s}}{%s_{\\times %s}}" % (self.n,
@@ -74,14 +74,14 @@ class Fractions:
         c2 = abs(outils.pgcd(self.d, fraction.n))
         simplifiable = 0  # permet de savoir si on a simplifiée le produit
         if c1 > 1:
-            n1 = "%s \\times \\cancel{%s}" % (self.n / c1, c1)
-            d2 = "%s \\times \\cancel{%s}" % (fraction.d / c1, c1)
+            n1 = "%s \\times \\cancel{%s}" % (self.n // c1, c1)
+            d2 = "%s \\times \\cancel{%s}" % (fraction.d // c1, c1)
         else:
             n1 = self.n
             d2 = fraction.d
         if c2 > 1:
-            d1 = "%s \\times \\bcancel{%s}" % (self.d / c2, c2)
-            n2 = "%s \\times \\bcancel{%s}" % (fraction.n / c2, c2)
+            d1 = "%s \\times \\bcancel{%s}" % (self.d // c2, c2)
+            n2 = "%s \\times \\bcancel{%s}" % (fraction.n // c2, c2)
         else:
             d1 = self.d
             n2 = fraction.n
@@ -91,29 +91,29 @@ class Fractions:
 
     def TeXSimplifie(self):
         frs = Fractions.simplifie(self)
-        coef = abs(self.n / frs.n)
+        coef = abs(self.n // frs.n)
         if coef > 1:
             texte = \
                 "\\dfrac{%s_{\\times \\cancel %s}}{%s_{\\times \\cancel %s}}" % \
-                (self.n / coef, coef, self.d / coef, coef)
+                (self.n // coef, coef, self.d // coef, coef)
         else:
             texte = Fractions.TeX(self, signe=None)
         return texte
 
     def __add__(self, fraction):
         ppcm = outils.ppcm(self.d, fraction.d)
-        return Fractions((self.n * ppcm) / self.d + (fraction.n * ppcm) /
+        return Fractions((self.n * ppcm) // self.d + (fraction.n * ppcm) //
                          fraction.d, ppcm)
 
     def __sub__(self, fraction):
         ppcm = outils.ppcm(self.d, fraction.d)
-        return Fractions((self.n * ppcm) / self.d - (fraction.n * ppcm) /
+        return Fractions((self.n * ppcm) // self.d - (fraction.n * ppcm) //
                          fraction.d, ppcm)
 
     def __mul__(self, fraction):
         return Fractions(self.n * fraction.n, self.d * fraction.d)
 
-    def __div__(self, fraction):
+    def __truediv__(self, fraction):
         return Fractions(self.n * fraction.d, self.d * fraction.n)
 
 
@@ -133,7 +133,7 @@ class Litteral:
 
         expression = sorted(self.e, key=lambda x: (x[1], -x[2]))
         (expr, i) = ([expression[0]], 1)
-        for i in xrange(1, len(expression)):
+        for i in range(1, len(expression)):
             if expr:
                 if expr[-1][1] == expression[i][1] and expr[-1][2] == \
                     expression[i][2]:
@@ -156,7 +156,7 @@ class Litteral:
 
         expr = self.e
         expression = []
-        for i in xrange(len(expr)):
+        for i in range(len(expr)):
             expression.append((-expr[i][0], expr[i][1], expr[i][2]))
         return Litteral(expression)
 
@@ -176,8 +176,8 @@ class Litteral:
         expr1 = self.e
         expr2 = expression.e
         expression = []
-        for i in xrange(len(expr1)):
-            for j in xrange(len(expr2)):
+        for i in range(len(expr1)):
+            for j in range(len(expr2)):
                 if expr1[i][1] == expr2[j][1]:
                     expression.append((expr1[i][0] * expr2[j][0], expr1[i][1],
                             expr1[i][2] + expr2[j][2]))
@@ -330,7 +330,7 @@ class Metapost:
             elif gamma == 90:
                 self.text.append("  draw (%s+5*unitvector(%s-%s))--(%s+5*unitvector(%s-%s)+\n" % (C, A, C, C, A, C))
                 self.text.append("      5*unitvector(%s-%s))--(%s+5*unitvector(%s-%s));\n" % ( B, C, C, B, C))
-            for i in xrange(3):
+            for i in range(3):
                 if marques[i]:
                     self.text.append("  m3:=unitvector(%s-%s) rotated 90;\n" % (points[(i+1)%3], points[(i+2)%3]))
                     self.text.append("  $:=image(\n")
@@ -415,7 +415,7 @@ class TeXMiseEnForme:
         # Insère les espaces fines pour séparer les milliers et remplace le point
         # décimal par une virgule
 
-        dec = [str(nb)[i] for i in xrange(len(str(nb)))]
+        dec = [str(nb)[i] for i in range(len(str(nb)))]
         if dec.count('e'):  #nb ecrit en notation scientifique
             exposant = int(("").join(dec[dec.index('e') + 1:]))
             dec = dec[:dec.index('e')]
@@ -427,7 +427,7 @@ class TeXMiseEnForme:
                 virg = len(dec)
             if virg + exposant < 0:  #L'ecriture decimale du nombre commence par 0,...
                 dec2 = ["0", '.']
-                for i in xrange(-virg - exposant):
+                for i in range(-virg - exposant):
                     dec2.append("0")
                 dec2.extend(dec)
                 dec = dec2
@@ -435,7 +435,7 @@ class TeXMiseEnForme:
 
                 #L'ecriture decimale du nombre finit par des 0
 
-                for i in xrange(-((lg - virg) - 1) + exposant):
+                for i in range(-((lg - virg) - 1) + exposant):
                     dec.append("0")
         dec2 = []
         if dec.count('.'):
@@ -451,7 +451,7 @@ class TeXMiseEnForme:
                 dec2 = dec[0:cpt]
                 dec2.append('\\,')
                 nbsep = nbsep - 1
-            for i in xrange(nbsep):
+            for i in range(nbsep):
                 dec2.extend(dec[cpt:cpt + 3])
                 if nbsep - i > 1:
                     dec2.append('\\,')
@@ -472,7 +472,7 @@ class TeXMiseEnForme:
             dec2.extend(dec[cpt:cpt + 4])
             dec2.append('\\,')
             cpt = cpt + 4
-            for i in xrange(nbsep):
+            for i in range(nbsep):
                 dec2.extend(dec[cpt:cpt + 3])
                 if cpt + 3 < len(dec):
                     dec2.append('\\,')

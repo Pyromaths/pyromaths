@@ -21,10 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import random
 from math import acos, asin, atan, pi, sin, cos, tan
-from outils import ecrit_tex
-
+import random
 #
 # ------------------- THEOREME DE PYTHAGORE -------------------
 
@@ -154,46 +152,31 @@ couples_pythagore = (
 
 def trouve_couples_pythagore(pyromax):
     (liste, listecouples) = ([], [])
-    for a in xrange(pyromax):
+    for a in range(pyromax):
         liste.append(a ** 2)
-    for c in xrange(pyromax):
-        for b in xrange(int((c + 1) / 2 ** .5)):
+    for c in range(pyromax):
+        for b in range(int((c + 1) / 2 ** .5)):
             if liste.count((c + 1) ** 2 - (b + 1) ** 2):
                 a = liste.index((c + 1) ** 2 - (b + 1) ** 2)
                 listeinter = [c + 1, b + 1, a]
                 listeinter.sort()
                 if listeinter[0] > 9:
                     listecouples.append(tuple(listeinter))
-
-#                if listecouples==[] :
-#                   listecouples.append(tuple(listeinter))
-#                else :
-#                    ajout=1
-#                    for i in xrange(len(listecouples)) :
-#                        if not(listeinter[2]%listecouples[i][2]) and not(listeinter[1]%listecouples[i][1]) and not(listeinter[0]%listecouples[i][0]) :
-#                            if listeinter[2]//listecouples[i][2]==listeinter[1]//listecouples[i][1]==listeinter[0]//listecouples[i][0] : ajout=0
-#                    if ajout :
-#                        listeinter=[c+1,b+1,a]
-#                        listeinter.sort()
-#                        listecouples.append(tuple(listeinter))
-
     return tuple(listecouples)
 
 
 def noms_sommets(nb):  # renvoie nb noms de sommets
     (listenb, listepts) = ([], [])
-    for i in xrange(26):
+    for i in range(26):
         listenb.append(i + 65)
-    for i in xrange(nb):
-        listepts.append(unichr(listenb.pop(random.randrange(26 - i))))
+    for i in range(nb):
+        listepts.append(chr(listenb.pop(random.randrange(26 - i))))
     listepts.sort()
     return tuple(listepts)
 
 
 def fig_tr_rect(lg):
-
     # renvoie les angles au centre des trois sommets du triangle ABC rectange en C
-
     a = random.randrange(360)
     if a < 180:
         b = a + 180
@@ -252,7 +235,7 @@ def enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
 def exo_pythagore():
     while True:
         longueurs = couples_pythagore[random.randrange(120)]
-        longueurs = [longueurs[i] / 10.0 for i in xrange(3)]
+        longueurs = [longueurs[i] / 10.0 for i in range(3)]
         if inegalite_triangulaire(longueurs):
             break
     noms = noms_sommets(3)
@@ -282,9 +265,9 @@ def exo_pythagore():
     exo.append(enonce)
     cor.append(enonce)
     cor.append("  \\par\\dotfill{}\\\\\n")
-    cor.append("  Le triangle %s est rectangle en %s donc, d'apr\\`es le \\textbf{th\\'eor\\`eme de Pythagore} :" %
+    cor.append("  Le triangle %s est rectangle en %s donc, d'après le \\textbf{théorème de Pythagore} :" %
                (nom_tr, noms[2]))
-    cor.append("  \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypot\\'enuse})}\\]" %
+    cor.append("  \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]" %
                (cotes[2], cotes[0], cotes[1], cotes[2]))
     if long0 == 2 or long1 == 2:
         cor.append("  \\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]" %
@@ -346,7 +329,7 @@ def exo_triangle_cercle():
     cor = ["\\exercice*"]
     while True:
         longueurs = couples_pythagore[random.randrange(120)]
-        longueurs = [longueurs[i] / 10.0 for i in xrange(3)]
+        longueurs = [longueurs[i] / 10.0 for i in range(3)]
         if inegalite_triangulaire(longueurs):
             break
     noms = noms_sommets(3)
@@ -367,7 +350,7 @@ def exo_triangle_cercle():
   \\end{pspicture}
 \\end{minipage}\\hfill
 \\begin{minipage}{13cm}
-  $\\big(\\mathcal{C}\\big)$ est un cercle de diam\\`etre $[%s]$ et $%s$ est un
+  $\\big(\\mathcal{C}\\big)$ est un cercle de diamètre $[%s]$ et $%s$ est un
   point de $\\big(\\mathcal{C}\\big)$.\\par
   On donne $%s=\\unit[%s]{cm}\\text{ et }%s=\\unit[%s]{cm}$.\\par
   Calculer la longueur $%s$.""" % \
@@ -376,12 +359,12 @@ def exo_triangle_cercle():
     exo.append(enonce)
     cor.append(enonce)
     cor.append("  \\par\\dotfill{}\\\\\n")
-    cor.append("  $[%s]$ est le diam\`etre du cercle circonscrit au triangle $%s$.\\par" %
+    cor.append("  $[%s]$ est le diamètre du cercle circonscrit au triangle $%s$.\\par" %
                (cotes[2], nom_tr))
     cor.append("  \\fbox{Donc le triangle %s est rectangle en %s.}\\\\\n" %
                (nom_tr, noms[2]))
-    cor.append("  D'apr\\`es le \\textbf{th\\'eor\\`eme de Pythagore} :")
-    cor.append("  \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypot\\'enuse})}\\]" %
+    cor.append("  D'après le \\textbf{théorème de Pythagore} :")
+    cor.append("  \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]" %
                (cotes[2], cotes[0], cotes[1], cotes[2]))
     if long0 == 2 or long1 == 2:
         cor.append("  \\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]" %
@@ -432,14 +415,13 @@ def exo_reciproque_pythagore():
     cor = ["\\exercice*"]
     while True:
         longueurs = couples_pythagore[random.randrange(120)]
-        longueurs = [longueurs[i] / 10.0 for i in xrange(3)]
+        longueurs = [longueurs[i] / 10.0 for i in range(3)]
         if inegalite_triangulaire(longueurs):
             break
     noms = noms_sommets(3)
     nom_tr = nom_triangle(noms)
-    l = [i for i in xrange(3)]
-    n = [l.pop(random.randrange(3 - i)) for i in xrange(3)]
-    del l
+    l = [i for i in range(3)]
+    n = [l.pop(random.randrange(3 - i)) for i in range(3)]
     c = cotes_sommets(noms)
     recip = (nom_tr, c[n[0]], nombre(longueurs[n[0]]), c[n[1]], nombre(longueurs[n[1]]),
              c[n[2]], nombre(longueurs[n[2]]), nom_tr)
@@ -451,13 +433,13 @@ Quelle est la nature du triangle $%s$?
     exo.append(enonce)
     cor.append(enonce)
     cor.append("\\par\\dotfill{}\\\\\n")
-    cor.append("Le triangle %s n'est ni isoc\\`ele, ni \\'equilat\\'eral.\\par\n" %
+    cor.append("Le triangle %s n'est ni isocèle, ni équilatéral.\\par\n" %
                nom_tr)
     cor.append("$\\left.")
     cor.append("  \\renewcommand{\\arraystretch}{2}")
     cor.append("  \\begin{array}{l}")
 
-    cor.append("    \\bullet %s^2=%s^2=%s\\qquad\\text{(}[%s]\\text{ est le plus grand c\\^ot\\'e.)}\\\\\n" %
+    cor.append("    \\bullet %s^2=%s^2=%s\\qquad\\text{(}[%s]\\text{ est le plus grand côté.)}\\\\\n" %
                (c[2], nombre(longueurs[2]), nombre(longueurs[2] ** 2), c[2]))
     cor.append("    \\bullet  %s^2+%s^2=%s^2+%s^2=%s \n" % (c[0], c[1],
                nombre(longueurs[0]), nombre(longueurs[1]), nombre(longueurs[0] **
@@ -465,7 +447,7 @@ Quelle est la nature du triangle $%s$?
     cor.append("  \\end{array}")
     cor.append("\\right\\rbrace$")
     cor.append("""Donc $%s^2=%s^2+%s^2$.\\par
-D'apr\\`es la \\textbf{r\\'eciproque du th\\'eor\\`eme de Pythagore},
+D'après la \\textbf{réciproque du théorème de Pythagore},
 \\fbox{le triangle $%s$ est rectangle en $%s$.}""" %
                (c[2], c[0], c[1], nom_tr, noms[2]))
     return (exo, cor)
@@ -479,17 +461,17 @@ D'apr\\`es la \\textbf{r\\'eciproque du th\\'eor\\`eme de Pythagore},
 def valeurs_thales(pyromax):
     liste = [0, 0, 0, 0, 0, 0, 0, 0]
     while liste == [0, 0, 0, 0, 0, 0, 0, 0]:
-        for i in xrange(3):
+        for i in range(3):
             liste[i] = random.randrange(2)
     a = random.randrange(liste.count(1))
-    for i in xrange(3):
+    for i in range(3):
         if liste[i]:
             if not a:
                 liste[i + 3] = 1
             a = a - 1
         else:
             liste[i + 3] = 1  # on doit connaitre le numeratuer ou le denominateur
-    for i in xrange(2):  # AB et AE  ou  AB et BE  ou  AE et EB
+    for i in range(2):  # AB et AE  ou  AB et BE  ou  AE et EB
         if liste[i] and liste[i + 3]:  # i est le rapport complet. On choisit une des 3 formes ci-dessus
             a = random.randrange(2)
             liste[i + 6] = 1
@@ -499,7 +481,7 @@ def valeurs_thales(pyromax):
     if liste[2] and liste[5]:
         rapport = [2, 5]
     valeurs = [0, 0, 0, 0, 0, 0, 0, 0]
-    for i in xrange(3):
+    for i in range(3):
         if liste[i]:
             valeurs[i] = random.randrange(15, pyromax) / 10.0
         if liste[i + 3] and liste[i]:
@@ -524,7 +506,7 @@ def valeurs_thales(pyromax):
 
 
 def test_valeurs_thales(valeurs, rapport, type_thales):
-    v = [valeurs[i] for i in xrange(8)]
+    v = [valeurs[i] for i in range(8)]
     if rapport[0] // 3 == 0 and rapport[1] // 3 == 2:  # On donne AB et EB
         v[rapport[0] + 3] = (v[rapport[0]] - v[rapport[1]]) * \
             type_thales
@@ -537,7 +519,7 @@ def test_valeurs_thales(valeurs, rapport, type_thales):
         rapp = (v[rapport[0] % 3 + 3] * 1.0) / v[rapport[0] % 3]
     else:
         rapp = 0
-    for i in xrange(3):
+    for i in range(3):
         if not v[i] and rapp:
             v[i] = v[i + 3] / rapp
         elif not v[i + 3]:
@@ -585,11 +567,11 @@ def exo_thales():
 
 def long_val(noms, valeurs):  # renvoie un tuple contenant les noms des segments et leur longueur puis les noms des longueurs a calculer
     liste = []
-    for i in xrange(8):
+    for i in range(8):
         if valeurs[i]:
             liste.append(creer_noms(noms, i))
             liste.append(nombre(valeurs[i]))
-    for i in xrange(6):
+    for i in range(6):
         if not valeurs[i] and valeurs[8][0][0] % 3 != i % 3:
             liste.append(creer_noms(noms, i))
     return liste
@@ -644,10 +626,10 @@ def tex_enonce_thales(noms, valeurs):
 
 
 def tex_resolution_thales0(n, v):
-    return """Dans le triangle $%s$,~ $%s$ est sur le c\\^ot\\'e $[%s]$,~ 
-$%s$ est sur le c\\^ot\\'e $[%s]$ et les droites $(%s)$ et $(%s)$ sont
-parall\\`eles.\\par
-D'apr\\`es le \\textbf{th\\'eor\\`eme de Thal\\`es} :
+    return """Dans le triangle $%s$,~ $%s$ est sur le côté $[%s]$,~
+$%s$ est sur le côté $[%s]$ et les droites $(%s)$ et $(%s)$ sont
+parallèles.\\par
+D'après le \\textbf{théorème de Thalès} :
 $\\qquad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$""" % \
         (
         n[0] + n[1] + n[2],
@@ -698,7 +680,7 @@ def tex_resolution_thales1(n, v):
 
 def tex_resolution_thales2(n, v):
     donnees = []
-    for i in xrange(3):
+    for i in range(3):
         if v[i]:
             donnees.append(nombre(v[i]))
         else:
@@ -735,7 +717,7 @@ def valeur_exacte(a, approx=3, unit=1):
 def tex_resolution_thales3(n, v):
     r = v[8][0][0] % 3  # grand rapport
     donnees = []
-    for i in xrange(3):
+    for i in range(3):
         if i != r:
             donnees.extend([nom_ou_valeur(n, v, r), nom_ou_valeur(n, v,
                            r + 3), nom_ou_valeur(n, v, i), nom_ou_valeur(n,
@@ -784,7 +766,7 @@ def fig_thales(noms, valeurs):
     type_thales = valeurs[8][1]
     angle = int(((100.0 * acos(((v[0] ** 2 + v[1] ** 2) - v[2] ** 2) / ((2 *
                 v[0]) * v[1]))) * 180) / pi) / 100.0
-    v = [int(v[i] * 100) / 100.0 for i in xrange(8)]
+    v = [int(v[i] * 100) / 100.0 for i in range(8)]
     mini_x = int(100.0 * min(0, v[1] * cos((angle * pi) / 180), v[3] *
                  type_thales, (v[4] * cos((angle * pi) / 180)) *
                  type_thales)) / 100.0 - 1.5
@@ -881,16 +863,16 @@ def exo_trigo():
 def enonce_trigo(v):
     (exo, cor) = ([], [])
     (l, lt) = ([], [])
-    for j in xrange(2):
+    for j in range(2):
         f = (('\\sin', 1, 0), ('\\cos', 2, 0), ('\\tan', 1, 2))[v[j][2][0]]
-        for i in xrange(2):
+        for i in range(2):
             l.append(v[j][1][f[i + 1]])
             l.append(v[j][2][i + 1])
         l.append(angle(v[j][0], 1))
         l.append(v[j][2][3])
-    for j in xrange(2):
+    for j in range(2):
         tmp = []
-        for i in xrange(3):
+        for i in range(3):
             if len(l[2 * i + 6 * j]) < 3:
                 if l[2 * i + 6 * j + 1]:
                     lt.append('$%s=\\unit[%s]{cm}$' % (l[2 * i + 6 * j],
@@ -1000,7 +982,7 @@ def angle(s, n):  # renvoie \\widehat{ABC} où s est la liste des 3 sommets du t
 
 
 def valeurs_trigo():
-    l = [random.randrange(10, 121) / 10.0 for i in xrange(3)]
+    l = [random.randrange(10, 121) / 10.0 for i in range(3)]
     l.sort()
     l.append(random.randrange(15, 76))
     trigo = 1
@@ -1020,5 +1002,3 @@ def valeurs_trigo():
         else:
             v = (v, (trigo, 0, l[0], l[3]))
     return v
-
-

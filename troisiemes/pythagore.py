@@ -22,7 +22,7 @@
 #
 
 import random
-import fractions
+from . import fractions
 from math import acos, asin, atan, pi, sin, cos, tan
 from outils import valeur_alea, pgcd, ecrit_tex
 
@@ -155,10 +155,10 @@ couples_pythagore = (
 
 def trouve_couples_pythagore(valeurmax):
     (liste, listecouples) = ([], [])
-    for a in xrange(valeurmax):
+    for a in range(valeurmax):
         liste.append(a ** 2)
-    for c in xrange(valeurmax):
-        for b in xrange(int((c + 1) / 2 ** .5)):
+    for c in range(valeurmax):
+        for b in range(int((c + 1) / 2 ** .5)):
             if liste.count((c + 1) ** 2 - (b + 1) ** 2):
                 a = liste.index((c + 1) ** 2 - (b + 1) ** 2)
                 listeinter = [c + 1, b + 1, a]
@@ -183,10 +183,10 @@ def trouve_couples_pythagore(valeurmax):
 
 def noms_sommets(nb):  # renvoie nb noms de sommets
     (listenb, listepts) = ([], [])
-    for i in xrange(26):
+    for i in range(26):
         listenb.append(i + 65)
-    for i in xrange(nb):
-        listepts.append(unichr(listenb.pop(random.randrange(26 - i))))
+    for i in range(nb):
+        listepts.append(chr(listenb.pop(random.randrange(26 - i))))
     listepts.sort()
     return tuple(listepts)
 
@@ -342,7 +342,7 @@ def tex_triangle_cercle(f0, f1, noms, angles, longueurs):
     \\end{pspicture}
   \\end{minipage}\\hfill
   \\begin{minipage}{13cm}
-    $\\big(\\mathcal{C}\\big)$ est un cercle de diam\\`etre $[%s]$ et $%s$ est un 
+    $\\big(\\mathcal{C}\\big)$ est un cercle de diam\\`etre $[%s]$ et $%s$ est un
     point de $\\big(\\mathcal{C}\\big)$.\\par
     On donne $%s=\\unit[%s]{cm}\\text{ et }%s=\\unit[%s]{cm}$.\\par
     Calculer la longueur $%s$.
@@ -404,9 +404,8 @@ def tex_triangle_cercle(f0, f1, noms, angles, longueurs):
 
 def tex_reciproque_pythagore(f0, f1, noms, longueurs):
     nom_tr = nom_triangle(noms)
-    l = [i for i in xrange(3)]
-    n = [l.pop(random.randrange(3 - i)) for i in xrange(3)]
-    del l
+    l = [i for i in range(3)]
+    n = [l.pop(random.randrange(3 - i)) for i in range(3)]
     c = cotes_sommets(noms)
     recip = (nom_tr, c[n[0]], nombre(longueurs[n[0]]), c[n[1]], nombre(longueurs[n[1]]),
              c[n[2]], nombre(longueurs[n[2]]), nom_tr)
@@ -444,17 +443,17 @@ def tex_reciproque_pythagore(f0, f1, noms, longueurs):
 def valeurs_thales(valeurmax):
     liste = [0, 0, 0, 0, 0, 0, 0, 0]
     while liste == [0, 0, 0, 0, 0, 0, 0, 0]:
-        for i in xrange(3):
+        for i in range(3):
             liste[i] = random.randrange(2)
     a = random.randrange(liste.count(1))
-    for i in xrange(3):
+    for i in range(3):
         if liste[i]:
             if not a:
                 liste[i + 3] = 1
             a = a - 1
         else:
             liste[i + 3] = 1  # on doit connaitre le numeratuer ou le denominateur
-    for i in xrange(2):  # AB et AE  ou  AB et BE  ou  AE et EB
+    for i in range(2):  # AB et AE  ou  AB et BE  ou  AE et EB
         if liste[i] and liste[i + 3]:  # i est le rapport complet. On choisit une des 3 formes ci-dessus
             a = random.randrange(2)
             liste[i + 6] = 1
@@ -464,7 +463,7 @@ def valeurs_thales(valeurmax):
     if liste[2] and liste[5]:
         rapport = [2, 5]
     valeurs = [0, 0, 0, 0, 0, 0, 0, 0]
-    for i in xrange(3):
+    for i in range(3):
         if liste[i]:
             valeurs[i] = random.randrange(15, valeurmax) / 10.0
         if liste[i + 3] and liste[i]:
@@ -491,7 +490,7 @@ def valeurs_thales(valeurmax):
 
 
 def test_valeurs_thales(valeurs, rapport, type_thales):
-    v = [valeurs[i] for i in xrange(8)]
+    v = [valeurs[i] for i in range(8)]
     if rapport[0] // 3 == 0 and rapport[1] // 3 == 2:  # On donne AB et EB
         v[rapport[0] + 3] = (v[rapport[0]] - v[rapport[1]]) * \
             type_thales
@@ -504,7 +503,7 @@ def test_valeurs_thales(valeurs, rapport, type_thales):
         rapp = (v[rapport[0] % 3 + 3] * 1.0) / v[rapport[0] % 3]
     else:
         rapp = 0
-    for i in xrange(3):
+    for i in range(3):
         if not v[i] and rapp:
             v[i] = v[i + 3] / rapp
         elif not v[i + 3]:
@@ -550,11 +549,11 @@ def thales(f0, f1):
 
 def long_val(noms, valeurs):  # renvoie un tuple contenant les noms des segments et leur longueur puis les noms des longueurs a calculer
     liste = []
-    for i in xrange(8):
+    for i in range(8):
         if valeurs[i]:
             liste.append(creer_noms(noms, i))
             liste.append(nombre(valeurs[i]))
-    for i in xrange(6):
+    for i in range(6):
         if not valeurs[i] and valeurs[8][0][0] % 3 != i % 3:
             liste.append(creer_noms(noms, i))
     return liste
@@ -663,7 +662,7 @@ def tex_resolution_thales1(n, v):
 
 def tex_resolution_thales2(n, v):
     donnees = []
-    for i in xrange(3):
+    for i in range(3):
         if v[i]:
             donnees.append(nombre(v[i]))
         else:
@@ -701,7 +700,7 @@ def valeur_exacte(a, approx=3, unit=1):
 def tex_resolution_thales3(n, v):
     r = v[8][0][0] % 3  # grand rapport
     donnees = []
-    for i in xrange(3):
+    for i in range(3):
         if i != r:
             donnees.extend([nom_ou_valeur(n, v, r), nom_ou_valeur(n, v,
                            r + 3), nom_ou_valeur(n, v, i), nom_ou_valeur(n,
@@ -746,7 +745,7 @@ def fig_thales(noms, valeurs):
     type_thales = valeurs[8][1]
     angle = int(((100.0 * acos(((v[0] ** 2 + v[1] ** 2) - v[2] ** 2) / ((2 *
                 v[0]) * v[1]))) * 180) / pi) / 100.0
-    v = [int(v[i] * 100) / 100.0 for i in xrange(8)]
+    v = [int(v[i] * 100) / 100.0 for i in range(8)]
     mini_x = int(100.0 * min(0, v[1] * cos((angle * pi) / 180), v[3] *
                  type_thales, (v[4] * cos((angle * pi) / 180)) *
                  type_thales)) / 100.0 - 1.5
@@ -954,15 +953,15 @@ def rec_thales(f0, f1):
 
 def enonce_rec_thales(n, v):
     (r, l) = (v[10], [])
-    for i in xrange(5):
+    for i in range(5):
         if i != 2:
             if i == r:
                 l.extend([creer_noms(n, 6 + i % 3), nombre(v[6 + i % 3])])
             else:
                 l.extend([creer_noms(n, i), nombre(v[i])])
-    l1 = [i for i in xrange(4)]
+    l1 = [i for i in range(4)]
     l2 = []
-    for i in xrange(4):
+    for i in range(4):
         a = l1.pop(random.randrange(4 - i))
         l2.extend([l[2 * a], l[2 * a + 1]])
     l2.extend([creer_noms(n, 2), creer_noms(n, 5)])
@@ -1012,7 +1011,7 @@ def tex_resolution_rec_thales0(n, v):
 
 def resolution_rec_thales1(n, v):
     (d, t) = ([], '')
-    for i in xrange(2):
+    for i in range(2):
         d.extend([creer_noms(n, i), creer_noms(n, i + 3), nombre(v[i]),
                  nombre(v[i + 3])])
         if valeur_exacte(v[i] / v[i + 3], approx=5).count('='):
@@ -1066,16 +1065,16 @@ def trigo_init(f0, f1):
 
 def enonce_trigo(f0, f1, v):
     (l, lt) = ([], [])
-    for j in xrange(2):
+    for j in range(2):
         f = (('\\sin', 1, 0), ('\\cos', 2, 0), ('\\tan', 1, 2))[v[j][2][0]]
-        for i in xrange(2):
+        for i in range(2):
             l.append(v[j][1][f[i + 1]])
             l.append(v[j][2][i + 1])
         l.append(tex_angle(v[j][0], 1))
         l.append(v[j][2][3])
-    for j in xrange(2):
+    for j in range(2):
         tmp = []
-        for i in xrange(3):
+        for i in range(3):
             if len(l[2 * i + 6 * j]) < 3:
                 if l[2 * i + 6 * j + 1]:
                     lt.append('$%s=\\unit[%s]{cm}$' % (l[2 * i + 6 * j],
@@ -1184,7 +1183,7 @@ def tex_angle(s, n):  # renvoie \\widehat{ABC} où s est la liste des 3 sommets 
 
 
 def valeurs_trigo():
-    l = [random.randrange(10, 121) / 10.0 for i in xrange(3)]
+    l = [random.randrange(10, 121) / 10.0 for i in range(3)]
     l.sort()
     l.append(random.randrange(15, 76))
     trigo = random.randrange(3)

@@ -27,7 +27,7 @@ import random
 def valeurs_diviseurs():
     diviseurs = [2, 3, 5, 9, 10]
     liste = []
-    for i in xrange(5):
+    for i in range(5):
         liste.append(diviseurs.pop(random.randrange(len(diviseurs))) *
                      random.randrange(11, 100))
     return liste
@@ -36,9 +36,9 @@ def valeurs_diviseurs():
 def liste_diviseurs(l):
     diviseurs = (2, 3, 5, 9, 10)
     reponse = []
-    for i in xrange(len(l)):
+    for i in range(len(l)):
         reponse.extend([[l[i]]])
-        for j in xrange(len(diviseurs)):
+        for j in range(len(diviseurs)):
             if l[i] % diviseurs[j]:  # n'est pas divisible
                 reponse[i].append("$\\Square$")
             else:
@@ -55,7 +55,7 @@ def tex_divisible(f0, f1):
     f1.write("""\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par
   3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}
 """)
-    for i in xrange(len(l)):
+    for i in range(len(l)):
         f0.write("  %s & $\\square$ & $\\square$ & $\\square$ & $\\square$ & $\\square$ \\\\\n" %
                  l[i])
         f1.write("  %s & %s & %s & %s & %s & %s \\\\\n" % tuple(reponse[i]))

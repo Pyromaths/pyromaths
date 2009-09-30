@@ -48,9 +48,9 @@ def choix_points(n):
     @type n: integer
     """
 
-    points = [unichr(i + 65) for i in xrange(26)]
+    points = [chr(i + 65) for i in range(26)]
     liste = []
-    for i in xrange(n):
+    for i in range(n):
         liste.append(points.pop(random.randrange(len(points))))
     return liste
 
@@ -64,9 +64,9 @@ def choix_ligne(n):
 
     lignes = ['droite', 'demi-droite', 'segment']
     (liste_lignes, retour) = ([], [])
-    for i in xrange((n - 1) // len(lignes) + 1):
+    for i in range((n - 1) // len(lignes) + 1):
         liste_lignes.extend(lignes)
-    for i in xrange(n):
+    for i in range(n):
         retour.append(liste_lignes.pop(random.randrange(len(liste_lignes))))
     return retour
 
@@ -101,9 +101,9 @@ def prepare_tuple(lpoints, ligne):
 
     #choix des deux points permettant de tracer la ligne :
 
-    templist = [i for i in xrange(len(lpoints))]
+    templist = [i for i in range(len(lpoints))]
     deuxpoints = []
-    for i in xrange(2):
+    for i in range(2):
         deuxpoints.append(lpoints[templist.pop(random.randrange(len(templist)))])
 
     #choix des symbole correspondant à la ligne :
@@ -138,16 +138,16 @@ def tex_figure(file, lpoints, nodesep=0):
     @type file: file
     @param lpoints: liste de 3 points
     @type lpoints: liste de 3 strings
-    @param nodesep: liste des d\xc3\xa9passements pour pstricks 
+    @param nodesep: liste des d\xc3\xa9passements pour pstricks
     @type nodesep: liste de 2 strings
     """
 
     ordonnees = ['0.5', '1', '1.5']
     l_ord = []
-    for i in xrange(3):
+    for i in range(3):
         l_ord.append(ordonnees.pop(random.randrange(len(ordonnees))))
     points_coord = []
-    for i in xrange(3):
+    for i in range(3):
         points_coord.append(l_ord[i])
         points_coord.append(lpoints[i])
     points_coord = tuple(points_coord)
@@ -199,7 +199,7 @@ def tex_droites(f0, f1):
     """
 
     line = choix_ligne(5)
-    for i in xrange(5):
+    for i in range(5):
         tex_ligne_tableau(f0, f1, line[i])
 
 
@@ -267,10 +267,10 @@ def fig_perp(points, coor, solution=0, per=[], par=[]):
 
 def noms_sommets(nb):  # renvoie nb noms de sommets
     (listenb, listepts) = ([], [])
-    for i in xrange(26):
+    for i in range(26):
         listenb.append(i + 65)
-    for i in xrange(nb):
-        listepts.append(unichr(listenb.pop(random.randrange(26 - i))))
+    for i in range(nb):
+        listepts.append(chr(listenb.pop(random.randrange(26 - i))))
     listepts.sort()
     return tuple(listepts)
 
@@ -282,7 +282,7 @@ def cree_coordonnees(long=3):
     a0 = alpha + random.randrange(30, 120)
     k1 = random.randrange(50, 100) / 100.0
     a1 = alpha + random.randrange(210, 300)
-    return (long, alpha, long, alpha + 180, floor((k0 * 10) * long) /
+    return (long, alpha, int, alpha + 180, floor((k0 * 10) * long) /
             10.0, a0, floor((k1 * 10) * long) / 10.0, a1)
 
 
@@ -291,10 +291,10 @@ def enonce_perp(f0, f1):
     noms = noms_sommets(4)
     (par, per) = ([], [])
     lval = [0, 1, 2, 3]
-    for i in xrange(3):
+    for i in range(3):
         par.append(lval.pop(random.randrange(len(lval))))
     lval = [0, 1, 2, 3]
-    for i in xrange(3):
+    for i in range(3):
         per.append(lval.pop(random.randrange(len(lval))))
     f0.write(fig_perp(noms, coor))
     f1.write(fig_perp(noms, coor, 1, per, par))
@@ -304,10 +304,8 @@ def enonce_perp(f0, f1):
     f1.write('''  \\par
   \\begin{enumerate}
 ''')
-    s_per = unicode("  \\item Tracer la droite perpendiculaire \\`a la droite (%s%s) passant par %s\n",
-                    'utf-8')
-    s_par = unicode("  \\item Tracer la droite parall\\`ele \\`a la droite (%s%s) passant par %s\n",
-                    'utf-8')
+    s_per = str("  \\item Tracer la droite perpendiculaire à la droite (%s%s) passant par %s\n")
+    s_par = str("  \\item Tracer la droite parallèle à la droite (%s%s) passant par %s\n")
     s_per = s_per % (noms[per[0]], noms[per[1]], noms[per[2]])
     s_par = s_par % (noms[par[0]], noms[par[1]], noms[par[2]])
     f0.write(s_par)
@@ -326,15 +324,15 @@ def enonce_perp(f0, f1):
 def fonction(angle, xa, ya, dist=0, droite='par'):
     """
     Retourne une fonction \xc3\xa0 utiliser avec psplot
-    @param angle: compris entre 1 et 89\xc2\xb0 ou 91 et 179\xc2\xb0. Angle entre la droite et l'axe des abscisses 
+    @param angle: compris entre 1 et 89\xc2\xb0 ou 91 et 179\xc2\xb0. Angle entre la droite et l'axe des abscisses
     @type angle:
     @param xa: abscisse d'un point de la droite
     @type xa:
     @param ya: ordonn\xc3\xa9e d'un point de la droite
     @type ya:
-    @param dist: distance entre l'origine et la droite 
+    @param dist: distance entre l'origine et la droite
     @type dist:
-    @param droite: 'par' pour une parall\xc3\xa8le et 'per' pour une perpendiculaire 
+    @param droite: 'par' pour une parall\xc3\xa8le et 'per' pour une perpendiculaire
     """
 
     angle_rad = (angle * math.pi) / 180
@@ -391,7 +389,7 @@ def Points(angle, xa, ya, dist=0):
 
 def figure(angle, xa, ya, dist, lpoints, noms, par_per, dist2=0):
     """
-    
+
     @param angle:
     @param xa:
     @param ya:
@@ -495,7 +493,7 @@ def valeurs_figures(par_per):
     else:
         lindices = [1, 2, 3]
         lpoints = []
-        for i in xrange(3):
+        for i in range(3):
             lpoints.append('(d_%s)' % lindices.pop(random.randrange(len(lindices))))
     angle = random.randrange(1, 90) + 90 * random.randrange(2)
     xa = random.randrange(-5, 5) / 10.0
@@ -517,23 +515,23 @@ def valeurs_figures(par_per):
 def enonce_prop(f0, f1):
     f0.write('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}\n')
     f0.write('  \\hline\n')
-    f0.write('  Donn\xe9es & Figure cod\xe9e & Propri\xe9t\xe9 & Conclusion \\\\ \n')
+    f0.write('  Données & Figure codée & Propriété & Conclusion \\\\ \n')
     f1.write('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}\n')
     f1.write('  \\hline\n')
-    f1.write('  Donn\xe9es & Figure cod\xe9e & Propri\xe9t\xe9 & Conclusion \\\\ \n')
+    f1.write('  Données & Figure codée & Propriété & Conclusion \\\\ \n')
     ltypes = [1, 2, 3]
     lexos = []
-    for i in xrange(3):
+    for i in range(3):
         lexos.append(ltypes.pop(random.randrange(len(ltypes))))
-    for i in xrange(3):
+    for i in range(3):
         f0.write('  \\hline\n')
         f1.write('  \\hline\n')
         v = valeurs_figures(lexos[i])
         if lexos[i] == 2:
             if v[5]:  #noms de la forme (AB), on ajoute des parenthèses
-                f0.write('''  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ & 
+                f0.write('''  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
-  \\end{pspicture*} 
+  \\end{pspicture*}
   & & \\\\\n''' %
                          (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0], v[4][1],
                          v[4][4], v[4][5]))
@@ -541,16 +539,16 @@ def enonce_prop(f0, f1):
                          (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0], v[4][1],
                          v[4][4], v[4][5]))
             else:
-                f0.write('''  $%s//%s$\\par et\\par $%s//%s$ & 
+                f0.write('''  $%s//%s$\\par et\\par $%s//%s$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
-  \\end{pspicture*} 
+  \\end{pspicture*}
   & & \\\\\n''' %
                          (v[4][0], v[4][1], v[4][0], v[4][2]))
                 f1.write('  $%s//%s$\\par et\\par $%s//%s$ & \n' % (v[4][0],
                          v[4][1], v[4][0], v[4][2]))
             f1.write('  %s & \n' % ('\n').join(figure(v[0], v[1], v[2],
                      v[3], v[4], v[5], lexos[i], v[6])))
-            f1.write('  Si deux droites sont parall\xe8les, alors toute parall\xe8le \\`a l\'une est parall\xe8le \\`a l\'autre. &\n')
+            f1.write('  Si deux droites sont parallèles, alors toute parallèle à l\'une est parallèle à l\'autre. &\n')
             if v[5]:
                 f1.write('$(%s%s)//(%s%s)$ \\\\\n  \\hline\n' % (v[4][2],
                          v[4][3], v[4][4], v[4][5]))
@@ -562,9 +560,9 @@ def enonce_prop(f0, f1):
             if lexos[i] == 1:
                 if v[5]:
                     if not fig:
-                        f0.write('''  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ & 
+                        f0.write('''  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
-  \\end{pspicture*} 
+  \\end{pspicture*}
   & & \\\\\n''' %
                                  (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0],
                                  v[4][1], v[4][0], v[4][2]))
@@ -573,9 +571,9 @@ def enonce_prop(f0, f1):
                              v[4][1], v[4][0], v[4][2]))
                 else:
                     if not fig:
-                        f0.write('''  $%s//%s$\\par et\\par $%s\perp%s$ & 
+                        f0.write('''  $%s//%s$\\par et\\par $%s\perp%s$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
-  \\end{pspicture*} 
+  \\end{pspicture*}
   & & \\\\\n''' %
                                  (v[4][0], v[4][1], v[4][0], v[4][2]))
                     f1.write('  $%s//%s$\\par et\\par $%s\perp%s$ &\n' %
@@ -585,7 +583,7 @@ def enonce_prop(f0, f1):
                              v[1], v[2], v[3], v[4], v[5], lexos[i])))
                 f1.write('  %s & \n' % ('\n').join(figure(v[0], v[1], v[2],
                          v[3], v[4], v[5], lexos[i])))
-                f1.write('  Si deux droites sont parall\xe8les, alors toute perpendiculaire \\`a l\'une est perpendiculaire \\`a l\'autre. &\n')
+                f1.write('  Si deux droites sont parallèles, alors toute perpendiculaire à l\'une est perpendiculaire à l\'autre. &\n')
                 if v[5]:
                     f1.write('  $(%s%s)\\perp(%s%s)$ \\\\\n  \\hline\n' %
                              (v[4][2], v[4][3], v[4][0], v[4][2]))
@@ -595,9 +593,9 @@ def enonce_prop(f0, f1):
             else:
                 if v[5]:
                     if not fig:
-                        f0.write('''  $(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ & 
+                        f0.write('''  $(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
-  \\end{pspicture*} 
+  \\end{pspicture*}
   & & \\\\\n''' %
                                  (v[4][0], v[4][1], v[4][0], v[4][2], v[4][2],
                                  v[4][3], v[4][0], v[4][2]))
@@ -606,9 +604,9 @@ def enonce_prop(f0, f1):
                              v[4][3], v[4][0], v[4][2]))
                 else:
                     if not fig:
-                        f0.write('''  $%s\\perp%s$\\par et\\par $%s\perp%s$ & 
+                        f0.write('''  $%s\\perp%s$\\par et\\par $%s\perp%s$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
-  \\end{pspicture*} 
+  \\end{pspicture*}
   & & \\\\\n''' %
                                  (v[4][0], v[4][2], v[4][1], v[4][2]))
                     f1.write('  $%s\\perp%s$\\par et\\par $%s\perp%s$ &\n' %
@@ -618,7 +616,7 @@ def enonce_prop(f0, f1):
                              v[1], v[2], v[3], v[4], v[5], lexos[i])))
                 f1.write('  %s &\n' % ('\n').join(figure(v[0], v[1], v[2],
                          v[3], v[4], v[5], lexos[i])))
-                f1.write('  Si deux droites sont perpendiculaires \\`a une m\\^eme troisi\\`eme alors elles sont parall\xe8les entre elles. &\n')
+                f1.write('  Si deux droites sont perpendiculaires à une même troisième alors elles sont parallèles entre elles. &\n')
                 if v[5]:
                     f1.write('  $(%s%s)//(%s%s)$ \\\\\n  \\hline\n' % (v[4][0],
                              v[4][1], v[4][2], v[4][3]))
@@ -629,5 +627,3 @@ def enonce_prop(f0, f1):
 \\end{tabularx}
 ''')
     f1.write('\\end{tabularx}\n')
-
-

@@ -71,8 +71,8 @@ def main():
     cor = ["\\exercice", "Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     modules = (plus, moins, plus, div)
-    calculs = [i for i in xrange(20)]
-    for i in xrange(20):
+    calculs = [i for i in range(20)]
+    for i in range(20):
         j = random.randrange(0, len(calculs))
         (a, b) = modules[calculs[j] // 5](10)
         if calculs[j] // 5 == 0:

@@ -23,7 +23,7 @@
 
 import outils
 import random
-from developpements import tex_coef
+from .developpements import tex_coef
 
 #carres=[2,3,5,6,7,10,11,13,15,17,19]
 
@@ -67,9 +67,9 @@ def exoaRb0(f0, f1, v):
 
 def valeurs_aRb0(pyromax):  # renvoie (coef0, coef1, coef2, carre0, carre1, carre2, b)
     a = carres
-    l = [outils.valeur_alea(-pyromax, pyromax) for i in xrange(3)]
+    l = [outils.valeur_alea(-pyromax, pyromax) for i in range(3)]
     while True:
-        t = [random.randrange(2, pyromax) for i in xrange(3)]
+        t = [random.randrange(2, pyromax) for i in range(3)]
         if pyromax < 4 or t[0] != t[1] and t[0] != t[2] and t[1] != t[2]:
             break
     l.extend(t)
@@ -105,7 +105,7 @@ def exoaRb1(f0, f1, v):
 def valeurs_aRb1(pyromax):  # renvoie (coef0, coef1, coef2, carre0, carre1, carre2, b)
     a = carres
     while True:
-        l = [random.randrange(2, pyromax) for i in xrange(3)]
+        l = [random.randrange(2, pyromax) for i in range(3)]
         if pyromax < 4 or l[0] != l[1] and l[0] != l[2] and l[1] != l[2]:
             break
     l.append(a[random.randrange(len(a))])

@@ -91,7 +91,7 @@ def tex_puissances_4(a):
 
 def verifie_type(a):  # verifie si des nombres reels dans le tuple a sont en fait des nombres entiers et change leur type
     list = []
-    for i in xrange(len(a)):
+    for i in range(len(a)):
         if str(a[i]).endswith('.0'):
             list.append(int(a[i] + .1))
         else:

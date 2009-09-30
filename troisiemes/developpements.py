@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from fractions import tex_frac, simplifie, tex_decomp_prod, decomp_prod, \
+from .fractions import tex_frac, simplifie, tex_decomp_prod, decomp_prod, \
     produit, den_com0
 from outils import ecrit_tex, valeur_alea, signe, pgcd
 import random
@@ -32,7 +32,7 @@ import random
 
 def coef_opposes(a):  # renvoie un tuple dont les valeurs sont les opposees de celles de a
     l = []
-    for i in xrange(len(a)):
+    for i in range(len(a)):
         l.append(-a[i])
     return tuple(l)
 
@@ -48,7 +48,7 @@ def somme_polynomes(a, b):  # renvoie un tuple dont les valeurs sont les sommes 
         long = len(a)
     else:
         long = len(b)
-    for i in xrange(long):
+    for i in range(long):
         if (len(a) - i) - 1 < 0:
             l.append(b[(len(b) - 1) - i])
         elif (len(b) - i) - 1 < 0:
@@ -327,7 +327,7 @@ def tex_trinome(a, bplus=0, bpar=0):  # renvoi le trinome ax²+bx+c
                         '', bplus=bplus or a[0] != 0 or a[1] != 0))
     if bpar:
         v0 = 0
-        for i in xrange(3):  # compte le nombre de valeurs nulles
+        for i in range(3):  # compte le nombre de valeurs nulles
             if a[i] == 0:
                 v0 = v0 + 1
         if v0 == 2:  # une seule valeur non nulle (on suppose que les trois coef ne sont pas nuls)
@@ -434,9 +434,9 @@ def tex_trinome_alea(a, bplus=0):  # renvoi le trinome ax²+bx+c dans le desordr
                1), tex_coef(a[2], '', bplus=1)]
     ordre1 = []
     while ordre1 == [] or ordre1 == [0, 1, 2]:
-        ordre0 = [i for i in xrange(3)]
-        ordre1 = [ordre0.pop(random.randrange(3 - i)) for i in xrange(3)]
-    liste = [valeurs[ordre1[i]] for i in xrange(3)]
+        ordre0 = [i for i in range(3)]
+        ordre1 = [ordre0.pop(random.randrange(3 - i)) for i in range(3)]
+    liste = [valeurs[ordre1[i]] for i in range(3)]
     if not bplus and liste[0].startswith('+'):
         liste[0] = liste[0].replace('+', '', 1)
     return '%s%s%s' % tuple(liste)

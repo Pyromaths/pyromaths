@@ -121,7 +121,7 @@ def verifie_angle(lpoints, A, B, C):
     if len(lpoints) == 0:  #Premier angle créé
         isValid = True
     else:
-        for i in xrange(len(lpoints)):
+        for i in range(len(lpoints)):
             (A1, B1, C1) = (lpoints[i])[:3]
             isValid = verifie_distance_mini(A, B, A1, B1) and \
                 verifie_distance_mini(A, B, A1, C1) and \
@@ -177,7 +177,7 @@ def PosAngle(alpha, beta):
 
 def PointName(l3noms, indice):
     list = []
-    for i in xrange(3):
+    for i in range(3):
         list.append(l3noms[i])
     return tuple(list)
 
@@ -186,11 +186,11 @@ def figure(f0, f1, lpoints, lnoms, xmax, ymax):
     text = []
     text.append("\\begin{pspicture}(%s,%s)\n" % (xmax, ymax))
     text.append("  \\psframe(0,0)(%s,%s)\n" % (xmax, ymax))
-    for i in xrange(len(lnoms)):
+    for i in range(len(lnoms)):
         text.append("  \\pstGeonode[PointName={%s,%s,%s}," % lnoms[i])
         text.append("PosAngle={%s,%s,%s}]\n  " % PosAngle(lpoints[i][3],
                     lpoints[i][4]))
-        for j in xrange(3):
+        for j in range(3):
             text.append("(%.2f,%.2f)" % lpoints[i][j])
             text.append("{a%s%s}" % (j, i))
         text.append("""
@@ -199,14 +199,14 @@ def figure(f0, f1, lpoints, lnoms, xmax, ymax):
                     i))
         text.append("  \\pstLineAB[nodesepB=-.5]{a0%s}{a2%s}\n" % (i, i))
     text.append("\\end{pspicture}\\par\n")
-    for i in xrange(len(text)):
+    for i in range(len(text)):
         f0.write(text[i])
         f1.write(text[i])
 
 
 def reponses(f0, f1, lpoints, lnoms):
     f1.write("\\begin{multicols}{4}\n")
-    for i in xrange(len(lnoms)):
+    for i in range(len(lnoms)):
         f1.write("  $\\widehat{%s%s%s}=%s\degres$\\par\n" % (lnoms[i][1],
                  lnoms[i][0], lnoms[i][2], lpoints[i][4]))
         if lpoints[i][4] < 90:
@@ -235,7 +235,7 @@ def mesure_angles(f0, f1):
         lpoints = cree_angles(nb_angles, xmax, ymax)
         cpt = cpt + 1
     tmpl = outils.choix_points(3 * nb_angles)
-    for i in xrange(nb_angles):
+    for i in range(nb_angles):
         lnoms.append(tuple(tmpl[3 * i:3 * i + 3]))
     figure(f0, f1, lpoints, lnoms, xmax, ymax)
     reponses(f0, f1, lpoints, lnoms)

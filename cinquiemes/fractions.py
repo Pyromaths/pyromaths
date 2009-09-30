@@ -32,7 +32,7 @@ def fractions_egales():
            "  \\begin{enumerate}"]
     cor = ["\\exercice*", "Compl\\'eter :", "\\begin{multicols}{4}",
            "  \\begin{enumerate}"]
-    for i in xrange(8):
+    for i in range(8):
         n = d = 1
         while n == d:
             n = random.randrange(1, 11)
@@ -74,7 +74,7 @@ def sommes_fractions():
     cor = ["\\exercice*",
            "Effectuer les calculs suivants et donner le r\\'esultat sous la forme d'une fraction simplifi\\'ee :",
            "\\begin{multicols}{4}", "  \\noindent"]
-    for i in xrange(8):
+    for i in range(8):
         if random.randrange(2):
             s = "+"
         else:
@@ -128,7 +128,7 @@ def produits_fractions():
     cor = ["\\exercice*",
            "Effectuer les calculs suivants et donner le r\\'esultat sous la forme d'une fraction simplifi\\'ee :",
            "\\begin{multicols}{4}", "  \\noindent"]
-    for i in xrange(8):
+    for i in range(8):
         n1=d1=n2=d2=a=b=2
         while outils.pgcd(a,b)>1:
             a=random.randrange(1,11)

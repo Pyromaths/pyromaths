@@ -22,9 +22,9 @@
 #
 
 import math
-import outils
 import random
 import string
+import outils
 
 #===============================================================================
 # Poser des opérations
@@ -39,8 +39,8 @@ def valeurs():
             break
     puisb = outils.valeur_alea(-2, 0)
     nbb = nbb * 10 ** puisb
-    deca = [str(nba)[i] for i in xrange(len(str(nba)))]
-    decb = [str(nbb)[i] for i in xrange(len(str(nbb)))]
+    deca = [str(nba)[i] for i in range(len(str(nba)))]
+    decb = [str(nbb)[i] for i in range(len(str(nbb)))]
     if random.randrange(2):
         (nba, deca, nbb, decb) = (nbb, decb, nba, deca)
     if deca.count('.'):
@@ -77,14 +77,14 @@ def lignes(ligne, deca, lavtvirg, laprvirg):
     else:
         posa = len(deca)
     if posa < lavtvirg:
-        for i in xrange(lavtvirg - posa):
+        for i in range(lavtvirg - posa):
             ligne.append('')
-    for i in xrange(len(deca)):
+    for i in range(len(deca)):
         if deca[i] == '.':
             ligne.append(',')
         else:
             ligne.append(str(deca[i]))
-    for i in xrange(laprvirg - (len(deca) - posa)):
+    for i in range(laprvirg - (len(deca) - posa)):
         if ligne.count(','):
             ligne.append('0')
         else:
@@ -104,8 +104,8 @@ def mon_int(t):  # retourne un entier texte sous la forme d'un nombre, zéro sin
 
 def retenues_somme(ligne1, ligne2):
     lg = len(ligne1)
-    ligne0 = ['' for i in xrange(lg)]
-    for i in xrange(lg - 1):
+    ligne0 = ['' for i in range(lg)]
+    for i in range(lg - 1):
 
         #on déplace la retenue pour qu'elle ne soit pas au-dessus de la virgule
 
@@ -120,7 +120,7 @@ def retenues_somme(ligne1, ligne2):
 def retenues_diff(ligne1, ligne2):
     lg = len(ligne1)
     ret = 0
-    for i in xrange(lg - 1):
+    for i in range(lg - 1):
         if not (ligne1[(lg - i) - 1] == ',' and ret):
             if mon_int(ligne1[(lg - i) - 1]) < mon_int(ligne2[(lg - i) -
                     1]) + ret:
@@ -138,7 +138,7 @@ def tex_somme(f0, f1):
     (ligne1, ligne2) = ([''], ['+'])
     (nba, nbb, deca, decb, lavtvirg, laprvirg) = valeurs()
     total = nba + nbb
-    dectotal = [str(total)[i] for i in xrange(len(str(total)))]
+    dectotal = [str(total)[i] for i in range(len(str(total)))]
     if dectotal.index('.') <= lavtvirg:
         ligne3 = ['']
     else:
@@ -155,11 +155,10 @@ def tex_somme(f0, f1):
              outils.sepmilliers(nbb)))
     f1.write('        \\begin{tabular}[t]{*{%s}{c}}\n' % (lavtvirg +
              laprvirg + 1))
-    f1.write('          %s \\\\\n' % string.join(ligne0, ' & \\tiny '))
-    f1.write('          %s \\\\\n' % string.join(ligne1, ' & '))
-    f1.write('          %s \\\\\n          \\hline\n' % string.join(ligne2,
-             ' & '))
-    f1.write('          %s \\\\\n' % string.join(ligne3, ' & '))
+    f1.write('          %s \\\\\n' % ' & \\tiny '.join(ligne0))
+    f1.write('          %s \\\\\n' % ' & '.join(ligne1))
+    f1.write('          %s \\\\\n          \\hline\n' % ' & '.join(ligne2))
+    f1.write('          %s \\\\\n' % ' & '.join(ligne3))
     f1.write('        \\end{tabular}\\par\n')
     outils.ecrit_tex(f1, '%s+%s = %s' % (outils.sepmilliers(nba, 1),
                      outils.sepmilliers(nbb, 1), outils.sepmilliers(nba +
@@ -172,7 +171,7 @@ def tex_difference(f0, f1):
     if nba < nbb:
         (nba, nbb, deca, decb) = (nbb, nba, decb, deca)
     total = nba - nbb
-    dectotal = [str(total)[i] for i in xrange(len(str(total)))]
+    dectotal = [str(total)[i] for i in range(len(str(total)))]
     if dectotal.index('.') <= lavtvirg:
         ligne3 = ['']
     else:
@@ -181,16 +180,15 @@ def tex_difference(f0, f1):
     ligne2 = lignes(ligne2, decb, lavtvirg, laprvirg)
     ligne3 = lignes(ligne3, dectotal, lavtvirg, laprvirg)
     (ligne1, ligne2) = retenues_diff(ligne1, ligne2)
-    f0.write(u"      \\item La diff\\'erence des termes %s et %s.\\par\n" %
+    f0.write("      \\item La différence des termes %s et %s.\\par\n" %
              (outils.sepmilliers(nba), outils.sepmilliers(nbb)))
-    f1.write(u"      \\item La diff\\'erence des termes %s et %s.\\par\n" %
+    f1.write("      \\item La différence des termes %s et %s.\\par\n" %
              (outils.sepmilliers(nba), outils.sepmilliers(nbb)))
     f1.write('        \\begin{tabular}[t]{*{%s}{c}}\n' % (lavtvirg +
              laprvirg + 1))
-    f1.write('          %s \\\\\n' % string.join(ligne1, ' & '))
-    f1.write('          %s \\\\\n          \\hline\n' % string.join(ligne2,
-             ' & '))
-    f1.write('          %s \\\\\n' % string.join(ligne3, ' & '))
+    f1.write('          %s \\\\\n' % ' & '.join(ligne1))
+    f1.write('          %s \\\\\n          \\hline\n' % ' & '.join(ligne2))
+    f1.write('          %s \\\\\n' % ' & '.join(ligne3))
     f1.write('        \\end{tabular}\\par\n')
     outils.ecrit_tex(f1, '%s-%s = %s' % (outils.sepmilliers(nba, 1),
                      outils.sepmilliers(nbb, 1), outils.sepmilliers(nba -
@@ -199,7 +197,7 @@ def tex_difference(f0, f1):
 
 def pose_mult(nba, nbb):
     (ligne, total) = ([], 0)
-    for i in xrange(int(math.log10(nbb)) + 1):
+    for i in range(int(math.log10(nbb)) + 1):
         sstotal = ((nbb - (nbb // 10) * 10) * nba) * 10 ** i
         total = total + sstotal
         ligne.append(sstotal)
@@ -208,25 +206,26 @@ def pose_mult(nba, nbb):
 
 
 def ligneprod(ligne, dec, lg):
-    ligne.extend(['' for i in xrange((lg - len(dec)) - len(ligne))])
+    ligne.extend(['' for i in range((lg - len(dec)) - len(ligne))])
     ligne.extend(dec)
     return ligne
 
 
 def tex_produit(f0, f1):
     (nba, nbb, puisa, puisb) = valeurs_prod()
-    deca = [string.join(string.rsplit(str(nba * 10 ** puisa), sep='.'),
-            ',')[i] for i in xrange(len(str(nba * 10 ** puisa)))]
-    decb = [string.join(string.rsplit(str(nbb * 10 ** puisb), sep='.'),
-            ',')[i] for i in xrange(len(str(nbb * 10 ** puisb)))]
+    deca = [','.join(str(nba * 10 ** puisa).rsplit('.'))[i] \
+                    for i in range(len(str(nba * 10 ** puisa)))]
+    decb = [','.join(str(nbb * 10 ** puisb).rsplit('.'))[i] \
+                    for i in range(len(str(nbb * 10 ** puisb)))]
+
     (dec3, total) = pose_mult(nba, nbb)
     (dec3bis, total) = pose_mult(nbb, nba)
     total = ((nba * 10 ** puisa) * nbb) * 10 ** puisb
-    dec4 = [str(total)[i] for i in xrange(len(str(total)))]
+    dec4 = [str(total)[i] for i in range(len(str(total)))]
     if dec4.count('.'):
         i = dec4.index('.')
         if (len(dec4) - i) - 1 < -(puisa + puisb):
-            for j in xrange(-(puisa + puisb) - len(dec4) + i + 1):
+            for j in range(-(puisa + puisb) - len(dec4) + i + 1):
                 dec4.append('0')  #ajoute les 0 inutiles au produit
         dec4.pop(i)  # supprime le point décimal
         dec4[i - 1] = '%s\\Huge ,' % dec4[i - 1]  # et ajoute une Huge virgule au chiffre des unités
@@ -236,33 +235,27 @@ def tex_produit(f0, f1):
     f1.write('      \\item Le produit des facteurs %s et %s.\\par\n' % (outils.sepmilliers(nba *
              10 ** puisa), outils.sepmilliers(nbb * 10 ** puisb)))
     f1.write('        \\begin{enumerate}\n')
-    f1.write('          \\item Premi\\`ere m\\\'ethode :\\par\n')
+    f1.write('          \\item Première méthode :\\par\n')
     f1.write('          \\begin{tabular}[t]{*{%s}{c}}\n' % lg)
-    f1.write('            %s \\\\\n' % string.join(ligneprod([], deca,
-             lg), ' & '))
-    f1.write('            %s \\\\\n          \\hline\n' % string.join(ligneprod(['$\\times$'],
-             decb, lg), ' & '))
-    for i in xrange(len(dec3)):
-        dec = [str(dec3[i])[j] for j in xrange(len(str(dec3[i])))]
-        f1.write('            %s \\\\\n' % string.join(ligneprod([], dec,
-                 lg), ' & '))
+    f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], deca,lg)))
+    f1.write('            %s \\\\\n          \\hline\n' % \
+                            ' & '.join(ligneprod(['$\\times$'], decb, lg)))
+    for i in range(len(dec3)):
+        dec = [str(dec3[i])[j] for j in range(len(str(dec3[i])))]
+        f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], dec, lg)))
     f1.write('            \\hline \\\\\n')
-    f1.write('            %s \\\\\n' % string.join(ligneprod([], dec4,
-             lg), ' & '))
+    f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], dec4, lg)))
     f1.write('          \\end{tabular}\n')
-    f1.write('          \\item Seconde m\\\'ethode :\\par\n')
+    f1.write('          \\item Seconde méthode :\\par\n')
     f1.write('          \\begin{tabular}[t]{*{%s}{c}}\n' % len(dec4))
-    f1.write('            %s \\\\\n' % string.join(ligneprod([], decb,
-             lg), ' & '))
-    f1.write('            %s \\\\\n          \\hline\n' % string.join(ligneprod(['$\\times$'],
-             deca, lg), ' & '))
-    for i in xrange(len(dec3bis)):
-        dec = [str(dec3bis[i])[j] for j in xrange(len(str(dec3bis[i])))]
-        f1.write('            %s \\\\\n' % string.join(ligneprod([], dec,
-                 lg), ' & '))
+    f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], decb, lg)))
+    f1.write('            %s \\\\\n          \\hline\n' % \
+                            ' & '.join(ligneprod(['$\\times$'], deca, lg)))
+    for i in range(len(dec3bis)):
+        dec = [str(dec3bis[i])[j] for j in range(len(str(dec3bis[i])))]
+        f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], dec, lg)))
     f1.write('            \\hline \\\\\n')
-    f1.write('            %s \\\\\n' % string.join(ligneprod([], dec4,
-             lg), ' & '))
+    f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], dec4, lg)))
     f1.write('          \\end{tabular}\n')
     f1.write('          \\end{enumerate}\n')
     outils.ecrit_tex(f1, '%s\\times%s = %s' % (outils.sepmilliers(nba *
@@ -278,8 +271,8 @@ def tex_produit(f0, f1):
 
 def tex_calcul_mental(f0, f1):
     modules = (plus, moins, plus, div)
-    calculs = [i for i in xrange(20)]
-    for i in xrange(20):
+    calculs = [i for i in range(20)]
+    for i in range(20):
         j = random.randrange(0, len(calculs))
         (a, b) = modules[calculs[j] // 5](10)
         if calculs[j] // 5 == 0:
@@ -338,7 +331,7 @@ def div(valeurmax):
 def tex_dix(f0, f1):
     nb = 4  # nb de calculs de chaque type
     l = valeurs10(nb)
-    for i in xrange(len(l)):
+    for i in range(len(l)):
         j = random.randrange(0, len(l))
         tex_formule_dix(l.pop(j), f0, f1)
 
@@ -394,17 +387,17 @@ def tex_formule_dix(l, f0, f1):
 
 def valeurs10(nb):  # renvoie nb valeur de chaque type : *10, /10, *0.1
     l = []
-    for i in xrange(nb):
+    for i in range(nb):
         if random.randrange(0, 1):
             l.append((outils.valeur_alea(111, 999) * 10 ** random.randrange(-3,
                      0), 10 ** (i + 1), '*'))
         else:
             l.append((10 ** (i + 1), outils.valeur_alea(111, 999) * 10 **
                      random.randrange(-3, 0), '*'))
-    for i in xrange(nb):
+    for i in range(nb):
         l.append((outils.valeur_alea(111, 999) * 10 ** random.randrange(-3,
                  0), 10 ** (i + 1), '/'))
-    for i in xrange(nb):
+    for i in range(nb):
         if random.randrange(0, 1):
             l.append((outils.valeur_alea(111, 999) * 10 ** random.randrange(-3,
                      0), 10 ** (-i - 1), '*'))

@@ -26,10 +26,10 @@ from outils import sepmilliers
 def noms_sommets(nb):
     """Renvoie nb noms de sommets"""
     (listenb, listepts) = ([], [])
-    for i in xrange(26):
+    for i in range(26):
         listenb.append(i + 65)
-    for i in xrange(nb):
-        listepts.append(str(unichr(listenb.pop(random.randrange(26 - i)))))
+    for i in range(nb):
+        listepts.append(str(chr(listenb.pop(random.randrange(26 - i)))))
     listepts.sort()
     return tuple(listepts)
 

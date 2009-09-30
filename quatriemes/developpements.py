@@ -30,12 +30,12 @@ from random import randrange
 
 def exo_distributivite():
     exo = ["\\exercice",
-           "D\\'evelopper et r\\'eduire les expressions suivantes :",
+           "Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
     cor = ["\\exercice*",
-           "D\\'evelopper et r\\'eduire les expressions suivantes :",
+           "Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
-    for i in xrange(8):
+    for i in range(8):
         (l1, l2) = tex_developpe1(valeurs_distr(10))
         exo.extend(l1)
         cor.extend(l2)
@@ -48,12 +48,12 @@ def exo_distributivite():
 
 def exo_double_distributivite():
     exo = ["\\exercice",
-           "D\\'evelopper et r\\'eduire les expressions suivantes :",
+           "Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
     cor = ["\\exercice*",
-           "D\\'evelopper et r\\'eduire les expressions suivantes :",
+           "Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
-    for i in xrange(6):
+    for i in range(6):
         (l1, l2) = tex_developpe1(valeurs_dbldistr(10))
         exo.extend(l1)
         cor.extend(l2)
@@ -66,7 +66,7 @@ def exo_double_distributivite():
 
 def coef_opposes(a):  # renvoie un tuple dont les valeurs sont les opposees de celles de a
     l = []
-    for i in xrange(len(a)):
+    for i in range(len(a)):
         l.append(-a[i])
     return tuple(l)
 
@@ -82,7 +82,7 @@ def somme_polynomes(a, b):  # renvoie un tuple dont les valeurs sont les sommes 
         long = len(a)
     else:
         long = len(b)
-    for i in xrange(long):
+    for i in range(int):
         if (len(a) - i) - 1 < 0:
             l.append(b[(len(b) - 1) - i])
         elif (len(b) - i) - 1 < 0:
@@ -381,7 +381,7 @@ def tex_trinome(a, bplus=0, bpar=0):  # renvoi le trinome ax²+bx+c
                         '', bplus=bplus or a[0] != 0 or a[1] != 0))
     if bpar:
         v0 = 0
-        for i in xrange(3):  # compte le nombre de valeurs nulles
+        for i in range(3):  # compte le nombre de valeurs nulles
             if a[i] == 0:
                 v0 = v0 + 1
         if v0 == 2:  # une seule valeur non nulle (on suppose que les trois coef ne sont pas nuls)
@@ -447,7 +447,7 @@ def valeurs_dbldistr(pyromax):  # renvoie in tuple contenant ((a,b),(c,d)) avec 
 def def_vals():
     lexp = [0, 1, 2, 0, 1, 2]
     expr = []
-    for i in xrange(6):
+    for i in range(6):
         a = valeur_alea(-10, 10)
         e = lexp.pop(randrange(len(lexp)))
         expr.append([a, 'x', e])
@@ -457,7 +457,7 @@ def def_vals():
 def def_vals2():
     expr = []
     loper = ['+', '-', '\\times', '+', '-', '\\times', '+', '-']
-    for i in xrange(8):
+    for i in range(8):
         a = valeur_alea(-10, 10)
         e = randrange(3)
         o = loper.pop(randrange(len(loper)))
@@ -468,7 +468,7 @@ def def_vals2():
 def def_vals3():
     expr = []
     lsgn = ['+', '-', '+', '-']
-    for i in xrange(9):
+    for i in range(9):
         if i % 3 == 0:
             sgn = lsgn.pop(randrange(len(lsgn)))
             if i > 0 or sgn == '-':
@@ -490,7 +490,7 @@ def def_vals3():
 
 def def_vals4():
     expr = []
-    for i in xrange(9):
+    for i in range(9):
         a = valeur_alea(-10, 10)
         e = randrange(3)
         if i % 3 == 0:
@@ -508,7 +508,7 @@ def def_vals4():
 
 def def_vals5():
     expr = []
-    for i in xrange(8):
+    for i in range(8):
         a = valeur_alea(-10, 10)
         e = randrange(3)
         if i % 2 == 0:
@@ -572,7 +572,7 @@ def monome(coef, var, exposant, bplus=0, bpn=0, bpc=0):
 
 def print_expr(expr):
     text = '$'
-    for i in xrange(len(expr)):
+    for i in range(len(expr)):
         coef = expr[i][0]
         var = expr[i][1]
         exposant = expr[i][2]
@@ -585,7 +585,7 @@ def print_expr(expr):
 
 def print_expr2(expr):
     text = '$'
-    for i in xrange(len(expr)):
+    for i in range(len(expr)):
         coef = expr[i][0]
         var = expr[i][1]
         exposant = expr[i][2]
@@ -599,7 +599,7 @@ def print_expr2(expr):
 
 def print_expr3(expr):
     text = '$'
-    for i in xrange(len(expr)):
+    for i in range(len(expr)):
         if isinstance(expr[i], list):
             coef = expr[i][0]
             var = expr[i][1]
@@ -616,7 +616,7 @@ def print_expr3(expr):
 
 def print_expr4(expr):
     text = '$'
-    for i in xrange(len(expr)):
+    for i in range(len(expr)):
         if isinstance(expr[i], list):
             coef = expr[i][0]
             var = expr[i][1]

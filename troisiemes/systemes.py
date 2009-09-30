@@ -22,7 +22,7 @@
 #
 
 import outils
-import developpements
+from . import developpements
 
 ##
 ##------------------- MÉTHODE PAR COMBINAISON -------------------
@@ -30,7 +30,7 @@ import developpements
 
 def choix_valeurs(m):  # crée les valeurs du systeme de la forme a1.x+b1.y=c1 ; a2.x+b2.y=c2 et renvoie ((a1, b1, c1), (a2, b2, c2), (x, y))
     while True:
-        c = [outils.valeur_alea(-m, m) for i in xrange(6)]
+        c = [outils.valeur_alea(-m, m) for i in range(6)]
         if c[0] * c[3] - c[1] * c[2] and abs(c[0]) - 1 and abs(c[1]) - 1 and \
             abs(c[2]) - 1 and abs(c[3]) - 1 and abs(c[1] * c[2] - c[0] *
                 c[3]) - 1 and abs(c[0]) - abs(c[2]) and abs(c[1]) - abs(c[3]) and \

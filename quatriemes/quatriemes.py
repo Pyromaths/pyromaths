@@ -21,15 +21,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import random
-import string
-import pythagore
-import puissances
-import developpements
-import calcul_mental
-import fractions
-from outils import ecrit_tex, randrange, tex_entete
-import os.path
+import quatriemes.puissances, quatriemes.developpements
+import quatriemes.calcul_mental, quatriemes.fractions
+import quatriemes.geometrie
 
 def write(f0, f1, exos):
     f0.write("\n")
@@ -39,21 +33,21 @@ def write(f0, f1, exos):
 
 def main(exo, f0, f1):
     modules = (
-        calcul_mental.main,
-        fractions.exo_sommes_fractions,
-        fractions.exo_produits_fractions,
-        fractions.exo_priorites_fractions,
-        puissances.tex_proprietes,
-        puissances.tex_proprietes_neg,
-        puissances.ecr_sc,
-        puissances.exo_puissances,
-        developpements.exo_distributivite,
-        developpements.exo_double_distributivite,
-        pythagore.exo_pythagore,
-        pythagore.exo_reciproque_pythagore,
-        pythagore.exo_triangle_cercle,
-        pythagore.exo_thales,
-        pythagore.exo_trigo,
+        quatriemes.calcul_mental.main,
+        quatriemes.fractions.exo_sommes_fractions,
+        quatriemes.fractions.exo_produits_fractions,
+        quatriemes.fractions.exo_priorites_fractions,
+        quatriemes.puissances.tex_proprietes,
+        quatriemes.puissances.tex_proprietes_neg,
+        quatriemes.puissances.ecr_sc,
+        quatriemes.puissances.exo_puissances,
+        quatriemes.developpements.exo_distributivite,
+        quatriemes.developpements.exo_double_distributivite,
+        quatriemes.geometrie.exo_pythagore,
+        quatriemes.geometrie.exo_reciproque_pythagore,
+        quatriemes.geometrie.exo_triangle_cercle,
+        quatriemes.geometrie.exo_thales,
+        quatriemes.geometrie.exo_trigo,
         )
     write(f0, f1, modules[exo]())
 
