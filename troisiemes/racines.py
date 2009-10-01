@@ -198,7 +198,5 @@ def exo_entier1(f0, f1, v):
                      a, tabs=3)
     outils.ecrit_tex(f1, '\\frac{%s\\times %s}{%s\\times %s}' % v[0:4],
                      tabs=3)
-    outils.ecrit_tex(f1, '%s' % (((v[0] * v[1]) / v[2]) / v[3]), cadre=1,
+    outils.ecrit_tex(f1, '%s' % (((v[0] * v[1]) // v[2]) // v[3]), cadre=1,
                      tabs=3)
-
-

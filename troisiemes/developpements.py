@@ -787,7 +787,7 @@ def choix_exo(a):  # renvoie un tuple contenant les valeurs
 
 def valeur_quotient():  # renvoie un tuple contenant la valeur du quotient à calculer
     (a, b) = (random.randrange(-10, 1), random.randrange(1, 11))
-    return (a / pgcd(a, b), b / pgcd(a, b))
+    return (a // pgcd(a, b), b // pgcd(a, b))
 
 
 def tex_initial(exo, a):  # renvoie l'écriture de l'expression A

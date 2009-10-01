@@ -44,7 +44,7 @@ def valeurs(pyromax):  # crée les valeurs aléatoires pour l'équation
                     dens[2]:
                     break
             ppcm = outils.ppcm(dens[0], outils.ppcm(dens[1], dens[2]))
-            densprim = [ppcm / dens[i] for i in range(3)]
+            densprim = [ppcm // dens[i] for i in range(3)]
             if densprim[0] < 10 and densprim[1] < 10 and densprim[2] < \
                 10:
                 break

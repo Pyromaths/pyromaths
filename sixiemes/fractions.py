@@ -97,13 +97,13 @@ def fractions_partage_corrige(l, h, n, d):
     if n == d:
         (lc, hc) = (l, h)
     elif div_l.count(d):
-        lc = l / d
+        lc = l // d
     elif div_h.count(d):
-        hc = h / d
+        hc = h // d
     else:
         for i in range(len(div_d) - 1):
-            if div_l.count(div_d[i + 1]) and div_h.count(d / div_d[i + 1]):
-                (lc, hc) = (l / div_d[i + 1], (h * div_d[i + 1]) / d)
+            if div_l.count(div_d[i + 1]) and div_h.count(d // div_d[i + 1]):
+                (lc, hc) = (l // div_d[i + 1], (h * div_d[i + 1]) // d)
                 break
     return (lc, hc)
 
@@ -111,16 +111,16 @@ def fractions_partage_corrige(l, h, n, d):
 def trace_partage(f1, l, h, lc, hc, cas):
     if lc < l:
         f1.write("        \\multips(%s,0)(%s,0){%s}{\\psline(0,0)(0,%s)}\n" %
-                 (lc, lc, l / lc - 1, h))
+                 (lc, lc, l // lc - 1, h))
         if cas == "nsd":
             f1.write("        \\rput(%s,0){\\multips(%s,0)(%s,0){%s}{\\psline(0,0)(0,%s)}}\n" %
-                     (l + 1, lc, lc, l / lc - 1, h))
+                     (l + 1, lc, lc, l // lc - 1, h))
     if hc < h:
         f1.write("        \\multips(0,%s)(0,%s){%s}{\\psline(0,0)(%s,0)}\n" %
-                 (hc, hc, h / hc - 1, l))
+                 (hc, hc, h // hc - 1, l))
         if cas == "nsd":
             f1.write("        \\rput(%s,0){\\multips(0,%s)(0,%s){%s}{\\psline(0,0)(%s,0)}}\n" %
-                     (l + 1, hc, hc, h / hc - 1, l))
+                     (l + 1, hc, hc, h // hc - 1, l))
 
 
 def coloriage(f1, n, d, l, h, lc, hc):
@@ -331,7 +331,7 @@ def ecrit_abscisses(f0, f1, origine, div, subd, lpts, lnum):
     f0.write("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[3],
              subd))
     f0.write("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (origine *
-             lnum[4] + (lpts[4] / div) * lnum[4], lnum[4]))
+             lnum[4] + (lpts[4] // div) * lnum[4], lnum[4]))
     f1.write("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[0],
              div))
     f1.write("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[1],
@@ -341,7 +341,7 @@ def ecrit_abscisses(f0, f1, origine, div, subd, lpts, lnum):
     f1.write("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[3],
              subd))
     f1.write("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (origine *
-             lnum[4] + (lpts[4] / div) * lnum[4], lnum[4]))
+             lnum[4] + (lpts[4] // div) * lnum[4], lnum[4]))
 
 
 def trouve_abscisses(f0, f1, div, subd, lnum):
@@ -356,11 +356,11 @@ def trouve_abscisses(f0, f1, div, subd, lnum):
     f1.write("        \\item $F~\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[5],
              div))
     f1.write("        \\item $F~\\left(\\cfrac{%s}{%s}\\right)$\n" % ((lnum[5] *
-             subd) / div, subd))
+             subd) // div, subd))
     f1.write("        \\item $G~\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[6],
              div))
     f1.write("        \\item $G~\\left(\\cfrac{%s}{%s}\\right)$\n" % ((lnum[6] *
-             subd) / div, subd))
+             subd) // div, subd))
 
 
 def questions_fractions_abscisses(f0, f1):

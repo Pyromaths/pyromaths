@@ -127,10 +127,10 @@ def tex_comb3(v):
 def tex_comb4(v):
     if v[0]:
         tv = (developpements.tex_coef(1, 'x'), v[2], v[0],
-              developpements.tex_coef(v[2] / v[0], ''))
+              developpements.tex_coef(v[2] // v[0], ''))
     else:
         tv = (developpements.tex_coef(1, 'y'), v[2], v[1],
-              developpements.tex_coef(v[2] / v[1], ''))
+              developpements.tex_coef(v[2] // v[1], ''))
     return '%s=\\frac{%s}{%s}=%s' % tv
 
 
@@ -209,7 +209,7 @@ def tex_verification(v):  # renvoie la vérification de lasolution du système d
 def systemes(f0, f1, v):
     a = outils.ppcm(v[0][0], v[1][0])
     b = outils.ppcm(v[0][1], v[1][1])
-    (a0, a1, b0, b1) = (a / v[0][0], -a / v[1][0], b / v[0][1], -b / v[1][1])
+    (a0, a1, b0, b1) = (a // v[0][0], -a // v[1][0], b // v[0][1], -b // v[1][1])
     if a0 < 0:
         (a0, a1) = (-a0, -a1)
     if b0 < 0:

@@ -84,7 +84,7 @@ def algo_euclide(a):  # renvoi une liste contenant (dividende,diviseur,quotient,
 
 def simplifie_fraction_pgcd(l):  # renvoie le nombre par lequel on peut simplifier la fraction et la fraction simplifiée
     (pgcd, n0, d0) = (l[len(l) - 1][1], l[0][0], l[0][1])
-    (n1, d1) = (l[0][0] / pgcd, l[0][1] / pgcd)
+    (n1, d1) = (l[0][0] // pgcd, l[0][1] // pgcd)
     return (n0, d0, n0, pgcd, d0, pgcd, n1, d1)
 
 

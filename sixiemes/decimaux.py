@@ -540,9 +540,9 @@ def classer(f0, f1):
         ordre = "croissant"
     else:
         ordre = "décroissant"
-    f0.write("Classer les nombres suivants dans l'odre %s.\\par\n    " %
+    f0.write("Classer les nombres suivants dans l'ordre %s.\\par\n    " %
              ordre)
-    f1.write("Classer les nombres suivants dans l'odre %s.\\par\n    " %
+    f1.write("Classer les nombres suivants dans l'ordre %s.\\par\n    " %
              ordre)
     for i in range(len(lnb)):
         if i:

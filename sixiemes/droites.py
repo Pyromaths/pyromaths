@@ -138,7 +138,7 @@ def tex_figure(file, lpoints, nodesep=0):
     @type file: file
     @param lpoints: liste de 3 points
     @type lpoints: liste de 3 strings
-    @param nodesep: liste des d\xc3\xa9passements pour pstricks
+    @param nodesep: liste des dépassements pour pstricks
     @type nodesep: liste de 2 strings
     """
 
@@ -282,7 +282,7 @@ def cree_coordonnees(long=3):
     a0 = alpha + random.randrange(30, 120)
     k1 = random.randrange(50, 100) / 100.0
     a1 = alpha + random.randrange(210, 300)
-    return (long, alpha, int, alpha + 180, floor((k0 * 10) * long) /
+    return (long, alpha, long, alpha + 180, floor((k0 * 10) * long) /
             10.0, a0, floor((k1 * 10) * long) / 10.0, a1)
 
 
@@ -304,8 +304,8 @@ def enonce_perp(f0, f1):
     f1.write('''  \\par
   \\begin{enumerate}
 ''')
-    s_per = str("  \\item Tracer la droite perpendiculaire à la droite (%s%s) passant par %s\n")
-    s_par = str("  \\item Tracer la droite parallèle à la droite (%s%s) passant par %s\n")
+    s_per = str("  \\item Tracer la droite perpendiculaire à la droite $(%s%s)$ passant par $%s$\n")
+    s_par = str("  \\item Tracer la droite parallèle à la droite $(%s%s)$ passant par $%s$\n")
     s_per = s_per % (noms[per[0]], noms[per[1]], noms[per[2]])
     s_par = s_par % (noms[par[0]], noms[par[1]], noms[par[2]])
     f0.write(s_par)

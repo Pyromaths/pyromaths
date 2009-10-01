@@ -270,9 +270,9 @@ def tex_pythagore(f0, f1, noms, angles, longueurs):
     f0.write(enonce)
     f1.write(enonce)
     f1.write("    \\par\\dotfill{}\\\\\n\n")
-    f1.write("    Le triangle %s est rectangle en %s donc, d'apr\\`es le \\textbf{th\\'eor\\`eme de Pythagore} :\n" %
+    f1.write("    Le triangle %s est rectangle en %s donc, d'après le \\textbf{théorème de Pythagore} :\n" %
              (nom_tr, noms[2]))
-    f1.write("    \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypot\\'enuse})}\\]\n" %
+    f1.write("    \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]\n" %
              (cotes[2], cotes[0], cotes[1], cotes[2]))
     if long0 == 2 or long1 == 2:
         f1.write("    \\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]\n" %
@@ -342,7 +342,7 @@ def tex_triangle_cercle(f0, f1, noms, angles, longueurs):
     \\end{pspicture}
   \\end{minipage}\\hfill
   \\begin{minipage}{13cm}
-    $\\big(\\mathcal{C}\\big)$ est un cercle de diam\\`etre $[%s]$ et $%s$ est un
+    $\\big(\\mathcal{C}\\big)$ est un cercle de diamètre $[%s]$ et $%s$ est un
     point de $\\big(\\mathcal{C}\\big)$.\\par
     On donne $%s=\\unit[%s]{cm}\\text{ et }%s=\\unit[%s]{cm}$.\\par
     Calculer la longueur $%s$.
@@ -356,8 +356,8 @@ def tex_triangle_cercle(f0, f1, noms, angles, longueurs):
              (cotes[2], nom_tr))
     f1.write("    \\fbox{Donc le triangle %s est rectangle en %s.}\\\\\n\n" %
              (nom_tr, noms[2]))
-    f1.write("    D'apr\\`es le \\textbf{th\\'eor\\`eme de Pythagore} :\n")
-    f1.write("    \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypot\\'enuse})}\\]\n" %
+    f1.write("    D'après le \\textbf{théorème de Pythagore} :\n")
+    f1.write("    \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]\n" %
              (cotes[2], cotes[0], cotes[1], cotes[2]))
     if long0 == 2 or long1 == 2:
         f1.write("    \\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]\n" %
@@ -417,20 +417,20 @@ def tex_reciproque_pythagore(f0, f1, noms, longueurs):
     f0.write(enonce)
     f1.write(enonce)
     f1.write("  \\par\\dotfill{}\\\\\n\n")
-    f1.write("  Le triangle %s n'est ni isoc\\`ele, ni \\'equilat\\'eral.\\par\n" %
+    f1.write("  Le triangle %s n'est ni isocèle, ni équilatéral.\\par\n" %
              nom_tr)
     f1.write('''  $\\left.
   \\renewcommand{\\arraystretch}{2}
   \\begin{array}{l}
 ''')
-    f1.write("    \\bullet %s^2=%s^2=%s\\qquad\\text{(}[%s]\\text{ est le plus grand c\\^ot\\'e.)}\\\\\n" %
+    f1.write("    \\bullet %s^2=%s^2=%s\\qquad\\text{(}[%s]\\text{ est le plus grand côté.)}\\\\\n" %
              (c[2], nombre(longueurs[2]), nombre(longueurs[2] ** 2), c[2]))
     f1.write("    \\bullet  %s^2+%s^2=%s^2+%s^2=%s \n" % (c[0], c[1],
              nombre(longueurs[0]), nombre(longueurs[1]), nombre(longueurs[0] **
              2 + longueurs[1] ** 2)))
     f1.write('  \\end{array}  \\right\\rbrace$\n')
     f1.write("""  Donc $%s^2=%s^2+%s^2$.\\par
-  D'apr\\`es la \\textbf{r\\'eciproque du th\\'eor\\`eme de Pythagore}, \\fbox{le triangle $%s$ est rectangle en $%s$.}
+  D'après la \\textbf{réciproque du théorème de Pythagore}, \\fbox{le triangle $%s$ est rectangle en $%s$.}
 """ %
              (c[2], c[0], c[1], nom_tr, noms[2]))
 
@@ -608,8 +608,8 @@ def tex_enonce_thales(noms, valeurs):
 
 
 def tex_resolution_thales0(n):
-    return """  Les points $%s$,~ $%s$,~ $%s$ et $%s$, $%s$, $%s$ sont align\\'es et les droites $(%s)$ et $(%s)$ sont parall\\`eles.\\par
-  D'apr\\`es le \\textbf{th\\'eor\\`eme de Thal\\`es} :
+    return """  Les points $%s$,~ $%s$,~ $%s$ et $%s$, $%s$, $%s$ sont alignés et les droites $(%s)$ et $(%s)$ sont parallèles.\\par
+  D'après le \\textbf{théorème de Thalès} :
   $\\qquad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$
 """ % \
         (
@@ -1003,7 +1003,7 @@ def resolution_rec_thales0(n, v):
 
 
 def tex_resolution_rec_thales0(n, v):
-    return """  Les points $%s$, $%s$, $%s$~ et $%s$, $%s$, $%s$ sont align\\'es dans le m\\^eme ordre.\\par
+    return """  Les points $%s$, $%s$, $%s$~ et $%s$, $%s$, $%s$ sont alignés dans le même ordre.\\par
   De plus $%s=%s%s%s=\\unit[%s]{cm}$.\\par
 """ % \
         resolution_rec_thales0(n, v)

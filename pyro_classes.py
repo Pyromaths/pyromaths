@@ -30,8 +30,8 @@ from outils import radians, degres
 
 class Fractions:
 
-    """Classe permettant d'op\xc3\xa9rer sur les fractions.
-    Une fraction est stock\xc3\xa9e ainsi : (num\xc3\xa9rateur, d\xc3\xa9nominateur)"""
+    """Classe permettant d'opérer sur les fractions.
+    Une fraction est stockée ainsi : (numérateur, dénominateur)"""
 
     def __init__(self, n, d=1):
         self.n = n
@@ -45,10 +45,10 @@ class Fractions:
         return Fractions(self.n // pgcd, self.d // pgcd)
 
     def TeX(self, signe=0, coef=None):
-        """Permet d'\xc3\xa9crire une fraction au format TeX.
+        """Permet d'écrire une fraction au format TeX.
 
-        @param signe: Si vrai, \xc3\xa9crit la fraction avec un d\xc3\xa9nominateur positif
-        @param coef: Multiplie le num\xc3\xa9rateur et le d\xc3\xa9nominateur par un m\xc3\xaame nombre
+        @param signe: Si vrai, écrit la fraction avec un dénominateur positif
+        @param coef: Multiplie le numérateur et le dénominateur par un même nombre
         """
 
         if signe:
@@ -119,8 +119,8 @@ class Fractions:
 
 class Litteral:
 
-    """Classe permettant d'op\xc3\xa9rer sur des expressions litt\xc3\xa9rales
-    Une expression litt\xc3\xa9rale est stock\xc3\xa9e ainsi :
+    """Classe permettant d'opérer sur des expressions littérales
+    Une expression littérale est stockée ainsi :
     [(coeff1, variable1, exposant1), (coeff2, variable2, exposant2), ...]"""
 
     def __init__(self, expression):
@@ -213,14 +213,14 @@ class Metapost:
         rotation=0,
         angledroit=0,
         ):
-        """Construit un triangle en metapost quelles que soient les donn\xc3\xa9es.
-        La base est le c\xc3\xb4t\xc3\xa9 [AB] de longueur c.
+        """Construit un triangle en metapost quelles que soient les données.
+        La base est le côté [AB] de longueur c.
 
         @param A, b, C : nom des trois sommets (obligatoire)
-        @param a, b, c : longueurs des trois c\xc3\xb4t\xc3\xa9s oppos\xc3\xa9s au sommet de m\xc3\xaame nom
+        @param a, b, c : longueurs des trois côtés opposés au sommet de même nom
         @param alpha, beta, gamma : mesure des 3 angles de sommets A, B et C
-        @param rotation: mesure en degr\xc3\xa9s de l'angle de la rotation de centre A
-                         appliqu\xc3\xa9e au triangle
+        @param rotation: mesure en degrés de l'angle de la rotation de centre A
+                         appliquée au triangle
         @param angledroit: doit-on afficher l'angle droit ?
         """
 

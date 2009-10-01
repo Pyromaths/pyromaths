@@ -155,7 +155,8 @@ def coordo_pts(nb):
 
 def affiche_coord(coord):
     """Affiche les coordonnées des points au format LaTeX"""
-    return '\\hbox{('+sepmilliers(str(coord[0]))+'~;~'+sepmilliers(str(coord[1]))+')}'
+    return '\\hbox{$('+sepmilliers(str(coord[0]), 1) + '~;~' + \
+                                             sepmilliers(str(coord[1]), 1)+')$}'
 
 def tex_liste_co(liste_coord):
     """prend une liste de coordonnées et renvoie la liste en string prête pour latex
@@ -163,7 +164,7 @@ def tex_liste_co(liste_coord):
     i=0
     tlc=[]
     while i < len(liste_coord):
-        tlc.append('\\hbox{('+sepmilliers(str(liste_coord[i][0]))+'~;~'+sepmilliers(str(liste_coord[i][1]))+')}')
+        tlc.append(affiche_coord(liste_coord[i]))
         i=i+1
     return tlc
 
@@ -171,7 +172,7 @@ def main():
     nbpts = 13
     noms_pts=(noms_sommets(nbpts))
     coord_pts=coordo_pts(nbpts)
-    voc=['ordonn\\\'ee','abscisse']
+    voc=['ordonnée','abscisse']
     rg1=random.randrange(0,2)
     rg2=abs(rg1-1)
     while len(coord_pts)<nbpts:
@@ -179,9 +180,9 @@ def main():
     exo=["\\exercice",
          "\\parbox{0.4\\linewidth}{",
          "\\begin{enumerate}",
-         "\\item Donner les coordonn\\\'ees des points %s, %s, %s, %s, %s et %s." % tuple(noms_pts[0:6]),
-         "\\item Placer dans le rep\\`ere les points %s, %s, %s, %s, %s et %s" %noms_pts[6:12] +" de cordonn\\\'ees respectives %s, %s, %s, %s, %s et %s. " %tuple(tex_liste_co(coord_pts[6:12])),
-         "\\item Placer dans le rep\\`ere le point %s d'%s %s et d'%s %s" %(noms_pts[12],voc[rg1],sepmilliers(str(coord_pts[12][rg1])),voc[rg2],sepmilliers(str(coord_pts[12][rg2]))),
+         "\\item Donner les coordonnées des points %s, %s, %s, %s, %s et %s." % tuple(noms_pts[0:6]),
+         "\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s" %noms_pts[6:12] +" de cordonnées respectives %s, %s, %s, %s, %s et %s. " %tuple(tex_liste_co(coord_pts[6:12])),
+         "\\item Placer dans le repère le point %s d'%s %s et d'%s %s" %(noms_pts[12],voc[rg1],sepmilliers(str(coord_pts[12][rg1])),voc[rg2],sepmilliers(str(coord_pts[12][rg2]))),
          "\\end{enumerate}}\\hfill ",
          "\\parbox{0.55\\linewidth}{",
          "\\psset{unit=0.8cm}",
@@ -202,13 +203,13 @@ def main():
          "\\end{pspicture}}\\hfill",
          "\\parbox{0.5\\linewidth}{",
          "\\begin{enumerate}",
-         "\\item Donner les coordonn\\\'ees des points %s, %s, %s, %s, %s et %s." % tuple(noms_pts[0:6])]
+         "\\item Donner les coordonnées des points %s, %s, %s, %s, %s et %s." % tuple(noms_pts[0:6])]
     i=0
     while i<6:
-        cor.append("Les coordonn\\\'ees du point %s sont %s \n"%(noms_pts[i],affiche_coord(coord_pts[i])))
+        cor.append("Les coordonnées du point %s sont %s \n"%(noms_pts[i],affiche_coord(coord_pts[i])))
         i=i+1
-    cor[len(cor):len(cor)]=["\\item Placer dans le rep\\`ere les points %s, %s, %s, %s, %s et %s" %noms_pts[6:12] +" de cordonn\\\'ees respectives %s, %s, %s, %s, %s et %s. " %tuple(tex_liste_co(coord_pts[6:12])),
-         "\\item Placer dans le rep\\`ere le point %s d'%s %s et d'%s %s" %(noms_pts[12],voc[rg1],sepmilliers(str(coord_pts[12][rg1])),voc[rg2],sepmilliers(str(coord_pts[12][rg2]))),
+    cor[len(cor):len(cor)]=["\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s" %noms_pts[6:12] +" de cordonnées respectives %s, %s, %s, %s, %s et %s. " %tuple(tex_liste_co(coord_pts[6:12])),
+         "\\item Placer dans le repère le point %s d'%s %s et d'%s %s" %(noms_pts[12],voc[rg1],sepmilliers(str(coord_pts[12][rg1])),voc[rg2],sepmilliers(str(coord_pts[12][rg2]))),
          "\\end{enumerate}"]
     cor.append("}")
     return(exo,cor)
