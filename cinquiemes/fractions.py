@@ -28,9 +28,9 @@ import outils
 
 
 def fractions_egales():
-    exo = ["\\exercice", "Compléter :", "\\begin{multicols}{4}",
+    exo = ["\\exercice", u"Compléter :", "\\begin{multicols}{4}",
            "  \\begin{enumerate}"]
-    cor = ["\\exercice*", "Compléter :", "\\begin{multicols}{4}",
+    cor = ["\\exercice*", u"Compléter :", "\\begin{multicols}{4}",
            "  \\begin{enumerate}"]
     for i in range(8):
         n = d = 1
@@ -69,10 +69,10 @@ def fractions_egales():
 
 def sommes_fractions():
     exo = ["\\exercice",
-           "Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent"]
     cor = ["\\exercice*",
-           "Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent"]
     for i in range(8):
         if random.randrange(2):
@@ -123,10 +123,10 @@ def sommes_fractions():
 
 def produits_fractions():
     exo = ["\\exercice",
-           "Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent"]
     cor = ["\\exercice*",
-           "Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent"]
     for i in range(8):
         n1=d1=n2=d2=a=b=2
@@ -162,5 +162,3 @@ def produits_fractions():
     exo.append("\end{multicols}\n")
     cor.append("\end{multicols}\n")
     return (exo, cor)
-
-

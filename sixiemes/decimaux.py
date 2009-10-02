@@ -59,7 +59,7 @@ def NombreEnLettres(n, France=True):
 
   # Cas particulier de zéro
     if n == 0:
-        result = 'zéro'
+        result = u'zéro'
     else:
         coef = 0
 
@@ -195,16 +195,16 @@ def EcritNombreDecimal(n):
     elif e:
         txt = NombreEnLettres(e)
     if d:
-        partieDec = [" dixième", " centième", " millième"]
+        partieDec = [u" dixième", u" centième", u" millième"]
         if txt.rfind("un") == len(txt) - 2:
 
         # le texte se finit par un. On l'accorde en genre avec unité
 
             txt = txt + "e"
         if e == 1:
-            txt = txt + ' unité et '
+            txt = txt + u' unité et '
         if e > 1:
-            txt = txt + ' unités et '
+            txt = txt + u' unités et '
         txt = txt + NombreEnLettres(d) + partieDec[len(str(d)) - 1]
         if d > 1:
             txt = txt + 's'
@@ -343,8 +343,8 @@ def tex_tableau_litres(f1, div0, u, nblist, chf_unite):
 # Placer une virgule
 #===============================================================================
 
-valeurs = ["milliers", "centaines", "dizaines", "unités",
-           "dixièmes", "centièmes", "millièmes"]
+valeurs = ["milliers", "centaines", "dizaines", u"unités",
+           u"dixièmes", u"centièmes", u"millièmes"]
 
 
 def valeurs_decimaux():
@@ -379,12 +379,11 @@ def tex_place_virgule(f0, f1):
 
     valeurs_index = [0, 1, 2, 3, 4, 5, 6]
     nb = valeurs_decimaux()
-    f0.write("""Placer une virgule (en ajoutant éventuellement des zéros) dans le nombre
+    f0.write(u"""Placer une virgule (en ajoutant éventuellement des zéros) dans le nombre
 %s de telle sorte que :
-""" %
-             nb)
+""" % nb)
     f0.write('\\begin{enumerate}\n')
-    f1.write("""Placer une virgule (en ajoutant éventuellement des zéros) dans le nombre
+    f1.write(u"""Placer une virgule (en ajoutant éventuellement des zéros) dans le nombre
 %s de telle sorte que :
 """ %
              nb)
@@ -393,10 +392,10 @@ def tex_place_virgule(f0, f1):
         dec = [str(nb)[i] for i in range(len(str(nb)))]
         index_dec = random.randrange(6)
         index_valeurs = valeurs_index.pop(random.randrange(len(valeurs_index)))
-        f0.write("  \\item le chiffre %s soit le chiffre des %s : " % (dec[index_dec],
-                 valeurs[index_valeurs]))
-        f1.write("  \\item le chiffre %s soit le chiffre des %s : " % (dec[index_dec],
-                 valeurs[index_valeurs]))
+        f0.write(u"  \\item le chiffre %s soit le chiffre des %s : " \
+                 % (dec[index_dec], valeurs[index_valeurs]))
+        f1.write(u"  \\item le chiffre %s soit le chiffre des %s : " \
+                 % (dec[index_dec], valeurs[index_valeurs]))
         resultat = ecrit_nombre_decimal(dec, (index_dec + 4) -
                 index_valeurs)
         f0.write('\\dotfill\n')
@@ -539,7 +538,7 @@ def classer(f0, f1):
     if random.randrange(2):
         ordre = "croissant"
     else:
-        ordre = "décroissant"
+        ordre = u"décroissant"
     f0.write("Classer les nombres suivants dans l'ordre %s.\\par\n    " %
              ordre)
     f1.write("Classer les nombres suivants dans l'ordre %s.\\par\n    " %

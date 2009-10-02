@@ -21,7 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 from PyQt4 import QtGui, QtCore
-import os, lxml, outils
+import os, lxml, codecs
+import outils
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, LesFiches,  configdir, iconesdir):
@@ -56,7 +57,7 @@ class Ui_MainWindow(object):
         #============================================================
         self.pushButton_ok = QtGui.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_ok)
-        self.pushButton_ok.setText("Créer")
+        self.pushButton_ok.setText(u"Créer")
         self.pushButton_ok.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         self.pushButton_quit = QtGui.QPushButton(self.centralwidget)
@@ -66,7 +67,7 @@ class Ui_MainWindow(object):
 
         self.pushButton_erase = QtGui.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_erase)
-        self.pushButton_erase.setText("Réinitialiser")
+        self.pushButton_erase.setText(u"Réinitialiser")
         self.pushButton_erase.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
@@ -120,13 +121,13 @@ class Ui_MainWindow(object):
         ############## Label nom du fichier
 
         self.opt_nom_fichier = QtGui.QLabel(self.tab_options)
-        self.opt_nom_fichier.setText("Nom par défaut du fichier : ")
+        self.opt_nom_fichier.setText(u"Nom par défaut du fichier : ")
         self.verticalLayout_16.addWidget(self.opt_nom_fichier)
 
         ############## Label chemin par défaut pour l'enregistrement des fichiers
 
         self.opt_chemin_fichier = QtGui.QLabel(self.tab_options)
-        self.opt_chemin_fichier.setText("Chemin par défaut pour enregistrer les fichiers : ")
+        self.opt_chemin_fichier.setText(u"Chemin par défaut pour enregistrer les fichiers : ")
         self.verticalLayout_16.addWidget(self.opt_chemin_fichier)
 
         ############## Label titre des fiches
@@ -180,17 +181,16 @@ class Ui_MainWindow(object):
         ############## CheckBox "corrigés ou non"
 
         self.checkBox_corrige = QtGui.QCheckBox(self.tab_options)
-        self.checkBox_corrige.setText("Créer le corrigé")
-        self.checkBox_corrige.setToolTip("Pyromaths doit-il créer la fiche de correction détaillée?")
+        self.checkBox_corrige.setText(u"Créer le corrigé")
+        self.checkBox_corrige.setToolTip(u"Pyromaths doit-il créer la fiche de correction détaillée?")
         self.checkBox_corrige.setChecked(int(self.config['corrige']))
-        #self.checkBox_corrige.setEnabled(False)
         self.verticalLayout_21.addWidget(self.checkBox_corrige)
 
         ############## CheckBox "pdf ou non"
 
         self.checkBox_pdf = QtGui.QCheckBox(self.tab_options)
-        self.checkBox_pdf.setText("Créer le pdf")
-        self.checkBox_pdf.setToolTip("Pyromaths doit-il créer les fiches au format pdf ?")
+        self.checkBox_pdf.setText(u"Créer le pdf")
+        self.checkBox_pdf.setToolTip(u"Pyromaths doit-il créer les fiches au format pdf ?")
         self.checkBox_pdf.setChecked(int(self.config['pdf']))
         self.verticalLayout_21.addWidget(self.checkBox_pdf)
 
@@ -212,7 +212,7 @@ class Ui_MainWindow(object):
         ############## Label Modèle
 
         self.label_modele = QtGui.QLabel(self.tab_options)
-        self.label_modele.setText("Modèle de mise en page :")
+        self.label_modele.setText(u"Modèle de mise en page :")
         #self.label_modele.setEnabled(False)
         self.verticalLayout_18.addWidget(self.label_modele)
         self.horizontalLayout_2.addLayout(self.verticalLayout_18)
@@ -266,7 +266,7 @@ class Ui_MainWindow(object):
         ############## Bouton enregistrer
 
         self.pushButton_enr_opt = QtGui.QPushButton(self.tab_options)
-        self.pushButton_enr_opt.setText("Enregistrer dans les préférences")
+        self.pushButton_enr_opt.setText(u"Enregistrer dans les préférences")
         self.pushButton_enr_opt.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         self.gridLayout_2.addWidget(self.pushButton_enr_opt, 4, 1, 1, 1)
@@ -306,10 +306,10 @@ class Ui_MainWindow(object):
         self.actionQuitter.setText("Quitter")
 
         self.actionAcceder_au_site = QtGui.QAction(MainWindow)
-        self.actionAcceder_au_site.setText("Accéder au site")
+        self.actionAcceder_au_site.setText(u"Accéder au site")
 
         self.action_a_propos = QtGui.QAction(MainWindow)
-        self.action_a_propos.setText("À propos")
+        self.action_a_propos.setText(u"À propos")
 
         self.menuFichier.addAction(self.actionTous_les_exercices)
         self.menuFichier.addSeparator()
@@ -351,8 +351,8 @@ class Ui_MainWindow(object):
         for level in range(4):
             nb_exos = len(self.LesFiches[level][2])
             for i in range(nb_exos):
-                exec("self.label_%s_%s.setText(\"%s\")" % (6-level,i,self.LesFiches[level][2][i]))
-                exec("self.spinBox_%s_%s.setToolTip(\"Choisissez le nombre d\'exercices de ce type \xe0 cr\xe9er.\")"% (6-level,i))
+                exec("self.label_%s_%s.setText(u\"%s\")" % (6-level,i,self.LesFiches[level][2][i]))
+                exec("self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -363,7 +363,7 @@ class Ui_MainWindow(object):
     def about(self):
         """Crée la boîte de dialogue "À propos de..." """
         version = self.lire_config('informations')['version']
-        text = """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+        text = u"""<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html>
   <head>
     <meta name="qrichtext" content="1" />
@@ -416,7 +416,7 @@ class Ui_MainWindow(object):
   </body>
 </html>"""
         banniere = os.path.join(self.iconesdir, 'pyromaths-banniere.png')
-        QtGui.QMessageBox.about(None, 'À propos de Pyromaths', text % (banniere,  version))
+        QtGui.QMessageBox.about(None, u'À propos de Pyromaths', text % (banniere,  version))
 
     def creer_les_exercices(self):
         """Vérifie si la liste d'exercices n'est pas vide puis sélectionne les noms des fichiers exercices et
@@ -424,17 +424,17 @@ class Ui_MainWindow(object):
         self.valide_options()
         if self.liste_creation == [] :
             QtGui.QMessageBox.warning(None, 'Attention !',
-                    "Veuillez sélectionner des exercices...",
+                    u"Veuillez sélectionner des exercices...",
                     QtGui.QMessageBox.Ok )
         else:
             parametres = {
                 'creer_pdf': self.checkBox_pdf.isChecked(),
-                'titre': str(self.titre_fiche.text()),
+                'titre': unicode(self.titre_fiche.text()),
                 'corrige': self.checkBox_corrige.isChecked(),
                 'niveau': str(self.comboBox_niveau.currentText()),
-                'nom_fichier': str(self.nom_fichier.text()),
-                'chemin_fichier': str(self.chemin_fichier.text()),
-                'modele': str(self.comboBox_modele.currentText() + '.tex'),
+                'nom_fichier': unicode(self.nom_fichier.text()),
+                'chemin_fichier': unicode(self.chemin_fichier.text()),
+                'modele': unicode(self.comboBox_modele.currentText() + '.tex'),
                 'configdir': self.configdir
                          }
             #============================================================
@@ -470,7 +470,7 @@ class Ui_MainWindow(object):
         """
         self.valide_options()
         (f0, f1) = ("", "")
-        f0 = QtGui.QFileDialog().getExistingDirectory (None, "Dossier où créer les fiches",
+        f0 = QtGui.QFileDialog().getExistingDirectory (None, u"Dossier où créer les fiches",
                                                          self.config['chemin_fichier'], QtGui.QFileDialog.ShowDirsOnly)
         i = 0
         if f0:
@@ -507,14 +507,14 @@ class Ui_MainWindow(object):
         tree = lxml.etree.parse(self.configfile)
         root = tree.getroot()
         options = root.find('options')
-        options .find('nom_fichier').text = str(self.nom_fichier.text())
-        options .find('chemin_fichier').text = str(self.chemin_fichier.text())
-        options .find('titre_fiche').text = str(self.titre_fiche.text())
+        options .find('nom_fichier').text = unicode(self.nom_fichier.text())
+        options .find('chemin_fichier').text = unicode(self.chemin_fichier.text())
+        options .find('titre_fiche').text = unicode(self.titre_fiche.text())
         options .find('corrige').text = str(self.checkBox_corrige.isChecked())
         options .find('pdf').text  = str(self.checkBox_pdf.isChecked())
-        options .find('modele').text = str(self.comboBox_modele.currentText() + '.tex')
+        options .find('modele').text = unicode(self.comboBox_modele.currentText() + '.tex')
 
-        f = open(self.configfile, encoding='utf-8', mode='w')
+        f = codecs.open(self.configfile, encoding='utf-8', mode='w')
         f.write(lxml.etree.tostring(root, pretty_print=True, encoding="UTF-8",
                                xml_declaration=True).decode('utf-8', 'strict'))
         f.close()
@@ -553,7 +553,7 @@ class Ui_MainWindow(object):
         return config
 
     def option_parcourir(self):
-        d0 = QtGui.QFileDialog().getExistingDirectory (None, "Dossier où créer les fiches",
+        d0 = QtGui.QFileDialog().getExistingDirectory (None, u"Dossier où créer les fiches",
                                                        self.config['chemin_fichier'], QtGui.QFileDialog.ShowDirsOnly)
         if d0:
             self.chemin_fichier.setText(d0)
@@ -645,7 +645,7 @@ def valide(list, LesFiches, parametres):
     l=[]
     lesexos = []
     for i in range(list.count()):
-        l.append(str(list.item(i).text()))
+        l.append(unicode(list.item(i).text()))
     for text in l:
         niveau = 6 - int(text[0])
         pos = LesFiches[niveau][2].index(text[4:])
@@ -662,16 +662,16 @@ def valide(list, LesFiches, parametres):
                 os.path.join(parametres['chemin_fichier'],
                              '%s.tex' % filename),
                              "Documents Tex (*.tex)"))
-    if f0 != "None":
+    if f0 != None:
         outils.ajoute_extension(f0, '.tex')
         if corrige:
             f1 = str(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(os.path.dirname(f0),
-                "%s-corrige.tex"  % os.path.splitext(os.path.basename(f0))[0]),
+                u"%s-corrige.tex"  % os.path.splitext(os.path.basename(f0))[0]),
                 "Documents Tex (*.tex)"))
         else:
             f1 = os.path.join(os.path.dirname(f0), 'temp.tex')
-        if f1 != "None":
+        if f1 != None:
             if corrige:
                 outils.ajoute_extension(f1, '.tex')
             parametres ['fiche_exo'] = f0

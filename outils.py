@@ -23,9 +23,7 @@
 # ------------------- OUTILS -------------------
 
 from random import randrange
-import string
-import os,  sys
-import math
+import string, os,  sys, math, codecs
 from lxml import etree
 from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 from re import sub, findall
@@ -39,10 +37,10 @@ def ecrit_tex(file, formule, cadre=None, thenocalcul='\\thenocalcul = ',
 
     if formule != '':
         if cadre == None or not cadre:
-            file.write(('  \\[ %s%s \\] \n').expandtabs(2 * tabs) % (thenocalcul,
-                       formule))
+            file.write((u'  \\[ %s%s \\] \n').expandtabs(2 * tabs) % \
+                    (thenocalcul, formule))
         else:
-            file.write(('  \\[ \\boxed{%s%s} \\] \n').expandtabs(2 *
+            file.write((u'  \\[ \\boxed{%s%s} \\] \n').expandtabs(2 *
                        tabs) % (thenocalcul, formule))
 
 
@@ -335,8 +333,8 @@ def creation(parametres):
                 }"""
     exo = parametres['fiche_exo']
     cor = parametres['fiche_cor']
-    f0 = open( exo, encoding='utf-8', mode='w')
-    f1 = open( cor, encoding='utf-8', mode='w')
+    f0 = codecs.open(exo, encoding='utf-8', mode='w')
+    f1 = codecs.open(cor, encoding='utf-8', mode='w')
     titre = parametres['titre']
     fiche_metapost = os.path.splitext(exo)[0] + '.mp'
 
@@ -423,18 +421,18 @@ def create_config_file():
     child = etree.SubElement(root, "options")
     etree.SubElement(child, "nom_fichier").text="exercices"
     etree.SubElement(child, "chemin_fichier").text="%s" % home()
-    etree.SubElement(child, "titre_fiche").text="Fiche de révisions"
+    etree.SubElement(child, "titre_fiche").text=u"Fiche de révisions"
     etree.SubElement(child, "corrige").text="True"
     etree.SubElement(child, "pdf").text="True"
     etree.SubElement(child, "modele").text="pyromaths.tex"
 
     child = etree.SubElement(root, "informations")
     etree.SubElement(child, "version").text="09.09-1"
-    etree.SubElement(child, "description").text="Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
+    etree.SubElement(child, "description").text=u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
     etree.SubElement(child, "icone").text="pyromaths.ico"
 
     subchild= etree.SubElement(child, "auteur")
-    etree.SubElement(subchild, "nom").text="Jérôme Ortais"
+    etree.SubElement(subchild, "nom").text=u"Jérôme Ortais"
     etree.SubElement(subchild, "email").text="jerome.ortais@pyromaths.org"
     etree.SubElement(subchild, "site").text="http://www.pyromaths.org"
 
@@ -492,7 +490,7 @@ def modify_config_file(file):
                 modifie = True
                 oldtag.text =  element.text
     if modifie:
-        f = open(os.path.join(configdir(),  "pyromaths.xml"),'w')
+        f = codecs.open(os.path.join(configdir(), "pyromaths.xml"), encoding='utf-8', mode = 'w')
         f.write(etree.tostring(indent(oldroot), pretty_print=True, encoding="UTF-8", xml_declaration=True))
         f.close()
 
@@ -535,7 +533,7 @@ def copie_tronq_modele(dest, parametres, master):
     ## Les variables à remplacer :
     titre = parametres['titre']
     niveau = parametres['niveau']
-    modele = open(source, encoding='utf-8', mode='r')
+    modele = codecs.open(source, encoding='utf-8', mode='r')
     for line in modele:
         if master_fin in line:
             break

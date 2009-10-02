@@ -270,9 +270,9 @@ def tex_pythagore(f0, f1, noms, angles, longueurs):
     f0.write(enonce)
     f1.write(enonce)
     f1.write("    \\par\\dotfill{}\\\\\n\n")
-    f1.write("    Le triangle %s est rectangle en %s donc, d'après le \\textbf{théorème de Pythagore} :\n" %
+    f1.write(u"    Le triangle %s est rectangle en %s donc, d'après le \\textbf{théorème de Pythagore} :\n" %
              (nom_tr, noms[2]))
-    f1.write("    \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]\n" %
+    f1.write(u"    \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]\n" %
              (cotes[2], cotes[0], cotes[1], cotes[2]))
     if long0 == 2 or long1 == 2:
         f1.write("    \\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]\n" %
@@ -334,7 +334,7 @@ def tex_triangle_cercle(f0, f1, noms, angles, longueurs):
     long1 = (random.randrange(2) + 1 + long0) % 3
     cotes = cotes_sommets(noms)
     enonce = \
-        '''  \\begin{minipage}{4cm}
+        u'''  \\begin{minipage}{4cm}
     \\begin{pspicture}(-2,-2)(2,2)
       \\SpecialCoor\\psset{PointSymbol=x}
       \\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){a}\\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){b}\\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){c}
@@ -356,8 +356,8 @@ def tex_triangle_cercle(f0, f1, noms, angles, longueurs):
              (cotes[2], nom_tr))
     f1.write("    \\fbox{Donc le triangle %s est rectangle en %s.}\\\\\n\n" %
              (nom_tr, noms[2]))
-    f1.write("    D'après le \\textbf{théorème de Pythagore} :\n")
-    f1.write("    \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]\n" %
+    f1.write(u"    D'après le \\textbf{théorème de Pythagore} :\n")
+    f1.write(u"    \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]\n" %
              (cotes[2], cotes[0], cotes[1], cotes[2]))
     if long0 == 2 or long1 == 2:
         f1.write("    \\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]\n" %
@@ -417,19 +417,19 @@ def tex_reciproque_pythagore(f0, f1, noms, longueurs):
     f0.write(enonce)
     f1.write(enonce)
     f1.write("  \\par\\dotfill{}\\\\\n\n")
-    f1.write("  Le triangle %s n'est ni isocèle, ni équilatéral.\\par\n" %
+    f1.write(u"  Le triangle %s n'est ni isocèle, ni équilatéral.\\par\n" %
              nom_tr)
     f1.write('''  $\\left.
   \\renewcommand{\\arraystretch}{2}
   \\begin{array}{l}
 ''')
-    f1.write("    \\bullet %s^2=%s^2=%s\\qquad\\text{(}[%s]\\text{ est le plus grand côté.)}\\\\\n" %
+    f1.write(u"    \\bullet %s^2=%s^2=%s\\qquad\\text{(}[%s]\\text{ est le plus grand côté.)}\\\\\n" %
              (c[2], nombre(longueurs[2]), nombre(longueurs[2] ** 2), c[2]))
     f1.write("    \\bullet  %s^2+%s^2=%s^2+%s^2=%s \n" % (c[0], c[1],
              nombre(longueurs[0]), nombre(longueurs[1]), nombre(longueurs[0] **
              2 + longueurs[1] ** 2)))
     f1.write('  \\end{array}  \\right\\rbrace$\n')
-    f1.write("""  Donc $%s^2=%s^2+%s^2$.\\par
+    f1.write(u"""  Donc $%s^2=%s^2+%s^2$.\\par
   D'après la \\textbf{réciproque du théorème de Pythagore}, \\fbox{le triangle $%s$ est rectangle en $%s$.}
 """ %
              (c[2], c[0], c[1], nom_tr, noms[2]))
@@ -597,7 +597,7 @@ def creer_noms(noms, i):
 
 def tex_enonce_thales(noms, valeurs):
     texte = \
-        '  Sur la figure ci-contre, les droites $(%s)\\text{ et }(%s)$ sont parall\xe8les.\\par\n' % \
+            u'  Sur la figure ci-contre, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par\n' % \
         (lAB(noms[1:3]), lAB(noms[3:5]))
     liste = long_val(noms, valeurs)
     texte = texte + \
@@ -608,7 +608,7 @@ def tex_enonce_thales(noms, valeurs):
 
 
 def tex_resolution_thales0(n):
-    return """  Les points $%s$,~ $%s$,~ $%s$ et $%s$, $%s$, $%s$ sont alignés et les droites $(%s)$ et $(%s)$ sont parallèles.\\par
+    return u"""  Les points $%s$,~ $%s$,~ $%s$ et $%s$, $%s$, $%s$ sont alignés et les droites $(%s)$ et $(%s)$ sont parallèles.\\par
   D'après le \\textbf{théorème de Thalès} :
   $\\qquad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$
 """ % \
@@ -971,8 +971,8 @@ def enonce_rec_thales(n, v):
 def tex_enonce_rec_thales(n, v):
     d = enonce_rec_thales(n, v)
     texte = \
-        '''  Sur la figure ci-contre, on donne $%s=\\unit[%s]{cm}$, $%s=\\unit[%s]{cm}$, $%s=\\unit[%s]{cm}$ et $%s=\\unit[%s]{cm}$.\\par
-  D\xe9montrer que les droites $(%s)$ et $(%s)$ sont parall\xe8les.
+        u'''  Sur la figure ci-contre, on donne $%s=\\unit[%s]{cm}$, $%s=\\unit[%s]{cm}$, $%s=\\unit[%s]{cm}$ et $%s=\\unit[%s]{cm}$.\\par
+  Démontrer que les droites $(%s)$ et $(%s)$ sont parallèles.
 ''' % \
         d
     return texte
@@ -1003,7 +1003,7 @@ def resolution_rec_thales0(n, v):
 
 
 def tex_resolution_rec_thales0(n, v):
-    return """  Les points $%s$, $%s$, $%s$~ et $%s$, $%s$, $%s$ sont alignés dans le même ordre.\\par
+    return u"""  Les points $%s$, $%s$, $%s$~ et $%s$, $%s$, $%s$ sont alignés dans le même ordre.\\par
   De plus $%s=%s%s%s=\\unit[%s]{cm}$.\\par
 """ % \
         resolution_rec_thales0(n, v)
@@ -1038,14 +1038,14 @@ def resolution_rec_thales1(n, v):
 
 def tex_resolution_rec_thales1(n, v):
     d = resolution_rec_thales1(n, v)
-    return """  $\\left.
+    return u"""  $\\left.
   \\renewcommand{\\arraystretch}{2}
   \\begin{array}{l}
     \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s\\\\\n    \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s
   \\end{array}
   \\right\\rbrace$
   Donc $\\cfrac{%s}{%s}=\\cfrac{%s}{%s}$\\,.\\par
-  D'apr\xe8s la \\textbf{r\xe9ciproque du th\xe9or\xe8me de Thal\xe8s}, \\fbox{les droites $(%s)$ et $(%s)$ sont parall\xe8les.}
+  D'après la \\textbf{réciproque du théorème de Thalès}, \\fbox{les droites $(%s)$ et $(%s)$ sont parallèles.}
 """ % \
         d
 
@@ -1205,5 +1205,3 @@ def valeurs_trigo():
         else:
             v = (v, (trigo, 0, l[0], l[3]))
     return v
-
-

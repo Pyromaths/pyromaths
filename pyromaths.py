@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Pyromaths
@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 from PyQt4 import QtGui, QtCore
-import sys,  os
+import sys, os, codecs
 
 #================================================================
 # Imports spécifiques à Pyromaths
@@ -48,68 +48,68 @@ else:
     iconesdir=os.path.join(outils.module_path(), 'img')
 
 
-LesFiches = [['Sixième', sixiemes.sixiemes, [
-'Calcul mental',
-'Écrire un nombre décimal',
-'Placer une virgule',
-'Écriture fractionnaire ou décimale',
-'Décomposition de nombres décimaux',
-'Conversions unités',
-'Poser des opérations (sauf divisions)',
-'Produits et quotients par 10, 100, 1000',
-'Classer des nombres décimaux',
-'Droites, demi-droites, segments',
-'Droites perpendiculaires et parallèles',
-'Propriétés sur les droites',
-'Multiples de 2, 3, 5, 9, 10',
-'Fractions partage',
-'Fractions et abscisses',
-'Symétrie et quadrillages',
-'Mesurer des angles',
+LesFiches = [[u'Sixième', sixiemes.sixiemes, [
+u'Calcul mental',
+u'Écrire un nombre décimal',
+u'Placer une virgule',
+u'Écriture fractionnaire ou décimale',
+u'Décomposition de nombres décimaux',
+u'Conversions unités',
+u'Poser des opérations (sauf divisions)',
+u'Produits et quotients par 10, 100, 1000',
+u'Classer des nombres décimaux',
+u'Droites, demi-droites, segments',
+u'Droites perpendiculaires et parallèles',
+u'Propriétés sur les droites',
+u'Multiples de 2, 3, 5, 9, 10',
+u'Fractions partage',
+u'Fractions et abscisses',
+u'Symétrie et quadrillages',
+u'Mesurer des angles',
 ]],
-['Cinquième', cinquiemes.cinquiemes, [
-'Priorités opératoires',
-'Symétrie centrale',
-'Fractions égales',
-'Sommes de fractions',
-'Produits de fractions',
-'repérage',
+[u'Cinquième', cinquiemes.cinquiemes, [
+u'Priorités opératoires',
+u'Symétrie centrale',
+u'Fractions égales',
+u'Sommes de fractions',
+u'Produits de fractions',
+u'repérage',
 ]],
-['Quatrième', quatriemes.quatriemes, [
-'Calcul mental',
-'Sommes de fractions',
-'Produits et quotients de fractions',
-'Fractions et priorités',
-'Propriétés sur les puissances',
-'Propriétés sur les puissances de 10',
-'Écritures scientifiques',
-'Puissances de 10',
-'Distributivité',
-'Double distributivité',
-'Théorème de Pythagore',
-'Réciproque du théorème de Pythagore',
-'Cercle et théorème de Pythagore',
-'Théorème de Thalès',
-'Trigonométrie',
+[u'Quatrième', quatriemes.quatriemes, [
+u'Calcul mental',
+u'Sommes de fractions',
+u'Produits et quotients de fractions',
+u'Fractions et priorités',
+u'Propriétés sur les puissances',
+u'Propriétés sur les puissances de 10',
+u'Écritures scientifiques',
+u'Puissances de 10',
+u'Distributivité',
+u'Double distributivité',
+u'Théorème de Pythagore',
+u'Réciproque du théorème de Pythagore',
+u'Cercle et théorème de Pythagore',
+u'Théorème de Thalès',
+u'Trigonométrie',
 ]],
-['Troisième', troisiemes.troisiemes, [
-'Fractions',
-'Puissances',
-'PGCD',
-'Développements',
-'Factorisations',
-'Dévt, factorisat°, calcul et éq° produit',
-'Équation',
-'Racines carrées',
-'Système d\'équations',
-'Fonctions affines',
-'Probabilités',
-'Théorème de Pythagore',
-'Réciproque du théorème de Pythagore',
-'Cercle et théorème de Pythagore',
-'Théorème de Thalès',
-'Réciproque du théorème de Thalès',
-'Trigonométrie',
+[u'Troisième', troisiemes.troisiemes, [
+u'Fractions',
+u'Puissances',
+u'PGCD',
+u'Développements',
+u'Factorisations',
+u'Dévt, factorisat°, calcul et éq° produit',
+u'Équation',
+u'Racines carrées',
+u'Système d\'équations',
+u'Fonctions affines',
+u'Probabilités',
+u'Théorème de Pythagore',
+u'Réciproque du théorème de Pythagore',
+u'Cercle et théorème de Pythagore',
+u'Théorème de Thalès',
+u'Réciproque du théorème de Thalès',
+u'Trigonométrie',
 ]]]
 
 class StartQT4(QtGui.QMainWindow):
@@ -123,13 +123,13 @@ if __name__ == "__main__":
 #================================================================
 # Création du fichier de configuration si inexistant
 #================================================================
-    if not os.access(os.path.join(outils.configdir(),  "pyromaths.xml"), os.R_OK):
+    if not os.access(os.path.join(outils.configdir(), "pyromaths.xml"), os.R_OK):
         if not os.path.isdir(outils.configdir()):
             os.makedirs(outils.configdir())
-        f = open(os.path.join(outils.configdir(),  "pyromaths.xml"), encoding='utf-8', mode='w')
-        f.write(outils.create_config_file())
+        f = codecs.open(os.path.join(outils.configdir(), "pyromaths.xml"), encoding='utf-8', mode='w')
+        f.write(u"" + outils.create_config_file())
         f.close()
-    outils.modify_config_file(os.path.join(outils.configdir(),  "pyromaths.xml"))
+    outils.modify_config_file(os.path.join(outils.configdir(), "pyromaths.xml"))
 
 #================================================================
 # Création du dossier "modeles" local

@@ -304,8 +304,8 @@ def enonce_perp(f0, f1):
     f1.write('''  \\par
   \\begin{enumerate}
 ''')
-    s_per = str("  \\item Tracer la droite perpendiculaire à la droite $(%s%s)$ passant par $%s$\n")
-    s_par = str("  \\item Tracer la droite parallèle à la droite $(%s%s)$ passant par $%s$\n")
+    s_per = u"  \\item Tracer la droite perpendiculaire à la droite $(%s%s)$ passant par $%s$\n"
+    s_par = u"  \\item Tracer la droite parallèle à la droite $(%s%s)$ passant par $%s$\n"
     s_per = s_per % (noms[per[0]], noms[per[1]], noms[per[2]])
     s_par = s_par % (noms[par[0]], noms[par[1]], noms[par[2]])
     f0.write(s_par)
@@ -515,10 +515,10 @@ def valeurs_figures(par_per):
 def enonce_prop(f0, f1):
     f0.write('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}\n')
     f0.write('  \\hline\n')
-    f0.write('  Données & Figure codée & Propriété & Conclusion \\\\ \n')
+    f0.write(u'  Données & Figure codée & Propriété & Conclusion \\\\ \n')
     f1.write('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}\n')
     f1.write('  \\hline\n')
-    f1.write('  Données & Figure codée & Propriété & Conclusion \\\\ \n')
+    f1.write(u'  Données & Figure codée & Propriété & Conclusion \\\\ \n')
     ltypes = [1, 2, 3]
     lexos = []
     for i in range(3):
@@ -548,7 +548,7 @@ def enonce_prop(f0, f1):
                          v[4][1], v[4][0], v[4][2]))
             f1.write('  %s & \n' % ('\n').join(figure(v[0], v[1], v[2],
                      v[3], v[4], v[5], lexos[i], v[6])))
-            f1.write('  Si deux droites sont parallèles, alors toute parallèle à l\'une est parallèle à l\'autre. &\n')
+            f1.write(u'  Si deux droites sont parallèles, alors toute parallèle à l\'une est parallèle à l\'autre. &\n')
             if v[5]:
                 f1.write('$(%s%s)//(%s%s)$ \\\\\n  \\hline\n' % (v[4][2],
                          v[4][3], v[4][4], v[4][5]))
@@ -583,7 +583,7 @@ def enonce_prop(f0, f1):
                              v[1], v[2], v[3], v[4], v[5], lexos[i])))
                 f1.write('  %s & \n' % ('\n').join(figure(v[0], v[1], v[2],
                          v[3], v[4], v[5], lexos[i])))
-                f1.write('  Si deux droites sont parallèles, alors toute perpendiculaire à l\'une est perpendiculaire à l\'autre. &\n')
+                f1.write(u'  Si deux droites sont parallèles, alors toute perpendiculaire à l\'une est perpendiculaire à l\'autre. &\n')
                 if v[5]:
                     f1.write('  $(%s%s)\\perp(%s%s)$ \\\\\n  \\hline\n' %
                              (v[4][2], v[4][3], v[4][0], v[4][2]))
@@ -616,7 +616,7 @@ def enonce_prop(f0, f1):
                              v[1], v[2], v[3], v[4], v[5], lexos[i])))
                 f1.write('  %s &\n' % ('\n').join(figure(v[0], v[1], v[2],
                          v[3], v[4], v[5], lexos[i])))
-                f1.write('  Si deux droites sont perpendiculaires à une même troisième alors elles sont parallèles entre elles. &\n')
+                f1.write(u'  Si deux droites sont perpendiculaires à une même troisième alors elles sont parallèles entre elles. &\n')
                 if v[5]:
                     f1.write('  $(%s%s)//(%s%s)$ \\\\\n  \\hline\n' % (v[4][0],
                              v[4][1], v[4][2], v[4][3]))

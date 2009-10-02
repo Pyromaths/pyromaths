@@ -1,11 +1,12 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 import sixiemes.sixiemes
 import cinquiemes.cinquiemes
 import quatriemes.quatriemes
 import troisiemes.troisiemes
-f0 = open('test.tex', encoding='utf-8', mode='w')
-f1 = open('test-cor.tex', encoding='utf-8', mode='w')
+import codecs
+f0 = codecs.open('test.tex', encoding='utf-8', mode='w')
+f1 = codecs.open('test-cor.tex', encoding='utf-8', mode='w')
 for j in range(30):
     for i in range(17):
         sixiemes.sixiemes.main(i, f0, f1)

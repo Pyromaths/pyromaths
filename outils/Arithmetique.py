@@ -20,7 +20,6 @@ def premier(n):
 def eratosthene(n):
     """Etablit la liste des nombres premiers inferieurs a n."""
     return [x for x in xrange(2, n) if premier(x)]
-      
 
 def factor(n):
     """Retourne la liste des facteurs premiers du nombre n."""

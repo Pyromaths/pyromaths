@@ -30,10 +30,10 @@ from random import randrange
 
 def exo_distributivite():
     exo = ["\\exercice",
-           "Développer et réduire les expressions suivantes :",
+           u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
     cor = ["\\exercice*",
-           "Développer et réduire les expressions suivantes :",
+           u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
     for i in range(8):
         (l1, l2) = tex_developpe1(valeurs_distr(10))
@@ -48,10 +48,10 @@ def exo_distributivite():
 
 def exo_double_distributivite():
     exo = ["\\exercice",
-           "Développer et réduire les expressions suivantes :",
+           u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
     cor = ["\\exercice*",
-           "Développer et réduire les expressions suivantes :",
+           u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
     for i in range(6):
         (l1, l2) = tex_developpe1(valeurs_dbldistr(10))

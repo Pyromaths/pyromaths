@@ -237,8 +237,6 @@ def systemes(f0, f1, v):
     outils.ecrit_tex(f1, tex_eq2(v, c2), thenocalcul='', tabs=2)
     outils.ecrit_tex(f1, tex_eq3(v, c2), thenocalcul='', tabs=2, cadre=1)
     f1.write('  \\end{multicols}\n')
-    f1.write("  \\underline{La solution de ce syst\xe8me d'\xe9quations est $(x;~y)=(%s;~%s)$.}\\par\n" %
+    f1.write(u"  \\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par\n" %
              v[2])
-    f1.write('  {V\xe9rification : $' + tex_verification(v) + '$}\n')
-
-
+    f1.write(u'  {Vérification : $' + tex_verification(v) + '$}\n')

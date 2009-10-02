@@ -180,9 +180,9 @@ def tex_difference(f0, f1):
     ligne2 = lignes(ligne2, decb, lavtvirg, laprvirg)
     ligne3 = lignes(ligne3, dectotal, lavtvirg, laprvirg)
     (ligne1, ligne2) = retenues_diff(ligne1, ligne2)
-    f0.write("      \\item La différence des termes %s et %s.\\par\n" %
+    f0.write(u"      \\item La différence des termes %s et %s.\\par\n" %
              (outils.sepmilliers(nba), outils.sepmilliers(nbb)))
-    f1.write("      \\item La différence des termes %s et %s.\\par\n" %
+    f1.write(u"      \\item La différence des termes %s et %s.\\par\n" %
              (outils.sepmilliers(nba), outils.sepmilliers(nbb)))
     f1.write('        \\begin{tabular}[t]{*{%s}{c}}\n' % (lavtvirg +
              laprvirg + 1))
@@ -235,7 +235,7 @@ def tex_produit(f0, f1):
     f1.write('      \\item Le produit des facteurs %s et %s.\\par\n' % (outils.sepmilliers(nba *
              10 ** puisa), outils.sepmilliers(nbb * 10 ** puisb)))
     f1.write('        \\begin{enumerate}\n')
-    f1.write('          \\item Première méthode :\\par\n')
+    f1.write(u'          \\item Première méthode :\\par\n')
     f1.write('          \\begin{tabular}[t]{*{%s}{c}}\n' % lg)
     f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], deca,lg)))
     f1.write('            %s \\\\\n          \\hline\n' % \
@@ -246,7 +246,7 @@ def tex_produit(f0, f1):
     f1.write('            \\hline \\\\\n')
     f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], dec4, lg)))
     f1.write('          \\end{tabular}\n')
-    f1.write('          \\item Seconde méthode :\\par\n')
+    f1.write(u'          \\item Seconde méthode :\\par\n')
     f1.write('          \\begin{tabular}[t]{*{%s}{c}}\n' % len(dec4))
     f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], decb, lg)))
     f1.write('            %s \\\\\n          \\hline\n' % \

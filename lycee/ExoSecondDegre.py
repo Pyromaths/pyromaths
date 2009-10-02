@@ -7,9 +7,9 @@ from outils/Polynomes import choix_coeffs
 def exo_second_degre():
     """Créer une exercice comprenant des équations et inéquations du second degré. PAS FINI."""
     exo = ["\\exercice",
-           "\\begin{multicols}{4}", "  \\noindent", "Question 1 : Chercher les racines des polyn\\^omes suivants :"]
+           "\\begin{multicols}{4}", "  \\noindent", u"Question 1 : Chercher les racines des polynômes suivants :"]
     cor = ["\\exercice*",
-           "\\begin{multicols}{4}", "  \\noindent", "Question 1 : Chercher les racines des polyn\\^omes suivants :"]
+           "\\begin{multicols}{4}", "  \\noindent", u"Question 1 : Chercher les racines des polynômes suivants :"]
 
     ## Equations
     pol1 = choix_coeffs(False, 2, True)
@@ -40,10 +40,10 @@ def exo_second_degre():
     cor.append("d)" + pol4[1].print_signe("="))
 
     cor.append("a) On calcule le discriminant : Delta = " + str(pol1[1].delta) + ".")
-    cor.append("Comme le discrimimant est " + pol1[1].signedelta + ", on en déduit que ce polyn\\^ome poss\\`ede " + str(pol1[1].nbrac) + " racines.")
+    cor.append("Comme le discrimimant est " + pol1[1].signedelta + u", on en déduit que ce polynôme possède " + str(pol1[1].nbrac) + " racines.")
 
-    exo.append("Question 2 : R\\'esoudre les in\\'equations suivantes : ")
-    cor.append("Question 2 : R\\'esoudre les in\\'equations suivantes : ")
+    exo.append(u"Question 2 : Résoudre les inéquations suivantes : ")
+    cor.append(u"Question 2 : Résoudre les inéquations suivantes : ")
 
     exo.append("a)" + pol5[1].print_signe("\\le"))
     exo.append("b)" + pol6[1].print_signe("\\ge"))
@@ -58,8 +58,8 @@ def exo_second_degre():
     exo.append("Question 3 : Trouver deux nombres sachant que leur somme est " + str(pol9[1].b) + " et leur produit " + str(pol9[1].c) + ".")
     cor.append("Question 3 : Trouver deux nombres sachant que leur somme est " + str(pol9[1].b) + " et leur produit " + str(pol9[1].c) + ".")
 
-    exo.append("Question 4 : Trouver les dimensions d'un rectangle, sachant que son p\\'erim\\`etre est " + str(pol9[1].b) + " et son aire " + str(pol9[1].c) + ".")
-    cor.append("Question 4 : Trouver les dimensions d'un rectangle, sachant que son p\\'erim\\`etre est " + str(pol9[1].b) + " et son aire " + str(pol9[1].c) + ".")
+    exo.append(u"Question 4 : Trouver les dimensions d'un rectangle, sachant que son périmètre est " + str(pol9[1].b) + " et son aire " + str(pol9[1].c) + ".")
+    cor.append(u"Question 4 : Trouver les dimensions d'un rectangle, sachant que son périmètre est " + str(pol9[1].b) + " et son aire " + str(pol9[1].c) + ".")
 
     return (exo, cor)
 
@@ -70,18 +70,3 @@ printlist(result[0])
 print "#" * 100
 
 printlist(result[1])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    

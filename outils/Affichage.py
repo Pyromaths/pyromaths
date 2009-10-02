@@ -3,7 +3,7 @@
 def printlist(liste):
     """Affiche chaque élément d'une liste, ligne par ligne."""
     for element in liste:
-        print element
+        print(element)
     return False
 
 def suppr0(nombre):

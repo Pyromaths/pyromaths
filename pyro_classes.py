@@ -113,7 +113,8 @@ class Fractions:
     def __mul__(self, fraction):
         return Fractions(self.n * fraction.n, self.d * fraction.d)
 
-    def __truediv__(self, fraction):
+    #def __truediv__(self, fraction): # pour Python 3
+    def __div__(self, fraction):
         return Fractions(self.n * fraction.d, self.d * fraction.n)
 
 

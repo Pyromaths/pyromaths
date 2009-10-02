@@ -30,7 +30,7 @@ import random
 def tex_trouve_diviseur(a):  # trouve si les nombres dans le tuple a sont divisible par 10, 2, 5, 9 ou 3 (dans cet ordre)
     if a[0] % 10 == 0 and a[1] % 10 == 0:
         return '    \\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
-            '} se terminent tous les deux par z\xe9ro donc ils sont divisibles par 10.\\par\n' + \
+            u'} se terminent tous les deux par zéro donc ils sont divisibles par 10.\\par\n' + \
             '    \\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
             '} ne sont donc pas premiers entre eux'
     elif a[0] % 2 == 0 and a[1] % 2 == 0:
@@ -40,7 +40,7 @@ def tex_trouve_diviseur(a):  # trouve si les nombres dans le tuple a sont divisi
             '} ne sont donc pas premiers entre eux'
     elif a[0] % 5 == 0 and a[1] % 5 == 0:
         return '    \\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
-            '} se terminent tous les deux par z\xe9ro ou cinq donc ils sont divisibles par 5.\\par\n' + \
+            u'} se terminent tous les deux par zéro ou cinq donc ils sont divisibles par 5.\\par\n' + \
             '    \\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
             '} ne sont donc pas premiers entre eux'
     elif a[0] % 9 == 0 and a[1] % 9 == 0:
@@ -103,5 +103,3 @@ def tex_simplifie_fraction_pgcd(a):  # renvoie l'ecriture au format tex de la si
       \\cfrac{\\nombre{%s}}{\\nombre{%s}} &= \\cfrac{\\nombre{%s}\\div%s}{\\nombre{%s}\\div%s}\\\\\n      &= \\boxed{\\cfrac{\\nombre{%s}}{\\nombre{%s}}}
     \\end{align*}''' % \
         a
-
-

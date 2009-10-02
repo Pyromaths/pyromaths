@@ -157,9 +157,9 @@ def tex_equation6(valeurs):  # renvoie la solution de l'equation
 
 
 def equations(f0, f1, valeurs):  #resolution d'une equation
-    f0.write("  R\xe9soudre l'\xe9quation : \n")
+    f0.write(u"  Résoudre l'équation : \n")
     outils.ecrit_tex(f0, tex_equation0(valeurs), thenocalcul='')
-    f1.write("  R\xe9soudre l'\xe9quation : \n")
+    f1.write(u"  Résoudre l'équation : \n")
     for i in range(7):
         exec('outils.ecrit_tex(f1,tex_equation' + str(i) + \
             '(valeurs),thenocalcul=\'\')')
@@ -173,7 +173,7 @@ def equations(f0, f1, valeurs):  #resolution d'une equation
         sol = fractions.tex_frac(simpl)
     else:
         sol = fractions.tex_frac(frac)
-    f1.write('  \\fbox{La solution de cette \xe9quation est $%s$\\,.}\n' %
+    f1.write(u'  \\fbox{La solution de cette équation est $%s$\\,.}\n' %
              sol)
 
 

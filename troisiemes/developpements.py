@@ -806,25 +806,25 @@ def fin_fact(a):  # renvoie un tuple contenant la version factorisee de a
 
 
 def tex_equations(fact, f1):  # renvoie un tuple contenant les deux binomes egaux a 0
-    f1.write('    Nous savons que $A=%s$. Nous devons donc r\xe9soudre $%s=0$.\\par\n' %
+    f1.write(u'    Nous savons que $A=%s$. Nous devons donc résoudre $%s=0$.\\par\n' %
              (tex_dev0(fact), tex_dev0(fact)))
     f1.write('    Un produit de facteurs est nul signifie qu\'un des facteurs est nul. Donc :\n')
     f1.write('    \\[%s=0 \\qquad\\text{ou}\\qquad %s=0\\]\n' % (tex_binome(fact[0]),
              tex_binome(fact[1])))
     eq = equations1(fact)
     if not isinstance(eq, tuple):
-        f1.write("  \t\\fbox{Cette \xe9quation n'admet aucune solution.}\n")
+        f1.write("  \t\\fbox{Cette équation n'admet aucune solution.}\n")
     elif not isinstance(eq[0], tuple):
         f1.write('    \\[ %s=%s \\]\n' % (tex_coef(eq[1][0], 'x'), eq[1][1]))
         if eq[1][0] != 1:
             f1.write('\\[ x=%s \\]\n' % tex_frac(equations2(eq)[1]))
-        f1.write('    \\fbox{La solution de cette \xe9quation est \\,$%s$\\,.}\n' %
+        f1.write(u'    \\fbox{La solution de cette équation est \\,$%s$\\,.}\n' %
                  tex_frac(equations3(eq)[1]))
     elif not isinstance(eq[1], tuple):
         f1.write('    \\[ %s=%s \\]\n' % (tex_coef(eq[0][0], 'x'), eq[0][1]))
         if eq[0][0] != 1:
             f1.write('    \\[ x=%s \\]\n' % tex_frac(equations2(eq)[0]))
-        f1.write('    \\fbox{La solution de cette \xe9quation est \\,$%s$\\,.}\n' %
+        f1.write(u'    \\fbox{La solution de cette équation est \\,$%s$\\,.}\n' %
                  tex_frac(equations3(eq)[0]))
     else:
         f1.write('    \\[%s=%s \\qquad\\text{ou}\\qquad %s=%s\\]\n' % (tex_coef(eq[0][0],
@@ -832,7 +832,7 @@ def tex_equations(fact, f1):  # renvoie un tuple contenant les deux binomes egau
         if eq[0][0] != 1 or eq[1][0] != 1:
             f1.write('    \\[x=%s \\qquad\\text{ou}\\qquad x=%s\\]\n' %
                      (tex_frac(equations2(eq)[0]), tex_frac(equations2(eq)[1])))
-        f1.write('    \\fbox{Les solutions de cette \xe9quation sont \\,$%s\\,\\text{ et }\\,%s$\\,.}\n' %
+        f1.write(u'    \\fbox{Les solutions de cette équation sont \\,$%s\\,\\text{ et }\\,%s$\\,.}\n' %
                  (tex_frac(equations3(eq)[0]), tex_frac(equations3(eq)[1])))
 
 
@@ -1038,5 +1038,3 @@ def tex_valeurx3(a, nb):
             return tex_frac(b) + '=' + tex_frac(simplifie(b))
         else:
             return tex_frac(b)
-
-

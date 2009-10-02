@@ -253,10 +253,10 @@ def valeurs_priorites_fractions(nb, entier=1):  # renvoie les 2 listes contenant
 
 def exo_sommes_fractions():
     exo = ["\\exercice",
-           "Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent%"]
     cor = ["\\exercice*",
-           "Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent%"]
     op = ["+", "-","+", "-","+", "-","+", "-"]
     for i in range(8):
@@ -281,10 +281,10 @@ def exo_sommes_fractions():
 
 def exo_produits_fractions():
     exo = ["\\exercice",
-           "Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent%"]
     cor = ["\\exercice*",
-           "Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent%"]
     op = ["*", "/","*", "/","*", "/","*", "/"]
     for i in range(8):
@@ -308,10 +308,10 @@ def exo_produits_fractions():
 
 def exo_priorites_fractions():
     exo = ["\\exercice",
-           "Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{3}", "  \\noindent%"]
     cor = ["\\exercice*",
-           "Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{3}", "  \\noindent%"]
     for i in range(6):
         while True:

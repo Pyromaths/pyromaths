@@ -26,7 +26,7 @@ class Poly2:
 
     def __add__(self, other):
         return poly2(self.a + other.a, self.b + other.b, self.c + other.c)
-        
+
     def __radd__(self, other):
         return poly2(self.a + other.a, self.b + other.b, self.c + other.c)
 
@@ -62,4 +62,3 @@ class Poly2:
 
     def print_signe(self, signe):
         return str(self) + " " + signe + " 0"
-        

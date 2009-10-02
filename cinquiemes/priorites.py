@@ -230,10 +230,10 @@ def calcul(a, op, b, entier=1):  #retourne 'hp' (hors programme) ou le résultat
 def main():
     nb = 9  # nombre de calculs
     exo = ["\\exercice",
-           "Calculer les expressions suivantes en d\xe9taillant les calculs.\n",
+           u"Calculer les expressions suivantes en détaillant les calculs.\n",
            "\\begin{multicols}{3}", "\\noindent"]
     cor = ["\\exercice*",
-           "Calculer les expressions suivantes en d\xe9taillant les calculs.",
+           u"Calculer les expressions suivantes en détaillant les calculs.",
            "\\begin{multicols}{3}", "\\noindent"]
     i = 0
     while i < nb:
@@ -265,5 +265,3 @@ def main():
     exo.append("\\end{multicols}")
     cor.append("\\end{multicols}")
     return (exo, cor)
-
-

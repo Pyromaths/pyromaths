@@ -265,9 +265,9 @@ def exo_pythagore():
     exo.append(enonce)
     cor.append(enonce)
     cor.append("  \\par\\dotfill{}\\\\\n")
-    cor.append("  Le triangle %s est rectangle en %s donc, d'après le \\textbf{théorème de Pythagore} :" %
+    cor.append(u"  Le triangle %s est rectangle en %s donc, d'après le \\textbf{théorème de Pythagore} :" %
                (nom_tr, noms[2]))
-    cor.append("  \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]" %
+    cor.append(u"  \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]" %
                (cotes[2], cotes[0], cotes[1], cotes[2]))
     if long0 == 2 or long1 == 2:
         cor.append("  \\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]" %
@@ -339,7 +339,7 @@ def exo_triangle_cercle():
     long1 = (random.randrange(2) + 1 + long0) % 3
     cotes = cotes_sommets(noms)
     enonce = \
-        """\\begin{minipage}{4cm}
+        u"""\\begin{minipage}{4cm}
   \\begin{pspicture}(-2,-2)(2,2)
     \\SpecialCoor\\psset{PointSymbol=x}
     \\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){a}
@@ -359,12 +359,12 @@ def exo_triangle_cercle():
     exo.append(enonce)
     cor.append(enonce)
     cor.append("  \\par\\dotfill{}\\\\\n")
-    cor.append("  $[%s]$ est le diamètre du cercle circonscrit au triangle $%s$.\\par" %
+    cor.append(u"  $[%s]$ est le diamètre du cercle circonscrit au triangle $%s$.\\par" %
                (cotes[2], nom_tr))
     cor.append("  \\fbox{Donc le triangle %s est rectangle en %s.}\\\\\n" %
                (nom_tr, noms[2]))
-    cor.append("  D'après le \\textbf{théorème de Pythagore} :")
-    cor.append("  \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]" %
+    cor.append(u"  D'après le \\textbf{théorème de Pythagore} :")
+    cor.append(u"  \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]" %
                (cotes[2], cotes[0], cotes[1], cotes[2]))
     if long0 == 2 or long1 == 2:
         cor.append("  \\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]" %
@@ -433,20 +433,20 @@ Quelle est la nature du triangle $%s$?
     exo.append(enonce)
     cor.append(enonce)
     cor.append("\\par\\dotfill{}\\\\\n")
-    cor.append("Le triangle %s n'est ni isocèle, ni équilatéral.\\par\n" %
+    cor.append(u"Le triangle %s n'est ni isocèle, ni équilatéral.\\par\n" %
                nom_tr)
     cor.append("$\\left.")
     cor.append("  \\renewcommand{\\arraystretch}{2}")
     cor.append("  \\begin{array}{l}")
 
-    cor.append("    \\bullet %s^2=%s^2=%s\\qquad\\text{(}[%s]\\text{ est le plus grand côté.)}\\\\\n" %
+    cor.append(u"    \\bullet %s^2=%s^2=%s\\qquad\\text{(}[%s]\\text{ est le plus grand côté.)}\\\\\n" %
                (c[2], nombre(longueurs[2]), nombre(longueurs[2] ** 2), c[2]))
     cor.append("    \\bullet  %s^2+%s^2=%s^2+%s^2=%s \n" % (c[0], c[1],
                nombre(longueurs[0]), nombre(longueurs[1]), nombre(longueurs[0] **
                2 + longueurs[1] ** 2)))
     cor.append("  \\end{array}")
     cor.append("\\right\\rbrace$")
-    cor.append("""Donc $%s^2=%s^2+%s^2$.\\par
+    cor.append(u"""Donc $%s^2=%s^2+%s^2$.\\par
 D'après la \\textbf{réciproque du théorème de Pythagore},
 \\fbox{le triangle $%s$ est rectangle en $%s$.}""" %
                (c[2], c[0], c[1], nom_tr, noms[2]))
@@ -615,7 +615,7 @@ def creer_noms(noms, i):
 
 def tex_enonce_thales(noms, valeurs):
     texte = \
-        '{Sur la figure ci-contre, les droites $(%s)\\text{ et }(%s)$ sont parall\xe8les.\\par\n' % \
+        u'{Sur la figure ci-contre, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par\n' % \
         (lAB(noms[1:3]), lAB(noms[3:5]))
     liste = long_val(noms, valeurs)
     texte = texte + \
@@ -626,7 +626,7 @@ def tex_enonce_thales(noms, valeurs):
 
 
 def tex_resolution_thales0(n, v):
-    return """Dans le triangle $%s$,~ $%s$ est sur le côté $[%s]$,~
+    return u"""Dans le triangle $%s$,~ $%s$ est sur le côté $[%s]$,~
 $%s$ est sur le côté $[%s]$ et les droites $(%s)$ et $(%s)$ sont
 parallèles.\\par
 D'après le \\textbf{théorème de Thalès} :

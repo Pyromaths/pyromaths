@@ -15,7 +15,8 @@ class Racine:
     def __add__(self, other):
         if not (isinstance(other, Racine)):
             return str(self) + " + " + str(other)
-        if (self.radicande == other.radicande) and (self.indice == other.indice):
+        if (self.radicande == other.radicande) and \
+                (self.indice == other.indice):
             return Racine(self.radicande, self.indice, self.coeff + other.coeff)
         else:
             return str(self) + " + " + str(other)
@@ -38,7 +39,8 @@ class Racine:
         if (isinstance(other, float)) or (isinstance(other, int)):
             return Racine(self.radicande, self.indice, self.coeff * other)
         elif self.indice == other.indice:
-            return Racine(self.radicande * other.radicande, self.indice, self.coeff * other.coeff)
+            return Racine(self.radicande * other.radicande, self.indice,
+                    self.coeff * other.coeff)
         else:
             return str(self) + ' x ' + str(other)
 
@@ -49,18 +51,21 @@ class Racine:
         if (isinstance(other, float)) or (isinstance(other, int)):
             return Racine(self.radicande, self.indice, self.coeff / other)
         elif self.indice == other.indice:
-            return Racine(self.radicande / float(other.radicande), self.indice, self.coeff / float(other.coeff))
+            return Racine(self.radicande / float(other.radicande), self.indice,
+                    self.coeff / float(other.coeff))
         else:
             return str(self) + ' / ' + str(other)
 
     def __rdiv__(self, other):
         if (isinstance(other, float)) or (isinstance(other, int)):
-            return Racine(self.radicande, self.indice, other / float(self.coeff * self.radicande))
+            return Racine(self.radicande, self.indice, other / float(self.coeff
+                * self.radicande))
         elif self.indice == other.indice:
-            return Racine(other.radicande / float(self.radicande), self.indice, other.coeff / float(self.coeff))
+            return Racine(other.radicande / float(self.radicande), self.indice,
+                    other.coeff / float(self.coeff))
         else:
             return str(other) + ' / ' + str(self)
-    
+
 
     def __str__(self):
         if self.coeff == 1:
@@ -87,4 +92,3 @@ class Racine:
                 self.radicande = self.radicande / (element**(self.indice))
 
         return False
-                

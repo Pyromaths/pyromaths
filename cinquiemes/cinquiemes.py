@@ -21,8 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import cinquiemes.priorites, cinquiemes.symetrie, cinquiemes.fractions
-import cinquiemes.reperage
+from . import priorites, symetrie, fractions, reperage
 
 def write(f0, f1, exos):
     f0.write("\n")
@@ -31,10 +30,8 @@ def write(f0, f1, exos):
     f1.writelines(x + "\n" for x in exos[1])
 
 def main(exo,f0, f1):
-    modules = (cinquiemes.priorites.main, cinquiemes.symetrie.main,
-               cinquiemes.fractions.fractions_egales,
-               cinquiemes.fractions.sommes_fractions,
-               cinquiemes.fractions.produits_fractions,
-               cinquiemes.reperage.main)
+    modules = (priorites.main, symetrie.main, fractions.fractions_egales,
+               fractions.sommes_fractions, fractions.produits_fractions,
+               reperage.main)
 
     write(f0, f1, modules[exo]())

@@ -258,7 +258,7 @@ def noms_pts(nb):  # renvoie nb noms de points
 
 
 def unites_fractions(f0, f1, origine, div, subd):
-    postf = 'ièmes'
+    postf = u'ièmes'
     lch = [
         'cinqu',
         'six',
@@ -281,17 +281,17 @@ def unites_fractions(f0, f1, origine, div, subd):
     lfr[2] = 'demis'
     lfr[3] = 'tiers'
     lfr[4] = 'quarts'
-    f0.write('        \\item 1 unité = \\ldots~%s\n' % lfr[div])
-    f0.write('        \\item 1 unité = \\ldots~%s\n' % lfr[subd])
-    f0.write('        \\item %s unités = \\ldots~%s\n' % (origine,
+    f0.write(u'        \\item 1 unité = \\ldots %s\n' % lfr[div])
+    f0.write(u'        \\item 1 unité = \\ldots~%s\n' % lfr[subd])
+    f0.write(u'        \\item %s unités = \\ldots~%s\n' % (origine,
              lfr[div]))
-    f0.write('        \\item %s unités = \\ldots~%s\n' % (origine,
+    f0.write(u'        \\item %s unités = \\ldots~%s\n' % (origine,
              lfr[subd]))
-    f1.write('        \\item 1 unité = %s %s\n' % (div, lfr[div]))
-    f1.write('        \\item 1 unité = %s %s\n' % (subd, lfr[subd]))
-    f1.write('        \\item %s unités = %s %s\n' % (origine,
+    f1.write(u'        \\item 1 unité = %s %s\n' % (div, lfr[div]))
+    f1.write(u'        \\item 1 unité = %s %s\n' % (subd, lfr[subd]))
+    f1.write(u'        \\item %s unités = %s %s\n' % (origine,
              origine * div, lfr[div]))
-    f1.write('        \\item %s unités = %s %s\n' % (origine,
+    f1.write(u'        \\item %s unités = %s %s\n' % (origine,
              origine * subd, lfr[subd]))
 
 
@@ -366,24 +366,24 @@ def trouve_abscisses(f0, f1, div, subd, lnum):
 def questions_fractions_abscisses(f0, f1):
     (origine, div, subd, lpts, npts, lnum) = valeurs_abscisses()
     f0.write("\\begin{enumerate}\n")
-    f0.write("  \\item Compléter :\n")
+    f0.write(u"  \\item Compléter :\n")
     f0.write("    \\begin{multicols}{2}\n")
     f0.write("      \\begin{enumerate}\n")
     f1.write("\\begin{enumerate}\n")
-    f1.write("  \\item Compléter :\n")
+    f1.write(u"  \\item Compléter :\n")
     f1.write("    \\begin{multicols}{2}\n")
     f1.write("      \\begin{enumerate}\n")
     unites_fractions(f0, f1, origine, div, subd)
     f0.write("      \\end{enumerate}\n")
     f0.write("    \\end{multicols}\n")
-    f0.write("  \\item Sur la demi-droite ci-dessous, placer les points d'abscisse donnée :\n")
+    f0.write(u"  \\item Sur la demi-droite ci-dessous, placer les points d'abscisse donnée :\n")
     f0.write("    \\begin{multicols}{5}\n")
     f0.write("      \\begin{enumerate}\n")
     f0.write("        \\renewcommand{\\theenumii}{\\Alph{enumii}}\n")
     f0.write("        \\renewcommand{\\labelenumii}{$\\theenumii$}\n")
     f1.write("      \\end{enumerate}\n")
     f1.write("    \\end{multicols}\n")
-    f1.write("  \\item Sur la demi-droite ci-dessous, placer les points d'abscisse donnée :\n")
+    f1.write(u"  \\item Sur la demi-droite ci-dessous, placer les points d'abscisse donnée :\n")
     f1.write("    \\begin{multicols}{5}\n")
     f1.write("      \\begin{enumerate}\n")
     f1.write("        \\renewcommand{\\theenumii}{\\Alph{enumii}}\n")
@@ -391,12 +391,12 @@ def questions_fractions_abscisses(f0, f1):
     ecrit_abscisses(f0, f1, origine, div, subd, lpts, lnum)
     f0.write("      \\end{enumerate}\n")
     f0.write("    \\end{multicols}\n")
-    f0.write("  \\item Compléter les abscisses des points suivants :\n")
+    f0.write(u"  \\item Compléter les abscisses des points suivants :\n")
     f0.write("    \\begin{multicols}{4}\n")
     f0.write("      \\begin{enumerate}")
     f1.write("      \\end{enumerate}\n")
     f1.write("    \\end{multicols}\n")
-    f1.write("  \\item Compléter les abscisses des points suivants :\n")
+    f1.write(u"  \\item Compléter les abscisses des points suivants :\n")
     f1.write("    \\begin{multicols}{4}\n")
     f1.write("      \\begin{enumerate}")
     trouve_abscisses(f0, f1, div, subd, lnum)
