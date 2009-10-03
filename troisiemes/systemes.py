@@ -22,7 +22,7 @@
 #
 
 import outils
-import developpements
+from . import developpements
 
 ##
 ##------------------- MÉTHODE PAR COMBINAISON -------------------
@@ -30,7 +30,7 @@ import developpements
 
 def choix_valeurs(m):  # crée les valeurs du systeme de la forme a1.x+b1.y=c1 ; a2.x+b2.y=c2 et renvoie ((a1, b1, c1), (a2, b2, c2), (x, y))
     while True:
-        c = [outils.valeur_alea(-m, m) for i in xrange(6)]
+        c = [outils.valeur_alea(-m, m) for i in range(6)]
         if c[0] * c[3] - c[1] * c[2] and abs(c[0]) - 1 and abs(c[1]) - 1 and \
             abs(c[2]) - 1 and abs(c[3]) - 1 and abs(c[1] * c[2] - c[0] *
                 c[3]) - 1 and abs(c[0]) - abs(c[2]) and abs(c[1]) - abs(c[3]) and \
@@ -127,10 +127,10 @@ def tex_comb3(v):
 def tex_comb4(v):
     if v[0]:
         tv = (developpements.tex_coef(1, 'x'), v[2], v[0],
-              developpements.tex_coef(v[2] / v[0], ''))
+              developpements.tex_coef(v[2] // v[0], ''))
     else:
         tv = (developpements.tex_coef(1, 'y'), v[2], v[1],
-              developpements.tex_coef(v[2] / v[1], ''))
+              developpements.tex_coef(v[2] // v[1], ''))
     return '%s=\\frac{%s}{%s}=%s' % tv
 
 
@@ -209,7 +209,7 @@ def tex_verification(v):  # renvoie la vérification de lasolution du système d
 def systemes(f0, f1, v):
     a = outils.ppcm(v[0][0], v[1][0])
     b = outils.ppcm(v[0][1], v[1][1])
-    (a0, a1, b0, b1) = (a / v[0][0], -a / v[1][0], b / v[0][1], -b / v[1][1])
+    (a0, a1, b0, b1) = (a // v[0][0], -a // v[1][0], b // v[0][1], -b // v[1][1])
     if a0 < 0:
         (a0, a1) = (-a0, -a1)
     if b0 < 0:
@@ -237,8 +237,6 @@ def systemes(f0, f1, v):
     outils.ecrit_tex(f1, tex_eq2(v, c2), thenocalcul='', tabs=2)
     outils.ecrit_tex(f1, tex_eq3(v, c2), thenocalcul='', tabs=2, cadre=1)
     f1.write('  \\end{multicols}\n')
-    f1.write("  \\underline{La solution de ce syst\xe8me d'\xe9quations est $(x;~y)=(%s;~%s)$.}\\par\n" %
+    f1.write(u"  \\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par\n" %
              v[2])
-    f1.write('  {V\xe9rification : $' + tex_verification(v) + '$}\n')
-
-
+    f1.write(u'  {Vérification : $' + tex_verification(v) + '$}\n')

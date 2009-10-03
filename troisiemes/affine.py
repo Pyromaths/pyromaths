@@ -211,8 +211,8 @@ def coefdir(A,B):
 def anteimage(fonc,A,B):
     #Génère la 1ère question et sa réponse
 
-    l=['l\'image de ','un nombre qui a pour image ','un ant\\\'ec\\\'edent de ']
-    lcor=['l\'image de ',' a pour image ','un ant\\\'ec\\\'edent de '] #liste pour le corrigé
+    l=['l\'image de ','un nombre qui a pour image ',u'un antécédent de ']
+    lcor=['l\'image de ',' a pour image ',u'un antécédent de '] #liste pour le corrigé
     i=random.randrange(0,2)
     j=i
     if i==1:
@@ -279,7 +279,7 @@ def tracefonc(f,i,A,B,xmin,xmax,ymin,ymax):
     else:
         st='On sait que $'+f+'(0)='+sepmilliers(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+' \\times '+x1+b+'='+sepmilliers(str(u[0]))+b+'='+y1+'$.'
 
-    l=['Tracer la droite repr\\\'esentative ($d_'+str(i)+'$) de la fonction $'+f+':x\\longmapsto '+coef+'x'+b+'$.',
+    l=[u'Tracer la droite représentative ($d_'+str(i)+'$) de la fonction $'+f+':x\\longmapsto '+coef+'x'+b+'$.',
        st,
        '\\psdot [dotsize=4.5pt,dotstyle=x]'+str(A),
        '\\psdot [dotsize=4.5pt,dotstyle=x]'+str(B),
@@ -341,8 +341,8 @@ def exprfonc(f,i,A,B):
     mid1=(mid11,mid12)
     mid2=(mid21,mid22)
 
-    l=['D\\\'eterminer l\'expression de la fonction $'+f+'$ repr\\\'esent\\\'ee ci-contre par la droite ($d_'+str(i)+'$).',
-       'On lit l\'ordonn\\\'e \`a l\'origine et le coefficient de la fonction affine sur le graphique.\\\ ',
+    l=[u'Déterminer l\'expression de la fonction $'+f+u'$ représentée ci-contre par la droite ($d_'+str(i)+'$).',
+       u'On lit l\'ordonné à l\'origine et le coefficient de la fonction affine sur le graphique.\\\ ',
        '$'+f+'(x)=ax+b$ ' +'avec $b='+ sepmilliers(str(A[1]))+'$ et $a='+'\\dfrac{'+deltay+'}{'+deltax+'}='+coefres+'$.\\\ ',
        'L\'expression de la fonction '+f+' est $'+f+'(x)='+coef+'x'+b+'$.',
        doublefleche(B,(B[0],A[1])),
@@ -367,7 +367,7 @@ def affine(f0,f1):
     l3=exprfonc(fonc3,3,E,F)
     noms=nom3droites(A,B,C,D,E,F,xmin,xmax,ymin,ymax)
     exo=["\\parbox{0.5\\linewidth}{",
-         "($d_1$) est la droite repr\\'esentative de la fonction $"+fonc1+"$.",
+         u"($d_1$) est la droite représentative de la fonction $"+fonc1+"$.",
          "\\begin{enumerate}",
          "\\item "+l[0],
          "\\item "+l[4],
@@ -388,7 +388,7 @@ def affine(f0,f1):
 
     cor=["\\setlength{\\columnsep}{2mm}",
          "\\begin{multicols}{2}\\noindent \\small",
-         "($d_1$) est la droite repr\\'esentative de la fonction $"+fonc1+"$.",
+         u"($d_1$) est la droite représentative de la fonction $"+fonc1+"$.",
          "\\begin{enumerate}",
          "\\item "+l[1],
          "\\item "+l[5],

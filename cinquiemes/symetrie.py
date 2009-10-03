@@ -32,7 +32,7 @@ from math import atan, cos, pi, sin, floor, ceil
 
 def valeurs_quad2(nb_pts):
     vals = []
-    for i in xrange(nb_pts):
+    for i in range(nb_pts):
         angle = random.randrange((i * 360) / nb_pts, ((i + 1) * 360) /
                                  nb_pts)
         vals.append(((random.randrange(1, 7) * .5) * cos((angle * pi) /
@@ -43,7 +43,7 @@ def valeurs_quad2(nb_pts):
 
 def valeurs_quad(nb_pts):
     vals = []
-    for i in xrange(nb_pts):
+    for i in range(nb_pts):
         (alpha, beta) = ((i * 360) / nb_pts, ((i + 1) * 360) / nb_pts)
         (x, y) = (0, 0)
         while x == 0 or angle < alpha or angle > beta:
@@ -73,30 +73,30 @@ def centre_sym(vals):
 
 def place_pts(vals, O):
     txt = ["  \\pstGeonode[PointSymbol=x,PointName=none]"]
-    for i in xrange(len(vals)):
+    for i in range(len(vals)):
         txt.append("(%s,%s)" % vals[i])
-        txt.append("{%s}" % unichr(i + 97))
+        txt.append("{%s}" % chr(i + 97))
     txt.append("\n  \\pstGeonode[PointSymbol=x](%s,%s){O}" % O)
     txt.append("\n  \\pspolygon")
-    for i in xrange(len(vals)):
-        txt.append("(%s)" % unichr(i + 97))
+    for i in range(len(vals)):
+        txt.append("(%s)" % chr(i + 97))
     return ("").join(txt)
 
 
 def place_pts_sym(vals):
     txt = ["  \\pstSymO[PointSymbol=x,PointName=none]{O}{"]
-    for i in xrange(len(vals)):
+    for i in range(len(vals)):
         if i > 0:
             txt.append(",")
-        txt.append("%s" % unichr(i + 97))
+        txt.append("%s" % chr(i + 97))
     txt.append("}[")
-    for i in xrange(len(vals)):
+    for i in range(len(vals)):
         if i > 0:
             txt.append(",")
-        txt.append("%s1" % unichr(i + 97))
+        txt.append("%s1" % chr(i + 97))
     txt.append("]\n  \pspolygon[linecolor=gray,linestyle=dashed]")
-    for i in xrange(len(vals)):
-        txt.append("(%s1)" % unichr(i + 97))
+    for i in range(len(vals)):
+        txt.append("(%s1)" % chr(i + 97))
     return ("").join(txt)
 
 
@@ -106,14 +106,14 @@ def exo_quadrillage(f0, f1):
 
 def main():
     exo = ["\\exercice",
-           "Construire la sym\\'etrique de chacune des figures par rapport au point O en",
+           u"Construire la symétrique de chacune des figures par rapport au point O en",
            "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
     cor = ["\\exercice*",
-           "Construire la sym\\'etrique de chacune des figures par rapport au point O en",
+           u"Construire la symétrique de chacune des figures par rapport au point O en",
            "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
     nbpts = 5
     langles = [0, 90, 45, 135]
-    for i in xrange(3):
+    for i in range(3):
         angle = langles.pop(random.randrange(len(langles)))
         vals = valeurs_quad(nbpts)
         O = centre_sym(vals)
@@ -131,5 +131,3 @@ def main():
             exo.append("\\hfill")
             cor.append("\\hfill")
     return (exo, cor)
-
-

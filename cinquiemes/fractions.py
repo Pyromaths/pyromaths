@@ -28,11 +28,11 @@ import outils
 
 
 def fractions_egales():
-    exo = ["\\exercice", "Compl\\'eter :", "\\begin{multicols}{4}",
+    exo = ["\\exercice", u"Compléter :", "\\begin{multicols}{4}",
            "  \\begin{enumerate}"]
-    cor = ["\\exercice*", "Compl\\'eter :", "\\begin{multicols}{4}",
+    cor = ["\\exercice*", u"Compléter :", "\\begin{multicols}{4}",
            "  \\begin{enumerate}"]
-    for i in xrange(8):
+    for i in range(8):
         n = d = 1
         while n == d:
             n = random.randrange(1, 11)
@@ -69,12 +69,12 @@ def fractions_egales():
 
 def sommes_fractions():
     exo = ["\\exercice",
-           "Effectuer les calculs suivants et donner le r\\'esultat sous la forme d'une fraction simplifi\\'ee :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent"]
     cor = ["\\exercice*",
-           "Effectuer les calculs suivants et donner le r\\'esultat sous la forme d'une fraction simplifi\\'ee :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent"]
-    for i in xrange(8):
+    for i in range(8):
         if random.randrange(2):
             s = "+"
         else:
@@ -108,7 +108,7 @@ def sommes_fractions():
         frs = Fractions.simplifie(fr)
         if frs.d != fr.d:
             cor.append("  \\[ \\thenocalcul = %s \\]" % Fractions.TeX(frs,
-                       coef=fr.d / frs.d))
+                       coef=fr.d // frs.d))
             cor.append("  \\[ \\boxed{\\thenocalcul = %s} \\]" %
                        Fractions.TeX(frs))
         else:
@@ -123,12 +123,12 @@ def sommes_fractions():
 
 def produits_fractions():
     exo = ["\\exercice",
-           "Effectuer les calculs suivants et donner le r\\'esultat sous la forme d'une fraction simplifi\\'ee :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent"]
     cor = ["\\exercice*",
-           "Effectuer les calculs suivants et donner le r\\'esultat sous la forme d'une fraction simplifi\\'ee :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent"]
-    for i in xrange(8):
+    for i in range(8):
         n1=d1=n2=d2=a=b=2
         while outils.pgcd(a,b)>1:
             a=random.randrange(1,11)
@@ -139,7 +139,7 @@ def produits_fractions():
         while outils.pgcd(n2*b,d2*a)>1:
             n2=random.randrange(1,11)
             d2=random.randrange(2,11)
-    
+
         fr1 = Fractions(n1*a, d1*b)
         fr2 = Fractions(n2*b, d2*a)
         exo.append("  \\[ \\thenocalcul = %s \\times %s \\]" % (Fractions.TeX(fr1),
@@ -162,5 +162,3 @@ def produits_fractions():
     exo.append("\end{multicols}\n")
     cor.append("\end{multicols}\n")
     return (exo, cor)
-
-

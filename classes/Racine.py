@@ -1,22 +1,33 @@
 # -*- coding: utf-8 -*-
 
-from outils/Arithmetique import factor
+import sys
+sys.path[:0] = ['../outils']
+from Arithmetique import *
+
+def produitfacteurs(facteurs):
+    """Affiche sous forme de produit les éléments d'une liste."""
+    prodfacteurs = ''
+    for element in facteurs:
+        if facteurs.index(element, -1) != len(facteurs) - 1:
+            prodfacteurs += str(element) + ' \\times '
+        else:
+            prodfacteurs += str(element)
+    return prodfacteurs
+
 
 class Racine:
-    """Classe pour les racines carrées."""
-    def __init__(self, radicande, indice, coeff = 1):
+    def __init__(self, radicande, coeff = 1, indice = 2):
         if (radicande < 0) or not (isinstance(indice, int)):
             print "Erreur de définition ! Le radicande doit être positif et l'indice un nombre entier !"
         self.radicande = radicande
         self.indice = indice # Nombre entier
         self.coeff = coeff # Coeff devant la racine
-        self.simplifie()
 
     def __add__(self, other):
         if not (isinstance(other, Racine)):
             return str(self) + " + " + str(other)
         if (self.radicande == other.radicande) and (self.indice == other.indice):
-            return Racine(self.radicande, self.indice, self.coeff + other.coeff)
+            return Racine(self.radicande, self.coeff + other.coeff, self.indice)
         else:
             return str(self) + " + " + str(other)
 
@@ -27,7 +38,7 @@ class Racine:
         if not (isinstance(other, Racine)):
             return str(self) + " + " + str(other)
         if (self.radicande == other.radicande) and (self.indice == other.indice):
-            return Racine(self.radicande, self.indice, self.coeff - other.coeff)
+            return Racine(self.radicande, self.coeff - other.coeff, self.indice)
         else:
             return str(self) + " - " + str(other)
 
@@ -36,9 +47,9 @@ class Racine:
 
     def __mul__(self, other):
         if (isinstance(other, float)) or (isinstance(other, int)):
-            return Racine(self.radicande, self.indice, self.coeff * other)
+            return Racine(self.radicande, self.coeff * other, self.indice)
         elif self.indice == other.indice:
-            return Racine(self.radicande * other.radicande, self.indice, self.coeff * other.coeff)
+            return Racine(self.radicande * other.radicande, self.coeff * other.coeff, self.indice)
         else:
             return str(self) + ' x ' + str(other)
 
@@ -47,44 +58,62 @@ class Racine:
 
     def __div__(self, other):
         if (isinstance(other, float)) or (isinstance(other, int)):
-            return Racine(self.radicande, self.indice, self.coeff / other)
+            return Racine(self.radicande, self.coeff / other, self.indice)
         elif self.indice == other.indice:
-            return Racine(self.radicande / float(other.radicande), self.indice, self.coeff / float(other.coeff))
+            return Racine(self.radicande / float(other.radicande), self.coeff / float(other.coeff), self.indice)
         else:
             return str(self) + ' / ' + str(other)
 
     def __rdiv__(self, other):
         if (isinstance(other, float)) or (isinstance(other, int)):
-            return Racine(self.radicande, self.indice, other / float(self.coeff * self.radicande))
+            return Racine(self.radicande, other / float(self.coeff * self.radicande), self.indice)
         elif self.indice == other.indice:
-            return Racine(other.radicande / float(self.radicande), self.indice, other.coeff / float(self.coeff))
+            return Racine(other.radicande / float(self.radicande), other.coeff / float(self.coeff), self.indice)
         else:
             return str(other) + ' / ' + str(self)
-    
 
     def __str__(self):
-        if self.coeff == 1:
-            coeff = ''
+        if self.coeff == 0:
+            return "0"
         else:
-            coeff = str(self.coeff) + ' '
-        if self.radicande == 1:
-            racine = ''
-            radicande = ''
-        elif self.radicande == 0:
-            return str(0)
-        else:
-            racine = '(' + str(self.indice) + ')\/ '
-            radicande = str(self.radicande)
-        return coeff + racine + radicande
+            if self.coeff == 1:
+                coeff = ""
+            else:
+                coeff = Affichage.sepmilliers(self.coeff, 1) + " \\, "
+            if self.radicande == 0:
+                coeff = ""
+                racine = ""
+                radicande = "0"
+            elif self.indice == 2:
+                racine = "\\sqrt{"
+                radicande = Affichage.sepmilliers(self.radicande, 1) + "}"
+            else:
+                racine = "\\sqrt[{0}]{{".format(self.indice)
+                radicande = Affichage.sepmilliers(self.radicande, 1) + "}"
+            return coeff + racine + radicande
 
     def simplifie(self):
         facteurs = factor(self.radicande)
+        prodfacteurs = produitfacteurs(facteurs)
+        for element in facteurs:
+            if facteurs.index(element, -1) != len(facteurs) - 1:
+                prodfacteurs += str(element) + ' \\times '
+            else:
+                prodfacteurs += str(element)
+        coeff = self.coeff
+        radicande = self.radicande
+        detail = [str(self), ' = ', '\\sqrt[' + self.indice + ']{' + prodfacteurs + '}']
         for element in facteurs:
             if facteurs.count(element) % self.indice == 0:
-                self.coeff *= element
+                coeff *= element
                 for n in range(self.indice):
                     facteurs.remove(element)
-                self.radicande = self.radicande / (element**(self.indice))
-
-        return False
+                radicande = radicande // (element**(self.indice))
+                prodfacteurs = produitfacteurs(facteurs)
+                detail.append(' = ')
+                detail.append(str(coeff) + ' \\times ' + '\\sqrt[' + self.indice + ']{' + prodfacteurs + '}')
+        if radicande == 1:
+            return (coeff, detail)
+        else:
+            return (Racine(radicande, coeff, self.indice), detail)
                 

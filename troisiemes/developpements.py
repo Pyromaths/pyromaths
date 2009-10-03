@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from fractions import tex_frac, simplifie, tex_decomp_prod, decomp_prod, \
+from .fractions import tex_frac, simplifie, tex_decomp_prod, decomp_prod, \
     produit, den_com0
 from outils import ecrit_tex, valeur_alea, signe, pgcd
 import random
@@ -32,7 +32,7 @@ import random
 
 def coef_opposes(a):  # renvoie un tuple dont les valeurs sont les opposees de celles de a
     l = []
-    for i in xrange(len(a)):
+    for i in range(len(a)):
         l.append(-a[i])
     return tuple(l)
 
@@ -48,7 +48,7 @@ def somme_polynomes(a, b):  # renvoie un tuple dont les valeurs sont les sommes 
         long = len(a)
     else:
         long = len(b)
-    for i in xrange(long):
+    for i in range(long):
         if (len(a) - i) - 1 < 0:
             l.append(b[(len(b) - 1) - i])
         elif (len(b) - i) - 1 < 0:
@@ -327,7 +327,7 @@ def tex_trinome(a, bplus=0, bpar=0):  # renvoi le trinome ax²+bx+c
                         '', bplus=bplus or a[0] != 0 or a[1] != 0))
     if bpar:
         v0 = 0
-        for i in xrange(3):  # compte le nombre de valeurs nulles
+        for i in range(3):  # compte le nombre de valeurs nulles
             if a[i] == 0:
                 v0 = v0 + 1
         if v0 == 2:  # une seule valeur non nulle (on suppose que les trois coef ne sont pas nuls)
@@ -434,9 +434,9 @@ def tex_trinome_alea(a, bplus=0):  # renvoi le trinome ax²+bx+c dans le desordr
                1), tex_coef(a[2], '', bplus=1)]
     ordre1 = []
     while ordre1 == [] or ordre1 == [0, 1, 2]:
-        ordre0 = [i for i in xrange(3)]
-        ordre1 = [ordre0.pop(random.randrange(3 - i)) for i in xrange(3)]
-    liste = [valeurs[ordre1[i]] for i in xrange(3)]
+        ordre0 = [i for i in range(3)]
+        ordre1 = [ordre0.pop(random.randrange(3 - i)) for i in range(3)]
+    liste = [valeurs[ordre1[i]] for i in range(3)]
     if not bplus and liste[0].startswith('+'):
         liste[0] = liste[0].replace('+', '', 1)
     return '%s%s%s' % tuple(liste)
@@ -787,7 +787,7 @@ def choix_exo(a):  # renvoie un tuple contenant les valeurs
 
 def valeur_quotient():  # renvoie un tuple contenant la valeur du quotient à calculer
     (a, b) = (random.randrange(-10, 1), random.randrange(1, 11))
-    return (a / pgcd(a, b), b / pgcd(a, b))
+    return (a // pgcd(a, b), b // pgcd(a, b))
 
 
 def tex_initial(exo, a):  # renvoie l'écriture de l'expression A
@@ -806,25 +806,25 @@ def fin_fact(a):  # renvoie un tuple contenant la version factorisee de a
 
 
 def tex_equations(fact, f1):  # renvoie un tuple contenant les deux binomes egaux a 0
-    f1.write('    Nous savons que $A=%s$. Nous devons donc r\xe9soudre $%s=0$.\\par\n' %
+    f1.write(u'    Nous savons que $A=%s$. Nous devons donc résoudre $%s=0$.\\par\n' %
              (tex_dev0(fact), tex_dev0(fact)))
     f1.write('    Un produit de facteurs est nul signifie qu\'un des facteurs est nul. Donc :\n')
     f1.write('    \\[%s=0 \\qquad\\text{ou}\\qquad %s=0\\]\n' % (tex_binome(fact[0]),
              tex_binome(fact[1])))
     eq = equations1(fact)
     if not isinstance(eq, tuple):
-        f1.write("  \t\\fbox{Cette \xe9quation n'admet aucune solution.}\n")
+        f1.write("  \t\\fbox{Cette équation n'admet aucune solution.}\n")
     elif not isinstance(eq[0], tuple):
         f1.write('    \\[ %s=%s \\]\n' % (tex_coef(eq[1][0], 'x'), eq[1][1]))
         if eq[1][0] != 1:
             f1.write('\\[ x=%s \\]\n' % tex_frac(equations2(eq)[1]))
-        f1.write('    \\fbox{La solution de cette \xe9quation est \\,$%s$\\,.}\n' %
+        f1.write(u'    \\fbox{La solution de cette équation est \\,$%s$\\,.}\n' %
                  tex_frac(equations3(eq)[1]))
     elif not isinstance(eq[1], tuple):
         f1.write('    \\[ %s=%s \\]\n' % (tex_coef(eq[0][0], 'x'), eq[0][1]))
         if eq[0][0] != 1:
             f1.write('    \\[ x=%s \\]\n' % tex_frac(equations2(eq)[0]))
-        f1.write('    \\fbox{La solution de cette \xe9quation est \\,$%s$\\,.}\n' %
+        f1.write(u'    \\fbox{La solution de cette équation est \\,$%s$\\,.}\n' %
                  tex_frac(equations3(eq)[0]))
     else:
         f1.write('    \\[%s=%s \\qquad\\text{ou}\\qquad %s=%s\\]\n' % (tex_coef(eq[0][0],
@@ -832,7 +832,7 @@ def tex_equations(fact, f1):  # renvoie un tuple contenant les deux binomes egau
         if eq[0][0] != 1 or eq[1][0] != 1:
             f1.write('    \\[x=%s \\qquad\\text{ou}\\qquad x=%s\\]\n' %
                      (tex_frac(equations2(eq)[0]), tex_frac(equations2(eq)[1])))
-        f1.write('    \\fbox{Les solutions de cette \xe9quation sont \\,$%s\\,\\text{ et }\\,%s$\\,.}\n' %
+        f1.write(u'    \\fbox{Les solutions de cette équation sont \\,$%s\\,\\text{ et }\\,%s$\\,.}\n' %
                  (tex_frac(equations3(eq)[0]), tex_frac(equations3(eq)[1])))
 
 
@@ -1038,5 +1038,3 @@ def tex_valeurx3(a, nb):
             return tex_frac(b) + '=' + tex_frac(simplifie(b))
         else:
             return tex_frac(b)
-
-

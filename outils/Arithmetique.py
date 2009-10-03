@@ -20,7 +20,7 @@ def premier(n):
 def eratosthene(n):
     """Etablit la liste des nombres premiers inferieurs a n."""
     return [x for x in xrange(2, n) if premier(x)]
-      
+
 
 def factor(n):
     """Retourne la liste des facteurs premiers du nombre n."""
@@ -72,4 +72,6 @@ def carrerise(n):
     q = 1
     for element in primes:
         q *= element
+
     return int(float(q) / float(n))
+

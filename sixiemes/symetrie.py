@@ -31,7 +31,7 @@ from math import atan, cos, pi, sin, floor, ceil
 
 def valeurs_quad2(nb_pts):
     vals = []
-    for i in xrange(nb_pts):
+    for i in range(nb_pts):
         angle = random.randrange((i * 360) / nb_pts, ((i + 1) * 360) /
                                  nb_pts)
         vals.append(((random.randrange(1, 7) * .5) * cos((angle * pi) /
@@ -42,7 +42,7 @@ def valeurs_quad2(nb_pts):
 
 def valeurs_quad(nb_pts):
     vals = []
-    for i in xrange(nb_pts):
+    for i in range(nb_pts):
         (alpha, beta) = ((i * 360) / nb_pts, ((i + 1) * 360) / nb_pts)
         (x, y) = (0, 0)
         while x == 0 or angle < alpha or angle > beta:
@@ -59,9 +59,9 @@ def valeurs_quad(nb_pts):
 
 def place_pts(vals, angle):
     txt = ["  \\pstGeonode[PointSymbol=x,PointName=none]"]
-    for i in xrange(len(vals)):
+    for i in range(len(vals)):
         txt.append("(%s,%s)" % vals[i])
-        txt.append("{%s}" % unichr(i + 97))
+        txt.append("{%s}" % chr(i + 97))
     txt.append("""
   \\pstGeonode[PointSymbol=x,PointName=none](-4.5;%s){A}(4.5;%s){B}
 """ %
@@ -70,15 +70,15 @@ def place_pts(vals, angle):
   \\psline[linewidth=1.5\\pslinewidth,nodesep=-4.5](A)(B)
 """)
     txt.append("  \\pspolygon")
-    for i in xrange(len(vals)):
-        txt.append("(%s)" % unichr(i + 97))
+    for i in range(len(vals)):
+        txt.append("(%s)" % chr(i + 97))
     return ("").join(txt)
 
 
 def exo_quadrillage(f0, f1):
     nbpts = 5
     langles = [0, 90, 45, 135]
-    for j in xrange(3):
+    for j in range(3):
         angle = langles.pop(random.randrange(len(langles)))
         vals = valeurs_quad(nbpts)
         txt = place_pts(vals, angle)
@@ -89,18 +89,18 @@ def exo_quadrillage(f0, f1):
         f1.write("  \\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]\n")
         f1.write(txt)
         f1.write("\n  \\pstOrtSym[PointSymbol=x,PointName=none]{A}{B}{")
-        for i in xrange(len(vals)):
+        for i in range(len(vals)):
             if i > 0:
                 f1.write(",")
-            f1.write("%s" % unichr(i + 97))
+            f1.write("%s" % chr(i + 97))
         f1.write("}[")
-        for i in xrange(len(vals)):
+        for i in range(len(vals)):
             if i > 0:
                 f1.write(",")
-            f1.write("%s1" % unichr(i + 97))
+            f1.write("%s1" % chr(i + 97))
         f1.write("]\n  \pspolygon[linecolor=gray,linestyle=dashed]")
-        for i in xrange(len(vals)):
-            f1.write("(%s1)" % unichr(i + 97))
+        for i in range(len(vals)):
+            f1.write("(%s1)" % chr(i + 97))
         f0.write("\end{pspicture*}\n")
         f1.write("""
 \end{pspicture*}

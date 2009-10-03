@@ -29,7 +29,7 @@ from outils import ppcm, pgcd, signe, ecrit_tex, valeur_alea, randrange
 
 def den_com0(a, b):  #renvoie un tuple contenant les 2 nombres par lesquels multiplier les deux denominateurs pour obtenir leur ppcm
     c = ppcm(a[1], b[1])
-    return (abs(c / a[1]), abs(c / b[1]))
+    return (abs(c // a[1]), abs(c // b[1]))
 
 
 def den_com1(a, b):  #renvoie un tuple contenant les fractions a et b avec le meme denominateur
@@ -51,7 +51,7 @@ def somme(a, b, sgn):  #renvoie un tuple contenant la somme des fractions a et b
 def simplifie(a):  #renvoie la fraction a simplifiee
     b = pgcd(a[0], a[1])
     if b != 1:
-        return (a[0] / b, a[1] / b)
+        return (a[0] // b, a[1] // b)
     else:
         return ''
 
@@ -65,11 +65,11 @@ def decomp_prod(a, b):  #renvoie un tuple contenant les deux fractions apres sim
     sgn1 = signe(a[1])
     sgn2 = signe(b[1])
     if c == d == 1:
-        return (((sgn1 * a[0]) / c, (sgn1 * a[1]) / d), ((sgn2 * b[0]) /
-                d, (sgn2 * b[1]) / c), '')
+        return (((sgn1 * a[0]) // c, (sgn1 * a[1]) // d), ((sgn2 * b[0]) //
+                d, (sgn2 * b[1]) // c), '')
     else:
-        return (((sgn1 * a[0]) / c, (sgn1 * a[1]) / d), ((sgn2 * b[0]) /
-                d, (sgn2 * b[1]) / c), (c, d))
+        return (((sgn1 * a[0]) // c, (sgn1 * a[1]) // d), ((sgn2 * b[0]) //
+                d, (sgn2 * b[1]) // c), (c, d))
 
 
 def produit(a, b):  #renvoie un tuple contenant le produit des fractions a et b
@@ -86,7 +86,7 @@ def tex_frac(a):  #renvoie l'ecriture au format tex de la fraction a
     if not isinstance(a, tuple):
         return ''
     else:
-        a = ((a[0] * a[1]) / abs(a[1]), abs(a[1]))
+        a = ((a[0] * a[1]) // abs(a[1]), abs(a[1]))
         if a[1] == 1:
             if abs(a[1]) >= 1000:
                 return '\nombre{%i}' % a[0]
@@ -324,21 +324,21 @@ def valeurs_somme_prod():  #cree 3 fractions et un tuple de signes (+,*)
     while True:
         (base1, base2) = (valeur_alea(-13, 13), valeur_alea(-13, 13))
         lepgcd = pgcd(base1, base2)
-        (base1, base2) = (base1 / lepgcd, base2 / lepgcd)
+        (base1, base2) = (base1 // lepgcd, base2 // lepgcd)
         if base1 != 1 and base2 != 1:
             break
     (n2, d2) = (base1 * valeur_alea(-10, 10), abs(base2 * valeur_alea(2,
                 10)))
     lepgcd = pgcd(n2, d2)
-    (n2, d2) = (n2 / lepgcd, d2 / lepgcd)
+    (n2, d2) = (n2 // lepgcd, d2 // lepgcd)
     (n3, d3) = (base2 * valeur_alea(-10, 10), abs(base1 * valeur_alea(2,
                 10)))
     lepgcd = pgcd(n3, d3)
-    (n3, d3) = (n3 / lepgcd, d3 / lepgcd)
+    (n3, d3) = (n3 // lepgcd, d3 // lepgcd)
     (n1, d1) = (base1 * valeur_alea(-10, 10), abs(pgcd(d2, base2 *
                 valeur_alea(2, 10))))
     lepgcd = pgcd(n1, d1)
-    (n1, d1) = (n1 / lepgcd, d1 / lepgcd)
+    (n1, d1) = (n1 // lepgcd, d1 // lepgcd)
     if randrange(2) == 0:
         s1 = '+'
     else:
@@ -357,7 +357,7 @@ def valeurs_prod_parenth():  # cree 3 fractions et un tuple de signes (*,+)
     while True:
         (base1, base2) = (valeur_alea(2, 13), valeur_alea(2, 13))
         lepgcd = pgcd(base1, base2)
-        (base1, base2) = (base1 / lepgcd, base2 / lepgcd)
+        (base1, base2) = (base1 // lepgcd, base2 // lepgcd)
         if base1 != 1 and base2 != 1:
             break
     while True:
@@ -375,7 +375,7 @@ def valeurs_prod_parenth():  # cree 3 fractions et un tuple de signes (*,+)
         lepgcd = pgcd(n1, d1)
         if lepgcd != n1 and lepgcd != d1:
             break
-    (n1, d1) = (n1 / lepgcd, d1 / lepgcd)
+    (n1, d1) = (n1 // lepgcd, d1 // lepgcd)
     if randrange(2) == 0:
         s1 = '*'
     else:
@@ -393,13 +393,13 @@ def valeurs_quotient_frac():  # cree 4 fractions et un tuple de signes (+,+)
         lepgcd = pgcd(n1, d1)
         if lepgcd != n1 and lepgcd != d1:
             break
-    (n1, d1) = (n1 / lepgcd, d1 / lepgcd)
+    (n1, d1) = (n1 // lepgcd, d1 // lepgcd)
     while True:
         (n3, d3) = (valeur_alea(-10, 10), valeur_alea(2, 10))
         lepgcd = pgcd(n3, d3)
         if lepgcd != n3 and lepgcd != d3:
             break
-    (n3, d3) = (n3 / lepgcd, d3 / lepgcd)
+    (n3, d3) = (n3 // lepgcd, d3 // lepgcd)
     (n2, n4) = (valeur_alea(1, 10), valeur_alea(1, 10))
     if randrange(2) == 0:
         s1 = '+'

@@ -20,34 +20,33 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
-from PyQt4 import QtCore, QtGui
-import sys,  os,  string,  codecs
-from shutil import copy2
+from PyQt4 import QtGui, QtCore
+import sys, os, codecs
 
 #================================================================
-#        Cas d'une installation de Pyromaths via deb ou rpm, il faut ajouter les modules au PATH
-#================================================================
+# Imports spécifiques à Pyromaths
+#=========================== QtGui ========================
+import interface,  outils
+import troisiemes.troisiemes, quatriemes.quatriemes, cinquiemes.cinquiemes
+import sixiemes.sixiemes
 
+#================================================================
+# Cas d'une installation de Pyromaths via deb ou rpm, il faut
+# ajouter les modules au PATH
+#================================================================
 if os.name == "posix" and os.path.basename(__file__)=="pyromaths":
     sys.path.append(os.path.join( os.path.dirname(__file__),
         "../lib/pyromaths"))
 
+#================================================================
 # Dossier des icones
-from outils import module_path
+#================================================================
 if os.name == "posix" and os.path.basename(__file__) == "pyromaths":
     iconesdir="/usr/share/pixmaps"
 else:
     pathname = os.path.dirname((sys.argv)[0])
-    iconesdir=os.path.join(module_path(), 'img')
+    iconesdir=os.path.join(outils.module_path(), 'img')
 
-
-from interface import Ui_MainWindow
-import outils
-#from pyro_classes import WriteFiles
-import troisiemes.troisiemes
-import quatriemes.quatriemes
-import cinquiemes.cinquiemes
-import sixiemes.sixiemes
 
 LesFiches = [[u'Sixième', sixiemes.sixiemes, [
 u'Calcul mental',
@@ -104,6 +103,7 @@ u'Équation',
 u'Racines carrées',
 u'Système d\'équations',
 u'Fonctions affines',
+u'Probabilités',
 u'Théorème de Pythagore',
 u'Réciproque du théorème de Pythagore',
 u'Cercle et théorème de Pythagore',
@@ -115,34 +115,30 @@ u'Trigonométrie',
 class StartQT4(QtGui.QMainWindow):
     def __init__(self, LesFiches, configdir, iconesdir, parent=None):
         QtGui.QWidget.__init__(self, parent)
-        self.ui = Ui_MainWindow()
+        self.ui = interface.Ui_MainWindow()
         self.ui.setupUi(self, LesFiches, configdir, iconesdir)
 
 
 if __name__ == "__main__":
-    ## Création du fichier de configuration si inexistant
-    if not os.access(os.path.join(outils.configdir(),  "pyromaths.xml"), os.R_OK):
+#================================================================
+# Création du fichier de configuration si inexistant
+#================================================================
+    if not os.access(os.path.join(outils.configdir(), "pyromaths.xml"), os.R_OK):
         if not os.path.isdir(outils.configdir()):
             os.makedirs(outils.configdir())
-        f = open(os.path.join(outils.configdir(),  "pyromaths.xml"),'w')
-        f.write(outils.create_config_file())
+        f = codecs.open(os.path.join(outils.configdir(), "pyromaths.xml"), encoding='utf-8', mode='w')
+        f.write(u"" + outils.create_config_file())
         f.close()
-    outils.modify_config_file(os.path.join(outils.configdir(),  "pyromaths.xml"))
+    outils.modify_config_file(os.path.join(outils.configdir(), "pyromaths.xml"))
 
-    ## Création du dossier "modeles" et copie des modèles si ils n'y sont pas
+#================================================================
+# Création du dossier "modeles" local
+#================================================================
     modeledir = os.path.join(outils.configdir(),  "modeles")
     if not os.path.isdir(modeledir):
         os.makedirs(modeledir)
 
-
     app = QtGui.QApplication(sys.argv)
-    #Traduction de l'interface dans la langue de l'OS
-    locale = QtCore.QLocale.system().name()
-    translator=QtCore.QTranslator ()
-    translator.load(QtCore.QString("qt_") + locale,
-                    QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.TranslationsPath))
-    app.installTranslator(translator)
-
     pyromaths = StartQT4(LesFiches,  outils.configdir(), iconesdir)
     pyromaths.show()
     sys.exit(app.exec_())

@@ -22,8 +22,8 @@
 #
 
 import outils
-import fractions
-import developpements
+from . import fractions
+from . import developpements
 
 #
 # ------------------- ÉQUATIONS -------------------
@@ -31,7 +31,7 @@ import developpements
 
 def valeurs(pyromax):  # crée les valeurs aléatoires pour l'équation
     while True:
-        coefs = [outils.valeur_alea(-pyromax, pyromax) for i in xrange(6)]
+        coefs = [outils.valeur_alea(-pyromax, pyromax) for i in range(6)]
         sgn = outils.valeur_alea(-1, 1)
         if sgn > 0:
             signe = "+"
@@ -39,17 +39,17 @@ def valeurs(pyromax):  # crée les valeurs aléatoires pour l'équation
             signe = "-"
         while True:
             while True:
-                dens = [outils.valeur_alea(2, 9) for i in xrange(3)]
+                dens = [outils.valeur_alea(2, 9) for i in range(3)]
                 if dens[0] != dens[1] and dens[0] != dens[2] and dens[1] != \
                     dens[2]:
                     break
             ppcm = outils.ppcm(dens[0], outils.ppcm(dens[1], dens[2]))
-            densprim = [ppcm / dens[i] for i in xrange(3)]
+            densprim = [ppcm // dens[i] for i in range(3)]
             if densprim[0] < 10 and densprim[1] < 10 and densprim[2] < \
                 10:
                 break
 
-        nvxcoefs = [coefs[i] * densprim[i // 2] for i in xrange(6)]
+        nvxcoefs = [coefs[i] * densprim[i // 2] for i in range(6)]
         if (nvxcoefs[0] + nvxcoefs[2] * sgn) - nvxcoefs[4] != 0:
             break
     return (tuple(coefs), tuple(dens), tuple(densprim), (signe, sgn),
@@ -70,7 +70,7 @@ def tex_quotient1(a, b, c, d):  # renvoie l'ecriture de la mise au meme denomina
 
 def tex_equation0(valeurs):  # renvoie l'ecriture des quotients de l'enonce
     texte = ''
-    for i in xrange(3):
+    for i in range(3):
         texte = texte + tex_quotient0(valeurs[0][i * 2], valeurs[0][i *
                 2 + 1], valeurs[1][i])
         if i == 0:
@@ -82,7 +82,7 @@ def tex_equation0(valeurs):  # renvoie l'ecriture des quotients de l'enonce
 
 def tex_equation1(valeurs):  # renvoie l'ecriture de la mise au meme denominateur des quotients
     texte = ''
-    for i in xrange(3):
+    for i in range(3):
         texte = texte + tex_quotient1(valeurs[0][i * 2], valeurs[0][i *
                 2 + 1], valeurs[1][i], valeurs[2][i])
         if i == 0:
@@ -94,7 +94,7 @@ def tex_equation1(valeurs):  # renvoie l'ecriture de la mise au meme denominateu
 
 def tex_equation2(valeurs):  # renvoie l'ecriture des quotients au meme denominateur
     texte = '\\cfrac{'
-    for i in xrange(3):
+    for i in range(3):
         texte = texte + developpements.tex_binome((valeurs[4][i * 2],
                 valeurs[4][i * 2 + 1]), bplus=i == 1 and valeurs[3][1] >
                 0, bpar=i == 1 and valeurs[3][1] < 0)
@@ -157,12 +157,12 @@ def tex_equation6(valeurs):  # renvoie la solution de l'equation
 
 
 def equations(f0, f1, valeurs):  #resolution d'une equation
-    f0.write("  R\xe9soudre l'\xe9quation : \n")
+    f0.write(u"  Résoudre l'équation : \n")
     outils.ecrit_tex(f0, tex_equation0(valeurs), thenocalcul='')
-    f1.write("  R\xe9soudre l'\xe9quation : \n")
-    for i in xrange(7):
-        exec 'outils.ecrit_tex(f1,tex_equation' + str(i) + \
-            '(valeurs),thenocalcul=\'\')'
+    f1.write(u"  Résoudre l'équation : \n")
+    for i in range(7):
+        exec('outils.ecrit_tex(f1,tex_equation' + str(i) + \
+            '(valeurs),thenocalcul=\'\')')
         if i == 2 and valeurs[3][1] < 0:
             outils.ecrit_tex(f1, tex_equation2bis(valeurs), thenocalcul=
                              '')
@@ -173,7 +173,7 @@ def equations(f0, f1, valeurs):  #resolution d'une equation
         sol = fractions.tex_frac(simpl)
     else:
         sol = fractions.tex_frac(frac)
-    f1.write('  \\fbox{La solution de cette \xe9quation est $%s$\\,.}\n' %
+    f1.write(u'  \\fbox{La solution de cette équation est $%s$\\,.}\n' %
              sol)
 
 

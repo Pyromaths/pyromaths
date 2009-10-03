@@ -21,15 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import random
-import string
-import pythagore
-import puissances
-import developpements
-import calcul_mental
-import fractions
-from outils import ecrit_tex, randrange, tex_entete
-import os.path
+from . import puissances, developpements, calcul_mental, fractions, geometrie
 
 def write(f0, f1, exos):
     f0.write("\n")
@@ -49,11 +41,11 @@ def main(exo, f0, f1):
         puissances.exo_puissances,
         developpements.exo_distributivite,
         developpements.exo_double_distributivite,
-        pythagore.exo_pythagore,
-        pythagore.exo_reciproque_pythagore,
-        pythagore.exo_triangle_cercle,
-        pythagore.exo_thales,
-        pythagore.exo_trigo,
+        geometrie.exo_pythagore,
+        geometrie.exo_reciproque_pythagore,
+        geometrie.exo_triangle_cercle,
+        geometrie.exo_thales,
+        geometrie.exo_trigo,
         )
     write(f0, f1, modules[exo]())
 

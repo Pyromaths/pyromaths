@@ -94,10 +94,10 @@ def valeurs(nb, entier=1):  # renvoie les 2 listes contenant les opérateurs et 
         loperateurs.append(')')
         p = p - 1
     if entier:
-        loperandes = [random.randrange(12) + 2 for i in xrange(nb)]
+        loperandes = [random.randrange(12) + 2 for i in range(nb)]
     else:
         loperandes = [((random.randrange(88) + 12) * 1.0) / 10 for i in
-                      xrange(nb)]
+                      range(nb)]
     return (loperateurs, loperandes)
 
 
@@ -107,7 +107,7 @@ def valeurs(nb, entier=1):  # renvoie les 2 listes contenant les opérateurs et 
 def affichage(loperateurs, loperandes):
     j = 0  #compteur des operateurs
     calcul = '%s' % nb_decimal((loperandes[0], ))
-    for i in xrange(len(loperandes) - 1):
+    for i in range(len(loperandes) - 1):
         if loperateurs[j] == ')':  #Il reste une opération mais je ferme d'abord une ou plusieurs parenthèses
             cpt = 1
             while loperateurs[j + cpt] == ')':
@@ -117,7 +117,7 @@ def affichage(loperateurs, loperandes):
         if j + cpt < len(loperateurs) - 1:  #Il reste au moins une opération, donc peut-etre une parenthèse ouvrante
             while loperateurs[j + cpt + 1] == '(':  #j+cpt est la position de la dernière parenthèse (
                 cpt = cpt + 1
-        for k in xrange(cpt + 1):
+        for k in range(cpt + 1):
             calcul = calcul + '%s' % loperateurs[j + k]
         calcul = calcul + '%s' % nb_decimal((loperandes[i + 1], ))
         j = j + cpt + 1
@@ -131,7 +131,7 @@ def affichage(loperateurs, loperandes):
 
 def nb_decimal(a):  # verifie si des nombres décimaux dans le tuple a sont en fait des nombres entiers et change leur type
     list = []
-    for i in xrange(len(a)):
+    for i in range(len(a)):
         if str(a[i]).endswith('.0'):
             list.append(int(a[i] + .1))
         else:
@@ -230,10 +230,10 @@ def calcul(a, op, b, entier=1):  #retourne 'hp' (hors programme) ou le résultat
 def main():
     nb = 9  # nombre de calculs
     exo = ["\\exercice",
-           "Calculer les expressions suivantes en d\xe9taillant les calculs.\n",
+           u"Calculer les expressions suivantes en détaillant les calculs.\n",
            "\\begin{multicols}{3}", "\\noindent"]
     cor = ["\\exercice*",
-           "Calculer les expressions suivantes en d\xe9taillant les calculs.",
+           u"Calculer les expressions suivantes en détaillant les calculs.",
            "\\begin{multicols}{3}", "\\noindent"]
     i = 0
     while i < nb:
@@ -250,7 +250,7 @@ def main():
             list = verifie_calcul([loperateurs], [loperandes], entier=1)
         if list != None:
             i = i + 1
-            for j in xrange(len(list[0])):
+            for j in range(len(list[0])):
                 if j == 0:
                     exo.append("  \\[ \\thenocalcul = %s \\]" %
                                affichage(list[0][j], list[1][j]))
@@ -265,5 +265,3 @@ def main():
     exo.append("\\end{multicols}")
     cor.append("\\end{multicols}")
     return (exo, cor)
-
-

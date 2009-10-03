@@ -13,7 +13,7 @@ import math
 
 def OperateurPrioritaire(exercice, niveau, pre="", post="", solution=[]):
     '''Renvoie un tuple contenant :
-    - la liste solution contenant la liste des instructions TeX \xc3\xa0 \xc3\xa9crire dans le corrig\xc3\xa9 
+    - la liste solution contenant la liste des instructions TeX \xc3\xa0 \xc3\xa9crire dans le corrig\xc3\xa9
     - le r\xc3\xa9sultat de l\'expression.
     La liste exercice peut contenir des nombres ou des objets Fractions.
     Ex : OperateurPrioritaire([3,"+",5,"*",2]) => [\'3 + 10\', \'13\'] , 13
@@ -25,12 +25,12 @@ def OperateurPrioritaire(exercice, niveau, pre="", post="", solution=[]):
               \'\\dfrac{3}{5}\'
             ],
             <pyro_classes.Fractions instance at 0xb7ddddec> (Fractions(3,5))
-    
+
     @param exercice: liste contenant la succession d\'op\xc3\xa9rations [3, \'+\', 5, \'*\', 2]
     @param niveau: niveau auquel doit se situer l\'exercice : 6: entiers, 5: d\xc3\xa9cimaux positifs, 4: d\xc3\xa9cimaux relatifs
     @param pre: chaine contenant ce qui doit \xc3\xaatre ajouter avant la solution
     @param post: chaine contenant ce qui doit \xc3\xaatre ajouter apr\xc3\xa8s la solution
-    @param solution: liste contenant chaque ligne \xc3\xa0 \xc3\xa9crire dans le fichier TeX pour 
+    @param solution: liste contenant chaque ligne \xc3\xa0 \xc3\xa9crire dans le fichier TeX pour
                      le corrig\xc3\xa9
     '''
 
@@ -171,12 +171,12 @@ def EffectueCalcul(op, nb1, nb2, pre="", post=""):
 
 def Affichage(l):
     """\xc3\x89crit une expressions contenant des d\xc3\xa9cimaux et des fractions au format TeX
-    
+
     @param l: liste contenant l'expression [3, '+', 5, '*', 2]
     """
 
     expr = ""  # résultat
-    for i in xrange(len(l)):  # on parcourt la liste
+    for i in range(len(l)):  # on parcourt la liste
         if ["+", "-", "*", "/", '(', ')'].count(l[i]):  # Un opérateur
             if l[i] == "*":
                 expr = expr + " \\times "
@@ -204,7 +204,7 @@ def Affichage(l):
 
 def TrouveParentheseInterieure(l):
     """Trouve la position de la parenth\xc3\xa8se la plus \xc3\xa0 l'int\xc3\xa9rieur
-    
+
     @param l: liste d'op\xc3\xa9rations
     """
 
@@ -283,10 +283,10 @@ def valeurs_priorites_decimaux(nb, entier=1):  # renvoie les 2 listes contenant 
         loperateurs.append(')')
         p = p - 1
     if entier:
-        loperandes = [random.randrange(12) + 2 for i in xrange(nb)]
+        loperandes = [random.randrange(12) + 2 for i in range(nb)]
     else:
         loperandes = [((random.randrange(88) + 12) * 1.0) / 10 for i in
-                      xrange(nb)]
+                      range(nb)]
     exercice = [loperandes[0]]
     i = 1
     j = 0
@@ -329,8 +329,8 @@ def EffectueSommeFractions(fr1, fr2, s, pre, post):
         ppcm = outils.ppcm(fr2.d, fr1.d)
         if abs(fr1.d) - abs(fr2.d):
             cor.append("%s%s%s%s%s" % (pre, Fractions.TeX(fr1, True,
-                       coef=ppcm / abs(fr1.d)), s, Fractions.TeX(fr2,
-                       True, coef=ppcm / abs(fr2.d)), post))
+                       coef=ppcm // abs(fr1.d)), s, Fractions.TeX(fr2,
+                       True, coef=ppcm // abs(fr2.d)), post))
         if pre.rstrip().endswith('(') and post.lstrip().startswith(')'):
             pre = pre.rstrip()[:len(pre.rstrip()) - 1]
             post = post.lstrip()[1:]
@@ -339,7 +339,7 @@ def EffectueSommeFractions(fr1, fr2, s, pre, post):
             frs = Fractions.simplifie(fr)
             if abs(frs.n) != abs(fr.n):
                 cor.append("%s%s%s" % (pre, Fractions.TeX(frs, True,
-                           coef=fr.d / frs.d), post))
+                           coef=fr.d // frs.d), post))
                 cor.append("%s%s%s" % (pre, Fractions.TeX(frs, True),
                            post))
     else:

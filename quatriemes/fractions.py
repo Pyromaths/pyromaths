@@ -31,7 +31,7 @@ def sommes_fractions_4e(op, level):
     '''Choisit des valeurs aléatoires pour effectuer une somme ou une différence
     de fractions en fonction du niveau de difficulté souhaité (de 1 à 4) et renvoie
     l'énoncé et le corrigé au format TeX
-    
+
     @param op: '+' ou '-'
     @param level: niveau de difficulté :
                   1- Fractions positives et dénominateur de l'une multiple de l'autre
@@ -39,9 +39,10 @@ def sommes_fractions_4e(op, level):
                   3- Fractions avec des nombres relatifs
                   4- Fractions avec des nombres relatifs et résultats simplifiable
     '''
-    
+
     while True:
         (n1, d1, n2, d2) = (2, 2, 2, 2)
+#        import pdb; pdb.set_trace()
         while True:
             if level == 1:
                 n1 = random.randrange(1, 16)
@@ -57,7 +58,7 @@ def sommes_fractions_4e(op, level):
                 d2 = outils.valeur_alea(1, 40)
             else:
                 while True:
-                    neg=[(-1,1)[random.randrange(2)] for x in xrange(4)]
+                    neg=[(-1,1)[random.randrange(2)] for x in range(4)]
                     if neg[0]<0 or neg[1]<0 or neg[2]<0 or neg[3]<0:
                         break
                 n1 = random.randrange(1, 16)*neg[0]
@@ -66,18 +67,20 @@ def sommes_fractions_4e(op, level):
                 d2 = random.randrange(1, 40)*neg[3]
             fr1 = Fractions(n1, d1)
             fr2 = Fractions(n2, d2)
-            if outils.pgcd(fr1.n, fr1.d) == 1 and outils.pgcd(fr2.n, fr2.d) == 1 and \
+            if outils.pgcd(fr1.n, fr1.d) == 1 and \
+                outils.pgcd(fr2.n, fr2.d) == 1 and \
                 (level == 1 or (outils.pgcd(fr1.d, fr2.d) != abs(fr1.d) \
                                 and outils.pgcd(fr1.d, fr2.d) != abs(fr2.d))):
                 if op == "+":
-                    simplifiable = abs(fr1.d * fr2.d) != abs(Fractions.simplifie(fr1 +
-                            fr2).d)
+                    simplifiable = abs(fr1.d * fr2.d) != \
+                                        abs(Fractions.simplifie(fr1 + fr2).d)
                 else:
-                    simplifiable = abs(fr1.d * fr2.d) != abs(Fractions.simplifie(fr1 -
-                            fr2).d)
-                if level == 1 or (simplifiable and level == 4) or (not simplifiable and level < 4):
+                    simplifiable = abs(fr1.d * fr2.d) != \
+                                        abs(Fractions.simplifie(fr1 - fr2).d)
+                if level == 1 or (simplifiable and level == 4) or \
+                                            (not simplifiable and level < 4):
                     break
-                
+
         l = [fr1, op, fr2]
         (cor, res, niveau) = OperateurPrioritaire(l, 4, solution=[])
         if niveau >= 4:
@@ -90,7 +93,7 @@ def produits_fractions_4e(op, level):
     '''Choisit des valeurs aléatoires pour effectuer un produit ou un quotient de
     fractions en fonction du niveau de difficulté souhaité (de 1 à 4) et renvoie
     l'énoncé et le corrigé au format TeX
-    
+
     @param op: '*' ou '/'
     @param level: niveau de difficulté :
                   1- Fractions positives non décomposables
@@ -98,7 +101,7 @@ def produits_fractions_4e(op, level):
                   3- Fractions positives à décomposer
                   4- Fractions avec des nombres relatifs à décomposer
     '''
-    
+
     while True:
         (n1, d1, n2, d2) = (2, 2, 2, 2)
         while True:
@@ -119,7 +122,7 @@ def produits_fractions_4e(op, level):
                         d2=random.randrange(2,11)
                 elif level == 2 or level == 4:
                     while True:
-                        neg=[(-1,-1,1)[random.randrange(3)] for x in xrange(4)]
+                        neg=[(-1,-1,1)[random.randrange(3)] for x in range(4)]
                         if neg[0]<0 or neg[1]<0 or neg[2]<0 or neg[3]<0:
                             break
                     while outils.pgcd(n1*a,d1*b)>1:
@@ -149,8 +152,8 @@ def produits_fractions_4e(op, level):
                         d2=random.randrange(2,11)*(-1,1)[random.randrange(2)]
                 fr1 = Fractions(n1*a, d1*b)
                 fr2 = Fractions(n2*a, d2*b)
-                simplifiable = abs(fr1.d * fr2.n) != Fractions.simplifie(fr1 /
-                                                                         fr2).d
+                simplifiable = abs(fr1.d * fr2.n) != \
+                                            Fractions.simplifie(fr1 / fr2).d
             if (simplifiable and level>2) or (not simplifiable and level<=2):
                 break
         l = [fr1, op, fr2]
@@ -225,7 +228,7 @@ def valeurs_priorites_fractions(nb, entier=1):  # renvoie les 2 listes contenant
         loperateurs.append(')')
         p = p - 1
     loperandes = []
-    for i in xrange(nb):
+    for i in range(nb):
         (n, d) = (2, 2)
         while outils.pgcd(n, d) != 1 or abs(d) == 1:
             n = outils.valeur_alea(-16, 16)
@@ -250,18 +253,18 @@ def valeurs_priorites_fractions(nb, entier=1):  # renvoie les 2 listes contenant
 
 def exo_sommes_fractions():
     exo = ["\\exercice",
-           "Effectuer les calculs suivants et donner le r\\'esultat sous la forme d'une fraction simplifi\\'ee :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent%"]
     cor = ["\\exercice*",
-           "Effectuer les calculs suivants et donner le r\\'esultat sous la forme d'une fraction simplifi\\'ee :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent%"]
     op = ["+", "-","+", "-","+", "-","+", "-"]
-    for i in xrange(8):
+    for i in range(8):
         if i%2:
-            (l, sol, res) = sommes_fractions_4e(op.pop(0), i/2+1)
+            (l, sol, res) = sommes_fractions_4e(op.pop(0), i//2+1)
         else:
-            (l, sol, res) = sommes_fractions_4e(op.pop(random.randrange(2)), 
-                                                i/2+1)
+            (l, sol, res) = sommes_fractions_4e(op.pop(random.randrange(2)),
+                                                i//2+1)
         exo.append("  \\[\\thenocalcul = %s\\]" % Affichage(l))
         cor.append("  \\[\\thenocalcul = %s\\]" % Affichage(l))
         for l in sol:
@@ -278,17 +281,17 @@ def exo_sommes_fractions():
 
 def exo_produits_fractions():
     exo = ["\\exercice",
-           "Effectuer les calculs suivants et donner le r\\'esultat sous la forme d'une fraction simplifi\\'ee :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent%"]
     cor = ["\\exercice*",
-           "Effectuer les calculs suivants et donner le r\\'esultat sous la forme d'une fraction simplifi\\'ee :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent%"]
     op = ["*", "/","*", "/","*", "/","*", "/"]
-    for i in xrange(8):
+    for i in range(8):
         if i%2:
-            (l, sol, res) = produits_fractions_4e(op.pop(0), i/2+1)
+            (l, sol, res) = produits_fractions_4e(op.pop(0), i//2+1)
         else:
-            (l, sol, res) = produits_fractions_4e(op.pop(random.randrange(2)), i/2+1)
+            (l, sol, res) = produits_fractions_4e(op.pop(random.randrange(2)), i//2+1)
         exo.append("  \\[\\thenocalcul = %s\\]" % Affichage(l))
         cor.append("  \\[\\thenocalcul = %s\\]" % Affichage(l))
         for l in sol:
@@ -305,12 +308,12 @@ def exo_produits_fractions():
 
 def exo_priorites_fractions():
     exo = ["\\exercice",
-           "Effectuer les calculs suivants et donner le r\\'esultat sous la forme d'une fraction simplifi\\'ee :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{3}", "  \\noindent%"]
     cor = ["\\exercice*",
-           "Effectuer les calculs suivants et donner le r\\'esultat sous la forme d'une fraction simplifi\\'ee :",
+           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{3}", "  \\noindent%"]
-    for i in xrange(6):
+    for i in range(6):
         while True:
             l = valeurs_priorites_fractions(3)
             (sol, res, niveau) = OperateurPrioritaire(l, 4, solution=[])

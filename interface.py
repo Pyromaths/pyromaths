@@ -20,16 +20,12 @@
 # along with this program; if notPopen, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
-from PyQt4 import QtCore, QtGui
-from os.path import isfile, basename
-import os , sys
-from string import lower
-from lxml import etree
-import tempfile
+from PyQt4 import QtGui, QtCore
+import os, lxml, codecs
+import outils
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, LesFiches,  configdir, iconesdir):
-        from outils import module_path
         self.LesFiches = LesFiches
         self.configdir = configdir
         self.iconesdir=iconesdir
@@ -38,7 +34,7 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet("background-color: rgb(251, 245, 225);")
         MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(iconesdir,
                 'pyromaths.png')))
-        MainWindow.setWindowTitle(u"Pyromaths")
+        MainWindow.setWindowTitle("Pyromaths")
         MainWindow.setGeometry(300,600, 500, 200)
 
         font = QtGui.QFont()
@@ -66,7 +62,7 @@ class Ui_MainWindow(object):
 
         self.pushButton_quit = QtGui.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_quit)
-        self.pushButton_quit.setText(u"Quitter")
+        self.pushButton_quit.setText("Quitter")
         self.pushButton_quit.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         self.pushButton_erase = QtGui.QPushButton(self.centralwidget)
@@ -90,21 +86,21 @@ class Ui_MainWindow(object):
         #        Remplissage des 4 niveaux
         #============================================================
 
-        for level in xrange(4):
-            exec "self.tab_%se = QtGui.QWidget()" % (6-level)
-            exec "self.gridLayout_%se = QtGui.QGridLayout(self.tab_%se)" % (6-level, 6-level)
+        for level in range(4):
+            exec("self.tab_%se = QtGui.QWidget()" % (6-level))
+            exec("self.gridLayout_%se = QtGui.QGridLayout(self.tab_%se)" % (6-level, 6-level))
             nb_exos = len(self.LesFiches[level][2])
-            for i in xrange(nb_exos):
+            for i in range(nb_exos):
                 self.insert_spinbox(6-level, i)
-                for col in xrange(2):
-                    exec "spacerItem_%s_%s = QtGui.QSpacerItem(20, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)" % (6-level, col)
-                    exec "self.gridLayout_%se.addItem(spacerItem_%s_%s, %s, %s, 1, 1)" % (6-level, 6-level, col, (nb_exos+1)/2, col)
-            exec "self.tabWidget.addTab(self.tab_%se, \"\")" % (6-level)
+                for col in range(2):
+                    exec("spacerItem_%s_%s = QtGui.QSpacerItem(20, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)" % (6-level, col))
+                    exec("self.gridLayout_%se.addItem(spacerItem_%s_%s, %s, %s, 1, 1)" % (6-level, 6-level, col, (nb_exos+1)/2, col))
+            exec("self.tabWidget.addTab(self.tab_%se, \"\")" % (6-level))
 
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6e), u"6e")
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5e), u"5e")
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4e), u"4e")
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3e), u"3e")
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6e), "6e")
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5e), "5e")
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4e), "4e")
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3e), "3e")
 
         #============================================================
         #        Onglet options
@@ -114,7 +110,7 @@ class Ui_MainWindow(object):
 
         self.tab_options = QtGui.QWidget()
         self.tabWidget.addTab(self.tab_options, "")
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_options), u"Options")
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_options), "Options")
         self.gridLayout_2 = QtGui.QGridLayout(self.tab_options)
         self.horizontalLayout_options1 = QtGui.QHBoxLayout()
 
@@ -137,7 +133,7 @@ class Ui_MainWindow(object):
         ############## Label titre des fiches
 
         self.opt_titre_fiche = QtGui.QLabel(self.tab_options)
-        self.opt_titre_fiche.setText(u"Titre de la fiche d'exercices : ")
+        self.opt_titre_fiche.setText("Titre de la fiche d'exercices : ")
         self.verticalLayout_16.addWidget(self.opt_titre_fiche)
         self.horizontalLayout_options1.addLayout(self.verticalLayout_16)
 
@@ -161,7 +157,7 @@ class Ui_MainWindow(object):
         ############## Bouton parcourir
 
         self.pushButton_parcourir = QtGui.QPushButton(self.tab_options)
-        self.pushButton_parcourir.setText(u"Parcourir")
+        self.pushButton_parcourir.setText("Parcourir")
         self.horizontalLayout_chemin_fichier.addWidget(self.pushButton_parcourir)
         self.verticalLayout_17.addLayout(self.horizontalLayout_chemin_fichier)
 
@@ -188,7 +184,6 @@ class Ui_MainWindow(object):
         self.checkBox_corrige.setText(u"Créer le corrigé")
         self.checkBox_corrige.setToolTip(u"Pyromaths doit-il créer la fiche de correction détaillée?")
         self.checkBox_corrige.setChecked(int(self.config['corrige']))
-        #self.checkBox_corrige.setEnabled(False)
         self.verticalLayout_21.addWidget(self.checkBox_corrige)
 
         ############## CheckBox "pdf ou non"
@@ -211,7 +206,7 @@ class Ui_MainWindow(object):
         ############## Label niveau
 
         self.opt_niveau = QtGui.QLabel(self.tab_options)
-        self.opt_niveau.setText(u"Niveau :")
+        self.opt_niveau.setText("Niveau :")
         self.verticalLayout_18.addWidget(self.opt_niveau)
 
         ############## Label Modèle
@@ -230,40 +225,34 @@ class Ui_MainWindow(object):
 
         self.comboBox_niveau = QtGui.QComboBox(self.tab_options)
         self.comboBox_niveau.setEditable(True) # l’utilisateur peut entrer son propre texte
-        self.comboBox_niveau.addItem(QtCore.QString())
-        self.comboBox_niveau.setItemText(0, u"6\\ieme")
-        self.comboBox_niveau.addItem(QtCore.QString())
-        self.comboBox_niveau.setItemText(1, u"5\\ieme")
-        self.comboBox_niveau.addItem(QtCore.QString())
-        self.comboBox_niveau.setItemText(2, u"4\\ieme")
-        self.comboBox_niveau.addItem(QtCore.QString())
-        self.comboBox_niveau.setItemText(3, u"3\\ieme")
-        self.comboBox_niveau.addItem(QtCore.QString())
-        self.comboBox_niveau.setItemText(4, u"2$^{nde}$")
+        self.comboBox_niveau.addItem("6\\ieme")
+        self.comboBox_niveau.addItem("5\\ieme")
+        self.comboBox_niveau.addItem("4\\ieme")
+        self.comboBox_niveau.addItem("3\\ieme")
+        self.comboBox_niveau.addItem("2$^{nde}$")
         self.verticalLayout_19.addWidget(self.comboBox_niveau)
 
         ############## ComboBox modèles
 
         self.comboBox_modele = QtGui.QComboBox(self.tab_options)
 
-        modeles = os.listdir(os.path.join(module_path(), 'modeles'))
+        modeles = os.listdir(os.path.join(outils.module_path(), 'modeles'))
         modeles_home = os.listdir(os.path.join(configdir,  'modeles'))
 
         count = 0
 
         for element in modeles:
           if element[len(element)-3:] == "tex":
-             self.comboBox_modele.addItem(QtCore.QString())
-             self.comboBox_modele.setItemText(count, unicode(element[:len(element)-4]))
+             self.comboBox_modele.addItem(str(element[:len(element)-4]))
              if element == self.config['modele']:
                self.comboBox_modele.setCurrentIndex(count)
              count += 1
 
 
-	for element in modeles_home:
+        for element in modeles_home:
           if element[len(element)-3:] == "tex":
              self.comboBox_modele.addItem(QtCore.QString())
-             self.comboBox_modele.setItemText(count, unicode(element[:len(element)-4]))
+             self.comboBox_modele.setItemText(count, str(element[:len(element)-4]))
              if element == self.config['modele']:
                self.comboBox_modele.setCurrentIndex(count)
              count += 1
@@ -298,10 +287,10 @@ class Ui_MainWindow(object):
         MainWindow.setMenuBar(self.menubar)
 
         self.menuFichier = QtGui.QMenu(self.menubar)
-        self.menuFichier.setTitle(u"Fichier")
+        self.menuFichier.setTitle("Fichier")
 
         self.menu_propos = QtGui.QMenu(self.menubar)
-        self.menu_propos.setTitle(u"Aide")
+        self.menu_propos.setTitle("Aide")
 
         self.statusbar = QtGui.QStatusBar(MainWindow)
         MainWindow.setStatusBar(self.statusbar)
@@ -311,10 +300,10 @@ class Ui_MainWindow(object):
         #        Menus de la barre de menus
         #============================================================
         self.actionTous_les_exercices = QtGui.QAction(MainWindow)
-        self.actionTous_les_exercices.setText(u"Tous les exercices")
+        self.actionTous_les_exercices.setText("Tous les exercices")
 
         self.actionQuitter = QtGui.QAction(MainWindow)
-        self.actionQuitter.setText(u"Quitter")
+        self.actionQuitter.setText("Quitter")
 
         self.actionAcceder_au_site = QtGui.QAction(MainWindow)
         self.actionAcceder_au_site.setText(u"Accéder au site")
@@ -355,15 +344,15 @@ class Ui_MainWindow(object):
         #============================================================
         #        Actions des spinBox
         #============================================================
-        for level in xrange(4):
-            for box in xrange(len(self.LesFiches[level][2])):
-                exec "QtCore.QObject.connect(self.spinBox_%s_%s, QtCore.SIGNAL(\"valueChanged(int)\"), self.setNbExos)" % (6-level, box)
+        for level in range(4):
+            for box in range(len(self.LesFiches[level][2])):
+                exec("QtCore.QObject.connect(self.spinBox_%s_%s, QtCore.SIGNAL(\"valueChanged(int)\"), self.setNbExos)" % (6-level, box))
 
-        for level in xrange(4):
+        for level in range(4):
             nb_exos = len(self.LesFiches[level][2])
-            for i in xrange(nb_exos):
-                exec "self.label_%s_%s.setText(u\"%s\")" % (6-level,i,self.LesFiches[level][2][i])
-                exec "self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type \xe0 cr\xe9er.\")"% (6-level,i)
+            for i in range(nb_exos):
+                exec("self.label_%s_%s.setText(u\"%s\")" % (6-level,i,self.LesFiches[level][2][i]))
+                exec("self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -427,38 +416,52 @@ class Ui_MainWindow(object):
   </body>
 </html>"""
         banniere = os.path.join(self.iconesdir, 'pyromaths-banniere.png')
-        QtGui.QMessageBox.about(None,QtCore.QString.fromUtf8(
-            'À propos de Pyromaths'), text % (banniere,  version))
+        QtGui.QMessageBox.about(None, u'À propos de Pyromaths', text % (banniere,  version))
 
     def creer_les_exercices(self):
         """Vérifie si la liste d'exercices n'est pas vide puis sélectionne les noms des fichiers exercices et
         corrigés"""
         self.valide_options()
         if self.liste_creation == [] :
-            QtGui.QMessageBox.warning(None,
-                                    'Attention !',  u"Veuillez sélectionner des exercices...",
-                                    QtGui.QMessageBox.Ok )
+            QtGui.QMessageBox.warning(None, 'Attention !',
+                    u"Veuillez sélectionner des exercices...",
+                    QtGui.QMessageBox.Ok )
         else:
             parametres = {
-                                    'creer_pdf': self.checkBox_pdf.isChecked(),
-                                    'titre': unicode(self.titre_fiche.text()),
-                                    'corrige': self.checkBox_corrige.isChecked(),
-                                    'niveau': unicode(self.comboBox_niveau.currentText()),
-                                    'nom_fichier': unicode(self.nom_fichier.text()),
-                                    'chemin_fichier': unicode(self.chemin_fichier.text()),
-				    'modele': unicode(self.comboBox_modele.currentText() + '.tex'),
-				    'configdir': self.configdir
-                                    }
+                'creer_pdf': self.checkBox_pdf.isChecked(),
+                'titre': unicode(self.titre_fiche.text()),
+                'corrige': self.checkBox_corrige.isChecked(),
+                'niveau': str(self.comboBox_niveau.currentText()),
+                'nom_fichier': unicode(self.nom_fichier.text()),
+                'chemin_fichier': unicode(self.chemin_fichier.text()),
+                'modele': unicode(self.comboBox_modele.currentText() + '.tex'),
+                'configdir': self.configdir
+                         }
             #============================================================
             #        Choix de l'ordre des exercices
             #============================================================
-	    list=[]
-            for i in xrange(len(self.liste_creation)):
+            list=[]
+            for i in range(len(self.liste_creation)):
                 niveau = self.liste_creation[i][0]
                 exo = self.liste_creation[i][1]
                 list.append("%se: %s" % (6-niveau,  self.LesFiches[niveau][2][exo]))
-            form = ChoixOrdreExos(list,  self.LesFiches,  parametres)
-            form.exec_()
+            self.List=QtGui.QListWidget()
+            for i in range(len(list)):
+                item = QtGui.QListWidgetItem(list[i])
+                item.setFlags(QtCore.Qt.ItemIsEnabled |
+                              QtCore.Qt.ItemIsSelectable |
+                              QtCore.Qt.ItemIsDragEnabled)
+                self.List.addItem(item)
+            bmono=True
+            for i in range(len(list)):
+                if list[0] != list[i]: bmono=False
+            if bmono:
+                # S'il ny a qu'un seul type d'exercices, pas la peine de choisir
+                # l'ordre
+                valide(self.List, self.LesFiches, parametres)
+            else:
+                form = ChoixOrdreExos(self.List,  self.LesFiches,  parametres)
+                form.exec_()
 
     def creer_tous_les_exercices(self):
         """
@@ -471,75 +474,75 @@ class Ui_MainWindow(object):
                                                          self.config['chemin_fichier'], QtGui.QFileDialog.ShowDirsOnly)
         i = 0
         if f0:
-            from outils import creation
-            for niveau in xrange(4):
+            for niveau in range(4):
                 liste = []
-                for i in xrange(len(self.LesFiches[niveau][2])):
+                for i in range(len(self.LesFiches[niveau][2])):
                     liste.append((niveau,  i))
-                exo = os.path.join(unicode(f0), "%se.tex" % (6 - niveau))
-                cor = os.path.join(unicode(f0), "%se-corrige.tex" % (6 - niveau))
+                exo = os.path.join(str(f0), "%se.tex" % (6 - niveau))
+                cor = os.path.join(str(f0), "%se-corrige.tex" % (6 - niveau))
                 parametres = {
                                         'les_fiches': self.LesFiches,
                                         'fiche_exo': exo,
                                         'fiche_cor': cor,
                                         'liste_exos': liste,
                                         'creer_pdf': '1',
-                                        'titre': u"Exemple de fiche",
+                                        'titre': "Exemple de fiche",
                                         'niveau': "%s\\ieme" % (6-niveau),
-                                        'modele': unicode(self.comboBox_modele.currentText() + '.tex'),
+                                        'modele': str(self.comboBox_modele.currentText() + '.tex'),
                                         'corrige': True,
-					'configdir': self.configdir
+                                        'configdir': self.configdir
                                         }
-                creation(parametres)
+                outils.creation(parametres)
 
     def effacer_choix_exercices(self):
         """Remet toutes les SpinBox à zéro et vide la liste d'exercices sélectionnés"""
         self.liste_creation=[]
-        for level in xrange(4):
-            for box in xrange(len(self.LesFiches[level][2])):
-                exec "self.spinBox_%s_%s.setValue(0)" % (6-level, box)
+        for level in range(4):
+            for box in range(len(self.LesFiches[level][2])):
+                exec("self.spinBox_%s_%s.setValue(0)" % (6-level, box))
 
     def enregistrer_config(self):
         """Fonction qui se charge d'enregistrer les options de l'interface dans le fichier de configuration
         après avoir complété le dictionnaire."""
-        tree = etree.parse(self.configfile)
+        tree = lxml.etree.parse(self.configfile)
         root = tree.getroot()
         options = root.find('options')
         options .find('nom_fichier').text = unicode(self.nom_fichier.text())
         options .find('chemin_fichier').text = unicode(self.chemin_fichier.text())
         options .find('titre_fiche').text = unicode(self.titre_fiche.text())
-        options .find('corrige').text = unicode(self.checkBox_corrige.isChecked())
-        options .find('pdf').text  = unicode(self.checkBox_pdf.isChecked())
+        options .find('corrige').text = str(self.checkBox_corrige.isChecked())
+        options .find('pdf').text  = str(self.checkBox_pdf.isChecked())
         options .find('modele').text = unicode(self.comboBox_modele.currentText() + '.tex')
 
-        f = open(self.configfile,'w')
-        f.write(etree.tostring(root, pretty_print=True, encoding="UTF-8", xml_declaration=True))
+        f = codecs.open(self.configfile, encoding='utf-8', mode='w')
+        f.write(lxml.etree.tostring(root, pretty_print=True, encoding="UTF-8",
+                               xml_declaration=True).decode('utf-8', 'strict'))
         f.close()
 
     def insert_spinbox(self, level, box):
         """Place autant de SpinBox que d'exercices pour chaque niveau et les nomme"""
         treated="%s_%s" % (level, box)
-        exec "self.horizontalLayout_%s = QtGui.QHBoxLayout()" % (treated)
-        exec "self.spinBox_%s = QtGui.QSpinBox(self.tab_%se)" % (treated, level)
+        exec("self.horizontalLayout_%s = QtGui.QHBoxLayout()" % (treated))
+        exec("self.spinBox_%s = QtGui.QSpinBox(self.tab_%se)" % (treated, level))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(40)
         sizePolicy.setVerticalStretch(30)
-        exec "sizePolicy.setHeightForWidth(self.spinBox_%s.sizePolicy().hasHeightForWidth())" % (treated)
-        exec "self.spinBox_%s.setSizePolicy(sizePolicy)" % (treated)
-        exec "self.horizontalLayout_%s.addWidget(self.spinBox_%s)" % (treated, treated)
-        exec "self.label_%s = QtGui.QLabel(self.tab_%se)" % (treated, level)
-        exec "self.horizontalLayout_%s.addWidget(self.label_%s)" % (treated, treated)
+        exec("sizePolicy.setHeightForWidth(self.spinBox_%s.sizePolicy().hasHeightForWidth())" % (treated))
+        exec("self.spinBox_%s.setSizePolicy(sizePolicy)" % (treated))
+        exec("self.horizontalLayout_%s.addWidget(self.spinBox_%s)" % (treated, treated))
+        exec("self.label_%s = QtGui.QLabel(self.tab_%se)" % (treated, level))
+        exec("self.horizontalLayout_%s.addWidget(self.label_%s)" % (treated, treated))
 
-        exec "spacerItem_%s = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)" % (treated)
-        exec "self.horizontalLayout_%s.addItem(spacerItem_%s)" % (treated, treated)
-        exec "self.horizontalLayout_%s.addItem(spacerItem_%s)" % (treated, treated)
+        exec("spacerItem_%s = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)" % (treated))
+        exec("self.horizontalLayout_%s.addItem(spacerItem_%s)" % (treated, treated))
+        exec("self.horizontalLayout_%s.addItem(spacerItem_%s)" % (treated, treated))
 
-        exec "self.gridLayout_%se.addLayout(self.horizontalLayout_%s, %s, %s, 1, 1)" % (level, treated, box/2, box%2)
+        exec("self.gridLayout_%se.addLayout(self.horizontalLayout_%s, %s, %s, 1, 1)" % (level, treated, box/2, box%2))
 
     def lire_config(self,  section):
         """Lis le fichier de configuration pyromaths.conf, enregistre les données dans un dictionnaire config"""
         config = {}
-        tree = etree.parse(self.configfile)
+        tree = lxml.etree.parse(self.configfile)
         root = tree.getroot()
         options = root.find(section)
         for child in options:
@@ -560,11 +563,11 @@ class Ui_MainWindow(object):
         et adapte le niveau affiché dans l'en-tête de la fiche en fonction du plus haut niveau d'exercice"""
         niveau=0
         self.liste_creation = []
-        for level in xrange(4):
-            for box in xrange(len(self.LesFiches[level][2])):
-                exec "qte = self.spinBox_%s_%s.value()" % (6 - level, box)
-                for i in xrange(qte):
-                    exec "self.liste_creation.append((%s, %s))" % (level, box)
+        for level in range(4):
+            for box in range(len(self.LesFiches[level][2])):
+                exec("qte = self.spinBox_%s_%s.value()" % (6 - level, box),  locals(),  globals())
+                for i in range(qte):
+                    exec("self.liste_creation.append((%s, %s))" % (level, box))
                     if level > niveau:
                         niveau = level
         self.comboBox_niveau.setCurrentIndex(niveau)
@@ -576,7 +579,8 @@ class Ui_MainWindow(object):
 
 
     def valide_options(self):
-        """Synchronise les options éventuellement saisies par l'utilisateur avec le dictionnaire de config"""
+        """Synchronise les options éventuellement saisies par l'utilisag
+QCoreApplication::exec: The event loop is already runningteur avec le dictionnaire de config"""
         self.config['chemin_fichier'] = self.chemin_fichier.text()
         self.config['nom_fichier'] = self.nom_fichier.text()
         self.config['titre_fiche'] = self.titre_fiche.text()
@@ -593,109 +597,85 @@ class ChoixOrdreExos(QtGui.QDialog):
     form = ChoixOrdreExos(list, LesFiches, parametres)
     Permet de choisir l'ordre dans lequel les exercices vont apparaître
     parametres = {'fiche_exo':
-                            'fiche_cor':
-                            'liste_exos':
-                            'creer_pdf':
-                            'titre':
-                            'corrige':
-                            'niveau':
-                            'nom_fichier':
-                            'chemin_fichier':
-                            }"""
+                  'fiche_cor':
+                  'liste_exos':
+                  'creer_pdf':
+                  'titre':
+                  'corrige':
+                  'niveau':
+                  'nom_fichier':
+                  'chemin_fichier':
+                 }"""
 
     def __init__(self, list, LesFiches, parametres,  parent=None):
         self.LesFiches = LesFiches
         self.parametres = parametres
-        self.lesexos = list
-        #Vérifie s'il n'y a pas un seul type d'exercices
-        self.bmono=True
-        for i in xrange(len(list)):
-            if list[0] != list[i]: self.bmono=False
-        if self.bmono: #S'il ny a qu'un seul type d'exercices, pas la peine de choisir l'ordre
-            self.List=QtGui.QListWidget()
-            for i in xrange(len(list)):
-                item = QtGui.QListWidgetItem(list[i])
-                item.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable |
-                              QtCore.Qt.ItemIsDragEnabled)
-                self.List.addItem(item)
-            self.accept()
-        else:
-            QtGui.QDialog.__init__(self, parent)
-            self.setWindowTitle("Choisissez l'ordre des exercices")
-            layout = QtGui.QHBoxLayout()
+        self.List = list
+        QtGui.QDialog.__init__(self, parent)
+        self.setWindowTitle("Choisissez l'ordre des exercices")
+        layout = QtGui.QHBoxLayout()
 
-            buttonBox = QtGui.QDialogButtonBox()
-            buttonBox.setOrientation(QtCore.Qt.Vertical)
-            buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+        buttonBox = QtGui.QDialogButtonBox()
+        buttonBox.setOrientation(QtCore.Qt.Vertical)
+        buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
 
-            self.List=QtGui.QListWidget()
-            self.List.setAlternatingRowColors(True)
-            self.List.setDragEnabled(True)
-            self.List.setAcceptDrops(True)
-            self.List.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
-            self.List.setDropIndicatorShown(True)
+        self.List.setAlternatingRowColors(True)
+        self.List.setDragEnabled(True)
+        self.List.setAcceptDrops(True)
+        self.List.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
+        self.List.setDropIndicatorShown(True)
 
-            for i in xrange(len(list)):
-                item = QtGui.QListWidgetItem(list[i])
-                item.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable |
-                              QtCore.Qt.ItemIsDragEnabled)
-                self.List.addItem(item)
+        layout.addWidget(self.List)
+        layout.addWidget(buttonBox)
+        self.setLayout(layout)
 
-            layout.addWidget(self.List)
-            layout.addWidget(buttonBox)
-            self.setLayout(layout)
-
-            QtCore.QObject.connect(buttonBox, QtCore.SIGNAL("accepted()"), self.accept)
-            QtCore.QObject.connect(buttonBox, QtCore.SIGNAL("rejected()"), self.close)
+        QtCore.QObject.connect(buttonBox, QtCore.SIGNAL("accepted()"), self.accept)
+        QtCore.QObject.connect(buttonBox, QtCore.SIGNAL("rejected()"), self.close)
 
     def accept(self):
         """Écrit une liste contenant la liste des exercices dans l'ordre choisit par l'utilisateur et demande à
         celui-ci les noms de fichiers pour les exercices et les corrigés"""
-	corrige = self.parametres['corrige']
-        l=[]
-        self.lesexos = []
-        for i in xrange(self.List.count()):
-            l.append(unicode(self.List.item(i).text()))
-        for text in l:
-            niveau = 6 - int(text[0])
-            pos = self.LesFiches[niveau][2].index(text[4:])
-            self.lesexos.append((niveau,  pos))
+        valide(self.List, self.LesFiches, self.parametres)
+        self.close()
 
-        #============================================================
-        #        Choix des noms des fichiers exercices et corrigés
-        #============================================================
-        (f0, f1) = ("", "")
-        saveas = QtGui.QFileDialog()
-        if lower(os.path.splitext(self.parametres['nom_fichier'])[1]) == '.tex':
-                self.parametres['nom_fichier'] = os.path.splitext(self.parametres['nom_fichier'])[0]
-        f0 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
-                                            os.path.join(self.parametres['chemin_fichier'],
-                                                         '%s.tex' % self.parametres['nom_fichier']),
-                                            "Documents Tex (*.tex)"))
-        if f0:
-            if lower(os.path.splitext(f0)[1]) != '.tex':
-                f0 = f0 + '.tex'
+def valide(list, LesFiches, parametres):
+    """ Permet de choisir les noms et emplacements des fichiers tex, les écrits
+    et lance la compilation LaTex"""
+    corrige = parametres['corrige']
+    l=[]
+    lesexos = []
+    for i in range(list.count()):
+        l.append(unicode(list.item(i).text()))
+    for text in l:
+        niveau = 6 - int(text[0])
+        pos = LesFiches[niveau][2].index(text[4:])
+        lesexos.append((niveau,  pos))
+
+    #============================================================
+    #        Choix des noms des fichiers exercices et corrigés
+    #============================================================
+    (f0, f1) = ("", "")
+    saveas = QtGui.QFileDialog()
+    filename = outils.supprime_extension(parametres['nom_fichier'],
+                                         '.tex')
+    f0 = str(saveas.getSaveFileName(None, "Enregistrer sous...",
+                os.path.join(parametres['chemin_fichier'],
+                             '%s.tex' % filename),
+                             "Documents Tex (*.tex)"))
+    if f0 != None:
+        outils.ajoute_extension(f0, '.tex')
+        if corrige:
+            f1 = str(saveas.getSaveFileName(None, "Enregistrer sous...",
+                os.path.join(os.path.dirname(f0),
+                u"%s-corrige.tex"  % os.path.splitext(os.path.basename(f0))[0]),
+                "Documents Tex (*.tex)"))
+        else:
+            f1 = os.path.join(os.path.dirname(f0), 'temp.tex')
+        if f1 != None:
             if corrige:
-                f1 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
-                                                    os.path.join(os.path.dirname(f0),
-                                                    "%s-corrige.tex"  % os.path.splitext(os.path.basename(f0))[0]),
-                                                    "Documents Tex (*.tex)"))
-            else:
-                f1 = os.path.join(os.path.dirname(f0), 'temp.tex')
-            if f1:
-                if corrige:
-                  if lower(os.path.splitext(f1)[1]) != '.tex':
-                    f1 = f1 + '.tex'
-                from outils import creation
-                self.parametres ['fiche_exo'] = f0
-                self.parametres ['fiche_cor'] = f1
-                self.parametres ['liste_exos'] = self.lesexos
-                self.parametres ['les_fiches'] =  self.LesFiches
-                creation(self.parametres)
-                if not self.bmono:
-                  self.close()
-            elif not self.bmono:
-                self.close()
-        elif not self.bmono:
-            self.close()
-
+                outils.ajoute_extension(f1, '.tex')
+            parametres ['fiche_exo'] = f0
+            parametres ['fiche_cor'] = f1
+            parametres ['liste_exos'] = lesexos
+            parametres ['les_fiches'] =  LesFiches
+            outils.creation(parametres)

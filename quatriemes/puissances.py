@@ -28,7 +28,7 @@ import string
 
 def tex_proprietes_val(exp_max, nb_max, type):
     """
-    Renvoie des valeurs pour l'exercice sur les propri\xc3\xa9t\xc3\xa9s des puissances
+    Renvoie des valeurs pour l'exercice sur les propriétés des puissances
     @param exp_max: valeur maximale pour les exposants
     @type exp_max: Integer
     @param nb_max: Valeur maximale pour les nombres
@@ -58,18 +58,18 @@ def tex_proprietes_val(exp_max, nb_max, type):
 
 def tex_proprietes():
     exo = ["\\exercice",
-           "Compl\\'eter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :",
+           u"Compléter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :",
            "\\begin{multicols}{4}", "  \\noindent%",
            "  \\begin{enumerate}"]
     cor = ["\\exercice*",
-           "Compl\\'eter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :",
+           u"Compléter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :",
            "\\begin{multicols}{4}", "  \\noindent%",
            "  \\begin{enumerate}"]
     lexos = [0, 1, 2, 3, 0, 1, 2, 3]
 
     #0: a^n*a^p ; 1: (a^n)^p ; 2:a^n/a^p ; 3: a^n*b^n
 
-    for i in xrange(len(lexos)):
+    for i in range(len(lexos)):
         j = lexos.pop(randrange(len(lexos)))
         if j == 3:
             lval = tex_proprietes_val(12, 12, 1)
@@ -110,7 +110,7 @@ def tex_proprietes():
 
 def tex_proprietes_neg_val(exp_max, nb_max, type):
     """
-    Renvoie des valeurs pour l'exercice sur les propri\xc3\xa9t\xc3\xa9s des puissances
+    Renvoie des valeurs pour l'exercice sur les propriétés des puissances
     @param exp_max: valeur maximale pour les exposants
     @type exp_max: Integer
     @param nb_max: Valeur maximale pour les nombres
@@ -140,26 +140,26 @@ def tex_proprietes_neg_val(exp_max, nb_max, type):
 
 def tex_proprietes_neg():
     exo = ["\\exercice",
-           "\\'Ecrire sous la forme d'une puissance de 10 puis donner l'\\'ecriture",
-           " d\\'ecimale de ces nombres :", "\\begin{multicols}{2}",
+           u"Écrire sous la forme d'une puissance de 10 puis donner l'écriture",
+           u" décimale de ces nombres :", "\\begin{multicols}{2}",
            "  \\noindent%", "  \\begin{enumerate}"]
     cor = ["\\exercice*",
-           "\\'Ecrire sous la forme d'une puissance de 10 puis donner l'\\'ecriture",
-           " d\\'ecimale de ces nombres :", "\\begin{multicols}{2}",
+           u"Écrire sous la forme d'une puissance de 10 puis donner l'écriture",
+           u" décimale de ces nombres :", "\\begin{multicols}{2}",
            "  \\noindent%", "  \\begin{enumerate}"]
     lexos = [0, 1, 2, 3, 0, 1, 2, 3]
 
     #0: a^n*a^p ; 1: (a^n)^p ; 2:a^n/a^p
 
-    for i in xrange(len(lexos)):
-        lexp = [randrange(-6, 6) for i in xrange(2)]
+    for i in range(len(lexos)):
+        lexp = [randrange(-6, 6) for i in range(2)]
         j = lexos.pop(randrange(len(lexos)))
 
         # FIXME : À finir
 
         if j == 0:
             while abs(lexp[0] + lexp[1]) > 10:
-                lexp = [randrange(-6, 6) for i in xrange(2)]
+                lexp = [randrange(-6, 6) for i in range(2)]
             exo.append("    \\item $10^{%s} \\times 10^{%s} = \\dotfill$" %
                        tuple(lexp))
             cor.append("    \\item $10^{%s}\\times 10^{%s}=" % tuple(lexp))
@@ -169,7 +169,7 @@ def tex_proprietes_neg():
                        sepmilliers(10 ** (lexp[0] + lexp[1]), 1)))
         elif j == 1:
             while abs(lexp[0] * lexp[1]) > 10:
-                lexp = [randrange(-6, 6) for i in xrange(2)]
+                lexp = [randrange(-6, 6) for i in range(2)]
             exo.append("    \\item $(10^{%s})^{%s}=\\dotfill$" % (lexp[0],
                        lexp[1]))
             cor.append("    \\item $(10^{%s})^{%s}=" % tuple(lexp))
@@ -179,7 +179,7 @@ def tex_proprietes_neg():
                        sepmilliers(10 ** (lexp[0] * lexp[1]), 1)))
         elif j == 2:
             while abs(lexp[0] - lexp[1]) > 10:
-                lexp = [randrange(-6, 6) for i in xrange(2)]
+                lexp = [randrange(-6, 6) for i in range(2)]
             exo.append("    \\item $\\dfrac{10^{%s}}{10^{%s}}=\\dotfill$" %
                        tuple(lexp))
             cor.append("    \\item $\\dfrac{10^{%s}}{10^{%s}}=" % tuple(lexp))
@@ -207,21 +207,21 @@ def val_sc():
 
         #a=randrange(1,9999)*10**randrange(-9,6)
 
-        if a >= 10 or a < 1:
+        if a >= 10 or (a < 1 and a >0) :
             break
     return a
 
 
 def ecr_sc():
     from math import log10, floor
-    exo = ["\\exercice", "Compl\\'eter par par le nombre qui convient :",
+    exo = ["\\exercice", u"Compléter par par le nombre qui convient :",
            "\\begin{multicols}{3}", "  \\noindent%",
            "  \\begin{enumerate}"]
     cor = ["\\exercice*",
-           "Compl\\'eter par par le nombre qui convient :",
+           u"Compléter par par le nombre qui convient :",
            "\\begin{multicols}{3}", "  \\noindent%",
            "  \\begin{enumerate}"]
-    for i in xrange(6):
+    for i in range(6):
         a = val_sc()
         exp = int(floor(log10(a)))
         a_sc = (a * 1.) / 10 ** exp
@@ -254,10 +254,10 @@ def exo_puissances():
     from math import floor, log10
     sd = string.maketrans('.', ',')  # convertit les . en , (separateur decimal)
     exo = ["\\exercice",
-           "Calculer les expressions suivantes et donner l'\\'ecriture scientifique du r\\'esultat.",
+           u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat.",
            "\\begin{multicols}{2}", "  \\noindent%"]
     cor = ["\\exercice*",
-           "Calculer les expressions suivantes et donner l'\\'ecriture scientifique du r\\'esultat.",
+           u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat.",
            "\\begin{multicols}{2}", "  \\noindent%"]
     valeurs = valeurs_puissances()
     i = randrange(2)
@@ -351,7 +351,7 @@ def tex_puissances_4(a):
 
 def verifie_type(a):  # verifie si des nombres reels dans le tuple a sont en fait des nombres entiers et change leur type
     list = []
-    for i in xrange(len(a)):
+    for i in range(len(a)):
         if str(a[i]).endswith('.0'):
             list.append(int(a[i] + .1))
         else:
@@ -393,5 +393,3 @@ def valeurs_puissances():  # renvoie un tuple contenant les valeurs pour les deu
                         valeur_alea(-10, -2), valeur_alea(2, 5))
     b = verifie_type((n1, n2, n3, e1, e2, e3, e4))
     return (a, b)
-
-
