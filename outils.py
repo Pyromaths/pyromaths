@@ -333,8 +333,8 @@ def creation(parametres):
                 }"""
     exo = parametres['fiche_exo']
     cor = parametres['fiche_cor']
-    f0 = codecs.open(exo, encoding='utf-8', mode='w')
-    f1 = codecs.open(cor, encoding='utf-8', mode='w')
+    f0 = codecs.open(unicode(exo), encoding='utf-8', mode='w')
+    f1 = codecs.open(unicode(cor), encoding='utf-8', mode='w')
     titre = parametres['titre']
     fiche_metapost = os.path.splitext(exo)[0] + '.mp'
 
@@ -399,15 +399,16 @@ def creation(parametres):
                 os.system('xdg-open %s.pdf' % (f1noext))
         #Supprime les fichiers temporaires créés par LaTeX
         try:
-            os.remove(os.path.join(dir0, 'pyromaths.log'))
             for ext in ('.aux', '.dvi', '.log', '.out', '.ps'):
                 os.remove(os.path.join(dir0,  f0noext + ext))
                 if parametres['corrige']:
                     os.remove(os.path.join(dir1,  f1noext + ext))
+            os.remove(os.path.join(dir0, 'pyromaths.log'))
         except OSError:
-            print(("Le fichier %s ou %s n'a pas été supprimé." % (os.path.join(dir0,  f0noext + ext),
-                                                                  os.path.join(dir1,  f1noext + ext))))
-                                                                  #le fichier à supprimer n'existe pas.
+            print(("Le fichier %s ou %s n'a pas été supprimé." % \
+                   (os.path.join(dir0,  f0noext + ext),
+                   os.path.join(dir1,  f1noext + ext))))
+                   #le fichier à supprimer n'existe pas.
     if not parametres['corrige']:
         os.remove(os.path.join(dir1,  f1noext + '.tex'))
 

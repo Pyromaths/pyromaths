@@ -213,15 +213,6 @@ def enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
             )
     else:
         return (
-            noms[0],
-            angles[0],
-            angles[0],
-            noms[1],
-            angles[1],
-            angles[1],
-            noms[2],
-            angles[2],
-            angles[2],
             nom_tr,
             noms[2],
             cotes[long0],
@@ -233,78 +224,75 @@ def enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
 
 
 def exo_pythagore():
-    while True:
-        longueurs = couples_pythagore[random.randrange(120)]
-        longueurs = [longueurs[i] / 10.0 for i in range(3)]
-        if inegalite_triangulaire(longueurs):
-            break
-    noms = noms_sommets(3)
-    angles = fig_tr_rect(longueurs)
-    nom_tr = nom_triangle(noms)
-    long0 = random.randrange(3)
-    long1 = (random.randrange(2) + 1 + long0) % 3
-    cotes = cotes_sommets(noms)
-    exo = ["\\exercice"]
-    cor = ["\\exercice*"]
-    enonce = \
-        """\\begin{minipage}{4cm}
-  \\begin{pspicture}(-2,-2)(2,2)
-    \\SpecialCoor\\psset{PointSymbol=x}
-    \\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){a}
-    \\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){b}
-    \\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){c}
-    \\pspolygon(a)(b)(c)
-    \\pstRightAngle{b}{c}{a}
-  \\end{pspicture}
-\\end{minipage}\\hfill
-\\begin{minipage}{13cm}
-  Soit $%s$ un triangle rectangle en $%s$ tel que $%s=\\unit[%s]{cm}\\text{ et }%s=\\unit[%s]{cm}$.\\par
-  Calculer la longueur $%s$.""" % \
-        enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
-                         long1)
-    exo.append(enonce)
-    cor.append(enonce)
-    cor.append("  \\par\\dotfill{}\\\\\n")
-    cor.append(u"  Le triangle %s est rectangle en %s donc, d'après le \\textbf{théorème de Pythagore} :" %
-               (nom_tr, noms[2]))
-    cor.append(u"  \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]" %
-               (cotes[2], cotes[0], cotes[1], cotes[2]))
-    if long0 == 2 or long1 == 2:
-        cor.append("  \\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]" %
-                   (cotes[(3 - long0) - long1], cotes[2], cotes[((4 -
-                   long0) - long1) % 2], cotes[(3 - long0) - long1]))
-    if long0 == 2 or long1 == 2:
-        cor.append("  \\[%s^2=%s^2-%s^2\\]" % (cotes[(3 - long0) - long1],
-                   nombre(longueurs[2]), nombre(longueurs[((4 - long0) -
-                   long1) % 2])))
-    else:
-        cor.append("  \\[%s^2=%s^2+%s^2\\]" % (cotes[2], nombre(longueurs[0]),
-                   nombre(longueurs[1])))
-    if long0 == 2 or long1 == 2:
-        cor.append("  \\[%s^2=%s-%s\\]" % (cotes[(3 - long0) - long1],
-                   nombre(longueurs[2] ** 2), nombre(longueurs[((4 -
-                   long0) - long1) % 2] ** 2)))
-    else:
-        cor.append("  \\[%s^2=%s+%s\\]" % (cotes[2], nombre(longueurs[0] **
-                   2), nombre(longueurs[1] ** 2)))
-    if long0 == 2 or long1 == 2:
-        cor.append("  \\[%s^2=%s\\]" % (cotes[(3 - long0) - long1],
-                   nombre(longueurs[2] ** 2 - longueurs[((4 - long0) -
-                   long1) % 2] ** 2)))
-    else:
-        cor.append("  \\[%s^2=%s\\]" % (cotes[2], nombre(longueurs[0] **
-                   2 + longueurs[1] ** 2)))
-    if long0 == 2 or long1 == 2:
-        cor.append("  \\[ \\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" %
-                   (cotes[(3 - long0) - long1], nombre(longueurs[2] ** 2 -
-                   longueurs[((4 - long0) - long1) % 2] ** 2), nombre(longueurs[(3 -
-                   long0) - long1])))
-    else:
-        cor.append("  \\[\\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" %
-                   (cotes[2], nombre(longueurs[0] ** 2 + longueurs[1] **
-                   2), nombre(longueurs[2])))
-    exo.append("\\end{minipage}\n")
-    cor.append("\\end{minipage}\n")
+    types_exercice = [[2, random.randrange(2)], [0, 1]]
+    random.shuffle(types_exercice)
+    random.shuffle(types_exercice[0])
+    random.shuffle(types_exercice[1])
+    exo = ["\\exercice\n\\begin{multicols}{2}\n  \\begin{enumerate}"]
+    cor = ["\\exercice*\n\\begin{multicols}{2}\n  \\begin{enumerate}"]
+    for j in range(2):
+        while True:
+            longueurs = couples_pythagore[random.randrange(120)]
+            longueurs = [longueurs[i] / 10.0 for i in range(3)]
+            if inegalite_triangulaire(longueurs):
+                break
+        noms = noms_sommets(3)
+        angles = fig_tr_rect(longueurs)
+        nom_tr = nom_triangle(noms)
+        long0 , long1 = types_exercice[j]
+        cotes = cotes_sommets(noms)
+        enonce = \
+            """    \\item Soit $%s$ un triangle rectangle en $%s$ tel que :\\par
+    $%s=\\unit[%s]{cm} \\text{ et }%s=\\unit[%s]{cm}$.\\par
+    Calculer la longueur $%s$.""" % \
+            enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
+                             long1)
+        exo.append(enonce)
+        cor.append(enonce)
+        cor.append("  \\par\\dotfill{}\\par\n")
+        cor.append(u"  Le triangle %s est rectangle en %s donc, d'après le \\textbf{théorème de Pythagore} :" %
+                   (nom_tr, noms[2]))
+        cor.append(u"  \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]" %
+                   (cotes[2], cotes[0], cotes[1], cotes[2]))
+        if long0 == 2 or long1 == 2:
+            cor.append("  \\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]" %
+                       (cotes[(3 - long0) - long1], cotes[2], cotes[((4 -
+                       long0) - long1) % 2], cotes[(3 - long0) - long1]))
+        if long0 == 2 or long1 == 2:
+            cor.append("  \\[%s^2=%s^2-%s^2\\]" % (cotes[(3 - long0) - long1],
+                       nombre(longueurs[2]), nombre(longueurs[((4 - long0) -
+                       long1) % 2])))
+        else:
+            cor.append("  \\[%s^2=%s^2+%s^2\\]" % (cotes[2], nombre(longueurs[0]),
+                       nombre(longueurs[1])))
+        if long0 == 2 or long1 == 2:
+            cor.append("  \\[%s^2=%s-%s\\]" % (cotes[(3 - long0) - long1],
+                       nombre(longueurs[2] ** 2), nombre(longueurs[((4 -
+                       long0) - long1) % 2] ** 2)))
+        else:
+            cor.append("  \\[%s^2=%s+%s\\]" % (cotes[2], nombre(longueurs[0] **
+                       2), nombre(longueurs[1] ** 2)))
+        if long0 == 2 or long1 == 2:
+            cor.append("  \\[%s^2=%s\\]" % (cotes[(3 - long0) - long1],
+                       nombre(longueurs[2] ** 2 - longueurs[((4 - long0) -
+                       long1) % 2] ** 2)))
+        else:
+            cor.append("  \\[%s^2=%s\\]" % (cotes[2], nombre(longueurs[0] **
+                       2 + longueurs[1] ** 2)))
+        if long0 == 2 or long1 == 2:
+            cor.append("  \\[ \\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" %
+                       (cotes[(3 - long0) - long1], nombre(longueurs[2] ** 2 -
+                       longueurs[((4 - long0) - long1) % 2] ** 2), nombre(longueurs[(3 -
+                       long0) - long1])))
+        else:
+            cor.append("  \\[\\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" %
+                       (cotes[2], nombre(longueurs[0] ** 2 + longueurs[1] **
+                       2), nombre(longueurs[2])))
+        if j == 0:
+            exo.append("  \\columnbreak")
+            cor.append("  \\columnbreak")
+    exo.append("  \\end{enumerate}\n\\end{multicols}\n")
+    cor.append("  \\end{enumerate}\n\\end{multicols}\n")
     return (exo, cor)
 
 

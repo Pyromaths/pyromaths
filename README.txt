@@ -1,3 +1,13 @@
+Version 09.10
+* Un exercice sur les probabilités niveau 3e - par Guillaume Barthélémy
+* Modification de l'exercice sur le théorème de Pythagore, niveau 4e :
+** la figure n'est plus dessinée
+** deux questions dans le même exercice : un calcul de l'hypoténuse et un calcul d'un côté de l'angle droit
+* Passage à Python 2.6
+** Gestion des caractères accentués dans les noms de fichiers
+** Passage à l'utf-8 pour l'encodage des fichiers.
+* Nouvelles fonctions et classes pour une utilisation prochaine dans de nouveaux exercices
+
 Version 09.09-1
 * Ajout de python-lxml à la liste des dépendances pour le paquet deb de Pyromaths (merci à Cedrick)
 * Correction du chemin des icônes pour la version deb de Pyromaths
@@ -6,7 +16,7 @@ Version 09.09
 * Correction d'un bug de numérotation des calculs sur le niveau troisième
 * Correction d'un bug de chemin avec Windows Vista et Windows 7
 * Envoi des logs de latex dans un fichier temporaire pour éviter l'ouverture de nombreuses fenêtres sous Windows
-* Permet le téléchargement automatique des paquets MikTeX sous Windows. 
+* Permet le téléchargement automatique des paquets MikTeX sous Windows.
 
 Version 09.08
 * Création de modèles pour choisir l'apparence des fiches - par Arnaud Kientz
