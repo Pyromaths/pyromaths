@@ -12,7 +12,6 @@ def produitfacteurs(facteurs):
         prodfacteurs += str(element) + ' \\times '
     return prodfacteurs[:-7]
 
-
 class Racine:
     def __init__(self, radicande, coeff = 1, indice = 2):
         if (radicande < 0) or not (isinstance(indice, int)):
@@ -113,4 +112,3 @@ class Racine:
             return (coeff, detail)
         else:
             return (Racine(radicande, coeff, self.indice), detail)
-                
