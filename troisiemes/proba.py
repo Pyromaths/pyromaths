@@ -35,19 +35,11 @@ def proba(f0,f1):
     c2,i2,n2=couleur[rg2],initiale[rg2],random.randrange(1,6)
     #3e couleur différente des précédentes
     c3,i3,n3=couleur[(rg2+1)%6],initiale[(rg2+1)%6],random.randrange(1,6)
-    exo=[u"Dans une urne, il y a %s boules %ss (%s), %s boules %ss (%s) et %s boules %ss (%s), indiscernables au touché. On tire successivement et sans remise deux boules."%(n1,c1,i1,n2,c2,i2,n3,c3,i3),
-    "\\begin{enumerate}",
-    u"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?" %c2,
-    u"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire.",
-    u"\\item Quelle est la probabilité que la première boule soit %s et la deuxième soit %s?"%(c3,c2),
-    u"\\item Quelle est la probabilité que la deuxième boule soit %s ?"%c1,
-    "\\end{enumerate}"]
-    tot=n1+n2+n3
     if n1>1:
         plur1="s"
     else :
         plur1=""
-    if n1>1:
+    if n2>1:
         plur2="s"
     else :
         plur2=""
@@ -55,6 +47,14 @@ def proba(f0,f1):
         plur3="s"
     else :
         plur3=""
+    exo=[u"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule%s %s%s (%s), indiscernables au touché. On tire successivement et sans remise deux boules."%(n1,plur1,c1,plur1,i1,n2,plur2,c2,plur2,i2,n3,plur3,c3,plur3,i3),
+    "\\begin{enumerate}",
+    u"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?" %c2,
+    u"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire.",
+    u"\\item Quelle est la probabilité que la première boule soit %s et la deuxième soit %s?"%(c3,c2),
+    u"\\item Quelle est la probabilité que la deuxième boule soit %s ?"%c1,
+    "\\end{enumerate}"]
+    tot=n1+n2+n3
     #calculs intermédiaires pour la question 4
     p41="\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}+"%(n1,tot,n1-1,tot-1)
     p42="\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}+"%(n2,tot,n1,tot-1)

@@ -67,15 +67,17 @@ def valeurs(nb, entier=1):  # renvoie les 2 listes contenant les opérateurs et 
         else:
             operateur = listoperateurs[random.randrange(8)]
         if nb > 3:
-            test = ('-*/').find(operateur) >= 0 and loperateurs.count(operateur) < \
-                1 or operateur == '+' and loperateurs.count(operateur) < \
-                2
+            test = ('-*/').find(operateur) >= 0 and \
+                   loperateurs.count(operateur) < 1 or \
+                   operateur == '+' and \
+                   loperateurs.count(operateur) < 2
         else:
-            test = ('-*/+').find(operateur) >= 0 and loperateurs.count(operateur) < \
-                1
+            test = ('-*/+').find(operateur) >= 0 and \
+                   loperateurs.count(operateur) < 1
         if test:
 
-            #On n'accepte pas plus de 1 produit, différence, quotient et de 2 sommes ou parenthèses par calcul.
+            #On n'accepte pas plus de 1 produit, différence, quotient et de 2
+            #sommes ou parenthèses par calcul.
 
             if i == 0 or loperateurs[-1] != '(' or ('*/').find(operateur) < \
                 0:  #pas de * ou / dans une parenthèse.
