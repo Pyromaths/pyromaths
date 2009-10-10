@@ -58,6 +58,8 @@ class Terme:
     def __str__(self):
         if self.coeff == 1:
             coeff = ''
+        elif self.coeff == -1:
+            coeff = '-'
         else:
             coeff = str(self.coeff) + ' '
         if self.puiss == 1:

@@ -342,7 +342,7 @@ def exprfonc(f,i,A,B):
     mid2=(mid21,mid22)
 
     l=[u'Déterminer l\'expression de la fonction $'+f+u'$ représentée ci-contre par la droite ($d_'+str(i)+'$).',
-       u'On lit l\'ordonné à l\'origine et le coefficient de la fonction affine sur le graphique.\\\ ',
+       u'On lit l\'ordonnée à l\'origine et le coefficient de la fonction affine sur le graphique.\\\ ',
        '$'+f+'(x)=ax+b$ ' +'avec $b='+ sepmilliers(str(A[1]))+'$ et $a='+'\\dfrac{'+deltay+'}{'+deltax+'}='+coefres+'$.\\\ ',
        'L\'expression de la fonction '+f+' est $'+f+'(x)='+coef+'x'+b+'$.',
        doublefleche(B,(B[0],A[1])),

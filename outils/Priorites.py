@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import re
+import re, sys
+sys.path[:0] = ['../classes']
+from Racine import *
+from Terme import *
 
 def split_calc(calcul):
 
@@ -137,7 +140,7 @@ def traite_operation(operateur, calcul, pre, post, solution):
                 ^\(*                #le calcul est au début (aux parenthèses près)
                                     #les signes +/- font parti du groupe 2
             |                   #ou
-                ^.*?[\+\-]?         #il y a des calculs avant, le 1e signe +/-
+                ^.*?[\+\-]?         #il y a des calculs avant, le 1er signe +/-
                                     #est un opérateur
             )                   #fin du groupe 0
             (                   #groupe 1
@@ -180,8 +183,19 @@ def traite_operation(operateur, calcul, pre, post, solution):
     test = re.search(pattern, calcul, re.VERBOSE)
     while test:
         sous_calcul = test.groups()
+        print(sous_calcul)
+        print(pre, post)
         sous_resultat = eval(sous_calcul[1])
-        if (sous_calcul[0] and sous_calcul[0][-1] == '(') and \
+        if isinstance(sous_resultat, list):
+            for element in sous_resultat:
+                solution.extend([pre +
+                             sous_calcul[0] +
+                             str(element) +
+                             sous_calcul[2] +
+                             post])
+            a = sous_resultat[-1]
+            sous_resultat = 'a'
+        elif (sous_calcul[0] and sous_calcul[0][-1] == '(') and \
            (sous_calcul[2][0] and sous_calcul[2][0] == ')') and \
            (post[:2] != '**' or sous_resultat > 0):
             #permet de supprimer les parenthèses
@@ -201,19 +215,39 @@ def traite_operation(operateur, calcul, pre, post, solution):
     return (calcul, pre, post, solution)
 
 def priorites_operations(calcul, pre = "", post = "", solution = []):
-    calcul, pre, post, solution = traite_operation("\*\*", calcul, pre,
+    for string in ["\*\*", "[\*/]", "[\+\-]"]:
+        calcul, pre, post, solution = traite_operation(string, calcul, pre,
                                                    post, solution)
-    calcul, pre, post, solution = traite_operation("[\*/]", calcul, pre,
-                                                   post, solution)
-    calcul, pre, post, solution = traite_operation("[\+\-]", calcul, pre,
-                                                   post, solution)
+    #calcul, pre, post, solution = traite_operation("\*\*", calcul, pre,
+                                                   #post, solution)
+    #calcul, pre, post, solution = traite_operation("[\*/]", calcul, pre,
+                                                   #post, solution)
+    #calcul, pre, post, solution = traite_operation("[\+\-]", calcul, pre,
+                                                   #post, solution)
     return (calcul, solution)
 
 print(priorites("(12-15)**2+(15-12)**3"))
-print(priorites("((-(-1)+-2)++3)"))
-print(priorites("4-((-1+-2)+3)"))
-print(priorites('8-(-5*(2-4))'))
+print("_" * 40)
+#print(priorites("((-(-1)+-2)++3)"))
+#print("_" * 40)
+#print(priorites("4-((-1+-2)+3)"))
+#print("_" * 40)
+#print(priorites('8-(-5*(2-4))'))
+#print("_" * 40)
 print(priorites("1+2+3+4"))
-print(priorites("-3**+2"))
-print(priorites("9+8*7"))
-print(priorites("8+1.3e+2"))
+print("_" * 40)
+#print(priorites("-3**+2"))
+#print("_" * 40)
+#print(priorites("9+8*7"))
+#print("_" * 40)
+#print(priorites("8+1.3e+2"))
+#print("_" * 40)
+a, b, c = Racine(5), Racine(5, 3), Racine(5, 2)
+print(priorites("2*(a+b+c)"))
+print("_" * 40)
+a, b = Racine(5), Racine(5, 3)
+print(priorites("a*b*2"))
+#print("_" * 40)
+#c, d = Terme(5, 2), Terme(-6, 2)
+#print(priorites("c*d"))
+#print("_" * 40)

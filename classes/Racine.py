@@ -24,7 +24,7 @@ class Racine:
         if not (isinstance(other, Racine)):
             return str(self) + " + " + str(other)
         if (self.radicande == other.radicande) and (self.indice == other.indice):
-            return Racine(self.radicande, self.coeff + other.coeff, self.indice)
+            return [str(self.simplifie()[0]) + "+" + str(other.simplifie()[0]), Racine(self.radicande, self.coeff + other.coeff, self.indice)]
         else:
             return str(self) + " + " + str(other)
 
@@ -37,7 +37,7 @@ class Racine:
         if (self.radicande == other.radicande) and (self.indice == other.indice):
             return Racine(self.radicande, self.coeff - other.coeff, self.indice)
         else:
-            return str(self) + " - " + str(other)
+            return (str(self) + " - " + str(other), "tset")
 
     def __rsub__(self, other):
         return -(self - other)

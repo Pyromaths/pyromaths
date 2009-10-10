@@ -19,7 +19,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-#fonction affine 3e
+
 import random
 from math import *
 from outils import sepmilliers
@@ -47,7 +47,7 @@ def proba(f0,f1):
         plur3="s"
     else :
         plur3=""
-    exo=[u"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule%s %s%s (%s), indiscernables au touché. On tire successivement et sans remise deux boules."%(n1,plur1,c1,plur1,i1,n2,plur2,c2,plur2,i2,n3,plur3,c3,plur3,i3),
+    exo=[u"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule%s %s%s (%s), indiscernables au toucher. On tire successivement et sans remise deux boules."%(n1,plur1,c1,plur1,i1,n2,plur2,c2,plur2,i2,n3,plur3,c3,plur3,i3),
     "\\begin{enumerate}",
     u"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?" %c2,
     u"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire.",
@@ -60,7 +60,7 @@ def proba(f0,f1):
     p42="\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}+"%(n2,tot,n1,tot-1)
     p43="\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}="%(n3,tot,n1,tot-1)
     result4="\\dfrac{%s}{%s}"%(n1*(n1-1+n2+n3),tot*(tot-1)) #resultat non simplifié de la question 4
-    cor=[u"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule%s %s%s (%s), indiscernables au touché. On tire successivement et sans remise deux boules."%(n1,plur1,c1,plur1,i1,n2,plur2,c2,plur2,i2,n3,plur3,c3,plur3,i3),
+    cor=[u"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule%s %s%s (%s), indiscernables au toucher. On tire successivement et sans remise deux boules."%(n1,plur1,c1,plur1,i1,n2,plur2,c2,plur2,i2,n3,plur3,c3,plur3,i3),
          "\\begin{enumerate}",
          u"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?\\par " %c2,
          "Il y a %s boules dans l'urne dont %s boule%s %s%s. \\par"%(tot,n2,plur2,c2,plur2),
