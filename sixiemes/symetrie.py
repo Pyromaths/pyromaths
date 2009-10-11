@@ -62,31 +62,31 @@ def place_pts(vals, angle):
     for i in range(len(vals)):
         txt.append("(%s,%s)" % vals[i])
         txt.append("{%s}" % chr(i + 97))
-    txt.append("\n  \\pstGeonode[PointSymbol=x,PointName=none](-4.5;%s){A}(4.5;%s){B}" % (angle, angle))
-    txt.append("\n  \\psline[linewidth=1.5\\pslinewidth,nodesep=-4.5](A)(B)")
-    txt.append("\n  \\pspolygon")
+    txt.append("\\pstGeonode[PointSymbol=x,PointName=none](-4.5;%s){A}(4.5;%s){B}" % (angle, angle))
+    txt.append("\\psline[linewidth=1.5\\pslinewidth,nodesep=-4.5](A)(B)")
+    txt.append("\\pspolygon")
     for i in range(len(vals)):
         txt.append("(%s)" % chr(i + 97))
     return ("").join(txt)
 
 
 def SymetrieQuadrillage():
-    exo = ["\\exercice", u"Construire la symétrique de chacune des figures par rapport à la droite en", "utilisant le quadrillage :\\par\n", "\\psset{unit=.9cm}\n"]
-    cor = ["\\exercice*", u"Construire la symétrique de chacune des figures par rapport à la droite en", "utilisant le quadrillage :\\par\n", "\\psset{unit=.9cm}\n"]
-    
+    exo = ["\\exercice", u"Construire la symétrique de chacune des figures par rapport à la droite en", "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
+    cor = ["\\exercice*", u"Construire la symétrique de chacune des figures par rapport à la droite en", "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
+
     nbpts = 5
     langles = [0, 90, 45, 135]
     for j in range(3):
         angle = langles.pop(random.randrange(len(langles)))
         vals = valeurs_quad(nbpts)
         txt = place_pts(vals, angle)
-        exo.append("\\begin{pspicture*}(-3,-3)(3,3)\n")
-        exo.append("  \\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]\n")
+        exo.append("\\begin{pspicture*}(-3,-3)(3,3)")
+        exo.append("  \\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]")
         exo.append(txt)
-        cor.append("\\begin{pspicture*}(-3,-3)(3,3)\n")
-        cor.append("  \\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]\n")
+        cor.append("\\begin{pspicture*}(-3,-3)(3,3)")
+        cor.append("  \\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]")
         cor.append(txt)
-        txt_cor = "\n  \\pstOrtSym[PointSymbol=x,PointName=none]{A}{B}{"
+        txt_cor = "\\pstOrtSym[PointSymbol=x,PointName=none]{A}{B}{"
         for i in range(len(vals)):
             if i > 0:
                 txt_cor += ","
@@ -100,10 +100,10 @@ def SymetrieQuadrillage():
         for i in range(len(vals)):
             txt_cor += "(%s1)" % chr(i + 97)
         cor.append(txt_cor)
-        exo.append("\\end{pspicture*}\n")
-        cor.append("\\end{pspicture*}\n")
+        exo.append("\\end{pspicture*}")
+        cor.append("\\end{pspicture*}")
         if j < 2:
-            exo.append("\\hfill\n")
-            cor.append("\\hfill\n")
+            exo.append("\\hfill")
+            cor.append("\\hfill")
     return (exo, cor)
 
