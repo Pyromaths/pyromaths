@@ -205,7 +205,7 @@ def EcritNombreDecimal(n):
             txt = txt + u' unité et '
         if e > 1:
             txt = txt + u' unités et '
-        txt = txt + NombreEnLettres(d) + partieDec[len(str(d)) - 1]
+        txt = txt + NombreEnLettres(d) + partieDec[len(str(n).split('.')[1]) - 1]
         if d > 1:
             txt = txt + 's'
     return txt
@@ -226,7 +226,6 @@ def EcritEnLettre(f0, f1):
                  " : \\dotfill\n")
         f1.write("      \\item " + outils.sepmilliers(lnb[i], 0) + " : ")
         f1.write(EcritNombreDecimal(lnb[i]) + '\n')
-
 
 #===============================================================================
 # Conversions

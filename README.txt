@@ -3,6 +3,7 @@ Version 09.10
 * Modification de l'exercice sur le théorème de Pythagore, niveau 4e :
 ** la figure n'est plus dessinée
 ** deux questions dans le même exercice : un calcul de l'hypoténuse et un calcul d'un côté de l'angle droit
+* Correction d'une erreur dans le corrigé de l'exercice "Écrire un nombre décimal" - merci à Samuel Coupey pour avoir signalé l'erreur
 * Passage à Python 2.6
 ** Gestion des caractères accentués dans les noms de fichiers
 ** Passage à l'utf-8 pour l'encodage des fichiers.
