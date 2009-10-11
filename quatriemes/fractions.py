@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import outils
+import outils.Arithmetique
 from fonctions_globales import OperateurPrioritaire, Affichage
 import random
 from pyro_classes import Fractions
@@ -52,10 +52,10 @@ def sommes_fractions_4e(op, level):
                 if random.randrange(2):
                     d1, d2 = d2, d1
             elif level == 2:
-                n1 = outils.valeur_alea(1, 16)
-                d1 = outils.valeur_alea(1, 40)
-                n2 = outils.valeur_alea(1, 16)
-                d2 = outils.valeur_alea(1, 40)
+                n1 = outils.Arithmetique.valeur_alea(1, 16)
+                d1 = outils.Arithmetique.valeur_alea(1, 40)
+                n2 = outils.Arithmetique.valeur_alea(1, 16)
+                d2 = outils.Arithmetique.valeur_alea(1, 40)
             else:
                 while True:
                     neg=[(-1,1)[random.randrange(2)] for x in range(4)]
@@ -67,10 +67,10 @@ def sommes_fractions_4e(op, level):
                 d2 = random.randrange(1, 40)*neg[3]
             fr1 = Fractions(n1, d1)
             fr2 = Fractions(n2, d2)
-            if outils.pgcd(fr1.n, fr1.d) == 1 and \
-                outils.pgcd(fr2.n, fr2.d) == 1 and \
-                (level == 1 or (outils.pgcd(fr1.d, fr2.d) != abs(fr1.d) \
-                                and outils.pgcd(fr1.d, fr2.d) != abs(fr2.d))):
+            if outils.Arithmetique.pgcd(fr1.n, fr1.d) == 1 and \
+                outils.Arithmetique.pgcd(fr2.n, fr2.d) == 1 and \
+                (level == 1 or (outils.Arithmetique.pgcd(fr1.d, fr2.d) != abs(fr1.d) \
+                                and outils.Arithmetique.pgcd(fr1.d, fr2.d) != abs(fr2.d))):
                 if op == "+":
                     simplifiable = abs(fr1.d * fr2.d) != \
                                         abs(Fractions.simplifie(fr1 + fr2).d)
@@ -107,17 +107,17 @@ def produits_fractions_4e(op, level):
         while True:
             n1=d1=n2=d2=a=b=2
             if level == 3 or level == 4:
-                while outils.pgcd(a,b)>1:
+                while outils.Arithmetique.pgcd(a,b)>1:
                     a=random.randrange(2,11)
                     b=random.randrange(2,11)
             else:
                 a, b = 1, 1
             if op == "*":
                 if level == 1 or level == 3:
-                    while outils.pgcd(n1*a,d1*b)>1:
+                    while outils.Arithmetique.pgcd(n1*a,d1*b)>1:
                         n1=random.randrange(1,11)
                         d1=random.randrange(2,11)
-                    while outils.pgcd(n2*b,d2*a)>1:
+                    while outils.Arithmetique.pgcd(n2*b,d2*a)>1:
                         n2=random.randrange(1,11)
                         d2=random.randrange(2,11)
                 elif level == 2 or level == 4:
@@ -125,10 +125,10 @@ def produits_fractions_4e(op, level):
                         neg=[(-1,-1,1)[random.randrange(3)] for x in range(4)]
                         if neg[0]<0 or neg[1]<0 or neg[2]<0 or neg[3]<0:
                             break
-                    while outils.pgcd(n1*a,d1*b)>1:
+                    while outils.Arithmetique.pgcd(n1*a,d1*b)>1:
                         n1=random.randrange(1,11)*neg[0]
                         d1=random.randrange(2,11)*neg[1]
-                    while outils.pgcd(n2*b,d2*a)>1:
+                    while outils.Arithmetique.pgcd(n2*b,d2*a)>1:
                         n2=random.randrange(1,11)*neg[2]
                         d2=random.randrange(2,11)*neg[3]
                 fr1 = Fractions(n1*a, d1*b)
@@ -137,17 +137,17 @@ def produits_fractions_4e(op, level):
                                                                          fr2).d
             else:
                 if level == 1 or level == 3:
-                    while outils.pgcd(n1*a,d1*b)>1:
+                    while outils.Arithmetique.pgcd(n1*a,d1*b)>1:
                         n1=random.randrange(1,11)
                         d1=random.randrange(2,11)
-                    while outils.pgcd(n2*a,d2*b)>1:
+                    while outils.Arithmetique.pgcd(n2*a,d2*b)>1:
                         n2=random.randrange(1,11)
                         d2=random.randrange(2,11)
                 else:
-                    while outils.pgcd(n1*a,d1*b)>1:
+                    while outils.Arithmetique.pgcd(n1*a,d1*b)>1:
                         n1=random.randrange(-11,11)
                         d1=random.randrange(2,11)*(-1,1)[random.randrange(2)]
-                    while outils.pgcd(n2*a,d2*b)>1:
+                    while outils.Arithmetique.pgcd(n2*a,d2*b)>1:
                         n2=random.randrange(-11,11)
                         d2=random.randrange(2,11)*(-1,1)[random.randrange(2)]
                 fr1 = Fractions(n1*a, d1*b)
@@ -230,9 +230,9 @@ def valeurs_priorites_fractions(nb, entier=1):  # renvoie les 2 listes contenant
     loperandes = []
     for i in range(nb):
         (n, d) = (2, 2)
-        while outils.pgcd(n, d) != 1 or abs(d) == 1:
-            n = outils.valeur_alea(-16, 16)
-            d = -outils.valeur_alea(-40, 40)
+        while outils.Arithmetique.pgcd(n, d) != 1 or abs(d) == 1:
+            n = outils.Arithmetique.valeur_alea(-16, 16)
+            d = -outils.Arithmetique.valeur_alea(-40, 40)
         loperandes.append(Fractions(n, d))
     exercice = [loperandes[0]]
     i = 1

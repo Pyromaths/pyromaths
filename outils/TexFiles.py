@@ -62,11 +62,13 @@ def trouve_indentation(cline, indent, lline):
     if cline.find(r"\end{")==0:
         "desindente tout ce qui suit \end{...}"
         indent -= 2
-    if lline.find(r"\begin{enumerate}")>=0 or lline.find(r"\begin{itemize}")>=0:
-        "n'indente pas ce qui suit un environnement itemize"
-        indent -= 2
-    if cline.find(r"\item") == 0 and lline.find(r"\begin{enumerate}") < 0 \
-                                  and lline.find(r"\begin{itemize}") < 0:
+#    if lline.find(r"\begin{enumerate}")>=0 or lline.find(r"\begin{itemize}")>=0:
+#        "n'indente pas ce qui suit un environnement itemize"
+#        indent -= 2
+#    if cline.find(r"\item") == 0 and lline.find(r"\begin{enumerate}") < 0 \
+#                                  and lline.find(r"\begin{itemize}") < 0:
+#        indent -= 2
+    if cline.find(r"\item") == 0 :
         indent -= 2
     if lline.find(r"\item") >= 0:
         indent += 2
@@ -79,8 +81,8 @@ def traite_chaine(cline,  indent):
     cline = " "*indent + cline
     list.append(cline)
     while len(list[-1]) > 80:
-        if list[-1].find(" ", 2*indent + 1, 80) > 0:
-            for i in range(79, 2*indent + 1, -1):
+        if list[-1].rfind(" ", indent + 1, 80) > 0:
+            for i in range(79, indent, -1):
                 if list[-1][i] == " ":
                     list.append(list[-1][:i])
                     indent = trouve_indentation(list[-2][i+1:], indent, list[-1])

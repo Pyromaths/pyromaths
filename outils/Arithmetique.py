@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import math
+import math, random
 
 def pgcd(a, b):
     """Calcule le pgcd entre a et b."""
@@ -75,3 +75,28 @@ def carrerise(n):
 
     return int(float(q) / float(n))
 
+def signe(a):
+    """renvoie 1 si a est>0, -1 si a<0"""
+    if a < 0:
+        return -1
+    else:
+        return 1
+def valeur_alea(a, b):
+    """choisit une valeur comprise entre a et b non nulle"""
+    while True:
+        alea = random.randrange(a, b + 1)
+        if alea != 0:
+            return alea
+
+#---------------------------------------------------------------------
+# A supprimer dès que troisiemes aura été converti au nouveau format
+#---------------------------------------------------------------------
+
+def ecrit_tex(file, formule, cadre=None, thenocalcul='\\thenocalcul = ',
+              tabs=1):
+    """Écrit la ligne dans le fichier"""
+    if formule != '':
+        if cadre == None or not cadre:
+            file.write((u'  \\[ %s%s \\] \n') % (thenocalcul, formule))
+        else:
+            file.write((u'  \\[ \\boxed{%s%s} \\] \n') % (thenocalcul, formule))

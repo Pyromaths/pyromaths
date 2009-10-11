@@ -26,7 +26,7 @@ import sys, os, codecs
 #================================================================
 # Imports spécifiques à Pyromaths
 #=========================== QtGui ========================
-import interface,  outils
+import interface,  outilsOld
 import troisiemes.troisiemes, quatriemes.quatriemes, cinquiemes.cinquiemes
 import sixiemes.sixiemes
 
@@ -45,7 +45,7 @@ if os.name == "posix" and os.path.basename(__file__) == "pyromaths":
     iconesdir="/usr/share/pixmaps"
 else:
     pathname = os.path.dirname((sys.argv)[0])
-    iconesdir=os.path.join(outils.module_path(), 'img')
+    iconesdir=os.path.join(outilsOld.module_path(), 'img')
 
 
 LesFiches = [[u'Sixième', sixiemes.sixiemes, [
@@ -123,22 +123,22 @@ if __name__ == "__main__":
 #================================================================
 # Création du fichier de configuration si inexistant
 #================================================================
-    if not os.access(os.path.join(outils.configdir(), "pyromaths.xml"), os.R_OK):
-        if not os.path.isdir(outils.configdir()):
-            os.makedirs(outils.configdir())
-        f = codecs.open(os.path.join(outils.configdir(), "pyromaths.xml"), encoding='utf-8', mode='w')
-        f.write(u"" + outils.create_config_file())
+    if not os.access(os.path.join(outilsOld.configdir(), "pyromaths.xml"), os.R_OK):
+        if not os.path.isdir(outilsOld.configdir()):
+            os.makedirs(outilsOld.configdir())
+        f = codecs.open(os.path.join(outilsOld.configdir(), "pyromaths.xml"), encoding='utf-8', mode='w')
+        f.write(u"" + outilsOld.create_config_file())
         f.close()
-    outils.modify_config_file(os.path.join(outils.configdir(), "pyromaths.xml"))
+    outilsOld.modify_config_file(os.path.join(outilsOld.configdir(), "pyromaths.xml"))
 
 #================================================================
 # Création du dossier "modeles" local
 #================================================================
-    modeledir = os.path.join(outils.configdir(),  "modeles")
+    modeledir = os.path.join(outilsOld.configdir(),  "modeles")
     if not os.path.isdir(modeledir):
         os.makedirs(modeledir)
 
     app = QtGui.QApplication(sys.argv)
-    pyromaths = StartQT4(LesFiches,  outils.configdir(), iconesdir)
+    pyromaths = StartQT4(LesFiches,  outilsOld.configdir(), iconesdir)
     pyromaths.show()
     sys.exit(app.exec_())

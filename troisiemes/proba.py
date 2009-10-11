@@ -22,7 +22,6 @@
 
 import random
 from math import *
-from outils import sepmilliers
 from pyro_classes import Fractions
 
 def proba(f0,f1):

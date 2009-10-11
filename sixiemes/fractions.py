@@ -72,20 +72,20 @@ def numerateur_denominateur(l, h, cas):
 
 
 def trace_rectangle(exo, cor, l, h, cas):
-    exo.append("        \\multips(0,0)(1,0){17}{\\psline[linecolor=lightgray](0,0)(0,%s)}\n" %
+    exo.append("\\multips(0,0)(1,0){17}{\\psline[linecolor=lightgray](0,0)(0,%s)}" %
              h)
-    cor.append("        \\multips(0,0)(1,0){17}{\\psline[linecolor=lightgray](0,0)(0,%s)}\n" %
+    cor.append("\\multips(0,0)(1,0){17}{\\psline[linecolor=lightgray](0,0)(0,%s)}" %
              h)
-    exo.append("        \\multips(0,0)(0,1){%s}{\\psline[linecolor=lightgray](0,0)(16,0)}\n" %
+    exo.append("\\multips(0,0)(0,1){%s}{\\psline[linecolor=lightgray](0,0)(16,0)}" %
              (h + 1))
-    cor.append("        \\multips(0,0)(0,1){%s}{\\psline[linecolor=lightgray](0,0)(16,0)}\n" %
+    cor.append("\\multips(0,0)(0,1){%s}{\\psline[linecolor=lightgray](0,0)(16,0)}" %
              (h + 1))
-    exo.append("        \\psframe[linewidth=1.5\\pslinewidth](0,0)(%s,%s)\n" %
+    exo.append("\\psframe[linewidth=1.5\\pslinewidth](0,0)(%s,%s)" %
              (l, h))
-    cor.append("        \\psframe[linewidth=1.5\\pslinewidth](0,0)(%s,%s)\n" %
+    cor.append("\\psframe[linewidth=1.5\\pslinewidth](0,0)(%s,%s)" %
              (l, h))
     if cas == "nsd":
-        cor.append("        \\psframe[linewidth=1.5\\pslinewidth](%s,0)(%s,%s)\n" %
+        cor.append("\\psframe[linewidth=1.5\\pslinewidth](%s,0)(%s,%s)" %
                  (l + 1, 2 * l + 1, h))
 
 
@@ -110,31 +110,31 @@ def fractions_partage_corrige(l, h, n, d):
 
 def trace_partage(cor, l, h, lc, hc, cas):
     if lc < l:
-        cor.append("        \\multips(%s,0)(%s,0){%s}{\\psline(0,0)(0,%s)}\n" %
+        cor.append("\\multips(%s,0)(%s,0){%s}{\\psline(0,0)(0,%s)}" %
                  (lc, lc, l // lc - 1, h))
         if cas == "nsd":
-            cor.append("        \\rput(%s,0){\\multips(%s,0)(%s,0){%s}{\\psline(0,0)(0,%s)}}\n" %
+            cor.append("\\rput(%s,0){\\multips(%s,0)(%s,0){%s}{\\psline(0,0)(0,%s)}}" %
                      (l + 1, lc, lc, l // lc - 1, h))
     if hc < h:
-        cor.append("        \\multips(0,%s)(0,%s){%s}{\\psline(0,0)(%s,0)}\n" %
+        cor.append("\\multips(0,%s)(0,%s){%s}{\\psline(0,0)(%s,0)}" %
                  (hc, hc, h // hc - 1, l))
         if cas == "nsd":
-            cor.append("        \\rput(%s,0){\\multips(0,%s)(0,%s){%s}{\\psline(0,0)(%s,0)}}\n" %
+            cor.append("\\rput(%s,0){\\multips(0,%s)(0,%s){%s}{\\psline(0,0)(%s,0)}}" %
                      (l + 1, hc, hc, h // hc - 1, l))
 
 
 def coloriage(cor, n, d, l, h, lc, hc):
     if n == d:
-        cor.append("        \\psframe[fillstyle=solid,fillcolor=gray](0,0)(%s,%s)\n" %
+        cor.append("\\psframe[fillstyle=solid,fillcolor=gray](0,0)(%s,%s)" %
                  (l, h))
     else:
         (x, y, nfig) = (0, 0, 0)
         for i in range(n):
             if nfig:
-                cor.append("        \\rput(%s,0){\\psframe[fillstyle=solid,fillcolor=gray](%s,%s)(%s,%s)}\n" %
+                cor.append("\\rput(%s,0){\\psframe[fillstyle=solid,fillcolor=gray](%s,%s)(%s,%s)}" %
                          (nfig, x, y, x + lc, y + hc))
             else:
-                cor.append("        \\psframe[fillstyle=solid,fillcolor=gray](%s,%s)(%s,%s)\n" %
+                cor.append("\\psframe[fillstyle=solid,fillcolor=gray](%s,%s)(%s,%s)" %
                          (x, y, x + lc, y + hc))
             if x + lc < l:
                 x = x + lc
@@ -156,9 +156,9 @@ def diviseurs(n):
 
 
 def FractionPartage():
-    exo = ["\\exercice", '\\begin{multicols}{2}\n', '  \\begin{enumerate}\n']
-    cor = ["\\exercice*", '\\begin{multicols}{2}\n', '  \\begin{enumerate}\n']
-    
+    exo = ["\\exercice", '\\begin{multicols}{2}', '\\begin{enumerate}']
+    cor = ["\\exercice*", '\\begin{multicols}{2}', '\\begin{enumerate}']
+
     lcas = ["nid", "un", "nsd", "nid", "nsd"]
     for i in range(4):
         cas = lcas.pop(random.randrange(len(lcas)))
@@ -172,28 +172,28 @@ def FractionPartage():
         (n, d) = numerateur_denominateur(l, h, cas)
         (lc, hc) = fractions_partage_corrige(l, h, n, d)
 
-        exo.append("    \\item Colorer $\\frac{%s}{%s}$ de ce rectangle.\\par\n" %
+        exo.append("\\item Colorer $\\frac{%s}{%s}$ de ce rectangle.\\par" %
                  (n, d))
-        cor.append("    \\item Colorer $\\frac{%s}{%s}$ de ce rectangle.\\par\n" %
+        cor.append("\\item Colorer $\\frac{%s}{%s}$ de ce rectangle.\\par" %
                  (n, d))
-        exo.append("      \\psset{unit=4mm}\n")
-        cor.append("      \\psset{unit=4mm}\n")
-        exo.append("      \\begin{pspicture}(16,%s)\n" % h)
-        cor.append("      \\begin{pspicture}(16,%s)\n" % h)
+        exo.append("\\psset{unit=4mm}")
+        cor.append("\\psset{unit=4mm}")
+        exo.append("\\begin{pspicture}(16,%s)" % h)
+        cor.append("\\begin{pspicture}(16,%s)" % h)
         (lc, hc) = fractions_partage_corrige(l, h, n, d)
         coloriage(cor, n, d, l, h, lc, hc)
         trace_rectangle(exo, cor, l, h, cas)
         trace_partage(cor, l, h, lc, hc, cas)
-        exo.append("      \\end{pspicture}\n")
-        cor.append("      \\end{pspicture}\n")
+        exo.append("\\end{pspicture}")
+        cor.append("\\end{pspicture}")
         if i == 1:
-            exo.append("      \\columnbreak\n")
-            cor.append("      \\columnbreak\n")
+            exo.append("\\columnbreak")
+            cor.append("\\columnbreak")
 
-    exo.append('  \\end{enumerate}\n')
-    exo.append('\\end{multicols}\n')
-    cor.append('  \\end{enumerate}\n')
-    cor.append('\\end{multicols}\n')
+    exo.append('\\end{enumerate}')
+    exo.append('\\end{multicols}')
+    cor.append('\\end{enumerate}')
+    cor.append('\\end{multicols}')
     return (exo, cor)
 
 #===============================================================================
@@ -289,85 +289,71 @@ def unites_fractions(exo, cor, origine, div, subd):
     lfr[2] = 'demis'
     lfr[3] = 'tiers'
     lfr[4] = 'quarts'
-    exo.append(u'        \\item 1 unité = \\ldots %s\n' % lfr[div])
-    exo.append(u'        \\item 1 unité = \\ldots~%s\n' % lfr[subd])
-    exo.append(u'        \\item %s unités = \\ldots~%s\n' % (origine,
+    exo.append(u'\\item 1 unité = \\ldots %s' % lfr[div])
+    exo.append(u'\\item 1 unité = \\ldots~%s' % lfr[subd])
+    exo.append(u'\\item %s unités = \\ldots~%s' % (origine,
              lfr[div]))
-    exo.append(u'        \\item %s unités = \\ldots~%s\n' % (origine,
+    exo.append(u'\\item %s unités = \\ldots~%s' % (origine,
              lfr[subd]))
-    cor.append(u'        \\item 1 unité = %s %s\n' % (div, lfr[div]))
-    cor.append(u'        \\item 1 unité = %s %s\n' % (subd, lfr[subd]))
-    cor.append(u'        \\item %s unités = %s %s\n' % (origine,
+    cor.append(u'\\item 1 unité = %s %s' % (div, lfr[div]))
+    cor.append(u'\\item 1 unité = %s %s' % (subd, lfr[subd]))
+    cor.append(u'\\item %s unités = %s %s' % (origine,
              origine * div, lfr[div]))
-    cor.append(u'        \\item %s unités = %s %s\n' % (origine,
+    cor.append(u'\\item %s unités = %s %s' % (origine,
              origine * subd, lfr[subd]))
 
 
 def trace_demi_droite(exo, cor, origine, div, subd, lpts, npts, lnum):
-    exo.append("  \\psline[arrowscale=2]{->}(0,0)(18,0)\n")
-    exo.append("  \\rput(2mm,0){%\n")
-    exo.append("  \\multips(0,0)(3 mm,0){58}{\\psline(0,-.1)(0,.1)}\n")
-    exo.append("  \\multips(0,0)(%s mm,0){%s}{\\psline(0,-.2)(0,.2)}\n" %
+    exo.append("\\psline[arrowscale=2]{->}(0,0)(18,0)")
+    exo.append("\\rput(2mm,0){%")
+    exo.append("\\multips(0,0)(3 mm,0){58}{\\psline(0,-.1)(0,.1)}")
+    exo.append("\\multips(0,0)(%s mm,0){%s}{\\psline(0,-.2)(0,.2)}" %
              (div * 3, 58 // div + 1))
-    cor.append("  \\psline[arrowscale=2]{->}(0,0)(18,0)\n")
-    cor.append("  \\rput(2mm,0){%\n")
-    cor.append("  \\multips(0,0)(3 mm,0){58}{\\psline(0,-.1)(0,.1)}\n")
-    cor.append("  \\multips(0,0)(%s mm,0){%s}{\\psline(0,-.2)(0,.2)}\n" %
+    cor.append("\\psline[arrowscale=2]{->}(0,0)(18,0)")
+    cor.append("\\rput(2mm,0){%")
+    cor.append("\\multips(0,0)(3 mm,0){58}{\\psline(0,-.1)(0,.1)}")
+    cor.append("\\multips(0,0)(%s mm,0){%s}{\\psline(0,-.2)(0,.2)}" %
              (div * 3, 58 // div + 1))
     for i in range(58 // div + 1):
-        exo.append("  \\rput[t](%s mm,-3mm){\\centering %s}\n" % ((i * div) *
+        exo.append("\\rput[t](%s mm,-3mm){\\centering %s}" % ((i * div) *
                  3, origine + i))
-        cor.append("  \\rput[t](%s mm,-3mm){\\centering %s}\n" % ((i * div) *
+        cor.append("\\rput[t](%s mm,-3mm){\\centering %s}" % ((i * div) *
                  3, origine + i))
     for i in range(2):
-        exo.append("  \\rput[t](%s mm,4mm){\\centering $%s$}\n" % (lpts[i +
+        exo.append("\\rput[t](%s mm,4mm){\\centering $%s$}" % (lpts[i +
                  5] * 3 + .1, npts[i + 5]))
     for i in range(7):
-        cor.append("  \\rput[t](%s mm,4mm){\\centering $%s$}\n" % (lpts[i] *
+        cor.append("\\rput[t](%s mm,4mm){\\centering $%s$}" % (lpts[i] *
                  3 + .1, npts[i]))
-    exo.append("  }\n")
-    cor.append("  }\n")
+    exo.append("  }")
+    cor.append("  }")
 
 
 def ecrit_abscisses(exo, cor, origine, div, subd, lpts, lnum):
-    exo.append("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[0],
-             div))
-    exo.append("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[1],
-             div))
-    exo.append("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[2],
-             subd))
-    exo.append("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[3],
-             subd))
-    exo.append("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (origine *
+    exo.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[0], div))
+    exo.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[1], div))
+    exo.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[2], subd))
+    exo.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[3], subd))
+    exo.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (origine *
              lnum[4] + (lpts[4] // div) * lnum[4], lnum[4]))
-    cor.append("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[0],
-             div))
-    cor.append("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[1],
-             div))
-    cor.append("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[2],
-             subd))
-    cor.append("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[3],
-             subd))
-    cor.append("        \\item $\\left(\\cfrac{%s}{%s}\\right)$\n" % (origine *
+    cor.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[0], div))
+    cor.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[1], div))
+    cor.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[2], subd))
+    cor.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[3], subd))
+    cor.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (origine *
              lnum[4] + (lpts[4] // div) * lnum[4], lnum[4]))
 
 
 def trouve_abscisses(exo, cor, div, subd, lnum):
-    exo.append("        \\item $F~\\left(\\cfrac{\\ldots}{%s}\\right)$\n" %
-             div)
-    exo.append("        \\item $F~\\left(\\cfrac{\\ldots}{%s}\\right)$\n" %
-             subd)
-    exo.append("        \\item $G~\\left(\\cfrac{\\ldots}{%s}\\right)$\n" %
-             div)
-    exo.append("        \\item $G~\\left(\\cfrac{\\ldots}{%s}\\right)$\n" %
-             subd)
-    cor.append("        \\item $F~\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[5],
-             div))
-    cor.append("        \\item $F~\\left(\\cfrac{%s}{%s}\\right)$\n" % ((lnum[5] *
+    exo.append("\\item $F~\\left(\\cfrac{\\ldots}{%s}\\right)$" % div)
+    exo.append("\\item $F~\\left(\\cfrac{\\ldots}{%s}\\right)$" % subd)
+    exo.append("\\item $G~\\left(\\cfrac{\\ldots}{%s}\\right)$" % div)
+    exo.append("\\item $G~\\left(\\cfrac{\\ldots}{%s}\\right)$" % subd)
+    cor.append("\\item $F~\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[5], div))
+    cor.append("\\item $F~\\left(\\cfrac{%s}{%s}\\right)$" % ((lnum[5] *
              subd) // div, subd))
-    cor.append("        \\item $G~\\left(\\cfrac{%s}{%s}\\right)$\n" % (lnum[6],
-             div))
-    cor.append("        \\item $G~\\left(\\cfrac{%s}{%s}\\right)$\n" % ((lnum[6] *
+    cor.append("\\item $G~\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[6], div))
+    cor.append("\\item $G~\\left(\\cfrac{%s}{%s}\\right)$" % ((lnum[6] *
              subd) // div, subd))
 
 
@@ -375,51 +361,50 @@ def QuestionsAbscisses():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
     (origine, div, subd, lpts, npts, lnum) = valeurs_abscisses()
-    exo.append("\\begin{enumerate}\n")
-    exo.append(u"  \\item Compléter :\n")
-    exo.append("    \\begin{multicols}{2}\n")
-    exo.append("      \\begin{enumerate}\n")
-    cor.append("\\begin{enumerate}\n")
-    cor.append(u"  \\item Compléter :\n")
-    cor.append("    \\begin{multicols}{2}\n")
-    cor.append("      \\begin{enumerate}\n")
+    exo.append("\\begin{enumerate}")
+    exo.append(u"\\item Compléter :")
+    exo.append("\\begin{multicols}{2}")
+    exo.append("\\begin{enumerate}")
+    cor.append("\\begin{enumerate}")
+    cor.append(u"\\item Compléter :")
+    cor.append("\\begin{multicols}{2}")
+    cor.append("\\begin{enumerate}")
     unites_fractions(exo, cor, origine, div, subd)
-    exo.append("      \\end{enumerate}\n")
-    exo.append("    \\end{multicols}\n")
-    exo.append(u"  \\item Sur la demi-droite ci-dessous, placer les points d'abscisse donnée :\n")
-    exo.append("    \\begin{multicols}{5}\n")
-    exo.append("      \\begin{enumerate}\n")
-    exo.append("        \\renewcommand{\\theenumii}{\\Alph{enumii}}\n")
-    exo.append("        \\renewcommand{\\labelenumii}{$\\theenumii$}\n")
-    cor.append("      \\end{enumerate}\n")
-    cor.append("    \\end{multicols}\n")
-    cor.append(u"  \\item Sur la demi-droite ci-dessous, placer les points d'abscisse donnée :\n")
-    cor.append("    \\begin{multicols}{5}\n")
-    cor.append("      \\begin{enumerate}\n")
-    cor.append("        \\renewcommand{\\theenumii}{\\Alph{enumii}}\n")
-    cor.append("        \\renewcommand{\\labelenumii}{$\\theenumii$}\n")
+    exo.append("\\end{enumerate}")
+    exo.append("\\end{multicols}")
+    exo.append(u"\\item Sur la demi-droite ci-dessous, placer les points d'abscisse donnée :")
+    exo.append("\\begin{multicols}{5}")
+    exo.append("\\begin{enumerate}")
+    exo.append("\\renewcommand{\\theenumii}{\\Alph{enumii}}")
+    exo.append("\\renewcommand{\\labelenumii}{$\\theenumii$}")
+    cor.append("\\end{enumerate}")
+    cor.append("\\end{multicols}")
+    cor.append(u"\\item Sur la demi-droite ci-dessous, placer les points d'abscisse donnée :")
+    cor.append("\\begin{multicols}{5}")
+    cor.append("\\begin{enumerate}")
+    cor.append("\\renewcommand{\\theenumii}{\\Alph{enumii}}")
+    cor.append("\\renewcommand{\\labelenumii}{$\\theenumii$}")
     ecrit_abscisses(exo, cor, origine, div, subd, lpts, lnum)
-    exo.append("      \\end{enumerate}\n")
-    exo.append("    \\end{multicols}\n")
-    exo.append(u"  \\item Compléter les abscisses des points suivants :\n")
-    exo.append("    \\begin{multicols}{4}\n")
-    exo.append("      \\begin{enumerate}")
-    cor.append("      \\end{enumerate}\n")
-    cor.append("    \\end{multicols}\n")
-    cor.append(u"  \\item Compléter les abscisses des points suivants :\n")
-    cor.append("    \\begin{multicols}{4}\n")
-    cor.append("      \\begin{enumerate}")
+    exo.append("\\end{enumerate}")
+    exo.append("\\end{multicols}")
+    exo.append(u"\\item Compléter les abscisses des points suivants :")
+    exo.append("\\begin{multicols}{4}")
+    exo.append("\\begin{enumerate}")
+    cor.append("\\end{enumerate}")
+    cor.append("\\end{multicols}")
+    cor.append(u"\\item Compléter les abscisses des points suivants :")
+    cor.append("\\begin{multicols}{4}")
+    cor.append("\\begin{enumerate}")
     trouve_abscisses(exo, cor, div, subd, lnum)
-    exo.append("      \\end{enumerate}\n")
-    exo.append("    \\end{multicols}\n")
-    exo.append("\\end{enumerate}\n")
-    exo.append("\\begin{pspicture}(0,-.5)(18,.5)\n")
-    cor.append("      \\end{enumerate}\n")
-    cor.append("    \\end{multicols}\n")
-    cor.append("\\end{enumerate}\n")
-    cor.append("\\begin{pspicture}(0,-.5)(18,.5)\n")
+    exo.append("\\end{enumerate}")
+    exo.append("\\end{multicols}")
+    exo.append("\\end{enumerate}")
+    exo.append("\\begin{pspicture}(0,-.5)(18,.5)")
+    cor.append("\\end{enumerate}")
+    cor.append("\\end{multicols}")
+    cor.append("\\end{enumerate}")
+    cor.append("\\begin{pspicture}(0,-.5)(18,.5)")
     trace_demi_droite(exo, cor, origine, div, subd, lpts, npts, lnum)
-    exo.append("\\end{pspicture}\n")
-    cor.append("\\end{pspicture}\n")
+    exo.append("\\end{pspicture}")
+    cor.append("\\end{pspicture}")
     return (exo, cor)
-

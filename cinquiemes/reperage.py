@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 import random
-from outils import sepmilliers
+from outils.Affichage import decimaux
 
 def noms_sommets(nb):
     """Renvoie nb noms de sommets"""
@@ -155,8 +155,8 @@ def coordo_pts(nb):
 
 def affiche_coord(coord):
     """Affiche les coordonnées des points au format LaTeX"""
-    return '\\hbox{$('+sepmilliers(str(coord[0]), 1) + '~;~' + \
-                                             sepmilliers(str(coord[1]), 1)+')$}'
+    return '\\hbox{$('+decimaux(str(coord[0]), 1) + '~;~' + \
+                                             decimaux(str(coord[1]), 1)+')$}'
 
 def tex_liste_co(liste_coord):
     """prend une liste de coordonnées et renvoie la liste en string prête pour latex
@@ -182,7 +182,7 @@ def main():
          "\\begin{enumerate}",
          u"\\item Donner les coordonnées des points %s, %s, %s, %s, %s et %s." % tuple(noms_pts[0:6]),
          u"\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s" %noms_pts[6:12] +u" de cordonnées respectives %s, %s, %s, %s, %s et %s. " %tuple(tex_liste_co(coord_pts[6:12])),
-         u"\\item Placer dans le repère le point %s d'%s %s et d'%s %s" %(noms_pts[12],voc[rg1],sepmilliers(str(coord_pts[12][rg1])),voc[rg2],sepmilliers(str(coord_pts[12][rg2]))),
+         u"\\item Placer dans le repère le point %s d'%s %s et d'%s %s" %(noms_pts[12],voc[rg1],decimaux(str(coord_pts[12][rg1])),voc[rg2],decimaux(str(coord_pts[12][rg2]))),
          "\\end{enumerate}}\\hfill ",
          "\\parbox{0.55\\linewidth}{",
          "\\psset{unit=0.8cm}",
@@ -209,7 +209,7 @@ def main():
         cor.append(u"Les coordonnées du point %s sont %s \n"%(noms_pts[i],affiche_coord(coord_pts[i])))
         i=i+1
     cor[len(cor):len(cor)]=[u"\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s" %noms_pts[6:12] +u" de cordonnées respectives %s, %s, %s, %s, %s et %s. " %tuple(tex_liste_co(coord_pts[6:12])),
-         u"\\item Placer dans le repère le point %s d'%s %s et d'%s %s" %(noms_pts[12],voc[rg1],sepmilliers(str(coord_pts[12][rg1])),voc[rg2],sepmilliers(str(coord_pts[12][rg2]))),
+         u"\\item Placer dans le repère le point %s d'%s %s et d'%s %s" %(noms_pts[12],voc[rg1],decimaux(str(coord_pts[12][rg1])),voc[rg2],decimaux(str(coord_pts[12][rg2]))),
          "\\end{enumerate}"]
     cor.append("}")
     return(exo,cor)

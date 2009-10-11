@@ -91,3 +91,42 @@ def decimaux(nb, mathenv = 0):
                              "\,".join(partie_decimale)))
     else:
         return "\,".join(partie_entiere)
+def tex_coef(coef, var, bplus=0, bpn=0, bpc=0):
+    """
+    coef est le coefficient à écrire devant la variable var
+    bplus est un booleen : s'il est vrai, il faut ecrire le signe +
+    bpn est un booleen : s'il est vrai, il faut mettre des parentheses autour de
+        l'écriture si coef est negatif.
+    bpc est un booleen : s'il est vrai, il faut mettre des parentheses autour de
+        l'écriture si coef =! 0 ou 1 et var est non vide
+    """
+    if coef != 0 and abs(coef) != 1:
+        if var == '':
+            if abs(coef) >= 1000:
+                a = '\\nombre{%s}' % coef
+            else:
+                a = '%s' % coef
+        else:
+            if abs(coef) >= 1000:
+                a = '\\nombre{%s}\\,%s' % (coef, var)
+            else:
+                a = '%s\\,%s' % (coef, var)
+        if bplus and coef > 0:
+            a = '+' + a
+    elif coef == 1:
+        if var == '':
+            a = '1'
+        else:
+            a = '%s' % var
+        if bplus:
+            a = '+' + a
+    elif coef == 0:
+        a = ''
+    elif coef == -1:
+        if var == '':
+            a = '-1'
+        else:
+            a = '-%s' % var
+    if bpn and coef < 0 or bpc and coef != 0 and coef != 1 and var != '':
+        a = '\\left( ' + a + '\\right)'
+    return a

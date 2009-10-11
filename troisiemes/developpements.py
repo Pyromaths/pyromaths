@@ -23,7 +23,7 @@
 
 from .fractions import tex_frac, simplifie, tex_decomp_prod, decomp_prod, \
     produit, den_com0
-from outils import ecrit_tex, valeur_alea, signe, pgcd
+from outils.Arithmetique import ecrit_tex, valeur_alea, signe, pgcd
 import random
 
 #

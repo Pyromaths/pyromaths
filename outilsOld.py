@@ -27,6 +27,7 @@ import string, os,  sys, math, codecs
 from lxml import etree
 from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 from re import sub, findall
+from outils.TexFiles import mise_en_forme
 
 
 
@@ -351,6 +352,11 @@ def creation(parametres):
 
     f0.close()
     f1.close()
+
+    # indentation des fichiers teX créés
+    mise_en_forme(unicode(exo))
+    if parametres['corrige']:
+        mise_en_forme(unicode(cor))
 
     # Dossiers et fichiers d'enregistrement, définitions qui doivent rester avant le if suivant.
     dir0=os.path.dirname(exo)

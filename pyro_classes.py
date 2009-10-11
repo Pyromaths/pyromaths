@@ -21,11 +21,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import outils
+import outils.Arithmetique
 import string
 import math
 import os
-from outils import radians, degres
+from outilsOld import radians, degres
 
 
 class Fractions:
@@ -41,7 +41,7 @@ class Fractions:
 
         # retourne la fraction rendue irréductible
 
-        pgcd = outils.pgcd(self.n, self.d)
+        pgcd = outils.Arithmetique.pgcd(self.n, self.d)
         return Fractions(self.n // pgcd, self.d // pgcd)
 
     def TeX(self, signe=0, coef=None):
@@ -70,8 +70,8 @@ class Fractions:
             (self.n, self.d) = (-self.n, -self.d)
         if fraction.d < 0:
             (fraction.n, fraction.d) = (-fraction.n, -fraction.d)
-        c1 = abs(outils.pgcd(self.n, fraction.d))
-        c2 = abs(outils.pgcd(self.d, fraction.n))
+        c1 = abs(outils.Arithmetique.pgcd(self.n, fraction.d))
+        c2 = abs(outils.Arithmetique.pgcd(self.d, fraction.n))
         simplifiable = 0  # permet de savoir si on a simplifiée le produit
         if c1 > 1:
             n1 = "%s \\times \\cancel{%s}" % (self.n // c1, c1)
@@ -101,12 +101,12 @@ class Fractions:
         return texte
 
     def __add__(self, fraction):
-        ppcm = outils.ppcm(self.d, fraction.d)
+        ppcm = outils.Arithmetique.ppcm(self.d, fraction.d)
         return Fractions((self.n * ppcm) // self.d + (fraction.n * ppcm) //
                          fraction.d, ppcm)
 
     def __sub__(self, fraction):
-        ppcm = outils.ppcm(self.d, fraction.d)
+        ppcm = outils.Arithmetique.ppcm(self.d, fraction.d)
         return Fractions((self.n * ppcm) // self.d - (fraction.n * ppcm) //
                          fraction.d, ppcm)
 

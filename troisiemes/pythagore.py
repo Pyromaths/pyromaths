@@ -24,7 +24,7 @@
 import random
 from . import fractions
 from math import acos, asin, atan, pi, sin, cos, tan
-from outils import valeur_alea, pgcd, ecrit_tex
+from outils.Arithmetique import valeur_alea, pgcd, ecrit_tex
 
 #
 # ------------------- THEOREME DE PYTHAGORE -------------------
@@ -435,12 +435,12 @@ def tex_reciproque_pythagore(f0, f1, noms, longueurs):
              (c[2], c[0], c[1], nom_tr, noms[2]))
 
 
-#
-# ------------------- THEOREME DE THALES -------------------
-#
+#---------------------------------------------------------------------
+#-                    THÉORÈME DE THALÈS                             -
+#---------------------------------------------------------------------
 
-
-def valeurs_thales(valeurmax):
+def valeurs_thales(valeurmax, type):
+    """type est égal à 1 pour la version triangle, -1 pour la version papillon"""
     liste = [0, 0, 0, 0, 0, 0, 0, 0]
     while liste == [0, 0, 0, 0, 0, 0, 0, 0]:
         for i in range(3):
@@ -476,14 +476,8 @@ def valeurs_thales(valeurmax):
     if liste[7]:
         valeurs[7] = random.randrange(5, valeurmax) / 10.0
 
-    #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    type_thales = valeur_alea(-1, 1)  # -1 si papillon, 1 si triangle
-
-    #type_thales=-1
-
-    valeurs.append((rapport, type_thales))
-    if test_valeurs_thales(valeurs, rapport, type_thales):
+    valeurs.append((rapport, type))
+    if test_valeurs_thales(valeurs, rapport, type):
         return valeurs
     else:
         return 0
@@ -532,20 +526,30 @@ def inegalite_triangulaire(a):  # renvoie 1 si c'est un triangle, 0 sinon
 
 def thales(f0, f1):
     noms = noms_sommets(5)  # les noms des sommets
-    while True:
-        valeurs = valeurs_thales(70)  # les longueurs en mm
-        if valeurs:
-            break
-    f0.write(tex_fig_thales(noms, valeurs))
-    f0.write(tex_enonce_thales(noms, valeurs) + '  \\vspace{2cm}\n')
-    f1.write(tex_fig_thales(noms, valeurs))
-    f1.write(tex_enonce_thales(noms, valeurs) +
-             "  \\par\\dotfill{}\\\\\n\n")
-    f1.write(tex_resolution_thales0(noms))
-    f1.write(tex_resolution_thales1(noms, valeurs))
-    f1.write(tex_resolution_thales2(noms, valeurs))
-    f1.write(tex_resolution_thales3(noms, valeurs))
-
+    type = [-1, 1]
+    random.shuffle(type)
+    f0.write("\\begin{multicols}{2}\n")
+    f1.write("\\begin{multicols}{2}\n")
+    for i in range(2):
+        while True:
+            valeurs = valeurs_thales(70, type[i])  # les longueurs en mm
+            if valeurs:
+                break
+        f0.write(tex_enonce_thales(noms, valeurs))
+        f0.write(tex_fig_thales(noms, valeurs))
+        f1.write(tex_enonce_thales(noms, valeurs))
+        f1.write(tex_fig_thales(noms, valeurs) +
+                 "\n\\par\\dotfill{}\n")
+        f1.write(tex_resolution_thales0(noms))
+        f1.write(tex_resolution_thales1(noms, valeurs))
+        f1.write(tex_resolution_thales2(noms, valeurs))
+        f1.write(tex_resolution_thales3(noms, valeurs))
+        if not i:
+            f0.write("\\columnbreak\n")
+            f1.write("\\columnbreak\n")
+        else:
+            f0.write("\\end{multicols}\n")
+            f1.write("\\end{multicols}\n")
 
 def long_val(noms, valeurs):  # renvoie un tuple contenant les noms des segments et leur longueur puis les noms des longueurs a calculer
     liste = []
@@ -597,7 +601,7 @@ def creer_noms(noms, i):
 
 def tex_enonce_thales(noms, valeurs):
     texte = \
-            u'  Sur la figure ci-contre, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par\n' % \
+            u'Sur la figure ci-dessous, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par\n' % \
         (lAB(noms[1:3]), lAB(noms[3:5]))
     liste = long_val(noms, valeurs)
     texte = texte + \
@@ -807,16 +811,15 @@ def fig_thales(noms, valeurs):
 def tex_fig_thales(noms, valeurs):
     donnees = fig_thales(noms, valeurs)
     enonce = \
-        '''  \\begin{wrapfigure}{r}{4cm}
-    \\psset{PointSymbol=x,unit=%s}
-    \\begin{pspicture}(%s,%s)(%s,%s)
-        \\SpecialCoor
-        \\pstTriangle[PosAngleA=%s,PosAngleB=-45,PosAngleC=%s,PointNameA=%s,PointNameB=%s,PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
-        \\pstTriangle[PosAngleB=%s,PosAngleC=%s,PointSymbolA=none,PointNameA=none,PointNameB=%s,PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
-    \\end{pspicture}
-  \\end{wrapfigure}\\par
-''' % \
-        donnees
+        '''\\begin{center}
+\\psset{PointSymbol=x,unit=%s}
+\\begin{pspicture}(%s,%s)(%s,%s)
+\\SpecialCoor
+\\pstTriangle[PosAngleA=%s, PosAngleB=-45, PosAngleC=%s, PointNameA=%s, PointNameB=%s, PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
+\\pstTriangle[PosAngleB=%s, PosAngleC=%s, PointSymbolA=none, PointNameA=none, PointNameB=%s, PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
+\\end{pspicture}
+\\end{center}
+''' % donnees
     return enonce
 
 

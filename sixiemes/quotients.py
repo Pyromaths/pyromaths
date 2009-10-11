@@ -49,21 +49,16 @@ def liste_diviseurs(l):
 def Divisible():
     l = valeurs_diviseurs()
     reponse = liste_diviseurs(l)
-    
-    exo = ["\\exercice", u'Cocher les bonnes réponses :\\par\n']
-    cor = ["\\exercice*", u'Cocher les bonnes réponses :\\par\n']
-    
-    exo.append("""\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par
-  3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}
-""")
-    cor.append("""\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par
-  3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}
-""")
-    for i in range(len(l)):
-        exo.append("  %s & $\\square$ & $\\square$ & $\\square$ & $\\square$ & $\\square$ \\\\\n" %
-                 l[i])
-        cor.append("  %s & %s & %s & %s & %s & %s \\\\\n" % tuple(reponse[i]))
-    exo.append("\\end{tabular}\n")
-    cor.append("\\end{tabular}\n")
-    return (exo, cor)
 
+    exo = ["\\exercice", u'Cocher les bonnes réponses :\\par']
+    cor = ["\\exercice*", u'Cocher les bonnes réponses :\\par']
+
+    exo.append("\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par 3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}")
+    cor.append("\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par 3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}")
+    for i in range(len(l)):
+        exo.append("  %s & $\\square$ & $\\square$ & $\\square$ & $\\square$ & $\\square$ \\\\" %
+                 l[i])
+        cor.append("  %s & %s & %s & %s & %s & %s \\\\" % tuple(reponse[i]))
+    exo.append("\\end{tabular}")
+    cor.append("\\end{tabular}")
+    return (exo, cor)

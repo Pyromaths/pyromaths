@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pyro_classes import Fractions
-import outils
+import outils.Arithmetique, outils.Affichage
 import random
 import math
 
@@ -117,7 +117,7 @@ def EffectueCalcul(op, nb1, nb2, pre="", post=""):
             if abs(resultat.d) > denominateur_max:
                 programme = 2
         else:
-            l = ["%s%s%s" % (pre, outils.sepmilliers(nb1 + nb2, 1), post)]
+            l = ["%s%s%s" % (pre, outils.Affichage.decimaux(nb1 + nb2, 1), post)]
             resultat = nb1 + nb2
     elif op == "-":
         if bfr:
@@ -131,7 +131,7 @@ def EffectueCalcul(op, nb1, nb2, pre="", post=""):
             if abs(resultat.d) > denominateur_max:
                 programme = 2
         else:
-            l = ["%s%s%s" % (pre, outils.sepmilliers(nb1 - nb2, 1), post)]
+            l = ["%s%s%s" % (pre, outils.Affichage.decimaux(nb1 - nb2, 1), post)]
             resultat = nb1 - nb2
             if resultat < 0:
                 programme = 4
@@ -142,7 +142,7 @@ def EffectueCalcul(op, nb1, nb2, pre="", post=""):
             if abs(resultat.d) > denominateur_max:
                 programme = 2
         else:
-            l = ["%s%s%s" % (pre, outils.sepmilliers(nb1 * nb2, 1), post)]
+            l = ["%s%s%s" % (pre, outils.Affichage.decimaux(nb1 * nb2, 1), post)]
             resultat = nb1 * nb2
     else:
         if bfr:
@@ -157,7 +157,7 @@ def EffectueCalcul(op, nb1, nb2, pre="", post=""):
             if nb2 == 0:  # division par zéro
                 (l, resultat, programme) = ([], 1, 1)
             else:
-                l = ["%s%s%s" % (pre, outils.sepmilliers((nb1 * 1.0) /
+                l = ["%s%s%s" % (pre, outils.Affichage.decimaux((nb1 * 1.0) /
                      nb2, 1), post)]
                 resultat = (nb1 * 1.0) / nb2
                 if resultat - math.floor(resultat) == 0.0:
@@ -198,7 +198,7 @@ def Affichage(l):
 
               # C'est un nombre
 
-            expr = expr + "%s" % outils.sepmilliers(l[i], 1)
+            expr = expr + "%s" % outils.Affichage.decimaux(l[i], 1)
     return expr
 
 
@@ -326,7 +326,7 @@ def EffectueSommeFractions(fr1, fr2, s, pre, post):
         fr = fr1 - fr2
     cor = []
     if fr1.n and fr2.n:
-        ppcm = outils.ppcm(fr2.d, fr1.d)
+        ppcm = outils.Arithmetique.ppcm(fr2.d, fr1.d)
         if abs(fr1.d) - abs(fr2.d):
             cor.append("%s%s%s%s%s" % (pre, Fractions.TeX(fr1, True,
                        coef=ppcm // abs(fr1.d)), s, Fractions.TeX(fr2,

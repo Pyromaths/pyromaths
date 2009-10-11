@@ -62,9 +62,9 @@ def place_pts(vals, angle):
     for i in range(len(vals)):
         txt.append("(%s,%s)" % vals[i])
         txt.append("{%s}" % chr(i + 97))
-    txt.append("\\pstGeonode[PointSymbol=x,PointName=none](-4.5;%s){A}(4.5;%s){B}" % (angle, angle))
-    txt.append("\\psline[linewidth=1.5\\pslinewidth,nodesep=-4.5](A)(B)")
-    txt.append("\\pspolygon")
+    txt.append("\n\\pstGeonode[PointSymbol=x,PointName=none](-4.5;%s){A}(4.5;%s){B}" % (angle, angle))
+    txt.append("\n\\psline[linewidth=1.5\\pslinewidth,nodesep=-4.5](A)(B)")
+    txt.append("\n\\pspolygon")
     for i in range(len(vals)):
         txt.append("(%s)" % chr(i + 97))
     return ("").join(txt)

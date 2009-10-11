@@ -21,7 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from outils import pgcd, valeur_alea, sepmilliers, tex_coef
+from outils.Arithmetique import pgcd, valeur_alea
+from outils.Affichage import decimaux, tex_coef
 from random import choice, randrange
 import string
 
@@ -166,7 +167,7 @@ def tex_proprietes_neg():
             cor.append("      10^{%s+%s}=" % (lexp[0], tex_coef(lexp[1],
                        '', bpn=1)))
             cor.append("      10^{%s}=%s$" % (lexp[0] + lexp[1],
-                       sepmilliers(10 ** (lexp[0] + lexp[1]), 1)))
+                       decimaux(10 ** (lexp[0] + lexp[1]), 1)))
         elif j == 1:
             while abs(lexp[0] * lexp[1]) > 10:
                 lexp = [randrange(-6, 6) for i in range(2)]
@@ -176,7 +177,7 @@ def tex_proprietes_neg():
             cor.append("      10^{%s \\times %s}=" % (lexp[0], tex_coef(lexp[1],
                        '', bpn=1)))
             cor.append("      10^{%s}=%s$" % (lexp[0] * lexp[1],
-                       sepmilliers(10 ** (lexp[0] * lexp[1]), 1)))
+                       decimaux(10 ** (lexp[0] * lexp[1]), 1)))
         elif j == 2:
             while abs(lexp[0] - lexp[1]) > 10:
                 lexp = [randrange(-6, 6) for i in range(2)]
@@ -186,7 +187,7 @@ def tex_proprietes_neg():
             cor.append("      10^{%s-%s}=" % (lexp[0], tex_coef(lexp[1],
                        '', bpn=1)))
             cor.append("      10^{%s}=%s$" % (lexp[0] - lexp[1],
-                       sepmilliers(10 ** (lexp[0] - lexp[1]), 1)))
+                       decimaux(10 ** (lexp[0] - lexp[1]), 1)))
     exo.append("  \\end{enumerate}")
     exo.append("\\end{multicols}\n")
     cor.append("  \\end{enumerate}")
@@ -225,13 +226,13 @@ def ecr_sc():
         a = val_sc()
         exp = int(floor(log10(a)))
         a_sc = (a * 1.) / 10 ** exp
-        s_a = sepmilliers(a, 1)
-        s_a_sc = sepmilliers(a_sc, 1)
+        s_a = decimaux(a, 1)
+        s_a_sc = decimaux(a_sc, 1)
         if randrange(2):  # forme : a=a_sc*...
             exo.append("    \\item $%s=%s\\times\\dotfill$" % (s_a,
                        s_a_sc))
             cor.append("    \\item $%s=%s\\times\\mathbf{10^{%s}}$" % (s_a,
-                       s_a_sc, sepmilliers(exp, 1)))
+                       s_a_sc, decimaux(exp, 1)))
         else:
 
               # forme : a_sc*...=a
@@ -239,7 +240,7 @@ def ecr_sc():
             exo.append("    \\item $%s\\times\\dotfill=%s$" % (s_a_sc,
                        s_a))
             cor.append("    \\item $%s\\times\\mathbf{10^{%s}}=%s$" % (s_a_sc,
-                       sepmilliers(exp, 1), s_a))
+                       decimaux(exp, 1), s_a))
     exo.append("  \\end{enumerate}")
     exo.append("\\end{multicols}\n")
     cor.append("  \\end{enumerate}")

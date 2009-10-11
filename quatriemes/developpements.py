@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from outils import ecrit_tex, valeur_alea, signe
+from outils.Arithmetique import ecrit_tex, valeur_alea, signe
 from random import randrange
 
 #

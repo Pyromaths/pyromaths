@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import outils
+import outilsOld
 import math
 from random import randrange
 
@@ -183,49 +183,49 @@ def PointName(l3noms, indice):
 
 
 def figure(exo, cor, lpoints, lnoms, xmax, ymax):
-    exo.append("\\begin{pspicture}(%s,%s)\n" % (xmax, ymax))
-    exo.append("  \\psframe(0,0)(%s,%s)\n" % (xmax, ymax))
-    cor.append("\\begin{pspicture}(%s,%s)\n" % (xmax, ymax))
-    cor.append("  \\psframe(0,0)(%s,%s)\n" % (xmax, ymax))
+    exo.append("\\begin{pspicture}(%s,%s)" % (xmax, ymax))
+    exo.append("\\psframe(0,0)(%s,%s)" % (xmax, ymax))
+    cor.append("\\begin{pspicture}(%s,%s)" % (xmax, ymax))
+    cor.append("\\psframe(0,0)(%s,%s)" % (xmax, ymax))
     for i in range(len(lnoms)):
         points_exo = ''
         points_cor = ''
-        points_exo += "  \\pstGeonode[PointName={%s,%s,%s}," % lnoms[i]
-        points_cor += "  \\pstGeonode[PointName={%s,%s,%s}," % lnoms[i]
-        points_exo += "PosAngle={%s,%s,%s}]\n  " % PosAngle(lpoints[i][3], lpoints[i][4])
-        points_cor += "PosAngle={%s,%s,%s}]\n  " % PosAngle(lpoints[i][3], lpoints[i][4])
+        points_exo += "\\pstGeonode[PointName={%s,%s,%s}," % lnoms[i]
+        points_cor += "\\pstGeonode[PointName={%s,%s,%s}," % lnoms[i]
+        points_exo += "PosAngle={%s,%s,%s}]" % PosAngle(lpoints[i][3], lpoints[i][4])
+        points_cor += "PosAngle={%s,%s,%s}]" % PosAngle(lpoints[i][3], lpoints[i][4])
         for j in range(3):
-            points_exo += "  (%.2f,%.2f)" % lpoints[i][j]
+            points_exo += "(%.2f,%.2f)" % lpoints[i][j]
             points_exo += "{a%s%s}" % (j, i)
             points_cor += "(%.2f,%.2f)" % lpoints[i][j]
             points_cor += "{a%s%s}" % (j, i)
         exo.append(points_exo)
         cor.append(points_cor)
-        exo.append("  \\pstLineAB[nodesepB=-.5]{a0%s}{a1%s}" % (i, i))
-        cor.append("  \\pstLineAB[nodesepB=-.5]{a0%s}{a1%s}" % (i, i))
-        exo.append("  \\pstLineAB[nodesepB=-.5]{a0%s}{a2%s}\n" % (i, i))
-        cor.append("  \\pstLineAB[nodesepB=-.5]{a0%s}{a2%s}\n" % (i, i))
-    exo.append("\\end{pspicture}\\par\n")
-    cor.append("\\end{pspicture}\\par\n")
+        exo.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a1%s}" % (i, i))
+        cor.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a1%s}" % (i, i))
+        exo.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a2%s}" % (i, i))
+        cor.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a2%s}" % (i, i))
+    exo.append("\\end{pspicture}\\par")
+    cor.append("\\end{pspicture}\\par")
     return (exo, cor)
 
 
 def reponses(exo, cor, lpoints, lnoms):
-    cor.append("\\begin{multicols}{4}\n")
+    cor.append("\\begin{multicols}{4}")
     for i in range(len(lnoms)):
-        cor.append("  $\\widehat{%s%s%s}=%s\degres$\\par\n" % (lnoms[i][1],
+        cor.append("$\\widehat{%s%s%s}=%s\degres$\\par" % (lnoms[i][1],
                  lnoms[i][0], lnoms[i][2], lpoints[i][4]))
         if lpoints[i][4] < 90:
-            cor.append("  angle aigu\\par\n")
+            cor.append("angle aigu\\par")
         elif lpoints[i][4] > 90:
-            cor.append("  angle obtus\\par\n")
+            cor.append("angle obtus\\par")
         else:
-            cor.append("  angle droit\\par\n")
-    cor.append("\\end{multicols}\n")
-    exo.append("\\begin{tabularx}{\\textwidth}{|*{4}{X|}}\n")
-    exo.append("  \\hline angle 1 : & angle 2 : & angle 3 : & angle 4 : \\\\\n")
-    exo.append("  \\hline &&& \\\\ &&& \\\\ &&& \\\\ \\hline\n")
-    exo.append("\\end{tabularx}\n")
+            cor.append("angle droit\\par")
+    cor.append("\\end{multicols}")
+    exo.append("\\begin{tabularx}{\\textwidth}{|*{4}{X|}}")
+    exo.append("\\hline angle 1 : & angle 2 : & angle 3 : & angle 4 : \\\\")
+    exo.append("\\hline &&& \\\\ &&& \\\\ &&& \\\\ \\hline")
+    exo.append("\\end{tabularx}")
 
 
 def MesureAngles():
@@ -240,11 +240,11 @@ def MesureAngles():
             cpt = 0
         lpoints = cree_angles(nb_angles, xmax, ymax)
         cpt = cpt + 1
-    tmpl = outils.choix_points(3 * nb_angles)
+    tmpl = outilsOld.choix_points(3 * nb_angles)
     for i in range(nb_angles):
         lnoms.append(tuple(tmpl[3 * i:3 * i + 3]))
-    exo = ["\\exercice", "Nommer, mesurer et donner la nature de chacun des angles suivants :\\par \n"]
-    cor = ["\\exercice*", "Nommer, mesurer et donner la nature de chacun des angles suivants :\\par \n"]
+    exo = ["\\exercice", "Nommer, mesurer et donner la nature de chacun des angles suivants :\\par "]
+    cor = ["\\exercice*", "Nommer, mesurer et donner la nature de chacun des angles suivants :\\par "]
     figure(exo, cor, lpoints, lnoms, xmax, ymax)
     reponses(exo, cor, lpoints, lnoms)
     return (exo, cor)

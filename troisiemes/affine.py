@@ -24,7 +24,7 @@
 #fonction affine 3e
 import random
 from math import *
-from outils import sepmilliers
+from outils.Affichage import decimaux
 from pyro_classes import Fractions
 
 def extreme(a,b,xmin,xmax,ymin,ymax):
@@ -218,8 +218,8 @@ def anteimage(fonc,A,B):
     if i==1:
         j=i+random.randrange(0,2)
     res=[]
-    res.append('Donner '+l[j]+sepmilliers(str(A[i]))+' par la fonction '+'\\textit{'+fonc+'}.')
-    res.append(sepmilliers(str(A[abs(i-1)]))+' est '+lcor[j]+sepmilliers(str(A[i]))+' par la \\hbox{fonction '+'\\textit{'+fonc+'}}.')
+    res.append('Donner '+l[j]+decimaux(str(A[i]))+' par la fonction '+'\\textit{'+fonc+'}.')
+    res.append(decimaux(str(A[abs(i-1)]))+' est '+lcor[j]+decimaux(str(A[i]))+' par la \\hbox{fonction '+'\\textit{'+fonc+'}}.')
     if i==0:
         res.append(doublefleche((A[0],0),A))
         res.append(doublefleche(A,(0,A[1])))
@@ -231,8 +231,8 @@ def anteimage(fonc,A,B):
     j=i
     if i==1:
         j=i+random.randrange(0,2)
-    res.append('Donner '+l[j]+sepmilliers(str(B[i]))+' par la fonction '+'\\textit{'+fonc+'}.')
-    res.append(sepmilliers(str(B[abs(i-1)]))+' est '+lcor[j]+sepmilliers(str(B[i]))+' par la \\hbox{fonction '+'\\textit{'+fonc+'}}.')
+    res.append('Donner '+l[j]+decimaux(str(B[i]))+' par la fonction '+'\\textit{'+fonc+'}.')
+    res.append(decimaux(str(B[abs(i-1)]))+' est '+lcor[j]+decimaux(str(B[i]))+' par la \\hbox{fonction '+'\\textit{'+fonc+'}}.')
     if i==0:
         res.append(doublefleche((B[0],0),B))
         res.append(doublefleche(B,(0,B[1])))
@@ -246,38 +246,38 @@ def tracefonc(f,i,A,B,xmin,xmax,ymin,ymax):
 #Génère la 2e queston et sa réponse
     u=coefdir(A,B)
     if A[1]>=0:
-        b='+'+sepmilliers(str(A[1]))
+        b='+'+decimaux(str(A[1]))
     else:
-        b=sepmilliers(str(A[1]))
+        b=decimaux(str(A[1]))
     if u[1]==1:
-        coef=sepmilliers(str(u[0]))
+        coef=decimaux(str(u[0]))
         if u[0]==-1:
             coef='-'
         if u[0]==1:
             coef=''
-        x1=sepmilliers(str(B[0]))
-        y1=sepmilliers(str(B[1]))
+        x1=decimaux(str(B[0]))
+        y1=decimaux(str(B[1]))
         u[0]=u[0]*B[0]
     else:
         B=(u[1],u[0]+float(A[1]))
         if not dansrep(B,xmin,xmax,ymin,ymax):
             B=(-u[1],-u[0]+float(A[1]))
 
-        x1=sepmilliers(str(B[0]))
-        y1=sepmilliers(str(B[1]))
+        x1=decimaux(str(B[0]))
+        y1=decimaux(str(B[1]))
         if u[0]>0:
-            coef='\\dfrac{'+sepmilliers(str(u[0]))+'}{'+sepmilliers(str(u[1]))+'}'
+            coef='\\dfrac{'+decimaux(str(u[0]))+'}{'+decimaux(str(u[1]))+'}'
         else:
-            coef='-\\dfrac{'+sepmilliers(str(abs(u[0])))+'}{'+sepmilliers(str(u[1]))+'}'
+            coef='-\\dfrac{'+decimaux(str(abs(u[0])))+'}{'+decimaux(str(u[1]))+'}'
 
     x0='0'
     y0=b
     if coef=='' or (coef=='-' and B[0]>0) :
-        st='On sait que $'+f+'(0)='+sepmilliers(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+x1+b+'='+y1+'$.'
+        st='On sait que $'+f+'(0)='+decimaux(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+x1+b+'='+y1+'$.'
     elif coef=='-' and B[0]<0:
-        st='On sait que $'+f+'(0)='+sepmilliers(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+'('+x1+')'+b+'='+y1+'$.'
+        st='On sait que $'+f+'(0)='+decimaux(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+'('+x1+')'+b+'='+y1+'$.'
     else:
-        st='On sait que $'+f+'(0)='+sepmilliers(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+' \\times '+x1+b+'='+sepmilliers(str(u[0]))+b+'='+y1+'$.'
+        st='On sait que $'+f+'(0)='+decimaux(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+' \\times '+x1+b+'='+decimaux(str(u[0]))+b+'='+y1+'$.'
 
     l=[u'Tracer la droite représentative ($d_'+str(i)+'$) de la fonction $'+f+':x\\longmapsto '+coef+'x'+b+'$.',
        st,
@@ -292,31 +292,31 @@ def exprfonc(f,i,A,B):
 #A est sur l'axe des ordonnées, f est le nom de la fonction
     u=coefdir(A,B)
     if A[1]>=0:
-        b='+'+sepmilliers(str(A[1]))
+        b='+'+decimaux(str(A[1]))
     else:
-        b=sepmilliers(str(A[1]))
+        b=decimaux(str(A[1]))
     if u[1]==1:
-        coef=sepmilliers(str(u[0]))
+        coef=decimaux(str(u[0]))
         if u[0]==-1:
             coef='-' #utilisé dans l'expression de la fonction
         if u[0]==1:
             coef=''
-        coefres=sepmilliers(str(u[0]))  #résultat utilisé pour a
+        coefres=decimaux(str(u[0]))  #résultat utilisé pour a
     else:
         if u[0]>0:
-            coef='\\dfrac{'+sepmilliers(str(u[0]))+'}{'+sepmilliers(str(u[1]))+'}'
+            coef='\\dfrac{'+decimaux(str(u[0]))+'}{'+decimaux(str(u[1]))+'}'
         else:
-            coef='-\\dfrac{'+sepmilliers(str(abs(u[0])))+'}{'+sepmilliers(str(u[1]))+'}'
+            coef='-\\dfrac{'+decimaux(str(abs(u[0])))+'}{'+decimaux(str(u[1]))+'}'
         coefres=coef
 
     if A[1]-B[1]>0:
-        deltay='+'+sepmilliers(str(A[1]-B[1]))
+        deltay='+'+decimaux(str(A[1]-B[1]))
     else :
-        deltay=sepmilliers(str(A[1]-B[1]))
+        deltay=decimaux(str(A[1]-B[1]))
     if A[0]-B[0]>0:
-        deltax='+'+sepmilliers(str(A[0]-B[0]))
+        deltax='+'+decimaux(str(A[0]-B[0]))
     else:
-        deltax=sepmilliers(str(A[0]-B[0]))
+        deltax=decimaux(str(A[0]-B[0]))
 
     if float(B[0])<0 :
        mid11=float(B[0])-0.6
@@ -343,7 +343,7 @@ def exprfonc(f,i,A,B):
 
     l=[u'Déterminer l\'expression de la fonction $'+f+u'$ représentée ci-contre par la droite ($d_'+str(i)+'$).',
        u'On lit l\'ordonnée à l\'origine et le coefficient de la fonction affine sur le graphique.\\\ ',
-       '$'+f+'(x)=ax+b$ ' +'avec $b='+ sepmilliers(str(A[1]))+'$ et $a='+'\\dfrac{'+deltay+'}{'+deltax+'}='+coefres+'$.\\\ ',
+       '$'+f+'(x)=ax+b$ ' +'avec $b='+ decimaux(str(A[1]))+'$ et $a='+'\\dfrac{'+deltay+'}{'+deltax+'}='+coefres+'$.\\\ ',
        'L\'expression de la fonction '+f+' est $'+f+'(x)='+coef+'x'+b+'$.',
        doublefleche(B,(B[0],A[1])),
        doublefleche((B[0],A[1]),A),

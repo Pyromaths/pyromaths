@@ -151,14 +151,14 @@ def tex_figure(liste, lpoints, nodesep=0):
         points_coord.append(l_ord[i])
         points_coord.append(lpoints[i])
     points_coord = tuple(points_coord)
-    liste.append('  \\begin{pspicture}(-0.5,0.2)(4.5,2.2)\n')
-    liste.append('    \\psset{PointSymbol=x}\n')
-    liste.append('    \\pstGeonode[PosAngle=90](0.5,%s){%s}(2,%s){%s}(3.5,%s){%s}\n' %
+    liste.append('\\begin{pspicture}(-0.5,0.2)(4.5,2.2)')
+    liste.append('\\psset{PointSymbol=x}')
+    liste.append('\\pstGeonode[PosAngle=90](0.5,%s){%s}(2,%s){%s}(3.5,%s){%s}' %
                points_coord)
     if nodesep:
-        liste.append('    \\pstLineAB[nodesepA=%s, nodesepB=%s]{%s}{%s}\n' %
+        liste.append('\\pstLineAB[nodesepA=%s, nodesepB=%s]{%s}{%s}' %
                    tuple(nodesep))
-    liste.append('  \\end{pspicture}\\\\\n')
+    liste.append('\\end{pspicture}\\\\')
 
 
 def tex_ligne_tableau(exo, cor, ligne):
@@ -174,9 +174,9 @@ def tex_ligne_tableau(exo, cor, ligne):
 
     lpoints = choix_points(3)
     (exer, solution) = prepare_tuple(lpoints, ligne)
-    exo.append('  \\hfill{} $%s %s%s %s$ \\hfill{} &\\hfill{}  %s \\hfill{} &\n' %
+    exo.append('\\hfill{} $%s %s%s %s$ \\hfill{} &\\hfill{}  %s \\hfill{} &' %
              exer)
-    cor.append('  \\hfill{} $%s %s%s %s$ \\hfill{} &\\hfill{}  %s \\hfill{} &\n' %
+    cor.append('\\hfill{} $%s %s%s %s$ \\hfill{} &\\hfill{}  %s \\hfill{} &' %
              solution)
     lnodesep = nodesep(ligne)
     lnodesep.extend(solution[1:3])
@@ -185,8 +185,8 @@ def tex_ligne_tableau(exo, cor, ligne):
     else:
         tex_figure(exo, lpoints, lnodesep)
     tex_figure(cor, lpoints, lnodesep)
-    exo.append('  \\hline\n')
-    cor.append('  \\hline\n')
+    exo.append('\\hline')
+    cor.append('\\hline')
 
 
 def Droites():
@@ -197,15 +197,15 @@ def Droites():
     @param cor: fichier de corrections
     @type cor: file
     """
-    exo = ["\\exercice", u"Compléter :\\par\n", '\\begin{tabular}{|p{3cm}|p{5cm}|c|}\n', '  \\hline\n', u'  \\hfill{} \\textbf{Nom} \\hfill{} & \\hfill{}\\textbf{Catégorie}\\hfill{} & \\textbf{Figure} \\\\\n \\hline\n']
-    cor = ["\\exercice*", u"Compléter :\\par\n", '\\begin{tabular}{|p{3cm}|p{5cm}|c|}\n', '  \\hline\n', u'  \\hfill{} \\textbf{Nom} \\hfill{} & \\hfill{}\\textbf{Catégorie}\\hfill{} & \\textbf{Figure} \\\\\n \\hline\n']
-    
+    exo = ["\\exercice", u"Compléter :\\par", '\\begin{tabular}{|p{3cm}|p{5cm}|c|}', '  \\hline', u'  \\hfill{} \\textbf{Nom} \\hfill{} & \\hfill{}\\textbf{Catégorie}\\hfill{} & \\textbf{Figure} \\\\ \\hline']
+    cor = ["\\exercice*", u"Compléter :\\par", '\\begin{tabular}{|p{3cm}|p{5cm}|c|}', '\\hline', u'\\hfill{} \\textbf{Nom} \\hfill{} & \\hfill{}\\textbf{Catégorie}\\hfill{} & \\textbf{Figure} \\\\ \\hline']
+
     line = choix_ligne(5)
     for i in range(5):
         tex_ligne_tableau(exo, cor, line[i])
 
-    exo.append('\\end{tabular}\n')
-    cor.append('\\end{tabular}\n')
+    exo.append('\\end{tabular}')
+    cor.append('\\end{tabular}')
     return (exo, cor)
 
 
@@ -239,7 +239,7 @@ def fig_perp(points, coor, solution=0, per=[], par=[]):
     \multips(-4,-3.6)(0,.4){20}{\psline(0,0)(0.05,0)}
     \multips(4,-4)(0,.4){20}{\psline(0,0)(-.05,0)}
     \pstGeonode[PointName={%s,%s}](%s;%s){a}(%s;%s){b}
-    \pstGeonode[PointName={%s,%s}](%s; %s){c}(%s; %s){d}\n""" % \
+    \pstGeonode[PointName={%s,%s}](%s; %s){c}(%s; %s){d}""" % \
         val_enonce
     if solution:
         val_soluce = (
@@ -266,7 +266,7 @@ def fig_perp(points, coor, solution=0, per=[], par=[]):
     \pstLineAB[nodesep=-4]{%s}{%s}
     \pstTranslation[PointName=none,PointSymbol=none]{%s}{%s}{%s}[f]
     \pstLineAB[nodesep=-7]{%s}{f}
-  \end{pspicture*}\n""" % \
+  \end{pspicture*}""" % \
             val_soluce
     return text
 
@@ -304,37 +304,33 @@ def enonce_perp(exo, cor):
         per.append(lval.pop(random.randrange(len(lval))))
     exo.append(fig_perp(noms, coor))
     cor.append(fig_perp(noms, coor, 1, per, par))
-    exo.append('''  \end{pspicture*}\\par
-  \\begin{enumerate}
-''')
-    cor.append('''  \\par
-  \\begin{enumerate}
-''')
-    s_per = u"  \\item Tracer la droite perpendiculaire à la droite $(%s%s)$ passant par $%s$\n"
-    s_par = u"  \\item Tracer la droite parallèle à la droite $(%s%s)$ passant par $%s$\n"
+    exo.append('\end{pspicture*}\\par\n\\begin{enumerate}')
+    cor.append('\\par\n\\begin{enumerate}')
+    s_per = u"\\item Tracer la droite perpendiculaire à la droite $(%s%s)$ passant par $%s$"
+    s_par = u"\\item Tracer la droite parallèle à la droite $(%s%s)$ passant par $%s$"
     s_per = s_per % (noms[per[0]], noms[per[1]], noms[per[2]])
     s_par = s_par % (noms[par[0]], noms[par[1]], noms[par[2]])
     exo.append(s_par)
     cor.append(s_par)
     exo.append(s_per)
     cor.append(s_per)
-    exo.append('  \\end{enumerate}\n')
-    cor.append('  \\end{enumerate}\n')
+    exo.append('\\end{enumerate}')
+    cor.append('\\end{enumerate}')
 
 
 def Perpendiculaires():
-    exo = ["\\exercice", u"Réaliser les figures suivantes :\\par\n", '\\begin{multicols}{2}\n']
-    cor = ["\\exercice*", u"Réaliser les figures suivantes :\\par\n", '\\begin{multicols}{2}\n']
-    
+    exo = ["\\exercice", u"Réaliser les figures suivantes :\\par", '\\begin{multicols}{2}']
+    cor = ["\\exercice*", u"Réaliser les figures suivantes :\\par", '\\begin{multicols}{2}']
+
     enonce_perp(exo, cor)
-    
-    exo.append('  \\columnbreak\n')
-    cor.append('  \\columnbreak\n')
-    
+
+    exo.append('\\columnbreak')
+    cor.append('\\columnbreak')
+
     enonce_perp(exo, cor)
-    
-    exo.append('\\end{multicols}\n')
-    cor.append('\\end{multicols}\n')
+
+    exo.append('\\end{multicols}')
+    cor.append('\\end{multicols}')
     return (exo, cor)
 
 
@@ -426,31 +422,31 @@ def figure(angle, xa, ya, dist, lpoints, noms, par_per, dist2=0):
 
     ltxt = []
     ltxt.append('\\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)')
-    ltxt.append('    \\footnotesize')
+    ltxt.append('\\footnotesize')
     if par_per < 3:
-        ltxt.append('    \\psplot[linewidth=1.5\\pslinewidth]{-2}{2}%s' %
+        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2}{2}%s' %
                     fonction(angle, xa, ya))
-        ltxt.append('    \\psplot[linewidth=1.5\\pslinewidth]{-2}{2}%s' %
+        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2}{2}%s' %
                     fonction(angle, xa, ya, dist))
     else:
-        ltxt.append('    \\psplot{-2}{2}%s' % fonction(angle, xa, ya))
-        ltxt.append('    \\psplot{-2}{2}%s' % fonction(angle, xa, ya,
+        ltxt.append('\\psplot{-2}{2}%s' % fonction(angle, xa, ya))
+        ltxt.append('\\psplot{-2}{2}%s' % fonction(angle, xa, ya,
                     dist))
     if par_per == 2:
-        ltxt.append('    \\psplot[linewidth=1.5\\pslinewidth]{-2}{2}%s' %
+        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2}{2}%s' %
                     fonction(angle, xa, ya, dist2))
     else:
-        ltxt.append('    \\psplot{-2}{2}%s' % fonction(angle, xa, ya,
+        ltxt.append('\\psplot{-2}{2}%s' % fonction(angle, xa, ya,
                     droite='per'))
     if noms:  #nomme les droites par deux points
         if par_per != 2:  #2 points d'intersection
-            ltxt.append('    \\pstGeonode[PointSymbol={none,x},PointName={%s,%s} %s{i1}%s{a1}' %
+            ltxt.append('\\pstGeonode[PointSymbol={none,x},PointName={%s,%s} %s{i1}%s{a1}' %
                         (lpoints[0], lpoints[1], PointInter(angle, xa,
                         ya), Points(angle, xa, ya)[0]))
-            ltxt.append('    \\pstGeonode[PointSymbol={none,x},PointName={%s,%s} %s{i2}%s{b1}' %
+            ltxt.append('\\pstGeonode[PointSymbol={none,x},PointName={%s,%s} %s{i2}%s{b1}' %
                         (lpoints[2], lpoints[3], PointInter(angle, xa,
                         ya, dist), Points(angle, xa, ya, dist)[0]))
-            ltxt.append('    \\pstGeonode[PointSymbol=none,PointName=none]%s{c1}%s{c2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=none,PointName=none]%s{c1}%s{c2}' %
                         (Points(angle + 90, 0, 0)[0], Points(angle + 90,
                         0, 0)[1]))
         else:
@@ -458,14 +454,14 @@ def figure(angle, xa, ya, dist, lpoints, noms, par_per, dist2=0):
               #pas de point d'intersection
 
             pts = Points(angle, xa, ya)
-            ltxt.append('    \\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{a1}%s{a2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{a1}%s{a2}' %
                         (angle + 45, lpoints[0], lpoints[1], pts[0], pts[1]))
             pts = Points(angle, xa, ya, dist)
-            ltxt.append('    \\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{b1}%s{b2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{b1}%s{b2}' %
                         (angle - (45.0 * dist) / abs(dist), lpoints[2],
                         lpoints[3], pts[0], pts[1]))
             pts = Points(angle, xa, ya, dist2)
-            ltxt.append('    \\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{c1}%s{c2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{c1}%s{c2}' %
                         (angle - (45.0 * dist2) / abs(dist2), lpoints[4],
                         lpoints[5], pts[0], pts[1]))
     else:
@@ -473,38 +469,38 @@ def figure(angle, xa, ya, dist, lpoints, noms, par_per, dist2=0):
           #nomme les droites (d_1), ...
 
         if par_per != 2:  #2 points d'intersection
-            ltxt.append('    \\pstGeonode[PointSymbol=none,PointName={none,%s} %s{i1}%s{a1}' %
+            ltxt.append('\\pstGeonode[PointSymbol=none,PointName={none,%s} %s{i1}%s{a1}' %
                         (lpoints[0], PointInter(angle, xa, ya), Points(angle,
                         xa, ya)[0]))
-            ltxt.append('    \\pstGeonode[PointSymbol=none,PointName={none,%s} %s{i2}%s{b1}' %
+            ltxt.append('\\pstGeonode[PointSymbol=none,PointName={none,%s} %s{i2}%s{b1}' %
                         (lpoints[1], PointInter(angle, xa, ya, dist),
                         Points(angle, xa, ya, dist)[0]))
-            ltxt.append('    \\pstGeonode[PointSymbol=none,PointName={none,%s}]%s{c1}%s{c2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=none,PointName={none,%s}]%s{c1}%s{c2}' %
                         (lpoints[2], Points(angle + 90, 0, 0)[0], Points(angle +
                         90, 0, 0)[1]))
         else:
             pts = Points(angle, xa, ya)
-            ltxt.append('    \\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{a1}%s{a2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{a1}%s{a2}' %
                         (angle + 45, lpoints[0], pts[0], pts[1]))
             pts = Points(angle, xa, ya, dist)
-            ltxt.append('    \\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{b1}%s{b2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{b1}%s{b2}' %
                         (angle - (45.0 * dist) / abs(dist), lpoints[1],
                         pts[0], pts[1]))
             pts = Points(angle, xa, ya, dist2)
-            ltxt.append('    \\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{c1}%s{c2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{c1}%s{c2}' %
                         (angle - (45.0 * dist2) / abs(dist2), lpoints[2],
                         pts[0], pts[1]))
     if par_per != 2:
         if angle < 90:
-            ltxt.append('    \\pstRightAngle[RightAngleSize=.2]{c1}{i1}{a1}')
+            ltxt.append('\\pstRightAngle[RightAngleSize=.2]{c1}{i1}{a1}')
         else:
-            ltxt.append('    \\pstRightAngle[RightAngleSize=.2]{c2}{i1}{a1}')
+            ltxt.append('\\pstRightAngle[RightAngleSize=.2]{c2}{i1}{a1}')
     if par_per == 3:
         if angle < 90:
-            ltxt.append('    \\pstRightAngle[RightAngleSize=.2]{c1}{i2}{b1}')
+            ltxt.append('\\pstRightAngle[RightAngleSize=.2]{c1}{i2}{b1}')
         else:
-            ltxt.append('    \\pstRightAngle[RightAngleSize=.2]{c2}{i2}{b1}')
-    ltxt.append('  \\end{pspicture*}')
+            ltxt.append('\\pstRightAngle[RightAngleSize=.2]{c2}{i2}{b1}')
+    ltxt.append('\\end{pspicture*}')
     return ltxt
 
 
@@ -535,47 +531,47 @@ def valeurs_figures(par_per):
 
 
 def enonce_prop(exo, cor):
-    exo.append('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}\n')
-    exo.append('  \\hline\n')
-    exo.append(u'  Données & Figure codée & Propriété & Conclusion \\\\ \n')
-    cor.append('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}\n')
-    cor.append('  \\hline\n')
-    cor.append(u'  Données & Figure codée & Propriété & Conclusion \\\\ \n')
+    exo.append('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}')
+    exo.append('\\hline')
+    exo.append(u'Données & Figure codée & Propriété & Conclusion \\\\ ')
+    cor.append('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}')
+    cor.append('\\hline')
+    cor.append(u'Données & Figure codée & Propriété & Conclusion \\\\ ')
     ltypes = [1, 2, 3]
     lexos = []
     for i in range(3):
         lexos.append(ltypes.pop(random.randrange(len(ltypes))))
     for i in range(3):
-        exo.append('  \\hline\n')
-        cor.append('  \\hline\n')
+        exo.append('\\hline')
+        cor.append('\\hline')
         v = valeurs_figures(lexos[i])
         if lexos[i] == 2:
             if v[5]:  #noms de la forme (AB), on ajoute des parenthèses
                 exo.append('''  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
   \\end{pspicture*}
-  & & \\\\\n''' %
+  & & \\\\''' %
                          (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0], v[4][1],
                          v[4][4], v[4][5]))
-                cor.append('  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ & \n' %
+                cor.append('  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ & ' %
                          (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0], v[4][1],
                          v[4][4], v[4][5]))
             else:
                 exo.append('''  $%s//%s$\\par et\\par $%s//%s$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
   \\end{pspicture*}
-  & & \\\\\n''' %
+  & & \\\\''' %
                          (v[4][0], v[4][1], v[4][0], v[4][2]))
-                cor.append('  $%s//%s$\\par et\\par $%s//%s$ & \n' % (v[4][0],
+                cor.append('  $%s//%s$\\par et\\par $%s//%s$ & ' % (v[4][0],
                          v[4][1], v[4][0], v[4][2]))
-            cor.append('  %s & \n' % ('\n').join(figure(v[0], v[1], v[2],
+            cor.append('  %s & ' % ('\n').join(figure(v[0], v[1], v[2],
                      v[3], v[4], v[5], lexos[i], v[6])))
-            cor.append(u'  Si deux droites sont parallèles, alors toute parallèle à l\'une est parallèle à l\'autre. &\n')
+            cor.append(u'Si deux droites sont parallèles, alors toute parallèle à l\'une est parallèle à l\'autre. &')
             if v[5]:
-                cor.append('$(%s%s)//(%s%s)$ \\\\\n  \\hline\n' % (v[4][2],
+                cor.append('$(%s%s)//(%s%s)$ \\\\\n  \\hline' % (v[4][2],
                          v[4][3], v[4][4], v[4][5]))
             else:
-                cor.append('  $%s//%s$ \\\\\n  \\hline\n' % (v[4][1], v[4][2]))
+                cor.append('$%s//%s$ \\\\\n  \\hline' % (v[4][1], v[4][2]))
         else:
 
             fig = random.randrange(2)
@@ -585,10 +581,10 @@ def enonce_prop(exo, cor):
                         exo.append('''  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
   \\end{pspicture*}
-  & & \\\\\n''' %
+  & & \\\\''' %
                                  (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0],
                                  v[4][1], v[4][0], v[4][2]))
-                    cor.append('  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &\n' %
+                    cor.append('  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &' %
                              (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0],
                              v[4][1], v[4][0], v[4][2]))
                 else:
@@ -596,21 +592,21 @@ def enonce_prop(exo, cor):
                         exo.append('''  $%s//%s$\\par et\\par $%s\perp%s$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
   \\end{pspicture*}
-  & & \\\\\n''' %
+  & & \\\\''' %
                                  (v[4][0], v[4][1], v[4][0], v[4][2]))
-                    cor.append('  $%s//%s$\\par et\\par $%s\perp%s$ &\n' %
+                    cor.append('  $%s//%s$\\par et\\par $%s\perp%s$ &' %
                              (v[4][0], v[4][1], v[4][0], v[4][2]))
                 if fig:
-                    exo.append('  & %s & & \\\\\n' % ('\n').join(figure(v[0],
+                    exo.append('  & %s & & \\\\' % ('\n').join(figure(v[0],
                              v[1], v[2], v[3], v[4], v[5], lexos[i])))
-                cor.append('  %s & \n' % ('\n').join(figure(v[0], v[1], v[2],
+                cor.append('  %s & ' % ('\n').join(figure(v[0], v[1], v[2],
                          v[3], v[4], v[5], lexos[i])))
-                cor.append(u'  Si deux droites sont parallèles, alors toute perpendiculaire à l\'une est perpendiculaire à l\'autre. &\n')
+                cor.append(u'Si deux droites sont parallèles, alors toute perpendiculaire à l\'une est perpendiculaire à l\'autre. &')
                 if v[5]:
-                    cor.append('  $(%s%s)\\perp(%s%s)$ \\\\\n  \\hline\n' %
+                    cor.append('$(%s%s)\\perp(%s%s)$ \\\\\n  \\hline' %
                              (v[4][2], v[4][3], v[4][0], v[4][2]))
                 else:
-                    cor.append('  $%s\perp%s$ \\\\\n  \\hline\n' % (v[4][1],
+                    cor.append('$%s\perp%s$ \\\\\n  \\hline' % (v[4][1],
                              v[4][2]))
             else:
                 if v[5]:
@@ -618,42 +614,42 @@ def enonce_prop(exo, cor):
                         exo.append('''  $(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
   \\end{pspicture*}
-  & & \\\\\n''' %
+  & & \\\\''' %
                                  (v[4][0], v[4][1], v[4][0], v[4][2], v[4][2],
                                  v[4][3], v[4][0], v[4][2]))
-                    cor.append('  $(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &\n' %
+                    cor.append('  $(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &' %
                              (v[4][0], v[4][1], v[4][0], v[4][2], v[4][2],
                              v[4][3], v[4][0], v[4][2]))
                 else:
                     if not fig:
-                        exo.append('''  $%s\\perp%s$\\par et\\par $%s\perp%s$ &
+                        exo.append('''$%s\\perp%s$\\par et\\par $%s\perp%s$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
   \\end{pspicture*}
-  & & \\\\\n''' %
+  & & \\\\''' %
                                  (v[4][0], v[4][2], v[4][1], v[4][2]))
-                    cor.append('  $%s\\perp%s$\\par et\\par $%s\perp%s$ &\n' %
+                    cor.append('$%s\\perp%s$\\par et\\par $%s\perp%s$ &' %
                              (v[4][0], v[4][2], v[4][1], v[4][2]))
                 if fig:
-                    exo.append('  & %s & & \\\\\n' % ('\n').join(figure(v[0],
+                    exo.append('  & %s & & \\\\' % ('\n').join(figure(v[0],
                              v[1], v[2], v[3], v[4], v[5], lexos[i])))
-                cor.append('  %s &\n' % ('\n').join(figure(v[0], v[1], v[2],
+                cor.append('  %s &' % ('\n').join(figure(v[0], v[1], v[2],
                          v[3], v[4], v[5], lexos[i])))
-                cor.append(u'  Si deux droites sont perpendiculaires à une même troisième alors elles sont parallèles entre elles. &\n')
+                cor.append(u'Si deux droites sont perpendiculaires à une même troisième alors elles sont parallèles entre elles. &')
                 if v[5]:
-                    cor.append('  $(%s%s)//(%s%s)$ \\\\\n  \\hline\n' % (v[4][0],
+                    cor.append('$(%s%s)//(%s%s)$ \\\\\n  \\hline' % (v[4][0],
                              v[4][1], v[4][2], v[4][3]))
                 else:
-                    cor.append('  $%s//%s$ \\\\\n  \\hline\n' % (v[4][0],
+                    cor.append('$%s//%s$ \\\\\n  \\hline' % (v[4][0],
                              v[4][1]))
     exo.append('''  \\hline
 \\end{tabularx}
 ''')
-    cor.append('\\end{tabularx}\n')
+    cor.append('\\end{tabularx}')
 
 
 def Proprietes():
-    exo = ["\\exercice", u"Compléter le tableau suivant :\\par Les droites en gras sont parall\xe8les.\\par """]
-    cor = ["\\exercice", u"Compléter le tableau suivant :\\par Les droites en gras sont parall\xe8les.\\par """]
+    exo = ["\\exercice", u"Compléter le tableau suivant :\\par Les droites en gras sont parallèles.\\par """]
+    cor = ["\\exercice*", u"Compléter le tableau suivant :\\par Les droites en gras sont parallèles.\\par """]
 
     enonce_prop(exo, cor)
     return (exo, cor)

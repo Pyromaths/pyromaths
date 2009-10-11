@@ -22,7 +22,7 @@
 
 from PyQt4 import QtGui, QtCore
 import os, lxml, codecs
-import outils
+import outilsOld
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, LesFiches,  configdir, iconesdir):
@@ -236,7 +236,7 @@ class Ui_MainWindow(object):
 
         self.comboBox_modele = QtGui.QComboBox(self.tab_options)
 
-        modeles = os.listdir(os.path.join(outils.module_path(), 'modeles'))
+        modeles = os.listdir(os.path.join(outilsOld.module_path(), 'modeles'))
         modeles_home = os.listdir(os.path.join(configdir,  'modeles'))
 
         count = 0
@@ -492,7 +492,7 @@ class Ui_MainWindow(object):
                                         'corrige': True,
                                         'configdir': self.configdir
                                         }
-                outils.creation(parametres)
+                outilsOld.creation(parametres)
 
     def effacer_choix_exercices(self):
         """Remet toutes les SpinBox à zéro et vide la liste d'exercices sélectionnés"""
@@ -656,14 +656,14 @@ def valide(list, LesFiches, parametres):
     #============================================================
     (f0, f1) = ("", "")
     saveas = QtGui.QFileDialog()
-    filename = outils.supprime_extension(parametres['nom_fichier'],
+    filename = outilsOld.supprime_extension(parametres['nom_fichier'],
                                          '.tex')
     f0 = str(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(parametres['chemin_fichier'],
                              '%s.tex' % filename),
                              "Documents Tex (*.tex)"))
     if f0 != None:
-        outils.ajoute_extension(f0, '.tex')
+        outilsOld.ajoute_extension(f0, '.tex')
         if corrige:
             f1 = str(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(os.path.dirname(f0),
@@ -673,9 +673,9 @@ def valide(list, LesFiches, parametres):
             f1 = os.path.join(os.path.dirname(f0), 'temp.tex')
         if f1 != None:
             if corrige:
-                outils.ajoute_extension(f1, '.tex')
+                outilsOld.ajoute_extension(f1, '.tex')
             parametres ['fiche_exo'] = f0
             parametres ['fiche_cor'] = f1
             parametres ['liste_exos'] = lesexos
             parametres ['les_fiches'] =  LesFiches
-            outils.creation(parametres)
+            outilsOld.creation(parametres)

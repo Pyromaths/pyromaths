@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from outils import ppcm, pgcd, signe, ecrit_tex, valeur_alea, randrange
+from outils.Arithmetique import ppcm, pgcd, signe, ecrit_tex, valeur_alea
 
 #
 # ------------------- FRACTIONS -------------------
