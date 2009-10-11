@@ -205,7 +205,7 @@ def EcritNombreDecimal(n):
             txt = txt + u' unité et '
         if e > 1:
             txt = txt + u' unités et '
-        txt = txt + NombreEnLettres(d) + partieDec[len(str(d)) - 1]
+        txt = txt + NombreEnLettres(d) + partieDec[len(str(n).split('.')[1]) - 1]
         if d > 1:
             txt = txt + 's'
     return txt
@@ -248,7 +248,7 @@ def EcrireNombreLettre():
     cor.append('    \\end{enumerate}\n')
     cor.append('\\end{enumerate}\n')
     return (exo, cor)
-    
+
 #===============================================================================
 # Conversions
 #===============================================================================

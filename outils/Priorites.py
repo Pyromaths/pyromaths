@@ -4,6 +4,7 @@ import re, sys
 sys.path[:0] = ['../classes']
 from Racine import *
 from Terme import *
+from Affichage import decimaux
 
 def split_calc(calcul):
 
@@ -201,16 +202,16 @@ def traite_operation(operateur, calcul, pre, post, solution):
             #permet de supprimer les parenthèses
             solution.extend([pre +
                              sous_calcul[0][:-1] +
-                             str(sous_resultat) +
+                             decimaux(sous_resultat, True) +
                              sous_calcul[2][1:] +
                              post])
         else:
             solution.extend([pre +
                              sous_calcul[0] +
-                             str(sous_resultat) +
+                             decimaux(sous_resultat, True) +
                              sous_calcul[2] +
                              post])
-        calcul = sous_calcul[0] + str(sous_resultat) + sous_calcul[2]
+        calcul = sous_calcul[0] + decimaux(sous_resultat, True) + sous_calcul[2]
         test = re.search(pattern, calcul, re.VERBOSE)
     return (calcul, pre, post, solution)
 
@@ -225,6 +226,7 @@ def priorites_operations(calcul, pre = "", post = "", solution = []):
     #calcul, pre, post, solution = traite_operation("[\+\-]", calcul, pre,
                                                    #post, solution)
     return (calcul, solution)
+
 
 print(priorites("(12-15)**2+(15-12)**3"))
 print("_" * 40)
@@ -251,3 +253,12 @@ print(priorites("a*b*2"))
 #c, d = Terme(5, 2), Terme(-6, 2)
 #print(priorites("c*d"))
 #print("_" * 40)
+print(priorites("8+1.3e+2"))
+print(priorites("755*(12-15)**2+(15-12)**3"))
+print(priorites("((-(-1)+-2)++3)"))
+print(priorites("4-((-1+-2)+3)"))
+print(priorites('8-(-5*(2-4))'))
+print(priorites("1+2+3+4"))
+print(priorites("-3**+2"))
+print(priorites("9+8*7"))
+

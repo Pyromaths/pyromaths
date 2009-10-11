@@ -35,7 +35,7 @@ def tex_fractions(f0, f1):
                     fractions.valeurs_prod_parenth,
                     fractions.valeurs_quotient_frac)
     ordre_exos = [i for i in range(nb_exos)]
-    f0.write('''\\exercice
+    f0.write('''\n\\exercice
 ''')
     f0.write(u"  Calculer les expressions suivantes et donner le résultat sous la forme d'une fraction irréductible.\n")
     f0.write('  \\begin{multicols}{3}\\noindent\n')

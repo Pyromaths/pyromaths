@@ -77,7 +77,9 @@ def decimaux(nb, mathenv = 0):
     pattern = re.compile(r"^(-?\d{1,3}?)" + "(\d{3})" * ((len(entiere) - 1) // 3) \
                          + "$")
     partie_entiere = pattern.search(entiere).groups()
-    if decimale:
+    if decimale and int(decimale):
+        """Vérifie si la partie décimale existe et si elle est différente de
+        zéro"""
         pattern = re.compile(r"^" + "(\d{3})" * ((len(decimale) - 1)  // 3) + \
                              "(\d{1,3})?$")
         partie_decimale = pattern.search(decimale).groups()

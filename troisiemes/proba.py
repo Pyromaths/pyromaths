@@ -23,6 +23,7 @@
 import random
 from math import *
 from outils import sepmilliers
+from pyro_classes import Fractions
 
 def proba(f0,f1):
     couleur=['bleue','rouge','jaune','verte','marron','orange']
@@ -59,13 +60,15 @@ def proba(f0,f1):
     p41="\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}+"%(n1,tot,n1-1,tot-1)
     p42="\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}+"%(n2,tot,n1,tot-1)
     p43="\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}="%(n3,tot,n1,tot-1)
+
     result4="\\dfrac{%s}{%s}"%(n1*(n1-1+n2+n3),tot*(tot-1)) #resultat non simplifié de la question 4
     cor=[u"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule%s %s%s (%s), indiscernables au toucher. On tire successivement et sans remise deux boules."%(n1,plur1,c1,plur1,i1,n2,plur2,c2,plur2,i2,n3,plur3,c3,plur3,i3),
+
          "\\begin{enumerate}",
          u"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?\\par " %c2,
          "Il y a %s boules dans l'urne dont %s boule%s %s%s. \\par"%(tot,n2,plur2,c2,plur2),
          u" La probabilité de tirer une boule %s au premier tirage est donc $\\dfrac{%s}{%s}$."%(c2,n2,tot),
-         u"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire.\\\[0,3cm] ",
+         u"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire.\\\ [0,3cm] ",
          "\\psset{unit=1 mm}",
          "\\psset{linewidth=0.3,dotsep=1,hatchwidth=0.3,hatchsep=1.5,shadowsize=1,dimen=middle}",
          "\\psset{dotsize=0.7 2.5,dotscale=1 1,fillcolor=black}",
@@ -95,7 +98,10 @@ def proba(f0,f1):
          "\\vspace{0.3cm}",
          u"\\item Quelle est la probabilité que la première boule soit %s et la deuxième soit %s?\\par"%(c3,c2),
          u"On utilise l'arbre construit précédemment.\\par",
-         "$p(%s,%s)=\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}=\\dfrac{%s}{%s}$\\par"%(i3,i2,n3,tot,n2,tot-1,n3*n2,tot*(tot-1)),
+         "$p(%s,%s)=%s \\times %s = %s$\\par" % \
+                (i3,i2,Fractions.TeX(Fractions(n3,tot)),
+                 Fractions.TeX(Fractions(n2,tot-1)),
+                 Fractions.TeX(Fractions(n3*n2,tot*(tot-1)))),
          u"La probabilité que la première boule soit %s et la deuxième soit %s est égale à $\\dfrac{%s}{%s}$."%(c3,c2,n3*n2,tot*(tot-1)),
          u"\\item Quelle est la probabilité que la deuxième boule soit %s ?\\par"%c1,
          u"On note (?, %s) l'évènement: la deuxième boule tirée est %s. \\par"%(i1,c1),
