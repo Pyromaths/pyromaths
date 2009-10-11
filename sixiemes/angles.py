@@ -182,47 +182,53 @@ def PointName(l3noms, indice):
     return tuple(list)
 
 
-def figure(f0, f1, lpoints, lnoms, xmax, ymax):
-    text = []
-    text.append("\\begin{pspicture}(%s,%s)\n" % (xmax, ymax))
-    text.append("  \\psframe(0,0)(%s,%s)\n" % (xmax, ymax))
+def figure(exo, cor, lpoints, lnoms, xmax, ymax):
+    exo.append("\\begin{pspicture}(%s,%s)\n" % (xmax, ymax))
+    exo.append("  \\psframe(0,0)(%s,%s)\n" % (xmax, ymax))
+    cor.append("\\begin{pspicture}(%s,%s)\n" % (xmax, ymax))
+    cor.append("  \\psframe(0,0)(%s,%s)\n" % (xmax, ymax))
     for i in range(len(lnoms)):
-        text.append("  \\pstGeonode[PointName={%s,%s,%s}," % lnoms[i])
-        text.append("PosAngle={%s,%s,%s}]\n  " % PosAngle(lpoints[i][3],
-                    lpoints[i][4]))
+        points_exo = ''
+        points_cor = ''
+        points_exo += "  \\pstGeonode[PointName={%s,%s,%s}," % lnoms[i]
+        points_cor += "  \\pstGeonode[PointName={%s,%s,%s}," % lnoms[i]
+        points_exo += "PosAngle={%s,%s,%s}]\n  " % PosAngle(lpoints[i][3], lpoints[i][4])
+        points_cor += "PosAngle={%s,%s,%s}]\n  " % PosAngle(lpoints[i][3], lpoints[i][4])
         for j in range(3):
-            text.append("(%.2f,%.2f)" % lpoints[i][j])
-            text.append("{a%s%s}" % (j, i))
-        text.append("""
-  \\pstLineAB[nodesepB=-.5]{a0%s}{a1%s}
-""" % (i,
-                    i))
-        text.append("  \\pstLineAB[nodesepB=-.5]{a0%s}{a2%s}\n" % (i, i))
-    text.append("\\end{pspicture}\\par\n")
-    for i in range(len(text)):
-        f0.write(text[i])
-        f1.write(text[i])
+            points_exo += "  (%.2f,%.2f)" % lpoints[i][j]
+            points_exo += "{a%s%s}" % (j, i)
+            points_cor += "(%.2f,%.2f)" % lpoints[i][j]
+            points_cor += "{a%s%s}" % (j, i)
+        exo.append(points_exo)
+        cor.append(points_cor)
+        exo.append("  \\pstLineAB[nodesepB=-.5]{a0%s}{a1%s}" % (i, i))
+        cor.append("  \\pstLineAB[nodesepB=-.5]{a0%s}{a1%s}" % (i, i))
+        exo.append("  \\pstLineAB[nodesepB=-.5]{a0%s}{a2%s}\n" % (i, i))
+        cor.append("  \\pstLineAB[nodesepB=-.5]{a0%s}{a2%s}\n" % (i, i))
+    exo.append("\\end{pspicture}\\par\n")
+    cor.append("\\end{pspicture}\\par\n")
+    return (exo, cor)
 
 
-def reponses(f0, f1, lpoints, lnoms):
-    f1.write("\\begin{multicols}{4}\n")
+def reponses(exo, cor, lpoints, lnoms):
+    cor.append("\\begin{multicols}{4}\n")
     for i in range(len(lnoms)):
-        f1.write("  $\\widehat{%s%s%s}=%s\degres$\\par\n" % (lnoms[i][1],
+        cor.append("  $\\widehat{%s%s%s}=%s\degres$\\par\n" % (lnoms[i][1],
                  lnoms[i][0], lnoms[i][2], lpoints[i][4]))
         if lpoints[i][4] < 90:
-            f1.write("  angle aigu\\par\n")
+            cor.append("  angle aigu\\par\n")
         elif lpoints[i][4] > 90:
-            f1.write("  angle obtus\\par\n")
+            cor.append("  angle obtus\\par\n")
         else:
-            f1.write("  angle droit\\par\n")
-    f1.write("\\end{multicols}\n")
-    f0.write("\\begin{tabularx}{\\textwidth}{|*{4}{X|}}\n")
-    f0.write("  \\hline angle 1 : & angle 2 : & angle 3 : & angle 4 : \\\\\n")
-    f0.write("  \\hline &&& \\\\ &&& \\\\ &&& \\\\ \\hline\n")
-    f0.write("\\end{tabularx}\n")
+            cor.append("  angle droit\\par\n")
+    cor.append("\\end{multicols}\n")
+    exo.append("\\begin{tabularx}{\\textwidth}{|*{4}{X|}}\n")
+    exo.append("  \\hline angle 1 : & angle 2 : & angle 3 : & angle 4 : \\\\\n")
+    exo.append("  \\hline &&& \\\\ &&& \\\\ &&& \\\\ \\hline\n")
+    exo.append("\\end{tabularx}\n")
 
 
-def mesure_angles(f0, f1):
+def MesureAngles():
     nb_angles = 4
     (xmax, ymax) = (18, 8)  #taille de l'image en cm
     lnoms = []
@@ -237,7 +243,8 @@ def mesure_angles(f0, f1):
     tmpl = outils.choix_points(3 * nb_angles)
     for i in range(nb_angles):
         lnoms.append(tuple(tmpl[3 * i:3 * i + 3]))
-    figure(f0, f1, lpoints, lnoms, xmax, ymax)
-    reponses(f0, f1, lpoints, lnoms)
-
-
+    exo = ["\\exercice", "Nommer, mesurer et donner la nature de chacun des angles suivants :\\par \n"]
+    cor = ["\\exercice*", "Nommer, mesurer et donner la nature de chacun des angles suivants :\\par \n"]
+    figure(exo, cor, lpoints, lnoms, xmax, ymax)
+    reponses(exo, cor, lpoints, lnoms)
+    return (exo, cor)

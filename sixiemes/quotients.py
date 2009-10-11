@@ -46,20 +46,24 @@ def liste_diviseurs(l):
     return reponse
 
 
-def tex_divisible(f0, f1):
+def Divisible():
     l = valeurs_diviseurs()
     reponse = liste_diviseurs(l)
-    f0.write("""\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par
+    
+    exo = ["\\exercice", u'Cocher les bonnes réponses :\\par\n']
+    cor = ["\\exercice*", u'Cocher les bonnes réponses :\\par\n']
+    
+    exo.append("""\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par
   3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}
 """)
-    f1.write("""\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par
+    cor.append("""\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par
   3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}
 """)
     for i in range(len(l)):
-        f0.write("  %s & $\\square$ & $\\square$ & $\\square$ & $\\square$ & $\\square$ \\\\\n" %
+        exo.append("  %s & $\\square$ & $\\square$ & $\\square$ & $\\square$ & $\\square$ \\\\\n" %
                  l[i])
-        f1.write("  %s & %s & %s & %s & %s & %s \\\\\n" % tuple(reponse[i]))
-    f0.write("\\end{tabular}\n")
-    f1.write("\\end{tabular}\n")
-
+        cor.append("  %s & %s & %s & %s & %s & %s \\\\\n" % tuple(reponse[i]))
+    exo.append("\\end{tabular}\n")
+    cor.append("\\end{tabular}\n")
+    return (exo, cor)
 

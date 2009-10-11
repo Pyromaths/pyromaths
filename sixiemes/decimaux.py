@@ -210,24 +210,45 @@ def EcritNombreDecimal(n):
             txt = txt + 's'
     return txt
 
-def EcritEnChiffre(f0, f1):
+def EcritEnChiffre(exo, cor):
     lnb = nombreATrouver()
     for i in range(len(lnb)):
-        f0.write("      \\item " + EcritNombreDecimal(lnb[i]) +
+        exo.append("      \\item " + EcritNombreDecimal(lnb[i]) +
                  " : \\dotfill\n")
-        f1.write("      \\item " + EcritNombreDecimal(lnb[i]) + " : ")
-        f1.write(outils.sepmilliers(lnb[i], 0) + '\n')
+        cor.append("      \\item " + EcritNombreDecimal(lnb[i]) + " : ")
+        cor.append(outils.sepmilliers(lnb[i], 0) + '\n')
 
 
-def EcritEnLettre(f0, f1):
+def EcritEnLettre(exo, cor):
     lnb = nombreATrouver()
     for i in range(8):
-        f0.write("      \\item " + outils.sepmilliers(lnb[i], 0) +
+        exo.append("      \\item " + outils.sepmilliers(lnb[i], 0) +
                  " : \\dotfill\n")
-        f1.write("      \\item " + outils.sepmilliers(lnb[i], 0) + " : ")
-        f1.write(EcritNombreDecimal(lnb[i]) + '\n')
+        cor.append("      \\item " + outils.sepmilliers(lnb[i], 0) + " : ")
+        cor.append(EcritNombreDecimal(lnb[i]) + '\n')
 
 
+def EcrireNombreLettre():
+    exo = ["\\exercice", "\\begin{enumerate}\n", u'  \\item Écrire en chiffres les nombres suivants.\n', '    \\begin{enumerate}\n']
+    cor = ["\\exercice*", "\\begin{enumerate}\n", u'  \\item Écrire en chiffres les nombres suivants.\n', '    \\begin{enumerate}\n']
+
+    EcritEnChiffre(exo, cor)
+    
+    exo.append('    \\end{enumerate}\n')
+    exo.append(u'  \\item Écrire en lettres les nombres suivants (sans utiliser le mot ``virgule").\n')
+    exo.append('    \\begin{enumerate}\n')
+    cor.append('    \\end{enumerate}\n')
+    cor.append(u'  \\item Écrire en lettres les nombres suivants (sans utiliser le mot ``virgule").\n')
+    cor.append('    \\begin{enumerate}\n')
+    
+    EcritEnLettre(exo, cor)
+    
+    exo.append('    \\end{enumerate}\n')
+    exo.append('\\end{enumerate}\n')
+    cor.append('    \\end{enumerate}\n')
+    cor.append('\\end{enumerate}\n')
+    return (exo, cor)
+    
 #===============================================================================
 # Conversions
 #===============================================================================
@@ -263,12 +284,12 @@ def valeurs_units():
     return (a, p, unit, div0, div1)
 
 
-def tex_units(f0, f1):
+def tex_units(exo, cor):
     """
     Écrit l'exercice sur les conversions d'unités et le corrigé au format
     LaTeX
-    @param f0: fichier exercices
-    @param f1: fichier corrige
+    @param exo: fichier exercices
+    @param cor: fichier corrige
     """
 
     for i in range(6):
@@ -280,9 +301,9 @@ def tex_units(f0, f1):
         nb0 = outils.sepmilliers(a * 10 ** p, 0)
         nb1 = outils.sepmilliers(a * 10 ** ((p + div1) - div0),
                 0)
-        f0.write("    \\item %s~%s%s=\dotfill~%s%s\n" % (nb0, division[div0],
+        exo.append("    \\item %s~%s%s=\dotfill~%s%s\n" % (nb0, division[div0],
                  units[unit], division[div1], units[unit]))
-        f1.write("    \\item %s~%s%s=%s~%s%s\\par\n" % (nb0, division[div0],
+        cor.append("    \\item %s~%s%s=%s~%s%s\\par\n" % (nb0, division[div0],
                  units[unit], nb1, division[div1], units[unit]))
         nblist = [nb0[i] for i in range(len(nb0))]
         if nblist.count(','):
@@ -291,15 +312,15 @@ def tex_units(f0, f1):
         else:
             chf_unite = len(nblist) - 1
         if unit:
-            tex_tableau_autres(f1, div0, u, nblist, chf_unite)
+            tex_tableau_autres(cor, div0, u, nblist, chf_unite)
         else:
-            tex_tableau_litres(f1, div0, u, nblist, chf_unite)
-        f1.write("      \\end{tabular}\n")
+            tex_tableau_litres(cor, div0, u, nblist, chf_unite)
+        cor.append("      \\end{tabular}\n")
 
 
-def tex_tableau_autres(f1, div0, u, nblist, chf_unite):
-    f1.write("      \\begin{tabular}{c|c|c|c|c|c|c}\n")
-    f1.write("        k%s & h%s & da%s & %s & d%s & c%s & m%s \\\\ \\hline\n" %
+def tex_tableau_autres(cor, div0, u, nblist, chf_unite):
+    cor.append("      \\begin{tabular}{c|c|c|c|c|c|c}\n")
+    cor.append("        k%s & h%s & da%s & %s & d%s & c%s & m%s \\\\ \\hline\n" %
              u)
     for i in range(-div0 + chf_unite):
         tmp = nblist.pop(0)
@@ -315,12 +336,12 @@ def tex_tableau_autres(f1, div0, u, nblist, chf_unite):
     for i in range(7 - len(nblist)):
         nblist.append('0')
 
-    f1.write("        %s & %s & %s & %s & %s & %s & %s\n" % tuple(nblist))
+    cor.append("        %s & %s & %s & %s & %s & %s & %s\n" % tuple(nblist))
 
 
-def tex_tableau_litres(f1, div0, u, nblist, chf_unite):
-    f1.write("      \\begin{tabular}{c|c|c|c|c|c}\n")
-    f1.write("        h%s & da%s & %s & d%s & c%s & m%s \\\\ \\hline\n" %
+def tex_tableau_litres(cor, div0, u, nblist, chf_unite):
+    cor.append("      \\begin{tabular}{c|c|c|c|c|c}\n")
+    cor.append("        h%s & da%s & %s & d%s & c%s & m%s \\\\ \\hline\n" %
              u)
     for i in range(-div0 + 1 + chf_unite):
         tmp = nblist.pop(0)
@@ -336,8 +357,20 @@ def tex_tableau_litres(f1, div0, u, nblist, chf_unite):
     for i in range(6 - len(nblist)):
         nblist.append('0')
 
-    f1.write("        %s & %s & %s & %s & %s & %s\n" % tuple(nblist))
+    cor.append("        %s & %s & %s & %s & %s & %s\n" % tuple(nblist))
 
+
+def Conversions():
+    exo = ["\\exercice", 'Effectuer les conversions suivantes :\n', '\\begin{multicols}{3}\\noindent\n', '  \\begin{enumerate}\n']
+    cor = ["\\exercice*", 'Effectuer les conversions suivantes :\n', '\\begin{multicols}{2}\\noindent\n', '  \\begin{enumerate}\n']
+    
+    tex_units(exo, cor)
+    
+    exo.append('  \\end{enumerate}\n')
+    exo.append('\\end{multicols}\n')
+    cor.append('  \\end{enumerate}\n')
+    cor.append('\\end{multicols}\n')
+    return (exo, cor)
 
 #===============================================================================
 # Placer une virgule
@@ -370,38 +403,38 @@ def valeurs_decimaux():
     return nb
 
 
-def tex_place_virgule(f0, f1):
+def tex_place_virgule(exo, cor):
     """
     Écrit un exercices demandant de placer une virgule dans un nombre.
-    @param f0: fichier exerices
-    @param f1:fichier corrigé
+    @param exo: fichier exerices
+    @param cor:fichier corrigé
     """
 
     valeurs_index = [0, 1, 2, 3, 4, 5, 6]
     nb = valeurs_decimaux()
-    f0.write(u"""Placer une virgule (en ajoutant éventuellement des zéros) dans le nombre
+    exo.append(u"""Placer une virgule (en ajoutant éventuellement des zéros) dans le nombre
 %s de telle sorte que :
 """ % nb)
-    f0.write('\\begin{enumerate}\n')
-    f1.write(u"""Placer une virgule (en ajoutant éventuellement des zéros) dans le nombre
+    exo.append('\\begin{enumerate}\n')
+    cor.append(u"""Placer une virgule (en ajoutant éventuellement des zéros) dans le nombre
 %s de telle sorte que :
 """ %
              nb)
-    f1.write('\\begin{enumerate}\n')
+    cor.append('\\begin{enumerate}\n')
     for i in range(6):
         dec = [str(nb)[i] for i in range(len(str(nb)))]
         index_dec = random.randrange(6)
         index_valeurs = valeurs_index.pop(random.randrange(len(valeurs_index)))
-        f0.write(u"  \\item le chiffre %s soit le chiffre des %s : " \
+        exo.append(u"  \\item le chiffre %s soit le chiffre des %s : " \
                  % (dec[index_dec], valeurs[index_valeurs]))
-        f1.write(u"  \\item le chiffre %s soit le chiffre des %s : " \
+        cor.append(u"  \\item le chiffre %s soit le chiffre des %s : " \
                  % (dec[index_dec], valeurs[index_valeurs]))
         resultat = ecrit_nombre_decimal(dec, (index_dec + 4) -
                 index_valeurs)
-        f0.write('\\dotfill\n')
-        f1.write(outils.sepmilliers(resultat, 0) + '\n')
-    f0.write('\\end{enumerate}\n')
-    f1.write('\\end{enumerate}\n')
+        exo.append('\\dotfill\n')
+        cor.append(outils.sepmilliers(resultat, 0) + '\n')
+    exo.append('\\end{enumerate}\n')
+    cor.append('\\end{enumerate}\n')
 
 
 def ecrit_nombre_decimal(dec, index):
@@ -428,6 +461,13 @@ def ecrit_nombre_decimal(dec, index):
     return strnb
 
 
+def PlaceVirgule():
+    exo = ["\\exercice"]
+    cor = ["\\exercice*"]
+
+    tex_place_virgule(exo, cor)
+    return (exo, cor)
+
 #===============================================================================
 #    Écriture fractionnaire
 #===============================================================================
@@ -439,32 +479,44 @@ def valeurs_frac():
     return (n1, p1)
 
 
-def choix_trou_frac(f0, f1, n1, p1):
+def choix_trou_frac(exo, cor, n1, p1):
     i = random.randrange(3)
     p2 = random.randrange(2)  #sert à compliquer un peu l'exercice
     if i > 1:
-        f0.write('\\cfrac{%s}{%s}=\\ldots$\n' % (outils.sepmilliers(n1 *
+        exo.append('\\cfrac{%s}{%s}=\\ldots$\n' % (outils.sepmilliers(n1 *
                  10 ** p2), outils.sepmilliers(10 ** (p1 + p2))))
     elif i > 0:
-        f0.write('\\cfrac{%s}{\ldots}=%s$\n' % (outils.sepmilliers(n1 *
+        exo.append('\\cfrac{%s}{\ldots}=%s$\n' % (outils.sepmilliers(n1 *
                  10 ** p2), outils.sepmilliers(n1 * 10 ** (-p1),
                  1)))
     else:
-        f0.write('\\cfrac{\ldots}{%s}=%s$\n' % (outils.sepmilliers(10 **
+        exo.append('\\cfrac{\ldots}{%s}=%s$\n' % (outils.sepmilliers(10 **
                  (p1 + p2)), outils.sepmilliers(n1 * 10 ** (-p1),
                  1)))
-    f1.write('\\cfrac{%s}{%s}=%s$\n' % (outils.sepmilliers(n1 *
+    cor.append('\\cfrac{%s}{%s}=%s$\n' % (outils.sepmilliers(n1 *
              10 ** p2), outils.sepmilliers(10 ** (p1 + p2)),
              outils.sepmilliers(n1 * 10 ** (-p1), 1)))
 
 
-def tex_frac(f0, f1):
+def tex_frac(exo, cor):
     for i in range(6):
-        f0.write('    \\item $')
-        f1.write('    \\item $')
+        exo.append('    \\item $')
+        cor.append('    \\item $')
         (nombre, puissance) = valeurs_frac()
-        choix_trou_frac(f0, f1, nombre, puissance)
+        choix_trou_frac(exo, cor, nombre, puissance)
 
+
+def EcritureFractionnaire():
+    exo = ["\\exercice", u"Compléter :\n", '\\begin{multicols}{3}\\noindent\n', '  \\begin{enumerate}\n']
+    cor = ["\\exercice", u"Compléter :\n", '\\begin{multicols}{3}\\noindent\n', '  \\begin{enumerate}\n']
+    
+    tex_frac(exo, cor)
+    
+    exo.append('  \\end{enumerate}\n')
+    exo.append('\\end{multicols}\n')
+    cor.append('  \\end{enumerate}\n')
+    cor.append('\\end{multicols}\n')
+    return (exo, cor)
 
 #===============================================================================
 #    Décomposition des nombres décimaux
@@ -481,37 +533,48 @@ def valeurs_dec():
     return (v, p)
 
 
-def tex_decomposition(f0, f1, v, p):
+def tex_decomposition(exo, cor, v, p):
     for i in range(3):
         if p[i] < 0:
-            f0.write('%s\\times \\cfrac{1}{%s}' % (v[i], outils.sepmilliers(10 **
+            exo.append('%s\\times \\cfrac{1}{%s}' % (v[i], outils.sepmilliers(10 **
                      (-p[i]), 1)))
-            f1.write('%s\\times \\cfrac{1}{%s}' % (v[i], outils.sepmilliers(10 **
+            cor.append('%s\\times \\cfrac{1}{%s}' % (v[i], outils.sepmilliers(10 **
                      (-p[i]), 1)))
         else:
-            f0.write('%s\\times %s' % (v[i], outils.sepmilliers(10 **
+            exo.append('%s\\times %s' % (v[i], outils.sepmilliers(10 **
                      p[i], 1)))
-            f1.write('%s\\times %s' % (v[i], outils.sepmilliers(10 **
+            cor.append('%s\\times %s' % (v[i], outils.sepmilliers(10 **
                      p[i], 1)))
         if i < 2:
-            f0.write('+')
-            f1.write('+')
+            exo.append('+')
+            cor.append('+')
         else:
-            f0.write('=')
-            f1.write('=')
-    f0.write('\\dotfill$\n')
-    f1.write('%s$\n' % outils.sepmilliers(v[0] * 10 ** p[0] +
+            exo.append('=')
+            cor.append('=')
+    exo.append('\\dotfill$\n')
+    cor.append('%s$\n' % outils.sepmilliers(v[0] * 10 ** p[0] +
              v[1] * 10 ** p[1] + v[2] * 10 ** p[2], 1))
 
 
-def tex_dec(f0, f1):
+def tex_dec(exo, cor):
     for i in range(6):
-        f0.write('    \\item $')
-        f1.write('    \\item $')
+        exo.append('    \\item $')
+        cor.append('    \\item $')
         (chiffres, puissances) = valeurs_dec()
-        tex_decomposition(f0, f1, chiffres, puissances)
+        tex_decomposition(exo, cor, chiffres, puissances)
 
-
+def Decomposition():
+    exo = ["\\exercice", u"Compléter avec un nombre d\xe9cimal :\n", '\\begin{multicols}{2}\\noindent\n', '  \\begin{enumerate}\n']
+    cor = ["\\exercice*", u"Compléter avec un nombre d\xe9cimal :\n", '\\begin{multicols}{2}\\noindent\n', '  \\begin{enumerate}\n']
+    
+    tex_dec(exo, cor)
+    
+    exo.append('  \\end{enumerate}\n')
+    exo.append('\\end{multicols}\n')
+    cor.append('  \\end{enumerate}\n')
+    cor.append('\\end{multicols}\n')
+    return (exo, cor)
+    
 #===============================================================================
 # Classer des nombres dans l'ordre
 #===============================================================================
@@ -532,33 +595,48 @@ def choix_nombres():
     return nb
 
 
-def classer(f0, f1):
+def classer(exo, cor):
     lnb = choix_nombres()
     lnb = outils.melange_liste(lnb)
     if random.randrange(2):
         ordre = "croissant"
     else:
         ordre = u"décroissant"
-    f0.write("Classer les nombres suivants dans l'ordre %s.\\par\n    " %
+    exo.append("Classer les nombres suivants dans l'ordre %s.\\par\n    " %
              ordre)
-    f1.write("Classer les nombres suivants dans l'ordre %s.\\par\n    " %
+    cor.append("Classer les nombres suivants dans l'ordre %s.\\par\n    " %
              ordre)
     for i in range(len(lnb)):
         if i:
-            f0.write(" \\kern1cm ; \\kern1cm ")
-            f1.write(" \\kern1cm ; \\kern1cm ")
-        f0.write(outils.sepmilliers(lnb[i], 0))
-        f1.write(outils.sepmilliers(lnb[i], 0))
+            exo.append(" \\kern1cm ; \\kern1cm ")
+            cor.append(" \\kern1cm ; \\kern1cm ")
+        exo.append(outils.sepmilliers(lnb[i], 0))
+        cor.append(outils.sepmilliers(lnb[i], 0))
     lnb.sort()
     if ordre == "croissant":
         ordre = "\\textless"
     else:
         ordre = "\\textgreater"
         lnb.reverse()
-    f1.write("\\par\n    ")
+    cor.append("\\par\n    ")
     for i in range(len(lnb)):
         if i:
-            f1.write(" \\kern1cm %s \\kern1cm " % ordre)
-        f1.write(outils.sepmilliers(lnb[i], 0))
+            cor.append(" \\kern1cm %s \\kern1cm " % ordre)
+        cor.append(outils.sepmilliers(lnb[i], 0))
 
 
+
+def ClasserNombres():
+    exo = ["\\exercice", '\\begin{enumerate}\n','  \\item ' ]
+    cor = ["\\exercice*", '\\begin{enumerate}\n','  \\item ' ]
+    
+    classer(exo, cor)
+    
+    exo.append('\n  \\item ')
+    cor.append('\n  \\item ')
+    
+    classer(exo, cor)
+    
+    exo.append('\\end{enumerate}\n')
+    cor.append('\\end{enumerate}\n')
+    return (exo, cor)

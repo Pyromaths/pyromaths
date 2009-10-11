@@ -130,12 +130,12 @@ def prepare_tuple(lpoints, ligne):
     return (tuple(retour_exo), tuple(retour_sol))
 
 
-def tex_figure(file, lpoints, nodesep=0):
+def tex_figure(liste, lpoints, nodesep=0):
     """
     \xc3\x89crit dans un fichier tex la construction de 3 points et \xc3\xa9ventuellement
     une droite, une demi-droite ou un segment.
-    @param file: fichier
-    @type file: file
+    @param liste: liste d'exos ou corrigés
+    @type liste: liste
     @param lpoints: liste de 3 points
     @type lpoints: liste de 3 strings
     @param nodesep: liste des dépassements pour pstricks
@@ -151,56 +151,62 @@ def tex_figure(file, lpoints, nodesep=0):
         points_coord.append(l_ord[i])
         points_coord.append(lpoints[i])
     points_coord = tuple(points_coord)
-    file.write('  \\begin{pspicture}(-0.5,0.2)(4.5,2.2)\n')
-    file.write('    \\psset{PointSymbol=x}\n')
-    file.write('    \\pstGeonode[PosAngle=90](0.5,%s){%s}(2,%s){%s}(3.5,%s){%s}\n' %
+    liste.append('  \\begin{pspicture}(-0.5,0.2)(4.5,2.2)\n')
+    liste.append('    \\psset{PointSymbol=x}\n')
+    liste.append('    \\pstGeonode[PosAngle=90](0.5,%s){%s}(2,%s){%s}(3.5,%s){%s}\n' %
                points_coord)
     if nodesep:
-        file.write('    \\pstLineAB[nodesepA=%s, nodesepB=%s]{%s}{%s}\n' %
+        liste.append('    \\pstLineAB[nodesepA=%s, nodesepB=%s]{%s}{%s}\n' %
                    tuple(nodesep))
-    file.write('  \\end{pspicture}\\\\\n')
+    liste.append('  \\end{pspicture}\\\\\n')
 
 
-def tex_ligne_tableau(f0, f1, ligne):
+def tex_ligne_tableau(exo, cor, ligne):
     """
     \xc3\x89crit une ligne de tableau dans un fichier tex
-    @param f0: fichier d'exercices
-    @type f0: file
-    @param f1: fichier de corrections
-    @type f1: file
+    @param exo: fichier d'exercices
+    @type exo: file
+    @param cor: fichier de corrections
+    @type cor: file
     @param ligne: droite, demi-droite ou segment
     @type ligne: string
     """
 
     lpoints = choix_points(3)
-    (exo, solution) = prepare_tuple(lpoints, ligne)
-    f0.write('  \\hfill{} $%s %s%s %s$ \\hfill{} &\\hfill{}  %s \\hfill{} &\n' %
-             exo)
-    f1.write('  \\hfill{} $%s %s%s %s$ \\hfill{} &\\hfill{}  %s \\hfill{} &\n' %
+    (exer, solution) = prepare_tuple(lpoints, ligne)
+    exo.append('  \\hfill{} $%s %s%s %s$ \\hfill{} &\\hfill{}  %s \\hfill{} &\n' %
+             exer)
+    cor.append('  \\hfill{} $%s %s%s %s$ \\hfill{} &\\hfill{}  %s \\hfill{} &\n' %
              solution)
     lnodesep = nodesep(ligne)
     lnodesep.extend(solution[1:3])
-    if exo != ('\\ldots', '\\ldots', '\\ldots', '\\ldots', '\\dotfill'):
-        tex_figure(f0, lpoints)
+    if exer != ('\\ldots', '\\ldots', '\\ldots', '\\ldots', '\\dotfill'):
+        tex_figure(exo, lpoints)
     else:
-        tex_figure(f0, lpoints, lnodesep)
-    tex_figure(f1, lpoints, lnodesep)
-    f0.write('  \\hline\n')
-    f1.write('  \\hline\n')
+        tex_figure(exo, lpoints, lnodesep)
+    tex_figure(cor, lpoints, lnodesep)
+    exo.append('  \\hline\n')
+    cor.append('  \\hline\n')
 
 
-def tex_droites(f0, f1):
+def Droites():
     """
     \xc3\x89crit les 5 lignes du tableau
-    @param f0: fichier d'exercices
-    @type f0: file
-    @param f1: fichier de corrections
-    @type f1: file
+    @param exo: fichier d'exercices
+    @type exo: file
+    @param cor: fichier de corrections
+    @type cor: file
     """
-
+    exo = ["\\exercice", u"Compléter :\\par\n", '\\begin{tabular}{|p{3cm}|p{5cm}|c|}\n', '  \\hline\n', u'  \\hfill{} \\textbf{Nom} \\hfill{} & \\hfill{}\\textbf{Catégorie}\\hfill{} & \\textbf{Figure} \\\\\n \\hline\n']
+    cor = ["\\exercice*", u"Compléter :\\par\n", '\\begin{tabular}{|p{3cm}|p{5cm}|c|}\n', '  \\hline\n', u'  \\hfill{} \\textbf{Nom} \\hfill{} & \\hfill{}\\textbf{Catégorie}\\hfill{} & \\textbf{Figure} \\\\\n \\hline\n']
+    
     line = choix_ligne(5)
     for i in range(5):
-        tex_ligne_tableau(f0, f1, line[i])
+        tex_ligne_tableau(exo, cor, line[i])
+
+    exo.append('\\end{tabular}\n')
+    cor.append('\\end{tabular}\n')
+    return (exo, cor)
 
 
 #------------------------------------------------------------------------------
@@ -286,7 +292,7 @@ def cree_coordonnees(long=3):
             10.0, a0, floor((k1 * 10) * long) / 10.0, a1)
 
 
-def enonce_perp(f0, f1):
+def enonce_perp(exo, cor):
     coor = cree_coordonnees(3)
     noms = noms_sommets(4)
     (par, per) = ([], [])
@@ -296,24 +302,40 @@ def enonce_perp(f0, f1):
     lval = [0, 1, 2, 3]
     for i in range(3):
         per.append(lval.pop(random.randrange(len(lval))))
-    f0.write(fig_perp(noms, coor))
-    f1.write(fig_perp(noms, coor, 1, per, par))
-    f0.write('''  \end{pspicture*}\\par
+    exo.append(fig_perp(noms, coor))
+    cor.append(fig_perp(noms, coor, 1, per, par))
+    exo.append('''  \end{pspicture*}\\par
   \\begin{enumerate}
 ''')
-    f1.write('''  \\par
+    cor.append('''  \\par
   \\begin{enumerate}
 ''')
     s_per = u"  \\item Tracer la droite perpendiculaire à la droite $(%s%s)$ passant par $%s$\n"
     s_par = u"  \\item Tracer la droite parallèle à la droite $(%s%s)$ passant par $%s$\n"
     s_per = s_per % (noms[per[0]], noms[per[1]], noms[per[2]])
     s_par = s_par % (noms[par[0]], noms[par[1]], noms[par[2]])
-    f0.write(s_par)
-    f1.write(s_par)
-    f0.write(s_per)
-    f1.write(s_per)
-    f0.write('  \\end{enumerate}\n')
-    f1.write('  \\end{enumerate}\n')
+    exo.append(s_par)
+    cor.append(s_par)
+    exo.append(s_per)
+    cor.append(s_per)
+    exo.append('  \\end{enumerate}\n')
+    cor.append('  \\end{enumerate}\n')
+
+
+def Perpendiculaires():
+    exo = ["\\exercice", u"Réaliser les figures suivantes :\\par\n", '\\begin{multicols}{2}\n']
+    cor = ["\\exercice*", u"Réaliser les figures suivantes :\\par\n", '\\begin{multicols}{2}\n']
+    
+    enonce_perp(exo, cor)
+    
+    exo.append('  \\columnbreak\n')
+    cor.append('  \\columnbreak\n')
+    
+    enonce_perp(exo, cor)
+    
+    exo.append('\\end{multicols}\n')
+    cor.append('\\end{multicols}\n')
+    return (exo, cor)
 
 
 #------------------------------------------------------------------------------
@@ -512,118 +534,126 @@ def valeurs_figures(par_per):
         return (angle, xa, ya, dist, lpoints, noms)
 
 
-def enonce_prop(f0, f1):
-    f0.write('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}\n')
-    f0.write('  \\hline\n')
-    f0.write(u'  Données & Figure codée & Propriété & Conclusion \\\\ \n')
-    f1.write('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}\n')
-    f1.write('  \\hline\n')
-    f1.write(u'  Données & Figure codée & Propriété & Conclusion \\\\ \n')
+def enonce_prop(exo, cor):
+    exo.append('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}\n')
+    exo.append('  \\hline\n')
+    exo.append(u'  Données & Figure codée & Propriété & Conclusion \\\\ \n')
+    cor.append('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}\n')
+    cor.append('  \\hline\n')
+    cor.append(u'  Données & Figure codée & Propriété & Conclusion \\\\ \n')
     ltypes = [1, 2, 3]
     lexos = []
     for i in range(3):
         lexos.append(ltypes.pop(random.randrange(len(ltypes))))
     for i in range(3):
-        f0.write('  \\hline\n')
-        f1.write('  \\hline\n')
+        exo.append('  \\hline\n')
+        cor.append('  \\hline\n')
         v = valeurs_figures(lexos[i])
         if lexos[i] == 2:
             if v[5]:  #noms de la forme (AB), on ajoute des parenthèses
-                f0.write('''  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ &
+                exo.append('''  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
   \\end{pspicture*}
   & & \\\\\n''' %
                          (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0], v[4][1],
                          v[4][4], v[4][5]))
-                f1.write('  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ & \n' %
+                cor.append('  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ & \n' %
                          (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0], v[4][1],
                          v[4][4], v[4][5]))
             else:
-                f0.write('''  $%s//%s$\\par et\\par $%s//%s$ &
+                exo.append('''  $%s//%s$\\par et\\par $%s//%s$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
   \\end{pspicture*}
   & & \\\\\n''' %
                          (v[4][0], v[4][1], v[4][0], v[4][2]))
-                f1.write('  $%s//%s$\\par et\\par $%s//%s$ & \n' % (v[4][0],
+                cor.append('  $%s//%s$\\par et\\par $%s//%s$ & \n' % (v[4][0],
                          v[4][1], v[4][0], v[4][2]))
-            f1.write('  %s & \n' % ('\n').join(figure(v[0], v[1], v[2],
+            cor.append('  %s & \n' % ('\n').join(figure(v[0], v[1], v[2],
                      v[3], v[4], v[5], lexos[i], v[6])))
-            f1.write(u'  Si deux droites sont parallèles, alors toute parallèle à l\'une est parallèle à l\'autre. &\n')
+            cor.append(u'  Si deux droites sont parallèles, alors toute parallèle à l\'une est parallèle à l\'autre. &\n')
             if v[5]:
-                f1.write('$(%s%s)//(%s%s)$ \\\\\n  \\hline\n' % (v[4][2],
+                cor.append('$(%s%s)//(%s%s)$ \\\\\n  \\hline\n' % (v[4][2],
                          v[4][3], v[4][4], v[4][5]))
             else:
-                f1.write('  $%s//%s$ \\\\\n  \\hline\n' % (v[4][1], v[4][2]))
+                cor.append('  $%s//%s$ \\\\\n  \\hline\n' % (v[4][1], v[4][2]))
         else:
 
             fig = random.randrange(2)
             if lexos[i] == 1:
                 if v[5]:
                     if not fig:
-                        f0.write('''  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
+                        exo.append('''  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
   \\end{pspicture*}
   & & \\\\\n''' %
                                  (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0],
                                  v[4][1], v[4][0], v[4][2]))
-                    f1.write('  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &\n' %
+                    cor.append('  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &\n' %
                              (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0],
                              v[4][1], v[4][0], v[4][2]))
                 else:
                     if not fig:
-                        f0.write('''  $%s//%s$\\par et\\par $%s\perp%s$ &
+                        exo.append('''  $%s//%s$\\par et\\par $%s\perp%s$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
   \\end{pspicture*}
   & & \\\\\n''' %
                                  (v[4][0], v[4][1], v[4][0], v[4][2]))
-                    f1.write('  $%s//%s$\\par et\\par $%s\perp%s$ &\n' %
+                    cor.append('  $%s//%s$\\par et\\par $%s\perp%s$ &\n' %
                              (v[4][0], v[4][1], v[4][0], v[4][2]))
                 if fig:
-                    f0.write('  & %s & & \\\\\n' % ('\n').join(figure(v[0],
+                    exo.append('  & %s & & \\\\\n' % ('\n').join(figure(v[0],
                              v[1], v[2], v[3], v[4], v[5], lexos[i])))
-                f1.write('  %s & \n' % ('\n').join(figure(v[0], v[1], v[2],
+                cor.append('  %s & \n' % ('\n').join(figure(v[0], v[1], v[2],
                          v[3], v[4], v[5], lexos[i])))
-                f1.write(u'  Si deux droites sont parallèles, alors toute perpendiculaire à l\'une est perpendiculaire à l\'autre. &\n')
+                cor.append(u'  Si deux droites sont parallèles, alors toute perpendiculaire à l\'une est perpendiculaire à l\'autre. &\n')
                 if v[5]:
-                    f1.write('  $(%s%s)\\perp(%s%s)$ \\\\\n  \\hline\n' %
+                    cor.append('  $(%s%s)\\perp(%s%s)$ \\\\\n  \\hline\n' %
                              (v[4][2], v[4][3], v[4][0], v[4][2]))
                 else:
-                    f1.write('  $%s\perp%s$ \\\\\n  \\hline\n' % (v[4][1],
+                    cor.append('  $%s\perp%s$ \\\\\n  \\hline\n' % (v[4][1],
                              v[4][2]))
             else:
                 if v[5]:
                     if not fig:
-                        f0.write('''  $(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
+                        exo.append('''  $(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
   \\end{pspicture*}
   & & \\\\\n''' %
                                  (v[4][0], v[4][1], v[4][0], v[4][2], v[4][2],
                                  v[4][3], v[4][0], v[4][2]))
-                    f1.write('  $(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &\n' %
+                    cor.append('  $(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &\n' %
                              (v[4][0], v[4][1], v[4][0], v[4][2], v[4][2],
                              v[4][3], v[4][0], v[4][2]))
                 else:
                     if not fig:
-                        f0.write('''  $%s\\perp%s$\\par et\\par $%s\perp%s$ &
+                        exo.append('''  $%s\\perp%s$\\par et\\par $%s\perp%s$ &
   \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
   \\end{pspicture*}
   & & \\\\\n''' %
                                  (v[4][0], v[4][2], v[4][1], v[4][2]))
-                    f1.write('  $%s\\perp%s$\\par et\\par $%s\perp%s$ &\n' %
+                    cor.append('  $%s\\perp%s$\\par et\\par $%s\perp%s$ &\n' %
                              (v[4][0], v[4][2], v[4][1], v[4][2]))
                 if fig:
-                    f0.write('  & %s & & \\\\\n' % ('\n').join(figure(v[0],
+                    exo.append('  & %s & & \\\\\n' % ('\n').join(figure(v[0],
                              v[1], v[2], v[3], v[4], v[5], lexos[i])))
-                f1.write('  %s &\n' % ('\n').join(figure(v[0], v[1], v[2],
+                cor.append('  %s &\n' % ('\n').join(figure(v[0], v[1], v[2],
                          v[3], v[4], v[5], lexos[i])))
-                f1.write(u'  Si deux droites sont perpendiculaires à une même troisième alors elles sont parallèles entre elles. &\n')
+                cor.append(u'  Si deux droites sont perpendiculaires à une même troisième alors elles sont parallèles entre elles. &\n')
                 if v[5]:
-                    f1.write('  $(%s%s)//(%s%s)$ \\\\\n  \\hline\n' % (v[4][0],
+                    cor.append('  $(%s%s)//(%s%s)$ \\\\\n  \\hline\n' % (v[4][0],
                              v[4][1], v[4][2], v[4][3]))
                 else:
-                    f1.write('  $%s//%s$ \\\\\n  \\hline\n' % (v[4][0],
+                    cor.append('  $%s//%s$ \\\\\n  \\hline\n' % (v[4][0],
                              v[4][1]))
-    f0.write('''  \\hline
+    exo.append('''  \\hline
 \\end{tabularx}
 ''')
-    f1.write('\\end{tabularx}\n')
+    cor.append('\\end{tabularx}\n')
+
+
+def Proprietes():
+    exo = ["\\exercice", u"Compléter le tableau suivant :\\par Les droites en gras sont parall\xe8les.\\par """]
+    cor = ["\\exercice", u"Compléter le tableau suivant :\\par Les droites en gras sont parall\xe8les.\\par """]
+
+    enonce_prop(exo, cor)
+    return (exo, cor)

@@ -62,51 +62,48 @@ def place_pts(vals, angle):
     for i in range(len(vals)):
         txt.append("(%s,%s)" % vals[i])
         txt.append("{%s}" % chr(i + 97))
-    txt.append("""
-  \\pstGeonode[PointSymbol=x,PointName=none](-4.5;%s){A}(4.5;%s){B}
-""" %
-               (angle, angle))
-    txt.append("""
-  \\psline[linewidth=1.5\\pslinewidth,nodesep=-4.5](A)(B)
-""")
-    txt.append("  \\pspolygon")
+    txt.append("\n  \\pstGeonode[PointSymbol=x,PointName=none](-4.5;%s){A}(4.5;%s){B}" % (angle, angle))
+    txt.append("\n  \\psline[linewidth=1.5\\pslinewidth,nodesep=-4.5](A)(B)")
+    txt.append("\n  \\pspolygon")
     for i in range(len(vals)):
         txt.append("(%s)" % chr(i + 97))
     return ("").join(txt)
 
 
-def exo_quadrillage(f0, f1):
+def SymetrieQuadrillage():
+    exo = ["\\exercice", u"Construire la symétrique de chacune des figures par rapport à la droite en", "utilisant le quadrillage :\\par\n", "\\psset{unit=.9cm}\n"]
+    cor = ["\\exercice*", u"Construire la symétrique de chacune des figures par rapport à la droite en", "utilisant le quadrillage :\\par\n", "\\psset{unit=.9cm}\n"]
+    
     nbpts = 5
     langles = [0, 90, 45, 135]
     for j in range(3):
         angle = langles.pop(random.randrange(len(langles)))
         vals = valeurs_quad(nbpts)
         txt = place_pts(vals, angle)
-        f0.write("\\begin{pspicture*}(-3,-3)(3,3)\n")
-        f0.write("  \\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]\n")
-        f0.write(txt)
-        f1.write("\\begin{pspicture*}(-3,-3)(3,3)\n")
-        f1.write("  \\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]\n")
-        f1.write(txt)
-        f1.write("\n  \\pstOrtSym[PointSymbol=x,PointName=none]{A}{B}{")
+        exo.append("\\begin{pspicture*}(-3,-3)(3,3)\n")
+        exo.append("  \\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]\n")
+        exo.append(txt)
+        cor.append("\\begin{pspicture*}(-3,-3)(3,3)\n")
+        cor.append("  \\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]\n")
+        cor.append(txt)
+        txt_cor = "\n  \\pstOrtSym[PointSymbol=x,PointName=none]{A}{B}{"
         for i in range(len(vals)):
             if i > 0:
-                f1.write(",")
-            f1.write("%s" % chr(i + 97))
-        f1.write("}[")
+                txt_cor += ","
+            txt_cor += "%s" % chr(i + 97)
+        txt_cor += "}["
         for i in range(len(vals)):
             if i > 0:
-                f1.write(",")
-            f1.write("%s1" % chr(i + 97))
-        f1.write("]\n  \pspolygon[linecolor=gray,linestyle=dashed]")
+                txt_cor += ","
+            txt_cor += "%s1" % chr(i + 97)
+        txt_cor += "]\n  \pspolygon[linecolor=gray,linestyle=dashed]"
         for i in range(len(vals)):
-            f1.write("(%s1)" % chr(i + 97))
-        f0.write("\end{pspicture*}\n")
-        f1.write("""
-\end{pspicture*}
-""")
+            txt_cor += "(%s1)" % chr(i + 97)
+        cor.append(txt_cor)
+        exo.append("\\end{pspicture*}\n")
+        cor.append("\\end{pspicture*}\n")
         if j < 2:
-            f0.write("\\hfill\n")
-            f1.write("\\hfill\n")
-
+            exo.append("\\hfill\n")
+            cor.append("\\hfill\n")
+    return (exo, cor)
 

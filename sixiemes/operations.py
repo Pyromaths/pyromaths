@@ -134,7 +134,7 @@ def retenues_diff(ligne1, ligne2):
     return (ligne1, ligne2)
 
 
-def tex_somme(f0, f1):
+def tex_somme(exo, cor):
     (ligne1, ligne2) = ([''], ['+'])
     (nba, nbb, deca, decb, lavtvirg, laprvirg) = valeurs()
     total = nba + nbb
@@ -149,23 +149,23 @@ def tex_somme(f0, f1):
     ligne0 = retenues_somme(ligne1, ligne2)
     if ligne0[0] == '1':
         ligne0[0] = '\\tiny 1'
-    f0.write('      \\item La somme des termes %s et %s.\\par\n' % (outils.sepmilliers(nba),
+    exo.append('      \\item La somme des termes %s et %s.\\par\n' % (outils.sepmilliers(nba),
              outils.sepmilliers(nbb)))
-    f1.write('      \\item La somme des termes %s et %s.\\par\n' % (outils.sepmilliers(nba),
+    cor.append('      \\item La somme des termes %s et %s.\\par\n' % (outils.sepmilliers(nba),
              outils.sepmilliers(nbb)))
-    f1.write('        \\begin{tabular}[t]{*{%s}{c}}\n' % (lavtvirg +
+    cor.append('        \\begin{tabular}[t]{*{%s}{c}}\n' % (lavtvirg +
              laprvirg + 1))
-    f1.write('          %s \\\\\n' % ' & \\tiny '.join(ligne0))
-    f1.write('          %s \\\\\n' % ' & '.join(ligne1))
-    f1.write('          %s \\\\\n          \\hline\n' % ' & '.join(ligne2))
-    f1.write('          %s \\\\\n' % ' & '.join(ligne3))
-    f1.write('        \\end{tabular}\\par\n')
-    outils.ecrit_tex(f1, '%s+%s = %s' % (outils.sepmilliers(nba, 1),
+    cor.append('          %s \\\\\n' % ' & \\tiny '.join(ligne0))
+    cor.append('          %s \\\\\n' % ' & '.join(ligne1))
+    cor.append('          %s \\\\\n          \\hline\n' % ' & '.join(ligne2))
+    cor.append('          %s \\\\\n' % ' & '.join(ligne3))
+    cor.append('        \\end{tabular}\\par\n')
+    formule = '%s+%s = %s' % (outils.sepmilliers(nba, 1),
                      outils.sepmilliers(nbb, 1), outils.sepmilliers(nba +
-                     nbb, 1)), cadre=1, thenocalcul='', tabs=3)
+                     nbb, 1))
+    cor.append((u'  \\[ \\boxed{%s} \\] \n').expandtabs(2 * 3) % (formule))
 
-
-def tex_difference(f0, f1):
+def tex_difference(exo, cor):
     (ligne1, ligne2) = ([''], ['-'])
     (nba, nbb, deca, decb, lavtvirg, laprvirg) = valeurs()
     if nba < nbb:
@@ -180,20 +180,20 @@ def tex_difference(f0, f1):
     ligne2 = lignes(ligne2, decb, lavtvirg, laprvirg)
     ligne3 = lignes(ligne3, dectotal, lavtvirg, laprvirg)
     (ligne1, ligne2) = retenues_diff(ligne1, ligne2)
-    f0.write(u"      \\item La différence des termes %s et %s.\\par\n" %
+    exo.append(u"      \\item La différence des termes %s et %s.\\par\n" %
              (outils.sepmilliers(nba), outils.sepmilliers(nbb)))
-    f1.write(u"      \\item La différence des termes %s et %s.\\par\n" %
+    cor.append(u"      \\item La différence des termes %s et %s.\\par\n" %
              (outils.sepmilliers(nba), outils.sepmilliers(nbb)))
-    f1.write('        \\begin{tabular}[t]{*{%s}{c}}\n' % (lavtvirg +
+    cor.append('        \\begin{tabular}[t]{*{%s}{c}}\n' % (lavtvirg +
              laprvirg + 1))
-    f1.write('          %s \\\\\n' % ' & '.join(ligne1))
-    f1.write('          %s \\\\\n          \\hline\n' % ' & '.join(ligne2))
-    f1.write('          %s \\\\\n' % ' & '.join(ligne3))
-    f1.write('        \\end{tabular}\\par\n')
-    outils.ecrit_tex(f1, '%s-%s = %s' % (outils.sepmilliers(nba, 1),
+    cor.append('          %s \\\\\n' % ' & '.join(ligne1))
+    cor.append('          %s \\\\\n          \\hline\n' % ' & '.join(ligne2))
+    cor.append('          %s \\\\\n' % ' & '.join(ligne3))
+    cor.append('        \\end{tabular}\\par\n')
+    formule = '%s-%s = %s' % (outils.sepmilliers(nba, 1),
                      outils.sepmilliers(nbb, 1), outils.sepmilliers(nba -
-                     nbb, 1)), cadre=1, thenocalcul='', tabs=3)
-
+                     nbb, 1))
+    cor.append((u'  \\[ \\boxed{%s} \\] \n').expandtabs(2 * 3) % (formule))
 
 def pose_mult(nba, nbb):
     (ligne, total) = ([], 0)
@@ -211,7 +211,7 @@ def ligneprod(ligne, dec, lg):
     return ligne
 
 
-def tex_produit(f0, f1):
+def tex_produit(exo, cor):
     (nba, nbb, puisa, puisb) = valeurs_prod()
     deca = [','.join(str(nba * 10 ** puisa).rsplit('.'))[i] \
                     for i in range(len(str(nba * 10 ** puisa)))]
@@ -230,78 +230,106 @@ def tex_produit(f0, f1):
         dec4.pop(i)  # supprime le point décimal
         dec4[i - 1] = '%s\\Huge ,' % dec4[i - 1]  # et ajoute une Huge virgule au chiffre des unités
     lg = max(len(dec4), max(len(deca), len(decb)))  # nombre de colonnes dans le tableau
-    f0.write('      \\item Le produit des facteurs %s et %s.\\par\n' % (outils.sepmilliers(nba *
+    exo.append('      \\item Le produit des facteurs %s et %s.\\par\n' % (outils.sepmilliers(nba *
              10 ** puisa), outils.sepmilliers(nbb * 10 ** puisb)))
-    f1.write('      \\item Le produit des facteurs %s et %s.\\par\n' % (outils.sepmilliers(nba *
+    cor.append('      \\item Le produit des facteurs %s et %s.\\par\n' % (outils.sepmilliers(nba *
              10 ** puisa), outils.sepmilliers(nbb * 10 ** puisb)))
-    f1.write('        \\begin{enumerate}\n')
-    f1.write(u'          \\item Première méthode :\\par\n')
-    f1.write('          \\begin{tabular}[t]{*{%s}{c}}\n' % lg)
-    f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], deca,lg)))
-    f1.write('            %s \\\\\n          \\hline\n' % \
+    cor.append('        \\begin{enumerate}\n')
+    cor.append(u'          \\item Première méthode :\\par\n')
+    cor.append('          \\begin{tabular}[t]{*{%s}{c}}\n' % lg)
+    cor.append('            %s \\\\\n' % ' & '.join(ligneprod([], deca,lg)))
+    cor.append('            %s \\\\\n          \\hline\n' % \
                             ' & '.join(ligneprod(['$\\times$'], decb, lg)))
     for i in range(len(dec3)):
         dec = [str(dec3[i])[j] for j in range(len(str(dec3[i])))]
-        f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], dec, lg)))
-    f1.write('            \\hline \\\\\n')
-    f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], dec4, lg)))
-    f1.write('          \\end{tabular}\n')
-    f1.write(u'          \\item Seconde méthode :\\par\n')
-    f1.write('          \\begin{tabular}[t]{*{%s}{c}}\n' % len(dec4))
-    f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], decb, lg)))
-    f1.write('            %s \\\\\n          \\hline\n' % \
+        cor.append('            %s \\\\\n' % ' & '.join(ligneprod([], dec, lg)))
+    cor.append('            \\hline \\\\\n')
+    cor.append('            %s \\\\\n' % ' & '.join(ligneprod([], dec4, lg)))
+    cor.append('          \\end{tabular}\n')
+    cor.append(u'          \\item Seconde méthode :\\par\n')
+    cor.append('          \\begin{tabular}[t]{*{%s}{c}}\n' % len(dec4))
+    cor.append('            %s \\\\\n' % ' & '.join(ligneprod([], decb, lg)))
+    cor.append('            %s \\\\\n          \\hline\n' % \
                             ' & '.join(ligneprod(['$\\times$'], deca, lg)))
     for i in range(len(dec3bis)):
         dec = [str(dec3bis[i])[j] for j in range(len(str(dec3bis[i])))]
-        f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], dec, lg)))
-    f1.write('            \\hline \\\\\n')
-    f1.write('            %s \\\\\n' % ' & '.join(ligneprod([], dec4, lg)))
-    f1.write('          \\end{tabular}\n')
-    f1.write('          \\end{enumerate}\n')
-    outils.ecrit_tex(f1, '%s\\times%s = %s' % (outils.sepmilliers(nba *
+        cor.append('            %s \\\\\n' % ' & '.join(ligneprod([], dec, lg)))
+    cor.append('            \\hline \\\\\n')
+    cor.append('            %s \\\\\n' % ' & '.join(ligneprod([], dec4, lg)))
+    cor.append('          \\end{tabular}\n')
+    cor.append('          \\end{enumerate}\n')
+    
+    #outils.ecrit_tex(f1, '%s\\times%s = %s' % (outils.sepmilliers(nba *
+                     #10 ** puisa, 1), outils.sepmilliers(nbb * 10 **
+                     #puisb, 1), outils.sepmilliers((nba * nbb) * 10 ** (puisa +
+                     #puisb), 1)), cadre=1, thenocalcul='', tabs=3)
+
+    #### Remplacement de la fonction outils.ecrit_tex :
+
+    formule = '%s\\times%s = %s' % (outils.sepmilliers(nba *
                      10 ** puisa, 1), outils.sepmilliers(nbb * 10 **
                      puisb, 1), outils.sepmilliers((nba * nbb) * 10 ** (puisa +
-                     puisb), 1)), cadre=1, thenocalcul='', tabs=3)
+                     puisb), 1))
+    cor.append((u'  \\[ \\boxed{%s} \\] \n').expandtabs(2 * 3) % (formule))
 
+
+def Operations():
+    nb_exos = 3
+    tex_exos = (tex_somme, tex_difference, tex_produit)
+    
+    ordre_exos = [i for i in range(nb_exos)]
+    
+    exo = ["\\exercice", u'Poser et effectuer les opérations suivantes.\n', '\\begin{multicols}{2}\\noindent\n', '  \\begin{enumerate}\n']
+    cor = ["\\exercice*", u'Poser et effectuer les opérations suivantes.\n', '\\begin{multicols}{2}\\noindent\n', '  \\begin{enumerate}\n']
+    
+    for i in range(nb_exos):
+        a = random.randrange(nb_exos - i)
+        j = ordre_exos.pop(a)
+        tex_exos[j](exo, cor)
+    exo.append('  \\end{enumerate}\n')
+    exo.append('\\end{multicols}\n')
+    cor.append('  \\end{enumerate}\n')
+    cor.append('\\end{multicols}\n')
+    return (exo, cor)
 
 #===============================================================================
 # Calcul mental
 #===============================================================================
 
 
-def tex_calcul_mental(f0, f1):
+def tex_calcul_mental(exo, cor):
     modules = (plus, moins, plus, div)
     calculs = [i for i in range(20)]
     for i in range(20):
         j = random.randrange(0, len(calculs))
         (a, b) = modules[calculs[j] // 5](10)
         if calculs[j] // 5 == 0:
-            choix_trou(a, b, a + b, '+', f0, f1)
+            choix_trou(a, b, a + b, '+', exo, cor)
         if calculs[j] // 5 == 1:
-            choix_trou(a, b, a - b, '-', f0, f1)
+            choix_trou(a, b, a - b, '-', exo, cor)
         if calculs[j] // 5 == 2:
-            choix_trou(a, b, a * b, '\\times', f0, f1)
+            choix_trou(a, b, a * b, '\\times', exo, cor)
         if calculs[j] // 5 == 3:
-            choix_trou(a, b, a // b, '\\div', f0, f1)
+            choix_trou(a, b, a // b, '\\div', exo, cor)
         calculs.pop(j)
 
 
-def choix_trou(nb1, nb2, tot, operateur, f0, f1):
+def choix_trou(nb1, nb2, tot, operateur, exo, cor):
     nbaleatoire = outils.randrange(4)
     if nbaleatoire > 1:
-        f0.write('    \\item $%s %s %s = \\ldots\\ldots$\n' % (nb1,
+        exo.append('    \\item $%s %s %s = \\ldots\\ldots$\n' % (nb1,
                  operateur, nb2))
-        f1.write('    \\item $%s %s %s = \\mathbf{%s}$\n' % (nb1,
+        cor.append('    \\item $%s %s %s = \\mathbf{%s}$\n' % (nb1,
                  operateur, nb2, tot))
     elif nbaleatoire > 0:
-        f0.write('    \\item $%s %s \\ldots\\ldots = %s$\n' % (nb1,
+        exo.append('    \\item $%s %s \\ldots\\ldots = %s$\n' % (nb1,
                  operateur, tot))
-        f1.write('    \\item $%s %s \\mathbf{%s} = %s$\n' % (nb1,
+        cor.append('    \\item $%s %s \\mathbf{%s} = %s$\n' % (nb1,
                  operateur, nb2, tot))
     else:
-        f0.write('    \\item $\\ldots\\ldots %s %s = %s$\n' % (operateur,
+        exo.append('    \\item $\\ldots\\ldots %s %s = %s$\n' % (operateur,
                  nb2, tot))
-        f1.write('    \\item $\\mathbf{%s} %s %s = %s$\n' % (nb1,
+        cor.append('    \\item $\\mathbf{%s} %s %s = %s$\n' % (nb1,
                  operateur, nb2, tot))
 
 
@@ -323,64 +351,79 @@ def div(valeurmax):
     return (a * b, a)
 
 
+
+
+def CalculMental():
+    exo = ["\\exercice", 'Effectuer sans calculatrice :\n', '\\begin{multicols}{4}\\noindent\n', '  \\begin{enumerate}\n']
+    cor = ["\\exercice*", 'Effectuer sans calculatrice :\n', '\\begin{multicols}{4}\\noindent\n', '  \\begin{enumerate}\n']
+    
+    tex_calcul_mental(exo, cor)
+    
+    exo.append('  \\end{enumerate}\n')
+    exo.append('\\end{multicols}\n')
+    cor.append('\\end{enumerate}\n')
+    cor.append('\\end{multicols}\n')
+    return (exo, cor)
+
+
 #===============================================================================
 # PRODUITS ET QUOTIENTS PAR 10, 100, 1000
 #===============================================================================
 
 
-def tex_dix(f0, f1):
+def tex_dix(exo, cor):
     nb = 4  # nb de calculs de chaque type
     l = valeurs10(nb)
     for i in range(len(l)):
         j = random.randrange(0, len(l))
-        tex_formule_dix(l.pop(j), f0, f1)
+        tex_formule_dix(l.pop(j), exo, cor)
 
 
-def tex_formule_dix(l, f0, f1):
+def tex_formule_dix(l, exo, cor):
     if l[2] == '*':
         alea = random.randrange(0, 5)
         if alea > 1:
-            f0.write('        \\item $%s \\quad\\times\\quad %s \\quad = \\quad \\dotfill$\n' %
+            exo.append('        \\item $%s \\quad\\times\\quad %s \\quad = \\quad \\dotfill$\n' %
                      (outils.sepmilliers(l[0], 1), outils.sepmilliers(l[1],
                      1)))
-            f1.write('        \\item $%s \\times %s = \\mathbf{%s}$\n' %
+            cor.append('        \\item $%s \\times %s = \\mathbf{%s}$\n' %
                      (outils.sepmilliers(l[0], 1), outils.sepmilliers(l[1],
                      1), outils.sepmilliers(l[0] * l[1], 1)))
         elif alea > 0:
-            f0.write('        \\item $%s \\quad\\times\\quad \\dotfill \\quad = \\quad %s$\n' %
+            exo.append('        \\item $%s \\quad\\times\\quad \\dotfill \\quad = \\quad %s$\n' %
                      (outils.sepmilliers(l[0], 1), outils.sepmilliers(l[0] *
                      l[1], 1)))
-            f1.write('        \\item $%s \\times \\mathbf{%s} = %s$\n' %
+            cor.append('        \\item $%s \\times \\mathbf{%s} = %s$\n' %
                      (outils.sepmilliers(l[0], 1), outils.sepmilliers(l[1],
                      1), outils.sepmilliers(l[0] * l[1], 1)))
         else:
-            f0.write('        \\item $\\dotfill \\quad\\times\\quad %s \\quad = \\quad %s$\n' %
+            exo.append('        \\item $\\dotfill \\quad\\times\\quad %s \\quad = \\quad %s$\n' %
                      (outils.sepmilliers(l[1], 1), outils.sepmilliers(l[0] *
                      l[1], 1)))
-            f1.write('        \\item $\\mathbf{%s} \\times %s = %s$\n' %
+            cor.append('        \\item $\\mathbf{%s} \\times %s = %s$\n' %
                      (outils.sepmilliers(l[0], 1), outils.sepmilliers(l[1],
                      1), outils.sepmilliers(l[0] * l[1], 1)))
     else:
         alea = random.randrange(0, 5)
         if alea > 1:
-            f0.write('        \\item $%s \\quad\\div\\quad %s \\quad = \\quad \\dotfill$\n' %
+            exo.append('        \\item $%s \\quad\\div\\quad %s \\quad = \\quad \\dotfill$\n' %
                      (outils.sepmilliers(l[0], 1), outils.sepmilliers(l[1],
                      1)))
-            f1.write('        \\item $%s \\div %s = \\mathbf{%s}$\n' % (outils.sepmilliers(l[0],
+            cor.append('        \\item $%s \\div %s = \\mathbf{%s}$\n' % (outils.sepmilliers(l[0],
                      1), outils.sepmilliers(l[1], 1), outils.sepmilliers(l[0] /
                      l[1], 1)))
         elif alea > 0:
-            f0.write('        \\item $%s \\quad\\div\\quad \\dotfill \\quad = \\quad %s$\n' %
+            exo.append('        \\item $%s \\quad\\div\\quad \\dotfill \\quad = \\quad %s$\n' %
                      (outils.sepmilliers(l[0], 1), outils.sepmilliers(l[0] /
                      l[1], 1)))
-            f1.write('        \\item $%s \\div \\mathbf{%s} = %s$\n' % (outils.sepmilliers(l[0],
+            cor.append('        \\item $%s \\div \\mathbf{%s} = %s$\n' % (outils.sepmilliers(l[0],
                      1), outils.sepmilliers(l[1], 1), outils.sepmilliers(l[0] /
                      l[1], 1)))
         else:
-            f0.write('        \\item $\\dotfill \\quad\\div\\quad %s \\quad = \\quad %s$\n' %
+            exo.append('        \\item $\\dotfill \\quad\\div\\quad %s \\quad = \\quad %s$\n' %
                      (outils.sepmilliers(l[1], 1), outils.sepmilliers(l[0] /
                      l[1], 1)))
-            f1.write('        \\item $\\mathbf{%s} \\div %s = %s$\n' % (outils.sepmilliers(l[0],
+            cor.append('        \\item $\\mathbf{%s} \\div %s = %s$\n' % (outils.sepmilliers(l[0],
                      1), outils.sepmilliers(l[1], 1), outils.sepmilliers(l[0] /
                      l[1], 1)))
 
@@ -407,3 +450,15 @@ def valeurs10(nb):  # renvoie nb valeur de chaque type : *10, /10, *0.1
     return l
 
 
+
+def ProduitPuissanceDix():
+    exo = ["\\exercice", u'Compléter sans calculatrice :\n', '\\begin{multicols}{2}\\noindent\n', '  \\begin{enumerate}\n']
+    cor = ["\\exercice", u'Compléter sans calculatrice :\n', '\\begin{multicols}{2}\\noindent\n', '  \\begin{enumerate}\n']
+    
+    tex_dix(exo, cor)
+    
+    exo.append('  \\end{enumerate}\n')
+    exo.append('\\end{multicols}\n')
+    cor.append('  \\end{enumerate}\n')
+    cor.append('\\end{multicols}\n')
+    return (exo, cor)
