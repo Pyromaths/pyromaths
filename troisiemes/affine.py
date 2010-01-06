@@ -117,9 +117,9 @@ def couples ():
     D=(float(random.randrange(-4,5)),float(random.randrange(-4,5)))
     while not (validec(A,D) and validec(B,D) and validedroite(C,D)) :
         D=(float(random.randrange(-4,5)),float(random.randrange(-4,5)))
-    E=(float(random.randrange(-4,5)),float(random.randrange(-4,5)))
+    E=(0,float(random.randrange(-4,5)))
     while not (validec(A,E) and validec(B,E) and validec(C,E) and validec(D,E)):
-        E=(float(random.randrange(-4,5)),float(random.randrange(-4,5)))
+        E=(0,float(random.randrange(-4,5)))
     F=(float(random.randrange(-4,5)),float(random.randrange(-4,5)))
     while not (validec(A,F) and validec(B,F) and validec(C,F) and validec(D,F)and validedroite(E,F)):
         F=(float(random.randrange(-4,5)),float(random.randrange(-4,5)))
