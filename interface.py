@@ -398,10 +398,13 @@ class Ui_MainWindow(object):
       <span style=" font-weight:600;">Arnaud Kientz</span> pour ses graphismes, son implication dans le code de Pyromaths et son amitié ;
       </li>
       <li>
-      <span style=" font-weight:600;">Nicolas Pourcelot</span> pour ses conseils et son implication prochaine dans le code de Pyromaths ;
+      <span style=" font-weight:600;">Guillaume Barthélémy</span> pour ses exercices ;
       </li>
       <li>
-      <span style=" font-weight:600;">Guillaume Barthélémy</span> pour ses exercices ;
+      <span style=" font-weight:600;">Nicolas Bissonnier</span> pour son arrivée dans l'équipe de développement ;
+      </li>
+      <li>
+      <span style=" font-weight:600;">Nicolas Pourcelot</span> pour ses conseils et son implication prochaine dans le code de Pyromaths ;
       </li>
       <li>
       <span style=" font-weight:600;">Jacqueline Gouguenheim-Desloy</span> a porté Pyromaths sous MacOS à ses débuts. Son soutien et son amitié nous ont été précieux. Sa disparition est une perte douloureuse pour la communauté du logiciel libre.

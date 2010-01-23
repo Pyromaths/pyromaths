@@ -24,20 +24,20 @@ from PyQt4 import QtGui, QtCore
 import sys, os, codecs
 
 #================================================================
-# Imports spécifiques à Pyromaths
-#=========================== QtGui ========================
-import interface
-import outils.System
-import troisiemes.troisiemes, quatriemes.quatriemes, cinquiemes.cinquiemes
-import sixiemes.sixiemes
-
-#================================================================
 # Cas d'une installation de Pyromaths via deb ou rpm, il faut
 # ajouter les modules au PATH
 #================================================================
 if os.name == "posix" and os.path.basename(__file__)=="pyromaths":
     sys.path.append(os.path.join( os.path.dirname(__file__),
         "../lib/pyromaths"))
+
+#================================================================
+# Imports spécifiques à Pyromaths
+#=========================== QtGui ========================
+import interface
+import outils.System
+import troisiemes.troisiemes, quatriemes.quatriemes, cinquiemes.cinquiemes
+import sixiemes.sixiemes
 
 #================================================================
 # Dossier des icones

@@ -72,7 +72,7 @@ def create_config_file():
     etree.SubElement(child, "modele").text="pyromaths.tex"
 
     child = etree.SubElement(root, "informations")
-    etree.SubElement(child, "version").text="09.09-1"
+    etree.SubElement(child, "version").text="10.01"
     etree.SubElement(child, "description").text=u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
     etree.SubElement(child, "icone").text="pyromaths.ico"
 
@@ -275,7 +275,7 @@ def copie_tronq_modele(dest, parametres, master):
 
     modele.close()
     return
-    
+
 #==============================================================
 #        Compilation de la version win32
 #==============================================================
@@ -285,12 +285,14 @@ def we_are_frozen():
     This will affect how we find out where we are located."""
     return hasattr(sys, "frozen")
 
+print os.path.dirname(unicode(sys.executable,
+                                sys.getfilesystemencoding( )))
 def module_path():
     """ This will get us the program's directory,
     even if we are frozen using py2exe"""
 
     if we_are_frozen():
-        return os.path.dirname(str(sys.executable,
+        return os.path.dirname(unicode(sys.executable,
                                 sys.getfilesystemencoding( )))
 
     #return os.path.dirname(str(__file__,
