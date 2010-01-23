@@ -197,11 +197,11 @@ def creation(parametres):
                 call(["latex", "-interaction=batchmode", str(cor)],
                         #env={"PATH": os.path.expandvars('$PATH')},
                         stdout=log)
-        call(["dvips", "-q", "%s.dvi" % (f0noext)],
+        call(["dvips", "-q", "%s.dvi" % (f0noext), "-o%s.ps" % (f0noext)],
                 #env={"PATH": os.path.expandvars('$PATH')},
                 stdout=log)
         if parametres['corrige']:
-            call(["dvips", "-q", "%s.dvi" % (f1noext)],
+            call(["dvips", "-q", "%s.dvi" % (f1noext), "-o%s.ps" % (f1noext)],
                     #env={"PATH": os.path.expandvars('$PATH')},
                     stdout=log)
         call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % (f0noext),
