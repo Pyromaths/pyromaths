@@ -25,7 +25,7 @@ import outils.Arithmetique
 import string
 import math
 import os
-from outilsOld import radians, degres
+from outils.Conversions import radians, degres
 
 
 class Fractions:
@@ -501,15 +501,12 @@ class TeXMiseEnForme:
 
 fig = Metapost()
 fig = Metapost.triangle(
-    fig, "A", "B",  "C", a=7, b=5, c=6, rotation=0, angledroit=1)
+    fig, "A", "B",  "C", a=3, b=4.2, c=4.2, rotation=10, angledroit=1)
 fig = Metapost.triangle(
-    fig, "D", "E",  "F", alpha=55, b=4, c=5, rotation=0, angledroit=1)
+    fig, "D", "E",  "F", a=4, b=5.7, c=6.5, rotation=90, angledroit=1)
 fig = Metapost.triangle(
-    fig, "G", "H",  "I", beta=55, b=5, c=4, rotation=0, angledroit=1)
+    fig, "G", "H",  "I", a=3.5, b=3.5, c=3.5, rotation=0, angledroit=1)
 fig = Metapost.triangle(
-    fig, "J", "K",  "L", alpha=40, beta=75, c=5, rotation=0, angledroit=1)
-fig = Metapost.triangle(
-    fig, "M", "N",  "O", alpha=35, beta=110, b=5, rotation=0, angledroit=1)
-
+    fig, "J", "K",  "L", a=4, b=4.5, c=4.5, rotation=30, angledroit=1)
 fig = Metapost.fin(fig)
-#print string.join(fig.text, "")
+print string.join(fig.text, "")

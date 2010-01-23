@@ -24,7 +24,7 @@
 from pyro_classes import Fractions
 import random
 import string
-import outils
+import outils.Arithmetique
 
 
 def fractions_egales():
@@ -80,10 +80,10 @@ def sommes_fractions():
         else:
             s = "-"
         n = d = c = n2 = 2
-        while outils.pgcd(n, d) > 1:
+        while outils.Arithmetique.pgcd(n, d) > 1:
             n = random.randrange(1, 11)
             d = random.randrange(2, 11)
-        while outils.pgcd(n2, d * c) > 1:
+        while outils.Arithmetique.pgcd(n2, d * c) > 1:
             c = random.randrange(2, 11)
             n2 = random.randrange(2, 11)
         fr1 = Fractions(n, d)
@@ -130,13 +130,13 @@ def produits_fractions():
            "\\begin{multicols}{4}", "  \\noindent"]
     for i in range(8):
         n1=d1=n2=d2=a=b=2
-        while outils.pgcd(a,b)>1:
+        while outils.Arithmetique.pgcd(a,b)>1:
             a=random.randrange(1,11)
             b=random.randrange(2,11)
-        while outils.pgcd(n1*a,d1*b)>1:
+        while outils.Arithmetique.pgcd(n1*a,d1*b)>1:
             n1=random.randrange(1,11)
             d1=random.randrange(2,11)
-        while outils.pgcd(n2*b,d2*a)>1:
+        while outils.Arithmetique.pgcd(n2*b,d2*a)>1:
             n2=random.randrange(1,11)
             d2=random.randrange(2,11)
 

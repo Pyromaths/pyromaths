@@ -22,148 +22,31 @@
 #
 
 from math import acos, asin, atan, pi, sin, cos, tan
-import random
+import operator, random
+
 #
 # ------------------- THEOREME DE PYTHAGORE -------------------
 
-couples_pythagore = (
-    (12, 16, 20),
-    (15, 20, 25),
-    (10, 24, 26),
-    (20, 21, 29),
-    (18, 24, 30),
-    (16, 30, 34),
-    (21, 28, 35),
-    (12, 35, 37),
-    (15, 36, 39),
-    (24, 32, 40),
-    (27, 36, 45),
-    (14, 48, 50),
-    (30, 40, 50),
-    (24, 45, 51),
-    (20, 48, 52),
-    (28, 45, 53),
-    (33, 44, 55),
-    (40, 42, 58),
-    (36, 48, 60),
-    (11, 60, 61),
-    (16, 63, 65),
-    (25, 60, 65),
-    (33, 56, 65),
-    (39, 52, 65),
-    (32, 60, 68),
-    (42, 56, 70),
-    (48, 55, 73),
-    (24, 70, 74),
-    (21, 72, 75),
-    (45, 60, 75),
-    (30, 72, 78),
-    (48, 64, 80),
-    (18, 80, 82),
-    (13, 84, 85),
-    (36, 77, 85),
-    (40, 75, 85),
-    (51, 68, 85),
-    (60, 63, 87),
-    (39, 80, 89),
-    (54, 72, 90),
-    (35, 84, 91),
-    (57, 76, 95),
-    (65, 72, 97),
-    (28, 96, 100),
-    (60, 80, 100),
-    (20, 99, 101),
-    (48, 90, 102),
-    (40, 96, 104),
-    (63, 84, 105),
-    (56, 90, 106),
-    (60, 91, 109),
-    (66, 88, 110),
-    (36, 105, 111),
-    (15, 112, 113),
-    (69, 92, 115),
-    (80, 84, 116),
-    (45, 108, 117),
-    (56, 105, 119),
-    (72, 96, 120),
-    (22, 120, 122),
-    (27, 120, 123),
-    (35, 120, 125),
-    (44, 117, 125),
-    (75, 100, 125),
-    (32, 126, 130),
-    (50, 120, 130),
-    (66, 112, 130),
-    (78, 104, 130),
-    (81, 108, 135),
-    (64, 120, 136),
-    (88, 105, 137),
-    (84, 112, 140),
-    (55, 132, 143),
-    (17, 144, 145),
-    (24, 143, 145),
-    (87, 116, 145),
-    (100, 105, 145),
-    (96, 110, 146),
-    (48, 140, 148),
-    (51, 140, 149),
-    (42, 144, 150),
-    (90, 120, 150),
-    (72, 135, 153),
-    (93, 124, 155),
-    (60, 144, 156),
-    (85, 132, 157),
-    (84, 135, 159),
-    (96, 128, 160),
-    (36, 160, 164),
-    (99, 132, 165),
-    (65, 156, 169),
-    (119, 120, 169),
-    (26, 168, 170),
-    (72, 154, 170),
-    (80, 150, 170),
-    (102, 136, 170),
-    (52, 165, 173),
-    (120, 126, 174),
-    (49, 168, 175),
-    (105, 140, 175),
-    (78, 160, 178),
-    (108, 144, 180),
-    (19, 180, 181),
-    (70, 168, 182),
-    (33, 180, 183),
-    (57, 176, 185),
-    (60, 175, 185),
-    (104, 153, 185),
-    (111, 148, 185),
-    (88, 165, 187),
-    (114, 152, 190),
-    (95, 168, 193),
-    (130, 144, 194),
-    (48, 189, 195),
-    (75, 180, 195),
-    (99, 168, 195),
-    (117, 156, 195),
-    (28, 195, 197),
-    (56, 192, 200),
-    (120, 160, 200),
-    )
-
-
-def trouve_couples_pythagore(pyromax):
-    (liste, listecouples) = ([], [])
-    for a in range(pyromax):
-        liste.append(a ** 2)
-    for c in range(pyromax):
-        for b in range(int((c + 1) / 2 ** .5)):
-            if liste.count((c + 1) ** 2 - (b + 1) ** 2):
-                a = liste.index((c + 1) ** 2 - (b + 1) ** 2)
-                listeinter = [c + 1, b + 1, a]
-                listeinter.sort()
-                if listeinter[0] > 9:
-                    listecouples.append(tuple(listeinter))
-    return tuple(listecouples)
-
+def trouve_couples_pythagore(max):
+    ls = []
+    for i in xrange(26):
+        for j in xrange(i-1):
+            a = i
+            b = j+1
+            for k in xrange(140):
+                x = (2*k+1)*(a**2-b**2)
+                y = (2*k+1)*(2*a*b)
+                z = (2*k+1)*(a**2+b**2)
+                if z <= max:
+                  ls.append(tuple(sorted([x,y,z])))
+    ls.sort(key = operator.itemgetter(2))
+    cpt = 1
+    while cpt < len(ls):
+        if ls[cpt]==ls[cpt-1]:
+            ls.pop(cpt)
+        else:
+            cpt += 1
+    return tuple(ls)
 
 def noms_sommets(nb):  # renvoie nb noms de sommets
     (listenb, listepts) = ([], [])
@@ -232,7 +115,8 @@ def exo_pythagore():
     cor = ["\\exercice*\n\\begin{multicols}{2}\n  \\begin{enumerate}"]
     for j in range(2):
         while True:
-            longueurs = couples_pythagore[random.randrange(120)]
+            couples = trouve_couples_pythagore(200)
+            longueurs = couples[random.randrange(len(couples))]
             longueurs = [longueurs[i] / 10.0 for i in range(3)]
             if inegalite_triangulaire(longueurs):
                 break
@@ -250,10 +134,11 @@ def exo_pythagore():
         exo.append(enonce)
         cor.append(enonce)
         cor.append("  \\par\\dotfill{}\\par\n")
-        cor.append(u"  Le triangle %s est rectangle en %s donc, d'après le \\textbf{théorème de Pythagore} :" %
+        cor.append(u"Le triangle $%s$ est rectangle en $%s$.\\par" % \
                    (nom_tr, noms[2]))
-        cor.append(u"  \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]" %
-                   (cotes[2], cotes[0], cotes[1], cotes[2]))
+        cor.append(u"Son hypoténuse est $[%s]$.\\par" % (cotes[2]))
+        cor.append(u"D'après le \\textbf{théorème de Pythagore} :" )
+        cor.append("\\[%s^2=%s^2+%s^2\\]" % (cotes[2], cotes[0], cotes[1] ))
         if long0 == 2 or long1 == 2:
             cor.append("  \\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]" %
                        (cotes[(3 - long0) - long1], cotes[2], cotes[((4 -
@@ -316,7 +201,8 @@ def exo_triangle_cercle():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
     while True:
-        longueurs = couples_pythagore[random.randrange(120)]
+        couples = trouve_couples_pythagore(200)
+        longueurs = couples[random.randrange(len(couples))]
         longueurs = [longueurs[i] / 10.0 for i in range(3)]
         if inegalite_triangulaire(longueurs):
             break
@@ -402,7 +288,8 @@ def exo_reciproque_pythagore():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
     while True:
-        longueurs = couples_pythagore[random.randrange(120)]
+        couples = trouve_couples_pythagore(200)
+        longueurs = couples[random.randrange(len(couples))]
         longueurs = [longueurs[i] / 10.0 for i in range(3)]
         if inegalite_triangulaire(longueurs):
             break

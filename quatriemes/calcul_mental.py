@@ -24,12 +24,12 @@
 # Pyromaths : Poser des opérations
 #----------------------------------------------------------------------
 
-import outils
+import outils.Arithmetique
 import random
 
 
 def choix_trou(nb1, nb2, tot, operateur, exo, cor):
-    nbaleatoire = outils.randrange(4)
+    nbaleatoire = random.randrange(4)
     if nbaleatoire > 1:
         exo.append("    \\item $%s %s %s = \\ldots\\ldots$" % (nb1,
                    operateur, nb2))
@@ -48,19 +48,19 @@ def choix_trou(nb1, nb2, tot, operateur, exo, cor):
 
 
 def plus(pyromax):
-    (a, b) = (outils.valeur_alea(-pyromax, pyromax), outils.valeur_alea(-pyromax,
+    (a, b) = (outils.Arithmetique.valeur_alea(-pyromax, pyromax), outils.Arithmetique.valeur_alea(-pyromax,
               pyromax))
     return (a, b)
 
 
 def moins(pyromax):
-    (a, b) = (outils.valeur_alea(-pyromax, pyromax), outils.valeur_alea(-pyromax,
+    (a, b) = (outils.Arithmetique.valeur_alea(-pyromax, pyromax), outils.Arithmetique.valeur_alea(-pyromax,
               pyromax))
     return (a + b, a)
 
 
 def div(pyromax):
-    (a, b) = (outils.valeur_alea(-pyromax, pyromax), outils.valeur_alea(-pyromax,
+    (a, b) = (outils.Arithmetique.valeur_alea(-pyromax, pyromax), outils.Arithmetique.valeur_alea(-pyromax,
               pyromax))
     return (a * b, a)
 
@@ -76,16 +76,16 @@ def main():
         j = random.randrange(0, len(calculs))
         (a, b) = modules[calculs[j] // 5](10)
         if calculs[j] // 5 == 0:
-            choix_trou(a, outils.tex_coef(b, '', bpn=1), a + b, '+', exo,
+            choix_trou(a, outils.Affichage.tex_coef(b, '', bpn=1), a + b, '+', exo,
                        cor)
         if calculs[j] // 5 == 1:
-            choix_trou(a, outils.tex_coef(b, '', bpn=1), a - b, '-', exo,
+            choix_trou(a, outils.Affichage.tex_coef(b, '', bpn=1), a - b, '-', exo,
                        cor)
         if calculs[j] // 5 == 2:
-            choix_trou(a, outils.tex_coef(b, '', bpn=1), a * b,
+            choix_trou(a, outils.Affichage.tex_coef(b, '', bpn=1), a * b,
                        '\\times', exo, cor)
         if calculs[j] // 5 == 3:
-            choix_trou(a, outils.tex_coef(b, '', bpn=1), a // b, '\\div',
+            choix_trou(a, outils.Affichage.tex_coef(b, '', bpn=1), a // b, '\\div',
                        exo, cor)
         calculs.pop(j)
     exo.extend(["  \\end{enumerate}", "\\end{multicols}"])

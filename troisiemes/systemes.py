@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import outils
+import outils.Arithmetique
 from . import developpements
 
 ##
@@ -30,7 +30,7 @@ from . import developpements
 
 def choix_valeurs(m):  # crée les valeurs du systeme de la forme a1.x+b1.y=c1 ; a2.x+b2.y=c2 et renvoie ((a1, b1, c1), (a2, b2, c2), (x, y))
     while True:
-        c = [outils.valeur_alea(-m, m) for i in range(6)]
+        c = [outils.Arithmetique.valeur_alea(-m, m) for i in range(6)]
         if c[0] * c[3] - c[1] * c[2] and abs(c[0]) - 1 and abs(c[1]) - 1 and \
             abs(c[2]) - 1 and abs(c[3]) - 1 and abs(c[1] * c[2] - c[0] *
                 c[3]) - 1 and abs(c[0]) - abs(c[2]) and abs(c[1]) - abs(c[3]) and \
@@ -207,8 +207,8 @@ def tex_verification(v):  # renvoie la vérification de lasolution du système d
 
 
 def systemes(f0, f1, v):
-    a = outils.ppcm(v[0][0], v[1][0])
-    b = outils.ppcm(v[0][1], v[1][1])
+    a = outils.Arithmetique.ppcm(v[0][0], v[1][0])
+    b = outils.Arithmetique.ppcm(v[0][1], v[1][1])
     (a0, a1, b0, b1) = (a // v[0][0], -a // v[1][0], b // v[0][1], -b // v[1][1])
     if a0 < 0:
         (a0, a1) = (-a0, -a1)
@@ -219,23 +219,23 @@ def systemes(f0, f1, v):
     f0.write('  $%s$\n' % tex_systeme(v))
     f1.write('  $%s$\n' % tex_systeme(v, (a0, a1)))
 
-    #outils.ecrit_tex(f1,tex_systeme(v, (a0, a1)), thenocalcul='',tabs=1)
+    #outils.Arithmetique.ecrit_tex(f1,tex_systeme(v, (a0, a1)), thenocalcul='',tabs=1)
 
     c1 = combinaison1(v, a0, a1)
     f1.write('''  \\vspace{2ex}
   \\begin{multicols}{2}\\noindent
 ''')
-    outils.ecrit_tex(f1, tex_systeme(c1) +
+    outils.Arithmetique.ecrit_tex(f1, tex_systeme(c1) +
                      '\\quad\\text{\\footnotesize On ajoute les deux lignes}',
                      thenocalcul='', tabs=2)
     c2 = combinaison2(c1)
-    outils.ecrit_tex(f1, tex_comb2(c1, c2), thenocalcul='', tabs=2)
-    outils.ecrit_tex(f1, tex_comb3(c2), thenocalcul='', tabs=2)
-    outils.ecrit_tex(f1, tex_comb4(c2), thenocalcul='', tabs=2, cadre=1)
+    outils.Arithmetique.ecrit_tex(f1, tex_comb2(c1, c2), thenocalcul='', tabs=2)
+    outils.Arithmetique.ecrit_tex(f1, tex_comb3(c2), thenocalcul='', tabs=2)
+    outils.Arithmetique.ecrit_tex(f1, tex_comb4(c2), thenocalcul='', tabs=2, cadre=1)
     f1.write('  \\columnbreak\\par\n')
     f1.write(tex_equation(v, c2))
-    outils.ecrit_tex(f1, tex_eq2(v, c2), thenocalcul='', tabs=2)
-    outils.ecrit_tex(f1, tex_eq3(v, c2), thenocalcul='', tabs=2, cadre=1)
+    outils.Arithmetique.ecrit_tex(f1, tex_eq2(v, c2), thenocalcul='', tabs=2)
+    outils.Arithmetique.ecrit_tex(f1, tex_eq3(v, c2), thenocalcul='', tabs=2, cadre=1)
     f1.write('  \\end{multicols}\n')
     f1.write(u"  \\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par\n" %
              v[2])

@@ -21,9 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import outilsOld
 import math
 from random import randrange
+import outils.Arithmetique
+import outils.Geometrie
 
 
 def eq_droites(A, B):
@@ -240,7 +241,7 @@ def MesureAngles():
             cpt = 0
         lpoints = cree_angles(nb_angles, xmax, ymax)
         cpt = cpt + 1
-    tmpl = outilsOld.choix_points(3 * nb_angles)
+    tmpl = outils.Geometrie.choix_points(3 * nb_angles)
     for i in range(nb_angles):
         lnoms.append(tuple(tmpl[3 * i:3 * i + 3]))
     exo = ["\\exercice", "Nommer, mesurer et donner la nature de chacun des angles suivants :\\par "]

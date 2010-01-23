@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import outils
+import outils.Arithmetique
 from . import fractions
 from . import developpements
 
@@ -31,19 +31,19 @@ from . import developpements
 
 def valeurs(pyromax):  # crée les valeurs aléatoires pour l'équation
     while True:
-        coefs = [outils.valeur_alea(-pyromax, pyromax) for i in range(6)]
-        sgn = outils.valeur_alea(-1, 1)
+        coefs = [outils.Arithmetique.valeur_alea(-pyromax, pyromax) for i in range(6)]
+        sgn = outils.Arithmetique.valeur_alea(-1, 1)
         if sgn > 0:
             signe = "+"
         else:
             signe = "-"
         while True:
             while True:
-                dens = [outils.valeur_alea(2, 9) for i in range(3)]
+                dens = [outils.Arithmetique.valeur_alea(2, 9) for i in range(3)]
                 if dens[0] != dens[1] and dens[0] != dens[2] and dens[1] != \
                     dens[2]:
                     break
-            ppcm = outils.ppcm(dens[0], outils.ppcm(dens[1], dens[2]))
+            ppcm = outils.Arithmetique.ppcm(dens[0], outils.Arithmetique.ppcm(dens[1], dens[2]))
             densprim = [ppcm // dens[i] for i in range(3)]
             if densprim[0] < 10 and densprim[1] < 10 and densprim[2] < \
                 10:
@@ -158,13 +158,13 @@ def tex_equation6(valeurs):  # renvoie la solution de l'equation
 
 def equations(f0, f1, valeurs):  #resolution d'une equation
     f0.write(u"  Résoudre l'équation : \n")
-    outils.ecrit_tex(f0, tex_equation0(valeurs), thenocalcul='')
+    outils.Arithmetique.ecrit_tex(f0, tex_equation0(valeurs), thenocalcul='')
     f1.write(u"  Résoudre l'équation : \n")
     for i in range(7):
-        exec('outils.ecrit_tex(f1,tex_equation' + str(i) + \
+        exec('outils.Arithmetique.ecrit_tex(f1,tex_equation' + str(i) + \
             '(valeurs),thenocalcul=\'\')')
         if i == 2 and valeurs[3][1] < 0:
-            outils.ecrit_tex(f1, tex_equation2bis(valeurs), thenocalcul=
+            outils.Arithmetique.ecrit_tex(f1, tex_equation2bis(valeurs), thenocalcul=
                              '')
     frac = ((valeurs[4][5] - valeurs[4][1]) - valeurs[4][3] * valeurs[3][1],
             (valeurs[4][0] + valeurs[4][2] * valeurs[3][1]) - valeurs[4][4])

@@ -22,6 +22,7 @@
 #
 
 from outils.Arithmetique import ppcm, pgcd, signe, ecrit_tex, valeur_alea
+from random import randrange
 
 #
 # ------------------- FRACTIONS -------------------

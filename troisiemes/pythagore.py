@@ -525,12 +525,12 @@ def inegalite_triangulaire(a):  # renvoie 1 si c'est un triangle, 0 sinon
 
 
 def thales(f0, f1):
-    noms = noms_sommets(5)  # les noms des sommets
     type = [-1, 1]
     random.shuffle(type)
     f0.write("\\begin{multicols}{2}\n")
     f1.write("\\begin{multicols}{2}\n")
     for i in range(2):
+        noms = noms_sommets(5)  # les noms des sommets
         while True:
             valeurs = valeurs_thales(70, type[i])  # les longueurs en mm
             if valeurs:

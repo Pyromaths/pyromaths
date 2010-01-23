@@ -22,7 +22,7 @@
 #
 
 import random, math, string
-import outils
+import outils.Arithmetique
 from . import fractions, puissances, pgcd, developpements, equations, racines
 from . import systemes, proba, affine, pythagore
 
@@ -67,35 +67,35 @@ def tex_puissances(f0, f1):
 ''')
     f1.write(u"  Calculer les expressions suivantes et donner l'écriture scientifique du résultat.\n")
     f1.write('  \\begin{multicols}{2}\\noindent\n')
-    outils.ecrit_tex(f0, puissances.tex_puissances_0(valeurs[i]).translate(sd),
+    outils.Arithmetique.ecrit_tex(f0, puissances.tex_puissances_0(valeurs[i]).translate(sd),
               tabs=2)
-    outils.ecrit_tex(f1, puissances.tex_puissances_0(valeurs[i]).translate(sd),
+    outils.Arithmetique.ecrit_tex(f1, puissances.tex_puissances_0(valeurs[i]).translate(sd),
               tabs=2)
-    outils.ecrit_tex(f1, puissances.tex_puissances_1(valeurs[i]).translate(sd),
+    outils.Arithmetique.ecrit_tex(f1, puissances.tex_puissances_1(valeurs[i]).translate(sd),
               tabs=2)
-    outils.ecrit_tex(f1, puissances.tex_puissances_2(valeurs[i]).translate(sd),
+    outils.Arithmetique.ecrit_tex(f1, puissances.tex_puissances_2(valeurs[i]).translate(sd),
               tabs=2)
     if int(math.floor(math.log10(((valeurs[i][0] * valeurs[i][1]) * 1.) / valeurs[i][2]))) != \
         0:
-        outils.ecrit_tex(f1, puissances.tex_puissances_3(valeurs[i]).translate(sd),
+        outils.Arithmetique.ecrit_tex(f1, puissances.tex_puissances_3(valeurs[i]).translate(sd),
                   tabs=2)
-    outils.ecrit_tex(f1, puissances.tex_puissances_4(valeurs[i]).translate(sd),
+    outils.Arithmetique.ecrit_tex(f1, puissances.tex_puissances_4(valeurs[i]).translate(sd),
               cadre=True, tabs=2)
     f0.write('    \\columnbreak\\stepcounter{nocalcul}%\n')
     f1.write('    \\columnbreak\\stepcounter{nocalcul}%\n')
-    outils.ecrit_tex(f0, puissances.tex_puissances_0(valeurs[1 - i]).translate(sd),
+    outils.Arithmetique.ecrit_tex(f0, puissances.tex_puissances_0(valeurs[1 - i]).translate(sd),
               tabs=2)
-    outils.ecrit_tex(f1, puissances.tex_puissances_0(valeurs[1 - i]).translate(sd),
+    outils.Arithmetique.ecrit_tex(f1, puissances.tex_puissances_0(valeurs[1 - i]).translate(sd),
               tabs=2)
-    outils.ecrit_tex(f1, puissances.tex_puissances_1(valeurs[1 - i]).translate(sd),
+    outils.Arithmetique.ecrit_tex(f1, puissances.tex_puissances_1(valeurs[1 - i]).translate(sd),
               tabs=2)
-    outils.ecrit_tex(f1, puissances.tex_puissances_2(valeurs[1 - i]).translate(sd),
+    outils.Arithmetique.ecrit_tex(f1, puissances.tex_puissances_2(valeurs[1 - i]).translate(sd),
               tabs=2)
     if int(math.floor(math.log10(((valeurs[1 - i][0] * valeurs[1 - i][1]) * 1.) /
            valeurs[1 - i][2]))) != 0:
-        outils.ecrit_tex(f1, puissances.tex_puissances_3(valeurs[1 - i]).translate(sd),
+        outils.Arithmetique.ecrit_tex(f1, puissances.tex_puissances_3(valeurs[1 - i]).translate(sd),
                   tabs=2)
-    outils.ecrit_tex(f1, puissances.tex_puissances_4(valeurs[1 - i]).translate(sd),
+    outils.Arithmetique.ecrit_tex(f1, puissances.tex_puissances_4(valeurs[1 - i]).translate(sd),
               cadre=True, tabs=2)
     f0.write('  \\end{multicols}\n')
     f1.write('  \\end{multicols}\n')
@@ -126,7 +126,7 @@ def tex_pgcd(f0, f1):
     l = pgcd.algo_euclide(nombres)
     tex_liste = pgcd.tex_algo_euclide(l)
     for i in range(len(l)):
-        outils.ecrit_tex(f1, '%s' % tex_liste[i], thenocalcul='', tabs=2)
+        outils.Arithmetique.ecrit_tex(f1, '%s' % tex_liste[i], thenocalcul='', tabs=2)
     f1.write('    ' + tex_liste[len(l)])
     f1.write(u'  \\item Simplifier la fraction $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ pour la rendre irréductible en indiquant la méthode.\n' %
              nombres)
