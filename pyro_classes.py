@@ -499,14 +499,14 @@ class TeXMiseEnForme:
 #b=Litteral([(3,'x',0),(-2,'x',1)])
 #print (a*b).e
 
-fig = Metapost()
-fig = Metapost.triangle(
-    fig, "A", "B",  "C", a=3, b=4.2, c=4.2, rotation=10, angledroit=1)
-fig = Metapost.triangle(
-    fig, "D", "E",  "F", a=4, b=5.7, c=6.5, rotation=90, angledroit=1)
-fig = Metapost.triangle(
-    fig, "G", "H",  "I", a=3.5, b=3.5, c=3.5, rotation=0, angledroit=1)
-fig = Metapost.triangle(
-    fig, "J", "K",  "L", a=4, b=4.5, c=4.5, rotation=30, angledroit=1)
-fig = Metapost.fin(fig)
-print string.join(fig.text, "")
+#fig = Metapost()
+#fig = Metapost.triangle(
+    #fig, "A", "B",  "C", a=3, b=4.2, c=4.2, rotation=10, angledroit=1)
+#fig = Metapost.triangle(
+    #fig, "D", "E",  "F", a=4, b=5.7, c=6.5, rotation=90, angledroit=1)
+#fig = Metapost.triangle(
+    #fig, "G", "H",  "I", a=3.5, b=3.5, c=3.5, rotation=0, angledroit=1)
+#fig = Metapost.triangle(
+    #fig, "J", "K",  "L", a=4, b=4.5, c=4.5, rotation=30, angledroit=1)
+#fig = Metapost.fin(fig)
+#print string.join(fig.text, "")

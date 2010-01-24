@@ -78,7 +78,7 @@ def create_config_file():
 
     subchild= etree.SubElement(child, "auteur")
     etree.SubElement(subchild, "nom").text=u"Jérôme Ortais"
-    etree.SubElement(subchild, "email").text="jerome.ortais@pyromaths.org"
+    etree.SubElement(subchild, "email").text=u"jerome.ortais@pyromaths.org"
     etree.SubElement(subchild, "site").text="http://www.pyromaths.org"
 
     return etree.tostring(root, pretty_print=True, encoding="UTF-8", xml_declaration=True).decode('utf-8', 'strict')
@@ -136,7 +136,7 @@ def modify_config_file(file):
                 oldtag.text =  element.text
     if modifie:
         f = codecs.open(os.path.join(configdir(), "pyromaths.xml"), encoding='utf-8', mode = 'w')
-        f.write(etree.tostring(indent(oldroot), pretty_print=True, encoding="UTF-8", xml_declaration=True))
+        f.write(etree.tostring(indent(oldroot), pretty_print=True, encoding="utf-8", xml_declaration=True).decode('utf-8', 'strict'))
         f.close()
 
 #==============================================================
@@ -285,8 +285,6 @@ def we_are_frozen():
     This will affect how we find out where we are located."""
     return hasattr(sys, "frozen")
 
-print os.path.dirname(unicode(sys.executable,
-                                sys.getfilesystemencoding( )))
 def module_path():
     """ This will get us the program's directory,
     even if we are frozen using py2exe"""
