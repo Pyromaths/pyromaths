@@ -23,30 +23,11 @@
 
 from math import acos, asin, atan, pi, sin, cos, tan
 import operator, random
+from outils.Geometrie import couples_pythagore
 
 #
 # ------------------- THEOREME DE PYTHAGORE -------------------
 
-def trouve_couples_pythagore(max):
-    ls = []
-    for i in xrange(26):
-        for j in xrange(i-1):
-            a = i
-            b = j+1
-            for k in xrange(140):
-                x = (2*k+1)*(a**2-b**2)
-                y = (2*k+1)*(2*a*b)
-                z = (2*k+1)*(a**2+b**2)
-                if z <= max:
-                  ls.append(tuple(sorted([x,y,z])))
-    ls.sort(key = operator.itemgetter(2))
-    cpt = 1
-    while cpt < len(ls):
-        if ls[cpt]==ls[cpt-1]:
-            ls.pop(cpt)
-        else:
-            cpt += 1
-    return tuple(ls)
 
 def noms_sommets(nb):  # renvoie nb noms de sommets
     (listenb, listepts) = ([], [])
@@ -115,8 +96,7 @@ def exo_pythagore():
     cor = ["\\exercice*\n\\begin{multicols}{2}\n  \\begin{enumerate}"]
     for j in range(2):
         while True:
-            couples = trouve_couples_pythagore(200)
-            longueurs = couples[random.randrange(len(couples))]
+            longueurs = couples_pythagore[random.randrange(len(couples_pythagore))]
             longueurs = [longueurs[i] / 10.0 for i in range(3)]
             if inegalite_triangulaire(longueurs):
                 break
@@ -201,8 +181,7 @@ def exo_triangle_cercle():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
     while True:
-        couples = trouve_couples_pythagore(200)
-        longueurs = couples[random.randrange(len(couples))]
+        longueurs = couples_pythagore[random.randrange(len(couples_pythagore))]
         longueurs = [longueurs[i] / 10.0 for i in range(3)]
         if inegalite_triangulaire(longueurs):
             break
@@ -288,8 +267,7 @@ def exo_reciproque_pythagore():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
     while True:
-        couples = trouve_couples_pythagore(200)
-        longueurs = couples[random.randrange(len(couples))]
+	longueurs = couples_pythagore[random.randrange(len(couples_pythagore))]
         longueurs = [longueurs[i] / 10.0 for i in range(3)]
         if inegalite_triangulaire(longueurs):
             break
