@@ -941,8 +941,8 @@ def tex_fig_rec_thales(noms, valeurs):
 def rec_thales(f0, f1):
     noms = noms_sommets(5)  # les noms des sommets
     valeurs = valeurs_reciproque_thales()
-    f0.write(tex_fig_rec_thales(noms, valeurs))
-    f0.write(tex_enonce_rec_thales(noms, valeurs) + '  \\vspace{2cm}\n')
+    f0.write('\\begingroup\n'+tex_fig_rec_thales(noms, valeurs))
+    f0.write(tex_enonce_rec_thales(noms, valeurs) + '  \\vspace{2cm}\n\\endgroup\n\n')
     f1.write(tex_fig_rec_thales(noms, valeurs))
     f1.write(tex_enonce_rec_thales(noms, valeurs) +
              "  \\par\\dotfill{}\\\\\n\n")
