@@ -479,20 +479,22 @@ def choix_trou_frac(exo, cor, n1, p1):
     i = random.randrange(3)
     p2 = random.randrange(2)  #sert à compliquer un peu l'exercice
     if i > 1:
-        exo.append('\\item $\\cfrac{%s}{%s}=\\ldots$' % (outils.Affichage.decimaux(n1 *
-                 10 ** p2), outils.Affichage.decimaux(10 ** (p1 + p2))))
+        exo.append('\\item $\\cfrac{%s}{%s}=\\ldots$' % (outils.Affichage.decimaux(n1 * 10 ** p2),
+		outils.Affichage.decimaux(10 ** (p1 + p2))))
+	cor.append('\\item $\\cfrac{%s}{%s}=\\mathbf{%s}$' % (outils.Affichage.decimaux(n1 * 10 ** p2),
+	     outils.Affichage.decimaux(10 ** (p1 + p2)),
+             outils.Affichage.decimaux(n1 * 10 ** (-p1), 1)))
     elif i > 0:
-        exo.append('\\item $\\cfrac{%s}{\ldots}=%s$' % (outils.Affichage.decimaux(n1 *
-                 10 ** p2), outils.Affichage.decimaux(n1 * 10 ** (-p1),
-                 1)))
+        exo.append('\\item $\\cfrac{%s}{\ldots}=%s$' % (outils.Affichage.decimaux(n1 * 10 ** p2),
+		outils.Affichage.decimaux(n1 * 10 ** (-p1), 1)))
+	cor.append('\\item $\\cfrac{%s}{\\mathbf{%s}}=%s$' % (outils.Affichage.decimaux(n1 * 10 ** p2),
+		outils.Affichage.decimaux(10 ** (p1 + p2)), outils.Affichage.decimaux(n1 * 10 ** (-p1), 1)))
     else:
-        exo.append('\\item $\\cfrac{\ldots}{%s}=%s$' % (outils.Affichage.decimaux(10 **
-                 (p1 + p2)), outils.Affichage.decimaux(n1 * 10 ** (-p1),
-                 1)))
-    cor.append('\\item $\\cfrac{%s}{%s}=%s$' % (outils.Affichage.decimaux(n1 *
+        exo.append('\\item $\\cfrac{\ldots}{%s}=%s$' % (outils.Affichage.decimaux(10 ** (p1 + p2)),
+		outils.Affichage.decimaux(n1 * 10 ** (-p1), 1)))
+        cor.append('\\item $\\cfrac{\\mathbf{%s}}{%s}=%s$' % (outils.Affichage.decimaux(n1 *
              10 ** p2), outils.Affichage.decimaux(10 ** (p1 + p2)),
              outils.Affichage.decimaux(n1 * 10 ** (-p1), 1)))
-
 
 def tex_frac(exo, cor):
     for i in range(6):
