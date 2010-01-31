@@ -97,15 +97,18 @@ class Polynome:
             else:
                 coeff = 1
             if (element not in [-1, 1]):
-                a = re.findall('\d+(?:\.\d*)?', element)
-                if (len(a) == 1) and (not re.findall('\^', element)) and (re.findall(self.var, element)):
-                    termes.append(Terme(coeff * float(a[0]), 1, self.var))
-                elif (len(a) == 1) and (re.findall(self.var, element)):
-                    termes.append(Terme(coeff * 1, int(a[0]), self.var))
-                elif (len(a) == 1):
-                    termes.append(Terme(coeff * float(a[0]), 0, self.var))
+                if element==var:
+                    termes.append(Terme(coeff * 1, 1, self.var))
                 else:
-                    termes.append(Terme(coeff * float(a[0]), int(a[1]), self.var))
+                    a = re.findall('\d+(?:\.\d*)?', element)
+                    if (len(a) == 1) and (not re.findall('\^', element)) and (re.findall(self.var, element)):
+                        termes.append(Terme(coeff * float(a[0]), 1, self.var))
+                    elif (len(a) == 1) and (re.findall(self.var, element)):
+                        termes.append(Terme(coeff * 1, int(a[0]), self.var))
+                    elif (len(a) == 1):
+                        termes.append(Terme(coeff * float(a[0]), 0, self.var))
+                    else:
+                        termes.append(Terme(coeff * float(a[0]), int(a[1]), self.var))
         return termes
 
 

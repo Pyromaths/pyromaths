@@ -64,7 +64,7 @@ class Terme:
             coeff = str(self.coeff) + ' '
         if self.puiss == 1:
             terme = self.var
-        elif (self.puiss == 0) and (self.coeff == 1):
+        elif (self.puiss == 0) and ((self.coeff == 1) or (self.coeff == -1)):
             terme = '1'
         elif self.puiss == 0:
             terme = ''
