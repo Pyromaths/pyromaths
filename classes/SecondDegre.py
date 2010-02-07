@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import random
-from outils/Arithmetique import factorise, carrerise
+from outils.Arithmetique import factorise, carrerise
 from math import sqrt
-from outils/Affichage import suppr0, suppr0list
+from outils.Affichage import suppr0, suppr0list
 
 class Poly2:
     """Classe pour les polynômes du second degré."""
@@ -25,16 +25,16 @@ class Poly2:
             self.nbrac = 1
 
     def __add__(self, other):
-        return poly2(self.a + other.a, self.b + other.b, self.c + other.c)
+        return Poly2(self.a + other.a, self.b + other.b, self.c + other.c)
 
     def __radd__(self, other):
-        return poly2(self.a + other.a, self.b + other.b, self.c + other.c)
+        return Poly2(self.a + other.a, self.b + other.b, self.c + other.c)
 
     def __sub__(self, other):
-        return poly2(self.a - other.a, self.b - other.b, self.c - other.c)
+        return Poly2(self.a - other.a, self.b - other.b, self.c - other.c)
 
     def __rsub__(self, other):
-        return poly2(self.a - other.a, self.b - other.b, self.c - other.c)
+        return Poly2(self.a - other.a, self.b - other.b, self.c - other.c)
 
     def __str__(self):
         if self.b<=0:
