@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from outils/Arithmetique import carrerise
-from outils/Affichage import suppr0list
-from classes/SecondDegre import Poly2
+from outils.Arithmetique import carrerise
+from outils.Affichage import suppr0list
+from classes.SecondDegre import Poly2
+import random
+from math import *
 
 def choix_coeffs(unitaire, nbrac, entiers):
 
@@ -28,7 +30,6 @@ def choix_coeffs(unitaire, nbrac, entiers):
     elif nbrac == 0:
         coeffrac = []
     elif nbrac == 2:
-
         coeffrac = [a*sgn[sgns[0]], random.randint(0, 200)*sgn[sgns[1]] / entier, random.randint(0, 200)*sgn[sgns[2]]]
 
 

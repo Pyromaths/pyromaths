@@ -55,46 +55,54 @@ def factor(n):
         candidat += 1
     return premiers
 
+
+
 def factorise(n):
     """Retourne la liste des facteurs premiers du nombre n, ainsi que le détail de la factorisation pour LateX. PAS FINI."""
     global corrige
-
     primes = []
-    candidates = xrange(2,n+1)
-    candidate = 2
-
+    #candidates = xrange(2,n+1)
+    limite=int(math.sqrt(n))+1
     espace = len(str(n))
     corrige = '$$'
-    text = ' = '
-
-    while n > 1:
-        if n%candidate == 0 and premier(candidate):
+    text = ' = '    
+    candidate = 2
+    text = ' ' * espace + ' = '
+    while candidate<limite:
+        if n%candidate == 0:# and premier(candidate):
             primes.append(candidate)
-            for nb in primes:
-                text += str(nb) + ' \\times '
-            if n / candidate <> 1:
-                corrige += text + str(n/candidate) + '\n'
+            text += str(candidate) + ' \\times '
             n = n / candidate
-
-        if n % candidate <> 0:
+            if n  == 1:
+                corrige +=  text[:-7]
+                break
+            corrige +=  text+str(n) + '\n'
+        else:# n % candidate <> 0:
             candidate += 1
-        text = ' ' * espace + ' = '
+    if n!=1:
+        primes.append(n)
+    if primes==[]:
+        primes.append(n)
     corrige += "$$"
     return (primes, corrige)
 
+
 def carrerise(n):
     """Trouve le plus petit facteur par lequel multiplier pour obtenir un carré."""
-    if round(sqrt(n), 0)==sqrt(n):
+    if round(math.sqrt(n), 0)==math.sqrt(n):
+        return 1
+    elif n<=0:
         return n
-    primes = factorise(n)[0]
-    for element in primes:
-        if (primes.count(element) % 2 == 1):
-            primes.append(element)
-    q = 1
-    for element in primes:
-        q *= element
-
-    return int(float(q) / float(n))
+    else:
+        primes = factorise(n)[0]
+        q = {}
+        for element in primes:
+            if (primes.count(element) % 2 == 1):
+                q[element]=1
+        ncar=1   
+        for element in q.iterkeys():
+            ncar *= element
+    return ncar
 
 def signe(a):
     """renvoie 1 si a est>0, -1 si a<0"""
