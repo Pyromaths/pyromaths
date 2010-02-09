@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-from Polylycee import *
+
+import sys, os, codecs
+sys.path.append("/home/nicolas/pyrogit/pyromaths")
+from outils.Polylycee import *
 from random import randrange,randint
 from math import *
-import sys, os, codecs
 from re import findall
-pyropath=os.path.normpath(os.path.join(os.getcwd(),'..'))
-sys.path.append(pyropath)
+##pyropath=os.path.normpath(os.path.join(os.getcwd(),'..'))
+##sys.path.append(pyropath)
 from outils.Arithmetique import carrerise,pgcd
 
 def Exo_factorisation():
@@ -23,10 +25,10 @@ def Exo_factorisation():
     #X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
     inconnues=['x','y','z','t']
     nom_poly=['P','Q','R','S']
-    exo="\\exercice\n"
-    cor="\\exercice*\n"
-    exo+="\\begin{enumerate}\n"
-    cor+="\\begin{enumerate}\n"
+#    exo="\\exercice\n"
+#    cor="\\exercice*\n"
+    exo="\\begin{enumerate}\n"
+    cor="\\begin{enumerate}\n"
     for i in range(10):
         X=Polynome({1:1},var=inconnues[randrange(4)])
         exo,cor=identites_remarquables(exo,cor,rac_min,rac_max,X)
@@ -94,7 +96,7 @@ def exo_factorisation_degre3(E,nomE,exo="",cor=""):
     elif E[3]!=1:
         cor+=TeX(E[3])            
     if delta<=0:
-        E_factorise=PO+"\\times"+P1+"$\n"
+        E_factorise=P0+"\\times"+P1+"$\n"
     else:
         E_factorise=P0+"\\left("+P1+"\\right)\\left("+P2+"\\right)$\n"
         x12=[x1,x2]
@@ -210,7 +212,7 @@ def identites_remarquables(exo,cor,rac_min,rac_max,X,nomP="P"):
     #pol2[1]=2× cx × b
     #pol2[0] = b^2
     c=int(sqrt(pol2[2]))
-    exo+=u"\\item  Factoriser le polynôme $"+nomP+"="+pol1.TeX()+"$$\n"
+    exo+=u"\\item  Factoriser le polynôme $$"+nomP+"="+pol1.TeX()+"$$\n"
     if a1!=1:
         cor+="\\item On remarque que $"+nomP+"="+pol1.TeX()+"="+TeX(a1)+"\\times\\big["+(pol1/a1).TeX()+"\\big]$"
         cor+="="+TeX(a1)+"\\times \\big["
@@ -367,6 +369,6 @@ def listeracines(a,b,delta):
     return rac_delta,simplrac,strx1,x1,strx2,x2,parenthesex1,parenthesex2
 
 if __name__=="__main__":
-    from imprimetest import *
+    from TEST.imprimetest import *
     exo,cor=Exo_factorisation()#denom1=12)
     imprime_TeX(exo+cor)
