@@ -114,7 +114,9 @@ u'Réciproque du théorème de Thalès',
 u'Trigonométrie',
 ]],
 [u'Lycée', lycee.lycee, [
-u'Factorisations',
+u'Équations 2° degré',
+u'Factorisations 2° degré',
+u'Factorisations degré 3',
 ]],
 ]
 

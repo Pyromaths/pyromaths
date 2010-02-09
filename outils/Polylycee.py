@@ -3,7 +3,9 @@
 import os,sys,codecs
 from fractions import Fraction
 import re
-
+from outils.Arithmetique import carrerise,pgcd
+from math import sqrt
+from pyro_classes import TeXMiseEnForme
 from random import randrange
 
 class Polynome:
@@ -351,6 +353,55 @@ def tab_print(polynome,longueur=0,parenthese=False):
                     string+= fin
             string+= " & "
     return string
+def TeXz(nombre):
+    '''n'affiche pas b si b=0'''
+    if nombre==0:
+        return ""
+    else:
+        return TeX(nombre)
+def tTeX(nombre):
+    '''raccourci pour TeX(nombre,terme=True)'''
+    return TeX(nombre,terme=True)
+def pTeX(nombre):
+    '''raccourci pour TeX(nombre,parenthese=True)'''
+    return TeX(nombre,parenthese=True)
+def TeX(nombre,parenthese=False,terme=False):
+    '''renvoie une chaine de caractere pour TeX'''
+    if parenthese and nombre<0:
+        strTeX="\\left("
+        finTeX="\\right)"
+    elif terme and nombre>0:
+        strTeX="+"
+        finTeX=""
+    else:
+        strTeX=finTeX=""
+    if isinstance(nombre,Fraction):
+        fractex="\\dfrac"
+        if nombre.denominator == 1:
+            strTeX += poly.sepmilliers(nombre.numerator) + ' '
+        elif nombre.numerator < 0:
+            strTeX += "-"+fractex+"{"+poly.sepmilliers(-nombre.numerator)+"}{"+poly.sepmilliers(nombre.denominator)+"} "
+        else:
+            strTeX += fractex+"{"+poly.sepmilliers(nombre.numerator)+"}{"+poly.sepmilliers(nombre.denominator)+"} "
+        return strTeX+finTeX
+    else:
+        return strTeX+poly.sepmilliers(nombre)+finTeX
+poly=TeXMiseEnForme("")
+def radicalTeX(n):
+    return "\\sqrt{"+TeX(n)+"}"
+def simplifie_racine(n):
+    ##La classe classes.Racine.py doit faire cela aussi bien
+    if n==0:
+        return "0",0
+    else:
+        ncar=carrerise(n)
+        if ncar==1:
+            return int(sqrt(n)),1
+        elif ncar==n:
+            return 1,ncar
+        else:
+            return int(sqrt(n/ncar)),ncar
+
 
 if __name__=="__main__":
     from imprimetest import *
