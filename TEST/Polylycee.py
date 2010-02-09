@@ -127,7 +127,8 @@ class Polynome:
                 coefficient=self.dictio[i]*other.dictio[j]
                 result = result + Polynome({exposant:coefficient},var=self.var)
         return result
-
+    def __ne__(self,other):
+        return not(self == other)
     def __eq__(self,other):
         if self.var==other.var and self.dictio==other.dictio:
             return True
@@ -318,7 +319,11 @@ def TeX_division(dividende,diviseur):
         string+= "\\\\ \n"
     string+= "\\end{array}\n$$"
 
-    string+="\n On a $$"+dividende.TeX()+" = \\left(" + texquotient.TeX()+"\\right) \\times \\left("+diviseur.TeX()+"\\right)+"+restera.TeX()+"$$"
+    string+="\n On a $$"+dividende.TeX()+" = \\left(" + texquotient.TeX()+"\\right) \\times \\left("+diviseur.TeX()+"\\right)"
+    if restera!=Polynome(0):
+        print restera
+        string+="+"+restera.TeX()
+    string+="$$"
     return string
 def tab_print(polynome,longueur=0,parenthese=False):
     '''utilise par TeX_division pour décaler le reste dans la partie gauche'''

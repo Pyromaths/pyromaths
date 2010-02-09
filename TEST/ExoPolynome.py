@@ -3,6 +3,7 @@ from Polylycee import *
 from random import randrange,randint
 from math import *
 import sys, os, codecs
+from re import findall
 pyropath=os.path.normpath(os.path.join(os.getcwd(),'..'))
 sys.path.append(pyropath)
 from outils.Arithmetique import carrerise,pgcd
@@ -26,68 +27,145 @@ def Exo_factorisation():
     cor="\\exercice*\n"
     exo+="\\begin{enumerate}\n"
     cor+="\\begin{enumerate}\n"
-    global info
-    info="(identite)"
-    for i in range(13):
+    for i in range(10):
         X=Polynome({1:1},var=inconnues[randrange(4)])
         exo,cor=identites_remarquables(exo,cor,rac_min,rac_max,X)
     cor+="\\pagebreak\n"
-    info="(rac entieres)"
-    for i in range(13):
+    
+    for i in range(10):
         X=Polynome({1:1},var=inconnues[randrange(4)])
         P=poly_racines_entieres(rac_min,rac_max,X)
-        exo,cor=degre2racine(exo,cor,P)
+        exo,cor=degre2racine(exo,cor,P,nomP="P")
     cor+="\\pagebreak\n"
         #exo,cor=degre2racine_entiere(exo,cor,rac_min,rac_max,X)
-    info="(fractions)"
-    for i in range(13):
+    
+    for i in range(10):
         X=Polynome({1:1},var=inconnues[randrange(4)])
         P=poly_racines_fractionnaires(rac_min,rac_max,denom1,X)
-        exo,cor=degre2racine(exo,cor,P)
+        exo,cor=degre2racine(exo,cor,P,nomP="P")
     cor+="\\pagebreak\n"
         #exo,cor=degre2racinefractionnaire(exo,cor,rac_min,rac_max,denom1,X)
-    info="(quelconque)"
-    for i in range(13):
+    
+    for i in range(10):
         #exo,cor=degre2racinequelconque(exo,cor,abs_a=1,abs_b=10,abs_c=10,X=X)
         X=Polynome({1:1},var=inconnues[randrange(4)])
         P=poly_racines_quelconques(abs_a=1,abs_b=10,abs_c=10,X=X)
-        exo,cor=degre2racine(exo,cor,P)
+        exo,cor=degre2racine(exo,cor,P,nomP="P")
     cor+="\\pagebreak\n"
-    exo+="\\end{enumerate}\n\\baselineskip=2mm\n\\parskip=5mm"
+    for i in range(10):
+        X=Polynome("x")
+        E=poly_degre3_racines_entieres(rac_min,rac_max,X)
+        exo,cor=exo_factorisation_degre3(E,"E",exo,cor)
+        F=poly_degre3_racines_fractionnaires(rac_min,rac_max,denom1,X)
+        exo,cor=exo_factorisation_degre3(F,"F",exo,cor)
+        
+        Q=poly_degre3_racines_quelconques(abs_a=1,abs_b=10,abs_c=10,X=X)
+        exo+="\\item ou bien $Q="+Q.TeX()+"$\n"
+    exo+="\\end{enumerate}\n"
     cor+="\\end{enumerate}\n"
     return exo,cor
+def exo_factorisation_degre3(E,nomE,exo="",cor=""):
+    X=Polynome({1:1},E.var)
+    exo+="\\item Soit $"+nomE+"="+E.TeX()+"$\n"
+    cor+="\\item Soit $"+nomE+"="+E.TeX()+"$\n"
+    exo+="\\begin{enumerate}\n"
+    cor+="\\begin{enumerate}\n"
+    exo+=u"\\item Vérifier si $"+nomE+u"$ possède une racine évidente.\n"
+    exo+="\\item Factoriser $"+nomE+"$.\n"
+    cor+="\\item "
+    racines=[]
+    for x0 in [0,1,-1,2,-2]:
+        if E(x0)==0:
+            break
+    cor+="Comme $"+nomE+"("+TeX(x0)+")=0$, on peut diviser $"+nomE+"$ par $"+(X-x0).TeX()+"$\n"
+    cor+=TeX_division(E,(X-x0))+"\n"
+    E2,reste=E/(X-x0)
+    cor+="\\item On doit maintenant factoriser le polynome $"+nomE+"_2="+ E2.TeX() +"$\\\\\n"
+    cor2,delta,P1,P2,x1,x2=factorisation_degre2(E2,nomP="E_2",detail=True)
+    cor+=cor2+"\\\\\n"
+    cor+="On en conclue donc que $"+nomE+"="
+    final=0
+    if x0==0:
+        P0=E.var
+    else:
+        P0="\\left("+(X-x0).TeX()+"\\right)"
+    if E[3]==-1:
+        cor+="-"
+    elif E[3]!=1:
+        cor+=TeX(E[3])            
+    if delta<=0:
+        E_factorise=PO+"\\times"+P1+"$\n"
+    else:
+        E_factorise=P0+"\\left("+P1+"\\right)\\left("+P2+"\\right)$\n"
+        x12=[x1,x2]
+        for i in range(2):
+            if isinstance(x12[i],str) and len(x12[i])>6 and x12[i][6]=="-":
+                final=1
+                x12[i]=x12[i][7:-7]
+        x1,x2=x12[0],x12[1]
+        E_final=P0+"\\left("+E.var+"+"+x1+"\\right)\\left("+E.var+"+"+x2+"\\right)$\n"
 
-def degre2racine(exo,cor,P):
+    cor+=E_factorise
+    if final:
+        cor+="\\\\\n Finalement, $"+nomE+"="+E_final+"$\n"
+    exo+="\\end{enumerate}\n"
+    cor+="\\end{enumerate}\n"
+    return exo,cor
+    
+def poly_degre3_racines_entieres(rac_min,rac_max,X):
+    racine_evidente=[-2,-1,0,1,2][randrange(5)]
+    return (X-racine_evidente)*poly_racines_entieres(rac_min,rac_max,X)
+def poly_degre3_racines_fractionnaires(rac_min,rac_max,denom1,X):
+    racine_evidente=[-2,-1,0,1,2][randrange(5)]
+    return (X-racine_evidente)*poly_racines_fractionnaires(rac_min,rac_max,denom1,X)
+def poly_degre3_racines_quelconques(abs_a,abs_b,abs_c,X):
+    racine_evidente=[-2,-1,0,1,2][randrange(5)]
+    return (X-racine_evidente)*poly_racines_quelconques(abs_a=1,abs_b=10,abs_c=10,X=X)
+
+def degre2racine(exo,cor,P,nomP="P"):
     var=P.var
     #X=Polynome({1:1},var=P.var)
-    delta=int(P[1]**2-4*P[2]*P[0])
-    exo+=u"\\item "+info+u" Factoriser le polynôme $$P="+P.TeX()+"$$\n"
+    exo+=u"\\item Factoriser le polynôme $$"+nomP+"="+P.TeX()+"$$\n"
+    cor+="\\item "+factorisation_degre2(P)
+    return exo,cor
 
-    cor+="\\item Je calcule $\Delta="+pTeX(P[1])+u"^2-4\\times"+pTeX(P[2])+"\\times"+pTeX(P[0])+"="\
+def factorisation_degre2(P,nomP="P",detail=False):
+    cor=""
+    x1=x2=0
+    delta=int(P[1]**2-4*P[2]*P[0])
+    cor+="Je calcule $\Delta="+pTeX(P[1])+u"^2-4\\times"+pTeX(P[2])+"\\times"+pTeX(P[0])+"="\
     +TeX(delta)+"$"
     if delta<0:
-        cor+=" donc P n'a pas de racines."
+        cor+=" donc $"+nomP+"$ n'a pas de racines."
+        P1=P.TeX()
+        P2=""
     elif delta==0:
         x0=Fraction(-1,2)*P[1]/P[2]
-        cor+=" donc $P$ a une seule racine $"+var+"_0="+TeX(x0)+"$.\\par\n"
-        cor+=u"Ainsi $P$ peut s'écrire $P="
+        cor+=" donc $"+nomP+"$ a une seule racine $"+P.var+"_0="+TeX(x0)+"$.\\par\n"
+        cor+=u"Ainsi $"+nomP+u"$ peut s'écrire $"+nomP+"="
         if P[2]!=1:
             cor+=TeX(P[2])
-        cor+="{\\left("+(Polynome({1:1,0:-x0},var=P.var)).TeX()+u"\\right)}^2$.\n"
+        P1="{\\left("+(Polynome({1:1,0:-x0},var=P.var)).TeX()+u"\\right)}^2"
+        P2=""
+        cor+=P1+"$.\n"
     else:
         rac_delta,simplrac,strx1,x1,strx2,x2,parenthesex1,parenthesex2=listeracines(P[2],P[1],delta)
         if simplrac:
             cor+=" et $"+radicalTeX(delta)+"="+rac_delta+"$"
         cor+=".\par\n"
-        cor+=" Les racines de $P$ sont $"+var+"_1="+ strx1 +"="+x1 +"$ et $"+var+"_2="+ strx2 + "="+x2 +"$.\n"
-        cor+=u"\\\\ Donc $P$ peut s'écrire $P=\n"
+        cor+=" Les racines de $"+nomP+"$ sont $"+P.var+"_1="+ strx1 +"="+x1 +"$ et $"+P.var+"_2="+ strx2 + "="+x2 +"$.\n"
+        cor+=u"\\\\ Donc $"+nomP+u"$ peut s'écrire $"+nomP+"=\n"
         if parenthesex1:
             x1="\\left("+x1+"\\right)"
         if parenthesex2:
             x2="\\left("+x2+"\\right)"
-        cor+=TeX(P[2])+"\\times\\left("+var+"-"+x1+"\\right)\\times\\left("+var+"-"+x2+"\\right)$.\n"
-    return exo,cor
-
+        cor+=TeX(P[2])+"\\times\\left("+P.var+"-"+x1+"\\right)\\times\\left("+P.var+"-"+x2+"\\right)$.\n"
+        P1=P.var+"-"+x1
+        P2=P.var+"-"+x2
+    if detail:
+        return cor,delta,P1,P2,x1,x2
+    else:
+        return cor
 def poly_racines_quelconques(abs_a,abs_b,abs_c,X):
     a3=(2*randrange(2)-1)*randrange(1,abs_a+1)
     b3=randrange(abs_b)
@@ -109,7 +187,7 @@ def poly_racines_entieres(rac_min,rac_max,X):
     return pol1
 
 
-def identites_remarquables(exo,cor,rac_min,rac_max,X):
+def identites_remarquables(exo,cor,rac_min,rac_max,X,nomP="P"):
     a=randint(1,10)
     while 1:
         coeff=randrange(rac_min,rac_max)
@@ -132,12 +210,12 @@ def identites_remarquables(exo,cor,rac_min,rac_max,X):
     #pol2[1]=2× cx × b
     #pol2[0] = b^2
     c=int(sqrt(pol2[2]))
-    exo+="\\item "+info+u" Factoriser le polynôme $$P="+pol1.TeX()+"$$\n"
+    exo+=u"\\item  Factoriser le polynôme $"+nomP+"="+pol1.TeX()+"$$\n"
     if a1!=1:
-        cor+="\\item On remarque que $P="+pol1.TeX()+"="+TeX(a1)+"\\times\\big["+(pol1/a1).TeX()+"\\big]$"
+        cor+="\\item On remarque que $"+nomP+"="+pol1.TeX()+"="+TeX(a1)+"\\times\\big["+(pol1/a1).TeX()+"\\big]$"
         cor+="="+TeX(a1)+"\\times \\big["
     else:
-        cor+="\\item $P="+pol1.TeX()+"="
+        cor+="\\item $"+nomP+"="+pol1.TeX()+"="
     if c!=1:
         cor+="("+TeX(c)+X.var+u")^2"
     else:
@@ -291,4 +369,4 @@ def listeracines(a,b,delta):
 if __name__=="__main__":
     from imprimetest import *
     exo,cor=Exo_factorisation()#denom1=12)
-    imprime_TeX(exo+'\\pagebreak'+cor)
+    imprime_TeX(exo+cor)
