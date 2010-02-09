@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import sys, os, codecs
-sys.path.append('..') ##pour charger les modules depuis pyromaths/ en test
 from classes.SecondDegre import Poly2
 from outils.Affichage import printlist
 from outils.Polynomes import choix_coeffs
