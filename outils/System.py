@@ -259,6 +259,7 @@ def copie_tronq_modele(dest, parametres, master):
     ## Les variables à remplacer :
     titre = parametres['titre']
     niveau = parametres['niveau']
+    tabvar = os.path.normpath(os.path.join(module_path(), 'modeles',"tabvar.tex"))
     modele = codecs.open(source, encoding='utf-8', mode='r')
     for line in modele:
         if master_fin in line:

@@ -1,0 +1,576 @@
+%-- pour griser des cases
+\definecolor{gristabvar}{rgb}{0.7669 0.7669 0.7669}
+
+
+%-- Dimensions sur lesquelles on peut agir facilement
+\newdimen\tabdim%-- taille minimale (horizontale) d'une case
+\newdimen\tabblanc%-- blanc ajout verticalement  chaque case (6 fois en tout !)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%          MACROS POUR FAIRE UN TABLEAU DE VARIATIONS
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\catcode`\@=11
+
+%-- Les diverses dimensions dont j'ai besoin
+\newdimen\tv@mydimen
+\newdimen\tv@mydimendeux
+\newdimen\tv@dimYHaut%-- taille verticale de la case en haut
+\newdimen\tv@dimYMilieu%-- taille verticale de la case du milieu
+\newdimen\tv@dimYBas%-- taille verticale de la case du bas
+\newdimen\tv@dimX%-- tampon pour les calculs bass sur la largeur de la case courante
+\newdimen\tv@Xdim%-- largeur de la case courante pour les calculs
+\newdimen\tv@YTotal%-- hauteur totale
+\newcount\tv@countLigne%-- Pour savoir le numro de la ligne actuelle
+\newdimen\tv@DX%-- pour savoir o est le trait de milieu de case courant
+
+%-- On fixe les dimensions par dfaut
+\tabdim=0.8cm
+\tabblanc=2pt
+
+%-- Pour savoir si on est en train de calculer les tailles ou de tracer le tableau de variations
+\newif\iftv@calcul
+
+
+%--- Mettre les valeurs par dfaut 
+\def\psdefaut{\psset{xunit=1cm,yunit=1cm,runit=1cm,linewidth=0.4pt,linestyle=solid,linecolor=black}}
+
+%-- quelques abbrviations commodes...
+\let\dsp=\displaystyle
+\let\spt=\scriptstyle
+
+
+%------------- MACROS POUR MANIPULER LES DIMENSIONS
+%-- Met dans \tv@mydimen la taille Y (depth+height) de #1
+\def\initY#1{%
+\setbox100=\hbox{#1}%
+\global\tv@mydimen=\ht100\global\advance\tv@mydimen by\dp100}
+
+
+%-- Met dans \tv@mydimen le rel Sup(la taille X (width) de #1 , \tabdim)
+\def\initX#1{\setbox100=\hbox{#1}%
+\ifdim\wd100>\tabdim
+  \global\tv@mydimen=\wd100
+\else
+  \global\tv@mydimen=\tabdim
+\fi}
+
+%-- Met dans \tv@mydimen la taille X (width) de #1
+\def\initx#1{\setbox100=\hbox{#1}\global\tv@mydimen=\wd100}
+
+%-- Calcule la hauteur totale = YHaut+YMilieu+YBas
+\def\calculeYTotal{%
+ \global\tv@YTotal=\tv@dimYHaut\global\advance\tv@YTotal by\tv@dimYMilieu\global\advance\tv@YTotal by\tv@dimYBas}
+
+%-- Fixer les trois dimensions, dans l'ordre : Haut Milieu Bas
+\def\setY#1#2#3{\global\tv@dimYHaut=#1\global\tv@dimYMilieu=#2\global\tv@dimYBas=#3\relax}
+
+%-- Mettre le max de #1,#2 dans #1
+\def\max#1#2{\ifdim#2>#1\global#1=#2\fi}
+
+
+%-- macro pour grer le calcul de \tv@Xdim : #1 est un contenu  afficher
+\def\GererX#1{%
+\initX{#1}\tv@mydimen=1.1\tv@mydimen%
+\max{\tv@Xdim}{\tv@mydimen}}
+
+%-- macro pour grer le calcul de \tv@Xdim : #1 est une dimension
+\def\GererXDimension#1{%
+\tv@mydimen=#1%
+\tv@mydimen=1.1\tv@mydimen%
+\max{\tv@Xdim}{\tv@mydimen}%
+\max{\tv@Xdim}{\tabdim}%-- taille minimale d'une case = \tabdim
+}
+
+
+%-- cas simple : dx vaux la moiti de la largeur de #1. On retrouve aprs a le bon dx dans \tv@DX
+\def\GererDXSimple#1{%
+\initX{#1}\tv@mydimen=1.1\tv@mydimen
+\tv@mydimen=0.5\tv@mydimen
+\max{\tv@DX}{\tv@mydimen}%
+}
+
+
+%-- cas complexe : #1 est une proposition de DX. On retrouve aprs a le bon dx dans \tv@DX
+\def\GererDXDimension#1{%
+\tv@mydimen=#1%
+\max{\tv@DX}{\tv@mydimen}%
+\max{\tv@DX}{0.5\tabdim}%-- au minimum = 1/2 tabdim
+}
+
+
+%-------------- MACROS POUR POSER UN TEXTE 
+%--  (elles supposent que \tv@DX contient la bonne valeur au moment de l'appel)
+\def\tabvarputhaut#1{%
+\iftv@calcul
+  \initY{#1}%
+  \max{\tv@dimYHaut}{\tv@mydimen}%
+\fi
+\rput(\tv@DX,-0.5\tv@dimYHaut){#1}}
+
+\def\tabvarputmilieu#1{%
+\iftv@calcul
+  \initY{#1}%
+  \max{\tv@dimYMilieu}{\tv@mydimen}%
+\fi%
+\tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by 0.5\tv@dimYMilieu
+\rput(\tv@DX,-\tv@mydimen){#1}}
+
+\def\tabvarputbas#1{%
+\iftv@calcul
+  \initY{#1}%
+  \max{\tv@dimYBas}{\tv@mydimen}%
+\fi%
+\tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by \tv@dimYMilieu\advance\tv@mydimen by 0.5\tv@dimYBas
+\rput(\tv@DX,-\tv@mydimen){#1}}
+
+%-------------- MACROS POUR LES TRAITS VERTICAUX 
+% (elles supposent que \tv@DX contient la bonne valeur au moment de l'appel)
+%
+%-- traits verticaux simples
+\def\traithaut{\psline(\tv@DX,0)(\tv@DX,-\tv@dimYHaut)}
+
+\def\traitmilieu{\tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by\tv@dimYMilieu
+\psline(\tv@DX,-\tv@dimYHaut)(\tv@DX,-\tv@mydimen)}
+
+\def\traitbas{\tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by\tv@dimYMilieu
+\dimen100=\tv@mydimen\advance\tv@mydimen by\tv@dimYBas
+\psline(\tv@DX,-\dimen100)(\tv@DX,-\tv@mydimen)}
+
+%-- doubles traits verticaux
+\def\doubletraithaut{\psline[doubleline=true,doublesep=1pt](\tv@DX,0)(\tv@DX,-\tv@dimYHaut)}
+
+\def\doubletraitmilieu{\tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by\tv@dimYMilieu
+\psline[doubleline=true,doublesep=1pt](\tv@DX,-\tv@dimYHaut)(\tv@DX,-\tv@mydimen)}
+
+\def\doubletraitbas{\tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by\tv@dimYMilieu
+\dimen100=\tv@mydimen\advance\tv@mydimen by\tv@dimYBas
+\psline[doubleline=true,doublesep=1pt](\tv@DX,-\dimen100)(\tv@DX,-\tv@mydimen)}
+
+%-- trait simple, occupant toute la hauteur
+\def\trait{\traithaut\traitmilieu\traitbas}
+
+%-- trait double, occupant toute la hauteur
+\def\dbt{\doubletraithaut\doubletraitmilieu\doubletraitbas}
+
+%-------------- MACROS POUR LES FLCHES 
+%-- flche montante (au milieu)
+\def\fm{%
+\iftv@calcul
+  \GererXDimension{\tabdim}%
+  \GererDXDimension{0.5\tabdim}%
+\fi
+\tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by\tv@dimYMilieu
+\tv@dimX=\tv@Xdim\advance\tv@dimX by -\tv@DX %-- tv@dimX = ce qui reste  droite de DX
+\hbox to\tv@Xdim{\rput(\tv@DX,0){\psline{->}(-0.9\tv@DX,-\tv@mydimen)(0.9\tv@dimX,-\tv@dimYHaut)}\hfil}}
+
+%-- flche descendante (au milieu)
+\def\fd{%
+\iftv@calcul
+  \GererXDimension{\tabdim}%
+  \GererDXDimension{0.5\tabdim}%
+\fi
+\tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by\tv@dimYMilieu
+\tv@dimX=\tv@Xdim\advance\tv@dimX by -\tv@DX %-- tv@dimX = ce qui reste  droite de DX
+\hbox to\tv@Xdim{\rput(\tv@DX,0){\psline{->}(-0.9\tv@DX,-\tv@dimYHaut)(0.9\tv@dimX,-\tv@mydimen)}\hfil}}
+
+%-- flche horizontale en haut
+\def\fhh{%
+\iftv@calcul
+  \GererXDimension{\tabdim}%
+  \GererDXDimension{0.5\tabdim}%
+\fi
+\tv@dimX=\tv@Xdim\advance\tv@dimX by -\tv@DX %-- tv@dimX = ce qui reste  droite de DX
+\hbox to\tv@Xdim{\rput(\tv@DX,0){\psline{->}(-0.9\tv@DX,-0.5\tv@dimYHaut)(0.9\tv@dimX,-0.5\tv@dimYHaut)}\hfil}}
+
+%-- flche horizontale au milieu
+\def\fhm{%
+\iftv@calcul
+  \GererXDimension{\tabdim}%
+  \GererDXDimension{0.5\tabdim}%
+\fi
+\tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by 0.5\tv@dimYMilieu
+\tv@dimX=\tv@Xdim\advance\tv@dimX by -\tv@DX %-- tv@dimX = ce qui reste  droite de DX
+\hbox to\tv@Xdim{\rput(\tv@DX,0){\psline{->}(-0.9\tv@DX,-\tv@mydimen)(0.9\tv@dimX,-\tv@mydimen)}\hfil}}
+
+%-- flche horizontale en bas
+\def\fhb{%
+\iftv@calcul
+  \GererXDimension{\tabdim}%
+  \GererDXDimension{0.5\tabdim}%
+\fi
+\tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by\tv@dimYMilieu\advance\tv@mydimen by0.5\tv@dimYBas
+\tv@dimX=\tv@Xdim\advance\tv@dimX by -\tv@DX %-- tv@dimX = ce qui reste  droite de DX
+\hbox to\tv@Xdim{\rput(\tv@DX,0){\psline{->}(-0.9\tv@DX,-\tv@mydimen)(0.9\tv@dimX,-\tv@mydimen)}\hfil}}
+
+
+%-- flche montante en partie basse
+\def\fmb{%
+\iftv@calcul
+  \GererXDimension{\tabdim}%
+  \GererDXDimension{0.5\tabdim}%
+\fi
+\tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by\tv@dimYMilieu\advance\tv@mydimen by 0.5\tv@dimYBas
+\tv@mydimendeux=\tv@dimYHaut\advance\tv@mydimendeux by 0.5\tv@dimYMilieu
+\tv@dimX=\tv@Xdim\advance\tv@dimX by -\tv@DX %-- tv@dimX = ce qui reste  droite de DX
+\hbox to\tv@Xdim{\rput(\tv@DX,0){\psline{->}(-0.9\tv@DX,-\tv@mydimen)(0.9\tv@dimX,-\tv@mydimendeux)}\hfil}}
+
+%-- flche descendante en partie basse
+\def\fdb{%
+\iftv@calcul
+  \GererXDimension{\tabdim}%
+  \GererDXDimension{0.5\tabdim}%
+\fi
+\tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by\tv@dimYMilieu\advance\tv@mydimen by 0.5\tv@dimYBas
+\tv@mydimendeux=\tv@dimYHaut\advance\tv@mydimendeux by 0.5\tv@dimYMilieu
+\tv@dimX=\tv@Xdim\advance\tv@dimX by -\tv@DX %-- tv@dimX = ce qui reste  droite de DX
+\hbox to\tv@Xdim{\rput(\tv@DX,0){\psline{->}(-0.9\tv@DX,-\tv@mydimendeux)(0.9\tv@dimX,-\tv@mydimen)}\hfil}}
+
+%-- flche montante en partie haute
+\def\fmh{%
+\iftv@calcul
+  \GererXDimension{\tabdim}%
+  \GererDXDimension{0.5\tabdim}%
+\fi
+\tv@mydimen=0.5\tv@dimYHaut\tv@mydimendeux=\tv@dimYHaut\advance\tv@mydimendeux by 0.5\tv@dimYMilieu 
+\tv@dimX=\tv@Xdim\advance\tv@dimX by -\tv@DX %-- tv@dimX = ce qui reste  droite de DX
+\hbox to\tv@Xdim{\rput(\tv@DX,0){\psline{->}(-0.9\tv@DX,-\tv@mydimendeux)(0.9\tv@dimX,-\tv@mydimen)}\hfil}}
+
+%-- flche descendante en partie haute
+\def\fdh{%
+\iftv@calcul
+  \GererXDimension{\tabdim}%
+  \GererDXDimension{0.5\tabdim}%
+\fi
+\tv@mydimen=0.5\tv@dimYHaut\tv@mydimendeux=\tv@dimYHaut\advance\tv@mydimendeux by 0.5\tv@dimYMilieu 
+\tv@dimX=\tv@Xdim\advance\tv@dimX by -\tv@DX %-- tv@dimX = ce qui reste  droite de DX
+\hbox to\tv@Xdim{\rput(\tv@DX,0){\psline{->}(-0.9\tv@DX,-\tv@mydimen)(0.9\tv@dimX,-\tv@mydimendeux)}\hfil}}
+
+
+%-- MACROS SIMPLIFIES POUR LES TEXTES (compatibilit avec mes anciennes macros)
+%-- texte au milieu
+\def\tx#1{%
+\iftv@calcul
+  \GererX{$\dsp#1$}%
+  \GererDXSimple{$\dsp#1$}%
+\fi
+\hbox to \tv@Xdim{\tabvarputmilieu{$\dsp #1$}\hfil}%
+}
+
+%-- texte en haut
+\def\txh#1{%
+\iftv@calcul
+  \GererX{$\dsp#1$}%
+  \GererDXSimple{$\dsp#1$}%
+\fi
+\hbox to\tv@Xdim{\tabvarputhaut{$\dsp #1$}\hfil}%
+}
+
+%-- texte en bas
+\def\txb#1{%
+\iftv@calcul
+  \GererX{$\dsp#1$}%
+  \GererDXSimple{$\dsp#1$}%
+\fi
+\hbox to\tv@Xdim{\tabvarputbas{$\dsp#1$}\hfil}%
+}
+
+%-- texte milieu + trait 
+\def\txt#1{%
+\iftv@calcul
+  \GererX{$\dsp#1$}%
+  \GererDXSimple{$\dsp#1$}%
+\fi
+\hbox to\tv@Xdim{\traithaut\tabvarputmilieu{$\dsp #1$}\traitbas\hfil}%
+}
+
+%-- texte haut + trait
+\def\txht#1{%
+\iftv@calcul
+  \GererX{$\dsp#1$}%
+  \GererDXSimple{$\dsp#1$}%
+\fi
+\hbox to\tv@Xdim{\tabvarputhaut{$\dsp #1$}\traitmilieu\traitbas\hfil}%
+}
+
+%--texte bas + trait
+\def\txbt#1{%
+\iftv@calcul
+  \GererX{$\dsp#1$}%
+  \GererDXSimple{$\dsp#1$}%
+\fi
+\hbox to\tv@Xdim{\traithaut\traitmilieu\tabvarputbas{$\dsp #1$}\hfil}%
+}
+
+%-- Texte pour la premire ligne
+\def\xt#1{%
+\iftv@calcul
+  \GererX{$\dsp#1$}%
+  \GererDXSimple{$\dsp#1$}%
+\fi
+\hbox to\tv@Xdim{\tabvarputmilieu{$\dsp#1$}\traitbas\hfil}%
+}
+
+%--Trait double + texte crit en haut
+\def\xdbt#1{%
+\iftv@calcul
+  \GererX{$\dsp#1$}%
+  \GererDXSimple{$\dsp#1$}%
+\fi
+\hbox to\tv@Xdim{\tabvarputmilieu{$\dsp#1$}\doubletraitbas\hfil}%
+}
+
+%-- Trait double + texte  gauche en haut(#1) et texte  droite en bas(#2)
+\def\txdbthb#1#2{%
+\iftv@calcul
+  \initY{$\dsp #1$}\max{\tv@dimYHaut}{\tv@mydimen}%
+   \initY{$\dsp #2$}\max{\tv@dimYBas}{\tv@mydimen}%
+  %-- calcul et gestion de DX
+  \initx{$\dsp#1$}\advance\tv@mydimen by 3 pt\relax
+  \GererDXDimension{\tv@mydimen}%
+  %-- calcul et gestion de la largeur totale
+  \initx{$\dsp#1$}\max{\tv@mydimen}{\tv@DX}%
+  \global\advance\tv@mydimen by 3pt\global\tv@dimX=\tv@mydimen
+  \initx{$\dsp#2$}\global\advance\tv@mydimen by\tv@dimX
+  \GererXDimension{\tv@mydimen}%
+\fi%
+%-- construction du texte + trait double
+\hbox to\tv@Xdim{%
+\rput[r](\tv@DX,0){\rput[r](-3pt,-0.5\tv@dimYHaut){$\dsp#1$}}%
+%
+\dbt
+ %
+ \tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by \tv@dimYMilieu\advance\tv@mydimen by 0.5\tv@dimYBas
+ \rput[l](\tv@DX,0){\rput[l](3pt,-\tv@mydimen){$\dsp #2$}}% 
+ \hfil}%
+}
+
+%-- Trait double + texte  gauche en haut(#1) et texte  droite en haut(#2)
+\def\txdbthh#1#2{%
+\iftv@calcul
+  \initY{$\dsp #1$}\max{\tv@dimYHaut}{\tv@mydimen}%
+  \initY{$\dsp #2$}\max{\tv@dimYHaut}{\tv@mydimen}%
+  %-- calcul et gestion de DX
+  \initx{$\dsp#1$}\advance\tv@mydimen by 3 pt\relax
+  \GererDXDimension{\tv@mydimen}%
+  %-- calcul et gestion de la largeur totale
+  \initx{$\dsp#1$}\max{\tv@mydimen}{\tv@DX}%
+  \global\advance\tv@mydimen by 3pt\global\tv@dimX=\tv@mydimen
+  \initx{$\dsp#2$}\global\advance\tv@mydimen by\tv@dimX
+  \GererXDimension{\tv@mydimen}%
+\fi%
+\hbox to\tv@Xdim{%
+ \rput[r](\tv@DX,0){\rput[r](-3pt,-0.5\tv@dimYHaut){$\dsp#1$}}%
+ %
+\dbt
+ %
+ \rput[l](\tv@DX,0){\rput[l](3pt,-0.5\tv@dimYHaut){$\dsp #2$}}
+ \hfil}%
+}%
+
+
+%-- Trait double + texte  gauche en bas (#1) et texte  droite en haut(#2)
+\def\txdbtbh#1#2{%
+\iftv@calcul 
+  \initY{$\dsp #1$}\max\tv@dimYBas\tv@mydimen%
+  \initY{$\dsp #2$}\max\tv@dimYHaut\tv@mydimen%
+  %-- calcul et gestion de DX
+  \initx{$\dsp#1$}\advance\tv@mydimen by 3 pt\relax
+  \GererDXDimension{\tv@mydimen}%
+  %-- calcul et gestion de la largeur totale
+  \initx{$\dsp#1$}\max{\tv@mydimen}{\tv@DX}%
+  \global\advance\tv@mydimen by 3pt\global\tv@dimX=\tv@mydimen
+  \initx{$\dsp#2$}\global\advance\tv@mydimen by\tv@dimX
+  \GererXDimension{\tv@mydimen}%
+\fi%
+\hbox to\tv@Xdim{%
+ \tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by \tv@dimYMilieu\advance\tv@mydimen by 0.5\tv@dimYBas
+ \rput[r](\tv@DX,0){\rput[r](-3pt,-\tv@mydimen){$\dsp#1$}}%
+ %
+\dbt
+ %
+ \rput[l](\tv@DX,0){\rput[l](3pt,-0.5\tv@dimYHaut){$\dsp #2$}}
+ \hfil}%
+}%
+
+%-- Trait double + texte  gauche en bas(#1) et texte  droite en bas(#2)
+\def\txdbtbb#1#2{%
+\iftv@calcul%
+  \initY{$\dsp #1$}\max{\tv@dimYBas}{\tv@mydimen}%
+  \initY{$\dsp #2$}\max{\tv@dimYBas}{\tv@mydimen}%
+  %-- calcul et gestion de DX
+  \initx{$\dsp#1$}\advance\tv@mydimen by 3 pt%
+  \GererDXDimension{\tv@mydimen}%
+  %-- calcul et gestion de la largeur totale
+  \initx{$\dsp#1$}\max{\tv@mydimen}{0.90909\tv@DX}%-- reprendre la bonne valeur de DX qui a t multipli par 1.1
+  \global\advance\tv@mydimen by 3pt\global\tv@dimX=\tv@mydimen%
+  \initx{$\dsp#2$}\global\advance\tv@mydimen by\tv@dimX%
+  \GererXDimension{\tv@mydimen}%
+\fi%
+\hbox to\tv@Xdim{%
+ \tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by\tv@dimYMilieu\advance\tv@mydimen by 0.5\tv@dimYBas\relax%
+ \rput[r](\tv@DX,0){\rput[r](-3pt,-\tv@mydimen){$\dsp#1$}}%
+ %
+\dbt
+ %
+ \tv@mydimen=\tv@dimYHaut\advance\tv@mydimen by\tv@dimYMilieu\advance\tv@mydimen by 0.5\tv@dimYBas\relax
+ \rput[l](\tv@DX,0){\rput[l](3pt,-\tv@mydimen){$\dsp #2$}}%
+ \hfil}%
+}%
+
+%-- Griser une case
+\def\grise{%
+\iftv@calcul
+  \GererXDimension{\tabdim}%
+  \GererDXDimension{0.5\tabdim}%
+\fi%
+\hbox to\tv@Xdim{\psframe[linecolor=gristabvar,fillstyle=solid,fillcolor=gristabvar](0,0)(\tv@Xdim,-\tv@YTotal)\hfil}}
+
+
+%-- MACROS MANIPULATION DES DONNES
+
+%-- Repiqu dans le TeXBook page 378 : list macro, lgrement modifi.
+\toksdef\ta=0 \toksdef\tb=2
+
+%-- ajoute un item  droite de la liste : #1 = item, #2 = liste
+\long\def\rightappenditem#1\to#2{\ta={\\{#1}}\tb=\expandafter{#2}%
+ \xdef#2{\the\tb\the\ta}}
+
+%-- ajoute un item  gauche de la liste : #1 = item, #2 = liste
+\long\def\leftappenditem#1\to#2{\ta={\\{#1}}\tb=\expandafter{#2}%
+\xdef#2{\the\ta\the\tb}}
+
+%-- extrait l'item de gauche de la liste et ampute celle-ci. #1 = liste, #2 = macro qui va
+%   recevoir l'item extrait.
+\def\lop#1\to#2{\expandafter\lopoff#1\lopoff#1#2}
+\long\def\lopoff\\#1#2\lopoff#3#4{\gdef#4{#1}\gdef#3{#2}}
+
+
+%-- On dmarre avec une liste vide
+%-- \listeY est une macro qui contiendra les dimensions, sous la forme : 
+%   \\{<YHaut 1>}\\{<YMilieu 1>}\\{<YBas 1>}\\{<YHaut 2>}...\\{<YBas n>}
+%
+%-- \listeX est une macro qui contiendra les dimensions, sous la forme : 
+%   \\{<Xgauche 1>}\\{<XMilieu 1>}\\{<XDroite 1>}\\{<XGauche 2>}...\\{<XDroite n>}
+\def\clearListes{\gdef\listeY{}\gdef\listeX{}\gdef\listeDX{}}
+
+
+%-- Sauvegarde des trois hauteurs
+\def\savedimsY{%
+  \expandafter\rightappenditem\the\tv@dimYHaut\to\listeY
+  \expandafter\rightappenditem\the\tv@dimYMilieu\to\listeY
+  \expandafter\rightappenditem\the\tv@dimYBas\to\listeY}
+
+
+%-- Lecture des trois hauteurs + ajout de blanc + initialisation de \tv@YTotal
+\def\litY{%
+ \lop\listeY\to\a \tv@dimYHaut=\a
+ \lop\listeY\to\a \tv@dimYMilieu=\a
+ \lop\listeY\to\a \tv@dimYBas=\a
+ \global\advance\tv@dimYHaut by 2\tabblanc
+ \global\advance\tv@dimYMilieu by 2\tabblanc
+ \global\advance\tv@dimYBas by 2\tabblanc
+ \calculeYTotal}
+
+%-- Ajout d'une dimension X  listeX
+\def\ajouteX#1{%
+  \expandafter\rightappenditem\the #1\to\listeX}
+
+%-- Ajout d'une dimension X  listeX ( gauche => initialisation)
+\def\ajouteXAGauche#1{%
+  \expandafter\leftappenditem\the #1\to\listeX}
+
+
+%-- Extrait la dimension X de gauche de \listeX et la stocke dans \tv@Xdim
+\def\extraitX{\lop\listeX\to\a\tv@Xdim=\a}
+
+
+%-- Ajout d'une dimension dx  listeDX
+\def\ajouteDX#1{%
+  \expandafter\rightappenditem\the #1\to\listeDX}
+
+%-- Ajout d'une dimension dx  listeDX ( gauche => initialisation)
+\def\ajouteDXAGauche#1{%
+  \expandafter\leftappenditem\the #1\to\listeDX}
+
+
+%-- Extrait la dimension dx de gauche de \listeDX et la stocke dans \tv@DX
+\def\extraitDX{\lop\listeDX\to\a\tv@DX=\a}
+
+
+
+%-- Macro juste pour initialiser \listeX et \listeDX avec le bon nombre de champs
+\def\initListeXListeDX#1{%
+\global\tv@countLigne=0
+\setbox150=\vbox{\halign{%
+\global\advance\tv@countLigne by 1
+\ifnum\tv@countLigne=1
+  \tv@mydimen=0pt
+  \ajouteXAGauche{\tv@mydimen}%
+  \ajouteDXAGauche{\tv@mydimen}%
+\fi
+##\hfil\vrule&&%
+\hfil
+\ifnum\tv@countLigne=1
+  \tv@mydimen=0pt
+  \ajouteXAGauche{\tv@mydimen}%
+  \ajouteDXAGauche{\tv@mydimen}%
+\fi
+##\hfil\cr%
+#1}}}
+
+
+%-- MACRO PRINCIPALE : TRAC DU TABLEAU OU SIMPLE CALCUL DES HAUTEURS
+\def\TABVAR#1{%
+\vbox{\vglue\smallskipamount\nobreak%
+{\offinterlineskip\everycr{\noalign{\hrule}}%
+\iftv@calcul
+\else
+  \litY
+\fi%-- lecture du premier champ (bidon : on le saute)
+\hbox{\vrule\vbox{\halign{%
+\iftv@calcul
+  \savedimsY
+  \setY{0pt}{0pt}{0pt}%-- Mode calcul : sauver les dimensions et remettre  zro
+\else
+  \litY%-- Mode trac : rcuprer les dimensions et calcul de \tv@YTotal
+\fi 
+\vrule height 0pt depth \tv@YTotal width 0pt\extraitX\extraitDX##\ajouteX{\tv@Xdim}\ajouteDX{\tv@DX}%
+\vrule&&%
+\extraitX\extraitDX##\ajouteX{\tv@Xdim}\ajouteDX{\tv@DX}\cr%
+#1}}\vrule}}
+\iftv@calcul
+  \savedimsY%-- dernire ligne : on sauve les dimensions
+\fi
+\medbreak%
+}}
+
+
+
+
+%--------------- LA MACRO FINALE POUR FAIRE UN TABLEAU DE VARIATIONS
+%
+\def\tabvar#1{{\clearListes\initListeXListeDX{#1}\tv@calcultrue%
+\psset{linewidth=.4pt}%-- fixer la largeur des lignes...
+\setbox150=\hbox{\TABVAR{#1}}\tv@calculfalse\TABVAR{#1}}}
+
+
+\catcode`\@=12
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%         FIN DES MACROS POUR TABLEAU DE VARIATION
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%% Local Variables: 
+%%% mode: plain-tex
+%%% TeX-master: t
+%%% End: 
