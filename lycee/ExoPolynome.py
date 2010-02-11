@@ -190,7 +190,7 @@ def factorisation_degre3(E,nomE,exo="",cor=""):
                 final=1
                 x12[i]=x12[i][7:-7]
         x1,x2=x12[0],x12[1]
-        E_final=P0+"\\left("+E.var+"+"+x1+"\\right)\\left("+E.var+"+"+x2+"\\right)$\n"
+        E_final=P0+"\\left("+E.var+"+"+x1+"\\right)\\left("+E.var+"+"+x2+"\\right)\n"
 
     cor+=E_factorise
     if final:
@@ -243,7 +243,7 @@ def factorisation_degre2(P,nomP="P",detail=False,factorisation=True):
         cor+=".\par\n"
         cor+=" Les racines de $"+nomP+"$ sont $"+P.var+"_1="+ strx1 +"="+x1 +"$ et $"+P.var+"_2="+ strx2 + "="+x2 +"$.\n"
         if factorisation:
-            cor+=u"\\\\ Donc $"+nomP+u"$ peut s'écrire $"+nomP+"=\n"
+            cor+=u"\\\\ Donc $%s$ peut s'écrire $%s(%s)=\n"%(nomP,nomP,P.var)
             if parenthesex1:
                 x1="\\left("+x1+"\\right)"
             if parenthesex2:
@@ -270,8 +270,7 @@ def poly_racines_fractionnaires(rac_min,rac_max,denom1,X,deltanul=False):
         pol2=a2*p2facteur[0]*p2facteur[1]
     return pol2
 
-def poly_racines_entieres(rac_min,rac_max,X):
-    a1=1
+def poly_racines_entieres(rac_min,rac_max,X,a1=1):
     p1facteur=[X-randrange(rac_min,rac_max) for i in range(2)]
     pol1=a1*p1facteur[0]*p1facteur[1]
     return pol1
@@ -310,7 +309,7 @@ def identites_remarquables(exo,cor,pol1,sgns,nomP="P",racines=True):
     c=int(sqrt(pol2[2]))
     exo+=u"\\item  Factoriser le polynôme $$"+nomP+"="+pol1.TeX()+"$$\n"
     if a1!=1:
-        cor+="\\item On remarque que $"+nomP+"="+pol1.TeX()+"="+TeX(a1)+"\\times\\big["+(pol1/a1).TeX()+"\\big]$"
+        cor+="\\item On remarque que $"+nomP+"="+pol1.TeX()+"="+TeX(a1)+"\\times\\big["+(pol1/a1).TeX()+"\\big]"
         cor+="="+TeX(a1)+"\\times \\big["
     else:
         cor+="\\item $"+nomP+"="+pol1.TeX()+"="
@@ -322,7 +321,7 @@ def identites_remarquables(exo,cor,pol1,sgns,nomP="P",racines=True):
         if sgns==-2: #-2 => (a-b)²
             cor+= "-2 \\times "
         else:        #+2 => (a+b)²
-            cor+= "+2 \\times"
+            cor+= "+2 \\times "
         if c<0:      #impossible ! 
             print "on peut avoir c<0 dans identites_remarquables"
             cor+="\\left("+TeX(c)+pol1.var+"\\right)"
@@ -417,8 +416,128 @@ def listeracines(a,b,delta):
     if a<0:
         strx1,strx2,x1,x2,parenthesex1,parenthesex2=strx2,strx1,x2,x1,parenthesex2,parenthesex1
     return rac_delta,simplrac,strx1,x1,strx2,x2,parenthesex1,parenthesex2
+def tableau_de_signe(P,nomP,delta,P1,P2,x1,x2,detail=False):
+    if delta<0:
+        if P[0]<0:
+            signe=u"négatif"
+        else:
+            signe="positif"
+        if detail:
+            return "Donc $%s$ ne change pas de signe donc $%s$ est $%s$\\\\\n"%(nomP,nomP,signe),signe
+        else:
+            return "Donc $%s$ ne change pas de signe donc $%s$ est $%s$\\\\\n"%(nomP,nomP,signe)
+    elif delta==0:
+        tab_signe="$$\
+                \\tabvar{\%\
+                \\tx{x}&\\tx{+\\infty}&& \\tx{%s}&& \\tx{-\\infty}\\cr\n\
+                \\tx{%s(%s)}&&\\tx{+}&\\tx{%s}&\\tx{-}&\\cr}$$" % (x1,nomP,P.var,x1)
+        str_signe="\\tx{%s(%s)}&&\\tx{+}&\\tx{%s}&\\tx{-}&\\cr" % (nomP,P.var,x1)
+        if detail:
+            return tab_signe,str_signe
+        else:
+            return tab_signe
+    else:
+        if P[2]>0:
+            str_a="\\tx{%s}& & \\tx{+} && \\tx{+} && \\tx{+} & \\cr\n" %(P.var)
+            str_signe="\\tx{%s(%s)}& &\\tx{+}&\\tx{0}&\\tx{-}&\\tx{0}&\\tx{+}&\\cr\n"% (nomP,P.var)
+        else:
+            str_a="\\tx{%s}& & \\tx{-} && \\tx{-} && \\tx{-} & \\cr\n" %(P.var)
+            str_signe="\\tx{%s(%s)}& &\\tx{-}&\\tx{0}&\\tx{+}&\\tx{0}&\\tx{-}&\\cr\n" % (nomP,P.var)
+        tab_signe="$$\
+                \\tabvar{\
+                \\tx{%s}& \\tx{+\\infty}&& \\tx{%s}&&\\tx{%s}&& \\tx{-\\infty}\\cr\n\
+                \\tx{%s}& & \\tx{-} &\\tx{0}& \\tx{+} && \\tx{+} & \\cr\n\
+                \\tx{%s}& & \\tx{-} && \\tx{-} &\\tx{0}& \\tx{+} & \\cr\n\
+                %s%s}$$" % (P.var,x1,x2,P1,P2,str_a,str_signe)
+    if detail:
+        return tab_signe,str_signe
+    else:
+        return tab_signe
+
+def exo_tableau():
+    #intervalle pour les racines entières ou fractionnaire
+    rac_min=-10
+    rac_max=10
+    #denominateur maximmum pour les racines fractionnaires
+    denom_max=denom1=12
+    #Valeurs absolues maximales des coefficients d'un polynôme quelconque
+    abs_a=1
+    abs_b=10
+    abs_c=10
+    #X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
+    inconnues=['x','y','z','t']
+    nom_poly=['P','Q','R','S']
+    var="x"
+    X=Polynome({1:1},var=var)
+    Poly=[poly_racines_entieres(rac_min,rac_max,X),poly_racines_fractionnaires(rac_min,rac_max,denom1,X,deltanul=False),poly_racines_quelconques(abs_a,abs_b,abs_c,X)]
+    nomP="P"
+    exo="\\begin{enumerate}\n"
+    cor="\\begin{enumerate}\n"
+    for i in range(len(Poly)):
+        P=Poly[i]
+        exo+=u"\\item Étudier le signe du polynôme $%s=%s$\n" % (nomP,P.TeX())
+        cor+="\\item $%s=%s$\\\\\n" % (nomP,P.TeX())
+        corfac,delta,P1,P2,x1,x2=factorisation_degre2(P,nomP=nomP,detail=True,factorisation=True)
+        cor+=corfac+"\\\\\n"
+        cor+=tableau_de_signe(P,nomP,delta,P1,P2,x1,x2)
+    
+    exo+="\\end{enumerate}\n"
+    cor+="\\end{enumerate}\n"
+    return exo,cor
+
+def exo_variation():
+    #intervalle pour les racines entières ou fractionnaire
+    a=3*randint(1,3)
+    rac_min=-10
+    rac_max=10
+    #denominateur maximmum pour les racines fractionnaires
+    denom_max=denom1=12
+    #Valeurs absolues maximales des coefficients d'un polynôme quelconque
+    abs_a=6
+    abs_b=10
+    abs_c=10
+    #X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
+    inconnues=['x','y','z','t']
+    nom_poly=['P','Q','R','S']
+    var="x"
+    X=Polynome({1:1},var=var)
+    nomP=["f","g","h","k","p","q"][randrange(6)]
+    exo="\\begin{enumerate}\n"
+    cor="\\begin{enumerate}\n"
+    Pprime=poly_racines_entieres(rac_min,rac_max,X,a1=a)
+    P=Pprime.primitive()+randint(-abs_c,abs_c)
+    exo+=u"\\item Étudier le sens de variations de $%s$ définie par $%s(x)=%s$\n" % (nomP,nomP,P.TeX())
+    cor+="\\item $%s(x)=%s$ donc $%s'(x)=%s$\\\\\n" % (nomP,P.TeX(),nomP,Pprime.TeX())
+    corfac,delta,P1,P2,x1,x2=factorisation_degre2(Pprime,nomP=nomP+"'",detail=True,factorisation=True)
+    cor+=corfac+"\\\\\n"
+    tab_signe,str_signe=tableau_de_signe(Pprime,nomP+"'",delta,P1,P2,x1,x2,detail=True)
+    cor+=tab_signe
+    if str_signe==u"négatif" or (delta==0 and P[3]<0):
+        cor+=u"Donc la fonction polynômiale $%s$ est décroissante sur $\mathbb R$.\n" %(nomP)
+    elif str_signe=="positif" or (delta==0 and P[3]>0):
+        cor+=u"Donc la fonction polynômiale $%s$ est croissante sur $\mathbb R$.\n"%(nomP)
+    else:
+        cor+="On obtient ainsi le tableau de variation de $%s$."%nomP
+        if P[3]>0:
+            var_de_P="\\tx{%s}& &\\fm&\\txh{%s}&\\fd&\\txb{%s}&\\fm&\\cr\n"\
+                        %(nomP,TeX(P(int(re.findall("[\-0-9]+",x1)[0]))),TeX(P(int(re.findall("[\-0-9]+",x2)[0]))))
+        else:
+            var_de_P="\\tx{%s}& &\\fd&\txb{%s}&\\fm&\\txh{%s}&\\fd&\\cr\n"\
+                      %(nomP,TeX(P(int(re.findall("[\-0-9]+",x1)[0]))),TeX(P(int(re.findall("[\-0-9]+",x2)[0]))))
+        
+        cor+="$$\
+            \\tabvar{\
+            \\tx{%s}& \\tx{+\\infty}&& \\tx{%s}&&\\tx{%s}&& \\tx{-\\infty}\\cr\n\
+            %s\
+            %s}$$"%(P.var,x1,x2,str_signe,var_de_P)
+    exo+="\\end{enumerate}\n"
+    cor+="\\end{enumerate}\n"
+    return exo,cor
+
 
 if __name__=="__main__":
     from TEST.imprimetest import *
-    exo,cor=Exo_factorisation()#denom1=12)
+    #exo,cor=Exo_factorisation()#denom1=12)
+    #exo,cor=exo_tableau()
+    exo,cor=exo_variation()
     imprime_TeX(exo+cor)

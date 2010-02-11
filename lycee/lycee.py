@@ -47,12 +47,27 @@ def tex_factorisation_degre3(f0,f1):
     f0.write(exo)
     f1.write(cor)
 
+def tex_tab_signe(f0,f1):
+    f0.write('\\exercice\n')
+    f1.write('\\exercice*\n')
+    exo,cor=ExoPolynome.exo_tableau()
+    f0.write(exo)
+    f1.write(cor)
+
+def tex_variation(f0,f1):
+    f0.write('\\exercice\n')
+    f1.write('\\exercice*\n')
+    exo,cor=ExoPolynome.exo_variation()
+    f0.write(exo)
+    f1.write(cor)
 
 def main(exo, f0, f1):
     modules = (
         tex_racines_degre2,
         tex_factorisation,
         tex_factorisation_degre3,
+        tex_tab_signe,
+        tex_variation,
         )
 
     modules[exo](f0, f1)

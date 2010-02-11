@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-
+import os,sys
+sys.path.append("/home/nicolas/pyrogit/pyromaths")
 from random import randrange
-from Polylycee import *
+from outils.Polylycee import *
 
 def genere_points(xmin,xmax,ymin,ymax,simple=False):
 
@@ -179,7 +180,7 @@ def nombre_TeX(nombre):#A remplacer par sepmillier
         return str(nombre)
 
 if __name__=="__main__":
-    from imprimetest import *
+    from TEST.imprimetest import *
     imprime_TeX(bezier(),"bezier.tex")
     P=Polynome("x^2+5x-6")
     imprime_TeX(tab_var(P),"polyvar.tex")
