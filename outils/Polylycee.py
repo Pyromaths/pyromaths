@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 
+
 import os,sys,codecs
+if __name__=="__main__":
+    sys.path.append('/home/nicolas/pyrogit/pyromaths')
+
 from fractions import Fraction
 import re
 from outils.Arithmetique import carrerise,pgcd
 from math import sqrt
 from pyro_classes import TeXMiseEnForme
-from random import randrange
+from random import randrange,randint
 
 class Polynome:
     '''Classe de polynôme pour le lycee'''
@@ -285,9 +289,9 @@ def TeX_division(dividende,diviseur):
     texquotient,restera= dividende/diviseur
     reste=dividende
     diviseur_degre=diviseur.deg
-    sauve=min(dividende.puiss+texquotient.puiss)
+    sauve=min(dividende.puiss+restera.puiss)
     longueur=dividende.degre-sauve
-    string= "$$\n\\begin{array}{c"
+    string= "$$\\renewcommand\\arraycolsep{0cm}\n\\begin{array}{c"
     for i in range(longueur):
         string+= "c"
     string+= "|c}\n"
@@ -302,57 +306,62 @@ def TeX_division(dividende,diviseur):
         facteur= reste.dictio[max(0,reste.deg)]/diviseur.dictio[diviseur.deg]
         ajout_quotient=Polynome({ajout_quotient_deg:facteur},var=dividende.var)
         soustrait_reste=ajout_quotient*diviseur
-        string +=tab_print(soustrait_reste,diviseur_degre+1,parenthese=True)
-        for k in range(longueur-i-diviseur.deg):
+        string +=tab_print(soustrait_reste,diviseur_degre+1-sauve,parenthese=True)
+        for k in range(longueur-i-diviseur.deg+sauve):
             string+= " & "
         if i ==0:
             string+= str(texquotient)
         string+= "\\\\\n"
-        string+= "\\cline{"+str(i+1) +"-"+str(i+diviseur.deg+1) +"}\n"
+        string+= "\\cline{"+str(i+1) +"-"+str(i+diviseur.deg+1-sauve) +"}\n"
         avant=reste.deg
         reste=reste-soustrait_reste
         delta=avant-reste.degre
-        i=i+delta
         for k in range(i):
             string+= " &"
-        string +=tab_print(reste,diviseur.deg)
-        for k in range(longueur-i-diviseur.deg):
+        i=i+delta
+        prochain=1
+        string +=tab_print(reste,min(diviseur.deg+1,reste.degre+1)+delta-sauve,debut=delta)
+        #fait descendre les monome du dividende
+        for k in range(longueur-i-diviseur.deg+sauve):
             string+= " & "
         string+= "\\\\ \n"
     string+= "\\end{array}\n$$"
 
     string+="\n On a $$"+dividende.TeX()+" = \\left(" + texquotient.TeX()+"\\right) \\times \\left("+diviseur.TeX()+"\\right)"
     if restera!=Polynome(0):
-        print restera
-        string+="+"+restera.TeX()
+        if len(restera.puiss)==1 and restera[restera.deg]>0:#monome
+            string +="+"+restera.TeX()
+        else:
+            string+="+\\left("+restera.TeX()+"\\right)"
     string+="$$"
     return string
-def tab_print(polynome,longueur=0,parenthese=False):
-    '''utilise par TeX_division pour décaler le reste dans la partie gauche'''
-    degre=polynome.degre
+def tab_print(polynome,longueur=0,parenthese=False,debut=0):
+    '''utilisé par TeX_division pour décaler le reste dans la partie gauche'''
+    degre=polynome.degre+debut
     string=''
     if parenthese:
         string = "-("
         fin=")"
     else:
         fin=""
-    if polynome.deg<0:
-        string =string+ str(0)+ " &"
+    if polynome.degre<0:
+        string += "+"+str(0)+ " &"
     else:
         for i in range(longueur):
             k=degre-i
             coeff=polynome.dictio.get(k,0)
             if coeff>=0:
-                string=string+ "+"
-            string =string+ str(coeff)
+                string+= "+"
+            string += str(coeff)
             if k!=0:
-                string=string+ "x"
+                string+= polynome.var
             if k != 1 and k!=0:
                 string+= u"^" + str(k)
             if longueur-i==1:
                     string+= fin
             string+= " & "
     return string
+
 def TeXz(nombre):
     '''n'affiche pas b si b=0'''
     if nombre==0:
@@ -404,11 +413,15 @@ def simplifie_racine(n):
 
 
 if __name__=="__main__":
-    from imprimetest import *
+    from TEST.imprimetest import *
+    X=Polynome("x")
     P=Polynome({2:4,1:8,0:1,3:0})
     Q=Polynome({2:-4,0:-1,1:8})
     R=Polynome({3:1,2:1,1:-2})
     D=Polynome({1:1,0:2})
+    F=Polynome("x-4")
+    FF=Polynome("x^2-3")
+    Divi=FF*F+7
     FR=Polynome({3:Fraction(2,3),2:Fraction(2,3),1:Fraction(-4,3)})
     print "P=", P
     print "Q=", Q
@@ -417,4 +430,5 @@ if __name__=="__main__":
     R_facteur=R.factorise()
     print "R=",R.factorise(TeX=True)
     TeX_division(R,D)
-    #imprime_TeX(TeX_division(P,D))
+    print Divi*Polynome("x^3")-28*X
+    imprime_TeX(TeX_division(Divi*Polynome("x^3")-28*X,F*X))
