@@ -9,6 +9,81 @@ from math import *
 from re import findall
 from outils.Arithmetique import carrerise,pgcd
 
+def exo_fonctions_rationnelles():
+    var=['t','x'][randrange(2)]
+    X=Polynome({1:1},var)
+    #intervalle pour les racines entières ou fractionnaire
+    rac_min=-10
+    rac_max=10
+    b1=b2=a1=a2=0
+    while b1==0 or b2==0 or a1==0 or a2==0:
+        b1=randint(rac_min,rac_max)
+        b2=randint(rac_min,rac_max)
+        a1=randint(-5,5)
+        a2=randint(-5,5)
+    P=a1*X+b1
+    Q=a2*X+b2
+    Intervalle=[rac_min,rac_max]
+    nomf=['f','g','h','k'][randrange(4)]
+    #Je veux que f soit définie et dérivable sur I=Intervalle
+    if (-Q[0]/Q[1])>=rac_min and (-Q[0]/Q[1])<=rac_max:
+        if ((-Q[0]/Q[1])-rac_min)<(rac_max-(-Q[0]/Q[1])):
+            Intervalle=[int(-Q[0]/Q[1])+1,rac_max]
+        else:
+            Intervalle=[rac_min,int(-Q[0]/Q[1])-1]
+    #dérivée
+    numerateur="%s\\times%s-%s\\times%s"%\
+                (P.derive().TeX(parenthese=True),Q.TeX(parenthese=True),P.TeX(parenthese=True),Q.derive().TeX(parenthese=True))
+    numerateur_simplifie=P.derive()*Q-P*Q.derive()
+    denominateur=u"%s^2"%(Q.TeX(parenthese=True))
+    f_derivee="\\dfrac{%s}{%s}"%(numerateur,denominateur)
+    f_derivee_simplifiee="\\dfrac{%s}{%s}"%(numerateur_simplifie,denominateur)
+    exo=u"\\exercice On considère la fonction $%s$ définie sur $I=[%s~;~%s]$ par $%s(%s)=\dfrac{%s}{%s}$.\n"%\
+          (nomf,Intervalle[0],Intervalle[1],nomf,var,P.TeX(),Q.TeX())
+    exo+="\\begin{enumerate}\n"
+    cor="\\exercice* \\begin{enumerate}\n"
+    exo+=u"\\item Justifier que $%s$ est définie et dérivable sur $I$.\n"%(nomf)
+    cor+=u"\\item Pour déterminer la valeur interdite on doit résoudre $%s=0$.\n\n"%(Q.TeX())
+    cor+="\\begin{align*}\n\
+            %s&=0\\\\\n\
+            %s&=%s\\\\\n\
+            %s&=%s\n\
+            \\end{align*}\n"%(Q.TeX(),(Q-Q[0]).TeX(),TeX(-Q[0]),var,TeX(-Q[0]*Fraction(1)/Q[1]))
+    cor+=u"Or $%s$ n'est pas dans l'intervalle $[%s~;~%s]$ donc $%s$ est bien définie et dérivable sur $I$.\n"%\
+          (TeX(-Q[0]*Fraction(1)/Q[1]),Intervalle[0],Intervalle[1],nomf)
+    exo+=u"\\item Déterminer $%s'(%s)$ pour tout $%s\in[%s~;~%s]$.\n"%\
+          (nomf,var,var,Intervalle[0],Intervalle[1])
+    cor+=u"\\item $$%s'(%s)=%s=%s$$\n"%(nomf,var,f_derivee,f_derivee_simplifiee)
+    exo+=u"\\item En déduire le sens de variations de $%s$ sur $I$.\n"%(nomf)
+    if numerateur_simplifie.degre==0:
+        cor+=u"\\item Comme $%s$ est un carré, il est toujours positif.\\\\\n"%(denominateur)
+        f_xmin=TeX(Fraction(1)*P(Intervalle[0])/Q(Intervalle[0]))
+        f_xmax=TeX(Fraction(1)*P(Intervalle[1])/Q(Intervalle[1]))
+        if numerateur_simplifie[0]<0:
+            cor+=u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient \n"%\
+                  (numerateur_simplifie[0],var,nomf,var)
+            cor+="$$\\tabvar{\n"
+            cor+="\\tx{%s}&\\tx{%s}&&\\tx{%s}\\cr\n"%(var,TeX(Intervalle[0]),TeX(Intervalle[1]))
+            cor+="\\tx{%s'(%s)}&&\\tx{-}&&\\cr\n"%(nomf,var)
+            cor+="\\tx{%s}&\\txh{%s}&\\fd&\\txb{%s}\\cr\n"%(nomf,f_xmin,f_xmax)
+            cor+="}\n"
+                                                              
+            
+        else:
+            cor+=u" De plus, $%s>0$ donc pour tout $%s$ de $I$, $%s'(%s)>0$."%\
+                  (numerateur_simplifie[0],var,nomf,var)
+            cor+="$$\\tabvar{\n"
+            cor+="\\tx{%s}&\\tx{%s}&&\\tx{%s}\\cr\n"%(var,TeX(Intervalle[0]),TeX(Intervalle[1]))
+            cor+="\\tx{%s'(%s)}&&\\tx{+}&&\\cr\n"%(nomf,var)
+            cor+="\\tx{%s}&\\txb{%s}&\\fm&\\txh{%s}\\cr\n"%(nomf,f_xmin,f_xmax)
+            cor+="}$$\n"
+    else:
+        cor+=u"\\item Je ne sais pas faire avec un tel numérateur"
+    exo+="\\end{enumerate}\n"
+    cor+="\\end{enumerate}\n"
+    return exo,cor
+
+
 def exo_variation():
     '''Exercice qui propose l'étude du sens de variation d'un polynôme de degré 3'''
 
@@ -225,16 +300,6 @@ def Exo_factorisation_degre3():
     exo+="\\end{enumerate}\n"
     cor+="\\end{enumerate}\n"
     return exo,cor 
- 
-def poly_degre3_racines_entieres(rac_min,rac_max,X):
-    racine_evidente=[-2,-1,0,1,2][randrange(5)]
-    return (X-racine_evidente)*poly_racines_entieres(rac_min,rac_max,X)
-def poly_degre3_racines_fractionnaires(rac_min,rac_max,denom1,X):
-    racine_evidente=[-2,-1,0,1,2][randrange(5)]
-    return (X-racine_evidente)*poly_racines_fractionnaires(rac_min,rac_max,denom1,X)
-def poly_degre3_racines_quelconques(abs_a,abs_b,abs_c,X):
-    racine_evidente=[-2,-1,0,1,2][randrange(5)]
-    return (X-racine_evidente)*poly_racines_quelconques(abs_a=1,abs_b=10,abs_c=10,X=X)
 
 ##def degre2racine(exo,cor,P,nomP="P"):
 ##    var=P.var
@@ -264,6 +329,8 @@ def factorisation_degre2(P,nomP="P",detail=False,factorisation=True):
         P2=""
         cor+=P1+"$.\n"
     else:
+        if P[2]==0:
+            print P,delta
         rac_delta,simplrac,strx1,x1,strx2,x2,parenthesex1,parenthesex2=listeracines(P[2],P[1],delta)
         if simplrac:
             cor+=" et $"+radicalTeX(delta)+"="+rac_delta+"$"
@@ -333,6 +400,16 @@ def poly_id_remarquables(rac_min,rac_max,X):
         # -2 => (a-b)²
         # +2 => (a+b)²
         # 0 => (a-b)(a+b)
+ 
+def poly_degre3_racines_entieres(rac_min,rac_max,X):
+    racine_evidente=[-2,-1,0,1,2][randrange(5)]
+    return (X-racine_evidente)*poly_racines_entieres(rac_min,rac_max,X)
+def poly_degre3_racines_fractionnaires(rac_min,rac_max,denom1,X):
+    racine_evidente=[-2,-1,0,1,2][randrange(5)]
+    return (X-racine_evidente)*poly_racines_fractionnaires(rac_min,rac_max,denom1,X)
+def poly_degre3_racines_quelconques(abs_a,abs_b,abs_c,X):
+    racine_evidente=[-2,-1,0,1,2][randrange(5)]
+    return (X-racine_evidente)*poly_racines_quelconques(abs_a=1,abs_b=10,abs_c=10,X=X)
 
 ###############################################
 #
@@ -521,12 +598,13 @@ def factorisation_degre3(E,nomE,exo="",cor="",racines=[0,1,-1,2,-2]):
         if E(x0)==0:
             break
     if x0==0:
-        degre_facteur=min(E.puiss)
+        #degre_facteur=min(E.puiss)
+        degre_facteur=1
         E2=(E/(X**degre_facteur))[0]
         if degre_facteur==1:
             cor+="On remarque que $%s$ peut se factoriser par $%s$ et $%s=%s\\left(%s\\right)$" %(nomE,E.var,nomE,E.var,E2.TeX())
         else:
-            cor+=u"On remarque que $%s$ peut se factoriser par $%s^%s$ et $%s=%s\\left(%s\\right)$"\
+            cor+=u"On remarque que $%s$ peut se factoriser par $%s^%s$ et $%s=%s^%s\\left(%s\\right)$"\
             %(nomE,E.var,str(degre_facteur),nomE,E.var,str(degre_facteur),E2.TeX())
     else:            
         cor+="Comme $"+nomE+"("+TeX(x0)+")=0$, on peut diviser $"+nomE+"$ par $"+(X-x0).TeX()+"$\n"
@@ -569,5 +647,7 @@ if __name__=="__main__":
     #exo,cor=Exo_factorisation()#denom1=12)
     #exo,cor=exo_tableau()
     exo,cor=exo_variation()
-    exo,cor=Exo_factorisation_degre3()
+    for i in range(50):
+        Exo_factorisation_degre3()
+    exo,cor=exo_fonctions_rationnelles()
     imprime_TeX(exo+cor)

@@ -73,8 +73,9 @@ class Polynome:
         return string
     
            
-    def TeX(self,display=True):
+    def TeX(self,display=True,parenthese=False):
         '''renvoie une chaine de caractere imprimant les fractions dans TeX'''
+        
         exposants = []+self.puiss
         premier = 1
         string=''
@@ -108,7 +109,10 @@ class Polynome:
                 terme = self.var + u'^' + str(exposant)
             string=string+coeff+terme
             premier=0
-        return string
+        if parenthese and (len(self.puiss)>1 or self[self.degre]>0):
+            return "\\left("+string+"\\right)"
+        else:
+            return string
 
     def __add__(self, other):
         if isinstance(other,int) or isinstance(other,float) or isinstance(other,Fraction):
@@ -136,7 +140,12 @@ class Polynome:
     def __ne__(self,other):
         return not(self == other)
     def __eq__(self,other):
-        if self.var==other.var and self.dictio==other.dictio:
+        if (isinstance(other,int) or isinstance(other,Fraction) or isinstance(other,float)):
+            if self.degre==0 and self[0]==other:
+                return True
+            else:
+                return False
+        elif self.var==other.var and self.dictio==other.dictio:
             return True
         else:
             return False

@@ -60,6 +60,13 @@ def tex_variation(f0,f1):
     exo,cor=ExoPolynome.exo_variation()
     f0.write(exo)
     f1.write(cor)
+    
+def tex_fonctions_rationnelles(f0,f1):
+    f0.write('\\exercice\n')
+    f1.write('\\exercice*\n')
+    exo,cor=ExoPolynome.exo_fonctions_rationnelles()
+    f0.write(exo)
+    f1.write(cor)
 
 def main(exo, f0, f1):
     modules = (
@@ -68,6 +75,7 @@ def main(exo, f0, f1):
         tex_factorisation_degre3,
         tex_tab_signe,
         tex_variation,
+        tex_fonctions_rationnelles,
         )
 
     modules[exo](f0, f1)
