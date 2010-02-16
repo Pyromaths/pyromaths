@@ -3,11 +3,13 @@
 import sys, os, codecs
 if __name__=="__main__":
     sys.path.append("/home/nicolas/pyrogit/pyromaths")
-from outils.Polylycee import *
+from classes.Polynome import *
+from outils.TeXMiseEnForme import *
 from random import randrange,randint
 from math import *
 from re import findall
 from outils.Arithmetique import carrerise,pgcd
+from outils.Polynomes import *
 
 def exo_fonctions_rationnelles():
     var=['t','x'][randrange(2)]
@@ -252,21 +254,18 @@ def Exo_factorisation():
     for i in range(2):
         X=Polynome({1:1},var=inconnues[randrange(4)])
         P=poly_racines_entieres(rac_min,rac_max,X)
-        #exo,cor=degre2racine(exo,cor,P,nomP="P")
         exo+=u"\\item Factoriser le polynôme $$"+nomP+"="+P.TeX()+"$$\n"
         cor+="\\item "+factorisation_degre2(P)
         
     for i in range(3):
         X=Polynome({1:1},var=inconnues[randrange(4)])
         P=poly_racines_fractionnaires(rac_min,rac_max,denom1,X)
-        #exo,cor=degre2racine(exo,cor,P,nomP="P")
         exo+=u"\\item Factoriser le polynôme $$"+nomP+"="+P.TeX()+"$$\n"
         cor+="\\item "+factorisation_degre2(P)
     
     for i in range(2):
         X=Polynome({1:1},var=inconnues[randrange(4)])
         P=poly_racines_quelconques(abs_a=1,abs_b=10,abs_c=10,X=X)
-        #exo,cor=degre2racine(exo,cor,P,nomP="P")
         exo+=u"\\item Factoriser le polynôme $$"+nomP+"="+P.TeX()+"$$\n"
         cor+="\\item "+factorisation_degre2(P)
 
@@ -300,13 +299,6 @@ def Exo_factorisation_degre3():
     exo+="\\end{enumerate}\n"
     cor+="\\end{enumerate}\n"
     return exo,cor 
-
-##def degre2racine(exo,cor,P,nomP="P"):
-##    var=P.var
-##    #X=Polynome({1:1},var=P.var)
-##    exo+=u"\\item Factoriser le polynôme $$"+nomP+"="+P.TeX()+"$$\n"
-##    cor+="\\item "+factorisation_degre2(P)
-##    return exo,cor
 
 def factorisation_degre2(P,nomP="P",detail=False,factorisation=True):
     cor=""
@@ -350,66 +342,70 @@ def factorisation_degre2(P,nomP="P",detail=False,factorisation=True):
     else:
         return cor
 
-########################################################
-#
-#  construction de polynôme de degré 2
-#  X est un Polynome
-#  X=Polynome("x","x") donnera un polynome de degré 2
-#  X=Polynome("x^2",x) donnera un polynôme bicarrée
-#
-########################################################
-def poly_racines_quelconques(abs_a,abs_b,abs_c,X):
-    '''renvoie un polynome de degré 2'''
-    '''abs_a,abs_b,abs_c sont des entiers positifs majorant les valeurs absolues de a, b ,c'''
-    
-    a3=(2*randrange(2)-1)*randrange(1,abs_a+1)
-    b3=randrange(abs_b)
-    c3=randrange(-abs_c,abs_c)
-    return a3*X**2+b3*X+c3
-def poly_racines_fractionnaires(rac_min,rac_max,denom1,X,deltanul=False):
-    '''renvoie un polynome de degré2 à racines fractionnaires '''
-    '''les racines sont comprises entre rac_min et rac_max'''
-    '''denom1 majore le dénominateur des racines'''
-    '''deltanul=True autorise un delta=0'''
-    
-    delta=0
-    pol2=[0,0]
-    while (delta==0 and pol2[1]==0) and (not(deltanul) or delta!=0):
-        #pour éviter P=77x^2
-        a2=2*randrange(2)-1 #a2=-1 ou 1
-        p2facteur=[randint(1,denom1)*X-randint(rac_min,rac_max)for i in range(2)]
-        pol2=a2*p2facteur[0]*p2facteur[1]
-    return pol2
-def poly_racines_entieres(rac_min,rac_max,X,a1=1):
-    p1facteur=[X-randrange(rac_min,rac_max) for i in range(2)]
-    pol1=a1*p1facteur[0]*p1facteur[1]
-    return pol1
-def poly_id_remarquables(rac_min,rac_max,X):
-    '''Renvoie un polynome obtenu par une identité remarquable'''
-    
-    a=randint(1,10)
-    while 1:
-        coeff=randrange(rac_min,rac_max)
-        racine=randrange(rac_min,rac_max)
-        if coeff!=0 and racine!=0:
-            break
-    sgns=[[-1,1][randrange(2)]for i in range(2)]
-    p1facteur=[coeff*X+sgns[i]*racine for i in range(2)]
-    return a*p1facteur[0]*p1facteur[1],sum(sgns)   
-        #sum(sgns) permet de connaître l'identité
-        # -2 => (a-b)²
-        # +2 => (a+b)²
-        # 0 => (a-b)(a+b)
- 
-def poly_degre3_racines_entieres(rac_min,rac_max,X):
-    racine_evidente=[-2,-1,0,1,2][randrange(5)]
-    return (X-racine_evidente)*poly_racines_entieres(rac_min,rac_max,X)
-def poly_degre3_racines_fractionnaires(rac_min,rac_max,denom1,X):
-    racine_evidente=[-2,-1,0,1,2][randrange(5)]
-    return (X-racine_evidente)*poly_racines_fractionnaires(rac_min,rac_max,denom1,X)
-def poly_degre3_racines_quelconques(abs_a,abs_b,abs_c,X):
-    racine_evidente=[-2,-1,0,1,2][randrange(5)]
-    return (X-racine_evidente)*poly_racines_quelconques(abs_a=1,abs_b=10,abs_c=10,X=X)
+def TeXracines(a,b,delta,simple=True):
+    '''renvoie la formule des racines sous forme TeX'''
+    strx1="\\dfrac{-"+pTeX(b)+"-\\sqrt{"+TeX(delta)+"}}{2\\times"+pTeX(a)+"}"
+    strx2="\\dfrac{-"+pTeX(b)+"+\\sqrt{"+TeX(delta)+"}}{2\\times"+pTeX(a)+"}"
+    if simple:
+        if a>0:
+            return strx1,strx2
+        else:
+            return strx2,strx1
+    x1=(-b-sqrt(delta))/(2*a)
+    x2=(-b+sqrt(delta))/(2*a)
+    return strx1,strx2
+
+def listeracines(a,b,delta):
+    '''renvoie racsimple,simplifie,formule_x1,x_1,formule_x2,x2'''
+    '''avec x_1<x_2'''
+    '''On suppose delta >0'''
+    '''simplrac est True si racine de delta se simplifie'''
+
+    parenthesex1=parenthesex2=True #par défaut
+    simplrac=True
+    strx1="\\dfrac{-"+pTeX(b)+"-\\sqrt{"+TeX(delta)+"}}{2\\times"+pTeX(a)+"}"
+    strx2="\\dfrac{-"+pTeX(b)+"+\\sqrt{"+TeX(delta)+"}}{2\\times"+pTeX(a)+"}"
+    ##on a strx1<strx2
+    coeff,radicande=simplifie_racine(delta)
+    if radicande==1:#delta est un carré
+        rac_delta=TeX(coeff)
+        x1=TeX(Fraction(1)*(-b-coeff)/(2*a))
+        x2=TeX(Fraction(1)*(-b+coeff)/(2*a))
+        #les racines sont fractionnaires ou entières
+        parenthesex1=((b+coeff)*a>0)
+        parenthesex2=((b-coeff)*a>0)
+    else:
+        #x1,x2 simplifiés ont une écriture fracionnaire donc
+        parenthesex1=parenthesex2=False
+        if coeff==1:#delta n'a pas de facteur carré, on ne peut rien simplifier
+            rac_delta=radicalTeX(delta)
+            simplrac=False
+        else:
+            rac_delta=TeX(coeff)+radicalTeX(radicande)                
+        simplifie=pgcd(pgcd(b,coeff),2*a)#simplifie est négatif si a<0
+        if simplifie==coeff:
+            rac_delta1="-"+radicalTeX(radicande)
+            rac_delta2="+"+radicalTeX(radicande)
+        elif simplifie==-coeff:
+            rac_delta1="+"+radicalTeX(radicande)
+            rac_delta2="-"+radicalTeX(radicande)
+        else:
+            rac_delta1=tTeX(-coeff/simplifie)+radicalTeX(radicande)
+            rac_delta2=tTeX(coeff/simplifie)+radicalTeX(radicande)
+        if simplifie==2*a:
+            x1=TeXz(-b/simplifie)+rac_delta1
+            x2=TeXz(-b/simplifie)+rac_delta2
+            #plus de barre de fraction donc
+            parenthesex1=parenthesex2=True
+        else:
+            x1="\\dfrac{"+TeXz(-b/simplifie)+rac_delta1+"}{"+TeX(2*a/simplifie)+"}"
+            x2="\\dfrac{"+TeXz(-b/simplifie)+rac_delta2+"}{"+TeX(2*a/simplifie)+"}"
+        if b==0:
+            parenthesex1=(coeff*a>0)
+            parenthesex2=(coeff*a<0)
+    if a<0:
+        strx1,strx2,x1,x2,parenthesex1,parenthesex2=strx2,strx1,x2,x1,parenthesex2,parenthesex1
+    return rac_delta,simplrac,strx1,x1,strx2,x2,parenthesex1,parenthesex2
 
 ###############################################
 #
@@ -478,70 +474,6 @@ def identites_remarquables(exo,cor,pol1,sgns,nomP="P",racines=True):
         return exo,cor,liste_racines
     return exo,cor
 
-def TeXracines(a,b,delta,simple=True):
-    '''renvoie la formule des racines sous forme TeX'''
-    strx1="\\dfrac{-"+pTeX(b)+"-\\sqrt{"+TeX(delta)+"}}{2\\times"+pTeX(a)+"}"
-    strx2="\\dfrac{-"+pTeX(b)+"+\\sqrt{"+TeX(delta)+"}}{2\\times"+pTeX(a)+"}"
-    if simple:
-        if a>0:
-            return strx1,strx2
-        else:
-            return strx2,strx1
-    x1=(-b-sqrt(delta))/(2*a)
-    x2=(-b+sqrt(delta))/(2*a)
-    return strx1,strx2
-
-def listeracines(a,b,delta):
-    '''renvoie racsimple,simplifie,formule_x1,x_1,formule_x2,x2'''
-    '''avec x_1<x_2'''
-    '''On suppose delta >0'''
-    '''simplrac est True si racine de delta se simplifie'''
-
-    parenthesex1=parenthesex2=True #par défaut
-    simplrac=True
-    strx1="\\dfrac{-"+pTeX(b)+"-\\sqrt{"+TeX(delta)+"}}{2\\times"+pTeX(a)+"}"
-    strx2="\\dfrac{-"+pTeX(b)+"+\\sqrt{"+TeX(delta)+"}}{2\\times"+pTeX(a)+"}"
-    ##on a strx1<strx2
-    coeff,radicande=simplifie_racine(delta)
-    if radicande==1:#delta est un carré
-        rac_delta=TeX(coeff)
-        x1=TeX(Fraction(1)*(-b-coeff)/(2*a))
-        x2=TeX(Fraction(1)*(-b+coeff)/(2*a))
-        #les racines sont fractionnaires ou entières
-        parenthesex1=((b+coeff)*a>0)
-        parenthesex2=((b-coeff)*a>0)
-    else:
-        #x1,x2 simplifiés ont une écriture fracionnaire donc
-        parenthesex1=parenthesex2=False
-        if coeff==1:#delta n'a pas de facteur carré, on ne peut rien simplifier
-            rac_delta=radicalTeX(delta)
-            simplrac=False
-        else:
-            rac_delta=TeX(coeff)+radicalTeX(radicande)                
-        simplifie=pgcd(pgcd(b,coeff),2*a)#simplifie est négatif si a<0
-        if simplifie==coeff:
-            rac_delta1="-"+radicalTeX(radicande)
-            rac_delta2="+"+radicalTeX(radicande)
-        elif simplifie==-coeff:
-            rac_delta1="+"+radicalTeX(radicande)
-            rac_delta2="-"+radicalTeX(radicande)
-        else:
-            rac_delta1=tTeX(-coeff/simplifie)+radicalTeX(radicande)
-            rac_delta2=tTeX(coeff/simplifie)+radicalTeX(radicande)
-        if simplifie==2*a:
-            x1=TeXz(-b/simplifie)+rac_delta1
-            x2=TeXz(-b/simplifie)+rac_delta2
-            #plus de barre de fraction donc
-            parenthesex1=parenthesex2=True
-        else:
-            x1="\\dfrac{"+TeXz(-b/simplifie)+rac_delta1+"}{"+TeX(2*a/simplifie)+"}"
-            x2="\\dfrac{"+TeXz(-b/simplifie)+rac_delta2+"}{"+TeX(2*a/simplifie)+"}"
-        if b==0:
-            parenthesex1=(coeff*a>0)
-            parenthesex2=(coeff*a<0)
-    if a<0:
-        strx1,strx2,x1,x2,parenthesex1,parenthesex2=strx2,strx1,x2,x1,parenthesex2,parenthesex1
-    return rac_delta,simplrac,strx1,x1,strx2,x2,parenthesex1,parenthesex2
 
 def tableau_de_signe(P,nomP,delta,P1,P2,x1,x2,detail=False):
     '''Étudie le signe d'un polynôme de degré2'''

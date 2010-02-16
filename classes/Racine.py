@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import sys
-sys.path[:0] = ['../outils']
+sys.path[:0] = ['../outils','outils']
 from Arithmetique import *
 from Affichage import decimaux
+from math import *
 
 def produitfacteurs(facteurs):
     """Affiche sous forme de produit les éléments d'une liste."""
@@ -112,3 +113,17 @@ class Racine:
             return (coeff, detail)
         else:
             return (Racine(radicande, coeff, self.indice), detail)
+def simplifie_racine(n):
+    ##La classe classes.Racine.py doit faire cela aussi bien
+    '''renvoie coeff,radicande où sqrt(n)=coeff*sqrt(radicande)'''
+    if n==0:
+        return 0,0
+    else:
+        ncar=carrerise(n)
+        if ncar==1:
+            return int(sqrt(n)),1
+        elif ncar==n:
+            return 1,ncar
+        else:
+            return int(sqrt(n/ncar)),ncar
+

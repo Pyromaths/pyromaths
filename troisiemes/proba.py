@@ -22,7 +22,7 @@
 
 import random
 from math import *
-from pyro_classes import Fractions
+from outils.Fractions import Fractions
 
 def proba(f0,f1):
     couleur=['bleue','rouge','jaune','verte','marron','orange']
