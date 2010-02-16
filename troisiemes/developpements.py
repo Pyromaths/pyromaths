@@ -23,7 +23,7 @@
 
 from .fractions import tex_frac, simplifie, tex_decomp_prod, decomp_prod, \
     produit, den_com0
-from outils.Arithmetique import ecrit_tex, valeur_alea, signe, pgcd
+from outils.Arithmetique import valeur_alea, signe, pgcd
 import random
 
 #
@@ -210,111 +210,95 @@ def tex_dev1(a, bplus=0, bpar=0, bpn=0):  # renvoi le developpement (a)²+2*a*b+
                 return texte
 
 
-def tex_developpe1(a, f0, f1):  # developpe l'expression a
-    ecrit_tex(f0, tex_dev0(a), tabs=2)
-    ecrit_tex(f1, tex_dev0(a), tabs=2)
-    ecrit_tex(f1, tex_dev1(a), tabs=2)
-    ecrit_tex(f1, tex_trinome(dev(a)), cadre=True, tabs=2)
+def tex_developpe1(a, exo, cor):  # developpe l'expression a
+    exo.append(u'  \\[ \\thenocalcul = ' + tex_dev0(a) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_dev0(a) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_dev1(a) + '\\] \n')
+    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_trinome(dev(a)) + '} \\] \n')
 
 
-def tex_developpe2(a, nega, b, negb, f1, f0=None, tabs=1):  # developpe l'expression a plus l'expression b.
+def tex_developpe2(a, nega, b, negb, cor, exo=None):  # developpe l'expression a plus l'expression b.
     if nega:
         if negb:
             if b[1][0] == 0 and b[1][1] == 1:
-                if f0:
-                    ecrit_tex(f0, '-' + tex_dev0(a) + '-(' + tex_dev0(b) +
-                              ')', tabs=2)
-                ecrit_tex(f1, '-' + tex_dev0(a) + '-(' + tex_dev0(b) +
-                          ')', tabs=tabs)
+                if exo:
+                    exo.append(u'  \\[ \\thenocalcul = ' + '-' + tex_dev0(a) + '-(' + tex_dev0(b) +
+                              ')' + '\\] \n')
+                cor.append(u'  \\[ \\thenocalcul = ' + '-' + tex_dev0(a) + '-(' + tex_dev0(b) +
+                          ')' + '\\] \n')
             elif a[1][0] == 0 and a[1][1] == 1:
-                if f0:
-                    ecrit_tex(f0, '-(' + tex_dev0(a) + ')-' + tex_dev0(b),
-                              tabs=2)
-                ecrit_tex(f1, '-(' + tex_dev0(a) + ')-' + tex_dev0(b),
-                          tabs=tabs)
+                if exo:
+                    exo.append(u'  \\[ \\thenocalcul = ' + '-(' + tex_dev0(a) + ')-' + tex_dev0(b) + '\\] \n')
+                cor.append(u'  \\[ \\thenocalcul = ' + '-(' + tex_dev0(a) + ')-' + tex_dev0(b) + '\\] \n')
             else:
-                if f0:
-                    ecrit_tex(f0, '-' + tex_dev0(a) + '-' + tex_dev0(b),
-                              tabs=2)
-                ecrit_tex(f1, '-' + tex_dev0(a) + '-' + tex_dev0(b),
-                          tabs=tabs)
-            ecrit_tex(f1, '-(' + tex_dev1(a) + ')-(' + tex_dev1(b) + ')',
-                      tabs=tabs)
-            ecrit_tex(f1, '-(' + tex_trinome(dev(a)) + ')-(' +
-                      tex_trinome(dev(b)) + ')', tabs=tabs)
-            ecrit_tex(f1, tex_trinome(coef_opposes(dev(a))) +
-                      tex_trinome(coef_opposes(dev(b)), bplus=1), tabs=
-                      tabs)
-            ecrit_tex(f1, tex_trinome(somme_polynomes(coef_opposes(dev(a)),
-                      coef_opposes(dev(b)))), cadre=True, tabs=tabs)
+                if exo:
+                    exo.append(u'  \\[ \\thenocalcul = ' + '-' + tex_dev0(a) + '-' + tex_dev0(b) + '\\] \n')
+                cor.append(u'  \\[ \\thenocalcul = ' + '-' + tex_dev0(a) + '-' + tex_dev0(b) + '\\] \n')
+            cor.append(u'  \\[ \\thenocalcul = ' + '-(' + tex_dev1(a) + ')-(' + tex_dev1(b) + ')' + '\\] \n')
+            cor.append(u'  \\[ \\thenocalcul = ' + '-(' + tex_trinome(dev(a)) + ')-(' +
+                      tex_trinome(dev(b)) + ')' + '\\] \n')
+            cor.append(u'  \\[ \\thenocalcul = ' + tex_trinome(coef_opposes(dev(a))) +
+                      tex_trinome(coef_opposes(dev(b)), bplus=1) + '\\] \n')
+            cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_trinome(somme_polynomes(coef_opposes(dev(a)),
+                      coef_opposes(dev(b)))) + '} \\] \n')
         else:
             if a[1][0] == 0 and a[1][1] == 1:
-                if f0:
-                    ecrit_tex(f0, '-(' + tex_dev0(a) + ')+' + tex_dev0(b),
-                              tabs=2)
-                ecrit_tex(f1, '-(' + tex_dev0(a) + ')+' + tex_dev0(b),
-                          tabs=tabs)
-                ecrit_tex(f1, '-(' + tex_dev1(a) + ')+' + tex_dev1(b,
-                          bpn=1), tabs=tabs)
-                ecrit_tex(f1, '-(' + tex_trinome(dev(a)) + ')+' +
-                          tex_trinome(dev(b)), tabs=tabs)
+                if exo:
+                    exo.append(u'  \\[ \\thenocalcul = ' + '-(' + tex_dev0(a) + ')+' + tex_dev0(b) + '\\] \n')
+                cor.append(u'  \\[ \\thenocalcul = ' + '-(' + tex_dev0(a) + ')+' + tex_dev0(b) + '\\] \n')
+                cor.append(u'  \\[ \\thenocalcul = ' + '-(' + tex_dev1(a) + ')+' + tex_dev1(b,
+                          bpn=1) + '\\] \n')
+                cor.append(u'  \\[ \\thenocalcul = ' + '-(' + tex_trinome(dev(a)) + ')+' +
+                          tex_trinome(dev(b)) + '\\] \n')
             elif b[1][0] == 0 and b[1][1] == 1:
-                if f0:
-                    ecrit_tex(f0, '-' + tex_dev0(a) + tex_dev0(b, bplus=
-                              1), tabs=2)
-                ecrit_tex(f1, '-' + tex_dev0(a) + tex_dev0(b, bplus=1),
-                          tabs=tabs)
-                ecrit_tex(f1, '-(' + tex_dev1(a) + ')' + tex_dev1(b,
-                          bplus=1), tabs=tabs)
-                ecrit_tex(f1, '-(' + tex_trinome(dev(a)) + ')' +
-                          tex_trinome(dev(b), bplus=1), tabs=tabs)
+                if exo:
+                    exo.append(u'  \\[ \\thenocalcul = ' + '-' + tex_dev0(a) + tex_dev0(b, bplus=
+                              1) + '\\] \n')
+                cor.append(u'  \\[ \\thenocalcul = ' + '-' + tex_dev0(a) + tex_dev0(b, bplus=1) + '\\] \n')
+                cor.append(u'  \\[ \\thenocalcul = ' + '-(' + tex_dev1(a) + ')' + tex_dev1(b,
+                          bplus=1) + '\\] \n')
+                cor.append(u'  \\[ \\thenocalcul = ' + '-(' + tex_trinome(dev(a)) + ')' +
+                          tex_trinome(dev(b), bplus=1) + '\\] \n')
             else:
-                if f0:
-                    ecrit_tex(f0, '-' + tex_dev0(a) + '+' + tex_dev0(b),
-                              tabs=2)
-                ecrit_tex(f1, '-' + tex_dev0(a) + '+' + tex_dev0(b),
-                          tabs=tabs)
-                ecrit_tex(f1, '-(' + tex_dev1(a) + ')+' + tex_dev1(b,
-                          bpn=1), tabs=tabs)
-                ecrit_tex(f1, '-(' + tex_trinome(dev(a)) + ')' +
-                          tex_trinome(dev(b), bplus=1), tabs=tabs)
-            ecrit_tex(f1, tex_trinome(coef_opposes(dev(a))) +
-                      tex_trinome(dev(b), bplus=1), tabs=tabs)
-            ecrit_tex(f1, tex_trinome(somme_polynomes(coef_opposes(dev(a)),
-                      dev(b))), cadre=True, tabs=tabs)
+                if exo:
+                    exo.append(u'  \\[ \\thenocalcul = ' + '-' + tex_dev0(a) + '+' + tex_dev0(b) + '\\] \n')
+                cor.append(u'  \\[ \\thenocalcul = ' + '-' + tex_dev0(a) + '+' + tex_dev0(b) + '\\] \n')
+                cor.append(u'  \\[ \\thenocalcul = ' + '-(' + tex_dev1(a) + ')+' + tex_dev1(b,
+                          bpn=1) + '\\] \n')
+                cor.append(u'  \\[ \\thenocalcul = ' + '-(' + tex_trinome(dev(a)) + ')' +
+                          tex_trinome(dev(b), bplus=1) + '\\] \n')
+            cor.append(u'  \\[ \\thenocalcul = ' + tex_trinome(coef_opposes(dev(a))) +
+                      tex_trinome(dev(b), bplus=1) + '\\] \n')
+            cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_trinome(somme_polynomes(coef_opposes(dev(a)),
+                      dev(b))) + '} \\] \n')
     elif negb:
         if b[1][0] == 0 and b[1][1] == 1:
-            if f0:
-                ecrit_tex(f0, tex_dev0(a) + '-(' + tex_dev0(b) + ')',
-                          tabs=2)
-            ecrit_tex(f1, tex_dev0(a) + '-(' + tex_dev0(b) + ')', tabs=
-                      tabs)
+            if exo:
+                exo.append(u'  \\[ \\thenocalcul = ' + tex_dev0(a) + '-(' + tex_dev0(b) + ')' + '\\] \n')
+            cor.append(u'  \\[ \\thenocalcul = ' + tex_dev0(a) + '-(' + tex_dev0(b) + ')' + '\\] \n')
         else:
-            if f0:
-                ecrit_tex(f0, tex_dev0(a) + '-' + tex_dev0(b), tabs=2)
-            ecrit_tex(f1, tex_dev0(a) + '-' + tex_dev0(b), tabs=tabs)
-        ecrit_tex(f1, tex_dev1(a) + '-(' + tex_dev1(b) + ')', tabs=tabs)
-        ecrit_tex(f1, tex_trinome(dev(a)) + '-(' + tex_trinome(dev(b)) +
-                  ')', tabs=tabs)
-        ecrit_tex(f1, tex_trinome(dev(a)) + tex_trinome(coef_opposes(dev(b)),
-                  bplus=1), tabs=tabs)
-        ecrit_tex(f1, tex_trinome(somme_polynomes(dev(a), coef_opposes(dev(b)))),
-                  cadre=True, tabs=tabs)
+            if exo:
+                exo.append(u'  \\[ \\thenocalcul = ' + tex_dev0(a) + '-' + tex_dev0(b) + '\\] \n')
+            cor.append(u'  \\[ \\thenocalcul = ' + tex_dev0(a) + '-' + tex_dev0(b) + '\\] \n')
+        cor.append(u'  \\[ \\thenocalcul = ' + tex_dev1(a) + '-(' + tex_dev1(b) + ')' + '\\] \n')
+        cor.append(u'  \\[ \\thenocalcul = ' + tex_trinome(dev(a)) + '-(' + tex_trinome(dev(b)) +
+                  ')' + '\\] \n')
+        cor.append(u'  \\[ \\thenocalcul = ' + tex_trinome(dev(a)) + tex_trinome(coef_opposes(dev(b)),
+                  bplus=1) + '\\] \n')
+        cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_trinome(somme_polynomes(dev(a), coef_opposes(dev(b)))) + '} \\] \n')
     else:
         if b[1][0] == 0 and b[1][1] == 1:
-            if f0:
-                ecrit_tex(f0, tex_dev0(a) + tex_dev0(b, bplus=1), tabs=2)
-            ecrit_tex(f1, tex_dev0(a) + tex_dev0(b, bplus=1), tabs=tabs)
-            ecrit_tex(f1, tex_dev1(a) + tex_dev1(b, bplus=1), tabs=tabs)
+            if exo:
+                exo.append(u'  \\[ \\thenocalcul = ' + tex_dev0(a) + tex_dev0(b, bplus=1) + '\\] \n')
+            cor.append(u'  \\[ \\thenocalcul = ' + tex_dev0(a) + tex_dev0(b, bplus=1) + '\\] \n')
+            cor.append(u'  \\[ \\thenocalcul = ' + tex_dev1(a) + tex_dev1(b, bplus=1) + '\\] \n')
         else:
-            if f0:
-                ecrit_tex(f0, tex_dev0(a) + '+' + tex_dev0(b), tabs=2)
-            ecrit_tex(f1, tex_dev0(a) + '+' + tex_dev0(b), tabs=tabs)
-            ecrit_tex(f1, tex_dev1(a) + '+' + tex_dev1(b), tabs=tabs)
-        ecrit_tex(f1, tex_trinome(dev(a)) + tex_trinome(dev(b), bplus=1),
-                  tabs=tabs)
-        ecrit_tex(f1, tex_trinome(somme_polynomes(dev(a), dev(b))),
-                  cadre=True, tabs=tabs)
+            if exo:
+                exo.append(u'  \\[ \\thenocalcul = ' + tex_dev0(a) + '+' + tex_dev0(b) + '\\] \n')
+            cor.append(u'  \\[ \\thenocalcul = ' + tex_dev0(a) + '+' + tex_dev0(b) + '\\] \n')
+            cor.append(u'  \\[ \\thenocalcul = ' + tex_dev1(a) + '+' + tex_dev1(b) + '\\] \n')
+        cor.append(u'  \\[ \\thenocalcul = ' + tex_trinome(dev(a)) + tex_trinome(dev(b), bplus=1) + '\\] \n')
+        cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_trinome(somme_polynomes(dev(a), dev(b))) + '} \\] \n')
 
 
 def tex_trinome(a, bplus=0, bpar=0):  # renvoi le trinome ax²+bx+c
@@ -507,32 +491,30 @@ def tex_a2moinsb2_3(a):  # renvoie (4+2x+3)(4-2x-3)
         return ''
 
 
-def tex_facteur_commun(valeurs, f1, f0=None):  # ecrit toutes les etapes de la factorisation
+def tex_facteur_commun(valeurs, cor, exo=None):  # ecrit toutes les etapes de la factorisation
     (a, b, nega, negb) = valeurs
     f = facteur_commun(a, b)
-    if f0:
-        ecrit_tex(f0, tex_facteur_commun0(valeurs), tabs=2)
-    ecrit_tex(f1, tex_facteur_commun0(valeurs), tabs=2)
-    ecrit_tex(f1, tex_facteur_commun1(f, nega, negb), tabs=2)
+    if exo:
+        exo.append(u'  \\[ \\thenocalcul = ' + tex_facteur_commun0(valeurs) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_facteur_commun0(valeurs) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_facteur_commun1(f, nega, negb) + '\\] \n')
     f2 = facteur_commun2(f, nega, negb)
     if nega and f2[1][0] != 0 and f2[1][1] != 0 or negb and f2[2][0] != \
         0 and f2[2][0] != 0:
-        ecrit_tex(f1, tex_facteur_commun2(f2), tabs=2)
-    ecrit_tex(f1, tex_dev0((f2[0], somme_polynomes(f2[1], f2[2]))),
-              cadre=True, tabs=2)
+        cor.append(u'  \\[ \\thenocalcul = ' + tex_facteur_commun2(f2) + '\\] \n')
+    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_dev0((f2[0], somme_polynomes(f2[1], f2[2]))) + '} \\] \n')
 
 
-def tex_a2moinsb2(valeurs, f1, f0):  # ecrit toutes les etapes de la factorisation
-    if f0:
-        ecrit_tex(f0, tex_a2moinsb2_0(valeurs), tabs=2)
-    ecrit_tex(f1, tex_a2moinsb2_0(valeurs), tabs=2)
-    ecrit_tex(f1, '%s^2-%s^2' % (tex_binome(valeurs[0], bpar=1),
-              tex_binome(valeurs[1], bpar=1)), tabs=2)
-    ecrit_tex(f1, tex_a2moinsb2_2(valeurs), tabs=2)
-    ecrit_tex(f1, tex_a2moinsb2_3(valeurs), tabs=2)
-    ecrit_tex(f1, tex_dev0((somme_polynomes(valeurs[0], valeurs[1]),
-              somme_polynomes(valeurs[0], coef_opposes(valeurs[1])))),
-              cadre=True, tabs=2)
+def tex_a2moinsb2(valeurs, cor, exo):  # ecrit toutes les etapes de la factorisation
+    if exo:
+        exo.append(u'  \\[ \\thenocalcul = ' + tex_a2moinsb2_0(valeurs) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_a2moinsb2_0(valeurs) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + '%s^2-%s^2' % (tex_binome(valeurs[0], bpar=1),
+              tex_binome(valeurs[1], bpar=1)) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_a2moinsb2_2(valeurs) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_a2moinsb2_3(valeurs) + '\\] \n')
+    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_dev0((somme_polynomes(valeurs[0], valeurs[1]),
+              somme_polynomes(valeurs[0], coef_opposes(valeurs[1])))) + '} \\] \n')
 
 
 def valeurs_facteur_commun(pyromax):  # renvoie les valeurs pour obtenir un facteur commun.
@@ -617,10 +599,10 @@ def valeurs_a2moinsb2(pyromax):  # renvoie les valeurs pour obtenir a²-(bx+c)²
         return (b, a)
 
 
-def factorisation0(f1, f0=None, valeurs=None):  # factorise (ax+b)(cx+d)+(ax+b)(ex+f)
+def factorisation0(cor, exo=None, valeurs=None):  # factorise (ax+b)(cx+d)+(ax+b)(ex+f)
     if not valeurs:
         valeurs = valeurs_facteur_commun(10)
-    tex_facteur_commun(valeurs, f1, f0)
+    tex_facteur_commun(valeurs, cor, exo)
 
 
 def tex_factorisation1(valeurs):  # renvoie la premiere etape de la factorisation 1
@@ -640,7 +622,7 @@ def tex_factorisation1(valeurs):  # renvoie la premiere etape de la factorisatio
                              tex_trinome(dev(valeurs[1]), bpar=1))
 
 
-def factorisation1(f1, f0=None, valeurs=None):  # factorise (ax+b)(cx+d)+(ax+b)
+def factorisation1(cor, exo=None, valeurs=None):  # factorise (ax+b)(cx+d)+(ax+b)
     if not valeurs:
         valeurs = valeurs_facteur1(10)
     if valeurs[2] == 0:
@@ -654,35 +636,34 @@ def factorisation1(f1, f0=None, valeurs=None):  # factorise (ax+b)(cx+d)+(ax+b)
     if valeurs[0][1][0] == 0 and valeurs[0][1][1] == 1:  # le 1 est dans la premiere partie
         texte = '%s%s%s%s' % (siga, tex_trinome(dev(valeurs[0]), bpar=1),
                               sigb, tex_dev0(valeurs[1]))
-        ecrit_tex(f1, texte, tabs=2)
-        if f0:
-            ecrit_tex(f0, texte, tabs=2)
+        cor.append(u'  \\[ \\thenocalcul = ' + texte + '\\] \n')
+        if exo:
+            exo.append(u'  \\[ \\thenocalcul = ' + texte + '\\] \n')
         texte = '%s%s\\times1%s%s' % (siga, tex_trinome(dev(valeurs[0]),
                 bpar=1), sigb, tex_dev0(valeurs[1]))
-        ecrit_tex(f1, texte, tabs=2)
+        cor.append(u'  \\[ \\thenocalcul = ' + texte + '\\] \n')
     else:
         texte = '%s%s%s%s' % (siga, tex_dev0(valeurs[0]), sigb,
                               tex_trinome(dev(valeurs[1]), bpar=1))
-        ecrit_tex(f1, texte, tabs=2)
-        if f0:
-            ecrit_tex(f0, texte, tabs=2)
+        cor.append(u'  \\[ \\thenocalcul = ' + texte + '\\] \n')
+        if exo:
+            exo.append(u'  \\[ \\thenocalcul = ' + texte + '\\] \n')
         texte = '%s%s%s%s\\times1' % (siga, tex_dev0(valeurs[0]), sigb,
                 tex_trinome(dev(valeurs[1]), bpar=1))
-        ecrit_tex(f1, texte, tabs=2)
+        cor.append(u'  \\[ \\thenocalcul = ' + texte + '\\] \n')
     f = facteur_commun(valeurs[0], valeurs[1])
-    ecrit_tex(f1, tex_facteur_commun1(f, valeurs[2], valeurs[3]), tabs=2)
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_facteur_commun1(f, valeurs[2], valeurs[3]) + '\\] \n')
     f2 = facteur_commun2(f, valeurs[2], valeurs[3])
     if valeurs[2] and f2[1][0] != 0 and f2[1][1] != 0 or valeurs[3] and \
         f2[2][0] != 0 and f2[2][0] != 0:
-        ecrit_tex(f1, tex_facteur_commun2(f2), tabs=2)
-    ecrit_tex(f1, tex_dev0((f2[0], somme_polynomes(f2[1], f2[2]))),
-              cadre=True, tabs=2)
+        cor.append(u'  \\[ \\thenocalcul = ' + tex_facteur_commun2(f2) + '\\] \n')
+    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_dev0((f2[0], somme_polynomes(f2[1], f2[2]))) + '} \\] \n')
 
 
-def factorisation2(f1, f0=None, valeurs=None):  # factorise (ax+b)(cx+d)+(ax+b)²
+def factorisation2(cor, exo=None, valeurs=None):  # factorise (ax+b)(cx+d)+(ax+b)²
     if not valeurs:
         valeurs = valeurs_facteurcarre(10)
-    tex_facteur_commun(valeurs, f1, f0)
+    tex_facteur_commun(valeurs, cor, exo)
 
 
 def tex_factorisation3(valeurs):  # renvoie les deux premieres etapes de la factorisation 3
@@ -704,24 +685,24 @@ def tex_factorisation3(valeurs):  # renvoie les deux premieres etapes de la fact
                 tex_dev0(valeurs[0]), negb, tex_dev1(valeurs[1])))
 
 
-def factorisation3(f1, f0=None, valeurs=None):  # factorise (ax+b)(cx+d)+(ax)²-b²
+def factorisation3(cor, exo=None, valeurs=None):  # factorise (ax+b)(cx+d)+(ax)²-b²
     if not valeurs:
         valeurs = valeurs_facteura2mb2(10)
     textes = tex_factorisation3(valeurs)
-    if f0:
-        ecrit_tex(f0, textes[0], tabs=2)
-    ecrit_tex(f1, textes[0], tabs=2)
-    ecrit_tex(f1, textes[1], tabs=2)
-    tex_facteur_commun(valeurs, f1)
+    if exo:
+        exo.append(u'  \\[ \\thenocalcul = ' + textes[0] + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + textes[0] + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + textes[1] + '\\] \n')
+    tex_facteur_commun(valeurs, cor)
 
 
-def factorisation4(f1, f0=None, valeurs=None):  #factorise 64-(x-5)²
+def factorisation4(cor, exo=None, valeurs=None):  #factorise 64-(x-5)²
     if not valeurs:
         valeurs = valeurs_a2moinsb2(10)
-    tex_a2moinsb2(valeurs, f1, f0)
+    tex_a2moinsb2(valeurs, cor, exo)
 
 
-def factorisation5(f1, f0=None, valeurs=None):  # factorise a²-b²
+def factorisation5(cor, exo=None, valeurs=None):  # factorise a²-b²
     if not valeurs:
         valeurs = valeurs_apbamb(10)
     if valeurs[0][0] == -valeurs[1][0]:
@@ -730,11 +711,11 @@ def factorisation5(f1, f0=None, valeurs=None):  # factorise a²-b²
     else:
         valeurs = ((abs(valeurs[0][0]), valeurs[0][1]), (abs(valeurs[1][0]),
                    valeurs[1][1]))
-    if f0:
-        ecrit_tex(f0, tex_trinome(dev(valeurs)), tabs=2)
-    ecrit_tex(f1, tex_trinome(dev(valeurs)), tabs=2)
-    ecrit_tex(f1, tex_dev1(valeurs), tabs=2)
-    ecrit_tex(f1, tex_dev0(valeurs), cadre=True, tabs=2)
+    if exo:
+        exo.append(u'  \\[ \\thenocalcul = ' + tex_trinome(dev(valeurs)) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_trinome(dev(valeurs)) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_dev1(valeurs) + '\\] \n')
+    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_dev0(valeurs) + '} \\] \n')
 
 
 def tex_factorisation6(valeurs):  # renvoie les deux premieres etapes de la factorisation 6
@@ -756,16 +737,16 @@ def tex_factorisation6(valeurs):  # renvoie les deux premieres etapes de la fact
                     bplus=1))
 
 
-def factorisation6(f1, f0=None, valeurs=None):  # factorise (ax+b)(cx+d)+2abx+a²x²+b²
+def factorisation6(cor, exo=None, valeurs=None):  # factorise (ax+b)(cx+d)+2abx+a²x²+b²
     if not valeurs:
         valeurs = valeurs_facteurcarre(10)
     textes = tex_factorisation6(valeurs)
-    if f0:
-        ecrit_tex(f0, textes[0], tabs=2)
-    ecrit_tex(f1, textes[0], tabs=2)
-    ecrit_tex(f1, textes[1], tabs=2)
+    if exo:
+        exo.append(u'  \\[ \\thenocalcul = ' + textes[0] + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + textes[0] + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + textes[1] + '\\] \n')
     tex_facteur_commun((valeurs[0], valeurs[1], valeurs[2], valeurs[3]),
-                       f1)
+                       cor)
 
 
 #
@@ -790,12 +771,12 @@ def valeur_quotient():  # renvoie un tuple contenant la valeur du quotient à ca
     return (a // pgcd(a, b), b // pgcd(a, b))
 
 
-def tex_initial(exo, a):  # renvoie l'écriture de l'expression A
-    if exo == 0 or exo == 2:
+def tex_initial(exos, a):  # renvoie l'écriture de l'expression A
+    if exos == 0 or exos == 2:
         return tex_facteur_commun0(a)
-    elif exo == 1:
+    elif exos == 1:
         return tex_factorisation1(a)
-    elif exo == 3:
+    elif exos == 3:
         return tex_factorisation3(a)[0]
     else:
         return tex_factorisation6(a)[0]
@@ -805,34 +786,34 @@ def fin_fact(a):  # renvoie un tuple contenant la version factorisee de a
     return facteur_commun3(facteur_commun(a[0], a[1]), a[2], a[3])
 
 
-def tex_equations(fact, f1):  # renvoie un tuple contenant les deux binomes egaux a 0
-    f1.write(u'    Nous savons que $A=%s$. Nous devons donc résoudre $%s=0$.\\par\n' %
+def tex_equations(fact, cor):  # renvoie un tuple contenant les deux binomes egaux a 0
+    cor.append(u'    Nous savons que $A=%s$. Nous devons donc résoudre $%s=0$.\\par\n' %
              (tex_dev0(fact), tex_dev0(fact)))
-    f1.write('    Un produit de facteurs est nul signifie qu\'un des facteurs est nul. Donc :\n')
-    f1.write('    \\[%s=0 \\qquad\\text{ou}\\qquad %s=0\\]\n' % (tex_binome(fact[0]),
+    cor.append('    Un produit de facteurs est nul signifie qu\'un des facteurs est nul. Donc :\n')
+    cor.append('    \\[%s=0 \\qquad\\text{ou}\\qquad %s=0\\]\n' % (tex_binome(fact[0]),
              tex_binome(fact[1])))
     eq = equations1(fact)
     if not isinstance(eq, tuple):
-        f1.write("  \t\\fbox{Cette équation n'admet aucune solution.}\n")
+        cor.append("  \t\\fbox{Cette équation n'admet aucune solution.}\n")
     elif not isinstance(eq[0], tuple):
-        f1.write('    \\[ %s=%s \\]\n' % (tex_coef(eq[1][0], 'x'), eq[1][1]))
+        cor.append('    \\[ %s=%s \\]\n' % (tex_coef(eq[1][0], 'x'), eq[1][1]))
         if eq[1][0] != 1:
-            f1.write('\\[ x=%s \\]\n' % tex_frac(equations2(eq)[1]))
-        f1.write(u'    \\fbox{La solution de cette équation est \\,$%s$\\,.}\n' %
+            cor.append('\\[ x=%s \\]\n' % tex_frac(equations2(eq)[1]))
+        cor.append(u'    \\fbox{La solution de cette équation est \\,$%s$\\,.}\n' %
                  tex_frac(equations3(eq)[1]))
     elif not isinstance(eq[1], tuple):
-        f1.write('    \\[ %s=%s \\]\n' % (tex_coef(eq[0][0], 'x'), eq[0][1]))
+        cor.append('    \\[ %s=%s \\]\n' % (tex_coef(eq[0][0], 'x'), eq[0][1]))
         if eq[0][0] != 1:
-            f1.write('    \\[ x=%s \\]\n' % tex_frac(equations2(eq)[0]))
-        f1.write(u'    \\fbox{La solution de cette équation est \\,$%s$\\,.}\n' %
+            cor.append('    \\[ x=%s \\]\n' % tex_frac(equations2(eq)[0]))
+        cor.append(u'    \\fbox{La solution de cette équation est \\,$%s$\\,.}\n' %
                  tex_frac(equations3(eq)[0]))
     else:
-        f1.write('    \\[%s=%s \\qquad\\text{ou}\\qquad %s=%s\\]\n' % (tex_coef(eq[0][0],
+        cor.append('    \\[%s=%s \\qquad\\text{ou}\\qquad %s=%s\\]\n' % (tex_coef(eq[0][0],
                  'x'), eq[0][1], tex_coef(eq[1][0], 'x'), eq[1][1]))
         if eq[0][0] != 1 or eq[1][0] != 1:
-            f1.write('    \\[x=%s \\qquad\\text{ou}\\qquad x=%s\\]\n' %
+            cor.append('    \\[x=%s \\qquad\\text{ou}\\qquad x=%s\\]\n' %
                      (tex_frac(equations2(eq)[0]), tex_frac(equations2(eq)[1])))
-        f1.write(u'    \\fbox{Les solutions de cette équation sont \\,$%s\\,\\text{ et }\\,%s$\\,.}\n' %
+        cor.append(u'    \\fbox{Les solutions de cette équation sont \\,$%s\\,\\text{ et }\\,%s$\\,.}\n' %
                  (tex_frac(equations3(eq)[0]), tex_frac(equations3(eq)[1])))
 
 
@@ -885,12 +866,12 @@ def equations3(a):  # renvoie les solutions éventuellement simplifiée
             return a
 
 
-def developpements(expr, exo, f1):  # effectue les developpements
-    if exo != 3 and exo != 6:
-        tex_developpe2(expr[0], expr[2], expr[1], expr[3], f1, tabs=2)
-    elif exo == 6 and expr[0][0] == expr[0][1] or exo == 3 and expr[0][0][0] == \
+def developpements(expr, exos, cor):  # effectue les developpements
+    if exos != 3 and exos != 6:
+        tex_developpe2(expr[0], expr[2], expr[1], expr[3], cor)
+    elif exos == 6 and expr[0][0] == expr[0][1] or exos == 3 and expr[0][0][0] == \
         expr[0][1][0] and expr[0][0][1] == -expr[0][1][1]:
-        ecrit_tex(f1, tex_initial(exo, expr), tabs=2)
+        cor.append(u'  \\[ \\thenocalcul = ' + tex_initial(exos, expr) + '\\] \n')
         if expr[2]:
             siga = '-'
         else:
@@ -899,9 +880,9 @@ def developpements(expr, exo, f1):  # effectue les developpements
             sigb = '-'
         else:
             sigb = ''
-        ecrit_tex(f1, '%s%s%s%s' % (siga, tex_trinome(dev(expr[0])),
+        cor.append(u'  \\[ \\thenocalcul = ' + '%s%s%s%s' % (siga, tex_trinome(dev(expr[0])),
                   sigb, tex_dev1(expr[1], bpar=expr[3], bplus=expr[3] -
-                  1)), tabs=2)
+                  1)) + '\\] \n')
         if expr[2]:
             a = coef_opposes(dev(expr[0]))
         else:
@@ -910,11 +891,10 @@ def developpements(expr, exo, f1):  # effectue les developpements
             b = coef_opposes(dev(expr[1]))
         else:
             b = dev(expr[1])
-        ecrit_tex(f1, tex_trinome(a) + tex_trinome(b, bplus=1), tabs=2)
-        ecrit_tex(f1, tex_trinome(somme_polynomes(a, b)), cadre=True,
-                  tabs=2)
+        cor.append(u'  \\[ \\thenocalcul = ' + tex_trinome(a) + tex_trinome(b, bplus=1) + '\\] \n')
+        cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_trinome(somme_polynomes(a, b)) + '} \\] \n')
     else:
-        ecrit_tex(f1, tex_initial(exo, expr), tabs=2)
+        cor.append(u'  \\[ \\thenocalcul = ' + tex_initial(exos, expr) + '\\] \n')
         if expr[2]:
             siga = '-'
         else:
@@ -923,9 +903,9 @@ def developpements(expr, exo, f1):  # effectue les developpements
             sigb = '-'
         else:
             sigb = ''
-        ecrit_tex(f1, '%s%s%s%s' % (siga, tex_dev1(expr[0], bpar=expr[2],
+        cor.append(u'  \\[ \\thenocalcul = ' + '%s%s%s%s' % (siga, tex_dev1(expr[0], bpar=expr[2],
                   bplus=expr[2] - 1), sigb, tex_trinome(dev(expr[1]),
-                  bpar=expr[3], bplus=expr[3] - 1)), tabs=2)
+                  bpar=expr[3], bplus=expr[3] - 1)) + '\\] \n')
         if expr[2]:
             a = coef_opposes(dev(expr[0]))
         else:
@@ -934,9 +914,8 @@ def developpements(expr, exo, f1):  # effectue les developpements
             b = coef_opposes(dev(expr[1]))
         else:
             b = dev(expr[1])
-        ecrit_tex(f1, tex_trinome(a) + tex_trinome(b, bplus=1), tabs=2)
-        ecrit_tex(f1, tex_trinome(somme_polynomes(a, b)), cadre=True,
-                  tabs=2)
+        cor.append(u'  \\[ \\thenocalcul = ' + tex_trinome(a) + tex_trinome(b, bplus=1) + '\\] \n')
+        cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_trinome(somme_polynomes(a, b)) + '} \\] \n')
 
 
 def version_developpee(expr):  # renvoie la version developpe de A
@@ -951,18 +930,23 @@ def version_developpee(expr):  # renvoie la version developpe de A
     return somme_polynomes(a, b)
 
 
-def tex_fractions(expr, nb, f1):  # repond a la question sur la valeur de x
+def tex_fractions(expr, nb, cor):  # repond a la question sur la valeur de x
     a = version_developpee(expr)
-    f1.write('    Nous savons que $A=%s$\\,. Donc pour $x=%s$\\, : \n' %
+    cor.append('    Nous savons que $A=%s$\\,. Donc pour $x=%s$\\, : \n' %
              (tex_trinome(a), tex_frac(nb)))
-    ecrit_tex(f1, tex_valeurx0(a, nb), tabs=2)
-    ecrit_tex(f1, tex_valeurx1(a, nb), cadre=nb == (0, 1), tabs=2)
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_valeurx0(a, nb) + '\\] \n')
+    if nb == (0, 1):
+      cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_valeurx1(a, nb) + '} \\] \n')
+    else:
+      cor.append(u'  \\[ \\thenocalcul = ' + tex_valeurx1(a, nb) + '\\] \n')
     b = decomp_prod((a[0], 1), (nb[0] ** 2, nb[1] ** 2))[0:2]
     c = decomp_prod((a[1], 1), (nb[0], nb[1]))[0:2]
     a = (produit(b[0], b[1]), produit(c[0], c[1]), (a[2], 1))
-    ecrit_tex(f1, tex_valeurx2(a, nb), cadre=a[0][1] == a[1][1] == 1,
-              tabs=2)
-    ecrit_tex(f1, tex_valeurx3(a, nb), 1, tabs=2)
+    if a[0][1] == a[1][1] == 1:
+      cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_valeurx2(a, nb) + '} \\] \n')
+    else:
+      cor.append(u'  \\[ \\thenocalcul = ' + tex_valeurx2(a, nb) + '\\] \n')
+    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_valeurx3(a, nb) + '} \\] \n')
 
 
 def tex_valeurx0(a, nb):
@@ -1038,3 +1022,100 @@ def tex_valeurx3(a, nb):
             return tex_frac(b) + '=' + tex_frac(simplifie(b))
         else:
             return tex_frac(b)
+
+def tex_devfacteq():
+    exos = [0, 1, 2, 3, 6][random.randrange(5)]
+    expr = choix_exo(exos)
+    valeurx = valeur_quotient()
+    fact = fin_fact(expr)
+    exo = ['''\\exercice''']
+    exo.append('  On donne $A=%s$\\,.\n' % tex_initial(exos,
+             expr))
+    exo.append('  \\begin{enumerate}\n')
+    exo.append(u'  \\item Développer et réduire $A$\\,.\n')
+    exo.append('  \\item Factoriser $A$\\,.\n')
+    exo.append('  \\item Calculer $A$ pour $x=%s$\\,.\n' % \
+             tex_frac(valeurx))
+    exo.append(u"  \\item Résoudre l'équation $A=0$\\,.\n")  # % tex_dev0(fact))
+    exo.append('  \\end{enumerate}\n')
+    cor = ['''\\exercice*''']
+    cor.append('  On donne $A=%s$\\,.\n' % tex_initial(exos,
+             expr))
+    cor.append('  \\begin{enumerate}\n')
+    cor.append(u'  \\item Développer et réduire $A$\\,.\n')
+    developpements(expr, exos, cor)
+    cor.append('  \\item Factoriser $A$\\,.\n')
+    exec('factorisation' + str(exos) + '(cor,valeurs=expr)')
+    cor.append('  \\item Calculer $A$ pour $x=%s$\\,.\\par\n' % \
+             tex_frac(valeurx))
+    tex_fractions(expr, valeurx, cor)
+    cor.append(u"  \\item Résoudre l'équation $A=0$\\,.\\par\n")  # % tex_dev0(fact))
+    tex_equations(fact, cor)
+    cor.append('  \\end{enumerate}\n')
+    return (exo, cor)
+
+def tex_developpements():
+    nb_exos = 4
+    liste_exos = (valeurs_apb2,
+                  valeurs_amb2,
+                  valeurs_apbamb,
+                  valeurs_distr)
+    exos = []
+    ordre_exos = [i for i in range(nb_exos)]
+    for i in range(nb_exos):
+        a = random.randrange(nb_exos - i)
+        exos.append(liste_exos[ordre_exos.pop(a)](10))
+    exo = ['''\\exercice''']
+    exo.append(u'  Développer et réduire les expressions suivantes.\n')
+    exo.append('  \\begin{multicols}{2}\\noindent\n')
+    cor = ['''\\exercice*''']
+    cor.append(u'  Développer et réduire les expressions suivantes.\n')
+    cor.append('  \\begin{multicols}{2}\\noindent\n')
+    tex_developpe1(exos[0], exo, cor)
+    exo.append('    \\stepcounter{nocalcul}%\n')
+    cor.append('    \\stepcounter{nocalcul}%\n')
+    tex_developpe1(exos[1], exo, cor)
+    exo.append('    \\stepcounter{nocalcul}%\n')
+    cor.append('    \\columnbreak\\stepcounter{nocalcul}%\n')
+    tex_developpe1(exos[2], exo, cor)
+    exo.append('    \\stepcounter{nocalcul}%\n')
+    cor.append('    \\stepcounter{nocalcul}%\n')
+    tex_developpe1(exos[3], exo, cor)
+    cor.append('  \\end{multicols}%\n')
+    exos = []
+    sig = [random.randrange(2) for i in range(4)]
+    ordre_exos = [i for i in range(nb_exos)]
+    for i in range(nb_exos):
+        a = random.randrange(nb_exos - i)
+        exos.append(liste_exos[ordre_exos.pop(a)](10))
+    exo.append('    \\stepcounter{nocalcul}%\n')
+    cor.append('  \\stepcounter{nocalcul}%\n')
+    tex_developpe2(exos[0], sig[0], exos[1], sig[1], cor, exo)
+    exo.append('    \\stepcounter{nocalcul}%\n')
+    cor.append('  \\stepcounter{nocalcul}%\n')
+    tex_developpe2(exos[2], sig[2], exos[3], sig[3], cor, exo)
+    exo.append('  \\end{multicols}\n')
+    return (exo, cor)
+
+
+def tex_factorisations():
+    (nb_exos, ordre_exos, ordre) = (6, [], [])
+    for i in range(nb_exos):
+        ordre.append(str(i))
+    for i in range(nb_exos):
+        ordre_exos.append(ordre.pop(random.randrange(nb_exos - i)))
+    del ordre
+    exo = ['''\\exercice''']
+    exo.append('  Factoriser les expressions suivantes.\n')
+    exo.append('  \\begin{multicols}{2}\\noindent\n')
+    cor = ['''\\exercice*''']
+    cor.append('  Factoriser les expressions suivantes.\n')
+    cor.append('  \\begin{multicols}{2}\\noindent\n')
+    for i in range(nb_exos):
+        exec('factorisation' + str(ordre_exos[i]) + \
+            '(cor,exo)')
+        exo.append('    \\stepcounter{nocalcul}%\n')
+        cor.append('    \\stepcounter{nocalcul}%\n')
+    exo.append('  \\end{multicols}\n')
+    cor.append('  \\end{multicols}\n')
+    return (exo, cor)

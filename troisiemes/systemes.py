@@ -206,7 +206,7 @@ def tex_verification(v):  # renvoie la vérification de lasolution du système d
         tv
 
 
-def systemes(f0, f1, v):
+def systemes(exo, cor, v):
     a = outils.Arithmetique.ppcm(v[0][0], v[1][0])
     b = outils.Arithmetique.ppcm(v[0][1], v[1][1])
     (a0, a1, b0, b1) = (a // v[0][0], -a // v[1][0], b // v[0][1], -b // v[1][1])
@@ -216,27 +216,33 @@ def systemes(f0, f1, v):
         (b0, b1) = (-b0, -b1)
     if min(abs(a0), abs(a1)) > min(abs(b0), abs(b1)):
         (a0, a1) = (b0, b1)
-    f0.write('  $%s$\n' % tex_systeme(v))
-    f1.write('  $%s$\n' % tex_systeme(v, (a0, a1)))
+    exo.append('  $%s$\n' % tex_systeme(v))
+    cor.append('  $%s$\n' % tex_systeme(v, (a0, a1)))
 
     #outils.Arithmetique.ecrit_tex(f1,tex_systeme(v, (a0, a1)), thenocalcul='',tabs=1)
 
     c1 = combinaison1(v, a0, a1)
-    f1.write('''  \\vspace{2ex}
+    cor.append('''  \\vspace{2ex}
   \\begin{multicols}{2}\\noindent
 ''')
-    outils.Arithmetique.ecrit_tex(f1, tex_systeme(c1) +
-                     '\\quad\\text{\\footnotesize On ajoute les deux lignes}',
-                     thenocalcul='', tabs=2)
+    cor.append(u'  \\[ ' + tex_systeme(c1) +
+                     '\\quad\\text{\\footnotesize On ajoute les deux lignes}' + '\\] \n')
     c2 = combinaison2(c1)
-    outils.Arithmetique.ecrit_tex(f1, tex_comb2(c1, c2), thenocalcul='', tabs=2)
-    outils.Arithmetique.ecrit_tex(f1, tex_comb3(c2), thenocalcul='', tabs=2)
-    outils.Arithmetique.ecrit_tex(f1, tex_comb4(c2), thenocalcul='', tabs=2, cadre=1)
-    f1.write('  \\columnbreak\\par\n')
-    f1.write(tex_equation(v, c2))
-    outils.Arithmetique.ecrit_tex(f1, tex_eq2(v, c2), thenocalcul='', tabs=2)
-    outils.Arithmetique.ecrit_tex(f1, tex_eq3(v, c2), thenocalcul='', tabs=2, cadre=1)
-    f1.write('  \\end{multicols}\n')
-    f1.write(u"  \\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par\n" %
+    cor.append(u'  \\[ ' + tex_comb2(c1, c2) + '\\] \n')
+    cor.append(u'  \\[ ' + tex_comb3(c2) + '\\] \n')
+    cor.append(u'  \\[ \\boxed{' + tex_comb4(c2) + '} \\] \n')
+    cor.append('  \\columnbreak\\par\n')
+    cor.append(tex_equation(v, c2))
+    cor.append(u'  \\[ ' + tex_eq2(v, c2) + '\\] \n')
+    cor.append(u'  \\[ \\boxed{' + tex_eq3(v, c2) + '} \\] \n')
+    cor.append('  \\end{multicols}\n')
+    cor.append(u"  \\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par\n" %
              v[2])
-    f1.write(u'  {Vérification : $' + tex_verification(v) + '$}\n')
+    cor.append(u'  {Vérification : $' + tex_verification(v) + '$}\n')
+
+def tex_systemes( ):
+    valeurs = choix_valeurs(10)
+    exo = ['\\exercice\n', u"  Résoudre le système d'équations suivant :\n"]
+    cor = ['\\exercice*\n', u"  Résoudre le système d'équations suivant :\n"]
+    systemes(exo, cor, valeurs)
+    return (exo, cor)

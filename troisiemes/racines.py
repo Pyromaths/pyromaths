@@ -30,18 +30,18 @@ from .developpements import tex_coef
 carres = [2, 3, 5, 6, 7, 10]  #,11,13,15,17,19]
 
 
-def exoaRb0(f0, f1, v):
+def exoaRb0(exo, cor, v):
     a = (tex_coef(v[0], '\\sqrt{%s}' % (v[6] * v[3] ** 2)), tex_coef(v[1],
          '\\sqrt{%s}' % (v[6] * v[4] ** 2), bplus=1), tex_coef(v[2],
          '\\sqrt{%s}' % (v[6] * v[5] ** 2), bplus=1))
-    outils.Arithmetique.ecrit_tex(f0, '%s%s%s' % a, tabs=3)
-    outils.Arithmetique.ecrit_tex(f1, '%s%s%s' % a, tabs=3)
+    exo.append(u'  \\[ \\thenocalcul = ' + '%s%s%s' % a + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + '%s%s%s' % a + '\\] \n')
     a = (tex_coef(v[0], '\\sqrt{%s}' % v[3] ** 2), v[6], tex_coef(v[1],
          '\\sqrt{%s}' % v[4] ** 2, bplus=1), v[6], tex_coef(v[2],
          '\\sqrt{%s}' % v[5] ** 2, bplus=1), v[6])
-    outils.Arithmetique.ecrit_tex(f1,
+    cor.append(u'  \\[ \\thenocalcul = ' + 
                      '%s\\times\\sqrt{%s}%s\\times\\sqrt{%s}%s\\times\\sqrt{%s}' %
-                     a, tabs=3)
+                     a + '\\] \n')
     a = (
         tex_coef(v[0], ''),
         v[3],
@@ -53,16 +53,16 @@ def exoaRb0(f0, f1, v):
         v[5],
         v[6],
         )
-    outils.Arithmetique.ecrit_tex(f1,
+    cor.append(u'  \\[ \\thenocalcul = ' + 
                      '%s\\times%s\\times\\sqrt{%s}%s\\times%s\\times\\sqrt{%s}%s\\times%s\\times\\sqrt{%s}' %
-                     a, tabs=3)
+                     a + '\\] \n')
     a = (tex_coef(v[0] * v[3], '\\sqrt{%s}' % v[6]), tex_coef(v[1] * v[4],
          '\\sqrt{%s}' % v[6], bplus=1), tex_coef(v[2] * v[5],
          '\\sqrt{%s}' % v[6], bplus=1))
-    outils.Arithmetique.ecrit_tex(f1, '%s%s%s' % a, tabs=3)
+    cor.append(u'  \\[ \\thenocalcul = ' + '%s%s%s' % a + '\\] \n')
     del a
-    outils.Arithmetique.ecrit_tex(f1, '%s' % tex_coef(v[0] * v[3] + v[1] * v[4] + v[2] *
-                     v[5], '\\sqrt{%s}' % v[6]), cadre=1, tabs=3)
+    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + '%s' % tex_coef(v[0] * v[3] + v[1] * v[4] + v[2] *
+                     v[5], '\\sqrt{%s}' % v[6]) + '} \\] \n')
 
 
 def valeurs_aRb0(pyromax):  # renvoie (coef0, coef1, coef2, carre0, carre1, carre2, b)
@@ -77,29 +77,29 @@ def valeurs_aRb0(pyromax):  # renvoie (coef0, coef1, coef2, carre0, carre1, carr
     return tuple(l)
 
 
-def exoaRb1(f0, f1, v):
+def exoaRb1(exo, cor, v):
     a = (v[3] * v[0] ** 2, v[3] * v[1] ** 2, v[3] * v[2] ** 2)
-    outils.Arithmetique.ecrit_tex(f0, '\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}' %
-                     a, tabs=3)
-    outils.Arithmetique.ecrit_tex(f1, '\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}' %
-                     a, tabs=3)
+    exo.append(u'  \\[ \\thenocalcul = ' + '\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}' %
+                     a + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + '\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}' %
+                     a + '\\] \n')
     a = (v[0] ** 2, v[3], v[1] ** 2, v[3], v[2] ** 2, v[3])
-    outils.Arithmetique.ecrit_tex(f1,
+    cor.append(u'  \\[ \\thenocalcul = ' + 
                      '\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}' %
-                     a, tabs=3)
+                     a + '\\] \n')
     a = (v[0], v[3], v[1], v[3], v[2], v[3])
-    outils.Arithmetique.ecrit_tex(f1,
+    cor.append(u'  \\[ \\thenocalcul = ' + 
                      '%s\\times\\sqrt{%s}\\times%s\\times\\sqrt{%s}\\times%s\\times\\sqrt{%s}' %
-                     a, tabs=3)
+                     a+ '\\] \n')
     a = ((v[0] * v[1]) * v[2], v[3], v[3])
-    outils.Arithmetique.ecrit_tex(f1,
+    cor.append(u'  \\[ \\thenocalcul = ' + 
                      '%s\\times\\left(\\sqrt{%s}\\right)^2\\times\\sqrt{%s}' %
-                     a, tabs=3)
+                     a + '\\] \n')
     a = ((v[0] * v[1]) * v[2], v[3], v[3])
-    outils.Arithmetique.ecrit_tex(f1, '%s\\times%s\\times\\sqrt{%s}' % a, tabs=3)
+    cor.append(u'  \\[ \\thenocalcul = ' + '%s\\times%s\\times\\sqrt{%s}' % a + '\\] \n')
     del a
-    outils.Arithmetique.ecrit_tex(f1, '%s' % tex_coef(((v[0] * v[1]) * v[2]) * v[3],
-                     '\\sqrt{%s}' % v[3]), cadre=1, tabs=3)
+    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + '%s' % tex_coef(((v[0] * v[1]) * v[2]) * v[3],
+                     '\\sqrt{%s}' % v[3]) + '} \\] \n')
 
 
 def valeurs_aRb1(pyromax):  # renvoie (coef0, coef1, coef2, carre0, carre1, carre2, b)
@@ -126,11 +126,11 @@ def valeurs_aPbRc(pyromax):  # renvoie (coef0, coef1, coef2, carre0, carre1, car
     return (c, a, d, b)
 
 
-def exo_aPbRc(f0, f1, v):
+def exo_aPbRc(exo, cor, v):
     a = (tex_coef(v[0], '\\sqrt{%s}' % v[1]), tex_coef(v[2],
          '\\sqrt{%s}' % v[3], bplus=1))
-    outils.Arithmetique.ecrit_tex(f0, '\\left( %s%s \\right)^2' % a, tabs=3)
-    outils.Arithmetique.ecrit_tex(f1, '\\left( %s%s \\right)^2' % a, tabs=3)
+    exo.append(u'  \\[ \\thenocalcul = ' + '\\left( %s%s \\right)^2' % a + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + '\\left( %s%s \\right)^2' % a + '\\] \n')
     if v[2] > 0:
         sgn = '+'
     else:
@@ -138,13 +138,13 @@ def exo_aPbRc(f0, f1, v):
     a = (tex_coef(v[0], '\\sqrt{%s}' % v[1], bpc=1), sgn, tex_coef(v[0],
          '\\sqrt{%s}' % v[1]), tex_coef(abs(v[2]), '\\sqrt{%s}' % v[3]),
          tex_coef(abs(v[2]), '\\sqrt{%s}' % v[3], bpc=1))
-    outils.Arithmetique.ecrit_tex(f1, '%s^2%s2\\times%s\\times%s+%s^2' % a, tabs=3)
+    cor.append(u'  \\[ \\thenocalcul = ' + '%s^2%s2\\times%s\\times%s+%s^2' % a + '\\] \n')
     a = (v[0] ** 2, v[1], tex_coef((2 * v[0]) * v[2], '\\sqrt{%s}' % (v[1] *
          v[3]), bplus=1), v[2] ** 2, v[3])
-    outils.Arithmetique.ecrit_tex(f1, '%s\\times %s %s+%s\\times %s' % a, tabs=3)
+    cor.append(u'  \\[ \\thenocalcul = ' + '%s\\times %s %s+%s\\times %s' % a + '\\] \n')
     a = (v[0] ** 2 * v[1] + v[2] ** 2 * v[3], tex_coef((2 * v[0]) * v[2],
          '\\sqrt{%s}' % (v[1] * v[3]), bplus=1))
-    outils.Arithmetique.ecrit_tex(f1, '%s%s' % a, cadre=1, tabs=3)
+    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + '%s%s' % a + '} \\] \n')
 
 
 def valeurs_entier0(pyromax):  # renvoie (coef0, coef1, coef2, carre0, carre1, carre2, b)
@@ -157,20 +157,19 @@ def valeurs_entier0(pyromax):  # renvoie (coef0, coef1, coef2, carre0, carre1, c
     return (b, c, a)
 
 
-def exo_entier0(f0, f1, v):
+def exo_entier0(exo, cor, v):
     a = (v[0], tex_coef(v[1], '\\sqrt{%s}' % v[2], bplus=1), v[0],
          tex_coef(-v[1], '\\sqrt{%s}' % v[2], bplus=1))
-    outils.Arithmetique.ecrit_tex(f0, '\\left( %s%s \\right)\\left( %s%s \\right)' %
-                     a, tabs=3)
-    outils.Arithmetique.ecrit_tex(f1, '\\left( %s%s \\right)\\left( %s%s \\right)' %
-                     a, tabs=3)
+    exo.append(u'  \\[ \\thenocalcul = ' + '\\left( %s%s \\right)\\left( %s%s \\right)' %
+                     a + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + '\\left( %s%s \\right)\\left( %s%s \\right)' %
+                     a + '\\] \n')
     a = (tex_coef(v[0], '', bpc=1), tex_coef(abs(v[1]), '\\sqrt{%s}' % v[2],
          bpc=1))
-    outils.Arithmetique.ecrit_tex(f1, '%s^2-%s^2' % a, tabs=3)
+    cor.append(u'  \\[ \\thenocalcul = ' + '%s^2-%s^2' % a + '\\] \n')
     a = (v[0] ** 2, v[1] ** 2, v[2])
-    outils.Arithmetique.ecrit_tex(f1, '%s-%s\\times %s' % a, tabs=3)
-    outils.Arithmetique.ecrit_tex(f1, '%s' % (v[0] ** 2 - v[1] ** 2 * v[2]), cadre=1,
-                     tabs=3)
+    cor.append(u'  \\[ \\thenocalcul = ' + '%s-%s\\times %s' % a + '\\] \n')
+    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + '%s' % (v[0] ** 2 - v[1] ** 2 * v[2]) + '} \\] \n')
 
 
 def valeurs_entier1(pyromax):  # renvoie (coef0, coef1, coef2, carre0, carre1, carre2, b)
@@ -187,16 +186,68 @@ def valeurs_entier1(pyromax):  # renvoie (coef0, coef1, coef2, carre0, carre1, c
     return (a0, b0, a1, b1, a)
 
 
-def exo_entier1(f0, f1, v):
+def exo_entier1(exo, cor, v):
     a = (tex_coef(v[0], '\\sqrt{%s}' % (v[1] ** 2 * v[4])), tex_coef(v[2],
          '\\sqrt{%s}' % (v[3] ** 2 * v[4])))
-    outils.Arithmetique.ecrit_tex(f0, '\\frac{%s}{%s}' % a, tabs=3)
-    outils.Arithmetique.ecrit_tex(f1, '\\frac{%s}{%s}' % a, tabs=3)
+    exo.append(u'  \\[ \\thenocalcul = ' + '\\frac{%s}{%s}' % a + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + '\\frac{%s}{%s}' % a + '\\] \n')
     a = (v[0], v[1] ** 2, v[4], v[2], v[3] ** 2, v[4])
-    outils.Arithmetique.ecrit_tex(f1,
+    cor.append(u'  \\[ \\thenocalcul = ' + 
                      '\\frac{%s\\times\\sqrt{%s}\\times\\cancel{\\sqrt{%s}}}{%s\\times\\sqrt{%s}\\times\\cancel{\\sqrt{%s}}}' %
-                     a, tabs=3)
-    outils.Arithmetique.ecrit_tex(f1, '\\frac{%s\\times %s}{%s\\times %s}' % v[0:4],
-                     tabs=3)
-    outils.Arithmetique.ecrit_tex(f1, '%s' % (((v[0] * v[1]) // v[2]) // v[3]), cadre=1,
-                     tabs=3)
+                     a + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + '\\frac{%s\\times %s}{%s\\times %s}' % v[0:4] + '\\] \n')
+    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + '%s' % (((v[0] * v[1]) // v[2]) // v[3]) + '} \\] \n')
+
+def tex_racines():
+    exo = ['''\\exercice''']
+    exo.append('  \\begin{enumerate}\n')
+    exo.append(u'  \\item Calculer les expressions suivantes et donner le résultat sous la forme $a\\,\\sqrt{b}$ avec $a$ et $b$ entiers, $b$ le plus petit possible.\n')
+    exo.append('  \\begin{multicols}{2}\\noindent\n')
+    cor = ['''\\exercice*''']
+    cor.append('  \\begin{enumerate}\n')
+    cor.append(u'  \\item Calculer les expressions suivantes et donner le résultat sous la forme $a\\,\\sqrt{b}$ avec $a$ et $b$ entiers, $b$ le plus petit possible.\n')
+    mymax = 5
+    cor.append('    \\begin{multicols}{2}\\noindent\n')
+    valeurs = valeurs_aRb0(mymax)
+    exoaRb0(exo, cor, valeurs)
+    exo.append('      \\columnbreak\\stepcounter{nocalcul}%\n')
+    cor.append('      \\columnbreak\\stepcounter{nocalcul}%\n')
+    valeurs = valeurs_aRb1(mymax)
+    exoaRb1(exo, cor, valeurs)
+    exo.append('    \\end{multicols}\\vspace{-3ex}\n')
+    cor.append('    \\end{multicols}\n')
+    exo.append(u'  \\item Calculer les expressions suivantes et donner le résultat sous la forme $a+b\\,\\sqrt{c}$ avec $a$, $b$ et $c$ entiers.\n')
+    exo.append('''    \\stepcounter{nocalcul}%
+    \\begin{multicols}{2}\\noindent
+''')
+    cor.append(u'  \\item Calculer les expressions suivantes et donner le résultat sous la forme $a+b\\,\\sqrt{c}$ avec $a$, $b$ et $c$ entiers.\n')
+    cor.append('''    \\stepcounter{nocalcul}%
+    \\begin{multicols}{2}\\noindent
+''')
+    valeurs = valeurs_aPbRc(mymax)
+    exo_aPbRc(exo, cor, valeurs)
+    exo.append('      \\columnbreak\\stepcounter{nocalcul}%\n')
+    cor.append('      \\columnbreak\\stepcounter{nocalcul}%\n')
+    valeurs = valeurs_aPbRc(mymax)
+    exo_aPbRc(exo, cor, valeurs)
+    exo.append('    \\end{multicols}\\vspace{-3ex}\n')
+    cor.append('    \\end{multicols}\n')
+    exo.append(u"  \\item Calculer les expressions suivantes et donner le résultat sous la forme d'un nombre entier.\n")
+    exo.append('''    \\stepcounter{nocalcul}%
+    \\begin{multicols}{2}\\noindent
+''')
+    cor.append(u"  \\item Calculer les expressions suivantes et donner le résultat sous la forme d'un nombre entier.\n")
+    cor.append('''    \\stepcounter{nocalcul}%
+    \\begin{multicols}{2}\\noindent
+''')
+    valeurs = valeurs_entier0(mymax)
+    exo_entier0(exo, cor, valeurs)
+    exo.append('      \\columnbreak\\stepcounter{nocalcul}%\n')
+    cor.append('      \\columnbreak\\stepcounter{nocalcul}%\n')
+    valeurs = valeurs_entier1(mymax)
+    exo_entier1(exo, cor, valeurs)
+    exo.append('    \\end{multicols}\\vspace{-3ex}\n')
+    exo.append('  \\end{enumerate}\n')
+    cor.append('    \\end{multicols}\n')
+    cor.append('  \\end{enumerate}\n')
+    return (exo, cor)

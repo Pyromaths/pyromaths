@@ -23,6 +23,7 @@
 
 from outils.Arithmetique import pgcd, valeur_alea
 from random import choice, randrange
+import string, math
 
 #
 # ------------------- PUISSANCES -------------------
@@ -134,4 +135,32 @@ def valeurs_puissances():  # renvoie un tuple contenant les valeurs pour les deu
     b = verifie_type((n1, n2, n3, e1, e2, e3, e4))
     return (a, b)
 
-
+def tex_puissances():
+    sd = string.maketrans('.', ',')  # convertit les . en , (separateur decimal)
+    valeurs = valeurs_puissances()
+    i = randrange(2)
+    exo = ['''\\exercice''', u"  Calculer les expressions suivantes et donner l'écriture scientifique du résultat.\n"]
+    exo.append('  \\begin{multicols}{2}\\noindent\n')
+    cor = ['''\\exercice*''', u"  Calculer les expressions suivantes et donner l'écriture scientifique du résultat.\n"]
+    cor.append('  \\begin{multicols}{2}\\noindent\n')
+    exo.append(u'  \\[ \\thenocalcul = ' + tex_puissances_0(valeurs[i]).translate(sd) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_0(valeurs[i]).translate(sd) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_1(valeurs[i]).translate(sd) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_2(valeurs[i]).translate(sd) + '\\] \n')
+    if int(math.floor(math.log10(((valeurs[i][0] * valeurs[i][1]) * 1.) / valeurs[i][2]))) != \
+        0:
+        cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_3(valeurs[i]).translate(sd) + '\\] \n')
+    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_puissances_4(valeurs[i]).translate(sd) + '} \\] \n')
+    exo.append('    \\columnbreak\\stepcounter{nocalcul}%\n')
+    cor.append('    \\columnbreak\\stepcounter{nocalcul}%\n')
+    exo.append(u'  \\[ \\thenocalcul = ' + tex_puissances_0(valeurs[1 - i]).translate(sd) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_0(valeurs[1 - i]).translate(sd) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_1(valeurs[1 - i]).translate(sd) + '\\] \n')
+    cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_2(valeurs[1 - i]).translate(sd) + '\\] \n')
+    if int(math.floor(math.log10(((valeurs[1 - i][0] * valeurs[1 - i][1]) * 1.) /
+           valeurs[1 - i][2]))) != 0:
+        cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_3(valeurs[1 - i]).translate(sd) + '\\] \n')
+    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_puissances_4(valeurs[1 - i]).translate(sd) + '} \\] \n')
+    exo.append('  \\end{multicols}\n')
+    cor.append('  \\end{multicols}\n')
+    return (exo, cor)

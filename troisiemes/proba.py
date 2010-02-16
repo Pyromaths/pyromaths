@@ -24,7 +24,7 @@ import random
 from math import *
 from pyro_classes import Fractions
 
-def proba(f0,f1):
+def proba(exo, cor):
     couleur=['bleue','rouge','jaune','verte','marron','orange']
     initiale=['B','R','J','V','M','O']
     #Choix des 3 couleurs et du nombre de boule
@@ -47,7 +47,7 @@ def proba(f0,f1):
         plur3="s"
     else :
         plur3=""
-    exo=[u"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule%s %s%s (%s), indiscernables au toucher. On tire successivement et sans remise deux boules."%(n1,plur1,c1,plur1,i1,n2,plur2,c2,plur2,i2,n3,plur3,c3,plur3,i3),
+    exos=[u"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule%s %s%s (%s), indiscernables au toucher. On tire successivement et sans remise deux boules."%(n1,plur1,c1,plur1,i1,n2,plur2,c2,plur2,i2,n3,plur3,c3,plur3,i3),
     "\\begin{enumerate}",
     u"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?" %c2,
     u"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire.",
@@ -61,7 +61,7 @@ def proba(f0,f1):
     p43="\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}="%(n3,tot,n1,tot-1)
 
     result4="\\dfrac{%s}{%s}"%(n1*(n1-1+n2+n3),tot*(tot-1)) #resultat non simplifié de la question 4
-    cor=[u"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule%s %s%s (%s), indiscernables au toucher. On tire successivement et sans remise deux boules."%(n1,plur1,c1,plur1,i1,n2,plur2,c2,plur2,i2,n3,plur3,c3,plur3,i3),
+    cors=[u"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule%s %s%s (%s), indiscernables au toucher. On tire successivement et sans remise deux boules."%(n1,plur1,c1,plur1,i1,n2,plur2,c2,plur2,i2,n3,plur3,c3,plur3,i3),
 
          "\\begin{enumerate}",
          u"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?\\par " %c2,
@@ -106,8 +106,14 @@ def proba(f0,f1):
          u"On note (?, %s) l'évènement: la deuxième boule tirée est %s. \\par"%(i1,c1),
          "$p(?,%s)=p(%s,%s)+p(%s,%s)+p(%s,%s,)="%(i1,i1,i1,i2,i1,i3,i1)+p41+p42+p43+result4+"$",
          "\\end{enumerate}"]
-    for st in exo:
-        f0.write(st+'\n')
-    for st in cor:
-        f1.write(st+'\n')
+    for st in exos:
+        exo.append(st+'\n')
+    for st in cors:
+        cor.append(st+'\n')
+        
+def tex_proba():
+    exo=['\\exercice\n']
+    cor=['\\exercice*\n']
+    proba(exo,cor)
+    return (exo, cor)
 

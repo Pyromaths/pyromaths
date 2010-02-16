@@ -3,7 +3,7 @@
 #
 # Pyromaths
 # Un programme en Python qui permet de créer des fiches d'exercices types de
-# mathématiques niveau collège ainsi que leur corrigé en LaTeX.
+# mathématiques niveau collège ainsi que leur corsrigé en LaTeX.
 # Copyright (C) 2006 -- Jérôme Ortais (jerome.ortais@pyromaths.org)
 #
 # This program is free software; you can redistribute it and/or modify
@@ -353,7 +353,7 @@ def exprfonc(f,i,A,B):
     return l
 
 
-def affine(f0,f1):
+def affine(exo,cor):
     #Génère l'exercice
     xmin,xmax,ymin,ymax=-5,5,-5,5
     f=['f','g','h','k','l','u']
@@ -366,7 +366,7 @@ def affine(f0,f1):
     fonc3=f[(rgfonc1+2)%6]
     l3=exprfonc(fonc3,3,E,F)
     noms=nom3droites(A,B,C,D,E,F,xmin,xmax,ymin,ymax)
-    exo=["\\parbox{0.5\\linewidth}{",
+    exos=["\\parbox{0.5\\linewidth}{",
          u"($d_1$) est la droite représentative de la fonction $"+fonc1+"$.",
          "\\begin{enumerate}",
          "\\item "+l[0],
@@ -386,7 +386,7 @@ def affine(f0,f1):
          noms[2],
          "\\end{pspicture}}"]
 
-    cor=["\\setlength{\\columnsep}{2mm}",
+    cors=["\\setlength{\\columnsep}{2mm}",
          "\\begin{multicols}{2}\\noindent \\small",
          u"($d_1$) est la droite représentative de la fonction $"+fonc1+"$.",
          "\\begin{enumerate}",
@@ -442,7 +442,13 @@ def affine(f0,f1):
          "\\end{center}",
          "\\end{minipage}",
          "\\vspace{0.45cm}"]
-    for st in exo:
-        f0.write(st+'\n')
-    for st in cor:
-        f1.write(st+'\n')
+    for st in exos:
+        exo.append(st+'\n')
+    for st in cors:
+        cor.append(st+'\n')
+
+def tex_affine():
+    exo = ['\\exercice\n']
+    cor = ['\\exercice*\n']
+    affine(exo,cor)
+    return (exo, cor)
