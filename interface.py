@@ -477,7 +477,7 @@ class Ui_MainWindow(object):
                                                          self.config['chemin_fichier'], QtGui.QFileDialog.ShowDirsOnly)
         i = 0
         if f0:
-            for niveau in [3]:#range(4):
+            for niveau in range(4):
                 liste = []
                 for i in range(len(self.LesFiches[niveau][2])):
                     liste.append((niveau,  i))
