@@ -295,7 +295,7 @@ def tex_quotient_frac(valeurs, exo, cor):  # effectue le quotient {a+b}/{c+d}, e
               tex_frac(c) + e[1] + tex_frac(d) + '} \\] \n')
     cor.append(u'  \\[ \\thenocalcul =  \cfrac{' + tex_frac(a) + e[0] + tex_frac(b) + '}{' +
               tex_frac(c) + e[1] + tex_frac(d) + '} \\] \n')
-    exo.append(u'  \\[ \\thenocalcul = \cfrac{' + tex_den_com0(a, b, den_com0(a, b), e[0]) +
+    cor.append(u'  \\[ \\thenocalcul = \cfrac{' + tex_den_com0(a, b, den_com0(a, b), e[0]) +
               '}{' + tex_den_com0(c, d, den_com0(c, d), e[1]) + '} \\] \n')
     cor.append(u'  \\[ \\thenocalcul = \cfrac{' + tex_den_com1(den_com1(a, b), e[0]) + '}{' +
               tex_den_com1(den_com1(c, d), e[1]) + '} \\] \n')
