@@ -157,13 +157,13 @@ def tex_equation6(valeurs):  # renvoie la solution de l'equation
 
 
 def equations(exo, cor, valeurs):  #resolution d'une equation
-    exo.append(u"  Résoudre l'équation : \n")
-    exo.append(u'  \\[ ' + tex_equation0(valeurs) + '\\] \n')
-    cor.append(u"  Résoudre l'équation : \n")
+    exo.append(u"  Résoudre l'équation : ")
+    exo.append(u'  \\[ ' + tex_equation0(valeurs) + '\\] ')
+    cor.append(u"  Résoudre l'équation : ")
     for i in range(7):
-        exec('cor.append(u\'  \\\\[\' + tex_equation' + str(i) + '(valeurs) + \'\\\\] \\n\')')
+        exec('cor.append(u\'  \\\\[\' + tex_equation' + str(i) + '(valeurs) + \'\\\\] \')')
         if i == 2 and valeurs[3][1] < 0:
-            cor.append(u'  \\[ ' + tex_equation2bis(valeurs) + '\\] \n')
+            cor.append(u'  \\[ ' + tex_equation2bis(valeurs) + '\\] ')
     frac = ((valeurs[4][5] - valeurs[4][1]) - valeurs[4][3] * valeurs[3][1],
             (valeurs[4][0] + valeurs[4][2] * valeurs[3][1]) - valeurs[4][4])
     simpl = fractions.simplifie(frac)
@@ -171,12 +171,12 @@ def equations(exo, cor, valeurs):  #resolution d'une equation
         sol = fractions.tex_frac(simpl)
     else:
         sol = fractions.tex_frac(frac)
-    cor.append(u'  \\fbox{La solution de cette équation est $%s$\\,.}\n' %
+    cor.append(u'  \\fbox{La solution de cette équation est $%s$\\,.}' %
              sol)
 
 def tex_equations():
     vals = valeurs(10)
-    exo = ['\\exercice\n']
-    cor = ['\\exercice*\n']
+    exo = ['\\exercice']
+    cor = ['\\exercice*']
     equations(exo, cor, vals)
     return (exo, cor)

@@ -106,34 +106,33 @@ def tex_simplifie_fraction_pgcd(a):  # renvoie l'ecriture au format tex de la si
 
 def tex_pgcd():
     nombres = valeurs_pgcd()
-    exo = ['\\exercice\n']
+    exo = ['\\exercice']
     exo.append('''  \\begin{enumerate}
   \\item Les nombres \\nombre{%s} et \\nombre{%s} sont-ils premiers entre eux ?
 ''' %
              nombres)
-    exo.append('  \\item Calculer le plus grand commun diviseur (\\textsc{pgcd}) de \\nombre{%s} et \\nombre{%s}.\n' %
+    exo.append('  \\item Calculer le plus grand commun diviseur (\\textsc{pgcd}) de \\nombre{%s} et \\nombre{%s}.' %
              nombres)
     exo.append(u'  \\item Simplifier la fraction $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ pour la rendre irréductible en indiquant la méthode.\n' %
              nombres)
-    exo.append('  \\end{enumerate}\n')
-    cor = ['\\exercice*\n']
+    exo.append('  \\end{enumerate}')
+    cor = ['\\exercice*']
     cor.append('''  \\begin{enumerate}
   \\item Les nombres \\nombre{%s} et \\nombre{%s} sont-ils premiers entre eux ?\\par
 ''' %
              nombres)
-    cor.append(tex_trouve_diviseur(nombres) + '\n')
-    cor.append('  \\item Calculer le plus grand commun diviseur (\\textsc{pgcd}) de \\nombre{%s} et \\nombre{%s}.\\par\n' %
+    cor.append(tex_trouve_diviseur(nombres))
+    cor.append('  \\item Calculer le plus grand commun diviseur (\\textsc{pgcd}) de \\nombre{%s} et \\nombre{%s}.\\par' %
              nombres)
-    cor.append('    On calcule le \\textsc{pgcd} des nombres \\nombre{%s} et \\nombre{%s} en utilisant l\'algorithme d\'Euclide.\n' %
+    cor.append('    On calcule le \\textsc{pgcd} des nombres \\nombre{%s} et \\nombre{%s} en utilisant l\'algorithme d\'Euclide.' %
              nombres)
     l = algo_euclide(nombres)
     tex_liste = tex_algo_euclide(l)
     for i in range(len(l)):
-        cor.append(u'  \\[ %s' % tex_liste[i] + '\\] \n')
+        cor.append(u'  \\[ %s' % tex_liste[i] + '\\] ')
     cor.append('    ' + tex_liste[len(l)])
-    cor.append(u'  \\item Simplifier la fraction $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ pour la rendre irréductible en indiquant la méthode.\n' %
+    cor.append(u'  \\item Simplifier la fraction $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ pour la rendre irréductible en indiquant la méthode.' %
              nombres)
-    cor.append(tex_simplifie_fraction_pgcd(simplifie_fraction_pgcd(l)) +
-             '\n')
-    cor.append('  \\end{enumerate}\n')
+    cor.append(tex_simplifie_fraction_pgcd(simplifie_fraction_pgcd(l)))
+    cor.append('  \\end{enumerate}')
     return (exo, cor)

@@ -443,9 +443,9 @@ def affine(exo,cor):
          "\\end{minipage}",
          "\\vspace{0.45cm}"]
     for st in exos:
-        exo.append(st+'\n')
+        exo.append(st)
     for st in cors:
-        cor.append(st+'\n')
+        cor.append(st)
 
 def tex_affine():
     exo = ['\\exercice\n']

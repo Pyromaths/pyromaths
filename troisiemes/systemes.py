@@ -216,8 +216,8 @@ def systemes(exo, cor, v):
         (b0, b1) = (-b0, -b1)
     if min(abs(a0), abs(a1)) > min(abs(b0), abs(b1)):
         (a0, a1) = (b0, b1)
-    exo.append('  $%s$\n' % tex_systeme(v))
-    cor.append('  $%s$\n' % tex_systeme(v, (a0, a1)))
+    exo.append('  $%s$' % tex_systeme(v))
+    cor.append('  $%s$' % tex_systeme(v, (a0, a1)))
 
     #outils.Arithmetique.ecrit_tex(f1,tex_systeme(v, (a0, a1)), thenocalcul='',tabs=1)
 
@@ -226,23 +226,23 @@ def systemes(exo, cor, v):
   \\begin{multicols}{2}\\noindent
 ''')
     cor.append(u'  \\[ ' + tex_systeme(c1) +
-                     '\\quad\\text{\\footnotesize On ajoute les deux lignes}' + '\\] \n')
+                     '\\quad\\text{\\footnotesize On ajoute les deux lignes}' + '\\] ')
     c2 = combinaison2(c1)
-    cor.append(u'  \\[ ' + tex_comb2(c1, c2) + '\\] \n')
-    cor.append(u'  \\[ ' + tex_comb3(c2) + '\\] \n')
-    cor.append(u'  \\[ \\boxed{' + tex_comb4(c2) + '} \\] \n')
-    cor.append('  \\columnbreak\\par\n')
+    cor.append(u'  \\[ ' + tex_comb2(c1, c2) + '\\] ')
+    cor.append(u'  \\[ ' + tex_comb3(c2) + '\\] ')
+    cor.append(u'  \\[ \\boxed{' + tex_comb4(c2) + '} \\] ')
+    cor.append('  \\columnbreak\\par')
     cor.append(tex_equation(v, c2))
-    cor.append(u'  \\[ ' + tex_eq2(v, c2) + '\\] \n')
-    cor.append(u'  \\[ \\boxed{' + tex_eq3(v, c2) + '} \\] \n')
-    cor.append('  \\end{multicols}\n')
-    cor.append(u"  \\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par\n" %
+    cor.append(u'  \\[ ' + tex_eq2(v, c2) + '\\] ')
+    cor.append(u'  \\[ \\boxed{' + tex_eq3(v, c2) + '} \\] ')
+    cor.append('  \\end{multicols}')
+    cor.append(u"  \\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par" %
              v[2])
-    cor.append(u'  {Vérification : $' + tex_verification(v) + '$}\n')
+    cor.append(u'  {Vérification : $' + tex_verification(v) + '$}')
 
 def tex_systemes( ):
     valeurs = choix_valeurs(10)
-    exo = ['\\exercice\n', u"  Résoudre le système d'équations suivant :\n"]
-    cor = ['\\exercice*\n', u"  Résoudre le système d'équations suivant :\n"]
+    exo = ['\\exercice', u"  Résoudre le système d'équations suivant :"]
+    cor = ['\\exercice*', u"  Résoudre le système d'équations suivant :"]
     systemes(exo, cor, valeurs)
     return (exo, cor)
