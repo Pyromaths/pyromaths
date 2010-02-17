@@ -3,7 +3,7 @@
 #
 # Pyromaths
 # Un programme en Python qui permet de créer des fiches d'exercices types de
-# mathématiques niveau collège ainsi que leur corsrigé en LaTeX.
+# mathématiques niveau collège ainsi que leur corrigé en LaTeX.
 # Copyright (C) 2006 -- Jérôme Ortais (jerome.ortais@pyromaths.org)
 #
 # This program is free software; you can redistribute it and/or modify
@@ -70,6 +70,8 @@ def validedroite(A,B):
         rep=False
     if A[0]==B[0] or A[1]==B[1]:
         rep=False
+    if abs(A[0]-B[0])<1 or abs(A[1]-B[1])<1:
+        rep=False
     return rep
 
 
@@ -117,9 +119,9 @@ def couples ():
     D=(float(random.randrange(-4,5)),float(random.randrange(-4,5)))
     while not (validec(A,D) and validec(B,D) and validedroite(C,D)) :
         D=(float(random.randrange(-4,5)),float(random.randrange(-4,5)))
-    E=(0,float(random.randrange(-4,5)))
+    E=(0,float(random.randrange(-8,9))/2)
     while not (validec(A,E) and validec(B,E) and validec(C,E) and validec(D,E)):
-        E=(0,float(random.randrange(-4,5)))
+        E=(0,float(random.randrange(-8,9))/2)
     F=(float(random.randrange(-4,5)),float(random.randrange(-4,5)))
     while not (validec(A,F) and validec(B,F) and validec(C,F) and validec(D,F)and validedroite(E,F)):
         F=(float(random.randrange(-4,5)),float(random.randrange(-4,5)))
@@ -172,8 +174,6 @@ def nom3droites(A,B,C,D,E,F,xmin,xmax,ymin,ymax):
         res.append(nomdroite(3,l3[1]))
     return res
 
-
-
 def isint(x):
     #est entier?
     res= False
@@ -211,15 +211,15 @@ def coefdir(A,B):
 def anteimage(fonc,A,B):
     #Génère la 1ère question et sa réponse
 
-    l=['l\'image de ','un nombre qui a pour image ',u'un antécédent de ']
-    lcor=['l\'image de ',' a pour image ',u'un antécédent de '] #liste pour le corrigé
+    l=[' l\'image de ',' un nombre qui a pour image ',u' un antécédent de ']
+    lcor=[' est l\'image de ',' a pour image ',u' est un antécédent de '] #liste pour le corrigé
     i=random.randrange(0,2)
     j=i
     if i==1:
         j=i+random.randrange(0,2)
     res=[]
-    res.append('Donner '+l[j]+decimaux(str(A[i]))+' par la fonction '+'\\textit{'+fonc+'}.')
-    res.append(decimaux(str(A[abs(i-1)]))+' est '+lcor[j]+decimaux(str(A[i]))+' par la \\hbox{fonction '+'\\textit{'+fonc+'}}.')
+    res.append('Donner '+l[j]+'$'+decimaux(str(A[i]))+'$'+' par la fonction '+'\\textit{'+fonc+'}.')
+    res.append('$'+decimaux(str(A[abs(i-1)]))+'$' + lcor[j]+'$'+decimaux(str(A[i]))+'$'+' par la \\hbox{fonction '+'\\textit{'+fonc+'}}.')
     if i==0:
         res.append(doublefleche((A[0],0),A))
         res.append(doublefleche(A,(0,A[1])))
@@ -231,8 +231,8 @@ def anteimage(fonc,A,B):
     j=i
     if i==1:
         j=i+random.randrange(0,2)
-    res.append('Donner '+l[j]+decimaux(str(B[i]))+' par la fonction '+'\\textit{'+fonc+'}.')
-    res.append(decimaux(str(B[abs(i-1)]))+' est '+lcor[j]+decimaux(str(B[i]))+' par la \\hbox{fonction '+'\\textit{'+fonc+'}}.')
+    res.append('Donner '+l[j]+'$'+decimaux(str(B[i]))+'$'+' par la fonction '+'\\textit{'+fonc+'}.')
+    res.append('$'+decimaux(str(B[abs(i-1)]))+'$'+lcor[j]+'$'+decimaux(str(B[i]))+'$'+' par la \\hbox{fonction '+'\\textit{'+fonc+'}}.')
     if i==0:
         res.append(doublefleche((B[0],0),B))
         res.append(doublefleche(B,(0,B[1])))
@@ -319,32 +319,40 @@ def exprfonc(f,i,A,B):
         deltax=decimaux(str(A[0]-B[0]))
 
     if float(B[0])<0 :
-       mid11=float(B[0])-0.6
+       mid11=float(B[0])-0.75
        mid12=float((B[1]+A[1]))/2   #milieu de la flèche verticale
     else:
-        mid11=float(B[0])+0.6
+        mid11=float(B[0])+0.75
         mid12=float((B[1]+A[1]))/2
     if float(B[0])*float(u[1]/u[0])>0 :
         mid21=float((A[0]+B[0]))/2
         mid22=A[1]-0.6               #milieu de la flèche horizontale
     else :
         mid21=float((A[0]+B[0]))/2
-        mid22=A[1]+0.6
+        mid22=A[1]+0.5
     if mid12 < 0 and mid12 >-0.8:
         mid12=-1
-    if mid21 < 0 and mid21 >-0.8:
-        mid21=-1
     if mid12 >= 0 and mid12 < 0.5:
         mid12=0.5
-    if mid21 >-0.8 and mid21 < 0:
-        mid21=-0.8
+    if mid11 < 0 and mid11 >-0.8:
+        mid11=-1
+    if mid11 >=0 and mid11 < 0.5:
+        mid11=0.5
+    if mid21 < 0 and mid21 >-0.8:
+        mid21=-1
+    if mid21 >=0 and mid21 < 0.5:
+        mid21=0.5
+    if mid22 < 0 and mid22 >-0.8:
+        mid22=-1
+    if mid22 >= 0 and mid22 < 0.5:
+        mid22=0.5
     mid1=(mid11,mid12)
     mid2=(mid21,mid22)
 
     l=[u'Déterminer l\'expression de la fonction $'+f+u'$ représentée ci-contre par la droite ($d_'+str(i)+'$).',
        u'On lit l\'ordonnée à l\'origine et le coefficient de la fonction affine sur le graphique.\\\ ',
        '$'+f+'(x)=ax+b$ ' +'avec $b='+ decimaux(str(A[1]))+'$ et $a='+'\\dfrac{'+deltay+'}{'+deltax+'}='+coefres+'$.\\\ ',
-       'L\'expression de la fonction '+f+' est $'+f+'(x)='+coef+'x'+b+'$.',
+       'L\'expression de la fonction $'+f+'$ est $'+f+'(x)='+coef+'x'+b+'$.',
        doublefleche(B,(B[0],A[1])),
        doublefleche((B[0],A[1]),A),
        '\\rput'+str(mid1)+'{('+deltay+')}',
@@ -353,7 +361,7 @@ def exprfonc(f,i,A,B):
     return l
 
 
-def affine(exo,cor):
+def affine():
     #Génère l'exercice
     xmin,xmax,ymin,ymax=-5,5,-5,5
     f=['f','g','h','k','l','u']
@@ -366,7 +374,7 @@ def affine(exo,cor):
     fonc3=f[(rgfonc1+2)%6]
     l3=exprfonc(fonc3,3,E,F)
     noms=nom3droites(A,B,C,D,E,F,xmin,xmax,ymin,ymax)
-    exos=["\\parbox{0.5\\linewidth}{",
+    exo=["\\exercice", "\\parbox{0.5\\linewidth}{",
          u"($d_1$) est la droite représentative de la fonction $"+fonc1+"$.",
          "\\begin{enumerate}",
          "\\item "+l[0],
@@ -386,22 +394,16 @@ def affine(exo,cor):
          noms[2],
          "\\end{pspicture}}"]
 
-    cors=["\\setlength{\\columnsep}{2mm}",
+    cor=["\\exercice*", "\\setlength{\\columnsep}{2mm}",
          "\\begin{multicols}{2}\\noindent \\small",
          u"($d_1$) est la droite représentative de la fonction $"+fonc1+"$.",
          "\\begin{enumerate}",
          "\\item "+l[1],
          "\\item "+l[5],
-         "\\item",
-         "\\begin{flushleft}",
-         l2[1],
-         " \\end{flushleft}",
-         "\\item",
-         "\\begin{flushleft}",
-         l3[1],
+         "\\item\n\\begin{flushleft}\n"+l2[1]+"\n\\end{flushleft}",
+         "\\item\n\\begin{flushleft}\n"+l3[1],
          l3[2],
-         l3[3],
-         "\\end{flushleft}",
+         l3[3]+"\n\\end{flushleft}",
          "\\end{enumerate}",
          "\\end{multicols}",
          "\\vspace{0.45cm}",
@@ -442,6 +444,7 @@ def affine(exo,cor):
          "\\end{center}",
          "\\end{minipage}",
          "\\vspace{0.45cm}"]
+
     for st in exos:
         exo.append(st)
     for st in cors:
