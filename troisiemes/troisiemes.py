@@ -42,7 +42,7 @@ def main(exo, f0, f1):
         equations.tex_equations,
         racines.tex_racines,
         systemes.tex_systemes,
-        affine.tex_affine,
+        affine.affine,
         proba.tex_proba,
         pythagore.tex_pythagore,
         pythagore.tex_reciproque_pythagore,

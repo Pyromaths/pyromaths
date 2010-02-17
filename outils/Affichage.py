@@ -112,6 +112,7 @@ def decimaux(nb, mathenv = 0):
                              "\,".join(partie_decimale)))
     else:
         return "\,".join(partie_entiere)
+        
 def tex_coef(coef, var, bplus=0, bpn=0, bpc=0):
     """
     coef est le coefficient à écrire devant la variable var
