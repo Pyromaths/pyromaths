@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from pyro_classes import Fractions
+from classes.Fractions import Fractions  #Fractions de pyromaths
 import random
 import string
 import outils.Arithmetique
