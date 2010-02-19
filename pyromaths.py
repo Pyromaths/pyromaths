@@ -38,6 +38,7 @@ import interface
 import outils.System
 import troisiemes.troisiemes, quatriemes.quatriemes, cinquiemes.cinquiemes
 import sixiemes.sixiemes
+import lycee.lycee
 
 #================================================================
 # Dossier des icones
@@ -111,7 +112,16 @@ u'Cercle et théorème de Pythagore',
 u'Théorème de Thalès',
 u'Réciproque du théorème de Thalès',
 u'Trigonométrie',
-]]]
+]],
+[u'Lycée', lycee.lycee, [
+u'Équations 2° degré',
+u'Factorisations 2° degré',
+u'Factorisations degré 3',
+u'Étude de signe',
+u"Sens de variations",
+u"Fonctions rationnelles",
+]],
+]
 
 class StartQT4(QtGui.QMainWindow):
     def __init__(self, LesFiches, configdir, iconesdir, parent=None):

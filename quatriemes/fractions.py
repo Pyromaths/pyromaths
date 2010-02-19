@@ -22,9 +22,10 @@
 #
 
 import outils.Arithmetique
-from fonctions_globales import OperateurPrioritaire, Affichage
+from outils.Priorites import OperateurPrioritaire
+from outils.TeXMiseEnForme import Affichage
 import random
-from pyro_classes import Fractions
+from classes.Fractions import Fractions #Classe Fractions de pyromaths
 
 
 def sommes_fractions_4e(op, level):

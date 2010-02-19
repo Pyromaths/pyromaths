@@ -86,7 +86,7 @@ class Ui_MainWindow(object):
         #        Remplissage des 4 niveaux
         #============================================================
 
-        for level in range(4):
+        for level in range(5):
             exec("self.tab_%se = QtGui.QWidget()" % (6-level))
             exec("self.gridLayout_%se = QtGui.QGridLayout(self.tab_%se)" % (6-level, 6-level))
             nb_exos = len(self.LesFiches[level][2])
@@ -101,6 +101,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5e), "5e")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4e), "4e")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3e), "3e")
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2e), "Lyc")
 
         #============================================================
         #        Onglet options
@@ -344,11 +345,11 @@ class Ui_MainWindow(object):
         #============================================================
         #        Actions des spinBox
         #============================================================
-        for level in range(4):
+        for level in range(5):
             for box in range(len(self.LesFiches[level][2])):
                 exec("QtCore.QObject.connect(self.spinBox_%s_%s, QtCore.SIGNAL(\"valueChanged(int)\"), self.setNbExos)" % (6-level, box))
 
-        for level in range(4):
+        for level in range(5):
             nb_exos = len(self.LesFiches[level][2])
             for i in range(nb_exos):
                 exec("self.label_%s_%s.setText(u\"%s\")" % (6-level,i,self.LesFiches[level][2][i]))
@@ -500,7 +501,7 @@ class Ui_MainWindow(object):
     def effacer_choix_exercices(self):
         """Remet toutes les SpinBox à zéro et vide la liste d'exercices sélectionnés"""
         self.liste_creation=[]
-        for level in range(4):
+        for level in range(5):
             for box in range(len(self.LesFiches[level][2])):
                 exec("self.spinBox_%s_%s.setValue(0)" % (6-level, box))
 
@@ -566,7 +567,7 @@ class Ui_MainWindow(object):
         et adapte le niveau affiché dans l'en-tête de la fiche en fonction du plus haut niveau d'exercice"""
         niveau=0
         self.liste_creation = []
-        for level in range(4):
+        for level in range(5):
             for box in range(len(self.LesFiches[level][2])):
                 exec("qte = self.spinBox_%s_%s.value()" % (6 - level, box),  locals(),  globals())
                 for i in range(qte):

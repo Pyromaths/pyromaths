@@ -22,7 +22,7 @@
 
 import random
 from math import *
-from pyro_classes import Fractions
+from outils.Fractions import Fractions
 
 def proba(exo, cor):
     couleur=['bleue','rouge','jaune','verte','marron','orange']
@@ -107,13 +107,13 @@ def proba(exo, cor):
          "$p(?,%s)=p(%s,%s)+p(%s,%s)+p(%s,%s,)="%(i1,i1,i1,i2,i1,i3,i1)+p41+p42+p43+result4+"$",
          "\\end{enumerate}"]
     for st in exos:
-        exo.append(st+'\n')
+        exo.append(st)
     for st in cors:
-        cor.append(st+'\n')
+        cor.append(st)
         
 def tex_proba():
-    exo=['\\exercice\n']
-    cor=['\\exercice*\n']
+    exo=['\\exercice']
+    cor=['\\exercice*']
     proba(exo,cor)
     return (exo, cor)
 

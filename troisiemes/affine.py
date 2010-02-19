@@ -25,7 +25,7 @@
 import random
 from math import *
 from outils.Affichage import decimaux
-from pyro_classes import Fractions
+from outils.Fractions import Fractions  #fractions pyromaths
 
 def extreme(a,b,xmin,xmax,ymin,ymax):
 #donne les extremités de la droite passant par a et b (coordonnées)
@@ -446,4 +446,14 @@ def affine():
          "\\end{center}",
          "\\end{minipage}",
          "\\vspace{0.45cm}"]
+
+    for st in exos:
+        exo.append(st)
+    for st in cors:
+        cor.append(st)
+
+def tex_affine():
+    exo = ['\\exercice\n']
+    cor = ['\\exercice*\n']
+    affine(exo,cor)
     return (exo, cor)
