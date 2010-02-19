@@ -276,6 +276,8 @@ def tracefonc(f,i,A,B,xmin,xmax,ymin,ymax):
         st='On sait que $'+f+'(0)='+decimaux(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+x1+b+'='+y1+'$.'
     elif coef=='-' and B[0]<0:
         st='On sait que $'+f+'(0)='+decimaux(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+'('+x1+')'+b+'='+y1+'$.'
+    elif B[0]<0:
+        st='On sait que $'+f+'(0)='+decimaux(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+' \\times ('+x1+')'+b+'='+decimaux(str(u[0]))+b+'='+y1+'$.'
     else:
         st='On sait que $'+f+'(0)='+decimaux(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+' \\times '+x1+b+'='+decimaux(str(u[0]))+b+'='+y1+'$.'
 
