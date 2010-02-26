@@ -26,7 +26,9 @@ import math
 import os
 from outils.Conversions import radians, degres
 from classes.Fractions import Fractions #Fractions de pyro
-from fractions import Fraction #Fraction de python
+#from fractions import Fraction #Fraction de python
+
+from outils.Affichage import decimaux
 def TeXz(nombre):
     '''n'affiche pas b si b=0'''
     if nombre==0:
@@ -49,19 +51,24 @@ def TeX(nombre,parenthese=False,terme=False):
         finTeX=""
     else:
         strTeX=finTeX=""
-    if isinstance(nombre,Fraction):
+    if isinstance(nombre,Fractions):
         fractex="\\dfrac"
-        if nombre.denominator == 1:
-            strTeX += sepmilliers(nombre.numerator) + ' '
-        elif nombre.numerator < 0:
-            strTeX += "-"+fractex+"{"+sepmilliers(-nombre.numerator)+"}{"+sepmilliers(nombre.denominator)+"} "
+        if nombre.denominateur == 1:
+            strTeX += decimaux(nombre.numerateur) + ' '
+        elif nombre.numerateur < 0:
+            strTeX += "-"+fractex+"{"+decimaux(-nombre.numerateur)+"}{"+decimaux(nombre.denominateur)+"} "
         else:
-            strTeX += fractex+"{"+sepmilliers(nombre.numerator)+"}{"+sepmilliers(nombre.denominator)+"} "
-        return strTeX+finTeX
+            strTeX += fractex+"{"+decimaux(nombre.numerateur)+"}{"+decimaux(nombre.denominateur)+"} "
+        strTeX+=finTeX
+        return strTeX
+    elif nombre==float("inf"):
+        return "+\\infty "
+    elif nombre==float("-inf"):
+        return "-\\infty "
     else:
-        return strTeX+sepmilliers(nombre)+finTeX
+        return strTeX+decimaux(nombre)+finTeX
 def radicalTeX(n):
-    return "\\sqrt{"+TeX(n)+"}"
+    return "\\sqrt{%s}"%(TeX(n))
 
 class TeXMiseEnForme:
 

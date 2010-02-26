@@ -101,7 +101,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5e), "5e")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4e), "4e")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3e), "3e")
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2e), "Lyc")
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2e), u"Lycée")
 
         #============================================================
         #        Onglet options

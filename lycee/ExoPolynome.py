@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 
-import sys, os, codecs
 if __name__=="__main__":
+    import sys
     sys.path.append("/home/nicolas/pyrogit/pyromaths")
+
 from classes.Polynome import *
 from outils.TeXMiseEnForme import *
 from random import randrange,randint
 from math import *
 from re import findall
-from outils.Arithmetique import carrerise,pgcd
+from outils.Arithmetique import pgcd
 from outils.Polynomes import *
+from classes.Fractions import Fractions
 
 def exo_fonctions_rationnelles():
     var=['t','x'][randrange(2)]
@@ -40,27 +42,27 @@ def exo_fonctions_rationnelles():
     denominateur=u"%s^2"%(Q.TeX(parenthese=True))
     f_derivee="\\dfrac{%s}{%s}"%(numerateur,denominateur)
     f_derivee_simplifiee="\\dfrac{%s}{%s}"%(numerateur_simplifie,denominateur)
-    exo=u"\\exercice On considère la fonction $%s$ définie sur $I=[%s~;~%s]$ par $%s(%s)=\dfrac{%s}{%s}$.\n"%\
-          (nomf,Intervalle[0],Intervalle[1],nomf,var,P.TeX(),Q.TeX())
+    exo=u"On considère la fonction $%s$ définie sur $I=[%s~;~%s]$ par $%s(%s)=\dfrac{%s}{%s}$.\n"%\
+          (nomf,Intervalle[0],Intervalle[1],nomf,var,P,Q)
     exo+="\\begin{enumerate}\n"
-    cor="\\exercice* \\begin{enumerate}\n"
+    cor="\\begin{enumerate}\n"
     exo+=u"\\item Justifier que $%s$ est définie et dérivable sur $I$.\n"%(nomf)
-    cor+=u"\\item Pour déterminer la valeur interdite on doit résoudre $%s=0$.\n\n"%(Q.TeX())
+    cor+=u"\\item Pour déterminer la valeur interdite on doit résoudre $%s=0$.\n\n"%(Q)
     cor+="\\begin{align*}\n\
             %s&=0\\\\\n\
             %s&=%s\\\\\n\
             %s&=%s\n\
-            \\end{align*}\n"%(Q.TeX(),(Q-Q[0]).TeX(),TeX(-Q[0]),var,TeX(-Q[0]*Fraction(1)/Q[1]))
+            \\end{align*}\n"%(Q,(Q-Q[0]),TeX(-Q[0]),var,TeX(-Q[0]*Fractions(1)/Q[1]))
     cor+=u"Or $%s$ n'est pas dans l'intervalle $[%s~;~%s]$ donc $%s$ est bien définie et dérivable sur $I$.\n"%\
-          (TeX(-Q[0]*Fraction(1)/Q[1]),Intervalle[0],Intervalle[1],nomf)
+          (TeX(-Q[0]*Fractions(1)/Q[1]),Intervalle[0],Intervalle[1],nomf)
     exo+=u"\\item Déterminer $%s'(%s)$ pour tout $%s\in[%s~;~%s]$.\n"%\
           (nomf,var,var,Intervalle[0],Intervalle[1])
     cor+=u"\\item $$%s'(%s)=%s=%s$$\n"%(nomf,var,f_derivee,f_derivee_simplifiee)
     exo+=u"\\item En déduire le sens de variations de $%s$ sur $I$.\n"%(nomf)
     if numerateur_simplifie.degre==0:
         cor+=u"\\item Comme $%s$ est un carré, il est toujours positif.\\\\\n"%(denominateur)
-        f_xmin=TeX(Fraction(1)*P(Intervalle[0])/Q(Intervalle[0]))
-        f_xmax=TeX(Fraction(1)*P(Intervalle[1])/Q(Intervalle[1]))
+        f_xmin=TeX(Fractions(1)*P(Intervalle[0])/Q(Intervalle[0]))
+        f_xmax=TeX(Fractions(1)*P(Intervalle[1])/Q(Intervalle[1]))
         if numerateur_simplifie[0]<0:
             cor+=u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient \n"%\
                   (numerateur_simplifie[0],var,nomf,var)
@@ -109,8 +111,8 @@ def exo_variation():
     cor="\\begin{enumerate}\n"
     Pprime=poly_racines_entieres(rac_min,rac_max,X,a1=a)
     P=Pprime.primitive()+randint(-abs_c,abs_c)
-    exo+=u"\\item Étudier le sens de variations de $%s$ définie par $%s(x)=%s$\n" % (nomP,nomP,P.TeX())
-    cor+="\\item $%s(x)=%s$ donc $%s'(x)=%s$\\\\\n" % (nomP,P.TeX(),nomP,Pprime.TeX())
+    exo+=u"\\item Étudier le sens de variations de $%s$ définie par $%s(x)=%s$\n" % (nomP,nomP,P)
+    cor+="\\item $%s(x)=%s$ donc $%s'(x)=%s$\\\\\n" % (nomP,P,nomP,Pprime)
     corfac,delta,P1,P2,x1,x2=factorisation_degre2(Pprime,nomP=nomP+"'",detail=True,factorisation=True)
     cor+=corfac+"\\\\\n"
     tab_signe,str_signe=tableau_de_signe(Pprime,nomP+"'",delta,P1,P2,x1,x2,detail=True)
@@ -122,17 +124,16 @@ def exo_variation():
     else:
         cor+="On obtient ainsi le tableau de variation de $%s$."%nomP
         if P[3]>0:
-            var_de_P="\\tx{%s}& &\\fm&\\txh{%s}&\\fd&\\txb{%s}&\\fm&\\cr\n"\
+            var_de_P="\\tx{%s}& &\\fm&\\txh{%s}&\\fd&\\txb{%s}&\\fm&\\cr"\
                         %(nomP,TeX(P(int(re.findall("[\-0-9]+",x1)[0]))),TeX(P(int(re.findall("[\-0-9]+",x2)[0]))))
         else:
-            var_de_P="\\tx{%s}& &\\fd&\txb{%s}&\\fm&\\txh{%s}&\\fd&\\cr\n"\
-                      %(nomP,TeX(P(int(re.findall("[\-0-9]+",x1)[0]))),TeX(P(int(re.findall("[\-0-9]+",x2)[0]))))
+            var_de_P="\\tx{%s}& &\\fd&\\txb{%s}&\\fm&\\txh{%s}&\\fd&\\cr"\
+                      %(nomP,x1,x2)
         
         cor+="$$\
-            \\tabvar{\
-            \\tx{%s}& \\tx{+\\infty}&& \\tx{%s}&&\\tx{%s}&& \\tx{-\\infty}\\cr\n\
-            %s\
-            %s}$$"%(P.var,x1,x2,str_signe,var_de_P)
+        \\tabvar{\n\
+        \\tx{%s}& \\tx{+\\infty}&& \\tx{%s}&&\\tx{%s}&& \\tx{-\\infty}\\cr\n\
+        %s %s}$$"%(P.var,x1,x2,str_signe,var_de_P)
     exo+="\\end{enumerate}\n"
     cor+="\\end{enumerate}\n"
     return exo,cor
@@ -159,8 +160,8 @@ def exo_tableau():
     cor="\\begin{enumerate}\n"
     for i in range(len(Poly)):
         P=Poly[i]
-        exo+=u"\\item Étudier le signe du polynôme $%s=%s$\n" % (nomP,P.TeX())
-        cor+="\\item $%s=%s$\\\\\n" % (nomP,P.TeX())
+        exo+=u"\\item Étudier le signe du polynôme $%s=%s$\n" % (nomP,P)
+        cor+="\\item $%s=%s$\\\\\n" % (nomP,P)
         corfac,delta,P1,P2,x1,x2=factorisation_degre2(P,nomP=nomP,detail=True,factorisation=True)
         cor+=corfac+"\\\\\n"
         cor+=tableau_de_signe(P,nomP,delta,P1,P2,x1,x2)
@@ -190,20 +191,21 @@ def exo_racines_degre2():
           \\begin{multicols}{3}\n"
     cor+="\\begin{enumerate}\n"
     for i in range(2):
-        X=Polynome({1:1},var=inconnues[randrange(4)])
+        var=inconnues[randrange(4)]
+        X=Polynome({1:1},var)
         P,sgns=poly_id_remarquables(rac_min,rac_max,X)
-        exo+="\\item $"+P.TeX()+"=0$\n"
+        exo+="\\item $%s=0$\n"%(P(var))
         exot,cor,racines=identites_remarquables(exo,cor,P,sgns,racines=True)
         cor+=u"\\\\\n On en déduit que l'équation a "
         if len(racines)==1:
-            cor+="une solution $"+X.var+"="+TeX(racines[0])+"$\n"
+            cor+="une solution $%s=%s$\n"%(X.var,TeX(racines[0]))
         else:
-            cor+="deux solutions $"+X.var+"="+TeX(racines[0])+"$ ou $"+X.var+"="+TeX(racines[1])+"$\n"
+            cor+="deux solutions $%s=%s$ ou $%s=%s$\n"%(X.var,TeX(racines[0]),X.var,TeX(racines[1]))
     for i in range(2):
         X=Polynome({1:1},var=inconnues[randrange(4)])
         P=poly_racines_entieres(rac_min,rac_max,X)
         #exo,cor=degre2racine(exo,cor,P,nomP="P")
-        exo+="\\item $"+P.TeX()+"=0$\n"
+        exo+="\\item $%s=0$\n"%(P(var))
         cor_fac,delta,P1,P2,x1,x2=factorisation_degre2(P,nomP="P",detail=True,factorisation=False)
         cor+="\\item "+cor_fac+"\n" 
 
@@ -211,7 +213,7 @@ def exo_racines_degre2():
         X=Polynome({1:1},var=inconnues[randrange(4)])
         P=poly_racines_fractionnaires(rac_min,rac_max,denom1,X,deltanul=False)
         #exo,cor=degre2racine(exo,cor,P,nomP="P")
-        exo+="\\item $"+P.TeX()+"=0$\n"
+        exo+="\\item $%s=0$\n"%(P(var))
         cor_fac,delta,P1,P2,x1,x2=factorisation_degre2(P,nomP="P",detail=True,factorisation=False)
         cor+="\\item "+cor_fac+"\n" 
     
@@ -219,7 +221,7 @@ def exo_racines_degre2():
         X=Polynome({1:1},var=inconnues[randrange(4)])
         P=poly_racines_quelconques(abs_a=1,abs_b=10,abs_c=10,X=X)
         #exo,cor=degre2racine(exo,cor,P,nomP="P")
-        exo+="\\item $"+P.TeX()+"=0$\n"
+        exo+="\\item $%s=0$\n"%(P(var))
         cor_fac,delta,P1,P2,x1,x2=factorisation_degre2(P,nomP="P",detail=True,factorisation=False)
         cor+="\\item "+cor_fac+"\n" 
     
@@ -254,19 +256,19 @@ def Exo_factorisation():
     for i in range(2):
         X=Polynome({1:1},var=inconnues[randrange(4)])
         P=poly_racines_entieres(rac_min,rac_max,X)
-        exo+=u"\\item Factoriser le polynôme $$"+nomP+"="+P.TeX()+"$$\n"
+        exo+=u"\\item Factoriser le polynôme $$%s=%s$$\n"%(nomP,P)
         cor+="\\item "+factorisation_degre2(P)
         
     for i in range(3):
         X=Polynome({1:1},var=inconnues[randrange(4)])
         P=poly_racines_fractionnaires(rac_min,rac_max,denom1,X)
-        exo+=u"\\item Factoriser le polynôme $$"+nomP+"="+P.TeX()+"$$\n"
+        exo+=u"\\item Factoriser le polynôme $$%s=%s$$\n"%(nomP,P)
         cor+="\\item "+factorisation_degre2(P)
     
     for i in range(2):
         X=Polynome({1:1},var=inconnues[randrange(4)])
         P=poly_racines_quelconques(abs_a=1,abs_b=10,abs_c=10,X=X)
-        exo+=u"\\item Factoriser le polynôme $$"+nomP+"="+P.TeX()+"$$\n"
+        exo+=u"\\item Factoriser le polynôme $$%s=%s$$\n"%(nomP,P)
         cor+="\\item "+factorisation_degre2(P)
 
     exo+="\\end{enumerate}\n"
@@ -304,39 +306,36 @@ def factorisation_degre2(P,nomP="P",detail=False,factorisation=True):
     cor=""
     x1=x2=0
     delta=int(P[1]**2-4*P[2]*P[0])
-    cor+="Je calcule $\Delta="+pTeX(P[1])+u"^2-4\\times"+pTeX(P[2])+"\\times"+pTeX(P[0])+"="\
-    +TeX(delta)+"$"
+    cor+=u"Je calcule $\Delta=%s^2-4\\times %s\\times %s=%s$"%(pTeX(P[1]),pTeX(P[2]),pTeX(P[0]),TeX(delta))
     if delta<0:
-        cor+=" donc $"+nomP+"$ n'a pas de racines."
-        P1=P.TeX()
+        cor+=" donc $%s$ n'a pas de racines."%(nomP)
+        P1=P
         P2=""
     elif delta==0:
-        x0=Fraction(-1,2)*P[1]/P[2]
-        cor+=" donc $"+nomP+"$ a une seule racine $"+P.var+"_0="+TeX(x0)+"$.\\par\n"
+        x0=Fractions(-1,2)*P[1]/P[2]
+        cor+=" donc $%s$ a une seule racine $%s_0=%s$.\\par\n"%(nomP,P.var,TeX(x0))
         if factorisation:
-            cor+=u"Ainsi $"+nomP+u"$ peut s'écrire $"+nomP+"="
+            cor+=u"Ainsi $%s$ peut s'écrire $%s="%(nomP,nomP)
             if P[2]!=1:
                 cor+=TeX(P[2])
-        P1="{\\left("+(Polynome({1:1,0:-x0},var=P.var)).TeX()+u"\\right)}^2"
+        P1=u"{\\left(%s\\right)}^2"%(Polynome({1:1,0:-x0},var=P.var))
         P2=""
         cor+=P1+"$.\n"
     else:
-        if P[2]==0:
-            print P,delta
         rac_delta,simplrac,strx1,x1,strx2,x2,parenthesex1,parenthesex2=listeracines(P[2],P[1],delta)
         if simplrac:
-            cor+=" et $"+radicalTeX(delta)+"="+rac_delta+"$"
+            cor+=" et $%s=%s$"%(radicalTeX(delta),rac_delta)
         cor+=".\par\n"
-        cor+=" Les racines de $"+nomP+"$ sont $"+P.var+"_1="+ strx1 +"="+x1 +"$ et $"+P.var+"_2="+ strx2 + "="+x2 +"$.\n"
+        cor+=" Les racines de $%s$ sont $%s_1=%s=%s$ et $%s_2=%s=%s$.\n"%(nomP,P.var,strx1,x1,P.var,strx2,x2)
         if factorisation:
             cor+=u"\\\\ Donc $%s$ peut s'écrire $%s(%s)=\n"%(nomP,nomP,P.var)
             if parenthesex1:
-                x1="\\left("+x1+"\\right)"
+                x1="\\left(%s\\right)"%(x1)
             if parenthesex2:
-                x2="\\left("+x2+"\\right)"
-            cor+=TeX(P[2])+"\\times\\left("+P.var+"-"+x1+"\\right)\\times\\left("+P.var+"-"+x2+"\\right)$.\n"
-        P1=P.var+"-"+x1
-        P2=P.var+"-"+x2
+                x2="\\left(%s\\right)"%(x2)
+            cor+="%s\\times\\left(%s-%s\\right)\\times\\left(%s-%s\\right)$.\n"%(TeX(P[2]),P.var,x1,P.var,x2)
+        P1="%s-%s"%(P.var,x1)
+        P2="%s-%s"%(P.var,x2)
     if detail:
         return cor,delta,P1,P2,x1,x2
     else:
@@ -344,8 +343,8 @@ def factorisation_degre2(P,nomP="P",detail=False,factorisation=True):
 
 def TeXracines(a,b,delta,simple=True):
     '''renvoie la formule des racines sous forme TeX'''
-    strx1="\\dfrac{-"+pTeX(b)+"-\\sqrt{"+TeX(delta)+"}}{2\\times"+pTeX(a)+"}"
-    strx2="\\dfrac{-"+pTeX(b)+"+\\sqrt{"+TeX(delta)+"}}{2\\times"+pTeX(a)+"}"
+    strx1="\\dfrac{-%s-\\sqrt{%s}}{2\\times %s}"%(pTeX(b),TeX(delta),pTeX(a))
+    strx2="\\dfrac{-%s+\\sqrt{%s}}{2\\times %s}"%(pTeX(b),TeX(delta),pTeX(a))
     if simple:
         if a>0:
             return strx1,strx2
@@ -360,17 +359,18 @@ def listeracines(a,b,delta):
     '''avec x_1<x_2'''
     '''On suppose delta >0'''
     '''simplrac est True si racine de delta se simplifie'''
-
+    a=int(a)
+    b=int(b)
     parenthesex1=parenthesex2=True #par défaut
     simplrac=True
-    strx1="\\dfrac{-"+pTeX(b)+"-\\sqrt{"+TeX(delta)+"}}{2\\times"+pTeX(a)+"}"
-    strx2="\\dfrac{-"+pTeX(b)+"+\\sqrt{"+TeX(delta)+"}}{2\\times"+pTeX(a)+"}"
+    strx1="\\dfrac{-%s-\\sqrt{%s}}{2\\times %s}"%(pTeX(b),TeX(delta),pTeX(a))
+    strx2="\\dfrac{-%s+\\sqrt{%s}}{2\\times %s}"%(pTeX(b),TeX(delta),pTeX(a))
     ##on a strx1<strx2
     coeff,radicande=simplifie_racine(delta)
     if radicande==1:#delta est un carré
         rac_delta=TeX(coeff)
-        x1=TeX(Fraction(1)*(-b-coeff)/(2*a))
-        x2=TeX(Fraction(1)*(-b+coeff)/(2*a))
+        x1=TeX((Fractions(1)*(-b-coeff)/(2*a)).simplifie())
+        x2=TeX((Fractions(1)*(-b+coeff)/(2*a)).simplifie())
         #les racines sont fractionnaires ou entières
         parenthesex1=((b+coeff)*a>0)
         parenthesex2=((b-coeff)*a>0)
@@ -381,7 +381,7 @@ def listeracines(a,b,delta):
             rac_delta=radicalTeX(delta)
             simplrac=False
         else:
-            rac_delta=TeX(coeff)+radicalTeX(radicande)                
+            rac_delta=TeX(coeff)+radicalTeX(radicande)
         simplifie=pgcd(pgcd(b,coeff),2*a)#simplifie est négatif si a<0
         if simplifie==coeff:
             rac_delta1="-"+radicalTeX(radicande)
@@ -428,14 +428,14 @@ def identites_remarquables(exo,cor,pol1,sgns,nomP="P",racines=True):
     #pol2[1]=2× cx × b
     #pol2[0] = b^2
     c=int(sqrt(pol2[2]))
-    exo+=u"\\item  Factoriser le polynôme $$"+nomP+"="+pol1.TeX()+"$$\n"
+    exo+=u"\\item  Factoriser le polynôme $$%s=%s$$\n"%(nomP,pol1)
     if a1!=1:
-        cor+="\\item On remarque que $"+nomP+"="+pol1.TeX()+"="+TeX(a1)+"\\times\\big["+(pol1/a1).TeX()+"\\big]"
-        cor+="="+TeX(a1)+"\\times \\big["
+        cor+="\\item On remarque que $%s = %s = %s \\times\\big[ %s \\big]"%(nomP,pol1,TeX(a1),(pol1/a1).simplifie())
+        cor+="= %s\\times \\big["%(TeX(a1))
     else:
-        cor+="\\item $"+nomP+"="+pol1.TeX()+"="
+        cor+="\\item $%s=%s ="%(nomP,pol1)
     if c!=1:
-        cor+="("+TeX(c)+pol1.var+u")^2"
+        cor+=u"(%s %s)^2"%(TeX(c),pol1.var)
     else:
         cor+=pol1.var+u"^2"
     if sgns:
@@ -445,7 +445,7 @@ def identites_remarquables(exo,cor,pol1,sgns,nomP="P",racines=True):
             cor+= "+2 \\times "
         if c<0:      #impossible ! 
             print "on peut avoir c<0 dans identites_remarquables"
-            cor+="\\left("+TeX(c)+pol1.var+"\\right)"
+            cor+="\\left(%s %s\\right)"%(TeX(c),pol1.var)
         elif c==1:
             cor+=pol1.var
         else:
@@ -465,11 +465,11 @@ def identites_remarquables(exo,cor,pol1,sgns,nomP="P",racines=True):
         cor+=TeX(a1)
     sgns=sgns/2
     if sgns:#(cx-b)² ou (cx+b)²
-        liste_racines=[Fraction(-(sgns))*b/c]
-        cor+="{("+ (c*X+sgns*b).TeX() +")}^2$"
+        liste_racines=[Fractions(-(sgns))*b/c]
+        cor+="{(%s)}^2$"%(c*X+sgns*b)
     else:#(cx-b)(cx+b)
-        liste_racines=[Fraction(-1)*b/c,Fraction(1)*b/c]
-        cor+="("+ (c*X+b).TeX() +")("+(c*X-b).TeX()+")$"
+        liste_racines=[Fractions(-1)*b/c,Fractions(1)*b/c]
+        cor+="(%s)(%s)$"%(c*X+b,c*X-b)
     if racines:
         return exo,cor,liste_racines
     return exo,cor
@@ -489,8 +489,7 @@ def tableau_de_signe(P,nomP,delta,P1,P2,x1,x2,detail=False):
         else:
             return "Donc $%s$ ne change pas de signe donc $%s$ est $%s$\\\\\n"%(nomP,nomP,signe)
     elif delta==0:
-        tab_signe="$$\
-                \\tabvar{\%\
+        tab_signe="$$\\tabvar{\n\
                 \\tx{x}&\\tx{+\\infty}&& \\tx{%s}&& \\tx{-\\infty}\\cr\n\
                 \\tx{%s(%s)}&&\\tx{+}&\\tx{%s}&\\tx{-}&\\cr}$$" % (x1,nomP,P.var,x1)
         str_signe="\\tx{%s(%s)}&&\\tx{+}&\\tx{%s}&\\tx{-}&\\cr" % (nomP,P.var,x1)
@@ -505,8 +504,7 @@ def tableau_de_signe(P,nomP,delta,P1,P2,x1,x2,detail=False):
         else:
             str_a="\\tx{%s}& & \\tx{-} && \\tx{-} && \\tx{-} & \\cr\n" %(P.var)
             str_signe="\\tx{%s(%s)}& &\\tx{-}&\\tx{0}&\\tx{+}&\\tx{0}&\\tx{-}&\\cr\n" % (nomP,P.var)
-        tab_signe="$$\
-                \\tabvar{\
+        tab_signe="$$\\tabvar{\n\
                 \\tx{%s}& \\tx{+\\infty}&& \\tx{%s}&&\\tx{%s}&& \\tx{-\\infty}\\cr\n\
                 \\tx{%s}& & \\tx{-} &\\tx{0}& \\tx{+} && \\tx{+} & \\cr\n\
                 \\tx{%s}& & \\tx{-} && \\tx{-} &\\tx{0}& \\tx{+} & \\cr\n\
@@ -519,12 +517,12 @@ def tableau_de_signe(P,nomP,delta,P1,P2,x1,x2,detail=False):
 def factorisation_degre3(E,nomE,exo="",cor="",racines=[0,1,-1,2,-2]):
     '''Factorise un polynôme de degré 3 avec une racine évidente'''
     X=Polynome({1:1},E.var)
-    exo+="\\item Soit $"+nomE+"="+E.TeX()+"$\n"
-    cor+="\\item Soit $"+nomE+"="+E.TeX()+"$\n"
+    exo+="\\item Soit $%s =%s $\n"%(nomE,E)
+    cor+="\\item Soit $%s=%s $\n"%(nomE,E)
     exo+="\\begin{enumerate}\n"
     cor+="\\begin{enumerate}\n"
-    exo+=u"\\item Vérifier si $"+nomE+u"$ possède une racine évidente.\n"
-    exo+="\\item Factoriser $"+nomE+"$.\n"
+    exo+=u"\\item Vérifier si $%s $ possède une racine évidente.\n"%(nomE)
+    exo+="\\item Factoriser $%s $.\n"%(nomE)
     cor+="\\item "
     for x0 in racines:
         if E(x0)==0:
@@ -534,42 +532,42 @@ def factorisation_degre3(E,nomE,exo="",cor="",racines=[0,1,-1,2,-2]):
         degre_facteur=1
         E2=(E/(X**degre_facteur))[0]
         if degre_facteur==1:
-            cor+="On remarque que $%s$ peut se factoriser par $%s$ et $%s=%s\\left(%s\\right)$" %(nomE,E.var,nomE,E.var,E2.TeX())
+            cor+="On remarque que $%s$ peut se factoriser par $%s$ et $%s=%s\\left(%s\\right)$" %(nomE,E.var,nomE,E.var,E2)
         else:
             cor+=u"On remarque que $%s$ peut se factoriser par $%s^%s$ et $%s=%s^%s\\left(%s\\right)$"\
-            %(nomE,E.var,str(degre_facteur),nomE,E.var,str(degre_facteur),E2.TeX())
+            %(nomE,E.var,str(degre_facteur),nomE,E.var,str(degre_facteur),E2)
     else:            
-        cor+="Comme $"+nomE+"("+TeX(x0)+")=0$, on peut diviser $"+nomE+"$ par $"+(X-x0).TeX()+"$\n"
+        cor+="Comme $%s(%s)=0$, on peut diviser $%s$ par $%s$\n"%(nomE,TeX(x0),nomE,X-x0)
         cor+=TeX_division(E,(X-x0))+"\n"
         E2,reste=E/(X-x0)
-    cor+="\\item On doit maintenant factoriser le polynome $"+nomE+"_2="+ E2.TeX() +"$\\\\\n"
-    cor2,delta,P1,P2,x1,x2=factorisation_degre2(E2,nomP="E_2",detail=True)
+    cor+="\\item On doit maintenant factoriser le polynome $%s_2=%s$\\\\\n"%(nomE,E2)
+    cor2,delta,P1,P2,x1,x2=factorisation_degre2(E2,nomP=nomE+"_2",detail=True)
     cor+=cor2+"\\\\\n"
-    cor+="On en conclue donc que $"+nomE+"="
+    cor+="On en conclue donc que $%s="%(nomE)
     final=0
     if x0==0:
         P0=E.var
     else:
-        P0="\\left("+(X-x0).TeX()+"\\right)"
+        P0="\\left(%s\\right)"%(X-x0)
     if E[3]==-1:
         cor+="-"
     elif E[3]!=1:
         cor+=TeX(E[3])            
     if delta<=0:
-        E_factorise=P0+"\\times"+P1+"$\n"
+        E_factorise="%s\\times%s$\n"%(P0,P1)
     else:
-        E_factorise=P0+"\\left("+P1+"\\right)\\left("+P2+"\\right)$\n"
+        E_factorise="%s\\left(%s\\right)\\left(%s\\right)$\n"%(P0,P1,P2)
         x12=[x1,x2]
         for i in range(2):
             if isinstance(x12[i],str) and len(x12[i])>6 and x12[i][6]=="-":
                 final=1
                 x12[i]=x12[i][7:-7]
         x1,x2=x12[0],x12[1]
-        E_final=P0+"\\left("+E.var+"+"+x1+"\\right)\\left("+E.var+"+"+x2+"\\right)\n"
+        E_final="%s\\left(%s+%s\\right)\\left(%s+%s\\right)\n"%(P0,E.var,x1,E.var,x2)
 
     cor+=E_factorise
     if final:
-        cor+="\\\\\n Finalement, $"+nomE+"="+E_final+"$\n"
+        cor+="\\\\\n Finalement, $%s=%s $\n"%(nomE,E_final)
     exo+="\\end{enumerate}\n"
     cor+="\\end{enumerate}\n"
     return exo,cor

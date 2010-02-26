@@ -446,14 +446,7 @@ def affine():
          "\\end{center}",
          "\\end{minipage}",
          "\\vspace{0.45cm}"]
-
-    for st in exos:
-        exo.append(st)
-    for st in cors:
-        cor.append(st)
+    return exo,cor
 
 def tex_affine():
-    exo = ['\\exercice\n']
-    cor = ['\\exercice*\n']
-    affine(exo,cor)
-    return (exo, cor)
+    return affine()

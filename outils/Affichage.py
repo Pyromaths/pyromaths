@@ -78,6 +78,11 @@ def ecrire_par3(nombre):
 # Affichages des nombres décimaux
 #---------------------------------------------------------------------
 def decimaux(nb, mathenv = 0):
+    if nb < 0:
+        nb=-1*nb
+        signe="-"
+    else:
+        signe=""
     pattern = re.compile(r"^(-?\d+)\.*(\d*)e?([\+\-]?\d*)$")
     entiere,  decimale,  exposant = pattern.search(str(nb)).groups()
     if exposant:
@@ -105,13 +110,13 @@ def decimaux(nb, mathenv = 0):
                              "(\d{1,3})?$")
         partie_decimale = pattern.search(decimale).groups()
         if mathenv:
-            return "{,}".join(("\,".join(partie_entiere),
+            return signe+"{,}".join(("\,".join(partie_entiere),
                                "\,".join(partie_decimale)))
         else:
-            return ",".join(("\,".join(partie_entiere),
+            return signe+",".join(("\,".join(partie_entiere),
                              "\,".join(partie_decimale)))
     else:
-        return "\,".join(partie_entiere)
+        return signe+"\,".join(partie_entiere)
         
 def tex_coef(coef, var, bplus=0, bpn=0, bpc=0):
     """

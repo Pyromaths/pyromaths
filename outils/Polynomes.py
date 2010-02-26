@@ -15,7 +15,7 @@ def TeX_division(dividende,diviseur):
     reste=dividende
     diviseur_degre=diviseur.deg
     sauve=min(dividende.puiss+restera.puiss)
-    longueur=dividende.degre-sauve
+    longueur=dividende.degre_max-sauve
     string= "$$\\renewcommand\\arraycolsep{0cm}\n\\begin{array}{c"
     for i in range(longueur):
         string+= "c"
@@ -40,12 +40,12 @@ def TeX_division(dividende,diviseur):
         string+= "\\cline{"+str(i+1) +"-"+str(i+diviseur.deg+1-sauve) +"}\n"
         avant=reste.deg
         reste=reste-soustrait_reste
-        delta=avant-reste.degre
+        delta=avant-reste.degre_max
         for k in range(i):
             string+= " &"
         i=i+delta
         prochain=1
-        string +=tab_print(reste,min(diviseur.deg+1,reste.degre+1)+delta-sauve,debut=delta)
+        string +=tab_print(reste,min(diviseur.deg+1,reste.degre_max+1)+delta-sauve,debut=delta)
         #fait descendre les monome du dividende
         for k in range(longueur-i-diviseur.deg+sauve):
             string+= " & "
@@ -62,14 +62,14 @@ def TeX_division(dividende,diviseur):
     return string
 def tab_print(polynome,longueur=0,parenthese=False,debut=0):
     '''utilisé par TeX_division pour décaler le reste dans la partie gauche'''
-    degre=polynome.degre+debut
+    degre=polynome.degre_max+debut
     string=''
     if parenthese:
         string = "-("
         fin=")"
     else:
         fin=""
-    if polynome.degre<0:
+    if polynome==0:
         string += "+"+str(0)+ " &"
     else:
         for i in range(longueur):

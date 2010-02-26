@@ -34,8 +34,9 @@ class Fractions:
     Une fraction est stockée ainsi : (numérateur, dénominateur)"""
 
     def __init__(self, n, d=1):
-        self.n = n
-        self.d = d
+        self.numerateur = self.n = n
+        self.denominateur = self.d = d
+        
 
     def simplifie(self):
 
@@ -44,6 +45,8 @@ class Fractions:
         pgcd = outils.Arithmetique.pgcd(self.n, self.d)
         return Fractions(self.n // pgcd, self.d // pgcd)
 
+    def __str__(self):
+        return self.TeX(signe=0,coef=None)
     def TeX(self, signe=0, coef=None):
         """Permet d'écrire une fraction au format TeX.
 
@@ -101,21 +104,86 @@ class Fractions:
         return texte
 
     def __add__(self, fraction):
+        if (isinstance(fraction,int) or isinstance(fraction,float)):
+            fraction=Fractions(fraction)
         ppcm = outils.Arithmetique.ppcm(self.d, fraction.d)
         return Fractions((self.n * ppcm) // self.d + (fraction.n * ppcm) //
                          fraction.d, ppcm)
-
+    def __radd__(self,other):
+        return self+other
+    
     def __sub__(self, fraction):
+        if isinstance(fraction,int) or isinstance(fraction,float):
+            fraction=Fractions(fraction)
         ppcm = outils.Arithmetique.ppcm(self.d, fraction.d)
         return Fractions((self.n * ppcm) // self.d - (fraction.n * ppcm) //
                          fraction.d, ppcm)
+    def __rsub__(self,other):
+        return other+(-self)
 
     def __mul__(self, fraction):
-        return Fractions(self.n * fraction.n, self.d * fraction.d)
+        if (isinstance(fraction,int) or isinstance(fraction,float)):
+            fraction=Fractions(fraction)
+        if isinstance(fraction,Fractions):
+            return Fractions(self.n * fraction.n, self.d * fraction.d)
+        else:
+            return fraction*self
+    def __rmul__(self,other):
+        return self*other
 
     #def __truediv__(self, fraction): # pour Python 3
     def __div__(self, fraction):
+        if (isinstance(fraction,int) or isinstance(fraction,float)):
+            fraction=Fractions(fraction)
         return Fractions(self.n * fraction.d, self.d * fraction.n)
+    def __rdiv__(self,other):
+        return other*~self
+    def __invert__(self):
+        return Fractions(self.d,self.n)
+    def __neg__(self):
+        return Fractions(-self.n,self.d)
+
+    def __pow__(self,n):
+        result=1
+        for i in range(n):
+            result=result*self
+        return result
+    def __trunc__(self):
+        return self.n//self.d
+
+    def __lt__(self, other):
+        if isinstance(other,int) or isinstance(other,float):
+            other=Fractions(other)
+        return self.n*other.d < self.d * other.n
+    def __le__(self, other):
+        if isinstance(other,int) or isinstance(other,float):
+            other=Fractions(other)
+        return self.n*other.d > self.d * other.n
+        
+    def __eq__(self, other):
+        if isinstance(other,int) or isinstance(other,float):
+            other=Fractions(other)
+        if isinstance(other,Fractions):
+            return self.n*other.d == self.d * other.n
+        
+    def __ne__(self, other):
+        if isinstance(other,int) or isinstance(other,float):
+            other=Fractions(other)
+        return self.n*other.d != self.d * other.n
+        
+    def __gt__(self, other):
+        if isinstance(other,int) or isinstance(other,float):
+            other=Fractions(other)
+        return self.n*other.d <= self.d * other.n
+        
+    def __ge__(self, other):
+        if isinstance(other,int) or isinstance(other,float):
+            other=Fractions(other)
+        return self.n*other.d >= self.d * other.n
+
+    def __float__(self):
+        return 1.0*self.n/self.d
+
 
 
 #a = Fractions(1, 2)

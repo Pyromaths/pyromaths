@@ -171,11 +171,11 @@ def tabvar_de_f(listef):
 def nombre_TeX(nombre):#A remplacer par sepmillier
     if type(nombre) in [type(int),type(float)]:
         return str(nombre)
-    elif isinstance(nombre,Fraction):
-        if nombre.denominator==1:
-            return nombre_TeX(nombre.numerator)
+    elif isinstance(nombre,Fractions):
+        if nombre.denominateur==1:
+            return nombre_TeX(nombre.numerateur)
         else:
-            return "\\dfrac{"+str(nombre.numerator)+"}{"+str(nombre.denominator)+"}"
+            return "\\dfrac{"+str(nombre.numerateur)+"}{"+str(nombre.denominateur)+"}"
     else:
         return str(nombre)
 
