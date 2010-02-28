@@ -104,6 +104,19 @@ def carrerise(n):
             ncar *= element
     return ncar
 
+def combinaison(n, k):
+    """renvoie le nombre de combinaisons de n objets pris k à k"""
+    if k > n//2:
+        k = n-k
+    x = 1
+    y = 1
+    i = n-k+1
+    while i <= n:
+        x = (x*i)//y
+        y += 1
+        i += 1
+    return x
+    
 def signe(a):
     """renvoie 1 si a est>0, -1 si a<0"""
     if a < 0:
