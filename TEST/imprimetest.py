@@ -24,8 +24,7 @@ def imprime_TeX(string,fichier="fichier.tex",chemin_fichier="",borne=["entete","
     ## Les variables à remplacer :
     titre = "Fiche d'essai"
     niveau = u"testeur"
-    preambule = "\\RequirePackage{alterqcm,tkz-fct,tkz-tab}\n\
-	\\usetikzlibrary{arrows,patterns}\n"
+    preambule = "\\input{/home/nicolas/pyrogit/pyromaths/modeles/tabvar.tex}"
     for line in modeletex:
         if master_fin in line:
             break

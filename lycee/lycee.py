@@ -21,61 +21,20 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import random, math, string
-#import outils.Arithmetique
 import ExoPolynome
 
-def tex_racines_degre2(f0,f1):
-    f0.write('\\exercice\n')
-    f1.write('\\exercice*\n')
-    exo,cor=ExoPolynome.exo_racines_degre2()
-    f0.write(exo)
-    f1.write(cor)
-
-
-def tex_factorisation(f0,f1):
-    f0.write('\\exercice\n')
-    f1.write('\\exercice*\n')
-    exo,cor=ExoPolynome.Exo_factorisation()
-    f0.write(exo)
-    f1.write(cor)
-    
-def tex_factorisation_degre3(f0,f1):
-    f0.write('\\exercice\n')
-    f1.write('\\exercice*\n')
-    exo,cor=ExoPolynome.Exo_factorisation_degre3()
-    f0.write(exo)
-    f1.write(cor)
-
-def tex_tab_signe(f0,f1):
-    f0.write('\\exercice\n')
-    f1.write('\\exercice*\n')
-    exo,cor=ExoPolynome.exo_tableau()
-    f0.write(exo)
-    f1.write(cor)
-
-def tex_variation(f0,f1):
-    f0.write('\\exercice\n')
-    f1.write('\\exercice*\n')
-    exo,cor=ExoPolynome.exo_variation()
-    f0.write(exo)
-    f1.write(cor)
-    
-def tex_fonctions_rationnelles(f0,f1):
-    f0.write('\\exercice\n')
-    f1.write('\\exercice*\n')
-    exo,cor=ExoPolynome.exo_fonctions_rationnelles()
-    f0.write(exo)
-    f1.write(cor)
+def write(f0, f1, exos):
+    f0.write("\n")
+    f1.write("\n")
+    f0.writelines(x + "\n" for x in exos[0])
+    f1.writelines(x + "\n" for x in exos[1])
 
 def main(exo, f0, f1):
     modules = (
-        tex_racines_degre2,
-        tex_factorisation,
-        tex_factorisation_degre3,
-        tex_tab_signe,
-        tex_variation,
-        tex_fonctions_rationnelles,
+        ExoPolynome.exo_racines_degre2(),
+        ExoPolynome.exo_factorisation_degre2(),
+        ExoPolynome.exo_factorisation_degre3(),
+        ExoPolynome.exo_tableau_de_signe(),
+        ExoPolynome.exo_variation(),
         )
-
-    modules[exo](f0, f1)
+    write(f0, f1, modules[exo])

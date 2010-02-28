@@ -119,7 +119,6 @@ u'Factorisations 2° degré',
 u'Factorisations degré 3',
 u'Étude de signe',
 u"Sens de variations",
-u"Fonctions rationnelles",
 ]],
 ]
 

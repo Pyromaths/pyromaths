@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from classes.Polynome import Polynome
-from outils.Arithmetique import carrerise
+from outils.Arithmetique import carrerise,pgcd
 
 from random import randint,randrange
 from math import *
@@ -103,27 +103,36 @@ def poly_racines_quelconques(abs_a,abs_b,abs_c,X):
     b3=randrange(abs_b)
     c3=randrange(-abs_c,abs_c)
     return a3*X**2+b3*X+c3
-def poly_racines_fractionnaires(rac_min,rac_max,denom1,X,deltanul=False):
+def poly_racines_fractionnaires(rac_min,rac_max,denom1,X):
     '''renvoie un polynome de degré2 à racines fractionnaires '''
     '''les racines sont comprises entre rac_min et rac_max'''
     '''denom1 majore le dénominateur des racines'''
-    '''deltanul=True autorise un delta=0'''
-    
-    delta=0
-    pol2=[0,0]
-    while (delta==0 and pol2[1]==0) and (not(deltanul) or delta!=0):
+    while 1:
         #pour éviter P=77x^2
         a2=2*randrange(2)-1 #a2=-1 ou 1
         p2facteur=[randint(1,denom1)*X-randint(rac_min,rac_max)for i in range(2)]
         pol2=a2*p2facteur[0]*p2facteur[1]
-    return pol2
+        if pol2[1]!=0 and pol2[0]!=0:
+            break
+    pol2=pol2.simplifie()
+    simplifie=abs(pgcd(pgcd(int(pol2[0]),int(pol2[1])),int(pol2[2])))
+    pol2= pol2/simplifie
+    return pol2.simplifie()
 def poly_racines_entieres(rac_min,rac_max,X,a1=1):
-    p1facteur=[X-randrange(rac_min,rac_max) for i in range(2)]
-    pol1=a1*p1facteur[0]*p1facteur[1]
+    
+    while 1:
+        p1facteur=[X-randrange(rac_min,rac_max) for i in range(2)]
+        pol1=a1*p1facteur[0]*p1facteur[1]
+        if pol1[1]!=0 or pol1[1]!=0:
+            break
     return pol1
+
 def poly_id_remarquables(rac_min,rac_max,X):
     '''Renvoie un polynome obtenu par une identité remarquable'''
-    
+    '''et sgns 
+         -2 => (a-b)²
+         +2 => (a+b)²
+          0 => (a-b)(a+b)'''
     a=randint(1,10)
     while 1:
         coeff=randrange(rac_min,rac_max)
@@ -133,7 +142,7 @@ def poly_id_remarquables(rac_min,rac_max,X):
     sgns=[[-1,1][randrange(2)]for i in range(2)]
     p1facteur=[coeff*X+sgns[i]*racine for i in range(2)]
     return a*p1facteur[0]*p1facteur[1],sum(sgns)   
-        #sum(sgns) permet de connaître l'identité
+        #sum(sgns) permet de connaître l'identité remarquable
         # -2 => (a-b)²
         # +2 => (a+b)²
         # 0 => (a-b)(a+b)
@@ -149,45 +158,4 @@ def poly_degre3_racines_quelconques(abs_a,abs_b,abs_c,X):
     racine_evidente=[-2,-1,0,1,2][randrange(5)]
     return (X-racine_evidente)*poly_racines_quelconques(abs_a=1,abs_b=10,abs_c=10,X=X)
 
-###############Ancien outil# À supprimer######################
-from outils.Affichage import suppr0list
-from classes.SecondDegre import Poly2
-import random
-
-def choix_coeffs(unitaire, nbrac, entiers):
-
-    """Génère un polynôme du second degré, unitaire ou non, suivant le nombre de racines demandé, et avec des coeffs entiers ou non.
-    Retourne un tuple contenant une liste [a, racines] et un objet polynôme."""
-    sgn = [-1, 1]
-    sgns = [random.randint(0,1), random.randint(0,1), random.randint(0,1)]
-
-    if entiers:
-        entier = 1.0
-    else:
-        entier = 10.0
-
-    if unitaire:
-        a = 1
-        sgns[0] = 1
-    else:
-        a = random.randint(1, 30)
-
-    if nbrac == 1:
-        x = random.randint(1, 200) / entier
-        coeffrac = [a*sgn[sgns[0]], x, x]
-    elif nbrac == 0:
-        coeffrac = []
-    elif nbrac == 2:
-        coeffrac = [a*sgn[sgns[0]], random.randint(0, 200)*sgn[sgns[1]] / entier, random.randint(0, 200)*sgn[sgns[2]]]
-
-
-    if nbrac == 0:
-        c = carrerise(a)*(random.randint(1, 10))**2
-        b = 2*sqrt(a*c)
-        coeffs = suppr0list([a*sgn[sgns[0]], b, (c+1)*sgn[sgns[0]]])
-    else:
-
-        coeffs = suppr0list([coeffrac[0], -coeffrac[0]*(coeffrac[1]+coeffrac[2]), coeffrac[0]*coeffrac[1]*coeffrac[2]])
-
-    return (suppr0list(coeffrac), Poly2(coeffs[0], coeffs[1], coeffs[2]))
 

@@ -51,7 +51,11 @@ def TeX(nombre,parenthese=False,terme=False):
         finTeX=""
     else:
         strTeX=finTeX=""
-    if isinstance(nombre,Fractions):
+    if nombre==float("inf"):
+        return "+\\infty "
+    elif nombre==float("-inf"):
+        return "-\\infty "
+    elif isinstance(nombre,Fractions):
         fractex="\\dfrac"
         if nombre.denominateur == 1:
             strTeX += decimaux(nombre.numerateur) + ' '
@@ -61,10 +65,6 @@ def TeX(nombre,parenthese=False,terme=False):
             strTeX += fractex+"{"+decimaux(nombre.numerateur)+"}{"+decimaux(nombre.denominateur)+"} "
         strTeX+=finTeX
         return strTeX
-    elif nombre==float("inf"):
-        return "+\\infty "
-    elif nombre==float("-inf"):
-        return "-\\infty "
     else:
         return strTeX+decimaux(nombre)+finTeX
 def radicalTeX(n):

@@ -154,11 +154,18 @@ class Fractions:
     def __lt__(self, other):
         if isinstance(other,int) or isinstance(other,float):
             other=Fractions(other)
-        return self.n*other.d < self.d * other.n
+        if other.d*self.d > 0:
+            return self.n*other.d < self.d * other.n
+        else :
+            return not(self.n*other.d < self.d * other.n)
+
     def __le__(self, other):
         if isinstance(other,int) or isinstance(other,float):
             other=Fractions(other)
-        return self.n*other.d > self.d * other.n
+        if other.d*self.d > 0:
+            return self.n*other.d <= self.d * other.n
+        else :
+            return not(self.n*other.d <= self.d * other.n)
         
     def __eq__(self, other):
         if isinstance(other,int) or isinstance(other,float):
@@ -174,12 +181,18 @@ class Fractions:
     def __gt__(self, other):
         if isinstance(other,int) or isinstance(other,float):
             other=Fractions(other)
-        return self.n*other.d <= self.d * other.n
+        if other.d*self.d > 0:
+            return self.n*other.d > self.d * other.n
+        else :
+            return not(self.n*other.d > self.d * other.n)
         
     def __ge__(self, other):
         if isinstance(other,int) or isinstance(other,float):
             other=Fractions(other)
-        return self.n*other.d >= self.d * other.n
+        if other.d*self.d > 0:
+            return self.n*other.d >= self.d * other.n
+        else :
+            return not(self.n*other.d >= self.d * other.n)
 
     def __float__(self):
         return 1.0*self.n/self.d

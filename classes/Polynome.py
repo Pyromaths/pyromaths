@@ -5,7 +5,6 @@ if __name__=="__main__":
     import sys
     sys.path.append('/home/nicolas/pyrogit/pyromaths')
 
-#from fractions import Fraction
 from classes.Fractions import Fractions
 import re
 from outils.Affichage import decimaux
@@ -40,7 +39,7 @@ class Polynome:
         return max(0,self.deg)+1
     
     def degre(self):
-        degre=-8
+        degre=float("-inf")
         for i in self.dictio.iterkeys():
             if i > degre and self.dictio[i] !=0:
                 degre=i
@@ -180,16 +179,11 @@ class Polynome:
     def simplifie(self):
         result={}
         for i in self.puiss:
-            result[i]=self[i].simplifie()
+            if isinstance(self[i],Fractions):
+                result[i]=self[i].simplifie()
+            else:
+                result[i]=self[i]
         return Polynome(result)
-
-##    def __rdiv__(self,other):
-##        if isinstance(other,Polynome):
-##            return other/self
-##        elif isinstance(other,int):
-##            return Fractions(1,other)*self
-##        elif isinstance(other,Fractions) or isinstance(other,float):
-##            return (1/other)*self
     
     def __call__(self,x,):
         '''renvoie la Fraction ou l'int P(x)'''
@@ -206,7 +200,9 @@ class Polynome:
             result=0
             for i in self.dictio.iterkeys():
                 result= result+self[i]*x**i
-            if isinstance(result,Fractions) and result.denominateur==1:
+            if isinstance(result,Fractions):
+                result=result.simplifie()
+            if result.denominateur==1:
                 return result.numerateur
             else:
                 return result
@@ -285,13 +281,13 @@ def str_Polynome(string,var='x'):
             else:
                 a = re.findall('\d+(?:\.\d*)?', element)
                 if (len(a) == 1) and (not re.findall('\^', element)) and (re.findall(var, element)):
-                    termes[1]=coeff * Fractions(a[0])
+                    termes[1]=coeff * Fractions(eval(a[0]))
                 elif (len(a) == 1) and (re.findall(var, element)):
                     termes[int(a[0])]=coeff * 1
                 elif (len(a) == 1):
-                    termes[0]=coeff * Fractions(a[0])
+                    termes[0]=coeff * Fractions(eval(a[0]))
                 else:
-                    termes[int(a[1])]=coeff * Fractions(a[0])
+                    termes[int(a[1])]=coeff * Fractions(eval(a[0]))
     return termes
 
 if __name__=="__main__":
