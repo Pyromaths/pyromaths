@@ -22,8 +22,11 @@
 #
 import re
 
-from outils.Affichage import decimaux
+if __name__=="__main__":
+    import sys
+    sys.path.append('..')
 
+from outils.Affichage import decimaux
 
 _POLYNOME_FORMAT = re.compile(r"""
     \s*                                         # éventuellement des espaces pour commencer
@@ -233,7 +236,7 @@ class Polynome():
         if len(other) == 1:
             return self+-other
         else:
-            return [self, "+", -other]
+            return repr(self) + "+" + repr(-other)
 
     def __rsub__(self, other):
         if not isinstance(other, Polynome):
@@ -250,7 +253,7 @@ class Polynome():
         if not isinstance(other, Polynome):
             other=Polynome(repr(other), self.var)
         m1, m2 = [m for m in self.monomes], [m for m in other.monomes]
-        m = []
+        m = ""
         if Polynome.degre(self) == 0:
             self.var = other.var
         elif Polynome.degre(other)==0:
@@ -260,9 +263,9 @@ class Polynome():
         elif len(m1)>1 or len(m2)>1:
             for f1 in m1:
                 for f2 in m2:
-                    m.extend([repr(Polynome([f1], self.var)),
-                              "*", repr(Polynome([f2], self.var)), "+"])
-            m.pop(-1) # suppression du dernier +
+                    m+=repr(Polynome([f1], self.var)) + "*" + \
+                       repr(Polynome([f2], self.var)) + "+"
+            m = m[:-1] # suppression du dernier +
             return m
         else:
             return Polynome([[m1[0][0]*m2[0][0], m1[0][1]+m2[0][1]]],self.var)
@@ -290,10 +293,10 @@ class Polynome():
         elif len(self) == 2 and other ==2:
             a = Polynome([self.monomes[0]],  self.var)
             b = Polynome([self.monomes[1]],  self.var)
-            return ["%r**2+2*%r*%r+%r**2"%(a, a, b, b)]
+            return "%r**2+2*%r*%r+%r**2"%(a, a, b, b)
 
 #---------------------------------------------------------------------
-# version des priorités pour les polynomes (extensible aux décimaux ?)
+# version des priorités pour les polynomes et les décimaux
 #---------------------------------------------------------------------
 nb = r"""
     # Utilisé pour définir un nombre dans les expressions régulières
@@ -388,12 +391,35 @@ recherche_somme = re.compile(r"""
     """ % (nb, nb, nb, nb), re.VERBOSE).search
 
 recherche_polynome = re.compile(r"""
-    $(?P<pre>.*?)
-    (?P<calcul>Polynome\([^)]*\))
+    ^(?P<pre>.*?)
+    (?P<calcul>Polynome\([^\)]+\))
     (?P<post>.*)$""", re.VERBOSE).search
 
+def reduire(calcul):
+    """reduit les polynomes compris dans une chaine de caractères"""
+    groups=recherche_polynome(calcul)
+    reponse=""
+    modifie = 0
+    if groups:
+        while groups:
+            reponse+=groups.group('pre')
+            if Polynome.reductible(eval(groups.group('calcul'))):
+                modifie = 1
+                reponse+=repr(Polynome.reduit(eval(groups.group('calcul'))))
+            else:
+                reponse+=groups.group('calcul')
+            calcul = groups.group('post')
+            groups=recherche_polynome(calcul)
+        if modifie:
+            return reponse
+        else:
+            return None
+    else:
+        return None
+
 def priorites_operations(calcul):
-    serie=(recherche_polynome, recherche_parentheses, recherche_pow, recherche_produit, recherche_somme)#, recherche_sub, recherche_add)
+    #FIXME: gérer la supression de parenthèses dans le calcul polynomial
+    serie=(recherche_parentheses, recherche_pow, recherche_produit, recherche_somme)
     result=[]
     for recherche in serie:
         test = recherche(calcul)
@@ -402,24 +428,14 @@ def priorites_operations(calcul):
                 t=test.groups()
                 if test.group('pre'):
                     result.extend(priorites_operations(test.group('pre')))
-                if recherche == recherche_polynome:
-                    if Polynome.reductible(eval(test.group('calcul'))):
-                        result.append(Polynome.reduit(eval(test.group('calcul'))))
+                s = eval(test.group('calcul'))
+                if not isinstance(s, str) and not isinstance(s, list):
+                    s = repr(s)
+                if isinstance(s, str) and eval(s)<0 and test.group('post') and \
+                   test.group('post')[0:2]=="**":
+                    result.append("("+s+")")
                 else:
-                    s = eval(test.group('calcul'))
-                    if not isinstance(s, str) and not isinstance(s, list):
-                        s = repr(s)
-                    if isinstance(s, str) and eval(s)<0 and test.group('post') and \
-                       test.group('post')[0:2]=="**":
-                        result.append("("+s+")")
-                    elif isinstance(s, list):
-                        for e in s:
-                            if isinstance(e, str):
-                                result.append(e)
-                            else:
-                                result.append(repr(e))
-                    else:
-                        result.append(s)
+                    result.append(s)
                 calcul=test.group('post')
                 if calcul and (calcul[0]!="-" or recherche!=recherche_somme):
                     result.append(calcul[0])
@@ -434,18 +450,26 @@ def priorites(calcul):
     #FIXME: comment gérer 'Polynome("+4.0z^2")+Polynome("+16.0z")+Polynome("+16.0")',
     # qui est la même chose que Polynome("+4.0z^2+16.0z+16.0")' à l'affichage ?
     solution = []
-    while not solution or calcul != s:
+    while not solution or calcul != solution[-1]:
         if solution:
             calcul=solution[-1]
+        else:
+            #On réduit si possible le calcul initial
+            s=reduire(calcul)
+            if s:
+                solution.append(s)
+                calcul = s
         s = priorites_operations(calcul)
         if solution:
             solution.append(s)
         else:
             solution=[s]
+        s=reduire(s)
+        if s: solution.append(s)
     solution.pop(-1) # dernier calcul en double
-    print isinstance(eval(s), Polynome)
-    if isinstance(eval(s), Polynome) and Polynome.reductible(eval(s)):
-        solution.append([repr(Polynome.reduit(eval(s)))])
+    if isinstance(eval(solution[-1]), Polynome) and \
+                  Polynome.reductible(eval(solution[-1])):
+        solution.append([repr(Polynome.reduit(eval(solution[-1])))])
     return solution
 
 def main():
@@ -455,7 +479,7 @@ def main():
     q=Polynome('15.0z^2')
 #    print q
 #    print priorites("%r-%r" % (p, m))
-    print priorites('Polynome("2z+4")**2')
+    print priorites('Polynome("2z+4")-Polynome("5z+4")*Polynome("5z+4")+Polynome("5z+4")**2')
 #    print priorites("%r*(%r-%r)" %(n, p, m))
 #    print p**2
 #    calcul = '6*2/3**5+8*6**2'
@@ -467,3 +491,4 @@ def main():
     calcul="2+6-4+8-9-1+7-6"
 #    print(calcul)
     print(priorites(calcul))
+main()
