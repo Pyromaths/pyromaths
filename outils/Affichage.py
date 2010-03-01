@@ -78,11 +78,6 @@ def ecrire_par3(nombre):
 # Affichages des nombres décimaux
 #---------------------------------------------------------------------
 def decimaux(nb, mathenv = 0):
-    if nb < 0:
-        nb=-1*nb
-        signe="-"
-    else:
-        signe=""
     pattern = re.compile(r"^(-?\d+)\.*(\d*)e?([\+\-]?\d*)$")
     entiere,  decimale,  exposant = pattern.search(str(nb)).groups()
     if exposant:
@@ -100,8 +95,8 @@ def decimaux(nb, mathenv = 0):
             else:
                 decimale = "0"*(-int(exposant)-len(entiere)) + entiere + decimale
                 entiere = "0"
-    pattern = re.compile(r"^(-?\d{1,3}?)" + "(\d{3})" * ((len(entiere) - 1) // 3) \
-                         + "$")
+    pattern = re.compile(r"^(-?\d{1,3}?)" + "(\d{3})" * \
+                         ((len(entiere) - 1 - (entiere[0]=='-')) // 3) + "$")
     partie_entiere = pattern.search(entiere).groups()
     if decimale and int(decimale):
         """Vérifie si la partie décimale existe et si elle est différente de
@@ -110,13 +105,13 @@ def decimaux(nb, mathenv = 0):
                              "(\d{1,3})?$")
         partie_decimale = pattern.search(decimale).groups()
         if mathenv:
-            return signe+"{,}".join(("\,".join(partie_entiere),
+            return "{,}".join(("\,".join(partie_entiere),
                                "\,".join(partie_decimale)))
         else:
-            return signe+",".join(("\,".join(partie_entiere),
+            return ",".join(("\,".join(partie_entiere),
                              "\,".join(partie_decimale)))
     else:
-        return signe+"\,".join(partie_entiere)
+        return "\,".join(partie_entiere)
         
 def tex_coef(coef, var, bplus=0, bpn=0, bpc=0):
     """
