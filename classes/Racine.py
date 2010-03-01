@@ -3,6 +3,7 @@
 if __name__=="__main__":
     import sys
     sys.path[:0]=['../']
+    import classes.Racine
 from outils.TeXMiseEnForme import *
 
 from outils.Arithmetique import *
@@ -265,6 +266,14 @@ class RacineDegre2:
         for i in range(n):
             result=result*self
         return result
-        
-
+    def __float__(self):
+        return (self.numerateur+self.coeff*sqrt(self.radicande))/self.denominateur
+    def __cmp__(self,other):
+        comp=float(self)-float(other)
+        if comp>0:
+            return 1
+        elif comp<0:
+            return -1
+        else:
+            return 0
 

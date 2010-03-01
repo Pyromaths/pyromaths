@@ -217,7 +217,7 @@ def exo_tableau_de_signe():
         
         delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(P,factorisation=True)
         cor=redaction_factorisation(P,nomP,exo=[],cor=cor)[1]
-        cor.pop(-5)
+        #cor.pop(-5)
         if factorisation==[]:
             factorisation=[0]
         cor.append(tableau_de_signe(P,nomP,delta,racines,factorisation[-1]))
@@ -443,7 +443,7 @@ def quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf")):
     
     delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(Pprime,factorisation=True)
     cor=redaction_factorisation(Pprime,nomP+"'",exo=[],cor=cor)[1]
-    cor.pop(-5)
+    #cor.pop(-5)
     if factorisation==[]:
         factorisation=[0]
     tab_signe,str_signe=tableau_de_signe(Pprime,nomP+"'",delta,racines,factorisation[-1],borneinf,bornesup,detail=True)
@@ -721,7 +721,7 @@ def factorisation_degre3(E,nomE,exo=[],cor=[],racines=[0,1,-1,2,-2]):
     cor.append("\\item On doit maintenant factoriser le polynome $%s_2=%s$\\\\\n"%(nomE,E2))
     delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(E2,factorisation=True)
     cor=redaction_factorisation(E2,nomP=nomE+"_2",exo=[],cor=cor)[1]
-    cor.pop(-5)
+    #cor.pop(-5)
     cor.append("\\par\n")
     cor.append("On en conclue donc que $%s="%(nomE))
     final=0

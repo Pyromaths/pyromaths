@@ -74,6 +74,8 @@ class Polynome:
                     string += '-'
                 else:
                     string+=tTeX(self[exposant])
+            else:
+                string+="+"
             if exposant == 1:
                 terme = var
             elif (exposant == 0) and ((self[exposant] == 1) or (self[exposant] == -1)):
