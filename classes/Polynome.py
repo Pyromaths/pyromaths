@@ -3,15 +3,10 @@
 
 if __name__=="__main__":
     import sys
-    sys.path.append('/home/nicolas/pyrogit/pyromaths')
+    sys.path.append('..')
 
-from classes.Fractions import Fractions
+from classes.Racine import *
 import re
-from outils.Affichage import decimaux
-
-from outils.Arithmetique import carrerise,pgcd,ppcm
-from classes.Racine import simplifie_racine
-from math import sqrt
 
 class Polynome:
     '''Classe de polynôme pour le lycee'''
@@ -66,38 +61,35 @@ class Polynome:
         else:
             fractex="\\frac"
         for exposant in exposants :
-            if not(premier) and self.dictio[exposant]>=0:
-                string=string+ " + "
-            if self.dictio[exposant] == 1:
-                coeff = ''
-            elif self.dictio[exposant] == -1:
-                coeff = '-'
-            elif isinstance(self.dictio[exposant],Fractions):
-                if self.dictio[exposant].denominateur == 1:
-                    coeff = str(self.dictio[exposant].numerateur) + ' '
-                elif self.dictio[exposant].numerateur < 0:
-                    coeff = "-"+fractex+"{"+str(-self.dictio[exposant].numerateur)+"}{"+str(self.dictio[exposant].denominateur)+"} "
+            if premier:
+                if self[exposant]==1 and exposant!=0:
+                    string=''
+                elif self[exposant]==-1 and exposant!=0:
+                    string='-'
                 else:
-                    coeff = fractex+"{"+str(self.dictio[exposant].numerateur)+"}{"+str(self.dictio[exposant].denominateur)+"} "
-            else:
-                coeff = str(self.dictio[exposant])
+                    string=TeX(self[exposant])
+                premier=0
+            elif self[exposant] != 1:
+                if self.dictio[exposant] == -1:
+                    string += '-'
+                else:
+                    string+=tTeX(self[exposant])
             if exposant == 1:
                 terme = var
-            elif (exposant == 0) and ((self.dictio[exposant] == 1) or (self.dictio[exposant] == -1)):
+            elif (exposant == 0) and ((self[exposant] == 1) or (self[exposant] == -1)):
                 terme = '1'
             elif exposant == 0:
                 terme = ''
             else:
                 terme = var + u'^' + str(exposant)
-            string=string+coeff+terme
-            premier=0
+            string+=terme
         if parenthese and (len(self.puiss)>1 or self[self.degre_max]<0):
             return "\\left("+string+"\\right)"
         else:
             return string
 
     def __add__(self, other):
-        if isinstance(other,int) or isinstance(other,float) or isinstance(other,Fractions):
+        if isinstance(other,int) or isinstance(other,float) or  isinstance(other,Fractions) or isinstance(other,RacineDegre2):
             return self+Polynome({0:other},var=self.var)
         result={0:0}
         liste1=self.puiss
@@ -162,7 +154,7 @@ class Polynome:
     def __div__(self,other):
         if isinstance(other,int):
             return Fractions(1,other)*self
-        elif isinstance(other,Fractions) or isinstance(other,float):
+        elif isinstance(other,Fractions) or isinstance(other,float)or isinstance(other,RacineDegre2):
             return (1/other)*self
         else:
             quotient=Polynome({},var=self.var)

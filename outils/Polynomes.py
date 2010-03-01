@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from classes.Polynome import Polynome
-from outils.Arithmetique import carrerise,pgcd
+from outils.Arithmetique import pgcd
 
 from random import randint,randrange
 from math import *

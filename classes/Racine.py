@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 
-import sys
-sys.path[:0] = ['../outils','outils']
-from Arithmetique import *
-from Affichage import decimaux
-from math import *
+if __name__=="__main__":
+    import sys
+    sys.path[:0]=['../']
+from outils.TeXMiseEnForme import *
+
+from outils.Arithmetique import *
+from outils.Affichage import decimaux
+from math import sqrt
+from Fractions import Fractions
 
 def produitfacteurs(facteurs):
     """Affiche sous forme de produit les éléments d'une liste."""
@@ -31,7 +35,7 @@ class Racine:
 
     def __radd__(self, other):
         return self + other
-
+    
     def __sub__(self, other):
         if not (isinstance(other, Racine)):
             return str(self) + " + " + str(other)
@@ -123,21 +127,30 @@ def simplifie_racine(n):
         return int(sqrt(n//ncar)),ncar
         
 class RacineDegre2:
-    def __init__(self,entier=0,denominateur=1,coeff=1,radicande=0):
-        self.entier=entier
+    def __init__(self,numerateur=0,denominateur=1,coeff=1,radicande=0):
+        self.numerateur=numerateur
         self.denominateur=denominateur
         self.coeff=coeff
         self.radicande=radicande
-        self=Fractions(entier,denominateur)
         
     def __str__(self):
         numerateur=""
-        if self.entier==0 and self.radicande!=0:
+        if self.numerateur==0 and self.radicande!=0:
             numerateur=""
         else:
-            numerateur=str(self.entier)
+            numerateur=str(self.numerateur)
         if self.radicande!=0:
-            numerateur+=tTeX(self.coeff)+"\\sqrt{"+TeX(self.radicande)+"}"
+            if isinstance(self.coeff,str):
+                if self.coeff[0]!="-" and self.coeff[0]!="+":
+                    numerateur+="+"
+                numerateur+=self.coeff+"\\sqrt{"+str(self.radicande)+"}"
+            elif self.coeff==1:
+                numerateur+="+\\sqrt{"+TeX(self.radicande)+"}"
+            elif self.coeff==-1:
+                numerateur+="-\\sqrt{"+TeX(self.radicande)+"}"
+            else:
+                numerateur+=tTeX(self.coeff)+"\\sqrt{"+TeX(self.radicande)+"}"
+            
         if self.denominateur==1:
             result=numerateur
         else:
@@ -145,60 +158,113 @@ class RacineDegre2:
         return result
     
     def simplifie(self,detail=False):
+        liste_detail=[]
         coeff,radicande=simplifie_racine(self.radicande)
+        numerateur=self.numerateur
+        if self.radicande!=0:
+            if self.coeff==1:
+                    det_coeff="+ "
+            elif self.coeff==-1:
+                det_coeff="- "
+            else:
+                det_coeff="%s\\times "%(self.coeff)
+            if coeff!=1 or radicande==1:
+                det_coeff+=str(coeff)
+        else:
+            det_coeff="0"
+        if radicande==1:
+            #det_coeff="%s\\times%s"%(tTeX(self.coeff),coeff)
+            liste_detail.append("\\dfrac{%s %s}{%s}"%\
+                                    (self.numerateur,det_coeff ,self.denominateur))
+            radicande=0
+            numerateur=self.numerateur+(self.coeff)*int(coeff)
+            coeff=0
+        
+        if coeff!=1:
+            liste_detail.append(str(RacineDegre2(numerateur,
+                                                 self.denominateur,
+                                                 det_coeff,
+                                                 radicande)))
+        
         coeff=(self.coeff)*int(coeff)
-        simplifie=pgcd(pgcd(coeff,self.entier),self.denominateur)
-        entier=self.entier//simplifie
+        
+        simplifie=pgcd(pgcd(coeff,numerateur),self.denominateur)
+        numerateur=numerateur//simplifie
         coeff=coeff//simplifie
         denominateur=self.denominateur//simplifie
-        return RacineDegre2(entier,denominateur,coeff,radicande)
+        if simplifie!=1:
+            if radicande!=0 or denominateur!=1:
+                det_numerateur="%s_{\\times %s}"%(numerateur,pTeX(simplifie))
+                det_denominateur="%s_{\\times %s}"%(denominateur,pTeX(simplifie))
+                det_coeff="%s_{\\times %s}"%(coeff,pTeX(simplifie))
+                liste_detail.append(str(RacineDegre2(det_numerateur,det_denominateur,det_coeff,radicande)))
+            liste_detail.append(str(RacineDegre2(numerateur,denominateur,coeff,radicande)))
+        if detail:
+            return RacineDegre2(numerateur,denominateur,coeff,radicande),liste_detail
+        return RacineDegre2(numerateur,denominateur,coeff,radicande)
     
     def __add__(self,other):
         if isinstance(other,RacineDegre2):
-            radicande=max(self.radicande,other.radicande)
-            premier=self.simplifie()
-            second=other.simplifie()
+            if self.radicande==other.radicande or self.radicande==0 or other.radicande==0:
+                radicande=max(self.radicande,other.radicande)
+                premier,second=self,other
+            else:
+                premier=self.simplifie()
+                second=other.simplifie()
+                if self.radicande==other.radicande or self.radicande==0 or other.radicande==0:
+                    radicande=max(self.radicande,other.radicande)
+                else:
+                    return NotImplemented
+
             denominateur=ppcm(premier.denominateur,second.denominateur)
             facteur1=denominateur/premier.denominateur
             facteur2=denominateur/second.denominateur
-            if self.radicande==other.radicande:
-                coeff=premier.coeff*facteur1+second.coeff*facteur2
-                if coeff==0:
-                    radicande=0
-                return RacineDegre2(premier.entier*facteur1+second.entier*facteur2,
-                                    denominateur,
-                                    coeff,
-                                    radicande)
+            #if self.radicande==other.radicande:
+            coeff=premier.coeff*facteur1*(premier.radicande!=0)+second.coeff*facteur2*(second.radicande!=0)
+            if coeff==0:
+                radicande=0
+            return RacineDegre2(premier.numerateur*facteur1+second.numerateur*facteur2,
+                                denominateur,
+                                coeff,
+                                radicande)
         elif isinstance(other,int):
-            return RacineDegre2(self.entier+self.denominateur*other,self.coeff,self.radicande)
-        elif isinstance(other,Fraction):
-            return RacineDegre2(self.entier*other.denominator+self.denominateur*other.numerator,
-                                self.denominateur*other.denominator,
-                                self.coeff*other.denominator,
-                                self.radicande)
+            return self + RacineDegre2(other)
+        elif isinstance(other,Fractions):
+            return self + RacineDegre2(other.numerateur,other.denominateur)
+            
     def __radd__(self,other):
         return self+other
     def __neg__(self):
-        return RacineDegre2(-self.entier,self.denominateur,-self.coeff,self.radicande)
+        return RacineDegre2(-self.numerateur,self.denominateur,-self.coeff,self.radicande)
 
     def __sub__(self,other):
         return self+(-other)
 
+    def __rsub__(self,other):
+        return -self + other
+    
     def __mul__(self,other):
-        if isinstance(other,Fraction):
-            return self*RacineDegre2(other.numerator,other.denominator,0,self.radicande)
+        if isinstance(other,Fractions):
+            return self*RacineDegre2(other.numerateur,other.denominateur,0,self.radicande)
         elif isinstance(other,int):
             return self*RacineDegre2(other,1,0,self.radicande)
         else:
             radicande=max(self.radicande,other.radicande)#cela autorise d'avoir un radicande=0 mais n'efface pas l'autre
-            coeff=self.entier*other.coeff+self.coeff*other.entier
+            coeff=self.numerateur*(other.coeff*(other.radicande!=0))+(self.coeff*(self.radicande!=0))*other.numerateur
             if coeff==0:
                 radicande=0
-            return RacineDegre2(self.entier*other.entier+(self.coeff*other.coeff)*self.radicande,
+            numerateur=self.numerateur*other.numerateur+(self.coeff*other.coeff)*(not(self.radicande==0 or other.radicande==0))*self.radicande
+            return RacineDegre2(numerateur,
                             self.denominateur*other.denominateur,
-                            self.entier*other.coeff+self.coeff*other.entier,
+                            coeff,
                             radicande)
     def __rmul__(self,other):
         return self*other
+    def __pow__(self,n):
+        result=1
+        for i in range(n):
+            result=result*self
+        return result
+        
 
 

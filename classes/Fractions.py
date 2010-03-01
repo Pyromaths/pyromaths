@@ -106,20 +106,20 @@ class Fractions:
     def __add__(self, fraction):
         if (isinstance(fraction,int) or isinstance(fraction,float)):
             fraction=Fractions(fraction)
-        ppcm = outils.Arithmetique.ppcm(self.d, fraction.d)
-        return Fractions((self.n * ppcm) // self.d + (fraction.n * ppcm) //
+        if isinstance(fraction,Fractions):
+            ppcm = outils.Arithmetique.ppcm(self.d, fraction.d)
+            return Fractions((self.n * ppcm) // self.d + (fraction.n * ppcm) //
                          fraction.d, ppcm)
+        else:
+            return fraction+self
+        
     def __radd__(self,other):
         return self+other
     
     def __sub__(self, fraction):
-        if isinstance(fraction,int) or isinstance(fraction,float):
-            fraction=Fractions(fraction)
-        ppcm = outils.Arithmetique.ppcm(self.d, fraction.d)
-        return Fractions((self.n * ppcm) // self.d - (fraction.n * ppcm) //
-                         fraction.d, ppcm)
+        return self + (-fraction)
     def __rsub__(self,other):
-        return other+(-self)
+        return (-self) + other
 
     def __mul__(self, fraction):
         if (isinstance(fraction,int) or isinstance(fraction,float)):
@@ -128,14 +128,18 @@ class Fractions:
             return Fractions(self.n * fraction.n, self.d * fraction.d)
         else:
             return fraction*self
+
     def __rmul__(self,other):
         return self*other
 
     #def __truediv__(self, fraction): # pour Python 3
     def __div__(self, fraction):
-        if (isinstance(fraction,int) or isinstance(fraction,float)):
-            fraction=Fractions(fraction)
-        return Fractions(self.n * fraction.d, self.d * fraction.n)
+            if (isinstance(fraction,int) or isinstance(fraction,float)):
+                fraction=Fractions(fraction)
+            if isinstance(fraction,Fractions):
+                return Fractions(self.n * fraction.d, self.d * fraction.n)
+            else:
+                return self*~fraction
     def __rdiv__(self,other):
         return other*~self
     def __invert__(self):

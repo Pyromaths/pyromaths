@@ -2,14 +2,13 @@
 
 if __name__=="__main__":
     import sys
-    sys.path.append("/home/nicolas/pyrogit/pyromaths")
+    sys.path.append("..")
 
 from random import randrange
 from classes.Polynome import *
 from outils.Polynomes import *
 from outils.TeXMiseEnForme import *
 from outils.Arithmetique import pgcd
-#from outils.Racine import simplifie_racine
 
 def exo_racines_degre2():
     '''exercice recherche de racines second degré'''
@@ -58,7 +57,9 @@ def exo_racines_degre2():
     X=Polynome({1:1},var)
     P=poly_racines_entieres(rac_min,rac_max,X)
 
-    redaction_racines(P,nomP,var,exo,cor)
+    exo.append("\\item $%s=0$\\par\n"%(P(var)))
+    cor.append("\\item $%s=0$\\par\n"%(P(var)))
+    cor=redaction_racines(P,nomP,var,cor)
 
     #Racines fractionnaires
     nomP='P'
@@ -67,7 +68,9 @@ def exo_racines_degre2():
     denom_max=12
     P=poly_racines_fractionnaires(rac_min,rac_max,denom_max,X)
     
-    redaction_racines(P,nomP,var,exo,cor)
+    exo.append("\\item $%s=0$\\par\n"%(P(var)))
+    cor.append("\\item $%s=0$\\par\n"%(P(var)))
+    cor=redaction_racines(P,nomP,var,cor)
     
     #Racines quelconques
     nomP='P'
@@ -76,7 +79,9 @@ def exo_racines_degre2():
     abs_a,abs_b,abs_c=10,10,10
     P=poly_racines_quelconques(abs_a,abs_b,abs_c,X)
     
-    redaction_racines(P,nomP,var,exo,cor)
+    exo.append("\\item $%s=0$\\par\n"%(P(var)))
+    cor.append("\\item $%s=0$\\par\n"%(P(var)))
+    redaction_racines(P,nomP,var,cor)
     
     exo.append("\\end{enumerate}\n")
     cor.append("\\end{enumerate}\n")
@@ -613,41 +618,22 @@ def listeracines(a,b,delta,parentheses=False):
     strx2="\\dfrac{-%s+\\sqrt{%s}}{2\\times %s}"%(pTeX(b),TeX(delta),pTeX(a))
     ##on a strx1<strx2
     coeff,radicande=simplifie_racine(delta)
-    if radicande==1:#delta est un carré
-        rac_delta=TeX(coeff)
-        simplrac=[True,rac_delta]
-        x1=(Fractions(1)*(-b-coeff)/(2*a)).simplifie()
-        x2=(Fractions(1)*(-b+coeff)/(2*a)).simplifie()
-        #les racines sont fractionnaires ou entières
-        parenthesex1=((b+coeff)*a>0)
-        parenthesex2=((b-coeff)*a>0)
-    else:
+    if 1:
         #x1,x2 simplifiés ont une écriture fractionnaire donc
         parenthesex1=parenthesex2=False
         if coeff==1:#delta n'a pas de facteur carré, on ne peut rien simplifier
             rac_delta=radicalTeX(delta)
             simplrac=[False]
         else:
-            rac_delta=TeX(coeff)+radicalTeX(radicande)
+            if radicande==1:
+                rac_delta=TeX(coeff)
+            else:
+                rac_delta=TeX(coeff)+radicalTeX(radicande)
             simplrac=[True,rac_delta]
-        simplifie=pgcd(pgcd(b,coeff),2*a)#simplifie est négatif si a<0
-        if simplifie==coeff:
-            rac_delta1="-"+radicalTeX(radicande)
-            rac_delta2="+"+radicalTeX(radicande)
-        elif simplifie==-coeff:
-            rac_delta1="+"+radicalTeX(radicande)
-            rac_delta2="-"+radicalTeX(radicande)
-        else:
-            rac_delta1=tTeX(-coeff/simplifie)+radicalTeX(radicande)
-            rac_delta2=tTeX(coeff/simplifie)+radicalTeX(radicande)
-        if simplifie==2*a:
-            x1=TeXz(-b/simplifie)+rac_delta1
-            x2=TeXz(-b/simplifie)+rac_delta2
-            #plus de barre de fraction donc
-            parenthesex1=parenthesex2=True
-        else:
-            x1="\\dfrac{"+TeXz(-b/simplifie)+rac_delta1+"}{"+TeX(2*a/simplifie)+"}"
-            x2="\\dfrac{"+TeXz(-b/simplifie)+rac_delta2+"}{"+TeX(2*a/simplifie)+"}"
+        
+        x1=RacineDegre2(-b,2*a,-1,delta)
+        x2=RacineDegre2(-b,2*a,1,delta)
+
         if b==0:
             parenthesex1=(coeff*a>0)
             parenthesex2=(coeff*a<0)
@@ -678,43 +664,27 @@ def factorisation_degre2(P,factorisation=True):
         if x0<0:
             factorisation.append([u"{\\left(%s\\right)}^2"%(X-racines[0])])
     else:#delta>0
-        simplrac,strx1,x1,strx2,x2,parenthesex1,parenthesex2=listeracines(P[2],P[1],delta,parentheses=True)
+        simplrac,strx1,x1,strx2,x2=listeracines(P[2],P[1],delta)
+        if isinstance(x1,RacineDegre2):
+            x1=x1.simplifie()
+            x2=x2.simplifie()
         racines=[x1,x2]
         str_racines=[strx1,strx2]
-        if parenthesex1:
-            px1="\\left(%s\\right)"%(x1)
-        else:
-            px1=x1
-        if parenthesex2:
-            px2="\\left(%s\\right)"%(x2)
-        else:
-            px2=x2
+
+
+        px1=pTeX(x1)
+        px2=pTeX(x2)
+
         P1="%s-%s"%(var,px1)
         P2="%s-%s"%(var,px2)
         factorisation=[[P1,P2]]#non simplifiée
-        #dictionnaire pour la fonction translate, obenu par maketrans("+-","-+") supprimé dans python 3
-        oppose='\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\x7f\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff'
+        
+        #x1 et x2 sont numérique. fractions ou racine
 
-        if isinstance(x1,str):#cas où il y a une racine, non numérique
-            if parenthesex1:
-                if x1[0]=="-":
-                    P1=var
-                else:
-                    P1=var+"-"
-                P1+=x1.translate(oppose)
-            if parenthesex2:
-                if x2[0]=="-":
-                    P2=var
-                else:
-                    P2=var+"-"
-                P2+=x2.translate(oppose)
-            if parenthesex1 or parenthesex2:
-                factorisation.append([P1,P2])
-        else:#x1 et x2 sont numérique. fractions ou entiers
-            if x1<0 or x2<0:
-                P1=(X-x1)(var)
-                P2=(X-x2)(var)
-                factorisation.append([P1,P2])
+        if x1.radicande==0 and (x1.numerateur<0 or x2.numerateur<0):
+            P1=(X-x1)(var)
+            P2=(X-x2)(var)
+            factorisation.append([P1,P2])
     return delta,simplrac,racines,str_racines,factorisation
 
 
@@ -752,7 +722,6 @@ def factorisation_degre3(E,nomE,exo=[],cor=[],racines=[0,1,-1,2,-2]):
     delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(E2,factorisation=True)
     cor=redaction_factorisation(E2,nomP=nomE+"_2",exo=[],cor=cor)[1]
     cor.pop(-5)
-    #print cor
     cor.append("\\par\n")
     cor.append("On en conclue donc que $%s="%(nomE))
     final=0
@@ -772,7 +741,6 @@ def factorisation_degre3(E,nomE,exo=[],cor=[],racines=[0,1,-1,2,-2]):
         P1=factorisation[-1][0]
         P2=factorisation[-1][1]
         E_factorise="%s\\left(%s\\right)\\left(%s\\right)$\n"%(P0,P1,P2)
-        #x12=[x1,x2]
     cor.append(E_factorise)
 
     exo.append("\\end{enumerate}\n")
@@ -787,22 +755,7 @@ def redaction_factorisation(P,nomP="P",exo=[],cor=[]):
     exo.append("\\item $%s(%s)=%s$\n"%(nomP,var,P(var)))
     cor.append("\\item Factoriser $%s(%s)=%s$\\par\n"%(nomP,var,P(var)))
     delta,simpl_delta,racines,str_racines,factorisation=factorisation_degre2(P)
-
-    #calculs des racines
-    ligne_delta=u"Je calcule $\\Delta=%s^2-4\\times %s\\times %s=%s$"%(pTeX(P[1]),pTeX(P[2]),pTeX(P[0]),TeX(delta))
-    if simpl_delta[0]:
-        ligne_delta+=" et $%s=%s$.\\par\n"%(radicalTeX(delta),simpl_delta[1])
-    else:
-        ligne_delta+=".\par\n"
-    cor.append(ligne_delta)
-    if delta<0:
-        cor.append("Comme $\\Delta <0$, $%s(%s)$ n'a pas de racines."%(nomP,var))
-    elif delta==0:
-        cor.append("Comme $\\Delta=0$, $%s(%s)$ a une seule racine $%s_0=%s=%s$.\\par\n"%(nomP,var,var,str_racines[0],TeX(racines[0])))
-    else:#delta>0
-        [x1,x2]=racines
-        [strx1,strx2]=str_racines
-        cor.append("Les racines de $%s$ sont $%s_1=%s=\\mathbf{%s}$ et $%s_2=%s=\\mathbf{%s}$.\\par\n"%(nomP,var,strx1,x1,var,strx2,x2))
+    redaction_racines(P,nomP,var,cor)
 
     #factorisation
     if delta<0:
@@ -822,15 +775,13 @@ def redaction_factorisation(P,nomP="P",exo=[],cor=[]):
         cor.append(ligne_factorisation)
     return exo,cor
 
-def redaction_racines(P,nomP,var,exo="",cor=""):
-    exo.append("\\item $%s=0$\\par\n"%(P(var)))
-    cor.append("\\item $%s=0$\\par\n"%(P(var)))
+def redaction_racines(P,nomP,var,cor=[]):
     delta,simpl_delta,liste_racines,liste_str_racines=racines_degre2(P)
     ligne_delta=u"Je calcule $\\Delta=%s^2-4\\times %s\\times %s=%s$"%(pTeX(P[1]),pTeX(P[2]),pTeX(P[0]),TeX(delta))
     if simpl_delta[0]:
         ligne_delta+=" et $%s=%s$.\\par\n"%(radicalTeX(delta),simpl_delta[1])
     else:
-        ligne_delta+=".\par\n"
+        ligne_delta+=".\\par\n"
     cor.append(ligne_delta)
     if delta<0:
         cor.append("Comme $\\Delta <0$, $%s(%s)$ n'a pas de racines."%(nomP,var))
@@ -838,16 +789,38 @@ def redaction_racines(P,nomP,var,exo="",cor=""):
         cor.append("Comme $\\Delta=0$, $%s(%s)$ a une seule racine $%s_0=%s=%s$.\\par\n"%(nomP,var,var,liste_str_racines[0],TeX(liste_racines[0])))
     else:#delta>0
         [x1,x2]=liste_racines
-        [strx1,strx2]=liste_str_racines
-        cor.append("Les racines de $%s$ sont $%s_1=%s=%s$ et $%s_2=%s=%s$.\n"%(nomP,var,strx1,x1,var,strx2,x2))
-    return exo,cor
+        cor.append("Comme $\\Delta>0$, $%s(%s)$ a deux racines :"%(nomP,var))
+        if isinstance(x1,RacineDegre2):
+            simplification1=simplification2=""
+            x1,detail1=x1.simplifie(True)
+            x2,detail2=x2.simplifie(True)
+
+            cor.append("\\begin{multicols}{2}")
+            cor.append("\\begin{align*}")
+            cor.append("%s =&%s\\\\"%(liste_str_racines[0],liste_racines[0]))
+            for i in range(0,len(detail1)):
+                cor.append("=&%s\\\\"%(detail1[i]))
+            cor.append("\\end{align*}\\par\n")
+            
+            cor.append("\\begin{align*}")
+            cor.append("%s =&%s\\\\"%(liste_str_racines[1],liste_racines[1]))
+            for i in range(0,len(detail2)):
+                cor.append("=&%s\\\\"%(detail2[i]))
+            cor.append("\\end{align*}\n")
+            cor.append("\\end{multicols}")
+            cor.append("Les racines de $%s$ sont $%s_1=%s$ et $%s_2=%s$.\n"%(nomP,var,x1,var,x2))
+        else:
+            [strx1,strx2]=liste_str_racines
+            cor.append("Les racines de $%s$ sont $%s_1=%s=%s$ et $%s_2=%s=%s$.\n"%(nomP,var,strx1,x1,var,strx2,x2))
+
+    return cor
 
 #######################################
 ###############TEST####################
 #######################################
 if __name__=="__main__":
     from TEST.imprimetest import *
-##    exor,corr=exo_racines_degre2()
+    exo,cor=exo_racines_degre2()
 ##    exof,corf=Exo_factorisation()
 ##    exof3,corf3=Exo_factorisation_degre3()
 ##    exo=exor+exof+exof3
@@ -855,8 +828,9 @@ if __name__=="__main__":
 ##    exo,cor=exo_tableau()
 ##    exo,cor=exo_variation()
 ##    exo,cor=exo_fonctions_rationnelles()
-    exo,cor=quest_fonctions_rationnelles_sur_R()
+##    exo,cor=quest_fonctions_rationnelles_sur_R()
     tex=""
+    exo,cor=exo_racines_degre2()
     for i in exo:
         tex+=i
     for i in cor:

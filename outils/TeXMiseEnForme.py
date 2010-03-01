@@ -25,8 +25,8 @@ import string
 import math
 import os
 from outils.Conversions import radians, degres
-from classes.Fractions import Fractions #Fractions de pyro
-#from fractions import Fraction #Fraction de python
+from classes.Fractions import Fractions
+import classes
 
 from outils.Affichage import decimaux
 def TeXz(nombre):
@@ -43,10 +43,19 @@ def pTeX(nombre):
     return TeX(nombre,parenthese=True)
 def TeX(nombre,parenthese=False,terme=False):
     '''renvoie une chaine de caractere pour TeX'''
-    if parenthese and nombre<0:
+    if isinstance(nombre,classes.Racine.RacineDegre2) and nombre.radicande==0:
+        return TeX(Fractions(nombre.numerateur,nombre.denominateur),parenthese,terme)
+    if parenthese and (isinstance(nombre,classes.Racine.RacineDegre2)
+                       and (nombre.denominateur==1 and
+                            (nombre.numerateur<0 or
+                             nombre.numerateur==0 and nombre.coeff<0 or
+                             nombre.numerateur and nombre.radicande))
+                   or not(isinstance(nombre,classes.Racine.RacineDegre2)) and nombre<0):
         strTeX="\\left("
         finTeX="\\right)"
-    elif terme and nombre>=0:
+    elif terme and (isinstance(nombre,classes.Racine.RacineDegre2) and
+                    (nombre.denominateur!=1 or (nombre.numerateur >0 or nombre.numerateur==0 and nombre.coeff>=0))
+                        or nombre>=0) :
         strTeX="+"
         finTeX=""
     else:
@@ -65,6 +74,8 @@ def TeX(nombre,parenthese=False,terme=False):
             strTeX += fractex+"{"+decimaux(nombre.numerateur)+"}{"+decimaux(nombre.denominateur)+"} "
         strTeX+=finTeX
         return strTeX
+    elif isinstance(nombre,classes.Racine.RacineDegre2):
+        return strTeX+str(nombre)+finTeX
     else:
         return strTeX+decimaux(nombre)+finTeX
 def radicalTeX(n):
