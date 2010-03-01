@@ -317,7 +317,7 @@ recherche_parentheses = re.compile(r"""
 recherche_pow = re.compile(r"""
     # Recherche la première série de puissances dans la chaine
     ^(?P<pre>                       # groupe pre-calcul
-        (?:[-+*/e\d.]|(?:\<polynome\>[^(?:</polynome>)]*</polynome>))*?[-+]?
+        (?:[-+*/]|%s)*?[-+]?
         # il y a des calculs avant l'opération cherchée avec des décimaux
         # et/ou un polynome. Le [-+] de la fin est pour le cas '3+-8**2'
     |
@@ -333,14 +333,14 @@ recherche_pow = re.compile(r"""
     )
 
     (?P<post>.*)$                  # groupe post (tout le reste)
-    """ % nb, re.VERBOSE).search
+    """ % (nb, nb), re.VERBOSE).search
 
 recherche_produit = re.compile(r"""
     # Recherche la première série de divisions ou de multiplications dans la chaine
     ^(?P<pre>                       # groupe pre-calcul
         \(*                         # l'opération est au début (aux parenthèses près)
         |
-        (?:[-+*/\d.e]|(?:\<polynome\>[^(?:</polynome>)]*</polynome>))*?(?<=\d)[-+]
+        (?:[-+*/]|%s)*?(?<=\d)[-+]
         # il y a des calculs avant l'opération cherchée avec des décimaux et/ou
         # un polynome. Le [-+] de la fin est pour conserver l'opérateur avant le
         # calcul qui va être effectué
@@ -359,14 +359,14 @@ recherche_produit = re.compile(r"""
     )
 
     (?P<post>.*)$                  # groupe post (tout le reste)
-    """ % (nb, nb, nb), re.VERBOSE).search
+    """ % (nb, nb, nb,  nb), re.VERBOSE).search
 
 recherche_somme = re.compile(r"""
     # Recherche la première série d'additions ou de soustractions dans la chaine
     ^(?P<pre>                       # groupe pre-calcul
         \(*                         # l'opération est au début (aux parenthèses près)
         |
-        (?:[-+\d.e]|(?:\<polynome\>[^(?:</polynome>)]*</polynome>))*?(?<=\d)[-+]
+        (?:[-+]|%s)*?(?<=\d)[-+]
         # il y a des calculs avant l'opération cherchée avec des décimaux et/ou
         # un polynome. Le [-+] de la fin est pour conserver l'opérateur avant le
         # calcul qui va être effectué
@@ -385,7 +385,7 @@ recherche_somme = re.compile(r"""
     )
 
     (?P<post>.*)$                  # groupe post (tout le reste)
-    """ % (nb, nb, nb), re.VERBOSE).search
+    """ % (nb, nb, nb, nb), re.VERBOSE).search
 
 recherche_polynome = re.compile(r"""
     $(?P<pre>.*?)
@@ -428,20 +428,24 @@ def priorites_operations(calcul):
                 else:
                     test=None
     if calcul: result.append(calcul)
-    return result
+    return "".join(result)
 
 def priorites(calcul):
+    #FIXME: comment gérer 'Polynome("+4.0z^2")+Polynome("+16.0z")+Polynome("+16.0")',
+    # qui est la même chose que Polynome("+4.0z^2+16.0z+16.0")' à l'affichage ?
     solution = []
-    while not solution or len(solution[-1])>1:
+    while not solution or calcul != s:
         if solution:
-            calcul="".join(solution[-1])
+            calcul=solution[-1]
         s = priorites_operations(calcul)
         if solution:
             solution.append(s)
         else:
             solution=[s]
-    if isinstance(eval(s[0]), Polynome) and Polynome.reductible(eval(s[0])):
-        solution.append([repr(Polynome.reduit(eval(s[0])))])
+    solution.pop(-1) # dernier calcul en double
+    print isinstance(eval(s), Polynome)
+    if isinstance(eval(s), Polynome) and Polynome.reductible(eval(s)):
+        solution.append([repr(Polynome.reduit(eval(s)))])
     return solution
 
 def main():
