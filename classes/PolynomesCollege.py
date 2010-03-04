@@ -288,12 +288,26 @@ class Polynome():
         return m.monomes[-1][1]
 
     def __pow__(self, other):
-        if len(self) == 1:
-            return self*self
-        elif len(self) == 2 and other ==2:
-            a = Polynome([self.monomes[0]],  self.var)
-            b = Polynome([self.monomes[1]],  self.var)
-            return "%r**2+2*%r*%r+%r**2"%(a, a, b, b)
+        if len(self) == 2 and other ==2:
+            a0 = self.monomes[0][0]
+            b0 = self.monomes[1][0]
+            p = a0*b0
+            a = Polynome([[abs(a0), self.monomes[0][1]]],  self.var)
+            b = Polynome([[abs(b0), self.monomes[1][1]]],  self.var)
+            if p < 0:
+                return "%r**2-2*%r*%r+%r**2"%(a, a, b, b)
+            else:
+                return "%r**2+2*%r*%r+%r**2"%(a, a, b, b)
+        elif len(self)==1:
+            result=self
+            for i in range(other-1):
+                result = result*self
+            return result
+        else:
+            result=self
+            for i in range(other-1):
+                result = eval(result*self)
+            return result
 
 #---------------------------------------------------------------------
 # version des priorités pour les polynomes et les décimaux
@@ -447,8 +461,6 @@ def priorites_operations(calcul):
     return "".join(result)
 
 def priorites(calcul):
-    #FIXME: comment gérer 'Polynome("+4.0z^2")+Polynome("+16.0z")+Polynome("+16.0")',
-    # qui est la même chose que Polynome("+4.0z^2+16.0z+16.0")' à l'affichage ?
     solution = []
     while not solution or calcul != solution[-1]:
         if solution:
@@ -480,6 +492,7 @@ def main():
 #    print q
 #    print priorites("%r-%r" % (p, m))
     print priorites('Polynome("2z+4")-Polynome("5z+4")*Polynome("5z+4")+Polynome("5z+4")**2')
+    print priorites('Polynome("2z-4")**2')
 #    print priorites("%r*(%r-%r)" %(n, p, m))
 #    print p**2
 #    calcul = '6*2/3**5+8*6**2'
