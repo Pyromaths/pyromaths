@@ -14,6 +14,7 @@ def imprime_TeX(string,fichier="fichier.tex",chemin_fichier="",borne=["entete","
     else:
         ##modeletest.tex est dans le dossier chemin_fichier indiqué
         modeletest=chemin_fichier
+
     f0noext=fichier[:-4]
     essai = os.path.join(chemin_fichier,fichier)
     sortie = codecs.open(essai, encoding='utf-8', mode='w')
@@ -36,7 +37,10 @@ def imprime_TeX(string,fichier="fichier.tex",chemin_fichier="",borne=["entete","
             sortie.write(line)
         if master in line:
             n = 1
-    sortie.write(string)
+    if isinstance(string,str):
+        sortie.write(string)
+    elif isinstance(string,list):
+        sortie.writelines(x + "\n" for x in string)
     master_fin = '% fin ' + borne[1]
     master = '% ' + borne[1]
     n = 0

@@ -2,8 +2,8 @@
 
 
 if __name__=="__main__":
-    import sys
-    sys.path.append('..')
+    import sys,os
+    sys.path.append(os.path.join('..'))
 
 from classes.Racine import *
 import re

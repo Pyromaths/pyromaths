@@ -22,6 +22,7 @@
 #
 
 import re
+import classes
 
 def printlist(liste):
     """Affiche chaque élément d'une liste, ligne par ligne."""
@@ -152,3 +153,64 @@ def tex_coef(coef, var, bplus=0, bpn=0, bpc=0):
     if bpn and coef < 0 or bpc and coef != 0 and coef != 1 and var != '':
         a = '\\left( ' + a + '\\right)'
     return a
+
+
+def TeXz(nombre):
+    '''n'affiche pas b si b=0'''
+    if nombre==0:
+        return ""
+    else:
+        return TeX(nombre)
+def tTeX(nombre):
+    '''raccourci pour TeX(nombre,terme=True)'''
+    return TeX(nombre,terme=True)
+def pTeX(nombre):
+    '''raccourci pour TeX(nombre,parenthese=True)'''
+    return TeX(nombre,parenthese=True)
+def TeX(nombre,parenthese=False,terme=False):
+    '''renvoie une chaine de caractere pour TeX'''
+    strTeX=finTeX=""
+    
+    #Affichage simplifié des racines ou fractions
+    if isinstance(nombre,classes.Racine.RacineDegre2) and nombre.radicande==0:
+        #Affiche la RacineDegre2 comme une Fractions
+        nombre=classes.Fractions.Fractions(nombre.numerateur,nombre.denominateur)
+    if isinstance(nombre,classes.Fractions.Fractions) and nombre.denominateur==1:
+        #Affiche la Fractions comme un entier
+        nombre=nombre.numerateur
+    #parentheses des fractions
+    if parenthese and (
+        isinstance(nombre,classes.Racine.RacineDegre2)
+                       and nombre.denominateur==1 and (nombre.numerateur or nombre.coeff<0 )
+        #RacineDegre2 avec radicande nécessairement grâce au tri
+        or isinstance(nombre,classes.Fractions.Fractions) and nombre.numerateur<0
+        or isinstance(nombre,int) and nombre<0
+        or isinstance(nombre,float) and nombre<0):
+        strTeX="\\left("
+        finTeX="\\right)" 
+    elif terme and (isinstance(nombre,classes.Racine.RacineDegre2) and
+                        (nombre.denominateur!=1 or (nombre.numerateur >0 or nombre.numerateur==0 and nombre.coeff>=0))
+                    or nombre>=0) :
+        strTeX="+"
+        finTeX=""
+
+    ##Affichage
+    if nombre==float("inf"):
+        return "+\\infty "
+    elif nombre==float("-inf"):
+        return "-\\infty "
+    elif isinstance(nombre,int) or isinstance(nombre,float):
+        return strTeX+decimaux(nombre)+finTeX
+    elif isinstance(nombre,classes.Fractions.Fractions):
+        if nombre.numerateur < 0:
+            strTeX += "-\\dfrac{"+decimaux(-nombre.numerateur)+"}{"+decimaux(nombre.denominateur)+"} "
+        else:
+            strTeX += "\\dfrac{"+decimaux(nombre.numerateur)+"}{"+decimaux(nombre.denominateur)+"} "
+        strTeX+=finTeX
+        return strTeX
+    elif isinstance(nombre,classes.Racine.RacineDegre2):
+        return strTeX+str(nombre)+finTeX
+    else:
+        return strTeX+str(nombre)+finTeX
+def radicalTeX(n):
+    return "\\sqrt{%s}"%(TeX(n))

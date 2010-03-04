@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 
 if __name__=="__main__":
-    import sys
-    sys.path.append("..")
+    import sys,os
+    sys.path.append(os.path.join('..'))
 
 from random import randrange
 from classes.Polynome import *
 from outils.Polynomes import *
-from outils.TeXMiseEnForme import *
+from outils.Affichage import *
 from outils.Arithmetique import pgcd
 
 def exo_racines_degre2():
     '''exercice recherche de racines second degré'''
 
-    exo=["\\exercice\n"]
-    cor=["\\exercice*\n"]
+    exo=["\\exercice"]
+    cor=["\\exercice*"]
     #intervalle pour les racines entières ou fractionnaire
     rac_min=-10
     rac_max=10
@@ -28,27 +28,27 @@ def exo_racines_degre2():
     inconnues=['x','y','z','t']
     nom_poly=['P','Q','R','S']
 
-    exo.append(u"Résoudre les équations suivantes :\n")
-    cor.append(u"Résoudre les équations suivantes :\n")
-    exo.append("\\begin{enumerate}\n")
-    cor.append("\\begin{enumerate}\n")
+    exo.append(u"Résoudre les équations suivantes :")
+    cor.append(u"Résoudre les équations suivantes :")
+    exo.append("\\begin{enumerate}")
+    cor.append("\\begin{enumerate}")
     
     #identites remarquables
     
     var=inconnues[randrange(4)]
     X=Polynome({1:1},var)
     P,sgns=poly_id_remarquables(rac_min,rac_max,X)#sgns=-2,0 ou 2
-    exo.append("\\item $%s=0$\n"% P)
-    cor.append("\\item $%s=0$\n"% P)
+    exo.append("\\item $%s=0$"% P)
+    cor.append("\\item $%s=0$"% P)
     factorisation,racines=factorise_identites_remarquables(P,sgns,var,racines=True)
     factorise="$$%s"% P
     for i in range(len(factorisation)):
         factorise+="="+factorisation[i]
-    cor.append(factorise+"$$\n")
+    cor.append(factorise+"$$")
     if len(racines)==1:
-        solution="une solution $%s=%s$\n"%(var,TeX(racines[0]))
+        solution="une solution $%s=%s$"%(var,TeX(racines[0]))
     else:
-        solution="deux solutions $%s=%s$ ou $%s=%s$\n"%(var,TeX(racines[0]),var,TeX(racines[1]))
+        solution="deux solutions $%s=%s$ ou $%s=%s$"%(var,TeX(racines[0]),var,TeX(racines[1]))
     cor.append(u"On en déduit que l'équation a "+solution)
     
     #Racines entières
@@ -57,41 +57,39 @@ def exo_racines_degre2():
     X=Polynome({1:1},var)
     P=poly_racines_entieres(rac_min,rac_max,X)
 
-    exo.append("\\item $%s=0$\\par\n"%(P(var)))
-    cor.append("\\item $%s=0$\\par\n"%(P(var)))
+    exo.append("\\item $%s=0$\\par"%(P(var)))
+    cor.append("\\item $%s=0$\\par"%(P(var)))
     cor=redaction_racines(P,nomP,var,cor)
 
     #Racines fractionnaires
     nomP='P'
     var=inconnues[randrange(4)]
     X=Polynome({1:1},var)
-    denom_max=12
     P=poly_racines_fractionnaires(rac_min,rac_max,denom_max,X)
     
-    exo.append("\\item $%s=0$\\par\n"%(P(var)))
-    cor.append("\\item $%s=0$\\par\n"%(P(var)))
+    exo.append("\\item $%s=0$\\par"%(P(var)))
+    cor.append("\\item $%s=0$\\par"%(P(var)))
     cor=redaction_racines(P,nomP,var,cor)
     
     #Racines quelconques
     nomP='P'
     var=inconnues[randrange(4)]
     X=Polynome({1:1},var)
-    abs_a,abs_b,abs_c=10,10,10
     P=poly_racines_quelconques(abs_a,abs_b,abs_c,X)
     
-    exo.append("\\item $%s=0$\\par\n"%(P(var)))
-    cor.append("\\item $%s=0$\\par\n"%(P(var)))
+    exo.append("\\item $%s=0$\\par"%(P(var)))
+    cor.append("\\item $%s=0$\\par"%(P(var)))
     redaction_racines(P,nomP,var,cor)
     
-    exo.append("\\end{enumerate}\n")
-    cor.append("\\end{enumerate}\n")
+    exo.append("\\end{enumerate}")
+    cor.append("\\end{enumerate}")
     return exo,cor
 
 def exo_factorisation_degre2():
     '''exercice recherche de racines second degré'''
 
-    exo=["\\exercice\n"]
-    cor=["\\exercice*\n"]
+    exo=["\\exercice"]
+    cor=["\\exercice*"]
     #intervalle pour les racines entières ou fractionnaire
     rac_min=-10
     rac_max=10
@@ -100,10 +98,10 @@ def exo_factorisation_degre2():
     inconnues=['x','y','z','t']
     nom_poly=['P','Q','R','S']
 
-    exo.append(u"Factoriser les polynômes suivants :\n")
-    #cor=[]u"Factoriser les polynômes suivants :\n"]
-    exo.append("\\begin{enumerate}\n")
-    cor.append("\\begin{enumerate}\n")
+    exo.append(u"Factoriser les polynômes suivants :")
+    #cor=[]u"Factoriser les polynômes suivants :"]
+    exo.append("\\begin{enumerate}")
+    cor.append("\\begin{enumerate}")
     
 ####identites remarquables
     
@@ -111,15 +109,15 @@ def exo_factorisation_degre2():
     var=inconnues[randrange(4)]
     X=Polynome({1:1},var)
     P,sgns=poly_id_remarquables(rac_min,rac_max,X)#sgns=-2,0 ou 2
-    exo.append("\\item $%s(%s)=%s$\n"% (nomP,var,P(var)))
-    cor.append("\\item Factoriser $%s(%s)=%s$\n"% (nomP,var,P(var)))
+    exo.append("\\item $%s(%s)=%s$"% (nomP,var,P(var)))
+    cor.append("\\item Factoriser $%s(%s)=%s$"% (nomP,var,P(var)))
                
     factorisation,racines=factorise_identites_remarquables(P,sgns,var,racines=True)
                
     factorise="$$%s"% P
     for i in range(len(factorisation)):
         factorise+="="+factorisation[i]
-    cor.append(factorise+"$$\n")
+    cor.append(factorise+"$$")
 
 ####Racines entières
     nomP=nom_poly[randrange(4)]
@@ -127,6 +125,8 @@ def exo_factorisation_degre2():
     X=Polynome({1:1},var)
     P=poly_racines_entieres(rac_min,rac_max,X)
     
+    exo.append("\\item $%s(%s)=%s$"%(nomP,var,P(var)))
+    cor.append("\\item Factoriser $%s(%s)=%s$\\par"%(nomP,var,P(var)))
     exo,cor=redaction_factorisation(P,nomP,exo,cor)
 
 ####Racines fractionnaires
@@ -137,6 +137,8 @@ def exo_factorisation_degre2():
     denom_max=12
     P=poly_racines_fractionnaires(rac_min,rac_max,denom_max,X)
 
+    exo.append("\\item $%s(%s)=%s$"%(nomP,var,P(var)))
+    cor.append("\\item Factoriser $%s(%s)=%s$\\par"%(nomP,var,P(var)))
     exo,cor=redaction_factorisation(P,nomP,exo,cor)
 
 
@@ -150,10 +152,12 @@ def exo_factorisation_degre2():
     abs_c=10
     P=poly_racines_quelconques(abs_a,abs_b,abs_c,X)
     
+    exo.append("\\item $%s(%s)=%s$"%(nomP,var,P(var)))
+    cor.append("\\item Factoriser $%s(%s)=%s$\\par"%(nomP,var,P(var)))
     exo,cor=redaction_factorisation(P,nomP,exo,cor)
 
-    exo.append("\\end{enumerate}\n")
-    cor.append("\\end{enumerate}\n")
+    exo.append("\\end{enumerate}")
+    cor.append("\\end{enumerate}")
     return exo,cor
 
 def exo_factorisation_degre3():
@@ -171,10 +175,10 @@ def exo_factorisation_degre3():
     #X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
     inconnues=['x','y','z','t']
     nom_poly=['P','Q','R','S']
-    exo=["\\exercice\n",
-        "\\begin{enumerate}\n"]
-    cor=["\\exercice*\n",
-         "\\begin{enumerate}\n"]
+    exo=["\\exercice",
+        "\\begin{enumerate}"]
+    cor=["\\exercice*",
+         "\\begin{enumerate}"]
     
     X=Polynome({1:1},var="x")
     E=poly_degre3_racines_entieres(rac_min,rac_max,X)
@@ -182,8 +186,8 @@ def exo_factorisation_degre3():
     F=poly_degre3_racines_fractionnaires(rac_min,rac_max,denom1,X)
     exo,cor=factorisation_degre3(F,"F",exo,cor)
          
-    exo.append("\\end{enumerate}\n")
-    cor.append("\\end{enumerate}\n")
+    exo.append("\\end{enumerate}")
+    cor.append("\\end{enumerate}")
     return exo,cor
 
 def exo_tableau_de_signe():
@@ -205,15 +209,15 @@ def exo_tableau_de_signe():
           poly_racines_fractionnaires(rac_min,rac_max,denom1,X),
           poly_racines_quelconques(abs_a,abs_b,abs_c,X)]
 
-    exo=["\\exercice\n",
-        "\\begin{enumerate}\n"]
-    cor=["\\exercice*\n",
-         "\\begin{enumerate}\n"]
+    exo=["\\exercice",
+        "\\begin{enumerate}"]
+    cor=["\\exercice*",
+         "\\begin{enumerate}"]
     nomP="P"
     for i in range(len(Poly)):
         P=Poly[i]
-        exo.append(u"\\item Étudier le signe du polynôme $%s=%s$\n" % (nomP,P))
-        cor.append("\\item $%s=%s$\\\\\n" % (nomP,P))
+        exo.append(u"\\item Étudier le signe du polynôme $%s=%s$" % (nomP,P))
+        cor.append("\\item $%s=%s$\\\\" % (nomP,P))
         
         delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(P,factorisation=True)
         cor=redaction_factorisation(P,nomP,exo=[],cor=cor)[1]
@@ -222,16 +226,16 @@ def exo_tableau_de_signe():
             factorisation=[0]
         cor.append(tableau_de_signe(P,nomP,delta,racines,factorisation[-1]))
         
-    exo.append("\\end{enumerate}\n")
-    cor.append("\\end{enumerate}\n")
+    exo.append("\\end{enumerate}")
+    cor.append("\\end{enumerate}")
     return exo,cor
 
 def exo_variation():
     
-    exo=["\\exercice\n",
-         "\\begin{enumerate}\n"]
-    cor=["\\exercice*\n",
-         "\\begin{enumerate}\n"]
+    exo=["\\exercice",
+         "\\begin{enumerate}"]
+    cor=["\\exercice*",
+         "\\begin{enumerate}"]
     quest1,cor1=quest_fonctions_rationnelles()
     quest2,cor2=quest_variation_degre3(borneinf=-10,bornesup=10)
     quest3,cor3=quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf"))
@@ -239,8 +243,8 @@ def exo_variation():
     exo+=quest1+quest2+quest3+quest4
     cor+=cor1  + cor2 + cor3 +cor4
 
-    exo.append("\\end{enumerate}\n")
-    cor.append("\\end{enumerate}\n")
+    exo.append("\\end{enumerate}")
+    cor.append("\\end{enumerate}")
     return exo,cor
 
 def quest_fonctions_rationnelles():
@@ -278,34 +282,43 @@ def quest_fonctions_rationnelles():
     f_derivee="\\dfrac{%s}{%s}"%(numerateur,denominateur)
     f_derivee_simplifiee="\\dfrac{%s}{%s}"%(numerateur_simplifie,denominateur)
     VI=(-Q[0]*Fractions(1)/Q[1]).simplifie()
-    exo=[u"\\item On considère la fonction $%s$ définie sur $I=[%s~;~%s]$ par $%s(%s)=\dfrac{%s}{%s}$.\n"%(nomf,Intervalle[0],Intervalle[1],nomf,var,P,Q),
-         "\\begin{enumerate}\n"]
-    cor=[u"\\item On considère la fonction $%s$ définie sur $I=[%s~;~%s]$ par $%s(%s)=\dfrac{%s}{%s}$.\n"%(nomf,Intervalle[0],Intervalle[1],nomf,var,P,Q),
-         "\\begin{enumerate}\n"]
+    exo=[u"\\item On considère la fonction $%s$ définie sur $I=[%s~;~%s]$ par $%s(%s)=\dfrac{%s}{%s}$."%(nomf,Intervalle[0],Intervalle[1],nomf,var,P,Q),
+         "\\begin{enumerate}"]
+    cor=[u"\\item On considère la fonction $%s$ définie sur $I=[%s~;~%s]$ par $%s(%s)=\dfrac{%s}{%s}$."%(nomf,Intervalle[0],Intervalle[1],nomf,var,P,Q),
+         "\\begin{enumerate}"]
 
-    exo.append(u"\\item Justifier que $%s$ est définie et dérivable sur $I$.\n"%(nomf))
-    cor.append(u"\\item Justifier que $%s$ est définie et dérivable sur $I$.\n"%(nomf))
-    cor.append(u" Pour déterminer la valeur interdite, on doit résoudre $%s=0$.\n\n"%(Q(var)))
-    cor.append("\\begin{align*}\n\
-            %s&=0\\\\\n\
-            %s&=%s\\\\\n\
-            %s&=%s\n\
-            \\end{align*}\n"%(Q,(Q-Q[0]),TeX(-Q[0]),var,TeX(-Q[0]*Fractions(1)/Q[1])))
-    cor.append(u"Or $%s$ n'est pas dans l'intervalle $[%s~;~%s]$ donc $%s$ est bien définie et dérivable sur $I$.\n"%\
+    exo.append(u"\\item Justifier que $%s$ est définie et dérivable sur $I$."%(nomf))
+    cor.append(u"\\item Justifier que $%s$ est définie et dérivable sur $I$."%(nomf))
+    cor.append(u" Pour déterminer la valeur interdite, on doit résoudre $%s=0$."%(Q(var)))
+    cor.append("\\begin{align*}")
+    cor.append("%s&=0\\\\"% Q)
+    cor.append("%s&=%s"%((Q-Q[0]),TeX(-Q[0])))
+    cor.append("\\\\")
+    if Q[1]!=1:
+        x0=-Q[0]*Fractions(1)/Q[1]
+        x1=x0.simplifie()
+        cor.append("%s&=%s"%(var,TeX(-Q[0]*Fractions(1)/Q[1])))
+        cor.append("\\\\")
+        if x0.denominateur!=x1.denominateur:
+            cor.append("%s&=%s"%(var,TeX(x1)))
+            cor.append("\\\\")
+    cor.pop(-1)
+    cor.append("\\end{align*}")
+    cor.append(u"Or $%s$ n'est pas dans l'intervalle $[%s~;~%s]$ donc $%s$ est bien définie et dérivable sur $I$."%\
           (TeX(VI),Intervalle[0],Intervalle[1],nomf))
-    exo.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in[%s~;~%s]$.\n"%\
+    exo.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in[%s~;~%s]$."%\
           (nomf,var,var,Intervalle[0],Intervalle[1]))
-    cor.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in[%s~;~%s]$.\n"%\
+    cor.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in[%s~;~%s]$."%\
           (nomf,var,var,Intervalle[0],Intervalle[1]))
-    cor.append(u"$$%s'(%s)=%s=%s$$\n"%(nomf,var,f_derivee,f_derivee_simplifiee))
-    exo.append(u"\\item En déduire le sens de variations de $%s$ sur $I$.\n"%(nomf))
-    cor.append(u"\\item En déduire le sens de variations de $%s$ sur $I$.\\par\n"%(nomf))
+    cor.append(u"$$%s'(%s)=%s=%s$$"%(nomf,var,f_derivee,f_derivee_simplifiee))
+    exo.append(u"\\item En déduire le sens de variations de $%s$ sur $I$."%(nomf))
+    cor.append(u"\\item En déduire le sens de variations de $%s$ sur $I$.\\par"%(nomf))
     if numerateur_simplifie.degre_max==0:
-        cor.append(u" Comme $%s$ est un carré, il est toujours positif.\\\\\n"%(denominateur))
+        cor.append(u" Comme $%s$ est un carré, il est toujours positif.\\\\"%(denominateur))
         f_xmin=TeX((Fractions(1)*P(Intervalle[0])/Q(Intervalle[0])).simplifie())
         f_xmax=TeX((Fractions(1)*P(Intervalle[1])/Q(Intervalle[1])).simplifie())
         if numerateur_simplifie[0]<0:
-            cor.append(u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient \n"%\
+            cor.append(u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient "%\
                   (numerateur_simplifie[0],var,nomf,var))
             cor.append("$$\\tabvar{")
             cor.append("\\tx{%s}&\\tx{%s}&&\\tx{%s}\\cr"%(var,TeX(Intervalle[0]),TeX(Intervalle[1])))
@@ -322,8 +335,8 @@ def quest_fonctions_rationnelles():
             cor.append("}$$")
     else:
         cor.append(u" Je ne sais pas faire avec un tel numérateur $%s$."%(numerateur_simplifie))
-    exo.append("\\end{enumerate}\n")
-    cor.append("\\end{enumerate}\n")
+    exo.append("\\end{enumerate}")
+    cor.append("\\end{enumerate}")
     return exo,cor
 
 def quest_fonctions_rationnelles_sur_R():
@@ -359,35 +372,35 @@ def quest_fonctions_rationnelles_sur_R():
     f_derivee="\\dfrac{%s}{%s}"%(numerateur,denominateur)
     f_derivee_simplifiee="\\dfrac{%s}{%s}"%(numerateur_simplifie,denominateur)
     
-    exo=[u"\\item On considère la fonction $%s$ définie  par $%s(%s)=\dfrac{%s}{%s}$.\n"%(nomf,nomf,var,P,Q),
-         "\\begin{enumerate}\n"]
-    cor=[u"\\item On considère la fonction $%s$ définie  par $%s(%s)=\dfrac{%s}{%s}$.\n"%(nomf,nomf,var,P,Q),
-         "\\begin{enumerate}\n"]
+    exo=[u"\\item On considère la fonction $%s$ définie  par $%s(%s)=\dfrac{%s}{%s}$."%(nomf,nomf,var,P,Q),
+         "\\begin{enumerate}"]
+    cor=[u"\\item On considère la fonction $%s$ définie  par $%s(%s)=\dfrac{%s}{%s}$."%(nomf,nomf,var,P,Q),
+         "\\begin{enumerate}"]
 
-    exo.append(u"\\item Déterminer l'ensemble de définition $\\mathcal{D}_{%s}$ de $%s$.\n"%(nomf,nomf))
-    cor.append(u"\\item Déterminer l'ensemble de définition $\\mathcal{D}_{%s}$ de $%s$.\n"%(nomf,nomf))
-    cor.append(u" La fonction rationnelle $%s$ est définie et dérivable en $%s$ si $%s\\neq0$.\n\n"%(nomf,var,Q(var))) 
+    exo.append(u"\\item Déterminer l'ensemble de définition $\\mathcal{D}_{%s}$ de $%s$."%(nomf,nomf))
+    cor.append(u"\\item Déterminer l'ensemble de définition $\\mathcal{D}_{%s}$ de $%s$."%(nomf,nomf))
+    cor.append(u" La fonction rationnelle $%s$ est définie et dérivable en $%s$ si $%s\\neq0$."%(nomf,var,Q(var))) 
     cor.append("\\begin{align*}\n\
             %s&=0\\\\\n\
             %s&=%s\\\\\n\
             %s&=%s\\\\\n\
             %s&=%s\n\
-            \\end{align*}\n"%(Q,(Q-Q[0]),TeX(-Q[0]),var,TeX(-Q[0]*Fractions(1)/Q[1]),var,TeX(VI)))
-    cor.append(u"On en déduit que $\\mathcal{D}_{%s}=\\mathcal{D'}_{%s}=]-\\infty~;~%s[\cup]%s~;~+\\infty[$.\n"%\
+            \\end{align*}"%(Q,(Q-Q[0]),TeX(-Q[0]),var,TeX(-Q[0]*Fractions(1)/Q[1]),var,TeX(VI)))
+    cor.append(u"On en déduit que $\\mathcal{D}_{%s}=\\mathcal{D'}_{%s}=]-\\infty~;~%s[\cup]%s~;~+\\infty[$."%\
           (nomf,nomf,TeX(VI),TeX(VI)))
-    exo.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in\\mathcal{D'}_{%s}$.\n"%\
+    exo.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in\\mathcal{D'}_{%s}$."%\
           (nomf,var,var,nomf))
-    cor.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in\\mathcal{D'}_{%s}$.\n"%\
+    cor.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in\\mathcal{D'}_{%s}$."%\
           (nomf,var,var,nomf))
-    cor.append(u"$$%s'(%s)=%s=%s$$\n"%(nomf,var,f_derivee,f_derivee_simplifiee))
-    exo.append(u"\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$.\n"%(nomf,nomf))
-    cor.append(u"\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$.\\par\n"%(nomf,nomf))
+    cor.append(u"$$%s'(%s)=%s=%s$$"%(nomf,var,f_derivee,f_derivee_simplifiee))
+    exo.append(u"\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$."%(nomf,nomf))
+    cor.append(u"\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$.\\par"%(nomf,nomf))
     if numerateur_simplifie.degre_max==0:
-        cor.append(u" Comme $%s$ est un carré, il est toujours positif.\\\\\n"%(denominateur))
+        cor.append(u" Comme $%s$ est un carré, il est toujours positif.\\\\"%(denominateur))
         f_xmin=TeX((P[1]/Q[1]).simplifie())#TeX((Fractions(1)*P(Intervalle[0])/Q(Intervalle[0])).simplifie())
         f_xmax=f_xmin#TeX((Fractions(1)*P(Intervalle[1])/Q(Intervalle[1])).simplifie())
         if numerateur_simplifie[0]<0:
-            cor.append(u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient \n"%\
+            cor.append(u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient "%\
                   (numerateur_simplifie[0],var,nomf,var))
             cor.append("$$\\tabvar{")
             cor.append("\\tx{%s}&\\tx{%s}&&&\\tx{%s}&&&\\tx{%s}\\cr"%(var,TeX(Intervalle[0]),TeX(VI),TeX(Intervalle[1])))
@@ -404,8 +417,8 @@ def quest_fonctions_rationnelles_sur_R():
             cor.append("}$$")
     else:
         cor.append(u" Je ne sais pas faire avec un tel numérateur $%s$."%(numerateur_simplifie))
-    exo.append("\\end{enumerate}\n")
-    cor.append("\\end{enumerate}\n")
+    exo.append("\\end{enumerate}")
+    cor.append("\\end{enumerate}")
     return exo,cor
 
 
@@ -435,11 +448,11 @@ def quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf")):
     Pprime=poly_racines_entieres(rac_min,rac_max,X,a1=a)
     P=Pprime.primitive()+randint(-abs_c,abs_c)
     P=P.simplifie()
-    exo=[u"\\item Étudier le sens de variations de $%s$ définie par $%s(x)=%s$ sur $%s$.\n" % (nomP,nomP,P(var),TeX_intervalle)]
-    cor=[u"\\item Étudier le sens de variations de $%s$ définie par $%s(x)=%s$ sur $%s$.\n" % (nomP,nomP,P(var),TeX_intervalle)]
+    exo=[u"\\item Étudier le sens de variations de $%s$ définie par $%s(x)=%s$ sur $%s$." % (nomP,nomP,P(var),TeX_intervalle)]
+    cor=[u"\\item Étudier le sens de variations de $%s$ définie par $%s(x)=%s$ sur $%s$." % (nomP,nomP,P(var),TeX_intervalle)]
     
-    cor.append("\\par $%s'(x)=%s$\\\\\n" % (nomP,Pprime(var)))
-    cor.append(u"Je dois factoriser $%s'(%s)$ qui est un polynôme du second degré.\\par\n"%(nomP,var))
+    cor.append("\\par $%s'(x)=%s$\\\\" % (nomP,Pprime(var)))
+    cor.append(u"Je dois factoriser $%s'(%s)$ qui est un polynôme du second degré.\\par"%(nomP,var))
     
     delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(Pprime,factorisation=True)
     cor=redaction_factorisation(Pprime,nomP+"'",exo=[],cor=cor)[1]
@@ -450,9 +463,9 @@ def quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf")):
     cor.append(tab_signe)
     
     if str_signe==u"négatif" or (delta==0 and P[3]<0):
-        cor+=u"Donc la fonction polynômiale $%s$ est décroissante sur $%s$.\n" %(nomP,TeX_intervalle)
+        cor+=u"Donc la fonction polynômiale $%s$ est décroissante sur $%s$." %(nomP,TeX_intervalle)
     elif str_signe=="positif" or (delta==0 and P[3]>0):
-        cor.append(u"Donc la fonction polynômiale $%s$ est croissante sur $%s$.\n"%(nomP,TeX_intervalle))
+        cor.append(u"Donc la fonction polynômiale $%s$ est croissante sur $%s$."%(nomP,TeX_intervalle))
     else:
         cor.append("On obtient ainsi le tableau de variation de $%s$."%nomP)
         [x1,x2]=racines
@@ -484,14 +497,25 @@ def tableau_de_signe(P,nomP,delta,racines,factorisation,borneinf=float("-inf"),b
         else:
             str_signe="positif"
         if detail:
-            return "Donc $%s$ ne change pas de signe donc $%s$ est %s\\\\\n"%(nomP,nomP,str_signe),signe
+            return "Donc $%s$ ne change pas de signe donc $%s$ est %s\\\\"%(nomP,nomP,str_signe),signe
         else:
-            return "Donc $%s$ ne change pas de signe donc $%s$ est %s\\\\\n"%(nomP,nomP,str_signe)
+            return "Donc $%s$ ne change pas de signe donc $%s$ est %s\\\\"%(nomP,nomP,str_signe)
     elif delta==0:
+        if P[2]>0:
+            if P[2]==1:
+                str_a=""
+            else:
+                str_a="\\tx{%s}& & \\tx{+} && \\tx{+} && \\tx{+} & \\cr" %(P[2])
+            str_signe="\\tx{%s(%s)}& &\\tx{+}&\\tx{0}&\\tx{+}&\\cr"% (nomP,var)
+        else:
+            str_a="\\tx{%s}& & \\tx{-} && \\tx{-} && \\tx{-} & \\cr" %(P[2])
+            str_signe="\\tx{%s(%s)}& &\\tx{-}&\\tx{0}&\\tx{-}&\\cr" % (nomP,var)
+
+        P1=factorisation[0]
         tab_signe="$$\\tabvar{\n\
                 \\tx{%s}&\\tx{%s}&& \\tx{%s}&& \\tx{%s}\\cr\n\
-                \\tx{%s(%s)}&&\\tx{+}&\\tx{%s}&\\tx{-}&\\cr}$$" % (var,TeX(borneinf),TeX(racines[0]),TeX(bornesup),nomP,var,TeX(racines[0]))
-        str_signe="\\tx{%s(%s)}&&\\tx{+}&\\tx{0}&\\tx{-}&\\cr" % (nomP,var)
+                \\tx{{\\left(%s\\right)}^2}&&\\tx{+}&\\tx{0}&\\tx{+}&\\cr%s%s}$$" %\
+                (var,TeX(borneinf),TeX(racines[0]),TeX(bornesup),P1,str_a,str_signe)
         if detail:
             return tab_signe,str_signe
         else:
@@ -501,11 +525,11 @@ def tableau_de_signe(P,nomP,delta,racines,factorisation,borneinf=float("-inf"),b
             if P[2]==1:
                 str_a=""
             else:
-                str_a="\\tx{%s}& & \\tx{+} && \\tx{+} && \\tx{+} & \\cr\n" %(P[2])
-            str_signe="\\tx{%s(%s)}& &\\tx{+}&\\tx{0}&\\tx{-}&\\tx{0}&\\tx{+}&\\cr\n"% (nomP,var)
+                str_a="\\tx{%s}& & \\tx{+} && \\tx{+} && \\tx{+} & \\cr" %(P[2])
+            str_signe="\\tx{%s(%s)}& &\\tx{+}&\\tx{0}&\\tx{-}&\\tx{0}&\\tx{+}&\\cr"% (nomP,var)
         else:
-            str_a="\\tx{%s}& & \\tx{-} && \\tx{-} && \\tx{-} & \\cr\n" %(P[2])
-            str_signe="\\tx{%s(%s)}& &\\tx{-}&\\tx{0}&\\tx{+}&\\tx{0}&\\tx{-}&\\cr\n" % (nomP,var)
+            str_a="\\tx{%s}& & \\tx{-} && \\tx{-} && \\tx{-} & \\cr" %(P[2])
+            str_signe="\\tx{%s(%s)}& &\\tx{-}&\\tx{0}&\\tx{+}&\\tx{0}&\\tx{-}&\\cr" % (nomP,var)
         if isinstance(racines[0],str):
             [x1,x2]=racines
         else:
@@ -588,7 +612,7 @@ def racines_degre2(P):
     if delta==0:
         x0=Fractions(-1,2)*P[1]/P[2]
         liste_racines=[x0.simplifie()]
-        liste_str_racines=["\\dfrac{-%s}{2\\times %s}"%(TeX(P[1]),pTeX(P[2]))]
+        liste_str_racines=["\\dfrac{-%s}{2\\times %s}"%(pTeX(P[1]),pTeX(P[2]))]
         simplrac=[False]
     elif delta>0:
         simplrac,strx1,x1,strx2,x2=listeracines(P[2],P[1],delta,parentheses=False)
@@ -618,25 +642,23 @@ def listeracines(a,b,delta,parentheses=False):
     strx2="\\dfrac{-%s+\\sqrt{%s}}{2\\times %s}"%(pTeX(b),TeX(delta),pTeX(a))
     ##on a strx1<strx2
     coeff,radicande=simplifie_racine(delta)
-    if 1:
-        #x1,x2 simplifiés ont une écriture fractionnaire donc
-        parenthesex1=parenthesex2=False
-        if coeff==1:#delta n'a pas de facteur carré, on ne peut rien simplifier
-            rac_delta=radicalTeX(delta)
-            simplrac=[False]
-        else:
-            if radicande==1:
-                rac_delta=TeX(coeff)
-            else:
-                rac_delta=TeX(coeff)+radicalTeX(radicande)
-            simplrac=[True,rac_delta]
-        
-        x1=RacineDegre2(-b,2*a,-1,delta)
-        x2=RacineDegre2(-b,2*a,1,delta)
 
-        if b==0:
-            parenthesex1=(coeff*a>0)
-            parenthesex2=(coeff*a<0)
+    #x1,x2 simplifiés ont une écriture fractionnaire donc
+    parenthesex1=parenthesex2=False
+    if coeff==1:#delta n'a pas de facteur carré, on ne peut rien simplifier
+        rac_delta=radicalTeX(delta)
+        simplrac=[False]
+    else:
+        if radicande==1:
+            rac_delta=TeX(coeff)
+        else:
+            rac_delta=TeX(coeff)+radicalTeX(radicande)
+        simplrac=[True,rac_delta]
+    x1=RacineDegre2(-b,2*a,-1,delta)
+    x2=RacineDegre2(-b,2*a,1,delta)
+    if b==0:
+        parenthesex1=(coeff*a>0)
+        parenthesex2=(coeff*a<0)
     if a<0:
         strx1,strx2,x1,x2,parenthesex1,parenthesex2=strx2,strx1,x2,x1,parenthesex2,parenthesex1
     if parentheses:
@@ -660,9 +682,14 @@ def factorisation_degre2(P,factorisation=True):
         simplrac=[False]
         racines=[x0.simplifie()]
         str_racines=["\\dfrac{-%s}{2\\times %s}"%(pTeX(P[1]),pTeX(P[2]))]
-        factorisation=[[u"{\\left(%s-%s\\right)}^2"%(var,pTeX(racines[0]))]]
-        if x0<0:
-            factorisation.append([u"{\\left(%s\\right)}^2"%(X-racines[0])])
+
+
+        P0="%s-%s"%(var,pTeX(racines[0]))
+        factorisation=[[P0,P0]]#non simplifiée
+        
+        if 0>racines[0]:
+            P0=X-racines[0]
+            factorisation.append([P0,P0])
     else:#delta>0
         simplrac,strx1,x1,strx2,x2=listeracines(P[2],P[1],delta)
         if isinstance(x1,RacineDegre2):
@@ -670,17 +697,10 @@ def factorisation_degre2(P,factorisation=True):
             x2=x2.simplifie()
         racines=[x1,x2]
         str_racines=[strx1,strx2]
-
-
-        px1=pTeX(x1)
-        px2=pTeX(x2)
-
-        P1="%s-%s"%(var,px1)
-        P2="%s-%s"%(var,px2)
+        P1="%s-%s"%(var,pTeX(x1))
+        P2="%s-%s"%(var,pTeX(x2))
         factorisation=[[P1,P2]]#non simplifiée
-        
-        #x1 et x2 sont numérique. fractions ou racine
-
+        #Peut-on simplifier les parenthèses ?
         if x1.radicande==0 and (x1.numerateur<0 or x2.numerateur<0):
             P1=(X-x1)(var)
             P2=(X-x2)(var)
@@ -692,12 +712,12 @@ def factorisation_degre3(E,nomE,exo=[],cor=[],racines=[0,1,-1,2,-2]):
     '''Factorise un polynôme de degré 3 avec une racine évidente'''
     var=E.var
     X=Polynome({1:1},var)
-    exo.append("\\item Soit $%s =%s $\n"%(nomE,E))
-    cor.append("\\item Soit $%s=%s $\n"%(nomE,E))
-    exo.append("\\begin{enumerate}\n")
-    cor.append("\\begin{enumerate}\n")
-    exo.append(u"\\item Vérifier si $%s $ possède une racine évidente.\n"%(nomE))
-    exo.append("\\item Factoriser $%s $.\n"%(nomE))
+    exo.append("\\item Soit $%s =%s $"%(nomE,E))
+    cor.append("\\item Soit $%s=%s $"%(nomE,E))
+    exo.append("\\begin{enumerate}")
+    cor.append("\\begin{enumerate}")
+    exo.append(u"\\item Vérifier si $%s $ possède une racine évidente."%(nomE))
+    exo.append("\\item Factoriser $%s $."%(nomE))
     cor.append("\\item ")
     for x0 in racines:
         if E(x0)==0:
@@ -711,18 +731,18 @@ def factorisation_degre3(E,nomE,exo=[],cor=[],racines=[0,1,-1,2,-2]):
         elif degre_facteur==2:
             cor.append(u"On remarque que $%s$ peut se factoriser par $%s^2$ et $%s=%s^2\\left(%s\\right)$"\
             %(nomE,E.var,nomE,E.var,E2))
-            exo.append("\\end{enumerate}\n")
-            cor.append("\\end{enumerate}\n")
+            exo.append("\\end{enumerate}")
+            cor.append("\\end{enumerate}")
             return exo,cor
     else:            
-        cor.append("Comme $%s(%s)=0$, on peut diviser $%s$ par $%s$\n"%(nomE,TeX(x0),nomE,X-x0))
-        cor.append(TeX_division(E,(X-x0))+"\n")
+        cor.append("Comme $%s(%s)=0$, on peut diviser $%s$ par $%s$"%(nomE,TeX(x0),nomE,X-x0))
+        cor.append(TeX_division(E,(X-x0))+"")
         E2,reste=E/(X-x0)
-    cor.append("\\item On doit maintenant factoriser le polynome $%s_2=%s$\\\\\n"%(nomE,E2))
+    cor.append("\\item On doit maintenant factoriser le polynome $%s_2=%s$\\\\"%(nomE,E2))
     delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(E2,factorisation=True)
     cor=redaction_factorisation(E2,nomP=nomE+"_2",exo=[],cor=cor)[1]
     #cor.pop(-5)
-    cor.append("\\par\n")
+    cor.append("\\par")
     cor.append("On en conclue donc que $%s="%(nomE))
     final=0
     if x0==0:
@@ -733,18 +753,21 @@ def factorisation_degre3(E,nomE,exo=[],cor=[],racines=[0,1,-1,2,-2]):
         cor.append("-")
     elif E[3]!=1:
         cor.append(TeX(E[3]))
-    if delta<=0:
+    if delta<0:
         P1=factorisation[-1][0]
-        E_factorise="%s\\times%s$\n"%(P0,P1)
+        E_factorise="%s\\times%s$"%(P0,P1)
+    elif delta==0:
+        P1=factorisation[-1][0]
+        E_factorise="%s\\times{\\left(%s\\right)}^2$"%(P0,P1)
     else:
         
         P1=factorisation[-1][0]
         P2=factorisation[-1][1]
-        E_factorise="%s\\left(%s\\right)\\left(%s\\right)$\n"%(P0,P1,P2)
+        E_factorise="%s\\left(%s\\right)\\left(%s\\right)$"%(P0,P1,P2)
     cor.append(E_factorise)
 
-    exo.append("\\end{enumerate}\n")
-    cor.append("\\end{enumerate}\n")
+    exo.append("\\end{enumerate}")
+    cor.append("\\end{enumerate}")
     return exo,cor
 
 
@@ -752,16 +775,25 @@ def factorisation_degre3(E,nomE,exo=[],cor=[],racines=[0,1,-1,2,-2]):
 
 def redaction_factorisation(P,nomP="P",exo=[],cor=[]):
     var=P.var
-    exo.append("\\item $%s(%s)=%s$\n"%(nomP,var,P(var)))
-    cor.append("\\item Factoriser $%s(%s)=%s$\\par\n"%(nomP,var,P(var)))
     delta,simpl_delta,racines,str_racines,factorisation=factorisation_degre2(P)
     redaction_racines(P,nomP,var,cor)
 
     #factorisation
     if delta<0:
-        cor.append(u"On ne peut pas factoriser $%s(%s)$.\n"%(nomP,var))
+        cor.append(u"On ne peut pas factoriser $%s(%s)$."%(nomP,var))
+    elif delta==0:
+        cor.append(u"On peut donc écrire ")
+        ligne_factorisation="$$%s(%s)"%(nomP,var)
+        for etape in factorisation:
+            ligne_factorisation+=" = "
+            if P[2]!=1:
+                ligne_factorisation+="%s \\times "%(TeX(P[2]))
+
+            ligne_factorisation+="{\\left(%s\\right)}^2"%(etape[0])
+        ligne_factorisation+="$$"
+        cor.append(ligne_factorisation)
     else:
-        cor.append(u"On peut donc écrire \n")
+        cor.append(u"On peut donc écrire ")
         ligne_factorisation="$$%s(%s)"%(nomP,var)
         for etape in factorisation:
             ligne_factorisation+=" = "
@@ -771,7 +803,7 @@ def redaction_factorisation(P,nomP="P",exo=[],cor=[]):
                 ligne_factorisation+=etape[0]
             else:
                 ligne_factorisation+="\\left(%s\\right)\left(%s\\right)"%(etape[0],etape[1])
-        ligne_factorisation+="$$\n"
+        ligne_factorisation+="$$"
         cor.append(ligne_factorisation)
     return exo,cor
 
@@ -779,14 +811,14 @@ def redaction_racines(P,nomP,var,cor=[]):
     delta,simpl_delta,liste_racines,liste_str_racines=racines_degre2(P)
     ligne_delta=u"Je calcule $\\Delta=%s^2-4\\times %s\\times %s=%s$"%(pTeX(P[1]),pTeX(P[2]),pTeX(P[0]),TeX(delta))
     if simpl_delta[0]:
-        ligne_delta+=" et $%s=%s$.\\par\n"%(radicalTeX(delta),simpl_delta[1])
+        ligne_delta+=" et $%s=%s$.\\par"%(radicalTeX(delta),simpl_delta[1])
     else:
-        ligne_delta+=".\\par\n"
+        ligne_delta+=".\\par"
     cor.append(ligne_delta)
     if delta<0:
         cor.append("Comme $\\Delta <0$, $%s(%s)$ n'a pas de racines."%(nomP,var))
     elif delta==0:
-        cor.append("Comme $\\Delta=0$, $%s(%s)$ a une seule racine $%s_0=%s=%s$.\\par\n"%(nomP,var,var,liste_str_racines[0],TeX(liste_racines[0])))
+        cor.append("Comme $\\Delta=0$, $%s(%s)$ a une seule racine $%s_0=%s=%s$.\\par"%(nomP,var,var,liste_str_racines[0],TeX(liste_racines[0])))
     else:#delta>0
         [x1,x2]=liste_racines
         cor.append("Comme $\\Delta>0$, $%s(%s)$ a deux racines :"%(nomP,var))
@@ -794,24 +826,27 @@ def redaction_racines(P,nomP,var,cor=[]):
             simplification1=simplification2=""
             x1,detail1=x1.simplifie(True)
             x2,detail2=x2.simplifie(True)
-
-            cor.append("\\begin{multicols}{2}")
+            max_len=max(len(detail1),len(detail2))
             cor.append("\\begin{align*}")
-            cor.append("%s =&%s\\\\"%(liste_str_racines[0],liste_racines[0]))
-            for i in range(0,len(detail1)):
-                cor.append("=&%s\\\\"%(detail1[i]))
-            cor.append("\\end{align*}\\par\n")
-            
-            cor.append("\\begin{align*}")
-            cor.append("%s =&%s\\\\"%(liste_str_racines[1],liste_racines[1]))
-            for i in range(0,len(detail2)):
-                cor.append("=&%s\\\\"%(detail2[i]))
-            cor.append("\\end{align*}\n")
-            cor.append("\\end{multicols}")
-            cor.append("Les racines de $%s$ sont $%s_1=%s$ et $%s_2=%s$.\n"%(nomP,var,x1,var,x2))
+            cor.append("%s =&%s  &%s =&%s"%\
+                       (liste_str_racines[0],liste_racines[0],liste_str_racines[1],liste_racines[1]))
+            cor.append("\\\\")
+            for i in range(0,max_len):
+                if i <len(detail1):
+                    cor.append("=&%s&"%(detail1[i]))
+                else:
+                    cor.append("&&")
+                if i <len(detail2):
+                    cor.append("=&%s"%(detail2[i]))
+                else:
+                    cor.append("& ")
+                cor.append("\\\\")
+            cor.pop(-1)
+            cor.append("\\end{align*}")
+            cor.append("Les racines de $%s$ sont $%s_1=%s$ et $%s_2=%s$."%(nomP,var,x1,var,x2))
         else:
             [strx1,strx2]=liste_str_racines
-            cor.append("Les racines de $%s$ sont $%s_1=%s=%s$ et $%s_2=%s=%s$.\n"%(nomP,var,strx1,x1,var,strx2,x2))
+            cor.append("Les racines de $%s$ sont $%s_1=%s=%s$ et $%s_2=%s=%s$."%(nomP,var,strx1,x1,var,strx2,x2))
 
     return cor
 
@@ -829,10 +864,11 @@ if __name__=="__main__":
 ##    exo,cor=exo_variation()
 ##    exo,cor=exo_fonctions_rationnelles()
 ##    exo,cor=quest_fonctions_rationnelles_sur_R()
-    tex=""
-    exo,cor=exo_racines_degre2()
-    for i in exo:
-        tex+=i
-    for i in cor:
-        tex+=i
-    imprime_TeX(tex)
+    exo=cor=[]
+    #exo,cor=exo_racines_degre2()
+    for i in range(10):
+        exo1,cor1=exo_racines_degre2()
+        exo=exo+exo1
+        cor=cor+cor1
+
+    imprime_TeX(exo+cor)

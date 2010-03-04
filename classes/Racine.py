@@ -3,11 +3,9 @@
 if __name__=="__main__":
     import sys
     sys.path[:0]=['../']
-    import classes.Racine
-from outils.TeXMiseEnForme import *
+from outils.Affichage import *
 
 from outils.Arithmetique import *
-from outils.Affichage import decimaux
 from math import sqrt
 from Fractions import Fractions
 
@@ -151,7 +149,6 @@ class RacineDegre2:
                 numerateur+="-\\sqrt{"+TeX(self.radicande)+"}"
             else:
                 numerateur+=tTeX(self.coeff)+"\\sqrt{"+TeX(self.radicande)+"}"
-            
         if self.denominateur==1:
             result=numerateur
         else:
@@ -259,6 +256,12 @@ class RacineDegre2:
                             self.denominateur*other.denominateur,
                             coeff,
                             radicande)
+    def __invert__(self):
+        return self.denominateur*RacineDegre2(self.numerateur,self.numerateur**2-self.coeff**2*self.radicande,-self.coeff,self.radicande)
+    def __div__(self,othrer):
+        return self*~other
+    def __rdiv__(self,other):
+        return ~self*other
     def __rmul__(self,other):
         return self*other
     def __pow__(self,n):
