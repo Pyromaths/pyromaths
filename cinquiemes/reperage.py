@@ -172,7 +172,7 @@ def main():
     nbpts = 13
     noms_pts=(noms_sommets(nbpts))
     coord_pts=coordo_pts(nbpts)
-    voc=[u'ordonnée','abscisse']
+    voc=['abscisse',u'ordonnée']
     rg1=random.randrange(0,2)
     rg2=abs(rg1-1)
     while len(coord_pts)<nbpts:
