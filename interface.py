@@ -478,24 +478,40 @@ class Ui_MainWindow(object):
                                                          self.config['chemin_fichier'], QtGui.QFileDialog.ShowDirsOnly)
         i = 0
         if f0:
-            for niveau in range(4):
+            for niveau in range(5):
                 liste = []
                 for i in range(len(self.LesFiches[niveau][2])):
                     liste.append((niveau,  i))
-                exo = os.path.join(str(f0), "%se.tex" % (6 - niveau))
-                cor = os.path.join(str(f0), "%se-corrige.tex" % (6 - niveau))
-                parametres = {
-                                        'les_fiches': self.LesFiches,
-                                        'fiche_exo': exo,
-                                        'fiche_cor': cor,
-                                        'liste_exos': liste,
-                                        'creer_pdf': '1',
-                                        'titre': "Exemple de fiche",
-                                        'niveau': "%s\\ieme" % (6-niveau),
-                                        'modele': str(self.comboBox_modele.currentText() + '.tex'),
-                                        'corrige': True,
-                                        'configdir': self.configdir
-                                        }
+                if niveau != 4:
+                  exo = os.path.join(str(f0), "%se.tex" % (6 - niveau))
+                  cor = os.path.join(str(f0), "%se-corrige.tex" % (6 - niveau))
+                  parametres = {
+                                          'les_fiches': self.LesFiches,
+                                          'fiche_exo': exo,
+                                          'fiche_cor': cor,
+                                          'liste_exos': liste,
+                                          'creer_pdf': '1',
+                                          'titre': "Exemple de fiche",
+                                          'niveau': "%s\\ieme" % (6-niveau),
+                                          'modele': str(self.comboBox_modele.currentText() + '.tex'),
+                                          'corrige': True,
+                                          'configdir': self.configdir
+                                          }
+                else:
+                  exo = os.path.join(str(f0), "Lycee.tex" )
+                  cor = os.path.join(str(f0), "Lycee-corrige.tex" )
+                  parametres = {
+                                          'les_fiches': self.LesFiches,
+                                          'fiche_exo': exo,
+                                          'fiche_cor': cor,
+                                          'liste_exos': liste,
+                                          'creer_pdf': '1',
+                                          'titre': "Exemple de fiche",
+                                          'niveau': u"Lycée",
+                                          'modele': str(self.comboBox_modele.currentText() + '.tex'),
+                                          'corrige': True,
+                                          'configdir': self.configdir
+                                          }
                 outils.System.creation(parametres)
 
     def effacer_choix_exercices(self):

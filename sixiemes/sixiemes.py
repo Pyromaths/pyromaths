@@ -22,7 +22,7 @@
 #
 
 
-from . import angles, decimaux, droites, fractions, operations, quotients, symetrie
+from . import angles, decimaux, droites, fractions, operations, quotients, symetrie, arrondi
 import random
 
 
@@ -50,6 +50,7 @@ def main(exo, f0, f1):
         fractions.FractionPartage,
         fractions.QuestionsAbscisses,        
         symetrie.SymetrieQuadrillage,
-        angles.MesureAngles
+        angles.MesureAngles,
+        arrondi.ArrondirNombreDecimal
         )
     write(f0, f1, modules[exo]())

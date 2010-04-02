@@ -62,19 +62,6 @@ def decomp3(nombre):
 
     return result
 
-def ecrire_par3(nombre):
-    """Affiche un nombre quelconque avec les chiffres par 3."""
-    intvir = re.findall( '(\d+)\.*(\d*)', repr(nombre))
-
-    if (re.findall('\.', repr(nombre)) and ((intvir[0][1]) != '0')):
-      secondterm = decomp3(intvir[0][1])
-      separateur = ', '
-    else:
-      secondterm = ''
-      separateur = ' '
-
-    return decomp3(intvir[0][0]) + separateur + secondterm
-
 #---------------------------------------------------------------------
 # Affichages des nombres décimaux
 #---------------------------------------------------------------------

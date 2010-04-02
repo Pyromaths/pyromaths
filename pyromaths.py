@@ -68,6 +68,7 @@ u'Fractions partage',
 u'Fractions et abscisses',
 u'Symétrie et quadrillages',
 u'Mesurer des angles',
+u'Arrondir des nombres décimaux'
 ]],
 [u'Cinquième', cinquiemes.cinquiemes, [
 u'Priorités opératoires',

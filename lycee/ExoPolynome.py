@@ -216,8 +216,8 @@ def exo_tableau_de_signe():
     nomP="P"
     for i in range(len(Poly)):
         P=Poly[i]
-        exo.append(u"\\item Étudier le signe du polynôme $%s=%s$" % (nomP,P))
-        cor.append("\\item $%s=%s$\\\\" % (nomP,P))
+        exo.append(u"\\item Étudier le signe du polynôme $%s=%s$" % (nomP+'(x)',P))
+        cor.append("\\item $%s=%s$\\\\" % (nomP+'(x)',P))
         
         delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(P,factorisation=True)
         cor=redaction_factorisation(P,nomP,exo=[],cor=cor)[1]
@@ -816,12 +816,12 @@ def redaction_racines(P,nomP,var,cor=[]):
         ligne_delta+=".\\par"
     cor.append(ligne_delta)
     if delta<0:
-        cor.append("Comme $\\Delta <0$, $%s(%s)$ n'a pas de racines."%(nomP,var))
+        cor.append("Comme $\\Delta <0$, $%s$ n'a pas de racines."%(nomP))
     elif delta==0:
-        cor.append("Comme $\\Delta=0$, $%s(%s)$ a une seule racine $%s_0=%s=%s$.\\par"%(nomP,var,var,liste_str_racines[0],TeX(liste_racines[0])))
+        cor.append("Comme $\\Delta=0$, $%s$ a une seule racine $%s_0=%s=%s$.\\par"%(nomP,var,liste_str_racines[0],TeX(liste_racines[0])))
     else:#delta>0
         [x1,x2]=liste_racines
-        cor.append("Comme $\\Delta>0$, $%s(%s)$ a deux racines :"%(nomP,var))
+        cor.append("Comme $\\Delta>0$, $%s$ a deux racines :"%(nomP))
         if isinstance(x1,RacineDegre2):
             simplification1=simplification2=""
             x1,detail1=x1.simplifie(True)

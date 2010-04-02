@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from random import randint
-import re
-from outils/Affichage import ecrire_par3
+from outils.Affichage import decimaux
 
-def arrondi():
-    """Créée et corrige un exercice d'arrondis avec les encadrements. PAS
-    FINI."""
+def ArrondirNombreDecimal():
+    """Créée et corrige un exercice d'arrondis avec les encadrements."""
     hasard = [float(randint(10000,1000000)), float(randint(10000,1000000)),
             float(randint(10000,1000000)), float(randint(10000,1000000))]
 
@@ -25,17 +23,21 @@ def arrondi():
             (hasard[1])/(10**(-choix_precision[1]+4)),
             (hasard[2])/(10**(-choix_precision[2]+4)),
             (hasard[3])/(10**(-choix_precision[3]+4))]
-
-    print('Arrondir les nombres suivants à la précision demandée :')
-
-    for j in range(4):
-        print ('Nombre ' + str(j + 1) + ' : ' + ecrire_par3(nombres[j]) + \
-                ' ' + precision[choix_precision[j]] + ' ' + \
-                supinf[choix_supinf[j]] + '.\n')
+            
+    exo = ["\\exercice", u'\\item Arrondir les nombres suivants à la précision demandée :', '\\begin{enumerate}']
+    cor = ["\\exercice*", u'\\item Arrondir les nombres suivants à la précision demandée :', '\\begin{enumerate}']
 
 
     for k in range(4):
-
+        
+        exo.append( '\\item Nombre ' + str(k + 1) + ' : ' + decimaux(nombres[k]) + \
+                ' ' + precision[choix_precision[k]] + ' ' + \
+                supinf[choix_supinf[k]] + '.\n' )
+   
+        cor.append( '\\item Nombre ' + str(k + 1) + ' : ' + decimaux(nombres[k]) + \
+                ' ' + precision[choix_precision[k]] + ' ' + \
+                supinf[choix_supinf[k]] + '.\n' )
+                
         arrondi = round(nombres[k], -choix_precision[k]+3)
 
         if (arrondi > nombres[k]):
@@ -53,13 +55,14 @@ def arrondi():
         elif (choix_supinf[k] == 2):
             solution = exc
 
-    print('L\'encadrement de ' + ecrire_par3(nombres[k]) + ' ' + \
-            precision[choix_precision[k]] + ' est : \n')
-    print(ecrire_par3(defaut) + ' < ' + ecrire_par3(nombres[k]) + ' < ' + \
-            ecrire_par3(exc) + '\n')
-    print('On en déduit que son arrondi ' + precision[choix_precision[k]] + \
-            ' ' + supinf[choix_supinf[k]] + ' est : ' + ecrire_par3(solution))
+        cor.append( 'L\'encadrement de ' + decimaux(nombres[k]) + ' ' + \
+                precision[choix_precision[k]] + ' est : \n' )
+        cor.append( decimaux(defaut) + ' < ' + decimaux(nombres[k]) + ' < ' + \
+                decimaux(exc) + '\n' )
+        cor.append( 'On en deduit que son arrondi ' + precision[choix_precision[k]] + \
+                ' ' + supinf[choix_supinf[k]] + ' est : ' + decimaux(solution) + '.\n')
 
-    if k != 3:
-        print('################################\n')
-
+    exo.append("\\end{enumerate}")    
+    cor.append("\\end{enumerate}") 
+    
+    return (exo, cor)
