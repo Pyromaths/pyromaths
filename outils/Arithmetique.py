@@ -77,7 +77,7 @@ def factorise(n):
             corrige.append(text + str(n) + '\\\\')
         else:
             candidate += 1
-    corrige.append("\\end{align}")
+    corrige.append("\\end{align*}")
     if (n != 1) or (primes == []):
         primes.append(n)
     if len(primes) == 1:
@@ -129,7 +129,7 @@ def valeur_alea(a, b):
             return alea
 
 #---------------------------------------------------------------------
-# A supprimer dès que troisiemes aura été converti au nouveau format
+# A supprimer dès que quatriemes/developpements.py aura été corrigé
 #---------------------------------------------------------------------
 
 def ecrit_tex(file, formule, cadre=None, thenocalcul='\\thenocalcul = ',
