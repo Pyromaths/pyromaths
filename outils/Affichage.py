@@ -43,25 +43,6 @@ def suppr0list(liste):
         element = suppr0(element)
     return liste
 
-def decomp3(nombre):
-    """Affiche un nombre entier avec les chiffres par 3."""
-    i = 0 ## 1
-    result = ''
-    nombrestr = repr(nombre)
-    longueur = len(nombrestr)
-    reste = longueur % 3
-
-    while (i < longueur):
-        if i == reste:
-            caract = ' '
-            reste += 3
-        else:
-            caract = nombrestr[i]
-            i += 1
-        result += caract
-
-    return result
-
 #---------------------------------------------------------------------
 # Affichages des nombres décimaux
 #---------------------------------------------------------------------

@@ -113,6 +113,7 @@ u'Cercle et théorème de Pythagore',
 u'Théorème de Thalès',
 u'Réciproque du théorème de Thalès',
 u'Trigonométrie',
+u'Arithmétique'
 ]],
 [u'Lycée', lycee.lycee, [
 u'Équations 2° degré',

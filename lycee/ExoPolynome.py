@@ -304,8 +304,8 @@ def quest_fonctions_rationnelles():
             cor.append("\\\\")
     cor.pop(-1)
     cor.append("\\end{align*}")
-    cor.append(u"Or $%s$ n'est pas dans l'intervalle $[%s~;~%s]$ donc $%s$ est bien définie et dérivable sur $I$."%\
-          (TeX(VI),Intervalle[0],Intervalle[1],nomf))
+    cor.append(u"Or $%s$ n'est pas dans l'intervalle $[%s~;~%s]$, et comme $%s$ est une fonction rationnelle, alors $%s$ est bien définie et dérivable sur $I$."%\
+          (TeX(VI),Intervalle[0],Intervalle[1],nomf, nomf))
     exo.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in[%s~;~%s]$."%\
           (nomf,var,var,Intervalle[0],Intervalle[1]))
     cor.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in[%s~;~%s]$."%\
@@ -497,9 +497,9 @@ def tableau_de_signe(P,nomP,delta,racines,factorisation,borneinf=float("-inf"),b
         else:
             str_signe="positif"
         if detail:
-            return "Donc $%s$ ne change pas de signe donc $%s$ est %s\\\\"%(nomP,nomP,str_signe),signe
+            return "Donc $%s$ ne change pas de signe, et comme a est %s, alors $%s$ est %s.\\\\"%(nomP,str_signe,nomP,str_signe),signe
         else:
-            return "Donc $%s$ ne change pas de signe donc $%s$ est %s\\\\"%(nomP,nomP,str_signe)
+            return "Donc $%s$ ne change pas de signe, et comme a est %s, alors $%s$ est %s.\\\\"%(nomP,str_signe,nomP,str_signe)
     elif delta==0:
         if P[2]>0:
             if P[2]==1:
