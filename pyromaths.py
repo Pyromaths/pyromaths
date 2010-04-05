@@ -22,7 +22,7 @@
 
 from PyQt4 import QtGui, QtCore
 import sys, os, codecs
-from outils.TestEnv import test
+#from outils.TestEnv import test
 
 #================================================================
 # Cas d'une installation de Pyromaths via deb ou rpm, il faut
