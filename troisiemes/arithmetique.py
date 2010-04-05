@@ -38,9 +38,9 @@ def Arithmetique():
   
   ### Question 1
   exo = ["\\exercice", '\\begin{enumerate}', 
-        u"\\item Donner la décomposition en facteurs premiers des nombres suivants, et préciser si besoin est, quand il s\'agit d\'un nombre premier :\n"]
+        u"\\item Donner la décomposition en facteurs premiers des nombres suivants, et préciser quand il s\'agit d\'un nombre premier :\n"]
   cor = ["\\exercice*", '\\begin{enumerate}', 
-        u"\\item Donner la décomposition en facteurs premiers des nombres suivants, et préciser si besoin est, quand il s\'agit d\'un nombre premier :\n"]
+        u"\\item Donner la décomposition en facteurs premiers des nombres suivants, et préciser quand il s\'agit d\'un nombre premier :\n"]
           
   prime = premiers[randint(10,167)]
   
@@ -63,7 +63,8 @@ def Arithmetique():
   melange = [prime, complementaires[0] * fauxpgcd, complementaires[1] * fauxpgcd, ] + autresnombres
   shuffle(melange)
   
-  exo.append(decimaux(melange[0]) + " ; " + decimaux(melange[1]) + " ; " + decimaux(melange[2]) + " ; " + decimaux(melange[3]) + " ; " + decimaux(melange[4]) + " ;\n")
+  exo.append(decimaux(melange[0]) + " ; " + decimaux(melange[1]) + " ; " + decimaux(melange[2]) 
+             + " ; " + decimaux(melange[3]) + " ; " + decimaux(melange[4]) + " ;\n")
   
   cor.append("\\begin{multicols}{2}")
   
@@ -109,17 +110,41 @@ def Arithmetique():
     cor.append(u"En voici deux :")
     cor.append("\\begin{enumerate}")
     
-    cor.append(u"\\item On peut simplement utiliser la formule : $a \\times b = PGCD(a;b) \\times PPCM(a;b)$.\n")
-    cor.append(u"Donc : PPCM(" + decimaux(listenombres[1]) + ";" + decimaux(listenombres[2]) + ") = " +
+    cor.append(u"\\item On peut simplement utiliser la formule : $a \\times b = PGCD(a;~b) \\times PPCM(a;~b)$.\n")
+    cor.append(u"Donc : PPCM(" + decimaux(listenombres[1]) + ";~" + decimaux(listenombres[2]) + ") = " +
               "\\dfrac{" + decimaux(listenombres[1]) + "\\times" + decimaux(listenombres[2]) + "}{" + decimaux(fauxpgcd * pgcdcompl) +
               "} = " + decimaux(vraippcm) + ".\n")
     
     cor.append(u"\\item On peut aussi multiplier un nombre par les \"facteurs complémentaires\" de l'autre.\n" +
               u"Ces \"facteurs complémentaires\" sont les facteurs qui complètent le PGCD pour former le nombre.\n")
-    cor.append(u"Comme PGCD(" + decimaux(listenombres[1]) + ";" + decimaux(listenombres[2]) + ") = " + decimaux(fauxpgcd * pgcdcompl) + 
-              u", alors les \"facteurs complémentaires\" de " + decimaux(listenombres[1]) + u" sont :")
+    cor.append(u"Comme $PGCD(" + decimaux(listenombres[1]) + ";~" + decimaux(listenombres[2]) + ") = " + decimaux(fauxpgcd * pgcdcompl) + " = ")
     
+    if len(facteurs) > 1:
+      for j in range(len(facteurs)):
+        if j != len(facteurs)-1:
+          cor.append(decimaux(facteurs[j]) + " \\times ")
+        else:
+          cor.append(decimaux(facteurs[j]))
+      textcompl = u"$, alors les \"facteurs complémentaires\" de $"
+    else:
+      textcompl = u"$, alors le \"facteur complémentaire\" de $"
+    
+    cor.append(textcompl + decimaux(listenombres[1]) + " = ")
+    
+    factornb1 = factorise(listenombres[1])[0]
+    
+    for j in range(len(factornb1)):
+      if j != len(factornb1)-1:
+        cor.append(decimaux(factornb1[j]) + " \\times ")
+      else:
+        cor.append(decimaux(factornb1[j]))
+        
     factcompl = factorise(listenombres[1] / (fauxpgcd * pgcdcompl))[0]
+    
+    if len(factcompl) == 1:
+      cor.append(u"$ est :")
+    else:
+      cor.append(u"$ sont :")
     
     for j in range(len(factcompl)):
       if j != len(factcompl)-1:
@@ -127,7 +152,7 @@ def Arithmetique():
       else:
         cor.append(decimaux(factcompl[j]) + ".\n")
         
-    cor.append(u"On en déduit que $PPCM(" + decimaux(listenombres[1]) + ";" + decimaux(listenombres[2]) + ") = " + decimaux(listenombres[2]) + " \\times ")
+    cor.append(u"On en déduit que $PPCM(" + decimaux(listenombres[1]) + ";~" + decimaux(listenombres[2]) + ") = " + decimaux(listenombres[2]) + " \\times ")
     
     for j in range(len(factcompl)):
       if j != len(factcompl)-1:
@@ -142,9 +167,9 @@ def Arithmetique():
   ### Question 3
 
   exo.append(u"\\item Quel est le plus petit nombre par lequel il faut multiplier " + decimaux(autresnombres[0])
-             + u" pour que ce soit un carré parfait ?\n")
+             + u" pour obtenir un carré parfait ?\n")
              
-  cor.append(u" \\item Pour obtenir un carré parfait, il faut que sa décomposition en facteurs premiers ne contiennent que facteurs "
+  cor.append(u" \\item Pour obtenir un carré parfait, il faut que sa décomposition en facteurs premiers ne contienne que des facteurs "
              + u"apparaissant un nombre pair de fois. D'après la question 1, la décomposition en facteurs premiers de "
              + decimaux(autresnombres[0]))
   
@@ -177,10 +202,11 @@ def Arithmetique():
              + decimaux(carre * autresnombres[0]) + ".\n")
  
   ### Question 4
-  exo.append(u"\\item Simplifier la fraction $\\dfrac{" + decimaux(listenombres[1]) + "}{" + decimaux(listenombres[2]) + "}$ au maximum.\n")
+  exo.append(u"\\item Rendre la fraction $\\dfrac{" + decimaux(listenombres[1]) + "}{" + decimaux(listenombres[2]) + u"}$ irréductible.\n")
   
   cor.append(u"\\item Le moyen le plus rapide de simplifier cette fraction est de diviser le numérateur et le dénominateur par leur PGCD." + 
-              u" D'après la question 2), ce PGCD vaut " + decimaux(fauxpgcd * pgcdcompl) + " donc on obtient :\n")
+              u" D'après la question 2),  PGCD(" + decimaux(listenombres[1]) + ";~" + decimaux(listenombres[2]) + ") = " 
+              + decimaux(fauxpgcd * pgcdcompl) + ", donc on obtient :\n")
   cor.append(u"$\dfrac{" + decimaux(listenombres[1]) + "{\\scriptstyle \\div " + decimaux(fauxpgcd * pgcdcompl) + "}}{" 
              + decimaux(listenombres[2]) + "{\\scriptstyle \\div " + decimaux(fauxpgcd * pgcdcompl) + "}} = \dfrac{" 
              + decimaux(listenombres[1] / (fauxpgcd * pgcdcompl)) + "}{" 
@@ -210,8 +236,7 @@ def Arithmetique():
   cor.append(u"\\item Il faut mettre les fractions au même dénominateur. Grâce à la question 2), nous avons déjà un dénominateur commun : " +
              u"le PPCM des nombres " + decimaux(listenombres[1]) + " et " + decimaux(listenombres[2]) 
              + u", qui est par définition le plus petit multiple commun de ces deux nombres.\n")
-  cor.append(u"$\\dfrac{" + decimaux(num[0]) + "}{" + decimaux(listenombres[1]) + "} + \\dfrac{" + decimaux(num[1])
-             + "}{" + decimaux(listenombres[2]) + "} = \\dfrac{" + decimaux(num[0]) + "{\\scriptstyle \\times " + decimaux(mult1) + "}}{" 
+  cor.append(u"$\\dfrac{" + decimaux(num[0]) + "{\\scriptstyle \\times " + decimaux(mult1) + "}}{" 
              + decimaux(listenombres[1]) + "{\\scriptstyle \\times " + decimaux(mult1) + "}} + \\dfrac{" 
              + decimaux(num[1]) + "{\\scriptstyle \\times " + decimaux(mult2) + "}}{" + decimaux(listenombres[2]) 
              + "{\\scriptstyle \\times " + decimaux(mult2) + "}} = \\dfrac{" + decimaux(num1) + "}{" + decimaux(vraippcm) 

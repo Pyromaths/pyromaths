@@ -361,6 +361,14 @@ class Ui_MainWindow(object):
     #        Début des fonctions
     #============================================================
 
+    ### Gestion des erreurs
+    
+    def confAbsent(self):
+      """Dialogue si pyromaths.xml est défectueux."""
+      QtGui.QMessageBox.critical(self, "Erreur critique",
+      u"Impossible de lire le fichier de configuration. Veuillez vérifier ce dernier ou faire remonter l'erreur sur le forum de Pyromaths.")
+
+
     def about(self):
         """Crée la boîte de dialogue "À propos de..." """
         version = self.lire_config('informations')['version']
@@ -606,7 +614,6 @@ QCoreApplication::exec: The event loop is already runningteur avec le dictionnai
         self.config['titre_fiche'] = self.titre_fiche.text()
         self.config['corrige'] = self.checkBox_corrige.isChecked()
         self.config['pdf'] = self.checkBox_pdf.isChecked()
-
 
 #================================================================
 #        Classe ChoixOrdreExos

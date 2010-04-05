@@ -31,7 +31,7 @@ def ArrondirNombreDecimal():
 
     precision = [u'au millième', u'au centième', u'au dixième', u'à l\'unité',
             u'à la dizaine', u'à la centaine', 'au millier',
-            u'à la dizaine de millier']
+            u'à la dizaine de milliers']
 
     choix_precision = [randint(0, 7), randint(0, 7), randint(0, 7),
             randint(0, 7)]
@@ -45,19 +45,15 @@ def ArrondirNombreDecimal():
             (hasard[2])/(10**(-choix_precision[2]+4)),
             (hasard[3])/(10**(-choix_precision[3]+4))]
             
-    exo = ["\\exercice", u'Arrondir les nombres suivants à la précision demandée :', '\\begin{enumerate}']
-    cor = ["\\exercice*", u'Arrondir les nombres suivants à la précision demandée :', '\\begin{enumerate}']
+    exo = ["\\exercice", '\\begin{enumerate}']
+    cor = ["\\exercice*", '\\begin{enumerate}']
 
 
     for k in range(4):
         
-        exo.append( '\\item Nombre ' + str(k + 1) + ' : ' + decimaux(nombres[k]) + \
-                ' ' + precision[choix_precision[k]] + ' ' + \
-                supinf[choix_supinf[k]] + '.\n' )
+        exo.append( "\\item Arrondir " + decimaux(nombres[k]) + " " + precision[choix_precision[k]] + " " + supinf[choix_supinf[k]] + '.\n' )
    
-        cor.append( '\\item Nombre ' + str(k + 1) + ' : ' + decimaux(nombres[k]) + \
-                ' ' + precision[choix_precision[k]] + ' ' + \
-                supinf[choix_supinf[k]] + '.\n' )
+        cor.append( "\\item Arrondir " + decimaux(nombres[k]) + " " + precision[choix_precision[k]] + " " + supinf[choix_supinf[k]] + '.\n' )
                 
         arrondi = round(nombres[k], -choix_precision[k]+3)
 
@@ -80,7 +76,7 @@ def ArrondirNombreDecimal():
                 precision[choix_precision[k]] + ' est : \n' )
         cor.append( decimaux(defaut) + ' < ' + decimaux(nombres[k]) + ' < ' + \
                 decimaux(exc) + '\n' )
-        cor.append( 'On en deduit que son arrondi ' + precision[choix_precision[k]] + \
+        cor.append( u'On en déduit que son arrondi ' + precision[choix_precision[k]] + \
                 ' ' + supinf[choix_supinf[k]] + ' est : ' + decimaux(solution) + '.\n')
 
     exo.append("\\end{enumerate}")    
