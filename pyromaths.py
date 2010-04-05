@@ -155,6 +155,6 @@ if __name__ == "__main__":
     pyromaths = StartQT4(LesFiches,  outils.System.configdir(), iconesdir)
     pyromaths.show()   
     
-    test(pyromaths)
+    #test(pyromaths)
     
     sys.exit(app.exec_())
