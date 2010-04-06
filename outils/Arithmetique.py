@@ -59,31 +59,29 @@ def factor(n):
 
 def factorise(n):
     """Retourne la liste des facteurs premiers du nombre n, ainsi que le détail de la factorisation pour LateX. PAS FINI."""
-    global corrige
+
     primes = []
-    #candidates = xrange(2,n+1)
+
     limite=int(math.sqrt(n))+1
-    espace = len(str(n))
-    corrige = '$$'
-    text = ' = '    
+    temp = n
+    corrige = ["\\begin{align*}", str(n)]
+    text = ' & = '    
     candidate = 2
-    text = ' ' * espace + ' = '
-    while candidate<limite:
-        if n%candidate == 0:# and premier(candidate):
+    while (candidate < limite):
+        if n % candidate == 0:
             primes.append(candidate)
             text += str(candidate) + ' \\times '
             n = n / candidate
             if n  == 1:
-                corrige +=  text[:-7]
                 break
-            corrige +=  text+str(n) + '\n'
-        else:# n % candidate <> 0:
+            corrige.append(text + str(n) + '\\\\')
+        else:
             candidate += 1
-    if n!=1:
+    corrige.append("\\end{align*}")
+    if (n != 1) or (primes == []):
         primes.append(n)
-    if primes==[]:
-        primes.append(n)
-    corrige += "$$"
+    if len(primes) == 1:
+        corrige = [str(temp) + " est un nombre premier.\n"]
     return (primes, corrige)
 
 
@@ -131,7 +129,7 @@ def valeur_alea(a, b):
             return alea
 
 #---------------------------------------------------------------------
-# A supprimer dès que troisiemes aura été converti au nouveau format
+# A supprimer dès que quatriemes/developpements.py aura été corrigé
 #---------------------------------------------------------------------
 
 def ecrit_tex(file, formule, cadre=None, thenocalcul='\\thenocalcul = ',

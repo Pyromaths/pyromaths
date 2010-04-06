@@ -22,6 +22,7 @@
 
 from PyQt4 import QtGui, QtCore
 import sys, os, codecs
+#from outils.TestEnv import test
 
 #================================================================
 # Cas d'une installation de Pyromaths via deb ou rpm, il faut
@@ -68,6 +69,7 @@ u'Fractions partage',
 u'Fractions et abscisses',
 u'Symétrie et quadrillages',
 u'Mesurer des angles',
+u'Arrondir des nombres décimaux'
 ]],
 [u'Cinquième', cinquiemes.cinquiemes, [
 u'Priorités opératoires',
@@ -112,6 +114,7 @@ u'Cercle et théorème de Pythagore',
 u'Théorème de Thalès',
 u'Réciproque du théorème de Thalès',
 u'Trigonométrie',
+u'Arithmétique'
 ]],
 [u'Lycée', lycee.lycee, [
 u'Équations 2° degré',
@@ -122,13 +125,13 @@ u"Sens de variations",
 ]],
 ]
 
-class StartQT4(QtGui.QMainWindow):
+class StartQT4(QtGui.QMainWindow, interface.Ui_MainWindow):
     def __init__(self, LesFiches, configdir, iconesdir, parent=None):
         QtGui.QWidget.__init__(self, parent)
         self.ui = interface.Ui_MainWindow()
         self.ui.setupUi(self, LesFiches, configdir, iconesdir)
 
-
+    
 if __name__ == "__main__":
 #================================================================
 # Création du fichier de configuration si inexistant
@@ -150,5 +153,8 @@ if __name__ == "__main__":
 
     app = QtGui.QApplication(sys.argv)
     pyromaths = StartQT4(LesFiches,  outils.System.configdir(), iconesdir)
-    pyromaths.show()
+    pyromaths.show()   
+    
+    #test(pyromaths)
+    
     sys.exit(app.exec_())

@@ -361,6 +361,14 @@ class Ui_MainWindow(object):
     #        Début des fonctions
     #============================================================
 
+    ### Gestion des erreurs
+    
+    def confAbsent(self):
+      """Dialogue si pyromaths.xml est défectueux."""
+      QtGui.QMessageBox.critical(self, "Erreur critique",
+      u"Impossible de lire le fichier de configuration. Veuillez vérifier ce dernier ou faire remonter l'erreur sur le forum de Pyromaths.")
+
+
     def about(self):
         """Crée la boîte de dialogue "À propos de..." """
         version = self.lire_config('informations')['version']
@@ -478,24 +486,40 @@ class Ui_MainWindow(object):
                                                          self.config['chemin_fichier'], QtGui.QFileDialog.ShowDirsOnly)
         i = 0
         if f0:
-            for niveau in range(4):
+            for niveau in range(5):
                 liste = []
                 for i in range(len(self.LesFiches[niveau][2])):
                     liste.append((niveau,  i))
-                exo = os.path.join(str(f0), "%se.tex" % (6 - niveau))
-                cor = os.path.join(str(f0), "%se-corrige.tex" % (6 - niveau))
-                parametres = {
-                                        'les_fiches': self.LesFiches,
-                                        'fiche_exo': exo,
-                                        'fiche_cor': cor,
-                                        'liste_exos': liste,
-                                        'creer_pdf': '1',
-                                        'titre': "Exemple de fiche",
-                                        'niveau': "%s\\ieme" % (6-niveau),
-                                        'modele': str(self.comboBox_modele.currentText() + '.tex'),
-                                        'corrige': True,
-                                        'configdir': self.configdir
-                                        }
+                if niveau != 4:
+                  exo = os.path.join(str(f0), "%se.tex" % (6 - niveau))
+                  cor = os.path.join(str(f0), "%se-corrige.tex" % (6 - niveau))
+                  parametres = {
+                                          'les_fiches': self.LesFiches,
+                                          'fiche_exo': exo,
+                                          'fiche_cor': cor,
+                                          'liste_exos': liste,
+                                          'creer_pdf': '1',
+                                          'titre': "Exemple de fiche",
+                                          'niveau': "%s\\ieme" % (6-niveau),
+                                          'modele': str(self.comboBox_modele.currentText() + '.tex'),
+                                          'corrige': True,
+                                          'configdir': self.configdir
+                                          }
+                else:
+                  exo = os.path.join(str(f0), "Lycee.tex" )
+                  cor = os.path.join(str(f0), "Lycee-corrige.tex" )
+                  parametres = {
+                                          'les_fiches': self.LesFiches,
+                                          'fiche_exo': exo,
+                                          'fiche_cor': cor,
+                                          'liste_exos': liste,
+                                          'creer_pdf': '1',
+                                          'titre': "Exemple de fiche",
+                                          'niveau': u"Lycée",
+                                          'modele': str(self.comboBox_modele.currentText() + '.tex'),
+                                          'corrige': True,
+                                          'configdir': self.configdir
+                                          }
                 outils.System.creation(parametres)
 
     def effacer_choix_exercices(self):
@@ -590,7 +614,6 @@ QCoreApplication::exec: The event loop is already runningteur avec le dictionnai
         self.config['titre_fiche'] = self.titre_fiche.text()
         self.config['corrige'] = self.checkBox_corrige.isChecked()
         self.config['pdf'] = self.checkBox_pdf.isChecked()
-
 
 #================================================================
 #        Classe ChoixOrdreExos

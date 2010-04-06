@@ -23,7 +23,7 @@
 
 
 from . import fractions, puissances, pgcd, developpements, equations, racines
-from . import systemes, proba, affine, pythagore
+from . import systemes, proba, affine, pythagore, arithmetique
 
 def write(f0, f1, exos):
     f0.write("\n")
@@ -50,5 +50,6 @@ def main(exo, f0, f1):
         pythagore.tex_thales,
         pythagore.tex_reciproque_thales,
         pythagore.tex_trigo,
+        arithmetique.Arithmetique
         )
     write(f0, f1, modules[exo]())

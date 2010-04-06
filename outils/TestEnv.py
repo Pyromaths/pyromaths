@@ -21,36 +21,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+### Pour tester la boite de dialogue
+## Fichier à compléter par les tests d'environnement
 
-from . import angles, decimaux, droites, fractions, operations, quotients, symetrie, arrondi
-import random
-
-
-def write(f0, f1, exos):
-    f0.write("\n")
-    f1.write("\n")
-    f0.writelines(x + "\n" for x in exos[0])
-    f1.writelines(x + "\n" for x in exos[1])
-
-def main(exo, f0, f1):
-    modules = (
-        operations.CalculMental,
-        decimaux.EcrireNombreLettre,
-        decimaux.PlaceVirgule,
-        decimaux.EcritureFractionnaire,
-        decimaux.Decomposition,
-        decimaux.Conversions,
-        operations.Operations,
-        operations.ProduitPuissanceDix,
-        decimaux.ClasserNombres,
-        droites.Droites,
-        droites.Perpendiculaires,
-        droites.Proprietes,
-        quotients.Divisible,
-        fractions.FractionPartage,
-        fractions.QuestionsAbscisses,        
-        symetrie.SymetrieQuadrillage,
-        angles.MesureAngles,
-        arrondi.ArrondirNombreDecimal
-        )
-    write(f0, f1, modules[exo]())
+#def test(gui):
+  #if 1:
+    #gui.confAbsent()
