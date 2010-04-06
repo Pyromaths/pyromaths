@@ -33,24 +33,7 @@ def exo_racines_degre2():
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
     
-    #identites remarquables
-    
-    var=inconnues[randrange(4)]
-    X=Polynome({1:1},var)
-    P,sgns=poly_id_remarquables(rac_min,rac_max,X)#sgns=-2,0 ou 2
-    exo.append("\\item $%s=0$"% P)
-    cor.append("\\item $%s=0$"% P)
-    factorisation,racines=factorise_identites_remarquables(P,sgns,var,racines=True)
-    factorise="$$%s"% P
-    for i in range(len(factorisation)):
-        factorise+="="+factorisation[i]
-    cor.append(factorise+"$$")
-    if len(racines)==1:
-        solution="une solution $%s=%s$"%(var,TeX(racines[0]))
-    else:
-        solution="deux solutions $%s=%s$ ou $%s=%s$"%(var,TeX(racines[0]),var,TeX(racines[1]))
-    cor.append(u"On en déduit que l'équation a "+solution)
-    
+
     #Racines entières
     nomP='P'
     var=inconnues[randrange(4)]
@@ -109,7 +92,7 @@ def exo_factorisation_degre2():
     var=inconnues[randrange(4)]
     X=Polynome({1:1},var)
     P,sgns=poly_id_remarquables(rac_min,rac_max,X)#sgns=-2,0 ou 2
-    exo.append("\\item $%s(%s)=%s$"% (nomP,var,P(var)))
+    exo.append(u"\\item Factoriser  $%s(%s)=%s$ à l'aide d'une identité remarquable."% (nomP,var,P(var)))
     cor.append("\\item Factoriser $%s(%s)=%s$"% (nomP,var,P(var)))
                
     factorisation,racines=factorise_identites_remarquables(P,sgns,var,racines=True)
@@ -203,6 +186,8 @@ def exo_tableau_de_signe():
     #X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
     inconnues=['x','y','z','t']
     nom_poly=['P','Q','R','S']
+    borneinf=float("-inf")
+    bornesup=float("inf")
     var="x"
     X=Polynome({1:1},var=var)
     Poly=[poly_racines_entieres(rac_min,rac_max,X),
@@ -218,14 +203,9 @@ def exo_tableau_de_signe():
         P=Poly[i]
         exo.append(u"\\item Étudier le signe du polynôme $%s=%s$" % (nomP,P))
         cor.append("\\item $%s=%s$\\\\" % (nomP,P))
-        
-        delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(P,factorisation=True)
-        cor=redaction_factorisation(P,nomP,exo=[],cor=cor)[1]
-        #cor.pop(-5)
-        if factorisation==[]:
-            factorisation=[0]
-        cor.append(tableau_de_signe(P,nomP,delta,racines,factorisation[-1]))
-        
+        delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(P,factorisation=False)
+        redaction_racines(P,nomP,var,cor)
+        tableau_de_signe(P,nomP,delta,racines,cor,borneinf=float("-inf"),bornesup=float("+inf"),detail=False)
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
     return exo,cor
@@ -304,8 +284,10 @@ def quest_fonctions_rationnelles():
             cor.append("\\\\")
     cor.pop(-1)
     cor.append("\\end{align*}")
-    cor.append(u"Or $%s$ n'est pas dans l'intervalle $[%s~;~%s]$ donc $%s$ est bien définie et dérivable sur $I$."%\
-          (TeX(VI),Intervalle[0],Intervalle[1],nomf))
+    cor.append(u"Or $%s$ n'est pas dans l'intervalle $[%s~;~%s]$, et comme $%s$ est un quotient de polynômes, alors $%s$ est définie et dérivable sur I."%\
+               (TeX(VI),Intervalle[0],Intervalle[1],nomf,nomf))
+    #cor.append(u"Or $%s$ n'est pas dans l'intervalle $[%s~;~%s]$ donc $%s$ est bien définie et dérivable sur $I$."%\
+    #      (TeX(VI),Intervalle[0],Intervalle[1],nomf))
     exo.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in[%s~;~%s]$."%\
           (nomf,var,var,Intervalle[0],Intervalle[1]))
     cor.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in[%s~;~%s]$."%\
@@ -378,7 +360,7 @@ def quest_fonctions_rationnelles_sur_R():
          "\\begin{enumerate}"]
 
     exo.append(u"\\item Déterminer l'ensemble de définition $\\mathcal{D}_{%s}$ de $%s$."%(nomf,nomf))
-    cor.append(u"\\item Déterminer l'ensemble de définition $\\mathcal{D}_{%s}$ de $%s$."%(nomf,nomf))
+    cor.append(u"\\item Déterminer l'ensemble de définition $\\mathcal{D}_{%s}$ de $%s$.\par"%(nomf,nomf))
     cor.append(u" La fonction rationnelle $%s$ est définie et dérivable en $%s$ si $%s\\neq0$."%(nomf,var,Q(var))) 
     cor.append("\\begin{align*}\n\
             %s&=0\\\\\n\
@@ -423,7 +405,7 @@ def quest_fonctions_rationnelles_sur_R():
 
 
 def quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf")):
-    '''Exercice qui propose l'étude du sens de variation d'un polynôme de degré 3'''
+    '''Question qui propose l'étude du sens de variation d'un polynôme de degré 3'''
     Intervalle=[borneinf,bornesup]
     if borneinf==float("-inf") and bornesup==float("+inf"):
         TeX_intervalle="\\mathbb R"
@@ -452,19 +434,20 @@ def quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf")):
     cor=[u"\\item Étudier le sens de variations de $%s$ définie par $%s(x)=%s$ sur $%s$." % (nomP,nomP,P(var),TeX_intervalle)]
     
     cor.append("\\par $%s'(x)=%s$\\\\" % (nomP,Pprime(var)))
-    cor.append(u"Je dois factoriser $%s'(%s)$ qui est un polynôme du second degré.\\par"%(nomP,var))
+    cor.append(u"Je dois étudier le signe de $%s'(%s)$ qui est un polynôme du second degré.\\par"%(nomP,var))
     
-    delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(Pprime,factorisation=True)
-    cor=redaction_factorisation(Pprime,nomP+"'",exo=[],cor=cor)[1]
+    delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(Pprime,factorisation=False)
+    #cor=redaction_factorisation(Pprime,nomP+"'",exo=[],cor=cor)[1]
     #cor.pop(-5)
     if factorisation==[]:
         factorisation=[0]
-    tab_signe,str_signe=tableau_de_signe(Pprime,nomP+"'",delta,racines,factorisation[-1],borneinf,bornesup,detail=True)
-    cor.append(tab_signe)
-    
-    if str_signe==u"négatif" or (delta==0 and P[3]<0):
+    str_signe=tableau_de_signe(Pprime,nomP+"'",delta,racines,cor,borneinf,bornesup,detail=True)
+    #cor.append(tab_signe)
+
+        
+    if (delta<=0 and P[3]<0):
         cor+=u"Donc la fonction polynômiale $%s$ est décroissante sur $%s$." %(nomP,TeX_intervalle)
-    elif str_signe=="positif" or (delta==0 and P[3]>0):
+    elif (delta<=0 and P[3]>0):
         cor.append(u"Donc la fonction polynômiale $%s$ est croissante sur $%s$."%(nomP,TeX_intervalle))
     else:
         cor.append("On obtient ainsi le tableau de variation de $%s$."%nomP)
@@ -487,63 +470,37 @@ def quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf")):
                 ###############################################
                    
 
-def tableau_de_signe(P,nomP,delta,racines,factorisation,borneinf=float("-inf"),bornesup=float("+inf"),detail=False):
+def tableau_de_signe(P,nomP,delta,racines,cor,borneinf=float("-inf"),bornesup=float("+inf"),detail=False):
     '''Étudie le signe d'un polynôme de degré2'''
     '''detail=True permet de récupérer la dernière ligne avec le signe de P'''
     var=P.var
+    tab_signe=[]
+    signe_moinsa,signe_a=[('+','-'),('-','+')][P[2]>0] #Ca donne bien ce qu'on veut...
+    
     if delta<0:
-        if P[0]<0:
-            str_signe=u"négatif"
-        else:
-            str_signe="positif"
-        if detail:
-            return "Donc $%s$ ne change pas de signe donc $%s$ est %s\\\\"%(nomP,nomP,str_signe),signe
-        else:
-            return "Donc $%s$ ne change pas de signe donc $%s$ est %s\\\\"%(nomP,nomP,str_signe)
-    elif delta==0:
-        if P[2]>0:
-            if P[2]==1:
-                str_a=""
-            else:
-                str_a="\\tx{%s}& & \\tx{+} && \\tx{+} && \\tx{+} & \\cr" %(P[2])
-            str_signe="\\tx{%s(%s)}& &\\tx{+}&\\tx{0}&\\tx{+}&\\cr"% (nomP,var)
-        else:
-            str_a="\\tx{%s}& & \\tx{-} && \\tx{-} && \\tx{-} & \\cr" %(P[2])
-            str_signe="\\tx{%s(%s)}& &\\tx{-}&\\tx{0}&\\tx{-}&\\cr" % (nomP,var)
+        cor.append("Comme $\\Delta <0$, $%s(%s)$ ne s'annule pas et est toujours du signe de $a$"%(nomP,var))
+        cor.append("Ainsi ")
+        cor.append("$$\\tabvar{")
+        cor.append("\\tx{%s}&\\tx{%s}&& \\tx{%s}\\cr" %(var,TeX(borneinf),TeX(bornesup)))
+        str_signe="\\tx{%s(%s)}&&\\tx{%s}&\\cr" %(nomP,var,signe_a)
+        cor.append("%s}$$"%(str_signe))
 
-        P1=factorisation[0]
-        tab_signe="$$\\tabvar{\n\
-                \\tx{%s}&\\tx{%s}&& \\tx{%s}&& \\tx{%s}\\cr\n\
-                \\tx{{\\left(%s\\right)}^2}&&\\tx{+}&\\tx{0}&\\tx{+}&\\cr%s%s}$$" %\
-                (var,TeX(borneinf),TeX(racines[0]),TeX(bornesup),P1,str_a,str_signe)
-        if detail:
-            return tab_signe,str_signe
-        else:
-            return tab_signe
-    else:
-        if P[2]>0:
-            if P[2]==1:
-                str_a=""
-            else:
-                str_a="\\tx{%s}& & \\tx{+} && \\tx{+} && \\tx{+} & \\cr" %(P[2])
-            str_signe="\\tx{%s(%s)}& &\\tx{+}&\\tx{0}&\\tx{-}&\\tx{0}&\\tx{+}&\\cr"% (nomP,var)
-        else:
-            str_a="\\tx{%s}& & \\tx{-} && \\tx{-} && \\tx{-} & \\cr" %(P[2])
-            str_signe="\\tx{%s(%s)}& &\\tx{-}&\\tx{0}&\\tx{+}&\\tx{0}&\\tx{-}&\\cr" % (nomP,var)
-        if isinstance(racines[0],str):
-            [x1,x2]=racines
-        else:
-            [x1,x2]=[TeX(racines[0]),TeX(racines[1])]
-        [P1,P2]=factorisation
-        tab_signe="$$\\tabvar{\n\
-                \\tx{%s}& \\tx{%s}&& \\tx{%s}&&\\tx{%s}&& \\tx{%s}\\cr\n\
-                \\tx{%s}& & \\tx{-} &\\tx{0}& \\tx{+} && \\tx{+} & \\cr\n\
-                \\tx{%s}& & \\tx{-} && \\tx{-} &\\tx{0}& \\tx{+} & \\cr\n\
-                %s%s}$$" % (P.var,TeX(borneinf),x1,x2,TeX(bornesup),P1,P2,str_a,str_signe)
+    elif delta == 0:
+        cor.append("Comme $\\Delta =0$, $%s(%s)$ s'annule une seule fois pour $%s_0=%s$ et est toujours du signe de $a$.\par"%(nomP,var,var,racines[0]))
+        cor.append("$$\\tabvar{")
+        cor.append("\\tx{%s}&\\tx{%s}&& \\tx{%s}&& \\tx{%s}\\cr" %(var,TeX(borneinf),TeX(racines[0]),TeX(bornesup)))
+        str_signe="\\tx{%s(%s)}&&\\tx{%s}&\\tx{0}&\\tx{%s}&\\cr" %(nomP,var,signe_a,signe_a)
+        cor.append("%s}$$"%(str_signe))
+    elif delta >0:
+        cor.append("Comme $\\Delta >0$, $%s(%s)$ est du signe de $-a$ entre les racines."%(nomP,var))
+        cor.append("Ainsi")
+        cor.append("$$\\tabvar{")
+        cor.append("\\tx{%s}&\\tx{%s}&& \\tx{%s}&&\\tx{%s}&& \\tx{%s}\\cr"%(var,TeX(borneinf),TeX(racines[0]),TeX(racines[1]),TeX(bornesup)))
+        str_signe="\\tx{%s(%s)}&&\\tx{%s}&\\tx{0}&\\tx{%s}&\\tx{0}&\\tx{%s}&\\cr" %(nomP,var,signe_a,signe_moinsa,signe_a)
+        cor.append("%s}$$"%(str_signe))
+        
     if detail:
-        return tab_signe,str_signe
-    else:
-        return tab_signe
+        return str_signe
 
 def factorise_identites_remarquables(pol1,sgns,var='',racines=True):
     '''Factorise un polynomes grâce aux identités remarquables'''
@@ -864,11 +821,11 @@ if __name__=="__main__":
 ##    exo,cor=exo_variation()
 ##    exo,cor=exo_fonctions_rationnelles()
 ##    exo,cor=quest_fonctions_rationnelles_sur_R()
-    exo=cor=[]
-    #exo,cor=exo_racines_degre2()
-    for i in range(10):
-        exo1,cor1=exo_racines_degre2()
-        exo=exo+exo1
-        cor=cor+cor1
+    exo,cor=exo_variation()
+##    exo=cor=[]
+##    for i in range(10):
+##        exo1,cor1=exo_tableau_de_signe()
+##        exo=exo+exo1
+##        cor=cor+cor1
 
     imprime_TeX(exo+cor)
