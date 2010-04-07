@@ -186,14 +186,14 @@ def exo_tableau_de_signe():
     #X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
     inconnues=['x','y','z','t']
     nom_poly=['P','Q','R','S']
-    borneinf=float("-inf")
-    bornesup=float("inf")
+    borneinf=-5#float("-inf")
+    bornesup=5#float("inf")
     var="x"
     X=Polynome({1:1},var=var)
     Poly=[poly_racines_entieres(rac_min,rac_max,X),
           poly_racines_fractionnaires(rac_min,rac_max,denom1,X),
           poly_racines_quelconques(abs_a,abs_b,abs_c,X)]
-
+    intervalles=[[0,5],[-5,5],[float("-inf"),float("inf")]]
     exo=["\\exercice",
         "\\begin{enumerate}"]
     cor=["\\exercice*",
@@ -201,11 +201,25 @@ def exo_tableau_de_signe():
     nomP="P"
     for i in range(len(Poly)):
         P=Poly[i]
-        exo.append(u"\\item Étudier le signe du polynôme $%s=%s$" % (nomP,P))
-        cor.append("\\item $%s=%s$\\\\" % (nomP,P))
+        borneinf,bornesup=intervalles[i]
+        if borneinf==float("-inf") and bornesup==float("inf"):
+            TeXintervalle="\\mathbb R"
+        else:
+            if borneinf!=float("-inf"):
+                TeXintervalle="["
+            else:
+                TeXintervalle="]"
+            TeXintervalle+="%s~;~%s"%(TeX(borneinf),TeX(bornesup))
+            if bornesup==float("inf"):
+                TeXintervalle+="["
+            else:
+                TeXintervalle+="]"
+        exo.append(u"\\item Étudier le signe du polynôme $%s=%s$ sur $I=%s$." % (nomP,P,TeXintervalle))
+        cor.append(u"\\item Étudier le signe du polynôme $%s=%s$ sur $I=%s$.\\par" % (nomP,P,TeXintervalle))
+        
         delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(P,factorisation=False)
         redaction_racines(P,nomP,var,cor)
-        tableau_de_signe(P,nomP,delta,racines,cor,borneinf=float("-inf"),bornesup=float("+inf"),detail=False)
+        tableau_de_signe(P,nomP,delta,racines,cor,borneinf,bornesup,detail=False)
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
     return exo,cor
@@ -438,7 +452,8 @@ def quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf")):
     #cor=redaction_factorisation(Pprime,nomP+"'",exo=[],cor=cor)[1]
     #cor.pop(-5)
     redaction_racines(Pprime,nomP+"'",var,cor)
-    str_signe=tableau_de_signe(Pprime,nomP+"'",delta,racines,cor,borneinf,bornesup,detail=True)
+    str_signe,str_valeurs,signes,ligne_valeurs=tableau_de_signe(Pprime,nomP+"'",delta,racines,cor,borneinf,bornesup,detail=True)
+    
     #cor.append(tab_signe)
 
         
@@ -449,14 +464,33 @@ def quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf")):
     else:
         cor.append("On obtient ainsi le tableau de variation de $%s$."%nomP)
         [x1,x2]=racines
-        if P[3]>0:
-            var_de_P="\\tx{%s}& \\txb{%s}&\\fm&\\txh{%s}&\\fd&\\txb{%s}&\\fm&\\txh{%s}\\cr"\
-                        %(nomP,TeX(P(borneinf)),TeX(P(x1)),TeX(P(x2)),TeX(P(bornesup)))
+        #macro=[["txb","txh"],["fm","fd"]]
+        
+        var_de_P="\\tx{%s}& \\%s{\\rnode{neu0}{%s}}&&"%(nomP,["txb","txh"]["-"==signes[0]],TeX(P(ligne_valeurs[0])))
+        compteur=0
+        for i in range(0,len(signes)-1):
+            if signes[i]=='+':
+                if 0 and signes[i+1]=="+":
+                    var_de_P+="&&"
+                else:
+                    compteur+=1
+                    var_de_P+="\\txh{\\rnode{neu%s}{%s}}&&"%(compteur,TeX(P(ligne_valeurs[i+1])))
+            else:
+                if 0 and signes[i+1]=="-":
+                    var_de_P+="&&"
+                else:
+                    compteur+=1
+                    var_de_P+="\\txb{\\rnode{neu%s}{%s}}&&"%(compteur,TeX(P(ligne_valeurs[i+1])))
+        compteur+=1
+        if signes[-1]=="+":
+            var_de_P+="\\txh{\\rnode{neu%s}{%s}}\\cr"%(compteur,TeX(P(ligne_valeurs[-1])))
         else:
-            var_de_P="\\tx{%s}& \\txh{%s} &\\fd&\\txb{%s}&\\fm&\\txh{%s}&\\fd&\\txb{%s}\\cr"\
-                      %(nomP,TeX(P(borneinf)),TeX(P(x1)),TeX(P(x2)),TeX(P(bornsup)))
-        cor.append("$$ \\tabvar{\n \\tx{%s}& \\tx{%s}&& \\tx{%s}&&\\tx{%s}&& \\tx{%s}\\cr\n %s %s}$$"%\
-                   (var,TeX(borneinf),TeX(x1),TeX(x2),TeX(bornesup),str_signe,var_de_P))
+            var_de_P+="\\txb{\\rnode{neu%s}{%s}}\\cr"%(compteur,TeX(P(ligne_valeurs[-1])))
+
+        cor.append("$$ \\tabvar{\n %s\n %s\n %s}$$"%\
+                   (str_valeurs,str_signe,var_de_P))
+        for i in range(1,compteur+1):
+            cor.append("\\ncline[nodesep=0.15,linewidth=0.5pt]{->}{neu%s}{neu%s}"%(i-1,i))
     return exo,cor
 
 
@@ -472,15 +506,14 @@ def tableau_de_signe(P,nomP,delta,racines,cor,borneinf=float("-inf"),bornesup=fl
     '''detail=True permet de récupérer la dernière ligne avec le signe de P'''
     var=P.var
     signe_moinsa,signe_a=[('+','-'),('-','+')][P[2]>0] #Ca donne bien ce qu'on veut...
-    
+    signes=[]
     if delta<0:
         cor.append("Comme $\\Delta <0$, $%s(%s)$ ne s'annule pas et est toujours du signe de $a$"%(nomP,var))
         cor.append("Ainsi ")
-        cor.append("$$\\tabvar{")
-        cor.append("\\tx{%s}&\\tx{%s}&& \\tx{%s}\\cr" %(var,TeX(borneinf),TeX(bornesup)))
+        str_valeurs="\\tx{%s}&\\tx{%s}&& \\tx{%s}\\cr" %(var,TeX(borneinf),TeX(bornesup))
         str_signe="\\tx{%s(%s)}&&\\tx{%s}&\\cr" %(nomP,var,signe_a)
-        cor.append("%s}$$"%(str_signe))
-
+        signes=[signe_a]
+        ligne_valeurs=[borneinf,bornesup]
     elif delta == 0:
         cor.append("Comme $\\Delta =0$, $%s(%s)$ s'annule une seule fois pour $%s_0=%s$ et est toujours du signe de $a$.\par"%(nomP,var,var,racines[0]))
         if racines[0]<borneinf or racines[0]>bornesup:
@@ -493,15 +526,24 @@ def tableau_de_signe(P,nomP,delta,racines,cor,borneinf=float("-inf"),bornesup=fl
                 intervalle+="["
             else:
                 intervalle+="]"
-            cor.append("Or $%s$ n'est pas dans l'intervalle $%s$ donc"%(TeX(racines[0])))
+            cor.append("Or $%s$ n'est pas dans l'intervalle $%s$ donc "%(TeX(racines[0]),intervalle))
+            ligne_valeurs=[borneinf,bornesup]
+            
+            str_valeurs="\\tx{%s}&\\tx{%s}&& \\tx{%s}\\cr" %(var,TeX(borneinf),TeX(bornesup))
+            
+            str_signe="\\tx{%s(%s)}&&\\tx{%s}&\\cr" %(nomP,var,signe_a)
+            signes=[signe_a]
         else:
-            cor.append("$$\\tabvar{")
-            cor.append("\\tx{%s}&\\tx{%s}&& \\tx{%s}&& \\tx{%s}\\cr" %(var,TeX(borneinf),TeX(racines[0]),TeX(bornesup)))
+            
+            ligne_valeurs=[borneinf,racines[0],bornesup]
+            str_valeurs="\\tx{%s}&\\tx{%s}&& \\tx{%s}&& \\tx{%s}\\cr" %(var,TeX(borneinf),TeX(racines[0]),TeX(bornesup))
             str_signe="\\tx{%s(%s)}&&\\tx{%s}&\\tx{0}&\\tx{%s}&\\cr" %(nomP,var,signe_a,signe_a)
-            cor.append("%s}$$"%(str_signe))
+            signes=[signe_a,signe_a]
     elif delta >0:
+        [x1,x2]=racines
         cor.append("Comme $\\Delta >0$, $%s(%s)$ est du signe de $-a$ entre les racines."%(nomP,var))
-        compare=[racines[0]<=borneinf+racines[1]<=borneinf,racines[1]>=bornesup+racines[0]>=bornesup]:
+        compare=[(x1<=borneinf)+(x2<=borneinf),(x2>=bornesup)+(x1>=bornesup)]
+        #x_x1=x_x2=sign_x1=sign_x2=""
         if compare!=[0,0]:
             if borneinf!=float("-inf"):
                 intervalle="["
@@ -512,26 +554,54 @@ def tableau_de_signe(P,nomP,delta,racines,cor,borneinf=float("-inf"),bornesup=fl
                 intervalle+="["
             else:
                 intervalle+="]"
-            x_x1=x_x2=sign_x1=sign_x2=""
-            if compare[0]==1 or compare[1]==2:
-                x_x1="&\\tx{%s}&"%(TeX(racines[0]))
-                sign_x1="&\\tx{%s}&\\tx{0}"%(signe_a)
-            if compare[1]==1 or compare[0]==2:            
-                x_x2="&\\tx{%s}&"%(TeX(racines[1]))
-                sign_x2="&\\tx{0}&\\tx{%s}"%(signe_a)
-        if 2 in compare:
-            entreracines="&%s&"%(signe_moinsa)
-        else:
-            entreracines=&&
-
-        cor.append("Ainsi")
-        cor.append("$$\\tabvar{")
-        cor.append("\\tx{%s}& \\tx{%s}& %s %s & \\tx{%s}\\cr"%(var,TeX(borneinf),x_x1,x_x2,TeX(bornesup)))
-        str_signe="\\tx{%s(%s)}&&\\tx{%s}&\\tx{0}&\\tx{%s}&\\tx{0}&\\tx{%s}&\\cr" %(nomP,var,sign_x1,entreracines,signe_x2)
-        cor.append("%s}$$"%(str_signe))
         
+        ligne_valeurs=[borneinf]    
+        if compare[0]>=1 or compare[1]==2:
+            x_x1=sign_x1=""
+        else:
+            x_x1="&\\tx{%s}&"%(TeX(x1))
+            ligne_valeurs+=[x1]
+            sign_x1="&\\tx{%s}&\\tx{0}"%(signe_a)
+            signes+=[signe_a]
+        
+        if 2 in compare:
+            entreracines="&\\tx{%s}"%(signe_a)
+            signes+=[signe_a]
+        else:
+            entreracines="&\\tx{%s}"%(signe_moinsa)
+            signes+=[signe_moinsa]
+        
+        if compare[1]>=1 or compare[0]==2:
+            x_x2=sign_x2=""
+        else:
+            x_x2="&\\tx{%s}&"%(TeX(x2))
+            ligne_valeurs+=[x2]
+            sign_x2="&\\tx{0}&\\tx{%s}"%(signe_a)
+            signes+=[signe_a]
+        ligne_valeurs+=[bornesup]
+        #Ne rien dire si une racine est égale à une borne    
+        compare=[compare[0]-(x1==borneinf)-(x2==borneinf),compare[1]-(x1==bornesup)-(x2==bornesup)]
+        
+        if sum(compare)==2 :
+            #les deux racines sont à supprimer
+            cor.append("\\par Or $%s$ et $%s$ ne sont pas dans $%s$."%(TeX(x1),TeX(x2),intervalle))
+            
+        elif compare[0]==1:
+            cor.append("\\par Or $%s$ n'est pas dans $%s$."%(TeX(x1),intervalle))
+        elif compare[1]==1:
+            cor.append("\\par Or $%s$ n'est pas dans $%s$."%(TeX(x2),intervalle)) 
+        cor.append("Ainsi")
+        
+        str_valeurs="\\tx{%s}& \\tx{%s}& %s %s & \\tx{%s}\\cr"%(var,TeX(borneinf),x_x1,x_x2,TeX(bornesup))
+        
+        str_signe="\\tx{%s(%s)}&%s %s %s&\\cr" %(nomP,var,sign_x1,entreracines,sign_x2)
+        
+    
+    cor.append("$$\\tabvar{")
+    cor.append(str_valeurs)
+    cor.append("%s}$$"%(str_signe))
     if detail:
-        return str_signe
+        return str_signe,str_valeurs,signes,ligne_valeurs
 
 def factorise_identites_remarquables(pol1,sgns,var='',racines=True):
     '''Factorise un polynomes grâce aux identités remarquables'''
@@ -831,7 +901,7 @@ def redaction_racines(P,nomP,var,cor=[]):
                 cor.append("\\\\")
             cor.pop(-1)
             cor.append("\\end{align*}")
-            cor.append("Les racines de $%s$ sont $%s_1=%s$ et $%s_2=%s$."%(nomP,var,x1,var,x2))
+            cor.append("Les racines de $%s$ sont $%s_1=%s$ et $%s_2=%s$.\\par"%(nomP,var,x1,var,x2))
         else:
             [strx1,strx2]=liste_str_racines
             cor.append("Les racines de $%s$ sont $%s_1=%s=%s$ et $%s_2=%s=%s$."%(nomP,var,strx1,x1,var,strx2,x2))
