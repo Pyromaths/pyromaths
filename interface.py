@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 from PyQt4 import QtGui, QtCore
-import os, lxml, codecs
+import os, lxml, codecs, sys
 import outils.System
 
 class Ui_MainWindow(object):
@@ -363,10 +363,11 @@ class Ui_MainWindow(object):
 
     ### Gestion des erreurs
     
-    def confAbsent(self):
+    def erreur_critique(self, message):
       """Dialogue si pyromaths.xml est défectueux."""
-      QtGui.QMessageBox.critical(self, "Erreur critique",
-      u"Impossible de lire le fichier de configuration. Veuillez vérifier ce dernier ou faire remonter l'erreur sur le forum de Pyromaths.")
+      reply = QtGui.QMessageBox.critical(self, "Erreur critique", message)
+      if reply:
+        sys.exit(1)
 
 
     def about(self):

@@ -72,30 +72,35 @@ def Arithmetique():
     cor += factorise(melange[i])[1]
 
   
-  cor.append("\\end{multicols}") 
+  cor.append("\\end{multicols}\n") 
   
   ### Question 2
-  exo.append(u'\\item En déduire le PGCD et le PPCM des nombres ' + decimaux(listenombres[1]) + " et " + decimaux(listenombres[2]) + ".\n")
-  cor.append(u'\\item En déduire le PGCD et le PPCM des nombres ' + decimaux(listenombres[1]) + " et " + decimaux(listenombres[2]) + ".\n")
+  exo.append(u'\\item En déduire le PGCD et le PPCM des nombres ' + decimaux(listenombres[1]) + " et " + decimaux(listenombres[2]) + ".\\par")
+  cor.append(u'\\item En déduire le PGCD et le PPCM des nombres ' + decimaux(listenombres[1]) + " et " + decimaux(listenombres[2]) + ".\\par")
   
   cor.append(u"D'après la question 1), on sait que les nombres " + decimaux(listenombres[1]) + " et " + decimaux(listenombres[2]) + 
-  " ont comme facteurs premiers communs : \n$")
+  " ont comme facteurs premiers communs :")
   
   for j in range(len(facteurs)):
+    if j == 0:
+      temp = "$"
     if j != len(facteurs)-1:
-      cor.append(decimaux(facteurs[j]) + " , ")
+      temp += decimaux(facteurs[j]) + " , "
     else:
-      cor.append(decimaux(facteurs[j]) + ".$\n")
+      temp += decimaux(facteurs[j]) + ".$"
+  cor.append(temp)
   
-  cor.append(u"On en déduit que le PGCD des nombres " + decimaux(listenombres[1]) + " et " + decimaux(listenombres[2]) + " est : $")
-
-  for j in range(len(facteurs)):
-    if j != len(facteurs)-1:
-      cor.append(decimaux(facteurs[j]) + " \\times ")
-    else:
-      cor.append(decimaux(facteurs[j]) + " = ")
+  cor.append(u"On en déduit que le PGCD des nombres " + decimaux(listenombres[1]) + " et " + decimaux(listenombres[2]) + " est :")
+  temp = "$"
+  if len(facteurs) > 1:
+    for j in range(len(facteurs)):
+      if j != len(facteurs)-1:
+        temp += decimaux(facteurs[j]) + " \\times "
+      else:
+        temp += decimaux(facteurs[j]) + " = "
       
-  cor.append(decimaux(fauxpgcd * pgcdcompl) + ".$\n")
+  temp+= decimaux(fauxpgcd * pgcdcompl) + ".$\n"
+  cor.append(temp)
   
   vraippcm = (listenombres[1] * listenombres[2]) / (fauxpgcd * pgcdcompl)
   
@@ -111,57 +116,58 @@ def Arithmetique():
     cor.append("\\begin{enumerate}")
     
     cor.append(u"\\item On peut simplement utiliser la formule : $a \\times b = PGCD(a;~b) \\times PPCM(a;~b)$.\n")
-    cor.append(u"Donc : PPCM(" + decimaux(listenombres[1]) + ";~" + decimaux(listenombres[2]) + ") = " +
+    cor.append(u"Donc : $PPCM(" + decimaux(listenombres[1]) + ";~" + decimaux(listenombres[2]) + ") = " +
               "\\dfrac{" + decimaux(listenombres[1]) + "\\times" + decimaux(listenombres[2]) + "}{" + decimaux(fauxpgcd * pgcdcompl) +
-              "} = " + decimaux(vraippcm) + ".\n")
+              "} = " + decimaux(vraippcm) + "$.\n")
     
     cor.append(u"\\item On peut aussi multiplier un nombre par les \"facteurs complémentaires\" de l'autre.\n" +
               u"Ces \"facteurs complémentaires\" sont les facteurs qui complètent le PGCD pour former le nombre.\n")
-    cor.append(u"Comme $PGCD(" + decimaux(listenombres[1]) + ";~" + decimaux(listenombres[2]) + ") = " + decimaux(fauxpgcd * pgcdcompl) + " = ")
+    temp = u"Comme $PGCD(" + decimaux(listenombres[1]) + ";~" + decimaux(listenombres[2]) + ") = " + decimaux(fauxpgcd * pgcdcompl) + " = "
     
     if len(facteurs) > 1:
       for j in range(len(facteurs)):
         if j != len(facteurs)-1:
-          cor.append(decimaux(facteurs[j]) + " \\times ")
+          temp += decimaux(facteurs[j]) + " \\times "
         else:
-          cor.append(decimaux(facteurs[j]))
+          temp += decimaux(facteurs[j])
       textcompl = u"$, alors les \"facteurs complémentaires\" de $"
     else:
       textcompl = u"$, alors le \"facteur complémentaire\" de $"
     
-    cor.append(textcompl + decimaux(listenombres[1]) + " = ")
+    temp += textcompl + decimaux(listenombres[1]) + " = "
     
     factornb1 = factorise(listenombres[1])[0]
     
     for j in range(len(factornb1)):
       if j != len(factornb1)-1:
-        cor.append(decimaux(factornb1[j]) + " \\times ")
+        temp += decimaux(factornb1[j]) + " \\times "
       else:
-        cor.append(decimaux(factornb1[j]))
+        temp += decimaux(factornb1[j])
         
     factcompl = factorise(listenombres[1] / (fauxpgcd * pgcdcompl))[0]
     
     if len(factcompl) == 1:
-      cor.append(u"$ est :")
+      temp += u"$ est : "
     else:
-      cor.append(u"$ sont :")
+      temp += u"$ sont : "
     
     for j in range(len(factcompl)):
       if j != len(factcompl)-1:
-        cor.append(decimaux(factcompl[j]) + " , ")
+        temp += decimaux(factcompl[j]) + " , "
       else:
-        cor.append(decimaux(factcompl[j]) + ".\n")
+        temp += decimaux(factcompl[j]) + ".\n"
         
-    cor.append(u"On en déduit que $PPCM(" + decimaux(listenombres[1]) + ";~" + decimaux(listenombres[2]) + ") = " + decimaux(listenombres[2]) + " \\times ")
+    temp += u"On en déduit que $PPCM(" + decimaux(listenombres[1]) + ";~" + decimaux(listenombres[2]) + ") = " + decimaux(listenombres[2]) + " \\times "
     
     for j in range(len(factcompl)):
       if j != len(factcompl)-1:
-        cor.append(decimaux(factcompl[j]) + " \\times ")
+        temp += decimaux(factcompl[j]) + " \\times "
       else:
-        cor.append(decimaux(factcompl[j]) + " = ")
+        temp += decimaux(factcompl[j]) + " = "
         
-    cor.append(decimaux(vraippcm) + ".$\n")
+    temp += decimaux(vraippcm) + ".$\n"
     
+    cor.append(temp)    
     cor.append("\\end{enumerate}")
   
   ### Question 3

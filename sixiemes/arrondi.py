@@ -51,9 +51,9 @@ def ArrondirNombreDecimal():
 
     for k in range(4):
         
-        exo.append( "\\item Arrondir " + decimaux(nombres[k]) + " " + precision[choix_precision[k]] + " " + supinf[choix_supinf[k]] + '.\n' )
+        exo.append( "\\item Arrondir " + decimaux(nombres[k]) + " " + precision[choix_precision[k]] + " " + supinf[choix_supinf[k]] + '.\\par' )
    
-        cor.append( "\\item Arrondir " + decimaux(nombres[k]) + " " + precision[choix_precision[k]] + " " + supinf[choix_supinf[k]] + '.\n' )
+        cor.append( "\\item Arrondir " + decimaux(nombres[k]) + " " + precision[choix_precision[k]] + " " + supinf[choix_supinf[k]] + '.\\par' )
                 
         arrondi = round(nombres[k], -choix_precision[k]+3)
 
@@ -73,9 +73,9 @@ def ArrondirNombreDecimal():
             solution = exc
 
         cor.append( 'L\'encadrement de ' + decimaux(nombres[k]) + ' ' + \
-                precision[choix_precision[k]] + ' est : \n' )
+                precision[choix_precision[k]] + ' est : \\par' )
         cor.append( decimaux(defaut) + ' < ' + decimaux(nombres[k]) + ' < ' + \
-                decimaux(exc) + '\n' )
+                decimaux(exc) + '\\par' )
         cor.append( u'On en déduit que son arrondi ' + precision[choix_precision[k]] + \
                 ' ' + supinf[choix_supinf[k]] + ' est : ' + decimaux(solution) + '.\n')
 
