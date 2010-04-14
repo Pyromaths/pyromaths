@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from outils.Arithmetique import pgcd, ppcm, premier, factorise, carrerise
+from outils.Arithmetique import pgcd, ppcm, premier, factoriseTex, carrerise
 from outils.Affichage import decimaux
 from random import randint, shuffle
 
@@ -53,11 +53,11 @@ def Arithmetique():
   prime = premiers[randint(10,167)]
 
   fauxpgcd = randint(1,101)
-  fauxpgcdfactor = factorise(fauxpgcd)[0]
+  fauxpgcdfactor = factoriseTex(fauxpgcd)[0]
 
   complementaires = [randint(6,50), randint(6,50)]
   pgcdcompl = pgcd(complementaires[0], complementaires[1])
-  pgcdcomplfact = factorise(pgcdcompl)[0]
+  pgcdcomplfact = factoriseTex(pgcdcompl)[0]
 
   if pgcdcompl != 1:
     facteurs = pgcdcomplfact + fauxpgcdfactor
@@ -80,7 +80,7 @@ def Arithmetique():
   cor.append("\\begin{multicols}{2}")
 
   for i in range(5):
-    cor += factorise(melange[i])[1]
+    cor += factoriseTex(melange[i])[1]
 
   cor.append("\\end{multicols}")
 
@@ -149,9 +149,6 @@ def Arithmetique():
         u"complémentaires\" sont les facteurs qui complètent le PGCD pour " +
         u"former le nombre.\\par")
 
-    #TODO: la gestion du pluriel n'est psa bonne. Ce n'est pas parceque la
-    #décomposition comporte plusieurs facteurs qu'il y a plusieurs facteurs
-    #complémentaires
     temp = u"Comme $PGCD(" + decimaux(listenombres[1]) + ";~" +\
             decimaux(listenombres[2]) + ") = " + decimaux(fauxpgcd * pgcdcompl)
 
@@ -162,20 +159,23 @@ def Arithmetique():
           temp += decimaux(facteurs[j]) + " \\times "
         else:
           temp += decimaux(facteurs[j])
+    
+    factornb1 = factoriseTex(listenombres[1])[0]  
+    
+    if len(factornb1) > 1:
       textcompl = u"$, alors les \"facteurs complémentaires\" de $"
     else:
       textcompl = u"$, alors le \"facteur complémentaire\" de $"
 
     temp += textcompl + decimaux(listenombres[1]) + " = "
 
-    factornb1 = factorise(listenombres[1])[0]
-
     for j in range(len(factornb1)):
       if j != len(factornb1)-1:
         temp += decimaux(factornb1[j]) + " \\times "
       else:
         temp += decimaux(factornb1[j])
-    factcompl = factorise(listenombres[1] / (fauxpgcd * pgcdcompl))[0]
+        
+    factcompl = factoriseTex(listenombres[1] / (fauxpgcd * pgcdcompl))[0]
 
     if len(factcompl) == 1:
       temp += u"$ est : "
@@ -211,7 +211,7 @@ def Arithmetique():
           u"la décomposition en facteurs premiers de "
           + decimaux(autresnombres[0]))
 
-  decompautre = factorise(autresnombres[0])[1]
+  decompautre = factoriseTex(autresnombres[0])[1]
 
   if len(decompautre) == 1:
     cor.append(u" est lui-même, car c'est un nombre premier.")
@@ -222,7 +222,7 @@ def Arithmetique():
   cor.append(u"Il faut donc encore multiplier ce nombre par ")
 
   carre = carrerise(autresnombres[0])
-  factsup = factorise(carre)[0]
+  factsup = factoriseTex(carre)[0]
 
   if len(factsup)==1:
     cor.append(" le facteur ")

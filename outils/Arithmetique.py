@@ -56,34 +56,53 @@ def factor(n):
     return premiers
 
 
-#TODO: factorise mélange le fond (la décompositio) et la forme (l'écriture en
-#LaTeX
 def factorise(n):
     """Retourne la liste des facteurs premiers du nombre n, ainsi que le détail
-    de la factorisation pour LateX. PAS FINI."""
+    de la factorisation."""
 
     primes = []
-
-    limite=int(math.sqrt(n))+1
     temp = n
-    corrige = ["\\begin{align*}", str(n)]
-    text = ' & = '
+    etapes = []
+    primes_etapes = []
+    limite=int(math.sqrt(n))+1
     candidate = 2
     while (candidate < limite):
         if n % candidate == 0:
             primes.append(candidate)
-            text += str(candidate) + ' \\times '
+            primes_etapes.append(str(candidate))
             n = n / candidate
             if n  == 1:
                 break
-            corrige.append(text + str(n) + '\\\\')
+            primes_etapes.append(str(n))
+            etapes.append(primes_etapes)
+            primes_etapes = primes_etapes[:-1]
         else:
             candidate += 1
-    corrige.append("\\end{align*}")
     if (n != 1) or (primes == []):
         primes.append(n)
-    if len(primes) == 1:
-        corrige = [str(temp) + " est un nombre premier.\\par "]
+    return (primes, etapes)
+    
+    
+def factoriseTex(n):
+    """Version LaTeX pour factorise."""
+    
+    corrige = ["\\begin{align*}", str(n)]
+    etapes = factorise(n)[1]
+    primes = factorise(n)[0]
+    
+    if len(primes) > 1:
+      for i in range(len(etapes)):
+        text = ' & = '
+        for j in range(len(etapes[i])):
+          if j != len(etapes[i]) - 1:
+            text += etapes[i][j] + ' \\times '
+          else:
+            text += etapes[i][j]
+        corrige.append(text + '\\\\')
+      corrige.append("\\end{align*}")
+    else:      
+      corrige = [str(n) + " est un nombre premier.\\par "]
+      
     return (primes, corrige)
 
 

@@ -136,17 +136,13 @@ if __name__ == "__main__":
 #================================================================
 # Création du fichier de configuration si inexistant
 #================================================================
-    #if not os.access(os.path.join(outils.System.configdir(), "pyromaths.xml"), os.R_OK):
-    if not os.access('temp.xml', os.R_OK):
+    if not os.access(os.path.join(outils.System.configdir(), "pyromaths.xml"), os.R_OK):
         if not os.path.isdir(outils.System.configdir()):
             os.makedirs(outils.System.configdir())
-        #f = codecs.open(os.path.join(outils.System.configdir(), "pyromaths.xml"), encoding='utf-8', mode='w')
-        f = codecs.open("temp.xml", encoding='utf-8', mode='w')
+        f = codecs.open(os.path.join(outils.System.configdir(), "pyromaths.xml"), encoding='utf-8', mode='w')
         f.write(u"" + outils.System.create_config_file())
         f.close()
-    #outils.System.modify_config_file(os.path.join(outils.System.configdir(), "pyromaths.xml"))
-    outils.System.modify_config_file('temp.xml')
-    os.system("move \"temp.xml\" \"%APPDATA%\\pyromaths\\pyromaths.xml\"")
+    outils.System.modify_config_file(os.path.join(outils.System.configdir(), "pyromaths.xml"))
 
 #================================================================
 # Création du dossier "modeles" local
