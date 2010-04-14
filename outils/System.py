@@ -30,6 +30,7 @@ from outils.TexFiles import mise_en_forme
 ## Création des chemins suivant les OS
 if os.name == 'nt':
     def home():
+        print  os.environ['HOMEPATH']
         return os.environ['HOMEPATH']
     def configdir():
         return os.path.join(os.environ['APPDATA'],"pyromaths")
@@ -65,7 +66,7 @@ def create_config_file():
 
     child = etree.SubElement(root, "options")
     etree.SubElement(child, "nom_fichier").text="exercices"
-    etree.SubElement(child, "chemin_fichier").text="%s" % home()
+    etree.SubElement(child, "chemin_fichier").text="%s" % 'test' #home()
     etree.SubElement(child, "titre_fiche").text=u"Fiche de révisions"
     etree.SubElement(child, "corrige").text="True"
     etree.SubElement(child, "pdf").text="True"
