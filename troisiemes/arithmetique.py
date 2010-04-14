@@ -94,25 +94,30 @@ def Arithmetique():
 
   cor.append(u"D'après la question 1), on sait que les nombres " +
           decimaux(listenombres[1]) + " et " + decimaux(listenombres[2]) +
-          " ont comme facteurs premiers communs : $")
+          " ont comme facteurs premiers communs : ")
 
   for j in range(len(facteurs)):
+    if j == 0:
+      temp = "$"
     if j != len(facteurs)-1:
-      cor.append(decimaux(facteurs[j]) + " , ")
+      temp += decimaux(facteurs[j]) + " , "
     else:
-      cor.append(decimaux(facteurs[j]) + ".$\\par")
+      temp += decimaux(facteurs[j]) + "$.\\par"
+  cor.append(temp)
 
   cor.append(u"On en déduit que le PGCD des nombres " +
           decimaux(listenombres[1]) + " et " + decimaux(listenombres[2]) +
-          " est : $")
+          " est : ")
+  temp = "$"
+  if len(facteurs) > 1:
+    for j in range(len(facteurs)):
+      if j != len(facteurs)-1:
+        temp += decimaux(facteurs[j]) + " \\times "
+      else:
+        temp += decimaux(facteurs[j]) + " = "
 
-  for j in range(len(facteurs)):
-    if j != len(facteurs)-1:
-      cor.append(decimaux(facteurs[j]) + " \\times ")
-    else:
-      cor.append(decimaux(facteurs[j]) + " = ")
-
-  cor.append(decimaux(fauxpgcd * pgcdcompl) + ".$\\par")
+  temp+= decimaux(fauxpgcd * pgcdcompl) + ".$\\par"
+  cor.append(temp)
 
   vraippcm = (listenombres[1] * listenombres[2]) / (fauxpgcd * pgcdcompl)
 
@@ -143,58 +148,55 @@ def Arithmetique():
         + u"complémentaires\" de l'autre.\n" + u"Ces \"facteurs " +
         u"complémentaires\" sont les facteurs qui complètent le PGCD pour " +
         u"former le nombre.\\par")
-    cor.append(u"Comme $PGCD(" + decimaux(listenombres[1]) + ";~" +
-        decimaux(listenombres[2]) + ") = " + decimaux(fauxpgcd * pgcdcompl))
 
     #TODO: la gestion du pluriel n'est psa bonne. Ce n'est pas parceque la
     #décomposition comporte plusieurs facteurs qu'il y a plusieurs facteurs
     #complémentaires
+    temp = u"Comme $PGCD(" + decimaux(listenombres[1]) + ";~" +\
+            decimaux(listenombres[2]) + ") = " + decimaux(fauxpgcd * pgcdcompl)
+
     if len(facteurs) > 1:
-      cor.append(" = ")
+      temp += " = "
       for j in range(len(facteurs)):
         if j != len(facteurs)-1:
-          cor.append(decimaux(facteurs[j]) + " \\times ")
+          temp += decimaux(facteurs[j]) + " \\times "
         else:
-          cor.append(decimaux(facteurs[j]))
+          temp += decimaux(facteurs[j])
       textcompl = u"$, alors les \"facteurs complémentaires\" de $"
     else:
       textcompl = u"$, alors le \"facteur complémentaire\" de $"
 
-    cor.append(textcompl + decimaux(listenombres[1]) + " = ")
+    temp += textcompl + decimaux(listenombres[1]) + " = "
 
     factornb1 = factorise(listenombres[1])[0]
 
     for j in range(len(factornb1)):
       if j != len(factornb1)-1:
-        cor.append(decimaux(factornb1[j]) + " \\times ")
+        temp += decimaux(factornb1[j]) + " \\times "
       else:
-        cor.append(decimaux(factornb1[j]))
-
+        temp += decimaux(factornb1[j])
     factcompl = factorise(listenombres[1] / (fauxpgcd * pgcdcompl))[0]
 
     if len(factcompl) == 1:
-      cor.append(u"$ est :")
+      temp += u"$ est : "
     else:
-      cor.append(u"$ sont :")
+      temp += u"$ sont : "
+    for j in range(len(factcompl)):
+      if j != len(factcompl)-1:
+        temp += decimaux(factcompl[j]) + " , "
+      else:
+        temp += decimaux(factcompl[j]) + ".\n"
+    temp += u"On en déduit que $PPCM(" + decimaux(listenombres[1]) + ";~" +\
+            decimaux(listenombres[2]) + ") = " + decimaux(listenombres[2]) +\
+            " \\times "
 
     for j in range(len(factcompl)):
       if j != len(factcompl)-1:
-        cor.append(decimaux(factcompl[j]) + " , ")
+        temp += decimaux(factcompl[j]) + " \\times "
       else:
-        cor.append(decimaux(factcompl[j]) + ".\\par")
-
-    cor.append(u"On en déduit que $PPCM(" + decimaux(listenombres[1]) + ";~" +
-            decimaux(listenombres[2]) + ") = " + decimaux(listenombres[2]) +
-            " \\times ")
-
-    for j in range(len(factcompl)):
-      if j != len(factcompl)-1:
-        cor.append(decimaux(factcompl[j]) + " \\times ")
-      else:
-        cor.append(decimaux(factcompl[j]) + " = ")
-
-    cor.append(decimaux(vraippcm) + ".$")
-
+        temp += decimaux(factcompl[j]) + " = "
+    temp += decimaux(vraippcm) + ".$"
+    cor.append(temp)
     cor.append("\\end{enumerate}")
 
   ### Question 3
