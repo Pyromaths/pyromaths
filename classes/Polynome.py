@@ -173,7 +173,7 @@ class Polynome:
     def simplifie(self):
         result={}
         for i in self.puiss:
-            if isinstance(self[i],Fractions):
+            if isinstance(self[i],(Fractions,RacineDegre2)):
                 result[i]=self[i].simplifie()
             else:
                 result[i]=self[i]
