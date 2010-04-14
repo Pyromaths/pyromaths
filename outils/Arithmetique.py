@@ -56,16 +56,18 @@ def factor(n):
     return premiers
 
 
-
+#TODO: factorise mélange le fond (la décompositio) et la forme (l'écriture en
+#LaTeX
 def factorise(n):
-    """Retourne la liste des facteurs premiers du nombre n, ainsi que le détail de la factorisation pour LateX. PAS FINI."""
+    """Retourne la liste des facteurs premiers du nombre n, ainsi que le détail
+    de la factorisation pour LateX. PAS FINI."""
 
     primes = []
 
     limite=int(math.sqrt(n))+1
     temp = n
     corrige = ["\\begin{align*}", str(n)]
-    text = ' & = '    
+    text = ' & = '
     candidate = 2
     while (candidate < limite):
         if n % candidate == 0:
@@ -81,7 +83,7 @@ def factorise(n):
     if (n != 1) or (primes == []):
         primes.append(n)
     if len(primes) == 1:
-        corrige = [str(temp) + " est un nombre premier.\n"]
+        corrige = [str(temp) + " est un nombre premier.\\par "]
     return (primes, corrige)
 
 
@@ -97,7 +99,7 @@ def carrerise(n):
         for element in primes:
             if (primes.count(element) % 2 == 1):
                 q[element]=1
-        ncar=1   
+        ncar=1
         for element in q.iterkeys():
             ncar *= element
     return ncar
@@ -114,7 +116,7 @@ def combinaison(n, k):
         y += 1
         i += 1
     return x
-    
+
 def signe(a):
     """renvoie 1 si a est>0, -1 si a<0"""
     if a < 0:

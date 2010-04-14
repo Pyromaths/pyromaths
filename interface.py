@@ -362,7 +362,7 @@ class Ui_MainWindow(object):
     #============================================================
 
     ### Gestion des erreurs
-    
+
     def confAbsent(self):
       """Dialogue si pyromaths.xml est défectueux."""
       QtGui.QMessageBox.critical(self, "Erreur critique",
@@ -685,14 +685,13 @@ def valide(list, LesFiches, parametres):
     saveas = QtGui.QFileDialog()
     filename = outils.System.supprime_extension(parametres['nom_fichier'],
                                          '.tex')
-    f0 = str(saveas.getSaveFileName(None, "Enregistrer sous...",
+    f0 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(parametres['chemin_fichier'],
-                             '%s.tex' % filename),
-                             "Documents Tex (*.tex)"))
+                             u'%s.tex' % filename), "Documents Tex (*.tex)"))
     if f0 != None:
         outils.System.ajoute_extension(f0, '.tex')
         if corrige:
-            f1 = str(saveas.getSaveFileName(None, "Enregistrer sous...",
+            f1 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(os.path.dirname(f0),
                 u"%s-corrige.tex"  % os.path.splitext(os.path.basename(f0))[0]),
                 "Documents Tex (*.tex)"))
