@@ -65,7 +65,7 @@ def create_config_file():
 
     child = etree.SubElement(root, "options")
     etree.SubElement(child, "nom_fichier").text="exercices"
-    etree.SubElement(child, "chemin_fichier").text="%s" % home()
+    etree.SubElement(child, "chemin_fichier").text="%s" % 'test' #home()
     etree.SubElement(child, "titre_fiche").text=u"Fiche de révisions"
     etree.SubElement(child, "corrige").text="True"
     etree.SubElement(child, "pdf").text="True"
@@ -151,10 +151,10 @@ def creation(parametres):
                   'titre': unicode(self.lineEdit_titre.text()),
                   'niveau': unicode(self.comboBox_niveau.currentText()),
                 }"""
-    exo = parametres['fiche_exo']
-    cor = parametres['fiche_cor']
-    f0 = codecs.open(unicode(exo), encoding='utf-8', mode='w')
-    f1 = codecs.open(unicode(cor), encoding='utf-8', mode='w')
+    exo = unicode(parametres['fiche_exo'])
+    cor = unicode(parametres['fiche_cor'])
+    f0 = codecs.open(exo, encoding='utf-8', mode='w')
+    f1 = codecs.open(cor, encoding='utf-8', mode='w')
     titre = parametres['titre']
     fiche_metapost = os.path.splitext(exo)[0] + '.mp'
 
@@ -173,9 +173,9 @@ def creation(parametres):
     f1.close()
 
     # indentation des fichiers teX créés
-    mise_en_forme(unicode(exo))
+    mise_en_forme(exo)
     if parametres['corrige']:
-        mise_en_forme(unicode(cor))
+        mise_en_forme(cor)
 
     # Dossiers et fichiers d'enregistrement, définitions qui doivent rester avant le if suivant.
     dir0=os.path.dirname(exo)
@@ -189,39 +189,39 @@ def creation(parametres):
         for i in range(2):
             os.chdir(dir0)
             log = open('pyromaths.log', 'w')
-            call(["latex", "-interaction=batchmode", str(exo)],
+            call(["latex", "-interaction=batchmode", exo],
                     #env={"PATH": os.path.expandvars('$PATH')},
                     stdout=log)
             if parametres['corrige']:
                 os.chdir(dir1)
-                call(["latex", "-interaction=batchmode", str(cor)],
+                call(["latex", "-interaction=batchmode", cor],
                         #env={"PATH": os.path.expandvars('$PATH')},
                         stdout=log)
-        call(["dvips", "-q", "%s.dvi" % (f0noext), "-o%s.ps" % (f0noext)],
+        call(["dvips", "-q", u"%s.dvi" % (f0noext), u"-o%s.ps" % (f0noext)],
                 #env={"PATH": os.path.expandvars('$PATH')},
                 stdout=log)
         if parametres['corrige']:
-            call(["dvips", "-q", "%s.dvi" % (f1noext), "-o%s.ps" % (f1noext)],
+            call(["dvips", "-q", u"%s.dvi" % (f1noext), u"-o%s.ps" % (f1noext)],
                     #env={"PATH": os.path.expandvars('$PATH')},
                     stdout=log)
-        call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % (f0noext),
-                    "%s.pdf" % (f0noext)],
+        call(["ps2pdf", "-sPAPERSIZE#a4", u"%s.ps" % (f0noext),
+                    u"%s.pdf" % (f0noext)],
                     #env={"PATH": os.path.expandvars('$PATH')},
                     stdout=log)
         if parametres['corrige']:
-            call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % (f1noext),
-                "%s.pdf" % (f1noext)],
+            call(["ps2pdf", "-sPAPERSIZE#a4", u"%s.ps" % (f1noext),
+                u"%s.pdf" % (f1noext)],
                 #env={"PATH": os.path.expandvars('$PATH')},
                 stdout=log)
         log.close()
         if os.name == "nt":  #Cas de Windows.
-            os.startfile('%s.pdf' % (f0noext))
+            os.startfile('%s.pdf' % (f0noext).encode('utf-8'))
             if parametres['corrige']:
-                os.startfile('%s.pdf' % (f1noext))
+                os.startfile('%s.pdf' % (f1noext).encode('utf-8'))
         else:
-            os.system('xdg-open %s.pdf' % (f0noext))
+            os.system('xdg-open %s.pdf' % (f0noext.encode('utf-8')))
             if parametres['corrige']:
-                os.system('xdg-open %s.pdf' % (f1noext))
+                os.system('xdg-open %s.pdf' % (f1noext.encode('utf-8')))
         #Supprime les fichiers temporaires créés par LaTeX
         try:
             for ext in ('.aux', '.dvi', '.log', '.out', '.ps'):
@@ -230,7 +230,7 @@ def creation(parametres):
                     os.remove(os.path.join(dir1,  f1noext + ext))
             os.remove(os.path.join(dir0, 'pyromaths.log'))
         except OSError:
-            print(("Le fichier %s ou %s n'a pas été supprimé." % \
+            print((u"Le fichier %s ou %s n'a pas été supprimé." % \
                    (os.path.join(dir0,  f0noext + ext),
                    os.path.join(dir1,  f1noext + ext))))
                    #le fichier à supprimer n'existe pas.

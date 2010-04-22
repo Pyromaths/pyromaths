@@ -24,6 +24,14 @@
 ### Pour tester la boite de dialogue
 ## Fichier à compléter par les tests d'environnement
 
+### Tests à faire ?
+# installation d'une distribution latex
+# installation des bonnes extensions latex
+# lecture de pyromaths.xml
+# écriture dans le dossier de destination
+
+import System, os
+
 def test(gui):
-  if 1:
-    gui.confAbsent()
+  if not os.path.isfile(os.path.join(System.configdir(), "pyromaths.xml")):
+    gui.erreur_critique(u"Impossible de lire le fichier de configuration. Veuillez vérifier ce dernier ou faire remonter l'erreur sur le forum de Pyromaths.")

@@ -25,7 +25,7 @@ from random import randint
 from outils.Affichage import decimaux
 
 def ArrondirNombreDecimal():
-    """Créée et corrige un exercice d'arrondis avec les encadrements."""
+    """Crée et corrige un exercice d'arrondis avec les encadrements."""
     hasard = [float(randint(10000,1000000)), float(randint(10000,1000000)),
             float(randint(10000,1000000)), float(randint(10000,1000000))]
 
@@ -36,7 +36,7 @@ def ArrondirNombreDecimal():
     choix_precision = [randint(0, 7), randint(0, 7), randint(0, 7),
             randint(0, 7)]
 
-    supinf = ['', u'par défaut', u'par excès']
+    supinf = ['', u' par défaut', u' par excès']
 
     choix_supinf = [randint(0, 2), randint(0, 2), randint(0, 2), randint(0, 2)]
 
@@ -44,17 +44,16 @@ def ArrondirNombreDecimal():
             (hasard[1])/(10**(-choix_precision[1]+4)),
             (hasard[2])/(10**(-choix_precision[2]+4)),
             (hasard[3])/(10**(-choix_precision[3]+4))]
-            
+
     exo = ["\\exercice", '\\begin{enumerate}']
     cor = ["\\exercice*", '\\begin{enumerate}']
 
 
     for k in range(4):
-        
-        exo.append( "\\item Arrondir " + decimaux(nombres[k]) + " " + precision[choix_precision[k]] + " " + supinf[choix_supinf[k]] + '.\n' )
-   
-        cor.append( "\\item Arrondir " + decimaux(nombres[k]) + " " + precision[choix_precision[k]] + " " + supinf[choix_supinf[k]] + '.\n' )
-                
+        exo.append( "\\item Arrondir " + decimaux(nombres[k]) + " " +
+                precision[choix_precision[k]] + supinf[choix_supinf[k]] +
+                '.' )
+
         arrondi = round(nombres[k], -choix_precision[k]+3)
 
         if (arrondi > nombres[k]):
@@ -72,14 +71,15 @@ def ArrondirNombreDecimal():
         elif (choix_supinf[k] == 2):
             solution = exc
 
-        cor.append( 'L\'encadrement de ' + decimaux(nombres[k]) + ' ' + \
-                precision[choix_precision[k]] + ' est : \n' )
-        cor.append( decimaux(defaut) + ' < ' + decimaux(nombres[k]) + ' < ' + \
-                decimaux(exc) + '\n' )
-        cor.append( u'On en déduit que son arrondi ' + precision[choix_precision[k]] + \
-                ' ' + supinf[choix_supinf[k]] + ' est : ' + decimaux(solution) + '.\n')
+        cor.append( '\\item L\'encadrement de ' + decimaux(nombres[k]) + ' ' +
+                precision[choix_precision[k]] + ' est :\\par' )
+        cor.append( decimaux(defaut) + ' < ' + decimaux(nombres[k]) + ' < ' +
+                decimaux(exc) + '\\par' )
+        cor.append( u'On en déduit que son arrondi ' +
+                precision[choix_precision[k]] + ' ' + supinf[choix_supinf[k]] +
+                ' est : ' + decimaux(solution) + '.')
 
-    exo.append("\\end{enumerate}")    
-    cor.append("\\end{enumerate}") 
-    
+    exo.append("\\end{enumerate}")
+    cor.append("\\end{enumerate}")
+
     return (exo, cor)
