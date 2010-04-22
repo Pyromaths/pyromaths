@@ -24,6 +24,6 @@
 ### Pour tester la boite de dialogue
 ## Fichier à compléter par les tests d'environnement
 
-#def test(gui):
-  #if 1:
-    #gui.confAbsent()
+def test(gui):
+  if 1:
+    gui.confAbsent()

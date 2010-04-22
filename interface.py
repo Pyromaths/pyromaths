@@ -1,4 +1,4 @@
-#!/usr/bin/python
+﻿#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Pyromaths
@@ -362,7 +362,7 @@ class Ui_MainWindow(object):
     #============================================================
 
     ### Gestion des erreurs
-    
+
     def confAbsent(self):
       """Dialogue si pyromaths.xml est défectueux."""
       QtGui.QMessageBox.critical(self, "Erreur critique",

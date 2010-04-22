@@ -1,4 +1,4 @@
-#!/usr/bin/python
+﻿#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Pyromaths
@@ -131,7 +131,7 @@ class StartQT4(QtGui.QMainWindow, interface.Ui_MainWindow):
         self.ui = interface.Ui_MainWindow()
         self.ui.setupUi(self, LesFiches, configdir, iconesdir)
 
-    
+
 if __name__ == "__main__":
 #================================================================
 # Création du fichier de configuration si inexistant
@@ -153,8 +153,8 @@ if __name__ == "__main__":
 
     app = QtGui.QApplication(sys.argv)
     pyromaths = StartQT4(LesFiches,  outils.System.configdir(), iconesdir)
-    pyromaths.show()   
-    
+    pyromaths.show()
+
     #test(pyromaths)
-    
+
     sys.exit(app.exec_())

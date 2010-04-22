@@ -1,4 +1,4 @@
-#!/usr/bin/python
+﻿#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Pyromaths
@@ -30,12 +30,12 @@ from outils.TexFiles import mise_en_forme
 ## Création des chemins suivant les OS
 if os.name == 'nt':
     def home():
-        return os.environ['HOMEPATH']
+        return unicode(os.environ['USERPROFILE'],sys.getfilesystemencoding())
     def configdir():
         return os.path.join(os.environ['APPDATA'],"pyromaths")
 else:
     def home():
-        return os.environ['HOME']
+        return unicode(os.environ['HOME'],sys.getfilesystemencoding())
     def configdir():
         return os.path.join(home(),  ".config", "pyromaths")
 
