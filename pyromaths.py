@@ -153,15 +153,8 @@ if __name__ == "__main__":
 
     app = QtGui.QApplication(sys.argv)
     pyromaths = StartQT4(LesFiches,  outils.System.configdir(), iconesdir)
-<<<<<<< HEAD
+
     pyromaths.show()
-
-    #test(pyromaths)
-
-=======
-    pyromaths.show()   
-    
     test(pyromaths)
-    
->>>>>>> 1b690ec3cac3e53b6e264b7d1ecb4c57f01d237b
+
     sys.exit(app.exec_())
