@@ -20,7 +20,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
-from PyQt4 import QtGui, QtCore
 import sys, os, codecs
 from outils.TestEnv import test
 
@@ -125,14 +124,15 @@ u"Sens de variations",
 ]],
 ]
 
-class StartQT4(QtGui.QMainWindow, interface.Ui_MainWindow):
-    def __init__(self, LesFiches, configdir, iconesdir, parent=None):
-        QtGui.QWidget.__init__(self, parent)
-        self.ui = interface.Ui_MainWindow()
-        self.ui.setupUi(self, LesFiches, configdir, iconesdir)
-
 
 if __name__ == "__main__":
+    from PyQt4 import QtGui, QtCore
+    class StartQT4(QtGui.QMainWindow, interface.Ui_MainWindow):
+        def __init__(self, LesFiches, configdir, iconesdir, parent=None):
+            QtGui.QWidget.__init__(self, parent)
+            self.ui = interface.Ui_MainWindow()
+            self.ui.setupUi(self, LesFiches, configdir, iconesdir)
+
 #================================================================
 # Création du fichier de configuration si inexistant
 #================================================================
