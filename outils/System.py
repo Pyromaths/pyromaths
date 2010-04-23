@@ -230,10 +230,8 @@ def creation(parametres):
                     os.remove(os.path.join(dir1,  f1noext + ext))
             os.remove(os.path.join(dir0, 'pyromaths.log'))
         except OSError:
-            print((u"Le fichier %s ou %s n'a pas été supprimé." % \
-                   (os.path.join(dir0,  f0noext + ext),
-                   os.path.join(dir1,  f1noext + ext))))
-                   #le fichier à supprimer n'existe pas.
+            pass
+        #le fichier à supprimer n'existe pas et on s'en fout.
     if not parametres['corrige']:
         os.remove(os.path.join(dir1,  f1noext + '.tex'))
 
