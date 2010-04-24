@@ -77,6 +77,7 @@ u'Fractions égales',
 u'Sommes de fractions',
 u'Produits de fractions',
 u'repérage',
+u'Addition de relatifs',
 ]],
 [u'Quatrième', quatriemes.quatriemes, [
 u'Calcul mental',

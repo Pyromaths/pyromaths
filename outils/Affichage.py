@@ -93,15 +93,9 @@ def tex_coef(coef, var, bplus=0, bpn=0, bpc=0):
     """
     if coef != 0 and abs(coef) != 1:
         if var == '':
-            if abs(coef) >= 1000:
-                a = '\\nombre{%s}' % coef
-            else:
-                a = '%s' % coef
+                a = TeX(coef)
         else:
-            if abs(coef) >= 1000:
-                a = '\\nombre{%s}\\,%s' % (coef, var)
-            else:
-                a = '%s\\,%s' % (coef, var)
+                a = '%s\\,%s' % (TeX(coef), var)
         if bplus and coef > 0:
             a = '+' + a
     elif coef == 1:
