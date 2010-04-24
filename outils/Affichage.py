@@ -135,7 +135,11 @@ def tTeX(nombre):
 def pTeX(nombre):
     '''raccourci pour TeX(nombre,parenthese=True)'''
     return TeX(nombre,parenthese=True)
-def TeX(nombre,parenthese=False,terme=False):
+def fTeX(nombre):
+    '''raccourci pour TeX(nombre,fractex="\\frac")'''
+    return TeX(nombre,fractex="\\frac")
+    
+def TeX(nombre,parenthese=False,terme=False,fractex="\\dfrac"):
     '''renvoie une chaine de caractere pour TeX'''
     strTeX=finTeX=""
     
@@ -171,9 +175,9 @@ def TeX(nombre,parenthese=False,terme=False):
         return strTeX+decimaux(nombre)+finTeX
     elif isinstance(nombre,classes.Fractions.Fractions):
         if nombre.numerateur < 0:
-            strTeX += "-\\dfrac{"+decimaux(-nombre.numerateur)+"}{"+decimaux(nombre.denominateur)+"} "
+            strTeX += "-"+fractex+"{"+decimaux(-nombre.numerateur)+"}{"+decimaux(nombre.denominateur)+"} "
         else:
-            strTeX += "\\dfrac{"+decimaux(nombre.numerateur)+"}{"+decimaux(nombre.denominateur)+"} "
+            strTeX += fractex+"{"+decimaux(nombre.numerateur)+"}{"+decimaux(nombre.denominateur)+"} "
         strTeX+=finTeX
         return strTeX
     elif isinstance(nombre,classes.Racine.RacineDegre2):

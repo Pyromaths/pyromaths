@@ -25,7 +25,8 @@ def imprime_TeX(string,fichier="fichier.tex",chemin_fichier="",borne=["entete","
     ## Les variables à remplacer :
     titre = "Fiche d'essai"
     niveau = u"testeur"
-    preambule = "\\input{/home/nicolas/pyrogit/pyromaths/modeles/tabvar.tex}"
+    tabvar = os.path.normpath(os.path.join(os.path.dirname(str(__file__)),  '..', 'modeles',"tabvar.tex"))
+    preambule = "\\input{%s}"%(tabvar)
     for line in modeletex:
         if master_fin in line:
             break
