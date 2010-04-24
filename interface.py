@@ -362,6 +362,9 @@ class Ui_MainWindow(object):
             nb_exos = len(self.LesFiches[level][2])
             for i in range(nb_exos):
                 exec("self.label_%s_%s.setText(u\"%s\")" % (6-level,i,self.LesFiches[level][2][i]))
+		try:
+			exec(u"self.label_%s_%s.setToolTip(u\"%s\")"% (6-level,i,LesFiches[level][3][i]))
+		except:pass
                 exec(u"self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)

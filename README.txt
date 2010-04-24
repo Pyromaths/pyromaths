@@ -1,3 +1,11 @@
+
+* Exercice sur les polynomes niveau Lycée
+** Équation du second degré
+** Factorisation degré 2 et degré 3.
+** Étude de fonctions : sens de variation et calcul de limite
+*** Polynômes de degré 3
+*** Fonction rationnelle
+
 Version 10.01
 * Un exercice sur les probabilités niveau 3e - par Guillaume Barthélémy
 * Modification de l'exercice sur le théorème de Pythagore, niveau 4e :
@@ -9,12 +17,6 @@ Version 10.01
 ** Gestion des caractères accentués dans les noms de fichiers
 ** Passage à l'utf-8 pour l'encodage des fichiers.
 * Nouvelles fonctions et classes pour une utilisation prochaine dans de nouveaux exercices
-* Exercice sur les polynomes niveau Lycée
-** Équation du second degré
-** Factorisation degré 2 et degré 3.
-** Étude de fonctions : sens de variation et calcul de limite
-*** Polynômes de degré 3
-*** Fonction rationnelle
 
 Version 09.09-1
 * Ajout de python-lxml à la liste des dépendances pour le paquet deb de Pyromaths (merci à Cedrick)
