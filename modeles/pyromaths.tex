@@ -4,8 +4,20 @@
 \usepackage[T1]{fontenc}
 \usepackage[frenchb]{babel}
 \usepackage[fleqn]{amsmath}
-\usepackage{amssymb,multicol,calc,vmargin,cancel,fancyhdr,units,pst-eucl,wrapfig,lastpage,wasysym,pst-plot,tabularx}
+\usepackage{amssymb,multicol,calc,vmargin,cancel,fancyhdr,units,pst-eucl,wrapfig,lastpage,wasysym,pst-plot,pst-text,tabularx}
 \input{##{{TABVAR}}##}
+
+%écrit la longueur sous un segment
+\def\pyrLongueur(#1)(#2)#3{%%
+{\psset{linestyle=none}
+\pstextpath[c](0,-2.5ex){\psline{}(#1)(#2)}{#3}}
+}
+%écrit la longueur sur un segment    
+\def\pyrLongueurh(#1)(#2)#3{%%
+{\psset{linestyle=none}
+\pstextpath[c](0,1.3ex){\psline{}(#1)(#2)}{#3}}
+}
+
 \setmarginsrb{1.5cm}{1.5cm}{1.5cm}{1.5cm}{.5cm}{.5cm}{.5cm}{1.cm}
 \newcounter{exo}
 \setlength{\headheight}{18pt}

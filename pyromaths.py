@@ -1,4 +1,4 @@
-﻿#!/usr/bin/python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Pyromaths
@@ -78,6 +78,7 @@ u'Sommes de fractions',
 u'Produits de fractions',
 u'repérage',
 u'Addition de relatifs',
+u'Construction de triangles',
 ]],
 [u'Quatrième', quatriemes.quatriemes, [
 u'Calcul mental',
