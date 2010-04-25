@@ -1,4 +1,4 @@
-
+* Exercice de construction de triangles, cinquièmes
 * Exercice sur les polynomes niveau Lycée
 ** Équation du second degré
 ** Factorisation degré 2 et degré 3.
