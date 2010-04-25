@@ -200,11 +200,12 @@ class Fractions:
 
     def __float__(self):
         return 1.0*self.n/self.d
+    
+    def __int__(self):
+        try:
+          assert (self.n / self.d == int(self.n / self.d)), 'La fraction n\'est pas un nombre entier !'
+          return int(self.n)
+        except AssertionError, args:
+          print '%s: %s' % (args.__class__.__name__, args)
 
-
-
-#a = Fractions(1, 2)
-#b = Fractions(1, 4)
-#c = Fractions(5, 6)
-#d = (a + b) / c
 
