@@ -2,8 +2,8 @@
 
 import re, sys
 sys.path[:0] = ['../classes','classes']
-from Racine import *
-from Terme import *
+#from Racine import *
+#from Terme import *
 from Affichage import decimaux
 import outils.Arithmetique, outils.Affichage
 import math

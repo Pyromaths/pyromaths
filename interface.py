@@ -1,4 +1,4 @@
-#!/usr/bin/python
+﻿#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Pyromaths
@@ -195,6 +195,14 @@ class Ui_MainWindow(object):
         self.checkBox_pdf.setChecked(int(self.config['pdf']))
         self.verticalLayout_21.addWidget(self.checkBox_pdf)
 
+        ############## CheckBox "pdf ou non"
+
+        self.checkBox_unpdf = QtGui.QCheckBox(self.tab_options)
+        self.checkBox_unpdf.setText(u"Créer un seul pdf")
+        self.checkBox_unpdf.setToolTip(u"Le corrigé et les exercices doivent-ils être dans le même document ?")
+        self.checkBox_unpdf.setChecked(int(self.config['unpdf']))
+        self.verticalLayout_21.addWidget(self.checkBox_unpdf)
+
         ############## Espace
 
         self.horizontalLayout_3.addLayout(self.verticalLayout_21)
@@ -342,6 +350,7 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.pushButton_ok,QtCore.SIGNAL("clicked()"), self.creer_les_exercices)
         QtCore.QObject.connect(self.pushButton_enr_opt,QtCore.SIGNAL("clicked()"), self.enregistrer_config)
         QtCore.QObject.connect(self.pushButton_parcourir,QtCore.SIGNAL("clicked()"), self.option_parcourir)
+        QtCore.QObject.connect(self.checkBox_corrige,QtCore.SIGNAL("stateChanged(int)"), self.option_corrige)
         #============================================================
         #        Actions des spinBox
         #============================================================
@@ -353,6 +362,9 @@ class Ui_MainWindow(object):
             nb_exos = len(self.LesFiches[level][2])
             for i in range(nb_exos):
                 exec("self.label_%s_%s.setText(u\"%s\")" % (6-level,i,self.LesFiches[level][2][i]))
+		try:
+			exec(u"self.label_%s_%s.setToolTip(u\"%s\")"% (6-level,i,LesFiches[level][3][i]))
+		except:pass
                 exec(u"self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -441,6 +453,7 @@ class Ui_MainWindow(object):
         else:
             parametres = {
                 'creer_pdf': self.checkBox_pdf.isChecked(),
+                'creer_unpdf': self.checkBox_unpdf.isChecked() and self.checkBox_unpdf.isEnabled(),
                 'titre': unicode(self.titre_fiche.text()),
                 'corrige': self.checkBox_corrige.isChecked(),
                 'niveau': str(self.comboBox_niveau.currentText()),
@@ -586,6 +599,13 @@ class Ui_MainWindow(object):
         if d0:
             self.chemin_fichier.setText(d0)
 
+    def option_corrige(self):
+        if not self.checkBox_corrige.isChecked():
+            self.checkBox_unpdf.setChecked(False)
+            self.checkBox_unpdf.setEnabled(False)
+        else:
+            self.checkBox_unpdf.setEnabled(True)
+
     def setNbExos(self):
         """Modifie le nombre d'exercices dans la variable liste_creation lorsqu'on  modifie une spinBox
         et adapte le niveau affiché dans l'en-tête de la fiche en fonction du plus haut niveau d'exercice"""
@@ -614,6 +634,7 @@ QCoreApplication::exec: The event loop is already runningteur avec le dictionnai
         self.config['titre_fiche'] = self.titre_fiche.text()
         self.config['corrige'] = self.checkBox_corrige.isChecked()
         self.config['pdf'] = self.checkBox_pdf.isChecked()
+        self.config['unpdf'] = self.checkBox_unpdf.isChecked()and self.checkBox_unpdf.isEnabled()
 
 #================================================================
 #        Classe ChoixOrdreExos
@@ -690,7 +711,7 @@ def valide(list, LesFiches, parametres):
                              u'%s.tex' % filename), "Documents Tex (*.tex)"))
     if f0 != None:
         outils.System.ajoute_extension(f0, '.tex')
-        if corrige:
+        if corrige and not parametres['creer_unpdf']:
             f1 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(os.path.dirname(f0),
                 u"%s-corrige.tex"  % os.path.splitext(os.path.basename(f0))[0]),

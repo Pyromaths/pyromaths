@@ -20,7 +20,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
-from PyQt4 import QtGui, QtCore
 import sys, os, codecs
 from outils.TestEnv import test
 
@@ -78,6 +77,9 @@ u'Fractions égales',
 u'Sommes de fractions',
 u'Produits de fractions',
 u'Repérage',
+u'Addition de relatifs',
+u'Construction de triangles',
+
 ]],
 [u'Quatrième', quatriemes.quatriemes, [
 u'Calcul mental',
@@ -122,17 +124,26 @@ u'Factorisations 2° degré',
 u'Factorisations degré 3',
 u'Étude de signe',
 u"Sens de variations",
+u"Étude de fonctions",
+], [
+u'Niveau 1èreS',
+u'Niveau 1èreS',
+u'Niveau 1èreS',
+u'Niveau 1èreS',
+u"Niveau 1èreS, Term STG",
+u"Niveau Term S",
 ]],
 ]
 
-class StartQT4(QtGui.QMainWindow, interface.Ui_MainWindow):
-    def __init__(self, LesFiches, configdir, iconesdir, parent=None):
-        QtGui.QWidget.__init__(self, parent)
-        self.ui = interface.Ui_MainWindow()
-        self.ui.setupUi(self, LesFiches, configdir, iconesdir)
 
-    
 if __name__ == "__main__":
+    from PyQt4 import QtGui, QtCore
+    class StartQT4(QtGui.QMainWindow, interface.Ui_MainWindow):
+        def __init__(self, LesFiches, configdir, iconesdir, parent=None):
+            QtGui.QWidget.__init__(self, parent)
+            self.ui = interface.Ui_MainWindow()
+            self.ui.setupUi(self, LesFiches, configdir, iconesdir)
+
 #================================================================
 # Création du fichier de configuration si inexistant
 #================================================================
@@ -153,8 +164,8 @@ if __name__ == "__main__":
 
     app = QtGui.QApplication(sys.argv)
     pyromaths = StartQT4(LesFiches,  outils.System.configdir(), iconesdir)
-    pyromaths.show()   
-    
+
+    pyromaths.show()
     test(pyromaths)
-    
+
     sys.exit(app.exec_())

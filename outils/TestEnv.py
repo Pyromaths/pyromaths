@@ -35,5 +35,3 @@ import System, os
 def test(gui):
   if not os.path.isfile(os.path.join(System.configdir(), "pyromaths.xml")):
     gui.erreur_critique(u"Impossible de lire le fichier de configuration. Veuillez vérifier ce dernier ou faire remonter l'erreur sur le forum de Pyromaths.")
-    
-    

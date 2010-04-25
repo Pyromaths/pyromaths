@@ -1,4 +1,4 @@
-#!/usr/bin/python
+﻿#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Pyromaths
@@ -69,6 +69,7 @@ def create_config_file():
     etree.SubElement(child, "titre_fiche").text=u"Fiche de révisions"
     etree.SubElement(child, "corrige").text="True"
     etree.SubElement(child, "pdf").text="True"
+    etree.SubElement(child, "unpdf").text="False"
     etree.SubElement(child, "modele").text="pyromaths.tex"
 
     child = etree.SubElement(root, "informations")
@@ -148,6 +149,7 @@ def creation(parametres):
                   'fiche_cor': f1,
                   'liste_exos': self.lesexos,
                   'creer_pdf': self.checkBox_create_pdf.checkState(),
+                  'creer_unpdf': self.checkBox_unpdf.isChecked() and self.checkBox_unpdf.isEnabled(),
                   'titre': unicode(self.lineEdit_titre.text()),
                   'niveau': unicode(self.comboBox_niveau.currentText()),
                 }"""
@@ -160,21 +162,35 @@ def creation(parametres):
 
     if parametres['creer_pdf']:
         copie_tronq_modele(f0, parametres, 'entete')
-        copie_tronq_modele(f1, parametres, 'entete')
+        if not parametres['creer_unpdf']:
+            copie_tronq_modele(f1, parametres, 'entete')
 
     for exercice in parametres['liste_exos']:
         parametres['les_fiches'][exercice[0]][1].main(exercice[1], f0, f1)
 
     if parametres['creer_pdf']:
-        copie_tronq_modele(f0, parametres, 'pied')
-        copie_tronq_modele(f1, parametres, 'pied')
+        if parametres['creer_unpdf']:
+            f0.write("\n\\newpage\n")
+            f0.write("\n\\setcounter{exo}{0}\n")
+            copie_tronq_modele(f1, parametres, 'pied')
+        else:
+            copie_tronq_modele(f0, parametres, 'pied')
+            copie_tronq_modele(f1, parametres, 'pied')
 
     f0.close()
     f1.close()
 
+    if parametres['creer_unpdf']:
+        f0 = codecs.open(exo, encoding='utf-8', mode='a')
+        f1 = codecs.open(cor, encoding='utf-8', mode='r')
+        for line in f1:
+            f0.write(line)
+        f0.close()
+        f1.close()
+
     # indentation des fichiers teX créés
     mise_en_forme(exo)
-    if parametres['corrige']:
+    if parametres['corrige'] and not parametres['creer_unpdf']:
         mise_en_forme(cor)
 
     # Dossiers et fichiers d'enregistrement, définitions qui doivent rester avant le if suivant.
@@ -192,7 +208,7 @@ def creation(parametres):
             call(["latex", "-interaction=batchmode", exo],
                     #env={"PATH": os.path.expandvars('$PATH')},
                     stdout=log)
-            if parametres['corrige']:
+            if parametres['corrige'] and not parametres['creer_unpdf']:
                 os.chdir(dir1)
                 call(["latex", "-interaction=batchmode", cor],
                         #env={"PATH": os.path.expandvars('$PATH')},
@@ -200,7 +216,7 @@ def creation(parametres):
         call(["dvips", "-q", u"%s.dvi" % (f0noext), u"-o%s.ps" % (f0noext)],
                 #env={"PATH": os.path.expandvars('$PATH')},
                 stdout=log)
-        if parametres['corrige']:
+        if parametres['corrige'] and not parametres['creer_unpdf']:
             call(["dvips", "-q", u"%s.dvi" % (f1noext), u"-o%s.ps" % (f1noext)],
                     #env={"PATH": os.path.expandvars('$PATH')},
                     stdout=log)
@@ -208,7 +224,7 @@ def creation(parametres):
                     u"%s.pdf" % (f0noext)],
                     #env={"PATH": os.path.expandvars('$PATH')},
                     stdout=log)
-        if parametres['corrige']:
+        if parametres['corrige'] and not parametres['creer_unpdf']:
             call(["ps2pdf", "-sPAPERSIZE#a4", u"%s.ps" % (f1noext),
                 u"%s.pdf" % (f1noext)],
                 #env={"PATH": os.path.expandvars('$PATH')},
@@ -216,25 +232,23 @@ def creation(parametres):
         log.close()
         if os.name == "nt":  #Cas de Windows.
             os.startfile('%s.pdf' % (f0noext).encode('utf-8'))
-            if parametres['corrige']:
+            if parametres['corrige'] and not parametres['creer_unpdf']:
                 os.startfile('%s.pdf' % (f1noext).encode('utf-8'))
         else:
             os.system('xdg-open %s.pdf' % (f0noext.encode('utf-8')))
-            if parametres['corrige']:
+            if parametres['corrige'] and not parametres['creer_unpdf']:
                 os.system('xdg-open %s.pdf' % (f1noext.encode('utf-8')))
         #Supprime les fichiers temporaires créés par LaTeX
         try:
             for ext in ('.aux', '.dvi', '.log', '.out', '.ps'):
                 os.remove(os.path.join(dir0,  f0noext + ext))
-                if parametres['corrige']:
+                if parametres['corrige'] and not parametres['creer_unpdf']:
                     os.remove(os.path.join(dir1,  f1noext + ext))
             os.remove(os.path.join(dir0, 'pyromaths.log'))
         except OSError:
-            print((u"Le fichier %s ou %s n'a pas été supprimé." % \
-                   (os.path.join(dir0,  f0noext + ext),
-                   os.path.join(dir1,  f1noext + ext))))
-                   #le fichier à supprimer n'existe pas.
-    if not parametres['corrige']:
+            pass
+        #le fichier à supprimer n'existe pas et on s'en fout.
+    if not parametres['corrige'] or parametres['creer_unpdf']:
         os.remove(os.path.join(dir1,  f1noext + '.tex'))
 
 def copie_tronq_modele(dest, parametres, master):

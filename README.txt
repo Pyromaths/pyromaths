@@ -1,3 +1,11 @@
+
+* Exercice sur les polynomes niveau Lycée
+** Équation du second degré
+** Factorisation degré 2 et degré 3.
+** Étude de fonctions : sens de variation et calcul de limite
+*** Polynômes de degré 3
+*** Fonction rationnelle
+
 Version 10.01
 * Un exercice sur les probabilités niveau 3e - par Guillaume Barthélémy
 * Modification de l'exercice sur le théorème de Pythagore, niveau 4e :

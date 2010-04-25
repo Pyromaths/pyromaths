@@ -164,8 +164,9 @@ def exo_factorisation_degre3():
          "\\begin{enumerate}"]
     
     X=Polynome({1:1},var="x")
-    E=poly_degre3_racines_entieres(rac_min,rac_max,X)
-    exo,cor=factorisation_degre3(E,"E",exo,cor)
+    racines_quelconques=[i for i in range(-10,11)]
+    E=poly_degre3_racines_entieres(rac_min,rac_max,X,racines=racines_quelconques)
+    exo,cor=factorisation_degre3(E,"E",exo,cor,racines=racines_quelconques)
     F=poly_degre3_racines_fractionnaires(rac_min,rac_max,denom1,X)
     exo,cor=factorisation_degre3(F,"F",exo,cor)
          
@@ -232,10 +233,24 @@ def exo_variation():
          "\\begin{enumerate}"]
     quest1,cor1=quest_fonctions_rationnelles()
     quest2,cor2=quest_variation_degre3(borneinf=-10,bornesup=10)
+    
+    exo+=quest1+quest2
+    cor+=cor1  + cor2 
+
+    exo.append("\\end{enumerate}")
+    cor.append("\\end{enumerate}")
+    return exo,cor
+
+def exo_variation_lim():
+    """Étude de fonctions avec calculs de limites"""
+    exo=["\\exercice",
+         "\\begin{enumerate}"]
+    cor=["\\exercice*",
+         "\\begin{enumerate}"]
     quest3,cor3=quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf"))
     quest4,cor4=quest_fonctions_rationnelles_sur_R()
-    exo+=quest1+quest2+quest3+quest4
-    cor+=cor1  + cor2 + cor3 +cor4
+    exo+=quest3+quest4
+    cor+= cor3 +cor4
 
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
@@ -343,7 +358,7 @@ def quest_fonctions_rationnelles_sur_R():
     rac_min=-9
     rac_max=9
     b1=b2=a1=a2=0
-    while b1==0 or b2==0 or a1==0 or a2==0:
+    while b1==0 or b2==0 or a1==0 or a2==0 or a1*(-float(b2)/a1)+b1==0:
         b1=randint(rac_min,rac_max)
         b2=randint(rac_min,rac_max)
         a1=randint(-5,5)
@@ -366,9 +381,9 @@ def quest_fonctions_rationnelles_sur_R():
     f_derivee="\\dfrac{%s}{%s}"%(numerateur,denominateur)
     f_derivee_simplifiee="\\dfrac{%s}{%s}"%(numerateur_simplifie,denominateur)
     
-    exo=[u"\\item On considère la fonction $%s$ définie  par $%s(%s)=\dfrac{%s}{%s}$."%(nomf,nomf,var,P,Q),
+    exo=[u"\\item On considère la fonction $%s$ définie  par $%s(%s)=\\dfrac{%s}{%s}$."%(nomf,nomf,var,P,Q),
          "\\begin{enumerate}"]
-    cor=[u"\\item On considère la fonction $%s$ définie  par $%s(%s)=\dfrac{%s}{%s}$."%(nomf,nomf,var,P,Q),
+    cor=[u"\\item On considère la fonction $%s$ définie  par $%s(%s)=\\dfrac{%s}{%s}$."%(nomf,nomf,var,P,Q),
          "\\begin{enumerate}"]
 
     exo.append(u"\\item Déterminer l'ensemble de définition $\\mathcal{D}_{%s}$ de $%s$."%(nomf,nomf))
@@ -387,6 +402,41 @@ def quest_fonctions_rationnelles_sur_R():
     cor.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in\\mathcal{D'}_{%s}$."%\
           (nomf,var,var,nomf))
     cor.append(u"$$%s'(%s)=%s=%s$$"%(nomf,var,f_derivee,f_derivee_simplifiee))
+    exo.append(u"\\item Déterminer les limites de $%s$ aux bornes de $\\mathcal{D}_{%s}$."%(nomf,nomf))
+    cor.append(u"\\item Déterminer les limites de $%s$ aux bornes de $\\mathcal{D}_{%s}$."%(nomf,nomf))
+    cor.append("$$\\lim_{%s\\to -\\infty}\\dfrac{%s}{%s}= "%(var,P,Q))
+    def coeffTeX(a):
+        if a==1:return ""
+        if a==-1:return "-"
+        return a
+    cor.append("\\lim_{%s\\to -\\infty}\\dfrac{%s%s}{%s%s}=\\dfrac{%s}{%s}$$" %(var,coeffTeX(P[1]),var,coeffTeX(Q[1]),var,P[1],Q[1]))
+    cor.append("$$\\lim_{%s\\to +\\infty}\\dfrac{%s}{%s}= "%(var,P,Q))
+    cor.append("\\lim_{%s\\to +\\infty}\\dfrac{%s%s}{%s%s}=\\dfrac{%s}{%s}$$" %(var,coeffTeX(P[1]),var,coeffTeX(Q[1]),var,P[1],Q[1]))
+    cor.append("Pour $%s=%s$, on a $%s=%s"%(var,TeX(VI),P,TeX(P(VI))))
+    if P(VI)<0:
+        limites=["-\\infty","+\\infty"]
+        cor.append("<0$.\\\\")
+    elif P(VI)>0:
+        limites=["+\\infty","-\\infty"]
+        cor.append(">0$.\\\\")
+    else:cor.append("$.\\\\")
+    
+    VIplus="\\substack{%s\\to %s\\\\%s>%s}"%(var,fTeX(VI),var,fTeX(VI))
+    VImoins="\\substack{%s\\to %s\\\\%s<%s}"%(var,fTeX(VI),var,fTeX(VI))
+    if Q[1]<0:
+        cor.append("De plus, $%s>0$ si $%s<%s$"%(Q,var,TeX(VI)))
+        cor.append("et  $%s<0$ si $%s>%s$.\\\\"%(Q,var,TeX(VI)))
+        cor.append(u"$$\\lim_{%s}\\dfrac{%s}{%s}=%s $$"%(VImoins,P,Q,limites[0]))
+        cor.append(u"$$\\lim_{%s}\\dfrac{%s}{%s}=%s $$"%(VIplus,P,Q,limites[1]))
+    else:
+        cor.append("De plus, $%s<0$ si $%s<%s$"%(Q,var,TeX(VI)))
+        cor.append("et  $%s>0$ si $%s>%s$.\\\\"%(Q,var,TeX(VI)))
+        cor.append(u"$$\\lim_{%s}\\dfrac{%s}{%s}=%s $$"%(VImoins,P,Q,limites[0]))
+        cor.append(u"$$\\lim_{%s}\\dfrac{%s}{%s}=%s $$"%(VIplus,P,Q,limites[1]))
+##    cor.append("\\lim_{%s\\rightarrow %s}\\dfrac{%s}{%s%s}=\\dfrac{%s}{%s}$$" %(var,TeX(VI),P(VI),coeffTeX(Q[1]),var,P[1],Q[1]))
+##            
+
+    
     exo.append(u"\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$."%(nomf,nomf))
     cor.append(u"\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$.\\par"%(nomf,nomf))
     if numerateur_simplifie.degre_max==0:
@@ -491,6 +541,10 @@ def quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf")):
                    (str_valeurs,str_signe,var_de_P))
         for i in range(1,compteur+1):
             cor.append("\\ncline[nodesep=0.15,linewidth=0.5pt]{->}{neu%s}{neu%s}"%(i-1,i))
+        if borneinf==float("-inf"):
+            cor.append(u"$$\\lim_{%s\\to %s} %s= \\lim_{%s\\to %s} %s%s^3=%s $$  "%(var,"-\\infty",P,var,"-\\infty",P[3],var,TeX(P(float("-inf")))))
+        if bornesup==float("+inf"):
+            cor.append(u"$$\\lim_{%s\\to %s} %s= \\lim_{%s\\to %s} %s%s^3=%s  $$ "%(var,"+\\infty",P,var,"+\\infty",P[3],var,TeX(P(float("inf")))))
     return exo,cor
 
 
@@ -774,12 +828,16 @@ def factorisation_degre3(E,nomE,exo=[],cor=[],racines=[0,1,-1,2,-2]):
     cor.append("\\item Soit $%s=%s $"%(nomE,E))
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
-    exo.append(u"\\item Vérifier si $%s $ possède une racine évidente."%(nomE))
-    exo.append("\\item Factoriser $%s $."%(nomE))
-    cor.append("\\item ")
     for x0 in racines:
         if E(x0)==0:
             break
+    if x0 in [-2,-1,0,1,2]:
+        exo.append(u"\\item Vérifier si $%s $ possède une racine évidente."%(nomE))
+    else:
+        exo.append(u"\\item Vérifier que $%s$ est une racine de $%s$."%(TeX(x0),nomE))
+    exo.append("\\item Factoriser $%s $."%(nomE))
+    cor.append("\\item ")
+
     if x0==0:
         degre_facteur=min(E.puiss)
         #degre_facteur=1
@@ -792,7 +850,7 @@ def factorisation_degre3(E,nomE,exo=[],cor=[],racines=[0,1,-1,2,-2]):
             exo.append("\\end{enumerate}")
             cor.append("\\end{enumerate}")
             return exo,cor
-    else:            
+    else:
         cor.append("Comme $%s(%s)=0$, on peut diviser $%s$ par $%s$"%(nomE,TeX(x0),nomE,X-x0))
         cor.append(TeX_division(E,(X-x0))+"")
         E2,reste=E/(X-x0)
@@ -923,10 +981,12 @@ if __name__=="__main__":
 ##    exo,cor=exo_fonctions_rationnelles()
 ##    exo,cor=quest_fonctions_rationnelles_sur_R()
     exo,cor=exo_variation()
+    exo1,cor1=exo_variation_lim()
+    
 ##    exo=cor=[]
 ##    for i in range(10):
 ##        exo1,cor1=exo_tableau_de_signe()
 ##        exo=exo+exo1
 ##        cor=cor+cor1
 
-    imprime_TeX(exo+cor)
+    imprime_TeX(exo+exo1+cor+cor1)

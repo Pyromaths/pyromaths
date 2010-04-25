@@ -148,14 +148,14 @@ def poly_id_remarquables(rac_min,rac_max,X):
         # 0 => (a-b)(a+b)
 
  #----------polynome de degré 3-------------
-def poly_degre3_racines_entieres(rac_min,rac_max,X):
-    racine_evidente=[-2,-1,0,1,2][randrange(5)]
+def poly_degre3_racines_entieres(rac_min,rac_max,X,racines=[-2,-1,0,1,2]):
+    racine_evidente=racines[randrange(len(racines))]
     return (X-racine_evidente)*poly_racines_entieres(rac_min,rac_max,X)
-def poly_degre3_racines_fractionnaires(rac_min,rac_max,denom1,X):
-    racine_evidente=[-2,-1,0,1,2][randrange(5)]
+def poly_degre3_racines_fractionnaires(rac_min,rac_max,denom1,X,racines=[-2,-1,0,1,2]):
+    racine_evidente=racines[randrange(len(racines))]
     return (X-racine_evidente)*poly_racines_fractionnaires(rac_min,rac_max,denom1,X)
-def poly_degre3_racines_quelconques(abs_a,abs_b,abs_c,X):
-    racine_evidente=[-2,-1,0,1,2][randrange(5)]
+def poly_degre3_racines_quelconques(abs_a,abs_b,abs_c,X,racines=[-2,-1,0,1,2]):
+    racine_evidente=racines[randrange(len(racines))]
     return (X-racine_evidente)*poly_racines_quelconques(abs_a=1,abs_b=10,abs_c=10,X=X)
 
 
