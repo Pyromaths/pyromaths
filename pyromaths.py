@@ -34,7 +34,6 @@ if os.name == "posix" and os.path.basename(__file__)=="pyromaths":
 #================================================================
 # Imports spécifiques à Pyromaths
 #=========================== QtGui ========================
-import interface
 import outils.System
 import troisiemes.troisiemes, quatriemes.quatriemes, cinquiemes.cinquiemes
 import sixiemes.sixiemes
@@ -137,6 +136,7 @@ u"Niveau Term S",
 
 
 if __name__ == "__main__":
+    import interface
     from PyQt4 import QtGui, QtCore
     class StartQT4(QtGui.QMainWindow, interface.Ui_MainWindow):
         def __init__(self, LesFiches, configdir, iconesdir, parent=None):
