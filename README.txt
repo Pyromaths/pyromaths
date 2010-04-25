@@ -5,6 +5,13 @@
 ** Étude de fonctions : sens de variation et calcul de limite
 *** Polynômes de degré 3
 *** Fonction rationnelle
+* Exercice sur les arrondis niveau sixième ( par défaut, par excès )
+* Exercice sur l'arithmétique niveau troisième :
+** Décomposition en facteurs premiers
+** PGCD et PPCM avec plusieurs méthodes
+** Réflexion sur la décomposition en facteurs premiers
+** Applications aux fractions.
+* Correction d'un bug lié à l'encodage sous Windows
 
 Version 10.01
 * Un exercice sur les probabilités niveau 3e - par Guillaume Barthélémy
