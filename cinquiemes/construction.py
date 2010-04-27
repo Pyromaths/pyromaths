@@ -23,6 +23,7 @@
 import outils.Geometrie as geo
 import random,math
 from outils.Affichage import decimaux
+
 #trigo en degré
 tan =lambda z:math.tan(math.radians(z))
 cos =lambda z:math.cos(math.radians(z))
@@ -37,6 +38,20 @@ def shuffle_nom(polygone):
     for i in range(debut,debut+n*sens,sens):
         nom+=polygone[i]
     return nom
+def cotation(cor,A,B,longueur,couleur="",unite="cm"):
+    (xA,yA)=A
+    (xB,yB)=B
+    if couleur!="":
+        couleur="\\color{%s}"%couleur
+    cor.append(u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\bput{:U}{%s\\unit[%s]{%s}}"
+               %(xA,yA,xB,yB,couleur,longueur,unite))
+def cotation_h(cor,A,B,longueur,couleur="",unite="cm"):
+    (xA,yA)=A
+    (xB,yB)=B
+    if couleur!="":
+        couleur="\\color{%s}"%couleur
+    cor.append(u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\aput{:U}{%s\\unit[%s]{%s}}"
+               %(xA,yA,xB,yB,couleur,longueur,unite))
 
 def exo_triangle():
     
@@ -48,14 +63,14 @@ def exo_triangle():
     cor.append("\\definecolor{calcul}{rgb}{0.13,0.54,0.13}")
     cor.append(u"\\psset{MarkAngleRadius=0.6}")
     if True:#toutes les constructions en test
-        exo,cor=quest_equilateral(exo,cor)
-        exo,cor=quest_LAL(exo,cor)
-        exo,cor=quest_ALA(exo,cor)
-        exo,cor=quest_AAL(exo,cor)
-        exo,cor=quest_isocele_angbase(exo,cor)
-        exo,cor=quest_isocele_angprincipal(exo,cor)
-        exo,cor=quest_rectangle_hypo_angle(exo,cor)
-        exo,cor=quest_rectangle_hypo_cote(exo,cor)
+        quest_equilateral(exo,cor)
+        quest_LAL(exo,cor)
+        quest_ALA(exo,cor)
+        quest_AAL(exo,cor)
+        quest_isocele_angbase(exo,cor)
+        quest_isocele_angprincipal(exo,cor)
+        quest_rectangle_hypo_angle(exo,cor)
+        quest_rectangle_hypo_cote(exo,cor)
     else:#Construction choisies au hasard
         questions=[quest_equilateral,
                    quest_LAL,
@@ -67,7 +82,7 @@ def exo_triangle():
                    quest_rectangle_hypo_angle]
         random.shuffle(questions)
         for i in range(4):
-            exo,cor=question[i](exo,cor)
+            question[i](exo,cor)
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
     return exo,cor
@@ -93,9 +108,9 @@ def quest_equilateral(exo,cor):
     cor.append(u"\\pstRotation[RotAngle=7,PointSymbol=none,PointName=none]{%s}{%s}[C_3]"%(B,C))
     cor.append(u"\\pstRotation[RotAngle=-7,PointSymbol=none,PointName=none]{%s}{%s}[C_4]"%(B,C))
     cor.append(u"\\pstArcOAB[linecolor=calcul]{%s}{C_4}{C_3}"%(B))
-    cor.append(u"\\pyrLongueur(0,0)(%s,0){\\color{enonce}\\unit[%s]{cm}}"%(c,decimaux(c)))
+    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
     cor.append(u"\\end{pspicture}")
-    return exo,cor
+
 def quest_LAL(exo,cor):
     """on donne un angle et les longueurs de ses deux côtés"""
     """            angBAC et      AB=c et AC=b"""
@@ -116,13 +131,14 @@ def quest_LAL(exo,cor):
     cor.append(u"\\pstRotation[RotAngle=7,PointSymbol=none,PointName=none]{%s}{%s}[C_1]"%(A,C))
     cor.append(u"\\pstRotation[RotAngle=-7,PointSymbol=none,PointName=none]{%s}{%s}[C_2]"%(A,C))
     cor.append(u"\\pstArcOAB[linecolor=calcul]{%s}{C_2}{C_1}"%(A))
-    cor.append(u"\\pyrLongueur(0,0)(%s,0){\\color{enonce}\\unit[%s]{cm}}"%(c,decimaux(c)))
+    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
     if angBAC<111:
-        cor.append(u"\\pyrLongueurh(0,0)(%s;%s){\\color{enonce}\\unit[%s]{cm}}"%(b,angBAC,decimaux(b)))
+        x_C,y_C=b*cos(angBAC),b*sin(angBAC)
+        cotation_h(cor,(0,0),(x_C,y_C),decimaux(b),couleur="enonce")
     else:
-        cor.append(u"\\pyrLongueur(%s;%s)(0,0){\\color{enonce}\\unit[%s]{cm}}"%(b,angBAC,decimaux(b)))
+        x_C,y_C=b*cos(angBAC),b*sin(angBAC)
+        cotation(cor,(0,0),(x_C,y_C),decimaux(b),couleur="enonce")
     cor.append(u"\\end{pspicture}")
-    return exo,cor
 
 def quest_ALA(exo,cor):
     """on donne deux angles et la longueur du côté commun"""
@@ -141,11 +157,10 @@ def quest_ALA(exo,cor):
     cor.append(u"\\begin{pspicture}(-0.4,-1)(%s,%s)"%(c+1,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,c,B,x_C,y_C,C))
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,C,B,C))
-    cor.append(u"\\pyrLongueur(0,0)(%s,0){\\color{enonce}\\unit[%s]{cm}}"%(c,decimaux(c)))
+    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(C,B,A,angABC))
     cor.append(u"\\end{pspicture}")
-    return exo,cor
 
 def quest_AAL(exo,cor):
     """on donne deux angles et la longueur d'un côté non commun aux deux angles"""
@@ -171,10 +186,9 @@ def quest_AAL(exo,cor):
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,C,B,C))
     cor.append(u"\\pstMarkAngle[linecolor=calcul]{%s}{%s}{%s}{\\color{calcul}%s\\degres}"%(C,B,A,angABC))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(A,C,B,angACB))
-    cor.append(u"\\pyrLongueur(0,0)(%s,0){\\color{enonce}\\unit[%s]{cm}}"%(c,decimaux(c)))
+    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
     cor.append(u"\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\end{pspicture}")
-    return exo,cor
 
 def quest_isocele_angbase(exo,cor):
     """on donne ABC isocele en C, AB=c et angBAC"""
@@ -195,11 +209,10 @@ donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=%s\\degres$.\\par"%(A,B,C,C,A,B,C,B,A,
     cor.append(u"\\pstSegmentMark[linecolor=enonce]{%s}{%s}"%(A,C))
     cor.append(u"\\pstSegmentMark[linecolor=enonce]{%s}{%s}"%(B,C))
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,C,B,C))
-    cor.append(u"\\pyrLongueur(0,0)(%s,0){\\color{enonce}\\unit[%s]{cm}}"%(c,decimaux(c)))
+    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\color{calcul}\\pstMarkAngle[linecolor=calcul]{%s}{%s}{%s}{%s\\degres}"%(C,B,A,angABC))
     cor.append(u"\\end{pspicture}")
-    return exo,cor
 
 def quest_isocele_angprincipal(exo,cor):
     """on donne ABC isocele en C, AB=c et angACB"""
@@ -224,12 +237,12 @@ donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=(180\\degres-%s\\degres)\\div 2=%s\\de
     cor.append(u"\\pstSegmentMark[linecolor=enonce]{%s}{%s}"%(A,C))
     cor.append(u"\\pstSegmentMark[linecolor=enonce]{%s}{%s}"%(B,C))
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,C,B,C))
-    cor.append(u"\\pyrLongueur(0,0)(%s,0){\\color{enonce}\\unit[%s]{cm}}"%(c,decimaux(c)))
+    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(A,C,B,angACB))
     cor.append(u"\\color{calcul}\\pstMarkAngle[linecolor=calcul]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\pstMarkAngle[linecolor=calcul]{%s}{%s}{%s}{%s\\degres}"%(C,B,A,angABC))
     cor.append(u"\\end{pspicture}")
-    return exo,cor
+    
 def quest_rectangle_hypo_angle(exo,cor):
     """on donne un triangle ABC rectangle en C et l'hypotenuse AB et l'angle BAC"""
     A,B,C=geo.choix_points(3)
@@ -257,12 +270,12 @@ donc $\widehat{%s%s%s}=90\\degres-%s\\degres=%s\\degres$."%(B,A,C,angBAC,angABC)
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,c,B,x_C,y_C,C))
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(A,C,B))
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,C,B,C))
-    cor.append(u"\\pyrLongueur(0,0)(%s,0){\\color{enonce}\\unit[%s]{cm}}"%(c,decimaux(c)))
+    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\color{calcul}\\pstMarkAngle[linecolor=calcul]{%s}{%s}{%s}{%s\\degres}"%(C,B,A,angABC))
     cor.append(u"\\end{pspicture}")
     cor.append("\\end{multicols}")
-    return exo,cor
+    
 def quest_rectangle_hypo_cote(exo,cor):
     """on donne un triangle ABC rectangle en B et l'hypotenuse AC et le coté AB"""
     A,B,C=geo.choix_points(3)
@@ -291,10 +304,7 @@ def quest_rectangle_hypo_cote(exo,cor):
     cor.append(u"\\pstRotation[RotAngle=-7,PointSymbol=none,PointName=none]{%s}{%s}[C_2]"%(A,C))
     cor.append(u"\\pstArcOAB[linecolor=calcul]{%s}{C_2}{C_1}"%(A))
     cor.append(u"\\pstLineAB{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,B,B,C))
-    cor.append(u"\\pyrLongueur(0,0)(%s,0){\\color{enonce}\\unit[%s]{cm}}"%(c,decimaux(c)))
-    cor.append(u"\\pyrLongueurh(0,0)(%s,%s){\\color{enonce}\\unit[%s]{cm}}"%(x_C,y_C,decimaux(b)))
+    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
+    cotation_h(cor,(0,0),(x_C,y_C),decimaux(b),couleur="enonce")
     cor.append(u"\\end{pspicture}")
     cor.append("\\end{multicols}")
-    return exo,cor
-    
-    
