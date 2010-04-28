@@ -186,7 +186,9 @@ def PointName(l3noms, indice):
 def figure(exo, cor, lpoints, lnoms, xmax, ymax):
     exo.append("\\begin{pspicture}(%s,%s)" % (xmax, ymax))
     exo.append("\\psframe(0,0)(%s,%s)" % (xmax, ymax))
+    exo.append("\\psset{PointSymbol=x,dotscale=2,MarkAngleRadius=0.6}")
     cor.append("\\begin{pspicture}(%s,%s)" % (xmax, ymax))
+    cor.append("\\psset{PointSymbol=none,dotscale=2,MarkAngleRadius=0.6}")
     cor.append("\\psframe(0,0)(%s,%s)" % (xmax, ymax))
     for i in range(len(lnoms)):
         points_exo = ''
@@ -202,10 +204,12 @@ def figure(exo, cor, lpoints, lnoms, xmax, ymax):
             points_cor += "{a%s%s}" % (j, i)
         exo.append(points_exo)
         cor.append(points_cor)
-        exo.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a1%s}" % (i, i))
-        cor.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a1%s}" % (i, i))
-        exo.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a2%s}" % (i, i))
-        cor.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a2%s}" % (i, i))
+        exo.append("\\pstMarkAngle{a%s%s}{a%s%s}{a%s%s}{}"%(1,i,0,i,2,i))
+        cor.append("\\pstMarkAngle{a%s%s}{a%s%s}{a%s%s}{}"%(1,i,0,i,2,i))
+        exo.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a1%s}\\pstLineAB[arrows=-|,linestyle=none]{a0%s}{a1%s}" % (i, i, i, i))
+        cor.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a1%s}\\pstLineAB[arrows=-|,linestyle=none]{a0%s}{a1%s}" % (i, i, i, i))
+        exo.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a2%s}\\pstLineAB[arrows=-|,linestyle=none]{a0%s}{a2%s}" % (i, i, i, i))
+        cor.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a2%s}\\pstLineAB[arrows=-|,linestyle=none]{a0%s}{a2%s}" % (i, i, i, i))
     exo.append("\\end{pspicture}\\par")
     cor.append("\\end{pspicture}\\par")
     return (exo, cor)
