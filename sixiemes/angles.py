@@ -186,9 +186,9 @@ def PointName(l3noms, indice):
 def figure(exo, cor, lpoints, lnoms, xmax, ymax):
     exo.append("\\begin{pspicture}(%s,%s)" % (xmax, ymax))
     exo.append("\\psframe(0,0)(%s,%s)" % (xmax, ymax))
-    exo.append("\\psset{PointSymbol=x,dotscale=2,MarkAngleRadius=0.6}")
+    exo.append("\\psset{PointSymbol=none,MarkAngleRadius=0.6}")
     cor.append("\\begin{pspicture}(%s,%s)" % (xmax, ymax))
-    cor.append("\\psset{PointSymbol=none,dotscale=2,MarkAngleRadius=0.6}")
+    cor.append("\\psset{PointSymbol=none,MarkAngleRadius=0.6}")
     cor.append("\\psframe(0,0)(%s,%s)" % (xmax, ymax))
     for i in range(len(lnoms)):
         points_exo = ''
