@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 
-if __name__=="__main__":
-    import sys
-    sys.path[:0]=['../']
-from outils.Affichage import *
-
+from outils.decimaux import decimaux
 from outils.Arithmetique import *
 from math import sqrt
 from Fractions import Fractions
@@ -125,6 +121,23 @@ def simplifie_racine(n):
         ncar=carrerise(n)
         return int(sqrt(n//ncar)),ncar
         
+
+def pTeX(n):
+	"""renvoie (n) si n<0"""
+	if n<0:
+		return "("+decimaux(n)+")"
+	else:
+		return decimaux(n)
+def tTeX(n):
+	if n==1:
+		return ""
+	elif n==-1:
+		return "-"
+	else:
+		return decimaux(n)
+
+
+
 class RacineDegre2:
     def __init__(self,numerateur=0,denominateur=1,coeff=1,radicande=0):
         self.numerateur=numerateur
@@ -136,21 +149,27 @@ class RacineDegre2:
         numerateur=""
         if self.numerateur==0 and self.radicande!=0:
             numerateur=""
-        else:
-            numerateur=str(self.numerateur)
-        if self.radicande!=0:
-            if isinstance(self.coeff,str):
+
+        if self.radicande==0:
+		if isinstance(self.numerateur,str):
+			numerateur=self.numerateur
+		else:
+			numerateur=decimaux(self.numerateur)*(self.numerateur!=0)	#renvoie "" si self.numerateur=0
+		
+	if isinstance(self.coeff,str):#utiliser dans le détail de la simplification
                 if self.coeff[0]!="-" and self.coeff[0]!="+":
-                    numerateur+="+"
-                numerateur+=self.coeff+"\\sqrt{"+str(self.radicande)+"}"
-            elif self.coeff==1:
-                numerateur+="+\\sqrt{"+TeX(self.radicande)+"}"
-            elif self.coeff==-1:
-                numerateur+="-\\sqrt{"+TeX(self.radicande)+"}"
-            else:
-                numerateur+=tTeX(self.coeff)+"\\sqrt{"+TeX(self.radicande)+"}"
+			numerateur+="+"
+                numerateur+=self.coeff+"\\sqrt{"+decimaux(self.radicande)+"}"
+	elif self.coeff==1:
+			numerateur+="+\\sqrt{"+decimaux(self.radicande)+"}"
+	elif self.coeff==-1:
+			numerateur+="-\\sqrt{"+decimaux(self.radicande)+"}"
+	else:
+		if self.coeff==1 and self.numerateur==0:
+			numerateur+="+"
+		numerateur+=tTeX(self.coeff)+"\\sqrt{"+decimaux(self.radicande)+"}"
         if self.denominateur==1:
-            result=numerateur
+		result=numerateur
         else:
             result="\\dfrac{%s}{%s}"%(numerateur,self.denominateur)
         return result

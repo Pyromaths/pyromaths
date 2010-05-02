@@ -6,7 +6,9 @@ if __name__=="__main__":
     sys.path.append(os.path.join('..'))
 
 from classes.Racine import *
+from classes.Fractions import Fractions
 import re
+from outils.Affichage import *
 
 class Polynome:
     '''Classe de polynôme pour le lycee'''
@@ -17,11 +19,11 @@ class Polynome:
             liste_coeff=str_Polynome(liste_coeff,var)
         elif isinstance(liste_coeff,list):
             liste_coeff=dict((i,liste_coeff[i])for i in range(len(liste_coeff)))
-        elif isinstance(liste_coeff,int) or isinstance(liste_coeff,Fractions) or isinstance(liste_coeff,float):
+        elif isinstance(liste_coeff,int) or isinstance(liste_coeff,Fractions.Fractions) or isinstance(liste_coeff,float):
             liste_coeff={0:liste_coeff}
         for i in liste_coeff.iterkeys():
             if liste_coeff[i] != 0:
-                liste_reduite[i]=liste_coeff[i]+Fractions(0, 1)
+                liste_reduite[i]=liste_coeff[i]+Fractions.Fractions(0, 1)
         if liste_reduite=={} or liste_coeff==[]:
             liste_reduite={0:0}
         self.dictio = liste_reduite
@@ -91,7 +93,7 @@ class Polynome:
             return string
 
     def __add__(self, other):
-        if isinstance(other,int) or isinstance(other,float) or  isinstance(other,Fractions) or isinstance(other,RacineDegre2):
+        if isinstance(other,int) or isinstance(other,float) or  isinstance(other,Fractions.Fractions) or isinstance(other,RacineDegre2):
             return self+Polynome({0:other},var=self.var)
         result={0:0}
         liste1=self.puiss
@@ -119,7 +121,7 @@ class Polynome:
     def __ne__(self,other):
         return not(self == other)
     def __eq__(self,other):
-        if (isinstance(other,int) or isinstance(other,Fractions) or isinstance(other,float)):
+        if (isinstance(other,int) or isinstance(other,Fractions.Fractions) or isinstance(other,float)):
             if self.degre_max==0 and self[0]==other:
                 return True
             else:
@@ -137,7 +139,7 @@ class Polynome:
             return result
 
     def __radd__(self, other):
-        if isinstance(other,int) or isinstance(other,float) or isinstance(other,Fractions):
+        if isinstance(other,int) or isinstance(other,float) or isinstance(other,Fractions.Fractions):
             return self+Polynome({0:other},var=self.var)
         return self + other
 
@@ -155,8 +157,8 @@ class Polynome:
     
     def __div__(self,other):
         if isinstance(other,int):
-            return Fractions(1,other)*self
-        elif isinstance(other,Fractions) or isinstance(other,float)or isinstance(other,RacineDegre2):
+            return Fractions.Fractions(1,other)*self
+        elif isinstance(other,Fractions.Fractions) or isinstance(other,float)or isinstance(other,RacineDegre2):
             return (1/other)*self
         else:
             quotient=Polynome({},var=self.var)
@@ -173,7 +175,7 @@ class Polynome:
     def simplifie(self):
         result={}
         for i in self.puiss:
-            if isinstance(self[i],(Fractions,RacineDegre2)):
+            if isinstance(self[i],(Fractions.Fractions,RacineDegre2)):
                 result[i]=self[i].simplifie()
             else:
                 result[i]=self[i]
@@ -194,7 +196,7 @@ class Polynome:
             result=0
             for i in self.dictio.iterkeys():
                 result= result+self[i]*x**i
-            if isinstance(result,Fractions):
+            if isinstance(result,Fractions.Fractions):
                 result=result.simplifie()
             if result.denominateur==1:
                 return result.numerateur
@@ -243,7 +245,7 @@ class Polynome:
     def primitive(self):
         result={}
         for i in self.dictio.iterkeys():
-            result[i+1]=Fractions(1,int(i+1))*self.dictio[i]
+            result[i+1]=Fractions.Fractions(1,int(i+1))*self.dictio[i]
         return Polynome(result,self.var)
     
 def str_Polynome(string,var='x'):
@@ -275,13 +277,13 @@ def str_Polynome(string,var='x'):
             else:
                 a = re.findall('\d+(?:\.\d*)?', element)
                 if (len(a) == 1) and (not re.findall('\^', element)) and (re.findall(var, element)):
-                    termes[1]=coeff * Fractions(eval(a[0]))
+                    termes[1]=coeff * Fractions.Fractions(eval(a[0]))
                 elif (len(a) == 1) and (re.findall(var, element)):
                     termes[int(a[0])]=coeff * 1
                 elif (len(a) == 1):
-                    termes[0]=coeff * Fractions(eval(a[0]))
+                    termes[0]=coeff * Fractions.Fractions(eval(a[0]))
                 else:
-                    termes[int(a[1])]=coeff * Fractions(eval(a[0]))
+                    termes[int(a[1])]=coeff * Fractions.Fractions(eval(a[0]))
     return termes
 
 if __name__=="__main__":

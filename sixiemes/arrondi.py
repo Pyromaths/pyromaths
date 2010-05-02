@@ -37,14 +37,18 @@ def ArrondirNombreDecimal():
             randint(0, 7)]
 
     supinf = ['', u' par défaut', u' par excès']
-
+#FIXME
+    #Arrondir n'est pas synonyme de valeur approchée
+    #Valeur approchée par excès 
+    #Valeur approchée par défaut 
+    #Arrondi = la « meilleure » valeur approchée
     choix_supinf = [randint(0, 2), randint(0, 2), randint(0, 2), randint(0, 2)]
 
     nombres = [(hasard[0])/(10**(-choix_precision[0]+4)),
             (hasard[1])/(10**(-choix_precision[1]+4)),
             (hasard[2])/(10**(-choix_precision[2]+4)),
             (hasard[3])/(10**(-choix_precision[3]+4))]
-
+#FIXME problème s'il faut arrondir 56 500 à la dizaine près ou 5,540 0 au centième
     exo = ["\\exercice", '\\begin{enumerate}']
     cor = ["\\exercice*", '\\begin{enumerate}']
 
