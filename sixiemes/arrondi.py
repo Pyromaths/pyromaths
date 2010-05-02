@@ -24,10 +24,16 @@
 from random import randint
 from outils.Affichage import decimaux
 
+def valide_hasard():
+    """renvoie un nombre float non multiple de 10000"""
+    while 1:
+        nbre = randint(10000,1000000)
+        if nbre % 10000 != 0 :
+            return float(nbre)
+
 def ArrondirNombreDecimal():
     """Crée et corrige un exercice d'arrondis avec les encadrements."""
-    hasard = [float(randint(10000,1000000)), float(randint(10000,1000000)),
-            float(randint(10000,1000000)), float(randint(10000,1000000))]
+    hasard = [valide_hasard() for i in range(4)]
 
     precision = [u'au millième', u'au centième', u'au dixième', u'à l\'unité',
             u'à la dizaine', u'à la centaine', 'au millier',
@@ -42,13 +48,14 @@ def ArrondirNombreDecimal():
     #Valeur approchée par excès 
     #Valeur approchée par défaut 
     #Arrondi = la « meilleure » valeur approchée
+    #et ne paraît employé ici correctement
     choix_supinf = [randint(0, 2), randint(0, 2), randint(0, 2), randint(0, 2)]
 
     nombres = [(hasard[0])/(10**(-choix_precision[0]+4)),
             (hasard[1])/(10**(-choix_precision[1]+4)),
             (hasard[2])/(10**(-choix_precision[2]+4)),
             (hasard[3])/(10**(-choix_precision[3]+4))]
-#FIXME problème s'il faut arrondir 56 500 à la dizaine près ou 5,540 0 au centième
+
     exo = ["\\exercice", '\\begin{enumerate}']
     cor = ["\\exercice*", '\\begin{enumerate}']
 
