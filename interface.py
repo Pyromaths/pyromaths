@@ -553,6 +553,7 @@ class Ui_MainWindow(object):
         options .find('titre_fiche').text = unicode(self.titre_fiche.text())
         options .find('corrige').text = str(self.checkBox_corrige.isChecked())
         options .find('pdf').text  = str(self.checkBox_pdf.isChecked())
+        options .find('unpdf').text  = str(self.checkBox_unpdf.isChecked())
         options .find('modele').text = unicode(self.comboBox_modele.currentText() + '.tex')
 
         f = codecs.open(self.configfile, encoding='utf-8', mode='w')
