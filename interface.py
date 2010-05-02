@@ -516,6 +516,7 @@ class Ui_MainWindow(object):
                                           'niveau': "%s\\ieme" % (6-niveau),
                                           'modele': str(self.comboBox_modele.currentText() + '.tex'),
                                           'corrige': True,
+                                          'creer_unpdf': False,
                                           'configdir': self.configdir
                                           }
                 else:
@@ -531,6 +532,7 @@ class Ui_MainWindow(object):
                                           'niveau': u"Lycée",
                                           'modele': str(self.comboBox_modele.currentText() + '.tex'),
                                           'corrige': True,
+                                          'creer_unpdf': False,
                                           'configdir': self.configdir
                                           }
                 outils.System.creation(parametres)
