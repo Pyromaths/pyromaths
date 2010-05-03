@@ -20,311 +20,23 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-
 import random
-from . import fractions
 from math import acos, asin, atan, pi, sin, cos, tan
+
+from . import fractions
 from outils.Arithmetique import valeur_alea, pgcd
-from outils.Geometrie import couples_pythagore
-#
-# ------------------- THEOREME DE PYTHAGORE -------------------
-
-def noms_sommets(nb):  # renvoie nb noms de sommets
-    (listenb, listepts) = ([], [])
-    for i in range(26):
-        listenb.append(i + 65)
-    for i in range(nb):
-        listepts.append(chr(listenb.pop(random.randrange(26 - i))))
-    listepts.sort()
-    return tuple(listepts)
-
-
-def fig_tr_rect(lg):  # renvoie les angles au centre des trois sommets du triangle ABC rectange en C
-    a = random.randrange(360)
-    if a < 180:
-        b = a + 180
-    else:
-        b = a - 180
-    c = (int((180 - ((2 * acos((lg[1] * 1.0) / lg[2])) * 180) / pi) *
-         100) * 1.0) / 100 + a
-    if c < 0:
-        c = c + 360
-    return (str(a), str(b), str(c))
-
-
-def enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
-                     long1, diam=0):
-    if diam:
-        return (
-            noms[0],
-            angles[0],
-            angles[0],
-            noms[1],
-            angles[1],
-            angles[1],
-            noms[2],
-            angles[2],
-            angles[2],
-            int(float(angles[0]) - 90),
-            cotes[2],
-            noms[2],
-            cotes[long0],
-            nombre(longueurs[long0]),
-            cotes[long1],
-            nombre(longueurs[long1]),
-            cotes[(3 - long0) - long1],
-            )
-    else:
-        return (
-            noms[0],
-            angles[0],
-            angles[0],
-            noms[1],
-            angles[1],
-            angles[1],
-            noms[2],
-            angles[2],
-            angles[2],
-            nom_tr,
-            noms[2],
-            cotes[long0],
-            nombre(longueurs[long0]),
-            cotes[long1],
-            nombre(longueurs[long1]),
-            cotes[(3 - long0) - long1],
-            )
-
-
-def tex_pythagore2(exo, cor, noms, angles, longueurs):
-    nom_tr = nom_triangle(noms)
-    long0 = random.randrange(3)
-    long1 = (random.randrange(2) + 1 + long0) % 3
-    cotes = cotes_sommets(noms)
-    enonce = \
-        '''  \\begin{minipage}{4cm}
-    \\begin{pspicture}(-2,-2)(2,2)
-      \\SpecialCoor\\psset{PointSymbol=x}
-      \\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){a}\\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){b}\\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){c}
-      \\pspolygon(a)(b)(c)
-      \\pstRightAngle{b}{c}{a}
-    \\end{pspicture}
-  \\end{minipage}\\hfill
-  \\begin{minipage}{13cm}
-    Soit $%s$ un triangle rectangle en $%s$ tel que $%s=\\unit[%s]{cm}\\text{ et }%s=\\unit[%s]{cm}$.\\par
-    Calculer la longueur $%s$.
-''' % \
-        enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
-                         long1)
-    exo.append(enonce)
-    cor.append(enonce)
-    cor.append("    \\par\\dotfill{}\\\\\n")
-    cor.append(u"    Le triangle %s est rectangle en %s donc, d'après le \\textbf{théorème de Pythagore} :" %
-             (nom_tr, noms[2]))
-    cor.append(u"    \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]" %
-             (cotes[2], cotes[0], cotes[1], cotes[2]))
-    if long0 == 2 or long1 == 2:
-        cor.append("    \\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]" %
-                 (cotes[(3 - long0) - long1], cotes[2], cotes[((4 -
-                 long0) - long1) % 2], cotes[(3 - long0) - long1]))
-    if long0 == 2 or long1 == 2:
-        cor.append("    \\[%s^2=%s^2-%s^2\\]" % (cotes[(3 - long0) -
-                 long1], nombre(longueurs[2]), nombre(longueurs[((4 -
-                 long0) - long1) % 2])))
-    else:
-        cor.append("    \\[%s^2=%s^2+%s^2\\]" % (cotes[2], nombre(longueurs[0]),
-                 nombre(longueurs[1])))
-    if long0 == 2 or long1 == 2:
-        cor.append("    \\[%s^2=%s-%s\\]" % (cotes[(3 - long0) - long1],
-                 nombre(longueurs[2] ** 2), nombre(longueurs[((4 - long0) -
-                 long1) % 2] ** 2)))
-    else:
-        cor.append("    \\[%s^2=%s+%s\\]" % (cotes[2], nombre(longueurs[0] **
-                 2), nombre(longueurs[1] ** 2)))
-    if long0 == 2 or long1 == 2:
-        cor.append("    \\[%s^2=%s\\]" % (cotes[(3 - long0) - long1],
-                 nombre(longueurs[2] ** 2 - longueurs[((4 - long0) -
-                 long1) % 2] ** 2)))
-    else:
-        cor.append("    \\[%s^2=%s\\]" % (cotes[2], nombre(longueurs[0] **
-                 2 + longueurs[1] ** 2)))
-    if long0 == 2 or long1 == 2:
-        cor.append("    \\[\\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" %
-                 (cotes[(3 - long0) - long1], nombre(longueurs[2] ** 2 -
-                 longueurs[((4 - long0) - long1) % 2] ** 2), nombre(longueurs[(3 -
-                 long0) - long1])))
-    else:
-        cor.append("    \\[\\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" %
-                 (cotes[2], nombre(longueurs[0] ** 2 + longueurs[1] ** 2),
-                 nombre(longueurs[2])))
-    exo.append('  \\end{minipage}')
-    cor.append('  \\end{minipage}')
-    return (exo, cor)
-
+from outils.Geometrie import choix_points
+#---------------------------------------------------------------------
+#-                    THÉORÈME DE THALÈS                             -
+#---------------------------------------------------------------------
+def cotes_sommets(noms):  # renvoie les noms des 3 cotes du triangle en finissant par l'hypotenuse
+    return (noms[1] + noms[2], noms[0] + noms[2], noms[0] + noms[1])
 
 def nom_triangle(noms):  # renvoie le nom du triangle dans un ordre aleatoire
     a = random.randrange(3)
     b = (random.randrange(2) + 1 + a) % 3
     c = (3 - a) - b
     return '%s%s%s' % (noms[a], noms[b], noms[c])
-
-
-def cotes_sommets(noms):  # renvoie les noms des 3 cotes du triangle en finissant par l'hypotenuse
-    return (noms[1] + noms[2], noms[0] + noms[2], noms[0] + noms[1])
-
-
-def tex_pythagore():
-    while True:
-        longueurs = (couples_pythagore)[random.randrange(120)]
-        longueurs = [longueurs[i] / 10.0 for i in range(3)]
-        if inegalite_triangulaire(longueurs):
-            break
-    noms = noms_sommets(3)
-    angles = fig_tr_rect(longueurs)
-    exo = ['\\exercice']
-    cor = ['\\exercice*']
-    tex_pythagore2(exo, cor, noms, angles, longueurs)
-    return (exo, cor)
-
-#
-# ------------------- CERCLE ET THEOREME DE PYTHAGORE -------------------
-#
-
-
-def tex_triangle_cercle2(exo, cor, noms, angles, longueurs):
-    nom_tr = nom_triangle(noms)
-    long0 = random.randrange(3)
-    long1 = (random.randrange(2) + 1 + long0) % 3
-    cotes = cotes_sommets(noms)
-    enonce = \
-        u'''  \\begin{minipage}{4cm}
-    \\begin{pspicture}(-2,-2)(2,2)
-      \\SpecialCoor\\psset{PointSymbol=x}
-      \\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){a}\\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){b}\\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){c}
-      \\pspolygon(a)(b)(c)\\pscircle(0,0){1.5}\\rput(1.8;%s){$\\big(\\mathcal{C}\\big)$}
-    \\end{pspicture}
-  \\end{minipage}\\hfill
-  \\begin{minipage}{13cm}
-    $\\big(\\mathcal{C}\\big)$ est un cercle de diamètre $[%s]$ et $%s$ est un
-    point de $\\big(\\mathcal{C}\\big)$.\\par
-    On donne $%s=\\unit[%s]{cm}\\text{ et }%s=\\unit[%s]{cm}$.\\par
-    Calculer la longueur $%s$.
-''' % \
-        enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
-                         long1, diam=1)
-    exo.append(enonce)
-    cor.append(enonce)
-    cor.append("    \\par\\dotfill{}\\\\\n")
-    cor.append("    $[%s]$ est le diam\`etre du cercle circonscrit au triangle $%s$.\\par" %
-             (cotes[2], nom_tr))
-    cor.append("    \\fbox{Donc le triangle %s est rectangle en %s.}\\\\\n" %
-             (nom_tr, noms[2]))
-    cor.append(u"    D'après le \\textbf{théorème de Pythagore} :")
-    cor.append(u"    \\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]" %
-             (cotes[2], cotes[0], cotes[1], cotes[2]))
-    if long0 == 2 or long1 == 2:
-        cor.append("    \\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]" %
-                 (cotes[(3 - long0) - long1], cotes[2], cotes[((4 -
-                 long0) - long1) % 2], cotes[(3 - long0) - long1]))
-    if long0 == 2 or long1 == 2:
-        cor.append("    \\[%s^2=%s^2-%s^2\\]" % (cotes[(3 - long0) -
-                 long1], nombre(longueurs[2]), nombre(longueurs[((4 -
-                 long0) - long1) % 2])))
-    else:
-        cor.append("    \\[%s^2=%s^2+%s^2\\]" % (cotes[2], nombre(longueurs[0]),
-                 nombre(longueurs[1])))
-    if long0 == 2 or long1 == 2:
-        cor.append("    \\[%s^2=%s-%s\\]" % (cotes[(3 - long0) - long1],
-                 nombre(longueurs[2] ** 2), nombre(longueurs[((4 - long0) -
-                 long1) % 2] ** 2)))
-    else:
-        cor.append("    \\[%s^2=%s+%s\\]" % (cotes[2], nombre(longueurs[0] **
-                 2), nombre(longueurs[1] ** 2)))
-    if long0 == 2 or long1 == 2:
-        cor.append("    \\[%s^2=%s\\]" % (cotes[(3 - long0) - long1],
-                 nombre(longueurs[2] ** 2 - longueurs[((4 - long0) -
-                 long1) % 2] ** 2)))
-    else:
-        cor.append("    \\[%s^2=%s\\]" % (cotes[2], nombre(longueurs[0] **
-                 2 + longueurs[1] ** 2)))
-    if long0 == 2 or long1 == 2:
-        cor.append("    \\[\\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" %
-                 (cotes[(3 - long0) - long1], nombre(longueurs[2] ** 2 -
-                 longueurs[((4 - long0) - long1) % 2] ** 2), nombre(longueurs[(3 -
-                 long0) - long1])))
-    else:
-        cor.append("    \\[\\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" %
-                 (cotes[2], nombre(longueurs[0] ** 2 + longueurs[1] ** 2),
-                 nombre(longueurs[2])))
-    exo.append('  \\end{minipage}')
-    cor.append('  \\end{minipage}')
-
-
-def tex_triangle_cercle():
-    while True:
-        longueurs = (couples_pythagore)[random.randrange(120)]
-        longueurs = [longueurs[i] / 10.0 for i in range(3)]
-        if inegalite_triangulaire(longueurs):
-            break
-    noms = noms_sommets(3)
-    angles = fig_tr_rect(longueurs)
-    exo = ['\\exercice']
-    cor = ['\\exercice*']
-    tex_triangle_cercle2(exo, cor, noms, angles, longueurs)
-    return (exo, cor)
-
-#
-# ------------------- RECIPROQUE DU THEOREME DE PYTHAGORE -------------------
-#
-
-
-def tex_reciproque_pythagore2(exo, cor, noms, longueurs):
-    nom_tr = nom_triangle(noms)
-    l = [i for i in range(3)]
-    n = [l.pop(random.randrange(3 - i)) for i in range(3)]
-    c = cotes_sommets(noms)
-    recip = (nom_tr, c[n[0]], nombre(longueurs[n[0]]), c[n[1]], nombre(longueurs[n[1]]),
-             c[n[2]], nombre(longueurs[n[2]]), nom_tr)
-    enonce = \
-        '''  Soit $%s$ un triangle tel que : $\\quad %s=\\unit[%s]{cm}\\quad$, $\\quad %s=\\unit[%s]{cm}\\quad$ et $\\quad %s=\\unit[%s]{cm}$.\\par
-  Quelle est la nature du triangle $%s$?
-''' % \
-        recip
-    exo.append(enonce)
-    cor.append(enonce)
-    cor.append("  \\par\\dotfill{}\\\\\n")
-    cor.append(u"  Le triangle %s n'est ni isocèle, ni équilatéral.\\par" %
-             nom_tr)
-    cor.append('''  $\\left.
-  \\renewcommand{\\arraystretch}{2}
-  \\begin{array}{l}
-''')
-    cor.append(u"    \\bullet %s^2=%s^2=%s\\qquad\\text{(}[%s]\\text{ est le plus grand côté.)}\\\\" %
-             (c[2], nombre(longueurs[2]), nombre(longueurs[2] ** 2), c[2]))
-    cor.append("    \\bullet  %s^2+%s^2=%s^2+%s^2=%s " % (c[0], c[1],
-             nombre(longueurs[0]), nombre(longueurs[1]), nombre(longueurs[0] **
-             2 + longueurs[1] ** 2)))
-    cor.append('  \\end{array}  \\right\\rbrace$')
-    cor.append(u"""  Donc $%s^2=%s^2+%s^2$.\\par
-  D'après la \\textbf{réciproque du théorème de Pythagore}, \\fbox{le triangle $%s$ est rectangle en $%s$.}
-""" %
-             (c[2], c[0], c[1], nom_tr, noms[2]))
-
-
-def tex_reciproque_pythagore():
-    while True:
-        longueurs = (couples_pythagore)[random.randrange(120)]
-        longueurs = [longueurs[i] / 10.0 for i in range(3)]
-        if inegalite_triangulaire(longueurs):
-            break
-    noms = noms_sommets(3)
-    exo = ['''\\exercice''']
-    cor = ['''\\exercice*''']
-    tex_reciproque_pythagore2(exo, cor, noms, longueurs)
-    return (exo, cor)
-
-#---------------------------------------------------------------------
-#-                    THÉORÈME DE THALÈS                             -
-#---------------------------------------------------------------------
 
 def valeurs_thales(valeurmax, type):
     """type est égal à 1 pour la version triangle, -1 pour la version papillon"""
@@ -417,7 +129,7 @@ def thales(exo, cor):
     exo.append("\\begin{multicols}{2}")
     cor.append("\\begin{multicols}{2}")
     for i in range(2):
-        noms = noms_sommets(5)  # les noms des sommets
+        noms = choix_points(5)  # les noms des sommets
         while True:
             valeurs = valeurs_thales(70, type[i])  # les longueurs en mm
             if valeurs:
@@ -817,7 +529,7 @@ def tex_fig_rec_thales(noms, valeurs):
 
 
 def rec_thales(exo, cor):
-    noms = noms_sommets(5)  # les noms des sommets
+    noms = choix_points(5)  # les noms des sommets
     valeurs = valeurs_reciproque_thales()
     exo.append(tex_fig_rec_thales(noms, valeurs))
     exo.append(tex_enonce_rec_thales(noms, valeurs) + '  \\vspace{2cm}}') #le dernier '}' ferme le bloc exercice
@@ -942,7 +654,7 @@ def tex_reciproque_thales():
 
 
 def trigo_init(exo, cor):
-    s = noms_sommets(6)
+    s = choix_points(6)
     n1 = cotes_sommets(s[0:3])
     n2 = cotes_sommets(s[3:6])
     v = valeurs_trigo()

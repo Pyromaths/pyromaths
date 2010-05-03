@@ -14,6 +14,8 @@
 ** PGCD et PPCM avec plusieurs méthodes
 ** Réflexion sur la décomposition en facteurs premiers
 ** Applications aux fractions.
+* Suppression des exercices autour de Pythagore, niveau troisième
+* Amélioration de l'exercice sur les fonctions, niveau troisième
 * Correction d'un bug lié à l'encodage sous Windows
 
 Version 10.01
