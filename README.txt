@@ -1,10 +1,13 @@
-* Exercice de construction de triangles, cinquièmes
+* Exercice de construction niveau cinquièmes :
+** de triangles
+** de parallélogrammes
 * Exercice sur les polynomes niveau Lycée
 ** Équation du second degré
 ** Factorisation degré 2 et degré 3.
 ** Étude de fonctions : sens de variation et calcul de limite
 *** Polynômes de degré 3
 *** Fonction rationnelle
+* Exercice de conversion d'unités d'aire niveau sixième
 * Exercice sur les arrondis niveau sixième ( par défaut, par excès )
 * Exercice sur l'arithmétique niveau troisième :
 ** Décomposition en facteurs premiers

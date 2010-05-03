@@ -331,6 +331,7 @@ def quest_rectangle_hypo_cote(exo,cor):
 #   AB est la longueur AB : type(float) en cm
 #   angBAC est la mesure de l'angle BAC : type(int) en degrés
 #   x_C,y_C sont les coordonnées cartésiennes du point C
+#  les coordonnées polaires sont notées (5 ; 60)
 #
 ###################################################################################################
 
@@ -341,8 +342,15 @@ def exo_quadrilatere(test=False):
     cor=["\\exercice*",
          "\\begin{enumerate}"]
     cor.append("\\definecolor{enonce}{rgb}{0.11,0.56,0.98}")
+    #couleur pour reporter les informations de la consigne
     cor.append("\\definecolor{calcul}{rgb}{0.13,0.54,0.13}")
+    #couleur pour reporter des informations déduites par raisonnement ou calcul
     cor.append(u"\\psset{MarkAngleRadius=0.7,PointSymbol=none,dotscale=2}")
+    #MarkAngleRadius = rayon de l'arc marquant les angles
+    #PointSymbol=none les points ne sont pas tracés
+    #dotscale=2, grossit la  croix si PointSymbol=x
+
+    #liste des questions possibles
     questions=[quest_rectangle_diag,
            quest_rectangle_angle,
            quest_rectangle_angle_diag,
@@ -355,14 +363,16 @@ def exo_quadrilatere(test=False):
            quest_losange_CDbis,
            quest_losange_CC,
            carre_diag]
+
     if test:#toutes les constructions en test
         for quest in questions:
             quest(exo,cor)
     else:
-        #random.shuffle(questions)
+        #on choisit un parallélogramme, un losange et un rectangle
         questions[random.randrange(4)](exo,cor)
         questions[random.randrange(4,7)](exo,cor)
         questions[random.randrange(7,11)](exo,cor)
+        #questions[11], le carré n'est jamais proposé
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
     return exo,cor
@@ -387,12 +397,12 @@ def quest_rectangle_diag(exo,cor):
                %(nom,A,B,decimaux(L),A,C,decimaux(Diag)))
     cor.append(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $%s%s=\\unit[%s]{cm}$.\\par"
                %(nom,A,B,decimaux(L),A,C,decimaux(Diag)))
-##    cor.append("\\begin{multicols}{2}")
-##    cor.append("\columnbreak")
+    #figure
     cor.append("\\figureadroite{")
     cor.append(u"\\begin{pspicture}(-0.4,-1)(%s,%s)"%(L+0.4,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,L,B,x_C,y_C,C))
     cor.append(u"\\pstGeonode[PosAngle=135](0,%s){%s}"%(y_C,D))
+    #codage
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(D,C,B))
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(B,A,D))
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(C,B,A))
@@ -403,13 +413,14 @@ def quest_rectangle_diag(exo,cor):
     cor.append(cotation((0,0),(L,0),decimaux(L),couleur="enonce"))
     cor.append(cotation_h((0,0),(x_C,y_C),decimaux(Diag),couleur="enonce"))
     cor.append(u"\\end{pspicture}}{")
+    #Programme de construction
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(L)))
     cor.append(u"\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;"%(A,B,C))
-    cor.append(u"\\item je reporte au compas la longueur $%s%s=\\unit[%s]{cm}$ à partir de $%s$."%(A,C,decimaux(Diag),A))
-    cor.append(u"\\item je trace enfin les angles droit en $%s$ et en $%s$ pour placer le point $%s$."%(A,C,D))
+    cor.append(u"\\item je reporte au compas la longueur $%s%s=\\unit[%s]{cm}$ à partir de $%s$ ;"%(A,C,decimaux(Diag),A))
+    cor.append(u"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour placer le point $%s$."%(A,C,D))
     cor.append("\\end{enumerate}}")
-##    cor.append("\\end{multicols}")
+    
 
 def quest_rectangle_angle(exo,cor):
     """On donne un rectangle ABCD avec le côté AB et l'angle BAC"""
@@ -426,10 +437,8 @@ def quest_rectangle_angle(exo,cor):
                %(nom,A,B,decimaux(L),B,A,C,angBAC))
     cor.append(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,B,decimaux(L),B,A,C,angBAC))
-##    cor.append("\\begin{multicols}{2}")
     
     cor.append("\\figureadroite{")
-##    cor.append("\columnbreak")
     cor.append(u"\\begin{pspicture}(-0.4,-1)(%s,%s)"%(L+0.4,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,L,B,x_C,y_C,C))
     cor.append(u"\\pstGeonode[PosAngle=135](0,%s){%s}"%(y_C,D))
@@ -441,13 +450,13 @@ def quest_rectangle_angle(exo,cor):
     cor.append(cotation((0,0),(L,0),decimaux(L),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\end{pspicture}}{")
+    #Programme de construction
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(L)))
     cor.append(u"\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;"%(A,B,C))
     cor.append(u"\\item la demi-droite $[%s%s)$ en mesurant $\\widehat{%s%s%s}=%s\\degres$."%(A,C,B,A,C,angBAC))
-    cor.append(u"\\item je trace enfin les angles droit en $%s$ et en $%s$ pour palcer le point $%s$."%(A,C,D))
+    cor.append(u"\\item je trace enfin les angles droit en $%s$ et en $%s$ pour placer le point $%s$."%(A,C,D))
     cor.append("\\end{enumerate}}")
-##    cor.append("\\end{multicols}")
 
 def quest_rectangle_angle_diag(exo,cor):
     """On donne un rectangle ABCD de centre E, la diagonale AC et l'angle AEB"""
@@ -489,8 +498,8 @@ def quest_rectangle_angle_diag(exo,cor):
     cor.append(u"\\end{pspicture}}{")
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,C,decimaux(Diag)))
-    cor.append(u"\\item le centre du rectangle est le milieu des diagonales donc $%s$ est le milieu de $[%s%s]$."%(E,A,C))
-    cor.append(u"\\item je trace la diagonale $(%s%s)$ passant par $%s$ en mesurant $\\widehat{%s%s%s}=%s\\degres$ ;"
+    cor.append(u"\\item le centre du rectangle est le milieu des diagonales donc $%s$ est le milieu de $[%s%s]$ ;"%(E,A,C))
+    cor.append(u"\\item je trace la diagonale $(%s%s)$ passant par $%s$ en mesurant \\mbox{$\\widehat{%s%s%s}=%s\\degres$} ;"
                %(B,D,E,A,E,B,angAEB))
     cor.append(u"\\item Comme les diagonales du rectangle sont de même longueur, je reporte les longueurs $%s%s=%s%s=\\unit[%s]{cm}$."
                %(E,D,E,B,decimaux(Diag/2)))
@@ -526,7 +535,7 @@ def quest_rectangle_diag_angle(exo,cor):
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(D,C,B))
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(B,A,D))
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(C,B,A))
-    cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"
+    cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesep=-1]{%s}{%s}"
                %(A,D,C,D,A,B,B,C))
     cor.append(cotation_h((0,0),(L,y_C),decimaux(Diag),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
@@ -534,9 +543,9 @@ def quest_rectangle_diag_angle(exo,cor):
     #Programme de construction
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,C,decimaux(Diag)))
-    cor.append(u"\\item la demi-droite $[%s%s)$ en mesurant $\\widehat{%s%s%s}=%s\\degres$."%(A,B,B,A,C,angBAC))
-    cor.append(u"\\item puis la perpendiculaire à $[%s%s)$ passant par $%s$."%(A,B,C))
-    cor.append(u"\\item je trace enfin les angles droit en $%s$ et en $%s$ pour palcer le point $%s$."%(A,C,D))
+    cor.append(u"\\item la demi-droite $[%s%s)$ en mesurant \\mbox{$\\widehat{%s%s%s}=%s\\degres$} ;"%(A,B,B,A,C,angBAC))
+    cor.append(u"\\item puis la perpendiculaire à $[%s%s)$ passant par~$%s$ ;"%(A,B,C))
+    cor.append(u"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour placer le point~$%s$."%(A,C,D))
     cor.append("\\end{enumerate}}")
 ##    cor.append("\\end{multicols}")
 
@@ -858,7 +867,6 @@ def carre_diag(exo,cor):
 
     A,B,C,D,E=geo.choix_points(5)
     nom=shuffle_nom([A,B,C,D])
-##    BD=0.2*random.randint(15,25)#AB mesure entre 4cm et 8cm, tracé horizontalement
     BD=AC=0.2*random.randint(20,40)#AC mesure entre 4cm et 8cm, tracé horizontalement
     
     exo.append(u"\\item Trace un carré $%s$  tel que $%s%s=\\unit[%s]{cm}$.\\par"

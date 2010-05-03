@@ -78,6 +78,7 @@ u'Produits de fractions',
 u'Repérage',
 u'Addition de relatifs',
 u'Construction de triangles',
+u'Construction de parallélogrammes',
 
 ]],
 [u'Quatrième', quatriemes.quatriemes, [

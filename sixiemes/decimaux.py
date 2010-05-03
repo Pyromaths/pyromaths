@@ -415,8 +415,8 @@ def tex_tableau_mcarre(cor, div0, nb0, u ):
     cor.append("\\end{tabular}")
 
 def Conversions():
-    exo = ["\\exercice",'\\DecimalMathComma', 'Effectuer les conversions suivantes :', '\\begin{multicols}{3}\\noindent', '\\begin{enumerate}']
-    cor = ["\\exercice*",'\\DecimalMathComma',  'Effectuer les conversions suivantes :', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
+    exo = ["\\exercice", 'Effectuer les conversions suivantes :', '\\begin{multicols}{3}\\noindent', '\\begin{enumerate}']
+    cor = ["\\exercice*", 'Effectuer les conversions suivantes :', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
 
     tex_units(exo, cor)
 
@@ -431,10 +431,8 @@ def Conversions():
         tex_metre_carre(exo, cor)
     exo.append('\\end{enumerate}')
     exo.append('\\end{multicols}')
-    exo.append('\StandardMathComma')
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
-    cor.append('\StandardMathComma')
     return (exo, cor)
 
 #===============================================================================
