@@ -1,3 +1,4 @@
+Version 10.05
 * Exercice de construction niveau cinquièmes :
 ** de triangles
 ** de parallélogrammes
