@@ -155,6 +155,8 @@ def split_calc(calcul):
 #autre version des priorités
 #---------------------------------------------------------------------
 
+import re
+
 def priorites(calcul, pre = "", post = "", solution = []):
     if not solution: solution = [calcul]
     recherche_parentheses = r"""
@@ -338,6 +340,7 @@ from classes.Fractions import Fractions
 import outils.Arithmetique, outils.Affichage
 import random
 import math
+from TeXMiseEnForme import Affichage
 
 #===============================================================================
 # Gère les priorités opératoires pour le calcul décimal et fractionnaire
@@ -379,8 +382,8 @@ def OperateurPrioritaire(exercice, niveau, pre="", post="", solution=[]):
         if nbpar:  # Des parenthèses oui, mais y-a-t-il des parenthèses à l'intérieur des parenthèses ?
             i0 = TrouveParentheseInterieure(exercice)
             i1 = exercice[i0:].index(')') + i0
-            pre1 = outils.Affichage.TeX(exercice[:i0 + 1])
-            post1 = outils.Affichage.TeX(exercice[i1:])
+            pre1 = Affichage(exercice[:i0 + 1])
+            post1 = Affichage(exercice[i1:])
             (cor, res, programme) = OperateurPrioritaire(exercice[i0 + 1:i1],
                     niveau, pre + pre1, post + post1, solution)
             suite_exo = exercice[:i0]
@@ -415,8 +418,8 @@ def OperateurPrioritaire(exercice, niveau, pre="", post="", solution=[]):
                     i0 = exercice.index("+")
                 else:
                     i0 = exercice.index("-")
-            pre1 = outils.Affichage.TeX(exercice[:i0 - 1])  # Ce qui est avant le calcul en cours
-            post1 = outils.Affichage.TeX(exercice[i0 + 2:])  # Ce qui est après le calcul en cours
+            pre1 = Affichage(exercice[:i0 - 1])  # Ce qui est avant le calcul en cours
+            post1 = Affichage(exercice[i0 + 2:])  # Ce qui est après le calcul en cours
             (l, res, programme) = EffectueCalcul(exercice[i0], exercice[i0 -
                     1], exercice[i0 + 1], pre + pre1, post + post1)
             for i in l:
