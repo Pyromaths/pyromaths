@@ -355,52 +355,52 @@ def fonction(angle, xa, ya, dist=0, droite='par'):
 
     angle_rad = (angle * math.pi) / 180
     if droite == 'par':
-        coef = math.floor(math.tan(angle_rad) * 100) / 100.0
+        coef = math.floor(math.tan(angle_rad) * 1000) / 1000.0
         ord_or = math.floor(((ya - xa * math.tan(angle_rad)) - dist /
-                            math.cos(angle_rad)) * 100) / 100.0
+                            math.cos(angle_rad)) * 1000) / 1000.0
         return '{x %s mul %s add}' % (coef, ord_or)
     else:
-        coef = math.floor(-100 / math.tan(angle_rad)) / 100.0
+        coef = math.floor(-1000 / math.tan(angle_rad)) / 1000.0
         return '{x %s mul}' % coef
 
 
 def PointInter(angle, xa, ya, dist=0):
     angle_rad = (angle * math.pi) / 180
-    coef1 = math.floor(math.tan(angle_rad) * 100) / 100.0
+    coef1 = math.floor(math.tan(angle_rad) * 1000) / 1000.0
     ord_or1 = math.floor(((ya - xa * math.tan(angle_rad)) - dist / math.cos(angle_rad)) *
-                         100) / 100.0
-    coef2 = math.floor(-100 / math.tan(angle_rad)) / 100.0
+                         1000) / 1000.0
+    coef2 = math.floor(-1000 / math.tan(angle_rad)) / 1000.0
     x = ord_or1 / (coef2 - coef1)
     y = x * coef2
-    return ',PosAngle=%s](%s,%s)' % (45 + angle, math.floor(x * 100) /
-            100.0, math.floor(y * 100) / 100.0)
+    return ',PosAngle=%s](%s,%s)' % (45 + angle, math.floor(x * 1000) /
+            1000.0, math.floor(y * 1000) / 1000.0)
 
 
 def Points(angle, xa, ya, dist=0):
     angle_rad = (angle * math.pi) / 180
-    coef = math.floor(math.tan(angle_rad) * 100) / 100.0
+    coef = math.floor(math.tan(angle_rad) * 1000) / 1000.0
     ord_or = math.floor(((ya - xa * math.tan(angle_rad)) - dist / math.cos(angle_rad)) *
-                        100) / 100.0
+                        1000) / 1000.0
     lpos = []
     if -1.5 < -2 * coef + ord_or < 1.5:
         x = -1.5
-        y = math.floor((x * coef + ord_or) * 100) / 100.0
+        y = math.floor((x * coef + ord_or) * 1000) / 1000.0
         lpos.append('(%s,%s)' % (x, y))
     if -1.5 < 2 * coef + ord_or < 1.5:
         x = 1.5
-        y = math.floor((x * coef + ord_or) * 100) / 100.0
+        y = math.floor((x * coef + ord_or) * 1000) / 1000.0
         lpos.append('(%s,%s)' % (x, y))
-    if -2 < (1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
-        math.tan(angle_rad) < 2:
+    if -2.1 < (1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
+        math.tan(angle_rad) < 2.1:
         y = 1.1
         x = math.floor(((y - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) /
-                       math.tan(angle_rad)) * 100) / 100.0
+                       math.tan(angle_rad)) * 1000) / 1000.0
         lpos.append('(%s,%s)' % (x, y))
-    if -2 < (-1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
-        math.tan(angle_rad) < 2:
+    if -2.1 < (-1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
+        math.tan(angle_rad) < 2.1:
         y = -1.1
         x = math.floor(((y - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) /
-                       math.tan(angle_rad)) * 100) / 100.0
+                       math.tan(angle_rad)) * 1000) / 1000.0
         lpos.append('(%s,%s)' % (x, y))
     return lpos
 
@@ -421,22 +421,22 @@ def figure(angle, xa, ya, dist, lpoints, noms, par_per, dist2=0):
     """
 
     ltxt = []
-    ltxt.append('\\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)')
+    ltxt.append('\\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)')
     ltxt.append('\\footnotesize')
     if par_per < 3:
-        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2}{2}%s' %
+        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2.1}{2.1}%s' %
                     fonction(angle, xa, ya))
-        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2}{2}%s' %
+        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2.1}{2.1}%s' %
                     fonction(angle, xa, ya, dist))
     else:
-        ltxt.append('\\psplot{-2}{2}%s' % fonction(angle, xa, ya))
-        ltxt.append('\\psplot{-2}{2}%s' % fonction(angle, xa, ya,
+        ltxt.append('\\psplot{-2.1}{2.1}%s' % fonction(angle, xa, ya))
+        ltxt.append('\\psplot{-2.1}{2.1}%s' % fonction(angle, xa, ya,
                     dist))
     if par_per == 2:
-        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2}{2}%s' %
+        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2.1}{2.1}%s' %
                     fonction(angle, xa, ya, dist2))
     else:
-        ltxt.append('\\psplot{-2}{2}%s' % fonction(angle, xa, ya,
+        ltxt.append('\\psplot{-2.1}{2.1}%s' % fonction(angle, xa, ya,
                     droite='per'))
     if noms:  #nomme les droites par deux points
         if par_per != 2:  #2 points d'intersection
@@ -451,7 +451,7 @@ def figure(angle, xa, ya, dist, lpoints, noms, par_per, dist2=0):
                         0, 0)[1]))
         else:
 
-              #pas de point d'intersection
+                #pas de point d'intersection
 
             pts = Points(angle, xa, ya)
             ltxt.append('\\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{a1}%s{a2}' %
@@ -486,6 +486,7 @@ def figure(angle, xa, ya, dist, lpoints, noms, par_per, dist2=0):
             ltxt.append('\\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{b1}%s{b2}' %
                         (angle - (45.0 * dist) / abs(dist), lpoints[1],
                         pts[0], pts[1]))
+                        #FIXME list index out of range
             pts = Points(angle, xa, ya, dist2)
             ltxt.append('\\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{c1}%s{c2}' %
                         (angle - (45.0 * dist2) / abs(dist2), lpoints[2],
@@ -548,7 +549,7 @@ def enonce_prop(exo, cor):
         if lexos[i] == 2:
             if v[5]:  #noms de la forme (AB), on ajoute des parenthèses
                 exo.append('''  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ &
-  \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
+  \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
   \\end{pspicture*}
   & & \\\\''' %
                          (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0], v[4][1],
@@ -558,14 +559,14 @@ def enonce_prop(exo, cor):
                          v[4][4], v[4][5]))
             else:
                 exo.append('''  $%s//%s$\\par et\\par $%s//%s$ &
-  \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
+  \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
   \\end{pspicture*}
   & & \\\\''' %
                          (v[4][0], v[4][1], v[4][0], v[4][2]))
                 cor.append('  $%s//%s$\\par et\\par $%s//%s$ & ' % (v[4][0],
                          v[4][1], v[4][0], v[4][2]))
             cor.append('  %s & ' % ('\n').join(figure(v[0], v[1], v[2],
-                     v[3], v[4], v[5], lexos[i], v[6])))
+                     v[3], v[4], v[5], lexos[i], v[6])))#eror out of range in figure
             cor.append(u'Si deux droites sont parallèles, alors toute parallèle à l\'une est parallèle à l\'autre. &')
             if v[5]:
                 cor.append('$(%s%s)//(%s%s)$ \\\\\n  \\hline' % (v[4][2],
@@ -579,7 +580,7 @@ def enonce_prop(exo, cor):
                 if v[5]:
                     if not fig:
                         exo.append('''  $(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
-  \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
+  \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
   \\end{pspicture*}
   & & \\\\''' %
                                  (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0],
@@ -590,7 +591,7 @@ def enonce_prop(exo, cor):
                 else:
                     if not fig:
                         exo.append('''  $%s//%s$\\par et\\par $%s\perp%s$ &
-  \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
+  \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
   \\end{pspicture*}
   & & \\\\''' %
                                  (v[4][0], v[4][1], v[4][0], v[4][2]))
@@ -612,7 +613,7 @@ def enonce_prop(exo, cor):
                 if v[5]:
                     if not fig:
                         exo.append('''  $(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
-  \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
+  \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
   \\end{pspicture*}
   & & \\\\''' %
                                  (v[4][0], v[4][1], v[4][0], v[4][2], v[4][2],
@@ -623,7 +624,7 @@ def enonce_prop(exo, cor):
                 else:
                     if not fig:
                         exo.append('''$%s\\perp%s$\\par et\\par $%s\perp%s$ &
-  \\begin{pspicture*}[shift=-1.5](-2,-1.5)(2,1.5)
+  \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
   \\end{pspicture*}
   & & \\\\''' %
                                  (v[4][0], v[4][2], v[4][1], v[4][2]))
@@ -653,3 +654,52 @@ def Proprietes():
 
     enonce_prop(exo, cor)
     return (exo, cor)
+
+##def test(n):
+##    for i in range(n):
+##        test=Proprietes()
+##def testPoints(angle, xa, ya, dist=0):
+##    angle_rad = (angle * math.pi) / 180
+##    coef = math.floor(math.tan(angle_rad) * 100) / 100.0
+##    ord_or = math.floor(((ya - xa * math.tan(angle_rad)) - dist / math.cos(angle_rad)) *
+##                        100) / 100.0
+##    lpos = []
+##    test=[]
+##    test.append(-1.5 < -2 * coef + ord_or < 1.5)
+####    print -2 * coef + ord_or
+##    if -1.5 < -2 * coef + ord_or < 1.5:
+##        x = -1.5
+##        y = math.floor((x * coef + ord_or) * 100) / 100.0
+##        lpos.append('(%s,%s)' % (x, y))
+##    test.append(-1.5 < 2 * coef + ord_or < 1.5)
+####    print 2 * coef + ord_or
+##    if -1.5 < 2 * coef + ord_or < 1.5:
+##        x = 1.5
+##        y = math.floor((x * coef + ord_or) * 100) / 100.0
+##        lpos.append('(%s,%s)' % (x, y))
+##    test.append( -2.1 < (1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
+##        math.tan(angle_rad) < 2.1)
+####    print (1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
+####        math.tan(angle_rad)
+##    if -2.1 < (1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
+##        math.tan(angle_rad) < 2.1:
+##        y = 1.1
+##        x = math.floor(((y - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) /
+##                       math.tan(angle_rad)) * 100) / 100.0
+##        lpos.append('(%s,%s)' % (x, y))
+##    test.append( -2.1 < (-1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
+##        math.tan(angle_rad) < 2.1)
+####    print (-1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
+####        math.tan(angle_rad)
+##    if -2.1 < (-1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
+##        math.tan(angle_rad) < 2.1:
+##        y = -1.1
+##        x = math.floor(((y - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) /
+##                       math.tan(angle_rad)) * 100) / 100.0
+##        lpos.append('(%s,%s)' % (x, y))
+##    if sum(test)!=2:
+##        print "test=",test," et lpos=",lpos
+##        print -2 * coef + ord_or, 2 * coef + ord_or,(1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
+##        math.tan(angle_rad),(-1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
+##        math.tan(angle_rad)
+##    return lpos

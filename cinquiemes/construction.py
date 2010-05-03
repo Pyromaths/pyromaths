@@ -38,20 +38,18 @@ def shuffle_nom(polygone):
     for i in range(debut,debut+n*sens,sens):
         nom+=polygone[i]
     return nom
-def cotation(cor,A,B,longueur,couleur="",unite="cm"):
+def cotation(A,B,longueur,couleur="",unite="cm"):
     (xA,yA)=A
     (xB,yB)=B
     if couleur!="":
         couleur="\\color{%s}"%couleur
-    cor.append(u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\bput{:U}{%s\\unit[%s]{%s}}"
-               %(xA,yA,xB,yB,couleur,longueur,unite))
-def cotation_h(cor,A,B,longueur,couleur="",unite="cm"):
+    return u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\bput{:U}{%s\\unit[%s]{%s}}" %(xA,yA,xB,yB,couleur,longueur,unite)
+def cotation_h(A,B,longueur,couleur="",unite="cm"):
     (xA,yA)=A
     (xB,yB)=B
     if couleur!="":
         couleur="\\color{%s}"%couleur
-    cor.append(u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\aput{:U}{%s\\unit[%s]{%s}}"
-               %(xA,yA,xB,yB,couleur,longueur,unite))
+    return u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\aput{:U}{%s\\unit[%s]{%s}}" %(xA,yA,xB,yB,couleur,longueur,unite)
 
 def exo_triangle(test=False):
     questions=[quest_equilateral,
@@ -102,7 +100,7 @@ def quest_equilateral(exo,cor):
     cor.append(u"\\pstRotation[RotAngle=7,PointSymbol=none,PointName=none]{%s}{%s}[C_3]"%(B,C))
     cor.append(u"\\pstRotation[RotAngle=-7,PointSymbol=none,PointName=none]{%s}{%s}[C_4]"%(B,C))
     cor.append(u"\\pstArcOAB[linecolor=calcul]{%s}{C_4}{C_3}"%(B))
-    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
+    cor.append(cotation((0,0),(c,0),decimaux(c),couleur="enonce"))
     cor.append(u"\\end{pspicture}")
 
 def quest_LAL(exo,cor):
@@ -125,13 +123,13 @@ def quest_LAL(exo,cor):
     cor.append(u"\\pstRotation[RotAngle=7,PointSymbol=none,PointName=none]{%s}{%s}[C_1]"%(A,C))
     cor.append(u"\\pstRotation[RotAngle=-7,PointSymbol=none,PointName=none]{%s}{%s}[C_2]"%(A,C))
     cor.append(u"\\pstArcOAB[linecolor=calcul]{%s}{C_2}{C_1}"%(A))
-    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
+    cor.append(cotation((0,0),(c,0),decimaux(c),couleur="enonce"))
     if angBAC<111:
         x_C,y_C=b*cos(angBAC),b*sin(angBAC)
-        cotation_h(cor,(0,0),(x_C,y_C),decimaux(b),couleur="enonce")
+        cor.append(cotation_h((0,0),(x_C,y_C),decimaux(b),couleur="enonce"))
     else:
         x_C,y_C=b*cos(angBAC),b*sin(angBAC)
-        cotation(cor,(x_C,y_C),(0,0),decimaux(b),couleur="enonce")
+        cor.append(cotation((x_C,y_C),(0,0),decimaux(b),couleur="enonce"))
     cor.append(u"\\end{pspicture}")
 
 def quest_ALA(exo,cor):
@@ -151,7 +149,7 @@ def quest_ALA(exo,cor):
     cor.append(u"\\begin{pspicture}(-0.4,-1)(%s,%s)"%(c+1,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,c,B,x_C,y_C,C))
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,C,B,C))
-    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
+    cor.append(cotation((0,0),(c,0),decimaux(c),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(C,B,A,angABC))
     cor.append(u"\\end{pspicture}")
@@ -161,16 +159,18 @@ def quest_AAL(exo,cor):
     """ angBAC et angACB et AB=c"""
     A,B,C=geo.choix_points(3)
     nom=shuffle_nom([A,B,C])
-    c=0.2*random.randint(20,50)#longueur AB
     angBAC=3*random.randint(10,24)#entre 30° et 72°
     angACB=3*random.randint(10,24)#entre 30° et 72°
+    angABC=180-angBAC-angACB
+    ABmax=int(35*(tan(angABC)+tan(angBAC))/(tan(angBAC)*tan(angABC)))#donne une hauteur inférieur à 35*0.2=7 cm
+    c=0.2*random.randint(20,max(20,ABmax))#longueur AB
+    
     exo.append(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$"
                %(nom,A,B,decimaux(c),B,A,C,angBAC,A,C,B,angACB))
     cor.append(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$\\par"
                %(nom,A,B,decimaux(c),B,A,C,angBAC,A,C,B,angACB))
     cor.append(u"On doit d'abord calculer la mesure de $\\widehat{%s%s%s}$.\\\\"
                %(A,B,C))
-    angABC=180-angBAC-angACB
     cor.append(u"Or la somme des trois angles d'un triangle est égale à 180\\degres donc $\\widehat{%s%s%s}=180\\degres-%s\\degres-%s\\degres=%s\\degres$.\\par"
                %(A,B,C,angBAC,angACB,angABC))
     x_C=(c*tan(angABC))/(tan(angABC)+tan(angBAC))
@@ -180,7 +180,7 @@ def quest_AAL(exo,cor):
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,C,B,C))
     cor.append(u"\\pstMarkAngle[linecolor=calcul]{%s}{%s}{%s}{\\color{calcul}%s\\degres}"%(C,B,A,angABC))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(A,C,B,angACB))
-    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
+    cor.append(cotation((0,0),(c,0),decimaux(c),couleur="enonce"))
     cor.append(u"\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\end{pspicture}")
 
@@ -188,23 +188,27 @@ def quest_isocele_angbase(exo,cor):
     """on donne ABC isocele en C, AB=c et angBAC"""
     A,B,C=geo.choix_points(3)
     nom=shuffle_nom([A,B,C])
-    c=0.2*random.randint(20,37)#longueur AB
-    angABC=angBAC=5*random.randint(4,12)
+    angABC=angBAC=random.randint(20,70)
+    maxc = max(20,int(35 / tan(angBAC)))#longueur c maximale pour que la hauteur soit 7 cm =0.2*35
+    minc = min(20,int(35 / tan(angBAC)))
+    c=0.2*random.randint(minc,min(maxc,50))#longueur AB
+    #Calcul pour tracer
+    x_C=c/2
+    y_C=x_C*tan(angBAC)
+
     exo.append(u"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$."
                %(nom,C,A,B,decimaux(c),B,A,C,angBAC))
     cor.append(u"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$. \\par"
                %(nom,C,A,B,decimaux(c),B,A,C,angBAC))
     cor.append(u"Comme $%s%s%s$ est un triangle isocèle en $%s$, je sais que les angles adjacents à la base sont de même mesure \
 donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=%s\\degres$.\\par"%(A,B,C,C,A,B,C,B,A,C,angBAC))
-    x_C=(c*tan(angABC))/(tan(angABC)+tan(angBAC))
-    y_C=x_C*tan(angBAC)
     cor.append(u"\\begin{pspicture}(-1,-1)(%s,%s)"%(c+1,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,c,B,x_C,y_C,C))
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,C))
     cor.append("\\pstLineAB[linestyle=none]{%s}{%s} \\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(A,C))
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}"%(B,C))
     cor.append(u"\\pstLineAB[linestyle=none]{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(B,C))
-    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
+    cor.append(cotation((0,0),(c,0),decimaux(c),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\color{calcul}\\pstMarkAngle[linecolor=calcul]{%s}{%s}{%s}{%s\\degres}"%(C,B,A,angABC))
     cor.append(u"\\end{pspicture}")
@@ -213,9 +217,14 @@ def quest_isocele_angprincipal(exo,cor):
     """on donne ABC isocele en C, AB=c et angACB"""
     A,B,C=geo.choix_points(3)
     nom=shuffle_nom([A,B,C])
-    c=0.2*random.randint(20,35)#longueur AB
     angACB=2*random.randint(20,60)#ACB est pair entre 40° et 120°
     angBAC=angABC=(180-angACB)/2
+    maxc = max(20,int(35 / tan(angBAC)))#longueur c maximale pour que la hauteur soit 7 cm =0.2*35
+    c=0.2*random.randint(20,min(maxc,35))#longueur AB
+    #Calcul pour tracer
+    x_C=c/2
+    y_C=x_C*tan(angBAC)
+    
     exo.append(u"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$."
                %(nom,C,A,B,decimaux(c),A,C,B,angACB))
     cor.append(u"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$.\\par"
@@ -225,15 +234,13 @@ donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}$.\\par"%(A,B,C,C,A,B,C,B,A,C))
     cor.append(u"De plus, je sais que la somme des mesures des trois angles d'un triangle est égale à 180\\degres \\\\ \
 donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=(180\\degres-%s\\degres)\\div 2=%s\\degres$. \\par"
                %(B,A,C,A,B,C,angACB,angBAC))
-    x_C=(c*tan(angABC))/(tan(angABC)+tan(angBAC))
-    y_C=x_C*tan(angBAC)
     cor.append(u"\\begin{pspicture}(-1,-1)(%s,%s)"%(c+1,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,c,B,x_C,y_C,C))
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,C))
     cor.append("\\pstLineAB[linestyle=none]{%s}{%s} \\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(A,C))
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}"%(B,C))
     cor.append("\\pstLineAB[linestyle=none]{%s}{%s} \\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(B,C))
-    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
+    cor.append(cotation((0,0),(c,0),decimaux(c),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce,Mark=MarkHash]{%s}{%s}{%s}{%s\\degres}"%(A,C,B,angACB))
     cor.append(u"\\color{calcul}\\pstMarkAngle[linecolor=calcul]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\pstMarkAngle[linecolor=calcul]{%s}{%s}{%s}{%s\\degres}"%(C,B,A,angABC))
@@ -247,12 +254,14 @@ def quest_rectangle_hypo_angle(exo,cor):
     angBAC=3*random.randint(7,23)#un angle mesurant entre 21° et 69°
     angABC=90-angBAC
     #angACB=90
+    #Calcul pour tracer
+    x_C=(c*tan(angABC))/(tan(angABC)+tan(angBAC))
+    y_C=x_C*tan(angBAC)
+    
     exo.append(u"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,C,A,B,decimaux(c),B,A,C,angBAC))
     cor.append(u"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,C,A,B,decimaux(c),B,A,C,angBAC))
-    x_C=(c*tan(angABC))/(tan(angABC)+tan(angBAC))
-    y_C=x_C*tan(angBAC)
 ##    cor.append("\\begin{multicols}{2}")
     cor.append(u"Je sais que dans un triangle rectangle, les deux angles aigus sont complémentaires \\\\ \
 donc $\widehat{%s%s%s}=90\\degres-%s\\degres=%s\\degres$.\\par"%(B,A,C,angBAC,angABC))
@@ -262,14 +271,14 @@ donc $\widehat{%s%s%s}=90\\degres-%s\\degres=%s\\degres$.\\par"%(B,A,C,angBAC,an
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,c,B,x_C,y_C,C))
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(A,C,B))
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,C,B,C))
-    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
+    cor.append(cotation((0,0),(c,0),decimaux(c),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\color{calcul}\\pstMarkAngle[linecolor=calcul]{%s}{%s}{%s}{%s\\degres}"%(C,B,A,angABC))
     cor.append(u"\\end{pspicture}}{")
     cor.append("\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(c)))
-    cor.append(u"\\item puis la demi-droite $[%s%s)$ en traçant l'angle $\widehat{%s%s%s}$ ;"%(A,C,B,A,C))
-    cor.append(u"\\item puis la demi-droite $[%s%s)$ en traçant l'angle $\widehat{%s%s%s}$ ;"%(B,C,A,B,C))
+    cor.append(u"\\item puis la demi-droite $[%s%s)$ en traçant l'angle~$\widehat{%s%s%s}$ ;"%(A,C,B,A,C))
+    cor.append(u"\\item puis la demi-droite $[%s%s)$ en traçant l'angle~$\widehat{%s%s%s}$ ;"%(B,C,A,B,C))
 ##    cor.append(u"\\item enfin je vérifie les trois {\\color{enonce}conditions de l'énoncé}.")
     cor.append("\\end{enumerate}\n")
 ##    cor.append("\\end{multicols}")
@@ -300,13 +309,13 @@ def quest_rectangle_hypo_cote(exo,cor):
     cor.append(u"\\pstRotation[RotAngle=-7,PointSymbol=none,PointName=none]{%s}{%s}[C_2]"%(A,C))
     cor.append(u"\\pstArcOAB[linecolor=calcul]{%s}{C_2}{C_1}"%(A))
     cor.append(u"\\pstLineAB{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,B,B,C))
-    cotation(cor,(0,0),(c,0),decimaux(c),couleur="enonce")
-    cotation_h(cor,(0,0),(x_C,y_C),decimaux(b),couleur="enonce")
+    cor.append(cotation((0,0),(c,0),decimaux(c),couleur="enonce"))
+    cor.append(cotation_h((0,0),(x_C,y_C),decimaux(b),couleur="enonce"))
     cor.append(u"\\end{pspicture}}{")
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(c)))
     cor.append(u"\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;"%(A,B,C))
-    cor.append(u"\\item enfin, je reporte au compas la longueur $%s%s=\\unit[%s]{cm}$ à partir de $%s$."%(A,C,decimaux(b),A))
+    cor.append(u"\\item enfin, je reporte au compas la longueur \\mbox{$%s%s=\\unit[%s]{cm}$} à partir de $%s$."%(A,C,decimaux(b),A))
     cor.append("\\end{enumerate}}")
 ##    cor.append("\\end{multicols}")
 
@@ -390,9 +399,9 @@ def quest_rectangle_diag(exo,cor):
     cor.append(u"\\pstRotation[RotAngle=7,PointSymbol=none,PointName=none]{%s}{%s}[C_1]"%(A,C))
     cor.append(u"\\pstRotation[RotAngle=-7,PointSymbol=none,PointName=none]{%s}{%s}[C_2]"%(A,C))
     cor.append(u"\\pstArcOAB[linecolor=calcul]{%s}{C_2}{C_1}"%(A))
-    cor.append(u"\\pstLineAB{%s}{%s}\\pstLineAB{%s}{%s}\\pstLineAB{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,D,C,D,A,B,B,C))
-    cotation(cor,(0,0),(L,0),decimaux(L),couleur="enonce")
-    cotation_h(cor,(0,0),(x_C,y_C),decimaux(Diag),couleur="enonce")
+    cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,D,C,D,A,B,B,C))
+    cor.append(cotation((0,0),(L,0),decimaux(L),couleur="enonce"))
+    cor.append(cotation_h((0,0),(x_C,y_C),decimaux(Diag),couleur="enonce"))
     cor.append(u"\\end{pspicture}}{")
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(L)))
@@ -429,7 +438,7 @@ def quest_rectangle_angle(exo,cor):
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(C,B,A))
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"
                %(A,D,C,D,A,B,B,C,A,C))
-    cotation(cor,(0,0),(L,0),decimaux(L),couleur="enonce")
+    cor.append(cotation((0,0),(L,0),decimaux(L),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\end{pspicture}}{")
     cor.append(u"\\begin{enumerate}")
@@ -465,11 +474,12 @@ def quest_rectangle_angle_diag(exo,cor):
     cor.append(u"\\pstGeonode[PosAngle={135,0}](0,%s){%s}(%s,%s){%s}"%(y_C,D,x_C/2.0,y_C/2.0,E))
     cor.append(u"\\pstLineAB{%s}{%s}"%(C,D))
     cor.append(u"\\pstLineAB{%s}{%s}"%(A,D))
+    cor.append(u"\\pstLineAB[nodesep=-1]{%s}{%s}"%(B,D))
     #codage
-    cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(E,A))
-    cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(E,B))
-    cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(E,C))
-    cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(E,D))
+    cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=calcul}\\MarkHashh}"%(E,A))
+    cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=calcul}\\MarkHashh}"%(E,B))
+    cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=calcul}\\MarkHashh}"%(E,C))
+    cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=calcul}\\MarkHashh}"%(E,D))
     cor.append(u"\\psarc[linecolor=calcul](%s,%s){%s}{%s}{%s} "%(x_C/2.0,y_C/2.0,Diag/2,angBAC-7,angBAC+7))
     cor.append(u"\\psarc[linecolor=calcul](%s,%s){%s}{%s}{%s} "%(x_C/2.0,y_C/2.0,Diag/2,180-angBAC-7,180-angBAC+7))
     cor.append(u"\\psarc[linecolor=calcul](%s,%s){%s}{%s}{%s} "%(x_C/2.0,y_C/2.0,Diag/2,-angBAC-7,-angBAC+7))
@@ -480,9 +490,11 @@ def quest_rectangle_angle_diag(exo,cor):
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,C,decimaux(Diag)))
     cor.append(u"\\item le centre du rectangle est le milieu des diagonales donc $%s$ est le milieu de $[%s%s]$."%(E,A,C))
-    cor.append(u"\\item Comme les diagonales du rectangle sont de même longueur, je trace le cercle de centre $%s$ et de rayon $\\unit[%s]{cm}$."
-               %(E,decimaux(Diag/2)))
-    cor.append(u"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour palcer le point $%s$."%(A,C,D))
+    cor.append(u"\\item je trace la diagonale $(%s%s)$ passant par $%s$ en mesurant $\\widehat{%s%s%s}=%s\\degres$ ;"
+               %(B,D,E,A,E,B,angAEB))
+    cor.append(u"\\item Comme les diagonales du rectangle sont de même longueur, je reporte les longueurs $%s%s=%s%s=\\unit[%s]{cm}$."
+               %(E,D,E,B,decimaux(Diag/2)))
+##    cor.append(u"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour palcer le point $%s$."%(A,C,D))
     cor.append("\\end{enumerate}}")
 ##    cor.append("\\end{multicols}")
 
@@ -514,9 +526,9 @@ def quest_rectangle_diag_angle(exo,cor):
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(D,C,B))
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(B,A,D))
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(C,B,A))
-    cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesep=-1]{%s}{%s}"
+    cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"
                %(A,D,C,D,A,B,B,C))
-    cotation_h(cor,(0,0),(L,y_C),decimaux(Diag),couleur="enonce")
+    cor.append(cotation_h((0,0),(L,y_C),decimaux(Diag),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\end{pspicture}}{")
     #Programme de construction
@@ -565,8 +577,8 @@ def quest_parallelogramme_CCA(exo,cor):
     cor.append(u"\\pstRotation[RotAngle=7,PointSymbol=none,PointName=none]{%s}{%s}[C_3]"%(B,C))
     cor.append(u"\\pstRotation[RotAngle=-7,PointSymbol=none,PointName=none]{%s}{%s}[C_4]"%(B,C))
     cor.append(u"\\pstArcOAB[linecolor=calcul]{%s}{C_4}{C_3}"%(B))
-    cotation_h(cor,(0,0),(x_C-AB,y_C),decimaux(AD),couleur="enonce")
-    cotation(cor,(0,0),(AB,0),decimaux(AB),couleur="enonce")
+    cor.append(cotation_h((0,0),(x_C-AB,y_C),decimaux(AD),couleur="enonce"))
+    cor.append(cotation((0,0),(AB,0),decimaux(AB),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,D,angBAD))
     cor.append(u"\\pstLineAB[linestyle=none]{%s}{%s}\\lput{:U}{\\psset{linecolor=calcul}\\MarkHashh}"%(A,D))
     cor.append(u"\\pstLineAB[linestyle=none]{%s}{%s}\\lput{:U}{\\psset{linecolor=calcul}\\MarkHashh}"%(B,C))
@@ -615,8 +627,8 @@ def quest_parallelogramme_CDA(exo,cor):
     cor.append(u"\\pstRotation[RotAngle=-7,PointSymbol=none,PointName=none]{%s}{%s}[D_4]"%(C,D))
     cor.append(u"\\pstArcOAB[linecolor=calcul]{%s}{D_4}{D_3}"%(C))
     #Codage
-    cotation_h(cor,(0,0),(x_C,y_C),decimaux(AC),couleur="enonce")
-    cotation(cor,(0,0),(AB,0),decimaux(AB),couleur="enonce")
+    cor.append(cotation_h((0,0),(x_C,y_C),decimaux(AC),couleur="enonce"))
+    cor.append(cotation((0,0),(AB,0),decimaux(AB),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\pstLineAB[linestyle=none]{%s}{%s}\\lput{:U}{\\psset{linecolor=calcul}\\MarkHashh}"%(A,D))
     cor.append(u"\\pstLineAB[linestyle=none]{%s}{%s}\\lput{:U}{\\psset{linecolor=calcul}\\MarkHashh}"%(B,C))
@@ -661,8 +673,8 @@ def quest_parallelogramme_DDA(exo,cor):
     cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=calcul}\\MarkCros}"%(D,E))
     cor.append(u"\\pstLineAB{%s}{%s}\\pstLineAB{%s}{%s}\\pstLineAB{%s}{%s}\\pstLineAB{%s}{%s}"
                %(A,D,C,D,A,B,B,C))
-    cotation_h(cor,(0,0),(x_C/2,y_C/2),decimaux(AC/2),couleur="enonce")
-    cotation_h(cor,(x_C/2,y_C/2),(AB,0),decimaux(BD/2),couleur="enonce")
+    cor.append(cotation_h((0,0),(x_C/2,y_C/2),decimaux(AC/2),couleur="enonce"))
+    cor.append(cotation_h((x_C/2,y_C/2),(AB,0),decimaux(BD/2),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(A,E,B,angAEB))
     cor.append(u"\\end{pspicture}")
 
@@ -687,7 +699,7 @@ def quest_losange_DD(exo,cor):
     cor.append(u"\\begin{pspicture}(%s,%s)(%s,%s)"%(-BD/2-0.7,-AC/2-0.4,BD/2+0.4,AC/2+0.4))
     cor.append(u"\\pstGeonode[PosAngle={-90,0,90,180}](0,%s){%s}(%s,0){%s}(0,%s){%s}(%s,0){%s}"
                %(-AC/2,A,BD/2,B,AC/2,C,-BD/2,D))
-    cor.append("\\pnode(0,0){%s}"%E)
+    cor.append("\\pstGeonode[PosAngle=-45](0,0){%s}"%E)
     
     cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=calcul}\\MarkCross}"%(A,E))
     cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=calcul}\\MarkCross}"%(C,E))
@@ -698,8 +710,8 @@ def quest_losange_DD(exo,cor):
     cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(B,C))
     cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(D,A))
     cor.append("\\pstRightAngle[linecolor=calcul]{%s}{%s}{%s}"%(B,E,C))
-    cotation_h(cor,(-BD/2,0),(0,0),decimaux(BD/2),couleur="enonce")
-    cotation_h(cor,(0,-AC/2),(0,0),decimaux(AC/2),couleur="enonce")
+    cor.append(cotation_h((-BD/2,0),(0,0),decimaux(BD/2),couleur="enonce"))
+    cor.append(cotation_h((0,-AC/2),(0,0),decimaux(AC/2),couleur="enonce"))
     cor.append(u"\\end{pspicture}}{")
     cor.append(u"Les diagonales du losange se coupent perpendiculairement en leur milieu~$%s$ ;  on a donc :"%E)
     cor.append(u"\\begin{enumerate}")
@@ -733,7 +745,6 @@ def quest_losange_CC(exo,cor):
     cor.append(u"\\begin{pspicture}(%s,%s)(%s,%s)"%(min(0,x_D)-0.4,0-0.4,max(AB,x_C),y_D+0.4))
     cor.append(u"\\pstGeonode[PosAngle={%s,%s,%s,%s}](0,0){%s}(%s,0){%s}(%s,%s){%s}(%s,%s){%s}"
                %(angBAD/2-180,angBAD/2-90,angBAD/2,angBAD/2+90,A,AB,B,x_C,y_C,C,x_D,y_D,D))
-    cor.append("\\pnode(0,0){%s}"%E)
     
     cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(A,B))
     cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(C,D))
@@ -746,7 +757,7 @@ def quest_losange_CC(exo,cor):
     cor.append(u"\\pstRotation[RotAngle=7,PointSymbol=none,PointName=none]{%s}{%s}[C_3]"%(B,C))
     cor.append(u"\\pstRotation[RotAngle=-7,PointSymbol=none,PointName=none]{%s}{%s}[C_4]"%(B,C))
     cor.append(u"\\pstArcOAB[linecolor=calcul]{%s}{C_4}{C_3}"%(B))
-    cotation(cor,(0,0),(AB,0),decimaux(AB),couleur="enonce")
+    cor.append(cotation((0,0),(AB,0),decimaux(AB),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,D,angBAD))
     cor.append(u"\\end{pspicture}")
     
@@ -782,7 +793,7 @@ def quest_losange_CD(exo,cor):
     cor.append(u"\\pstLineAB[nodesepA=-1]{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(B,C))
     cor.append(u"\\pstLineAB[nodesepA=-1]{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(D,A))
     cor.append(u"\\pstLineAB{%s}{%s}"%(A,C))
-    cotation_h(cor,(0,0),(AC,0),decimaux(AC),couleur="enonce")
+    cor.append(cotation_h((0,0),(AC,0),decimaux(AC),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce,Mark=MarkHash]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=calcul,Mark=MarkHash]{%s}{%s}{%s}{}"%(C,A,D))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=calcul,Mark=MarkHash]{%s}{%s}{%s}{}"%(D,C,A))
@@ -836,7 +847,7 @@ def quest_losange_CDbis(exo,cor):
     cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(C,B))
     cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(C,D))
     cor.append(u"\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(A,D))
-    cotation(cor,(0,0),(AC,0),decimaux(AC),couleur="enonce")
+    cor.append(cotation((0,0),(AC,0),decimaux(AC),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(A,D,C,angCDA))
     cor.append(u"\\end{pspicture}")
 
@@ -866,7 +877,7 @@ def carre_diag(exo,cor):
     cor.append("\\begin{pspicture}(%s,%s)(%s,%s)"%(-BD/2-0.4,-AC/2-0.4,BD/2+0.4,AC/2+0.4))
     cor.append("\\pstGeonode[PosAngle={-90,0,90,180}](0,%s){%s}(%s,0){%s}(0,%s){%s}(%s,0){%s}"
                %(-AC/2,A,BD/2,B,AC/2,C,-BD/2,D))
-    cor.append("\\pnode(0,0){%s}"%E)
+    cor.append("\\pstGeonode[PosAngle=-45](0,0){%s}"%E)
     
     cor.append("\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=calcul}\\MarkCros}"%(A,E))
     cor.append("\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=calcul}\\MarkCros}"%(C,E))
@@ -877,5 +888,5 @@ def carre_diag(exo,cor):
     cor.append("\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(B,C))
     cor.append("\\pstLineAB{%s}{%s}\\lput{:U}{\\psset{linecolor=enonce}\\MarkHashh}"%(D,A))
     cor.append("\\pstRightAngle[linecolor=calcul]{%s}{%s}{%s}"%(B,E,C))
-    cotation_h(cor,(-BD/2,0),(0,0),decimaux(BD/2),couleur="enonce")
+    cor.append(cotation_h((-BD/2,0),(0,0),decimaux(BD/2),couleur="enonce"))
     cor.append(u"\\end{pspicture}")

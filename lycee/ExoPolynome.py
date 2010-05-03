@@ -7,9 +7,9 @@ if __name__=="__main__":
 from random import randrange
 from classes.Polynome import *
 from outils.Polynomes import *
-from outils.Affichage import *
+from outils.decimaux import decimaux
 from outils.Arithmetique import pgcd
-
+Fractions=Fractions.Fractions
 def exo_racines_degre2():
     '''exercice recherche de racines second degré'''
 
@@ -420,6 +420,7 @@ def quest_fonctions_rationnelles_sur_R():
         limites=["+\\infty","-\\infty"]
         cor.append(">0$.\\\\")
     else:cor.append("$.\\\\")
+        #FIXME Et si P(VI)=0
     
     VIplus="\\substack{%s\\to %s\\\\%s>%s}"%(var,fTeX(VI),var,fTeX(VI))
     VImoins="\\substack{%s\\to %s\\\\%s<%s}"%(var,fTeX(VI),var,fTeX(VI))
@@ -989,4 +990,4 @@ if __name__=="__main__":
 ##        exo=exo+exo1
 ##        cor=cor+cor1
 
-    imprime_TeX(exo+exo1+cor+cor1)
+    imprime_TeX((exo+exo1,cor+cor1))

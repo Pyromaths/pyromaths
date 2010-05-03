@@ -218,12 +218,10 @@ def tex_racines():
     cor.append('    \\end{multicols}')
     exo.append(u'  \\item Calculer les expressions suivantes et donner le résultat sous la forme $a+b\\,\\sqrt{c}$ avec $a$, $b$ et $c$ entiers.')
     exo.append('''    \\stepcounter{nocalcul}%
-    \\begin{multicols}{2}\\noindent
-''')
+    \\begin{multicols}{2}\\noindent''')
     cor.append(u'  \\item Calculer les expressions suivantes et donner le résultat sous la forme $a+b\\,\\sqrt{c}$ avec $a$, $b$ et $c$ entiers.')
     cor.append('''    \\stepcounter{nocalcul}%
-    \\begin{multicols}{2}\\noindent
-''')
+    \\begin{multicols}{2}\\noindent''')
     valeurs = valeurs_aPbRc(mymax)
     exo_aPbRc(exo, cor, valeurs)
     exo.append('      \\columnbreak\\stepcounter{nocalcul}%')
@@ -234,12 +232,10 @@ def tex_racines():
     cor.append('    \\end{multicols}')
     exo.append(u"  \\item Calculer les expressions suivantes et donner le résultat sous la forme d'un nombre entier.\n")
     exo.append('''    \\stepcounter{nocalcul}%
-    \\begin{multicols}{2}\\noindent
-''')
+    \\begin{multicols}{2}\\noindent''')
     cor.append(u"  \\item Calculer les expressions suivantes et donner le résultat sous la forme d'un nombre entier.\n")
     cor.append('''    \\stepcounter{nocalcul}%
-    \\begin{multicols}{2}\\noindent
-''')
+    \\begin{multicols}{2}\\noindent''')
     valeurs = valeurs_entier0(mymax)
     exo_entier0(exo, cor, valeurs)
     exo.append('      \\columnbreak\\stepcounter{nocalcul}%')
