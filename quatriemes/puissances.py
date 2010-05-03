@@ -215,11 +215,11 @@ def val_sc():
 
 def ecr_sc():
     from math import log10, floor
-    exo = ["\\exercice", u"Compléter par par le nombre qui convient :",
+    exo = ["\\exercice", u"Compléter par le nombre qui convient :",
            "\\begin{multicols}{3}", "  \\noindent%",
            "  \\begin{enumerate}"]
     cor = ["\\exercice*",
-           u"Compléter par par le nombre qui convient :",
+           u"Compléter par le nombre qui convient :",
            "\\begin{multicols}{3}", "  \\noindent%",
            "  \\begin{enumerate}"]
     for i in range(6):

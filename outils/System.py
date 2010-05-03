@@ -1,4 +1,4 @@
-﻿#!/usr/bin/python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Pyromaths
@@ -40,7 +40,7 @@ else:
         return os.path.join(home(),  ".config", "pyromaths")
 
 #==============================================================
-#        Gestion des extensiosn de fichiers
+#        Gestion des extensions de fichiers
 #==============================================================
 def supprime_extension(filename,  ext):
     """supprime l'éventuelle extension ext du nom de fichier filename.
@@ -73,7 +73,7 @@ def create_config_file():
     etree.SubElement(child, "modele").text="pyromaths.tex"
 
     child = etree.SubElement(root, "informations")
-    etree.SubElement(child, "version").text="10.01"
+    etree.SubElement(child, "version").text="10.05"
     etree.SubElement(child, "description").text=u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
     etree.SubElement(child, "icone").text="pyromaths.ico"
 
@@ -204,7 +204,7 @@ def creation(parametres):
 
         for i in range(2):
             os.chdir(dir0)
-            log = open('pyromaths.log', 'w')
+            log = open('pyromaths.log', 'a')
             call(["latex", "-interaction=batchmode", exo],
                     #env={"PATH": os.path.expandvars('$PATH')},
                     stdout=log)
@@ -240,11 +240,13 @@ def creation(parametres):
                 os.system('xdg-open %s.pdf' % (f1noext.encode('utf-8')))
         #Supprime les fichiers temporaires créés par LaTeX
         try:
-            for ext in ('.aux', '.dvi', '.log', '.out', '.ps'):
+            for ext in ('.aux', '.dvi', '.out', '.ps'):
                 os.remove(os.path.join(dir0,  f0noext + ext))
                 if parametres['corrige'] and not parametres['creer_unpdf']:
                     os.remove(os.path.join(dir1,  f1noext + ext))
-            os.remove(os.path.join(dir0, 'pyromaths.log'))
+            if os.path.getsize('%s.pdf' % f0noext) > 1000 :
+                os.remove(os.path.join(dir0, 'pyromaths.log'))
+                os.remove(os.path.join(dir0, '%s.log' % f0noext))
         except OSError:
             pass
         #le fichier à supprimer n'existe pas et on s'en fout.
@@ -273,7 +275,14 @@ def copie_tronq_modele(dest, parametres, master):
     ## Les variables à remplacer :
     titre = parametres['titre']
     niveau = parametres['niveau']
-    tabvar = os.path.normpath(os.path.join(module_path(), 'modeles',"tabvar.tex"))
+    if os.name == 'nt':
+        os.environ['TEXINPUTS']= os.path.normpath(os.path.join(module_path(),
+            'modeles'))
+        tabvar = 'tabvar.tex'
+    else:
+        tabvar = os.path.normpath(os.path.join(module_path(), 'modeles',
+            'tabvar.tex'))
+    #rawstring pour \tabvar -> tab + abvarsous windows
     modele = codecs.open(source, encoding='utf-8', mode='r')
     for line in modele:
         if master_fin in line:
@@ -282,7 +291,8 @@ def copie_tronq_modele(dest, parametres, master):
             temp = findall('##{{[A-Z]*}}##',line)
             if temp:
                 occ = temp[0][4:len(temp)-5].lower()
-                line = sub('##{{[A-Z]*}}##',eval(occ),line)
+                #line = sub('##{{[A-Z]*}}##',eval(occ),line)
+                line = line.replace(temp[0], eval(occ))
             dest.write(line)
 
         if master in line:

@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 import sys, os, codecs
-from outils.TestEnv import test
 
 #================================================================
 # Cas d'une installation de Pyromaths via deb ou rpm, il faut
@@ -35,6 +34,7 @@ if os.name == "posix" and os.path.basename(__file__)=="pyromaths":
 # Imports spécifiques à Pyromaths
 #=========================== QtGui ========================
 import outils.System
+from outils.TestEnv import test
 import troisiemes.troisiemes, quatriemes.quatriemes, cinquiemes.cinquiemes
 import sixiemes.sixiemes
 import lycee.lycee
@@ -109,9 +109,6 @@ u'Racines carrées',
 u'Système d\'équations',
 u'Fonctions affines',
 u'Probabilités',
-u'Théorème de Pythagore',
-u'Réciproque du théorème de Pythagore',
-u'Cercle et théorème de Pythagore',
 u'Théorème de Thalès',
 u'Réciproque du théorème de Thalès',
 u'Trigonométrie',

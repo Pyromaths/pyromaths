@@ -20,25 +20,14 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-
+import random
 from math import acos, asin, atan, pi, sin, cos, tan
-import operator, random
-from outils.Geometrie import couples_pythagore
+
+from outils.Geometrie import couples_pythagore,  choix_points
+
 
 #
 # ------------------- THEOREME DE PYTHAGORE -------------------
-
-
-def noms_sommets(nb):  # renvoie nb noms de sommets
-    (listenb, listepts) = ([], [])
-    for i in range(26):
-        listenb.append(i + 65)
-    for i in range(nb):
-        listepts.append(chr(listenb.pop(random.randrange(26 - i))))
-    listepts.sort()
-    return tuple(listepts)
-
-
 def fig_tr_rect(lg):
     # renvoie les angles au centre des trois sommets du triangle ABC rectange en C
     a = random.randrange(360)
@@ -100,7 +89,7 @@ def exo_pythagore():
             longueurs = [longueurs[i] / 10.0 for i in range(3)]
             if inegalite_triangulaire(longueurs):
                 break
-        noms = noms_sommets(3)
+        noms = choix_points(3)
         angles = fig_tr_rect(longueurs)
         nom_tr = nom_triangle(noms)
         long0 , long1 = types_exercice[j]
@@ -185,7 +174,7 @@ def exo_triangle_cercle():
         longueurs = [longueurs[i] / 10.0 for i in range(3)]
         if inegalite_triangulaire(longueurs):
             break
-    noms = noms_sommets(3)
+    noms = choix_points(3)
     angles = fig_tr_rect(longueurs)
     nom_tr = nom_triangle(noms)
     long0 = random.randrange(3)
@@ -271,7 +260,7 @@ def exo_reciproque_pythagore():
         longueurs = [longueurs[i] / 10.0 for i in range(3)]
         if inegalite_triangulaire(longueurs):
             break
-    noms = noms_sommets(3)
+    noms = choix_points(3)
     nom_tr = nom_triangle(noms)
     l = [i for i in range(3)]
     n = [l.pop(random.randrange(3 - i)) for i in range(3)]
@@ -402,7 +391,7 @@ def inegalite_triangulaire(a):  # renvoie 1 si c'est un triangle, 0 sinon
 def exo_thales():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
-    noms = noms_sommets(5)  # les noms des sommets
+    noms = choix_points(5)  # les noms des sommets
     while True:
         valeurs = valeurs_thales(70)  # les longueurs en mm
         if valeurs:
@@ -703,7 +692,7 @@ def tex_fig_thales(noms, valeurs):
 def exo_trigo():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
-    s = noms_sommets(6)
+    s = choix_points(6)
     n1 = cotes_sommets(s[0:3])
     n2 = cotes_sommets(s[3:6])
     v = valeurs_trigo()
