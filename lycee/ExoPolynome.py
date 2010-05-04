@@ -358,7 +358,8 @@ def quest_fonctions_rationnelles_sur_R():
     rac_min=-9
     rac_max=9
     b1=b2=a1=a2=0
-    while b1==0 or b2==0 or a1==0 or a2==0 or a1*(-float(b2)/a1)+b1==0:
+    while b1==0 or b2==0 or a1==0 or a2==0 or a1*(-float(b2)/a1)+b1==0 or (a1*b2/a2 - b1)==0:
+        #(a1*b2/a2 - b1)==0 on teste que la racine de Q n'annule pas P donc on ne peut pas simplifier
         b1=randint(rac_min,rac_max)
         b2=randint(rac_min,rac_max)
         a1=randint(-5,5)
@@ -420,8 +421,8 @@ def quest_fonctions_rationnelles_sur_R():
         limites=["+\\infty","-\\infty"]
         cor.append(">0$.\\\\")
     else:cor.append("$.\\\\")
-        #FIXME Et si P(VI)=0
-    
+        #Impossible car on test (a1*b2/a2 - b1)!=0
+        
     VIplus="\\substack{%s\\to %s\\\\%s>%s}"%(var,fTeX(VI),var,fTeX(VI))
     VImoins="\\substack{%s\\to %s\\\\%s<%s}"%(var,fTeX(VI),var,fTeX(VI))
     if Q[1]<0:
