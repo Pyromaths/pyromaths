@@ -362,10 +362,10 @@ class Ui_MainWindow(object):
             nb_exos = len(self.LesFiches[level][2])
             for i in range(nb_exos):
                 exec("self.label_%s_%s.setText(u\"%s\")" % (6-level,i,self.LesFiches[level][2][i]))
-		try:
-			exec(u"self.label_%s_%s.setToolTip(u\"%s\")"% (6-level,i,LesFiches[level][3][i]))
-		except:pass
-                exec(u"self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
+        try:
+            exec(u"self.label_%s_%s.setToolTip(u\"%s\")"% (6-level,i,LesFiches[level][3][i]))
+        except:
+            exec(u"self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -405,27 +405,27 @@ class Ui_MainWindow(object):
     Les fiches sont produites au format LaTeX. Pyromaths lance ensuite les commandes nécessaires à la production de fichiers pdf (latex - dvips - ps2pdf) et les ouvre.
     </p>
     <p align="center">
-    <span style=" text-decoration: underline;">Remerciements à :</span>
+    <span style=" text-decoration: underline;">Remerciements à&nbsp;:</span>
     </p>
     <p>
-    <ul style="-qt-list-indent: 1;">
+    <ul style="-qt-list-indent:1;">
       <li>
-      <span style=" font-weight:600;">David Robert</span> pour l'idée de départ ;
+      <span style=" font-weight:600;">David Robert</span> pour l'idée de départ&nbsp;;
       </li>
       <li>
-      <span style=" font-weight:600;">Yves Gesnel</span> pour le portage de Pyromaths sous MacOS ;
+      <span style=" font-weight:600;">Yves Gesnel</span> pour le portage de Pyromaths sous MacOS&nbsp;;
       </li>
       <li>
-      <span style=" font-weight:600;">Arnaud Kientz</span> pour ses graphismes, son implication dans le code de Pyromaths et son amitié ;
+      <span style=" font-weight:600;">Arnaud Kientz</span> pour ses graphismes, son implication dans le code de Pyromaths et son amitié&nbsp;;
       </li>
       <li>
-      <span style=" font-weight:600;">Guillaume Barthélémy</span> pour ses exercices ;
+      <span style=" font-weight:600;">Guillaume Barthélémy</span> pour ses exercices&nbsp;;
       </li>
       <li>
-      <span style=" font-weight:600;">Nicolas Bissonnier</span> pour son arrivée dans l'équipe de développement ;
+      <span style=" font-weight:600;">Nicolas Bissonnier</span> pour son arrivée dans l'équipe de développement&nbsp;;
       </li>
       <li>
-      <span style=" font-weight:600;">Nicolas Pourcelot</span> pour ses conseils et son implication prochaine dans le code de Pyromaths ;
+      <span style=" font-weight:600;">Nicolas Pourcelot</span> pour ses conseils et son implication prochaine dans le code de Pyromaths&nbsp;;
       </li>
       <li>
       <span style=" font-weight:600;">Jacqueline Gouguenheim-Desloy</span> a porté Pyromaths sous MacOS à ses débuts. Son soutien et son amitié nous ont été précieux. Sa disparition est une perte douloureuse pour la communauté du logiciel libre.
@@ -494,18 +494,18 @@ class Ui_MainWindow(object):
         dans le dossier /home/jerome/workspace/Pyromaths/src/exemples
         """
         self.valide_options()
-        (f0, f1) = ("", "")
-        f0 = QtGui.QFileDialog().getExistingDirectory (None, u"Dossier où créer les fiches",
-                                                         self.config['chemin_fichier'], QtGui.QFileDialog.ShowDirsOnly)
+        d0 = ""
+        d0 = unicode(QtGui.QFileDialog().getExistingDirectory (None, u"Dossier où créer les fiches",
+                                                         self.config['chemin_fichier'], QtGui.QFileDialog.ShowDirsOnly))
         i = 0
-        if f0:
+        if d0:
             for niveau in range(5):
                 liste = []
                 for i in range(len(self.LesFiches[niveau][2])):
                     liste.append((niveau,  i))
                 if niveau != 4:
-                  exo = os.path.join(str(f0), "%se.tex" % (6 - niveau))
-                  cor = os.path.join(str(f0), "%se-corrige.tex" % (6 - niveau))
+                  exo = os.path.join(d0, "%se.tex" % (6 - niveau))
+                  cor = os.path.join(d0, "%se-corrige.tex" % (6 - niveau))
                   parametres = {
                                           'les_fiches': self.LesFiches,
                                           'fiche_exo': exo,
@@ -520,8 +520,8 @@ class Ui_MainWindow(object):
                                           'configdir': self.configdir
                                           }
                 else:
-                  exo = os.path.join(str(f0), "Lycee.tex" )
-                  cor = os.path.join(str(f0), "Lycee-corrige.tex" )
+                  exo = os.path.join(d0, "Lycee.tex" )
+                  cor = os.path.join(d0, "Lycee-corrige.tex" )
                   parametres = {
                                           'les_fiches': self.LesFiches,
                                           'fiche_exo': exo,
@@ -720,7 +720,8 @@ def valide(list, LesFiches, parametres):
                 u"%s-corrige.tex"  % os.path.splitext(os.path.basename(f0))[0]),
                 "Documents Tex (*.tex)"))
         else:
-            f1 = os.path.join(os.path.dirname(f0), 'temp.tex')
+            f1 = os.path.join(os.path.dirname(f0), u"%s-corrige.tex"  %
+                              os.path.splitext(os.path.basename(f0))[0])
         if f1 != None:
             if corrige:
                 outils.System.ajoute_extension(f1, '.tex')
