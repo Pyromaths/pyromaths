@@ -247,6 +247,7 @@ def creation(parametres):
             if os.path.getsize('%s.pdf' % f0noext) > 1000 :
                 os.remove(os.path.join(dir0, 'pyromaths.log'))
                 os.remove(os.path.join(dir0, '%s.log' % f0noext))
+                os.remove(os.path.join(dir1, '%s.log' % f1noext))
         except OSError:
             pass
         #le fichier à supprimer n'existe pas et on s'en fout.

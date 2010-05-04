@@ -17,11 +17,11 @@
 
     <!-- Version number -->
     <key>CFBundleShortVersionString</key>
-    <string>08.11</string>
+    <string>10.05</string>
 
     <!-- Build number -->
     <key>CFBundleVersion</key>
-    <string>08.11</string>
+    <string>10.05</string>
 
     <!-- Copyright notice -->
     <key>NSHumanReadableCopyright</key>
