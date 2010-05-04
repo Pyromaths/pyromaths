@@ -149,7 +149,7 @@ def produits_fractions_4e(op, level):
                         n1=random.randrange(-11,11)
                         d1=random.randrange(2,11)*(-1,1)[random.randrange(2)]
                     while outils.Arithmetique.pgcd(n2*a,d2*b)>1:
-                        n2=random.randrange(-11,11)
+                        n2=random.randrange(2,11)*(-1,1)[random.randrange(2)]
                         d2=random.randrange(2,11)*(-1,1)[random.randrange(2)]
                 fr1 = Fractions(n1*a, d1*b)
                 fr2 = Fractions(n2*a, d2*b)

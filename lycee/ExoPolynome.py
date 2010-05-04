@@ -279,9 +279,9 @@ def quest_fonctions_rationnelles():
     #Je veux que f soit définie et dérivable sur I=Intervalle
     if (-Q[0]/Q[1])>=borneinf and (-Q[0]/Q[1])<=bornesup:
         if ((-Q[0]/Q[1])-borneinf)<(bornesup-(-Q[0]/Q[1])):
-            Intervalle=[int(-Q[0]/Q[1])+1,bornesup]
+            Intervalle=[int(round(-Q[0]/Q[1]))+1,bornesup]
         else:
-            Intervalle=[borneinf,int(-Q[0]/Q[1])-1]
+            Intervalle=[borneinf,int(round(-Q[0]/Q[1]))-1]
 
     #dérivée
     numerateur="%s\\times%s-%s\\times%s"%(P.derive().TeX(parenthese=True),Q.TeX(parenthese=True),
