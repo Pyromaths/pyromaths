@@ -31,11 +31,11 @@ def write(f0, f1, exos):
 
 def main(exo, f0, f1):
     modules = (
-        ExoPolynome.exo_racines_degre2(),
-        ExoPolynome.exo_factorisation_degre2(),
-        ExoPolynome.exo_factorisation_degre3(),
-        ExoPolynome.exo_tableau_de_signe(),
-        ExoPolynome.exo_variation(),
-        ExoPolynome.exo_variation_lim(),
+        ExoPolynome.exo_racines_degre2,
+        ExoPolynome.exo_factorisation_degre2,
+        ExoPolynome.exo_factorisation_degre3,
+        ExoPolynome.exo_tableau_de_signe,
+        ExoPolynome.exo_variation,
+        ExoPolynome.exo_variation_lim,
         )
-    write(f0, f1, modules[exo])
+    write(f0, f1, modules[exo]())

@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 
-if __name__=="__main__":
-    import sys,os
-    sys.path.append(os.path.join('..'))
-
 from random import randrange
 from classes.Polynome import *
 from outils.Polynomes import *
 from outils.decimaux import decimaux
 from outils.Arithmetique import pgcd
 Fractions=Fractions.Fractions
+
+    
 def exo_racines_degre2():
     '''exercice recherche de racines second degré'''
 
@@ -405,14 +403,22 @@ def quest_fonctions_rationnelles_sur_R():
     cor.append(u"$$%s'(%s)=%s=%s$$"%(nomf,var,f_derivee,f_derivee_simplifiee))
     exo.append(u"\\item Déterminer les limites de $%s$ aux bornes de $\\mathcal{D}_{%s}$."%(nomf,nomf))
     cor.append(u"\\item Déterminer les limites de $%s$ aux bornes de $\\mathcal{D}_{%s}$."%(nomf,nomf))
+    limite = P[1]/Q[1]
+    limite_simple = limite.simplifie()
+    
     cor.append("$$\\lim_{%s\\to -\\infty}\\dfrac{%s}{%s}= "%(var,P,Q))
-    def coeffTeX(a):
-        if a==1:return ""
-        if a==-1:return "-"
-        return a
-    cor.append("\\lim_{%s\\to -\\infty}\\dfrac{%s%s}{%s%s}=\\dfrac{%s}{%s}$$" %(var,coeffTeX(P[1]),var,coeffTeX(Q[1]),var,P[1],Q[1]))
+
+    cor.append("\\lim_{%s\\to -\\infty}\\dfrac{%s%s}{%s%s} = %s" %(var,coeffTeX(P[1]),var,coeffTeX(Q[1]),var,limite))
+    if limite.n == limite_simple.n:
+        cor.append("$$")
+    else:
+        cor.append("= %s $$"%(TeX(limite_simple)))
     cor.append("$$\\lim_{%s\\to +\\infty}\\dfrac{%s}{%s}= "%(var,P,Q))
-    cor.append("\\lim_{%s\\to +\\infty}\\dfrac{%s%s}{%s%s}=\\dfrac{%s}{%s}$$" %(var,coeffTeX(P[1]),var,coeffTeX(Q[1]),var,P[1],Q[1]))
+    cor.append("\\lim_{%s\\to +\\infty}\\dfrac{%s%s}{%s%s} = %s" %(var,coeffTeX(P[1]),var,coeffTeX(Q[1]),var,limite))
+    if limite.n == limite_simple.n:
+        cor.append("$$")
+    else:
+        cor.append("= %s $$"%(TeX(limite_simple)))
     cor.append("Pour $%s=%s$, on a $%s=%s"%(var,TeX(VI),P,TeX(P(VI))))
     if P(VI)<0:
         limites=["-\\infty","+\\infty"]
@@ -435,16 +441,13 @@ def quest_fonctions_rationnelles_sur_R():
         cor.append("et  $%s>0$ si $%s>%s$.\\\\"%(Q,var,TeX(VI)))
         cor.append(u"$$\\lim_{%s}\\dfrac{%s}{%s}=%s $$"%(VImoins,P,Q,limites[0]))
         cor.append(u"$$\\lim_{%s}\\dfrac{%s}{%s}=%s $$"%(VIplus,P,Q,limites[1]))
-##    cor.append("\\lim_{%s\\rightarrow %s}\\dfrac{%s}{%s%s}=\\dfrac{%s}{%s}$$" %(var,TeX(VI),P(VI),coeffTeX(Q[1]),var,P[1],Q[1]))
-##            
-
     
     exo.append(u"\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$."%(nomf,nomf))
     cor.append(u"\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$.\\par"%(nomf,nomf))
     if numerateur_simplifie.degre_max==0:
         cor.append(u" Comme $%s$ est un carré, il est toujours positif.\\\\"%(denominateur))
-        f_xmin=TeX((P[1]/Q[1]).simplifie())#TeX((Fractions(1)*P(Intervalle[0])/Q(Intervalle[0])).simplifie())
-        f_xmax=f_xmin#TeX((Fractions(1)*P(Intervalle[1])/Q(Intervalle[1])).simplifie())
+        f_xmin = TeX((P[1]/Q[1]).simplifie())
+        f_xmax = f_xmin
         if numerateur_simplifie[0]<0:
             cor.append(u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient "%\
                   (numerateur_simplifie[0],var,nomf,var))
@@ -467,6 +470,10 @@ def quest_fonctions_rationnelles_sur_R():
     cor.append("\\end{enumerate}")
     return exo,cor
 
+def coeffTeX(a):
+        if a==1:return ""
+        if a==-1:return "-"
+        return a
 
 def quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf")):
     '''Question qui propose l'étude du sens de variation d'un polynôme de degré 3'''
@@ -485,7 +492,7 @@ def quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf")):
     abs_a=6
     abs_b=10
     abs_c=10
-    #X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
+    #X est le polynome P=x pour faciliter la construction des polynômes, 
     inconnues=['x','y','z','t']
     nom_poly=['P','Q','R','S']
     var="x"
@@ -859,7 +866,6 @@ def factorisation_degre3(E,nomE,exo=[],cor=[],racines=[0,1,-1,2,-2]):
     cor.append("\\item On doit maintenant factoriser le polynome $%s_2=%s$\\\\"%(nomE,E2))
     delta,simplrac,racines,str_racines,factorisation=factorisation_degre2(E2,factorisation=True)
     cor=redaction_factorisation(E2,nomP=nomE+"_2",exo=[],cor=cor)[1]
-    #cor.pop(-5)
     cor.append("\\par")
     cor.append("On en conclue donc que $%s="%(nomE))
     final=0
@@ -968,27 +974,3 @@ def redaction_racines(P,nomP,var,cor=[]):
 
     return cor
 
-#######################################
-###############TEST####################
-#######################################
-if __name__=="__main__":
-    from TEST.imprimetest import *
-    exo,cor=exo_racines_degre2()
-##    exof,corf=Exo_factorisation()
-##    exof3,corf3=Exo_factorisation_degre3()
-##    exo=exor+exof+exof3
-##    cor=corr+corf+corf3
-##    exo,cor=exo_tableau()
-##    exo,cor=exo_variation()
-##    exo,cor=exo_fonctions_rationnelles()
-##    exo,cor=quest_fonctions_rationnelles_sur_R()
-    exo,cor=exo_variation()
-    exo1,cor1=exo_variation_lim()
-    
-##    exo=cor=[]
-##    for i in range(10):
-##        exo1,cor1=exo_tableau_de_signe()
-##        exo=exo+exo1
-##        cor=cor+cor1
-
-    imprime_TeX((exo+exo1,cor+cor1))
