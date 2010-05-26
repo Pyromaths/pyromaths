@@ -1,3 +1,7 @@
+Version 10.0?
+* Exercice de calcul d'aires niveau sixième
+* Correction d'un bug dans l'affichage de la résolution d'une équation du second degré (merci à Marty de l'avoir signalé)
+
 Version 10.05
 * Exercice de construction niveau cinquièmes :
 ** de triangles

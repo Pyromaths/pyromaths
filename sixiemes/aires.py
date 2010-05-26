@@ -169,8 +169,8 @@ def triangle_qcq(dim, n_fig):
     fc += "\\rput(%.2f,%.2f){\\pscirclebox{3}}" % isobarycentre(s2, s0, angle2)
     fc += f
     s = "Aire de la figure %s : " % n_fig
-    s += u"on va calculer l'aire du rectangle en pointillés et on va soustraire"
-    s += " les aires des triangles rectangles \\pscirclebox{1}, "
+    s += u"on calcule l'aire du rectangle en pointillés et on soustrait "
+    s += "les aires des triangles rectangles \\pscirclebox{1}, "
     s += "\\pscirclebox{2} et \\pscirclebox{3}.\\par\n"
     s += "$(%s) - (%s) \\div 2 - (%s) \\div 2 - (%s) \\div 2 " %\
             (aire_rectangle(dim)[0], aire_rectangle(s0, s1)[0],
