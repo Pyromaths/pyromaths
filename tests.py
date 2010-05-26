@@ -3,7 +3,6 @@
 from pyromaths import LesFiches
 import codecs
 for j in range(100):
-    print("%se test en cours..." % (j+1))
     f0 = codecs.open('/tmp/test.tex', encoding='utf-8', mode='w')
     f1 = codecs.open('/tmp/test-cor.tex', encoding='utf-8', mode='w')
     for n in range(len(LesFiches)):
