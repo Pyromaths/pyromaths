@@ -65,6 +65,7 @@ u'Propriétés sur les droites',
 u'Multiples de 2, 3, 5, 9, 10',
 u'Fractions partage',
 u'Fractions et abscisses',
+u'Aires et quadrillage',
 u'Symétrie et quadrillages',
 u'Mesurer des angles',
 u'Arrondir des nombres décimaux'

@@ -44,7 +44,7 @@ def carre(dim, n_fig):
     f = "\\psframe[fillstyle=hlines, hatchcolor=lightgray](0, 0)(%s, %s)\n" % dim
     f += "\\rput(%.2f,%.2f)" % isobarycentre((0, 0), dim)
     f += "{\\psframebox[linecolor=white,fillstyle=solid]{figure %s}}" %  n_fig
-    s = "Aire de la figure %s : $%s = %s$~unités d'aire" %(n_fig,
+    s = u"Aire de la figure %s : $%s = %s$~unités d'aire" %(n_fig,
             aire_rectangle(dim)[0], aire_rectangle(dim)[1])
     return (f, f, s)
 
@@ -54,7 +54,7 @@ def rectangle(dim, n_fig):
     f = "\\psframe[fillstyle=hlines, hatchcolor=lightgray](0, 0)(%s, %s)\n" % dim
     f += "\\rput(%.2f,%.2f)" % isobarycentre((0, 0), dim)
     f += "{\\psframebox[linecolor=white,fillstyle=solid]{figure %s}}" %  n_fig
-    s = "Aire de la figure %s : $%s = %s$~unités d'aire" %(n_fig,
+    s = u"Aire de la figure %s : $%s = %s$~unités d'aire" %(n_fig,
             aire_rectangle(dim)[0], aire_rectangle(dim)[1])
     return (f, f, s)
 
@@ -87,8 +87,8 @@ def parallelogramme(dim, n_fig):
     fc += "\\rput(%.2f,%.2f)" % isobarycentre((0, 0), dim)
     fc += "{\\psframebox[linecolor=white,fillstyle=solid]{figure %s}}" %  n_fig
     s = "Aire de la figure %s : " % n_fig
-    s += "c'est l'aire du rectangle en pointillés.\\par\n"
-    s += "$%s = %s$~unités d'aire" %(aire_rectangle(frame0, frame1)[0],
+    s += u"c'est l'aire du rectangle en pointillés.\\par\n"
+    s += u"$%s = %s$~unités d'aire" %(aire_rectangle(frame0, frame1)[0],
             aire_rectangle(frame0, frame1)[1])
     return (f, fc, s)
 
@@ -106,8 +106,8 @@ def triangle_rectangle(dim, n_fig):
     fc = "\\psframe[linestyle=dashed]%s%s" % (s0, s2)
     fc += f
     s = "Aire de la figure %s : " % n_fig
-    s += "c'est la moitié de l'aire du rectangle en pointillés.\\par\n"
-    s += "$(%s) \\div 2= %s$~unités d'aire" %(aire_rectangle(dim)[0],
+    s += u"c'est la moitié de l'aire du rectangle en pointillés.\\par\n"
+    s += u"$(%s) \\div 2= %s$~unités d'aire" %(aire_rectangle(dim)[0],
             Affichage.decimaux(aire_rectangle(dim)[1]/2., 1))
     return f, fc, s
 
@@ -133,8 +133,8 @@ def triangle_base(dim, n_fig):
     fc += "\\psframe[linestyle=dashed]%s%s" % (s2, s1)
     fc += f
     s = "Aire de la figure %s : " % n_fig
-    s += "c'est la moitié de l'aire du rectangle en pointillés.\\par\n"
-    s += "$(%s) \\div 2= %s$~unités d'aire" %(aire_rectangle(dim)[0],
+    s += u"c'est la moitié de l'aire du rectangle en pointillés.\\par\n"
+    s += u"$(%s) \\div 2= %s$~unités d'aire" %(aire_rectangle(dim)[0],
             Affichage.decimaux(aire_rectangle(dim)[1]/2., 1))
     return f, fc, s
 
@@ -169,13 +169,13 @@ def triangle_qcq(dim, n_fig):
     fc += "\\rput(%.2f,%.2f){\\pscirclebox{3}}" % isobarycentre(s2, s0, angle2)
     fc += f
     s = "Aire de la figure %s : " % n_fig
-    s += "on va calculer l'aire du rectangle en pointillés et on va soustraire "
-    s += "les aires des triangles rectangles \\pscirclebox{1}, \\pscirclebox{2}"
-    s += " et \\pscirclebox{3}.\\par\n"
+    s += u"on va calculer l'aire du rectangle en pointillés et on va soustraire"
+    s += " les aires des triangles rectangles \\pscirclebox{1}, "
+    s += "\\pscirclebox{2} et \\pscirclebox{3}.\\par\n"
     s += "$(%s) - (%s) \\div 2 - (%s) \\div 2 - (%s) \\div 2 " %\
             (aire_rectangle(dim)[0], aire_rectangle(s0, s1)[0],
                     aire_rectangle(s1, s2)[0], aire_rectangle(s2, s0)[0])
-    s += "= %s$~unités d'aire" % Affichage.decimaux(aire_rectangle(dim)[1] -
+    s += u"= %s$~unités d'aire" % Affichage.decimaux(aire_rectangle(dim)[1] -
             aire_rectangle(s0, s1)[1]/2. - aire_rectangle(s0, s2)[1]/2. -
             aire_rectangle(s1, s2)[1]/2., 1)
     return f, fc, s
@@ -201,7 +201,7 @@ def figure():
     t = "\\begin{pspicture}(0,0)(18,9)\n"
     t += "\\psgrid[gridcolor=lightgray, subgridcolor=lightgray, subgriddiv=2, gridlabels=0pt]\n"
     t += "\\psframe[fillstyle=vlines, hatchsep=1pt, hatchcolor=lightgray](0,0)(.5,.5)\n"
-    t += "\\rput[l](0.6,0.25){\\psframebox[linecolor=white, fillstyle=solid]{unité d'aire}}\n"
+    t += u"\\rput[l](0.6,0.25){\\psframebox[linecolor=white, fillstyle=solid]{unité d'aire}}\n"
     t += "\\psset{unit=5mm}\n"
     exo.append(t)
     cor.append(t)
@@ -229,8 +229,8 @@ def figure():
 
 def main():
     exo, cor, sol = [], [], []
-    exo = ["\\exercice", "Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
-    cor = ["\\exercice*", "Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
+    exo = ["\\exercice", u"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
+    cor = ["\\exercice*", u"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
     exercice = figure()
     exo.append(exercice[0])
     cor.append(exercice[1])
