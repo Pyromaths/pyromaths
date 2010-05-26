@@ -43,7 +43,7 @@ def carre(dim, n_fig):
     else: dim = (dim[1], dim[1])
     f = "\\psframe[fillstyle=hlines, hatchcolor=lightgray](0, 0)(%s, %s)\n" % dim
     f += "\\rput(%.2f,%.2f)" % isobarycentre((0, 0), dim)
-    f += "{\\psframebox[linecolor=white,fillstyle=solid]{figure %s}}" %  n_fig
+    f += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}} " %  n_fig
     s = u"Aire de la figure %s : $%s = %s$~unités d'aire" %(n_fig,
             aire_rectangle(dim)[0], aire_rectangle(dim)[1])
     return (f, f, s)
@@ -53,7 +53,7 @@ def rectangle(dim, n_fig):
     avec n_fig"""
     f = "\\psframe[fillstyle=hlines, hatchcolor=lightgray](0, 0)(%s, %s)\n" % dim
     f += "\\rput(%.2f,%.2f)" % isobarycentre((0, 0), dim)
-    f += "{\\psframebox[linecolor=white,fillstyle=solid]{figure %s}}" %  n_fig
+    f += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}}" %  n_fig
     s = u"Aire de la figure %s : $%s = %s$~unités d'aire" %(n_fig,
             aire_rectangle(dim)[0], aire_rectangle(dim)[1])
     return (f, f, s)
@@ -65,27 +65,31 @@ def parallelogramme(dim, n_fig):
     if base_h:
         tab = random.randrange(1, min(dim[0]/2, dim[0]-3))*(-1)**random.randrange(2)
         if tab>0:
-            s0, s1, s2, s3 = (tab, 0), (dim[0], 0), (dim[0]-tab, dim[1]), (0, dim[1])
+            s0, s1, s2, s3 = (tab, 0), (dim[0], 0), (dim[0]-tab, dim[1]), (0,
+                    dim[1])
             frame0, frame1 = s0, dim
         else:
-            s0, s1, s2, s3 = (0, 0), (dim[0]+tab, 0), (dim[0], dim[1]), (-tab, dim[1])
+            s0, s1, s2, s3 = (0, 0), (dim[0]+tab, 0), (dim[0], dim[1]), (-tab,
+                    dim[1])
             frame0, frame1 = s0, (dim[0]+tab, dim[1])
     else:
         tab = random.randrange(1, min(dim[1]/2, dim[1]-3))*(-1)**random.randrange(2)
         if tab>0:
-            s0, s1, s2, s3 = (0, tab), (dim[0], 0), (dim[0], dim[1]-tab), (0, dim[1])
+            s0, s1, s2, s3 = (0, tab), (dim[0], 0), (dim[0], dim[1]-tab), (0,
+                    dim[1])
             frame0, frame1 = s0, dim
         else:
-            s0, s1, s2, s3 = (0, 0), (dim[0], -tab), (dim[0], dim[1]), (0, dim[1]+tab)
+            s0, s1, s2, s3 = (0, 0), (dim[0], -tab), (dim[0], dim[1]), (0,
+                    dim[1]+tab)
             frame0, frame1 = s0, (dim[0], dim[1]+tab)
     f = "\\pspolygon[fillstyle=hlines, hatchcolor=lightgray]%s%s%s%s\n" % (s0,
             s1, s2, s3)
     f += "\\rput(%.2f,%.2f)" % isobarycentre((0, 0), dim)
-    f += "{\\psframebox[linecolor=white,fillstyle=solid]{figure %s}}" %  n_fig
+    f += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}} " %  n_fig
     fc = "\\pspolygon%s%s%s%s\n" % (s0, s1, s2, s3)
-    fc += "\\psframe[linestyle=dashed, fillstyle=hlines, hatchcolor=lightgray]%s%s" % (frame0, frame1)
+    fc += "\\psframe[linestyle=dashed, fillstyle=hlines, hatchcolor=lightgray]%s%s\n" % (frame0, frame1)
     fc += "\\rput(%.2f,%.2f)" % isobarycentre((0, 0), dim)
-    fc += "{\\psframebox[linecolor=white,fillstyle=solid]{figure %s}}" %  n_fig
+    fc += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}} " %  n_fig
     s = "Aire de la figure %s : " % n_fig
     s += u"c'est l'aire du rectangle en pointillés.\\par\n"
     s += u"$%s = %s$~unités d'aire" %(aire_rectangle(frame0, frame1)[0],
@@ -102,8 +106,8 @@ def triangle_rectangle(dim, n_fig):
     f = "\\pspolygon[fillstyle=hlines, hatchcolor=lightgray]%s%s%s\n" % (s0, s1,
             s2)
     f += "\\rput(%.2f,%.2f)" % isobarycentre(s0, s1, s2)
-    f += "{\\psframebox[linecolor=white,fillstyle=solid]{figure %s}}" %  n_fig
-    fc = "\\psframe[linestyle=dashed]%s%s" % (s0, s2)
+    f += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}} " %  n_fig
+    fc = "\\psframe[linestyle=dashed]%s%s\n" % (s0, s2)
     fc += f
     s = "Aire de la figure %s : " % n_fig
     s += u"c'est la moitié de l'aire du rectangle en pointillés.\\par\n"
@@ -128,9 +132,9 @@ def triangle_base(dim, n_fig):
     f = "\\pspolygon[fillstyle=hlines, hatchcolor=lightgray]%s%s%s\n" % (s0, s1,
             s2)
     f += "\\rput(%.2f,%.2f)" % isobarycentre(s0, s1, s2)
-    f += "{\\psframebox[linecolor=white,fillstyle=solid]{figure %s}}" %  n_fig
-    fc = "\\psframe[linestyle=dashed]%s%s" % (s0, s2)
-    fc += "\\psframe[linestyle=dashed]%s%s" % (s2, s1)
+    f += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}} " %  n_fig
+    fc = "\\psframe[linestyle=dashed]%s%s\n" % (s0, s2)
+    fc += "\\psframe[linestyle=dashed]%s%s\n" % (s2, s1)
     fc += f
     s = "Aire de la figure %s : " % n_fig
     s += u"c'est la moitié de l'aire du rectangle en pointillés.\\par\n"
@@ -162,11 +166,11 @@ def triangle_qcq(dim, n_fig):
     f = "\\pspolygon[fillstyle=hlines, hatchcolor=lightgray]%s%s%s\n" % (s0, s1,
             s2)
     f += "\\rput(%.2f,%.2f)" % isobarycentre(s0, s1, s2)
-    f += "{\\psframebox[linecolor=white,fillstyle=solid]{figure %s}}" %  n_fig
-    fc = "\\psframe[linestyle=dashed](0,0)(%s,%s)" % dim
-    fc += "\\rput(%.2f,%.2f){\\pscirclebox{1}}" % isobarycentre(s0, s1, angle0)
-    fc += "\\rput(%.2f,%.2f){\\pscirclebox{2}}" % isobarycentre(s1, s2, angle1)
-    fc += "\\rput(%.2f,%.2f){\\pscirclebox{3}}" % isobarycentre(s2, s0, angle2)
+    f += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}}" %  n_fig
+    fc = "\\psframe[linestyle=dashed](0,0)(%s,%s) " % dim
+    fc += "\\rput(%.2f,%.2f){\\pscirclebox{1}} " % isobarycentre(s0, s1, angle0)
+    fc += "\\rput(%.2f,%.2f){\\pscirclebox{2}} " % isobarycentre(s1, s2, angle1)
+    fc += "\\rput(%.2f,%.2f){\\pscirclebox{3}}\n" % isobarycentre(s2, s0, angle2)
     fc += f
     s = "Aire de la figure %s : " % n_fig
     s += u"on calcule l'aire du rectangle en pointillés et on soustrait "
@@ -216,10 +220,10 @@ def figure():
     fig = [carre, rectangle, triangle_rectangle, triangle_base, triangle_qcq, parallelogramme]
     for i in range(len(fig)):
         r = fig.pop(random.randrange(len(fig)))(eval('dim'+str(i)), i+1)
-        exo.append("\\rput(%s,%s){" % (eval('xtab' + str(i%3)),
-                eval('ytab' + str(i)))+ r[0] + '}')
-        cor.append("\\rput(%s,%s){" % (eval('xtab' + str(i%3)),
-                eval('ytab' + str(i)))+ r[1] + '}')
+        exo.append("\\rput(%s,%s){\n" % (eval('xtab' + str(i%3)),
+                eval('ytab' + str(i)))+ r[0] + '\n}')
+        cor.append("\\rput(%s,%s){\n" % (eval('xtab' + str(i%3)),
+                eval('ytab' + str(i)))+ r[1] + '\n}')
         sol.append("\\item %s" % r[2])
     exo.append("\\end{pspicture}")
     cor.append("\\end{pspicture}")
