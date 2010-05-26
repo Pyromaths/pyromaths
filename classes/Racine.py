@@ -133,8 +133,10 @@ def tTeX(n):
 		return ""
 	elif n==-1:
 		return "-"
+	elif n>=0:
+		return "+"+decimaux(n)
 	else:
-		return decimaux(n)
+            return decimaux(n)
 
 
 
@@ -146,34 +148,34 @@ class RacineDegre2:
         self.radicande=radicande
         
     def __str__(self):
-        numerateur=""
-        if self.numerateur==0 and self.radicande!=0:
-            numerateur=""
-
-        if self.radicande==0:
-		if isinstance(self.numerateur,str):
-			numerateur=self.numerateur
-		else:
-			numerateur=decimaux(self.numerateur)*(self.numerateur!=0)	#renvoie "" si self.numerateur=0
-		
-	if isinstance(self.coeff,str):#utiliser dans le détail de la simplification
+        if isinstance(self.numerateur,str):
+            #utilisé dans le détail de la simplification
+            numerateur=self.numerateur
+	else:
+            numerateur=decimaux(self.numerateur)*(self.numerateur!=0)   #renvoie "" si self.numerateur=0
+        if self.radicande!=0:
+            if isinstance(self.coeff,str):#utilisé dans le détail de la simplification
                 if self.coeff[0]!="-" and self.coeff[0]!="+":
 			numerateur+="+"
                 numerateur+=self.coeff+"\\sqrt{"+decimaux(self.radicande)+"}"
-	elif self.coeff==1:
+            elif self.coeff==1:
 			numerateur+="+\\sqrt{"+decimaux(self.radicande)+"}"
-	elif self.coeff==-1:
+            elif self.coeff==-1:
 			numerateur+="-\\sqrt{"+decimaux(self.radicande)+"}"
-	else:
-		if self.coeff==1 and self.numerateur==0:
-			numerateur+="+"
+            else:
 		numerateur+=tTeX(self.coeff)+"\\sqrt{"+decimaux(self.radicande)+"}"
+	if numerateur=='':
+            numerateur = '0'
         if self.denominateur==1:
 		result=numerateur
         else:
             result="\\dfrac{%s}{%s}"%(numerateur,self.denominateur)
-        return result
-    
+
+        if result[0]=='+':
+            return result[1:]
+        else:
+            return result
+        
     def simplifie(self,detail=False):
         liste_detail=[]
         coeff,radicande=simplifie_racine(self.radicande)

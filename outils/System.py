@@ -170,10 +170,16 @@ def creation(parametres):
 
     if parametres['creer_pdf']:
         if parametres['creer_unpdf']:
-            f0.write("\n\\newpage\n")
-            f0.write("\n\\setcounter{exo}{0}\n")
+            f0.write("\\label{LastPage}\n")
+            f0.write("\\newpage\n")
+            f0.write("\\lhead{\\textsl{\\footnotesize{Page \\thepage/ \\pageref{LastCorPage}}}}\n")
+            f0.write("\\setcounter{page}{1} ")
+            f0.write("\\setcounter{exo}{0}\n")
+            f1.write("\\label{LastCorPage}\n")
             copie_tronq_modele(f1, parametres, 'pied')
         else:
+            f0.write("\\label{LastPage}\n")
+            f1.write("\\label{LastPage}\n")
             copie_tronq_modele(f0, parametres, 'pied')
             copie_tronq_modele(f1, parametres, 'pied')
 
