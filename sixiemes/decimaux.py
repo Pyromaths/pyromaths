@@ -272,7 +272,7 @@ def valeurs_units():
           #Litres, donc pas de kL
 
         imax = 6
-    div0 = random.randrange(imax)
+    div0 = random.randrange(imax + p)
     if not unit:
         div0 = div0 + 1
     while 1:
@@ -320,7 +320,7 @@ def tex_units(exo, cor):
         else:
             tex_tableau_litres(cor, div0, u, nblist, chf_unite)
         cor.append("      \\end{tabular}")
-    
+
 
 def tex_tableau_autres(cor, div0, u, nblist, chf_unite):
     cor.append("      \\begin{tabular}{c|c|c|c|c|c|c}")
@@ -383,7 +383,7 @@ def tex_metre_carre(exo, cor):
     u = tuple([division[i]+"m^2" for i in range(7)])
     nb0 = a * 10 ** p
     nb1 = nb0 * 10 ** ( 2 * ( div1- div0))
-    
+
     exo.append("\\item $\\unit[%s]{%s}=\\unit[\\dotfill]{%s}$"% (outils.Affichage.decimaux(nb0), u[div0], u[div1]))
     cor.append("\\item $\\unit[%s]{%s}=\\unit[%s]{%s}$\\vspace{1ex}\\par" % (outils.Affichage.decimaux(nb0), u[div0], outils.Affichage.decimaux(nb1), u[div1]))
 
@@ -403,15 +403,15 @@ def nbre_to_dict(nbre,div0):
 def tex_tableau_mcarre(cor, div0, nb0, u ):
     cor.append("\\hspace{-3em}\\begin{tabular}{cc|cc|cc|cc|cc|cc|cc}")
     cor.append("        \\multicolumn{2}{c|}{$\\rm %s$} & \\multicolumn{2}{c|}{$\\rm %s$} & \\multicolumn{2}{c|}{$\\rm %s$} &\
-\\multicolumn{2}{c|}{$\\rm %s$} & \\multicolumn{2}{c|}{$\\rm %s$} & \\multicolumn{2}{c|}{$\\rm %s$} & \\multicolumn{2}{c}{$\\rm %s$}  \\\\ \\hline" 
+\\multicolumn{2}{c|}{$\\rm %s$} & \\multicolumn{2}{c|}{$\\rm %s$} & \\multicolumn{2}{c|}{$\\rm %s$} & \\multicolumn{2}{c}{$\\rm %s$}  \\\\ \\hline"
         %u)
-    
+
     nb_dict = nbre_to_dict(nb0,div0)
     nb_dict[0]=nb_dict.get(0,0)+10*nb_dict.get(-1,0)
     nblist = [nb_dict.get(i,0) for i in range(14)]
-    
+
     cor.append("%s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s" % tuple(nblist))
-    
+
     cor.append("\\end{tabular}")
 
 def Conversions():
