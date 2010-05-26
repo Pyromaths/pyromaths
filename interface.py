@@ -1,4 +1,4 @@
-﻿#!/usr/bin/python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Pyromaths
@@ -362,10 +362,12 @@ class Ui_MainWindow(object):
             nb_exos = len(self.LesFiches[level][2])
             for i in range(nb_exos):
                 exec("self.label_%s_%s.setText(u\"%s\")" % (6-level,i,self.LesFiches[level][2][i]))
-        try:
-            exec(u"self.label_%s_%s.setToolTip(u\"%s\")"% (6-level,i,LesFiches[level][3][i]))
-        except:
-            exec(u"self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
+                exec("self.label_%s_%s_A.setText(u\'<img src=\"%s\" />\')" % (6-level,i,os.path.join(iconesdir,'vignette','Apercu16')))
+                try:
+                    exec(u'self.label_%s_%s.setToolTip(u\'%s\')'% (6-level,i,LesFiches[level][3][i]))
+                    exec(u'self.label_%s_%s_A.setToolTip(u\'%s\')'% (6-level,i,LesFiches[level][3][i]))
+                except:pass
+                exec(u"self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -580,6 +582,8 @@ class Ui_MainWindow(object):
         exec("spacerItem_%s = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)" % (treated))
         exec("self.horizontalLayout_%s.addItem(spacerItem_%s)" % (treated, treated))
         exec("self.horizontalLayout_%s.addItem(spacerItem_%s)" % (treated, treated))
+        exec("self.label_%s_A = QtGui.QLabel(self.tab_%se)" % (treated, level))
+        exec("self.horizontalLayout_%s.addWidget(self.label_%s_A)" % (treated, treated))
 
         exec("self.gridLayout_%se.addLayout(self.horizontalLayout_%s, %s, %s, 1, 1)" % (level, treated, box/2, box%2))
 
