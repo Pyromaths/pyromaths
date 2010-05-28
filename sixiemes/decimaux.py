@@ -381,9 +381,10 @@ def tex_metre_carre(exo, cor):
         (div0,div1)=(random.randrange(6),random.randrange(7),)
         #Pas de mm² par ce que ça sort du tableau
         if (div0-div1) in [-2,-1,1,2]:
-            #pas trop loin car ça fait de très long nombres
+            
+            #pas trop loin car ça fait de très longs nombres
             break
-
+    
     u = tuple([division[i]+"m^2" for i in range(7)])
     nb0 = a * 10 ** p
     nb1 = nb0 * 10 ** ( 2 * ( div1- div0))
@@ -394,36 +395,19 @@ def tex_metre_carre(exo, cor):
             (outils.Affichage.decimaux(nb0), u[div0],
                 outils.Affichage.decimaux(nb1), u[div1]))
 
-    tex_tableau_mcarre(cor, div0, nb0, u)
+    return tex_tableau_mcarre(cor, div0, div1, nb0, u)
 
-def nbre_to_dict(nbre,div0):
-    nbre=int(round(nbre*100))
-    nb_dict = {}
-    curseur = 3
-    while nbre > 0:
-        chiffre = nbre % 10
-        nb_dict[curseur+2*div0]=chiffre
-        nbre = (nbre-chiffre)/10
-        curseur -= 1
-    return nb_dict
 
-def tex_tableau_mcarre(cor, div0, nb0, u ):
-    cor.append("\\hspace{-3em}\\begin{tabular}{cc|cc|cc|cc|cc|cc|cc}")
-    cor.append("\\multicolumn{2}{c|}{$\\rm %s$} & \
-            \\multicolumn{2}{c|}{$\\rm %s$} & \\multicolumn{2}{c|}{$\\rm %s$} &\
-            \\multicolumn{2}{c|}{$\\rm %s$} & \\multicolumn{2}{c|}{$\\rm %s$} &\
-            \\multicolumn{2}{c|}{$\\rm %s$} & \\multicolumn{2}{c}{$\\rm %s$}\
-            \\\\ \\hline"
-        %u)
 
-    nb_dict = nbre_to_dict(nb0,div0)
-    nb_dict[0]=nb_dict.get(0,0)+10*nb_dict.get(-1,0)
-    nblist = [nb_dict.get(i,0) for i in range(14)]
+def tex_tableau_mcarre(cor, div0, div1, nb0, u ):
+    
 
-    cor.append("%s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s \
-            & %s" % tuple(nblist))
-
-    cor.append("\\end{tabular}")
+    nb_dict = nbre_to_dict(nb0,div0,div1)
+    nblist = [str(nb_dict.get(i,"")) for i in range(14)]
+    nblist[2*div0 + 1] =  "{%s\\textcolor{blue}{\\LARGE ,}}"%nb_dict.get(2*div0+1,"0")
+    nblist[2*div1 + 1] = "{%s\\textcolor{red}{ \\LARGE ,}}"%nb_dict.get(2*div1+1,"0")
+    return ["%s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s \
+            & %s\\\\" % tuple(nblist)]
 
 def Conversions():
     exo = ["\\exercice", 'Effectuer les conversions suivantes :',
@@ -437,19 +421,84 @@ def Conversions():
     exo.append('\\end{multicols}')
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
+    
+    #exo_conversion(exo, cor, 1) #le choix des valeurs prises, l'absence de grammes et litres ne rendent pas cette rédaction pertinente 
+    exo_conversion(exo, cor, 2)
+    exo_conversion(exo, cor, 3)
+    return (exo, cor)
 
+def exo_conversion(exo, cor, exposant):
     exo += ["\\exercice", 'Effectuer les conversions suivantes :',
             '\\begin{multicols}{3}\\noindent', '\\begin{enumerate}']
     cor += ["\\exercice*", 'Effectuer les conversions suivantes :',
             '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
+    
+    str_exposant=(u"^%s"%(exposant))*(exposant > 1)
+    
+    u = tuple([division[i]+"m%s"%str_exposant for i in range(7)])
+    tableau = ((" \\multicolumn{%s}{c|}"%exposant +"{$\\rm %s$} &")*6 +"\\multicolumn{%s}{c}"%exposant+"{$\\rm %s$}" )%u   
+    ligne_tab = []
+    ligne_tab.append("\\begin{tabular}{*{%s}{p{3.5mm}|}p{3.5mm}}"%(exposant*7-1)) 
+    ligne_tab.append(tableau + "\\\\ \\hline")
     for i in range(6):
-        tex_metre_carre(exo, cor)
-    exo.append('\\end{enumerate}')
-    exo.append('\\end{multicols}')
+        ligne_tab += tex_conversion(exo, cor,exposant, u) 
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
-    return (exo, cor)
+    exo.append('\\end{enumerate}')
+    exo.append('\\end{multicols}')
+    cor += ligne_tab
+    cor.append("\\end{tabular}")
+    
+def tex_conversion(exo, cor, exposant, u ):
+    """Écrit l'exercice sur les conversions d'unités d'aires et le corrigé au
+    format LaTeX
+    @param exo: fichier exercices
+    @param cor: fichier corrige
+    """
 
+    a = random.randint(101,999)
+    p = random.randint(-2,-1)
+    while True:
+        (div0,div1)=(random.randrange(6),random.randrange(7),)
+        #Pas de mm³ par ce que ça sort du tableau
+        if (div0-div1) in [-2,-1,1,2]:
+            #pas trop loin car ça fait de très longs nombres
+            break
+    nb0 = a * 10 ** p
+    nb1 = nb0 * 10 ** ( exposant * ( div1- div0))
+
+    exo.append("\\item $\\unit[%s]{%s}=\\unit[\\dotfill]{%s}$"%
+            (outils.Affichage.decimaux(nb0), u[div0], u[div1]))
+    cor.append("\\item $\\unit[%s]{%s}=\\unit[%s]{%s}$\\vspace{1ex}\\par" %
+            (outils.Affichage.decimaux(nb0), u[div0],
+                outils.Affichage.decimaux(nb1), u[div1]))
+
+    return tex_tableau_conversion(cor, div0, div1, nb0, u, exposant)
+
+def tex_tableau_conversion(cor, div0, div1, nb0, u,exposant ):
+    nb_dict = nbre_to_dict(nb0,div0,div1,exposant)
+    nblist = [str(nb_dict.get(i,"")) for i in range(7*exposant)]
+    nblist[exposant*(div0 + 1)-1] =  "{%s\\textcolor{gray}{\\LARGE ,}}"%nb_dict.get(exposant*(div0+1)-1,"0")
+    nblist[exposant*(div1 + 1)-1] = "{%s\\textcolor{red}{ \\LARGE ,}}"%nb_dict.get(exposant*(div1+1)-1,"0")
+    return [("%s " + "& %s"*(7*exposant-1) +"\\\\") % tuple(nblist)]
+
+
+def nbre_to_dict(nbre ,div0,div1,exposant):
+    #exposant peut être 2 ou 3 pour les m² ou les m³
+    nbre = int(round(nbre*100))
+    nb_dict = {}
+    for i in range(min(exposant*(div0+1),exposant*(div1+1))-1,max(exposant*(div0+1),exposant*(div1+1))):
+            nb_dict[i] = "\\textcolor{red}{0}"
+    curseur = 1+exposant*(div0+1)
+    while nbre % 10 == 0:
+        nbre = nbre / 10
+        curseur -= 1
+    while nbre > 0:
+        chiffre = nbre % 10
+        nbre = (nbre-chiffre)/10
+        nb_dict[curseur] = "\\textcolor{blue}{%s}"%chiffre
+        curseur -= 1
+    return nb_dict
 #===============================================================================
 # Placer une virgule
 #===============================================================================
