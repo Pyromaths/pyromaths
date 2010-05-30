@@ -25,7 +25,7 @@ p["/usr/lib/pyromaths"] = glob("sixiemes/*.py") + glob("cinquiemes/*.py") + \
                           glob("quatriemes/*.py") + glob("troisiemes/*.py") +\
                           glob("classes/*.py") + glob("lycee/*.py") +\
                           glob("modeles/*.tex") + glob("outils/*.py") + \
-                          ["interface.py", "outils.py" ]
+                          ["interface.py", ]
 p["/usr/bin"] = ["pyromaths.py|pyromaths"]
 p["/usr/share/doc/pyromaths"] = ["README.txt", "licence.txt"]
 
