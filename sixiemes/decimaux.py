@@ -223,9 +223,9 @@ def EcritEnChiffre(exo, cor):
 def EcritEnLettre(exo, cor):
     lnb = nombreATrouver()
     for i in range(8):
-        exo.append("""\\item " + outils.Affichage.decimaux(lnb[i], 0) +
+        exo.append("\\item " + outils.Affichage.decimaux(lnb[i], 0) +
                  " : \\dotfill")
-        cor.append("""\\item " + outils.Affichage.decimaux(lnb[i], 0) +
+        cor.append("\\item " + outils.Affichage.decimaux(lnb[i], 0) +
                 " : ")
         cor.append(EcritNombreDecimal(lnb[i]) + '')
 
@@ -325,7 +325,7 @@ def tex_units(exo, cor):
             tex_tableau_autres(cor, div0, u, nblist, chf_unite)
         else:
             tex_tableau_litres(cor, div0, u, nblist, chf_unite)
-        cor.append("""\\end{tabular}")
+        cor.append("\\end{tabular}")
 
 
 def tex_tableau_autres(cor, div0, u, nblist, chf_unite):
@@ -345,12 +345,12 @@ def tex_tableau_autres(cor, div0, u, nblist, chf_unite):
     for i in range(7 - len(nblist)):
         nblist.append('0')
 
-    cor.append("""%s & %s & %s & %s & %s & %s & %s" % tuple(nblist))
+    cor.append("%s & %s & %s & %s & %s & %s & %s" % tuple(nblist))
 
 
 def tex_tableau_litres(cor, div0, u, nblist, chf_unite):
-    cor.append("""\\begin{tabular}{c|c|c|c|c|c}")
-    cor.append("""h%s & da%s & %s & d%s & c%s & m%s \\\\ \\hline" %
+    cor.append("\\begin{tabular}{c|c|c|c|c|c}")
+    cor.append("h%s & da%s & %s & d%s & c%s & m%s \\\\ \\hline" %
              u)
     for i in range(-div0 + 1 + chf_unite):
         tmp = nblist.pop(0)
@@ -366,7 +366,7 @@ def tex_tableau_litres(cor, div0, u, nblist, chf_unite):
     for i in range(6 - len(nblist)):
         nblist.append('0')
 
-    cor.append("""%s & %s & %s & %s & %s & %s" % tuple(nblist))
+    cor.append("%s & %s & %s & %s & %s & %s" % tuple(nblist))
 
 def tex_metre_carre(exo, cor):
     """Écrit l'exercice sur les conversions d'unités d'aires et le corrigé au
