@@ -81,10 +81,10 @@ def SymetrieQuadrillage():
         vals = valeurs_quad(nbpts)
         txt = place_pts(vals, angle)
         exo.append("\\begin{pspicture*}(-3,-3)(3,3)")
-        exo.append("  \\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]")
+        exo.append("""\\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]")
         exo.append(txt)
         cor.append("\\begin{pspicture*}(-3,-3)(3,3)")
-        cor.append("  \\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]")
+        cor.append("""\\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]")
         cor.append(txt)
         txt_cor = "\\pstOrtSym[PointSymbol=x,PointName=none]{A}{B}{"
         for i in range(len(vals)):

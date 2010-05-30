@@ -31,19 +31,19 @@ import random
 def choix_trou(nb1, nb2, tot, operateur, exo, cor):
     nbaleatoire = random.randrange(4)
     if nbaleatoire > 1:
-        exo.append("    \\item $%s %s %s = \\ldots\\ldots$" % (nb1,
+        exo.append("""\\item $%s %s %s = \\ldots\\ldots$" % (nb1,
                    operateur, nb2))
-        cor.append("    \\item $%s %s %s = \\mathbf{%s}$" % (nb1,
+        cor.append("""\\item $%s %s %s = \\mathbf{%s}$" % (nb1,
                    operateur, nb2, tot))
     elif nbaleatoire > 0:
-        exo.append("    \\item $%s %s \\ldots\\ldots = %s$" % (nb1,
+        exo.append("""\\item $%s %s \\ldots\\ldots = %s$" % (nb1,
                    operateur, tot))
-        cor.append("    \\item $%s %s \\mathbf{%s} = %s$" % (nb1,
+        cor.append("""\\item $%s %s \\mathbf{%s} = %s$" % (nb1,
                    operateur, nb2, tot))
     else:
-        exo.append("    \\item $\\ldots\\ldots %s %s = %s$" % (operateur,
+        exo.append("""\\item $\\ldots\\ldots %s %s = %s$" % (operateur,
                    nb2, tot))
-        cor.append("    \\item $\\mathbf{%s} %s %s = %s$" % (nb1,
+        cor.append("""\\item $\\mathbf{%s} %s %s = %s$" % (nb1,
                    operateur, nb2, tot))
 
 

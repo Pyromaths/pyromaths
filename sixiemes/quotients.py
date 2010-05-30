@@ -56,9 +56,9 @@ def Divisible():
     exo.append("\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par 3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}")
     cor.append("\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par 3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}")
     for i in range(len(l)):
-        exo.append("  %s & $\\square$ & $\\square$ & $\\square$ & $\\square$ & $\\square$ \\\\" %
+        exo.append("""%s & $\\square$ & $\\square$ & $\\square$ & $\\square$ & $\\square$ \\\\" %
                  l[i])
-        cor.append("  %s & %s & %s & %s & %s & %s \\\\" % tuple(reponse[i]))
+        cor.append("""%s & %s & %s & %s & %s & %s \\\\" % tuple(reponse[i]))
     exo.append("\\end{tabular}")
     cor.append("\\end{tabular}")
     return (exo, cor)

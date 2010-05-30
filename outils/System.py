@@ -256,18 +256,17 @@ def copie_tronq_modele(dest, parametres, master):
     master = '% ' + master
     n = 0
 
-    ## Liste des modèles pyromaths
-    liste_modeles_pyromaths = ['evaluation.tex', 'pyromaths.tex']
-
     ## Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
     source = parametres['modele']
 
-    if source in liste_modeles_pyromaths:
+    if os.path.isfile(os.path.join(parametres['configdir'], 'modeles',source)):
+        source = os.path.join(parametres['configdir'], 'modeles', source)
+    elif os.path.isfile(os.path.join(module_path(), 'modeles', source)):
         source = os.path.join(module_path(), 'modeles', source)
     else:
-        source = os.path.join(parametres['configdir'], 'modeles', source)
-
-    ## La destination est le fichier temporaire.
+        #TODO: Message d'erreur, le modèle demandé n'existe pas
+        print(u"Le fichier modèle n'a pas été trouvé dans %s" %
+                os.path.join(module_path(), 'modeles'))
 
     ## Les variables à remplacer :
     titre = parametres['titre']
@@ -312,10 +311,10 @@ def module_path():
     even if we are frozen using py2exe"""
 
     if we_are_frozen():
-        return os.path.dirname(unicode(sys.executable,
-                                sys.getfilesystemencoding( )))
+        return os.path.normpath(os.path.dirname(unicode(sys.executable,
+            sys.getfilesystemencoding())))
 
     #return os.path.dirname(str(__file__,
     #                                sys.getfilesystemencoding( )))
-    return os.path.join(os.path.dirname(str(__file__)),  '..')
+    return os.path.normpath(os.path.join(os.path.dirname(str(__file__)), '..'))
 

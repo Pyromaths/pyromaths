@@ -254,15 +254,15 @@ def main():
             i = i + 1
             for j in range(len(list[0])):
                 if j == 0:
-                    exo.append("  \\[ \\thenocalcul = %s \\]" %
+                    exo.append("""\\[ \\thenocalcul = %s \\]" %
                                affichage(list[0][j], list[1][j]))
-                    exo.append('  \\stepcounter{nocalcul}%')
+                    exo.append('''\\stepcounter{nocalcul}%')
                 if j == len(list[0]) - 1:
-                    cor.append("  \\[ \\boxed{\\thenocalcul = %s} \\]" %
+                    cor.append("""\\[ \\boxed{\\thenocalcul = %s} \\]" %
                                affichage(list[0][j], list[1][j]))
-                    cor.append('  \\stepcounter{nocalcul}%')
+                    cor.append('''\\stepcounter{nocalcul}%')
                 else:
-                    cor.append("  \\[ \\thenocalcul = %s \\]" %
+                    cor.append("""\\[ \\thenocalcul = %s \\]" %
                                affichage(list[0][j], list[1][j]))
     exo.append("\\end{multicols}")
     cor.append("\\end{multicols}")

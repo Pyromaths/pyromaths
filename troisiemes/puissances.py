@@ -31,12 +31,8 @@ import string, math
 
 def tex_puissances_0(a):
     if isinstance(a, tuple):
-
-        #print str(a[0])+'   '+str(a[1])+'   '+str(a[2])
-
         return '\\cfrac{\\nombre{%s} \\times 10^{%s} \\times \\nombre{%s} \\times 10^{%s}}{\\nombre{%s} \\times \\big( 10^{%s} \\big) ^%s}' % \
             (a[0], a[3], a[1], a[4], a[2], a[5], a[6])
-
 
 def tex_puissances_1(a):
     if isinstance(a, tuple):
@@ -71,10 +67,6 @@ def tex_puissances_2(a):
 def tex_puissances_3(a):
     from math import floor, log10
     b = int(floor(log10(((a[0] * a[1]) * 1.) / a[2])))
-
-    #print str(a[0])+'   '+str(a[1])+'   '+str(a[2])
-    #print str(a[0]*a[1]*1./a[2])+'  '+str(a[0]*a[1]*1./a[2]/10**b)+'    '+str(int(a[0]*a[1]*1./a[2]/10**b+.1))
-
     if isinstance(a, tuple) and b != 0:
         return '\\nombre{%s}  \\times 10^{%s} \\times 10^{%s}' % \
             verifie_type(((((a[0] * a[1]) * 1.) / a[2]) / 10 ** b, b, (a[3] +
@@ -139,28 +131,28 @@ def tex_puissances():
     sd = string.maketrans('.', ',')  # convertit les . en , (separateur decimal)
     valeurs = valeurs_puissances()
     i = randrange(2)
-    exo = ['''\\exercice''', u"  Calculer les expressions suivantes et donner l'écriture scientifique du résultat."]
-    exo.append('  \\begin{multicols}{2}\\noindent')
-    cor = ['''\\exercice*''', u"  Calculer les expressions suivantes et donner l'écriture scientifique du résultat."]
-    cor.append('  \\begin{multicols}{2}\\noindent')
-    exo.append(u'  \\[ \\thenocalcul = ' + tex_puissances_0(valeurs[i]).translate(sd) + '\\] ')
-    cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_0(valeurs[i]).translate(sd) + '\\] ')
-    cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_1(valeurs[i]).translate(sd) + '\\] ')
-    cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_2(valeurs[i]).translate(sd) + '\\] ')
+    exo = ['''\\exercice''', u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat."]
+    exo.append('''\\begin{multicols}{2}\\noindent')
+    cor = ['''\\exercice*''', u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat."]
+    cor.append('''\\begin{multicols}{2}\\noindent')
+    exo.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_1(valeurs[i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_2(valeurs[i]).translate(sd) + '\\] ')
     if int(math.floor(math.log10(((valeurs[i][0] * valeurs[i][1]) * 1.) / valeurs[i][2]))) != \
         0:
-        cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_3(valeurs[i]).translate(sd) + '\\] ')
-    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_puissances_4(valeurs[i]).translate(sd) + '} \\] ')
-    exo.append('    \\columnbreak\\stepcounter{nocalcul}%')
-    cor.append('    \\columnbreak\\stepcounter{nocalcul}%')
-    exo.append(u'  \\[ \\thenocalcul = ' + tex_puissances_0(valeurs[1 - i]).translate(sd) + '\\] ')
-    cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_0(valeurs[1 - i]).translate(sd) + '\\] ')
-    cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_1(valeurs[1 - i]).translate(sd) + '\\] ')
-    cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_2(valeurs[1 - i]).translate(sd) + '\\] ')
+        cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_3(valeurs[i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_puissances_4(valeurs[i]).translate(sd) + '} \\] ')
+    exo.append('''\\columnbreak\\stepcounter{nocalcul}%')
+    cor.append('''\\columnbreak\\stepcounter{nocalcul}%')
+    exo.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[1 - i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[1 - i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_1(valeurs[1 - i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_2(valeurs[1 - i]).translate(sd) + '\\] ')
     if int(math.floor(math.log10(((valeurs[1 - i][0] * valeurs[1 - i][1]) * 1.) /
            valeurs[1 - i][2]))) != 0:
-        cor.append(u'  \\[ \\thenocalcul = ' + tex_puissances_3(valeurs[1 - i]).translate(sd) + '\\] ')
-    cor.append(u'  \\[ \\boxed{\\thenocalcul = ' + tex_puissances_4(valeurs[1 - i]).translate(sd) + '} \\] ')
-    exo.append('  \\end{multicols}')
-    cor.append('  \\end{multicols}')
+        cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_3(valeurs[1 - i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_puissances_4(valeurs[1 - i]).translate(sd) + '} \\] ')
+    exo.append('''\\end{multicols}')
+    cor.append('''\\end{multicols}')
     return (exo, cor)

@@ -29,31 +29,31 @@ import random
 
 def tex_trouve_diviseur(a):  # trouve si les nombres dans le tuple a sont divisible par 10, 2, 5, 9 ou 3 (dans cet ordre)
     if a[0] % 10 == 0 and a[1] % 10 == 0:
-        return '    \\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
+        return '\\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
             u'} se terminent tous les deux par zéro donc ils sont divisibles par 10.\\par\n' + \
-            '    \\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
+            '\\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
             '} ne sont donc pas premiers entre eux'
     elif a[0] % 2 == 0 and a[1] % 2 == 0:
-        return '    \\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
+        return '\\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
             '} sont deux nombres pairs donc ils sont divisibles par 2.\\par\n' + \
-            '    \\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
+            '\\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
             '} ne sont donc pas premiers entre eux'
     elif a[0] % 5 == 0 and a[1] % 5 == 0:
-        return '    \\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
+        return '\\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
             u'} se terminent tous les deux par zéro ou cinq donc ils sont divisibles par 5.\\par\n' + \
-            '    \\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
+            '\\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
             '} ne sont donc pas premiers entre eux'
     elif a[0] % 9 == 0 and a[1] % 9 == 0:
-        return '    La somme des chiffres de \\nombre{' + str(a[0]) + \
+        return 'La somme des chiffres de \\nombre{' + str(a[0]) + \
             '} et celle de \\nombre{' + str(a[1]) + \
             '} sont divisibles par neuf donc ils sont divisibles par 9.\\par\n' + \
-            '    \\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
+            '\\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
             '} ne sont donc pas premiers entre eux'
     elif a[0] % 3 == 0 and a[1] % 3 == 0:
-        return '    La somme des chiffres de \\nombre{' + str(a[0]) + \
+        return 'La somme des chiffres de \\nombre{' + str(a[0]) + \
             '} et celle de \\nombre{' + str(a[1]) + \
             '} sont divisibles par trois donc ils sont divisibles par 3.\\par\n' + \
-            '    \\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
+            '\\nombre{' + str(a[0]) + '} et \\nombre{' + str(a[1]) + \
             '} ne sont donc pas premiers entre eux'
 
 
@@ -99,7 +99,7 @@ def tex_algo_euclide(l):  # renvoie l'ecriture au format tex de l'algorithme d'E
 
 
 def tex_simplifie_fraction_pgcd(a):  # renvoie l'ecriture au format tex de la simplification de la fraction
-    return '''    \\begin{align*}
+    return '''\\begin{align*}
       \\cfrac{\\nombre{%s}}{\\nombre{%s}} &= \\cfrac{\\nombre{%s}\\div%s}{\\nombre{%s}\\div%s}\\\\\n      &= \\boxed{\\cfrac{\\nombre{%s}}{\\nombre{%s}}}
     \\end{align*}''' % \
         a
@@ -107,32 +107,32 @@ def tex_simplifie_fraction_pgcd(a):  # renvoie l'ecriture au format tex de la si
 def tex_pgcd():
     nombres = valeurs_pgcd()
     exo = ['\\exercice']
-    exo.append('''  \\begin{enumerate}
+    exo.append('''\\begin{enumerate}
   \\item Les nombres \\nombre{%s} et \\nombre{%s} sont-ils premiers entre eux ?
 ''' %
              nombres)
-    exo.append('  \\item Calculer le plus grand commun diviseur (\\textsc{pgcd}) de \\nombre{%s} et \\nombre{%s}.' %
+    exo.append('''\\item Calculer le plus grand commun diviseur (\\textsc{pgcd}) de \\nombre{%s} et \\nombre{%s}.' %
              nombres)
-    exo.append(u'  \\item Simplifier la fraction $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ pour la rendre irréductible en indiquant la méthode.\n' %
+    exo.append(u'\\item Simplifier la fraction $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ pour la rendre irréductible en indiquant la méthode.\n' %
              nombres)
-    exo.append('  \\end{enumerate}')
+    exo.append('''\\end{enumerate}')
     cor = ['\\exercice*']
-    cor.append('''  \\begin{enumerate}
+    cor.append('''\\begin{enumerate}
   \\item Les nombres \\nombre{%s} et \\nombre{%s} sont-ils premiers entre eux ?\\par
 ''' %
              nombres)
     cor.append(tex_trouve_diviseur(nombres))
-    cor.append('  \\item Calculer le plus grand commun diviseur (\\textsc{pgcd}) de \\nombre{%s} et \\nombre{%s}.\\par' %
+    cor.append('''\\item Calculer le plus grand commun diviseur (\\textsc{pgcd}) de \\nombre{%s} et \\nombre{%s}.\\par' %
              nombres)
-    cor.append('    On calcule le \\textsc{pgcd} des nombres \\nombre{%s} et \\nombre{%s} en utilisant l\'algorithme d\'Euclide.' %
+    cor.append('''On calcule le \\textsc{pgcd} des nombres \\nombre{%s} et \\nombre{%s} en utilisant l\'algorithme d\'Euclide.' %
              nombres)
     l = algo_euclide(nombres)
     tex_liste = tex_algo_euclide(l)
     for i in range(len(l)):
-        cor.append(u'  \\[ %s' % tex_liste[i] + '\\] ')
-    cor.append('    ' + tex_liste[len(l)])
-    cor.append(u'  \\item Simplifier la fraction $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ pour la rendre irréductible en indiquant la méthode.' %
+        cor.append(u'\\[ %s' % tex_liste[i] + '\\] ')
+    cor.append('''' + tex_liste[len(l)])
+    cor.append(u'\\item Simplifier la fraction $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ pour la rendre irréductible en indiquant la méthode.' %
              nombres)
     cor.append(tex_simplifie_fraction_pgcd(simplifie_fraction_pgcd(l)))
-    cor.append('  \\end{enumerate}')
+    cor.append('''\\end{enumerate}')
     return (exo, cor)

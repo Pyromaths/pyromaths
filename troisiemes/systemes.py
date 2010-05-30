@@ -137,19 +137,19 @@ def tex_comb4(v):
 def tex_equation(v, c):
     tv = (developpements.tex_coef(v[0][0], 'x'), developpements.tex_coef(v[0][1],
           'y', bplus=1), v[0][2])
-    t = '    $%s%s=%s\\quad\\text{et}\\quad ' % tv
+    t = '$%s%s=%s\\quad\\text{et}\\quad ' % tv
     if c[0]:
         t = t + 'x=%s\\quad\\text{donc :}$\n' % v[2][0]
         tv = (developpements.tex_coef(v[0][0], ''), developpements.tex_coef(v[2][0],
               '', bpn=1), developpements.tex_coef(v[0][1], 'y', bplus=1),
               v[0][2])
-        t = t + '    \\[%s\\times %s %s=%s\\]\n' % tv
+        t = t + '\\[%s\\times %s %s=%s\\]\n' % tv
     else:
         t = t + 'y=%s\\quad\\text{donc :}$\n' % v[2][1]
         tv = (developpements.tex_coef(v[0][0], 'x'), developpements.tex_coef(v[0][1],
               '', bplus=1), developpements.tex_coef(v[2][1], '', bpn=1),
               v[0][2])
-        t = t + '    \\[%s %s\\times %s=%s\\]\n' % tv
+        t = t + '\\[%s %s\\times %s=%s\\]\n' % tv
     return t
 
 
@@ -216,33 +216,33 @@ def systemes(exo, cor, v):
         (b0, b1) = (-b0, -b1)
     if min(abs(a0), abs(a1)) > min(abs(b0), abs(b1)):
         (a0, a1) = (b0, b1)
-    exo.append('  $%s$' % tex_systeme(v))
-    cor.append('  $%s$' % tex_systeme(v, (a0, a1)))
+    exo.append('''$%s$' % tex_systeme(v))
+    cor.append('''$%s$' % tex_systeme(v, (a0, a1)))
 
     #outils.Arithmetique.ecrit_tex(f1,tex_systeme(v, (a0, a1)), thenocalcul='',tabs=1)
 
     c1 = combinaison1(v, a0, a1)
-    cor.append('''  \\vspace{2ex}
+    cor.append('''\\vspace{2ex}
   \\begin{multicols}{2}\\noindent
 ''')
-    cor.append(u'  \\[ ' + tex_systeme(c1) +
+    cor.append(u'\\[ ' + tex_systeme(c1) +
                      '\\quad\\text{\\footnotesize On ajoute les deux lignes}' + '\\] ')
     c2 = combinaison2(c1)
-    cor.append(u'  \\[ ' + tex_comb2(c1, c2) + '\\] ')
-    cor.append(u'  \\[ ' + tex_comb3(c2) + '\\] ')
-    cor.append(u'  \\[ \\boxed{' + tex_comb4(c2) + '} \\] ')
-    cor.append('  \\columnbreak\\par')
+    cor.append(u'\\[ ' + tex_comb2(c1, c2) + '\\] ')
+    cor.append(u'\\[ ' + tex_comb3(c2) + '\\] ')
+    cor.append(u'\\[ \\boxed{' + tex_comb4(c2) + '} \\] ')
+    cor.append('''\\columnbreak\\par')
     cor.append(tex_equation(v, c2))
-    cor.append(u'  \\[ ' + tex_eq2(v, c2) + '\\] ')
-    cor.append(u'  \\[ \\boxed{' + tex_eq3(v, c2) + '} \\] ')
-    cor.append('  \\end{multicols}')
-    cor.append(u"  \\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par" %
+    cor.append(u'\\[ ' + tex_eq2(v, c2) + '\\] ')
+    cor.append(u'\\[ \\boxed{' + tex_eq3(v, c2) + '} \\] ')
+    cor.append('''\\end{multicols}')
+    cor.append(u"\\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par" %
              v[2])
-    cor.append(u'  {Vérification : $' + tex_verification(v) + '$}')
+    cor.append(u'{Vérification : $' + tex_verification(v) + '$}')
 
 def tex_systemes( ):
     valeurs = choix_valeurs(10)
-    exo = ['\\exercice', u"  Résoudre le système d'équations suivant :"]
-    cor = ['\\exercice*', u"  Résoudre le système d'équations suivant :"]
+    exo = ['\\exercice', u"Résoudre le système d'équations suivant :"]
+    cor = ['\\exercice*', u"Résoudre le système d'équations suivant :"]
     systemes(exo, cor, valeurs)
     return (exo, cor)
