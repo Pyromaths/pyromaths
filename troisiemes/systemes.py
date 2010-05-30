@@ -59,10 +59,10 @@ def tex_systeme(v, p=None):  # renvoie l'écriture au format tex d'un système d
               developpements.tex_coef(v[1][0], 'x'), signe(v[1][1]),
               developpements.tex_coef(abs(v[1][1]), 'y'), v[1][2])
         return '''\\left\\lbrace
-    \\begin{array}{rcrcl}
-      %s & %s & %s & = & %s \\\\\n      %s & %s & %s & = & %s
-    \\end{array}
-  \\right.''' % \
+\\begin{array}{rcrcl}
+%s & %s & %s & = & %s \\\\\n      %s & %s & %s & = & %s
+\\end{array}
+\\right.''' % \
             tv
     else:
         tv = (
@@ -80,10 +80,10 @@ def tex_systeme(v, p=None):  # renvoie l'écriture au format tex d'un système d
                 developpements.tex_coef(p[1], '', bpn=1),
             )
         return '''\\left\\lbrace
-    \\begin{array}{rcrcll}
-      %s & %s & %s & = & %s & %s \\\\\n      %s & %s & %s & = & %s & %s
-    \\end{array}
-  \\right.''' % \
+\\begin{array}{rcrcll}
+%s & %s & %s & = & %s & %s \\\\\n      %s & %s & %s & = & %s & %s
+\\end{array}
+\\right.''' % \
             tv
 
 
@@ -199,10 +199,10 @@ def tex_verification(v):  # renvoie la vérification de lasolution du système d
         v[1][2],
         )
     return '''\\left\\lbrace
-    \\begin{array}{l}
-      %s %s=%s %s=%s \\\\\n      %s %s=%s %s=%s
-    \\end{array}
-  \\right.''' % \
+\\begin{array}{l}
+%s %s=%s %s=%s \\\\\n      %s %s=%s %s=%s
+\\end{array}
+\\right.''' % \
         tv
 
 
@@ -216,8 +216,8 @@ def systemes(exo, cor, v):
         (b0, b1) = (-b0, -b1)
     if min(abs(a0), abs(a1)) > min(abs(b0), abs(b1)):
         (a0, a1) = (b0, b1)
-    exo.append('''$%s$' % tex_systeme(v))
-    cor.append('''$%s$' % tex_systeme(v, (a0, a1)))
+    exo.append('$%s$' % tex_systeme(v))
+    cor.append('$%s$' % tex_systeme(v, (a0, a1)))
 
     #outils.Arithmetique.ecrit_tex(f1,tex_systeme(v, (a0, a1)), thenocalcul='',tabs=1)
 
@@ -231,11 +231,11 @@ def systemes(exo, cor, v):
     cor.append(u'\\[ ' + tex_comb2(c1, c2) + '\\] ')
     cor.append(u'\\[ ' + tex_comb3(c2) + '\\] ')
     cor.append(u'\\[ \\boxed{' + tex_comb4(c2) + '} \\] ')
-    cor.append('''\\columnbreak\\par')
+    cor.append('\\columnbreak\\par')
     cor.append(tex_equation(v, c2))
     cor.append(u'\\[ ' + tex_eq2(v, c2) + '\\] ')
     cor.append(u'\\[ \\boxed{' + tex_eq3(v, c2) + '} \\] ')
-    cor.append('''\\end{multicols}')
+    cor.append('\\end{multicols}')
     cor.append(u"\\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par" %
              v[2])
     cor.append(u'{Vérification : $' + tex_verification(v) + '$}')

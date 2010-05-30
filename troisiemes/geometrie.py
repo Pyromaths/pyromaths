@@ -686,48 +686,48 @@ def enonce_trigo(exo, cor, v):
                 lt.append('la mesure de l\'angle $%s$' % l[2 * i + 6 * j])
         if tmp:
             lt.append(tmp)
-    exo.append('''\\begin{multicols}{2}')
-    exo.append('''\\begin{enumerate}')
-    cor.append('''\\begin{multicols}{2}')
-    cor.append('''\\begin{enumerate}')
+    exo.append('\\begin{multicols}{2}')
+    exo.append('\\begin{enumerate}')
+    cor.append('\\begin{multicols}{2}')
+    cor.append('\\begin{enumerate}')
     tr = nom_triangle(v[0][0])
-    exo.append('''\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' %
+    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' %
              (tr, v[0][0][0]))
     exo.append('''%s et %s.\\par
-      Calculer %s.\\par
+Calculer %s.\\par
 ''' % tuple(lt[0:3]))
-    cor.append('''\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' %
+    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' %
              (tr, v[0][0][0]))
     cor.append('''%s et %s.\\par
-      Calculer %s.\\par
+Calculer %s.\\par
 ''' % tuple(lt[0:3]))
-    cor.append("""\\dotfill{}\\par\\vspace{2ex}")
-    cor.append('''Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[0][0][0]))  # résolution
+    cor.append("\\dotfill{}\\par\\vspace{2ex}")
+    cor.append('Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[0][0][0]))  # résolution
     v2 = (v[0][1], v[0][2])
     l2 = l[0:6]
     resolution_trigo(cor, v2, l2)
     tr = nom_triangle(v[1][0])
-    exo.append('''\\columnbreak')
-    cor.append('''\\columnbreak')
-    exo.append('''\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
+    exo.append('\\columnbreak')
+    cor.append('\\columnbreak')
+    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
              (tr, v[1][0][0]))
     exo.append('''%s et %s.\\par
-      Calculer %s.\\par
+Calculer %s.\\par
 ''' % tuple(lt[3:6]))
-    cor.append('''\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
+    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
              (tr, v[1][0][0]))
     cor.append('''%s et %s.\\par
-      Calculer %s.\\par
+Calculer %s.\\par
 ''' % tuple(lt[3:6]))
-    cor.append("""\\dotfill{}\\par\\vspace{2ex}")
-    cor.append('''Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[1][0][0]))  # résolution
+    cor.append("\\dotfill{}\\par\\vspace{2ex}")
+    cor.append('Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[1][0][0]))  # résolution
     v2 = (v[1][1], v[1][2])
     l2 = l[6:12]
     resolution_trigo(cor, v2, l2)
-    exo.append('''\\end{enumerate}')
-    exo.append('''\\end{multicols}')
-    cor.append('''\\end{enumerate}')
-    cor.append('''\\end{multicols}')
+    exo.append('\\end{enumerate}')
+    exo.append('\\end{multicols}')
+    cor.append('\\end{enumerate}')
+    cor.append('\\end{multicols}')
 
 
 def resolution_trigo(cor, v2, l2):

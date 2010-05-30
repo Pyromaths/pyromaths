@@ -266,15 +266,15 @@ def exo_sommes_fractions():
         else:
             (l, sol, res) = sommes_fractions_4e(op.pop(random.randrange(2)),
                                                 i//2+1)
-        exo.append("""\\[\\thenocalcul = %s\\]" % Affichage(l))
-        cor.append("""\\[\\thenocalcul = %s\\]" % Affichage(l))
+        exo.append("\\[\\thenocalcul = %s\\]" % Affichage(l))
+        cor.append("\\[\\thenocalcul = %s\\]" % Affichage(l))
         for l in sol:
             if l == sol[-1]:
-                cor.append("""\\[\\boxed{\\thenocalcul = %s}\\]" % l)
+                cor.append("\\[\\boxed{\\thenocalcul = %s}\\]" % l)
             else:
-                cor.append("""\\[\\thenocalcul = %s\\]" % l)
-        exo.append("""\\stepcounter{nocalcul}%")
-        cor.append("""\\stepcounter{nocalcul}%")
+                cor.append("\\[\\thenocalcul = %s\\]" % l)
+        exo.append("\\stepcounter{nocalcul}%")
+        cor.append("\\stepcounter{nocalcul}%")
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
     return (exo, cor)
@@ -293,15 +293,15 @@ def exo_produits_fractions():
             (l, sol, res) = produits_fractions_4e(op.pop(0), i//2+1)
         else:
             (l, sol, res) = produits_fractions_4e(op.pop(random.randrange(2)), i//2+1)
-        exo.append("""\\[\\thenocalcul = %s\\]" % Affichage(l))
-        cor.append("""\\[\\thenocalcul = %s\\]" % Affichage(l))
+        exo.append("\\[\\thenocalcul = %s\\]" % Affichage(l))
+        cor.append("\\[\\thenocalcul = %s\\]" % Affichage(l))
         for l in sol:
             if l == sol[-1]:
-                cor.append("""\\[\\boxed{\\thenocalcul = %s}\\]" % l)
+                cor.append("\\[\\boxed{\\thenocalcul = %s}\\]" % l)
             else:
-                cor.append("""\\[\\thenocalcul = %s\\]" % l)
-        exo.append("""\\stepcounter{nocalcul}%")
-        cor.append("""\\stepcounter{nocalcul}%")
+                cor.append("\\[\\thenocalcul = %s\\]" % l)
+        exo.append("\\stepcounter{nocalcul}%")
+        cor.append("\\stepcounter{nocalcul}%")
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
     return (exo, cor)
@@ -320,15 +320,15 @@ def exo_priorites_fractions():
             (sol, res, niveau) = OperateurPrioritaire(l, 4, solution=[])
             if niveau >= 4:
                 break
-        exo.append("""\\[\\thenocalcul = %s\\]" % Affichage(l))
-        cor.append("""\\[\\thenocalcul = %s\\]" % Affichage(l))
+        exo.append("\\[\\thenocalcul = %s\\]" % Affichage(l))
+        cor.append("\\[\\thenocalcul = %s\\]" % Affichage(l))
         for l in sol:
             if l == sol[-1]:
-                cor.append("""\\[\\boxed{\\thenocalcul = %s}\\]" % l)
+                cor.append("\\[\\boxed{\\thenocalcul = %s}\\]" % l)
             else:
-                cor.append("""\\[\\thenocalcul = %s\\]" % l)
-        exo.append("""\\stepcounter{nocalcul}%")
-        cor.append("""\\stepcounter{nocalcul}%")
+                cor.append("\\[\\thenocalcul = %s\\]" % l)
+        exo.append("\\stepcounter{nocalcul}%")
+        cor.append("\\stepcounter{nocalcul}%")
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
     return (exo, cor)

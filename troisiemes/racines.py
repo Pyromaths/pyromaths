@@ -39,7 +39,7 @@ def exoaRb0(exo, cor, v):
     a = (tex_coef(v[0], '\\sqrt{%s}' % v[3] ** 2), v[6], tex_coef(v[1],
          '\\sqrt{%s}' % v[4] ** 2, bplus=1), v[6], tex_coef(v[2],
          '\\sqrt{%s}' % v[5] ** 2, bplus=1), v[6])
-    cor.append(u'\\[ \\thenocalcul = ' + 
+    cor.append(u'\\[ \\thenocalcul = ' +
                      '%s\\times\\sqrt{%s}%s\\times\\sqrt{%s}%s\\times\\sqrt{%s}' %
                      a + '\\] ')
     a = (
@@ -53,7 +53,7 @@ def exoaRb0(exo, cor, v):
         v[5],
         v[6],
         )
-    cor.append(u'\\[ \\thenocalcul = ' + 
+    cor.append(u'\\[ \\thenocalcul = ' +
                      '%s\\times%s\\times\\sqrt{%s}%s\\times%s\\times\\sqrt{%s}%s\\times%s\\times\\sqrt{%s}' %
                      a + '\\] ')
     a = (tex_coef(v[0] * v[3], '\\sqrt{%s}' % v[6]), tex_coef(v[1] * v[4],
@@ -84,15 +84,15 @@ def exoaRb1(exo, cor, v):
     cor.append(u'\\[ \\thenocalcul = ' + '\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}' %
                      a + '\\] ')
     a = (v[0] ** 2, v[3], v[1] ** 2, v[3], v[2] ** 2, v[3])
-    cor.append(u'\\[ \\thenocalcul = ' + 
+    cor.append(u'\\[ \\thenocalcul = ' +
                      '\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}' %
                      a + '\\] ')
     a = (v[0], v[3], v[1], v[3], v[2], v[3])
-    cor.append(u'\\[ \\thenocalcul = ' + 
+    cor.append(u'\\[ \\thenocalcul = ' +
                      '%s\\times\\sqrt{%s}\\times%s\\times\\sqrt{%s}\\times%s\\times\\sqrt{%s}' %
                      a+ '\\] ')
     a = ((v[0] * v[1]) * v[2], v[3], v[3])
-    cor.append(u'\\[ \\thenocalcul = ' + 
+    cor.append(u'\\[ \\thenocalcul = ' +
                      '%s\\times\\left(\\sqrt{%s}\\right)^2\\times\\sqrt{%s}' %
                      a + '\\] ')
     a = ((v[0] * v[1]) * v[2], v[3], v[3])
@@ -192,30 +192,30 @@ def exo_entier1(exo, cor, v):
     exo.append(u'\\[ \\thenocalcul = ' + '\\frac{%s}{%s}' % a + '\\] ')
     cor.append(u'\\[ \\thenocalcul = ' + '\\frac{%s}{%s}' % a + '\\] ')
     a = (v[0], v[1] ** 2, v[4], v[2], v[3] ** 2, v[4])
-    cor.append(u'\\[ \\thenocalcul = ' + 
+    cor.append(u'\\[ \\thenocalcul = ' +
                      '\\frac{%s\\times\\sqrt{%s}\\times\\cancel{\\sqrt{%s}}}{%s\\times\\sqrt{%s}\\times\\cancel{\\sqrt{%s}}}' %
                      a + '\\] ')
     cor.append(u'\\[ \\thenocalcul = ' + '\\frac{%s\\times %s}{%s\\times %s}' % v[0:4] + '\\] ')
     cor.append(u'\\[ \\boxed{\\thenocalcul = ' + '%s' % (((v[0] * v[1]) // v[2]) // v[3]) + '} \\] ')
 
 def tex_racines():
-    exo = ['''\\exercice''']
-    exo.append('''\\begin{enumerate}')
+    exo = ['\\exercice']
+    exo.append('\\begin{enumerate}')
     exo.append(u'\\item Calculer les expressions suivantes et donner le résultat sous la forme $a\\,\\sqrt{b}$ avec $a$ et $b$ entiers, $b$ le plus petit possible.')
-    exo.append('''\\begin{multicols}{2}\\noindent')
-    cor = ['''\\exercice*''']
-    cor.append('''\\begin{enumerate}')
+    exo.append('\\begin{multicols}{2}\\noindent')
+    cor = ['\\exercice*']
+    cor.append('\\begin{enumerate}')
     cor.append(u'\\item Calculer les expressions suivantes et donner le résultat sous la forme $a\\,\\sqrt{b}$ avec $a$ et $b$ entiers, $b$ le plus petit possible.')
     mymax = 5
-    cor.append('''\\begin{multicols}{2}\\noindent')
+    cor.append('\\begin{multicols}{2}\\noindent')
     valeurs = valeurs_aRb0(mymax)
     exoaRb0(exo, cor, valeurs)
-    exo.append('''\\columnbreak\\stepcounter{nocalcul}%')
-    cor.append('''\\columnbreak\\stepcounter{nocalcul}%')
+    exo.append('\\columnbreak\\stepcounter{nocalcul}%')
+    cor.append('\\columnbreak\\stepcounter{nocalcul}%')
     valeurs = valeurs_aRb1(mymax)
     exoaRb1(exo, cor, valeurs)
-    exo.append('''\\end{multicols}\\vspace{-3ex}')
-    cor.append('''\\end{multicols}')
+    exo.append('\\end{multicols}\\vspace{-3ex}')
+    cor.append('\\end{multicols}')
     exo.append(u'\\item Calculer les expressions suivantes et donner le résultat sous la forme $a+b\\,\\sqrt{c}$ avec $a$, $b$ et $c$ entiers.')
     exo.append('''\\stepcounter{nocalcul}%
     \\begin{multicols}{2}\\noindent''')
@@ -224,12 +224,12 @@ def tex_racines():
     \\begin{multicols}{2}\\noindent''')
     valeurs = valeurs_aPbRc(mymax)
     exo_aPbRc(exo, cor, valeurs)
-    exo.append('''\\columnbreak\\stepcounter{nocalcul}%')
-    cor.append('''\\columnbreak\\stepcounter{nocalcul}%')
+    exo.append('\\columnbreak\\stepcounter{nocalcul}%')
+    cor.append('\\columnbreak\\stepcounter{nocalcul}%')
     valeurs = valeurs_aPbRc(mymax)
     exo_aPbRc(exo, cor, valeurs)
-    exo.append('''\\end{multicols}\\vspace{-3ex}')
-    cor.append('''\\end{multicols}')
+    exo.append('\\end{multicols}\\vspace{-3ex}')
+    cor.append('\\end{multicols}')
     exo.append(u"\\item Calculer les expressions suivantes et donner le résultat sous la forme d'un nombre entier.\n")
     exo.append('''\\stepcounter{nocalcul}%
     \\begin{multicols}{2}\\noindent''')
@@ -238,12 +238,12 @@ def tex_racines():
     \\begin{multicols}{2}\\noindent''')
     valeurs = valeurs_entier0(mymax)
     exo_entier0(exo, cor, valeurs)
-    exo.append('''\\columnbreak\\stepcounter{nocalcul}%')
-    cor.append('''\\columnbreak\\stepcounter{nocalcul}%')
+    exo.append('\\columnbreak\\stepcounter{nocalcul}%')
+    cor.append('\\columnbreak\\stepcounter{nocalcul}%')
     valeurs = valeurs_entier1(mymax)
     exo_entier1(exo, cor, valeurs)
-    exo.append('''\\end{multicols}\\vspace{-3ex}')
-    exo.append('''\\end{enumerate}')
-    cor.append('''\\end{multicols}')
-    cor.append('''\\end{enumerate}')
+    exo.append('\\end{multicols}\\vspace{-3ex}')
+    exo.append('\\end{enumerate}')
+    cor.append('\\end{multicols}')
+    cor.append('\\end{enumerate}')
     return (exo, cor)

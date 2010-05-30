@@ -417,16 +417,16 @@ def tex_fractions():
                     valeurs_quotient_frac)
     ordre_exos = [i for i in range(nb_exos)]
     exo = ['''\n\\exercice''', u"Calculer les expressions suivantes et donner le résultat sous la forme d'une fraction irréductible."]
-    exo.append('''\\begin{multicols}{3}\\noindent')
+    exo.append('\\begin{multicols}{3}\\noindent')
     cor = ['''\\exercice*''', u"Calculer les expressions suivantes et donner le résultat sous la forme d'une fraction irréductible."]
-    cor.append('''\\begin{multicols}{3}\\noindent')
+    cor.append('\\begin{multicols}{3}\\noindent')
     for i in range(nb_exos):
         a = randrange(nb_exos - i)
         tex_exos[ordre_exos[a]](valeurs_exos[ordre_exos.pop(a)](), exo, cor)
         if i < nb_exos - 1:
-            exo.append('''\\columnbreak\\stepcounter{nocalcul}')
-            cor.append('''\\columnbreak\\stepcounter{nocalcul}')
+            exo.append('\\columnbreak\\stepcounter{nocalcul}')
+            cor.append('\\columnbreak\\stepcounter{nocalcul}')
         else:
-            exo.append('''\\end{multicols}')
-            cor.append('''\\end{multicols}')
+            exo.append('\\end{multicols}')
+            cor.append('\\end{multicols}')
     return (exo, cor)
