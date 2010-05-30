@@ -9,7 +9,7 @@ import glob
 
 setup(
     name='Pyromaths',
-    version='10.05',
+    version='10.06',
     package_dir={'': 'pyromaths'},
     packages=['', 'troisiemes', 'quatriemes', 'cinquiemes', 'sixiemes', 'lycee',
         'outils', 'classes', 'img'],

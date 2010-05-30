@@ -789,29 +789,29 @@ def fin_fact(a):  # renvoie un tuple contenant la version factorisee de a
 def tex_equations(fact, cor):  # renvoie un tuple contenant les deux binomes egaux a 0
     cor.append(u'Nous savons que $A=%s$. Nous devons donc résoudre $%s=0$.\\par' %
              (tex_dev0(fact), tex_dev0(fact)))
-    cor.append('''Un produit de facteurs est nul signifie qu\'un des facteurs est nul. Donc :')
-    cor.append('''\\[%s=0 \\qquad\\text{ou}\\qquad %s=0\\]' % (tex_binome(fact[0]),
+    cor.append('Un produit de facteurs est nul signifie qu\'un des facteurs est nul. Donc :')
+    cor.append('\\[%s=0 \\qquad\\text{ou}\\qquad %s=0\\]' % (tex_binome(fact[0]),
              tex_binome(fact[1])))
     eq = equations1(fact)
     if not isinstance(eq, tuple):
-        cor.append("""\t\\fbox{Cette équation n'admet aucune solution.}")
+        cor.append("\\fbox{Cette équation n'admet aucune solution.}")
     elif not isinstance(eq[0], tuple):
-        cor.append('''\\[ %s=%s \\]' % (tex_coef(eq[1][0], 'x'), eq[1][1]))
+        cor.append('\\[ %s=%s \\]' % (tex_coef(eq[1][0], 'x'), eq[1][1]))
         if eq[1][0] != 1:
             cor.append('\\[ x=%s \\]' % tex_frac(equations2(eq)[1]))
         cor.append(u'\\fbox{La solution de cette équation est \\,$%s$\\,.}' %
                  tex_frac(equations3(eq)[1]))
     elif not isinstance(eq[1], tuple):
-        cor.append('''\\[ %s=%s \\]' % (tex_coef(eq[0][0], 'x'), eq[0][1]))
+        cor.append('\\[ %s=%s \\]' % (tex_coef(eq[0][0], 'x'), eq[0][1]))
         if eq[0][0] != 1:
-            cor.append('''\\[ x=%s \\]' % tex_frac(equations2(eq)[0]))
+            cor.append('\\[ x=%s \\]' % tex_frac(equations2(eq)[0]))
         cor.append(u'\\fbox{La solution de cette équation est \\,$%s$\\,.}' %
                  tex_frac(equations3(eq)[0]))
     else:
-        cor.append('''\\[%s=%s \\qquad\\text{ou}\\qquad %s=%s\\]' % (tex_coef(eq[0][0],
+        cor.append('\\[%s=%s \\qquad\\text{ou}\\qquad %s=%s\\]' % (tex_coef(eq[0][0],
                  'x'), eq[0][1], tex_coef(eq[1][0], 'x'), eq[1][1]))
         if eq[0][0] != 1 or eq[1][0] != 1:
-            cor.append('''\\[x=%s \\qquad\\text{ou}\\qquad x=%s\\]' %
+            cor.append('\\[x=%s \\qquad\\text{ou}\\qquad x=%s\\]' %
                      (tex_frac(equations2(eq)[0]), tex_frac(equations2(eq)[1])))
         cor.append(u'\\fbox{Les solutions de cette équation sont \\,$%s\\,\\text{ et }\\,%s$\\,.}' %
                  (tex_frac(equations3(eq)[0]), tex_frac(equations3(eq)[1])))
@@ -932,7 +932,7 @@ def version_developpee(expr):  # renvoie la version developpe de A
 
 def tex_fractions(expr, nb, cor):  # repond a la question sur la valeur de x
     a = version_developpee(expr)
-    cor.append('''Nous savons que $A=%s$\\,. Donc pour $x=%s$\\, : ' %
+    cor.append('Nous savons que $A=%s$\\,. Donc pour $x=%s$\\, : ' %
              (tex_trinome(a), tex_frac(nb)))
     cor.append(u'\\[ \\thenocalcul = ' + tex_valeurx0(a, nb) + '\\]')
     if nb == (0, 1):
@@ -1028,30 +1028,30 @@ def tex_devfacteq():
     expr = choix_exo(exos)
     valeurx = valeur_quotient()
     fact = fin_fact(expr)
-    exo = ['''\\exercice''']
-    exo.append('''On donne $A=%s$\\,.' % tex_initial(exos,
+    exo = ['\\exercice']
+    exo.append('On donne $A=%s$\\,.' % tex_initial(exos,
              expr))
-    exo.append('''\\begin{enumerate}')
+    exo.append('\\begin{enumerate}')
     exo.append(u'\\item Développer et réduire $A$\\,.')
-    exo.append('''\\item Factoriser $A$\\,.')
-    exo.append('''\\item Calculer $A$ pour $x=%s$\\,.' % \
+    exo.append('\\item Factoriser $A$\\,.')
+    exo.append('\\item Calculer $A$ pour $x=%s$\\,.' % \
              tex_frac(valeurx))
     exo.append(u"\\item Résoudre l'équation $A=0$\\,.")  # % tex_dev0(fact))
-    exo.append('''\\end{enumerate}')
-    cor = ['''\\exercice*''']
-    cor.append('''On donne $A=%s$\\,.' % tex_initial(exos,
+    exo.append('\\end{enumerate}')
+    cor = ['\\exercice*']
+    cor.append('On donne $A=%s$\\,.' % tex_initial(exos,
              expr))
-    cor.append('''\\begin{enumerate}')
+    cor.append('\\begin{enumerate}')
     cor.append(u'\\item Développer et réduire $A$\\,.')
     developpements(expr, exos, cor)
-    cor.append('''\\item Factoriser $A$\\,.')
+    cor.append('\\item Factoriser $A$\\,.')
     exec('factorisation' + str(exos) + '(cor,valeurs=expr)')
-    cor.append('''\\item Calculer $A$ pour $x=%s$\\,.\\par' % \
+    cor.append('\\item Calculer $A$ pour $x=%s$\\,.\\par' % \
              tex_frac(valeurx))
     tex_fractions(expr, valeurx, cor)
     cor.append(u"\\item Résoudre l'équation $A=0$\\,.\\par")  # % tex_dev0(fact))
     tex_equations(fact, cor)
-    cor.append('''\\end{enumerate}')
+    cor.append('\\end{enumerate}')
     return (exo, cor)
 
 def tex_developpements():
@@ -1065,36 +1065,36 @@ def tex_developpements():
     for i in range(nb_exos):
         a = random.randrange(nb_exos - i)
         exos.append(liste_exos[ordre_exos.pop(a)](10))
-    exo = ['''\\exercice''']
+    exo = ['\\exercice']
     exo.append(u'Développer et réduire les expressions suivantes.')
-    exo.append('''\\begin{multicols}{2}\\noindent')
-    cor = ['''\\exercice*''']
+    exo.append('\\begin{multicols}{2}\\noindent')
+    cor = ['\\exercice*']
     cor.append(u'Développer et réduire les expressions suivantes.')
-    cor.append('''\\begin{multicols}{2}\\noindent')
+    cor.append('\\begin{multicols}{2}\\noindent')
     tex_developpe1(exos[0], exo, cor)
-    exo.append('''\\stepcounter{nocalcul}%')
-    cor.append('''\\stepcounter{nocalcul}%')
+    exo.append('\\stepcounter{nocalcul}%')
+    cor.append('\\stepcounter{nocalcul}%')
     tex_developpe1(exos[1], exo, cor)
-    exo.append('''\\stepcounter{nocalcul}%')
-    cor.append('''\\columnbreak\\stepcounter{nocalcul}%')
+    exo.append('\\stepcounter{nocalcul}%')
+    cor.append('\\columnbreak\\stepcounter{nocalcul}%')
     tex_developpe1(exos[2], exo, cor)
-    exo.append('''\\stepcounter{nocalcul}%')
-    cor.append('''\\stepcounter{nocalcul}%')
+    exo.append('\\stepcounter{nocalcul}%')
+    cor.append('\\stepcounter{nocalcul}%')
     tex_developpe1(exos[3], exo, cor)
-    cor.append('''\\end{multicols}%')
+    cor.append('\\end{multicols}%')
     exos = []
     sig = [random.randrange(2) for i in range(4)]
     ordre_exos = [i for i in range(nb_exos)]
     for i in range(nb_exos):
         a = random.randrange(nb_exos - i)
         exos.append(liste_exos[ordre_exos.pop(a)](10))
-    exo.append('''\\stepcounter{nocalcul}%')
-    cor.append('''\\stepcounter{nocalcul}%')
+    exo.append('\\stepcounter{nocalcul}%')
+    cor.append('\\stepcounter{nocalcul}%')
     tex_developpe2(exos[0], sig[0], exos[1], sig[1], cor, exo)
-    exo.append('''\\stepcounter{nocalcul}%')
-    cor.append('''\\stepcounter{nocalcul}%')
+    exo.append('\\stepcounter{nocalcul}%')
+    cor.append('\\stepcounter{nocalcul}%')
     tex_developpe2(exos[2], sig[2], exos[3], sig[3], cor, exo)
-    exo.append('''\\end{multicols}')
+    exo.append('\\end{multicols}')
     return (exo, cor)
 
 
@@ -1105,17 +1105,17 @@ def tex_factorisations():
     for i in range(nb_exos):
         ordre_exos.append(ordre.pop(random.randrange(nb_exos - i)))
     del ordre
-    exo = ['''\\exercice''']
-    exo.append('''Factoriser les expressions suivantes.')
-    exo.append('''\\begin{multicols}{2}\\noindent')
-    cor = ['''\\exercice*''']
-    cor.append('''Factoriser les expressions suivantes.')
-    cor.append('''\\begin{multicols}{2}\\noindent')
+    exo = ['\\exercice']
+    exo.append('Factoriser les expressions suivantes.')
+    exo.append('\\begin{multicols}{2}\\noindent')
+    cor = ['\\exercice*']
+    cor.append('Factoriser les expressions suivantes.')
+    cor.append('\\begin{multicols}{2}\\noindent')
     for i in range(nb_exos):
         exec('factorisation' + str(ordre_exos[i]) + \
             '(cor,exo)')
-        exo.append('''\\stepcounter{nocalcul}%')
-        cor.append('''\\stepcounter{nocalcul}%')
-    exo.append('''\\end{multicols}')
-    cor.append('''\\end{multicols}')
+        exo.append('\\stepcounter{nocalcul}%')
+        cor.append('\\stepcounter{nocalcul}%')
+    exo.append('\\end{multicols}')
+    cor.append('\\end{multicols}')
     return (exo, cor)

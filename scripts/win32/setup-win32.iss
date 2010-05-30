@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=Pyromaths
-AppVerName=Pyromaths 10.05
+AppVerName=Pyromaths 10.06
 AppPublisher=Jérôme Ortais
 AppPublisherURL=http://www.pyromaths.org
 AppSupportURL=http://www.pyromaths.org
