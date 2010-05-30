@@ -632,13 +632,14 @@ def resolution_rec_thales1(n, v):
 def tex_resolution_rec_thales1(n, v):
     d = resolution_rec_thales1(n, v)
     return u"""$\\left.
-  \\renewcommand{\\arraystretch}{2}
-  \\begin{array}{l}
-    \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s\\\\\n    \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s
-  \\end{array}
-  \\right\\rbrace$
-  Donc $\\cfrac{%s}{%s}=\\cfrac{%s}{%s}$\\,.\\par
-  D'après la \\textbf{réciproque du théorème de Thalès}, \\fbox{les droites $(%s)$ et $(%s)$ sont parallèles.}
+\\renewcommand{\\arraystretch}{2}
+\\begin{array}{l}
+\\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s\\\\\n    \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s
+\\end{array}
+\\right\\rbrace$
+Donc $\\cfrac{%s}{%s}=\\cfrac{%s}{%s}$\\,.\\par
+D'après la \\textbf{réciproque du théorème de Thalès}, \\fbox{les droites $(%s)$ et $(%s)$ sont parallèles.}
+}
 """ % \
         d
 
