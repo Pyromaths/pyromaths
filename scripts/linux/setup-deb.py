@@ -4,7 +4,7 @@
 from glob import glob
 from py2deb import Py2deb
 
-version = "10.06"
+version = "10.06-1"
 changelog = open("README.txt", "r").read()
 
 p = Py2deb("pyromaths")
