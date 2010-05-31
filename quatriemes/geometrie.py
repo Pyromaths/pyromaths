@@ -574,15 +574,9 @@ def tex_resolution_thales3(n, v):
                                valeur_exacte(((v[r] * 1.0) * v[i + 3]) /
                                v[r + 3])])
     texte = \
-        '''$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad
-\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par
-''' % \
-        tuple(donnees[0:9])
+        '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad \\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n ' % tuple(donnees[0:9])
     texte = texte + \
-        '''$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc
-$\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par
-''' % \
-        tuple(donnees[9:18])
+        '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n' % tuple(donnees[9:18])
     return texte
 
 
@@ -734,14 +728,10 @@ def enonce_trigo(v):
     tr = nom_triangle(v[0][0])
     exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
                (tr, v[0][0][0]))
-    exo.append('''%s et %s.\\par
-Calculer %s.\\par''' %
-               tuple(lt[0:3]))
+    exo.append('%s et %s.\\par\nCalculer %s.\\par' % tuple(lt[0:3]))
     cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
                (tr, v[0][0][0]))
-    cor.append('''%s et %s.\\par
-Calculer %s.\\par''' %
-               tuple(lt[0:3]))
+    cor.append('%s et %s.\\par\nCalculer %s.\\par' % tuple(lt[0:3]))
     cor.append('Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[0][0][0]))  # résolution
     v2 = (v[0][1], v[0][2])
     l2 = l[0:6]
@@ -756,9 +746,7 @@ Calculer %s.\\par''' %
                tuple(lt[3:6]))
     cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
                (tr, v[1][0][0]))
-    cor.append('''%s et %s.\\par
-Calculer %s.\\par''' %
-               tuple(lt[3:6]))
+    cor.append('%s et %s.\\par\nCalculer %s.\\par' % tuple(lt[3:6]))
 #    cor.append("""\\dotfill{}\\par\\vspace{2ex}")
     cor.append('Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[1][0][0]))  # résolution
     v2 = (v[1][1], v[1][2])
