@@ -200,11 +200,11 @@ def creer_noms(noms, i):
 
 def tex_enonce_thales(noms, valeurs):
     texte = \
-            u'Sur la figure ci-dessous, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par' % \
+            u'Sur la figure ci-dessous, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par\n' % \
         (lAB(noms[1:3]), lAB(noms[3:5]))
     liste = long_val(noms, valeurs)
     texte = texte + \
-        'On donne $%s=\\unit[%s]{cm},\\quad %s=\\unit[%s]{cm}, \\quad %s=\\unit[%s]{cm}\\quad\\text{et}\\quad %s~=~\\unit[%s]{cm}$.\\par' % \
+        'On donne $%s=\\unit[%s]{cm},\\quad %s=\\unit[%s]{cm}, \\quad %s=\\unit[%s]{cm}\\quad\\text{et}\\quad %s~=~\\unit[%s]{cm}$.\\par\n' % \
         tuple(liste[0:8])
     texte = texte + 'Calculer $%s\\text{ et }%s$.' % tuple(liste[8:10])
     return texte
@@ -212,8 +212,8 @@ def tex_enonce_thales(noms, valeurs):
 
 def tex_resolution_thales0(n):
     return u"""Les points $%s$,~ $%s$,~ $%s$ et $%s$, $%s$, $%s$ sont alignés et les droites $(%s)$ et $(%s)$ sont parallèles.\\par
-  D'après le \\textbf{théorème de Thalès} :
-  $\\qquad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$
+D'après le \\textbf{théorème de Thalès} :
+$\\qquad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$
 """ % \
         (
         n[0],
@@ -257,7 +257,7 @@ def tex_resolution_thales1(n, v):
             donnees = (creer_noms(n, r + 3), creer_noms(n, r + 6), '-',
                        creer_noms(n, r), nombre(v[r + 3]))
     if donnees:
-        return '\\vspace{1ex}\\par De plus $%s=%s%s%s=\\unit[%s]{cm}$' % \
+        return '\\vspace{1ex}\\par\nDe plus $%s=%s%s%s=\\unit[%s]{cm}$' % \
             donnees
     else:
         return ''
@@ -319,10 +319,10 @@ def tex_resolution_thales3(n, v):
                                valeur_exacte(((v[r] * 1.0) * v[i + 3]) /
                                v[r + 3])])
     texte = \
-        '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par' % \
+        '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n' % \
         tuple(donnees[0:9])
     texte = texte + \
-        '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par' % \
+        '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n' % \
         tuple(donnees[9:18])
     return texte
 
@@ -535,7 +535,7 @@ def rec_thales(exo, cor):
     exo.append(tex_enonce_rec_thales(noms, valeurs) + '\\vspace{2cm}}') #le dernier '}' ferme le bloc exercice
     cor.append(tex_fig_rec_thales(noms, valeurs))
     cor.append(tex_enonce_rec_thales(noms, valeurs) +
-             "\\par\\dotfill{}\\\\\n")
+             "\\par\\dotfill{}\\\\}\n")
     cor.append(tex_resolution_rec_thales0(noms, valeurs))
     cor.append(tex_resolution_rec_thales1(noms, valeurs))
 
@@ -565,7 +565,7 @@ def tex_enonce_rec_thales(n, v):
     d = enonce_rec_thales(n, v)
     texte = \
         u'''Sur la figure ci-contre, on donne $%s=\\unit[%s]{cm}$, $%s=\\unit[%s]{cm}$, $%s=\\unit[%s]{cm}$ et $%s=\\unit[%s]{cm}$.\\par
-  Démontrer que les droites $(%s)$ et $(%s)$ sont parallèles.
+Démontrer que les droites $(%s)$ et $(%s)$ sont parallèles.
 ''' % \
         d
     return texte
@@ -597,7 +597,7 @@ def resolution_rec_thales0(n, v):
 
 def tex_resolution_rec_thales0(n, v):
     return u"""Les points $%s$, $%s$, $%s$~ et $%s$, $%s$, $%s$ sont alignés dans le même ordre.\\par
-  De plus $%s=%s%s%s=\\unit[%s]{cm}$.\\par
+De plus $%s=%s%s%s=\\unit[%s]{cm}$.\\par
 """ % \
         resolution_rec_thales0(n, v)
 
@@ -632,13 +632,13 @@ def resolution_rec_thales1(n, v):
 def tex_resolution_rec_thales1(n, v):
     d = resolution_rec_thales1(n, v)
     return u"""$\\left.
-  \\renewcommand{\\arraystretch}{2}
-  \\begin{array}{l}
-    \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s\\\\\n    \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s
-  \\end{array}
-  \\right\\rbrace$
-  Donc $\\cfrac{%s}{%s}=\\cfrac{%s}{%s}$\\,.\\par
-  D'après la \\textbf{réciproque du théorème de Thalès}, \\fbox{les droites $(%s)$ et $(%s)$ sont parallèles.}
+\\renewcommand{\\arraystretch}{2}
+\\begin{array}{l}
+\\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s\\\\\n    \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s
+\\end{array}
+\\right\\rbrace$
+Donc $\\cfrac{%s}{%s}=\\cfrac{%s}{%s}$\\,.\\par
+D'après la \\textbf{réciproque du théorème de Thalès}, \\fbox{les droites $(%s)$ et $(%s)$ sont parallèles.}
 """ % \
         d
 
