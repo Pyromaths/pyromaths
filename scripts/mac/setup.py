@@ -1,6 +1,6 @@
 from setuptools import setup
 
-APP = ['../pyromaths.py']
+APP = ['../../pyromaths.py']
 DATA_FILES = ['pyromaths.icns']
 OPTIONS = dict(
         plist='Info.plist',
