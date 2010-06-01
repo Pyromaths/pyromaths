@@ -1,13 +1,45 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import sys, os
+from subprocess import call, Popen
+
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from pyromaths import LesFiches
+from outils.System import creation
 import codecs
+
+if os.name == 'nt':
+    def home():
+        return unicode(os.environ['USERPROFILE'],sys.getfilesystemencoding())
+    def configdir():
+        return os.path.join(os.environ['APPDATA'],"pyromaths")
+else:
+    def home():
+        return unicode(os.environ['HOME'],sys.getfilesystemencoding())
+    def configdir():
+        return os.path.join(home(), ".config", "pyromaths")
+
+parametres = {
+        'creer_pdf': True,
+        'creer_unpdf': True,
+        'titre': u"Fiche de révisions",
+        'corrige': True,
+        'niveau': "test",
+        'nom_fichier': u'test.tex',
+        'chemin_fichier': "/tmp/",
+        'fiche_exo': '/tmp/test.tex',
+        'fiche_cor': '/tmp/test-corrige.tex',
+        'configdir': configdir(),
+        'modele': 'pyromaths.tex',
+        'liste_exos': [],
+        'les_fiches': LesFiches,
+        }
+
 for j in range(100):
     print('Test n° %03d' % (j+1))
-    f0 = codecs.open('/tmp/test.tex', encoding='utf-8', mode='w')
-    f1 = codecs.open('/tmp/test-cor.tex', encoding='utf-8', mode='w')
+    lst = []
     for n in range(len(LesFiches)):
         for i in range(len(LesFiches[n][2])):
-            LesFiches[n][1].main(i, f0, f1)
-    f0.close()
-    f1.close()
+            lst.append([n,i])
+    parametres['liste_exos'] = lst
+    creation(parametres)
