@@ -155,6 +155,7 @@ def creation(parametres):
                 }"""
     exo = unicode(parametres['fiche_exo'])
     cor = unicode(parametres['fiche_cor'])
+    print cor
     f0 = codecs.open(exo, encoding='utf-8', mode='w')
     f1 = codecs.open(cor, encoding='utf-8', mode='w')
     titre = parametres['titre']
@@ -235,7 +236,7 @@ def creation(parametres):
             else:
                 os.system('xdg-open %s.pdf' % f1noext)
         else:
-            os.remove('%s-corrige.tex' % f0noext)
+            os.remove(cor)
 
 def nettoyage(basefilename):
     """Supprime les fichiers temporaires créés par LaTeX"""
