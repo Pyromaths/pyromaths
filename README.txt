@@ -1,4 +1,11 @@
-Version 10.0?
+Version 10.?
+* Amélioration de la version Mac (retour du look Aqua, position de la fenêtre à l'ouverture améliorée, ouverture automatique des fichiers pdf générés, Pyromaths n'est plus lancé par un applescript, diverses améliorations cosmétiques)
+
+Version 10.06-1
+* Correction d’un bug (il manquait un retour ligne après certains \par) dans les exercices de géométrie troisième.
+* Ajout de l’utilisation du paquet textcomp pour enjoliver les \degres
+
+Version 10.06
 * Exercice de calcul d'aires niveau sixième
 * Correction d'un non sens dans les tableaux de conversion niveau sixième : le tableau de conversion se retrouvait parfois avec plusieurs chiffres dans la colonne des mL, mm ou mg.
 * Correction d'un bug dans l'affichage de la résolution d'une équation du second degré (merci à Marty de l'avoir signalé)
