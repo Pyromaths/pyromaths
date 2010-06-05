@@ -31,12 +31,17 @@ class Ui_MainWindow(object):
         self.iconesdir=iconesdir
         self.configfile = os.path.join(configdir,  "pyromaths.xml")
         self.liste_creation=[]
-        MainWindow.setStyleSheet("background-color: rgb(251, 245, 225);")
-        MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(iconesdir,
+        if sys.platform == "darwin":  #Cas de Mac OS X.
+            MainWindow.setStyleSheet("background-color: "";")
+        else:
+            MainWindow.setStyleSheet("background-color: rgb(251, 245, 225);")
+            MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(iconesdir,
                 'pyromaths.png')))
         MainWindow.setWindowTitle("Pyromaths")
-        MainWindow.setGeometry(300,600, 500, 200)
-
+        if sys.platform == "darwin":  #Cas de Mac OS X.
+            MainWindow.setGeometry(250,200, 500, 200)
+        else:
+            MainWindow.setGeometry(300,600, 500, 200)
         font = QtGui.QFont()
         font.setPointSize(10)
         MainWindow.setFont(font)
@@ -58,17 +63,26 @@ class Ui_MainWindow(object):
         self.pushButton_ok = QtGui.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_ok)
         self.pushButton_ok.setText(u"Créer")
-        self.pushButton_ok.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
+        if sys.platform == "darwin":  #Cas de Mac OS X.
+            self.pushButton_ok.setStyleSheet("background-color: "";")
+        else:
+            self.pushButton_ok.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         self.pushButton_quit = QtGui.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_quit)
         self.pushButton_quit.setText("Quitter")
-        self.pushButton_quit.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
+        if sys.platform == "darwin":  #Cas de Mac OS X.
+            self.pushButton_quit.setStyleSheet("background-color: "";")
+        else:
+            self.pushButton_quit.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         self.pushButton_erase = QtGui.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_erase)
         self.pushButton_erase.setText(u"Réinitialiser")
-        self.pushButton_erase.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
+        if sys.platform == "darwin":  #Cas de Mac OS X.
+            self.pushButton_erase.setStyleSheet("background-color: "";")
+        else:
+            self.pushButton_erase.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
@@ -80,7 +94,10 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(self.verticalLayout, 0, 1, 1, 1)
         self.tabWidget = QtGui.QTabWidget(self.centralwidget)
         self.tabWidget.setAutoFillBackground(True)
-        self.tabWidget.setStyleSheet("background-color: rgb(251, 231, 178);")
+        if sys.platform == "darwin":  #Cas de Mac OS X.
+            self.tabWidget.setStyleSheet("background-color: "";")
+        else:
+            self.tabWidget.setStyleSheet("background-color: rgb(251, 231, 178);")
 
         #============================================================
         #        Remplissage des 4 niveaux
@@ -276,7 +293,10 @@ class Ui_MainWindow(object):
 
         self.pushButton_enr_opt = QtGui.QPushButton(self.tab_options)
         self.pushButton_enr_opt.setText(u"Enregistrer dans les préférences")
-        self.pushButton_enr_opt.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
+        if sys.platform == "darwin":  #Cas de Mac OS X.
+            self.pushButton_enr_opt.setStyleSheet("background-color:"";")
+        else:
+            self.pushButton_enr_opt.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         self.gridLayout_2.addWidget(self.pushButton_enr_opt, 4, 1, 1, 1)
         spacerItem14 = QtGui.QSpacerItem(20, 177, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
@@ -292,8 +312,10 @@ class Ui_MainWindow(object):
 
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 700, 22))
-        self.menubar.setStyleSheet("background-color: rgb(251, 231, 178);")
-        MainWindow.setMenuBar(self.menubar)
+        if sys.platform == "darwin":  #Cas de Mac OS X.
+            self.menubar.setStyleSheet("background-color: "";")
+        else:
+            self.menubar.setStyleSheet("background-color: rgb(251, 231, 178);")
 
         self.menuFichier = QtGui.QMenu(self.menubar)
         self.menuFichier.setTitle("Fichier")
@@ -303,7 +325,10 @@ class Ui_MainWindow(object):
 
         self.statusbar = QtGui.QStatusBar(MainWindow)
         MainWindow.setStatusBar(self.statusbar)
-        self.statusbar.setStyleSheet("background-color: rgb(251, 231, 178);")
+        if sys.platform == "darwin":  #Cas de Mac OS X.
+            self.statusbar.setStyleSheet("background-color: "";")
+        else:
+            self.statusbar.setStyleSheet("background-color: rgb(251, 231, 178);")
 
         #============================================================
         #        Menus de la barre de menus
@@ -413,7 +438,7 @@ class Ui_MainWindow(object):
       <span style=" font-weight:600;">David Robert</span> pour l'idée de départ&nbsp;;
       </li>
       <li>
-      <span style=" font-weight:600;">Yves Gesnel</span> pour le portage de Pyromaths sous MacOS&nbsp;;
+      <span style=" font-weight:600;">Yves Gesnel</span> pour le portage de Pyromaths sur Mac OS X&nbsp;;
       </li>
       <li>
       <span style=" font-weight:600;">Arnaud Kientz</span> pour ses graphismes, son implication dans le code de Pyromaths et son amitié&nbsp;;
@@ -428,7 +453,7 @@ class Ui_MainWindow(object):
       <span style=" font-weight:600;">Nicolas Pourcelot</span> pour ses conseils et son implication prochaine dans le code de Pyromaths&nbsp;;
       </li>
       <li>
-      <span style=" font-weight:600;">Jacqueline Gouguenheim-Desloy</span> a porté Pyromaths sous MacOS à ses débuts. Son soutien et son amitié nous ont été précieux. Sa disparition est une perte douloureuse pour la communauté du logiciel libre.
+      <span style=" font-weight:600;">Jacqueline Gouguenheim-Desloy</span> a porté Pyromaths sur Mac OS X à ses débuts. Son soutien et son amitié nous ont été précieux. Sa disparition est une perte douloureuse pour la communauté du logiciel libre.
       </li>
     </ul>
     </p>
@@ -439,7 +464,10 @@ class Ui_MainWindow(object):
     </p>
   </body>
 </html>"""
-        banniere = os.path.join(self.iconesdir, 'pyromaths-banniere.png')
+        if sys.platform == "darwin":  #Cas de Mac OS X.
+            banniere = os.path.join(self.iconesdir, 'pyromaths.png')
+        else:
+            banniere = os.path.join(self.iconesdir, 'pyromaths-banniere.png')
         QtGui.QMessageBox.about(None, u'À propos de Pyromaths', text % (banniere,  version))
 
     def creer_les_exercices(self):
