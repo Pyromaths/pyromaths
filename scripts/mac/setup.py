@@ -1,7 +1,7 @@
 from setuptools import setup
 
 APP = ['../../pyromaths.py']
-DATA_FILES = ['pyromaths.icns']
+DATA_FILES = ['pyromaths.icns', '../../sixiemes', '../../cinquiemes', '../../quatriemes', '../../troisiemes', '../../classes', '../../lycee', '../../outils']
 OPTIONS = dict(
         plist='Info.plist',
         argv_emulation=True,

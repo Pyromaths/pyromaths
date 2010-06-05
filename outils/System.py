@@ -219,6 +219,8 @@ def creation(parametres):
         nettoyage(f0noext)
         if os.name == "nt":  #Cas de Windows.
             os.startfile('%s.pdf' % f0noext)
+        elif sys.platform == "darwin":  #Cas de Mac OS X.
+            os.system('open %s.pdf' % f0noext)
         else:
             os.system('xdg-open %s.pdf' % f0noext)
 
@@ -233,6 +235,8 @@ def creation(parametres):
             nettoyage(f1noext)
             if os.name == "nt":  #Cas de Windows.
                 os.startfile('%s.pdf' % f1noext)
+            elif sys.platform == "darwin":  #Cas de Mac OS X.
+                os.system('open %s.pdf' % f1noext)
             else:
                 os.system('xdg-open %s.pdf' % f1noext)
         else:
