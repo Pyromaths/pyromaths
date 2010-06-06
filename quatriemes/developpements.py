@@ -39,8 +39,8 @@ def exo_distributivite():
         (l1, l2) = tex_developpe1(valeurs_distr(10))
         exo.extend(l1)
         cor.extend(l2)
-        exo.append("  \\stepcounter{nocalcul}%")
-        cor.append("  \\stepcounter{nocalcul}%")
+        exo.append("\\stepcounter{nocalcul}%")
+        cor.append("\\stepcounter{nocalcul}%")
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
     return (exo, cor)
@@ -57,8 +57,8 @@ def exo_double_distributivite():
         (l1, l2) = tex_developpe1(valeurs_dbldistr(10))
         exo.extend(l1)
         cor.extend(l2)
-        exo.append("  \\stepcounter{nocalcul}%")
-        cor.append("  \\stepcounter{nocalcul}%")
+        exo.append("\\stepcounter{nocalcul}%")
+        cor.append("\\stepcounter{nocalcul}%")
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
     return (exo, cor)
@@ -264,10 +264,10 @@ def tex_dev1(a, bplus=0, bpar=0, bpn=0):  # renvoi le developpement (a)²+2*a*b+
 
 def tex_developpe1(a):  # developpe l'expression a
     (exo, cor) = ([], [])
-    exo.append("  \\[ \\thenocalcul = %s \\]" % tex_dev0(a))
-    cor.append("  \\[ \\thenocalcul = %s \\]" % tex_dev0(a))
-    cor.append("  \\[ \\thenocalcul = %s \\]" % tex_dev1(a))
-    cor.append("  \\[ \\boxed{\\thenocalcul = %s} \\]" % tex_trinome(dev(a)))
+    exo.append("\\[ \\thenocalcul = %s \\]" % tex_dev0(a))
+    cor.append("\\[ \\thenocalcul = %s \\]" % tex_dev0(a))
+    cor.append("\\[ \\thenocalcul = %s \\]" % tex_dev1(a))
+    cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" % tex_trinome(dev(a)))
     return (exo, cor)
 
 
@@ -629,14 +629,3 @@ def print_expr4(expr):
         else:
             text = '%s%s' % (text, expr[i])
     return '%s$' % text
-
-
-#for i in xrange(2):
-    #print '  \item %s' % print_expr4(def_vals5())
-
-# ------------ ÉQUATIONS ------------
-#for i in xrange(20):
- #print '\\item $x %s = %s$' % (monome(valeur_alea(-10,10),'',0,bplus=1), randrange(-10,10))
- #print '\\item $%s = %s$' % (monome(valeur_alea(-10,10),'x',1), randrange(-10,10))
- #print '\\item $%s %s = %s$' % (monome(valeur_alea(-10,10),'x',1), monome(valeur_alea(-10,10),'',0,bplus=1), randrange(-10,10))
- #print '\\item $%s %s = %s %s$' % (monome(valeur_alea(-10,10),'x',1), monome(valeur_alea(-10,10),'',0,bplus=1),monome(valeur_alea(-10,10),'x',1), monome(randrange(-10,10),'',0,bplus=1))

@@ -1,3 +1,8 @@
+Version 10.0?
+* Exercice de calcul d'aires niveau sixième
+* Correction d'un non sens dans les tableaux de conversion niveau sixième : le tableau de conversion se retrouvait parfois avec plusieurs chiffres dans la colonne des mL, mm ou mg.
+* Correction d'un bug dans l'affichage de la résolution d'une équation du second degré (merci à Marty de l'avoir signalé)
+
 Version 10.05
 * Exercice de construction niveau cinquièmes :
 ** de triangles

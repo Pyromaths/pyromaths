@@ -22,7 +22,8 @@
 #
 
 
-from . import angles, decimaux, droites, fractions, operations, quotients, symetrie, arrondi
+from . import angles, decimaux, droites, fractions, operations, quotients
+from . import symetrie, arrondi, aires
 import random
 
 
@@ -48,7 +49,8 @@ def main(exo, f0, f1):
         droites.Proprietes,
         quotients.Divisible,
         fractions.FractionPartage,
-        fractions.QuestionsAbscisses,        
+        fractions.QuestionsAbscisses,
+        aires.main,
         symetrie.SymetrieQuadrillage,
         angles.MesureAngles,
         arrondi.ArrondirNombreDecimal

@@ -54,13 +54,13 @@ def fractions_egales():
         else:
             solution.insert(4, c)
             solution.insert(3, c)
-        exo.append("    \\item $\\dfrac{%s}{%s}=\\dfrac{%s}{%s}$" %
+        exo.append("\\item $\\dfrac{%s}{%s}=\\dfrac{%s}{%s}$" %
                    tuple(enonce))
         if cas:
-            cor.append("    \\item $\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}=\\dfrac{%s}{%s}$" %
+            cor.append("\\item $\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}=\\dfrac{%s}{%s}$" %
                        tuple(solution))
         else:
-            cor.append("    \\item $\\dfrac{%s}{%s}=\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}$" %
+            cor.append("\\item $\\dfrac{%s}{%s}=\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}$" %
                        tuple(solution))
     exo.extend(["  \\end{enumerate}", "\end{multicols}\n"])
     cor.extend(["  \\end{enumerate}", "\end{multicols}\n"])
@@ -91,15 +91,15 @@ def sommes_fractions():
         if s == "-" and (fr1 - fr2).n * (fr1 - fr2).d < 0 or s == "+" and \
             random.randrange(2):
             (fr1, fr2) = (fr2, fr1)
-        exo.append("  \\[ \\thenocalcul = %s%s%s \\]" % (Fractions.TeX(fr1),
+        exo.append("\\[ \\thenocalcul = %s%s%s \\]" % (Fractions.TeX(fr1),
                    s, Fractions.TeX(fr2)))
-        cor.append("  \\[ \\thenocalcul = %s%s%s \\]" % (Fractions.TeX(fr1),
+        cor.append("\\[ \\thenocalcul = %s%s%s \\]" % (Fractions.TeX(fr1),
                    s, Fractions.TeX(fr2)))
         if fr1.d < fr2.d:
-            cor.append("  \\[ \\thenocalcul = %s%s%s \\]" % (Fractions.TeX(fr1,
+            cor.append("\\[ \\thenocalcul = %s%s%s \\]" % (Fractions.TeX(fr1,
                        coef=c), s, Fractions.TeX(fr2)))
         else:
-            cor.append("  \\[ \\thenocalcul = %s%s%s \\]" % (Fractions.TeX(fr1),
+            cor.append("\\[ \\thenocalcul = %s%s%s \\]" % (Fractions.TeX(fr1),
                        s, Fractions.TeX(fr2, coef=c)))
         if s == "+":
             fr = fr1 + fr2
@@ -107,15 +107,15 @@ def sommes_fractions():
             fr = fr1 - fr2
         frs = Fractions.simplifie(fr)
         if frs.d != fr.d:
-            cor.append("  \\[ \\thenocalcul = %s \\]" % Fractions.TeX(frs,
+            cor.append("\\[ \\thenocalcul = %s \\]" % Fractions.TeX(frs,
                        coef=fr.d // frs.d))
-            cor.append("  \\[ \\boxed{\\thenocalcul = %s} \\]" %
+            cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" %
                        Fractions.TeX(frs))
         else:
-            cor.append("  \\[ \\boxed{\\thenocalcul = %s} \\]" %
+            cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" %
                        Fractions.TeX(fr))
-        exo.append("  \\stepcounter{nocalcul}%")
-        cor.append("  \\stepcounter{nocalcul}%")
+        exo.append("\\stepcounter{nocalcul}%")
+        cor.append("\\stepcounter{nocalcul}%")
     exo.append("\end{multicols}\n")
     cor.append("\end{multicols}\n")
     return (exo, cor)
@@ -142,23 +142,23 @@ def produits_fractions():
 
         fr1 = Fractions(n1*a, d1*b)
         fr2 = Fractions(n2*b, d2*a)
-        exo.append("  \\[ \\thenocalcul = %s \\times %s \\]" % (Fractions.TeX(fr1),
+        exo.append("\\[ \\thenocalcul = %s \\times %s \\]" % (Fractions.TeX(fr1),
                    Fractions.TeX(fr2)))
-        cor.append("  \\[ \\thenocalcul = %s \\times %s \\]" % (Fractions.TeX(fr1),
+        cor.append("\\[ \\thenocalcul = %s \\times %s \\]" % (Fractions.TeX(fr1),
                    Fractions.TeX(fr2)))
         fr1s = Fractions.simplifie(fr1)
         fr2s = Fractions.simplifie(fr2)
         if abs(fr1s.d) < abs(fr1.d) or abs(fr2s.d) < abs(fr2.d):
-            cor.append("  \\[ \\thenocalcul = %s \\times %s \\]" % (Fractions.TeXSimplifie(fr1),
+            cor.append("\\[ \\thenocalcul = %s \\times %s \\]" % (Fractions.TeXSimplifie(fr1),
                        Fractions.TeXSimplifie(fr2)))
         fr = fr1s * fr2s
         frs = Fractions.simplifie(fr)
         if abs(frs.d) < abs(fr.d):
-            cor.append("  \\[ \\thenocalcul = %s \\]" % Fractions.TeXProduit(fr1s,
+            cor.append("\\[ \\thenocalcul = %s \\]" % Fractions.TeXProduit(fr1s,
                        fr2s))
-        cor.append("  \\[ \\boxed{\\thenocalcul = %s} \\]" % Fractions.TeX(frs))
-        exo.append("  \\stepcounter{nocalcul}%")
-        cor.append("  \\stepcounter{nocalcul}%")
+        cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" % Fractions.TeX(frs))
+        exo.append("\\stepcounter{nocalcul}%")
+        cor.append("\\stepcounter{nocalcul}%")
     exo.append("\end{multicols}\n")
     cor.append("\end{multicols}\n")
     return (exo, cor)

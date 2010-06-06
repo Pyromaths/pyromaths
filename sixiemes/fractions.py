@@ -325,8 +325,8 @@ def trace_demi_droite(exo, cor, origine, div, subd, lpts, npts, lnum):
     for i in range(7):
         cor.append("\\rput[t](%s mm,4mm){\\centering $%s$}" % (lpts[i] *
                  3 + .1, npts[i]))
-    exo.append("  }")
-    cor.append("  }")
+    exo.append("}")
+    cor.append("}")
 
 
 def ecrit_abscisses(exo, cor, origine, div, subd, lpts, lnum):

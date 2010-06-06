@@ -4,8 +4,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[frenchb]{babel}
+\usepackage[autolanguage]{numprint}
 \usepackage[fleqn]{amsmath}
-\usepackage{amssymb,multicol,calc,vmargin,cancel,fancyhdr,units,pst-eucl,wrapfig,wasysym,pst-plot,tabularx}
+\usepackage{amssymb,multicol,calc,vmargin,cancel,fancyhdr,units,pst-eucl,wrapfig,wasysym,pst-plot,tabularx,textcomp}
 \input{##{{TABVAR}}##}
 
 \setmarginsrb{1.5cm}{1.5cm}{1.5cm}{1.5cm}{.5cm}{.5cm}{.5cm}{1.cm}
@@ -29,13 +30,13 @@
   \par\@afterheading\vspace{0.5\baselineskip minus 0.2\baselineskip}}
 \newcommand*\exercice{%
   \psset{unit=1cm}
-  \ifthenelse{\equal{\theexo}{0}}{}{\filbreak}
+  %\ifthenelse{\equal{\theexo}{0}}{}{\filbreak}
   \refstepcounter{exo}%
   \stepcounter{nocalcul}%
   \par\addvspace{1.5\baselineskip minus 1\baselineskip}%
   \@ifstar%
   {\penalty-130\styleexo[Corrigé de l'exercice]}%
-  {\filbreak\styleexo[Exercice]}%
+  {\penalty-130\styleexo[Exercice]}%
   }
 \makeatother
 \newlength{\ltxt}

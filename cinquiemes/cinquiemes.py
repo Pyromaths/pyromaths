@@ -31,10 +31,8 @@ def write(f0, f1, exos):
 
 def main(exo,f0, f1):
     modules = (priorites.main, symetrie.main, fractions.fractions_egales,
-               fractions.sommes_fractions, fractions.produits_fractions,
-               reperage.main,
-		relatifs.main,
-               construction.exo_triangle,
-               construction.exo_quadrilatere)
+            fractions.sommes_fractions, fractions.produits_fractions,
+            reperage.main, relatifs.main, construction.exo_triangle,
+            construction.exo_quadrilatere)
 
     write(f0, f1, modules[exo]())

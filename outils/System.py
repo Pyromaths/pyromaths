@@ -73,7 +73,7 @@ def create_config_file():
     etree.SubElement(child, "modele").text="pyromaths.tex"
 
     child = etree.SubElement(root, "informations")
-    etree.SubElement(child, "version").text="10.05"
+    etree.SubElement(child, "version").text="10.06-1"
     etree.SubElement(child, "description").text=u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
     etree.SubElement(child, "icone").text="pyromaths.ico"
 
@@ -202,63 +202,53 @@ def creation(parametres):
     # Dossiers et fichiers d'enregistrement, définitions qui doivent rester avant le if suivant.
     dir0=os.path.dirname(exo)
     dir1=os.path.dirname(cor)
-    f0noext=os.path.splitext(exo)[0]
-    f1noext=os.path.splitext(cor)[0]
+    f0noext=os.path.splitext(os.path.basename(exo))[0].encode(sys.getfilesystemencoding())
+    f1noext=os.path.splitext(os.path.basename(cor))[0].encode(sys.getfilesystemencoding())
 
     if parametres['creer_pdf']:
         from subprocess import call
 
+        os.chdir(dir0)
+        log = open('%s-pyromaths.log' % f0noext, 'w')
         for i in range(2):
-            os.chdir(dir0)
-            log = open('pyromaths.log', 'a')
-            call(["latex", "-interaction=batchmode", exo],
-                    #env={"PATH": os.path.expandvars('$PATH')},
-                    stdout=log)
-            if parametres['corrige'] and not parametres['creer_unpdf']:
-                os.chdir(dir1)
-                call(["latex", "-interaction=batchmode", cor],
-                        #env={"PATH": os.path.expandvars('$PATH')},
-                        stdout=log)
-        call(["dvips", "-q", u"%s.dvi" % (f0noext), u"-o%s.ps" % (f0noext)],
-                #env={"PATH": os.path.expandvars('$PATH')},
-                stdout=log)
-        if parametres['corrige'] and not parametres['creer_unpdf']:
-            call(["dvips", "-q", u"%s.dvi" % (f1noext), u"-o%s.ps" % (f1noext)],
-                    #env={"PATH": os.path.expandvars('$PATH')},
-                    stdout=log)
-        call(["ps2pdf", "-sPAPERSIZE#a4", u"%s.ps" % (f0noext),
-                    u"%s.pdf" % (f0noext)],
-                    #env={"PATH": os.path.expandvars('$PATH')},
-                    stdout=log)
-        if parametres['corrige'] and not parametres['creer_unpdf']:
-            call(["ps2pdf", "-sPAPERSIZE#a4", u"%s.ps" % (f1noext),
-                u"%s.pdf" % (f1noext)],
-                #env={"PATH": os.path.expandvars('$PATH')},
-                stdout=log)
+            call(["latex", "-interaction=batchmode", "%s.tex" % f0noext], stdout=log)
+        call(["dvips", "-q", "%s.dvi" % f0noext, "-o%s.ps" % f0noext], stdout=log)
+        call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % f0noext, "%s.pdf" % f0noext], stdout=log)
         log.close()
+        nettoyage(f0noext)
         if os.name == "nt":  #Cas de Windows.
-            os.startfile('%s.pdf' % (f0noext).encode('utf-8'))
-            if parametres['corrige'] and not parametres['creer_unpdf']:
-                os.startfile('%s.pdf' % (f1noext).encode('utf-8'))
+            os.startfile('%s.pdf' % f0noext)
         else:
-            os.system('xdg-open %s.pdf' % (f0noext.encode('utf-8')))
-            if parametres['corrige'] and not parametres['creer_unpdf']:
-                os.system('xdg-open %s.pdf' % (f1noext.encode('utf-8')))
-        #Supprime les fichiers temporaires créés par LaTeX
-        try:
-            for ext in ('.aux', '.dvi', '.out', '.ps'):
-                os.remove(os.path.join(dir0,  f0noext + ext))
-                if parametres['corrige'] and not parametres['creer_unpdf']:
-                    os.remove(os.path.join(dir1,  f1noext + ext))
-            if os.path.getsize('%s.pdf' % f0noext) > 1000 :
-                os.remove(os.path.join(dir0, 'pyromaths.log'))
-                os.remove(os.path.join(dir0, '%s.log' % f0noext))
-                os.remove(os.path.join(dir1, '%s.log' % f1noext))
-        except OSError:
-            pass
+            os.system('xdg-open %s.pdf' % f0noext)
+
+        if parametres['corrige'] and not parametres['creer_unpdf']:
+            os.chdir(dir1)
+            log = open('%s-pyromaths.log' % f1noext, 'w')
+            for i in range(2):
+                call(["latex", "-interaction=batchmode", "%s.tex" % f1noext], stdout=log)
+            call(["dvips", "-q", "%s.dvi" % f1noext, "-o%s.ps" % f1noext], stdout=log)
+            call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % f1noext, "%s.pdf" % f1noext], stdout=log)
+            log.close()
+            nettoyage(f1noext)
+            if os.name == "nt":  #Cas de Windows.
+                os.startfile('%s.pdf' % f1noext)
+            else:
+                os.system('xdg-open %s.pdf' % f1noext)
+        else:
+            os.remove('%s-corrige.tex' % f0noext)
+
+def nettoyage(basefilename):
+    """Supprime les fichiers temporaires créés par LaTeX"""
+    try:
+        for ext in ('.aux', '.dvi', '.out', '.ps'):
+            os.remove(basefilename+ext)
+        if os.path.getsize('%s.pdf' % basefilename) > 1000 :
+            os.remove('%s.log' % basefilename)
+            os.remove('%s-pyromaths.log' % basefilename)
+    except OSError:
+        pass
         #le fichier à supprimer n'existe pas et on s'en fout.
-    if not parametres['corrige'] or parametres['creer_unpdf']:
-        os.remove(os.path.join(dir1,  f1noext + '.tex'))
+
 
 def copie_tronq_modele(dest, parametres, master):
     """Copie des morceaux des modèles, suivant le schéma du master."""
@@ -266,18 +256,17 @@ def copie_tronq_modele(dest, parametres, master):
     master = '% ' + master
     n = 0
 
-    ## Liste des modèles pyromaths
-    liste_modeles_pyromaths = ['evaluation.tex', 'pyromaths.tex']
-
     ## Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
     source = parametres['modele']
 
-    if source in liste_modeles_pyromaths:
+    if os.path.isfile(os.path.join(parametres['configdir'], 'modeles',source)):
+        source = os.path.join(parametres['configdir'], 'modeles', source)
+    elif os.path.isfile(os.path.join(module_path(), 'modeles', source)):
         source = os.path.join(module_path(), 'modeles', source)
     else:
-        source = os.path.join(parametres['configdir'], 'modeles', source)
-
-    ## La destination est le fichier temporaire.
+        #TODO: Message d'erreur, le modèle demandé n'existe pas
+        print(u"Le fichier modèle n'a pas été trouvé dans %s" %
+                os.path.join(module_path(), 'modeles'))
 
     ## Les variables à remplacer :
     titre = parametres['titre']
@@ -322,10 +311,10 @@ def module_path():
     even if we are frozen using py2exe"""
 
     if we_are_frozen():
-        return os.path.dirname(unicode(sys.executable,
-                                sys.getfilesystemencoding( )))
+        return os.path.normpath(os.path.dirname(unicode(sys.executable,
+            sys.getfilesystemencoding())))
 
     #return os.path.dirname(str(__file__,
     #                                sys.getfilesystemencoding( )))
-    return os.path.join(os.path.dirname(str(__file__)),  '..')
+    return os.path.normpath(os.path.join(os.path.dirname(str(__file__)), '..'))
 

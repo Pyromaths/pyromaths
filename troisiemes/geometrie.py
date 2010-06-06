@@ -200,20 +200,20 @@ def creer_noms(noms, i):
 
 def tex_enonce_thales(noms, valeurs):
     texte = \
-            u'Sur la figure ci-dessous, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par' % \
+            u'Sur la figure ci-dessous, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par\n' % \
         (lAB(noms[1:3]), lAB(noms[3:5]))
     liste = long_val(noms, valeurs)
     texte = texte + \
-        '  On donne $%s=\\unit[%s]{cm},\\quad %s=\\unit[%s]{cm}, \\quad %s=\\unit[%s]{cm}\\quad\\text{et}\\quad %s~=~\\unit[%s]{cm}$.\\par' % \
+        'On donne $%s=\\unit[%s]{cm},\\quad %s=\\unit[%s]{cm}, \\quad %s=\\unit[%s]{cm}\\quad\\text{et}\\quad %s~=~\\unit[%s]{cm}$.\\par\n' % \
         tuple(liste[0:8])
-    texte = texte + '  Calculer $%s\\text{ et }%s$.' % tuple(liste[8:10])
+    texte = texte + 'Calculer $%s\\text{ et }%s$.' % tuple(liste[8:10])
     return texte
 
 
 def tex_resolution_thales0(n):
-    return u"""  Les points $%s$,~ $%s$,~ $%s$ et $%s$, $%s$, $%s$ sont alignés et les droites $(%s)$ et $(%s)$ sont parallèles.\\par
-  D'après le \\textbf{théorème de Thalès} :
-  $\\qquad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$
+    return u"""Les points $%s$,~ $%s$,~ $%s$ et $%s$, $%s$, $%s$ sont alignés et les droites $(%s)$ et $(%s)$ sont parallèles.\\par
+D'après le \\textbf{théorème de Thalès} :
+$\\qquad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$
 """ % \
         (
         n[0],
@@ -257,7 +257,7 @@ def tex_resolution_thales1(n, v):
             donnees = (creer_noms(n, r + 3), creer_noms(n, r + 6), '-',
                        creer_noms(n, r), nombre(v[r + 3]))
     if donnees:
-        return '  \\vspace{1ex}\\par De plus $%s=%s%s%s=\\unit[%s]{cm}$' % \
+        return '\\vspace{1ex}\\par\nDe plus $%s=%s%s%s=\\unit[%s]{cm}$' % \
             donnees
     else:
         return ''
@@ -274,7 +274,7 @@ def tex_resolution_thales2(n, v):
             donnees.append(nombre(v[i + 3]))
         else:
             donnees.append(creer_noms(n, i + 3))
-    return '  \\[\\frac{%s}{%s}=\\frac{%s}{%s}=\\frac{%s}{%s}\\]' % \
+    return '\\[\\frac{%s}{%s}=\\frac{%s}{%s}=\\frac{%s}{%s}\\]' % \
         tuple(donnees)
 
 
@@ -319,10 +319,10 @@ def tex_resolution_thales3(n, v):
                                valeur_exacte(((v[r] * 1.0) * v[i + 3]) /
                                v[r + 3])])
     texte = \
-        '  $\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par' % \
+        '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n' % \
         tuple(donnees[0:9])
     texte = texte + \
-        '  $\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par' % \
+        '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n' % \
         tuple(donnees[9:18])
     return texte
 
@@ -515,14 +515,14 @@ def fig_rec_thales(noms, v):
 def tex_fig_rec_thales(noms, valeurs):
     donnees = fig_rec_thales(noms, valeurs)
     enonce = \
-        '''  {\\begin{wrapfigure}{r}{4cm}
-    \\psset{PointSymbol=x,unit=%s}
-    \\begin{pspicture}(%s,%s)(%s,%s)
-      \\SpecialCoor
-      \\pstTriangle[PosAngleA=%s,PosAngleB=-45,PosAngleC=%s,PointNameA=%s,PointNameB=%s,PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
-      \\pstTriangle[PosAngleB=%s,PosAngleC=%s,PointSymbolA=none,PointNameA=none,PointNameB=%s,PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
-    \\end{pspicture}
-  \\end{wrapfigure}\\par
+        '''{\\begin{wrapfigure}{r}{4cm}
+\\psset{PointSymbol=x,unit=%s}
+\\begin{pspicture}(%s,%s)(%s,%s)
+\\SpecialCoor
+\\pstTriangle[PosAngleA=%s,PosAngleB=-45,PosAngleC=%s,PointNameA=%s,PointNameB=%s,PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
+\\pstTriangle[PosAngleB=%s,PosAngleC=%s,PointSymbolA=none,PointNameA=none,PointNameB=%s,PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
+\\end{pspicture}
+\\end{wrapfigure}\\par
 ''' % \
         donnees
     return enonce
@@ -532,10 +532,10 @@ def rec_thales(exo, cor):
     noms = choix_points(5)  # les noms des sommets
     valeurs = valeurs_reciproque_thales()
     exo.append(tex_fig_rec_thales(noms, valeurs))
-    exo.append(tex_enonce_rec_thales(noms, valeurs) + '  \\vspace{2cm}}') #le dernier '}' ferme le bloc exercice
+    exo.append(tex_enonce_rec_thales(noms, valeurs) + '\\vspace{2cm}}') #le dernier '}' ferme le bloc exercice
     cor.append(tex_fig_rec_thales(noms, valeurs))
     cor.append(tex_enonce_rec_thales(noms, valeurs) +
-             "  \\par\\dotfill{}\\\\\n")
+             "\\par\\dotfill{}\\\\}\n")
     cor.append(tex_resolution_rec_thales0(noms, valeurs))
     cor.append(tex_resolution_rec_thales1(noms, valeurs))
 
@@ -564,8 +564,8 @@ def enonce_rec_thales(n, v):
 def tex_enonce_rec_thales(n, v):
     d = enonce_rec_thales(n, v)
     texte = \
-        u'''  Sur la figure ci-contre, on donne $%s=\\unit[%s]{cm}$, $%s=\\unit[%s]{cm}$, $%s=\\unit[%s]{cm}$ et $%s=\\unit[%s]{cm}$.\\par
-  Démontrer que les droites $(%s)$ et $(%s)$ sont parallèles.
+        u'''Sur la figure ci-contre, on donne $%s=\\unit[%s]{cm}$, $%s=\\unit[%s]{cm}$, $%s=\\unit[%s]{cm}$ et $%s=\\unit[%s]{cm}$.\\par
+Démontrer que les droites $(%s)$ et $(%s)$ sont parallèles.
 ''' % \
         d
     return texte
@@ -596,8 +596,8 @@ def resolution_rec_thales0(n, v):
 
 
 def tex_resolution_rec_thales0(n, v):
-    return u"""  Les points $%s$, $%s$, $%s$~ et $%s$, $%s$, $%s$ sont alignés dans le même ordre.\\par
-  De plus $%s=%s%s%s=\\unit[%s]{cm}$.\\par
+    return u"""Les points $%s$, $%s$, $%s$~ et $%s$, $%s$, $%s$ sont alignés dans le même ordre.\\par
+De plus $%s=%s%s%s=\\unit[%s]{cm}$.\\par
 """ % \
         resolution_rec_thales0(n, v)
 
@@ -631,14 +631,14 @@ def resolution_rec_thales1(n, v):
 
 def tex_resolution_rec_thales1(n, v):
     d = resolution_rec_thales1(n, v)
-    return u"""  $\\left.
-  \\renewcommand{\\arraystretch}{2}
-  \\begin{array}{l}
-    \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s\\\\\n    \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s
-  \\end{array}
-  \\right\\rbrace$
-  Donc $\\cfrac{%s}{%s}=\\cfrac{%s}{%s}$\\,.\\par
-  D'après la \\textbf{réciproque du théorème de Thalès}, \\fbox{les droites $(%s)$ et $(%s)$ sont parallèles.}
+    return u"""$\\left.
+\\renewcommand{\\arraystretch}{2}
+\\begin{array}{l}
+\\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s\\\\\n    \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s
+\\end{array}
+\\right\\rbrace$
+Donc $\\cfrac{%s}{%s}=\\cfrac{%s}{%s}$\\,.\\par
+D'après la \\textbf{réciproque du théorème de Thalès}, \\fbox{les droites $(%s)$ et $(%s)$ sont parallèles.}
 """ % \
         d
 
@@ -686,55 +686,55 @@ def enonce_trigo(exo, cor, v):
                 lt.append('la mesure de l\'angle $%s$' % l[2 * i + 6 * j])
         if tmp:
             lt.append(tmp)
-    exo.append('  \\begin{multicols}{2}')
-    exo.append('    \\begin{enumerate}')
-    cor.append('  \\begin{multicols}{2}')
-    cor.append('    \\begin{enumerate}')
+    exo.append('\\begin{multicols}{2}')
+    exo.append('\\begin{enumerate}')
+    cor.append('\\begin{multicols}{2}')
+    cor.append('\\begin{enumerate}')
     tr = nom_triangle(v[0][0])
-    exo.append('    \\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' %
+    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' %
              (tr, v[0][0][0]))
-    exo.append('''      %s et %s.\\par
-      Calculer %s.\\par
+    exo.append('''%s et %s.\\par
+Calculer %s.\\par
 ''' % tuple(lt[0:3]))
-    cor.append('    \\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' %
+    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' %
              (tr, v[0][0][0]))
-    cor.append('''      %s et %s.\\par
-      Calculer %s.\\par
+    cor.append('''%s et %s.\\par
+Calculer %s.\\par
 ''' % tuple(lt[0:3]))
-    cor.append("      \\dotfill{}\\par\\vspace{2ex}")
-    cor.append('      Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[0][0][0]))  # résolution
+    cor.append("\\dotfill{}\\par\\vspace{2ex}")
+    cor.append('Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[0][0][0]))  # résolution
     v2 = (v[0][1], v[0][2])
     l2 = l[0:6]
     resolution_trigo(cor, v2, l2)
     tr = nom_triangle(v[1][0])
-    exo.append('      \\columnbreak')
-    cor.append('      \\columnbreak')
-    exo.append('    \\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
+    exo.append('\\columnbreak')
+    cor.append('\\columnbreak')
+    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
              (tr, v[1][0][0]))
-    exo.append('''      %s et %s.\\par
-      Calculer %s.\\par
+    exo.append('''%s et %s.\\par
+Calculer %s.\\par
 ''' % tuple(lt[3:6]))
-    cor.append('    \\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
+    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
              (tr, v[1][0][0]))
-    cor.append('''      %s et %s.\\par
-      Calculer %s.\\par
+    cor.append('''%s et %s.\\par
+Calculer %s.\\par
 ''' % tuple(lt[3:6]))
-    cor.append("      \\dotfill{}\\par\\vspace{2ex}")
-    cor.append('      Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[1][0][0]))  # résolution
+    cor.append("\\dotfill{}\\par\\vspace{2ex}")
+    cor.append('Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[1][0][0]))  # résolution
     v2 = (v[1][1], v[1][2])
     l2 = l[6:12]
     resolution_trigo(cor, v2, l2)
-    exo.append('    \\end{enumerate}')
-    exo.append('  \\end{multicols}')
-    cor.append('    \\end{enumerate}')
-    cor.append('  \\end{multicols}')
+    exo.append('\\end{enumerate}')
+    exo.append('\\end{multicols}')
+    cor.append('\\end{enumerate}')
+    cor.append('\\end{multicols}')
 
 
 def resolution_trigo(cor, v2, l2):
     f = (('\\sin', 1, 0), ('\\cos', 2, 0), ('\\tan', 1, 2))[v2[1][0]]
-    cor.append(u'  \\[%s%s=\\cfrac{%s}{%s}' % (f[0], l2[4], v2[0][f[1]], v2[0][f[2]]) + '\\] ')
+    cor.append(u'\\[%s%s=\\cfrac{%s}{%s}' % (f[0], l2[4], v2[0][f[1]], v2[0][f[2]]) + '\\] ')
     if not v2[1][3]:
-        cor.append(u'  \\[ %s%s=\\cfrac{%s}{%s}' % (f[0], l2[4], nombre(v2[1][1]),
+        cor.append(u'\\[ %s%s=\\cfrac{%s}{%s}' % (f[0], l2[4], nombre(v2[1][1]),
                   nombre(v2[1][2])) + '\\] ')
         if f[0] == '\\sin':
             r = (asin(v2[1][1] / v2[1][2]) * 180) / pi
@@ -742,11 +742,11 @@ def resolution_trigo(cor, v2, l2):
             r = (acos(v2[1][1] / v2[1][2]) * 180) / pi
         else:
             r = (atan(v2[1][1] / v2[1][2]) * 180) / pi
-        cor.append(u'  \\[ %s=%s^{-1}\\left(\\cfrac{%s}{%s}\\right)\\simeq%s\\degres' %
+        cor.append(u'\\[ %s=%s^{-1}\\left(\\cfrac{%s}{%s}\\right)\\simeq%s\\degres' %
                   (l2[4], f[0], nombre(v2[1][1]), nombre(v2[1][2]),
                   nombre(int(r * 10) / 10.0)) + '\\] ')
     elif not v2[1][1]:
-        cor.append(u'  \\[ %s%s=\\cfrac{%s}{%s}' % (f[0], v2[1][3], v2[0][f[1]],
+        cor.append(u'\\[ %s%s=\\cfrac{%s}{%s}' % (f[0], v2[1][3], v2[0][f[1]],
                   nombre(v2[1][2])) + '\\] ')
         if f[0] == '\\sin':
             r = sin((v2[1][3] * pi) / 180)
@@ -755,11 +755,11 @@ def resolution_trigo(cor, v2, l2):
         else:
             r = tan((v2[1][3] * pi) / 180)
         r = r * v2[1][2]
-        cor.append(u'  \\[ %s=%s%s\\times %s\\simeq\\unit[%s]{cm}' % (v2[0][f[1]],
+        cor.append(u'\\[ %s=%s%s\\times %s\\simeq\\unit[%s]{cm}' % (v2[0][f[1]],
                   f[0], v2[1][3], nombre(v2[1][2]), nombre(int(r * 100) /
                   100.0)) + '\\] ')
     else:
-        cor.append(u'  \\[ %s%s=\\cfrac{%s}{%s}' % (f[0], v2[1][3], nombre(v2[1][1]),
+        cor.append(u'\\[ %s%s=\\cfrac{%s}{%s}' % (f[0], v2[1][3], nombre(v2[1][1]),
                   v2[0][f[2]]) + '\\] ')
         if f[0] == '\\sin':
             r = sin((v2[1][3] * pi) / 180)
@@ -768,7 +768,7 @@ def resolution_trigo(cor, v2, l2):
         else:
             r = tan((v2[1][3] * pi) / 180)
         r = v2[1][1] / r
-        cor.append(u'  \\[ %s=\\cfrac{%s}{%s%s}\\simeq\\unit[%s]{cm}' % (v2[0][f[2]],
+        cor.append(u'\\[ %s=\\cfrac{%s}{%s%s}\\simeq\\unit[%s]{cm}' % (v2[0][f[2]],
                   nombre(v2[1][1]), f[0], v2[1][3], nombre(int(r * 100) /
                   100.0)) + '\\] ')
 
