@@ -316,7 +316,8 @@ class Ui_MainWindow(object):
             self.menubar.setStyleSheet("background-color: "";")
         else:
             self.menubar.setStyleSheet("background-color: rgb(251, 231, 178);")
-
+        MainWindow.setMenuBar(self.menubar)
+        
         self.menuFichier = QtGui.QMenu(self.menubar)
         self.menuFichier.setTitle("Fichier")
 
