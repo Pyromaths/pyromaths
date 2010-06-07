@@ -441,15 +441,14 @@ def exo_conversion(exo, cor, exposant):
     ligne_tab.append("\\begin{tabular}{*{%s}{p{3.5mm}|}p{3.5mm}}"%(exposant*7-1)) 
     ligne_tab.append(tableau + "\\\\ \\hline")
     for i in range(6):
-        ligne_tab += tex_conversion(exo, cor,exposant, u) 
+        ligne_tab += tex_conversion(exo, cor,exposant, u, i) +["\\ncline[nodesepA = -1.5mm, linewidth = 0.6pt, linestyle = dotted]{->}{A%s}{B%s}"%(i, i)]
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
     exo.append('\\end{enumerate}')
     exo.append('\\end{multicols}')
-    cor += ligne_tab
+    cor += ligne_tab 
     cor.append("\\end{tabular}")
-    
-def tex_conversion(exo, cor, exposant, u ):
+def tex_conversion(exo, cor, exposant, u ,i):
     """Écrit l'exercice sur les conversions d'unités d'aires et le corrigé au
     format LaTeX
     @param exo: fichier exercices
@@ -473,13 +472,13 @@ def tex_conversion(exo, cor, exposant, u ):
             (outils.Affichage.decimaux(nb0), u[div0],
                 outils.Affichage.decimaux(nb1), u[div1]))
 
-    return tex_tableau_conversion(cor, div0, div1, nb0, u, exposant)
+    return tex_tableau_conversion(cor, div0, div1, nb0, u, exposant, i)
 
-def tex_tableau_conversion(cor, div0, div1, nb0, u,exposant ):
+def tex_tableau_conversion(cor, div0, div1, nb0, u,exposant , j):
     nb_dict = nbre_to_dict(nb0,div0,div1,exposant)
     nblist = [str(nb_dict.get(i,"")) for i in range(7*exposant)]
-    nblist[exposant*(div0 + 1)-1] =  "{%s\\textcolor{gray}{\\LARGE ,}}"%nb_dict.get(exposant*(div0+1)-1,"0")
-    nblist[exposant*(div1 + 1)-1] = "{%s\\textcolor{red}{ \\LARGE ,}}"%nb_dict.get(exposant*(div1+1)-1,"0")
+    nblist[exposant*(div0 + 1)-1] =  "%s\\Rnode[vref = -0.8mm]{A%s}{\\ }"%(nb_dict.get(exposant*(div0+1)-1,"0"), j)
+    nblist[exposant*(div1 + 1)-1] = "{%s\\Rnode[vref = -0.8mm]{B%s}{\\textcolor{red}{ \\LARGE ,}}}"%(nb_dict.get(exposant*(div1+1)-1,"0"), j)
     return [("%s " + "& %s"*(7*exposant-1) +"\\\\") % tuple(nblist)]
 
 
