@@ -80,6 +80,7 @@ u'Repérage',
 u'Addition de relatifs',
 u'Construction de triangles',
 u'Construction de parallélogrammes',
+u'Échelles',
 
 ]],
 [u'Quatrième', quatriemes.quatriemes, [

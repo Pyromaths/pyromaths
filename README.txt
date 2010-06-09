@@ -1,5 +1,11 @@
 Version 10.?
 * Amélioration de la version Mac (retour du look Aqua, position de la fenêtre à l'ouverture améliorée, ouverture automatique des fichiers pdf générés, Pyromaths n'est plus lancé par un applescript, diverses améliorations cosmétiques)
+* Exercices de proportionnalités en cinquièmes
+** Calcul de la quatrièmes proportionnelles
+** Calculs avec les échelles
+* Conversions d'unités
+** Exercices de conversions d'unités de volume
+** Amélioration de la présentation du tableau de conversions
 
 Version 10.06-1
 * Correction d’un bug (il manquait un retour ligne après certains \par) dans les exercices de géométrie troisième.

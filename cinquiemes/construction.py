@@ -23,6 +23,7 @@
 import outils.Geometrie as geo
 import random,math
 from outils.Affichage import decimaux
+from outils.Geometrie import cotation, cotation_h
 
 #trigo en degré
 tan =lambda z:math.tan(math.radians(z))
@@ -38,18 +39,6 @@ def shuffle_nom(polygone):
     for i in range(debut,debut+n*sens,sens):
         nom+=polygone[i]
     return nom
-def cotation(A,B,longueur,couleur="",unite="cm"):
-    (xA,yA)=A
-    (xB,yB)=B
-    if couleur!="":
-        couleur="\\color{%s}"%couleur
-    return u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\bput{:U}{%s\\unit[%s]{%s}}" %(xA,yA,xB,yB,couleur,longueur,unite)
-def cotation_h(A,B,longueur,couleur="",unite="cm"):
-    (xA,yA)=A
-    (xB,yB)=B
-    if couleur!="":
-        couleur="\\color{%s}"%couleur
-    return u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\aput{:U}{%s\\unit[%s]{%s}}" %(xA,yA,xB,yB,couleur,longueur,unite)
 
 def exo_triangle(test=False):
     questions=[quest_equilateral,
