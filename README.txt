@@ -1,7 +1,13 @@
 Version 10.?
-* Amélioration de la version Mac (retour du look Aqua, position de la fenêtre à l'ouverture améliorée, ouverture automatique des fichiers pdf générés, Pyromaths n'est plus lancé par un applescript, diverses améliorations cosmétiques)
+* Amélioration de la version Mac
+** Retour du look Aqua
+** Position de la fenêtre à l'ouverture améliorée
+** Ouverture automatique des fichiers pdf générés
+** Pyromaths n'est plus lancé par un applescript
+** Diverses améliorations cosmétiques
+** Compatibilité avec Mac OS X 10.4
 * Exercices de proportionnalités en cinquièmes
-** Calcul de la quatrièmes proportionnelles
+** Calcul de la quatrième proportionnelle
 ** Calculs avec les échelles
 * Conversions d'unités
 ** Exercices de conversions d'unités de volume
