@@ -33,6 +33,11 @@ if os.name == 'nt':
         return unicode(os.environ['USERPROFILE'],sys.getfilesystemencoding())
     def configdir():
         return os.path.join(os.environ['APPDATA'],"pyromaths")
+elif sys.platform == "darwin":  #Cas de Mac OS X.
+    def home():
+        return unicode(os.environ['HOME'],sys.getfilesystemencoding())
+    def configdir():
+        return os.path.join(home(),  "Library", "Application Support", "Pyromaths")
 else:
     def home():
         return unicode(os.environ['HOME'],sys.getfilesystemencoding())
