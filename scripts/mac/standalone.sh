@@ -38,8 +38,8 @@ cp $pyromaths/img/pyromaths.png $mac/dist/Pyromaths.app/Contents/MacOS/img/
 cp $mac/setenv.sh $mac/dist/Pyromaths.app/Contents/MacOS/
 chmod +x $mac/dist/Pyromaths.app/Contents/MacOS/setenv.sh
 
-# Remplacer le CFBundleExecutable pyromaths par le script setenv.sh dans info.plist
-sed -i '' '23s/pyromaths/setenv.sh/' $mac/dist/Pyromaths.app/Contents/info.plist
+# Remplacer le CFBundleExecutable pyromaths par le script setenv.sh dans Info.plist
+sed -i '' '23s/pyromaths/setenv.sh/' $mac/dist/Pyromaths.app/Contents/Info.plist
 
 # Déplacement de Pyromaths finalisé sur le bureau
 mv $mac/dist/Pyromaths.app ~/Desktop
