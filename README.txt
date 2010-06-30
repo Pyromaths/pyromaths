@@ -1,4 +1,6 @@
 Version 10.?
+* Représentation de données niveau cinquième
+* Calcul d'aire de disques niveau cinquième
 * Amélioration de la version Mac
 ** Retour du look Aqua
 ** Position de la fenêtre à l'ouverture améliorée
