@@ -23,7 +23,7 @@
 
 
 from . import angles, decimaux, droites, fractions, operations, quotients
-from . import symetrie, arrondi, aires
+from . import symetrie, arrondi, aires, espace
 import random
 
 
@@ -55,6 +55,7 @@ def main(exo, f0, f1):
         aires.main,
         symetrie.SymetrieQuadrillage,
         angles.MesureAngles,
+	espace.main,
         arrondi.ArrondirNombreDecimal
         )
     write(f0, f1, modules[exo]())

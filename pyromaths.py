@@ -70,6 +70,7 @@ u'Fractions et abscisses',
 u'Aires et quadrillage',
 u'Symétrie et quadrillages',
 u'Mesurer des angles',
+u'Cubes',
 u'Arrondir des nombres décimaux'
 ]],
 [u'Cinquième', cinquiemes.cinquiemes, [
