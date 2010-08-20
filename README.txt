@@ -1,4 +1,4 @@
-Version 10.?
+﻿Version 10.?
 * Représentation de données niveau cinquième
 * Calcul d'aire de disques niveau cinquième
 * Amélioration de la version Mac
@@ -14,6 +14,7 @@ Version 10.?
 * Conversions d'unités
 ** Exercices de conversions d'unités de volume
 ** Amélioration de la présentation du tableau de conversions
+* Exercice de géométrie dans l'espace niveau sixième
 
 Version 10.06-1
 * Correction d’un bug (il manquait un retour ligne après certains \par) dans les exercices de géométrie troisième.
