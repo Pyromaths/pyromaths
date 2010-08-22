@@ -189,7 +189,7 @@ def main():
          "\\begin{enumerate}",
          u"\\item Compléter les sommets manquants de la figure 2.",
          u"\\item Donner toutes les arêtes perpendiculaires à [%s%s]."%(pt1,ptc1),
-         u"\\item Donner toutes les arêtes perpendiculaires à [%s%s]."%(pt2,ptc2),
+         u"\\item Donner toutes les arêtes parallèles à [%s%s]."%(pt2,ptc2),
          "\\end{enumerate}"]
     cor=["\\exercice*",
          u"Les figures 1 et 2 représentent le même cube %s%s%s%s%s%s%s%s.\\\ "%tuple(noms_pts),
@@ -242,7 +242,7 @@ def main():
          u"\\item Compléter les sommets manquants de la figure 2.",
          u"\\item Donner toutes les arêtes perpendiculaires à [%s%s].\\par "%(pt1,ptc1),
          rp2,
-         u"\\item Donner toutes les arêtes perpendiculaires à [%s%s]. \\par "%(pt2,ptc2),
+         u"\\item Donner toutes les arêtes parallèles à [%s%s]. \\par "%(pt2,ptc2),
          rp3,
          "\\end{enumerate}"]
     return (exo,cor)

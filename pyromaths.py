@@ -70,7 +70,7 @@ u'Fractions et abscisses',
 u'Aires et quadrillage',
 u'Symétrie et quadrillages',
 u'Mesurer des angles',
-u'Représentation dans l''espace',
+u'Représentation dans l\'espace',
 u'Arrondir des nombres décimaux'
 ]],
 [u'Cinquième', cinquiemes.cinquiemes, [
