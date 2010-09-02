@@ -33,11 +33,6 @@ if os.name == 'nt':
         return unicode(os.environ['USERPROFILE'],sys.getfilesystemencoding())
     def configdir():
         return os.path.join(os.environ['APPDATA'],"pyromaths")
-elif sys.platform == "darwin":  #Cas de Mac OS X.
-    def home():
-        return unicode(os.environ['HOME'],sys.getfilesystemencoding())
-    def configdir():
-        return os.path.join(home(),  "Library", "Application Support", "Pyromaths")
 else:
     def home():
         return unicode(os.environ['HOME'],sys.getfilesystemencoding())
@@ -70,7 +65,7 @@ def create_config_file():
 
     child = etree.SubElement(root, "options")
     etree.SubElement(child, "nom_fichier").text="exercices"
-    etree.SubElement(child, "chemin_fichier").text="%s" % home()
+    etree.SubElement(child, "chemin_fichier").text="%s" % 'test' #home()
     etree.SubElement(child, "titre_fiche").text=u"Fiche de révisions"
     etree.SubElement(child, "corrige").text="True"
     etree.SubElement(child, "pdf").text="True"
@@ -160,7 +155,6 @@ def creation(parametres):
                 }"""
     exo = unicode(parametres['fiche_exo'])
     cor = unicode(parametres['fiche_cor'])
-    print cor
     f0 = codecs.open(exo, encoding='utf-8', mode='w')
     f1 = codecs.open(cor, encoding='utf-8', mode='w')
     titre = parametres['titre']
@@ -208,8 +202,8 @@ def creation(parametres):
     # Dossiers et fichiers d'enregistrement, définitions qui doivent rester avant le if suivant.
     dir0=os.path.dirname(exo)
     dir1=os.path.dirname(cor)
-    f0noext=os.path.splitext(os.path.basename(exo))[0].encode(sys.getfilesystemencoding())
-    f1noext=os.path.splitext(os.path.basename(cor))[0].encode(sys.getfilesystemencoding())
+    f0noext=os.path.splitext(exo)[0].encode(sys.getfilesystemencoding())
+    f1noext=os.path.splitext(cor)[0].encode(sys.getfilesystemencoding())
 
     if parametres['creer_pdf']:
         from subprocess import call
@@ -224,8 +218,6 @@ def creation(parametres):
         nettoyage(f0noext)
         if os.name == "nt":  #Cas de Windows.
             os.startfile('%s.pdf' % f0noext)
-        elif sys.platform == "darwin":  #Cas de Mac OS X.
-            os.system('open %s.pdf' % f0noext)
         else:
             os.system('xdg-open %s.pdf' % f0noext)
 
@@ -240,12 +232,10 @@ def creation(parametres):
             nettoyage(f1noext)
             if os.name == "nt":  #Cas de Windows.
                 os.startfile('%s.pdf' % f1noext)
-            elif sys.platform == "darwin":  #Cas de Mac OS X.
-                os.system('open %s.pdf' % f1noext)
             else:
                 os.system('xdg-open %s.pdf' % f1noext)
         else:
-            os.remove(cor)
+            os.remove('%s-corrige.tex' % f0noext)
 
 def nettoyage(basefilename):
     """Supprime les fichiers temporaires créés par LaTeX"""
@@ -257,7 +247,7 @@ def nettoyage(basefilename):
             os.remove('%s-pyromaths.log' % basefilename)
     except OSError:
         pass
-        #le fichier à supprimer n'existe pas et on s'en fout.
+        #le fichier à supprimer n'existe pas et on s'en moque.
 
 
 def copie_tronq_modele(dest, parametres, master):
