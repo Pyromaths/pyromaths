@@ -45,6 +45,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         MainWindow.setFont(font)
+        MainWindow.move(0, 0)
 
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         self.centralwidget = QtGui.QWidget(MainWindow)
@@ -317,7 +318,7 @@ class Ui_MainWindow(object):
         else:
             self.menubar.setStyleSheet("background-color: rgb(251, 231, 178);")
         MainWindow.setMenuBar(self.menubar)
-        
+
         self.menuFichier = QtGui.QMenu(self.menubar)
         self.menuFichier.setTitle("Fichier")
 
