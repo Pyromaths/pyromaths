@@ -45,7 +45,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         MainWindow.setFont(font)
-        MainWindow.move(0, 0)
+        MainWindow.move(0, 22)
 
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         self.centralwidget = QtGui.QWidget(MainWindow)
