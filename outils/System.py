@@ -33,6 +33,11 @@ if os.name == 'nt':
         return unicode(os.environ['USERPROFILE'],sys.getfilesystemencoding())
     def configdir():
         return os.path.join(os.environ['APPDATA'],"pyromaths")
+elif sys.platform == "darwin":  #Cas de Mac OS X.
+    def home():
+        return unicode(os.environ['HOME'],sys.getfilesystemencoding())
+    def configdir():
+        return os.path.join(home(),  "Library", "Application Support", "Pyromaths")
 else:
     def home():
         return unicode(os.environ['HOME'],sys.getfilesystemencoding())
@@ -65,7 +70,7 @@ def create_config_file():
 
     child = etree.SubElement(root, "options")
     etree.SubElement(child, "nom_fichier").text="exercices"
-    etree.SubElement(child, "chemin_fichier").text="%s" % 'test' #home()
+    etree.SubElement(child, "chemin_fichier").text="%s" % home()
     etree.SubElement(child, "titre_fiche").text=u"Fiche de révisions"
     etree.SubElement(child, "corrige").text="True"
     etree.SubElement(child, "pdf").text="True"
@@ -218,6 +223,8 @@ def creation(parametres):
         nettoyage(f0noext)
         if os.name == "nt":  #Cas de Windows.
             os.startfile('%s.pdf' % f0noext)
+        elif sys.platform == "darwin":  #Cas de Mac OS X.
+            os.system('open %s.pdf' % f0noext)
         else:
             os.system('xdg-open %s.pdf' % f0noext)
 
@@ -232,6 +239,8 @@ def creation(parametres):
             nettoyage(f1noext)
             if os.name == "nt":  #Cas de Windows.
                 os.startfile('%s.pdf' % f1noext)
+            elif sys.platform == "darwin":  #Cas de Mac OS X.
+                os.system('open %s.pdf' % f1noext)
             else:
                 os.system('xdg-open %s.pdf' % f1noext)
         else:
