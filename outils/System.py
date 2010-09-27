@@ -30,19 +30,21 @@ from outils.TexFiles import mise_en_forme
 ## Création des chemins suivant les OS
 if os.name == 'nt':
     def home():
-        return unicode(os.environ['USERPROFILE'],sys.getfilesystemencoding())
+        return unicode(os.environ['USERPROFILE'], sys.getfilesystemencoding())
     def configdir():
-        return os.path.join(os.environ['APPDATA'],"pyromaths")
+        return os.path.join(unicode(os.environ['APPDATA'],
+            sys.getfilesystemencoding()), "pyromaths")
 elif sys.platform == "darwin":  #Cas de Mac OS X.
     def home():
-        return unicode(os.environ['HOME'],sys.getfilesystemencoding())
+        return unicode(os.environ['HOME'], sys.getfilesystemencoding())
     def configdir():
-        return os.path.join(home(),  "Library", "Application Support", "Pyromaths")
+        return os.path.join(home(), "Library", "Application Support",
+                "Pyromaths")
 else:
     def home():
-        return unicode(os.environ['HOME'],sys.getfilesystemencoding())
+        return unicode(os.environ['HOME'], sys.getfilesystemencoding())
     def configdir():
-        return os.path.join(home(),  ".config", "pyromaths")
+        return os.path.join(home(), ".config", "pyromaths")
 
 #==============================================================
 #        Gestion des extensions de fichiers
@@ -177,6 +179,7 @@ def creation(parametres):
         if parametres['creer_unpdf']:
             f0.write("\\label{LastPage}\n")
             f0.write("\\newpage\n")
+            f0.write(u"\\currentpdfbookmark{Le corrigé des exercices}{Corrigé}")
             f0.write("\\lhead{\\textsl{\\footnotesize{Page \\thepage/ \\pageref{LastCorPage}}}}\n")
             f0.write("\\setcounter{page}{1} ")
             f0.write("\\setcounter{exo}{0}\n")
@@ -207,9 +210,16 @@ def creation(parametres):
     # Dossiers et fichiers d'enregistrement, définitions qui doivent rester avant le if suivant.
     dir0=os.path.dirname(exo)
     dir1=os.path.dirname(cor)
-    f0noext=os.path.splitext(exo)[0].encode(sys.getfilesystemencoding())
-    f1noext=os.path.splitext(cor)[0].encode(sys.getfilesystemencoding())
-
+    import socket
+    if socket.gethostname() == "sd-20841.pyromaths.org":
+        # Chemin complet pour Pyromaths en ligne car pas d'accents
+        f0noext=os.path.splitext(exo)[0].encode(sys.getfilesystemencoding())
+        f1noext=os.path.splitext(cor)[0].encode(sys.getfilesystemencoding())
+    else:
+        # Pas le chemin pour les autres, au cas où il y aurait un accent dans
+        # le chemin (latex ne gère pas le 8 bits)
+        f0noext=os.path.splitext(os.path.basename(exo))[0].encode(sys.getfilesystemencoding())
+        f1noext=os.path.splitext(os.path.basename(cor))[0].encode(sys.getfilesystemencoding())
     if parametres['creer_pdf']:
         from subprocess import call
 
@@ -280,6 +290,10 @@ def copie_tronq_modele(dest, parametres, master):
     ## Les variables à remplacer :
     titre = parametres['titre']
     niveau = parametres['niveau']
+    if parametres['creer_unpdf']:
+        bookmark=u"\\currentpdfbookmark{Les énoncés des exercices}{Énoncés}"
+    else:
+        bookmark=""
     if os.name == 'nt':
         os.environ['TEXINPUTS']= os.path.normpath(os.path.join(module_path(),
             'modeles'))

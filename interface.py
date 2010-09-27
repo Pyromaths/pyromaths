@@ -85,6 +85,15 @@ class Ui_MainWindow(object):
         else:
             self.pushButton_erase.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
+
+        self.pushButton_preview = QtGui.QPushButton(self.centralwidget)
+        self.verticalLayout.addWidget(self.pushButton_preview)
+        self.pushButton_preview.setText(u"Présentation")
+        if sys.platform == "darwin":  #Cas de Mac OS X.
+            self.pushButton_preview.setStyleSheet("background-color: "";")
+        else:
+            self.pushButton_preview.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
+
         spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
 
@@ -374,6 +383,7 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.pushButton_quit, QtCore.SIGNAL("clicked()"), QtGui.qApp,
                                                                  QtCore.SLOT("quit()"))
         QtCore.QObject.connect(self.pushButton_erase, QtCore.SIGNAL("clicked()"), self.effacer_choix_exercices)
+        QtCore.QObject.connect(self.pushButton_preview, QtCore.SIGNAL("clicked()"), self.preview)
         QtCore.QObject.connect(self.pushButton_ok,QtCore.SIGNAL("clicked()"), self.creer_les_exercices)
         QtCore.QObject.connect(self.pushButton_enr_opt,QtCore.SIGNAL("clicked()"), self.enregistrer_config)
         QtCore.QObject.connect(self.pushButton_parcourir,QtCore.SIGNAL("clicked()"), self.option_parcourir)
@@ -389,10 +399,10 @@ class Ui_MainWindow(object):
             nb_exos = len(self.LesFiches[level][2])
             for i in range(nb_exos):
                 exec("self.label_%s_%s.setText(u\"%s\")" % (6-level,i,self.LesFiches[level][2][i]))
-        try:
-            exec(u"self.label_%s_%s.setToolTip(u\"%s\")"% (6-level,i,LesFiches[level][3][i]))
-        except:
-            exec(u"self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
+                exec("self.label_%s_%s.setWhatsThis(u\'<img src=\"%s\"/>\')" %
+                        (6-level,i,os.path.join(iconesdir,'vignettes',
+                            '%se-%02d.png' % (6-level, i))))
+                exec(u"self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -573,6 +583,11 @@ class Ui_MainWindow(object):
         for level in range(5):
             for box in range(len(self.LesFiches[level][2])):
                 exec("self.spinBox_%s_%s.setValue(0)" % (6-level, box))
+
+    def preview(self):
+        """Active le mode WhatsThis"""
+        self.statusbar.showMessage(u"Présentation : cliquer sur le titre d'un exercice pour en avoir un aperçu")
+        QtGui.QWhatsThis.enterWhatsThisMode()
 
     def enregistrer_config(self):
         """Fonction qui se charge d'enregistrer les options de l'interface dans le fichier de configuration
