@@ -336,6 +336,7 @@ class Ui_MainWindow(object):
 
         self.statusbar = QtGui.QStatusBar(MainWindow)
         MainWindow.setStatusBar(self.statusbar)
+        self.statusbar.showMessage(u"Pour avoir un aperçu d'un exercice, cliquer sur le bouton \"Présentation\" puis sur le titre de l'exercice.")
         if sys.platform == "darwin":  #Cas de Mac OS X.
             self.statusbar.setStyleSheet("background-color: "";")
         else:
@@ -586,7 +587,6 @@ class Ui_MainWindow(object):
 
     def preview(self):
         """Active le mode WhatsThis"""
-        self.statusbar.showMessage(u"Présentation : cliquer sur le titre d'un exercice pour en avoir un aperçu")
         QtGui.QWhatsThis.enterWhatsThisMode()
 
     def enregistrer_config(self):
