@@ -33,6 +33,7 @@ rm $mac/dist/Pyromaths.app/Contents/Frameworks/*.framework/*_debug
 cp -R $pyromaths/modeles $mac/dist/Pyromaths.app/Contents/MacOS
 mkdir $mac/dist/Pyromaths.app/Contents/MacOS/img/
 cp $pyromaths/img/pyromaths.png $mac/dist/Pyromaths.app/Contents/MacOS/img/
+cp -R $pyromaths/img/vignettes $mac/dist/Pyromaths.app/Contents/MacOS/img/
 
 # copier le script setenv.sh et le rendre exécutable
 cp $mac/setenv.sh $mac/dist/Pyromaths.app/Contents/MacOS/

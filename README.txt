@@ -2,6 +2,7 @@
 * Représentation de données niveau cinquième
 * Calcul d'aire de disques niveau cinquième
 * Amélioration de la version Mac
+** icône 512 pixels par 512 pixels
 ** Retour du look Aqua
 ** Position de la fenêtre à l'ouverture améliorée
 ** Ouverture automatique des fichiers pdf générés
