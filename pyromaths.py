@@ -43,7 +43,7 @@ import lycee.lycee
 # Dossier des icones
 #================================================================
 if os.name == "posix" and os.path.basename(__file__) == "pyromaths":
-    iconesdir="/usr/share/pixmaps"
+    iconesdir="/usr/share/pixmaps/pyromaths/"
 else:
     pathname = os.path.dirname((sys.argv)[0])
     iconesdir=os.path.join(outils.System.module_path(),  'img')

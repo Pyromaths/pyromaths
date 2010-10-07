@@ -395,13 +395,13 @@ class Ui_MainWindow(object):
         for level in range(5):
             for box in range(len(self.LesFiches[level][2])):
                 exec("QtCore.QObject.connect(self.spinBox_%s_%s, QtCore.SIGNAL(\"valueChanged(int)\"), self.setNbExos)" % (6-level, box))
-
         for level in range(5):
             nb_exos = len(self.LesFiches[level][2])
             for i in range(nb_exos):
-                exec("self.label_%s_%s.setText(u\"%s\")" % (6-level,i,self.LesFiches[level][2][i]))
-                exec("self.label_%s_%s.setWhatsThis(u\'<img src=\"%s\"/>\')" %
-                        (6-level,i,os.path.join(iconesdir,'vignettes',
+                exec("self.label_%s_%s.setText(u\"%s\")" % (6-level, i,
+                    self.LesFiches[level][2][i]))
+                exec("self.label_%s_%s.setWhatsThis(r\'<img src=\"%s\"/>\')" %
+                        (6-level, i, os.path.join(iconesdir, 'vignettes',
                             '%se-%02d.png' % (6-level, i))))
                 exec(u"self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
 
@@ -587,6 +587,7 @@ class Ui_MainWindow(object):
 
     def preview(self):
         """Active le mode WhatsThis"""
+        self.statusbar.showMessage(u"Pour avoir un aperçu d'un exercice, cliquer sur le bouton \"Présentation\" puis sur le titre de l'exercice.")
         QtGui.QWhatsThis.enterWhatsThisMode()
 
     def enregistrer_config(self):

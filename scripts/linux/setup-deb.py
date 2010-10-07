@@ -4,7 +4,7 @@
 from glob import glob
 from py2deb import Py2deb
 
-version = "10.06-1"
+version = "10.10"
 changelog = open("README.txt", "r").read()
 
 p = Py2deb("pyromaths")
@@ -19,8 +19,10 @@ p.licence = "gpl"
 p.section = "math"
 p.arch = "all"
 p["/usr/share/applications"] = ["data/pyromaths.desktop|pyromaths.desktop"]
-p["/usr/share/pixmaps"] = ["data/pyromaths.png|pyromaths.png",
-                           "data/pyromaths-banniere.png|pyromaths-banniere.png"]
+p["/usr/share/pixmaps/pyromaths"] = ["data/pyromaths.png|pyromaths.png",
+                           "data/pyromaths-banniere.png|pyromaths-banniere.png",
+                           ] + ["%s|%s" %(i, i[4:]) \
+                                   for i in glob("img/vignettes/?e-??.png")]
 p["/usr/lib/pyromaths"] = glob("sixiemes/*.py") + glob("cinquiemes/*.py") + \
                           glob("quatriemes/*.py") + glob("troisiemes/*.py") +\
                           glob("classes/*.py") + glob("lycee/*.py") +\
