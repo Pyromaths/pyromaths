@@ -30,14 +30,21 @@ from outils.TexFiles import mise_en_forme
 ## Création des chemins suivant les OS
 if os.name == 'nt':
     def home():
-        return unicode(os.environ['USERPROFILE'],sys.getfilesystemencoding())
+        return unicode(os.environ['USERPROFILE'], sys.getfilesystemencoding())
     def configdir():
-        return os.path.join(os.environ['APPDATA'],"pyromaths")
+        return os.path.join(unicode(os.environ['APPDATA'],
+            sys.getfilesystemencoding()), "pyromaths")
+elif sys.platform == "darwin":  #Cas de Mac OS X.
+    def home():
+        return unicode(os.environ['HOME'], sys.getfilesystemencoding())
+    def configdir():
+        return os.path.join(home(), "Library", "Application Support",
+                "Pyromaths")
 else:
     def home():
-        return unicode(os.environ['HOME'],sys.getfilesystemencoding())
+        return unicode(os.environ['HOME'], sys.getfilesystemencoding())
     def configdir():
-        return os.path.join(home(),  ".config", "pyromaths")
+        return os.path.join(home(), ".config", "pyromaths")
 
 #==============================================================
 #        Gestion des extensions de fichiers
@@ -65,7 +72,7 @@ def create_config_file():
 
     child = etree.SubElement(root, "options")
     etree.SubElement(child, "nom_fichier").text="exercices"
-    etree.SubElement(child, "chemin_fichier").text="%s" % 'test' #home()
+    etree.SubElement(child, "chemin_fichier").text="%s" % home()
     etree.SubElement(child, "titre_fiche").text=u"Fiche de révisions"
     etree.SubElement(child, "corrige").text="True"
     etree.SubElement(child, "pdf").text="True"
@@ -73,7 +80,7 @@ def create_config_file():
     etree.SubElement(child, "modele").text="pyromaths.tex"
 
     child = etree.SubElement(root, "informations")
-    etree.SubElement(child, "version").text="10.06-1"
+    etree.SubElement(child, "version").text="10.10"
     etree.SubElement(child, "description").text=u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
     etree.SubElement(child, "icone").text="pyromaths.ico"
 
@@ -172,6 +179,7 @@ def creation(parametres):
         if parametres['creer_unpdf']:
             f0.write("\\label{LastPage}\n")
             f0.write("\\newpage\n")
+            f0.write(u"\\currentpdfbookmark{Le corrigé des exercices}{Corrigé}")
             f0.write("\\lhead{\\textsl{\\footnotesize{Page \\thepage/ \\pageref{LastCorPage}}}}\n")
             f0.write("\\setcounter{page}{1} ")
             f0.write("\\setcounter{exo}{0}\n")
@@ -202,9 +210,16 @@ def creation(parametres):
     # Dossiers et fichiers d'enregistrement, définitions qui doivent rester avant le if suivant.
     dir0=os.path.dirname(exo)
     dir1=os.path.dirname(cor)
-    f0noext=os.path.splitext(os.path.basename(exo))[0].encode(sys.getfilesystemencoding())
-    f1noext=os.path.splitext(os.path.basename(cor))[0].encode(sys.getfilesystemencoding())
-
+    import socket
+    if socket.gethostname() == "sd-20841.pyromaths.org":
+        # Chemin complet pour Pyromaths en ligne car pas d'accents
+        f0noext=os.path.splitext(exo)[0].encode(sys.getfilesystemencoding())
+        f1noext=os.path.splitext(cor)[0].encode(sys.getfilesystemencoding())
+    else:
+        # Pas le chemin pour les autres, au cas où il y aurait un accent dans
+        # le chemin (latex ne gère pas le 8 bits)
+        f0noext=os.path.splitext(os.path.basename(exo))[0].encode(sys.getfilesystemencoding())
+        f1noext=os.path.splitext(os.path.basename(cor))[0].encode(sys.getfilesystemencoding())
     if parametres['creer_pdf']:
         from subprocess import call
 
@@ -218,6 +233,8 @@ def creation(parametres):
         nettoyage(f0noext)
         if os.name == "nt":  #Cas de Windows.
             os.startfile('%s.pdf' % f0noext)
+        elif sys.platform == "darwin":  #Cas de Mac OS X.
+            os.system('open %s.pdf' % f0noext)
         else:
             os.system('xdg-open %s.pdf' % f0noext)
 
@@ -232,6 +249,8 @@ def creation(parametres):
             nettoyage(f1noext)
             if os.name == "nt":  #Cas de Windows.
                 os.startfile('%s.pdf' % f1noext)
+            elif sys.platform == "darwin":  #Cas de Mac OS X.
+                os.system('open %s.pdf' % f1noext)
             else:
                 os.system('xdg-open %s.pdf' % f1noext)
         else:
@@ -247,7 +266,7 @@ def nettoyage(basefilename):
             os.remove('%s-pyromaths.log' % basefilename)
     except OSError:
         pass
-        #le fichier à supprimer n'existe pas et on s'en fout.
+        #le fichier à supprimer n'existe pas et on s'en moque.
 
 
 def copie_tronq_modele(dest, parametres, master):
@@ -271,6 +290,10 @@ def copie_tronq_modele(dest, parametres, master):
     ## Les variables à remplacer :
     titre = parametres['titre']
     niveau = parametres['niveau']
+    if parametres['creer_unpdf']:
+        bookmark=u"\\currentpdfbookmark{Les énoncés des exercices}{Énoncés}"
+    else:
+        bookmark=""
     if os.name == 'nt':
         os.environ['TEXINPUTS']= os.path.normpath(os.path.join(module_path(),
             'modeles'))

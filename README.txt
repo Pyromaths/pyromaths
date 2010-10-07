@@ -1,4 +1,28 @@
-Version 10.0?
+﻿Version 10.10
+* Représentation de données niveau cinquième
+* Calcul d'aire de disques niveau cinquième
+* Amélioration de la version Mac
+** icône 512 pixels par 512 pixels
+** Retour du look Aqua
+** Position de la fenêtre à l'ouverture améliorée
+** Ouverture automatique des fichiers pdf générés
+** Pyromaths n'est plus lancé par un applescript
+** Diverses améliorations cosmétiques
+** Compatibilité avec Mac OS X 10.4
+* Exercices de proportionnalités en cinquièmes
+** Calcul de la quatrième proportionnelle
+** Calculs avec les échelles
+* Conversions d'unités
+** Exercices de conversions d'unités de volume
+** Amélioration de la présentation du tableau de conversions
+* Exercice de géométrie dans l'espace niveau sixième
+* Visualisation des exercices grâce au bouton "Présentation"
+
+Version 10.06-1
+* Correction d’un bug (il manquait un retour ligne après certains \par) dans les exercices de géométrie troisième.
+* Ajout de l’utilisation du paquet textcomp pour enjoliver les \degres
+
+Version 10.06
 * Exercice de calcul d'aires niveau sixième
 * Correction d'un non sens dans les tableaux de conversion niveau sixième : le tableau de conversion se retrouvait parfois avec plusieurs chiffres dans la colonne des mL, mm ou mg.
 * Correction d'un bug dans l'affichage de la résolution d'une équation du second degré (merci à Marty de l'avoir signalé)

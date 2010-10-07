@@ -1,11 +1,11 @@
 from setuptools import setup
 
-APP = ['../pyromaths.py']
-DATA_FILES = ['pyromaths.icns']
+APP = ['../../pyromaths.py']
+DATA_FILES = ['pyromaths.icns', '../../sixiemes', '../../cinquiemes', '../../quatriemes', '../../troisiemes', '../../classes', '../../lycee', '../../outils', 'qt.conf']
 OPTIONS = dict(
         plist='Info.plist',
         argv_emulation=True,
-        includes=['sip', 'PyQt4._qt']
+        includes=['gzip', 'sip', 'PyQt4']
     )
 setup(
     app=APP,

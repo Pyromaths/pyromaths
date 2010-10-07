@@ -7,6 +7,7 @@
 \usepackage[autolanguage]{numprint}
 \usepackage[fleqn]{amsmath}
 \usepackage{amssymb,multicol,calc,vmargin,cancel,fancyhdr,units,pst-eucl,wrapfig,wasysym,pst-plot,tabularx,textcomp}
+\usepackage[right]{eurosym}
 \input{##{{TABVAR}}##}
 
 \setmarginsrb{1.5cm}{1.5cm}{1.5cm}{1.5cm}{.5cm}{.5cm}{.5cm}{1.cm}
@@ -16,10 +17,11 @@
 \setlength\parindent{0em}
 \setlength\mathindent{0em}
 \setlength{\columnsep}{30pt}
-\usepackage[ps2pdf,pagebackref=true,colorlinks=true,linkcolor=blue,plainpages=true]{hyperref}
+\usepackage[bookmarks=true, bookmarksnumbered=true, ps2pdf, pagebackref=true,%
+            colorlinks=true,linkcolor=blue,plainpages=true]{hyperref}
 \hypersetup{pdfauthor={Jérôme Ortais},pdfsubject={Exercices de
-    mathématiques},pdftitle={Exercices créés par Pyromaths, un programme
-    en Python de Jérôme Ortais}}
+    mathématiques},pdftitle={Exercices créés par Pyromaths, un logiciel libre
+    en Python sous licence GPL}}
 \makeatletter
 \newcommand\styleexo[1][]{
   \renewcommand{\theenumi}{\arabic{enumi}}
@@ -64,6 +66,7 @@
 \rhead{\textsl{\footnotesize{Classe de ##{{NIVEAU}}##}}}
 \DecimalMathComma
 \begin{document}
+##{{BOOKMARK}}##
 \newcounter{nocalcul}[exo]
 \renewcommand{\thenocalcul}{\Alph{nocalcul}}
 \raggedcolumns

@@ -43,7 +43,7 @@ import lycee.lycee
 # Dossier des icones
 #================================================================
 if os.name == "posix" and os.path.basename(__file__) == "pyromaths":
-    iconesdir="/usr/share/pixmaps"
+    iconesdir="/usr/share/pixmaps/pyromaths/"
 else:
     pathname = os.path.dirname((sys.argv)[0])
     iconesdir=os.path.join(outils.System.module_path(),  'img')
@@ -54,10 +54,12 @@ u'Calcul mental',
 u'Écrire un nombre décimal',
 u'Placer une virgule',
 u'Écriture fractionnaire ou décimale',
-u'Décomposition de nombres décimaux',
+u'Décomposition de décimaux',
 u'Conversions unités',
+u"Conversions unités d'aires",
+u"Conversions unités de volumes",
 u'Poser des opérations (sauf divisions)',
-u'Produits et quotients par 10, 100, 1000',
+u'Produits, quotients par 10, 100, 1000',
 u'Classer des nombres décimaux',
 u'Droites, demi-droites, segments',
 u'Droites perpendiculaires et parallèles',
@@ -68,6 +70,7 @@ u'Fractions et abscisses',
 u'Aires et quadrillage',
 u'Symétrie et quadrillages',
 u'Mesurer des angles',
+u'Représentation dans l\'espace',
 u'Arrondir des nombres décimaux'
 ]],
 [u'Cinquième', cinquiemes.cinquiemes, [
@@ -80,7 +83,9 @@ u'Repérage',
 u'Addition de relatifs',
 u'Construction de triangles',
 u'Construction de parallélogrammes',
-
+u'Échelles',
+u'Aire de disques',
+u'Représentation de données',
 ]],
 [u'Quatrième', quatriemes.quatriemes, [
 u'Calcul mental',
