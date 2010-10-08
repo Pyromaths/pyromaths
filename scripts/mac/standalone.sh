@@ -42,8 +42,8 @@ chmod +x $mac/dist/Pyromaths.app/Contents/MacOS/setenv.sh
 # Remplacer le CFBundleExecutable pyromaths par le script setenv.sh dans Info.plist
 sed -i '' '23s/pyromaths/setenv.sh/' $mac/dist/Pyromaths.app/Contents/Info.plist
 
-# Déplacement de Pyromaths finalisé sur le bureau
-mv $mac/dist/Pyromaths.app ~/Desktop
+# Suppression du code PowerPC et déplacement de Pyromaths finalisé sur le bureau
+ditto --rsrc --arch i386 $mac/dist/Pyromaths.app ~/Desktop/Pyromaths.app
 
 # nettoyage
 rm -rf $mac/dist/
