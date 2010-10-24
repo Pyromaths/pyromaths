@@ -278,14 +278,14 @@ def copie_tronq_modele(dest, parametres, master):
     ## Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
     source = parametres['modele']
 
-    if os.path.isfile(os.path.join(parametres['configdir'], 'modeles',source)):
-        source = os.path.join(parametres['configdir'], 'modeles', source)
-    elif os.path.isfile(os.path.join(module_path(), 'modeles', source)):
-        source = os.path.join(module_path(), 'modeles', source)
+    if os.path.isfile(os.path.join(parametres['datadir'], 'modeles',source)):
+        source = os.path.join(parametres['datadir'], 'modeles', source)
+    elif os.path.isfile(os.path.join(parametres['datadir'], 'modeles', source)):
+        source = os.path.join(parametres['datadir'], 'modeles', source)
     else:
         #TODO: Message d'erreur, le modèle demandé n'existe pas
         print(u"Le fichier modèle n'a pas été trouvé dans %s" %
-                os.path.join(module_path(), 'modeles'))
+                os.path.join(parametres['datadir'], 'modeles'))
 
     ## Les variables à remplacer :
     titre = parametres['titre']
@@ -295,12 +295,12 @@ def copie_tronq_modele(dest, parametres, master):
     else:
         bookmark=""
     if os.name == 'nt':
-        os.environ['TEXINPUTS']= os.path.normpath(os.path.join(module_path(),
+        os.environ['TEXINPUTS']= os.path.normpath(os.path.join(parametres['datadir'],
             'modeles'))
         tabvar = 'tabvar.tex'
     else:
-        tabvar = os.path.normpath(os.path.join(module_path(), 'modeles',
-            'tabvar.tex'))
+        tabvar = os.path.normpath(os.path.join(parametres['datadir'],
+            'modeles', 'tabvar.tex'))
     #rawstring pour \tabvar -> tab + abvarsous windows
     modele = codecs.open(source, encoding='utf-8', mode='r')
     for line in modele:
@@ -319,25 +319,3 @@ def copie_tronq_modele(dest, parametres, master):
 
     modele.close()
     return
-
-#==============================================================
-#        Compilation de la version win32
-#==============================================================
-
-def we_are_frozen():
-    """Returns whether we are frozen via py2exe.
-    This will affect how we find out where we are located."""
-    return hasattr(sys, "frozen")
-
-def module_path():
-    """ This will get us the program's directory,
-    even if we are frozen using py2exe"""
-
-    if we_are_frozen():
-        return os.path.normpath(os.path.dirname(unicode(sys.executable,
-            sys.getfilesystemencoding())))
-
-    #return os.path.dirname(str(__file__,
-    #                                sys.getfilesystemencoding( )))
-    return os.path.normpath(os.path.join(os.path.dirname(str(__file__)), '..'))
-

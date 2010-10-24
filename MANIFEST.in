@@ -1,0 +1,3 @@
+include AUTHORS COPYING NEWS runner/pyromaths
+recursive-include img *
+recursive-include modeles *

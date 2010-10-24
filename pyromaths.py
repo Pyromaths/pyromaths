@@ -30,6 +30,25 @@ if os.name == "posix" and os.path.basename(__file__)=="pyromaths":
     sys.path.append(os.path.join( os.path.dirname(__file__),
         "../lib/pyromaths"))
 
+#==============================================================
+#        Compilation de la version win32
+#==============================================================
+def we_are_frozen():
+    """Returns whether we are frozen via py2exe.
+    This will affect how we find out where we are located."""
+    return hasattr(sys, "frozen")
+
+def module_path():
+    """ This will get us the program's directory,
+    even if we are frozen using py2exe"""
+    if we_are_frozen():
+        return os.path.normpath(os.path.dirname(unicode(sys.executable,
+            sys.getfilesystemencoding())))
+    elif os.name == "posix" and os.path.basename(__file__) == "pyromaths":
+        return "/usr/share/pyromaths/"
+    else:
+        return os.path.abspath(os.path.dirname(str(__file__)))
+
 #================================================================
 # Imports spécifiques à Pyromaths
 #=========================== QtGui ========================
@@ -43,10 +62,10 @@ import lycee.lycee
 # Dossier des icones
 #================================================================
 if os.name == "posix" and os.path.basename(__file__) == "pyromaths":
-    iconesdir="/usr/share/pixmaps/pyromaths/"
+    datadir="/usr/share/pyromaths/"
 else:
     pathname = os.path.dirname((sys.argv)[0])
-    iconesdir=os.path.join(outils.System.module_path(),  'img')
+    datadir=os.path.join(module_path())
 
 
 LesFiches = [[u'Sixième', sixiemes.sixiemes, [
@@ -143,10 +162,10 @@ if __name__ == "__main__":
     import interface
     from PyQt4 import QtGui, QtCore
     class StartQT4(QtGui.QMainWindow, interface.Ui_MainWindow):
-        def __init__(self, LesFiches, configdir, iconesdir, parent=None):
+        def __init__(self, LesFiches, configdir, datadir, parent=None):
             QtGui.QWidget.__init__(self, parent)
             self.ui = interface.Ui_MainWindow()
-            self.ui.setupUi(self, LesFiches, configdir, iconesdir)
+            self.ui.setupUi(self, LesFiches, configdir, datadir)
 
 #================================================================
 # Création du fichier de configuration si inexistant
@@ -167,7 +186,7 @@ if __name__ == "__main__":
         os.makedirs(modeledir)
 
     app = QtGui.QApplication(sys.argv)
-    pyromaths = StartQT4(LesFiches,  outils.System.configdir(), iconesdir)
+    pyromaths = StartQT4(LesFiches,  outils.System.configdir(), datadir)
 
     pyromaths.show()
     test(pyromaths)

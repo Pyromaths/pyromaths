@@ -25,15 +25,15 @@ import os, lxml, codecs, sys
 import outils.System
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow, LesFiches,  configdir, iconesdir):
+    def setupUi(self, MainWindow, LesFiches,  configdir, datadir):
         self.LesFiches = LesFiches
         self.configdir = configdir
-        self.iconesdir=iconesdir
+        self.datadir=datadir
         self.configfile = os.path.join(configdir,  "pyromaths.xml")
         self.liste_creation=[]
         if sys.platform != "darwin":  #Cas de Mac OS X.
             MainWindow.setStyleSheet("background-color: rgb(251, 245, 225);")
-            MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(iconesdir,
+            MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(datadir, 'img',
                 'pyromaths.png')))
         MainWindow.setWindowTitle("Pyromaths")
         if sys.platform == "darwin":  #Cas de Mac OS X.
@@ -254,13 +254,13 @@ class Ui_MainWindow(object):
 
         self.comboBox_modele = QtGui.QComboBox(self.tab_options)
 
-        modeles = os.listdir(os.path.join(outils.System.module_path(), 'modeles'))
-        modeles_home = os.listdir(os.path.join(configdir,  'modeles'))
+        modeles = os.listdir(os.path.join(datadir, 'modeles'))
+        modeles_home = os.listdir(os.path.join(configdir, 'modeles'))
 
         count = 0
 
         for element in modeles:
-          if element[len(element)-3:] == "tex":
+          if os.path.splitext(element)[1] == ".tex" and element != "tabvar.tex":
              self.comboBox_modele.addItem(str(element[:len(element)-4]))
              if element == self.config['modele']:
                self.comboBox_modele.setCurrentIndex(count)
@@ -268,7 +268,7 @@ class Ui_MainWindow(object):
 
 
         for element in modeles_home:
-          if element[len(element)-3:] == "tex":
+          if os.path.splitext(element)[1] == ".tex" and element != "tabvar.tex":
              self.comboBox_modele.addItem(QtCore.QString())
              self.comboBox_modele.setItemText(count, str(element[:len(element)-4]))
              if element == self.config['modele']:
@@ -375,9 +375,11 @@ class Ui_MainWindow(object):
             for i in range(nb_exos):
                 exec("self.label_%s_%s.setText(u\"%s\")" % (6-level, i,
                     self.LesFiches[level][2][i]))
-                exec("self.imglabel_%s_%s.setText(r'<img src=\"%s\" />')" % (6-level, i, os.path.join(iconesdir, 'whatsthis.png')))
+                exec("self.imglabel_%s_%s.setText(r'<img src=\"%s\" />')" %
+                        (6-level, i, os.path.join(datadir, 'img',
+                            'whatsthis.png')))
                 exec("self.imglabel_%s_%s.setToolTip(r\'<img src=\"%s\" />\')" %
-                        (6-level, i, os.path.join(iconesdir, 'vignettes',
+                        (6-level, i, os.path.join(datadir, 'img', 'vignettes',
                             '%se-%02d.png' % (6-level, i))))
                 exec(u"self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
 
@@ -454,9 +456,9 @@ class Ui_MainWindow(object):
   </body>
 </html>"""
         if sys.platform == "darwin":  #Cas de Mac OS X.
-            banniere = os.path.join(self.iconesdir, 'pyromaths.png')
+            banniere = os.path.join(self.datadir, 'img', 'pyromaths.png')
         else:
-            banniere = os.path.join(self.iconesdir, 'pyromaths-banniere.png')
+            banniere = os.path.join(self.datadir, 'img', 'pyromaths-banniere.png')
         QtGui.QMessageBox.about(None, u'À propos de Pyromaths', text % (banniere,  version))
 
     def creer_les_exercices(self):
@@ -477,6 +479,7 @@ class Ui_MainWindow(object):
                 'nom_fichier': unicode(self.nom_fichier.text()),
                 'chemin_fichier': unicode(self.chemin_fichier.text()),
                 'modele': unicode(self.comboBox_modele.currentText() + '.tex'),
+                'datadir': self.datadir,
                 'configdir': self.configdir
                          }
             #============================================================
@@ -534,6 +537,7 @@ class Ui_MainWindow(object):
                                           'modele': str(self.comboBox_modele.currentText() + '.tex'),
                                           'corrige': True,
                                           'creer_unpdf': True,
+                                          'datadir': self.datadir,
                                           'configdir': self.configdir
                                           }
                 else:
@@ -550,6 +554,7 @@ class Ui_MainWindow(object):
                                           'modele': str(self.comboBox_modele.currentText() + '.tex'),
                                           'corrige': True,
                                           'creer_unpdf': True,
+                                          'datadir': self.datadir,
                                           'configdir': self.configdir
                                           }
                 outils.System.creation(parametres)

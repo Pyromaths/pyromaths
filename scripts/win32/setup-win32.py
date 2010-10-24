@@ -14,7 +14,7 @@ setup(
     packages=['', 'troisiemes', 'quatriemes', 'cinquiemes', 'sixiemes', 'lycee',
         'outils', 'classes', 'img'],
     data_files=[('img', ['pyromaths/img/pyromaths.ico',
-        'pyromaths/img/pyromaths.png',
+        'pyromaths/img/pyromaths.png', 'img/whatsthis.png',
         'pyromaths/img/pyromaths-banniere.png']),
         (r'modeles', glob.glob(r'pyromaths/modeles/*')),
         (r'img/vignettes', glob.glob(r'pyromaths/img/vignettes/*')),

@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os, sys, codecs, shutil
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+datadir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.append(datadir)
 from pyromaths import LesFiches
 from outils.System import creation
 from subprocess import call, Popen
-d =os.path.join(sys.path[0], "..", "img", "vignettes")
+d =os.path.join(os.path.abspath(sys.path[0]), "..", "img", "vignettes")
 
 if os.name == 'nt':
     def home():
@@ -30,6 +31,7 @@ parametres = {
     'fiche_exo': '/tmp/test.tex',
     'fiche_cor': '/tmp/test-corrige.tex',
     'configdir': configdir(),
+    'datadir': datadir,
     'modele': 'pyromaths.tex',
     'liste_exos': [],
     'les_fiches': LesFiches,
