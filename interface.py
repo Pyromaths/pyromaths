@@ -31,9 +31,7 @@ class Ui_MainWindow(object):
         self.iconesdir=iconesdir
         self.configfile = os.path.join(configdir,  "pyromaths.xml")
         self.liste_creation=[]
-        if sys.platform == "darwin":  #Cas de Mac OS X.
-            MainWindow.setStyleSheet("background-color: "";")
-        else:
+        if sys.platform != "darwin":  #Cas de Mac OS X.
             MainWindow.setStyleSheet("background-color: rgb(251, 245, 225);")
             MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(iconesdir,
                 'pyromaths.png')))
@@ -64,35 +62,21 @@ class Ui_MainWindow(object):
         self.pushButton_ok = QtGui.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_ok)
         self.pushButton_ok.setText(u"Créer")
-        if sys.platform == "darwin":  #Cas de Mac OS X.
-            self.pushButton_ok.setStyleSheet("background-color: "";")
-        else:
+        if sys.platform != "darwin":  #Cas de Mac OS X.
             self.pushButton_ok.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         self.pushButton_quit = QtGui.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_quit)
         self.pushButton_quit.setText("Quitter")
-        if sys.platform == "darwin":  #Cas de Mac OS X.
-            self.pushButton_quit.setStyleSheet("background-color: "";")
-        else:
+        if sys.platform != "darwin":  #Cas de Mac OS X.
             self.pushButton_quit.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         self.pushButton_erase = QtGui.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_erase)
         self.pushButton_erase.setText(u"Réinitialiser")
-        if sys.platform == "darwin":  #Cas de Mac OS X.
-            self.pushButton_erase.setStyleSheet("background-color: "";")
-        else:
+        if sys.platform != "darwin":  #Cas de Mac OS X.
             self.pushButton_erase.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
-
-        self.pushButton_preview = QtGui.QPushButton(self.centralwidget)
-        self.verticalLayout.addWidget(self.pushButton_preview)
-        self.pushButton_preview.setText(u"Présentation")
-        if sys.platform == "darwin":  #Cas de Mac OS X.
-            self.pushButton_preview.setStyleSheet("background-color: "";")
-        else:
-            self.pushButton_preview.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
@@ -104,9 +88,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(self.verticalLayout, 0, 1, 1, 1)
         self.tabWidget = QtGui.QTabWidget(self.centralwidget)
         self.tabWidget.setAutoFillBackground(True)
-        if sys.platform == "darwin":  #Cas de Mac OS X.
-            self.tabWidget.setStyleSheet("background-color: "";")
-        else:
+        if sys.platform != "darwin":  #Cas de Mac OS X.
             self.tabWidget.setStyleSheet("background-color: rgb(251, 231, 178);")
 
         #============================================================
@@ -303,9 +285,7 @@ class Ui_MainWindow(object):
 
         self.pushButton_enr_opt = QtGui.QPushButton(self.tab_options)
         self.pushButton_enr_opt.setText(u"Enregistrer dans les préférences")
-        if sys.platform == "darwin":  #Cas de Mac OS X.
-            self.pushButton_enr_opt.setStyleSheet("background-color:"";")
-        else:
+        if sys.platform != "darwin":  #Cas de Mac OS X.
             self.pushButton_enr_opt.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         self.gridLayout_2.addWidget(self.pushButton_enr_opt, 4, 1, 1, 1)
@@ -322,9 +302,7 @@ class Ui_MainWindow(object):
 
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 700, 22))
-        if sys.platform == "darwin":  #Cas de Mac OS X.
-            self.menubar.setStyleSheet("background-color: "";")
-        else:
+        if sys.platform != "darwin":  #Cas de Mac OS X.
             self.menubar.setStyleSheet("background-color: rgb(251, 231, 178);")
         MainWindow.setMenuBar(self.menubar)
 
@@ -336,10 +314,8 @@ class Ui_MainWindow(object):
 
         self.statusbar = QtGui.QStatusBar(MainWindow)
         MainWindow.setStatusBar(self.statusbar)
-        self.statusbar.showMessage(u"Pour avoir un aperçu d'un exercice, cliquer sur le bouton \"Présentation\" puis sur le titre de l'exercice.")
-        if sys.platform == "darwin":  #Cas de Mac OS X.
-            self.statusbar.setStyleSheet("background-color: "";")
-        else:
+        self.statusbar.showMessage(u"Pour avoir un aperçu d'un exercice, positionner le curseur de la souris sur le point d'interrogation.")
+        if sys.platform != "darwin":  #Cas de Mac OS X.
             self.statusbar.setStyleSheet("background-color: rgb(251, 231, 178);")
 
         #============================================================
@@ -384,7 +360,6 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.pushButton_quit, QtCore.SIGNAL("clicked()"), QtGui.qApp,
                                                                  QtCore.SLOT("quit()"))
         QtCore.QObject.connect(self.pushButton_erase, QtCore.SIGNAL("clicked()"), self.effacer_choix_exercices)
-        QtCore.QObject.connect(self.pushButton_preview, QtCore.SIGNAL("clicked()"), self.preview)
         QtCore.QObject.connect(self.pushButton_ok,QtCore.SIGNAL("clicked()"), self.creer_les_exercices)
         QtCore.QObject.connect(self.pushButton_enr_opt,QtCore.SIGNAL("clicked()"), self.enregistrer_config)
         QtCore.QObject.connect(self.pushButton_parcourir,QtCore.SIGNAL("clicked()"), self.option_parcourir)
@@ -400,7 +375,8 @@ class Ui_MainWindow(object):
             for i in range(nb_exos):
                 exec("self.label_%s_%s.setText(u\"%s\")" % (6-level, i,
                     self.LesFiches[level][2][i]))
-                exec("self.label_%s_%s.setWhatsThis(r\'<img src=\"%s\"/>\')" %
+                exec("self.imglabel_%s_%s.setText(r'<img src=\"%s\" />')" % (6-level, i, os.path.join(iconesdir, 'whatsthis.png')))
+                exec("self.imglabel_%s_%s.setToolTip(r\'<img src=\"%s\" />\')" %
                         (6-level, i, os.path.join(iconesdir, 'vignettes',
                             '%se-%02d.png' % (6-level, i))))
                 exec(u"self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
@@ -585,11 +561,6 @@ class Ui_MainWindow(object):
             for box in range(len(self.LesFiches[level][2])):
                 exec("self.spinBox_%s_%s.setValue(0)" % (6-level, box))
 
-    def preview(self):
-        """Active le mode WhatsThis"""
-        self.statusbar.showMessage(u"Pour avoir un aperçu d'un exercice, cliquer sur le bouton \"Présentation\" puis sur le titre de l'exercice.")
-        QtGui.QWhatsThis.enterWhatsThisMode()
-
     def enregistrer_config(self):
         """Fonction qui se charge d'enregistrer les options de l'interface dans le fichier de configuration
         après avoir complété le dictionnaire."""
@@ -620,6 +591,8 @@ class Ui_MainWindow(object):
         exec("sizePolicy.setHeightForWidth(self.spinBox_%s.sizePolicy().hasHeightForWidth())" % (treated))
         exec("self.spinBox_%s.setSizePolicy(sizePolicy)" % (treated))
         exec("self.horizontalLayout_%s.addWidget(self.spinBox_%s)" % (treated, treated))
+        exec("self.imglabel_%s = QtGui.QLabel(self.tab_%se)" % (treated, level))
+        exec("self.horizontalLayout_%s.addWidget(self.imglabel_%s)" % (treated, treated))
         exec("self.label_%s = QtGui.QLabel(self.tab_%se)" % (treated, level))
         exec("self.horizontalLayout_%s.addWidget(self.label_%s)" % (treated, treated))
 
