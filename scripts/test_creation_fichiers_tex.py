@@ -65,5 +65,5 @@ else:
     print "###            USAGE            ###"
     print "###################################\n"
     print u"Sans argument, ce script génère un exemplaire de chaque exercice et leurs corrigés en tex et pdf.\n"
-    print u"Sinon, \"python test_creation_fichiers_tex.py i j k\" génère k exercices n° j du niveau i."
-    print u"Par exemple, \"python test_creation_fichiers_tex.py 1 5 10\" génère 10 exercices de \"Repérage\" du niveau cinquième.\n"
+    print u"Sinon, \"python scripts/test_creation_fichiers_tex.py i j k\" génère k exercices n° j du niveau i."
+    print u"Par exemple, \"python scripts/test_creation_fichiers_tex.py 1 5 10\" génère 10 exercices de \"Repérage\" du niveau cinquième.\n"
