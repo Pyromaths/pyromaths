@@ -1,10 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import sys, os
+import sys, os, shutil
 from subprocess import call, Popen
 
-datadir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "..")
-sys.path.append(datadir)
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from pyromaths import LesFiches
 from outils.System import creation
 import codecs
@@ -31,17 +30,37 @@ parametres = {
         'fiche_exo': '/tmp/test.tex',
         'fiche_cor': '/tmp/test-corrige.tex',
         'configdir': configdir(),
-        'datadir': datadir,
         'modele': 'pyromaths.tex',
         'liste_exos': [],
         'les_fiches': LesFiches,
         }
 
-for j in range(100):
-    print('Test n° %03d' % (j+1))
+if not os.path.isdir("/tmp/modeles"):
+    shutil.copytree("modeles","/tmp/modeles" ) 
+
+if (len(sys.argv) == 4):
+
     lst = []
-    for n in range(len(LesFiches)):
-        for i in range(len(LesFiches[n][2])):
-            lst.append([n,i])
+
+    for i in range(int(sys.argv[3])):
+      lst.append([int(sys.argv[1]),int(sys.argv[2])])
+      
     parametres['liste_exos'] = lst
     creation(parametres)
+
+elif (len(sys.argv) == 1):
+    for j in range(100):
+	print('Test n° %03d' % (j+1))
+	lst = []
+	for n in range(len(LesFiches)):
+	    for i in range(len(LesFiches[n][2])):
+		lst.append([n,i])
+	parametres['liste_exos'] = lst
+	creation(parametres)
+else:
+    print "\n###################################"
+    print "###            USAGE            ###"
+    print "###################################\n"
+    print u"Sans argument, ce script génère un exemplaire de chaque exercice et leurs corrigés en tex et pdf.\n"
+    print u"Sinon, \"python test_creation_fichiers_tex.py i j k\" génère k exercices n° j du niveau i."
+    print u"Par exemple, \"python test_creation_fichiers_tex.py 1 5 10\" génère 10 exercices de \"Repérage\" du niveau cinquième.\n"
