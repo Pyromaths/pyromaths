@@ -3,7 +3,9 @@
 import sys, os, shutil
 from subprocess import call, Popen
 
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+datadir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "..")
+sys.path.append(datadir)
+
 from pyromaths import LesFiches
 from outils.System import creation
 import codecs
@@ -29,6 +31,7 @@ parametres = {
         'chemin_fichier': "/tmp/",
         'fiche_exo': '/tmp/test.tex',
         'fiche_cor': '/tmp/test-corrige.tex',
+        'datadir': datadir,
         'configdir': configdir(),
         'modele': 'pyromaths.tex',
         'liste_exos': [],
