@@ -2,22 +2,34 @@
 # -*- coding: utf-8 -*-
 #
 from distutils.core import setup
-import glob
+#from distutils.cmd import Command
+#from setuptools import setup
 
+import glob
 setup(name = "Pyromaths",
+    #install_requires=['distribute'],
     version = "10.10",
-    description = "Génère des exercices types de mathématiques de collège et leur corrigé au format LaTeX.",
+    description = "Exerciseur de mathématiques créant des fiches aux formats " \
+            + "LaTeX et PDF.",
+    license = "GPL",
     author = "Jérôme Ortais",
     author_email = "jerome.ortais@pyromaths.org",
     url = "http://www.pyromaths.org",
-    packages=['', 'troisiemes', 'quatriemes', 'cinquiemes', 'sixiemes', 'lycee',
-        'outils', 'classes'],
-    data_files=[('img', ['img/pyromaths.ico', 'img/pyromaths.png',
-        'img/pyromaths-banniere.png', 'img/whatsthis.png']),
-        (r'modeles', glob.glob(r'modeles/*')),
-        (r'img/vignettes', glob.glob(r'img/vignettes/*')),
+    package_dir={'pyromaths': 'src'},
+    packages=['pyromaths', 'pyromaths.troisiemes', 'pyromaths.quatriemes',
+        'pyromaths.cinquiemes', 'pyromaths.sixiemes', 'pyromaths.lycee',
+        'pyromaths.outils', 'pyromaths.classes'],
+    data_files=[
+        ('share/pyromaths/images', ['data/images/pyromaths.ico',
+            'data/images/pyromaths.png', 'data/images/pyromaths-banniere.png',
+            'data/images/whatsthis.png']
+        ),
+        (r'share/pyromaths/images/vignettes',
+            glob.glob(r'data/images/vignettes/*.png')),
+        (r'share/pyromaths/templates', glob.glob(r'data/templates/*.tex')),
+        (r'share/pyromaths/packages', glob.glob(r'data/packages/*')),
         ],
-    scripts = ["runner/pyromaths"],
+    scripts = ["pyromaths"],
     long_description = """Pyromaths est un programme initié par Jérôme Ortais,
     qui a pour but de créer des exercices type de mathématiques niveau collège
     et lycée ainsi que leur corrigé. C’est ce qu’on appelle parfois un
