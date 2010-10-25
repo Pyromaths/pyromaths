@@ -682,10 +682,12 @@ def factorise_identites_remarquables(pol1,sgns,var='',racines=True):
     #pol2[1]=2× cx × b
     #pol2[0] = b^2
     c=int(sqrt(pol2[2]))#problème d'arrondi ?
-        
+
     factorisation=[]
     if a1!=1:
-        factorisation.append("%s \\times\\big[ %s \\big]"%(TeX(a1),(pol1/a1).simplifie()))
+	pol_temp = (pol1/a1).simplifie()
+	pol_temp.var = var
+        factorisation.append("%s \\times\\big[ %s \\big]"%(TeX(a1),pol_temp))
         facteur2 ="%s\\times \\big["%(TeX(a1))
     else:
         facteur2 =""
