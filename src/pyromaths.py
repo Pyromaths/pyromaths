@@ -23,17 +23,17 @@
 from sys import argv, exit
 import sys
 from os import access, R_OK, makedirs, chdir
-from os.path import join, isdir, dirname, realpath
+from os.path import join, isdir, dirname, realpath, split
 from codecs import open
 
+def main():
 #===============================================================================
 # Imports spécifiques à Pyromaths
 #===============================================================================
-from outils.System import create_config_file, modify_config_file
-from outils.TestEnv import test
-from Values import CONFIGDIR
+    from outils.System import create_config_file, modify_config_file
+    from outils.TestEnv import test
+    from Values import CONFIGDIR
 
-def main():
     import interface
     from PyQt4 import QtGui, QtCore
     class StartQT4(QtGui.QMainWindow, interface.Ui_MainWindow):
@@ -65,4 +65,8 @@ def main():
     exit(app.exec_())
 
 if __name__ == "__main__":
-    main()
+    basedir = dirname(realpath(__file__))
+    _path, _dir = split(basedir)
+    sys.path[0] = realpath(_path)
+    exec("from %s import pyromaths" % _dir)
+    pyromaths.main()

@@ -6,8 +6,8 @@ from os.path import normpath, dirname, exists, abspath, join
 from os import environ, name
 from sys import executable, getfilesystemencoding
 import sys
-import troisiemes.troisiemes, quatriemes.quatriemes, cinquiemes.cinquiemes
-import sixiemes.sixiemes, lycee.lycee
+#import troisiemes.troisiemes, quatriemes.quatriemes, cinquiemes.cinquiemes
+#import sixiemes.sixiemes, lycee.lycee
 
 def we_are_frozen():
     """Returns whether we are frozen via py2exe.
@@ -18,7 +18,8 @@ def data_dir():
     """Renvoie le dossier data, selon qu'on utilise pyromaths à partir des
     sources, de l'exécutable win32 ou du paquet deb"""
     if we_are_frozen():
-        return normpath(dirname(unicode(executable, getfilesystemencoding())))
+        return join(normpath(dirname(unicode(executable, 
+            getfilesystemencoding()))), 'data')
     elif  exists(join(abspath(dirname(__file__)),'../data/')):
         return normpath(join(abspath(dirname(__file__)),'../data/'))
     else:
@@ -41,7 +42,7 @@ else:
     def configdir():
         return join(home(), ".config", "pyromaths")
 
-VERSION = '10.10'
+VERSION = '10.11'
 COPYRIGHT_YEAR = strftime('%Y')
 COPYRIGHTS = u'© 2006 – %s Jérôme Ortais<br/>\n' \
         u'<span style=" font-size:small;">Pyromaths est distribué sous ' \
@@ -51,7 +52,7 @@ DATADIR = data_dir()
 HOME = home()
 CONFIGDIR = configdir()
 
-LESFICHES = [[u'Sixième', sixiemes.sixiemes, [
+LESFICHES = [[u'Sixième', '', [
 u'Calcul mental',
 u'Écrire un nombre décimal',
 u'Placer une virgule',
@@ -75,7 +76,7 @@ u'Mesurer des angles',
 u'Représentation dans l\'espace',
 u'Arrondir des nombres décimaux'
 ]],
-[u'Cinquième', cinquiemes.cinquiemes, [
+[u'Cinquième', '', [
 u'Priorités opératoires',
 u'Symétrie centrale',
 u'Fractions égales',
@@ -89,7 +90,7 @@ u'Échelles',
 u'Aire de disques',
 u'Représentation de données',
 ]],
-[u'Quatrième', quatriemes.quatriemes, [
+[u'Quatrième', '', [
 u'Calcul mental',
 u'Sommes de fractions',
 u'Produits et quotients de fractions',
@@ -106,7 +107,7 @@ u'Cercle et théorème de Pythagore',
 u'Théorème de Thalès',
 u'Trigonométrie',
 ]],
-[u'Troisième', troisiemes.troisiemes, [
+[u'Troisième', '', [
 u'Fractions',
 u'Puissances',
 u'PGCD',
@@ -123,7 +124,7 @@ u'Réciproque du théorème de Thalès',
 u'Trigonométrie',
 u'Arithmétique'
 ]],
-[u'Lycée', lycee.lycee, [
+[u'Lycée', '', [
 u'Équations 2° degré',
 u'Factorisations 2° degré',
 u'Factorisations degré 3',

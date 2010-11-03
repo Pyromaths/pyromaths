@@ -1,0 +1,7 @@
+pyromaths (10.11-1) unstable; urgency=low
+
+  * Initial release 
+  * This is my first Debian package.
+  * Switch to dpkg-source 3.0 (quilt) format
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Tue, 02 Nov 2010 23:30:02 +0100

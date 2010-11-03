@@ -1,15 +1,14 @@
-REM Crée l'installateur de Pyromaths pour Windows
+REM Creer l'installateur de Pyromaths pour Windows
+C:
 cd "C:\Documents and Settings\jerome\Bureau"
 md pyromaths
-xcopy z:\pyromaths\*.* "C:\Documents and settings\jerome\Bureau\pyromaths" /s
-copy z:\setup-win32.py "C:\Documents and Settings\jerome\Bureau\"
-copy z:\setup-win32.iss "C:\Documents and Settings\jerome\Bureau\"
-c:\Python26\python.exe setup-win32.py py2exe -i sip -p lxml,gzip
-"C:\Program Files\Inno Setup 5\ISCC.exe" setup-win32.iss
-copy Pyromaths-setup.exe z:
-rmdir /s /q dist
-rmdir /s /q build
+cd pyromaths
+xcopy z:\pyromaths\data data /i /s
+xcopy z:\pyromaths\src src /i /s
+copy z:\pyromaths\scripts\win32\setup.py .
+copy z:\pyromaths\* .
+move pyromaths Pyromaths.py
+c:\Python26\python.exe setup.py innosetup
+copy dist\Pyromaths-*-win32.exe z:\
+cd ..
 rmdir /s /q pyromaths
-del Pyromaths-setup.exe
-del setup-win32.iss
-del setup-win32.py

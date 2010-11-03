@@ -26,7 +26,6 @@ from lxml import etree
 from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 from re import sub, findall
 from .TexFiles import mise_en_forme
-from ..Values import HOME, CONFIGDIR
 
 
 #==============================================================
@@ -51,6 +50,7 @@ def ajoute_extension(filename,  ext):
 #==============================================================
 def create_config_file():
     """Crée le fichier de configuration au format xml"""
+    from ..Values import HOME
     root = etree.Element("pyromaths")
 
     child = etree.SubElement(root, "options")
@@ -95,6 +95,7 @@ def indent(elem, level=0):
 
 def modify_config_file(file):
     """Modifie le fichier de configuration si besoin, excepté les options utilisateur déjà configurées"""
+    from ..Values import CONFIGDIR
     modifie = False
     oldtree = etree.parse(file)
     oldroot = oldtree.getroot()
@@ -156,7 +157,14 @@ def creation(parametres):
             copie_tronq_modele(f1, parametres, 'entete')
 
     for exercice in parametres['liste_exos']:
-        parametres['les_fiches'][exercice[0]][1].main(exercice[1], f0, f1)
+        from ..sixiemes import sixiemes
+        from ..cinquiemes import cinquiemes
+        from ..quatriemes import quatriemes
+        from ..troisiemes import troisiemes
+        from ..lycee import lycee
+        fonction = {0: sixiemes, 1: cinquiemes, 2: quatriemes, 3: troisiemes,
+                4: lycee}
+        fonction[exercice[0]].main(exercice[1], f0, f1)
 
     if parametres['creer_pdf']:
         if parametres['creer_unpdf']:
@@ -279,7 +287,7 @@ def copie_tronq_modele(dest, parametres, master):
         bookmark=""
     if os.name == 'nt':
         os.environ['TEXINPUTS']= os.path.normpath(os.path.join(parametres['datadir'],
-            'modeles'))
+            'packages'))
         tabvar = 'tabvar.tex'
     else:
         tabvar = os.path.normpath(os.path.join(parametres['datadir'],

@@ -1,3 +1,0 @@
-include AUTHORS COPYING NEWS pyromaths
-recursive-include data *
-

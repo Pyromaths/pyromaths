@@ -9,7 +9,7 @@ try:
 except ImportError:
     basedir = dirname(realpath(__file__))
     workdir = join(basedir,'src')
-    sys.path.insert(0, workdir)
+    sys.path.insert(0, basedir)
     from src import pyromaths
     chdir(workdir)
 pyromaths.main()

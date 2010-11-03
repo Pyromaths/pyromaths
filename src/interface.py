@@ -22,7 +22,7 @@
 
 from PyQt4 import QtGui, QtCore
 import os, lxml, codecs, sys
-import outils.System
+from outils import System
 from Values import HOME, CONFIGDIR, DATADIR, LESFICHES, COPYRIGHTS, VERSION
 
 class Ui_MainWindow(object):
@@ -34,14 +34,10 @@ class Ui_MainWindow(object):
             MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(DATADIR, 'images',
                 'pyromaths.png')))
         MainWindow.setWindowTitle("Pyromaths")
-        if sys.platform == "darwin":  #Cas de Mac OS X.
-            MainWindow.setGeometry(250,200, 500, 200)
-        else:
-            MainWindow.setGeometry(300,600, 500, 200)
+        MainWindow.setGeometry(0,22, 500, 200)
         font = QtGui.QFont()
         font.setPointSize(10)
         MainWindow.setFont(font)
-        MainWindow.move(0, 22)
 
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         self.centralwidget = QtGui.QWidget(MainWindow)
@@ -256,7 +252,6 @@ class Ui_MainWindow(object):
         modeles_home = os.listdir(os.path.join(CONFIGDIR, 'templates'))
 
         count = 0
-
         for element in modeles:
           if os.path.splitext(element)[1] == ".tex":
              self.comboBox_modele.addItem(str(element[:len(element)-4]))
@@ -552,7 +547,7 @@ class Ui_MainWindow(object):
                                           'datadir': DATADIR,
                                           'configdir': CONFIGDIR
                                           }
-                outils.System.creation(parametres)
+                System.creation(parametres)
 
     def effacer_choix_exercices(self):
         """Remet toutes les SpinBox à zéro et vide la liste d'exercices sélectionnés"""
@@ -726,13 +721,13 @@ def valide(list, LesFiches, parametres):
     #============================================================
     (f0, f1) = ("", "")
     saveas = QtGui.QFileDialog()
-    filename = outils.System.supprime_extension(parametres['nom_fichier'],
+    filename = System.supprime_extension(parametres['nom_fichier'],
                                          '.tex')
     f0 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(parametres['chemin_fichier'],
                              u'%s.tex' % filename), "Documents Tex (*.tex)"))
     if f0 != None:
-        outils.System.ajoute_extension(f0, '.tex')
+        System.ajoute_extension(f0, '.tex')
         if corrige and not parametres['creer_unpdf']:
             f1 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(os.path.dirname(f0),
@@ -743,9 +738,9 @@ def valide(list, LesFiches, parametres):
                               os.path.splitext(os.path.basename(f0))[0])
         if f1 != None:
             if corrige:
-                outils.System.ajoute_extension(f1, '.tex')
+                System.ajoute_extension(f1, '.tex')
             parametres ['fiche_exo'] = f0
             parametres ['fiche_cor'] = f1
             parametres ['liste_exos'] = lesexos
             parametres ['les_fiches'] =  LesFiches
-            outils.System.creation(parametres)
+            System.creation(parametres)
