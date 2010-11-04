@@ -35,7 +35,7 @@ rm $mac/dist/Pyromaths.app/Contents/Resources/lib/python2.6/lxml/html/*.py
 rm $mac/dist/Pyromaths.app/Contents/Resources/site.py
 
 # Copier les dossiers images, packages et templates
-cp -R $pyromaths/data/templates $mac/dist/Pyromaths.app/Contents/MacOS/data/
+mkdir $mac/dist/Pyromaths.app/Contents/MacOS/data/
 mkdir $mac/dist/Pyromaths.app/Contents/MacOS/data/images/
 cp -R $pyromaths/data/images/vignettes $mac/dist/Pyromaths.app/Contents/MacOS/data/images/
 cp $pyromaths/data/images/pyromaths.png $mac/dist/Pyromaths.app/Contents/MacOS/data/images/
