@@ -3,10 +3,13 @@
 import sys, os, shutil
 from subprocess import call, Popen
 
-datadir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "..")
-sys.path.append(datadir)
+datadir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../data")
+src = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../src")
 
-from pyromaths import LesFiches
+sys.path.append(datadir)
+sys.path.append(src)
+
+from Values import LESFICHES as LesFiches
 from outils.System import creation
 import codecs
 
@@ -39,7 +42,7 @@ parametres = {
         }
 
 if not os.path.isdir("/tmp/modeles"):
-    shutil.copytree("modeles","/tmp/modeles" ) 
+    shutil.copytree("data/templates","/tmp/modeles" ) 
 
 if (len(sys.argv) == 4):
 
