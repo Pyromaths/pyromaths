@@ -34,7 +34,7 @@ class Ui_MainWindow(object):
             MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(DATADIR, 'images',
                 'pyromaths.png')))
         MainWindow.setWindowTitle("Pyromaths")
-        MainWindow.setGeometry(0,22, 500, 200)
+        MainWindow.setGeometry(0,44, 500, 200)
         font = QtGui.QFont()
         font.setPointSize(10)
         MainWindow.setFont(font)
