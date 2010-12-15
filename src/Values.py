@@ -131,6 +131,7 @@ u'Factorisations degré 3',
 u'Étude de signe',
 u"Sens de variations",
 u"Étude de fonctions",
+u"Vecteurs",
 ], [
 u'Niveau 1èreS',
 u'Niveau 1èreS',
@@ -138,6 +139,7 @@ u'Niveau 1èreS',
 u'Niveau 1èreS',
 u"Niveau 1èreS, Term STG",
 u"Niveau Term S",
+u"Niveau Seconde",
 ]],
 ]
 

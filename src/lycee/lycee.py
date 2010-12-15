@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import ExoPolynome
+import ExoPolynome, Vecteurs
 
 def write(f0, f1, exos):
     f0.write("\n")
@@ -37,5 +37,6 @@ def main(exo, f0, f1):
         ExoPolynome.exo_tableau_de_signe,
         ExoPolynome.exo_variation,
         ExoPolynome.exo_variation_lim,
+        Vecteurs.vecteurs_add,
         )
     write(f0, f1, modules[exo]())
