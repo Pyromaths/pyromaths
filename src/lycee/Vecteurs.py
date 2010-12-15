@@ -30,8 +30,9 @@
 ##- simplifier des sommes
 ##- problèmes de colinéarité
 
-from classes.Vecteurs import *
+from ..classes.Vecteurs import *
 import math
+from random import randint, shuffle
 
 def dist_bords(a,b):
     '''Calcule les distances minimales d'un point de coordonnées (a,b) aux bords du cadre, selon l'axe x et y.'''
@@ -46,7 +47,35 @@ def pair(n):
     else:
       return n+1
 
-def repr_somme(u,v,cor):
+def AffNom(u,crd = 0):
+    '''Renvoie les coordonnées pour l'affichage du nom du vecteur u.'''
+    if u.x == 0 and math.fabs(u.y) > 2:
+      coord = (0,u.y / 2)
+    elif u.x == 0:
+      coord = (-0.5,u.y / 2)
+    elif u.y == 0 and math.fabs(u.x) > 2:
+      coord = (u.x / 2, 0)
+    elif u.y == 0:
+      coord = (u.x / 2, - 0.5)
+    elif math.fabs(u.x)+math.fabs(u.y) < 3:
+      coord = (u.x/ 2.0 + 0.5,u.y / 2.0 + 0.5)
+    else:
+      coord = (u.x /2,u.y / 2)
+    return str(coord[0]) + "," + str(coord[1])
+
+def ChoixVecteur(u,v,w,x,y):
+  listecoeff = [0.5, -0.5, -1, -2, 2, 3, -3]
+  listevect = [(u,"u"),(v,"v"),(w,"w")]
+  shuffle(listecoeff)
+  shuffle(listevect)
+  for vec in listevect:
+    for coeff in listecoeff:
+      if ( 0 <= x + coeff * vec[0].x <= 18 ) and ( 0 <= y + coeff * vec[0].y <= 10 ):
+	return (coeff, coeff * vec[0], vec[1])
+  
+  
+
+def repr_somme(u,v,u1,u2,cor,larg=0):
     '''Représente la somme des vecteurs u + v.'''
 
     a = u + v
@@ -56,7 +85,7 @@ def repr_somme(u,v,cor):
       if ( a.x > 0 ):
          departx = 0
       elif ( a.x == 0 ):
-	 departx = -u.x/2+math.fabs(u.x)/2
+	 departx = -u.x/2.0+math.fabs(u.x)/2
       else:
          departx = max(math.fabs(u.x),math.fabs(a.x))
     else:
@@ -70,7 +99,7 @@ def repr_somme(u,v,cor):
       if ( a.y > 0 ):
          departy = 0
       elif ( a.y == 0 ):
-	 departy = -u.y/2+math.fabs(u.y)/2
+	 departy = -u.y/2.0+math.fabs(u.y)/2
       else:
          departy = max(math.fabs(u.y),math.fabs(a.y))
     else:
@@ -79,117 +108,167 @@ def repr_somme(u,v,cor):
          departy = -a.y
       else:
          departy = -u.y 
-    
+
+    if int(larg) + largeur > 18:
+      cor.append("\\par") # Figure trop large avec la précédente, il faut passer à une nouvelle ligne.
+
     depart = "(" + str(departx) + "," + str(departy) + ")"
-    largeur = str(pair(int(largeur)/2))
-    hauteur = str(pair(int(hauteur)/2))
-
+    largeur = str(pair(int(largeur)))
+    hauteur = str(pair(int(hauteur)))
+    
     cor.append(u"\\begin{pspicture}(0,0)(" + largeur + "," + hauteur + ")")
-    cor.append(u"\psgrid[gridcolor=lightgray, subgridcolor=lightgray, subgriddiv=2, gridlabels=0pt]")
-    cor.append(u"\psset{unit=5mm}")
-    
-    ## NOMS des vecteurs ?
-    
-    cor.append(u"\\rput" + depart + "{")
-    cor.append(u"\psline{->}(0, 0)(" + str(u.x) + ", " + str(u.y) + ")") ## Premier Vecteur
-    cor.append(u"\\rput(" + str(u.x / 2 + 1) + "," + str(u.y / 2 ) + ") \
-		  {\psframebox[linecolor=white, fillstyle=solid]{$\\vec{" + "u" + "}$}}")
-    cor.append(u"\psline{->}(" + str(u.x) + ", " + str(u.y) + ")(" + str(a.x) + ", " + str(a.y) + ")") ## 2e Vecteur
-    #cor.append(u"\\rput(" + str((vec[1].x + vec[2].x) / 2 + 1) + "," + str((vec[1].y + vec[2].y) / 2 + plus) + ") \
-	#	  {\psframebox[linecolor=white, fillstyle=solid]{$\\vec{" + vec[4] + "}$}}")
-    cor.append(u"\psline[linestyle=dashed]{->}(0, 0)(" + str(a.x) + ", " + str(a.y) + ")") ## Résultat de l'opération
+    cor.append(u"\\psgrid[gridcolor=lightgray, subgridcolor=lightgray, subgriddiv=2, gridlabels=0pt]")
+    cor.append(u"\\psset{unit=10mm}")
 
+    cor.append(u"\\rput" + depart + "{")
+    cor.append(u"\\psline[linecolor=green]{->}(0, 0)(" + str(u.x) + ", " + str(u.y) + ")") ## Premier Vecteur
+    cor.append(u"\\rput(" + AffNom(u) + ") \
+		  {\\psframebox[linecolor=white, fillstyle=solid]{\\textcolor{green}{$\\overrightarrow{" + u1 + "}$}}}")
+		  
+    cor.append(u"\\psline[linecolor=blue]{->}(" + str(u.x) + ", " + str(u.y) + ")(" + str(a.x) + ", " + str(a.y) + ")") ## 2e Vecteur
+    k = Vecteur(u.x+a.x,u.y+a.y)
+    cor.append(u"\\rput(" + AffNom(k) + ") \
+		  {\psframebox[linecolor=white, fillstyle=solid]{\\textcolor{blue}{$\\overrightarrow{" + u2 + "}$}}}")
+    if len(u2)>1:
+      sgn = "-"
+    else:
+      sgn = "+"
+    cor.append(u"\\psline[linestyle=dashed,linecolor=red]{->}(0, 0)(" + str(a.x) + ", " + str(a.y) + ")") ## Résultat de l'opération
+    cor.append(u"\\rput(" + AffNom(a) + ") \
+		  {\psframebox[linecolor=white, fillstyle=solid]{\\textcolor{red}{$\\overrightarrow{" + u1 + "}" + sgn + "\\overrightarrow{" + u2[-1] + "}$}}}")
+		  
     cor.append(u"}")
     cor.append(u"\\end{pspicture}")
+    return largeur ## récupérer la largeur pour éviter d'aligner des figures trop larges sur la feuille
 
 def vecteurs_add():
     '''Exercice sur la définition des vecteurs et leurs sommes.'''
-    (u, posux, posuy) = randvect(0, 10)
-    (v, posvx, posvy) = randvect(math.fabs(u.x)+3, 10)
-    (w, poswx, poswy) = randvect(math.fabs(v.x)+math.fabs(u.x)+6, 10)
     
+    (u, posux, posuy) = randvect(0, 10)
+    (v, posvx, posvy) = randvect(math.fabs(u.x)+1, 10)
+    (w, poswx, poswy) = randvect(math.fabs(v.x)+math.fabs(u.x)+2, 10)
+    
+    ## Construction du point pour la question 2
+    if 18 - poswx - max(w.x,0) > 0:
+      restes = (18 - poswx - max(w.x,0),10)    
+      pointy = randint(0,10)
+    elif poswy + min(w.y,0) > 10 - poswy - max(w.y,0):
+      restes = (poswx+min(w.x,0),poswy + min(w.y,0))
+      pointy = randint(0,restes[1])
+    else:
+      restes = (poswx+min(w.x,0),10 - poswy - max(w.y,0))
+      pointy = randint(10 - restes[1],10)
+    
+    pointx = randint(18 - restes[0],18)
+
+    t = ChoixVecteur(u,v,w,pointx,pointy)
+
     exo=["\\exercice"]
     cor=["\\exercice*"]
             
     exo.append(u"\\begin{pspicture*}(0,0)(18,10)")
-    exo.append(u"\psgrid[gridcolor=lightgray, subgridcolor=lightgray, subgriddiv=2, gridlabels=0pt]")
-    exo.append(u"\psset{unit=5mm}")
+    exo.append(u"\\psgrid[gridcolor=lightgray, subgridcolor=lightgray, subgriddiv=2, gridlabels=0pt]")
+    exo.append(u"\\psset{unit=10mm}")
+    
+    exo.append(u"\\psdot(" + str(pointx) + "," + str(pointy) + ")")
+    
+    if pointx < 18 and pointy < 10:
+      nompoint = str(pointx+0.5) + "," + str(pointy+0.5)
+    else:
+      nompoint = str(pointx-0.5) + "," + str(pointy-0.5)
+      
+    exo.append(u"\\rput(" + nompoint + "){\\psframebox[linecolor=white, fillstyle=solid]{$A$}}")
+    
+    cor.append(u"\\psdot(" + str(pointx) + "," + str(pointy) + ")")
+    cor.append(u"\\rput(" + nompoint + "){\\psframebox[linecolor=white, fillstyle=solid]{$A$}}")
+    
+    cor.append(u"\psline[linecolor=blue]{->}(" + str(pointx) + "," + str(pointy) + ")(" + str(pointx + t[1].x) + ", " + str(pointy + t[1].y) + ")")
+    
+    bx = pointx + t[1].x
+    by = pointy + t[1].y
+    
+    if bx < 18 and by < 10:
+      nompoint = str(bx+0.5) + "," + str(by+0.5)
+    else:
+      nompoint = str(bx-0.5) + "," + str(by-0.5)
+      
+    cor.append(u"\\psdot(" + str(pointx + t[1].x) + "," + str(pointy + t[1].y) + ")")
+    cor.append(u"\\rput(" + nompoint + "){\\psframebox[linecolor=white, fillstyle=solid]{$B$}}")
+    
     for vec in [(u, posux, posuy, "u"), (v, posvx, posvy, "v"), (w, poswx, poswy, "w")]:
-      if vec[0].y>0:
-	plus = 1
-      else:
-	plus = 0
       exo.append(u"\\rput(" + str(vec[1]) + "," + str(vec[2]) + "){")
       exo.append(u"\psline{->}(0, 0)(" + str(vec[0].x) + ", " + str(vec[0].y) + ")")
-      exo.append(u"\\rput(" + str(vec[0].x / 2 + 1) + "," + str(vec[0].y / 2 + plus) + ") \
-                   {\psframebox[linecolor=white, fillstyle=solid]{$\\vec{" + vec[3] + "}$}}")
+
+      exo.append(u"\\rput(" + AffNom(vec[0]) + ") \
+                   {\\psframebox[linecolor=white, fillstyle=solid]{$\\overrightarrow{" + vec[3] + "}$}}")
       exo.append(u"}")
     exo.append(u"\\end{pspicture}")
     
     cor.append(u"\\begin{pspicture}(0,0)(18,10)")
-    cor.append(u"\psgrid[gridcolor=lightgray, subgridcolor=lightgray, subgriddiv=2, gridlabels=0pt]")
-    cor.append(u"\psset{unit=5mm}")
+    cor.append(u"\\psgrid[gridcolor=lightgray, subgridcolor=lightgray, subgriddiv=2, gridlabels=0pt]")
+    cor.append(u"\\psset{unit=10mm}")
+    
     for vec in [(u, posux, posuy, "u"), (v, posvx, posvy, "v"), (w, poswx, poswy, "w")]:
       if vec[0].y>0:
 	plus = 1
       else:
 	plus = 0
       cor.append(u"\\rput(" + str(vec[1]) + "," + str(vec[2]) + "){")
-      cor.append(u"\psline{->}(0, 0)(" + str(vec[0].x) + ", " + str(vec[0].y) + ")")
-      cor.append(u"\psline[linestyle=dashed](0, 0)(" + str(vec[0].x) + ", 0)(" + str(vec[0].x) + "," + str(vec[0].y) + ")") # Ajouter coordonnées des vecteurs ?
-      cor.append(u"\\rput(" + str(vec[0].x / 2 + 1) + "," + str(vec[0].y / 2 + plus) + "){\psframebox[linecolor=white, \
-                   fillstyle=solid]{$\\vec{" + vec[3] + "}$}}")
+      cor.append(u"\\psline{->}(0, 0)(" + str(vec[0].x) + ", " + str(vec[0].y) + ")")
+      cor.append(u"\\psline[linestyle=dashed,linecolor=red](0, 0)(" + str(vec[0].x) + ", 0)(" + str(vec[0].x) + "," + str(vec[0].y) + ")")
+      cor.append(u"\\rput(" + AffNom(vec[0]) + "){\\psframebox[linecolor=white, \
+                   fillstyle=solid]{$\\overrightarrow{" + vec[3] + "}\\ (" + str(vec[0].x) + ";" + str(vec[0].y) + ")$}}")
       cor.append(u"}")
     cor.append(u"\\end{pspicture*}")
     
     exo.append("\\par")
     cor.append("\\par")
-    exo.append(u"On considère les vecteurs $\\vec{u}$, $\\vec{v}$, et $\\vec{w}$ ci-dessous.")
-    cor.append(u"On considère les vecteurs $\\vec{u}$, $\\vec{v}$, et $\\vec{w}$ ci-dessous.")
+    exo.append(u"On se place dans un repère orthonormé et on considère les vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$ ci-dessous.")
+    cor.append(u"On se place dans un repère orthonormé et on considère les vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$ ci-dessous.")
     
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
     
-    exo.append(u"\\item Lire les coordonnées de chacun des vecteurs $\\vec{u}$, $\\vec{v}$, et $\\vec{w}$.")
-    cor.append(u"\\item Lire les coordonnées de chacun des vecteurs $\\vec{u}$, $\\vec{v}$, et $\\vec{w}$.")    
+    exo.append(u"\\item Lire les coordonnées de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$.")
+    cor.append(u"\\item Lire les coordonnées de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$.")    
     
     cor.append("\\par")
     cor.append(u"Un petit rappel : l'abscisse d'un vecteur est la différence d'abscisse entre le fin et le début du vecteur. \
-                 Concernant le vecteur $\\vec{u}$, son abscisse est " + str(u.x) + u". \
-                 On lit également son ordonnée : " + str(u.x) + u". \
-                 Donc les coordonnées de $\\vec{u}$ sont (" + str(u.x) + ", " + str(u.y) + u" ). \
+                 Concernant le vecteur $\\overrightarrow{u}$, son abscisse est $" + str(u.x) + u"$. \
+                 On lit également son ordonnée : $" + str(u.x) + u"$. \
+                 Donc les coordonnées de $\\overrightarrow{u}$ sont $(" + str(u.x) + ", " + str(u.y) + u" )$. \
                  Des pointillés ont été ajoutés sur la figure pour faciliter la lecture des coordonnées.")
-    cor.append(u"De même, les coordonnées de $\\vec{v}$ sont (" + str(v.x) + ", " + str(v.y) + u" ) \
-                 et les coordonnées de $\\vec{w}$ sont (" + str(w.x) + ", " + str(w.y) + " ).")
+    cor.append(u"De même, les coordonnées de $\\overrightarrow{v}$ sont $(" + str(v.x) + ", " + str(v.y) + u" )$ \
+                 et les coordonnées de $\\overrightarrow{w}$ sont $(" + str(w.x) + ", " + str(w.y) + " )$.")
     
-    ## Vérifier les unités de lecture
-    
-    exo.append(u"\\item Placer un point B de sorte que le vecteur $\\vec{AB}$ soit égal à -2 * u et .....")
-    cor.append(u"\\item Placer un point B de sorte que le vecteur $\\vec{AB}$ soit égal à -2 * u et .....")
+    exo.append(u"\\item Placer un point B de sorte que le vecteur $\\overrightarrow{AB}$ soit égal à $" + str(t[0]) + " \\times \\overrightarrow{" + t[2] + "}$.")
+    cor.append(u"\\item Placer un point B de sorte que le vecteur $\\overrightarrow{AB}$ soit égal à $" + str(t[0]) + " \\times \\overrightarrow{" + t[2] + "}$.")
 
-    ## Reste à corriger, préciser l'énoncé et dessiner le point concerné
+    cor.append(u"Le plus simple pour répondre à cette question est de calculer les coordonnées du vecteur $" + str(t[0]) + " \\times \\overrightarrow{" + str(t[2]) + "}$.")
+    cor.append(u"Cela se fait en multipliant les coordonnées de $\\overrightarrow{" + str(t[2]) + "}$ par $" + str(t[0]) + u"$, ce qui donne comme résultat $(" + str(t[1].x) + ";" + str(t[1].y) + ")$.")
+    cor.append(u"En partant du point A et en respectant ces coordonnées, on dessine un vecteur ( en bleu sur la figure ci-dessus ) qui indique l'emplacement du point B.")
 
-    exo.append(u"\\item Calculer les normes de chacun des vecteurs $\\vec{u}$, $\\vec{v}$, et $\\vec{w}$.")
-    cor.append(u"\\item Calculer les normes de chacun des vecteurs $\\vec{u}$, $\\vec{v}$, et $\\vec{w}$.")
+    exo.append(u"\\item Calculer les normes de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$.")
+    cor.append(u"\\item Calculer les normes de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$.")
 
     cor.append("\\par")
-    cor.append(u"$\|\\vec{u}\|=\\sqrt{(" + str(u.x) + ")^2+(" + str(u.y) + ")^2}=\\sqrt{" + str(u.x**2) + " + " + str(u.y**2) + "}= \
+    cor.append(u"$\|\\overrightarrow{u}\|=\\sqrt{(" + str(u.x) + ")^2+(" + str(u.y) + ")^2}=\\sqrt{" + str(u.x**2) + " + " + str(u.y**2) + "}= \
                  \\sqrt{" + str(u.x**2 + u.y**2) + "}=" + str(u.normeTex()) + "$.\\par")
-    cor.append(u"De la même manière, on obtient : $\|\\vec{v}\| = " + str(v.normeTex()) + "$ \
-                 et $\|\\vec{w}\| = " + str(w.normeTex()) + "$.")
+    cor.append(u"De la même manière, on obtient : $\|\\overrightarrow{v}\| = " + str(v.normeTex()) + "$ \
+                 et $\|\\overrightarrow{w}\| = " + str(w.normeTex()) + "$.")
 
-    exo.append(u"\\item Dessiner des représentants des vecteurs $\\vec{u}+\\vec{v}$, $\\vec{u}-\\vec{v}$, $\\vec{u}-\\vec{w}$ \
-                 et $\\vec{v}+\\vec{w}$.")
-    cor.append(u"\\item Dessiner des représentants des vecteurs $\\vec{u}+\\vec{v}$, $\\vec{u}-\\vec{v}$, $\\vec{u}-\\vec{w}$ \
-                 et $\\vec{v}+\\vec{w}$.\\par")
+    exo.append(u"\\item Dessiner des représentants des vecteurs $\\overrightarrow{u}+\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{w}$ \
+                 et $\\overrightarrow{v}+\\overrightarrow{w}$.")
+    cor.append(u"\\item Dessiner des représentants des vecteurs $\\overrightarrow{u}+\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{w}$ \
+                 et $\\overrightarrow{v}+\\overrightarrow{w}$.\\par")
     cor.append(u"Pour dessiner les sommes ou différences de vecteurs, il faut les mettre \"bouts à bouts\", \
                  comme sur les figures qui suivent :\\par")
     
-    repr_somme(u,v,cor)
-    repr_somme(u,-v,cor)
+    i = repr_somme(u,v,'u','v',cor)
+    repr_somme(u,-v,'u','-v',cor,i)
     cor.append("\\par")
-    repr_somme(u,-w,cor)
-    repr_somme(v,w,cor)
+    i = repr_somme(u,-w,'u','-w',cor)
+    repr_somme(v,w,'v','w',cor,i)
 
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")

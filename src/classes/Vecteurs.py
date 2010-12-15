@@ -24,7 +24,7 @@
 
 import math
 import random
-from classes.Racine import simplifie_racine
+from ..classes.Racine import simplifie_racine
 
 class Vecteur:
   
@@ -81,11 +81,11 @@ class Vecteur:
       
 def randvect(a, b):
   '''Retourne un vecteur aléatoire et s'occupe de placer l'abscisse au-dessus de a et l'ordonnée dans [0,b]. Il faut que b>=10.'''
-  x = random.randint(-10,10)
-  y = random.randint(-10,10)
-  posx = a + max(1-x, 3) ## 3 colonnes minimum d'écart
+  x = random.randint(-5,5)
+  y = random.randint(-5,5)
+  posx = a + max(1-x, 1) ## 1 colonne minimum d'écart
   if y>=0:
-    posy = random.randint(0, math.fabs(y - 5)) + 5 ## Ajouter 5 pour éviter de coller au bas de la grille
+    posy = random.randint(0, math.fabs(y - 2)) + 1 ## Ajouter 1 pour éviter de coller au bas de la grille
   else:
     posy = random.randint(math.fabs(y), b) ## Comme y < 0, cela ne colle pas au bas de la grille
   return [Vecteur(x,y), posx, posy]
