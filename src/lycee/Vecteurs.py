@@ -31,6 +31,7 @@
 ##- problèmes de colinéarité
 
 from ..classes.Vecteurs import *
+from ..classes.Racine import simplifie_racine
 import math
 from random import randint, shuffle
 
@@ -118,14 +119,14 @@ def repr_somme(u,v,u1,u2,cor,larg=0):
     
     cor.append(u"\\begin{pspicture}(0,0)(" + largeur + "," + hauteur + ")")
     cor.append(u"\\psgrid[gridcolor=lightgray, subgridcolor=lightgray, subgriddiv=2, gridlabels=0pt]")
-    cor.append(u"\\psset{unit=10mm}")
+    cor.append(u"\\psset{unit=10mm,arrowscale=2}")
 
     cor.append(u"\\rput" + depart + "{")
-    cor.append(u"\\psline[linecolor=green]{->}(0, 0)(" + str(u.x) + ", " + str(u.y) + ")") ## Premier Vecteur
+    cor.append(u"\\psline[linecolor=green]{|->}(0, 0)(" + str(u.x) + ", " + str(u.y) + ")") ## Premier Vecteur
     cor.append(u"\\rput(" + AffNom(u) + ") \
 		  {\\psframebox[linecolor=white, fillstyle=solid]{\\textcolor{green}{$\\overrightarrow{" + u1 + "}$}}}")
 		  
-    cor.append(u"\\psline[linecolor=blue]{->}(" + str(u.x) + ", " + str(u.y) + ")(" + str(a.x) + ", " + str(a.y) + ")") ## 2e Vecteur
+    cor.append(u"\\psline[linecolor=blue]{|->}(" + str(u.x) + ", " + str(u.y) + ")(" + str(a.x) + ", " + str(a.y) + ")") ## 2e Vecteur
     k = Vecteur(u.x+a.x,u.y+a.y)
     cor.append(u"\\rput(" + AffNom(k) + ") \
 		  {\psframebox[linecolor=white, fillstyle=solid]{\\textcolor{blue}{$\\overrightarrow{" + u2 + "}$}}}")
@@ -133,7 +134,7 @@ def repr_somme(u,v,u1,u2,cor,larg=0):
       sgn = "-"
     else:
       sgn = "+"
-    cor.append(u"\\psline[linestyle=dashed,linecolor=red]{->}(0, 0)(" + str(a.x) + ", " + str(a.y) + ")") ## Résultat de l'opération
+    cor.append(u"\\psline[linestyle=dashed,linecolor=red]{|->}(0, 0)(" + str(a.x) + ", " + str(a.y) + ")") ## Résultat de l'opération
     cor.append(u"\\rput(" + AffNom(a) + ") \
 		  {\psframebox[linecolor=white, fillstyle=solid]{\\textcolor{red}{$\\overrightarrow{" + u1 + "}" + sgn + "\\overrightarrow{" + u2[-1] + "}$}}}")
 		  
@@ -165,10 +166,14 @@ def vecteurs_add():
 
     exo=["\\exercice"]
     cor=["\\exercice*"]
-            
+
     exo.append(u"\\begin{pspicture*}(0,0)(18,10)")
     exo.append(u"\\psgrid[gridcolor=lightgray, subgridcolor=lightgray, subgriddiv=2, gridlabels=0pt]")
-    exo.append(u"\\psset{unit=10mm}")
+    exo.append(u"\\psset{unit=10mm,arrowscale=2}")
+    
+    cor.append(u"\\begin{pspicture}(0,0)(18,10)")
+    cor.append(u"\\psgrid[gridcolor=lightgray, subgridcolor=lightgray, subgriddiv=2, gridlabels=0pt]")
+    cor.append(u"\\psset{unit=10mm,arrowscale=2}")
     
     exo.append(u"\\psdot(" + str(pointx) + "," + str(pointy) + ")")
     
@@ -182,7 +187,7 @@ def vecteurs_add():
     cor.append(u"\\psdot(" + str(pointx) + "," + str(pointy) + ")")
     cor.append(u"\\rput(" + nompoint + "){\\psframebox[linecolor=white, fillstyle=solid]{$A$}}")
     
-    cor.append(u"\psline[linecolor=blue]{->}(" + str(pointx) + "," + str(pointy) + ")(" + str(pointx + t[1].x) + ", " + str(pointy + t[1].y) + ")")
+    cor.append(u"\psline[linecolor=blue]{|->}(" + str(pointx) + "," + str(pointy) + ")(" + str(pointx + t[1].x) + ", " + str(pointy + t[1].y) + ")")
     
     bx = pointx + t[1].x
     by = pointy + t[1].y
@@ -197,16 +202,13 @@ def vecteurs_add():
     
     for vec in [(u, posux, posuy, "u"), (v, posvx, posvy, "v"), (w, poswx, poswy, "w")]:
       exo.append(u"\\rput(" + str(vec[1]) + "," + str(vec[2]) + "){")
-      exo.append(u"\psline{->}(0, 0)(" + str(vec[0].x) + ", " + str(vec[0].y) + ")")
+      exo.append(u"\psline{|->}(0, 0)(" + str(vec[0].x) + ", " + str(vec[0].y) + ")")
 
       exo.append(u"\\rput(" + AffNom(vec[0]) + ") \
                    {\\psframebox[linecolor=white, fillstyle=solid]{$\\overrightarrow{" + vec[3] + "}$}}")
       exo.append(u"}")
     exo.append(u"\\end{pspicture}")
     
-    cor.append(u"\\begin{pspicture}(0,0)(18,10)")
-    cor.append(u"\\psgrid[gridcolor=lightgray, subgridcolor=lightgray, subgriddiv=2, gridlabels=0pt]")
-    cor.append(u"\\psset{unit=10mm}")
     
     for vec in [(u, posux, posuy, "u"), (v, posvx, posvy, "v"), (w, poswx, poswy, "w")]:
       if vec[0].y>0:
@@ -214,7 +216,7 @@ def vecteurs_add():
       else:
 	plus = 0
       cor.append(u"\\rput(" + str(vec[1]) + "," + str(vec[2]) + "){")
-      cor.append(u"\\psline{->}(0, 0)(" + str(vec[0].x) + ", " + str(vec[0].y) + ")")
+      cor.append(u"\\psline{|->}(0, 0)(" + str(vec[0].x) + ", " + str(vec[0].y) + ")")
       cor.append(u"\\psline[linestyle=dashed,linecolor=red](0, 0)(" + str(vec[0].x) + ", 0)(" + str(vec[0].x) + "," + str(vec[0].y) + ")")
       cor.append(u"\\rput(" + AffNom(vec[0]) + "){\\psframebox[linecolor=white, \
                    fillstyle=solid]{$\\overrightarrow{" + vec[3] + "}\\ (" + str(vec[0].x) + ";" + str(vec[0].y) + ")$}}")
@@ -243,19 +245,39 @@ def vecteurs_add():
     
     exo.append(u"\\item Placer un point B de sorte que le vecteur $\\overrightarrow{AB}$ soit égal à $" + str(t[0]) + " \\times \\overrightarrow{" + t[2] + "}$.")
     cor.append(u"\\item Placer un point B de sorte que le vecteur $\\overrightarrow{AB}$ soit égal à $" + str(t[0]) + " \\times \\overrightarrow{" + t[2] + "}$.")
-
+    
+    cor.append(u"\\par")
     cor.append(u"Le plus simple pour répondre à cette question est de calculer les coordonnées du vecteur $" + str(t[0]) + " \\times \\overrightarrow{" + str(t[2]) + "}$.")
     cor.append(u"Cela se fait en multipliant les coordonnées de $\\overrightarrow{" + str(t[2]) + "}$ par $" + str(t[0]) + u"$, ce qui donne comme résultat $(" + str(t[1].x) + ";" + str(t[1].y) + ")$.")
     cor.append(u"En partant du point A et en respectant ces coordonnées, on dessine un vecteur ( en bleu sur la figure ci-dessus ) qui indique l'emplacement du point B.")
 
     exo.append(u"\\item Calculer les normes de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$.")
     cor.append(u"\\item Calculer les normes de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$.")
+      
+    if u.x**2+u.y**2 == simplifie_racine(u.x**2+u.y**2)[1]: # Cas où la simplification est la même, donc inutile d'écrire deux fois la même chose.
+      Norm_u = "$"
+    else:
+      Norm_u = "=" + str(u.normeTex()) + "$"
+
+    if v.x**2+v.y**2 == simplifie_racine(v.x**2+v.y**2)[1]:
+      Norm_v = "$"
+    else:
+      Norm_v = "=" + str(v.normeTex()) + "$"
+      
+    if w.x**2+w.y**2 == simplifie_racine(w.x**2+w.y**2)[1]:
+      Norm_w = "$"
+    else:
+      Norm_w = "=" + str(w.normeTex()) + "$"
 
     cor.append("\\par")
     cor.append(u"$\|\\overrightarrow{u}\|=\\sqrt{(" + str(u.x) + ")^2+(" + str(u.y) + ")^2}=\\sqrt{" + str(u.x**2) + " + " + str(u.y**2) + "}= \
-                 \\sqrt{" + str(u.x**2 + u.y**2) + "}=" + str(u.normeTex()) + "$.\\par")
-    cor.append(u"De la même manière, on obtient : $\|\\overrightarrow{v}\| = " + str(v.normeTex()) + "$ \
-                 et $\|\\overrightarrow{w}\| = " + str(w.normeTex()) + "$.")
+                 \\sqrt{" + str(u.x**2 + u.y**2) + "}" + Norm_u + ".\\par")
+    cor.append(u"De la même manière, on obtient :")
+                 
+    cor.append(u"$\|\\overrightarrow{v}\|=\\sqrt{(" + str(v.x) + ")^2+(" + str(v.y) + ")^2}=\\sqrt{" + str(v.x**2) + " + " + str(v.y**2) + "}= \
+                 \\sqrt{" + str(v.x**2 + v.y**2) + "}" + Norm_v + " et \\par")
+    cor.append(u"$\|\\overrightarrow{w}\|=\\sqrt{(" + str(w.x) + ")^2+(" + str(w.y) + ")^2}=\\sqrt{" + str(w.x**2) + " + " + str(w.y**2) + "}= \
+                 \\sqrt{" + str(w.x**2 + w.y**2) + "}" + Norm_w + ".\\par")
 
     exo.append(u"\\item Dessiner des représentants des vecteurs $\\overrightarrow{u}+\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{w}$ \
                  et $\\overrightarrow{v}+\\overrightarrow{w}$.")
