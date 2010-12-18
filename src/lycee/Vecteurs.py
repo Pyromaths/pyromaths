@@ -249,7 +249,7 @@ def vecteurs_add():
     cor.append(u"\\par")
     cor.append(u"Le plus simple pour répondre à cette question est de calculer les coordonnées du vecteur $" + str(t[0]) + " \\times \\overrightarrow{" + str(t[2]) + "}$.")
     cor.append(u"Cela se fait en multipliant les coordonnées de $\\overrightarrow{" + str(t[2]) + "}$ par $" + str(t[0]) + u"$, ce qui donne comme résultat $(" + str(t[1].x) + ";" + str(t[1].y) + ")$.")
-    cor.append(u"En partant du point A et en respectant ces coordonnées, on dessine un vecteur ( en bleu sur la figure ci-dessus ) qui indique l'emplacement du point B.")
+    cor.append(u"En partant du point A et en respectant ces coordonnées, on dessine un vecteur (en bleu sur la figure ci-dessus) qui indique l'emplacement du point B.")
 
     exo.append(u"\\item Calculer les normes de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$.")
     cor.append(u"\\item Calculer les normes de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$.")
@@ -282,9 +282,13 @@ def vecteurs_add():
     exo.append(u"\\item Dessiner des représentants des vecteurs $\\overrightarrow{u}+\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{w}$ \
                  et $\\overrightarrow{v}+\\overrightarrow{w}$.")
     cor.append(u"\\item Dessiner des représentants des vecteurs $\\overrightarrow{u}+\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{w}$ \
-                 et $\\overrightarrow{v}+\\overrightarrow{w}$.\\par")
+                 et $\\overrightarrow{v}+\\overrightarrow{w}$.")
+                 
+    cor.append("\\par")            
     cor.append(u"Pour dessiner les sommes ou différences de vecteurs, il faut les mettre \"bouts à bouts\", \
-                 comme sur les figures qui suivent :\\par")
+                 comme sur les figures qui suivent :")
+    
+    cor.append("\\par")    
     
     i = repr_somme(u,v,'u','v',cor)
     repr_somme(u,-v,'u','-v',cor,i)
