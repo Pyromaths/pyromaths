@@ -237,11 +237,11 @@ class Ui_MainWindow(object):
 
         self.comboBox_niveau = QtGui.QComboBox(self.tab_options)
         self.comboBox_niveau.setEditable(True) # l’utilisateur peut entrer son propre texte
-        self.comboBox_niveau.addItem("6\\ieme")
-        self.comboBox_niveau.addItem("5\\ieme")
-        self.comboBox_niveau.addItem("4\\ieme")
-        self.comboBox_niveau.addItem("3\\ieme")
-        self.comboBox_niveau.addItem("2$^{nde}$")
+        self.comboBox_niveau.addItem("Classe de 6\\ieme")
+        self.comboBox_niveau.addItem("Classe de 5\\ieme")
+        self.comboBox_niveau.addItem("Classe de 4\\ieme")
+        self.comboBox_niveau.addItem("Classe de 3\\ieme")
+        self.comboBox_niveau.addItem("Classe de 2$^{nde}$")
         self.verticalLayout_19.addWidget(self.comboBox_niveau)
 
         ############## ComboBox modèles
@@ -465,7 +465,7 @@ class Ui_MainWindow(object):
                 'creer_unpdf': self.checkBox_unpdf.isChecked() and self.checkBox_unpdf.isEnabled(),
                 'titre': unicode(self.titre_fiche.text()),
                 'corrige': self.checkBox_corrige.isChecked(),
-                'niveau': str(self.comboBox_niveau.currentText()),
+                'niveau': unicode(self.comboBox_niveau.currentText()),
                 'nom_fichier': unicode(self.nom_fichier.text()),
                 'chemin_fichier': unicode(self.chemin_fichier.text()),
                 'modele': unicode(self.comboBox_modele.currentText() + '.tex'),
