@@ -41,9 +41,9 @@ def carre(dim, n_fig):
     avec n_fig"""
     if dim[0]<dim[1]: dim = (dim[0], dim[0])
     else: dim = (dim[1], dim[1])
-    f = "\\psframe[fillstyle=hlines, hatchcolor=lightgray](0, 0)(%s, %s)\n" % dim
+    f = "\\psframe[fillstyle=hlines](0, 0)(%s, %s)\n" % dim
     f += "\\rput(%.2f,%.2f)" % isobarycentre((0, 0), dim)
-    f += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}} " %  n_fig
+    f += "{\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{figure %s}} " %  n_fig
     s = u"Aire de la figure %s : $%s = %s$~unités d'aire" %(n_fig,
             aire_rectangle(dim)[0], aire_rectangle(dim)[1])
     return (f, f, s)
@@ -51,9 +51,9 @@ def carre(dim, n_fig):
 def rectangle(dim, n_fig):
     """Dessine en psTricks un rectangle de dimensions dim et numérote la figure
     avec n_fig"""
-    f = "\\psframe[fillstyle=hlines, hatchcolor=lightgray](0, 0)(%s, %s)\n" % dim
+    f = "\\psframe[fillstyle=hlines](0, 0)(%s, %s)\n" % dim
     f += "\\rput(%.2f,%.2f)" % isobarycentre((0, 0), dim)
-    f += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}}" %  n_fig
+    f += "{\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{figure %s}}" %  n_fig
     s = u"Aire de la figure %s : $%s = %s$~unités d'aire" %(n_fig,
             aire_rectangle(dim)[0], aire_rectangle(dim)[1])
     return (f, f, s)
@@ -82,14 +82,14 @@ def parallelogramme(dim, n_fig):
             s0, s1, s2, s3 = (0, 0), (dim[0], -tab), (dim[0], dim[1]), (0,
                     dim[1]+tab)
             frame0, frame1 = s0, (dim[0], dim[1]+tab)
-    f = "\\pspolygon[fillstyle=hlines, hatchcolor=lightgray]%s%s%s%s\n" % (s0,
+    f = "\\pspolygon[fillstyle=hlines]%s%s%s%s\n" % (s0,
             s1, s2, s3)
     f += "\\rput(%.2f,%.2f)" % isobarycentre((0, 0), dim)
-    f += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}} " %  n_fig
+    f += "{\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{figure %s}} " %  n_fig
     fc = "\\pspolygon%s%s%s%s\n" % (s0, s1, s2, s3)
-    fc += "\\psframe[linestyle=dashed, fillstyle=hlines, hatchcolor=lightgray]%s%s\n" % (frame0, frame1)
+    fc += "\\psframe[linestyle=dashed, fillstyle=hlines]%s%s\n" % (frame0, frame1)
     fc += "\\rput(%.2f,%.2f)" % isobarycentre((0, 0), dim)
-    fc += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}} " %  n_fig
+    fc += "{\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{figure %s}} " %  n_fig
     s = "Aire de la figure %s : " % n_fig
     s += u"c'est l'aire du rectangle en pointillés.\\par\n"
     s += u"$%s = %s$~unités d'aire" %(aire_rectangle(frame0, frame1)[0],
@@ -103,10 +103,10 @@ def triangle_rectangle(dim, n_fig):
     s0 = random.randrange(4)
     s1, s2 = (s0+1)%4, (s0+2)%4
     s0, s1, s2 = sommets[s0], sommets[s1], sommets[s2]
-    f = "\\pspolygon[fillstyle=hlines, hatchcolor=lightgray]%s%s%s\n" % (s0, s1,
+    f = "\\pspolygon[fillstyle=hlines]%s%s%s\n" % (s0, s1,
             s2)
     f += "\\rput(%.2f,%.2f)" % isobarycentre(s0, s1, s2)
-    f += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}} " %  n_fig
+    f += "{\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{figure %s}} " %  n_fig
     fc = "\\psframe[linestyle=dashed]%s%s\n" % (s0, s2)
     fc += f
     s = "Aire de la figure %s : " % n_fig
@@ -129,10 +129,10 @@ def triangle_base(dim, n_fig):
     if y0 != y1: y0 = random.randrange(y0+1, y1)
     s2 = (x0, y0)
     s0, s1 = sommets[s0], sommets[s1]
-    f = "\\pspolygon[fillstyle=hlines, hatchcolor=lightgray]%s%s%s\n" % (s0, s1,
+    f = "\\pspolygon[fillstyle=hlines]%s%s%s\n" % (s0, s1,
             s2)
     f += "\\rput(%.2f,%.2f)" % isobarycentre(s0, s1, s2)
-    f += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}} " %  n_fig
+    f += "{\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{figure %s}} " %  n_fig
     fc = "\\psframe[linestyle=dashed]%s%s\n" % (s0, s2)
     fc += "\\psframe[linestyle=dashed]%s%s\n" % (s2, s1)
     fc += f
@@ -163,10 +163,10 @@ def triangle_qcq(dim, n_fig):
     if y0 != y1: y0 = random.randrange(y0+1, y1)
     s2 = (x0, y0)
     s0 = sommets[s0]
-    f = "\\pspolygon[fillstyle=hlines, hatchcolor=lightgray]%s%s%s\n" % (s0, s1,
+    f = "\\pspolygon[fillstyle=hlines]%s%s%s\n" % (s0, s1,
             s2)
     f += "\\rput(%.2f,%.2f)" % isobarycentre(s0, s1, s2)
-    f += "{\\psframebox[linecolor=white, fillstyle=solid]{figure %s}}" %  n_fig
+    f += "{\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{figure %s}}" %  n_fig
     fc = "\\psframe[linestyle=dashed](0,0)(%s,%s) " % dim
     fc += "\\rput(%.2f,%.2f){\\pscirclebox{1}} " % isobarycentre(s0, s1, angle0)
     fc += "\\rput(%.2f,%.2f){\\pscirclebox{2}} " % isobarycentre(s1, s2, angle1)
@@ -203,9 +203,9 @@ def figure():
     figures géométriques)"""
     exo, cor, sol = [], [], ["\\begin{enumerate}"]
     t = "\\begin{pspicture}(0,0)(18,9)\n"
-    t += "\\psgrid[gridcolor=lightgray, subgridcolor=lightgray, subgriddiv=2, gridlabels=0pt]\n"
-    t += "\\psframe[fillstyle=vlines, hatchsep=1pt, hatchcolor=lightgray](0,0)(.5,.5)\n"
-    t += u"\\rput[l](0.6,0.25){\\psframebox[linecolor=white, fillstyle=solid]{unité d'aire}}\n"
+    t += "\\psgrid[subgriddiv=2, gridlabels=0pt]\n"
+    t += "\\psframe[fillstyle=vlines, hatchsep=1pt](0,0)(.5,.5)\n"
+    t += u"\\rput[l](0.6,0.25){\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{unité d'aire}}\n"
     t += "\\psset{unit=5mm}\n"
     exo.append(t)
     cor.append(t)

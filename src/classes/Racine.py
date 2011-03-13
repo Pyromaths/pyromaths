@@ -30,7 +30,7 @@ class Racine:
 
     def __radd__(self, other):
         return self + other
-    
+
     def __sub__(self, other):
         if not (isinstance(other, Racine)):
             return str(self) + " + " + str(other)
@@ -120,22 +120,22 @@ def simplifie_racine(n):
     else:
         ncar=carrerise(n)
         return int(sqrt(n//ncar)),ncar
-        
+
 
 def pTeX(n):
-	"""renvoie (n) si n<0"""
-	if n<0:
-		return "("+decimaux(n)+")"
-	else:
-		return decimaux(n)
+    """renvoie (n) si n<0"""
+    if n<0:
+        return "("+decimaux(n)+")"
+    else:
+        return decimaux(n)
 def tTeX(n):
-	if n==1:
-		return ""
-	elif n==-1:
-		return "-"
-	elif n>=0:
-		return "+"+decimaux(n)
-	else:
+    if n==1:
+        return ""
+    elif n==-1:
+        return "-"
+    elif n>=0:
+        return "+"+decimaux(n)
+    else:
             return decimaux(n)
 
 
@@ -146,28 +146,28 @@ class RacineDegre2:
         self.denominateur=denominateur
         self.coeff=coeff
         self.radicande=radicande
-        
+
     def __str__(self):
         if isinstance(self.numerateur,str):
             #utilisé dans le détail de la simplification
             numerateur=self.numerateur
-	else:
+        else:
             numerateur=decimaux(self.numerateur)*(self.numerateur!=0)   #renvoie "" si self.numerateur=0
         if self.radicande!=0:
             if isinstance(self.coeff,str):#utilisé dans le détail de la simplification
                 if self.coeff[0]!="-" and self.coeff[0]!="+":
-			numerateur+="+"
+                    numerateur+="+"
                 numerateur+=self.coeff+"\\sqrt{"+decimaux(self.radicande)+"}"
             elif self.coeff==1:
-			numerateur+="+\\sqrt{"+decimaux(self.radicande)+"}"
+                numerateur+="+\\sqrt{"+decimaux(self.radicande)+"}"
             elif self.coeff==-1:
-			numerateur+="-\\sqrt{"+decimaux(self.radicande)+"}"
+                numerateur+="-\\sqrt{"+decimaux(self.radicande)+"}"
             else:
-		numerateur+=tTeX(self.coeff)+"\\sqrt{"+decimaux(self.radicande)+"}"
-	if numerateur=='':
+                numerateur+=tTeX(self.coeff)+"\\sqrt{"+decimaux(self.radicande)+"}"
+        if numerateur=='':
             numerateur = '0'
         if self.denominateur==1:
-		result=numerateur
+            result=numerateur
         else:
             result="\\dfrac{%s}{%s}"%(numerateur,self.denominateur)
 
@@ -175,7 +175,7 @@ class RacineDegre2:
             return result[1:]
         else:
             return result
-        
+
     def simplifie(self,detail=False):
         liste_detail=[]
         coeff,radicande=simplifie_racine(self.radicande)
@@ -198,15 +198,15 @@ class RacineDegre2:
             radicande=0
             numerateur=self.numerateur+(self.coeff)*int(coeff)
             coeff=0
-        
+
         if coeff!=1:
             liste_detail.append(str(RacineDegre2(numerateur,
                                                  self.denominateur,
                                                  det_coeff,
                                                  radicande)))
-        
+
         coeff=(self.coeff)*int(coeff)
-        
+
         simplifie=pgcd(pgcd(coeff,numerateur),self.denominateur)
         numerateur=numerateur//simplifie
         coeff=coeff//simplifie
@@ -221,7 +221,7 @@ class RacineDegre2:
         if detail:
             return RacineDegre2(numerateur,denominateur,coeff,radicande),liste_detail
         return RacineDegre2(numerateur,denominateur,coeff,radicande)
-    
+
     def __add__(self,other):
         if isinstance(other,RacineDegre2):
             if self.radicande==other.radicande or self.radicande==0 or other.radicande==0:
@@ -250,7 +250,7 @@ class RacineDegre2:
             return self + RacineDegre2(other)
         elif isinstance(other,Fractions):
             return self + RacineDegre2(other.numerateur,other.denominateur)
-            
+
     def __radd__(self,other):
         return self+other
     def __neg__(self):
@@ -261,7 +261,7 @@ class RacineDegre2:
 
     def __rsub__(self,other):
         return -self + other
-    
+
     def __mul__(self,other):
         if isinstance(other,Fractions):
             return self*RacineDegre2(other.numerateur,other.denominateur,0,self.radicande)

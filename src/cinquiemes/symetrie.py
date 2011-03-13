@@ -72,12 +72,12 @@ def centre_sym(vals):
 
 
 def place_pts(vals, O):
-    txt = ["  \\pstGeonode[PointSymbol=x,PointName=none]"]
+    txt = ["  \\pstGeonode[PointSymbol=none,PointName=none]"]
     for i in range(len(vals)):
         txt.append("(%s,%s)" % vals[i])
         txt.append("{%s}" % chr(i + 97))
-    txt.append("\n  \\pstGeonode[PointSymbol=x](%s,%s){O}" % O)
-    txt.append("\n  \\pspolygon")
+    txt.append("\n  \\pstGeonode[PointSymbol=x, linecolor=Black, dotsize=6pt](%s,%s){O}" % O)
+    txt.append("\n  \\pspolygon[linewidth=1pt]")
     for i in range(len(vals)):
         txt.append("(%s)" % chr(i + 97))
     return ("").join(txt)
@@ -94,7 +94,7 @@ def place_pts_sym(vals):
         if i > 0:
             txt.append(",")
         txt.append("%s1" % chr(i + 97))
-    txt.append("]\n  \pspolygon[linecolor=gray,linestyle=dashed]")
+    txt.append("]\n\pspolygon[linecolor=Black,linestyle=dashed, linewidth=1pt]")
     for i in range(len(vals)):
         txt.append("(%s1)" % chr(i + 97))
     return ("").join(txt)
@@ -119,10 +119,10 @@ def main():
         O = centre_sym(vals)
         txt = place_pts(vals, O)
         exo.append("\\begin{pspicture*}(-3,-3)(3,3)")
-        exo.append("\\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]")
+        exo.append("\\psgrid[subgriddiv=2,gridlabels=0pt]")
         exo.append(txt)
         cor.append("\\begin{pspicture*}(-3,-3)(3,3)")
-        cor.append("\\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]")
+        cor.append("\\psgrid[subgriddiv=2,gridlabels=0pt]")
         cor.append(txt)
         cor.append(place_pts_sym(vals))
         exo.append("\end{pspicture*}")

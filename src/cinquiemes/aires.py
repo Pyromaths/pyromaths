@@ -40,7 +40,7 @@ def exo_aire_diques():
     rayon2 = int(1.5*rayon1)
     i=random.randrange(2)
     if i==0:
-    	donnees=('rayons', rayon1, rayon2)
+        donnees=('rayons', rayon1, rayon2)
     else:
         donnees=(u'diamètres', 2*rayon1, 2*rayon2)
     difference_des_carres = rayon2**2-rayon1**2
@@ -48,15 +48,15 @@ def exo_aire_diques():
     enonce = \
         u"""\\begin{minipage}{4cm}
 \\begin{pspicture}(-2,-2)(2,2)
-\\pscircle[fillstyle=solid,fillcolor=lightgray](0,0){1.5}
-\\pscircle[fillstyle=solid,fillcolor=white](0,0){1}
+\\pscircle[fillstyle=solid](0,0){1.5}
+\\pscircle[fillstyle=solid, fillcolor=white](0,0){1}
 \\psdots[dotstyle=x](0,0)
 \\rput(0.3;60){$O$}
 \\end{pspicture}
 \\end{minipage}\\hfill
 \\begin{minipage}{13cm}
 On considère deux cercles de centre $O$ et de %s respectifs $\\unit[%s]{cm}$ et $\\unit[%s]{cm}$.\\par
-Calculer l'aire de la couronne circulaire (partie en gris) comprise entre les deux cercles en arrondissant le résultat au $\\unit{cm^2}$ le plus proche.""" % donnees
+Calculer l'aire de la couronne circulaire (partie colorée) comprise entre les deux cercles en arrondissant le résultat au $\\unit{cm^2}$ le plus proche.""" % donnees
     exo.append(enonce)
     cor.append(enonce)
     cor.append("\\par\\dotfill{}\\\\\n")

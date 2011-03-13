@@ -62,9 +62,9 @@ def place_pts(vals, angle):
     for i in range(len(vals)):
         txt.append("(%s,%s)" % vals[i])
         txt.append("{%s}" % chr(i + 97))
-    txt.append("\n\\pstGeonode[PointSymbol=x,PointName=none](-4.5;%s){A}(4.5;%s){B}" % (angle, angle))
-    txt.append("\n\\psline[linewidth=1.5\\pslinewidth,nodesep=-4.5](A)(B)")
-    txt.append("\n\\pspolygon")
+    txt.append("\n\\pstGeonode[PointSymbol=none,PointName=none](-4.5;%s){A}(4.5;%s){B}" % (angle, angle))
+    txt.append("\n\\psline[linecolor=Black, linewidth=1pt, nodesep=-4.5](A)(B)")
+    txt.append("\n\\pspolygon[linecolor=Maroon, linewidth=1pt]")
     for i in range(len(vals)):
         txt.append("(%s)" % chr(i + 97))
     return ("").join(txt)
@@ -81,10 +81,10 @@ def SymetrieQuadrillage():
         vals = valeurs_quad(nbpts)
         txt = place_pts(vals, angle)
         exo.append("\\begin{pspicture*}(-3,-3)(3,3)")
-        exo.append("\\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]")
+        exo.append("\\psgrid[subgriddiv=2,gridlabels=0pt]")
         exo.append(txt)
         cor.append("\\begin{pspicture*}(-3,-3)(3,3)")
-        cor.append("\\psgrid[gridcolor=lightgray,subgridcolor=lightgray,subgriddiv=2,gridlabels=0pt]")
+        cor.append("\\psgrid[subgriddiv=2,gridlabels=0pt]")
         cor.append(txt)
         txt_cor = "\\pstOrtSym[PointSymbol=x,PointName=none]{A}{B}{"
         for i in range(len(vals)):
@@ -96,7 +96,7 @@ def SymetrieQuadrillage():
             if i > 0:
                 txt_cor += ","
             txt_cor += "%s1" % chr(i + 97)
-        txt_cor += "]\n  \pspolygon[linecolor=gray,linestyle=dashed]"
+        txt_cor += "]\n  \pspolygon[linecolor=Black, linestyle=dashed, linewidth=1pt]"
         for i in range(len(vals)):
             txt_cor += "(%s1)" % chr(i + 97)
         cor.append(txt_cor)

@@ -82,10 +82,10 @@ def reponse1(pt,F1,F2):
         i=F6.index(pt)
         j=F4.index(ptc3)
         res=[pt,F6[(i+1)%4],F6[(i+2)%4],F6[(i+3)%4],ptc3,F5[(j-1)%4],F5[(j-2)%4],F5[(j-3)%4]]
-    return res       
-        
-        
-        
+    return res
+
+
+
 
 def reponse2(pt1,ptc1,F1,F2):
     """renvoie la réponse à la deuxième question et le segment[p1ptc1]"""
@@ -126,13 +126,13 @@ def reponse3(pt2,ptc2,F1,F2):
         else:
             i=F2.index(pt2)
         rep=('['+F1[(i+1)%len(F1)]+F2[(i+1)%len(F1)]+']','['+F1[(i+2)%len(F1)]+F2[(i+2)%len(F1)]+']','['+F1[(i+3)%len(F1)]+F2[(i+3)%len(F1)]+']','['+pt2+ptc2+']')
-    
+
     return tuple(rep)
-        
+
 def main():
     """Face 1, Face 2"""
     noms_pts=(noms_sommets(8))
-    F1=noms_pts[0:4]    
+    F1=noms_pts[0:4]
     F2=noms_pts[4:8]
     pt=noms_pts[random.randrange(0,len(noms_pts))]
     rp1=reponse1(pt,F1,F2)
@@ -150,15 +150,15 @@ def main():
          "\\begin{pspicture*}(-2,-0.38)(15,4.5)",
          "\\psframe[fillstyle=solid,fillcolor=darkgray,framearc=0.2](-1,3.5)(-0.5,4)",
          "\\rput[bl](-0.85,3.65){\\white{\\textbf{$1$}}}",
-         "\\psline[linestyle=dashed,linecolor=darkgray,dash=4pt 4pt](3.5,1)(1.5,1)",
-         "\\psline[linestyle=dashed,linecolor=darkgray,dash=4pt 4pt](1.5,1)(1.5,3)",
-         "\\psline[linestyle=dashed,linecolor=darkgray,dash=4pt 4pt](1.5,1)(0.5,0)",
-         "\\psframe(0.5,0)(2.5,2)",
-         "\\psline(1.5,3)(3.5,3)",
-         "\\psline(3.5,3)(3.5,1)",
-         "\\psline(0.5,2)(1.5,3)",
-         "\\psline(2.5,2)(3.5,3)",
-         "\\psline(2.5,0)(3.5,1)",
+         "\\psline[linestyle=dashed,linecolor=Maroon,dash=4pt 4pt](3.5,1)(1.5,1)",
+         "\\psline[linestyle=dashed,linecolor=Maroon,dash=4pt 4pt](1.5,1)(1.5,3)",
+         "\\psline[linestyle=dashed,linecolor=Maroon,dash=4pt 4pt](1.5,1)(0.5,0)",
+         "\\psframe[linecolor=Maroon](0.5,0)(2.5,2)",
+         "\\psline[linecolor=Maroon](1.5,3)(3.5,3)",
+         "\\psline[linecolor=Maroon](3.5,3)(3.5,1)",
+         "\\psline[linecolor=Maroon](0.5,2)(1.5,3)",
+         "\\psline[linecolor=Maroon](2.5,2)(3.5,3)",
+         "\\psline[linecolor=Maroon](2.5,0)(3.5,1)",
          "\\rput[bl](0.22,2.08){%s}"%F1[0],
          "\\rput[bl](2.28,2.16){%s}"%F1[1],
          "\\rput[bl](2.6,-0.22){%s}"%F1[2],
@@ -167,21 +167,21 @@ def main():
          "\\rput[bl](3.58,3.04){%s}"%F2[1],
          "\\rput[bl](3.58,1.04){%s}"%F2[2],
          "\\rput[bl](1.58,1.04){%s}"%F2[3],
-         "\\psline(5.2,-04)(5.2,4)",
+         "\\psline[linecolor=Maroon](5.2,-04)(5.2,4)",
          "\\psframe[fillstyle=solid,fillcolor=darkgray,framearc=0.2](5.7,3.5)(6.2,4)",
          "\\rput[bl](5.85,3.65){\\white{\\textbf{$2$}}}",
-         "\\psline(8.48,2.71)(7.18,2.42)",
-         "\\psline(7.18,2.42)(7.18,0.46)",
-         "\\psline[linestyle=dashed,dash=4pt 4pt](7.18,0.46)(8.48,0.75)",
-         "\\psline[linestyle=dashed,dash=4pt 4pt](8.48,0.75)(8.48,2.71)",
-         "\psline(10,2.46)(8.7,2.17)",
-         "\\psline(8.7,2.17)(8.7,0.21)",
-         "\\psline(8.7,0.21)(10,0.5)",
-         "\\psline(10,0.5)(10,2.46)",
-         "\\psline(10,2.46)(8.48,2.71)",
-         "\\psline(7.18,2.42)(8.7,2.17)",
-         "\\psline(8.7,0.21)(7.18,0.46)",
-         "\\psline[linestyle=dashed,dash=4pt 4pt](10,0.5)(8.48,0.75)",
+         "\\psline[linecolor=Maroon](8.48,2.71)(7.18,2.42)",
+         "\\psline[linecolor=Maroon](7.18,2.42)(7.18,0.46)",
+         "\\psline[linestyle=dashed, linecolor=Maroon, dash=4pt 4pt](7.18,0.46)(8.48,0.75)",
+         "\\psline[linestyle=dashed, linecolor=Maroon, dash=4pt 4pt](8.48,0.75)(8.48,2.71)",
+         "\psline[linecolor=Maroon](10,2.46)(8.7,2.17)",
+         "\\psline[linecolor=Maroon](8.7,2.17)(8.7,0.21)",
+         "\\psline[linecolor=Maroon](8.7,0.21)(10,0.5)",
+         "\\psline[linecolor=Maroon](10,0.5)(10,2.46)",
+         "\\psline[linecolor=Maroon](10,2.46)(8.48,2.71)",
+         "\\psline[linecolor=Maroon](7.18,2.42)(8.7,2.17)",
+         "\\psline[linecolor=Maroon](8.7,0.21)(7.18,0.46)",
+         "\\psline[linestyle=dashed,dash=4pt 4pt, linecolor=Maroon](10,0.5)(8.48,0.75)",
          "\\rput[bl](8.68,2.27){%s}"%rp1[0],
          "\\rput[bl](10.06,2.5){%s}"%rp1[1],
          "\\rput[bl](8.71,-0.1){%s}"%rp1[3],
@@ -197,15 +197,15 @@ def main():
          "\\begin{pspicture*}(-2,-0.38)(15,4.5)",
          "\\psframe[fillstyle=solid,fillcolor=darkgray,framearc=0.2](-1,3.5)(-0.5,4)",
          "\\rput[bl](-0.85,3.65){\\white{\\textbf{$1$}}}",
-         "\\psline[linestyle=dashed,linecolor=darkgray,dash=4pt 4pt](3.5,1)(1.5,1)",
-         "\\psline[linestyle=dashed,linecolor=darkgray,dash=4pt 4pt](1.5,1)(1.5,3)",
-         "\\psline[linestyle=dashed,linecolor=darkgray,dash=4pt 4pt](1.5,1)(0.5,0)",
-         "\\psframe(0.5,0)(2.5,2)",
-         "\\psline(1.5,3)(3.5,3)",
-         "\\psline(3.5,3)(3.5,1)",
-         "\\psline(0.5,2)(1.5,3)",
-         "\\psline(2.5,2)(3.5,3)",
-         "\\psline(2.5,0)(3.5,1)",
+         "\\psline[linestyle=dashed,linecolor=Maroon,dash=4pt 4pt](3.5,1)(1.5,1)",
+         "\\psline[linestyle=dashed,linecolor=Maroon,dash=4pt 4pt](1.5,1)(1.5,3)",
+         "\\psline[linestyle=dashed,linecolor=Maroon,dash=4pt 4pt](1.5,1)(0.5,0)",
+         "\\psframe[linecolor=Maroon](0.5,0)(2.5,2)",
+         "\\psline[linecolor=Maroon](1.5,3)(3.5,3)",
+         "\\psline[linecolor=Maroon](3.5,3)(3.5,1)",
+         "\\psline[linecolor=Maroon](0.5,2)(1.5,3)",
+         "\\psline[linecolor=Maroon](2.5,2)(3.5,3)",
+         "\\psline[linecolor=Maroon](2.5,0)(3.5,1)",
          "\\rput[bl](0.22,2.08){%s}"%F1[0],
          "\\rput[bl](2.28,2.16){%s}"%F1[1],
          "\\rput[bl](2.6,-0.22){%s}"%F1[2],
@@ -214,21 +214,21 @@ def main():
          "\\rput[bl](3.58,3.04){%s}"%F2[1],
          "\\rput[bl](3.58,1.04){%s}"%F2[2],
          "\\rput[bl](1.58,1.04){%s}"%F2[3],
-         "\\psline(5.2,-04)(5.2,4)",
+         "\\psline[linecolor=Maroon](5.2,-04)(5.2,4)",
          "\\psframe[fillstyle=solid,fillcolor=darkgray,framearc=0.2](5.7,3.5)(6.2,4)",
          "\\rput[bl](5.85,3.65){\\white{\\textbf{$2$}}}",
-         "\\psline(8.48,2.71)(7.18,2.42)",
-         "\\psline(7.18,2.42)(7.18,0.46)",
-         "\\psline[linestyle=dashed,dash=4pt 4pt](7.18,0.46)(8.48,0.75)",
-         "\\psline[linestyle=dashed,dash=4pt 4pt](8.48,0.75)(8.48,2.71)",
-         "\psline(10,2.46)(8.7,2.17)",
-         "\\psline(8.7,2.17)(8.7,0.21)",
-         "\\psline(8.7,0.21)(10,0.5)",
-         "\\psline(10,0.5)(10,2.46)",
-         "\\psline(10,2.46)(8.48,2.71)",
-         "\\psline(7.18,2.42)(8.7,2.17)",
-         "\\psline(8.7,0.21)(7.18,0.46)",
-         "\\psline[linestyle=dashed,dash=4pt 4pt](10,0.5)(8.48,0.75)",
+         "\\psline[linecolor=Maroon](8.48,2.71)(7.18,2.42)",
+         "\\psline[linecolor=Maroon](7.18,2.42)(7.18,0.46)",
+         "\\psline[linestyle=dashed,dash=4pt 4pt, linecolor=Maroon](7.18,0.46)(8.48,0.75)",
+         "\\psline[linestyle=dashed,dash=4pt 4pt, linecolor=Maroon](8.48,0.75)(8.48,2.71)",
+         "\psline[linecolor=Maroon](10,2.46)(8.7,2.17)",
+         "\\psline[linecolor=Maroon](8.7,2.17)(8.7,0.21)",
+         "\\psline[linecolor=Maroon](8.7,0.21)(10,0.5)",
+         "\\psline[linecolor=Maroon](10,0.5)(10,2.46)",
+         "\\psline[linecolor=Maroon](10,2.46)(8.48,2.71)",
+         "\\psline[linecolor=Maroon](7.18,2.42)(8.7,2.17)",
+         "\\psline[linecolor=Maroon](8.7,0.21)(7.18,0.46)",
+         "\\psline[linestyle=dashed,dash=4pt 4pt, linecolor=Maroon](10,0.5)(8.48,0.75)",
          "\\rput[bl](10.05,0.2){%s}"%rp1[2],
          "\\rput[bl](8.71,-0.1){%s}"%rp1[3],
          "\\rput[bl](8.1,0.79){%s}"%rp1[6],
@@ -246,6 +246,6 @@ def main():
          rp3,
          "\\end{enumerate}"]
     return (exo,cor)
-    
-    
-    
+
+
+
