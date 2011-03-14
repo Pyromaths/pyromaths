@@ -95,7 +95,8 @@ class Polynome():
         Renvoie une chaîne de caractère pouvant être utilisée pour créer un polynôme.
         S'appelle ainsi : repr(p) où p est un polynôme"""
         var = self.var
-        s = "Polynome(\""
+#        s = "Polynome(\""
+        s = ""
         for m in self.monomes:
             if isinstance(m, list):
                 if m[1] > 1:
@@ -124,9 +125,8 @@ class Polynome():
                         s = s + str(m[0])
                     else:
                         s = s + "+" + str(m[0])
-        if s[0]=='+': s=s[1:]
-        # supprime le + en début de séquence
-        s += "\")"
+        s = s.lstrip("+") # supprime le + en début de séquence
+        s = "Polynome(\"%s\")" % s
         return s
 
     def __str__(self):
@@ -224,9 +224,11 @@ class Polynome():
         if self.var != other.var:
             raise ValueError(u'Pyromaths ne sait additionner que deux polynômes de même variable')
         else :
+            m=[]
             m1.extend(m2)
-#            return Polynome.somme_detail(Polynome.ordonne(Polynome(m1, self.var)))
-            return Polynome(m1, self.var)
+            for monomes in m1:
+                if monomes[0]: m.append(monomes)
+            return Polynome(m, self.var)
 
     def somme_detail(self):
         reductible = False
@@ -253,16 +255,12 @@ class Polynome():
             tmp += ")"
             if m[-1][1]==0:
                 tmp = eval(tmp)
-                s += "+%s" % tmp
+                s += "+Polynome(\"%s\")" % tmp
             else:
                 s += "+%s*%r" % (tmp, Polynome('1%s^%s' % (var,  m[-1][1])))
         else:
             s += "+Polynome(\"%s%s^%s\")" % (str(m[-1][0]), var,  m[-1][1])
-#        if p != "Polynome(\"": p=p[:-1] + "\")"
-#        else: p=""
-        if s and s[0] == "+": s = s [1:] # suppression du + initial
-#        if s and p: return s + "+" + p
-#        else: return s + p
+        s = s.lstrip("+") # suppression du + initial
         return s
 
     def __radd__(self, other):
@@ -372,41 +370,38 @@ class Polynome():
 # EXPRESSIONS RÉGULIÈRES
 #---------------------------------------------------------------------
 # Expression régulière pour définir un nombre décimal
-decimal = r"""[-+]?\d+\.?\d*(?:e[-+]\d+)?"""
+decimal = r"[-+]?\d+\.?\d*(?:e[-+]\d+)?"#(?=[^a-z])
 
 # Expression régulière pour définir un nombre décimal avec ou sans parenthèses
 # ex : -5 et (-5)
 decimal_par = r"\(%s\)|%s" % (decimal, decimal)
 
 # Expression régulière pour définir un polynôme
-polynome = r"""Polynome\(\"     # commence par Polynome("
-    (?:
-        [-+]?%s?                # Le coefficient est un nombre décimal
-        (?:[a-z](?:\^\d+)?)?    # La variable et son exposant entier positif
-    )+
-    \"\)                        # Finit par ")
-    """ % (decimal_par)
+polynome = r"Polynome\([^\)]+\)"
 
 # Expression régulière pour définir un polynôme avec ou sans parenthèses
 polynome_par = r"\(%s\)|%s" % (polynome, polynome)
 
 # Expression régulière pour définir un nombre dans une opération
+# un  décimal est soit en début de chaîne, soit précédé d'un opérateur.
 nb = """
     # Utilisé pour définir un nombre dans les expressions régulières
     (?:                 # doit être
-        ^               # en début de chaîne
+        ^\s*            # en début de chaîne (aux espaces près)
     |                   # OU
         (?<=[-+*/(])    # précédé d'un opérateur ou d'une parenthèses ouvrante
     )
     (?:
-        %s | %s         # un décimal ou un polynôme avec ou sans parenthèses
+        (?:%s)
+        |               # un décimal ou un polynôme avec ou sans parenthèses
+        (?:%s)
     )
     (?:                 # doit être
         (?=[-+*/)])     # suivi d'un opérateur ou d'une parenthèses fermante
     |                   # OU
         $               # en fin de chaîne
     )
-    """ % (decimal_par, polynome_par)
+    """ % (polynome_par, decimal_par)
 
 # Recherche des parenthèses intérieures contenant un calcul
 recherche_parentheses = re.compile(r"""
@@ -422,21 +417,20 @@ recherche_parentheses = re.compile(r"""
 recherche_pow = re.compile(r"""
     ^(?P<pre>               # groupe pre-calcul
         .*?[-+]?            # il y a des calculs avant l'opération cherchée et
-    |                       # le signe n'est pas à garder ex : -3^2 => 3^2
-        \(*                 # OU l'opération est au début (aux parenthèses près)
     )
     (?P<calcul>
-        %s(?:\*\*[-+]?\d+)+ # symbole exposant suivi d'un exposant entier
+        (?:%s)(?:\*\*[-+]?\d+)+ # symbole exposant suivi d'un exposant entier
     )                       # relatif éventuellement plusieurs fois consécutives
     (?P<post>.*)$           # tout le reste
     """ % (nb), re.VERBOSE).search
 
 # Recherche la première série de divisions ou de multiplications dans la chaîne
 recherche_produit = re.compile(r"""
-    ^(?P<pre>.*?)                 # un minimum de calculs
+    ^(?P<pre>.*?(?<!\*\*))        # un minimum de calculs (mais pas de puissance)
     (?P<calcul>
         %s
         (?:(?:/%s)+ | (?:\*%s)+)  # plusieurs multiplications ou divisions
+        (?!\*\*)
     )
     (?P<post>.*)$                 # tout le reste
     """ % (nb, nb,  nb), re.VERBOSE).search
@@ -445,34 +439,54 @@ recherche_produit = re.compile(r"""
 recherche_neg = re.compile(r"""
     ^(?P<pre>.*?)       # un minium de calculs
     (?P<calcul>         # un nombre entre parenthèses précédé d'un signe + ou -
-#        (?:\-#s)
-#    |
-#        (?:(?<=[-+*)])\+Polynome\([^\)]+\))
-#    |
-        (?:[-+]\(%s\)) | (?:[-+]\(%s\))
+        (?:[-+]\(%s\)(?!\*\*)) | (?:[-+]\(%s\)(?!\*\*)) | (?:\-%s)
     )
     (?P<post>.*)$       # groupe post (tout le reste)
-    """ % (polynome, decimal), re.VERBOSE).search
+    """ % (decimal, decimal, polynome), re.VERBOSE).search
 
 # Recherche la première série d'additions ou de soustractions dans la chaîne
 recherche_somme = re.compile(r"""
     ^(?P<pre>                      # une somme à calculer ne doit jamais être
-        \(* | .*?(?:[^-*/])        # précédée d'un produit ou d'une différence
+        .*?                        # précédée d'un produit ou d'une différence
     )
     (?P<calcul>                    # groupe calcul
-        %s
-        (?:(?:-%s)+ | (?:\+%s)+)   # série d'additions ou soustractions
-        (?:$ | (?:(?=[^*/])))      # ne doit pas être suivi d'une multiplication
+        (?<![-*/])%s
+        (?:(?:\-%s)+ | (?:\+%s)+)  # série d'additions ou soustractions
+        (?:$ | (?:(?=[^*/])))      # ne doit pas être suivi d'un produit
     )
     (?P<post>.*)$                  # groupe post (tout le reste)
     """ % (nb, nb, nb), re.VERBOSE).search
 
+# Recherche un nombre décimal multiplié par un monôme de coefficient 1
+recherche_simplification=re.compile(r"""
+    (?P<pre>.*?)
+    (?P<coef>%s)
+    \*
+    (?P<monome>Polynome\(\"[a-z](?:\^\d+)?\"\))
+    (?P<post>.*?)$""" % decimal_par, re.VERBOSE).search
+
 recherche_polynome = re.compile(r"""
     ^(?P<pre>.*?)
-    (?P<calcul> %s )
+    (?P<calcul>(?:%s))
     (?P<post>.*)$
     """ % (polynome), re.VERBOSE).search
 
+suppression_parentheses_polynomes = re.compile(r"""
+    (?P<pre>.*?)
+    (?P<par>\( %s \) )
+    (?P<post>.*?)$""" % polynome, re.VERBOSE).search
+
+recherche_somme_polynomes = re.compile(r"""
+    ^(?P<pre>                      # une somme à calculer ne doit jamais être
+        .*?                        # précédée d'un produit ou d'une différence
+    )
+    (?P<calcul>                    # groupe calcul
+        (?<![-*/])%s
+        (?:\+%s)+                  # série d'additions
+        (?:$ | (?:(?=[^*/])))      # ne doit pas être suivi d'un produit
+    )
+    (?P<post>.*)$                  # groupe post (tout le reste)
+    """ % (polynome, polynome), re.VERBOSE).search
 def reduire(calcul,  detail=0):
     """réduit les polynômes compris dans une chaîne de caractères."""
     groups=recherche_polynome(calcul)
@@ -515,52 +529,33 @@ def traitement_resultat(s, before, after):
         if before and before[-1][-1] not in '+-*/(': s = "+" + s
     return s
 
-def post_traitement(s, nepascherchersomme):
-    recherche_simplification=re.compile(r"""
-    (?P<pre>^ | .*?)                # début de chaîne ou un minimum de calculs
-    (?P<coef>                       # un coefficient
-        \((?:[-+]?\d+\.?\d*(?:e[-+]\d+)?)\) | [-+]?\d+\.?\d*(?:e[-+]\d+)?
-    )
-    \*
-    (?P<monome>                     #un monome de coefficient 1
-        Polynome\(\"\+[a-z](?:\^\d+)?\"\)
-    )
-    (?P<post>.*?)$                 # un minimum de calculs et la fin de la chaîne
-    """, re.VERBOSE).search
-    suppression_parentheses = re.compile(r"""
-    (?P<pre>^ | .*?)
-    (?P<par>\(Polynome\([^\)]+\)\))
-    (?P<post>.*?)$""", re.VERBOSE).search
-    recherche_plus = re.compile(r"""
-    ^(?P<pre>\(* | .*?(?:[^-*/]))
-    (?P<calcul>%s(?:\+%s)+(?:$|(?:(?=[^*/]))))
-    (?P<post>.*)$
-    """ % (nb, nb), re.VERBOSE).search
+def post_traitement(s):
     r = recherche_simplification(s)
     while r:
-        t = r.groups()
-        s = r.group('pre').rstrip("+") + "+" +\
-            repr(eval(r.group('coef'))*eval(r.group('monome'))) +\
-            r.group('post')
+#        t = r.groups()
+        if r.group('pre').rstrip("+") and r.group('pre').rstrip("+")[-1] in "(*-":
+            s = r.group('pre').rstrip("+")
+        else: s = r.group('pre').rstrip("+") + "+"
+        s += repr(eval(r.group('coef'))*eval(r.group('monome'))) +\
+             r.group('post')
+        s = s.lstrip("+")
         r = recherche_simplification(s)
-    r = suppression_parentheses(s)
+    r = suppression_parentheses_polynomes(s)
     while r:
-        t = r.groups()
+#        t = r.groups()
         s = r.group('pre')+ r.group('par')[1:-1] + r.group('post')
-        r = suppression_parentheses(s)
-    if nepascherchersomme: r = None
-    else: r = recherche_plus(s)
-#    s = s.replace("(+Polynome(", "(Polynome(")
+        r = suppression_parentheses_polynomes(s)
+    r = recherche_somme_polynomes(s)
     while r:
-        t = r.groups()
+#        t = r.groups()
         tmp = eval(r.group('calcul'))
-        if isinstance(tmp, Polynome): tmp = repr(Polynome.ordonne(tmp))
+        if isinstance(tmp, Polynome): tmp = repr(tmp)
         elif isinstance(tmp, (int, float)): tmp = str(tmp)
         s = r.group('pre') + tmp + r.group('post')
-        r = recherche_plus(s)
+        r = recherche_somme_polynomes(s)
     return s
 
-def priorites_operations(calcul, nepascherchersomme= 0):
+def priorites_operations(calcul):
     """Recherche les opérations à effectuer dans un calcul.
     @calcul: string (ex:'Polynome("3z-4")*Polynome("4z-5")')
     @nepascherchersomme: Booléen ; permet d'éviter, dans l'exemple '(2+6)*4+5',
@@ -574,13 +569,12 @@ def priorites_operations(calcul, nepascherchersomme= 0):
     for recherche in serie:
         test = recherche(calcul)
         while test:
-            if nepascherchersomme and recherche==recherche_somme:break
             while test:
-                t=test.groups()#TODO: supprimer quand terminé
+#                t=test.groups()
                 if test.group('pre'):
-                    tmp = priorites_operations(test.group('pre'), nepascherchersomme)
+                    tmp = priorites_operations(test.group('pre'))
                     if result and result[-1][-1] not in '+-*/(' and \
-                                  tmp[0] not in    '+-*/(':
+                                  tmp[0] not in    '+-*/)':
                         tmp= "+" + tmp
                     result.append(tmp)
                 if recherche == recherche_parentheses:
@@ -589,9 +583,12 @@ def priorites_operations(calcul, nepascherchersomme= 0):
                     if len(spar)>1 and result and result[-1][-1]!="(" and\
                                        test.group('post') != ")":
                         s = "(" + spar[0] +")"
+                    elif len(spar)>1:
+                        s = spar[0]
                     else:
                         s = traitement_resultat(eval(spar[0]), result,
                                                 test.group('post'))
+#                    print u"parenthèses : ", test.group('pre'), s, test.group('post')
                 else:
                 # s est soit un résultat (par exemple un polynôme), soit une
                 # chaîne de caractères contenant un nouveau calcul à effectuer
@@ -602,19 +599,14 @@ def priorites_operations(calcul, nepascherchersomme= 0):
 
                 result.append(s)
                 calcul=test.group('post')
-                if calcul and (calcul[0]!="-" or recherche!=recherche_somme):
-                    result.append(calcul[0])
-                    # Pour éviter, dans l'exemple (2+6)*4+5, de calculer 4+5
-                    # après avoir calculé (2+6) =>
-                    if calcul[0] in "*/-": nepascherchersomme = 1
-                    calcul = calcul[1:]
-                    test=recherche(calcul)
+                if calcul:
+                    test = recherche(calcul)
                 else:
                     test=None
     if calcul: result.append(calcul)
     s = "".join(result)
     if s.find("Polynome(")>=0:
-        s = post_traitement(s, nepascherchersomme)
+        s = post_traitement(s)
     return s
 
 def priorites(calcul, parentheses=0):
@@ -639,12 +631,17 @@ def priorites(calcul, parentheses=0):
         s=reduire(s)
         if s: solution.append(s)
     if calcul == solution[-1]: solution.pop(-1) # dernier calcul en double
-    s = solution[-1]
-    #TODO: rechercher les écritures du type 8*Polynome('x') à remplacer par des Polynome('8x').
-    p = eval(s)
-    if isinstance(p, Polynome) and Polynome.reductible(p):
-        solution.append(repr(Polynome.reduit(p)))
-    return solution
+    if parentheses and len(solution)>1:
+        # si le calcul est un extrait d'un calcul entre parenthèses, on n'a pas
+        # besoin du résultat complet
+        return solution
+    else:
+        s = solution[-1]
+        p = eval(s)
+        if isinstance(p, Polynome) and Polynome.reductible(p):
+            solution.append(repr(Polynome.reduit(p)))
+#       print solution
+        return solution
 
 def texify(liste_calculs):
     """Convertit une liste de chaînes de caractères 'liste_calculs' contenant
@@ -739,21 +736,22 @@ def valeurs(n, polynomes=0, entier=1):
         s += ')'
         nbp.pop(-1)
     return s
-#TODO: Dans le cas 20*9-(-88)+5 ; faire ne sorte qu'on calcule -(-88) en même
-#      temps qu'on calcule 20*9
 
 def main():
-    test_entiers(nbval=10, polynomes=0, entiers=1)
-#    a = 'Polynome("-6+8x")+Polynome("-1-8x")+Polynome("-4+4x")*Polynome("-1+2x")'
+    test_entiers(nbval=5, polynomes=1, entiers=0)
+#    a = 'Polynome("0-6x")-Polynome("8+4x")*(Polynome("4-10x")*(Polynome("-11-x")+Polynome("-6+6x")*Polynome("50x")*Polynome("8-2x")))'
+#    a = '(Polynome("-300.0x")*Polynome("-6.0")+Polynome("-300.0x")*Polynome("x")+Polynome("-400.0x^2")*Polynome("-6.0")+Polynome("-400.0x^2")*Polynome("x"))'
 #    print(a)
-#    print "\n".join(texify(priorites(a)))
-#    print "\n".join(priorites(a))
+#    r = [a]
+#    r.extend(priorites(a))
+#    print "\n".join(r)
+#    print "\\]\n\\[".join(texify(priorites(a)))
 #    print recherche_produit("(-(+5)*7)").groups()
 
 def test_entiers(nbval, polynomes, entiers):
-    for x in range(10000):
+    for x in range(10):
         a = valeurs(nbval, polynomes, entiers)
-        print u"\n%s ème calcul" % (x+1), a
+        print u"\n%s ème calcul" % (x+1), a,
         r = priorites(a)
         if not polynomes:
             print u"%s ème calcul" % (x+1), a, " = ", eval(a), u" en %s étapes"%(len(r))
@@ -764,4 +762,4 @@ def test_entiers(nbval, polynomes, entiers):
         if polynomes:
             print u" en %s étapes"%(len(r))
 #            print "\n".join(texify(r))
-            print "\n".join(r)
+#            print "\n".join(r)
