@@ -497,8 +497,11 @@ def reduire(calcul,  detail=0):
             reponse+=groups.group('pre')
             if Polynome.reductible(eval(groups.group('calcul'))):
                 modifie = 1
-#                reponse+=repr(Polynome.reduit(eval(groups.group('calcul'))))
-                reponse += Polynome.somme_detail(eval(groups.group('calcul')))
+                s = Polynome.somme_detail(eval(groups.group('calcul')))
+                if (reponse and reponse[-1] in '-*') or (groups.group('post') and groups.group('post')[0] == '*'):
+                    reponse += "(" + s + ")"
+                else:
+                    reponse += s
             else:
                 reponse+=groups.group('calcul')
             calcul = groups.group('post')
@@ -540,11 +543,6 @@ def post_traitement(s):
              r.group('post')
         s = s.lstrip("+")
         r = recherche_simplification(s)
-    r = suppression_parentheses_polynomes(s)
-    while r:
-#        t = r.groups()
-        s = r.group('pre')+ r.group('par')[1:-1] + r.group('post')
-        r = suppression_parentheses_polynomes(s)
     r = recherche_somme_polynomes(s)
     while r:
 #        t = r.groups()
@@ -553,6 +551,11 @@ def post_traitement(s):
         elif isinstance(tmp, (int, float)): tmp = str(tmp)
         s = r.group('pre') + tmp + r.group('post')
         r = recherche_somme_polynomes(s)
+    r = suppression_parentheses_polynomes(s)
+    while r:
+#        t = r.groups()
+        s = r.group('pre')+ r.group('par')[1:-1] + r.group('post')
+        r = suppression_parentheses_polynomes(s)
     return s
 
 def priorites_operations(calcul):
@@ -579,24 +582,22 @@ def priorites_operations(calcul):
                     result.append(tmp)
                 if recherche == recherche_parentheses:
                     # on utilise les priorités sur le calcul entre parenthèses
-                    spar=priorites(test.group('calcul')[1:-1], parentheses=1)
-                    if len(spar)>1 and result and result[-1][-1]!="(" and\
-                                       test.group('post') != ")":
-                        s = "(" + spar[0] +")"
-                    elif len(spar)>1:
-                        s = spar[0]
+                    if litteral and test.group('calcul').find('Polynome("')<0:
+                        # on réduit directement les calculs numériques
+                        s = str(eval(test.group('calcul')))
                     else:
-                        s = traitement_resultat(eval(spar[0]), result,
-                                                test.group('post'))
-#                    print u"parenthèses : ", test.group('pre'), s, test.group('post')
+                        spar=priorites(test.group('calcul')[1:-1], parentheses=1)
+                        if len(spar)>1:
+                            s = "(" + spar[0] +")"
+                        else:
+                            s = traitement_resultat(eval(spar[0]), result,
+                                                    test.group('post'))
                 else:
                 # s est soit un résultat (par exemple un polynôme), soit une
                 # chaîne de caractères contenant un nouveau calcul à effectuer
                 # (par exemple pour le produit de deux polynômes).
                     s = eval(test.group('calcul'))
                     s = traitement_resultat(s, result, test.group('post'))
-
-
                 result.append(s)
                 calcul=test.group('post')
                 if calcul:
@@ -653,6 +654,7 @@ def texify(liste_calculs):
         if groups: calcul_litteral = 1
         else: calcul_litteral = 0
         while groups:
+            deci = groups.group('pre')
             s += groups.group('pre')
             p = eval(groups.group('calcul'))
             q = groups.group('post')
@@ -689,6 +691,57 @@ def texify(liste_calculs):
         s = s.replace("*", " \\times ")
         s = s.replace("(", " \\left(")
         s = s.replace(")", "\\right) ")
+        if not ls or s != ls[-1]:
+            ls.append(s)
+    return ls
+
+def sympyfy(liste_calculs):
+    """Convertit une liste de chaînes de caractères 'liste_calculs' contenant
+    des polynômes en liste de chaînes de caractères au format TeX"""
+    ls = []
+    for calcul in liste_calculs:
+        s, q = "", ""
+        groups=recherche_polynome(calcul)
+        if groups: calcul_litteral = 1
+        else: calcul_litteral = 0
+        while groups:
+            deci = groups.group('pre')
+            s += groups.group('pre')
+            p = eval(groups.group('calcul'))
+            q = groups.group('post')
+            if (s and s[-1] in "*-" and (len(p)>1 or p.monomes[0][0]<0)) \
+                or (q and q[0] == "*" and len(p)>1) \
+                or ((len(p)>1 or p.monomes[0][0]!=1 and p.monomes[0][1]>0) and q[:2]=="**"):
+                s += "("+ str(p) +")"
+            elif s and s[-1] == "+" and p.monomes[0][0]<0:
+                s = s[:-1]
+                s += str(eval(groups.group('calcul')))
+            else:
+               s += str(eval(groups.group('calcul')))
+            groups=recherche_polynome(groups.group('post'))
+        s += q
+        calcul, s, q = s, "", ""
+
+        if calcul_litteral:
+            recherche_suppression_multiplication = re.compile(r"""
+                ^(?P<pre>.*?)
+                (?P<calcul>
+                    \*\(
+                    |
+                    \d\*[a-z]
+                )
+                (?P<post>.*)$""", re.VERBOSE).search
+            groups = recherche_suppression_multiplication(calcul)
+            while groups:
+                s += groups.group('pre') + groups.group('calcul')
+                q = groups.group('post')
+                groups = recherche_suppression_multiplication(q)
+            s += q
+            if not s: s = calcul
+        s = s.replace("\\,x", "*x")
+        s = s.replace("\\,", "")
+        s = s.replace("^{", "**")
+        s = s.replace("}", "")
         if not ls or s != ls[-1]:
             ls.append(s)
     return ls
@@ -737,29 +790,37 @@ def valeurs(n, polynomes=0, entier=1):
         nbp.pop(-1)
     return s
 
-def main():
-    test_entiers(nbval=5, polynomes=1, entiers=0)
-#    a = 'Polynome("0-6x")-Polynome("8+4x")*(Polynome("4-10x")*(Polynome("-11-x")+Polynome("-6+6x")*Polynome("50x")*Polynome("8-2x")))'
-#    a = '(Polynome("-300.0x")*Polynome("-6.0")+Polynome("-300.0x")*Polynome("x")+Polynome("-400.0x^2")*Polynome("-6.0")+Polynome("-400.0x^2")*Polynome("x"))'
-#    print(a)
-#    r = [a]
-#    r.extend(priorites(a))
-#    print "\n".join(r)
-#    print "\\]\n\\[".join(texify(priorites(a)))
-#    print recherche_produit("(-(+5)*7)").groups()
+def remplace_decimaux(matchobj):
+    nb = matchobj.group(0)
+    if nb[0]=="+": return "+" + decimaux(nb[1:])
+    else: return decimaux(nb)
 
 def test_entiers(nbval, polynomes, entiers):
-    for x in range(10):
+    for c in range(1000):
         a = valeurs(nbval, polynomes, entiers)
-        print u"\n%s ème calcul" % (x+1), a,
         r = priorites(a)
         if not polynomes:
-            print u"%s ème calcul" % (x+1), a, " = ", eval(a), u" en %s étapes"%(len(r))
+            print u"%s ème calcul" % (c+1), a, " = ", eval(a), u" en %s étapes"%(len(r))
             if str(eval(a)) != r[-1]:
                 print a, " = ", eval(a)
                 print r
                 break
         if polynomes:
-            print u" en %s étapes"%(len(r))
-#            print "\n".join(texify(r))
-#            print "\n".join(r)
+            from sympy import Symbol, expand
+            x = Symbol('x')
+            print u"%s ème calcul en %s étapes : " % (c+1, len(r)),
+            t0=sympyfy([a])[0]
+            print a
+            t1=sympyfy([r[-1]])[0]
+            if eval(t0).expand()!=eval(t1):
+                print a, "=", t1
+                print r
+                print eval(t0).expand()
+                break
+
+def main():
+    test_entiers(nbval=3, polynomes=1, entiers=1)
+    a='Polynome("-10+9x")-Polynome("2-11x")*Polynome("-4+5x")'
+#    print sympyfy([a])
+#    print recherche_somme(a).groups()
+#    print "\n".join(priorites(a))
