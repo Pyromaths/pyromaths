@@ -117,7 +117,7 @@ def repr_somme(u,v,u1,u2,cor,larg=0):
     largeur = str(pair(int(largeur)))
     hauteur = str(pair(int(hauteur)))
 
-    cor.append(u"\\begin{pspicture}(0,0)(" + largeur + "," + hauteur + ")")
+    cor.append(u"\\begin{pspicture*}(0,0)(" + largeur + "," + hauteur + ")")
     cor.append(u"\\psgrid[subgriddiv=2, gridlabels=0pt]")
     cor.append(u"\\psset{unit=10mm,arrowscale=2}")
 
@@ -139,7 +139,7 @@ def repr_somme(u,v,u1,u2,cor,larg=0):
           {\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{\\textcolor{DarkRed}{$\\overrightarrow{" + u1 + "}" + sgn + "\\overrightarrow{" + u2[-1] + "}$}}}")
 
     cor.append(u"}")
-    cor.append(u"\\end{pspicture}")
+    cor.append(u"\\end{pspicture*}")
     return largeur ## récupérer la largeur pour éviter d'aligner des figures trop larges sur la feuille
 
 def vecteurs_add():
@@ -171,7 +171,7 @@ def vecteurs_add():
     exo.append(u"\\psgrid[subgriddiv=2, gridlabels=0pt]")
     exo.append(u"\\psset{unit=10mm,arrowscale=2}")
 
-    cor.append(u"\\begin{pspicture}(0,0)(18,10)")
+    cor.append(u"\\begin{pspicture*}(0,0)(18,10)")
     cor.append(u"\\psgrid[subgriddiv=2, gridlabels=0pt]")
     cor.append(u"\\psset{unit=10mm,arrowscale=2}")
 
@@ -207,7 +207,7 @@ def vecteurs_add():
       exo.append(u"\\rput(" + AffNom(vec[0]) + ") \
                    {\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{$\\overrightarrow{" + vec[3] + "}$}}")
       exo.append(u"}")
-    exo.append(u"\\end{pspicture}")
+    exo.append(u"\\end{pspicture*}")
 
 
     for vec in [(u, posux, posuy, "u"), (v, posvx, posvy, "v"), (w, poswx, poswy, "w")]:
