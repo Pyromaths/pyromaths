@@ -36,12 +36,11 @@ setup(name = "Pyromaths",
             glob.glob(r'data/images/vignettes/*.png')),
         (r'data/templates', glob.glob(r'data/templates/*.tex')),
         (r'data/packages', glob.glob(r'data/packages/*')),
-        # 'data/win32/MSVCR71.dll',
         ],
     platforms = ['windows'],
-    options = 
+    options =
     {
-        'py2exe': 
+        'py2exe':
         {
             "compressed": 1, "optimize": 2, "bundle_files": 3,
             "includes":["sip", "gzip"]
