@@ -23,17 +23,25 @@ pyromaths=$PWD
 
 # Utiliser py2app:
 cd $mac
-python setup.py py2app --packages=lxml
+python setup.py py2app
 
 # Supprimer les fichiers debug des frameworks
 rm $mac/dist/Pyromaths.app/Contents/Frameworks/*.framework/Versions/4/*_debug
 rm $mac/dist/Pyromaths.app/Contents/Frameworks/*.framework/*_debug
 
-# Copier les dossiers modele et img
-cp -R $pyromaths/modeles $mac/dist/Pyromaths.app/Contents/MacOS
-mkdir $mac/dist/Pyromaths.app/Contents/MacOS/img/
-cp $pyromaths/img/pyromaths.png $mac/dist/Pyromaths.app/Contents/MacOS/img/
-cp -R $pyromaths/img/vignettes $mac/dist/Pyromaths.app/Contents/MacOS/img/
+# Supprimer les fichiers py inutiles
+rm $mac/dist/Pyromaths.app/Contents/Resources/lib/python2.6/lxml/*.py
+rm $mac/dist/Pyromaths.app/Contents/Resources/lib/python2.6/lxml/html/*.py
+rm $mac/dist/Pyromaths.app/Contents/Resources/site.py
+
+# Copier les dossiers images, packages et templates
+mkdir $mac/dist/Pyromaths.app/Contents/MacOS/data/
+mkdir $mac/dist/Pyromaths.app/Contents/MacOS/data/images/
+cp -R $pyromaths/data/images/vignettes $mac/dist/Pyromaths.app/Contents/MacOS/data/images/
+cp $pyromaths/data/images/pyromaths.png $mac/dist/Pyromaths.app/Contents/MacOS/data/images/
+cp $pyromaths/data/images/whatsthis.png $mac/dist/Pyromaths.app/Contents/MacOS/data/images/
+cp -R $pyromaths/data/packages $mac/dist/Pyromaths.app/Contents/MacOS/data/
+cp -R $pyromaths/data/templates $mac/dist/Pyromaths.app/Contents/MacOS/data/
 
 # copier le script setenv.sh et le rendre exécutable
 cp $mac/setenv.sh $mac/dist/Pyromaths.app/Contents/MacOS/

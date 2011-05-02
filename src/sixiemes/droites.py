@@ -27,15 +27,15 @@ import math
 
 def nodesep(ligne):
     """
-    D\xc3\xa9fini les valeurs nodesep : 0 pour une extr\xc3\xa9mit\xc3\xa9, -0.5 pour une continuit\xc3\xa9
+    Défini les valeurs nodesep : 0 pour une extrémité, -0.5 pour une continuité
     @param ligne: droite, demi-droite, segment
     @type ligne: string
     """
 
-    if ligne == 'droite':
-        retour = ['-0.8', '-0.8']
-    elif ligne == 'demi-droite':
-        retour = ['0', '-0.8']
+    if ligne == 'une droite':
+        retour = ['-6', '-6']
+    elif ligne == 'une demi-droite':
+        retour = ['0', '-6']
     else:
         retour = ['0', '0']
     return retour
@@ -44,7 +44,7 @@ def nodesep(ligne):
 def choix_points(n):
     """
     choisit n points parmi A, B, C, ..., Z
-    @param n: nombre de points \xc3\xa0 choisir
+    @param n: nombre de points à choisir
     @type n: integer
     """
 
@@ -62,7 +62,7 @@ def choix_ligne(n):
     @type n: interger
     """
 
-    lignes = ['droite', 'demi-droite', 'segment']
+    lignes = ['une droite', 'une demi-droite', 'un segment']
     (liste_lignes, retour) = ([], [])
     for i in range((n - 1) // len(lignes) + 1):
         liste_lignes.extend(lignes)
@@ -78,9 +78,9 @@ def symboles(ligne):
     @type ligne: string
     """
 
-    if ligne == 'droite':
+    if ligne == 'une droite':
         retour = ['(', ')']
-    elif ligne == 'demi-droite':
+    elif ligne == 'une demi-droite':
         retour = ['[', ')']
     else:
         retour = ['[', ']']
@@ -130,9 +130,9 @@ def prepare_tuple(lpoints, ligne):
     return (tuple(retour_exo), tuple(retour_sol))
 
 
-def tex_figure(liste, lpoints, nodesep=0):
+def tex_figure(liste, lpoints, points_coord, nodesep=0):
     """
-    \xc3\x89crit dans un fichier tex la construction de 3 points et \xc3\xa9ventuellement
+    Écrit dans un fichier tex la construction de 3 points et éventuellement
     une droite, une demi-droite ou un segment.
     @param liste: liste d'exos ou corrigés
     @type liste: liste
@@ -141,29 +141,28 @@ def tex_figure(liste, lpoints, nodesep=0):
     @param nodesep: liste des dépassements pour pstricks
     @type nodesep: liste de 2 strings
     """
-
-    ordonnees = ['0.5', '1', '1.5']
-    l_ord = []
-    for i in range(3):
-        l_ord.append(ordonnees.pop(random.randrange(len(ordonnees))))
-    points_coord = []
-    for i in range(3):
-        points_coord.append(l_ord[i])
-        points_coord.append(lpoints[i])
-    points_coord = tuple(points_coord)
-    liste.append('\\begin{pspicture}(-0.5,0.2)(4.5,2.2)')
+    liste.append('\\begin{pspicture*}(-0.5,0.2)(4.5,2.2)')
     liste.append('\\psset{PointSymbol=x}')
     liste.append('\\pstGeonode[PosAngle=90](0.5,%s){%s}(2,%s){%s}(3.5,%s){%s}' %
                points_coord)
     if nodesep:
         liste.append('\\pstLineAB[nodesepA=%s, nodesepB=%s]{%s}{%s}' %
                    tuple(nodesep))
-    liste.append('\\end{pspicture}\\\\')
+    liste.append('\\end{pspicture*}\\tabularnewline')
 
+def coord_points(lpoints):
+    """Définit les ordonnées de trois points nommés dont les noms sont dans lpoints"""
+    ordonnees = [random.randrange(5, 16)/10.for i in range(3)]
+    while abs(2*ordonnees[1]-ordonnees[0]-ordonnees[2])<.5:
+        ordonnees = [random.randrange(5, 16)/10.for i in range(3)]
+    random.shuffle(ordonnees)
+    for i in range(3):
+        ordonnees.insert(2*i+1,  lpoints[i])
+    return tuple(ordonnees)
 
 def tex_ligne_tableau(exo, cor, ligne):
     """
-    \xc3\x89crit une ligne de tableau dans un fichier tex
+    Écrit une ligne de tableau dans un fichier tex
     @param exo: fichier d'exercices
     @type exo: file
     @param cor: fichier de corrections
@@ -174,38 +173,47 @@ def tex_ligne_tableau(exo, cor, ligne):
 
     lpoints = choix_points(3)
     (exer, solution) = prepare_tuple(lpoints, ligne)
-    exo.append('\\hfill{} $%s %s%s %s$ \\hfill{} &\\hfill{}  %s \\hfill{} &' %
+    exo.append('$%s %s%s %s$ est %s &' %
              exer)
-    cor.append('\\hfill{} $%s %s%s %s$ \\hfill{} &\\hfill{}  %s \\hfill{} &' %
+    cor.append('$%s %s%s %s$ est %s &' %
              solution)
     lnodesep = nodesep(ligne)
     lnodesep.extend(solution[1:3])
+    points_coord=coord_points(lpoints)
     if exer != ('\\ldots', '\\ldots', '\\ldots', '\\ldots', '\\dotfill'):
-        tex_figure(exo, lpoints)
+        tex_figure(exo, lpoints, points_coord)
     else:
-        tex_figure(exo, lpoints, lnodesep)
-    tex_figure(cor, lpoints, lnodesep)
+        tex_figure(exo, lpoints, points_coord, lnodesep)
+    tex_figure(cor, lpoints, points_coord, lnodesep)
     exo.append('\\hline')
     cor.append('\\hline')
 
 
 def Droites():
     """
-    \xc3\x89crit les 5 lignes du tableau
+    Écrit les 5 lignes du tableau
     @param exo: fichier d'exercices
     @type exo: file
     @param cor: fichier de corrections
     @type cor: file
     """
-    exo = ["\\exercice", u"Compléter :\\par", '\\begin{tabular}{|p{3cm}|p{5cm}|c|}', '\\hline', u'\\hfill{} \\textbf{Nom} \\hfill{} & \\hfill{}\\textbf{Catégorie}\\hfill{} & \\textbf{Figure} \\\\ \\hline']
-    cor = ["\\exercice*", u"Compléter :\\par", '\\begin{tabular}{|p{3cm}|p{5cm}|c|}', '\\hline', u'\\hfill{} \\textbf{Nom} \\hfill{} & \\hfill{}\\textbf{Catégorie}\\hfill{} & \\textbf{Figure} \\\\ \\hline']
+    exo = ["\\exercice", u"Compléter les pointillés et les figures :\\par",
+            '\\renewcommand{\\tabularxcolumn}[1]{m{#1}}',
+            '\\begin{tabularx}{\\linewidth}{|X|>{\\centering}m{5cm}|}',
+            '\\hline',
+            u'\\textbf{phrase} & \\textbf{Figure} \\tabularnewline \\hline']
+    cor = ["\\exercice*", u"Compléter les pointillés et les figures :\\par",
+            '\\renewcommand{\\tabularxcolumn}[1]{m{#1}}',
+            '\\begin{tabularx}{\\linewidth}{|X|>{\\centering}m{5cm}|}',
+            '\\hline',
+            u'\\textbf{Phrase} & \\textbf{Figure} \\tabularnewline \\hline']
 
     line = choix_ligne(5)
     for i in range(5):
         tex_ligne_tableau(exo, cor, line[i])
 
-    exo.append('\\end{tabular}')
-    cor.append('\\end{tabular}')
+    exo.append('\\end{tabularx}')
+    cor.append('\\end{tabularx}')
     return (exo, cor)
 
 
@@ -218,54 +226,29 @@ def Droites():
 
 def fig_perp(points, coor, solution=0, per=[], par=[]):
     val_enonce = (
-        points[0],
-        points[1],
-        coor[0],
-        coor[1],
-        coor[2],
-        coor[3],
-        points[2],
-        points[3],
-        coor[4],
-        coor[5],
-        coor[6],
-        coor[7],
-        )
+        points[0], points[1], coor[0], coor[1], coor[2], coor[3],
+        points[2], points[3], coor[4], coor[5], coor[6], coor[7],)
     pts = ('a', 'b', 'c', 'd')
     text = \
         """  \\begin{pspicture*}(-4,-4)(4,4)
-    \multips(-3.6,4)(.4,0){20}{\psline(0,0)(0,-.05)}
-    \multips(-4,-4)(.4,0){20}{\psline(0,0)(0,.05)}
-    \multips(-4,-3.6)(0,.4){20}{\psline(0,0)(0.05,0)}
-    \multips(4,-4)(0,.4){20}{\psline(0,0)(-.05,0)}
+    \psset{PointSymbol=x}
     \pstGeonode[PointName={%s,%s}](%s;%s){a}(%s;%s){b}
     \pstGeonode[PointName={%s,%s}](%s; %s){c}(%s; %s){d}""" % \
         val_enonce
     if solution:
         val_soluce = (
-            pts[per[0]],
-            pts[per[1]],
-            pts[per[0]],
-            pts[per[1]],
-            pts[per[2]],
-            pts[per[2]],
-            pts[per[2]],
-            pts[per[0]],
-            pts[par[0]],
-            pts[par[1]],
-            pts[par[0]],
-            pts[par[1]],
-            pts[par[2]],
-            pts[par[2]],
-            )
+            pts[per[0]], pts[per[1]], pts[per[0]], pts[per[1]],
+            pts[per[2]], pts[per[2]], pts[per[2]], pts[per[0]],
+            pts[par[0]], pts[par[1]], pts[par[0]], pts[par[1]],
+            pts[par[2]], pts[par[2]])
 
         text = text + \
-            """    \pstLineAB[nodesep=-4]{%s}{%s}
-    \pstProjection[PointName=none]{%s}{%s}{%s}[e]\pstLineAB[nodesep=-7]{%s}{e}
-    \pstRightAngle{%s}{e}{%s}
-    \pstLineAB[nodesep=-4]{%s}{%s}
+            """    \pstLineAB[nodesep=-4, linecolor=DarkBlue]{%s}{%s}
+    \pstProjection[PointName=none]{%s}{%s}{%s}[e]\pstLineAB[nodesep=-7, linecolor=DarkBlue]{%s}{e}
+    \pstRightAngle[, linecolor=DarkBlue]{%s}{e}{%s}
+    \pstLineAB[nodesep=-4, linecolor=DarkRed]{%s}{%s}
     \pstTranslation[PointName=none,PointSymbol=none]{%s}{%s}{%s}[f]
-    \pstLineAB[nodesep=-7]{%s}{f}
+    \pstLineAB[nodesep=-7, linecolor=DarkRed]{%s}{f}
   \end{pspicture*}""" % \
             val_soluce
     return text
@@ -295,13 +278,16 @@ def cree_coordonnees(long=3):
 def enonce_perp(exo, cor):
     coor = cree_coordonnees(3)
     noms = noms_sommets(4)
-    (par, per) = ([], [])
+    par, per = [], []
     lval = [0, 1, 2, 3]
     for i in range(3):
         par.append(lval.pop(random.randrange(len(lval))))
-    lval = [0, 1, 2, 3]
-    for i in range(3):
-        per.append(lval.pop(random.randrange(len(lval))))
+    while per==[] or (par[0], par[1]) == (per[0], per[1]) or \
+            (par[0], par[1]) == (per[1], per[0]) :
+        lval = [0, 1, 2, 3]
+        per = []
+        for i in range(3):
+            per.append(lval.pop(random.randrange(len(lval))))
     exo.append(fig_perp(noms, coor))
     cor.append(fig_perp(noms, coor, 1, per, par))
     exo.append('\end{pspicture*}\\par\n\\begin{enumerate}')
@@ -310,10 +296,16 @@ def enonce_perp(exo, cor):
     s_par = u"\\item Tracer la droite parallèle à la droite $(%s%s)$ passant par $%s$"
     s_per = s_per % (noms[per[0]], noms[per[1]], noms[per[2]])
     s_par = s_par % (noms[par[0]], noms[par[1]], noms[par[2]])
-    exo.append(s_par)
-    cor.append(s_par)
-    exo.append(s_per)
-    cor.append(s_per)
+    if random.randrange(2):
+        exo.append(s_par)
+        cor.append(s_par)
+        exo.append(s_per)
+        cor.append(s_per)
+    else:
+        exo.append(s_per)
+        cor.append(s_per)
+        exo.append(s_par)
+        cor.append(s_par)
     exo.append('\\end{enumerate}')
     cor.append('\\end{enumerate}')
 
@@ -341,16 +333,16 @@ def Perpendiculaires():
 
 def fonction(angle, xa, ya, dist=0, droite='par'):
     """
-    Retourne une fonction \xc3\xa0 utiliser avec psplot
-    @param angle: compris entre 1 et 89\xc2\xb0 ou 91 et 179\xc2\xb0. Angle entre la droite et l'axe des abscisses
+    Retourne une fonction à utiliser avec psplot
+    @param angle: compris entre 1 et 89° ou 91 et 179°. Angle entre la droite et l'axe des abscisses
     @type angle:
     @param xa: abscisse d'un point de la droite
     @type xa:
-    @param ya: ordonn\xc3\xa9e d'un point de la droite
+    @param ya: ordonnée d'un point de la droite
     @type ya:
     @param dist: distance entre l'origine et la droite
     @type dist:
-    @param droite: 'par' pour une parall\xc3\xa8le et 'per' pour une perpendiculaire
+    @param droite: 'par' pour une parallèle et 'per' pour une perpendiculaire
     """
 
     angle_rad = (angle * math.pi) / 180
@@ -414,9 +406,9 @@ def figure(angle, xa, ya, dist, lpoints, noms, par_per, dist2=0):
     @param dist:
     @param lpoints:
     @param noms: 1: nomme la droite (AB)
-                 2: nomme la dorite (d1)
-    @param par_per: 1: parall\xc3\xa8les + perpendiculaires
-                    2: 3 parall\xc3\xa8les
+                 2: nomme la droite (d1)
+    @param par_per: 1: parallèles + perpendiculaires
+                    2: 3 parallèles
                     3: 2 perpendiculaires
     """
 
@@ -532,12 +524,16 @@ def valeurs_figures(par_per):
 
 
 def enonce_prop(exo, cor):
-    exo.append('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}')
+    exo.append('\\renewcommand{\\tabularxcolumn}[1]{m{#1}}')
+    exo.append('\\begin{tabularx}{\\textwidth}[t]{|m{3cm}|m{4cm}|X|m{3cm}|}')
     exo.append('\\hline')
-    exo.append(u'Données & Figure codée & Propriété & Conclusion \\\\ ')
-    cor.append('\\begin{tabularx}{\\textwidth}[t]{|p{3cm}|p{4cm}|X|p{3cm}|}')
+    exo.append(u'\\multicolumn{1}{|c|}{\\bf Données} & \\multicolumn{1}{|c|}{\\bf Figure codée}')
+    exo.append(u'& \\multicolumn{1}{|c|}{\\bf Propriété} & \\multicolumn{1}{|c|}{\\bf Conclusion}\\\\')
+    cor.append('\\renewcommand{\\tabularxcolumn}[1]{m{#1}}')
+    cor.append('\\begin{tabularx}{\\textwidth}[t]{|m{3cm}|m{4cm}|X|m{3cm}|}')
     cor.append('\\hline')
-    cor.append(u'Données & Figure codée & Propriété & Conclusion \\\\ ')
+    cor.append(u'\\multicolumn{1}{|c|}{\\bf Données} & \\multicolumn{1}{|c|}{\\bf Figure codée}')
+    cor.append(u'& \\multicolumn{1}{|c|}{\\bf Propriété} & \\multicolumn{1}{|c|}{\\bf Conclusion}\\\\')
     ltypes = [1, 2, 3]
     lexos = []
     for i in range(3):
@@ -654,52 +650,3 @@ def Proprietes():
 
     enonce_prop(exo, cor)
     return (exo, cor)
-
-##def test(n):
-##    for i in range(n):
-##        test=Proprietes()
-##def testPoints(angle, xa, ya, dist=0):
-##    angle_rad = (angle * math.pi) / 180
-##    coef = math.floor(math.tan(angle_rad) * 100) / 100.0
-##    ord_or = math.floor(((ya - xa * math.tan(angle_rad)) - dist / math.cos(angle_rad)) *
-##                        100) / 100.0
-##    lpos = []
-##    test=[]
-##    test.append(-1.5 < -2 * coef + ord_or < 1.5)
-####    print -2 * coef + ord_or
-##    if -1.5 < -2 * coef + ord_or < 1.5:
-##        x = -1.5
-##        y = math.floor((x * coef + ord_or) * 100) / 100.0
-##        lpos.append('(%s,%s)' % (x, y))
-##    test.append(-1.5 < 2 * coef + ord_or < 1.5)
-####    print 2 * coef + ord_or
-##    if -1.5 < 2 * coef + ord_or < 1.5:
-##        x = 1.5
-##        y = math.floor((x * coef + ord_or) * 100) / 100.0
-##        lpos.append('(%s,%s)' % (x, y))
-##    test.append( -2.1 < (1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
-##        math.tan(angle_rad) < 2.1)
-####    print (1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
-####        math.tan(angle_rad)
-##    if -2.1 < (1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
-##        math.tan(angle_rad) < 2.1:
-##        y = 1.1
-##        x = math.floor(((y - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) /
-##                       math.tan(angle_rad)) * 100) / 100.0
-##        lpos.append('(%s,%s)' % (x, y))
-##    test.append( -2.1 < (-1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
-##        math.tan(angle_rad) < 2.1)
-####    print (-1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
-####        math.tan(angle_rad)
-##    if -2.1 < (-1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
-##        math.tan(angle_rad) < 2.1:
-##        y = -1.1
-##        x = math.floor(((y - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) /
-##                       math.tan(angle_rad)) * 100) / 100.0
-##        lpos.append('(%s,%s)' % (x, y))
-##    if sum(test)!=2:
-##        print "test=",test," et lpos=",lpos
-##        print -2 * coef + ord_or, 2 * coef + ord_or,(1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
-##        math.tan(angle_rad),(-1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
-##        math.tan(angle_rad)
-##    return lpos

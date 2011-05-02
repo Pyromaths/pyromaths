@@ -61,8 +61,10 @@ def decimaux(nb, mathenv = 0):
                 decimale = entiere[len(entiere)+int(exposant):] + decimale
                 entiere = entiere[:len(entiere)+int(exposant)]
             else:
-                decimale = "0"*(-int(exposant)-len(entiere)) + entiere + decimale
-                entiere = "0"
+                decimale = "0"*(-int(exposant)-len(entiere)) + str(abs(int(entiere))) + decimale.rstrip("0")
+                if entiere[0]=="-": entiere = "-0"
+                else: entiere = "0"
+
     pattern = re.compile(r"^(-?\d{1,3}?)" + "(\d{3})" * \
                          ((len(entiere) - 1 - (entiere[0]=='-')) // 3) + "$")
     partie_entiere = pattern.search(entiere).groups()

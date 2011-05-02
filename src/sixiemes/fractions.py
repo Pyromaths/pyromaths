@@ -72,22 +72,13 @@ def numerateur_denominateur(l, h, cas):
 
 
 def trace_rectangle(exo, cor, l, h, cas):
-    exo.append("\\multips(0,0)(1,0){17}{\\psline[linecolor=lightgray](0,0)(0,%s)}" %
-             h)
-    cor.append("\\multips(0,0)(1,0){17}{\\psline[linecolor=lightgray](0,0)(0,%s)}" %
-             h)
-    exo.append("\\multips(0,0)(0,1){%s}{\\psline[linecolor=lightgray](0,0)(16,0)}" %
-             (h + 1))
-    cor.append("\\multips(0,0)(0,1){%s}{\\psline[linecolor=lightgray](0,0)(16,0)}" %
-             (h + 1))
-    exo.append("\\psframe[linewidth=1.5\\pslinewidth](0,0)(%s,%s)" %
-             (l, h))
-    cor.append("\\psframe[linewidth=1.5\\pslinewidth](0,0)(%s,%s)" %
-             (l, h))
+    exo.append("\\psgrid[gridcolor=Olive,subgriddiv=0,gridlabels=0pt]")
+    cor.append("\\psgrid[gridcolor=Olive,subgriddiv=0,gridlabels=0pt]")
+    exo.append("\\psframe[linewidth=1.5\\pslinewidth,linecolor=Maroon](0,0)(%s,%s)"% (l, h))
+    cor.append("\\psframe[linewidth=1.5\\pslinewidth,linecolor=Maroon](0,0)(%s,%s)"% (l, h))
     if cas == "nsd":
-        cor.append("\\psframe[linewidth=1.5\\pslinewidth](%s,0)(%s,%s)" %
-                 (l + 1, 2 * l + 1, h))
-
+        cor.append("\\psframe[linewidth=1.5\\pslinewidth,linecolor=Maroon](%s,0)(%s,%s)" %
+                (l + 1, 2 * l + 1, h))
 
 def fractions_partage_corrige(l, h, n, d):
     div_l = diviseurs(l)
@@ -110,31 +101,31 @@ def fractions_partage_corrige(l, h, n, d):
 
 def trace_partage(cor, l, h, lc, hc, cas):
     if lc < l:
-        cor.append("\\multips(%s,0)(%s,0){%s}{\\psline(0,0)(0,%s)}" %
+        cor.append("\\multips(%s,0)(%s,0){%s}{\\psline[linecolor=Maroon](0,0)(0,%s)}" %
                  (lc, lc, l // lc - 1, h))
         if cas == "nsd":
-            cor.append("\\rput(%s,0){\\multips(%s,0)(%s,0){%s}{\\psline(0,0)(0,%s)}}" %
+            cor.append("\\rput(%s,0){\\multips(%s,0)(%s,0){%s}{\\psline[linecolor=Maroon](0,0)(0,%s)}}" %
                      (l + 1, lc, lc, l // lc - 1, h))
     if hc < h:
-        cor.append("\\multips(0,%s)(0,%s){%s}{\\psline(0,0)(%s,0)}" %
+        cor.append("\\multips(0,%s)(0,%s){%s}{\\psline[linecolor=Maroon](0,0)(%s,0)}" %
                  (hc, hc, h // hc - 1, l))
         if cas == "nsd":
-            cor.append("\\rput(%s,0){\\multips(0,%s)(0,%s){%s}{\\psline(0,0)(%s,0)}}" %
+            cor.append("\\rput(%s,0){\\multips(0,%s)(0,%s){%s}{\\psline[linecolor=Maroon](0,0)(%s,0)}}" %
                      (l + 1, hc, hc, h // hc - 1, l))
 
 
 def coloriage(cor, n, d, l, h, lc, hc):
     if n == d:
-        cor.append("\\psframe[fillstyle=solid,fillcolor=gray](0,0)(%s,%s)" %
+        cor.append("\\psframe[fillstyle=solid](0,0)(%s,%s)" %
                  (l, h))
     else:
         (x, y, nfig) = (0, 0, 0)
         for i in range(n):
             if nfig:
-                cor.append("\\rput(%s,0){\\psframe[fillstyle=solid,fillcolor=gray](%s,%s)(%s,%s)}" %
+                cor.append("\\rput(%s,0){\\psframe[fillstyle=solid](%s,%s)(%s,%s)}" %
                          (nfig, x, y, x + lc, y + hc))
             else:
-                cor.append("\\psframe[fillstyle=solid,fillcolor=gray](%s,%s)(%s,%s)" %
+                cor.append("\\psframe[fillstyle=solid](%s,%s)(%s,%s)" %
                          (x, y, x + lc, y + hc))
             if x + lc < l:
                 x = x + lc
@@ -304,15 +295,15 @@ def unites_fractions(exo, cor, origine, div, subd):
 
 
 def trace_demi_droite(exo, cor, origine, div, subd, lpts, npts, lnum):
-    exo.append("\\psline[arrowscale=2]{->}(0,0)(18,0)")
+    exo.append("\\psline[arrowscale=2,linecolor=Maroon]{->}(0,0)(18,0)")
     exo.append("\\rput(2mm,0){%")
-    exo.append("\\multips(0,0)(3 mm,0){58}{\\psline(0,-.1)(0,.1)}")
-    exo.append("\\multips(0,0)(%s mm,0){%s}{\\psline(0,-.2)(0,.2)}" %
+    exo.append("\\multips(0,0)(3 mm,0){58}{\\psline[linecolor=Maroon](0,-.1)(0,.1)}")
+    exo.append("\\multips(0,0)(%s mm,0){%s}{\\psline[linecolor=Maroon](0,-.2)(0,.2)}" %
              (div * 3, 58 // div + 1))
-    cor.append("\\psline[arrowscale=2]{->}(0,0)(18,0)")
+    cor.append("\\psline[arrowscale=2,linecolor=Maroon]{->}(0,0)(18,0)")
     cor.append("\\rput(2mm,0){%")
-    cor.append("\\multips(0,0)(3 mm,0){58}{\\psline(0,-.1)(0,.1)}")
-    cor.append("\\multips(0,0)(%s mm,0){%s}{\\psline(0,-.2)(0,.2)}" %
+    cor.append("\\multips(0,0)(3 mm,0){58}{\\psline[linecolor=Maroon](0,-.1)(0,.1)}")
+    cor.append("\\multips(0,0)(%s mm,0){%s}{\\psline[linecolor=Maroon](0,-.2)(0,.2)}" %
              (div * 3, 58 // div + 1))
     for i in range(58 // div + 1):
         exo.append("\\rput[t](%s mm,-3mm){\\centering %s}" % ((i * div) *

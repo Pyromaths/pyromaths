@@ -18,9 +18,9 @@ def data_dir():
     """Renvoie le dossier data, selon qu'on utilise pyromaths à partir des
     sources, de l'exécutable win32 ou du paquet deb"""
     if we_are_frozen():
-        return join(normpath(dirname(unicode(executable, 
+        return join(normpath(dirname(unicode(executable,
             getfilesystemencoding()))), 'data')
-    elif  exists(join(abspath(dirname(__file__)),'../data/')):
+    elif exists(join(abspath(dirname(__file__)),'../data/')):
         return normpath(join(abspath(dirname(__file__)),'../data/'))
     else:
         return '/usr/share/pyromaths/'
@@ -95,6 +95,8 @@ u'Calcul mental',
 u'Sommes de fractions',
 u'Produits et quotients de fractions',
 u'Fractions et priorités',
+u'Bases du calcul littéral',
+u'Réduire des expressions littérales',
 u'Propriétés sur les puissances',
 u'Propriétés sur les puissances de 10',
 u'Écritures scientifiques',
@@ -131,6 +133,7 @@ u'Factorisations degré 3',
 u'Étude de signe',
 u"Sens de variations",
 u"Étude de fonctions",
+u"Vecteurs",
 ], [
 u'Niveau 1èreS',
 u'Niveau 1èreS',
@@ -138,6 +141,7 @@ u'Niveau 1èreS',
 u'Niveau 1èreS',
 u"Niveau 1èreS, Term STG",
 u"Niveau Term S",
+u"Niveau Seconde",
 ]],
 ]
 

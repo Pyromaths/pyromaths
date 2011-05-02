@@ -57,7 +57,7 @@ def exo_diagrammes():
     cor.append(u"""\\begin{minipage}{10cm}
     \\begin{pspicture}(0,-1)(8.5,9.5)
     \\psaxes[showorigin=false]{->}(7.5,8.5)
-    \\psset{fillstyle=solid,fillcolor=gray,linewidth=0.5pt}
+    \\psset{fillstyle=solid, linewidth=0.5pt}
     \\psframe(0,0)(1,%s)
     \\psframe(1,0)(2,%s)
     \\psframe(2,0)(3,%s)
@@ -92,9 +92,9 @@ def exo_diagrammes():
     cor.append(u"""\\begin{minipage}{13cm}
     \\psset{unit=3cm,fillstyle=solid}
     \\pspicture(-1.5,-1)(1,1.5)
-    \\pswedge[fillcolor=lightgray]{1}{0}{%s}
-    \\pswedge[fillcolor=gray]{1}{%s}{%s}
-    \\pswedge[fillcolor=darkgray]{1}{%s}{%s}
+    \\pswedge[fillcolor=Bisque]{1}{0}{%s}
+    \\pswedge[fillcolor=LightSalmon]{1}{%s}{%s}
+    \\pswedge[fillcolor=Chocolate]{1}{%s}{%s}
     \\pswedge{1}{%s}{360}
     \\rput(.6;%s){Basket}
     \\rput(.6;%s){Tennis}

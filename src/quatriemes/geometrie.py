@@ -255,7 +255,7 @@ def exo_reciproque_pythagore():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
     while True:
-	longueurs = couples_pythagore[random.randrange(len(couples_pythagore))]
+        longueurs = couples_pythagore[random.randrange(len(couples_pythagore))]
         longueurs = [longueurs[i] / 10.0 for i in range(3)]
         if inegalite_triangulaire(longueurs):
             break
