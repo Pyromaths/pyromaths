@@ -68,6 +68,5 @@ if __name__ == "__main__":
     basedir = dirname(realpath(__file__))
     _path, _dir = split(basedir)
     sys.path[0] = realpath(_path)
-    print(_dir, sys.path)
     exec("from %s import pyromaths" % _dir)
     pyromaths.main()

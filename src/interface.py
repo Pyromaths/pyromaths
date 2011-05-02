@@ -241,7 +241,7 @@ class Ui_MainWindow(object):
         self.comboBox_niveau.addItem("Classe de 5\\ieme")
         self.comboBox_niveau.addItem("Classe de 4\\ieme")
         self.comboBox_niveau.addItem("Classe de 3\\ieme")
-        self.comboBox_niveau.addItem("Classe de 2$^{nde}$")
+        self.comboBox_niveau.addItem("Classe de 2\\up{nde}")
         self.verticalLayout_19.addWidget(self.comboBox_niveau)
 
         ############## ComboBox modèles

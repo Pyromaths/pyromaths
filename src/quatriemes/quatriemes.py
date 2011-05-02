@@ -22,6 +22,7 @@
 #
 
 from . import puissances, developpements, calcul_mental, fractions, geometrie
+from . import litteral
 
 def write(f0, f1, exos):
     f0.write("\n")
@@ -35,6 +36,8 @@ def main(exo, f0, f1):
         fractions.exo_sommes_fractions,
         fractions.exo_produits_fractions,
         fractions.exo_priorites_fractions,
+        litteral.reduire,
+        litteral.reduire_expressions, 
         puissances.tex_proprietes,
         puissances.tex_proprietes_neg,
         puissances.ecr_sc,
