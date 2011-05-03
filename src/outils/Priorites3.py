@@ -23,8 +23,8 @@
 #----------------------------------------------------------------------
 # Pyromaths : GESTION DES PRIORITES
 #----------------------------------------------------------------------
-from PolynomesCollege import Polynome
-from ..outils.Affichage import decimaux
+from src.classes.PolynomesCollege import Polynome
+from src.outils.Affichage import decimaux
 
 
 def cherche_polynome(calcul, index):
