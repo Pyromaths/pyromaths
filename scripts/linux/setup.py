@@ -3,6 +3,7 @@
 
 from distutils.core import setup
 import glob
+
 from src.Values import VERSION
 
 setup(name = "pyromaths",
