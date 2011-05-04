@@ -25,7 +25,7 @@
 #----------------------------------------------------------------------
 from ..outils import Arithmetique
 from ..outils.Affichage import tex_coef
-from src.outils.Priorites3 import texify, priorites
+from ..outils.Priorites3 import texify, priorites
 import random
 
 def valeurs_reduire():

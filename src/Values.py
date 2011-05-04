@@ -42,7 +42,7 @@ else:
     def configdir():
         return join(home(), ".config", "pyromaths")
 
-VERSION = '10.11'
+VERSION = '11.05'
 COPYRIGHT_YEAR = strftime('%Y')
 COPYRIGHTS = u'© 2006 – %s Jérôme Ortais<br/>\n' \
         u'<span style=" font-size:small;">Pyromaths est distribué sous ' \
