@@ -1,11 +1,19 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os, sys, codecs, shutil
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from pyromaths import LesFiches
-from outils.System import creation
+from os.path import dirname, normpath, join, abspath, realpath, split
+
+_path = normpath(join(abspath(dirname(__file__)), ".."))
+sys.path[0] = realpath(_path)
+from src import pyromaths
+
+#datadir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+#sys.path.append(datadir)
+from src.Values import LESFICHES, data_dir, configdir
+from src.outils.System import creation
+
 from subprocess import call, Popen
-d =os.path.join(sys.path[0], "..", "img", "vignettes")
+d =os.path.join(dirname(os.path.abspath(__file__)), "..", "data", "images", "vignettes")
 
 if os.name == 'nt':
     def home():
@@ -30,20 +38,21 @@ parametres = {
     'fiche_exo': '/tmp/test.tex',
     'fiche_cor': '/tmp/test-corrige.tex',
     'configdir': configdir(),
+    'datadir': data_dir(),
     'modele': 'pyromaths.tex',
     'liste_exos': [],
-    'les_fiches': LesFiches,
+    'les_fiches': LESFICHES,
 }
 
 #for n in range(1):
     #for i in range(1):
-for n in range(len(LesFiches)):
-    for i in range(len(LesFiches[n][2])):
+for n in range(len(LESFICHES)):
+    for i in range(len(LESFICHES[n][2])):
         lst = [[n, i]]
         parametres['liste_exos'] = lst
         creation(parametres)
         call(["convert", "-density", "288", "/tmp/test.pdf", "-resize", "25%",
-            "-crop", "710x560+0+89", "-trim", "/tmp/%se-%02d.png" % (6-n, i)],
+            "-crop", "710x560+0+85", "-trim", "/tmp/%se-%02d.png" % (6-n, i)],
             stdout=log)
         call(["pngnq", "-f", "-s1", "-n32", "/tmp/%se-%02d.png" % (6-n, i)],
                 stdout=log)
