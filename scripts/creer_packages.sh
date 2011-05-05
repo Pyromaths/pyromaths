@@ -73,39 +73,6 @@ gpg --default-key "Jérôme Ortais" -bao Release.gpg Release &&
 tar vjcf ${ARCHIVEPATH}/debs-${VERSION}.tar.bz2 dists/ Packages Packages.gz Packages.bz2 Release Release.gpg &&
 cd ${PYROPATH} &&
 rm -r /tmp/repo_debian
-sleep 40
-
-echo "#-------------------------------------------
-#-------- CRÉATION DU PAQUET DEBIAN --------
-#-------------------------------------------"
-cd $ARCHIVEPATH
-mkdir -p tmpdeb
-cd tmpdeb &&
-cp -r $PYROPATH/scripts/linux/* .
-tar jxf ../pyromaths-${VERSION}-sources.tar.bz2 &&
-#mv data pyromaths/ &&
-mv pyromaths-${VERSION} pyromaths &&
-cd pyromaths
-python ../setup.py &&
-mv *.rpm pyromaths_${VERSION}.tar.gz ../ &&
-cd .. &&
-rm -r pyromaths &&
-tar vzxf pyromaths_${VERSION}.tar.gz &&
-cd pyromaths &&
-debuild -k0xB39EE5B6 &&
-cd .. &&
-mkdir dists &&
-mv pyromaths_${VERSION}_all.deb dists/ &&
-sudo dpkg-scanpackages . /dev/null > Packages &&
-sudo dpkg-scanpackages . /dev/null | gzip -c9 > Packages.gz &&
-sudo dpkg-scanpackages . /dev/null | bzip2 -c9 > Packages.bz2 &&
-apt-ftparchive release . > /tmp/Release.tmp &&
-mv /tmp/Release.tmp Release &&
-gpg --default-key "Jérôme Ortais" -bao Release.gpg Release &&
-tar vjcf ARCHIVEPATH../debs-${VERSION}.tar.bz2 dists/ Packages Packages.gz Packages.bz2 Release Release.gpg &&
-mv *.rpm dists/*.deb .. &&
-cd ${ARCHIVEPATH} &&
-rm -r tmpdeb &&
 
 echo "#-------------------------------------------
 #------- CRÉATION DU BINAIRE WINDOWS -------

@@ -8,6 +8,7 @@
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
+include /usr/share/python/python.mk
 
 clean:
 	dh_testdir
@@ -35,7 +36,8 @@ binary-indep: build install
 	dh_icons
 	dh_compress -X.pdf -X.py
 	dh_fixperms
-	#dh_pycentral
+	#dh_python2 -i -V '2.5-3.0' -p pyromaths -v
+	dh_pysupport
 	dh_installdeb
 	dh_gencontrol
 	dh_md5sums

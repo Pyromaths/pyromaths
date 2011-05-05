@@ -278,7 +278,7 @@ class Polynome():
             other = Polynome(repr(other), self.var)
             return other*self
         if isinstance(other, str):
-            from src.outils.Priorites3 import splitting
+            from ..outils.Priorites3 import splitting
             ls = splitting(other)
             if ls.count("+") or ls.count("-"):
                 # Réduire @other avant de faire le produit et vérifier s'il faut
