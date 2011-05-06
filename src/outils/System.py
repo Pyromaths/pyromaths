@@ -24,7 +24,7 @@
 import sys,  os,  codecs
 from lxml import etree
 from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
-from re import sub, findall
+from re import findall
 from .TexFiles import mise_en_forme
 
 
@@ -72,7 +72,7 @@ def create_config_file():
     etree.SubElement(subchild, "email").text=u"jerome.ortais@pyromaths.org"
     etree.SubElement(subchild, "site").text="http://www.pyromaths.org"
 
-    return etree.tostring(root, pretty_print=True, encoding="UTF-8", xml_declaration=True).decode('utf-8', 'strict')
+    return etree.tostring(root, pretty_print=True, encoding=unicode)
 
 def indent(elem, level=0):
     """Indente correctement les fichiers xml.
@@ -128,7 +128,7 @@ def modify_config_file(file):
                 oldtag.text =  element.text
     if modifie:
         f = codecs.open(os.path.join(CONFIGDIR, "pyromaths.xml"), encoding='utf-8', mode = 'w')
-        f.write(etree.tostring(indent(oldroot), pretty_print=True, encoding="utf-8", xml_declaration=True).decode('utf-8', 'strict'))
+        f.write(etree.tostring(indent(oldroot), pretty_print=True, encoding=unicode))
         f.close()
 
 #==============================================================
