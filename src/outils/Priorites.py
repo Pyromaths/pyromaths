@@ -4,8 +4,7 @@ import re, sys
 from Affichage import decimaux
 from . import Arithmetique, Affichage
 import math
-from .Fractions import *
-
+from .Fractions import EffectueSommeFractions, EffectueQuotientFractions, EffectueProduitFractions
 
 def EffectueCalcul(op, nb1, nb2, pre="", post=""):
     denominateur_max = 20

@@ -5,10 +5,10 @@ if __name__=="__main__":
     import sys,os
     sys.path.append(os.path.join('..'))
 
-from .Racine import *
+from .Racine import simplifie_racine, RacineDegre2, sqrt
 from .Fractions import Fractions
 import re
-from ..outils.Affichage import *
+from ..outils.Affichage import pTeX, TeX, radicalTeX, fTeX, Fractions, tTeX
 
 class Polynome:
     '''Classe de polynôme pour le lycee'''

@@ -30,7 +30,7 @@
 ##- simplifier des sommes
 ##- problèmes de colinéarité
 
-from ..classes.Vecteurs import *
+from ..classes.Vecteurs import randvect, Vecteur
 from ..classes.Racine import simplifie_racine
 import math
 from random import randint, shuffle
