@@ -38,7 +38,11 @@ elif sys.platform == "darwin":  #Cas de Mac OS X.
         return join(home(), "Library", "Application Support", "Pyromaths")
 else:
     def home():
-        return unicode(environ['HOME'], getfilesystemencoding())
+        try:
+            return unicode(environ['HOME'], getfilesystemencoding())
+        except KeyError:
+            # Pyromaths en ligne, l'user apache n'a pas de $HOME
+            return ""
     def configdir():
         return join(home(), ".config", "pyromaths")
 
