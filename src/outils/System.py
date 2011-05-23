@@ -222,12 +222,13 @@ def creation(parametres):
         call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % f0noext, "%s.pdf" % f0noext], stdout=log)
         log.close()
         nettoyage(f0noext)
-        if os.name == "nt":  #Cas de Windows.
-            os.startfile('%s.pdf' % f0noext)
-        elif sys.platform == "darwin":  #Cas de Mac OS X.
-            os.system('open %s.pdf' % f0noext)
-        else:
-            os.system('xdg-open %s.pdf' % f0noext)
+        if not "openpdf" in parametres or parametres["openpdf"]:
+            if os.name == "nt":  #Cas de Windows.
+                os.startfile('%s.pdf' % f0noext)
+            elif sys.platform == "darwin":  #Cas de Mac OS X.
+                os.system('open %s.pdf' % f0noext)
+            else:
+                os.system('xdg-open %s.pdf' % f0noext)
 
         if parametres['corrige'] and not parametres['creer_unpdf']:
             os.chdir(dir1)
@@ -238,12 +239,13 @@ def creation(parametres):
             call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % f1noext, "%s.pdf" % f1noext], stdout=log)
             log.close()
             nettoyage(f1noext)
-            if os.name == "nt":  #Cas de Windows.
-                os.startfile('%s.pdf' % f1noext)
-            elif sys.platform == "darwin":  #Cas de Mac OS X.
-                os.system('open %s.pdf' % f1noext)
-            else:
-                os.system('xdg-open %s.pdf' % f1noext)
+            if not "openpdf" in parametres or parametres["openpdf"]:
+                if os.name == "nt":  #Cas de Windows.
+                    os.startfile('%s.pdf' % f1noext)
+                elif sys.platform == "darwin":  #Cas de Mac OS X.
+                    os.system('open %s.pdf' % f1noext)
+                else:
+                    os.system('xdg-open %s.pdf' % f1noext)
         else:
             os.remove('%s-corrige.tex' % f0noext)
 

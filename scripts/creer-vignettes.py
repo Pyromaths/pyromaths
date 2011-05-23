@@ -42,6 +42,7 @@ parametres = {
     'modele': 'pyromaths.tex',
     'liste_exos': [],
     'les_fiches': LESFICHES,
+    'openpdf': 0,
 }
 
 #for n in range(1):

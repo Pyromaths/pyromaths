@@ -144,25 +144,27 @@ def repr_somme(u,v,u1,u2,cor,larg=0):
 
 def vecteurs_add():
     '''Exercice sur la définition des vecteurs et leurs sommes.'''
+    t = None
+    while not t:
+    # Pour être sûr que l'exercice ait des solutions
+        (u, posux, posuy) = randvect(0, 10)
+        (v, posvx, posvy) = randvect(math.fabs(u.x)+1, 10)
+        (w, poswx, poswy) = randvect(math.fabs(v.x)+math.fabs(u.x)+2, 10)
 
-    (u, posux, posuy) = randvect(0, 10)
-    (v, posvx, posvy) = randvect(math.fabs(u.x)+1, 10)
-    (w, poswx, poswy) = randvect(math.fabs(v.x)+math.fabs(u.x)+2, 10)
+        ## Construction du point pour la question 2
+        if 18 - poswx - max(w.x,0) > 0:
+          restes = (18 - poswx - max(w.x,0),10)
+          pointy = randint(0,10)
+        elif poswy + min(w.y,0) > 10 - poswy - max(w.y,0):
+          restes = (poswx+min(w.x,0),poswy + min(w.y,0))
+          pointy = randint(0,restes[1])
+        else:
+          restes = (poswx+min(w.x,0),10 - poswy - max(w.y,0))
+          pointy = randint(10 - restes[1],10)
 
-    ## Construction du point pour la question 2
-    if 18 - poswx - max(w.x,0) > 0:
-      restes = (18 - poswx - max(w.x,0),10)
-      pointy = randint(0,10)
-    elif poswy + min(w.y,0) > 10 - poswy - max(w.y,0):
-      restes = (poswx+min(w.x,0),poswy + min(w.y,0))
-      pointy = randint(0,restes[1])
-    else:
-      restes = (poswx+min(w.x,0),10 - poswy - max(w.y,0))
-      pointy = randint(10 - restes[1],10)
+        pointx = randint(18 - restes[0],18)
 
-    pointx = randint(18 - restes[0],18)
-
-    t = ChoixVecteur(u,v,w,pointx,pointy)
+        t = ChoixVecteur(u,v,w,pointx,pointy)
 
     exo=["\\exercice"]
     cor=["\\exercice*"]

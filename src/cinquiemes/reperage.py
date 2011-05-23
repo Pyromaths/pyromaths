@@ -85,8 +85,8 @@ def quadrant(coord,liste_coord):
 
 
 def coordo_pts(nb):
-    """Génère une liste de nb coordonnées. Je m'arrange pour avoir des points sur les 4 quadrants
-    et sur les deux axes"""
+    """Génère une liste de nb coordonnées. Je m'arrange pour avoir des points
+    sur les 4 quadrants et sur les deux axes"""
     j=0
     k=0
     l=[]
@@ -94,7 +94,8 @@ def coordo_pts(nb):
     while i<4 and i<nb:
         j=j+1
         if j==600:
-            break
+            # Correction d'un bug
+            l, i, j = [], 0, 0
         a=float(random.randrange(-9,10))/2
         b=float(random.randrange(-9,10))/2
         if ((a,b) not in l) and valide((a,b),l)and quadrant((a,b),l):
