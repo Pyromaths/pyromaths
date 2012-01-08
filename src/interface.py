@@ -23,7 +23,7 @@
 from PyQt4 import QtGui, QtCore
 import os, lxml, codecs, sys
 from outils import System
-from Values import HOME, CONFIGDIR, DATADIR, LESFICHES, COPYRIGHTS, VERSION
+from Values import HOME, CONFIGDIR, DATADIR, LESFICHES, COPYRIGHTS, VERSION, ICONDIR
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -31,8 +31,7 @@ class Ui_MainWindow(object):
         self.liste_creation=[]
         if sys.platform != "darwin":  #Cas de Mac OS X.
             MainWindow.setStyleSheet("background-color: rgb(251, 245, 225);")
-            MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(DATADIR, 'images',
-                'pyromaths.png')))
+            MainWindow.setWindowIcon(QtGui.QIcon(ICONDIR))
         MainWindow.setWindowTitle("Pyromaths")
         MainWindow.setGeometry(0,44, 500, 200)
         font = QtGui.QFont()
@@ -434,6 +433,9 @@ class Ui_MainWindow(object):
       </li>
       <li>
       <span style=" font-weight:600;">Nicolas Pourcelot</span> pour ses conseils et son implication prochaine dans le code de Pyromaths&nbsp;;
+      </li>
+      <li>
+      <span style=" font-weight:600;">Didier Roche</span> pour l'intégration de Pyromaths dans les dépôts Ubuntu&nbsp;;
       </li>
       <li>
       <span style=" font-weight:600;">Jacqueline Gouguenheim-Desloy</span> a porté Pyromaths sur Mac OS X à ses débuts. Son soutien et son amitié nous ont été précieux. Sa disparition est une perte douloureuse pour la communauté du logiciel libre.

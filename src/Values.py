@@ -25,6 +25,14 @@ def data_dir():
     else:
         return '/usr/share/pyromaths/'
 
+def icon_dir():
+    """Renvoie le dossier où se trouve l'icône, sequ'on utilise pyromaths à
+    partir des sources, de l'exécutable win32 ou du paquet deb"""
+    if we_are_frozen() or exists(join(abspath(dirname(__file__)),'../data/')):
+        return join(DATADIR, 'images', 'pyromaths.png')
+    else:
+        return join('/usr/share/pixmaps', 'pyromaths.png')
+        
 if name == 'nt':
     def home():
         return unicode(environ['USERPROFILE'], getfilesystemencoding())
@@ -46,13 +54,14 @@ else:
     def configdir():
         return join(home(), ".config", "pyromaths")
 
-VERSION = '11.05.1b2'
+VERSION = '12.01'
 COPYRIGHT_YEAR = strftime('%Y')
 COPYRIGHTS = u'© 2006 – %s Jérôme Ortais<br/>\n' \
         u'<span style=" font-size:small;">Pyromaths est distribué sous ' \
         u'licence GPL.</span>' % (COPYRIGHT_YEAR)
 WEBSITE = 'http://www.pyromaths.org/'
 DATADIR = data_dir()
+ICONDIR = icon_dir()
 HOME = home()
 CONFIGDIR = configdir()
 

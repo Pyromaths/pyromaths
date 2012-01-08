@@ -19,8 +19,9 @@ setup(name = "pyromaths",
         'pyromaths.cinquiemes', 'pyromaths.sixiemes', 'pyromaths.lycee',
         'pyromaths.outils', 'pyromaths.classes'],
     data_files=[
-        ('share/pyromaths/images', [ 'data/images/pyromaths.png',
-            'data/images/pyromaths-banniere.png', 'data/images/whatsthis.png' ]
+        ('share/pixmaps/', [ 'data/images/pyromaths.png' ] ),
+        ('share/pyromaths/images', [ 'data/images/pyromaths-banniere.png',
+            'data/images/whatsthis.png' ]
         ),
         ('share/applications', ['data/linux/pyromaths.desktop']),
         ('share/man/man1', ['data/linux/pyromaths.1']),
