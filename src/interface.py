@@ -420,7 +420,7 @@ class Ui_MainWindow(object):
       <span style=" font-weight:600;">David Robert</span> pour l'idée de départ&nbsp;;
       </li>
       <li>
-      <span style=" font-weight:600;">Yves Gesnel</span> pour le portage de Pyromaths sur Mac OS X&nbsp;;
+      <span style=" font-weight:600;">Yves Gesnel</span> pour le portage de Pyromaths sur Mac OS X et la conception d'exercices&nbsp;;
       </li>
       <li>
       <span style=" font-weight:600;">Arnaud Kientz</span> pour ses graphismes, son implication dans le code de Pyromaths et son amitié&nbsp;;

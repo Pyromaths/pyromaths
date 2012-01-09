@@ -1,8 +1,9 @@
 [Desktop Entry]
-Icon=/usr/share/pyromaths/images/pyromaths.png
+Icon=/usr/share/pixmaps/pyromaths.png
 Version=1.0
 Name=Pyromaths
-Comment=Générateur d'exercices de maths
+Comment=Generator for math worksheets for french college
+Comment[fr]=Générateur d'exercices de maths
 Exec=/usr/bin/pyromaths
 Terminal=false
 Type=Application

@@ -26,7 +26,7 @@ def data_dir():
         return '/usr/share/pyromaths/'
 
 def icon_dir():
-    """Renvoie le dossier où se trouve l'icône, sequ'on utilise pyromaths à
+    """Renvoie le dossier où se trouve l'icône, selon qu'on utilise pyromaths à
     partir des sources, de l'exécutable win32 ou du paquet deb"""
     if we_are_frozen() or exists(join(abspath(dirname(__file__)),'../data/')):
         return join(DATADIR, 'images', 'pyromaths.png')
