@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import re
 
-## TODO Gestion des signes qui se suivent ( 3+-5 ou 3*-5 )
+## TODO Gestion des signes qui se suivent ( 3+-5 ou 3*-5 ) --> à mon avis inutile si le calcul généré contient des parenthèses - Arnaud
+## TODO Problème avec l'opposé d'un nombre -(-5)+(+2)
 
 def priorites(calcul, pre = "", post = "", solution = []):
     if not solution: solution = [calcul]
@@ -26,7 +27,7 @@ def priorites(calcul, pre = "", post = "", solution = []):
         [\+\-\*/]+                  #un opérateur
       )+                            #fin du regroupement 0 (présent au moins
                                     #un fois)
-      [\+\-]?                     #un éventuel signe
+      [\+\-]?                       #un éventuel signe
       (?:                           #regroupement 0 (non groupe)
           \(                        #une parenthèse ouvrante
           [\+\-]?                   #un éventuel signe
@@ -136,10 +137,10 @@ def priorites_operations(calcul, pre = "", post = "", solution = []):
 for element in priorites("(2-5)**2+(5-2)**3+((3*4+5)*2+3*(32-5*7)**2)*5+17*(12-3*5)"):
   print element 
   
-#print priorites("((-(-1)+-2)++3)")
-#print priorites("4-((-1+-2)+3)")
-#print priorites('8-(-5*(2-4))')
-#print priorites("1+2+3+4")
-#print priorites("-3**+2")
-#print priorites("9+8*7")
-#print priorites("8+1.3e+2")
+print priorites("(((-1)+(-2))+(+3))")
+print priorites("4-((-1+-2)+3)")
+print priorites('8-(-5*(2-4))')
+print priorites("1+2+3+4")
+print priorites("(-3)**(+2)")
+print priorites("9+8*7")
+print priorites("8+1.3e+2")

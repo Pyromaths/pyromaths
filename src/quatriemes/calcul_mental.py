@@ -69,7 +69,7 @@ def div(pyromax):
 def main():
     exo = ["\\exercice", "Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
-    cor = ["\\exercice", "Effectuer sans calculatrice :",
+    cor = ["\\exercice*", "Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     modules = (plus, moins, plus, div)
     calculs = [i for i in range(20)]

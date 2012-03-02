@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from . import priorites, symetrie, fractions, reperage, relatifs, construction, proportionnalite, aires, diagrammes
+from . import priorites, symetrie, fractions, reperage, relatifs, construction, proportionnalite, aires, diagrammes, statistiques
 
 def write(f0, f1, exos):
     f0.write("\n")
@@ -34,6 +34,7 @@ def main(exo,f0, f1):
             fractions.sommes_fractions, fractions.produits_fractions,
             reperage.main, relatifs.main, construction.exo_triangle,
             construction.exo_quadrilatere,
-            proportionnalite.exo_echelles, aires.exo_aire_diques, diagrammes.exo_diagrammes)
+            proportionnalite.exo_echelles, aires.exo_aire_diques, diagrammes.exo_diagrammes,
+            statistiques.statistiques)
 
     write(f0, f1, modules[exo]())
