@@ -101,7 +101,6 @@ u'Construction de triangles',
 u'Construction de parallélogrammes',
 u'Échelles',
 u'Aire de disques',
-u'Représentation de données',
 u'Statistiques',
 ]],
 [u'Quatrième', '', [
