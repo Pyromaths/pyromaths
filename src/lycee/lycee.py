@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import ExoPolynome, Vecteurs
+import ExoPolynome, Vecteurs, CercleTrigo
 
 def write(f0, f1, exos):
     f0.write("\n")
@@ -38,5 +38,6 @@ def main(exo, f0, f1):
         ExoPolynome.exo_variation,
         ExoPolynome.exo_variation_lim,
         Vecteurs.vecteurs_add,
+        CercleTrigo.cercle_trigonometrique,
         )
     write(f0, f1, modules[exo]())
