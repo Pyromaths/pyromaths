@@ -81,8 +81,17 @@ def cercle_trigo(code=0,*args):
     \\begin{pspicture}(-2,-2)(2,2)
     \\psframe(-2,-2)(2,2)
     \\psaxes[linewidth=0.5pt,Dx=2,Dy=2]{->}(0,0)(-1.1,-1.1)(1.1,1.1)
-    \\pscircle[linecolor=green](0,0){3}"""
+    \\pscircle[linecolor=gray](0,0){3}\n"""
     idx = 0
+    if not code:
+        for a in range(11):
+            if (a+1)/6.0 not in [0.5,1,1.5]:
+                figure += "\\psline[linecolor=aliceblue,linestyle=dashed](0,0)("+str(round(cos((a+1)*pi/6),2))+","+str(round(sin((a+1)*pi/6),2))+")\n" 
+        for a in range(9):
+            if (a+1)/5.0 not in [0.5,1,1.5]:
+                figure += "\\psline[linecolor=papayawhip,linestyle=dashed](0,0)("+str(round(cos((a+1)*pi/5),2))+","+str(round(sin((a+1)*pi/5),2))+")\n" 
+        for a in range(4):
+            figure += "\\psline[linecolor=thistle,linestyle=dashed](0,0)("+str(round(cos((2*a+1)*pi/4),2))+","+str(round(sin((2*a+1)*pi/4),2))+")\n" 
     for f in args:
         if isinstance(f,list): # mesure en radians
             rad = simprad(f) 
@@ -91,7 +100,7 @@ def cercle_trigo(code=0,*args):
         f = rad[0]*pi/rad[1] # Le dénominateur ne devrait pas être nul...
         frac = rad2tex(rad)         
             
-        figure += "\n\\psline[linecolor=blue,linestyle=dashed](0,0)("+str(round(cos(f),2))+","+str(round(sin(f),2))+")\n"
+        figure += "\\psline[linecolor=red,linestyle=dashed](0,0)("+str(round(cos(f),2))+","+str(round(sin(f),2))+")\n"
         if code:
             figure += "\\rput("+str(round(1.25*cos(f),2))+","+str(round(1.25*sin(f),2))+"){"+frac+"}\n"
         else:
@@ -100,7 +109,7 @@ def cercle_trigo(code=0,*args):
     figure += """\\uput[dl](0,0){$O$}
     \uput[dr](1,0){$I$}
     \uput[ul](0,1){$J$}"""
-    figure += "\\end{pspicture}\n"
+    figure += "\n\\end{pspicture}"
     return figure
 
 def findrad(itv=1, neg=0, denom_simple=1):
@@ -196,27 +205,27 @@ def cercle_trigonometrique():
     mes_deg_en_rad = [deg2rad(d) for d in mes_deg]
     mes_deg_en_rad_tex = [rad2tex(r) for r in mes_deg_en_rad]
     
-    exo.append(u"\\begin{enumerate}\\par")
+    exo.append(u"\\begin{enumerate}")
     exo.append(u"\\item Convertir les cinq mesures suivantes en radians : %s, %s, %s, %s et %s.\\par" %(tuple(mes_deg_tex)))
     exo.append(u"\\item Convertir les cinq mesures suivantes en degrés : %s, %s, %s, %s et %s~rad.\\par" %(tuple(mes_rad_tex[0:5])))
-    exo.append(u"\\item Déterminer les mesures principales des angles suivants en radians : %s, %s, %s, %s et %s~rad.\\par" %(tuple(mes_rad_tex[5:10])))
-    exo.append(u"\\item Des angles ont été placés sur le cercle trigonométrique ci-dessous, représentés par les points $M_0$, $M_1$, $M_2$ et $M_3$. Lire leurs mesures principales en radians.\\par")
+    exo.append(u"\\item Déterminer les mesures principales des angles suivants en radians : %s, %s, %s, %s et %s~rad." %(tuple(mes_rad_tex[5:10])))
+    exo.append(u"\\item Des angles ont été placés sur le cercle trigonométrique ci-dessous, représentés en rouge par les points $M_0$, $M_1$, $M_2$ et $M_3$. Lire leurs mesures principales en radians.\\par")
     exo.append(cercle_trigo(0,radq4[0],radq4[1],radq4[2],radq4[3]))
     exo.append(u"\\item Placer les angles suivants sur le cercle trigonométrique : %s, %s, %s et %s~rad.\\par" %(tuple(mes_rad_tex[14:])))
     exo.append(cercle_trigo())
     exo.append(u"\\end{enumerate}\\par")
     
-    cor.append(u"\\begin{enumerate}\\par")
+    cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item Convertir les cinq mesures suivantes en radians : %s, %s, %s, %s et %s.\\par" %(tuple(mes_deg_tex)))
     
     cor.append(u"La conversion est en fait une simple règle de proportionnalité : il faut multiplier par $\\dfrac{\\pi}{180}$.\\par")
     cor.append(u"Par exemple pour la première mesure, on obtient avec simplification : $"+str(mes_deg[0])+"\\times\\dfrac{\\pi}{180}$ = "+mes_deg_en_rad_tex[0]+"~rad.\\par")
-    cor.append(u"De même pour les autres mesures, on trouve alors respectivement : %s~rad, %s~rad, %s~rad, %s~rad et %s~rad.\\par" %(tuple(mes_deg_en_rad_tex)))
+    cor.append(u"De même pour les autres mesures, on trouve alors respectivement : %s~rad, %s~rad, %s~rad, %s~rad et %s~rad." %(tuple(mes_deg_en_rad_tex)))
     
     cor.append(u"\\item Convertir les cinq mesures suivantes en degrés : %s, %s, %s, %s et %s~rad.\\par" %(tuple(mes_rad_tex[0:5])))
     
     cor.append(u"On effectue alors la proportionnalité inverse : il faut multiplier par $\\dfrac{180}{\\pi}$.\\par")
-    cor.append(u"Après simplification, voici les résultats : %s\\degres, %s\\degres, %s\\degres, %s\\degres et %s\\degres.\\par" %(tuple([rad2deg(r) for r in radq2])))
+    cor.append(u"Après simplification, voici les résultats : %s\\degres, %s\\degres, %s\\degres, %s\\degres et %s\\degres." %(tuple([rad2deg(r) for r in radq2])))
     
     cor.append(u"\\item Déterminer les mesures principales des angles suivants en radians : %s, %s, %s, %s et %s~rad.\\par" %(tuple(mes_rad_tex[5:10])))
     
@@ -226,13 +235,13 @@ def cercle_trigonometrique():
     cor.append(u"Une mesure d'angle en radians est définie modulo $2\\pi$, c'est-à-dire que l'ajout ou la suppression d'un tour ( qui vaut $2\\pi$ ou 360\\degres ) ne change pas un angle.\\par")
     cor.append(u"Concrètement, avec le premier angle de la question, on remarque que :\\par")
     cor.append(rad2tex(radq3[0])[:-1]+"\\equiv"+rad2tex(rep)[1:-1]+"+"+rad2tex([2*nb_tours*rep[1],rep[1]])[1:-1]+"\\equiv"+rad2tex(rep)[1:-1]+"+"+rad2tex([2*nb_tours,1])[1:-1]+"\\equiv"+rad2tex(rep)[1:-1]+u"~(2\\pi)$.\\par")
-    cor.append(u"De même pour les autres mesures, on trouve alors respectivement : %s~rad, %s~rad, %s~rad, %s~rad et %s~rad.\\par" %(tuple([rad2tex(mes_princ(r)) for r in radq3])))
+    cor.append(u"De même pour les autres mesures, on trouve alors respectivement : %s~rad, %s~rad, %s~rad, %s~rad et %s~rad." %(tuple([rad2tex(mes_princ(r)) for r in radq3])))
     
-    cor.append(u"\\item Des angles ont été placés sur le cercle trigonométrique ci-dessous, représentés par les points $M_0$, $M_1$, $M_2$ et $M_3$. Lire leurs mesures principales en radians.\\par")
+    cor.append(u"\\item Des angles ont été placés sur le cercle trigonométrique ci-dessous, représentés en rouge par les points $M_0$, $M_1$, $M_2$ et $M_3$. Lire leurs mesures principales en radians.\\par")
     
     cor.append(u"Les réponses sont directement données sur le cercle trigonométrique ci-dessous :\\par")
     cor.append(cercle_trigo(1,mes_princ(radq4[0]),mes_princ(radq4[1]),mes_princ(radq4[2]),mes_princ(radq4[3])))
-    
+    cor.append(u"Les points $M_0$, $M_1$, $M_2$ et $M_3$ définissent alors respectivement les angles %s, %s, %s et %s~rad.\\par" %(tuple(mes_rad_tex[10:14])))
     cor.append(u"\\item Placer les angles suivants sur le cercle trigonométrique : %s, %s, %s et %s~rad.\\par" %(tuple(mes_rad_tex[14:])))
     
     cor.append(u"Les réponses sont directement données sur le cercle trigonométrique ci-dessous :\\par")
