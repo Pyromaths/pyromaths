@@ -25,10 +25,10 @@ from math import cos, sin, radians
 from ..outils.decimaux import decimaux
 from ..outils.Arithmetique import pgcd
 
-def tableau_tex(titres, eff=1, freq=1, val=[[],[]],total=1):
+def tableau_tex(titres, larg="c", eff=1, freq=1, val=[[],[]],total=1):
     """Génère le tableau des effectifs (liste val[1]) et fréquences (liste val[2])."""
     cols = len(titres)
-    tableau_tex = u"\\begin{tabular}{|>{\\centering\\bfseries}c|*{"+str(cols-1)+"}{c|}"
+    tableau_tex = u"\\begin{tabular}{|>{\\bfseries}c|*{"+str(cols-1)+"}{"+larg+"|}"
     
     if total:
         tableau_tex += ">{\\centering\\bfseries\\arraybackslash}p{2cm}|}\n"
@@ -82,7 +82,7 @@ def tableau_tex(titres, eff=1, freq=1, val=[[],[]],total=1):
         else:
             tableau_tex += "\\\\\\hline\n"
     
-    tableau_tex += "\\end{tabular}\n"    
+    tableau_tex += "\\end{tabular}"    
     
     return tableau_tex
 
@@ -90,7 +90,7 @@ def diagramme_tex(typed=2,val=[[],[]],aide=0):
     """Génère un diagramme en bâtons (type 1), circulaire (type2) ou semi-circulaire (type3) à partir des fréquences (liste val[1]) et son tableau de calculs."""
     diag = ""
     
-    couleur = ["yellow", "blue", "orange", "green", "red", "gray", "pink", "purple", "brown", "white", "cyan", "olive"]
+    couleur = ["AliceBlue", "Bisque", "PaleGreen", "Thistle", "LightGray", "Khaki", "LightBlue", "LightSalmon", "PaleGoldenrod", "PapayaWhip", "Plum", "Gainsboro"]
     
     if typed == 1: # Diagramme en bâtons
         
@@ -119,12 +119,12 @@ def diagramme_tex(typed=2,val=[[],[]],aide=0):
 
         for v in range(len(val[1])-1):
             diag += u"\\pswedge[fillstyle=solid,fillcolor="+couleur[v%12]+"](0,0){3}{"+str(debut)+"}{"+str(fin)+"}\n"
-            diag_texte += u"\\rput("+str(3*round(cos(radians((debut+fin)/2.0)),2))+","+str(3*round(sin(radians((debut+fin)/2.0)),2))+"){\\small \\bfseries{"+val[0][v+1]+"}}\n"
+            diag_texte += u"\\rput[r]{"+str((debut+fin)/2.0)+"}("+str(3*round(cos(radians((debut+fin)/2.0)),2))+","+str(3*round(sin(radians((debut+fin)/2.0)),2))+"){\\small \\bfseries{"+val[0][v+1]+"}}\n"
             debut = fin
             fin += round(val[1][v+1]*3.6,0)
             liste_fin.append(fin)
         diag += u"\\pswedge[fillstyle=solid,fillcolor="+couleur[(len(val[1])-1)%12]+"](0,0){3}{"+str(debut)+"}{360}\n"
-        diag_texte += u"\\rput("+str(3*round(cos(radians((debut+fin)/2.0)),2))+","+str(3*round(sin(radians((debut+fin)/2.0)),2))+"){\\small \\bfseries{"+val[0][-1]+"}}\n"
+        diag_texte += u"\\rput[r]{"+str((debut+fin)/2.0)+"}("+str(3*round(cos(radians((debut+fin)/2.0)),2))+","+str(3*round(sin(radians((debut+fin)/2.0)),2))+"){\\small \\bfseries{"+val[0][-1]+"}}\n"
                 
         if aide != 0:        
             temp = [int(3.6*v) for v in val[1]]
@@ -152,12 +152,12 @@ def diagramme_tex(typed=2,val=[[],[]],aide=0):
         
         for v in range(len(val[1])-1):
             diag += u"\\pswedge[fillstyle=solid,fillcolor="+couleur[v%12]+"](0,0){3}{"+str(debut)+"}{"+str(fin)+"}\n"
-            diag_texte += u"\\rput("+str(3*round(cos(radians((debut+fin)/2.0)),2))+","+str(3*round(sin(radians((debut+fin)/2.0)),2))+"){\\small \\bfseries{"+val[0][v+1]+"}}\n" # FIX problème hauteur textes superposés
+            diag_texte += u"\\rput[r]{"+str((debut+fin)/2.0)+"}("+str(3*round(cos(radians((debut+fin)/2.0)),2))+","+str(3*round(sin(radians((debut+fin)/2.0)),2))+"){\\small \\bfseries{"+val[0][v+1]+"}}\n" # FIX problème hauteur textes superposés
             debut = fin
             fin += round(val[1][v+1]*1.8,0)
             liste_fin.append(fin)
         diag += u"\\pswedge[fillstyle=solid,fillcolor="+couleur[(len(val[1])-1)%12]+"](0,0){3}{"+str(debut)+"}{180}\n"
-        diag_texte += u"\\rput("+str(3*round(cos(radians((debut+fin)/2.0)),2))+","+str(3*round(sin(radians((debut+fin)/2.0)),2))+"){\\small \\bfseries{"+val[0][-1]+"}}\n"
+        diag_texte += u"\\rput[r]{"+str((debut+fin)/2.0)+"}("+str(3*round(cos(radians((debut+fin)/2.0)),2))+","+str(3*round(sin(radians((debut+fin)/2.0)),2))+"){\\small \\bfseries{"+val[0][-1]+"}}\n"
         
         if aide != 0:        
             temp = [int(1.8*v) for v in val[1]]
@@ -177,16 +177,17 @@ def diagramme_tex(typed=2,val=[[],[]],aide=0):
     
     return diag
 
-def tableau_diagramme_tex(typed=2,val=[[],[]]):
+def tableau_diagramme_tex(typed=2,val=[[],[]],larg="c"):
     """Génère le tableau de calculs des angles ou des longueurs pour le corrigé de la construction des diagrammes."""
     tab = ""
     cols = len(val[0])
-    tab = u"\\begin{tabular}{|>{\\bfseries}c|*{"+str(cols-1)+"}{c|}>{\\centering\\bfseries\\arraybackslash}p{2cm}|}\n"
-    tab += u"\\cline{1-"+str(cols)+"}\n"
+    tab = u"\\begin{tabular}{|>{\\bfseries}c|*{"+str(cols-1)+"}{"+larg+"|}>{\\centering\\bfseries\\arraybackslash}p{2cm}|}\n"
+    #tab += u"\\cline{1-"+str(cols)+"}\n"
+    tab += u"\\hline\n"    
     
     for titre in val[0]: # Ligne de titre, avec astuce pour éviter le cadre sur la dernière cellule "Total"
         tab += u"\\textbf{"+titre+"} & "
-    tab += u"\\multicolumn{1}{c}{\\textbf{Total}} \\\\\\hline\n"
+    tab += u"\\textbf{Total} \\\\\\hline\n"
     
     tab += u"Fréquences ( \\% )"
 
@@ -219,7 +220,7 @@ def tableau_diagramme_tex(typed=2,val=[[],[]]):
             tab += " & "+decimaux(round(frequence*1.8,0))
         tab += " & 180 \\\\\\hline\n"        
     
-    tab += "\\end{tabular}\\par\n"
+    tab += "\\end{tabular}\n"
     
     return tab
 
@@ -245,8 +246,8 @@ def exo_pi():
     effectifs = [dec.count(i) for i in range(10)]    
     frequences = [round(i*100.0/nb_dec,2) for i in effectifs] # FIX somme pas toujours égale à 100%
     
-    tableau = tableau_tex([u"Chiffres", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]) 
-    tableau_cor = tableau_tex([u"Chiffres", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],1,1,[effectifs,frequences])
+    tableau = tableau_tex([u"Chiffres", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],">{\\centering}p{0.5cm}") 
+    tableau_cor = tableau_tex([u"Chiffres", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],">{\\centering}p{0.8cm}",1,1,[effectifs,frequences])
     
     exo.append(u"Voici une liste de chiffres choisis au hasard dans les décimales de $\\pi$ :\\par")    
     cor.append(u"Voici une liste de chiffres choisis au hasard dans les décimales de $\\pi$ :\\par")
@@ -254,26 +255,30 @@ def exo_pi():
     cor.append(dec_tex)
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
-    exo.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.\\par")
+    exo.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.")
     cor.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.\\par")   
+    exo.append("\\end{enumerate}")    
     exo.append(tableau)
+    exo.append(u"\\par")
     cor.append(u"Chaque effectif se complète en comptant le nombre d'apparition de chaque chiffre dans la liste de l'énoncé.")
     cor.append(u"Comme les chiffres sont rangés par 20, on voit assez rapidement que le nombre total de chiffres est de "+str(nb_dec)+".\\par")
     cor.append(u"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise par le nombre total de chiffres, puis il ne faut pas oublier d'arrondir au centième.\\par\n")
     cor.append(u"Par exemple pour la fréquence du chiffre 1 : $\\dfrac{"+decimaux(effectifs[0])+"\\times 100}{"+str(nb_dec)+"} \\approx "+decimaux(frequences[0])+"$.\\par")
+    cor.append("\\end{enumerate}")
     cor.append(tableau_cor)
-    exo.append(u"\\item Représenter la répartition des chiffres dans un diagramme en bâtons avec 1~cm pour 10\\%.\\par")
-    cor.append(u"\\item Représenter la répartition des chiffres dans un diagramme en bâtons avec 1~cm pour 10\\%.\\par") 
+    exo.append("\\begin{enumerate}")
+    cor.append("\\begin{enumerate}")
+    exo.append(u"\\item[$\\blacktriangleright$\\textbf{2.}] Représenter la répartition des chiffres dans un diagramme en bâtons avec 1~cm pour 10\\%.")
+    cor.append(u"\\item[$\\blacktriangleright$\\textbf{2.}] Représenter la répartition des chiffres dans un diagramme en bâtons avec 1~cm pour 10\\%.\\par") 
+    exo.append("\\end{enumerate}")
+    cor.append("\\end{enumerate}")
     
     diagramme = diagramme_tex(1,[[u"Valeurs", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],frequences])
-    diagramme_tableau = tableau_diagramme_tex(1,[[u"Valeurs", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],frequences])
+    diagramme_tableau = tableau_diagramme_tex(1,[[u"Valeurs", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],frequences],">{\\centering}p{0.8cm}")
     
     cor.append(diagramme_tableau)  
     cor.append("\\bigskip")
-    cor.append(diagramme)
-    
-    exo.append("\n\\end{enumerate}")
-    cor.append("\n\\end{enumerate}")    
+    cor.append(diagramme)  
     
     return False
 
@@ -297,15 +302,18 @@ def exo_notes():
     notes_tpl = [str(i) for i in range(21)]
     notes = [random.randint(1,20) for i in range(nb_eleves)]
     notes_effectifs = [notes.count(i) for i in range(21)]
-    tableau_notes = tableau_tex([u"Notes"]+notes_tpl,1,0,[notes_effectifs,[]],0)
+    tableau_notes = tableau_tex([u"Notes"]+notes_tpl,">{\\centering\\arraybackslash}p{0.25cm}",1,0,[notes_effectifs,[]],0)
     
     exo.append(tableau_notes)
     cor.append(tableau_notes)
+    exo.append(u"\\bigskip")
+    cor.append(u"\\bigskip")
     exo.append(u"\\begin{enumerate}")
     cor.append(u"\\begin{enumerate}")
     exo.append(u"\\item Compléter le tableau ci-dessous afin de regrouper les notes par classes et effectuer le calcul des fréquences arrondies au centième :\\par")
     cor.append(u"\\item Compléter le tableau ci-dessous afin de regrouper les notes par classes et effectuer le calcul des fréquences arrondies au centième :\\par")
-    exo.append(tableau_tex(titres))
+    exo.append(u"\\end{enumerate}")
+    exo.append(tableau_tex(titres,">{\\centering\\arraybackslash}p{2.1cm}"))
     
     classes_effectifs=[0 for f in classes]
     
@@ -323,15 +331,19 @@ def exo_notes():
     cor.append(u"Le nombre de notes du contrôle, qui est aussi le nombre d'élèves, est donc de "+str(nb_eleves)+".\\par")
     cor.append(u"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise par le nombre total de notes, puis il ne faut pas oublier d'arrondir au centième.\\par\n")
     cor.append(u"Par exemple pour la fréquence des notes dans la première classe : $\\dfrac{"+decimaux(classes_effectifs[0])+"\\times 100}{"+str(nb_eleves)+"} \\approx "+decimaux(frequences[0])+"$.\\par")    
-    cor.append(tableau_tex(titres,1,1,[classes_effectifs,frequences]))
+    cor.append(u"\\end{enumerate}")
+    cor.append(tableau_tex(titres,">{\\centering\\arraybackslash}p{2.1cm}",1,1,[classes_effectifs,frequences]))
     
     note1_rand = random.randint(0,len(classes)-2)
     note1 = classes[note1_rand][1]
     note2 = 20 - note1
     note2_rand = len(classes)-1-note1_rand
     
-    exo.append(u"\\item Combien d'élèves ont une note strictement inférieure à "+str(note1)+u" ? Supérieure ou égale à "+str(note2)+" ?\\par")
-    cor.append(u"\\item Combien d'élèves ont une note strictement inférieure à "+str(note1)+u" ? Supérieure ou égale à "+str(note2)+" ?\\par")    
+    cor.append(u"\\bigskip")    
+    exo.append(u"\\begin{enumerate}")
+    cor.append(u"\\begin{enumerate}")
+    exo.append(u"\\item[$\\blacktriangleright$\\textbf{2.}] Combien d'élèves ont une note strictement inférieure à "+str(note1)+u" ? Supérieure ou égale à "+str(note2)+" ?\\par")
+    cor.append(u"\\item[$\\blacktriangleright$\\textbf{2.}] Combien d'élèves ont une note strictement inférieure à "+str(note1)+u" ? Supérieure ou égale à "+str(note2)+" ?\\par")    
     
     card_note1 = 0
     card_note2 = 0
@@ -368,8 +380,8 @@ def exo_notes():
     cor.append(u"La réponse à la seconde question se fait de même en comptant tous les effectifs des élèves se situant à droite de "+str(note2)+u".\\par")
     cor.append(u"Le résultat est donc : "+texte_note2+u" élèves.\\par")
     
-    exo.append(u"\n\\end{enumerate}")
-    cor.append(u"\n\\end{enumerate}")
+    exo.append(u"\\end{enumerate}")
+    cor.append(u"\\end{enumerate}")
     
     return False
 
@@ -379,39 +391,43 @@ def exo_de():
     
     nb_simul = random.randint(50,80)
     simul = []
-    simul_tex = "\\par"
+    simul_tex = ""
     for f in range(nb_simul): # Simulation de nb_simul lancés d'un dé
         temp = random.randint(1,6)
         simul.append(temp)
         simul_tex += str(temp) + " "
         if ((f+1) % 25 == 0):
-            simul_tex += "\\par"
+            simul_tex += "\\par\n"
         
     effectifs = [simul.count(i+1) for i in range(6)]    
     frequences = [round(i*100.0/nb_simul,2) for i in effectifs] # FIX somme pas toujours égale à 100%
     
-    tableau = tableau_tex([u"Valeurs", "1", "2", "3", "4", "5", "6"]) 
-    tableau_cor = tableau_tex([u"Valeurs", "1", "2", "3", "4", "5", "6"],1,1,[effectifs,frequences])
+    tableau = tableau_tex([u"Valeurs", "1", "2", "3", "4", "5", "6"],">{\\centering}p{1cm}") 
+    tableau_cor = tableau_tex([u"Valeurs", "1", "2", "3", "4", "5", "6"],">{\\centering}p{1cm}",1,1,[effectifs,frequences])
     
     exo.append(u"Voici une liste des résultats obtenus en lançant plusieurs fois un dé à six faces :\\par")    
     cor.append(u"Voici une liste des résultats obtenus en lançant plusieurs fois un dé à six faces :\\par")
     exo.append(simul_tex)
     cor.append(simul_tex)
+    exo.append(u"\\bigskip")
+    cor.append(u"\\bigskip")
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
-    exo.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.\\par")
+    exo.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.")
     cor.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.\\par")   
     exo.append(tableau)
+    exo.append(u"\\bigskip")
     cor.append(u"Chaque effectif se complète en comptant le nombre d'apparition de chaque chiffre dans la liste de l'énoncé.")
     cor.append(u"Comme les chiffres sont rangés par 25, on voit assez rapidement que le nombre total de chiffres est de "+str(nb_simul)+".\\par")
     cor.append(u"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise par le nombre total de chiffres, puis il ne faut pas oublier d'arrondir au centième.\\par\n")
     cor.append(u"Par exemple pour la fréquence du chiffre 1 : $\\dfrac{"+str(effectifs[0])+"\\times 100}{"+str(nb_simul)+"} \\approx "+decimaux(frequences[0])+"$.\\par")
     cor.append(tableau_cor)
+    cor.append(u"\\bigskip")
     exo.append(u"\\item Représenter la répartition des chiffres dans un diagramme en bâtons avec 1cm pour 10\\%.\\par")
     cor.append(u"\\item Représenter la répartition des chiffres dans un diagramme en bâtons avec 1cm pour 10\\%.\\par") 
     
     diagramme = diagramme_tex(1,[[u"Valeurs", "1", "2", "3", "4", "5", "6"],frequences])
-    diagramme_tableau = tableau_diagramme_tex(1,[[u"Valeurs", "1", "2", "3", "4", "5", "6"],frequences])
+    diagramme_tableau = tableau_diagramme_tex(1,[[u"Valeurs", "1", "2", "3", "4", "5", "6"],frequences],">{\\centering}p{1cm}")
     
     cor.append(diagramme_tableau)  
     cor.append("\\bigskip")
@@ -454,7 +470,7 @@ def exo_ages():
     population = 20*random.randint(100,2000)
     
     titres = [u"Moins de 20 ans", u"Entre 20 et 40 ans", u"Entre 40 et 60 ans", u"Entre 60 et 80 ans", u"Plus de 80 ans"]
-    diagramme = diagramme_tex(choix_diagramme+2,[[u"Ages", u"<20","20 - 40","40 - 60","60 - 80",u">80"],frequences],1) 
+    diagramme = diagramme_tex(choix_diagramme+2,[[u"Ages", u"<20 ans","20 - 40 ans","40 - 60 ans","60 - 80 ans",u">80 ans"],frequences],1) 
     exo.append(u"\\begin{center}")
     cor.append(u"\\begin{center}")
     exo.append(diagramme)
@@ -465,7 +481,7 @@ def exo_ages():
     cor.append(u"Le diagramme "+diagramme_texte+u" ci-dessus représente les différentes fréquences des classes d'âges dans une certaine région.\\par")
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
-    exo.append(u"\\item Calculer les fréquences de chaque classe d'âges.\\par")
+    exo.append(u"\\item Calculer les fréquences de chaque classe d'âges.")
     cor.append(u"\\item Calculer les fréquences de chaque classe d'âges.\\par")
     
     titres = [u"Classes d'âges", u"$0 \\leq n \\leq 20$", u"$20 \\leq n \\leq 40$", u"$40 \\leq n \\leq 60$", u"$60 \\leq n \\leq 80$", u"$80 \\geq n$"]
@@ -478,19 +494,21 @@ def exo_ages():
     
     cor.append(u"Le diagramme "+diagramme_texte+u" est partagé en "+str(parts)+u" parts symbolisées par des lignes grises en pointillés.\\par")
     cor.append(u"On en déduit que chacune de ces parts représente $\\dfrac{100}{"+str(parts)+"}="+str(pourcent)+u"\\%$, puis en comptant le nombre de parts dans chaque classe, on obtient le tableau suivant :\\par" )
-    cor.append(tableau_tex(titres,0,1,[[],frequences]))
-    
-    exo.append(u"\\item Sachant que la population étudiée est composée de "+str(population)+u" personnes, calculer les effectifs de chaque classe d'âges.\\par")
-    cor.append(u"\\item Sachant que la population étudiée est composée de "+str(population)+u" personnes, calculer les effectifs de chaque classe d'âges.\\par")
+    cor.append("\\end{enumerate}")
+    cor.append(tableau_tex(titres,">{\\centering}p{2.2cm}",0,1,[[],frequences]))
+    cor.append("\\begin{enumerate}")
+    exo.append(u"\\item Sachant que la population étudiée est composée de "+str(population)+u" personnes, calculer les effectifs de chaque classe d'âges.")
+    cor.append(u"\\item[$\\blacktriangleright$\\textbf{2.}] Sachant que la population étudiée est composée de "+str(population)+u" personnes, calculer les effectifs de chaque classe d'âges.\\par")
     
     cor.append(u"Sachant que la classe des moins de vingt ans est composée de "+str(frequences[0])+u" \\% de "+str(population)+u" personnes, on peut calculer l'effectif concerné :\\par")
     cor.append(u"$\\dfrac{"+str(frequences[0])+u" \\times "+str(population)+u"}{100}="+str(effectifs[0])+u"$.\\par")
-    cor.append(u"Avec le même type de calcul, on obtient les effectifs des autres classes, résumés dans le tableau ci-dessous : \\par")
-    cor.append(tableau_tex(titres,1,1,[effectifs,frequences]))
+    cor.append(u"Avec le même type de calcul, on obtient les effectifs des autres classes, résumés dans le tableau ci-dessous :")
+    cor.append("\\end{enumerate}")
+    cor.append(tableau_tex(titres,">{\\centering}p{2.2cm}",1,1,[effectifs,frequences]))
     
     
     exo.append("\n\\end{enumerate}")
-    cor.append("\n\\end{enumerate}")
+
     return False
 
 
@@ -500,12 +518,12 @@ def exo_vote():
     
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
-    exo.append(u"\\item Les données du vote du délégué de classe ont été malheureusement partiellement perdues, mais on a réussi à regrouper les informations du tableau ci-dessous ( sachant que chaque élève a voté ) :\\par\n")
-    cor.append(u"\\item Les données du vote du délégué de classe ont été malheureusement partiellement perdues, mais on a réussi à regrouper les informations du tableau ci-dessous ( sachant que chaque élève a voté ) :\\par\n")
+    exo.append(u"\\item Les données du vote du délégué de classe ont été malheureusement partiellement perdues, mais on a réussi à regrouper les informations du tableau ci-dessous ( sachant que chaque élève a voté ) :")
+    cor.append(u"\\item Les données du vote du délégué de classe ont été malheureusement partiellement perdues, mais on a réussi à regrouper les informations du tableau ci-dessous ( sachant que chaque élève a voté ) :\\par")
     
-    eff1 = random.randint(0,15)
-    eff2 = random.randint(0,25-eff1)
-    freq1 = 4*random.randint(0,25-eff1-eff2)
+    eff1 = random.randint(1,15)
+    eff2 = random.randint(1,25-eff1)
+    freq1 = 4*random.randint(1,25-eff1-eff2)
     effectifs = [eff1,eff2,-1,-1]
     random.shuffle(effectifs)
     idx = effectifs.index(-1)
@@ -521,10 +539,10 @@ def exo_vote():
     titres = [u"Elève"] + prenoms[:4] 
     valeurs = [effectifs,frequences]
     
-    exo.append(tableau_tex(titres,1,1,valeurs,0))
-    cor.append(tableau_tex(titres,1,1,valeurs,0))
-    exo.append("\\bigskip")
-    cor.append("\\bigskip")
+    exo.append(tableau_tex(titres,">{\\centering\\arraybackslash}p{2.1cm}",1,1,valeurs,0))
+    cor.append(tableau_tex(titres,">{\\centering\\arraybackslash}p{2.1cm}",1,1,valeurs,0))
+    exo.append("\\par")
+    cor.append("\\par")
     exo.append(u"Sachant qu'il y a 25 élèves dans la classe, compléter alors le tableau ci-dessus.\\par")
     cor.append(u"Sachant qu'il y a 25 élèves dans la classe, compléter alors le tableau ci-dessus.\\par")    
 
@@ -540,20 +558,20 @@ def exo_vote():
     cor.append(u"$25 - "+str(eff1)+" - "+str(eff2)+" - "+str(freq1/4)+" = "+str(effectifs[idx2])+u"$ élève(s) pour "+titres[idx2+1]+".\\par")
     cor.append(u"Enfin, pour le calcul des fréquences manquantes, il faut multiplier chaque effectif par 4, ce qui fourni le tableau ci-dessous.\\par")
 
-    cor.append(tableau_tex(titres,1,1,[effectifs,frequences]))
-    cor.append("\\bigskip")
+    cor.append(tableau_tex(titres,">{\\centering}p{2.1cm}",1,1,[effectifs,frequences]))
+    cor.append("\\par")
     exo.append(u"\\item Représenter la répartition des votes dans un diagramme circulaire de rayon 3 cm.\\par")
     cor.append(u"\\item Représenter la répartition des votes dans un diagramme circulaire de rayon 3 cm.\\par") 
 
     diagramme = diagramme_tex(2,[titres,frequences])
-    diagramme_tableau = tableau_diagramme_tex(2,[titres,frequences])
+    diagramme_tableau = tableau_diagramme_tex(2,[titres,frequences],">{\\centering}p{2.1cm}")
     
     cor.append(diagramme_tableau)  
     cor.append("\\bigskip")
     cor.append(diagramme)    
     
-    exo.append("\n\\end{enumerate}")
-    cor.append("\n\\end{enumerate}")
+    exo.append("\\end{enumerate}")
+    cor.append("\\end{enumerate}")
     return exo,cor
 
 def exo_sport():
@@ -655,7 +673,8 @@ def statistiques():
     #elif hasard == 3:
         #exo_vote()
     #elif hasard == 4:
-        #exo_sport()    
+        #exo_sport()
     #else:
         #exo_ages()
+
     return (exo, cor)
