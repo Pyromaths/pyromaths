@@ -182,7 +182,6 @@ def tableau_diagramme_tex(typed=2,val=[[],[]],larg="c"):
     tab = ""
     cols = len(val[0])
     tab = u"\\begin{tabular}{|>{\\bfseries}c|*{"+str(cols-1)+"}{"+larg+"|}>{\\centering\\bfseries\\arraybackslash}p{2cm}|}\n"
-    #tab += u"\\cline{1-"+str(cols)+"}\n"
     tab += u"\\hline\n"    
     
     for titre in val[0]: # Ligne de titre, avec astuce pour éviter le cadre sur la dernière cellule "Total"
@@ -663,18 +662,17 @@ def statistiques():
     cor.append("\\renewcommand{\\arraystretch}{2}")
     
     hasard = random.randint(0,5)
-    exo_pi()
-    #if hasard == 0:
-        #exo_pi()
-    #elif hasard == 1:
-        #exo_notes()
-    #elif hasard == 2:
-        #exo_de()
-    #elif hasard == 3:
-        #exo_vote()
-    #elif hasard == 4:
-        #exo_sport()
-    #else:
-        #exo_ages()
+    if hasard == 0:
+        exo_pi()
+    elif hasard == 1:
+        exo_notes()
+    elif hasard == 2:
+        exo_de()
+    elif hasard == 3:
+        exo_vote()
+    elif hasard == 4:
+        exo_sport()
+    else:
+        exo_ages()
 
     return (exo, cor)
