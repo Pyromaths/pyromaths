@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"
+"http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Globally unique identifier -->
+    <key>CFBundleIdentifier</key>
+    <string>org.pyromaths.pyromaths</string>
+
+    <!-- Used by py2app to generate application bundle -->
+    <key>CFBundleName</key>
+    <string>Pyromaths</string>
+
+    <!-- Package type is an Application -->
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+
+    <!-- Version number -->
+    <key>CFBundleShortVersionString</key>
+    <string>11.05.2</string>
+
+    <!-- Build number -->
+    <key>CFBundleVersion</key>
+    <string>11.05.2</string>
+
+    <!-- Copyright notice -->
+    <key>NSHumanReadableCopyright</key>
+    <string>© Jérôme Ortais</string>
+
+    <!-- Icon file name -->
+    <key>CFBundleIconFile</key>
+    <string>pyromaths</string>
+
+
+    <!-- Development region -->
+    <key>CFBundleDevelopmentRegion</key>
+    <string>French</string>
+
+    <!-- Executable name -->
+    <key>CFBundleExecutable</key>
+    <string>pyromaths</string>
+
+    <!-- Bundle display name -->
+    <key>CFBundleDisplayName</key>
+    <string>pyromaths</string>
+    
+    <key>CFBundleSignature</key>
+	<string>PYTS</string>
+</dict>
+</plist>

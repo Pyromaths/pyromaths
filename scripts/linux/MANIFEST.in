@@ -1,0 +1,6 @@
+include AUTHORS COPYING NEWS pyromaths MANIFEST.in
+recursive-include data/images *
+recursive-include data/packages *
+recursive-include data/templates *
+recursive-include data/linux *
+recursive-include debian *

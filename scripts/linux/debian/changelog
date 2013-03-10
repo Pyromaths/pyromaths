@@ -1,0 +1,15 @@
+pyromaths (11.05.1b1-1) unstable; urgency=low
+
+  * Gestion des version 2.5 à 2.7 de Python
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Thu, 05 May 2011 16:16:00 +0100
+
+pyromaths (11.05-1) unstable; urgency=low
+
+  * Initial release
+  * Sommes de vecteurs niveau lycée
+  * Deux exercices sur le calcul littéral niveau quatrième
+  * Quelques corrections de bugs et améliorations
+  * Switch to dpkg-source 3.0 (quilt) format
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Tue, 02 May 2011 10:48:02 +0100
