@@ -26,7 +26,7 @@ def data_dir():
         return '/usr/share/pyromaths/'
 
 def icon_dir():
-    """Renvoie le dossier où se trouve l'icône, sequ'on utilise pyromaths à
+    """Renvoie le dossier où se trouve l'icône, selon qu'on utilise pyromaths à
     partir des sources, de l'exécutable win32 ou du paquet deb"""
     if we_are_frozen() or exists(join(abspath(dirname(__file__)),'../data/')):
         return join(DATADIR, 'images', 'pyromaths.png')
@@ -54,7 +54,7 @@ else:
     def configdir():
         return join(home(), ".config", "pyromaths")
 
-VERSION = '12.01'
+VERSION = '13.03'
 COPYRIGHT_YEAR = strftime('%Y')
 COPYRIGHTS = u'© 2006 – %s Jérôme Ortais<br/>\n' \
         u'<span style=" font-size:small;">Pyromaths est distribué sous ' \
@@ -101,7 +101,7 @@ u'Construction de triangles',
 u'Construction de parallélogrammes',
 u'Échelles',
 u'Aire de disques',
-u'Représentation de données',
+u'Statistiques',
 ]],
 [u'Quatrième', '', [
 u'Calcul mental',
@@ -147,6 +147,7 @@ u'Étude de signe',
 u"Sens de variations",
 u"Étude de fonctions",
 u"Vecteurs",
+u"Cercle trigonométrique",
 ], [
 u'Niveau 1èreS',
 u'Niveau 1èreS',
@@ -154,6 +155,7 @@ u'Niveau 1èreS',
 u'Niveau 1èreS',
 u"Niveau 1èreS, Term STG",
 u"Niveau Term S",
+u"Niveau Seconde",
 u"Niveau Seconde",
 ]],
 ]

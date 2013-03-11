@@ -2,6 +2,14 @@
 VERSION=`date +%y.%m`
 PYROPATH=$(cd `dirname $0` && cd .. && pwd)
 ARCHIVEPATH=$( cd ${PYROPATH} && cd .. && pwd)
+if [ ! -f /usr/bin/debuild ];
+then
+    sudo apt-get install devscripts
+fi
+if [ ! -f /usr/bin/rpm ];
+then
+    sudo apt-get install rpm
+fi
 
 echo "#-------------------------------------
 #---- CHANGE LE NUMERO DE VERSION ----
@@ -39,6 +47,7 @@ cp -r ${PYROPATH}/src ${PYROPATH}/data .
 cp ${PYROPATH}/* .
 cp -r ${PYROPATH}/scripts/linux/* .
 python setup.py sdist --formats=bztar
+rm MANIFEST
 cp dist/pyromaths-${VERSION}.tar.bz2 ${ARCHIVEPATH}/pyromaths-${VERSION}-sources.tar.bz2
 mv dist/pyromaths-${VERSION}.tar.bz2 /tmp/pyromaths_${VERSION}.orig.tar.bz2
 
@@ -46,7 +55,8 @@ echo "#--------------------------------------------
 #--------- CRÉATION DU PAQUET DEB -----------
 #--------------------------------------------"
 debuild clean
-debuild
+debuild -kB39EE5B6
+sleep 30
 cp /tmp/pyromaths_${VERSION}-?_all.deb  ${ARCHIVEPATH}
 
 echo "#--------------------------------------------
