@@ -53,7 +53,7 @@ for n in range(len(LESFICHES)):
         parametres['liste_exos'] = lst
         creation(parametres)
         call(["convert", "-density", "288", "/tmp/test.pdf", "-resize", "25%",
-            "-crop", "710x560+0+85", "-trim", "/tmp/%se-%02d.png" % (6-n, i)],
+            "-crop", "710x560+0+85", "-flatten", "-trim", "/tmp/%se-%02d.png" % (6-n, i)],
             stdout=log)
         call(["pngnq", "-f", "-s1", "-n32", "/tmp/%se-%02d.png" % (6-n, i)],
                 stdout=log)

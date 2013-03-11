@@ -18,6 +18,10 @@ clean:
 	rm -rf debian/pyromaths
 	find . -name '*.py[co]' | xargs rm -f
 
+build-arch: build
+
+build-indep: build
+      
 install: build
 	dh_testdir
 	dh_testroot

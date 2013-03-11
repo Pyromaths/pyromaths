@@ -1,3 +1,11 @@
+pyromaths (13.03-1) quantal; urgency=low
+
+  * Correction d'un bug d'affichage des pdf
+  * Ajout de cinq exercices de statistiques niveau cinquième
+  * Conversion degrés/radians et mesures principales d'un angle sur le cercle trigonométrique niveau Lycée 
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Mon, 11 Mar 2013 21:10:00 +0100
+
 pyromaths (11.05.1b1-1) unstable; urgency=low
 
   * Gestion des version 2.5 à 2.7 de Python

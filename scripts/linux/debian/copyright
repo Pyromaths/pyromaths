@@ -1,48 +1,37 @@
-This work was packaged for Debian by:
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: pyromaths
+Source: http://www.pyromaths.org
 
-    Jérôme Ortais <jerome.ortais@pyromaths.org> on Tue, 02 Nov 2010 22:07:58 +0100
+Files: *
+Copyright: 2006-2013, Jérôme Ortais <jerome.ortais@pyromaths.org>
+           2009-2013, Arnaud Kientz <arnaud@pyromaths.org>
+           2010-2013, Yves Gesnels
+           2010, Guillaume Barthélémy
+           2010, Nicolas Bissonier
+License: GPL-3.0+
 
-It was downloaded from:
+Files: debian/*
+Copyright: 2013 Jérôme Ortais <jerome.ortais@pyromaths.org>
+License: GPL-3.0+
 
-    <url://www.pyromaths.org>
+License: GPL-3.0+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
 
-Upstream Author(s):
-
-    Jérôme Ortais <jerome.ortais@pyromaths.org>
-    Arnaud Kientz <arnaud@pyromaths.org>
-    Yves Gesnel
-    Guillaume Barthélémy
-    Nicolas Bissonnier
-
-Copyright:
-
-    <Copyright (C) 2006 Jérôme Ortais>
-
-License:
-
-   This package is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License version 2 as
-   published by the Free Software Foundation.
-
-    This package is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this package; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
-
-On Debian systems, the complete text of the GNU General
-Public License version 2 can be found in `/usr/share/common-licenses/GPL-2'.
-
-The Debian packaging is:
-
-    Copyright (C) 2010 Jérôme Ortais <jerome.ortais@pyromaths.org>
-
-you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-
+# Please also look if there are files or directories which have a
+# different copyright/license attached and list them here.
+# Please avoid to pick license terms that are more restrictive than the
+# packaged work, as it may make Debian's contributions unacceptable upstream.
