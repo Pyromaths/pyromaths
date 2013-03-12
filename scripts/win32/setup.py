@@ -13,6 +13,8 @@ OutputBaseFilename=pyromaths-%s-win32
 Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+[Icons]
+Name: "{commondesktop}\Pyromaths"; Filename: "{app}\pyromaths.exe"
 ''' % VERSION
 
 setup(name = "Pyromaths",
