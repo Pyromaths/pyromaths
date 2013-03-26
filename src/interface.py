@@ -356,24 +356,6 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.pushButton_enr_opt,QtCore.SIGNAL("clicked()"), self.enregistrer_config)
         QtCore.QObject.connect(self.pushButton_parcourir,QtCore.SIGNAL("clicked()"), self.option_parcourir)
         QtCore.QObject.connect(self.checkBox_corrige,QtCore.SIGNAL("stateChanged(int)"), self.option_corrige)
-        #============================================================
-        #        Actions des spinBox
-        #============================================================
-        for level in range(5):
-            for box in range(len(LESFICHES[level][2])):
-                exec("QtCore.QObject.connect(self.spinBox_%s_%s, QtCore.SIGNAL(\"valueChanged(int)\"), self.setNbExos)" % (6-level, box))
-        for level in range(5):
-            nb_exos = len(LESFICHES[level][2])
-            for i in range(nb_exos):
-                exec("self.label_%s_%s.setText(u\"%s\")" % (6-level, i,
-                    LESFICHES[level][2][i]))
-                exec("self.imglabel_%s_%s.setText(r'<img src=\"%s\" />')" %
-                        (6-level, i, os.path.join(DATADIR, 'images',
-                            'whatsthis.png')))
-                exec("self.imglabel_%s_%s.setToolTip(r\'<img src=\"%s\" />\')" %
-                        (6-level, i, os.path.join(DATADIR, 'images', 'vignettes',
-                            '%se-%02d.png' % (6-level, i))))
-                exec(u"self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% (6-level,i))
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -598,6 +580,17 @@ class Ui_MainWindow(object):
         exec("self.horizontalLayout_%s.addItem(spacerItem_%s)" % (treated, treated))
 
         exec("self.gridLayout_%se.addLayout(self.horizontalLayout_%s, %s, %s, 1, 1)" % (level, treated, box/2, box%2))
+
+        # Action
+        exec("QtCore.QObject.connect(self.spinBox_%s, QtCore.SIGNAL(\"valueChanged(int)\"), self.setNbExos)" % treated)
+        exec("self.label_%s.setText(u\"%s\")" % (treated,
+            LESFICHES[6-level][2][box]))
+        exec("self.imglabel_%s.setText(r'<img src=\"%s\" />')" %
+                (treated, os.path.join(DATADIR, 'images', 'whatsthis.png')))
+        exec("self.imglabel_%s.setToolTip(r\'<img src=\"%s\" />\')" %
+                (treated, os.path.join(DATADIR, 'images', 'vignettes',
+                    '%se-%02d.png' % (level, box))))
+        exec(u"self.spinBox_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% treated)
 
     def lire_config(self,  section):
         """Lis le fichier de configuration pyromaths.conf, enregistre les données dans un dictionnaire config"""
