@@ -578,9 +578,9 @@ class Ui_MainWindow(object):
         self.liste_creation = []
         for level in range(5):
             for box in range(len(LESFICHES[level][2])):
-                exec("qte = self.tabs[%u].spinBox_%s.value()" % (level, box),  locals(),  globals())
+                qte = self.tabs[level].spinBox[box].value()
                 for i in range(qte):
-                    exec("self.liste_creation.append((%s, %s))" % (level, box))
+                    self.liste_creation.append((level, box))
                     if level > niveau:
                         niveau = level
         self.comboBox_niveau.setCurrentIndex(niveau)
@@ -709,6 +709,7 @@ class Tab(QtGui.QWidget):
         self.titre  = Tab.titres[level]
         self.exos   = LESFICHES[level][2]
         self.layout = QtGui.QGridLayout(self)
+        self.spinBox = []
         # Crée les widgets des exercices
         nb_exos = len(self.exos)
         spacer  = QtGui.QSpacerItem(20, 0, QtGui.QSizePolicy.Minimum,
@@ -722,36 +723,39 @@ class Tab(QtGui.QWidget):
 
     def add_exercise(self, i, onchange):
         """Ajoute l'exercice n°i à cet onglet"""
-        exec("self.horizontalLayout_%s = QtGui.QHBoxLayout()" % i)
-        exec("self.spinBox_%s = QtGui.QSpinBox(self)" % i)
+        layout = QtGui.QHBoxLayout()
+        # SpinBox
+        spinBox = QtGui.QSpinBox(self)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(40)
         sizePolicy.setVerticalStretch(30)
-        exec("sizePolicy.setHeightForWidth(self.spinBox_%s.sizePolicy().hasHeightForWidth())" % (i))
-        exec("self.spinBox_%s.setSizePolicy(sizePolicy)" % (i))
-        exec("self.horizontalLayout_%s.addWidget(self.spinBox_%s)" % (i, i))
-        exec("self.imglabel_%s = QtGui.QLabel(self)" % i)
-        exec("self.horizontalLayout_%s.addWidget(self.imglabel_%s)" % (i, i))
-        exec("self.label_%s = QtGui.QLabel(self)" % i)
-        exec("self.horizontalLayout_%s.addWidget(self.label_%s)" % (i, i))
-
-        exec("spacerItem_%s = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)" % i)
-        exec("self.horizontalLayout_%s.addItem(spacerItem_%s)" % (i, i))
-        exec("self.horizontalLayout_%s.addItem(spacerItem_%s)" % (i, i))
-
-        exec("self.layout.addLayout(self.horizontalLayout_%s, %s, %s, 1, 1)" % (i, i/2, i%2))
-
-        # Action
-        exec("QtCore.QObject.connect(self.spinBox_%s, QtCore.SIGNAL(\"valueChanged(int)\"), onchange)" % i)
-        exec("self.label_%s.setText(u\"%s\")" % (i, self.exos[i]))
-        exec("self.imglabel_%s.setText(r'<img src=\"%s\" />')" %
-                (i, os.path.join(DATADIR, 'images', 'whatsthis.png')))
-        exec("self.imglabel_%s.setToolTip(r\'<img src=\"%s\" />\')" %
-                (i, os.path.join(DATADIR, 'images', 'vignettes',
-                    '%se-%02d.png' % (self.level, i))))
-        exec(u"self.spinBox_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% i)
+        sizePolicy.setHeightForWidth(spinBox.sizePolicy().hasHeightForWidth())
+        spinBox.setSizePolicy(sizePolicy)
+        spinBox.setToolTip(u"Choisissez le nombre d\'exercices de ce type à créer.")
+        QtCore.QObject.connect(spinBox, QtCore.SIGNAL("valueChanged(int)"),
+                               onchange)
+        self.spinBox.append(spinBox)
+        layout.addWidget(spinBox)
+        # Image
+        img = QtGui.QLabel(self)
+        img.setText(r'<img src="%s"/>' %
+                    os.path.join(DATADIR, 'images', 'whatsthis.png'))
+        img.setToolTip(r'<img src="%s"/>' %
+                       os.path.join(DATADIR, 'images', 'vignettes',
+                                    '%se-%02d.png' % (6-self.level, i)))
+        layout.addWidget(img)
+        # Label
+        label = QtGui.QLabel(self)
+        label.setText(self.exos[i])
+        layout.addWidget(label)
+        # Espacements
+        spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        layout.addItem(spacer)
+        layout.addItem(spacer)
+        # Ajoute cet exercice à l'onglet
+        self.layout.addLayout(layout, i/2, i%2, 1, 1)
 
     def reset(self):
         """Remet les compteurs à zéro"""
         for i in range(len(self.exos)):
-            exec("self.spinBox_%s.setValue(0)" % i,  locals())
+            self.spinBox[i].setValue(0)
