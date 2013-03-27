@@ -748,6 +748,8 @@ def factorisation6(cor, exo=None, valeurs=None):  # factorise (ax+b)(cx+d)+2abx+
     tex_facteur_commun((valeurs[0], valeurs[1], valeurs[2], valeurs[3]),
                        cor)
 
+factorisations = [factorisation0, factorisation1, factorisation2, factorisation3,
+                  factorisation4, factorisation5, factorisation6]
 
 #
 # ------------------- DEV-FACT-EQUAT -------------------
@@ -1045,7 +1047,7 @@ def tex_devfacteq():
     cor.append(u'\\item Développer et réduire $A$\\,.')
     developpements(expr, exos, cor)
     cor.append('\\item Factoriser $A$\\,.')
-    exec('factorisation' + str(exos) + '(cor,valeurs=expr)')
+    factorisations[exos](cor,valeurs=expr)
     cor.append('\\item Calculer $A$ pour $x=%s$\\,.\\par' % \
              tex_frac(valeurx))
     tex_fractions(expr, valeurx, cor)
@@ -1101,7 +1103,7 @@ def tex_developpements():
 def tex_factorisations():
     (nb_exos, ordre_exos, ordre) = (6, [], [])
     for i in range(nb_exos):
-        ordre.append(str(i))
+        ordre.append(i)
     for i in range(nb_exos):
         ordre_exos.append(ordre.pop(random.randrange(nb_exos - i)))
     del ordre
@@ -1112,8 +1114,7 @@ def tex_factorisations():
     cor.append('Factoriser les expressions suivantes.')
     cor.append('\\begin{multicols}{2}\\noindent')
     for i in range(nb_exos):
-        exec('factorisation' + str(ordre_exos[i]) + \
-            '(cor,exo)')
+        factorisations[ordre_exos[i]](cor,exo)
         exo.append('\\stepcounter{nocalcul}%')
         cor.append('\\stepcounter{nocalcul}%')
     exo.append('\\end{multicols}')

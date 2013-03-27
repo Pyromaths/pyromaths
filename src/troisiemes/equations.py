@@ -155,13 +155,15 @@ def tex_equation6(valeurs):  # renvoie la solution de l'equation
             texte = texte + '=' + fractions.tex_frac(simpl)
     return texte
 
+tex_eqs = [tex_equation0, tex_equation1, tex_equation2, tex_equation3,
+          tex_equation4, tex_equation5, tex_equation6]
 
 def equations(exo, cor, valeurs):  #resolution d'une equation
     exo.append(u"Résoudre l'équation : ")
     exo.append(u'\\[ ' + tex_equation0(valeurs) + '\\] ')
     cor.append(u"Résoudre l'équation : ")
     for i in range(7):
-        exec('cor.append(u\'\\\\[\' + tex_equation' + str(i) + '(valeurs) + \'\\\\] \')')
+        cor.append(u"\\[%s\\]" % tex_eqs[i](valeurs))
         if i == 2 and valeurs[3][1] < 0:
             cor.append(u'\\[ ' + tex_equation2bis(valeurs) + '\\] ')
     frac = ((valeurs[4][5] - valeurs[4][1]) - valeurs[4][3] * valeurs[3][1],
