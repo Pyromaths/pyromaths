@@ -88,22 +88,9 @@ class Ui_MainWindow(object):
         #        Remplissage des 4 niveaux
         #============================================================
 
+        self.tabs = []
         for level in range(5):
-            exec("self.tab_%se = QtGui.QWidget()" % (6-level))
-            exec("self.gridLayout_%se = QtGui.QGridLayout(self.tab_%se)" % (6-level, 6-level))
-            nb_exos = len(LESFICHES[level][2])
-            for i in range(nb_exos):
-                self.insert_spinbox(6-level, i)
-                for col in range(2):
-                    exec("spacerItem_%s_%s = QtGui.QSpacerItem(20, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)" % (6-level, col))
-                    exec("self.gridLayout_%se.addItem(spacerItem_%s_%s, %s, %s, 1, 1)" % (6-level, 6-level, col, (nb_exos+1)/2, col))
-            exec("self.tabWidget.addTab(self.tab_%se, \"\")" % (6-level))
-
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6e), "6e")
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5e), "5e")
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4e), "4e")
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3e), "3e")
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2e), u"Lycée")
+            self.tabs.append(Tab(self.tabWidget, level, self.setNbExos))
 
         #============================================================
         #        Onglet options
@@ -537,8 +524,7 @@ class Ui_MainWindow(object):
         """Remet toutes les SpinBox à zéro et vide la liste d'exercices sélectionnés"""
         self.liste_creation=[]
         for level in range(5):
-            for box in range(len(LESFICHES[level][2])):
-                exec("self.spinBox_%s_%s.setValue(0)" % (6-level, box))
+            self.tabs[level].reset()
 
     def enregistrer_config(self):
         """Fonction qui se charge d'enregistrer les options de l'interface dans le fichier de configuration
@@ -558,39 +544,6 @@ class Ui_MainWindow(object):
         f.write(lxml.etree.tostring(root, pretty_print=True, encoding="UTF-8",
                                xml_declaration=True).decode('utf-8', 'strict'))
         f.close()
-
-    def insert_spinbox(self, level, box):
-        """Place autant de SpinBox que d'exercices pour chaque niveau et les nomme"""
-        treated="%s_%s" % (level, box)
-        exec("self.horizontalLayout_%s = QtGui.QHBoxLayout()" % (treated))
-        exec("self.spinBox_%s = QtGui.QSpinBox(self.tab_%se)" % (treated, level))
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(40)
-        sizePolicy.setVerticalStretch(30)
-        exec("sizePolicy.setHeightForWidth(self.spinBox_%s.sizePolicy().hasHeightForWidth())" % (treated))
-        exec("self.spinBox_%s.setSizePolicy(sizePolicy)" % (treated))
-        exec("self.horizontalLayout_%s.addWidget(self.spinBox_%s)" % (treated, treated))
-        exec("self.imglabel_%s = QtGui.QLabel(self.tab_%se)" % (treated, level))
-        exec("self.horizontalLayout_%s.addWidget(self.imglabel_%s)" % (treated, treated))
-        exec("self.label_%s = QtGui.QLabel(self.tab_%se)" % (treated, level))
-        exec("self.horizontalLayout_%s.addWidget(self.label_%s)" % (treated, treated))
-
-        exec("spacerItem_%s = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)" % (treated))
-        exec("self.horizontalLayout_%s.addItem(spacerItem_%s)" % (treated, treated))
-        exec("self.horizontalLayout_%s.addItem(spacerItem_%s)" % (treated, treated))
-
-        exec("self.gridLayout_%se.addLayout(self.horizontalLayout_%s, %s, %s, 1, 1)" % (level, treated, box/2, box%2))
-
-        # Action
-        exec("QtCore.QObject.connect(self.spinBox_%s, QtCore.SIGNAL(\"valueChanged(int)\"), self.setNbExos)" % treated)
-        exec("self.label_%s.setText(u\"%s\")" % (treated,
-            LESFICHES[6-level][2][box]))
-        exec("self.imglabel_%s.setText(r'<img src=\"%s\" />')" %
-                (treated, os.path.join(DATADIR, 'images', 'whatsthis.png')))
-        exec("self.imglabel_%s.setToolTip(r\'<img src=\"%s\" />\')" %
-                (treated, os.path.join(DATADIR, 'images', 'vignettes',
-                    '%se-%02d.png' % (level, box))))
-        exec(u"self.spinBox_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% treated)
 
     def lire_config(self,  section):
         """Lis le fichier de configuration pyromaths.conf, enregistre les données dans un dictionnaire config"""
@@ -625,7 +578,7 @@ class Ui_MainWindow(object):
         self.liste_creation = []
         for level in range(5):
             for box in range(len(LESFICHES[level][2])):
-                exec("qte = self.spinBox_%s_%s.value()" % (6 - level, box),  locals(),  globals())
+                exec("qte = self.tabs[%u].spinBox_%s.value()" % (level, box),  locals(),  globals())
                 for i in range(qte):
                     exec("self.liste_creation.append((%s, %s))" % (level, box))
                     if level > niveau:
@@ -739,3 +692,66 @@ def valide(list, LesFiches, parametres):
             parametres ['liste_exos'] = lesexos
             parametres ['les_fiches'] =  LesFiches
             System.creation(parametres)
+
+#================================================================
+#        Classe Tab
+#================================================================
+
+class Tab(QtGui.QWidget):
+    """Gère les onglets permettant de sélectionner des exercices"""
+
+    # Titres des tabs
+    titres = ["6e", "5e", "4e", "3e", u"Lycée"]
+
+    def __init__(self, parent, level, onchange):
+        QtGui.QWidget.__init__(self)             # Initialise la super-classe
+        self.level  = level
+        self.titre  = Tab.titres[level]
+        self.exos   = LESFICHES[level][2]
+        self.layout = QtGui.QGridLayout(self)
+        # Crée les widgets des exercices
+        nb_exos = len(self.exos)
+        spacer  = QtGui.QSpacerItem(20, 0, QtGui.QSizePolicy.Minimum,
+                                    QtGui.QSizePolicy.Expanding)
+        for i in range(nb_exos):
+            self.add_exercise(i, onchange)
+            self.layout.addItem(spacer, (nb_exos+1)/2, 0, 1, 1)
+            self.layout.addItem(spacer, (nb_exos+1)/2, 1, 1, 1)
+        # Ajoute ce tab au widget parent
+        parent.addTab(self, self.titre)
+
+    def add_exercise(self, i, onchange):
+        """Ajoute l'exercice n°i à cet onglet"""
+        exec("self.horizontalLayout_%s = QtGui.QHBoxLayout()" % i)
+        exec("self.spinBox_%s = QtGui.QSpinBox(self)" % i)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(40)
+        sizePolicy.setVerticalStretch(30)
+        exec("sizePolicy.setHeightForWidth(self.spinBox_%s.sizePolicy().hasHeightForWidth())" % (i))
+        exec("self.spinBox_%s.setSizePolicy(sizePolicy)" % (i))
+        exec("self.horizontalLayout_%s.addWidget(self.spinBox_%s)" % (i, i))
+        exec("self.imglabel_%s = QtGui.QLabel(self)" % i)
+        exec("self.horizontalLayout_%s.addWidget(self.imglabel_%s)" % (i, i))
+        exec("self.label_%s = QtGui.QLabel(self)" % i)
+        exec("self.horizontalLayout_%s.addWidget(self.label_%s)" % (i, i))
+
+        exec("spacerItem_%s = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)" % i)
+        exec("self.horizontalLayout_%s.addItem(spacerItem_%s)" % (i, i))
+        exec("self.horizontalLayout_%s.addItem(spacerItem_%s)" % (i, i))
+
+        exec("self.layout.addLayout(self.horizontalLayout_%s, %s, %s, 1, 1)" % (i, i/2, i%2))
+
+        # Action
+        exec("QtCore.QObject.connect(self.spinBox_%s, QtCore.SIGNAL(\"valueChanged(int)\"), onchange)" % i)
+        exec("self.label_%s.setText(u\"%s\")" % (i, self.exos[i]))
+        exec("self.imglabel_%s.setText(r'<img src=\"%s\" />')" %
+                (i, os.path.join(DATADIR, 'images', 'whatsthis.png')))
+        exec("self.imglabel_%s.setToolTip(r\'<img src=\"%s\" />\')" %
+                (i, os.path.join(DATADIR, 'images', 'vignettes',
+                    '%se-%02d.png' % (self.level, i))))
+        exec(u"self.spinBox_%s.setToolTip(u\"Choisissez le nombre d\'exercices de ce type à créer.\")"% i)
+
+    def reset(self):
+        """Remet les compteurs à zéro"""
+        for i in range(len(self.exos)):
+            exec("self.spinBox_%s.setValue(0)" % i,  locals())
