@@ -251,15 +251,15 @@ def creation(parametres):
 
 def nettoyage(basefilename):
     """Supprime les fichiers temporaires créés par LaTeX"""
-    try:
-        for ext in ('.aux', '.dvi', '.out', '.ps'):
+    for ext in ('.aux', '.dvi', '.out', '.ps','.nav','.snm','.toc'):
+        try:
             os.remove(basefilename+ext)
-        if os.path.getsize('%s.pdf' % basefilename) > 1000 :
-            os.remove('%s.log' % basefilename)
-            os.remove('%s-pyromaths.log' % basefilename)
-    except OSError:
-        pass
-        #le fichier à supprimer n'existe pas et on s'en moque.
+        except OSError:
+            pass
+            #le fichier à supprimer n'existe pas et on s'en moque.
+    if os.path.getsize('%s.pdf' % basefilename) > 1000 :
+        os.remove('%s.log' % basefilename)
+        os.remove('%s-pyromaths.log' % basefilename)
 
 
 def copie_tronq_modele(dest, parametres, master):
