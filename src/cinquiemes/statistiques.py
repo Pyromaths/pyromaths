@@ -521,7 +521,7 @@ def exo_vote():
     cor.append(u"\\item Les données du vote du délégué de classe ont été malheureusement partiellement perdues, mais on a réussi à regrouper les informations du tableau ci-dessous ( sachant que chaque élève a voté ) :\\par")
     
     eff1 = random.randint(1,15)
-    eff2 = random.randint(1,25-eff1)
+    eff2 = random.randint(1,24-eff1)
     freq1 = 4*random.randint(1,25-eff1-eff2)
     effectifs = [eff1,eff2,-1,-1]
     random.shuffle(effectifs)

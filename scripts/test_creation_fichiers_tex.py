@@ -27,10 +27,15 @@ Sans argument, ce script génère cent fiches contenant chacune un exemplaire de
 chaque exercice et leurs corrigés en tex et pdf.
 
 Sinon, "python test_creation_fichiers_tex.py i j k" génère k exercices n° j du
-niveau i.
+niveau i dans le dossier /tmp.
 
 Par exemple, "python test_creation_fichiers_tex.py 1 5 10" génère 10 exercices
 de "Repérage" du niveau cinquième.
+Niveau 0 : sixième
+Niveau 1 : cinquième
+Niveau 2 : quatrième
+Niveau 3 : troisième
+Niveau 4 : lycée
 """
 dt = tempfile.mkdtemp(prefix = 'pyromaths_tests-', dir = '/tmp')
 parametres = {
