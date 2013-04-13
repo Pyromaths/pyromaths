@@ -128,6 +128,7 @@ def pTeX(n):
         return "("+decimaux(n)+")"
     else:
         return decimaux(n)
+    
 def tTeX(n):
     if n==1:
         return ""
@@ -136,16 +137,17 @@ def tTeX(n):
     elif n>=0:
         return "+"+decimaux(n)
     else:
-            return decimaux(n)
+        return decimaux(n)
 
 
 
 class RacineDegre2:
     def __init__(self,numerateur=0,denominateur=1,coeff=1,radicande=0):
-        self.numerateur=numerateur
-        self.denominateur=denominateur
-        self.coeff=coeff
-        self.radicande=radicande
+        """Constructeur de la forme (a+c*racine(d))/b"""
+        self.numerateur=numerateur # a
+        self.denominateur=denominateur # b
+        self.coeff=coeff # c
+        self.radicande=radicande # d
 
     def __str__(self):
         if isinstance(self.numerateur,str):

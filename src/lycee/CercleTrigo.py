@@ -35,12 +35,12 @@ def deg2rad(n):
     return [n/p,180/p]
 
 def simprad(liste):
-    """Simplifie la fraction d'un angle en radians."""
+    """Simplifie la fraction d'un angle en radians. Le paramètre est une liste d'entiers, pour représenter une fraction."""
     p = pgcd(liste[0],liste[1])
     return [f/p for f in liste]
 
 def rad2deg(liste):
-    """Effectue la conversion de radians entre 0 et 2pi vers degrés."""
+    """Effectue la conversion de radians entre 0 et 2pi vers degrés. Le paramètre est une liste d'entiers, pour représenter une fraction."""
     return liste[0]*180/liste[1] # Attention résultat entier, donc faux si liste[1] ne divise pas 180
 
 def rad2tex(liste):

@@ -142,6 +142,7 @@ def signe(a):
         return -1
     else:
         return 1
+    
 def valeur_alea(a, b):
     """choisit une valeur comprise entre a et b non nulle"""
     while True:

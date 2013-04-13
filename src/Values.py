@@ -148,6 +148,7 @@ u"Sens de variations",
 u"Étude de fonctions",
 u"Vecteurs",
 u"Cercle trigonométrique",
+u"Forme canonique",
 ], [
 u'Niveau 1èreS',
 u'Niveau 1èreS',

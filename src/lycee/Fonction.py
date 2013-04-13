@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import os,sys
-sys.path.append("/home/nicolas/pyrogit/pyromaths")
+
 from random import randrange
 from ..outils.Polylycee import *
 
 def genere_points(xmin,xmax,ymin,ymax,simple=False):
 
-    if simple:#génère 3 intervalle de variation /\/ ou \/\
+    if simple:#génère 3 intervalles de variations /\/ ou \/\
         if randrange(1):
             variation=[0,1,0]
         else:
@@ -106,7 +106,7 @@ def tab_var(fonc,Intervalle=["-\\infty","+\\infty"]):
     if isinstance(fonc,Polynome):
         return tab_var_poly(fonc,Intervalle[0],Intervalle[1])
     else:
-        return "Je ne sais pas étudier les variations de cette fonction"
+        return "Je ne sais pas étudier les variations de cette fonction."
 
 def tab_var_poly(P,borneinf="-\\infty" , bornesup=u"+\\infty"):
     Intervalle=[borneinf,bornesup]
@@ -165,9 +165,6 @@ def tabvar_x(listex,var):
         var_x+="&&\\tx{"+nombre_TeX(listex[i])+"}"
     return var_x+"\\cr\n"
 
-def tabvar_de_f(listef):
-    '''inutile'''
-    return ""
 def nombre_TeX(nombre):#A remplacer par sepmillier
     if type(nombre) in [type(int),type(float)]:
         return str(nombre)
@@ -179,9 +176,4 @@ def nombre_TeX(nombre):#A remplacer par sepmillier
     else:
         return str(nombre)
 
-if __name__=="__main__":
-    from TEST.imprimetest import *
-    imprime_TeX(bezier(),"bezier.tex")
-    P=Polynome("x^2+5x-6")
-    imprime_TeX(tab_var(P),"polyvar.tex")
     

@@ -70,3 +70,4 @@ if __name__ == "__main__":
     sys.path[0] = realpath(_path)
     exec("from %s import pyromaths" % _dir)
     pyromaths.main()
+   
