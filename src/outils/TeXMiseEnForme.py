@@ -171,17 +171,9 @@ def Affichage(l):
             else:
                 expr = expr + " " + l[i] + " "
         elif type(l[i]) == type(Fractions(1, 1)):
-
             # C'est une fraction
-
             expr = expr + "%s" % Fractions.TeX(l[i], signe = 0)
         else:
-
-              # C'est un nombre
-
+            # C'est un nombre
             expr = expr + "%s" % Affichage.decimaux(l[i], 1)
     return expr
-
-
-
-

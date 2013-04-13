@@ -292,12 +292,12 @@ def priorites_operations(calcul, pre = "", post = "", solution = []):
     for string in ["\*\*", "[\*/]", "[\+\-]"]:
         calcul, pre, post, solution = traite_operation(string, calcul, pre,
                                                    post, solution)
-    #calcul, pre, post, solution = traite_operation("\*\*", calcul, pre,
-                                                   #post, solution)
-    #calcul, pre, post, solution = traite_operation("[\*/]", calcul, pre,
-                                                   #post, solution)
-    #calcul, pre, post, solution = traite_operation("[\+\-]", calcul, pre,
-                                                   #post, solution)
+#    calcul, pre, post, solution = traite_operation("\*\*", calcul, pre,
+#                                                   post, solution)
+#    calcul, pre, post, solution = traite_operation("[\*/]", calcul, pre,
+#                                                   post, solution)
+#    calcul, pre, post, solution = traite_operation("[\+\-]", calcul, pre,
+#                                                   post, solution)
     return (calcul, solution)
 
 ##
@@ -373,7 +373,7 @@ def OperateurPrioritaire(exercice, niveau, pre="", post="", solution=[]):
         return (solution, exercice[0], niveau)
     else:
 
-          # Trouvons l'opérateur prioritaire :
+        # Trouvons l'opérateur prioritaire :
 
         nbpar = exercice.count('(')
         nbmul = exercice.count("*")

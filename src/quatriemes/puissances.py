@@ -234,9 +234,7 @@ def ecr_sc():
             cor.append("\\item $%s=%s\\times\\mathbf{10^{%s}}$" % (s_a,
                        s_a_sc, decimaux(exp, 1)))
         else:
-
-              # forme : a_sc*...=a
-
+            # forme : a_sc*...=a
             exo.append("\\item $%s\\times\\dotfill=%s$" % (s_a_sc,
                        s_a))
             cor.append("\\item $%s\\times\\mathbf{10^{%s}}=%s$" % (s_a_sc,

@@ -135,7 +135,7 @@ def priorites_operations(calcul, pre = "", post = "", solution = []):
     return (calcul, solution)
 
 for element in priorites("(2-5)**2+(5-2)**3+((3*4+5)*2+3*(32-5*7)**2)*5+17*(12-3*5)"):
-  print element 
+    print element
   
 print priorites("(((-1)+(-2))+(+3))")
 print priorites("4-((-1+-2)+3)")

@@ -123,7 +123,7 @@ def tab_var_poly(P,borneinf="-\\infty" , bornesup=u"+\\infty"):
         if P.dictio[1]>0:
             tab_var+="\\tx{f("+P.var+")}& &\\fm& \\cr\n"
         else:
-           tab_var+="\\tx{f("+P.var+")}& &\\fd&\\cr\n"
+            tab_var+="\\tx{f("+P.var+")}& &\\fd&\\cr\n"
         return tab_var+"}$$\n"
     elif P.deg==2:
         alpha=-P.dictio[1]/(2*P.dictio[2])

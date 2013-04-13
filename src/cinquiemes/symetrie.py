@@ -50,8 +50,7 @@ def valeurs_quad(nb_pts):
             (x, y) = (random.randrange(-6, 7) * .5, random.randrange(-6,
                       7) * .5)
             if x > 0:
-                angle = int((atan((y * 1.0) / x) * 180) / pi + 360) % \
-                    360
+                angle = int((atan((y * 1.0) / x) * 180) / pi + 360) % 360
             if x < 0:
                 angle = int((atan((y * 1.0) / x) * 180) / pi + 180)
         vals.append((x, y))

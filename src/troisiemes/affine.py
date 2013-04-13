@@ -321,8 +321,8 @@ def exprfonc(f,i,A,B):
         deltax=decimaux(str(A[0]-B[0]))
 
     if float(B[0])<0 :
-       mid11=float(B[0])-0.75
-       mid12=float((B[1]+A[1]))/2   #milieu de la flèche verticale
+        mid11=float(B[0])-0.75
+        mid12=float((B[1]+A[1]))/2   #milieu de la flèche verticale
     else:
         mid11=float(B[0])+0.75
         mid12=float((B[1]+A[1]))/2

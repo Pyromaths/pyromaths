@@ -29,20 +29,20 @@ from ..classes.Racine import simplifie_racine
 class Vecteur:
 
     def __init__(self, x=0, y=0):
-      self.x=x
-      self.y=y
+        self.x=x
+        self.y=y
 
     def __eq__(self, vec):
-      '''Teste l'égalité entre deux vecteurs'''
-      return (self.x==vec.x) and (self.y==vec.y)
+        '''Teste l'égalité entre deux vecteurs'''
+        return (self.x==vec.x) and (self.y==vec.y)
 
     def __add__(self, vec):
-      '''Addition'''
-      return Vecteur(self.x+vec.x,self.y+vec.y)
+        '''Addition'''
+        return Vecteur(self.x+vec.x,self.y+vec.y)
 
     def __sub__(self, vec):
-      '''Soustraction'''
-      return Vecteur(self.x-vec.x,self.y-vec.y)
+        '''Soustraction'''
+        return Vecteur(self.x-vec.x,self.y-vec.y)
 
     def __mul__(self, c):
         '''Multiplication par un nombre''' ## Besoin du produit scalaire ou du produit vectoriel ?

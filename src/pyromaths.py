@@ -22,7 +22,7 @@
 
 from sys import argv, exit
 import sys
-from os import access, R_OK, makedirs, chdir
+from os import access, R_OK, makedirs
 from os.path import join, isdir, dirname, realpath, split
 from codecs import open
 
@@ -35,7 +35,7 @@ def main():
     from Values import CONFIGDIR
 
     import interface
-    from PyQt4 import QtGui, QtCore
+    from PyQt4 import QtGui
     class StartQT4(QtGui.QMainWindow, interface.Ui_MainWindow):
         def __init__(self, parent=None):
             QtGui.QWidget.__init__(self, parent)
@@ -70,4 +70,3 @@ if __name__ == "__main__":
     sys.path[0] = realpath(_path)
     exec("from %s import pyromaths" % _dir)
     pyromaths.main()
-   

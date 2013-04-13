@@ -44,10 +44,10 @@ def cherche_racines(a,s1,s2):
 def variations(a,s1,s2):
     """Affiche les variations d'une fonction du second degré."""
     if a > 0:
-       result = u"La courbe est décroissante sur l'intervalle $]-\infty,%s[$, \
+        result = u"La courbe est décroissante sur l'intervalle $]-\infty,%s[$, \
 atteint un minimum qui vaut %s en %s puis est croissante sur l'intervalle $]%s;+\infty[$." % (s1,s2,s1,s1)
     else:
-       result = u"La courbe est croissante sur l'intervalle $]-\infty,%s[$, \
+        result = u"La courbe est croissante sur l'intervalle $]-\infty,%s[$, \
 atteint un maximum qui vaut %s en %s puis est décroissante sur l'intervalle $]%s;+\infty[$." % (s1,s2,s1,s1)    
     return result
 

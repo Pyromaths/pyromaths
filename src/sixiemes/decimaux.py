@@ -57,7 +57,7 @@ def NombreEnLettres(n, France=True):
     coefs = {0: 'cent', 1: 'mille', 2: 'million', 3: 'milliard'}
     result = ""
 
-  # Cas particulier de zéro
+    # Cas particulier de zéro
     if n == 0:
         result = u'zéro'
     else:
@@ -91,7 +91,7 @@ def NombreEnLettres(n, France=True):
                     else:
                         temp = dizaineF[d]
 
-            # Ajout du cas particulier de 'et' entre la dizaine et 1
+                    # Ajout du cas particulier de 'et' entre la dizaine et 1
 
                     if d < 8 and (u == 1 or u == 11):
                         temp = temp + '-et'
@@ -101,7 +101,7 @@ def NombreEnLettres(n, France=True):
                     else:
                         temp = dizaineB[d]
 
-              # Ajout du cas particulier de 'et' entre la dizaine et 1
+                    # Ajout du cas particulier de 'et' entre la dizaine et 1
 
                     if u == 1:
                         temp = temp + '-et'
@@ -121,7 +121,7 @@ def NombreEnLettres(n, France=True):
             result = temp + result
 
 
-        # Récupération de la centaine du bloc de trois chiffres en cours
+            # Récupération de la centaine du bloc de trois chiffres en cours
 
             c = n % 10
             n = n // 10
@@ -136,13 +136,13 @@ def NombreEnLettres(n, France=True):
                 else:
                     temp = temp + '-' + coefs[0]
 
-          # Traitement du cas particulier du 's' à cent si rien ne suit
+                # Traitement du cas particulier du 's' à cent si rien ne suit
 
                 if result == "" and c > 1:
                     result = 's'
                 result = temp + result
 
-        # Traitement du prochain groupe de 3 chiffres
+            # Traitement du prochain groupe de 3 chiffres
 
             if n > 0:
                 coef = coef + 1
@@ -150,7 +150,7 @@ def NombreEnLettres(n, France=True):
                 if i > 1 and coef > 1:
                     result = 's' + result
 
-          # Traitement du cas particulier 'mille' ( non pas 'un mille' )
+                # Traitement du cas particulier 'mille' ( non pas 'un mille' )
 
                 if i == 1 and coef == 1:
                     n = n - 1

@@ -118,21 +118,3 @@ def proportionnalite_3eme():
     
     
     return (exo,cor)
-
-
-
-
-
-            
-              
-
-
-
-
-
-
-
-
-
-
-

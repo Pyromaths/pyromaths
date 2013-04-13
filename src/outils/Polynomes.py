@@ -147,7 +147,7 @@ def poly_id_remarquables(rac_min,rac_max,X):
         # +2 => (a+b)²
         # 0 => (a-b)(a+b)
 
- #----------polynome de degré 3-------------
+#----------polynome de degré 3-------------
 def poly_degre3_racines_entieres(rac_min,rac_max,X,racines=[-2,-1,0,1,2]):
     racine_evidente=racines[randrange(len(racines))]
     return (X-racine_evidente)*poly_racines_entieres(rac_min,rac_max,X)

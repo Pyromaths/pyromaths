@@ -201,9 +201,9 @@ class Fractions:
 
     def __int__(self):
         try:
-          assert (self.n / self.d == int(self.n / self.d)), 'La fraction n\'est pas un nombre entier !'
-          return int(self.n)
+            assert (self.n / self.d == int(self.n / self.d)), 'La fraction n\'est pas un nombre entier !'
+            return int(self.n)
         except AssertionError, args:
-          print '%s: %s' % (args.__class__.__name__, args)
+            print '%s: %s' % (args.__class__.__name__, args)
 
 

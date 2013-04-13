@@ -458,7 +458,7 @@ def figure(angle, xa, ya, dist, lpoints, noms, par_per, dist2=0):
                         lpoints[5], pts[0], pts[1]))
     else:
 
-          #nomme les droites (d_1), ...
+        #nomme les droites (d_1), ...
 
         if par_per != 2:  #2 points d'intersection
             ltxt.append('\\pstGeonode[PointSymbol=none,PointName={none,%s} %s{i1}%s{a1}' %

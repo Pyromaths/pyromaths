@@ -91,17 +91,17 @@ def factoriseTex(n):
     primes = factorise(n)[0]
 
     if len(primes) > 1:
-      for i in range(len(etapes)):
-        text = ' & = '
-        for j in range(len(etapes[i])):
-          if j != len(etapes[i]) - 1:
-            text += etapes[i][j] + ' \\times '
-          else:
-            text += etapes[i][j]
-        corrige.append(text + '\\\\')
-      corrige.append("\\end{align*}")
+        for i in range(len(etapes)):
+            text = ' & = '
+            for j in range(len(etapes[i])):
+                if j != len(etapes[i]) - 1:
+                    text += etapes[i][j] + ' \\times '
+                else:
+                    text += etapes[i][j]
+            corrige.append(text + '\\\\')
+        corrige.append("\\end{align*}")
     else:
-      corrige = [str(n) + " est un nombre premier.\\par "]
+        corrige = [str(n) + " est un nombre premier.\\par "]
 
     return (primes, corrige)
 

@@ -938,16 +938,16 @@ def tex_fractions(expr, nb, cor):  # repond a la question sur la valeur de x
              (tex_trinome(a), tex_frac(nb)))
     cor.append(u'\\[ \\thenocalcul = ' + tex_valeurx0(a, nb) + '\\]')
     if nb == (0, 1):
-      cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_valeurx1(a, nb) + '} \\]')
+        cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_valeurx1(a, nb) + '} \\]')
     else:
-      cor.append(u'\\[ \\thenocalcul = ' + tex_valeurx1(a, nb) + '\\]')
+        cor.append(u'\\[ \\thenocalcul = ' + tex_valeurx1(a, nb) + '\\]')
     b = decomp_prod((a[0], 1), (nb[0] ** 2, nb[1] ** 2))[0:2]
     c = decomp_prod((a[1], 1), (nb[0], nb[1]))[0:2]
     a = (produit(b[0], b[1]), produit(c[0], c[1]), (a[2], 1))
     if a[0][1] == a[1][1] == 1:
-      cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_valeurx2(a, nb) + '} \\]')
+        cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_valeurx2(a, nb) + '} \\]')
     else:
-      cor.append(u'\\[ \\thenocalcul = ' + tex_valeurx2(a, nb) + '\\]')
+        cor.append(u'\\[ \\thenocalcul = ' + tex_valeurx2(a, nb) + '\\]')
     cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_valeurx3(a, nb) + '} \\]')
 
 

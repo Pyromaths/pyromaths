@@ -239,20 +239,18 @@ class Ui_MainWindow(object):
 
         count = 0
         for element in modeles:
-          if os.path.splitext(element)[1] == ".tex":
-             self.comboBox_modele.addItem(str(element[:len(element)-4]))
-             if element == self.config['modele']:
-               self.comboBox_modele.setCurrentIndex(count)
-             count += 1
-
-
+            if os.path.splitext(element)[1] == ".tex":
+                self.comboBox_modele.addItem(str(element[:len(element)-4]))
+                if element == self.config['modele']:
+                    self.comboBox_modele.setCurrentIndex(count)
+                count += 1
         for element in modeles_home:
-          if os.path.splitext(element)[1] == ".tex":
-             self.comboBox_modele.addItem(QtCore.QString())
-             self.comboBox_modele.setItemText(count, str(element[:len(element)-4]))
-             if element == self.config['modele']:
-               self.comboBox_modele.setCurrentIndex(count)
-             count += 1
+            if os.path.splitext(element)[1] == ".tex":
+                self.comboBox_modele.addItem(QtCore.QString())
+                self.comboBox_modele.setItemText(count, str(element[:len(element)-4]))
+                if element == self.config['modele']:
+                    self.comboBox_modele.setCurrentIndex(count)
+                count += 1
 
         self.verticalLayout_19.addWidget(self.comboBox_modele)
         self.horizontalLayout_2.addLayout(self.verticalLayout_19)
@@ -352,10 +350,10 @@ class Ui_MainWindow(object):
 
     ### Gestion des erreurs
     def erreur_critique(self, message):
-      """Dialogue si pyromaths.xml est défectueux."""
-      reply = QtGui.QMessageBox.critical(self, "Erreur critique", message)
-      if reply:
-        sys.exit(1)
+        """Dialogue si pyromaths.xml est défectueux."""
+        reply = QtGui.QMessageBox.critical(self, "Erreur critique", message)
+        if reply:
+            sys.exit(1)
 
 
     def about(self):
@@ -475,8 +473,7 @@ class Ui_MainWindow(object):
         dans le dossier /home/jerome/workspace/Pyromaths/src/exemples
         """
         self.valide_options()
-        d0 = ""
-        d0 = unicode(QtGui.QFileDialog().getExistingDirectory (None, u"Dossier où créer les fiches",
+        d0 = unicode(QtGui.QFileDialog().getExistingDirectory(None, u"Dossier où créer les fiches",
                                                          self.config['chemin_fichier'], QtGui.QFileDialog.ShowDirsOnly))
         i = 0
         if d0:
@@ -485,39 +482,37 @@ class Ui_MainWindow(object):
                 for i in range(len(LESFICHES[niveau][2])):
                     liste.append((niveau,  i))
                 if niveau != 4:
-                  exo = os.path.join(d0, "%se.tex" % (6 - niveau))
-                  cor = os.path.join(d0, "%se-corrige.tex" % (6 - niveau))
-                  parametres = {
-                                          'les_fiches': LESFICHES,
-                                          'fiche_exo': exo,
-                                          'fiche_cor': cor,
-                                          'liste_exos': liste,
-                                          'creer_pdf': '1',
-                                          'titre': "Exemple de fiche",
-                                          'niveau': "%s\\ieme" % (6-niveau),
-                                          'modele': str(self.comboBox_modele.currentText() + '.tex'),
-                                          'corrige': True,
-                                          'creer_unpdf': True,
-                                          'datadir': DATADIR,
-                                          'configdir': CONFIGDIR
-                                          }
+                    exo = os.path.join(d0, "%se.tex" % (6 - niveau))
+                    cor = os.path.join(d0, "%se-corrige.tex" % (6 - niveau))
+                    parametres = {'les_fiches': LESFICHES,
+                                  'fiche_exo': exo,
+                                  'fiche_cor': cor,
+                                  'liste_exos': liste,
+                                  'creer_pdf': '1',
+                                  'titre': "Exemple de fiche",
+                                  'niveau': "%s\\ieme" % (6-niveau),
+                                  'modele': str(self.comboBox_modele.currentText() + '.tex'),
+                                  'corrige': True,
+                                  'creer_unpdf': True,
+                                  'datadir': DATADIR,
+                                  'configdir': CONFIGDIR
+                                  }
                 else:
-                  exo = os.path.join(d0, "Lycee.tex" )
-                  cor = os.path.join(d0, "Lycee-corrige.tex" )
-                  parametres = {
-                                          'les_fiches': LESFICHES,
-                                          'fiche_exo': exo,
-                                          'fiche_cor': cor,
-                                          'liste_exos': liste,
-                                          'creer_pdf': '1',
-                                          'titre': "Exemple de fiche",
-                                          'niveau': u"Lycée",
-                                          'modele': str(self.comboBox_modele.currentText() + '.tex'),
-                                          'corrige': True,
-                                          'creer_unpdf': True,
-                                          'datadir': DATADIR,
-                                          'configdir': CONFIGDIR
-                                          }
+                    exo = os.path.join(d0, "Lycee.tex" )
+                    cor = os.path.join(d0, "Lycee-corrige.tex" )
+                    parametres = {'les_fiches': LESFICHES,
+                                  'fiche_exo': exo,
+                                  'fiche_cor': cor,
+                                  'liste_exos': liste,
+                                  'creer_pdf': '1',
+                                  'titre': "Exemple de fiche",
+                                  'niveau': u"Lycée",
+                                  'modele': str(self.comboBox_modele.currentText() + '.tex'),
+                                  'corrige': True,
+                                  'creer_unpdf': True,
+                                  'datadir': DATADIR,
+                                  'configdir': CONFIGDIR
+                                  }
                 System.creation(parametres)
 
     def effacer_choix_exercices(self):
@@ -667,7 +662,6 @@ def valide(list, LesFiches, parametres):
     #============================================================
     #        Choix des noms des fichiers exercices et corrigés
     #============================================================
-    (f0, f1) = ("", "")
     saveas = QtGui.QFileDialog()
     filename = System.supprime_extension(parametres['nom_fichier'],
                                          '.tex')
