@@ -4,12 +4,12 @@ import sys, os, shutil
 from subprocess import call, Popen
 from os.path import dirname, normpath, join, abspath, realpath, split
 
-_path = normpath(join(abspath(dirname(__file__)), ".."))
+_path = normpath(join(abspath(dirname(__file__)), "../src"))
 sys.path[0] = realpath(_path)
-from src import pyromaths
+from pyromaths import pyromaths
 
-from src.Values import LESFICHES, data_dir, configdir
-from src.outils.System import creation
+from pyromaths.Values import LESFICHES, data_dir, configdir
+from pyromaths.outils.System import creation
 import codecs, tempfile
 
 

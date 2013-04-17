@@ -6,8 +6,6 @@ from os.path import normpath, dirname, exists, abspath, join
 from os import environ, name
 from sys import executable, getfilesystemencoding
 import sys
-#import troisiemes.troisiemes, quatriemes.quatriemes, cinquiemes.cinquiemes
-#import sixiemes.sixiemes, lycee.lycee
 
 def we_are_frozen():
     """Returns whether we are frozen via py2exe.
@@ -17,21 +15,18 @@ def we_are_frozen():
 def data_dir():
     """Renvoie le dossier data, selon qu'on utilise pyromaths à partir des
     sources, de l'exécutable win32 ou du paquet deb"""
-    if we_are_frozen():
-        return join(normpath(dirname(unicode(executable,
-            getfilesystemencoding()))), 'data')
-    elif exists(join(abspath(dirname(__file__)),'../data/')):
-        return normpath(join(abspath(dirname(__file__)),'../data/'))
-    else:
-        return '/usr/share/pyromaths/'
+    if we_are_frozen(): return join(normpath(dirname(unicode(executable,
+                                             getfilesystemencoding()))), 'data')
+    data = join(abspath(dirname(__file__)),'../../data/')
+    if exists(data): return normpath(data)
+    return '/usr/share/pyromaths/'
 
 def icon_dir():
     """Renvoie le dossier où se trouve l'icône, selon qu'on utilise pyromaths à
     partir des sources, de l'exécutable win32 ou du paquet deb"""
-    if we_are_frozen() or exists(join(abspath(dirname(__file__)),'../data/')):
+    if we_are_frozen() or exists(join(abspath(dirname(__file__)),'../../data/')):
         return join(DATADIR, 'images', 'pyromaths.png')
-    else:
-        return join('/usr/share/pixmaps', 'pyromaths.png')
+    return join('/usr/share/pixmaps', 'pyromaths.png')
         
 if name == 'nt':
     def home():
