@@ -25,7 +25,7 @@ case "$touche" in
 esac
 
 #---- CHANGE LE NUMÉRO DE VERSION DE PYROMATHS ----
-sed -i "s/VERSION = '.*/VERSION = '${VERSION}'/" ${PYROPATH}/src/Values.py
+sed -i "s/VERSION = '.*/VERSION = '${VERSION}'/" ${PYROPATH}/src/pyromaths/Values.py
 
 #---- CHANGE LE NUMÉRO DE VERSION DE MACOS ----
 sed -i "N;s!\(<key>CFBundleVersion</key>\n *<string>\).*\(</string>\)!\1${VERSION}\2!;P;D" ${PYROPATH}/scripts/mac/Info.plist

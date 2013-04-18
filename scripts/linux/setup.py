@@ -4,7 +4,12 @@
 from distutils.core import setup
 import glob
 
-from src.Values import VERSION
+# Cruft dedicating to importing version number
+import sys
+from os.path import dirname, join, realpath
+basedir = dirname(realpath(__file__))
+sys.path.insert(0, join(basedir,'src'))
+from pyromaths.Values import VERSION
 
 setup(name = "pyromaths",
     version = VERSION,
@@ -14,7 +19,7 @@ setup(name = "pyromaths",
     author = "Jérôme Ortais",
     author_email = "jerome.ortais@pyromaths.org",
     url = "http://www.pyromaths.org",
-    package_dir={'pyromaths': 'src'},
+    package_dir={'': 'src'},
     packages=['pyromaths', 'pyromaths.troisiemes', 'pyromaths.quatriemes',
         'pyromaths.cinquiemes', 'pyromaths.sixiemes', 'pyromaths.lycee',
         'pyromaths.outils', 'pyromaths.classes'],

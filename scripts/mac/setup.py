@@ -1,7 +1,11 @@
 from setuptools import setup
 
-APP = ['../../src/pyromaths.py']
-DATA_FILES = ['pyromaths.icns', 'qt.conf', '../../src/sixiemes', '../../src/cinquiemes', '../../src/quatriemes', '../../src/troisiemes', '../../src/classes', '../../src/lycee', '../../src/outils', '../../src/__init__.py', '../../src/interface.py', '../../src/Values.py']
+APP = ['../../src/pyromaths/pyromaths.py']
+DATA_FILES = ['pyromaths.icns', 'qt.conf', '../../src/pyromaths',
+              '../../src/pyromaths/sixiemes', '../../src/pyromaths/cinquiemes',
+              '../../src/pyromaths/quatriemes', '../../src/pyromaths/troisiemes',
+              '../../src/pyromaths/classes', '../../src/pyromaths/lycee',
+              '../../src/pyromaths/outils']
 OPTIONS = dict(
         plist='Info.plist',
         argv_emulation=True,
