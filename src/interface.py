@@ -325,17 +325,17 @@ class Ui_MainWindow(object):
         #    Raccourcis clavier
         #============================================================
         keyQuit = QtGui.QShortcut("Ctrl+Q", MainWindow)
-        QtCore.QObject.connect(keyQuit, QtCore.SIGNAL("activated()"), QtGui.qApp,
+        QtCore.QObject.connect(keyQuit, QtCore.SIGNAL("triggered()"), QtGui.qApp,
                                                                  QtCore.SLOT("quit()"))
 
         #============================================================
         #    Actions des boutons et menus
         #============================================================
-        QtCore.QObject.connect(self.actionTous_les_exercices, QtCore.SIGNAL("activated()"), self.creer_tous_les_exercices)
-        QtCore.QObject.connect(self.actionQuitter, QtCore.SIGNAL("activated()"), QtGui.qApp,
+        QtCore.QObject.connect(self.actionTous_les_exercices, QtCore.SIGNAL("triggered()"), self.creer_tous_les_exercices)
+        QtCore.QObject.connect(self.actionQuitter, QtCore.SIGNAL("triggered()"), QtGui.qApp,
                                                                  QtCore.SLOT("quit()"))
-        QtCore.QObject.connect(self.actionAcceder_au_site, QtCore.SIGNAL("activated()"), self.site)
-        QtCore.QObject.connect(self.action_a_propos, QtCore.SIGNAL("activated()"), self.about)
+        QtCore.QObject.connect(self.actionAcceder_au_site, QtCore.SIGNAL("triggered()"), self.site)
+        QtCore.QObject.connect(self.action_a_propos, QtCore.SIGNAL("triggered()"), self.about)
         QtCore.QObject.connect(self.pushButton_quit, QtCore.SIGNAL("clicked()"), QtGui.qApp,
                                                                  QtCore.SLOT("quit()"))
         QtCore.QObject.connect(self.pushButton_erase, QtCore.SIGNAL("clicked()"), self.effacer_choix_exercices)
@@ -674,7 +674,7 @@ def valide(list, LesFiches, parametres):
     f0 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(parametres['chemin_fichier'],
                              u'%s.tex' % filename), "Documents Tex (*.tex)"))
-    if f0 != None:
+    if f0:
         System.ajoute_extension(f0, '.tex')
         if corrige and not parametres['creer_unpdf']:
             f1 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
@@ -684,7 +684,7 @@ def valide(list, LesFiches, parametres):
         else:
             f1 = os.path.join(os.path.dirname(f0), u"%s-corrige.tex"  %
                               os.path.splitext(os.path.basename(f0))[0])
-        if f1 != None:
+        if f1:
             if corrige:
                 System.ajoute_extension(f1, '.tex')
             parametres ['fiche_exo'] = f0
