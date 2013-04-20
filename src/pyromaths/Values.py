@@ -15,8 +15,14 @@ def we_are_frozen():
 def data_dir():
     """Renvoie le dossier data, selon qu'on utilise pyromaths à partir des
     sources, de l'exécutable win32 ou du paquet deb"""
-    if we_are_frozen(): return join(normpath(dirname(unicode(executable,
-                                             getfilesystemencoding()))), 'data')
+    if we_are_frozen():
+        if   sys.platform == 'win32':
+            path = 'data'
+        elif sys.platform == 'darwin':
+            path = '../Resources/data'
+        return join(normpath(dirname(unicode(executable,
+                                             getfilesystemencoding()))), path)
+    # We're alive
     data = join(abspath(dirname(__file__)),'../../data/')
     if exists(data): return normpath(data)
     return '/usr/share/pyromaths/'
