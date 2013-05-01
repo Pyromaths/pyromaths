@@ -8,51 +8,61 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-
+#
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-mac=`/usr/bin/dirname $0`
-cd $mac/../..
-pyromaths=$PWD
+cd $(dirname $0)
+DIST="$PWD/dist"
+APP="$DIST/Pyromaths.app/Contents"
 
-# Utiliser py2app:
-cd $mac
-python setup.py py2app
+echo "*** Remove previous builds..."
+rm -rf dist/Pyromaths*.app build/bdist.macosx*
 
-# Supprimer les fichiers debug des frameworks
-rm $mac/dist/Pyromaths.app/Contents/Frameworks/*.framework/Versions/4/*_debug
-rm $mac/dist/Pyromaths.app/Contents/Frameworks/*.framework/*_debug
+echo "*** Build stand-alone application..."
+# L'option -v permet d'afficher le détail de la compilation
+if [ "$1" == "-v" ]; then
+	python setup.py py2app
+else
+	python setup.py py2app > /dev/null
+fi
 
-# Supprimer les fichiers py inutiles
-rm $mac/dist/Pyromaths.app/Contents/Resources/lib/python2.6/lxml/*.py
-rm $mac/dist/Pyromaths.app/Contents/Resources/lib/python2.6/lxml/html/*.py
-rm $mac/dist/Pyromaths.app/Contents/Resources/site.py
+echo "*** Apply setenv.sh hack..."
+# Copier le script setenv.sh
+cp -a setenv.sh $APP/MacOS/
+# Remplacer le CFBundleExecutable pyromaths par setenv.sh
+sed -i '' '23s/pyromaths/setenv.sh/' $APP/Info.plist
 
-# Copier les dossiers images, packages et templates
-mkdir $mac/dist/Pyromaths.app/Contents/MacOS/data/
-mkdir $mac/dist/Pyromaths.app/Contents/MacOS/data/images/
-cp -R $pyromaths/data/images/vignettes $mac/dist/Pyromaths.app/Contents/MacOS/data/images/
-cp $pyromaths/data/images/pyromaths.png $mac/dist/Pyromaths.app/Contents/MacOS/data/images/
-cp $pyromaths/data/images/whatsthis.png $mac/dist/Pyromaths.app/Contents/MacOS/data/images/
-cp -R $pyromaths/data/packages $mac/dist/Pyromaths.app/Contents/MacOS/data/
-cp -R $pyromaths/data/templates $mac/dist/Pyromaths.app/Contents/MacOS/data/
+echo "*** Clean-up unnecessary files/folders..."
+# /: Supprimer le fichier PkgInfo (codes type & creator codes déjà indiqués dans Info.plist)
+rm $APP/PkgInfo
+# /Resources: Supprimer les fichiers inutiles
+cd $APP/Resources
+rm -rf include lib/python2.*/config lib/python2.*/site.pyc
+# /Resources/data: Supprimer le dossier linux et les images inutiles
+cd $APP/Resources/data
+rm -rf linux/ images/pyromaths-banniere.png images/pyromaths.ico
+# /Resources/lib: Supprimer les fichiers .so inutiles
+cd $APP/Resources/lib/python2.*/lib-dynload
+rm _AE.so _codecs_cn.so _codecs_hk.so _codecs_iso2022.so _codecs_jp.so    \
+	_codecs_kr.so _codecs_tw.so _Evt.so _File.so _hashlib.so _heapq.so       \
+	_locale.so _multibytecodec.so _Res.so _ssl.so array.so bz2.so cPickle.so \
+	datetime.so gestalt.so MacOS.so pyexpat.so resource.so strop.so          \
+	unicodedata.so PyQt4/Qt.so
+# /Frameworks: Supprimer les fichiers inutiles
+cd $APP/Frameworks
+rm -rf *.framework/Contents *.framework/Versions/4.0 \
+	*.framework/Versions/Current *.framework/*.prl    \
+	QtCore.framework/QtCore QtGui.framework/QtGui
+cd $APP/Frameworks/Python.framework/Versions/2.*
+rm -rf include lib Resources
 
-# copier le script setenv.sh et le rendre exécutable
-cp $mac/setenv.sh $mac/dist/Pyromaths.app/Contents/MacOS/
-chmod +x $mac/dist/Pyromaths.app/Contents/MacOS/setenv.sh
+echo "*** Remove all architectures but x86_64..."
+ditto --rsrc --arch x86_64 --hfsCompression $DIST/Pyromaths.app $DIST/Pyromaths-x86_64.app
 
-# Remplacer le CFBundleExecutable pyromaths par le script setenv.sh dans Info.plist
-sed -i '' '23s/pyromaths/setenv.sh/' $mac/dist/Pyromaths.app/Contents/Info.plist
-
-# Suppression du code PowerPC et déplacement de Pyromaths finalisé sur le bureau
-ditto --rsrc --arch i386 $mac/dist/Pyromaths.app ~/Desktop/Pyromaths.app
-
-# nettoyage
-rm -rf $mac/dist/
-rm -rf $mac/build
+echo "*** Done."
