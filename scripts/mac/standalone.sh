@@ -62,6 +62,26 @@ rm -rf *.framework/Contents *.framework/Versions/4.0 \
 cd $APP/Frameworks/Python.framework/Versions/2.*
 rm -rf include lib Resources
 
+echo "*** Improve french localization..."
+# Extract strings from qt_menu.nib
+cd $DIST
+ibtool --generate-strings-file qt_menu.strings $APP/Frameworks/QtGui.framework/Versions/4/Resources/qt_menu.nib
+# Convert qt_menu.strings from UTF-16 to UTF-8
+iconv -f utf-16 -t utf-8 qt_menu.strings > qt_menu_tmp.strings
+mv -f qt_menu_tmp.strings qt_menu.strings
+# Replace the english strings with the french string
+sed -i '' 's/Hide/Masquer/g' qt_menu.strings
+sed -i '' 's/Others/les autres/g' qt_menu.strings
+sed -i '' 's/Show All/Tout afficher/g' qt_menu.strings
+sed -i '' 's/Quit/Quitter/g' qt_menu.strings
+# Import french strings
+cd $APP/Frameworks/QtGui.framework/Versions/4/Resources
+ibtool --strings-file $DIST/qt_menu.strings --write qt_menu_french.nib qt_menu.nib
+# Clean-up
+rm -rf qt_menu.nib
+mv qt_menu_french.nib qt_menu.nib
+rm $DIST/qt_menu.strings
+
 echo "*** Remove all architectures but x86_64..."
 ditto --rsrc --arch x86_64 --hfsCompression $DIST/Pyromaths.app $DIST/Pyromaths-x86_64.app
 
