@@ -106,7 +106,7 @@ START=$(date +%s)
 # Build stages:
 #   - clean, build and hack are mandatory
 #   - optimize and translate are optional
-clean && build && hack && (translate; optimize) && echo "*** Done."
+clean && build $1 && hack && (translate; optimize) && echo "*** Done."
 END=$(date +%s)
 ELAPSED=$(( $END - $START ))
 echo "(Run time: ${ELAPSED}s)"
