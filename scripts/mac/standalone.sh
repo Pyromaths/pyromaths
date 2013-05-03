@@ -18,26 +18,40 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 cd $(dirname $0)
-DIST="$PWD/dist"
+DIR=$PWD
+BUILD="$DIR/build"
+DIST="$DIR/dist"
 APP="$DIST/Pyromaths.app/Contents"
 
-echo "*** Remove previous builds..."
-rm -rf dist/Pyromaths*.app build/bdist.macosx*
+echo "Build Mac OSX standalone application (using py2app)."
+echo "Build dir: $BUILD"
+echo "Dist dir:  $DIST"
 
+clean() {
+echo "*** Remove previous builds..."
+rm -rf $DIST/Pyromaths*.app $BUILD/bdist.macosx*
+}
+
+build() {
 echo "*** Build stand-alone application..."
 # L'option -v permet d'afficher le détail de la compilation
+cd $DIR
 if [ "$1" == "-v" ]; then
-	python setup.py py2app
+	python setup.py py2app -b $BUILD -d $DIST
 else
-	python setup.py py2app > /dev/null
+	python setup.py py2app -b $BUILD -d $DIST > /dev/null
 fi
+}
 
+hack() {
 echo "*** Apply setenv.sh hack..."
 # Copier le script setenv.sh
-cp -a setenv.sh $APP/MacOS/
-# Remplacer le CFBundleExecutable pyromaths par setenv.sh
+# et remplacer le CFBundleExecutable pyromaths par setenv.sh
+cp -a $DIR/setenv.sh $APP/MacOS/ &&
 sed -i '' '23s/pyromaths/setenv.sh/' $APP/Info.plist
+}
 
+optimize() {
 echo "*** Clean-up unnecessary files/folders..."
 # /: Supprimer le fichier PkgInfo (codes type & creator codes déjà indiqués dans Info.plist)
 rm $APP/PkgInfo
@@ -49,19 +63,24 @@ cd $APP/Resources/data
 rm -rf linux/ images/pyromaths-banniere.png images/pyromaths.ico
 # /Resources/lib: Supprimer les fichiers .so inutiles
 cd $APP/Resources/lib/python2.*/lib-dynload
-rm _AE.so _codecs_cn.so _codecs_hk.so _codecs_iso2022.so _codecs_jp.so    \
+rm _AE.so _codecs_cn.so _codecs_hk.so _codecs_iso2022.so _codecs_jp.so    	 \
 	_codecs_kr.so _codecs_tw.so _Evt.so _File.so _hashlib.so _heapq.so       \
 	_locale.so _multibytecodec.so _Res.so _ssl.so array.so bz2.so cPickle.so \
 	datetime.so gestalt.so MacOS.so pyexpat.so resource.so strop.so          \
 	unicodedata.so PyQt4/Qt.so
 # /Frameworks: Supprimer les fichiers inutiles
 cd $APP/Frameworks
-rm -rf *.framework/Contents *.framework/Versions/4.0 \
+rm -rf *.framework/Contents *.framework/Versions/4.0  \
 	*.framework/Versions/Current *.framework/*.prl    \
 	QtCore.framework/QtCore QtGui.framework/QtGui
 cd $APP/Frameworks/Python.framework/Versions/2.*
 rm -rf include lib Resources
 
+echo "*** Remove all architectures but x86_64..."
+ditto --rsrc --arch x86_64 --hfsCompression $DIST/Pyromaths.app $DIST/Pyromaths-x86_64.app
+}
+
+translate() {
 echo "*** Improve french localization..."
 # Extract strings from qt_menu.nib
 cd $DIST
@@ -81,8 +100,9 @@ ibtool --strings-file $DIST/qt_menu.strings --write qt_menu_french.nib qt_menu.n
 rm -rf qt_menu.nib
 mv qt_menu_french.nib qt_menu.nib
 rm $DIST/qt_menu.strings
+}
 
-echo "*** Remove all architectures but x86_64..."
-ditto --rsrc --arch x86_64 --hfsCompression $DIST/Pyromaths.app $DIST/Pyromaths-x86_64.app
-
-echo "*** Done."
+# Build stages:
+#   - clean, build and hack are mandatory
+#   - optimize and translate are optional
+clean && build && hack && (optimize; translate) && echo "*** Done."
