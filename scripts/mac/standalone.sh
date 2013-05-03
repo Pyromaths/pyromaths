@@ -102,7 +102,11 @@ mv qt_menu_french.nib qt_menu.nib
 rm $DIST/qt_menu.strings
 }
 
+START=$(date +%s)
 # Build stages:
 #   - clean, build and hack are mandatory
 #   - optimize and translate are optional
 clean && build && hack && (optimize; translate) && echo "*** Done."
+END=$(date +%s)
+ELAPSED=$(( $END - $START ))
+echo "(Run time: ${ELAPSED}s)"
