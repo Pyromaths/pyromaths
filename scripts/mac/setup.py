@@ -3,8 +3,8 @@ from glob import glob
 from setuptools import setup, find_packages
 
 import sys
-sys.path.append('../../src/pyromaths/')
-from Values import VERSION
+sys.path.append('../../src')
+from pyromaths.Values import VERSION
 
 plist = dict(
         CFBundleIdentifier = "org.pyromaths.pyromaths",
