@@ -43,14 +43,6 @@ build() {
 	fi
 }
 
-hack() {
-	echo "*** Apply setenv.sh hack..."
-	# Copier le script setenv.sh
-	# et remplacer le CFBundleExecutable pyromaths par setenv.sh
-	cp -a $DIR/setenv.sh $APP/MacOS/ &&
-	sed -i '' '23s/pyromaths/setenv.sh/' $APP/Info.plist
-}
-
 optimize() {
 	echo "*** Clean-up unnecessary files/folders..."
 	# /: Supprimer le fichier PkgInfo (codes type & creator codes déjà indiqués dans Info.plist)
@@ -106,7 +98,7 @@ START=$(date +%s)
 # Build stages:
 #   - clean, build and hack are mandatory
 #   - optimize and translate are optional
-clean && build $1 && hack && (translate; optimize) && echo "*** Done."
+clean && build $1 && (translate; optimize) && echo "*** Done."
 END=$(date +%s)
 ELAPSED=$(( $END - $START ))
 echo "(Run time: ${ELAPSED}s)"
