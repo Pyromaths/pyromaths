@@ -1,6 +1,8 @@
 #!/bin/bash
 VERSION=`date +%y.%m`
 PYROPATH=$(cd `dirname $0` && cd .. && pwd)
+BUILD="${PYROPATH}/build"
+DIST="${PYROPATH}/dist"
 ARCHIVEPATH=$( cd ${PYROPATH} && cd .. && pwd)
 if [ ! -f /usr/bin/debuild ];
 then
@@ -32,21 +34,22 @@ echo "#-------------------------------------------
 #-------------------------------------------"
 find ${PYROPATH} -iname '*~' | xargs rm
 find ${PYROPATH} -iname '*.pyc' | xargs rm
-rm /tmp/pyromaths_*
+rm ${BUILD}/pyromaths_${VERSION}* ${DIST}/pyromaths_${VERSION}-*.deb
 
 echo "#--------------------------------------------
 #---------- CRÉATION DES SOURCES ------------
 #--------------------------------------------"
-[ -d /tmp/building_pyromaths ] && rm -r /tmp/building_pyromaths
-mkdir /tmp/building_pyromaths
-cd /tmp/building_pyromaths
+[ -d ${BUILD}/building_pyromaths ] && rm -r ${BUILD}/building_pyromaths
+mkdir ${BUILD}/building_pyromaths
+cd ${BUILD}/building_pyromaths
 cp -r ${PYROPATH}/src ${PYROPATH}/data .
 cp ${PYROPATH}/* .
 cp -r ${PYROPATH}/scripts/linux/* .
-python setup.py sdist --formats=bztar
+python setup.py sdist --formats=bztar -d $BUILD
+rm -rf src/*.egg-info
 rm MANIFEST
-cp dist/pyromaths-${VERSION}.tar.bz2 ${ARCHIVEPATH}/pyromaths-${VERSION}-sources.tar.bz2
-mv dist/pyromaths-${VERSION}.tar.bz2 /tmp/pyromaths_${VERSION}.orig.tar.bz2
+cp ${BUILD}/pyromaths-${VERSION}.tar.bz2 ${ARCHIVEPATH}/pyromaths-${VERSION}-sources.tar.bz2
+mv ${BUILD}/pyromaths-${VERSION}.tar.bz2 ${BUILD}/pyromaths_${VERSION}.orig.tar.bz2
 
 echo "#--------------------------------------------
 #--------- CRÉATION DU PAQUET DEB -----------
@@ -54,23 +57,24 @@ echo "#--------------------------------------------
 debuild clean
 debuild -kB39EE5B6
 sleep 30
-cp /tmp/pyromaths_${VERSION}-?_all.deb  ${ARCHIVEPATH}
+cp ${BUILD}/pyromaths_${VERSION}-?_all.deb ${ARCHIVEPATH}
+mv ${BUILD}/pyromaths_${VERSION}-?_all.deb ${DIST}
 
 echo "#--------------------------------------------
 #--------- CRÉATION DU PAQUET RPM -----------
 #--------------------------------------------"
-python setup.py bdist --formats=rpm
-mv dist/pyromaths-${VERSION}*.noarch.rpm ${ARCHIVEPATH}
+python setup.py bdist --formats=rpm -d $DIST
+cp ${DIST}/pyromaths-${VERSION}*.noarch.rpm ${ARCHIVEPATH}
 cd ${PYROPATH}
 
 echo "#--------------------------------------------
 #---------- CRÉATION DU DÉPÔT DEB -----------
 #--------------------------------------------"
-rm -r /tmp/building_pyromaths
-[ -d /tmp/repo_debian ] && rm -r /tmp/repo_debian
-mkdir -p /tmp/repo_debian/dists
-mv /tmp/pyromaths_${VERSION}* /tmp/repo_debian/dists
-cd /tmp/repo_debian
+rm -r ${BUILD}/building_pyromaths
+[ -d ${BUILD}/repo_debian ] && rm -r ${BUILD}/repo_debian
+mkdir -p ${BUILD}/repo_debian/dists
+cp ${DIST}/pyromaths_${VERSION}*.deb ${BUILD}/repo_debian/dists
+cd ${BUILD}/repo_debian
 sudo dpkg-scanpackages . /dev/null > Packages &&
 sudo dpkg-scanpackages . /dev/null | gzip -c9 > Packages.gz &&
 sudo dpkg-scanpackages . /dev/null | bzip2 -c9 > Packages.bz2 &&
@@ -79,7 +83,7 @@ mv /tmp/Release.tmp Release &&
 gpg --default-key "Jérôme Ortais" -bao Release.gpg Release &&
 tar vjcf ${ARCHIVEPATH}/debs-${VERSION}.tar.bz2 dists/ Packages Packages.gz Packages.bz2 Release Release.gpg &&
 cd ${PYROPATH} &&
-rm -r /tmp/repo_debian
+rm -r ${BUILD}/repo_debian
 
 echo "#-------------------------------------------
 #------- CRÉATION DU BINAIRE WINDOWS -------
