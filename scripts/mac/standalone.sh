@@ -18,6 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 cd $(dirname $0)
+cd ../..
 DIR=$PWD
 BUILD="$DIR/build"
 DIST="$DIR/dist"

@@ -5,7 +5,6 @@ md pyromaths
 cd pyromaths
 xcopy z:\pyromaths\data data /i /s
 xcopy z:\pyromaths\src src /i /s
-copy z:\pyromaths\scripts\win32\setup.py .
 copy z:\pyromaths\* .
 move pyromaths Pyromaths.py
 c:\Python27\python.exe setup.py innosetup
