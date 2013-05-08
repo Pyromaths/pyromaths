@@ -28,7 +28,6 @@ esac
 
 #---- CHANGE LE NUMÉRO DE VERSION DE PYROMATHS ----
 sed -i "s/VERSION = '.*/VERSION = '${VERSION}'/" ${PYROPATH}/src/pyromaths/Values.py
-
 echo "#-------------------------------------------
 #---- SUPPRIME LES FICHIERS TEMPORAIRES ----
 #-------------------------------------------"
@@ -39,9 +38,11 @@ rm ${BUILD}/pyromaths_${VERSION}* ${DIST}/pyromaths_${VERSION}-*.deb
 echo "#--------------------------------------------
 #---------- CRÉATION DES SOURCES ------------
 #--------------------------------------------"
-[ -d ${BUILD}/building_pyromaths ] && rm -r ${BUILD}/building_pyromaths
-mkdir ${BUILD}/building_pyromaths
-cd ${BUILD}/building_pyromaths
+# Create and switch to target BUILDIR
+BUILDIR=${BUILD}/pyromaths-${VERSION}
+[ -d $BUILDIR ] && rm -r $BUILDIR
+mkdir $BUILDIR
+cd $BUILDIR
 cp -r ${PYROPATH}/src ${PYROPATH}/data .
 cp ${PYROPATH}/* .
 cp -r ${PYROPATH}/scripts/linux/* .
@@ -70,7 +71,8 @@ cd ${PYROPATH}
 echo "#--------------------------------------------
 #---------- CRÉATION DU DÉPÔT DEB -----------
 #--------------------------------------------"
-rm -r ${BUILD}/building_pyromaths
+# Clean-up BUILDIR
+rm -r ${BUILDIR}
 [ -d ${BUILD}/repo_debian ] && rm -r ${BUILD}/repo_debian
 mkdir -p ${BUILD}/repo_debian/dists
 cp ${DIST}/pyromaths_${VERSION}*.deb ${BUILD}/repo_debian/dists
