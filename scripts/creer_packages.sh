@@ -38,6 +38,13 @@ rm ${BUILD}/pyromaths_${VERSION}* ${DIST}/pyromaths_${VERSION}-*.deb
 echo "#--------------------------------------------
 #---------- CRÉATION DES SOURCES ------------
 #--------------------------------------------"
+cd $PYROPATH
+python setup.py sdist --formats=bztar -d $DIST
+cp ${DIST}/pyromaths-${VERSION}.tar.bz2 ${ARCHIVEPATH}/pyromaths-${VERSION}-sources.tar.bz2
+
+echo "#--------------------------------------------
+#--------- CRÉATION DU PAQUET DEB -----------
+#--------------------------------------------"
 # Create and switch to target BUILDIR
 BUILDIR=${BUILD}/pyromaths-${VERSION}
 [ -d $BUILDIR ] && rm -r $BUILDIR
@@ -49,12 +56,7 @@ cp -r ${PYROPATH}/scripts/linux/* .
 python setup.py sdist --formats=bztar -d $BUILD
 rm -rf src/*.egg-info
 rm MANIFEST
-cp ${BUILD}/pyromaths-${VERSION}.tar.bz2 ${ARCHIVEPATH}/pyromaths-${VERSION}-sources.tar.bz2
 mv ${BUILD}/pyromaths-${VERSION}.tar.bz2 ${BUILD}/pyromaths_${VERSION}.orig.tar.bz2
-
-echo "#--------------------------------------------
-#--------- CRÉATION DU PAQUET DEB -----------
-#--------------------------------------------"
 debuild clean
 debuild -kB39EE5B6
 sleep 30
