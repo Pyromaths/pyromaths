@@ -16,12 +16,13 @@ or .py extensions), mostly located in platform-specific sub-folders.
 Most of them will run rather quietly (except for warnings and errors) yet can be
 made chatty with the verbose flag (-v).
 Examples:
-    $ pkg/mac/make_standalone.sh -v
     $ pkg\win32\make_standalone.bat
 
 Preferably, make scripts can be full GNU make targets:
 Example (Unix):
     $ make source     # or tgz, tbz, egg, rpm, deb, all
+Example (Mac):
+    $ make app
 More:
     $ make [help]
 

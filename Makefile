@@ -18,12 +18,14 @@ DEBUILDIR=$(BUILD)/pyromaths-$(VERSION)
 REPOBUILDIR=$(BUILD)/repo_debian
 # Build files in root folder
 FILES=AUTHORS COPYING NEWS pyromaths README setup.py
+# Mac app folder
+APP=$(DIST)/Pyromaths.app/Contents
 
 help:
 	#
 	# Build pyromaths packages in several formats.
 	#
-	# Usage:
+	# Usage (Unix):
 	#	$$ make tgz          # Make full-source .tar.gz archive
 	#	$$ make tbz          # Make full-source .tar.bz2 archive
 	#	$$ make source       # Alias for 'make tbz'
@@ -31,6 +33,9 @@ help:
 	#	$$ make rpm          # Make RPM package
 	#	$$ make deb          # Make DEB package
 	#	$$ make all          # Make all previous archives/packages
+	#
+	# Usage (Mac):
+	#	$$ make app          # Make standalone application
 	#
 	# And also:
 	#	$$ make version      # Print target version
@@ -126,5 +131,48 @@ deb_repo: deb
 	mv /tmp/Release.tmp Release && \
 	gpg --default-key "Jérôme Ortais" -bao Release.gpg Release && \
 	tar vjcf $(ARCHIVEPATH)/debs-$(VERSION).tar.bz2 dists/ Packages Packages.gz Packages.bz2 Release Release.gpg
+
+app: clean
+	# Make standalone Mac application
+	# ... Remove previous builds
+	rm -rf $(DIST)/Pyromaths*.app $(BUILD)/bdist.macosx*
+	# ... Build standalone app
+	cd $(PYROPATH) && python setup.py py2app -b $(BUILD) -d $(DIST) $(OUT)
+	# ... Improve french localization..."
+	#     Extract strings from qt_menu.nib
+	cd $(DIST) && \
+	ibtool --generate-strings-file qt_menu.strings $APP/Frameworks/QtGui.framework/Versions/4/Resources/qt_menu.nib && \
+	#     Convert qt_menu.strings from UTF-16 to UTF-8
+	iconv -f utf-16 -t utf-8 qt_menu.strings > qt_menu_tmp.strings && \
+	mv -f qt_menu_tmp.strings qt_menu.strings &&                      \
+	#     Replace the english strings with the french string
+	sed -i '' 's/Hide/Masquer/g' qt_menu.strings &&                   \
+	sed -i '' 's/Others/les autres/g' qt_menu.strings &&              \
+	sed -i '' 's/Show All/Tout afficher/g' qt_menu.strings &&         \
+	sed -i '' 's/Quit/Quitter/g' qt_menu.strings
+	#     Import french strings
+	cd $(APP)/Frameworks/QtGui.framework/Versions/4/Resources && \
+	ibtool --strings-file $DIST/qt_menu.strings --write qt_menu_french.nib qt_menu.nib && \
+	#     Clean-up
+	rm -rf qt_menu.nib && mv qt_menu_french.nib qt_menu.nib
+	rm $(DIST)/qt_menu.strings
+	# ... Clean-up unnecessary files/folders
+	rm -f $(APP)/PkgInfo
+	cd $(APP)/Resources && rm -rf include lib/python2.*/config lib/python2.*/site.pyc
+	cd $(APP)/Resources/lib/python2.*/lib-dynload && \
+	rm -f _AE.so _codecs_cn.so _codecs_hk.so _codecs_iso2022.so _codecs_jp.so   \
+		_codecs_kr.so _codecs_tw.so _Evt.so _File.so _hashlib.so _heapq.so      \
+		_locale.so _multibytecodec.so _Res.so _ssl.so array.so bz2.so cPickle.so\
+		datetime.so gestalt.so MacOS.so pyexpat.so resource.so strop.so         \
+		unicodedata.so PyQt4/Qt.so
+	cd $(APP)/Frameworks &&                               \
+	rm -rf *.framework/Contents *.framework/Versions/4.0  \
+		*.framework/Versions/Current *.framework/*.prl    \
+		QtCore.framework/QtCore QtGui.framework/QtGui
+	cd $(APP)/Frameworks/Python.framework/Versions/2.* && \
+	rm -rf include lib Resources
+	# ... Remove all architectures but x86_64..."
+	ditto --rsrc --arch x86_64 --hfsCompression $(DIST)/Pyromaths.app $(DIST)/Pyromaths-x86_64.app
+
 
 all: tbz tgz egg rpm deb
