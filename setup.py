@@ -86,11 +86,18 @@ def _mac_opt():
                   dylib_excludes = qt_unused,
                   argv_emulation = True,
                   )
-    return dict(app        = ['src/pyromaths.py'],
-                data_files = [('data', glob('data/*'))],
-                setup_requires = ['py2app>=0.7.3', 'lxml>=2.2.2'],
-                options    = {'py2app': py2app},
-                )
+    return dict(
+        app        = ['src/pyromaths.py'],
+        data_files = [
+            ('data/images', ['data/images/pyromaths.png',
+                             'data/images/whatsthis.png']),
+            ('data/images/vignettes', glob('data/images/vignettes/*.png')),
+            ('data/templates',        glob('data/templates/*.tex')),
+            ('data/packages',         glob('data/packages/*')),
+        ],
+        setup_requires = ['py2app>=0.7.3', 'lxml>=2.2.2'],
+        options    = {'py2app': py2app},
+    )
 
 def _win_opt():
     '''M$ Win: py2exe helps generate a self-contained app.'''
@@ -135,7 +142,7 @@ Filename:     "{app}\pyromaths.exe"
                                    ),
                        innosetup=dict(inno_script=inno_script, compressed=True)
                        )
-        )
+    )
 
 # Set platform-specific options
 if "py2app" in sys.argv:

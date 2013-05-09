@@ -51,9 +51,6 @@ optimize() {
 	# /Resources: Supprimer les fichiers inutiles
 	cd $APP/Resources
 	rm -rf include lib/python2.*/config lib/python2.*/site.pyc
-	# /Resources/data: Supprimer le dossier linux et les images inutiles
-	cd $APP/Resources/data
-	rm -rf linux/ images/pyromaths-banniere.png images/pyromaths.ico
 	# /Resources/lib: Supprimer les fichiers .so inutiles
 	cd $APP/Resources/lib/python2.*/lib-dynload
 	rm _AE.so _codecs_cn.so _codecs_hk.so _codecs_iso2022.so _codecs_jp.so    	 \
