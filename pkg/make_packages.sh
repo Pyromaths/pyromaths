@@ -28,12 +28,12 @@ echo "*** Update pyromaths version in sources..."
 sed -i "s/VERSION = '.*/VERSION = '${VERSION}'/" ${PYROPATH}/src/pyromaths/Values.py
 
 # Clean-up and create packages
-LINUX=$DIR/linux
-env VERSION=$VERSION $LINUX/make_clean.sh
-env VERSION=$VERSION $LINUX/make_sources.sh $1
-env VERSION=$VERSION $LINUX/make_rpm.sh $1
-env VERSION=$VERSION $LINUX/make_deb.sh $1 &&
-env VERSION=$VERSION $LINUX/make_deb_repo.sh $1
+UNIX=$DIR/unix
+env VERSION=$VERSION $UNIX/make_clean.sh
+env VERSION=$VERSION $UNIX/make_sources.sh $1
+env VERSION=$VERSION $UNIX/make_rpm.sh $1
+env VERSION=$VERSION $UNIX/make_deb.sh $1 &&
+env VERSION=$VERSION $UNIX/make_deb_repo.sh $1
 
 echo "*** Create Windows binary..."
 echo "Hit 'enter' when Windows package is ready."

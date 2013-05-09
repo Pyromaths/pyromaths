@@ -12,7 +12,7 @@ mkdir $BUILDIR
 cd $BUILDIR
 cp -r ${PYROPATH}/src ${PYROPATH}/data .
 cp ${PYROPATH}/* . > $OUT
-cp -r ${PYROPATH}/pkg/linux/debian .
+cp -r ${PYROPATH}/pkg/unix/debian .
 # lightweight source archive in $BUILD
 python setup.py sdist --formats=bztar -d $BUILD > $OUT
 # Rename source archive according to debuild format

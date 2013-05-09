@@ -15,7 +15,7 @@ Make-scripts usually are shell scripts of the form make_TARGET (with .sh, .bat
 or .py extensions), mostly located in platform-specific sub-folders.
 Most of them will run rather quietly (except for warnings and errors) yet can be
 made chatty with the verbose flag (-v). Examples:
-    $ pkg/linux/make_deb.sh
+    $ pkg/unix/make_deb.sh
     $ pkg/mac/make_standalone.sh -v
     $ pkg\win32\make_standalone.bat
 
@@ -31,8 +31,8 @@ Internally, make scripts generally present the following structure:
 Note: policy is to leave build folders in place after running (in order to make
 post-inspection possible), and clean-up extensively before running.
 
-Additionally, linux/ scripts behave according to a few environment variables,
-which default values are set in linux/default.sh:
+Additionally, unix/ scripts behave according to a few environment variables,
+which default values are set in unix/default.sh:
     * VERSION:  pyromaths version         (default: `date +%y.%m`)
     * PYROPATH: project root directory
     * DIST:     packages target directory (default: $PYROPATH/dist)
@@ -46,7 +46,7 @@ Building all packages in a single command is impossible, or quite difficult at
 least, as most make-scripts only run on specific platforms. 
 
 The closest thing to a "build all" make-script is pkg/make_packages.sh,
-which calls in turn each linux/ make-script. It's mainly used by Jerome to
+which calls in turn each unix/ make-script. It's mainly used by Jerome to
 publish new versions of pyromaths.
 Usage:
     $ pkg/make_packages.sh [-v]
@@ -56,7 +56,7 @@ Usage:
 2. (Meta-)Data files
 
 Data files are platform-specific data (e.g. icons) and metadata (e.g. debian
-package files in pkg/linux/debian) used at some point by make-scripts.
+package files in pkg/unix/debian) used at some point by make-scripts.
 
 Let's note that data files common to all architectures *must* go in /data, *not*
 in /pkg.
