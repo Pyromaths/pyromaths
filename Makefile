@@ -127,4 +127,4 @@ deb_repo: deb
 	gpg --default-key "Jérôme Ortais" -bao Release.gpg Release && \
 	tar vjcf $(ARCHIVEPATH)/debs-$(VERSION).tar.bz2 dists/ Packages Packages.gz Packages.bz2 Release Release.gpg
 
-all: source egg rpm deb
+all: tbz tgz egg rpm deb
