@@ -19,9 +19,8 @@ Examples:
     $ pkg/mac/make_standalone.sh -v
     $ pkg\win32\make_standalone.bat
 
-Make scripts can also be full GNU make targets, like in the pkg/unix folder.
-Examples:
-    $ cd pkg/unix
+Preferably, make scripts can be full GNU make targets:
+Example (Unix):
     $ make source     # or tgz, tbz, egg, rpm, deb, all
 More:
     $ make [help]

@@ -6,14 +6,18 @@ OUT=> /dev/null       # uncomment: quieter output
 #OUT=>> log            # uncomment: log output to file
 
 # Path
-PYROPATH=$(PWD)/../..
+PYROPATH=$(PWD)
 ARCHIVEPATH=$(PYROPATH)/..
 DIST=$(PYROPATH)/dist
 BUILD=$(PYROPATH)/build
+
+# Build process
 # Target specific build path
 RPMBUILDIR=$(BUILD)/pyromaths-rpm
 DEBUILDIR=$(BUILD)/pyromaths-$(VERSION)
 REPOBUILDIR=$(BUILD)/repo_debian
+# Build files in root folder
+FILES=AUTHORS COPYING NEWS pyromaths README setup.py
 
 help:
 	#
@@ -31,7 +35,7 @@ help:
 	# And also:
 	#	$$ make version      # Print target version
 	# 	$$ make clean        # Clean source tree
-	#	$$ make purge        # Remove build/dist folders
+	#	$$ make purge        # Clean-up build/dist folders
 	#	$$ make deb_repo     # Make debian repository for DEB packages
 	#
 	# Notes:
@@ -45,8 +49,10 @@ clean:
 	# Remove backup and compiled files
 	find $(PYROPATH) -iname '*~'    | xargs rm -f
 	find $(PYROPATH) -iname '*.pyc' | xargs rm -f
+	mkdir -p $(BUILD)
+	mkdir -p $(DIST)
 
-purge: clean
+purge:
 	# Remove $$BUILD and $$DIST folders
 	rm -rf $(BUILD) $(DIST)
 
@@ -80,8 +86,8 @@ rpm: clean
 	rm -f $(DIST)/pyromaths_$(VERSION)-*.rpm
 	# ... Create stripped-down sources
 	mkdir $(RPMBUILDIR)
-	cp -r $(PYROPATH)/src $(PYROPATH)/data . $(RPMBUILDIR)
-	cp -f $(PYROPATH)/* $(RPMBUILDIR) || exit 0
+	cp -r $(PYROPATH)/src $(PYROPATH)/data $(RPMBUILDIR)
+	cd $(PYROPATH) && cp $(FILES) $(RPMBUILDIR)
 	# Create .rpm archive
 	cd $(RPMBUILDIR) && python setup.py bdist --formats=rpm -b $(BUILD) -d $(DIST) $(OUT)
 
@@ -92,8 +98,8 @@ deb: clean
 	rm -f $(BUILD)/pyromaths_$(VERSION)* $(DIST)/pyromaths_$(VERSION)-*.deb
 	# ... Create stripped-down source archive..."
 	mkdir $(DEBUILDIR)
-	cp -r ${PYROPATH}/src ${PYROPATH}/data $(DEBUILDIR)
-	cp ${PYROPATH}/* $(DEBUILDIR) || exit 0
+	cp -r $(PYROPATH)/src $(PYROPATH)/data $(DEBUILDIR)
+	cd $(PYROPATH) && cp $(FILES) $(DEBUILDIR)
 	cp -r ${PYROPATH}/pkg/unix/debian $(DEBUILDIR)
 	cd $(DEBUILDIR) && python setup.py sdist --formats=bztar -d $(BUILD) $(OUT)
 	# ... Rename source archive according to debuild format
