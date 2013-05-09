@@ -1,53 +1,53 @@
-The /pkg directory contain files (make-scripts and other data files) dedicated
+The /pkg directory contain files (make scripts and other data files) dedicated
 to building working packages of pyromaths on/for different platforms.
 
 
-1. Make-scripts
+1. Make scripts
 
-Make-scripts are basic wrappers around setup.py commands, dedicated to producing
+Make scripts are basic wrappers around setup.py commands, dedicated to producing
 one of several package formats: source, binary, python eggs, RPM, DEB, Windows
 and Mac standalone applications, etc.
 
 
 1.1 Usage
 
-Make-scripts usually are shell scripts of the form make_TARGET (with .sh, .bat
+Make scripts usually are shell scripts of the form make_TARGET (with .sh, .bat
 or .py extensions), mostly located in platform-specific sub-folders.
 Most of them will run rather quietly (except for warnings and errors) yet can be
-made chatty with the verbose flag (-v). Examples:
-    $ pkg/unix/make_deb.sh
+made chatty with the verbose flag (-v).
+Examples:
     $ pkg/mac/make_standalone.sh -v
     $ pkg\win32\make_standalone.bat
 
+Make scripts can also be full GNU make targets, like in the pkg/unix folder.
+Examples:
+    $ cd pkg/unix
+    $ make source     # or tgz, tbz, egg, rpm, deb, all
+More:
+    $ make [help]
 
 1.2 Internals
 
-Internally, make scripts generally present the following structure:
+Internally, both make targets and shell scripts generally present the following
+structure:
     1) Clean files from previous runs
     2) Build a tailored file tree in $BUILD      (optional)
     3) Build the final package, calling setup.py
     4) Clean-up and optimize package             (optional)
     5) Move package to $DIST
+
 Note: policy is to leave build folders in place after running (in order to make
 post-inspection possible), and clean-up extensively before running.
-
-Additionally, unix/ scripts behave according to a few environment variables,
-which default values are set in unix/default.sh:
-    * VERSION:  pyromaths version         (default: `date +%y.%m`)
-    * PYROPATH: project root directory
-    * DIST:     packages target directory (default: $PYROPATH/dist)
-    * BUILD:    build parent directory    (default: $PYROPATH/build)
-    * OUT:      standard out redirection  (default: /dev/null)
 
 
 1.3 Build all
 
 Building all packages in a single command is impossible, or quite difficult at
-least, as most make-scripts only run on specific platforms. 
+least, as most make scripts only run on specific platforms.
 
 The closest thing to a "build all" make-script is pkg/make_packages.sh,
-which calls in turn each unix/ make-script. It's mainly used by Jerome to
-publish new versions of pyromaths.
+which builds all pkg/unix targets, among other things. It's mainly used by
+Jerome to publish new versions of pyromaths, though.
 Usage:
     $ pkg/make_packages.sh [-v]
 

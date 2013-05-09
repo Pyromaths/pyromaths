@@ -24,17 +24,15 @@ case "$touche" in
   VERSION="$touche"
   ;;
 esac
-echo "*** Update pyromaths version in sources..."
-sed -i "s/VERSION = '.*/VERSION = '${VERSION}'/" ${PYROPATH}/src/pyromaths/Values.py
+echo "*** Update pyromaths version..."
+sed -i "s/VERSION = '.*'/VERSION = '${VERSION}'/" ${PYROPATH}/src/pyromaths/Values.py
+sed -i "s/VERSION=.*/VERSION=${VERSION}/" ${PYROPATH}/pkg/unix/Makefile
 
 # Clean-up and create packages
-UNIX=$DIR/unix
-env VERSION=$VERSION $UNIX/make_clean.sh
-env VERSION=$VERSION $UNIX/make_sources.sh $1
-env VERSION=$VERSION $UNIX/make_egg.sh $1
-env VERSION=$VERSION $UNIX/make_rpm.sh $1
-env VERSION=$VERSION $UNIX/make_deb.sh $1 &&
-env VERSION=$VERSION $UNIX/make_deb_repo.sh $1
+cd $DIR/unix
+make purge
+make all
+make deb_repo
 
 echo "*** Create Windows binary..."
 echo "Hit 'enter' when Windows package is ready."
