@@ -26,10 +26,10 @@ case "$touche" in
 esac
 echo "*** Update pyromaths version..."
 sed -i "s/VERSION = '.*'/VERSION = '${VERSION}'/" ${PYROPATH}/src/pyromaths/Values.py
-sed -i "s/VERSION=.*/VERSION=${VERSION}/" ${PYROPATH}/pkg/unix/Makefile
+sed -i "s/VERSION=.*/VERSION=${VERSION}/" ${PYROPATH}/Makefile
 
 # Clean-up and create packages
-cd $DIR/unix
+cd $PYROPATH
 make purge
 make all
 make deb_repo
