@@ -52,7 +52,7 @@ mkdir $BUILDIR
 cd $BUILDIR
 cp -r ${PYROPATH}/src ${PYROPATH}/data .
 cp ${PYROPATH}/* .
-cp -r ${PYROPATH}/scripts/linux/* .
+cp -r ${PYROPATH}/pkg/linux/* .
 python setup.py sdist --formats=bztar -d $BUILD
 rm -rf src/*.egg-info
 rm MANIFEST

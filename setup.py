@@ -80,7 +80,7 @@ def _mac_opt():
                  'QtXml', 'QtXmlPatterns', 'phonon']
     # py2app
     py2app = dict(plist    = plist,
-                  iconfile = 'scripts/mac/pyromaths.icns',
+                  iconfile = 'pkg/mac/pyromaths.icns',
                   includes = ['gzip'],
                   excludes = ['PyQt4.%s' % f for f in qt_unused],
                   dylib_excludes = qt_unused,
@@ -112,7 +112,7 @@ Filename:     "{app}\pyromaths.exe"
 ''' % VERSION
     return dict(
         platforms  = ['windows'],
-        app        = ["scripts/win32/Pyromaths.py"],
+        app        = ["src/pyromaths.py"],
         data_files = [
             ('data/images', ['data/images/pyromaths.ico',
                              'data/images/pyromaths.png',
