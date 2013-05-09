@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "*** Create DEB repository..."
-source $(dirname $0)/env.sh
+source $(dirname $0)/default.sh
 ARCHIVEPATH=${PYROPATH}/..
 
 echo "***   Clean-up previous builds..."

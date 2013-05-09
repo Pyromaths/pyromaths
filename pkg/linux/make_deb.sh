@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "*** Make pyromaths DEB archive..."
-source $(dirname $0)/env.sh
+source $(dirname $0)/default.sh
 
 echo "***   Clean-up previous builds..."
 BUILDIR=${BUILD}/pyromaths-${VERSION}

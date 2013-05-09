@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "*** Make pyromaths source archive..."
-source $(dirname $0)/env.sh
+source $(dirname $0)/default.sh
 
 echo "***   Clean-up previous builds..."
 rm ${DIST}/pyromaths-${VERSION}.tar.*
