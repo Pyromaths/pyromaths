@@ -46,8 +46,8 @@ Building all packages in a single command is impossible, or quite difficult at
 least, as most make scripts only run on specific platforms.
 
 The closest thing to a "build all" make-script is pkg/make_packages.sh,
-which builds all pkg/unix targets, among other things. It's mainly used by
-Jerome to publish new versions of pyromaths, though.
+which builds all unix targets, among other things. It's primarily used by
+Jerome to publish new versions of pyromaths.
 Usage:
     $ pkg/make_packages.sh [-v]
 
