@@ -7,13 +7,13 @@ This script is internally based on setuptools, with platform-specific extensions
 for special tasks (py2app, py2exe, innosetup).
 It builds different types of packages (source, binary, self-contained) on
 several platforms. Packages should be functional, although further optimization
-may be operated by other scripts (see: scripts/).
+may be operated by other scripts (see: pkg/README).
 
 Python source and bynary eggs (all platforms):
     $ python setup.py [sdist|bdist|bdist_egg] [options...]
 
 RPM package (UNIX/Linux):
-    $ python setup.py bdist_rpm [options...]
+    $ ./setup.py bdist_rpm [options...]
 
 Self-contained application (Mac OS X):
     $ python setup.py py2app [options...]
