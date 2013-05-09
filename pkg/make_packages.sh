@@ -31,6 +31,7 @@ sed -i "s/VERSION = '.*/VERSION = '${VERSION}'/" ${PYROPATH}/src/pyromaths/Value
 UNIX=$DIR/unix
 env VERSION=$VERSION $UNIX/make_clean.sh
 env VERSION=$VERSION $UNIX/make_sources.sh $1
+env VERSION=$VERSION $UNIX/make_egg.sh $1
 env VERSION=$VERSION $UNIX/make_rpm.sh $1
 env VERSION=$VERSION $UNIX/make_deb.sh $1 &&
 env VERSION=$VERSION $UNIX/make_deb_repo.sh $1
