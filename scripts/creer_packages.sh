@@ -60,8 +60,8 @@ mv ${BUILD}/pyromaths-${VERSION}.tar.bz2 ${BUILD}/pyromaths_${VERSION}.orig.tar.
 debuild clean
 debuild -kB39EE5B6
 sleep 30
-cp ${BUILD}/pyromaths_${VERSION}-?_all.deb ${ARCHIVEPATH}
-mv ${BUILD}/pyromaths_${VERSION}-?_all.deb ${DIST}
+cp ${BUILD}/pyromaths_${VERSION}-*_all.deb ${ARCHIVEPATH}
+mv ${BUILD}/pyromaths_${VERSION}-*_all.deb ${DIST}
 
 echo "#--------------------------------------------
 #--------- CRÉATION DU PAQUET RPM -----------
