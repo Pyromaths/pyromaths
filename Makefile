@@ -16,6 +16,7 @@ BUILD=$(PYROPATH)/build
 RPMBUILDIR=$(BUILD)/pyromaths-rpm
 DEBUILDIR=$(BUILD)/pyromaths-$(VERSION)
 REPOBUILDIR=$(BUILD)/repo_debian
+EXEBUILDIR=$(BUILD)/pyromaths-exe
 # Build files in root folder
 FILES=AUTHORS COPYING NEWS pyromaths README setup.py
 # Mac app folder
@@ -36,6 +37,9 @@ help:
 	#
 	# Usage (Mac):
 	#	$$ make app          # Make standalone application
+	#
+	# Usage (Windows):
+	#	$$ make exe          # Make standalone executable (experimental)
 	#
 	# And also:
 	#	$$ make version      # Print target version
@@ -173,6 +177,20 @@ app: clean
 	rm -rf include lib Resources
 	# ... Remove all architectures but x86_64..."
 	ditto --rsrc --arch x86_64 --hfsCompression $(DIST)/Pyromaths.app $(DIST)/Pyromaths-x86_64.app
+
+exe:
+	# Make standalone Windows executable
+	# ... Remove previous builds
+	rmdir /s /q $(EXEBUILDIR)
+	rm $(DIST)/Pyromaths-*-win32.exe
+	# ... Create stripped-down sources
+	md $(EXEBUILDIR)
+	xcopy data $(EXEBUILDIR)/data /i /s
+	xcopy src $(EXEBUILDIR)/src /i /s
+	copy $(FILES) $(EXEBUILDIR)
+	move $(EXEBUILDIR)/pyromaths $(EXEBUILDIR)/Pyromaths.py
+	# ... Create standalone exe
+	cd $(EXEBUILDIR) && c:/Python27/python.exe setup.py innosetup -b $(BUILD) -d $(DIST)
 
 
 all: tbz tgz egg rpm deb
