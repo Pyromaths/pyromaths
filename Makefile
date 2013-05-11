@@ -1,39 +1,81 @@
+# Pyromaths Makefile.
+#
+# See 'make help' for available targets and usage details.
+
+### CONFIG
+#
 # Pyromaths version
-VERSION=13.05
+VERSION ?= 13.03
+# Archive format(s) produced by 'make src' (bztar,gztar,zip...)
+FORMATS ?= bztar,zip
+# Verbosity and logging
+OUT     ?= > /dev/null       # uncomment: quieter output
+#OUT     ?= >> log            # uncomment: log output to file
 
-# Logging
-OUT=> /dev/null       # uncomment: quieter output
-#OUT=>> log            # uncomment: log output to file
-
+### ENVIRONMENT VARIABLES
+#
 # Path
-PYROPATH=$(PWD)
-ARCHIVEPATH=$(PYROPATH)/..
-DIST=$(PYROPATH)/dist
-BUILD=$(PYROPATH)/build
-
-# Build process
-# Target specific build path
-RPMBUILDIR=$(BUILD)/pyromaths-rpm
-DEBUILDIR=$(BUILD)/pyromaths-$(VERSION)
-REPOBUILDIR=$(BUILD)/repo_debian
-EXEBUILDIR=$(BUILD)/pyromaths-exe
-# Build files in root folder
-FILES=AUTHORS COPYING NEWS pyromaths README setup.py
+PYRO    := $(PWD)
+DIST    := $(PYRO)/dist
+BUILD   := $(PYRO)/build
+ARCHIVE := $(PYRO)/..
+# Target-specific build dir (if needed)
+BUILDIR  = $(BUILD)/$@
 # Mac app folder
-APP=$(DIST)/Pyromaths.app/Contents
+APP     := $(DIST)/Pyromaths.app/Contents
+# Project files
+FILES   := AUTHORS COPYING NEWS pyromaths README setup.py MANIFEST.in src data
+
+### MANIFESTS
+#
+# Base manifest (README, src/ and test/ auto-included):
+MANIFEST := \
+	include AUTHORS COPYING NEWS                 \n\
+	exclude MANIFEST.in                          \n\
+	recursive-include data *                     \n\
+# Minimal install (i.e. without test/ dir):
+MANIFEST-min := $(MANIFEST)\
+	prune test                                   \n\
+# Full project sources:
+MANIFEST-all := $(MANIFEST)\
+	recursive-include pkg *                      \n\
+	recursive-include utils *                    \n\
+	include Makefile                             \n\
+# Unix:
+MANIFEST-unix := $(MANIFEST-min)\
+	exclude data/images/pyromaths.icns           \n\
+	exclude data/images/pyromaths.ico            \n\
+# Mac app:
+MANIFEST-mac := $(MANIFEST-min)\
+	prune data/linux                             \n\
+	exclude data/images/pyromaths.ico            \n\
+	exclude data/images/pyromaths-banniere.png   \n\
+# Win app:
+MANIFEST-win := $(MANIFEST-min)\
+	prune data/linux                             \n\
+	exclude data/images/pyromaths.icns           \n\
+
+### MACROS
+#
+# Remove manifest file, egg-info dir and target build dir, clean-up sources.
+CLEAN = rm -f MANIFEST.in && rm -rf src/*.egg-info && rm -rf $(BUILDIR) &&\
+        find . -name '*~' | xargs rm -f && find . -iname '*.pyc' | xargs rm -f
+
+
+# src must be after rpm, otherwise rpm produces a .tar.gz file that replaces the
+# .tar.gz source file (should $$FORMATS include gztar).
+all: egg rpm deb src
 
 help:
 	#
 	# Build pyromaths packages in several formats.
 	#
 	# Usage (Unix):
-	#	$$ make tgz          # Make full-source .tar.gz archive
-	#	$$ make tbz          # Make full-source .tar.bz2 archive
-	#	$$ make source       # Alias for 'make tbz'
-	#	$$ make egg          # Make python egg archive
+	#	$$ make src          # Make full-source archive(s)
+	#	$$ make egg          # Make python egg
 	#	$$ make rpm          # Make RPM package
 	#	$$ make deb          # Make DEB package
-	#	$$ make all          # Make all previous archives/packages
+	#	$$ make [all]        # Make all previous archives/packages
 	#
 	# Usage (Mac):
 	#	$$ make app          # Make standalone application
@@ -42,155 +84,124 @@ help:
 	#	$$ make exe          # Make standalone executable (experimental)
 	#
 	# And also:
-	#	$$ make version      # Print target version
-	# 	$$ make clean        # Clean source tree
-	#	$$ make purge        # Clean-up build/dist folders
-	#	$$ make deb_repo     # Make debian repository for DEB packages
+	#	$$ make version      # Apply target version to sources
+	# 	$$ make clean        # Clean-up build/dist folders and source tree
+	#	$$ make repo         # Make debian repository
 	#
 	# Notes:
-	#	- Check $$VERSION is up-to-date before running.
+	#	- Notice the source achive $$FORMATS produced ($(FORMATS))
 	#	- Mangle with $$OUT to make it quieter/verbose/log to output file.
 
-version:
-	# Target version: pyromaths-$(VERSION)
-
 clean:
-	# Remove backup and compiled files
-	find $(PYROPATH) -iname '*~'    | xargs rm -f
-	find $(PYROPATH) -iname '*.pyc' | xargs rm -f
-	mkdir -p $(BUILD)
-	mkdir -p $(DIST)
+	# Clean
+	rm -r $(BUILD)/* || mkdir -p $(BUILD)
+	rm -r $(DIST)/*  || mkdir -p $(DIST)
+	$(CLEAN)
 
-purge:
-	# Remove $$BUILD and $$DIST folders
-	rm -rf $(BUILD) $(DIST)
+version:
+	# Apply target version ($(VERSION)) to sources
+	sed -i "s/VERSION\s*=\s*'.*'/VERSION = '$(VERSION)'/" src/pyromaths/Values.py
 
-tbz: clean
-	# Make pyromaths full-source BZ archive
-	# ... Clean-up previous builds
-	rm -f $(DIST)/pyromaths-$(VERSION).tar.bz2
-	# ... Create .tar.bz archive
-	cd $(PYROPATH) && python setup.py sdist --formats=bztar -d $(DIST) $(OUT)
+src: version
+	# Make full-source archive(s) (formats=$(FORMATS))
+	$(CLEAN)
+	echo "$(MANIFEST-all)" > MANIFEST.in
+	python setup.py sdist --formats=$(FORMATS) -d $(DIST) $(OUT)
 
-tgz: clean
-	# Make pyromaths full-source GZ archive
-	# ... Clean-up previous builds
-	rm -f $(DIST)/pyromaths-$(VERSION).tar.gz
-	# ... Create .tar.gz archive
-	cd $(PYROPATH) && python setup.py sdist --formats=gztar -d $(DIST) $(OUT)
+egg: version
+	# Make python egg
+	$(CLEAN)
+	echo "$(MANIFEST-unix)" > MANIFEST.in
+	python setup.py bdist_egg -d $(DIST) $(OUT)
 
-source: tbz
+rpm: version
+	# Make RPM pakage
+	$(CLEAN)
+	echo "$(MANIFEST-unix)" > MANIFEST.in
+	python setup.py bdist --formats=rpm -b $(BUILD) -d $(DIST) $(OUT)
+	rm $(DIST)/pyromaths-$(VERSION).tar.gz
 
-egg: clean
-	# Make pyromaths python egg
-	# ... Clean-up previous builds
-	rm -f $(DIST)/pyromaths-$(VERSION)-*.egg
-	# ... Create python egg
-	cd $(PYROPATH) && python setup.py bdist_egg -d $(DIST) $(OUT)
+min: version
+	# Make minimalist .tar.bz source archive in $(BUILD)
+	$(CLEAN)
+	echo "$(MANIFEST-unix)" > MANIFEST.in
+	python setup.py sdist --formats=bztar -d $(BUILD) $(OUT)
 
-rpm: clean
-	# Make pyromaths RPM archive
-	# ... Clean-up previous builds
-	rm -rf $(RPMBUILDIR)
-	rm -f $(DIST)/pyromaths_$(VERSION)-*.rpm
-	# ... Create stripped-down sources
-	mkdir $(RPMBUILDIR)
-	cp -r $(PYROPATH)/src $(PYROPATH)/data $(RPMBUILDIR)
-	cd $(PYROPATH) && cp $(FILES) $(RPMBUILDIR)
-	# Create .rpm archive
-	cd $(RPMBUILDIR) && python setup.py bdist --formats=rpm -b $(BUILD) -d $(DIST) $(OUT)
-
-deb: clean
-	# Make pyromaths DEB archive
-	# ... Clean-up previous builds
-	rm -rf $(DEBUILDIR)
-	rm -f $(BUILD)/pyromaths_$(VERSION)* $(DIST)/pyromaths_$(VERSION)-*.deb
-	# ... Create stripped-down source archive..."
-	mkdir $(DEBUILDIR)
-	cp -r $(PYROPATH)/src $(PYROPATH)/data $(DEBUILDIR)
-	cd $(PYROPATH) && cp $(FILES) $(DEBUILDIR)
-	cp -r ${PYROPATH}/pkg/unix/debian $(DEBUILDIR)
-	cd $(DEBUILDIR) && python setup.py sdist --formats=bztar -d $(BUILD) $(OUT)
-	# ... Rename source archive according to debuild format
-	mv $(BUILD)/pyromaths-$(VERSION).tar.bz2 $(BUILD)/pyromaths_$(VERSION).orig.tar.bz2
-	# ... Create .deb archive
-	# ... WARNING: code signing failure will not stop build process
-	cd $(DEBUILDIR) && debuild clean $(OUT)
-	cd $(DEBUILDIR) && debuild -kB39EE5B6 $(OUT) || exit 0
-	# ... Move it to $$DIST
+deb: min
+	# Make DEB archive
+	$(CLEAN)
+	cd $(BUILD) && tar -xjf pyromaths-$(VERSION).tar.bz2                  &&\
+		mv pyromaths-$(VERSION).tar.bz2 pyromaths_$(VERSION).orig.tar.bz2 &&\
+		mv pyromaths-$(VERSION) $(BUILDIR)
+	cp -r pkg/unix/debian $(BUILDIR)
+	cd $(BUILDIR) && debuild clean $(OUT)
+	cd $(BUILDIR) && debuild -kB39EE5B6 $(OUT) || exit 0
 	mv $(BUILD)/pyromaths_$(VERSION)-*_all.deb $(DIST)
 
-deb_repo: deb
+repo: deb
 	# Create DEB repository
-	# ... Clean-up previous builds
-	rm -rf $(REPOBUILDIR)
-	# ... Create repository
-	mkdir -p $(REPOBUILDIR)/dists
-	cp $(DIST)/pyromaths_$(VERSION)*.deb $(REPOBUILDIR)/dists
-	cd $(REPOBUILDIR) && \
-	sudo dpkg-scanpackages . /dev/null > Packages && \
-	sudo dpkg-scanpackages . /dev/null | gzip -c9 > Packages.gz && \
-	sudo dpkg-scanpackages . /dev/null | bzip2 -c9 > Packages.bz2 && \
-	apt-ftparchive release . > /tmp/Release.tmp && \
-	mv /tmp/Release.tmp Release && \
-	gpg --default-key "Jérôme Ortais" -bao Release.gpg Release && \
-	tar vjcf $(ARCHIVEPATH)/debs-$(VERSION).tar.bz2 dists/ Packages Packages.gz Packages.bz2 Release Release.gpg
+	$(CLEAN)
+	mkdir -p $(BUILDIR)/dists
+	cp $(DIST)/pyromaths_$(VERSION)*.deb $(BUILDIR)/dists
+	cd $(BUILDIR)                                                     &&\
+		sudo dpkg-scanpackages . /dev/null > Packages                 &&\
+		sudo dpkg-scanpackages . /dev/null | gzip -c9 > Packages.gz   &&\
+		sudo dpkg-scanpackages . /dev/null | bzip2 -c9 > Packages.bz2 &&\
+		apt-ftparchive release . > /tmp/Release.tmp                   &&\
+		mv /tmp/Release.tmp Release                                   &&\
+		gpg --default-key "Jérôme Ortais" -bao Release.gpg Release    &&\
+		tar vjcf $(ARCHIVE)/debs-$(VERSION).tar.bz2 dists/ Packages Packages.gz Packages.bz2 Release Release.gpg
 
-app: clean
+app: version
 	# Make standalone Mac application
-	# ... Remove previous builds
-	rm -rf $(DIST)/Pyromaths*.app $(BUILD)/bdist.macosx*
-	# ... Build standalone app
-	cd $(PYROPATH) && python setup.py py2app -b $(BUILD) -d $(DIST) $(OUT)
-	# ... Improve french localization..."
-	#     Extract strings from qt_menu.nib
-	cd $(DIST) && \
-	ibtool --generate-strings-file qt_menu.strings $APP/Frameworks/QtGui.framework/Versions/4/Resources/qt_menu.nib && \
-	#     Convert qt_menu.strings from UTF-16 to UTF-8
-	iconv -f utf-16 -t utf-8 qt_menu.strings > qt_menu_tmp.strings && \
-	mv -f qt_menu_tmp.strings qt_menu.strings &&                      \
-	#     Replace the english strings with the french string
-	sed -i '' 's/Hide/Masquer/g' qt_menu.strings &&                   \
-	sed -i '' 's/Others/les autres/g' qt_menu.strings &&              \
-	sed -i '' 's/Show All/Tout afficher/g' qt_menu.strings &&         \
-	sed -i '' 's/Quit/Quitter/g' qt_menu.strings
-	#     Import french strings
-	cd $(APP)/Frameworks/QtGui.framework/Versions/4/Resources && \
-	ibtool --strings-file $DIST/qt_menu.strings --write qt_menu_french.nib qt_menu.nib && \
-	#     Clean-up
+	$(CLEAN)
+	echo "$(MANIFEST-mac)" > MANIFEST.in
+	python setup.py py2app -b $(BUILD) -d $(DIST) $(OUT)
+	# ..Improve french localization..."
+	# ....Extract strings from qt_menu.nib
+	cd $(DIST)                                                         &&\
+		ibtool --generate-strings-file qt_menu.strings $APP/Frameworks/QtGui.framework/Versions/4/Resources/qt_menu.nib &&\
+		iconv -f utf-16 -t utf-8 qt_menu.strings > qt_menu_tmp.strings &&\
+		mv -f qt_menu_tmp.strings qt_menu.strings                      &&\
+		sed -i '' 's/Hide/Masquer/g' qt_menu.strings                   &&\
+		sed -i '' 's/Others/les autres/g' qt_menu.strings              &&\
+		sed -i '' 's/Show All/Tout afficher/g' qt_menu.strings         &&\
+		sed -i '' 's/Quit/Quitter/g' qt_menu.strings
+	# ....Import french strings
+	cd $(APP)/Frameworks/QtGui.framework/Versions/4/Resources          &&\
+		ibtool --strings-file $DIST/qt_menu.strings --write qt_menu_french.nib qt_menu.nib &&\
+	# ....Clean-up
 	rm -rf qt_menu.nib && mv qt_menu_french.nib qt_menu.nib
 	rm $(DIST)/qt_menu.strings
-	# ... Clean-up unnecessary files/folders
+	# ..Clean-up unnecessary files/folders
 	rm -f $(APP)/PkgInfo
 	cd $(APP)/Resources && rm -rf include lib/python2.*/config lib/python2.*/site.pyc
-	cd $(APP)/Resources/lib/python2.*/lib-dynload && \
-	rm -f _AE.so _codecs_cn.so _codecs_hk.so _codecs_iso2022.so _codecs_jp.so   \
-		_codecs_kr.so _codecs_tw.so _Evt.so _File.so _hashlib.so _heapq.so      \
-		_locale.so _multibytecodec.so _Res.so _ssl.so array.so bz2.so cPickle.so\
-		datetime.so gestalt.so MacOS.so pyexpat.so resource.so strop.so         \
-		unicodedata.so PyQt4/Qt.so
-	cd $(APP)/Frameworks &&                               \
-	rm -rf *.framework/Contents *.framework/Versions/4.0  \
-		*.framework/Versions/Current *.framework/*.prl    \
-		QtCore.framework/QtCore QtGui.framework/QtGui
-	cd $(APP)/Frameworks/Python.framework/Versions/2.* && \
-	rm -rf include lib Resources
-	# ... Remove all architectures but x86_64..."
+	cd $(APP)/Resources/lib/python2.*/lib-dynload                        &&\
+		rm -f _AE.so _codecs_cn.so _codecs_hk.so _codecs_iso2022.so        \
+		      _codecs_jp.so _codecs_kr.so _codecs_tw.so _Evt.so _File.so   \
+		      _hashlib.so _heapq.so _locale.so _multibytecodec.so _Res.so  \
+		      _ssl.so array.so bz2.so cPickle.so datetime.so gestalt.so    \
+		      MacOS.so pyexpat.so resource.so strop.so unicodedata.so      \
+		      PyQt4/Qt.so
+	cd $(APP)/Frameworks                                     &&\
+		rm -rf *.framework/Contents *.framework/Versions/4.0   \
+		       *.framework/Versions/Current *.framework/*.prl  \
+		       QtCore.framework/QtCore QtGui.framework/QtGui
+	cd $(APP)/Frameworks/Python.framework/Versions/2.*       &&\
+		rm -rf include lib Resources
+	# ..Remove all architectures but x86_64..."
 	ditto --rsrc --arch x86_64 --hfsCompression $(DIST)/Pyromaths.app $(DIST)/Pyromaths-x86_64.app
 
 exe:
 	# Make standalone Windows executable
-	# ... Remove previous builds
-	rmdir /s /q $(EXEBUILDIR)
+	# ..Remove previous builds
+	rmdir /s /q $(BUILDIR)
 	rm $(DIST)/Pyromaths-*-win32.exe
-	# ... Create stripped-down sources
-	md $(EXEBUILDIR)
-	xcopy data $(EXEBUILDIR)/data /i /s
-	xcopy src $(EXEBUILDIR)/src /i /s
-	copy $(FILES) $(EXEBUILDIR)
-	move $(EXEBUILDIR)/pyromaths $(EXEBUILDIR)/Pyromaths.py
-	# ... Create standalone exe
-	cd $(EXEBUILDIR) && c:/Python27/python.exe setup.py innosetup -b $(BUILD) -d $(DIST)
-
-
-all: tbz tgz egg rpm deb
+	# ..Create stripped-down sources
+	md $(BUILDIR)
+	xcopy data $(BUILDIR)/data /i /s
+	xcopy src $(BUILDIR)/src /i /s
+	copy $(FILES) $(BUILDIR)
+	move $(BUILDIR)/pyromaths $(BUILDIR)/Pyromaths.py
+	# ..Create standalone exe
+	cd $(BUILDIR) && c:/Python27/python.exe setup.py innosetup -b $(BUILD) -d $(DIST)

@@ -88,13 +88,7 @@ def _mac_opt():
                   )
     return dict(
         app        = ['src/pyromaths.py'],
-        data_files = [
-            ('data/images', ['data/images/pyromaths.png',
-                             'data/images/whatsthis.png']),
-            ('data/images/vignettes', glob('data/images/vignettes/*.png')),
-            ('data/templates',        glob('data/templates/*.tex')),
-            ('data/packages',         glob('data/packages/*')),
-        ],
+        data_files = [('data', glob('data/*'))],
         setup_requires = ['py2app>=0.7.3', 'lxml>=2.2.2'],
         options    = {'py2app': py2app},
     )
@@ -120,15 +114,7 @@ Filename:     "{app}\pyromaths.exe"
     return dict(
         platforms  = ['windows'],
         app        = ["src/pyromaths.py"],
-        data_files = [
-            ('data/images', ['data/images/pyromaths.ico',
-                             'data/images/pyromaths.png',
-                             'data/images/pyromaths-banniere.png',
-                             'data/images/whatsthis.png']),
-            ('data/images/vignettes', glob('data/images/vignettes/*.png')),
-            ('data/templates',        glob('data/templates/*.tex')),
-            ('data/packages',         glob('data/packages/*')),
-        ],
+        data_files = [('data', glob('data/*'))],
         zipfile = None,
         windows = [dict(script="Pyromaths.py",
                         icon_resources=[(1, 'data/images/pyromaths.ico')],
