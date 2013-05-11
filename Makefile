@@ -38,7 +38,7 @@ MANIFEST-min := $(MANIFEST)\
 	prune test                                   \n\
 # Full project sources:
 MANIFEST-all := $(MANIFEST)\
-	recursive-include pkg *                      \n\
+	recursive-include debian *                   \n\
 	recursive-include utils *                    \n\
 	include Makefile                             \n\
 # Unix:
@@ -133,7 +133,7 @@ deb: min
 	cd $(BUILD) && tar -xjf pyromaths-$(VERSION).tar.bz2                  &&\
 		mv pyromaths-$(VERSION).tar.bz2 pyromaths_$(VERSION).orig.tar.bz2 &&\
 		mv pyromaths-$(VERSION) $(BUILDIR)
-	cp -r pkg/unix/debian $(BUILDIR)
+	cp -r debian $(BUILDIR)
 	cd $(BUILDIR) && debuild clean $(OUT)
 	cd $(BUILDIR) && debuild -kB39EE5B6 $(OUT) || exit 0
 	mv $(BUILD)/pyromaths_$(VERSION)-*_all.deb $(DIST)
