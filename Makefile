@@ -84,12 +84,12 @@ help:
 	#	$$ make exe          # Make standalone executable (experimental)
 	#
 	# And also:
-	#	$$ make version      # Apply target version to sources
+	#	$$ make version      # Apply target $$VERSION [$(VERSION)] to sources
 	# 	$$ make clean        # Clean-up build/dist folders and source tree
 	#	$$ make repo         # Make debian repository
 	#
 	# Notes:
-	#	- Notice the source achive $$FORMATS produced ($(FORMATS))
+	#	- Notice the source achive $$FORMATS produced [$(FORMATS)].
 	#	- Mangle with $$OUT to make it quieter/verbose/log to output file.
 
 clean:
@@ -115,7 +115,7 @@ egg: version
 	python setup.py bdist_egg -d $(DIST) $(OUT)
 
 rpm: version
-	# Make RPM pakage
+	# Make RPM package
 	$(CLEAN)
 	echo "$(MANIFEST-unix)" > MANIFEST.in
 	python setup.py bdist --formats=rpm -b $(BUILD) -d $(DIST) $(OUT)
