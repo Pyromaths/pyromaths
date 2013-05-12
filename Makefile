@@ -160,7 +160,8 @@ app: version
 	# ..Improve french localization..."
 	# ....Extract strings from qt_menu.nib
 	cd $(DIST)                                                         &&\
-	    ibtool --generate-strings-file qt_menu.strings $APP/Frameworks/QtGui.framework/Versions/4/Resources/qt_menu.nib &&\
+	    ibtool --generate-strings-file qt_menu.strings                   \
+	           $(APP)/Frameworks/QtGui.framework/Versions/4/Resources/qt_menu.nib &&\
 	    iconv -f utf-16 -t utf-8 qt_menu.strings > qt_menu_tmp.strings &&\
 	    mv -f qt_menu_tmp.strings qt_menu.strings                      &&\
 	    sed -i '' 's/Hide/Masquer/g' qt_menu.strings                   &&\
