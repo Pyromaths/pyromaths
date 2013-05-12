@@ -55,6 +55,21 @@ MANIFEST-win := $(MANIFEST-min)                 \
     prune data/linux                            \n\
     exclude data/images/pyromaths.icns          \n
 
+### SHORTCUTS & COMPATIBILITY
+#
+ifeq ($(OS),Windows_NT)
+	# Windows
+else
+	# Unix
+	ifeq ($(shell uname -s),Darwin)
+		# Mac/BSD
+		sed-i := sed -i ''
+	else
+		# GNU
+		sed-i := sed -i
+	endif
+endif
+
 ### MACROS
 #
 # Remove manifest file, egg-info dir and target build dir, clean-up sources.
@@ -100,7 +115,7 @@ clean:
 
 version:
 	# Apply target version ($(VERSION)) to sources
-	sed -i "s/VERSION\s*=\s*'.*'/VERSION = '$(VERSION)'/" src/pyromaths/Values.py
+	$(sed-i) "s/VERSION\s*=\s*'.*'/VERSION = '$(VERSION)'/" src/pyromaths/Values.py
 
 src: version
 	# Make full-source archive(s) (formats=$(FORMATS))
@@ -164,10 +179,10 @@ app: version
 	           $(APP)/Frameworks/QtGui.framework/Versions/4/Resources/qt_menu.nib &&\
 	    iconv -f utf-16 -t utf-8 qt_menu.strings > qt_menu_tmp.strings &&\
 	    mv -f qt_menu_tmp.strings qt_menu.strings                      &&\
-	    sed -i '' 's/Hide/Masquer/g' qt_menu.strings                   &&\
-	    sed -i '' 's/Others/les autres/g' qt_menu.strings              &&\
-	    sed -i '' 's/Show All/Tout afficher/g' qt_menu.strings         &&\
-	    sed -i '' 's/Quit/Quitter/g' qt_menu.strings
+	    $(sed-i) 's/Hide/Masquer/g' qt_menu.strings                    &&\
+	    $(sed-i) 's/Others/les autres/g' qt_menu.strings               &&\
+	    $(sed-i) 's/Show All/Tout afficher/g' qt_menu.strings          &&\
+	    $(sed-i) 's/Quit/Quitter/g' qt_menu.strings
 	# ....Import french strings
 	cd $(APP)/Frameworks/QtGui.framework/Versions/4/Resources          &&\
 	    ibtool --strings-file $DIST/qt_menu.strings                      \
