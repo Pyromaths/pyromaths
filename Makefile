@@ -76,7 +76,7 @@ setup := $(PYTHON) setup.py
 ### MACROS
 #
 # Remove manifest file, egg-info dir and target build dir, clean-up sources.
-CLEAN = rm -f MANIFEST.in && rm -rf src/*.egg-info && rm -rf $(BUILDIR) &&\
+clean = rm -f MANIFEST.in && rm -rf src/*.egg-info && rm -rf $(BUILDIR) &&\
         find . -name '*~' | xargs rm -f && find . -iname '*.pyc' | xargs rm -f
 
 
@@ -114,7 +114,7 @@ clean:
 	# Clean
 	rm -r $(BUILD)/* || mkdir -p $(BUILD)
 	rm -r $(DIST)/*  || mkdir -p $(DIST)
-	$(CLEAN)
+	$(clean)
 
 version:
 	# Apply target version ($(VERSION)) to sources
@@ -122,32 +122,32 @@ version:
 
 src: version
 	# Make full-source archive(s) (formats=$(FORMATS))
-	$(CLEAN)
+	$(clean)
 	echo "$(MANIFEST-all)" > MANIFEST.in
 	$(setup) sdist --formats=$(FORMATS) -d $(DIST) $(OUT)
 
 egg: version
 	# Make python egg
-	$(CLEAN)
+	$(clean)
 	echo "$(MANIFEST-unix)" > MANIFEST.in
 	$(setup) bdist_egg -d $(DIST) $(OUT)
 
 rpm: version
 	# Make RPM package
-	$(CLEAN)
+	$(clean)
 	echo "$(MANIFEST-unix)" > MANIFEST.in
 	$(setup) bdist --formats=rpm -b $(BUILD) -d $(DIST) $(OUT)
 	rm $(DIST)/pyromaths-$(VERSION).tar.gz
 
 min: version
 	# Make minimalist .tar.bz source archive in $(BUILD)
-	$(CLEAN)
+	$(clean)
 	echo "$(MANIFEST-unix)" > MANIFEST.in
 	$(setup) sdist --formats=bztar -d $(BUILD) $(OUT)
 
 deb: min
 	# Make DEB archive
-	$(CLEAN)
+	$(clean)
 	cd $(BUILD) && tar -xjf pyromaths-$(VERSION).tar.bz2              &&\
 	    mv pyromaths-$(VERSION) $(BUILDIR)                            &&\
 	    mv pyromaths-$(VERSION).tar.bz2 pyromaths_$(VERSION).orig.tar.bz2
@@ -158,7 +158,7 @@ deb: min
 
 repo: deb
 	# Create DEB repository
-	$(CLEAN)
+	$(clean)
 	mkdir -p $(BUILDIR)/dists
 	cp $(DIST)/pyromaths_$(VERSION)*.deb $(BUILDIR)/dists
 	cd $(BUILDIR)                                                     &&\
@@ -172,7 +172,7 @@ repo: deb
 
 app: version
 	# Make standalone Mac application
-	$(CLEAN)
+	$(clean)
 	echo "$(MANIFEST-mac)" > MANIFEST.in
 	$(setup) py2app -b $(BUILD) -d $(DIST) $(OUT)
 	# ..Improve french localization..."
