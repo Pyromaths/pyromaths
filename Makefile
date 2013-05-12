@@ -59,8 +59,10 @@ MANIFEST-win := $(MANIFEST-min)                 \
 #
 ifeq ($(OS),Windows_NT)
 	# Windows
+	PYTHON ?= c:/Python27/python.exe
 else
 	# Unix
+	PYTHON ?= python
 	ifeq ($(shell uname -s),Darwin)
 		# Mac/BSD
 		sed-i := sed -i ''
@@ -69,6 +71,7 @@ else
 		sed-i := sed -i
 	endif
 endif
+setup := $(PYTHON) setup.py
 
 ### MACROS
 #
@@ -121,26 +124,26 @@ src: version
 	# Make full-source archive(s) (formats=$(FORMATS))
 	$(CLEAN)
 	echo "$(MANIFEST-all)" > MANIFEST.in
-	python setup.py sdist --formats=$(FORMATS) -d $(DIST) $(OUT)
+	$(setup) sdist --formats=$(FORMATS) -d $(DIST) $(OUT)
 
 egg: version
 	# Make python egg
 	$(CLEAN)
 	echo "$(MANIFEST-unix)" > MANIFEST.in
-	python setup.py bdist_egg -d $(DIST) $(OUT)
+	$(setup) bdist_egg -d $(DIST) $(OUT)
 
 rpm: version
 	# Make RPM package
 	$(CLEAN)
 	echo "$(MANIFEST-unix)" > MANIFEST.in
-	python setup.py bdist --formats=rpm -b $(BUILD) -d $(DIST) $(OUT)
+	$(setup) bdist --formats=rpm -b $(BUILD) -d $(DIST) $(OUT)
 	rm $(DIST)/pyromaths-$(VERSION).tar.gz
 
 min: version
 	# Make minimalist .tar.bz source archive in $(BUILD)
 	$(CLEAN)
 	echo "$(MANIFEST-unix)" > MANIFEST.in
-	python setup.py sdist --formats=bztar -d $(BUILD) $(OUT)
+	$(setup) sdist --formats=bztar -d $(BUILD) $(OUT)
 
 deb: min
 	# Make DEB archive
@@ -171,7 +174,7 @@ app: version
 	# Make standalone Mac application
 	$(CLEAN)
 	echo "$(MANIFEST-mac)" > MANIFEST.in
-	python setup.py py2app -b $(BUILD) -d $(DIST) $(OUT)
+	$(setup) py2app -b $(BUILD) -d $(DIST) $(OUT)
 	# ..Improve french localization..."
 	# ....Extract strings from qt_menu.nib
 	cd $(DIST)                                                         &&\
@@ -220,4 +223,4 @@ exe:
 	copy $(FILES) $(BUILDIR)
 	move $(BUILDIR)/pyromaths $(BUILDIR)/Pyromaths.py
 	# ..Create standalone exe
-	cd $(BUILDIR) && c:/Python27/python.exe setup.py innosetup -b $(BUILD) -d $(DIST)
+	cd $(BUILDIR) && $(setup) innosetup -b $(BUILD) -d $(DIST)
