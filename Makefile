@@ -32,14 +32,14 @@ FILES   := AUTHORS COPYING NEWS pyromaths README setup.py MANIFEST.in src data
 MANIFEST :=                                     \
     include AUTHORS COPYING NEWS                \n\
     exclude MANIFEST.in                         \n\
-    recursive-include data *                    \n
+    graft data                                  \n
 # Minimal install (i.e. without test/ dir):
 MANIFEST-min := $(MANIFEST)                     \
     prune test                                  \n
 # Full project sources:
 MANIFEST-all := $(MANIFEST)                     \
-    recursive-include debian *                  \n\
-    recursive-include utils *                   \n\
+    graft debian                                \n\
+    graft utils                                 \n\
     include Makefile                            \n
 # Unix:
 MANIFEST-unix := $(MANIFEST-min)                \
