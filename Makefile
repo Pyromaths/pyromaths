@@ -188,7 +188,7 @@ app: version
 	    $(sed-i) 's/Quit/Quitter/g' qt_menu.strings
 	# ....Import french strings
 	cd $(APP)/Frameworks/QtGui.framework/Versions/4/Resources          &&\
-	    ibtool --strings-file $DIST/qt_menu.strings                      \
+	    ibtool --strings-file $(DIST)/qt_menu.strings                    \
 	           --write qt_menu_french.nib qt_menu.nib                  &&\
 	    rm -rf qt_menu.nib && mv qt_menu_french.nib qt_menu.nib
 	rm $(DIST)/qt_menu.strings
