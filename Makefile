@@ -43,6 +43,7 @@ MANIFEST-all := $(MANIFEST)                     \
     include Makefile                            \n
 # Unix:
 MANIFEST-unix := $(MANIFEST-min)                \
+    exclude data/macmenu_fr.qm                  \n\
     exclude data/images/pyromaths.icns          \n\
     exclude data/images/pyromaths.ico           \n
 # Mac app:
@@ -53,6 +54,7 @@ MANIFEST-mac := $(MANIFEST-min)                 \
 # Win app:
 MANIFEST-win := $(MANIFEST-min)                 \
     prune data/linux                            \n\
+    exclude data/macmenu_fr.qm                  \n\
     exclude data/images/pyromaths.icns          \n
 
 ### SHORTCUTS & COMPATIBILITY
@@ -173,25 +175,7 @@ repo: deb
 app: version
 	# Make standalone Mac application
 	$(clean)
-	echo "$(MANIFEST-mac)" > MANIFEST.in
 	$(setup) py2app -b $(BUILD) -d $(DIST) $(OUT)
-	# ..Improve french localization..."
-	# ....Extract strings from qt_menu.nib
-	cd $(DIST)                                                         &&\
-	    ibtool --generate-strings-file qt_menu.strings                   \
-	           $(APP)/Frameworks/QtGui.framework/Versions/4/Resources/qt_menu.nib &&\
-	    iconv -f utf-16 -t utf-8 qt_menu.strings > qt_menu_tmp.strings &&\
-	    mv -f qt_menu_tmp.strings qt_menu.strings                      &&\
-	    $(sed-i) 's/Hide/Masquer/g' qt_menu.strings                    &&\
-	    $(sed-i) 's/Others/les autres/g' qt_menu.strings               &&\
-	    $(sed-i) 's/Show All/Tout afficher/g' qt_menu.strings          &&\
-	    $(sed-i) 's/Quit/Quitter/g' qt_menu.strings
-	# ....Import french strings
-	cd $(APP)/Frameworks/QtGui.framework/Versions/4/Resources          &&\
-	    ibtool --strings-file $(DIST)/qt_menu.strings                    \
-	           --write qt_menu_french.nib qt_menu.nib                  &&\
-	    rm -rf qt_menu.nib && mv qt_menu_french.nib qt_menu.nib
-	rm $(DIST)/qt_menu.strings
 	# ..Clean-up unnecessary files/folders
 	rm -f $(APP)/PkgInfo
 	cd $(APP)/Resources && rm -rf include lib/python2.*/config lib/python2.*/site.pyc

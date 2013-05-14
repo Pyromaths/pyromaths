@@ -88,7 +88,15 @@ def _mac_opt():
                   )
     return dict(
         app        = ['src/pyromaths.py'],
-        data_files = [('data', glob('data/*'))],
+        data_files = [
+            ( 'data', ['data/macmenu_fr.qm']),
+            ( 'data/images', ['data/images/pyromaths.png',
+                     'data/images/whatsthis.png']),
+            ('data/images/vignettes', glob('data/images/vignettes/*.png')),
+            ('data/macmenu_fr.qm'),
+            ('data/templates',        glob('data/templates/*.tex')),
+            ('data/packages',         glob('data/packages/*')),
+        ],
         setup_requires = ['py2app>=0.7.3', 'lxml>=2.2.2'],
         options    = {'py2app': py2app},
     )
