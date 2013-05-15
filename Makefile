@@ -175,7 +175,7 @@ repo: deb
 app: version
 	# Make standalone Mac application
 	$(clean)
-	cd $(PYRO)/data && lrelease macmenu_fr.ts
+	cd $(PYRO)/data && lrelease qtmac_fr.ts
 	$(setup) py2app -O2 -b $(BUILD) -d $(DIST) $(OUT)
 	# ..Clean-up unnecessary files/folders
 	rm -f $(APP)/PkgInfo
