@@ -58,11 +58,11 @@ def main():
 
     app = QtGui.QApplication(argv)
     pyromaths = StartQT4()
-    
+
     # Intégration de QTranslator
     from PyQt4.QtCore import QTranslator
     translator = QTranslator()
-    translator.load("macmenu_fr", "data")
+    translator.load("qtmac_fr", "data")
     app.installTranslator(translator)
 
     pyromaths.show()

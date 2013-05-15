@@ -43,7 +43,7 @@ MANIFEST-all := $(MANIFEST)                     \
     include Makefile                            \n
 # Unix:
 MANIFEST-unix := $(MANIFEST-min)                \
-    exclude data/macmenu_fr.qm                  \n\
+    exclude data/qtmac_fr.qm                    \n\
     exclude data/images/pyromaths.icns          \n\
     exclude data/images/pyromaths.ico           \n
 # Mac app:
@@ -54,7 +54,7 @@ MANIFEST-mac := $(MANIFEST-min)                 \
 # Win app:
 MANIFEST-win := $(MANIFEST-min)                 \
     prune data/linux                            \n\
-    exclude data/macmenu_fr.qm                  \n\
+    exclude data/qtmac_fr.qm                  \n\
     exclude data/images/pyromaths.icns          \n
 
 ### SHORTCUTS & COMPATIBILITY
@@ -175,17 +175,11 @@ repo: deb
 app: version
 	# Make standalone Mac application
 	$(clean)
-	$(setup) py2app -b $(BUILD) -d $(DIST) $(OUT)
+	cd $(PYRO)/data && lrelease macmenu_fr.ts
+	$(setup) py2app -O2 -b $(BUILD) -d $(DIST) $(OUT)
 	# ..Clean-up unnecessary files/folders
 	rm -f $(APP)/PkgInfo
-	cd $(APP)/Resources && rm -rf include lib/python2.*/config lib/python2.*/site.pyc
-	cd $(APP)/Resources/lib/python2.*/lib-dynload                        &&\
-	    rm -f _AE.so _codecs_cn.so _codecs_hk.so _codecs_iso2022.so        \
-	          _codecs_jp.so _codecs_kr.so _codecs_tw.so _Evt.so _File.so   \
-	          _hashlib.so _heapq.so _locale.so _multibytecodec.so _Res.so  \
-	          _ssl.so array.so bz2.so cPickle.so datetime.so gestalt.so    \
-	          MacOS.so pyexpat.so resource.so strop.so unicodedata.so      \
-	          PyQt4/Qt.so
+	cd $(APP)/Resources && rm -rf site.pyc include lib/python2.*/config lib/python2.*/site.pyc
 	cd $(APP)/Frameworks                                     &&\
 	    rm -rf *.framework/Contents *.framework/Versions/4.0   \
 	           *.framework/Versions/Current *.framework/*.prl  \

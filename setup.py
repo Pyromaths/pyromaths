@@ -78,22 +78,37 @@ def _mac_opt():
                  'QtMultimedia', 'QtNetwork', 'QtOpenGL', 'QtScript',
                  'QtScriptTools', 'QtSql', 'QtSvg', 'QtTest', 'QtWebKit',
                  'QtXml', 'QtXmlPatterns', 'phonon']
+    lib_dynload_unused = ['_AE', '_codecs_cn', '_codecs_hk', '_codecs_2022', 
+                          '_codecs_iso2022', '_codecs_jp', '_codecs_kr', 
+                          '_codecs_tw', '_Evt', '_File', '_hashlib', '_heapq', 
+                          '_locale', '_multibytecodec', '_Res','_ssl', 'array',
+                          'bz2', 'cPickle', 'datetime', 'gestalt', 'MacOS',
+                          'pyexpat', 'rurce', 'strop', 'unicodedata']
+    site_packages_unused = ['_osx_support', '_builtinSuites', 'Carbon', 
+                            'distutils', 'Finder', 'StdSuites', 'unittest',
+                            'xml', 'StringIO', 'getopt', 'repr','_strptime', 
+                            'gettext', 'sets', '_threading_local', 'glob',
+                            'base64', 'locale', 'sre', 'bdb', 'optparse.',
+                            'ssl', 'calendar', 'pdb', 'stringprep', 'cmd',
+                            'pkg_resources' 'tempfile','copy', 'pkgutil',
+                            'textwrap', 'difflib', 'platform', 'threading',
+                            'dummy_thread', 'plistlib', 'quopri', 'fnmatch',
+                            'pprint']
+    excludes = lib_dynload_unused + site_packages_unused + ['PyQt4.%s' % f for f in qt_unused]
     # py2app
     py2app = dict(plist    = plist,
                   iconfile = 'data/images/pyromaths.icns',
                   includes = ['gzip'],
-                  excludes = ['PyQt4.%s' % f for f in qt_unused],
-                  dylib_excludes = qt_unused,
+                  excludes = excludes,
                   argv_emulation = True,
                   )
     return dict(
         app        = ['src/pyromaths.py'],
         data_files = [
-            ( 'data', ['data/macmenu_fr.qm']),
+            ( 'data', ['data/qtmac_fr.qm']),
             ( 'data/images', ['data/images/pyromaths.png',
                      'data/images/whatsthis.png']),
             ('data/images/vignettes', glob('data/images/vignettes/*.png')),
-            ('data/macmenu_fr.qm'),
             ('data/templates',        glob('data/templates/*.tex')),
             ('data/packages',         glob('data/packages/*')),
         ],
