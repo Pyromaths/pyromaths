@@ -172,10 +172,13 @@ repo: deb
 	    gpg --default-key "Jérôme Ortais" -bao Release.gpg Release    &&\
 	    tar vjcf $(ARCHIVE)/debs-$(VERSION).tar.bz2 dists/ Packages Packages.gz Packages.bz2 Release Release.gpg
 
-app: version
+data/%.qm: data/%.ts
+	# Translate new/updated language files
+	lrelease $< -qm $@
+
+app: version data/qtmac_fr.qm
 	# Make standalone Mac application
 	$(clean)
-	cd $(PYRO)/data && lrelease qtmac_fr.ts
 	$(setup) py2app -O2 -b $(BUILD) -d $(DIST) $(OUT)
 	# ..Clean-up unnecessary files/folders
 	rm -f $(APP)/PkgInfo
