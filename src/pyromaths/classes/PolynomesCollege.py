@@ -48,20 +48,27 @@ _MONOME_FORMAT = re.compile(r"""
 
 class Polynome():
     """Cette classe crée la notion de polynômes.
-    Polynome([[2,2],[3,1],[4,0]], 'z') est équivalent à 2z^2+3z+4.
+        >>> from pyromaths.classes.PolynomesCollege import Polynome
+        >>> Polynome([[2,2],[3,1],[4,0]], 'z')
+        Polynome([[2, 2], [3, 1], [4, 0]], "z")
+        >>> Polynome("2y^2+3y+4")
+        Polynome([[2.0, 2], [3.0, 1], [4.0, 0]], "y")
 
-    Un polynôme peut aussi être produit à l'aide d'une chaîne de la forme
-    Polynome("2y^2+3y+4")
-
-    Les variables ne peuvent être : e, i, j, l, o, O.
+    Les variables e, i, j, l, o, O sont interdites pour des raisons de
+    lisibilité (l, o, O) ou parce qu'elles sont utilisées comme constantes (e,
+    i, j).
     """
 
     def __init__(self, monomes, var=None):
-        """Crée un polynôme.
-        Accepte une chaîne de caractères comme '2x^2-4x+6' ou une liste de
-        monômes [coefficient, degré] finit par une string contenant la variable.
-        Par exemple, Polynome([[5,2], [-4,1], [6,0]], 't') équivaut à
-        Polynome("+5t^2-4t+6")
+        """Crée un polynôme. Si ``var == None`` alors la variable est ``x``.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> Polynome([[2,2],[3,1],[4,0]], 'z')
+            Polynome([[2, 2], [3, 1], [4, 0]], "z")
+            >>> Polynome("2y^2+3y+4")
+            Polynome([[2.0, 2], [3.0, 1], [4.0, 0]], "y")
+            >>> Polynome([[1, 1], [2, 2]])
+            Polynome([[1, 1], [2, 2]], "x")
         """
         monomes = monomes or '0' # monômes du polynôme, par défaut un polynôme nul
         if isinstance(monomes, basestring):
@@ -94,14 +101,32 @@ class Polynome():
             self.var = var or 'x' # Variable par défaut
 
     def __repr__(self):
-        """repr(self)
-        Renvoie une chaîne de caractère pouvant être utilisée pour créer un polynôme.
-        S'appelle ainsi : repr(p) où p est un polynôme"""
+        """**repr**\ (*object*)
+
+        Renvoie une chaîne de caractère pouvant être utilisée pour créer un
+        polynôme.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p=Polynome([[2,2],[3,1],[4,0]], 'z')
+            >>> repr(p)
+            'Polynome([[2, 2], [3, 1], [4, 0]], "z")'
+
+        :rtype: string
+        """
         return "Polynome(%s, \"%s\")" % (self.monomes, self.var)
 
     def __str__(self):
-        """str(self)
-        Renvoie une version LaTeX du polynôme"""
+        """**str**\ (*object*)
+
+        Renvoie une version LaTeX du polynôme.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p=Polynome([[2,2],[3,1],[4,0]], 'z')
+            >>> str(p)
+            '2\\,z^{2}+3\\,z+4'
+
+        :rtype: string
+        """
         var = self.var
         s = ""
         for m in self.monomes:
@@ -138,11 +163,35 @@ class Polynome():
         return s
 
     def __getitem__(self, i):
-        """Renvoie le i ème monôme"""
+        """*object*\ .\ **__getitem__**\ (*integer*)
+
+        Renvoie le i ème monome du polynôme.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p=Polynome("2y+3y^2+4")
+            >>> p
+            Polynome([[2.0, 1], [3.0, 2], [4.0, 0]], "y")
+            >>> p.__getitem__(1)
+            [3.0, 2]
+
+        :rtype: list
+        """
         return self.monomes[i]
 
     def __iadd__(self, other):
-        """Définit @self += @other"""
+        """*object*\ .\ **__iadd__**\ (*other*)
+
+        ``p.__iadd__(q)`` est équivalent à ``p + q`` **Quel est l'intérêt de
+        cette fonction ?**\ Vérifier si elle est utilisée.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p=Polynome("2y+3y^2+4")
+            >>> q=Polynome('-y+6')
+            >>> p.__iadd__(q)
+            Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+
+        :rtype: Polynome
+        """
         if isinstance(other, (float, int)):
             other = Polynome([[other, 0]], self.var)
         m1, m2 = [m for m in self.monomes], [m for m in other.monomes]
@@ -160,8 +209,22 @@ class Polynome():
             return Polynome(m, self.var)
 
     def __eq__(self, other):
-        """Renvoie True si @self est égal à @other, False sinon. Ne tient pas
-        compte de l'ordre des monômes"""
+        """*object*\ .\ **__eq__**\ (*other*)
+
+        ``p.__eq__(q)`` est équivalent à ``p == q``
+        Renvoie True si deux polynômes sont égaux. Ne tient pas compte de
+        l'ordre des monômes.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p = Polynome("2y+3y^2+4")
+            >>> q = Polynome('-y+6')
+            >>> p.__eq__(q)
+            False
+            >>> p == q
+            False
+
+        :rtype: boolean
+        """
         if not isinstance(other, Polynome):
             other = Polynome(other, self.var)
         return not (self.var != other.var or \
@@ -169,17 +232,60 @@ class Polynome():
                     sorted(other.monomes, key = lambda x: (-x[1], x[0])))
 
     def __ne__(self, other):
-        """ @self différent de @other ?"""
+        """*object*\ .\ **__ne__**\ (*other*)
+
+        ``p.__ne__(q)`` est équivalent à ``p != q``
+        Renvoie True si deux polynômes sont différents. Ne tient pas compte de
+        l'ordre des monômes.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p = Polynome("2y+3y^2+4")
+            >>> q = Polynome('-y+6')
+            >>> p.__ne__(q)
+            True
+            >>> p != q
+            True
+
+        :rtype: boolean
+        """
         return not (self==other)
 
     def __add__(self, other):
-        """Calcule la somme des polynômes @self et @other"""
+        """*object*\ .\ **__add__**\ (*other*)
+
+        ``p.__add__(q)`` est équivalent à ``p + q``  calcule la somme de
+        polynômes.
+
+        *other* peut être une chaîne représentant un polynôme.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p=Polynome("2y+3y^2+4")
+            >>> q=Polynome('-y+6')
+            >>> p.__add__(q)
+            Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+            >>> p+q
+            Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+            >>> p.__add__("Polynome('-y+6')")
+            Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+
+        :param: other
+        :type: Polynome ou string *évaluable comme Polynome*
+        :rtype: Polynome
+        """
         if isinstance(other,  basestring):
             other = eval(other)
         self += other
         return self
 
     def __radd__(self, other):
+        """*object*\ .\ **__radd__**\ (*other*)
+
+        ``p.__radd__(q)`` est équivalent à ``q + p``
+
+        :param: other
+        :type: Polynome ou string *évaluable comme Polynome*
+        rtype: Polynome
+        """
         if isinstance(other,  basestring):
             other = eval(other)
         if isinstance(other, (float, int)):
@@ -187,7 +293,7 @@ class Polynome():
         return other + self
 
     def __sub__(self, other):
-        """Jamais utilisé !"""
+        """**Jamais utilisé !**"""
         if not isinstance(other, Polynome):
             self.monomes.append([-other, 0])
             return self
@@ -197,23 +303,84 @@ class Polynome():
         return "%r+%r" %(self, -other)
 
     def __rsub__(self, other):
-        """Jamais utilisé !"""
+        """**Jamais utilisé !**"""
         if not isinstance(other, str):
             other=str(other)
         return other + -self
 
     def __neg__(self):
-        """Renvoie l'opposé d'un polynôme"""
+        """*object*\ .\ **__neg__**\ ()
+
+        ``p.__neg__()`` est équivalent à ``-p`` est équivalent à ``p = -p``
+
+        **TODO :** Corriger ce dernier point ; p ne devrait pas être modifié
+
+        Renvoie l'opposé d'un polynôme.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p=Polynome("2y+3y^2+4")
+            >>> p.__neg__()
+            Polynome([[-2.0, 1], [-3.0, 2], [-4.0, 0]], "y")
+
+        :rtype: Polynome
+        """
         m = [m1 for m1 in self.monomes]
         for i in range(len(m)):
             m[i][0] = -m[i][0]
         return Polynome(m, self.var)
 
     def __pos__(self):
-        """+a"""
+        """*object*\ .\ **__pos__**\ ()
+
+        ``p.__pos__()`` est équivalent à ``+p``
+
+        Renvoie le polynôme.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p=Polynome("2y+3y^2+4")
+            >>> p.__pos__()
+            Polynome([[2.0, 1], [3.0, 2], [4.0, 0]], "y")
+
+        :rtype: Polynome
+        """
         return self
 
     def __mul__(self,  other):
+        """*object*\ .\ **__mul__**\ (*other*)
+
+        ``p.__mul__(q)`` est équivalent à ``p * q``
+
+        **TODO :** Cas d'un produit par 0 ou 1
+
+        Renvoie une chaîne de caractère ou un objet Polynôme dont les éléments
+        sont :
+
+        * le produit de ``p`` et ``q`` si ce sont deux monômes dont un au moins
+          a pour coefficient 1.
+        * le produit détaillé de ``p`` et ``q`` si ce sont deux monômes ne
+          dépendant pas du cas précédent.
+        * le développement par distributivité dans les autres cas
+        * **TODO :** le développement par une identité remarquable si ``p ==
+          q`` ou si ``p`` et ``q`` sont respectivement de la forme ``a.x + b``
+          et ``a.x - b``
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p=Polynome('3x+4')
+            >>> q=Polynome('2x+5')
+            >>> p*q
+            'Polynome([[3.0, 1]], "x")*Polynome([[2.0, 1]], "x")+Polynome([[3.0, 1]], "x")*Polynome([[5.0, 0]], "x")+Polynome([[4.0, 0]], "x")*Polynome([[2.0, 1]], "x")+Polynome([[4.0, 0]], "x")*Polynome([[5.0, 0]], "x")'
+            >>> p=Polynome('3x')
+            >>> q=Polynome('2x')
+            >>> p*q
+            '3.0*2.0*Polynome("x^1")*Polynome("x^1")'
+            >>> q=Polynome('x')
+            >>> p*q
+            Polynome([[3.0, 2]], "x")
+
+        :param: other
+        :type: Polynome ou string *évaluable comme Polynome*
+        :rtype: string ou Polynome
+        """
         #TODO: Cas d'un produit par 0 ou 1
         if not isinstance(other, Polynome):
             other=Polynome(repr(other), self.var)
@@ -269,11 +436,16 @@ class Polynome():
                 return "*".join(m)
 
     def __rmul__(self,  other):
-        """Multiplication de @other (qui n'est pas un polynôme) par @self (qui
-        en est un)
-        - Si @other est une suite de produits de monômes, et @self un polynôme
+        """Multiplication de *other* (qui n'est pas un polynôme) par *object*
+        (qui en est un)
+
+        * Si *other* est une suite de produits de monômes, et *self* un polynôme
           de rang 1, on effectue toutes les multiplications en une fois
-        - Sinon, on calcule d'abord @other"""
+        * Sinon, on calcule d'abord @other
+
+        :param: other
+        :type: Polynome ou string *évaluable comme Polynome*
+        :rtype: string ou Polynome"""
         if isinstance(other, (int, float)):
             other = Polynome(repr(other), self.var)
             return other*self
@@ -314,13 +486,38 @@ class Polynome():
         else: raise ValueError(u"Type non prévu. Bogue en perspective !")
 
     def __len__(self):
-        "retourne le nombre de monômes d'un polynôme"
+        """*object*\ .\ **__len__**\ ()
+
+        ``p.__len__()`` équivaut à ``len(p)`` et renvoie le nombre de monômes
+        d'un polynôme.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p = Polynome("2y+3y^2+4")
+            >>> len(p)
+            3
+            >>> p.__len__()
+            3
+
+        :rtype: integer
+        """
         m = [m1 for m1 in self.monomes]
         m =Polynome.ordonne(Polynome(m, self.var))
         return len(self.monomes)
 
     def degre(self):
-        "retourne le degré d'un polynôme, -1 pour le polynôme nul"
+        """**degre**\ (*object*)
+
+        Retourne le degré d'un polynôme, -1 pour le polynôme nul
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p = Polynome("2y+3y^2+4")
+            >>> Polynome.degre(p)
+            2
+            >>> Polynome.degre(Polynome(''))
+            -1
+
+        :rtype: integer
+        """
         if self == Polynome(""): return -1
         else:
             m = [m1 for m1 in self.monomes]
@@ -328,6 +525,31 @@ class Polynome():
             return m.monomes[0][1]
 
     def __pow__(self, other):
+        """*object*\ .\ **pow**\ (*integer*)
+
+        ``p.__pow__(n)`` équivaut à ``p**n`` et renvoie le développement du
+        polynôme p à la puissance n.
+
+        * Si ``n == 1``, alors renvoie l'objet Polynome ;
+        * si ``n == 2``, alors renvoie une chaîne avec le développement en
+          utilisant une identité remarquable ;
+        * si ``n > 1``, renvoie le développement en utilisant la formule du
+          binôme de Newton.
+
+        **TODO :** si ``n == 2`` et ``len(p) > 2``, bug
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p = Polynome("2y+4")
+            >>> p**2
+            'Polynome([[2.0, 1]], "y")**2+2*Polynome([[2.0, 1]], "y")*Polynome([[4.0, 0]], "y")+Polynome([[4.0, 0]], "y")**2'
+            >>> p = Polynome("2y")
+            >>> p**3
+            Polynome([[8.0, 3]], "y")
+            >>> p.__pow__(2)
+            Polynome([[4.0, 2]], "y")
+
+        :rtype: string ou Polynome
+        """
         if len(self) == 2 and other ==2:
             a0 = self.monomes[0][0]
             b0 = self.monomes[1][0]
@@ -347,7 +569,18 @@ class Polynome():
             return result
 
     def reduit(self):
-        """Renvoie une version réduite du polynôme self"""
+        """**reduit**\ (*object*)
+
+        Retourne une version réduite et ordonnée du polynôme
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p = Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+            >>> Polynome.reduit(p)
+            Polynome([[3.0, 2], [1.0, 1], [10.0, 0]], "y")
+
+        :param type: Polynome
+        :rtype: Polynome
+        """
         polynome = []
         for monome in Polynome.ordonne(self).monomes:
             if  polynome and monome[1] == polynome[-1][1]:
@@ -360,8 +593,24 @@ class Polynome():
         return Polynome(polynome, self.var)
 
     def reduction_detaillee(self):
-        """Ordonne puis effectue les factorisations qui permettent de réduire un
-        polynôme"""
+        """**reduction_detaillee**\ (*object*)
+
+        Cette fonction effectue l'une des deux actions suivantes :
+
+        * ordonne les monômes d'un polynôme si nécessaire ;
+        * écrit les factorisation qui permettent de réduire un polynôme
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p = Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+            >>> Polynome.reduction_detaillee(p)
+            Polynome([[3.0, 2], [2.0, 1], [-1.0, 1], [4.0, 0], [6.0, 0]], "y")
+            >>> p = Polynome([[3.0, 2], [2.0, 1], [-1.0, 1], [4.0, 0], [6.0, 0]], "y")
+            >>> Polynome.reduction_detaillee(p)
+            'Polynome("3.0y^2")+(2.0-1.0)*Polynome([[1.0, 1]], "y")+Polynome("10.0")'
+
+        :param type: Polynome
+        :rtype: string ou Polynome
+        """
         po = Polynome.ordonne(self)
         if not Polynome.reductible(self) or repr(po) != repr(self):
             return po
@@ -399,15 +648,37 @@ class Polynome():
             return s
 
     def reductible(self):
-        """Renvoie 1 si le polynôme est réductible, 0 sinon."""
+        """**reductible**\ (*object*)
+
+        Retourne True si le polynôme est réductible, False sinon.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p = Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+            >>> Polynome.reductible(p)
+            True
+
+        :param type: Polynome
+        :rtype: boolean
+        """
         if self != Polynome.reduit(self):
-            return 1
+            return True
         else:
-            return 0
+            return False
 
     def ordonne(self):
-        """Ordonne les monômes du polynôme @self en écrivant en premier ceux
-        de degré supérieur"""
+        """**ordonne**\ (*object*)
+
+        Retourne une version ordonnée d'un polynôme en écrivant en premier les
+        monômes de degré supérieur.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p = Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+            >>> Polynome.ordonne(p)
+            Polynome([[3.0, 2], [2.0, 1], [-1.0, 1], [4.0, 0], [6.0, 0]], "y")
+
+        :param type: Polynome
+        :rtype: Polynome
+        """
         m1 = self.monomes
         m1 = sorted(m1, key = lambda x: (-x[1]))
         return Polynome(m1, self.var)
