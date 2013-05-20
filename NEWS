@@ -1,3 +1,11 @@
+* Construction et packaging:
+** Factorisation des setup.py en un seul, commun à toutes les plateformes
+** Utilisation de Make pour tout ce qui déborde du périmètre de setup.py (traductions, optimisations...)
+** Modification de l'arborescence
+** Support du format python EGG (packaging et installation)
+* Menu système en français (version OSX)
+* Version 64 bits (application OSX)
+
 Version 13.03
 * Correction d'un bug d'affichage des pdf
 * Ajout de cinq exercices de statistiques niveau cinquième
