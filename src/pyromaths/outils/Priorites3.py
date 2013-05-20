@@ -28,10 +28,23 @@ from ..outils.Affichage import decimaux
 
 
 def cherche_polynome(calcul, index):
-    """Recherche le premier polynôme dans la chaîne calcul à une position
+    """**cherche_polynome**\ (*calcul*\ , *index*)
+
+    Recherche le premier polynôme dans la chaîne calcul à une position
     supérieure ou égale à index, sans expression régulière
-    @calcul: str
-    @index: int"""
+
+    :param calcul: le calcul à tester
+    :type calcul: string
+    :param index: position à partir de laquelle effectuer le test
+    :type index: integer
+    
+    >>> from pyromaths.outils import Priorites3
+    >>> p = 'Polynome([[-4, 2]], "x")-Polynome([[-5, 1], [4, 2], [1, 0]], "x")+Polynome([[6,  0], [5, 1]], "x")'
+    >>> Priorites3.cherche_polynome(p, 5)
+    'Polynome([[-5, 1], [4, 2], [1, 0]], "x")' 
+
+    :rtype: string
+    """
     index = calcul.find("Polynome(", index)
     if index < 0: return None
     par, i = 1, index+9 # nombre de parenthèses ouvertes, début de recherche
@@ -45,11 +58,34 @@ def cherche_polynome(calcul, index):
     return calcul[index:i+1]
 
 def cherche_decimal(calcul, index):
-    """130 fois plus rapide qu'avec une expression régulière !
+    """**cherche_decimal**\ (*calcul*\ , *index*)
+
+    Recherche le premier nombre décimal dans la chaîne calcul à une position
+    supérieure ou égale à index, sans expression régulière.
     Un nombre décimal peut être entouré de parenthèses s'il a un signe, ou avoir
-    un signe s'il est en début de chaîne
-    @calcul: str
-    @index: int"""
+    un signe s'il est en début de chaîne.
+    
+    Cette fonction est 130 fois plus rapide qu'avec une expression régulière.
+
+    :param calcul: le calcul à tester
+    :type calcul: string
+    :param index: position à partir de laquelle effectuer le test
+    :type index: integer
+    
+    >>> from pyromaths.outils import Priorites3
+    >>> p = '-Polynome([[-4, 2]], "x")*6**2+3'
+    >>> Priorites3.cherche_decimal(p, 1)
+    '4'
+    >>> p = '-6*(-11)*(-5)'
+    >>> Priorites3.cherche_decimal(p, 1)
+    '6'
+    >>> Priorites3.cherche_decimal(p, 0)
+    '6'
+
+    **TODO :** vérifier ces deux derniers exemples. Je pense que je devrais récupérer -6
+    
+    :rtype: string
+    """
     end = len(calcul)
     while index<=end:
         try:
@@ -76,9 +112,26 @@ def cherche_decimal(calcul, index):
     return calcul[index:end]
 
 def split_calcul(calcul):
-    """Partitionne la chaîne de caractères pour obtenir une liste d'opérateurs,
+    """**split_calcul**\ (*calcul*)
+
+    Partitionne la chaîne de caractères pour obtenir une liste d'opérateurs,
     de parenthèses, de polynômes et de nombres
-    @calcul: str"""
+
+    :param calcul: le calcul à traiter
+    :type calcul: string
+    
+    >>> from pyromaths.outils import Priorites3
+    >>> p = '-Polynome([[-4, 2]], "x")*6**2+3'
+    >>> Priorites3.split_calcul(p)
+    ['-', 'Polynome([[-4, 2]], "x")', '*', '6', '**', '2', '+', '3']
+    >>> p = '-6*(-11)*(-5)'
+    >>> Priorites3.split_calcul(p)
+    ['-', '6', '*', '(-11)', '*', '(-5)']
+
+    **TODO :** vérifier ce dernier exemple. Je pense que je devrais récupérer -6
+    
+    :rtype: list
+    """ 
     l = []
     findings = (cherche_polynome, cherche_decimal)
     for finding in findings:
@@ -102,18 +155,50 @@ def split_calcul(calcul):
     return l
 
 def EstNombre(value):
-    """Test si Value est un nombre ou pas
-    @value: str"""
+    """**EstNombre**\ (*value*)
+
+    Teste si `value` est une valeur, c'est à dire un entier, un réel, un polynôme
+
+    :param value: la valeur à traiter
+    :type value: string
+    
+    >>> from pyromaths.outils import Priorites3
+    >>> v = '-15'
+    >>> Priorites3.EstNombre(v)
+    True
+    >>> v = 'Polynome([[-4, 2]], "x")'
+    >>> Priorites3.EstNombre(v)
+    True
+
+    :rtype: list
+    """
     if value in "**/+-()":
         return False
     else:
         return isinstance(eval(value), (float, int, Polynome))
 
 def splitting(calcul):
-    """Partitionne la chaîne de caractères pour obtenir une liste d'opérateurs,
+    """**split_calcul**\ (*calcul*)
+
+    Partitionne la chaîne de caractères pour obtenir une liste d'opérateurs,
     de parenthèses, de polynômes et de nombres puis arrange la liste des
     opérandes et opérateurs
-    @calcul: str"""
+
+    :param calcul: le calcul à traiter
+    :type calcul: string
+    
+    >>> from pyromaths.outils import Priorites3
+    >>> p = '-Polynome([[-4, 2]], "x")*6**2+3'
+    >>> Priorites3.splitting(p)
+    ['-', 'Polynome([[-4, 2]], "x")', '*', '6', '**', '2', '+', '3']
+    >>> p = '-6*(-11)*(-5)'
+    >>> Priorites3.split_calcul(p)
+    ['-6', '*', '(-11)', '*', '(-5)']
+
+    **TODO :** Ce dernier exemple fonctionne ici. Quelle différence avec split_calcul ?
+    
+    :rtype: list
+    """ 
     if calcul == "": return []
     l = split_calcul(calcul)
     if l[0] == "+" and len(l) > 1: l[0] += l.pop(1)
@@ -133,22 +218,52 @@ def splitting(calcul):
     return l
 
 def recherche_parentheses(calcul):
-    """Recherche les parenthèses intérieures dans une liste
-    @calcul: list"""
+    """**recherche_parentheses**\ (*calcul*)
+
+    Recherche les premières parenthèses (éventuellement intérieures) dans une expression
+
+    :param calcul: le calcul à traiter
+    :type calcul: list
+    
+    >>> from pyromaths.outils import Priorites3
+    >>> c = ['-6', '*', '(-11)', '*', '(-5)']
+    >>> Priorites3.recherche_parentheses(c)
+    >>>
+    >>> c = ['-9', '-', '6', '*', '(', '(-2)', '-', '4', ')']
+    >>> Priorites3.recherche_parentheses(c)
+    (4, 9)
+
+    :rtype: tuple
+    """     
     if calcul.count("("):
         debut = calcul.index("(")
         if calcul[debut+1:].count(")"): fin = calcul[debut:].index(")") + debut
         else: return None
-        for i in range(calcul[debut + 1:fin].count("(")):
+        for dummy in range(calcul[debut + 1:fin].count("(")):
             debut += calcul[debut+1:].index("(") + 1
         return (debut, fin+1)
     else:
         return None
 
 def recherche_puissance(calcul):
-    """Recherche la première occurrence d'une puissance dans une liste de
+    """**recherche_puissance**\ (*calcul*)
+
+    Recherche la première occurrence d'une puissance dans une liste de
     calculs. Elle doit être entourée de deux nombres.
-    @calcul: list"""
+
+    :param calcul: le calcul à traiter
+    :type calcul: list
+    
+    >>> from pyromaths.outils import Priorites3
+    >>> c = ['-6', '**', '(-11)', '*', '(-5)']
+    >>> Priorites3.recherche_puissance(c)
+    (0, 3) 
+    >>> p = ['-', 'Polynome([[-4, 2]], "x")', '**', '2', '+', '3']
+    >>> Priorites3.recherche_puissance(p)
+    (1, 4)
+
+    :rtype: tuple
+    """     
     if calcul.count("**"):
         i = calcul.index("**")
         return (i-1, i+2)
@@ -156,17 +271,35 @@ def recherche_puissance(calcul):
         return None
 
 def recherche_operation(calcul, op, l_interdit, debut = 0):
-    """Recherche la première occurrence de l'opération op dans la liste de
+    """**recherche_operation**\ (*calcul*\ , *op*\ , *l_interdit*\ [, *debut*])
+
+    Recherche la première occurrence de l'opération op dans la liste de
     calculs list. L'opérateur doit être entouré de deux nombres, le premier ne
     doit pas être précédé d'un opérateur inclus dans la liste l_interdit.
     L'opérateur à trouver doit être avant la position debut (si debut est non
     nul).
-    @calcul: list
-    @op: str
-    @l_interdit: list
-    @debut: int"""
+
+    :param calcul: le calcul à traiter
+    :type calcul: list
+    :param op: l'opérateur à chercher
+    :type op: string
+    :param l_interdit: liste des opérateurs à ignorer, pour respecter les priorités
+    :type l_interdit: list
+    :param debut: À partir d'où chercher l'opérateur dans l'expression
+    :type debut: integer
+    
+    >>> from pyromaths.outils import Priorites3
+    >>> c = ['-6', '**', '(-11)', '*', '(-5)']
+    >>> Priorites3.recherche_operation(c, "*", ("**", "/"))
+    >>> 
+    >>> c = ['-9', '-', '6', '*', '2', '-', '4']
+    >>> Priorites3.recherche_operation(c, "*", ("**", "/"))
+    3
+
+    :rtype: integer
+    """     
     ind, fin = 0, len(calcul)
-    for c in range(calcul.count(op)):
+    for dummy in range(calcul.count(op)):
         ind = calcul.index(op, ind)
         if ind == 1 and ind < fin-1 and EstNombre(calcul[ind-1]) and\
             EstNombre(calcul[ind+1]):
@@ -184,14 +317,31 @@ def recherche_operation(calcul, op, l_interdit, debut = 0):
     else: return None
 
 def recherche_fin_operation(calcul, op, l_interdit, debut):
-    """Recherche la fin de la suite d'opération @op situé à la position @debut
+    """**recherche_fin_operation**\ (*calcul*\ , *op*\ , *l_interdit*\ , *debut*)
+
+    Recherche la fin de la suite d'opération @op situé à la position @debut
     de la liste de calculs @calcul, en vérifiant que cet enchaînement n'est pas
     suivi par un opérateur compris dans @l_interdit.
-    @calcul: list
-    @op: str
-    @l_interdit: list
-    @debut: int"""
-    index, fin, unique = debut + 2, len(calcul), False
+
+    :param calcul: le calcul à traiter
+    :type calcul: string
+    :param op: l'opérateur à chercher
+    :type op: string
+    :param l_interdit: liste des opérateurs à ignorer, pour respecter les priorités
+    :type l_interdit: list
+    :param debut: À partir d'où chercher l'opérateur dans l'expression
+    :type debut: integer
+    
+    >>> from pyromaths.outils import Priorites3
+    >>> c     = ['-9', '-', '6', '*', '2', '*', '5', '-', '4']
+    >>> Priorites3.recherche_fin_operation(c, "*", ("**", "/"),0)
+    2
+    >>> Priorites3.recherche_fin_operation(c, "*", ("**", "/"),4)
+    6
+
+    :rtype: integer
+    """
+    index, fin = debut + 2, len(calcul)
     while index < fin-1 and calcul[index] == op and EstNombre(calcul[index+1]):
         index +=2
     if index < fin and calcul[index] in l_interdit:
@@ -200,10 +350,22 @@ def recherche_fin_operation(calcul, op, l_interdit, debut):
     return index
 
 def recherche_produit(calcul):
-    """Recherche la première occurrence d'une multiplication ou divisions dans
+    """**recherche_produit**\ (*calcul*)
+
+    Recherche la première occurrence d'une multiplication ou divisions dans
     une liste de calculs. Elle doit être précédée d'un nombre qui ne doit pas
-    être précédé d'une puissance ou d'une division, NI SUIVIE D'UN EXPOSANT !
-    @calcul: list"""
+    être précédé d'une puissance ou d'une division, ni suivie d'un exposant.
+
+    :param calcul: le calcul à traiter
+    :type calcul: list
+        
+    >>> from pyromaths.outils import Priorites3
+    >>> c = ['-9', '-', '6', '*', '2', '*', '5', '-', '4']
+    >>> Priorites3.recherche_produit(c)
+    (2, 7)
+
+    :rtype: tuple
+    """
     debut = recherche_operation(calcul, "*", ("**", "/"))
     debut = recherche_operation(calcul, "/", ("**", "/"), debut)
     if debut is not None:
@@ -212,12 +374,18 @@ def recherche_produit(calcul):
     return None
 
 def recherche_somme(calcul):
-    """Recherche la première occurrence d'une addition ou soustraction dans une
+    """**recherche_somme**\ (*calcul*)
+
+    Recherche la première occurrence d'une addition ou soustraction dans une
     liste de calculs. Elle doit être précédée d'un nombre qui ne doit pas être
     précédé d'une puissance, d'une multiplication, d'une division ou d'une
-    soustraction, NI SUIVIE D'UN EXPOSANT, D'UNE MULTIPLICATION OU D'UNE
-    DIVISION !
-    @calcul: list"""
+    soustraction, ni suivie d'un exposant, d'une multiplaication ou d'une
+    division.
+
+    :param calcul: le calcul à traiter
+    :type calcul: list
+    :rtype: tuple
+    """    
     debut = recherche_operation(calcul, "+", ("**", "*", "/", "-"))
     debut = recherche_operation(calcul, "-", ("**", "*", "/", "-"), debut)
     if debut is not None:
@@ -227,12 +395,18 @@ def recherche_somme(calcul):
     return None
 
 def recherche_neg(calcul):
-    """Recherche la première occurence d'un opposé ## -(-5) ou -Polynome ## ou
-    d'une écriture du style +(-5) dans une liste de calculs ET NE DOIT PAS ĘTRE
-    SUIVI D'UN EXPOSANT !
-    @calcul: list"""
+    """**recherche_neg**\ (*calcul*)
+
+    Recherche la première occurence d'un opposé `-(-5)` ou `-Polynome` ou
+    d'une écriture du style `+(-5)` dans une liste de calculs qui ne doit pas être
+    suivie d'un exposant.
+
+    :param calcul: le calcul à traiter
+    :type calcul: list
+    :rtype: tuple
+    """    
     ind, debut, fin = 0, None, len(calcul)
-    for c in range(calcul.count("-")):
+    for dummy in range(calcul.count("-")):
         ind = calcul.index("-", ind)
         if ind < fin-1 and EstNombre(calcul[ind+1]):
             n = eval(calcul[ind+1])
@@ -242,7 +416,7 @@ def recherche_neg(calcul):
                 break
         else:
             ind += 1
-    for c in range(calcul[ind+1:].count("+")):
+    for dummy in range(calcul[ind+1:].count("+")):
         ind = calcul.index("+", ind)
         if ind < fin-1 and EstNombre(calcul[ind+1]) and calcul[ind+1][0] == "(":
             if debut is not None: debut = min(debut, ind)
@@ -255,25 +429,59 @@ def recherche_neg(calcul):
         return (debut, debut+2)
     else: return None
 
-def post_polynomes(l_calcul):
-    """Réduit les polynômes de la liste de calculs"""
-    for k in range(len(l_calcul)):
-        if 'Polynome(' in l_calcul[k]:
-            p = eval(l_calcul[k])
+def post_polynomes(calcul):
+    """**post_polynomes**\ (*calcul*)
+
+    Retourne la liste `calcul` dans laquelle 
+    
+    * les polynômes sont ordonnés si nécessaire
+    * les polynômes sont réduits s'ils sont déjà ordonnés
+
+    :param calcul: le calcul à traiter
+    :type calcul: list
+    
+    >>> p = ['Polynome([[1, 2], [-1, 0], [3, 1], [-9, 2], [-8, 1]], "x")']
+    >>> Priorites3.post_polynomes(p)
+    ['Polynome([[1, 2], [-9, 2], [3, 1], [-8, 1], [-1, 0]], "x")']
+    >>> p = ['Polynome([[1, 2], [-9, 2], [3, 1], [-8, 1], [-1, 0]], "x")']
+    ['(', '1', '-', '9', ')', '*', 'Polynome([[1.0, 2]], "x")', '+', '(', '3', '-', '8', ')', '*', 'Polynome([[1.0, 1]], "x")', '+', 'Polynome("-1x^0")']
+    
+    :rtype: list
+    """    
+    for k in range(len(calcul)):
+        if 'Polynome(' in calcul[k]:
+            p = eval(calcul[k])
             if Polynome.reductible(p):
                 p = Polynome.reduction_detaillee(p)
-                if isinstance(p, Polynome): l_calcul[k] = repr(p)
+                if isinstance(p, Polynome): calcul[k] = repr(p)
                 else:
                     if isinstance(p, basestring): p = splitting(p)
-                    if (k and l_calcul[k-1] in "*-") or (k<len(l_calcul)-1 and l_calcul[k+1] in "**"):
+                    if (k and calcul[k-1] in "*-") or (k<len(calcul)-1 and calcul[k+1] in "**"):
                         p.insert(0, "(")
                         p.append(")")
-                    l_calcul[k:k+1] = p
-    return l_calcul
+                    calcul[k:k+1] = p
+    return calcul
 
 def effectue_calcul(calcul):
-    """Effectue une étape du calcul en respectant les priorités
-    @calcul: list"""
+    """**effectue_calcul**\ (*calcul*)
+
+    Effectue une étape du calcul en respectant les priorités
+
+    :param calcul: le calcul à traiter
+    :type calcul: list
+    
+    >>> c = ['-5', '-', '(', '(-6)', '-', '1', '+', '(-3)', ')', '*', '(-1)']
+    >>> Priorites3.effectue_calcul(c)
+    ['-5', '-', '(', '-7', '-', '3', ')', '*', '(-1)']
+    >>> Priorites3.effectue_calcul(['-5', '-', '(', '-7', '-', '3', ')', '*', '(-1)'])
+    ['-5', '-', '-10', '*', '(-1)']
+    >>> Priorites3.effectue_calcul(['-5', '-', '-10', '*', '(-1)'])
+    ['-5', '-', '10']
+    >>> Priorites3.effectue_calcul(['-5', '-', '10'])
+    ['-15']
+    
+    :rtype: list
+    """    
     serie = (recherche_parentheses, recherche_puissance, recherche_produit,
             recherche_neg, recherche_somme)
     result, post, break_somme = [], "", False
@@ -328,7 +536,7 @@ def effectue_calcul(calcul):
                 if isinstance(sol, basestring): sol = splitting(sol)
                 elif isinstance(sol, (int, float)): sol = [str(sol)]
                 elif isinstance(sol, Polynome): sol = [repr(sol)]
-                else : raise valueError(u"Le résultat a un format inattendu")
+                else : raise ValueError(u"Le résultat a un format inattendu")
             if recherche == recherche_neg:
                 # Ajoute le "+" ou sépare le "-":
                 # "1-(-9)" => "1 + 9" et "1+(-9)" => "1 - 9"
@@ -362,9 +570,20 @@ def effectue_calcul(calcul):
     return result
 
 def priorites(calcul):
-    """Effectue un enchaînement d'opérations contenues dans calcul en
+    """**priorites**\ (*calcul*)
+
+    Effectue un enchaînement d'opérations contenues dans calcul en
     respectant les priorités et en détaillant les étapes.
-    @calcul: str"""
+
+    :param calcul: le calcul à traiter
+    :type calcul: string
+    
+    >>> c = '-1+5-(-5)+(-6)*1'
+    >>> Priorites3.priorites(c)
+    [['4', '+', '5', '-', '6'], ['9', '-', '6'], ['3']]
+    
+    :rtype: list
+    """
 #    if cherche_polynome(calcul, 0)>=0: litteral = True
 #    else: litteral = False
     calcul = splitting(calcul)
@@ -381,8 +600,26 @@ def priorites(calcul):
     return solution
 
 def texify(liste_calculs):
-    """Convertit une liste de chaînes de caractères 'liste_calculs' contenant
-    des polynômes en liste de chaînes de caractères au format TeX"""
+    """**texify**\ (*liste_calculs*)
+
+    Convertit la liste de chaînes de caractères `liste_calculs` contenant
+    des polynômes en liste de chaînes de caractères au format TeX
+
+    **TODO :** intégrer cela dans :mod:`outils.Affichage` et gérer l'ensemble des
+    classes de Pyromaths.
+    
+    :param calcul: le calcul à traiter
+    :type calcul: string
+    
+    >>> l = [['4', '+', '5', '-', '6'], ['9', '-', '6'], ['3']]
+    >>> Priorites3.texify(l)
+    ['4+5-6', '9-6', '3']
+    >>> p = '(-7)+8-Polynome([[-4, 1], [-9, 2], [-5, 0]], "x")'
+    >>> Priorites3.texify(Priorites3.priorites(p))
+    ['1+4\\,x+9\\,x^{2}+5', '9\\,x^{2}+4\\,x+1+5', '9\\,x^{2}+4\\,x+6']
+    
+    :rtype: list
+    """
     ls = []
     for calcul in liste_calculs:
         if isinstance(calcul,  basestring): calcul = splitting(calcul)
@@ -435,7 +672,7 @@ def texify(liste_calculs):
 # Pyromaths : FICHIERS DE TESTS
 #----------------------------------------------------------------------
 def valeurs(n, polynomes=0, entier=1):
-    """Renvoie une chaîne de caractères contenant un calcul aléatoire de
+    """*fichier de tests :* Renvoie une chaîne de caractères contenant un calcul aléatoire de
     n nombres, qui sont soit des entiers, soit des décimaux, soit des polynômes."""
     import random
     def deci(entier):
@@ -444,13 +681,13 @@ def valeurs(n, polynomes=0, entier=1):
         else:
             return random.randrange(-110, 110)/10.
     def poly(entier):
-        long = random.randrange(3)
+        lg = random.randrange(3)
         degre=[0, 1, 2]
-        p = [[deci(entier), degre.pop(random.randrange(len(degre)))] for i in range(long+1)]
+        p = [[deci(entier), degre.pop(random.randrange(len(degre)))] for dummy in range(lg+1)]
         p = Polynome(p, "x")
         while p == Polynome([[0, 0]], "x"):
             degre=[0, 1, 2]
-            p = [[deci(entier), degre.pop(random.randrange(len(degre)))] for i in range(long+1)]
+            p = [[deci(entier), degre.pop(random.randrange(len(degre)))] for dummy in range(lg+1)]
             p = Polynome(p, "x")
         if len(p) == 1 and Polynome.degre(p) == 0:
             p = p[0][0]
@@ -526,7 +763,7 @@ def test_entiers(nbval, polynomes, entiers):
                         break
 
 def sympyfy(liste_calculs):
-    """Convertit une liste de chaînes de caractères 'liste_calculs' contenant
+    """*fichier de tests :* Convertit une liste de chaînes de caractères 'liste_calculs' contenant
     des polynômes en liste de chaînes de caractères au format Sympy"""
     ls = []
     for calcul in liste_calculs:

@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.2. Arithmetique — Fonctions arithmétiques &mdash; Pyromaths 13.03 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" media="print" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '13.03',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Pyromaths 13.03 documentation" href="index.html" />
+    <link rel="up" title="3. Les outils de Pyromaths" href="pyromaths.outils.html" />
+    <link rel="next" title="3.3. Conversions — Fonctions de conversions" href="pyromaths.outils.Conversions.html" />
+    <link rel="prev" title="3.1. Affichage — Fonctions d’affichage" href="pyromaths.outils.Affichage.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/bandeau.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Pyromaths 13.03 documentation</span></a></h1>
+        <h2 class="heading"><span>3.2. Arithmetique — Fonctions arithmétiques</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="pyromaths.outils.Affichage.html">3.1. <tt class="docutils literal docutils literal docutils literal"><span class="pre">Affichage</span></tt> &#8212; Fonctions d&#8217;affichage</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="pyromaths.outils.Conversions.html">3.3. <tt class="docutils literal"><span class="pre">Conversions</span></tt> &#8212; Fonctions de conversions</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="arithmetique-fonctions-arithmetiques">
+<h1>3.2. <tt class="xref py py-mod docutils literal"><span class="pre">Arithmetique</span></tt> &#8212; Fonctions arithmétiques<a class="headerlink" href="#arithmetique-fonctions-arithmetiques" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le module <tt class="xref py py-mod docutils literal"><span class="pre">Arithmetique</span></tt></p>
+<span class="target" id="module-pyromaths.outils.Arithmetique"></span><dl class="function">
+<dt id="pyromaths.outils.Arithmetique.carrerise">
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">carrerise</tt><big>(</big><em>n</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#carrerise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.carrerise" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>carrerise</strong>(<em>n</em>)</p>
+<p>Retourne le plus petit facteur par lequel multiplier pour obtenir un carré.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>n</strong> (<em>integer</em>) &#8211; Nombre à rendre carré</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">carrerise</span><span class="p">(</span><span class="mi">75</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Arithmetique.combinaison">
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">combinaison</tt><big>(</big><em>n</em>, <em>k</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#combinaison"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.combinaison" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>combinaison</strong>(<em>n</em>, <em>k</em>)</p>
+<p>Retourne k parmi n</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n</strong> (<em>integer</em>) &#8211; Nombre d&#8217;éléments</li>
+<li><strong>k</strong> (<em>integer</em>) &#8211; éléments pris k à k</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">combinaison</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">20</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Arithmetique.ecrit_tex">
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">ecrit_tex</tt><big>(</big><em>file</em>, <em>formule</em>, <em>cadre=None</em>, <em>thenocalcul='\\thenocalcul = '</em>, <em>tabs=1</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#ecrit_tex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.ecrit_tex" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>ecrit_tex</strong>(<em>n</em>)</p>
+<p><strong>TODO :</strong> À supprimer dès que quatriemes/developpements.py aura été corrigé</p>
+<p>Écrit <cite>formule</cite> dans <cite>file</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>file</strong> (<em>I/O</em>) &#8211; Fichier dans lequel écrire</li>
+<li><strong>formule</strong> (<em>string</em>) &#8211; formule à insérer</li>
+<li><strong>cadre</strong> (<em>boolean</em>) &#8211; faut-il entourer la formule ?</li>
+<li><strong>thenocalcul</strong> (<em>string</em>) &#8211; Numérotation automatique par LaTeX de l&#8217;équation</li>
+<li><strong>tabs</strong> (<em>integer</em>) &#8211; combien de tabulation insérer pour l&#8217;indentation du fichier ?</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Type retourné:</th><td class="field-body"><p class="first last">file</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Arithmetique.eratosthene">
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">eratosthene</tt><big>(</big><em>n</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#eratosthene"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.eratosthene" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>eratosthene</strong>(<em>n</em>)</p>
+<p>Établit la liste des nombres premiers inférieurs a n.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>n</strong> (<em>integer</em>) &#8211; borne supérieure</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">eratosthene</span><span class="p">(</span><span class="mi">26</span><span class="p">)</span>
+<span class="go">[2, 3, 5, 7, 11, 13, 17, 19, 23]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Arithmetique.factor">
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">factor</tt><big>(</big><em>n</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#factor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.factor" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>factor</strong>(<em>n</em>)</p>
+<p>Retourne la liste des facteurs premiers du nombre n.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>n</strong> (<em>integer</em>) &#8211; Nombre à décomposer</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="mi">2673</span><span class="p">)</span>
+<span class="go">[3, 3, 3, 3, 3, 11]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+<span class="go">[23]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Arithmetique.factorise">
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">factorise</tt><big>(</big><em>n</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#factorise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.factorise" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>factorise</strong>(<em>n</em>)</p>
+<p>Retourne la liste des facteurs premiers du nombre n, ainsi que le détail de
+la factorisation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>n</strong> (<em>integer</em>) &#8211; Nombre à décomposer</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">factorise</span><span class="p">(</span><span class="mi">2673</span><span class="p">)</span>
+<span class="go">([3, 3, 3, 3, 3, 11], [[&#39;3&#39;, &#39;891&#39;], [&#39;3&#39;, &#39;3&#39;, &#39;297&#39;], [&#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;99&#39;], [&#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;33&#39;], [&#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;11&#39;]])</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Arithmetique.factoriseTex">
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">factoriseTex</tt><big>(</big><em>n</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#factoriseTex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.factoriseTex" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>factoriseTex</strong>(<em>n</em>)</p>
+<p>Retourne la liste des facteurs premiers du nombre n, ainsi que le détail de
+la factorisation au format TeX.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>n</strong> (<em>integer</em>) &#8211; Nombre à décomposer</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">factoriseTex</span><span class="p">(</span><span class="mi">2673</span><span class="p">)</span>
+<span class="go">([3, 3, 3, 3, 3, 11], [&#39;\begin{align*}&#39;, &#39;2673&#39;, &#39; &amp; = 3 \times 891\\&#39;, &#39; &amp; = 3 \times 3 \times 297\\&#39;, &#39; &amp; = 3 \times 3 \times 3 \times 99\\&#39;, &#39; &amp; = 3 \times 3 \times 3 \times 3 \times 33\\&#39;, &#39; &amp; = 3 \times 3 \times 3 \times 3 \times 3 \times 11\\&#39;, &#39;\end{align*}&#39;])</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Arithmetique.pgcd">
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">pgcd</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#pgcd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.pgcd" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>pgcd</strong>(<em>a</em>, <em>b</em>)</p>
+<p>Calcule le pgcd de deux entiers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>a,b</strong> (<em>integer</em>) &#8211; Les entiers dont on veut le pgcd</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">pgcd</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">72</span><span class="p">)</span>
+<span class="go">8</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Arithmetique.ppcm">
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">ppcm</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#ppcm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.ppcm" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>ppcm</strong>(<em>a</em>, <em>b</em>)</p>
+<p>Calcule le ppcm de deux entiers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>a,b</strong> (<em>integer</em>) &#8211; Les entiers dont on veut le ppcm</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">ppcm</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">72</span><span class="p">)</span>
+<span class="go">572</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Arithmetique.premier">
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">premier</tt><big>(</big><em>n</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#premier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.premier" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>premier</strong>(<em>n</em>)</p>
+<p>Teste si un nombre est premier.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>n</strong> (<em>integer</em>) &#8211; Nombre à tester</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">premier</span><span class="p">(</span><span class="mi">2673</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Arithmetique.signe">
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">signe</tt><big>(</big><em>a</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#signe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.signe" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>signe</strong>(<em>a</em>)</p>
+<p>Retourne <cite>1</cite> si <cite>a</cite> est positif, <cite>-1</cite> sinon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>a</strong> (<em>float</em>) &#8211; Nombre à tester</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">signe</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">signe</span><span class="p">(</span><span class="o">-</span><span class="mi">234</span><span class="p">)</span>
+<span class="go">-1</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Arithmetique.valeur_alea">
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">valeur_alea</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#valeur_alea"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.valeur_alea" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>valeur_alea</strong>(<em>a</em>, <em>b</em>)</p>
+<p>Retourne une valeur comprise entre <cite>a</cite> et <cite>b</cite> non nulle.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>a,b</strong> (<em>integer</em>) &#8211; bornes de l&#8217;ensemble de définition</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">valeur_alea</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="pyromaths.outils.Affichage.html">3.1. <tt class="docutils literal docutils literal docutils literal"><span class="pre">Affichage</span></tt> &#8212; Fonctions d&#8217;affichage</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="pyromaths.outils.Conversions.html">3.3. <tt class="docutils literal"><span class="pre">Conversions</span></tt> &#8212; Fonctions de conversions</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Jérôme Ortais.
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

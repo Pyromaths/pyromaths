@@ -61,7 +61,6 @@ class Polynome():
 
     def __init__(self, monomes, var=None):
         """Crée un polynôme. Si ``var == None`` alors la variable est ``x``.
-
             >>> from pyromaths.classes.PolynomesCollege import Polynome
             >>> Polynome([[2,2],[3,1],[4,0]], 'z')
             Polynome([[2, 2], [3, 1], [4, 0]], "z")
@@ -103,8 +102,8 @@ class Polynome():
     def __repr__(self):
         """**repr**\ (*object*)
 
-        Renvoie une chaîne de caractère pouvant être utilisée pour créer un
-        polynôme.
+        Renvoie une chaîne de caractère représentant un :mod:`Polynome`
+        évaluable pour créer un :mod:`Polynome`.
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
             >>> p=Polynome([[2,2],[3,1],[4,0]], 'z')
@@ -119,7 +118,6 @@ class Polynome():
         """**str**\ (*object*)
 
         Renvoie une version LaTeX du polynôme.
-
             >>> from pyromaths.classes.PolynomesCollege import Polynome
             >>> p=Polynome([[2,2],[3,1],[4,0]], 'z')
             >>> str(p)
@@ -284,7 +282,7 @@ class Polynome():
 
         :param: other
         :type: Polynome ou string *évaluable comme Polynome*
-        rtype: Polynome
+        :rtype: Polynome
         """
         if isinstance(other,  basestring):
             other = eval(other)
@@ -564,7 +562,7 @@ class Polynome():
             return Polynome([[self[0][0]**other, self[0][1]*other]], self.var)
         else:
             result=self
-            for i in range(other-1):
+            for dummy in range(other-1):
                 result = eval(result*self)
             return result
 
@@ -618,7 +616,7 @@ class Polynome():
             reductible = False
             var = self.var
             m = [m for m in po.monomes]
-            s, p = "", "Polynome(\""
+            s = ""
             tmp = ""
             for i in range(len(m)):
                 if tmp == "":

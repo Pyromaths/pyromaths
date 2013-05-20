@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from ..outils.decimaux import decimaux
-from ..outils.Arithmetique import carrerise, pgcd, ppcm
+from ..outils.Arithmetique import carrerise, pgcd, ppcm, factor
 from math import sqrt
 from Fractions import Fractions
 
@@ -281,7 +281,7 @@ class RacineDegre2:
                             radicande)
     def __invert__(self):
         return self.denominateur*RacineDegre2(self.numerateur,self.numerateur**2-self.coeff**2*self.radicande,-self.coeff,self.radicande)
-    def __div__(self,othrer):
+    def __div__(self,other):
         return self*~other
     def __rdiv__(self,other):
         return ~self*other

@@ -1,0 +1,137 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.3. Conversions — Fonctions de conversions &mdash; Pyromaths 13.03 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" media="print" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '13.03',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Pyromaths 13.03 documentation" href="index.html" />
+    <link rel="up" title="3. Les outils de Pyromaths" href="pyromaths.outils.html" />
+    <link rel="next" title="3.4. Priorites3 — Évaluation d’une expression calculatoire" href="pyromaths.outils.Priorites3.html" />
+    <link rel="prev" title="3.2. Arithmetique — Fonctions arithmétiques" href="pyromaths.outils.Arithmetique.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/bandeau.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Pyromaths 13.03 documentation</span></a></h1>
+        <h2 class="heading"><span>3.3. Conversions — Fonctions de conversions</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="pyromaths.outils.Arithmetique.html">3.2. <tt class="docutils literal docutils literal docutils literal"><span class="pre">Arithmetique</span></tt> &#8212; Fonctions arithmétiques</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="pyromaths.outils.Priorites3.html">3.4. <tt class="docutils literal"><span class="pre">Priorites3</span></tt> &#8212; Évaluation d&#8217;une expression calculatoire</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="conversions-fonctions-de-conversions">
+<h1>3.3. <tt class="xref py py-mod docutils literal"><span class="pre">Conversions</span></tt> &#8212; Fonctions de conversions<a class="headerlink" href="#conversions-fonctions-de-conversions" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le module <tt class="xref py py-mod docutils literal"><span class="pre">Conversions</span></tt></p>
+<span class="target" id="module-pyromaths.outils.Conversions"></span><dl class="function">
+<dt id="pyromaths.outils.Conversions.degres">
+<tt class="descclassname">pyromaths.outils.Conversions.</tt><tt class="descname">degres</tt><big>(</big><em>alpha</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Conversions.html#degres"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Conversions.degres" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>radians</strong>(<em>alpha</em>)</p>
+<p>Convertit un angle donné en radians en degrés</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>alpha</strong> (<em>float</em>) &#8211; angle en radians</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Conversions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Conversions</span><span class="o">.</span><span class="n">degres</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">90.0</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Conversions.radians">
+<tt class="descclassname">pyromaths.outils.Conversions.</tt><tt class="descname">radians</tt><big>(</big><em>alpha</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Conversions.html#radians"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Conversions.radians" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>radians</strong>(<em>alpha</em>)</p>
+<p>Convertit un angle donné en degrés en radians</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>alpha</strong> (<em>float</em>) &#8211; angle en degrés</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Conversions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Conversions</span><span class="o">.</span><span class="n">randians</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="go">0.5235987755982988</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="pyromaths.outils.Arithmetique.html">3.2. <tt class="docutils literal docutils literal docutils literal"><span class="pre">Arithmetique</span></tt> &#8212; Fonctions arithmétiques</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="pyromaths.outils.Priorites3.html">3.4. <tt class="docutils literal"><span class="pre">Priorites3</span></tt> &#8212; Évaluation d&#8217;une expression calculatoire</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Jérôme Ortais.
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

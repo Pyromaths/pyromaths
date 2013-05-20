@@ -23,9 +23,34 @@
 import math
 
 def radians(alpha):
-    # convertit un angle en degré en radians
+    """**radians**\ (*alpha*)
+
+    Convertit un angle donné en degrés en radians
+
+    :param alpha: angle en degrés
+    :type alpha: float
+
+    >>> from pyromaths.outils import Conversions
+    >>> Conversions.randians(30)
+    0.5235987755982988
+
+    :rtype: float
+    """
     return alpha*math.pi/180
 
 def degres(alpha):
-    return alpha*180/math.pi
+    """**radians**\ (*alpha*)
 
+    Convertit un angle donné en radians en degrés
+
+    :param alpha: angle en radians
+    :type alpha: float
+
+    >>> from pyromaths.outils import Conversions
+    >>> from math import pi
+    >>> Conversions.degres(pi/2)
+    90.0
+
+    :rtype: float
+    """
+    return alpha*180/math.pi

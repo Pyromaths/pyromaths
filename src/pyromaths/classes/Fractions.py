@@ -21,16 +21,17 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import string
-import math
-import os
 from ..outils import Arithmetique
 
 class Fractions:
+    """Cette classe crée la notion de fractions.
 
-    """Classe permettant d'opérer sur les fractions.
-    Une fraction est stockée ainsi : (numérateur, dénominateur)"""
-
+        >>> from pyromaths.classes.Fractions import Fractions
+        >>> Fractions(5,6)
+        Fractions(5, 6)
+        >>> Fractions('x',6)
+        Fractions("x", 6)
+    """
     def __init__(self, n, d=1):
         self.numerateur = self.n = n
         self.denominateur = self.d = d
@@ -44,12 +45,65 @@ class Fractions:
         return Fractions(self.n // pgcd, self.d // pgcd)
 
     def __str__(self):
-        return self.TeX(signe=0,coef=None)
-    def TeX(self, signe=0, coef=None):
-        """Permet d'écrire une fraction au format TeX.
+        """**str**\ (*object*)
 
-        @param signe: Si vrai, écrit la fraction avec un dénominateur positif
-        @param coef: Multiplie le numérateur et le dénominateur par un même nombre
+        Renvoie une version LaTeX de la :mod:`Fractions`.
+            >>> from pyromaths.classes.Fractions import Fractions
+            >>> f=Fractions(5,6)
+            >>> str(f)
+            '\\dfrac{5}{6}'
+
+        :rtype: string
+        """
+        return self.TeX(signe=0,coef=None)
+
+    def __repr__(self):
+        """**repr**\ (*object*)
+
+        Renvoie une chaîne de caractère représentant une :mod:`Fractions`
+        évaluable pour créer un :mod:`Fractions`.
+
+            >>> from pyromaths.classes.Fractions import Fractions
+            >>> f=Fractions(5,6)
+            >>> repr(f)
+            'Fractions(5, 6)'
+
+        :rtype: string
+        """
+        if isinstance(self.n, str):
+            num = "\"%s\"" % self.n
+        else:
+            num = "%s" % self.n
+        if isinstance(self.d, str):
+            den = "\"%s\"" % self.d
+        else:
+            den = "%s" % self.d
+        return "Fractions(%s, %s)" % (num, den)
+
+    def TeX(self, signe=0, coef=None):
+        """**TeX**\ (*object*\ , *signe*\ , *coef*)
+
+        Permet d'écrire une fraction au format TeX.
+
+            >>> f=Fractions(5,-6)
+            >>> Fractions.TeX(f,0)
+            '\\dfrac{5}{-6}'
+            >>> Fractions.TeX(f)
+            '\\dfrac{5}{-6}'
+            >>> Fractions.TeX(f,1)
+            '\\dfrac{-5}{6}'
+            >>> f=Fractions(5,-6)
+            >>> Fractions.TeX(f,coef='6')
+            '\\dfrac{5_{\\times 6}}{-6_{\\times 6}}'
+            >>> Fractions.TeX(f,1,coef='6')
+            '\\dfrac{-5_{\\times 6}}{6_{\\times 6}}'
+
+        **TODO :** Attention, transforme *object*\ . À corriger.
+
+        :param signe: Si vrai, écrit la fraction avec un dénominateur positif
+        :param coef: Écrit la multiplication du numérateur et du dénominateur
+                     par un même nombre pour une mise au même dénominateur.
+        :rtype: string
         """
 
         if signe:
@@ -73,7 +127,6 @@ class Fractions:
             (fraction.n, fraction.d) = (-fraction.n, -fraction.d)
         c1 = abs(Arithmetique.pgcd(self.n, fraction.d))
         c2 = abs(Arithmetique.pgcd(self.d, fraction.n))
-        simplifiable = 0  # permet de savoir si on a simplifiée le produit
         if c1 > 1:
             n1 = "%s \\times \\cancel{%s}" % (self.n // c1, c1)
             d2 = "%s \\times \\cancel{%s}" % (fraction.d // c1, c1)

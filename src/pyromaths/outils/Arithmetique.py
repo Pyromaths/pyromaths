@@ -24,27 +24,89 @@
 import math, random
 
 def pgcd(a, b):
-    """Calcule le pgcd entre a et b."""
+    """**pgcd**\ (*a*\ , *b*\ )
+
+    Calcule le pgcd de deux entiers.
+
+    :param a,b: Les entiers dont on veut le pgcd
+    :type a,b: integer
+
+    >>> from pyromaths.outils import Arithmetique
+    >>> Arithmetique.pgcd(64,72)
+    8
+
+    :rtype: integer
+    """
     while b:
         a, b = b, a%b
     return a
 
 def ppcm(a, b):
-    """Calcule le ppcm entre a et b."""
+    """**ppcm**\ (*a*\ , *b*\ )
+
+    Calcule le ppcm de deux entiers.
+
+    :param a,b: Les entiers dont on veut le ppcm
+    :type a,b: integer
+
+    >>> from pyromaths.outils import Arithmetique
+    >>> Arithmetique.ppcm(64,72)
+    572
+
+    :rtype: integer
+    """
     return a*b/pgcd(a, b)
 
 def premier(n):
-    """Teste si un nombre est premier."""
+    """**premier**\ (*n*)
+
+    Teste si un nombre est premier.
+
+    :param n: Nombre à tester
+    :type n: integer
+
+    >>> from pyromaths.outils import Arithmetique
+    >>> Arithmetique.premier(2673)
+    False
+
+    :rtype: boolean
+    """
     return not [x for x in xrange(2,int(math.sqrt(n)) + 1)
                 if n%x == 0]
 
 def eratosthene(n):
-    """Etablit la liste des nombres premiers inferieurs a n."""
+    """**eratosthene**\ (*n*)
+
+    Établit la liste des nombres premiers inférieurs a n.
+
+    :param n: borne supérieure
+    :type n: integer
+
+    >>> from pyromaths.outils import Arithmetique
+    >>> Arithmetique.eratosthene(26)
+    [2, 3, 5, 7, 11, 13, 17, 19, 23]
+
+    :rtype: list
+    """
     return [x for x in xrange(2, n) if premier(x)]
 
 
 def factor(n):
-    """Retourne la liste des facteurs premiers du nombre n."""
+    """**factor**\ (*n*)
+
+    Retourne la liste des facteurs premiers du nombre n.
+
+    :param n: Nombre à décomposer
+    :type n: integer
+
+    >>> from pyromaths.outils import Arithmetique
+    >>> Arithmetique.factor(2673)
+    [3, 3, 3, 3, 3, 11]
+    >>> Arithmetique.factor(23)
+    [23]
+
+    :rtype: list
+    """
     premiers = []
     candidats = xrange(2,n+1)
     candidat = 2
@@ -57,11 +119,21 @@ def factor(n):
 
 
 def factorise(n):
-    """Retourne la liste des facteurs premiers du nombre n, ainsi que le détail
-    de la factorisation."""
+    """**factorise**\ (*n*)
 
+    Retourne la liste des facteurs premiers du nombre n, ainsi que le détail de
+    la factorisation.
+
+    :param n: Nombre à décomposer
+    :type n: integer
+
+    >>> from pyromaths.outils import Arithmetique
+    >>> Arithmetique.factorise(2673)
+    ([3, 3, 3, 3, 3, 11], [['3', '891'], ['3', '3', '297'], ['3', '3', '3', '99'], ['3', '3', '3', '3', '33'], ['3', '3', '3', '3', '3', '11']])
+
+    :rtype: tuple
+    """
     primes = []
-    temp = n
     etapes = []
     primes_etapes = []
     limite=int(math.sqrt(n))+1
@@ -84,6 +156,20 @@ def factorise(n):
 
 
 def factoriseTex(n):
+    """**factoriseTex**\ (*n*)
+
+    Retourne la liste des facteurs premiers du nombre n, ainsi que le détail de
+    la factorisation au format TeX.
+
+    :param n: Nombre à décomposer
+    :type n: integer
+
+    >>> from pyromaths.outils import Arithmetique
+    >>> Arithmetique.factoriseTex(2673)
+    ([3, 3, 3, 3, 3, 11], ['\\begin{align*}', '2673', ' & = 3 \\times 891\\\\', ' & = 3 \\times 3 \\times 297\\\\', ' & = 3 \\times 3 \\times 3 \\times 99\\\\', ' & = 3 \\times 3 \\times 3 \\times 3 \\times 33\\\\', ' & = 3 \\times 3 \\times 3 \\times 3 \\times 3 \\times 11\\\\', '\\end{align*}'])
+
+    :rtype: tuple
+    """
     """Version LaTeX pour factorise."""
 
     corrige = ["\\begin{align*}", str(n)]
@@ -107,7 +193,19 @@ def factoriseTex(n):
 
 
 def carrerise(n):
-    """Trouve le plus petit facteur par lequel multiplier pour obtenir un carré."""
+    """**carrerise**\ (*n*)
+
+    Retourne le plus petit facteur par lequel multiplier pour obtenir un carré.
+
+    :param n: Nombre à rendre carré
+    :type n: integer
+
+    >>> from pyromaths.outils import Arithmetique
+    >>> Arithmetique.carrerise(75)
+    3
+
+    :rtype: integer
+    """
     if round(math.sqrt(n), 0)==math.sqrt(n):
         return 1
     elif n<=0:
@@ -124,7 +222,21 @@ def carrerise(n):
     return ncar
 
 def combinaison(n, k):
-    """renvoie le nombre de combinaisons de n objets pris k à k"""
+    """**combinaison**\ (*n*\ , *k*)
+
+    Retourne k parmi n
+
+    :param n: Nombre d'éléments
+    :type n: integer
+    :param k: éléments pris k à k
+    :type k: integer
+
+    >>> from pyromaths.outils import Arithmetique
+    >>> Arithmetique.combinaison(6,3)
+    20
+
+    :rtype: integer
+    """
     if k > n//2:
         k = n-k
     x = 1
@@ -137,14 +249,40 @@ def combinaison(n, k):
     return x
 
 def signe(a):
-    """renvoie 1 si a est>0, -1 si a<0"""
+    """**signe**\ (*a*)
+
+    Retourne `1` si `a` est positif, `-1` sinon.
+
+    :param a: Nombre à tester
+    :type a: float
+
+    >>> from pyromaths.outils import Arithmetique
+    >>> Arithmetique.signe(234)
+    1
+    >>> Arithmetique.signe(-234)
+    -1
+
+    :rtype: integer
+    """
     if a < 0:
         return -1
     else:
         return 1
-    
+
 def valeur_alea(a, b):
-    """choisit une valeur comprise entre a et b non nulle"""
+    """**valeur_alea**\ (*a*\ , *b*)
+
+    Retourne une valeur comprise entre `a` et `b` non nulle.
+
+    :param a,b: bornes de l'ensemble de définition
+    :type a,b: integer
+
+    >>> from pyromaths.outils import Arithmetique
+    >>> Arithmetique.valeur_alea(-7,7)
+    2
+
+    :rtype: integer
+    """
     while True:
         alea = random.randrange(a, b + 1)
         if alea != 0:
@@ -154,11 +292,30 @@ def valeur_alea(a, b):
 # A supprimer dès que quatriemes/developpements.py aura été corrigé
 #---------------------------------------------------------------------
 
-def ecrit_tex(file, formule, cadre=None, thenocalcul='\\thenocalcul = ',
+def ecrit_tex(fichier, formule, cadre=None, thenocalcul='\\thenocalcul = ',
               tabs=1):
-    """Écrit la ligne dans le fichier"""
+    """**ecrit_tex**\ (*n*)
+
+    **TODO :** À supprimer dès que quatriemes/developpements.py aura été corrigé
+
+    Écrit `formule` dans `fichier`.
+
+    :param fichier: Fichier dans lequel écrire
+    :type fichier: I/O
+    :param formule: formule à insérer
+    :type formule: string
+    :param cadre: faut-il entourer la formule ?
+    :type cadre: boolean
+    :param thenocalcul: Numérotation automatique par LaTeX de l'équation
+    :type thenocalcul: string
+    :param tabs: combien de tabulation insérer pour l'indentation du fichier ?
+    :type tabs: integer
+
+    :rtype: fichier
+    """
+
     if formule != '':
         if cadre == None or not cadre:
-            file.write((u'  \\[ %s%s \\] \n') % (thenocalcul, formule))
+            fichier.write((u'  \\[ %s%s \\] \n') % (thenocalcul, formule))
         else:
-            file.write((u'  \\[ \\boxed{%s%s} \\] \n') % (thenocalcul, formule))
+            fichier.write((u'  \\[ \\boxed{%s%s} \\] \n') % (thenocalcul, formule))
