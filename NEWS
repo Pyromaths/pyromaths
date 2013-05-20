@@ -3,8 +3,9 @@
 ** Utilisation de Make pour tout ce qui déborde du périmètre de setup.py (traductions, optimisations...)
 ** Modification de l'arborescence
 ** Support du format python EGG (packaging et installation)
-* Amélioration de la traduction en français (version OSX)
-* Version 64 bits (application OSX)
+* Amélioration de la traduction des boîtes de dialogue (version OSX)
+* Déplacement de «À propos de Pyromaths» dans le menu Pyromaths (application OSX) 
+* Version 64 bits (application OSX) 
 
 Version 13.03
 * Correction d'un bug d'affichage des pdf
