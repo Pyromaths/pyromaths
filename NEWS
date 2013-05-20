@@ -3,7 +3,7 @@
 ** Utilisation de Make pour tout ce qui déborde du périmètre de setup.py (traductions, optimisations...)
 ** Modification de l'arborescence
 ** Support du format python EGG (packaging et installation)
-* Menu système en français (version OSX)
+* Amélioration de la traduction en français (version OSX)
 * Version 64 bits (application OSX)
 
 Version 13.03
