@@ -23,8 +23,13 @@ def data_dir():
         return join(normpath(dirname(unicode(executable,
                                              getfilesystemencoding()))), path)
     # We're alive
+    # Are we running from the sources?
     data = join(abspath(dirname(__file__)),'../../data/')
     if exists(data): return normpath(data)
+    # Are we running from an egg?
+    data = join(abspath(dirname(__file__)),'../share/pyromaths/')
+    if exists(data): return normpath(data)
+    # Assume we're installed system-wide
     return '/usr/share/pyromaths/'
 
 def icon_dir():

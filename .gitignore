@@ -1,0 +1,12 @@
+# Compiled python files
+*.pyc
+
+# Python egg info
+*.egg-info/
+
+# Build and distribution folders
+build/
+dist/
+
+# Last package manifest used
+/MANIFEST.in

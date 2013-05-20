@@ -309,6 +309,7 @@ class Ui_MainWindow(object):
 
         self.action_a_propos = QtGui.QAction(MainWindow)
         self.action_a_propos.setText(u"À propos")
+        self.action_a_propos.setMenuRole(QtGui.QAction.AboutRole)
 
         self.menuFichier.addAction(self.actionTous_les_exercices)
         self.menuFichier.addSeparator()
