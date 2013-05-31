@@ -6,6 +6,7 @@ from os.path import normpath, dirname, exists, abspath, join
 from os import environ, name
 from sys import executable, getfilesystemencoding
 import sys
+import pkgutil, types
 
 def we_are_frozen():
     """Returns whether we are frozen via py2exe.
@@ -71,11 +72,38 @@ ICONDIR = icon_dir()
 HOME = home()
 CONFIGDIR = configdir()
 
+def _exercices(pkg):
+    ''' Discover package exercises. '''
+    exercices = []
+    # search package modules
+    for _, name, ispkg in pkgutil.iter_modules(pkg.__path__, pkg.__name__+'.'):
+        # skip sub-packages (discovery is not recursive)
+        if ispkg: continue
+        # import discovered module
+        module = __import__(name, fromlist=pkg.__name__)
+        # search module for exercises: functions with a 'description' attribute
+        # of UnicodeType
+        for element in dir(module):
+            # list module elements
+            element = module.__dict__[element]
+            if not type(element) is types.FunctionType: continue
+            if 'description' not in dir(element): continue
+            description = element.__dict__['description']
+            if not type(description) is types.UnicodeType: continue
+            # store discovered exercise
+            exercices.append(element)
+    return exercices
+
 def _packages():
+    ''' List exercise packages from pyromaths.ex. '''
     import ex.sixiemes, ex.cinquiemes, ex.quatriemes, ex.troisiemes, ex.lycee
     return [ex.sixiemes, ex.cinquiemes, ex.quatriemes, ex.troisiemes, ex.lycee]
 
 # Packages d'exercices
 PACKAGES = _packages()
 
-LESFICHES = [pkg.FICHE for pkg in PACKAGES]
+LESFICHES = []
+for pkg in PACKAGES:
+    pkg.EXERCICES = _exercices(pkg)
+    titles = [ex.description for ex in pkg.EXERCICES]
+    LESFICHES.append([pkg.description, '', titles])

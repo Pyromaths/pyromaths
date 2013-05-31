@@ -20,28 +20,4 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-
-from . import puissances, developpements, calcul_mental, fractions, geometrie
-from . import litteral
-
-EXERCICES = (
-        calcul_mental.main,
-        fractions.exo_sommes_fractions,
-        fractions.exo_produits_fractions,
-        fractions.exo_priorites_fractions,
-        litteral.reduire,
-        litteral.reduire_expressions, 
-        puissances.tex_proprietes,
-        puissances.tex_proprietes_neg,
-        puissances.ecr_sc,
-        puissances.exo_puissances,
-        developpements.exo_distributivite,
-        developpements.exo_double_distributivite,
-        geometrie.exo_pythagore,
-        geometrie.exo_reciproque_pythagore,
-        geometrie.exo_triangle_cercle,
-        geometrie.exo_thales,
-        geometrie.exo_trigo,
-        )
-TITRES = [exercice.description for exercice in EXERCICES]
-FICHE = [u'Quatrième', '', TITRES]
+description = u'Quatrième'

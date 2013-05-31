@@ -20,13 +20,4 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-
-from . import priorites, symetrie, fractions, reperage, relatifs, construction, proportionnalite, aires, statistiques
-
-EXERCICES = (priorites.main, symetrie.main, fractions.fractions_egales,
-            fractions.sommes_fractions, fractions.produits_fractions,
-            reperage.main, relatifs.main, construction.exo_triangle,
-            construction.exo_quadrilatere,
-            proportionnalite.exo_echelles, aires.exo_aire_diques, statistiques.statistiques)
-TITRES = [exercice.description for exercice in EXERCICES]
-FICHE = [u'Cinquième', '', TITRES]
+description = u'Cinquième'

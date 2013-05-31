@@ -20,20 +20,4 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-
-import ExoPolynome, Vecteurs, CercleTrigo, SecondDegre
-
-EXERCICES = (
-        ExoPolynome.exo_racines_degre2,
-        ExoPolynome.exo_factorisation_degre2,
-        ExoPolynome.exo_factorisation_degre3,
-        ExoPolynome.exo_tableau_de_signe,
-        ExoPolynome.exo_variation,
-        ExoPolynome.exo_variation_lim,
-        Vecteurs.vecteurs_add,
-        CercleTrigo.cercle_trigonometrique,
-        SecondDegre.FormeCanonique,
-        )
-TITRES = [exercice.description for exercice in EXERCICES]
-NIVEAUX = [exercice.level for exercice in EXERCICES]
-FICHE = [u'Lycée', '', TITRES, NIVEAUX]
+description = u'Lycée'
