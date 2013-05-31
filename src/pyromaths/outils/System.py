@@ -26,6 +26,7 @@ from lxml import etree
 from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 from re import findall
 from .TexFiles import mise_en_forme
+from ..Values import HOME, VERSION, CONFIGDIR
 
 
 #==============================================================
@@ -50,7 +51,6 @@ def ajoute_extension(filename,  ext):
 #==============================================================
 def create_config_file():
     """Crée le fichier de configuration au format xml"""
-    from ..Values import HOME
     root = etree.Element("pyromaths")
 
     child = etree.SubElement(root, "options")
@@ -63,7 +63,6 @@ def create_config_file():
     etree.SubElement(child, "modele").text="pyromaths.tex"
 
     child = etree.SubElement(root, "informations")
-    from ..Values import VERSION
     etree.SubElement(child, "version").text=VERSION
     etree.SubElement(child, "description").text=u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
     etree.SubElement(child, "icone").text="pyromaths.ico"
@@ -96,7 +95,6 @@ def indent(elem, level=0):
 
 def modify_config_file(file):
     """Modifie le fichier de configuration si besoin, excepté les options utilisateur déjà configurées"""
-    from ..Values import CONFIGDIR
     modifie = False
     oldtree = etree.parse(file)
     oldroot = oldtree.getroot()
