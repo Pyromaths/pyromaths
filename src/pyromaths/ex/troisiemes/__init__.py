@@ -20,3 +20,44 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
+
+
+from . import fractions, puissances, pgcd, developpements, equations, racines
+from . import systemes, proba, affine, geometrie, arithmetique
+
+EXERCICES = (
+        fractions.tex_fractions,
+        puissances.tex_puissances,
+        pgcd.tex_pgcd,
+        developpements.tex_developpements,
+        developpements.tex_factorisations,
+        developpements.tex_devfacteq,
+        equations.tex_equations,
+        racines.tex_racines,
+        systemes.tex_systemes,
+        affine.affine,
+        proba.tex_proba,
+        geometrie.tex_thales,
+        geometrie.tex_reciproque_thales,
+        geometrie.tex_trigo,
+        arithmetique.Arithmetique
+        )
+
+TITRES = [u'Fractions',
+          u'Puissances',
+          u'PGCD',
+          u'Développements',
+          u'Factorisations',
+          u'Dévt, factorisat°, calcul et éq° produit',
+          u'Équation',
+          u'Racines carrées',
+          u'Système d\'équations',
+          u'Fonctions affines',
+          u'Probabilités',
+          u'Théorème de Thalès',
+          u'Réciproque du théorème de Thalès',
+          u'Trigonométrie',
+          u'Arithmétique'
+         ]
+
+FICHE = [u'Troisième', '', TITRES]

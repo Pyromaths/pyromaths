@@ -20,3 +20,59 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
+
+
+from . import angles, decimaux, droites, fractions, operations, quotients
+from . import symetrie, arrondi, aires, espace
+import random
+
+EXERCICES = (
+        operations.CalculMental,
+        decimaux.EcrireNombreLettre,
+        decimaux.PlaceVirgule,
+        decimaux.EcritureFractionnaire,
+        decimaux.Decomposition,
+        decimaux.Conversions(1),
+        decimaux.Conversions(2),
+        decimaux.Conversions(3),
+        operations.Operations,
+        operations.ProduitPuissanceDix,
+        decimaux.ClasserNombres,
+        droites.Droites,
+        droites.Perpendiculaires,
+        droites.Proprietes,
+        quotients.Divisible,
+        fractions.FractionPartage,
+        fractions.QuestionsAbscisses,
+        aires.main,
+        symetrie.SymetrieQuadrillage,
+        angles.MesureAngles,
+        espace.main,
+        arrondi.ArrondirNombreDecimal
+        )
+
+TITRES = [u'Calcul mental',
+          u'Écrire un nombre décimal',
+          u'Placer une virgule',
+          u'Écriture fractionnaire ou décimale',
+          u'Décomposition de décimaux',
+          u'Conversions unités',
+          u"Conversions unités d'aires",
+          u"Conversions unités de volumes",
+          u'Poser des opérations (sauf divisions)',
+          u'Produits, quotients par 10, 100, 1000',
+          u'Classer des nombres décimaux',
+          u'Droites, demi-droites, segments',
+          u'Droites perpendiculaires et parallèles',
+          u'Propriétés sur les droites',
+          u'Multiples de 2, 3, 5, 9, 10',
+          u'Fractions partage',
+          u'Fractions et abscisses',
+          u'Aires et quadrillage',
+          u'Symétrie et quadrillages',
+          u'Mesurer des angles',
+          u'Représentation dans l\'espace',
+          u'Arrondir des nombres décimaux'
+         ]
+
+FICHE = [u'Sixième', '', TITRES]

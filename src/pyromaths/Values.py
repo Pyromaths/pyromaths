@@ -72,12 +72,8 @@ HOME = home()
 CONFIGDIR = configdir()
 
 def _packages():
-    from ex.sixiemes import sixiemes
-    from ex.cinquiemes import cinquiemes
-    from ex.quatriemes import quatriemes
-    from ex.troisiemes import troisiemes
-    from ex.lycee import lycee
-    return [sixiemes, cinquiemes, quatriemes, troisiemes, lycee]
+    import ex.sixiemes, ex.cinquiemes, ex.quatriemes, ex.troisiemes, ex.lycee
+    return [ex.sixiemes, ex.cinquiemes, ex.quatriemes, ex.troisiemes, ex.lycee]
 
 # Packages d'exercices
 PACKAGES = _packages()

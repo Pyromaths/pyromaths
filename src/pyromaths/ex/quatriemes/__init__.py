@@ -20,3 +20,47 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
+
+from . import puissances, developpements, calcul_mental, fractions, geometrie
+from . import litteral
+
+EXERCICES = (
+        calcul_mental.main,
+        fractions.exo_sommes_fractions,
+        fractions.exo_produits_fractions,
+        fractions.exo_priorites_fractions,
+        litteral.reduire,
+        litteral.reduire_expressions, 
+        puissances.tex_proprietes,
+        puissances.tex_proprietes_neg,
+        puissances.ecr_sc,
+        puissances.exo_puissances,
+        developpements.exo_distributivite,
+        developpements.exo_double_distributivite,
+        geometrie.exo_pythagore,
+        geometrie.exo_reciproque_pythagore,
+        geometrie.exo_triangle_cercle,
+        geometrie.exo_thales,
+        geometrie.exo_trigo,
+        )
+
+TITRES = [u'Calcul mental',
+          u'Sommes de fractions',
+          u'Produits et quotients de fractions',
+          u'Fractions et priorités',
+          u'Bases du calcul littéral',
+          u'Réduire des expressions littérales',
+          u'Propriétés sur les puissances',
+          u'Propriétés sur les puissances de 10',
+          u'Écritures scientifiques',
+          u'Puissances de 10',
+          u'Distributivité',
+          u'Double distributivité',
+          u'Théorème de Pythagore',
+          u'Réciproque du théorème de Pythagore',
+          u'Cercle et théorème de Pythagore',
+          u'Théorème de Thalès',
+          u'Trigonométrie',
+         ]
+
+FICHE = [u'Quatrième', '', TITRES]
