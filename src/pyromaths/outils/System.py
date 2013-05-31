@@ -26,7 +26,7 @@ from lxml import etree
 from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 from re import findall
 from .TexFiles import mise_en_forme
-from ..Values import HOME, VERSION, CONFIGDIR
+from ..Values import HOME, VERSION, CONFIGDIR, PACKAGES
 
 
 #==============================================================
@@ -156,14 +156,9 @@ def creation(parametres):
             copie_tronq_modele(f1, parametres, 'entete')
 
     for exercice in parametres['liste_exos']:
-        from ..ex.sixiemes import sixiemes
-        from ..ex.cinquiemes import cinquiemes
-        from ..ex.quatriemes import quatriemes
-        from ..ex.troisiemes import troisiemes
-        from ..ex.lycee import lycee
-        fonction = {0: sixiemes, 1: cinquiemes, 2: quatriemes, 3: troisiemes,
-                4: lycee}
-        fonction[exercice[0]].main(exercice[1], f0, f1)
+        pkg_no = exercice[0]
+        ex_no  = exercice[1]
+        PACKAGES[pkg_no].main(ex_no, f0, f1)
 
     if parametres['creer_pdf']:
         if parametres['creer_unpdf']:

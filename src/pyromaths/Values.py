@@ -71,6 +71,17 @@ ICONDIR = icon_dir()
 HOME = home()
 CONFIGDIR = configdir()
 
+def _packages():
+    from ex.sixiemes import sixiemes
+    from ex.cinquiemes import cinquiemes
+    from ex.quatriemes import quatriemes
+    from ex.troisiemes import troisiemes
+    from ex.lycee import lycee
+    return [sixiemes, cinquiemes, quatriemes, troisiemes, lycee]
+
+# Packages d'exercices
+PACKAGES = _packages()
+
 LESFICHES = [[u'Sixième', '', [
 u'Calcul mental',
 u'Écrire un nombre décimal',
