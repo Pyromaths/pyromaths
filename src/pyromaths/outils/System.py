@@ -158,11 +158,11 @@ def creation(parametres):
             copie_tronq_modele(f1, parametres, 'entete')
 
     for exercice in parametres['liste_exos']:
-        from ..sixiemes import sixiemes
-        from ..cinquiemes import cinquiemes
-        from ..quatriemes import quatriemes
-        from ..troisiemes import troisiemes
-        from ..lycee import lycee
+        from ..ex.sixiemes import sixiemes
+        from ..ex.cinquiemes import cinquiemes
+        from ..ex.quatriemes import quatriemes
+        from ..ex.troisiemes import troisiemes
+        from ..ex.lycee import lycee
         fonction = {0: sixiemes, 1: cinquiemes, 2: quatriemes, 3: troisiemes,
                 4: lycee}
         fonction[exercice[0]].main(exercice[1], f0, f1)
