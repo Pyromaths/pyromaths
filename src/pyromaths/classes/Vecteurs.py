@@ -24,7 +24,7 @@
 
 import math
 import random
-from ..classes.Racine import simplifie_racine
+from Racine import simplifie_racine
 
 class Vecteur:
 

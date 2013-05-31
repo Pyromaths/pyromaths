@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..classes.Polynome import Polynome
+from pyromaths.classes.Polynome import Polynome
 from .Arithmetique import pgcd
 
 from random import randint,randrange

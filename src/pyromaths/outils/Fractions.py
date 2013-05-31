@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from ..classes.Fractions import Fractions
+from pyromaths.classes.Fractions import Fractions
 from . import Arithmetique, Affichage
 import random
 import math

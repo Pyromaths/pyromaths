@@ -26,7 +26,7 @@ from lxml import etree
 from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 from re import findall
 from .TexFiles import mise_en_forme
-from ..Values import HOME, VERSION, CONFIGDIR, PACKAGES
+from pyromaths.Values import HOME, VERSION, CONFIGDIR, PACKAGES
 
 
 #==============================================================

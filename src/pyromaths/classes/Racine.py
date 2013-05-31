@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from ..outils.decimaux import decimaux
-from ..outils.Arithmetique import carrerise, pgcd, ppcm, factor
+from pyromaths.outils.decimaux import decimaux
+from pyromaths.outils.Arithmetique import carrerise, pgcd, ppcm, factor
 from math import sqrt
 from Fractions import Fractions
 

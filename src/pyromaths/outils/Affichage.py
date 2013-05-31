@@ -23,7 +23,7 @@
 
 import re
 from .decimaux import decimaux
-from ..classes import Racine, Fractions
+from pyromaths.classes import Racine, Fractions
 
 
 def tex_coef(coef, var='', bplus=0, bpn=0, bpc=0):

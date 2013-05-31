@@ -25,7 +25,7 @@ import re
 if __name__=="__main__":
     import sys
     sys.path.append('..')
-from ..outils.Affichage import decimaux
+from pyromaths.outils.Affichage import decimaux
 
 _POLYNOME_FORMAT = re.compile(r"""
     \s*                                         # éventuellement des espaces pour commencer
@@ -448,7 +448,7 @@ class Polynome():
             other = Polynome(repr(other), self.var)
             return other*self
         if isinstance(other, str):
-            from ..outils.Priorites3 import splitting
+            from pyromaths.outils.Priorites3 import splitting
             ls = splitting(other)
             if ls.count("+") or ls.count("-"):
                 # Réduire @other avant de faire le produit et vérifier s'il faut

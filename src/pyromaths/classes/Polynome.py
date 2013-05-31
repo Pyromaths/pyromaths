@@ -8,7 +8,7 @@ if __name__=="__main__":
 from .Racine import simplifie_racine, RacineDegre2, sqrt
 from .Fractions import Fractions
 import re
-from ..outils.Affichage import pTeX, TeX, radicalTeX, fTeX, Fractions, tTeX
+from pyromaths.outils.Affichage import pTeX, TeX, radicalTeX, fTeX, Fractions, tTeX
 
 class Polynome:
     '''Classe de polynôme pour le lycee'''
