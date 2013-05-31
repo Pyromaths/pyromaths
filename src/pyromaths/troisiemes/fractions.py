@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from ..outils.Arithmetique import ppcm, pgcd, signe, valeur_alea
+from pyromaths.outils.Arithmetique import ppcm, pgcd, signe, valeur_alea
 from random import randrange
 
 #

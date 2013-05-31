@@ -21,10 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from ..classes.Fractions import Fractions  #Fractions de pyromaths
+from pyromaths.classes.Fractions import Fractions  #Fractions de pyromaths
 import random
 import string
-from ..outils import Arithmetique
+from pyromaths.outils import Arithmetique
 
 
 def fractions_egales():

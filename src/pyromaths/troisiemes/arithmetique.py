@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from ..outils.Arithmetique import pgcd, ppcm, premier, factoriseTex, carrerise
-from ..outils.Affichage import decimaux
+from pyromaths.outils.Arithmetique import pgcd, ppcm, premier, factoriseTex, carrerise
+from pyromaths.outils.Affichage import decimaux
 from random import randint, shuffle
 
 premiers = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,

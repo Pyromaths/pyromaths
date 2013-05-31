@@ -22,7 +22,7 @@
 #
 
 from random import randint, shuffle
-from ..outils.Affichage import decimaux
+from pyromaths.outils.Affichage import decimaux
 
 def valide_hasard():
     """renvoie un nombre float non multiple de 10000"""

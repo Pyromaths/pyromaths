@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import sys, os, codecs
-from ..classes.SecondDegre import Poly2
-from ..outils.Affichage import printlist
-from ..outils.Polynomes import choix_coeffs
-from ..outils.Arithmetique import *
+from pyromaths.classes.SecondDegre import Poly2
+from pyromaths.outils.Affichage import printlist
+from pyromaths.outils.Polynomes import choix_coeffs
+from pyromaths.outils.Arithmetique import *
 
 def exo_second_degre():
     """Créer une exercice comprenant des équations et inéquations du second degré. PAS FINI."""

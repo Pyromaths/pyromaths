@@ -24,7 +24,7 @@
 import math
 import random
 import string
-from ..outils import Arithmetique, Affichage
+from pyromaths.outils import Arithmetique, Affichage
 
 #===============================================================================
 # Poser des opérations

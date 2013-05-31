@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 import random
-from ..outils.Affichage import decimaux
+from pyromaths.outils.Affichage import decimaux
 
 def noms_sommets(nb):
     """Renvoie nb noms de sommets"""

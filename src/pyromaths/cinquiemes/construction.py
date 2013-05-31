@@ -20,10 +20,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-from ..outils import Geometrie as geo
+from pyromaths.outils import Geometrie as geo
 import random,math
-from ..outils.Affichage import decimaux
-from ..outils.Geometrie import cotation, cotation_h
+from pyromaths.outils.Affichage import decimaux
+from pyromaths.outils.Geometrie import cotation, cotation_h
 
 #trigo en degré
 tan =lambda z:math.tan(math.radians(z))

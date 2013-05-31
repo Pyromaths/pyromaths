@@ -20,7 +20,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 from random import randint, randrange
-from ..outils.decimaux import decimaux
+from pyromaths.outils.decimaux import decimaux
 import math
 
 def ncotation(A,B,longueur,couleur=""):

@@ -24,8 +24,8 @@
 #fonction affine 3e
 import random
 from math import *
-from ..outils.Affichage import decimaux
-from ..outils.Fractions import Fractions  #fractions pyromaths
+from pyromaths.outils.Affichage import decimaux
+from pyromaths.outils.Fractions import Fractions  #fractions pyromaths
 
 def extreme(a,b,xmin,xmax,ymin,ymax):
 #donne les extremités de la droite passant par a et b (coordonnées)

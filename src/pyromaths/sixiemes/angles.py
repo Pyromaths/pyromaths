@@ -23,8 +23,8 @@
 
 import math
 from random import randrange
-from ..outils import Arithmetique
-from ..outils import Geometrie
+from pyromaths.outils import Arithmetique
+from pyromaths.outils import Geometrie
 
 
 def eq_droites(A, B):

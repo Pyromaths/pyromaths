@@ -2,8 +2,8 @@
 
 from random import randint, choice
 from math import sqrt
-from ..classes.Racine import RacineDegre2
-from ..outils.Affichage import tex_coef, TeX
+from pyromaths.classes.Racine import RacineDegre2
+from pyromaths.outils.Affichage import tex_coef, TeX
 
 a = choice(range(1,11)+range(-11,-1))
 s1 = randint(-8,8)

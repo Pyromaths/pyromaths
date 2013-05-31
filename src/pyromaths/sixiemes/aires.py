@@ -23,7 +23,7 @@
 #sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 import random
-from ..outils import Affichage
+from pyromaths.outils import Affichage
 def boxes():
     """Crée les boites pour insérer les figures dans un environnement 36x16"""
     b0x, b0y = random.randrange(5, 2*36/3-1), random.randrange(5, 2*16/3+1)

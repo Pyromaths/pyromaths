@@ -20,9 +20,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 from random import randint, shuffle, randrange
-from ..outils.decimaux import decimaux
+from pyromaths.outils.decimaux import decimaux
 import math
-from ..outils.Geometrie import cotation, cotation_h
+from pyromaths.outils.Geometrie import cotation, cotation_h
 
 def choix_valeurs(min_prct, max_prct, min_nbre, max_nbre):
 

@@ -24,8 +24,8 @@ import random
 from math import acos, asin, atan, pi, sin, cos, tan
 
 from . import fractions
-from ..outils.Arithmetique import valeur_alea, pgcd
-from ..outils.Geometrie import choix_points
+from pyromaths.outils.Arithmetique import valeur_alea, pgcd
+from pyromaths.outils.Geometrie import choix_points
 #---------------------------------------------------------------------
 #-                    THÉORÈME DE THALÈS                             -
 #---------------------------------------------------------------------

@@ -22,7 +22,7 @@
 #
 
 import random
-from ..outils import Affichage, Arithmetique
+from pyromaths.outils import Affichage, Arithmetique
 #===============================================================================
 # Écrire un nombre en lettres ou en chiffres
 #===============================================================================

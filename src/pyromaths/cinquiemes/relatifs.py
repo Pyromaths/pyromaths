@@ -24,8 +24,8 @@
 # Pyromaths : Poser des opérations
 #----------------------------------------------------------------------
 
-from ..outils import Arithmetique
-from ..outils.Affichage import TeX, tex_coef
+from pyromaths.outils import Arithmetique
+from pyromaths.outils.Affichage import TeX, tex_coef
 import random
 
 

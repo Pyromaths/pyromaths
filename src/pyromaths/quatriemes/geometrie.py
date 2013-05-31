@@ -23,7 +23,7 @@
 import random
 from math import acos, asin, atan, pi, sin, cos, tan
 
-from ..outils.Geometrie import couples_pythagore,  choix_points
+from pyromaths.outils.Geometrie import couples_pythagore,  choix_points
 
 
 #

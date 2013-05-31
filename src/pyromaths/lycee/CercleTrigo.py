@@ -22,8 +22,8 @@
 #
 import random
 from math import cos, sin, radians, pi
-from ..outils.decimaux import decimaux
-from ..outils.Arithmetique import pgcd
+from pyromaths.outils.decimaux import decimaux
+from pyromaths.outils.Arithmetique import pgcd
 
 div180 = [[1,180],[2,90],[3,60],[4,45],[5,36],[6,30],[9,20],[10,18],[12,15]]
 

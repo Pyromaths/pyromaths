@@ -23,9 +23,9 @@
 #----------------------------------------------------------------------
 # Pyromaths : Initiation au calcul littéral
 #----------------------------------------------------------------------
-from ..outils import Arithmetique
-from ..outils.Affichage import tex_coef
-from ..outils.Priorites3 import texify, priorites
+from pyromaths.outils import Arithmetique
+from pyromaths.outils.Affichage import tex_coef
+from pyromaths.outils.Priorites3 import texify, priorites
 import random
 
 def valeurs_reduire():

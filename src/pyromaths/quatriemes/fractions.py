@@ -21,11 +21,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from ..outils import Arithmetique
-from ..outils.Priorites import OperateurPrioritaire
-from ..outils.TeXMiseEnForme import Affichage
+from pyromaths.outils import Arithmetique
+from pyromaths.outils.Priorites import OperateurPrioritaire
+from pyromaths.outils.TeXMiseEnForme import Affichage
 import random
-from ..classes.Fractions import Fractions #Classe Fractions de pyromaths
+from pyromaths.classes.Fractions import Fractions #Classe Fractions de pyromaths
 
 
 def sommes_fractions_4e(op, level):

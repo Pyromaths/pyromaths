@@ -22,8 +22,8 @@
 #
 import random
 from math import cos, sin, radians
-from ..outils.decimaux import decimaux
-from ..outils.Arithmetique import pgcd
+from pyromaths.outils.decimaux import decimaux
+from pyromaths.outils.Arithmetique import pgcd
 
 def tableau_tex(titres, larg="c", eff=1, freq=1, val=[[],[]],total=1):
     """Génère le tableau des effectifs (liste val[1]) et fréquences (liste val[2])."""

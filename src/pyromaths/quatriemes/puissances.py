@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from ..outils.Arithmetique import pgcd, valeur_alea
-from ..outils.Affichage import decimaux, tex_coef
+from pyromaths.outils.Arithmetique import pgcd, valeur_alea
+from pyromaths.outils.Affichage import decimaux, tex_coef
 from random import choice, randrange
 import string
 

@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 import random
-from ..outils.decimaux import decimaux
+from pyromaths.outils.decimaux import decimaux
 
 #
 # ------------------- Aire de disques -------------------
