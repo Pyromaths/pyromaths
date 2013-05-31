@@ -24,8 +24,7 @@
 from . import puissances, developpements, calcul_mental, fractions, geometrie
 from . import litteral
 
-def main(exo):
-    modules = (
+EXERCICES = (
         calcul_mental.main,
         fractions.exo_sommes_fractions,
         fractions.exo_produits_fractions,
@@ -44,5 +43,3 @@ def main(exo):
         geometrie.exo_thales,
         geometrie.exo_trigo,
         )
-    return modules[exo]()
-

@@ -23,8 +23,7 @@
 
 import ExoPolynome, Vecteurs, CercleTrigo, SecondDegre
 
-def main(exo):
-    modules = (
+EXERCICES = (
         ExoPolynome.exo_racines_degre2,
         ExoPolynome.exo_factorisation_degre2,
         ExoPolynome.exo_factorisation_degre3,
@@ -35,4 +34,3 @@ def main(exo):
         CercleTrigo.cercle_trigonometrique,
         SecondDegre.FormeCanonique,
         )
-    return modules[exo]()

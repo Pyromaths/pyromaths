@@ -23,11 +23,8 @@
 
 from . import priorites, symetrie, fractions, reperage, relatifs, construction, proportionnalite, aires, statistiques
 
-def main(exo):
-    modules = (priorites.main, symetrie.main, fractions.fractions_egales,
+EXERCICES = (priorites.main, symetrie.main, fractions.fractions_egales,
             fractions.sommes_fractions, fractions.produits_fractions,
             reperage.main, relatifs.main, construction.exo_triangle,
             construction.exo_quadrilatere,
             proportionnalite.exo_echelles, aires.exo_aire_diques, statistiques.statistiques)
-
-    return modules[exo]()

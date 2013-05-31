@@ -26,9 +26,7 @@ from . import angles, decimaux, droites, fractions, operations, quotients
 from . import symetrie, arrondi, aires, espace
 import random
 
-
-def main(exo):
-    modules = (
+EXERCICES = (
         operations.CalculMental,
         decimaux.EcrireNombreLettre,
         decimaux.PlaceVirgule,
@@ -49,7 +47,6 @@ def main(exo):
         aires.main,
         symetrie.SymetrieQuadrillage,
         angles.MesureAngles,
-	espace.main,
+        espace.main,
         arrondi.ArrondirNombreDecimal
         )
-    return modules[exo]()

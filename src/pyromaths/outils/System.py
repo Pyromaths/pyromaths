@@ -159,7 +159,7 @@ def creation(parametres):
         pkg_no = exercice[0]
         ex_no  = exercice[1]
         # get exercise's TeX code (question & answer) 
-        enonce, correction = PACKAGES[pkg_no].main(ex_no)
+        enonce, correction = PACKAGES[pkg_no].EXERCICES[ex_no]()
         # write to files
         f0.write("\n")
         f0.writelines(line + "\n" for line in enonce)

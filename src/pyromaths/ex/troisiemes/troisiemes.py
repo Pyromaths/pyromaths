@@ -25,8 +25,7 @@
 from . import fractions, puissances, pgcd, developpements, equations, racines
 from . import systemes, proba, affine, geometrie, arithmetique
 
-def main(exo):
-    modules = (
+EXERCICES = (
         fractions.tex_fractions,
         puissances.tex_puissances,
         pgcd.tex_pgcd,
@@ -43,4 +42,3 @@ def main(exo):
         geometrie.tex_trigo,
         arithmetique.Arithmetique
         )
-    return modules[exo]()
