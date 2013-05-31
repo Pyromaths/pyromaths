@@ -2,8 +2,7 @@
 
 import sys, os, codecs
 from pyromaths.classes.SecondDegre import Poly2
-from pyromaths.outils.Affichage import printlist
-from pyromaths.outils.Polynomes import choix_coeffs
+from pyromaths.outils.decimaux import printlist
 from pyromaths.outils.Arithmetique import *
 
 def exo_second_degre():

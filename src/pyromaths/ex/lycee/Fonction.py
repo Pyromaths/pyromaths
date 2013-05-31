@@ -2,7 +2,6 @@
 import os,sys
 
 from random import randrange
-from pyromaths.outils.Polylycee import *
 
 def genere_points(xmin,xmax,ymin,ymax,simple=False):
 
