@@ -92,3 +92,5 @@ def main():
     exo.extend(["  \\end{enumerate}", "\\end{multicols}"])
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
     return (exo, cor)
+
+main.description = u'Calcul mental'

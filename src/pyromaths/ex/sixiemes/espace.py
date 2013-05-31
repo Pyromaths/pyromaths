@@ -247,5 +247,4 @@ def main():
          "\\end{enumerate}"]
     return (exo,cor)
 
-
-
+main.description = u'Représentation dans l\'espace'

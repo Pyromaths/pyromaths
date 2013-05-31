@@ -66,6 +66,8 @@ def fractions_egales():
     cor.extend(["  \\end{enumerate}", "\end{multicols}\n"])
     return (exo, cor)
 
+fractions_egales.description = u'Fractions égales'
+
 
 def sommes_fractions():
     exo = ["\\exercice",
@@ -120,6 +122,8 @@ def sommes_fractions():
     cor.append("\end{multicols}\n")
     return (exo, cor)
 
+sommes_fractions.description = u'Sommes de fractions'
+
 
 def produits_fractions():
     exo = ["\\exercice",
@@ -162,3 +166,5 @@ def produits_fractions():
     exo.append("\end{multicols}\n")
     cor.append("\end{multicols}\n")
     return (exo, cor)
+
+produits_fractions.description = u'Produits de fractions'

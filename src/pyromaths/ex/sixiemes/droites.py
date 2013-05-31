@@ -216,6 +216,8 @@ def Droites():
     cor.append('\\end{tabularx}')
     return (exo, cor)
 
+Droites.description = u'Droites, demi-droites, segments'
+
 
 #------------------------------------------------------------------------------
 # Parallèles et perpendiculaires
@@ -324,6 +326,8 @@ def Perpendiculaires():
     exo.append('\\end{multicols}')
     cor.append('\\end{multicols}')
     return (exo, cor)
+
+Perpendiculaires.description = u'Droites perpendiculaires et parallèles'
 
 
 #------------------------------------------------------------------------------
@@ -650,3 +654,5 @@ def Proprietes():
 
     enonce_prop(exo, cor)
     return (exo, cor)
+
+Proprietes.description = u'Propriétés sur les droites'

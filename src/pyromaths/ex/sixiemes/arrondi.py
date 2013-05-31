@@ -99,3 +99,5 @@ def ArrondirNombreDecimal():
     cor.append("\\end{enumerate}")
 
     return (exo, cor)
+
+ArrondirNombreDecimal.description = u'Arrondir des nombres décimaux'

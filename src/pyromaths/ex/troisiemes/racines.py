@@ -247,3 +247,5 @@ def tex_racines():
     cor.append('\\end{multicols}')
     cor.append('\\end{enumerate}')
     return (exo, cor)
+
+tex_racines.description = u'Racines carrées'

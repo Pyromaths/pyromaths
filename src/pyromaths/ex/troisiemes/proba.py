@@ -117,3 +117,4 @@ def tex_proba():
     proba(exo,cor)
     return (exo, cor)
 
+tex_proba.description = u'Probabilités'

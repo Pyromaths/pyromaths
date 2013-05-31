@@ -258,3 +258,5 @@ def cercle_trigonometrique():
     
     return exo, cor
 
+cercle_trigonometrique.description = u"Cercle trigonométrique"
+cercle_trigonometrique.level = u"Niveau Seconde"

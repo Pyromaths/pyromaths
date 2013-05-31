@@ -105,6 +105,8 @@ def tex_proprietes():
     cor.append("\\end{multicols}\n")
     return (exo, cor)
 
+tex_proprietes.description = u'Propriétés sur les puissances'
+
 
 # ----PROPRIETES AVEC 10
 
@@ -194,6 +196,8 @@ def tex_proprietes_neg():
     cor.append("\\end{multicols}\n")
     return (exo, cor)
 
+tex_proprietes_neg.description = u'Propriétés sur les puissances de 10'
+
 
 #------------------------------------------------------------------------------
 #  Écritures scientifiques
@@ -245,6 +249,8 @@ def ecr_sc():
     cor.append("\\end{multicols}\n")
     return (exo, cor)
 
+ecr_sc.description = u'Écritures scientifiques'
+
 
 # ------------------- PUISSANCES de 10 -------------------
 
@@ -288,6 +294,8 @@ def exo_puissances():
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
     return (exo, cor)
+
+exo_puissances.description = u'Puissances de 10'
 
 
 def tex_puissances_0(a):

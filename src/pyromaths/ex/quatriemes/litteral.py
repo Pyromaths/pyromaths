@@ -75,6 +75,9 @@ def reduire():
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
     return (exo, cor)
 
+reduire.description = u'Bases du calcul littéral'
+
+
 def valeurs_reduire_somme():
     """Réduire une somme de six monômes de degrés 0, 1 et 2"""
     import random
@@ -136,3 +139,4 @@ def reduire_expressions():
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
     return (exo, cor)
 
+reduire_expressions.description = u'Réduire des expressions littérales'

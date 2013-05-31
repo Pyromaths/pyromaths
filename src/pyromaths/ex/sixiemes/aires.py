@@ -239,3 +239,5 @@ def main():
     exo.append(exercice[0])
     cor.append(exercice[1])
     return(exo, cor)
+
+main.description = u'Aires et quadrillage'

@@ -215,3 +215,4 @@ def main():
     cor.append("}")
     return(exo,cor)
 
+main.description = u'Repérage'

@@ -45,6 +45,8 @@ def exo_distributivite():
     cor.append("\\end{multicols}\n")
     return (exo, cor)
 
+exo_distributivite.description = u'Distributivité'
+
 
 def exo_double_distributivite():
     exo = ["\\exercice",
@@ -62,6 +64,8 @@ def exo_double_distributivite():
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
     return (exo, cor)
+
+exo_double_distributivite.description = u'Double distributivité'
 
 
 def coef_opposes(a):  # renvoie un tuple dont les valeurs sont les opposees de celles de a

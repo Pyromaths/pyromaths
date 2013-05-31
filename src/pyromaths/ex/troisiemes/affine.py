@@ -448,5 +448,4 @@ def affine():
          "\\vspace{0.45cm}"]
     return exo,cor
 
-def tex_affine():
-    return affine()
+affine.description = u'Fonctions affines'

@@ -133,6 +133,9 @@ def exo_echelles():
             
     return exo, cor
 
+exo_echelles.description = u'Échelles'
+
+
 def exo_fruits():
     fruit = ["Cerises", "Tomates", "Pommes", "Poires", "Raisin", "Oranges"][randrange(6)]
     while 1:

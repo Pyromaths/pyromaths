@@ -255,6 +255,9 @@ def EcrireNombreLettre():
     cor.append('\\end{enumerate}')
     return (exo, cor)
 
+EcrireNombreLettre.description = u'Écrire un nombre décimal'
+
+
 #===============================================================================
 # Conversions
 #===============================================================================
@@ -269,15 +272,6 @@ division = ["k", "h", "da", "", "d", "c", "m"]
 ## vref = -0.8mm      : décale la flèche vers le bas, sous les chiffres
 PSSET_FLECHE = '\\psset{nodesepA = -1.5mm, linewidth = 0.6pt, linestyle = dotted, vref = -0.8mm}'
 
-
-def Conversions(n):
-    if n == 1:#Conversions de L, m ou g
-        #le module sixiemes.sixiemes va appeler Conversions(1)()
-        return tex_units
-
-    #exo_conversion(exo, cor, 1) #le choix des valeurs prises, l'absence de grammes et litres ne rendent pas cette rédaction pertinente
-    else:  #conversions de m² ou m³
-        return exo_conversion(n)
 
 def valeurs_units():
     """
@@ -363,6 +357,8 @@ def tex_units():
     cor.append('{')
     return (exo, cor)
 
+tex_units.description = u'Conversions unités'
+
 
 def tex_tableau(cor, div0, div1, u, nblist, chf_unite):
     """tableau de conversion pour les unités simples : L, g ou m"""
@@ -447,7 +443,15 @@ def exo_conversion(exposant):
     #ferme le groupe dans lequel PSSET_FLECHE portait
     cor.append("}")
     #C'est fini
-    return (lambda: (exo, cor))
+    return (exo, cor)
+
+def exo_conversion_2d():
+    return exo_conversion(2)
+exo_conversion_2d.description = u"Conversions unités d'aires"
+
+def exo_conversion_3d():
+    return exo_conversion(3)
+exo_conversion_3d.description = u"Conversions unités de volumes"
 
 
 def tex_conversion(exo, cor, exposant, u):
@@ -588,6 +592,9 @@ def PlaceVirgule():
     tex_place_virgule(exo, cor)
     return (exo, cor)
 
+PlaceVirgule.description = u'Placer une virgule'
+
+
 #===============================================================================
 #    Écriture fractionnaire
 #===============================================================================
@@ -646,6 +653,9 @@ def EcritureFractionnaire():
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
     return (exo, cor)
+
+EcritureFractionnaire.description = u'Écriture fractionnaire ou décimale'
+
 
 #===============================================================================
 #    Décomposition des nombres décimaux
@@ -709,6 +719,9 @@ def Decomposition():
     cor.append('\\end{multicols}')
     return (exo, cor)
 
+Decomposition.description = u'Décomposition de décimaux'
+
+
 #===============================================================================
 # Classer des nombres dans l'ordre
 #===============================================================================
@@ -770,3 +783,5 @@ def ClasserNombres():
     exo.append('\\end{enumerate}')
     cor.append('\\end{enumerate}')
     return (exo, cor)
+
+ClasserNombres.description = u'Classer des nombres décimaux'

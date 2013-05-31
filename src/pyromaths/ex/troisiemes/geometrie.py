@@ -413,6 +413,9 @@ def tex_thales():
     thales(exo, cor)
     return (exo, cor)
 
+tex_thales.description = u'Théorème de Thalès'
+
+
 #
 # ------------------- RECIPROQUE DU THEOREME DE THALES -------------------
 #
@@ -648,6 +651,9 @@ def tex_reciproque_thales():
     rec_thales(exo, cor)
     return (exo, cor)
 
+tex_reciproque_thales.description = u'Réciproque du théorème de Thalès'
+
+
 #
 # ------------------- TRIGONOMETRIE -------------------
 #
@@ -806,3 +812,5 @@ def tex_trigo():
     cor = ['\\exercice*']
     trigo_init(exo, cor)
     return (exo, cor)
+
+tex_trigo.description = u'Trigonométrie'

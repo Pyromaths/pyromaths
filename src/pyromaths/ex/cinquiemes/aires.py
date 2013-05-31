@@ -79,3 +79,5 @@ Calculer l'aire de la couronne circulaire (partie colorée) comprise entre les d
     exo.append("\\end{minipage}\n")
     cor.append("\\end{minipage}\n")
     return (exo, cor)
+
+exo_aire_diques.description = u'Aire de disques'

@@ -676,3 +676,5 @@ def statistiques():
         exo_ages()
 
     return (exo, cor)
+
+statistiques.description = u'Statistiques'

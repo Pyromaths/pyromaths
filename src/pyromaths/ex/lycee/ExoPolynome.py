@@ -66,6 +66,10 @@ def exo_racines_degre2():
     cor.append("\\end{enumerate}")
     return exo,cor
 
+exo_racines_degre2.description = u'Équations 2° degré'
+exo_racines_degre2.level = u'Niveau 1èreS'
+
+
 def exo_factorisation_degre2():
     '''exercice recherche de racines second degré'''
 
@@ -141,6 +145,10 @@ def exo_factorisation_degre2():
     cor.append("\\end{enumerate}")
     return exo,cor
 
+exo_factorisation_degre2.description = u'Factorisations 2° degré'
+exo_factorisation_degre2.level = u'Niveau 1èreS'
+
+
 def exo_factorisation_degre3():
     '''exercice de factorisation degre3'''
 
@@ -171,6 +179,10 @@ def exo_factorisation_degre3():
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
     return exo,cor
+
+exo_factorisation_degre3.description = u'Factorisations degré 3'
+exo_factorisation_degre3.level = u'Niveau 1èreS'
+
 
 def exo_tableau_de_signe():
     #intervalle pour les racines entières ou fractionnaire
@@ -223,6 +235,10 @@ def exo_tableau_de_signe():
     cor.append("\\end{enumerate}")
     return exo,cor
 
+exo_tableau_de_signe.description = u'Étude de signe'
+exo_tableau_de_signe.level = u'Niveau 1èreS'
+
+
 def exo_variation():
 
     exo=["\\exercice",
@@ -239,6 +255,10 @@ def exo_variation():
     cor.append("\\end{enumerate}")
     return exo,cor
 
+exo_variation.description = u"Sens de variations"
+exo_variation.level = u"Niveau 1èreS, Term STG"
+
+
 def exo_variation_lim():
     """Étude de fonctions avec calculs de limites"""
     exo=["\\exercice",
@@ -253,6 +273,9 @@ def exo_variation_lim():
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
     return exo,cor
+
+exo_variation_lim.description = u"Étude de fonctions"
+exo_variation_lim.level = u"Niveau Term S"
 
 def quest_fonctions_rationnelles():
 

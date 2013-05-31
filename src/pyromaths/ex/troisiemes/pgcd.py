@@ -126,3 +126,5 @@ def tex_pgcd():
     cor.append(tex_simplifie_fraction_pgcd(simplifie_fraction_pgcd(l)))
     cor.append('\\end{enumerate}')
     return (exo, cor)
+
+tex_pgcd.description = u'PGCD'

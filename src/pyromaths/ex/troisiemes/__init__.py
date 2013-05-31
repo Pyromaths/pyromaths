@@ -40,24 +40,7 @@ EXERCICES = (
         geometrie.tex_thales,
         geometrie.tex_reciproque_thales,
         geometrie.tex_trigo,
-        arithmetique.Arithmetique
+        arithmetique.Arithmetique,
         )
-
-TITRES = [u'Fractions',
-          u'Puissances',
-          u'PGCD',
-          u'Développements',
-          u'Factorisations',
-          u'Dévt, factorisat°, calcul et éq° produit',
-          u'Équation',
-          u'Racines carrées',
-          u'Système d\'équations',
-          u'Fonctions affines',
-          u'Probabilités',
-          u'Théorème de Thalès',
-          u'Réciproque du théorème de Thalès',
-          u'Trigonométrie',
-          u'Arithmétique'
-         ]
-
+TITRES = [exercice.description for exercice in EXERCICES]
 FICHE = [u'Troisième', '', TITRES]

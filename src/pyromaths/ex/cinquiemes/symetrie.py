@@ -130,3 +130,5 @@ def main():
             exo.append("\\hfill")
             cor.append("\\hfill")
     return (exo, cor)
+
+main.description = u'Symétrie centrale'

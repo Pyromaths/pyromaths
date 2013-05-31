@@ -187,6 +187,9 @@ def FractionPartage():
     cor.append('\\end{multicols}')
     return (exo, cor)
 
+FractionPartage.description = u'Fractions partage'
+
+
 #===============================================================================
 # Fractions et abscisses
 #===============================================================================
@@ -399,3 +402,5 @@ def QuestionsAbscisses():
     exo.append("\\end{pspicture}")
     cor.append("\\end{pspicture}")
     return (exo, cor)
+
+QuestionsAbscisses.description = u'Fractions et abscisses'

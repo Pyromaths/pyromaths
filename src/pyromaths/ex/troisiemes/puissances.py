@@ -156,3 +156,5 @@ def tex_puissances():
     exo.append('\\end{multicols}')
     cor.append('\\end{multicols}')
     return (exo, cor)
+
+tex_puissances.description = u'Puissances'

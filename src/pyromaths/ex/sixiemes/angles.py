@@ -253,3 +253,5 @@ def MesureAngles():
     figure(exo, cor, lpoints, lnoms, xmax, ymax)
     reponses(exo, cor, lpoints, lnoms)
     return (exo, cor)
+
+MesureAngles.description = u'Mesurer des angles'

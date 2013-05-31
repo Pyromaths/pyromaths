@@ -69,6 +69,9 @@ def exo_triangle(test=False):
     cor.append("\\end{enumerate}")
     return exo,cor
 
+exo_triangle.description = u'Construction de triangles'
+
+
 def quest_equilateral(exo,cor):
     A,B,C=geo.choix_points(3)
     nom=shuffle_nom([A,B,C])
@@ -365,6 +368,8 @@ def exo_quadrilatere(test=False):
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
     return exo,cor
+
+exo_quadrilatere.description = u'Construction de parallélogrammes'
 
 ################################################################
 

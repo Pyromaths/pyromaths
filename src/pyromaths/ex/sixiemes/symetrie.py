@@ -107,3 +107,4 @@ def SymetrieQuadrillage():
             cor.append("\\hfill")
     return (exo, cor)
 
+SymetrieQuadrillage.description = u'Symétrie et quadrillages'

@@ -266,3 +266,5 @@ def main():
     exo.append("\\end{multicols}")
     cor.append("\\end{multicols}")
     return (exo, cor)
+
+main.description = u'Priorités opératoires'

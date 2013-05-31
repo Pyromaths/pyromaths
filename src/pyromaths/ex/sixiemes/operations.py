@@ -290,6 +290,9 @@ def Operations():
     cor.append('\\end{multicols}')
     return (exo, cor)
 
+Operations.description = u'Poser des opérations (sauf divisions)'
+
+
 #===============================================================================
 # Calcul mental
 #===============================================================================
@@ -362,6 +365,8 @@ def CalculMental():
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
     return (exo, cor)
+
+CalculMental.description = u'Calcul mental'
 
 
 #===============================================================================
@@ -460,3 +465,5 @@ def ProduitPuissanceDix():
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
     return (exo, cor)
+
+ProduitPuissanceDix.description = u'Produits, quotients par 10, 100, 1000'

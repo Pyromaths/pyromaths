@@ -62,3 +62,5 @@ def Divisible():
     exo.append("\\end{tabular}")
     cor.append("\\end{tabular}")
     return (exo, cor)
+
+Divisible.description = u'Multiples de 2, 3, 5, 9, 10'

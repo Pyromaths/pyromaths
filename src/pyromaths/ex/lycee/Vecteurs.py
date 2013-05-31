@@ -299,3 +299,6 @@ def vecteurs_add():
     cor.append("\\end{enumerate}")
 
     return exo,cor
+
+vecteurs_add.description = u"Vecteurs"
+vecteurs_add.level = u"Niveau Seconde"

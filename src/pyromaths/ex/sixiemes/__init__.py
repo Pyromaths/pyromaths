@@ -32,9 +32,9 @@ EXERCICES = (
         decimaux.PlaceVirgule,
         decimaux.EcritureFractionnaire,
         decimaux.Decomposition,
-        decimaux.Conversions(1),
-        decimaux.Conversions(2),
-        decimaux.Conversions(3),
+        decimaux.tex_units,
+        decimaux.exo_conversion_2d,
+        decimaux.exo_conversion_3d,
         operations.Operations,
         operations.ProduitPuissanceDix,
         decimaux.ClasserNombres,
@@ -48,31 +48,7 @@ EXERCICES = (
         symetrie.SymetrieQuadrillage,
         angles.MesureAngles,
         espace.main,
-        arrondi.ArrondirNombreDecimal
+        arrondi.ArrondirNombreDecimal,
         )
-
-TITRES = [u'Calcul mental',
-          u'Écrire un nombre décimal',
-          u'Placer une virgule',
-          u'Écriture fractionnaire ou décimale',
-          u'Décomposition de décimaux',
-          u'Conversions unités',
-          u"Conversions unités d'aires",
-          u"Conversions unités de volumes",
-          u'Poser des opérations (sauf divisions)',
-          u'Produits, quotients par 10, 100, 1000',
-          u'Classer des nombres décimaux',
-          u'Droites, demi-droites, segments',
-          u'Droites perpendiculaires et parallèles',
-          u'Propriétés sur les droites',
-          u'Multiples de 2, 3, 5, 9, 10',
-          u'Fractions partage',
-          u'Fractions et abscisses',
-          u'Aires et quadrillage',
-          u'Symétrie et quadrillages',
-          u'Mesurer des angles',
-          u'Représentation dans l\'espace',
-          u'Arrondir des nombres décimaux'
-         ]
-
+TITRES = [exercice.description for exercice in EXERCICES]
 FICHE = [u'Sixième', '', TITRES]

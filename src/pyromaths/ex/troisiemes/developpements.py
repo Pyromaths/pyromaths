@@ -1056,6 +1056,9 @@ def tex_devfacteq():
     cor.append('\\end{enumerate}')
     return (exo, cor)
 
+tex_devfacteq.description = u'Dévt, factorisat°, calcul et éq° produit'
+
+
 def tex_developpements():
     nb_exos = 4
     liste_exos = (valeurs_apb2,
@@ -1099,6 +1102,8 @@ def tex_developpements():
     exo.append('\\end{multicols}')
     return (exo, cor)
 
+tex_developpements.description = u'Développements'
+
 
 def tex_factorisations():
     (nb_exos, ordre_exos, ordre) = (6, [], [])
@@ -1120,3 +1125,5 @@ def tex_factorisations():
     exo.append('\\end{multicols}')
     cor.append('\\end{multicols}')
     return (exo, cor)
+
+tex_factorisations.description = u'Factorisations'

@@ -298,3 +298,5 @@ def Arithmetique():
     cor.append("\\end{enumerate}")
 
     return (exo,cor)
+
+Arithmetique.description = u'Arithmétique'

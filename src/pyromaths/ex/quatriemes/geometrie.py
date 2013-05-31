@@ -149,6 +149,8 @@ Calculer la longueur $%s$.""" % \
     cor.append("\\end{enumerate}\n\\end{multicols}\n")
     return (exo, cor)
 
+exo_pythagore.description = u'Théorème de Pythagore'
+
 
 def nom_triangle(noms):  # renvoie le nom du triangle dans un ordre aleatoire
     a = random.randrange(3)
@@ -245,6 +247,8 @@ Calculer la longueur $%s$.""" % \
     cor.append("\\end{minipage}\n")
     return (exo, cor)
 
+exo_triangle_cercle.description = u'Cercle et théorème de Pythagore'
+
 
 #
 # ------------------- RECIPROQUE DU THEOREME DE PYTHAGORE -------------------
@@ -292,6 +296,8 @@ D'après la \\textbf{réciproque du théorème de Pythagore},
 \\fbox{le triangle $%s$ est rectangle en $%s$.}""" %
                (c[2], c[0], c[1], nom_tr, noms[2]))
     return (exo, cor)
+
+exo_reciproque_pythagore.description = u'Réciproque du théorème de Pythagore'
 
 
 #
@@ -404,6 +410,8 @@ def exo_thales():
     cor.append(tex_resolution_thales2(noms, valeurs))
     cor.append(tex_resolution_thales3(noms, valeurs))
     return (exo, cor)
+
+exo_thales.description = u'Théorème de Thalès'
 
 
 def long_val(noms, valeurs):  # renvoie un tuple contenant les noms des segments et leur longueur puis les noms des longueurs a calculer
@@ -693,6 +701,8 @@ def exo_trigo():
     exo.extend(l1)
     cor.extend(l2)
     return (exo, cor)
+
+exo_trigo.description = u'Trigonométrie'
 
 
 def enonce_trigo(v):

@@ -244,3 +244,5 @@ def tex_systemes( ):
     cor = ['\\exercice*', u"Résoudre le système d'équations suivant :"]
     systemes(exo, cor, valeurs)
     return (exo, cor)
+
+tex_systemes.description = u'Système d\'équations'

@@ -279,6 +279,8 @@ def exo_sommes_fractions():
     cor.append("\\end{multicols}\n")
     return (exo, cor)
 
+exo_sommes_fractions.description = u'Sommes de fractions'
+
 
 def exo_produits_fractions():
     exo = ["\\exercice",
@@ -306,6 +308,8 @@ def exo_produits_fractions():
     cor.append("\\end{multicols}\n")
     return (exo, cor)
 
+exo_produits_fractions.description = u'Produits et quotients de fractions'
+
 
 def exo_priorites_fractions():
     exo = ["\\exercice",
@@ -332,5 +336,8 @@ def exo_priorites_fractions():
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
     return (exo, cor)
+
+exo_priorites_fractions.description = u'Fractions et priorités'
+
 
 exo_sommes_fractions()

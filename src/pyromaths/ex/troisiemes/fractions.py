@@ -430,3 +430,5 @@ def tex_fractions():
             exo.append('\\end{multicols}')
             cor.append('\\end{multicols}')
     return (exo, cor)
+
+tex_fractions.description = u'Fractions'

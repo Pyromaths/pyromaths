@@ -182,3 +182,5 @@ def tex_equations():
     cor = ['\\exercice*']
     equations(exo, cor, vals)
     return (exo, cor)
+
+tex_equations.description = u'Équation'
