@@ -24,13 +24,7 @@
 from . import puissances, developpements, calcul_mental, fractions, geometrie
 from . import litteral
 
-def write(f0, f1, exos):
-    f0.write("\n")
-    f1.write("\n")
-    f0.writelines(x + "\n" for x in exos[0])
-    f1.writelines(x + "\n" for x in exos[1])
-
-def main(exo, f0, f1):
+def main(exo):
     modules = (
         calcul_mental.main,
         fractions.exo_sommes_fractions,
@@ -50,5 +44,5 @@ def main(exo, f0, f1):
         geometrie.exo_thales,
         geometrie.exo_trigo,
         )
-    write(f0, f1, modules[exo]())
+    return modules[exo]()
 

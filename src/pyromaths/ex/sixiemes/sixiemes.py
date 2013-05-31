@@ -27,13 +27,7 @@ from . import symetrie, arrondi, aires, espace
 import random
 
 
-def write(f0, f1, exos):
-    f0.write("\n")
-    f1.write("\n")
-    f0.writelines(x + "\n" for x in exos[0])
-    f1.writelines(x + "\n" for x in exos[1])
-
-def main(exo, f0, f1):
+def main(exo):
     modules = (
         operations.CalculMental,
         decimaux.EcrireNombreLettre,
@@ -58,4 +52,4 @@ def main(exo, f0, f1):
 	espace.main,
         arrondi.ArrondirNombreDecimal
         )
-    write(f0, f1, modules[exo]())
+    return modules[exo]()

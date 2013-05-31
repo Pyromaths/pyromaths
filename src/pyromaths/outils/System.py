@@ -158,7 +158,14 @@ def creation(parametres):
     for exercice in parametres['liste_exos']:
         pkg_no = exercice[0]
         ex_no  = exercice[1]
-        PACKAGES[pkg_no].main(ex_no, f0, f1)
+        # get exercise's TeX code (question & answer) 
+        enonce, correction = PACKAGES[pkg_no].main(ex_no)
+        # write to files
+        f0.write("\n")
+        f0.writelines(line + "\n" for line in enonce)
+        f1.write("\n")
+        f1.writelines(line + "\n" for line in correction)
+
 
     if parametres['creer_pdf']:
         if parametres['creer_unpdf']:

@@ -25,13 +25,7 @@
 from . import fractions, puissances, pgcd, developpements, equations, racines
 from . import systemes, proba, affine, geometrie, arithmetique
 
-def write(f0, f1, exos):
-    f0.write("\n")
-    f1.write("\n")
-    f0.writelines(x + "\n" for x in exos[0])
-    f1.writelines(x + "\n" for x in exos[1])
-
-def main(exo, f0, f1):
+def main(exo):
     modules = (
         fractions.tex_fractions,
         puissances.tex_puissances,
@@ -49,4 +43,4 @@ def main(exo, f0, f1):
         geometrie.tex_trigo,
         arithmetique.Arithmetique
         )
-    write(f0, f1, modules[exo]())
+    return modules[exo]()
