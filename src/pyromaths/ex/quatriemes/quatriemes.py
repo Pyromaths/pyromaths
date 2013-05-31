@@ -43,3 +43,24 @@ EXERCICES = (
         geometrie.exo_thales,
         geometrie.exo_trigo,
         )
+
+TITRES = [u'Calcul mental',
+          u'Sommes de fractions',
+          u'Produits et quotients de fractions',
+          u'Fractions et priorités',
+          u'Bases du calcul littéral',
+          u'Réduire des expressions littérales',
+          u'Propriétés sur les puissances',
+          u'Propriétés sur les puissances de 10',
+          u'Écritures scientifiques',
+          u'Puissances de 10',
+          u'Distributivité',
+          u'Double distributivité',
+          u'Théorème de Pythagore',
+          u'Réciproque du théorème de Pythagore',
+          u'Cercle et théorème de Pythagore',
+          u'Théorème de Thalès',
+          u'Trigonométrie',
+         ]
+
+FICHE = [u'Quatrième', '', TITRES]

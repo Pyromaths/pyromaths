@@ -28,3 +28,19 @@ EXERCICES = (priorites.main, symetrie.main, fractions.fractions_egales,
             reperage.main, relatifs.main, construction.exo_triangle,
             construction.exo_quadrilatere,
             proportionnalite.exo_echelles, aires.exo_aire_diques, statistiques.statistiques)
+
+TITRES = [u'Priorités opératoires',
+          u'Symétrie centrale',
+          u'Fractions égales',
+          u'Sommes de fractions',
+          u'Produits de fractions',
+          u'Repérage',
+          u'Addition de relatifs',
+          u'Construction de triangles',
+          u'Construction de parallélogrammes',
+          u'Échelles',
+          u'Aire de disques',
+          u'Statistiques',
+         ]
+
+FICHE = [u'Cinquième', '', TITRES]

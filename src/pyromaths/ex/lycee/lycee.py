@@ -34,3 +34,26 @@ EXERCICES = (
         CercleTrigo.cercle_trigonometrique,
         SecondDegre.FormeCanonique,
         )
+
+TITRES = [u'Équations 2° degré',
+          u'Factorisations 2° degré',
+          u'Factorisations degré 3',
+          u'Étude de signe',
+          u"Sens de variations",
+          u"Étude de fonctions",
+          u"Vecteurs",
+          u"Cercle trigonométrique",
+          u"Forme canonique",
+         ]
+
+NIVEAUX = [u'Niveau 1èreS',
+           u'Niveau 1èreS',
+           u'Niveau 1èreS',
+           u'Niveau 1èreS',
+           u"Niveau 1èreS, Term STG",
+           u"Niveau Term S",
+           u"Niveau Seconde",
+           u"Niveau Seconde",
+          ]
+
+FICHE = [u'Lycée', '', TITRES, NIVEAUX]

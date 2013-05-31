@@ -42,3 +42,22 @@ EXERCICES = (
         geometrie.tex_trigo,
         arithmetique.Arithmetique
         )
+
+TITRES = [u'Fractions',
+          u'Puissances',
+          u'PGCD',
+          u'Développements',
+          u'Factorisations',
+          u'Dévt, factorisat°, calcul et éq° produit',
+          u'Équation',
+          u'Racines carrées',
+          u'Système d\'équations',
+          u'Fonctions affines',
+          u'Probabilités',
+          u'Théorème de Thalès',
+          u'Réciproque du théorème de Thalès',
+          u'Trigonométrie',
+          u'Arithmétique'
+         ]
+
+FICHE = [u'Troisième', '', TITRES]
