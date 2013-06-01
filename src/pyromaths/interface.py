@@ -23,7 +23,7 @@
 from PyQt4 import QtGui, QtCore
 import os, lxml, codecs, sys
 from outils import System
-from Values import HOME, CONFIGDIR, DATADIR, LESFICHES, COPYRIGHTS, VERSION, ICONDIR
+from Values import HOME, CONFIGDIR, DATADIR, PACKAGES, LESFICHES, COPYRIGHTS, VERSION, ICONDIR
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -702,6 +702,7 @@ class Tab(QtGui.QWidget):
         QtGui.QWidget.__init__(self)             # Initialise la super-classe
         self.level  = level
         self.titre  = Tab.titres[level]
+        self.pkg    = PACKAGES[level]
         self.exos   = LESFICHES[level][2]
         self.layout = QtGui.QGridLayout(self)
         self.spinBox = []
@@ -736,8 +737,8 @@ class Tab(QtGui.QWidget):
         img.setText(r'<img src="%s"/>' %
                     os.path.join(DATADIR, 'images', 'whatsthis.png'))
         img.setToolTip(r'<img src="%s"/>' %
-                       os.path.join(DATADIR, 'images', 'vignettes',
-                                    '%se-%02d.png' % (6-self.level, i)))
+                       os.path.join(self.pkg.__path__[0], 'img',
+                                    'ex-%02d.png' % i))
         layout.addWidget(img)
         # Label
         label = QtGui.QLabel(self)

@@ -51,8 +51,6 @@ def _unix_opt():
             ('share/pixmaps/',         ['data/images/pyromaths.png']),
             ('share/pyromaths/images', ['data/images/pyromaths-banniere.png',
                                         'data/images/whatsthis.png']),
-            ('share/pyromaths/images/vignettes',
-                                          glob('data/images/vignettes/*.png')),
             ('share/pyromaths/templates', glob('data/templates/*.tex')),
             ('share/pyromaths/packages',  glob('data/packages/*'))
             ],
@@ -108,7 +106,6 @@ def _mac_opt():
             ( 'data', ['data/qtmac_fr.qm']),
             ( 'data/images', ['data/images/pyromaths.png',
                      'data/images/whatsthis.png']),
-            ('data/images/vignettes', glob('data/images/vignettes/*.png')),
             ('data/templates',        glob('data/templates/*.tex')),
             ('data/packages',         glob('data/packages/*')),
         ],
@@ -179,6 +176,7 @@ setup(
     # python packages
     packages    = find_packages('src'),
     package_dir = {'': 'src'},
+    include_package_data = True,
     # dependencies
     provides    = ["pyromaths"],
     # platform-specific options

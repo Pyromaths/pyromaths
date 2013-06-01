@@ -32,6 +32,7 @@ FILES   := AUTHORS COPYING NEWS pyromaths README setup.py MANIFEST.in src data
 MANIFEST :=                                     \
     include AUTHORS COPYING NEWS                \n\
     exclude MANIFEST.in                         \n\
+    global-include src/pyromaths/ex/*/img/*.png \n\
     graft data                                  \n
 # Minimal install (i.e. without test/ dir):
 MANIFEST-min := $(MANIFEST)                     \
@@ -54,7 +55,7 @@ MANIFEST-mac := $(MANIFEST-min)                 \
 # Win app:
 MANIFEST-win := $(MANIFEST-min)                 \
     prune data/linux                            \n\
-    exclude data/qtmac_fr.qm                  \n\
+    exclude data/qtmac_fr.qm                    \n\
     exclude data/images/pyromaths.icns          \n
 
 ### SHORTCUTS & COMPATIBILITY
