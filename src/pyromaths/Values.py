@@ -7,6 +7,7 @@ from os import environ, name
 from sys import executable, getfilesystemencoding
 import sys
 import pkgutil, types
+import ex
 
 def we_are_frozen():
     """Returns whether we are frozen via py2exe.
@@ -94,13 +95,26 @@ def _exercices(pkg):
             exercices.append(element)
     return exercices
 
-def _packages():
-    ''' List exercise packages from pyromaths.ex. '''
-    import ex.sixiemes, ex.cinquiemes, ex.quatriemes, ex.troisiemes, ex.lycee
-    return [ex.sixiemes, ex.cinquiemes, ex.quatriemes, ex.troisiemes, ex.lycee]
+def _packages(pkg):
+    ''' Discover all packages located in pkg. '''
+    packages = []
+    # search packages
+    for _, name, ispkg in pkgutil.iter_modules(pkg.__path__, pkg.__name__+'.'):
+        # skip modules
+        if not ispkg: continue
+        # import discovered package
+        package = __import__(name, fromlist=pkg.__name__)
+        # exercise packages must have a description property
+        if 'description' not in dir(package): continue
+        description = package.__dict__['description']
+        # description property must be Unicode
+        if not type(description) is types.UnicodeType: continue
+        # valid exercise package
+        packages.append(package)
+    return packages
 
 # Packages d'exercices
-PACKAGES = _packages()
+PACKAGES = _packages(ex)
 
 LESFICHES = []
 for pkg in PACKAGES:
