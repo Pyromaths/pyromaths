@@ -90,7 +90,7 @@ def _exercices(pkg):
             if not type(element) is types.FunctionType: continue
             if 'description' not in dir(element): continue
             description = element.__dict__['description']
-            if not type(description) is types.UnicodeType: continue
+            if not isinstance(description, basestring): continue
             # store discovered exercise
             exercices.append(element)
     return exercices
@@ -107,8 +107,8 @@ def _packages(pkg):
         # exercise packages must have a description property
         if 'description' not in dir(package): continue
         description = package.__dict__['description']
-        # description property must be Unicode
-        if not type(description) is types.UnicodeType: continue
+        # description property must be a string
+        if not isinstance(description, basestring): continue
         # valid exercise package
         packages.append(package)
     return packages
