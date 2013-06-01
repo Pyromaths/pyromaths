@@ -89,8 +89,8 @@ class Ui_MainWindow(object):
         #============================================================
 
         self.tabs = []
-        for level in range(5):
-            self.tabs.append(Tab(self.tabWidget, level, self.setNbExos))
+        for pkg_no in range(len(PACKAGES)):
+            self.tabs.append(Tab(self.tabWidget, pkg_no, self.setNbExos))
 
         #============================================================
         #        Onglet options
@@ -519,8 +519,8 @@ class Ui_MainWindow(object):
     def effacer_choix_exercices(self):
         """Remet toutes les SpinBox à zéro et vide la liste d'exercices sélectionnés"""
         self.liste_creation=[]
-        for level in range(5):
-            self.tabs[level].reset()
+        for tab in self.tabs:
+            tab.reset()
 
     def enregistrer_config(self):
         """Fonction qui se charge d'enregistrer les options de l'interface dans le fichier de configuration
@@ -572,13 +572,13 @@ class Ui_MainWindow(object):
         et adapte le niveau affiché dans l'en-tête de la fiche en fonction du plus haut niveau d'exercice"""
         niveau=0
         self.liste_creation = []
-        for level in range(5):
-            for box in range(len(LESFICHES[level][2])):
-                qte = self.tabs[level].spinBox[box].value()
+        for pkg_no in range(5):
+            for box in range(len(LESFICHES[pkg_no][2])):
+                qte = self.tabs[pkg_no].spinBox[box].value()
                 for i in range(qte):
-                    self.liste_creation.append((level, box))
-                    if level > niveau:
-                        niveau = level
+                    self.liste_creation.append((pkg_no, box))
+                    if pkg_no > niveau:
+                        niveau = pkg_no
         self.comboBox_niveau.setCurrentIndex(niveau)
 
     def site(self):
@@ -695,12 +695,11 @@ def valide(list, LesFiches, parametres):
 class Tab(QtGui.QWidget):
     """Gère les onglets permettant de sélectionner des exercices"""
 
-    def __init__(self, parent, level, onchange):
+    def __init__(self, parent, pkg_no, onchange):
         QtGui.QWidget.__init__(self)             # Initialise la super-classe
-        self.level  = level
-        self.pkg    = PACKAGES[level]
+        self.pkg    = PACKAGES[pkg_no]
         self.titre  = self.pkg.description
-        self.exos   = LESFICHES[level][2]
+        self.exos   = LESFICHES[pkg_no][2]
         self.layout = QtGui.QGridLayout(self)
         self.spinBox = []
         # Crée les widgets des exercices
