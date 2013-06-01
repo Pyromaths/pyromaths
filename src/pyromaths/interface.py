@@ -695,14 +695,11 @@ def valide(list, LesFiches, parametres):
 class Tab(QtGui.QWidget):
     """Gère les onglets permettant de sélectionner des exercices"""
 
-    # Titres des tabs
-    titres = ["6e", "5e", "4e", "3e", u"Lycée"]
-
     def __init__(self, parent, level, onchange):
         QtGui.QWidget.__init__(self)             # Initialise la super-classe
         self.level  = level
-        self.titre  = Tab.titres[level]
         self.pkg    = PACKAGES[level]
+        self.titre  = self.pkg.description
         self.exos   = LESFICHES[level][2]
         self.layout = QtGui.QGridLayout(self)
         self.spinBox = []
