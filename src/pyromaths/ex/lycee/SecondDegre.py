@@ -114,4 +114,3 @@ def FormeCanonique():
     return exo, cor
 
 FormeCanonique.description = u"Forme canonique"
-FormeCanonique.level = u""

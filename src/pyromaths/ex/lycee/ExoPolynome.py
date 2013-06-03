@@ -67,7 +67,7 @@ def exo_racines_degre2():
     return exo,cor
 
 exo_racines_degre2.description = u'Équations 2° degré'
-exo_racines_degre2.level = u'Niveau 1èreS'
+exo_racines_degre2.level = u'1èreS'
 
 
 def exo_factorisation_degre2():
@@ -146,7 +146,7 @@ def exo_factorisation_degre2():
     return exo,cor
 
 exo_factorisation_degre2.description = u'Factorisations 2° degré'
-exo_factorisation_degre2.level = u'Niveau 1èreS'
+exo_factorisation_degre2.level = u'1èreS'
 
 
 def exo_factorisation_degre3():
@@ -181,7 +181,7 @@ def exo_factorisation_degre3():
     return exo,cor
 
 exo_factorisation_degre3.description = u'Factorisations degré 3'
-exo_factorisation_degre3.level = u'Niveau 1èreS'
+exo_factorisation_degre3.level = u'1èreS'
 
 
 def exo_tableau_de_signe():
@@ -236,7 +236,7 @@ def exo_tableau_de_signe():
     return exo,cor
 
 exo_tableau_de_signe.description = u'Étude de signe'
-exo_tableau_de_signe.level = u'Niveau 1èreS'
+exo_tableau_de_signe.level = u'1èreS'
 
 
 def exo_variation():
@@ -256,7 +256,7 @@ def exo_variation():
     return exo,cor
 
 exo_variation.description = u"Sens de variations"
-exo_variation.level = u"Niveau 1èreS, Term STG"
+exo_variation.level = u"1èreS, Term STG"
 
 
 def exo_variation_lim():
@@ -275,7 +275,7 @@ def exo_variation_lim():
     return exo,cor
 
 exo_variation_lim.description = u"Étude de fonctions"
-exo_variation_lim.level = u"Niveau Term S"
+exo_variation_lim.level = u"Term S"
 
 def quest_fonctions_rationnelles():
 
