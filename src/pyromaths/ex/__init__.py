@@ -10,7 +10,7 @@ class Exercise(object):
     ''' Base class for all exercise types. '''
 
     description = u'Description'
-    levels      = u'Academic level'
+    level       = u'Academic level'
     thumb       = 'path/to/thumbnail.png'
 
     def __str__(self):
@@ -53,7 +53,7 @@ def __legacy(path, i, function):
     return type('LegacyExercise%u' % __LegacyExercise._id,
                 (__LegacyExercise,),
                 dict(description=function.description,
-                     levels=function.level,
+                     level=function.level,
                      thumb=os.path.join(path, 'img', 'ex-%02d.png' % i),
                      function=(function,),
                      )
@@ -121,7 +121,7 @@ def load(pkg=None, recursive=True):
     if pkg is None: pkg = __import()
     # load package exercises
     for ex in _exercises(pkg):
-        for lvl in ex.levels:
+        for lvl in ex.level:
             # new level? create its exercise list
             if lvl not in levels.keys(): levels[lvl] = []
             levels[lvl].append(ex)
