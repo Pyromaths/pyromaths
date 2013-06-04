@@ -71,7 +71,7 @@ def __isexercise(obj):
     ''' Is target object an exercise in legacy format? '''
     return inspect.isfunction(obj) and __hasdescription(obj)
 
-def __levels(level):
+def __level(level):
     ''' Format academic level(s). '''
     # level may be a string or a list (default)
     if not isinstance(level, list): level = [level]
@@ -103,7 +103,7 @@ def _exercises(pkg):
             element = mod.__dict__[element]
             if not __isexercise(element): continue
             # found an exercise: work out what level it is
-            element.level = __levels(element.level if 'level' in dir(element)
+            element.level = __level(element.level if 'level' in dir(element)
                                      else mod.level)
             yield __legacy(pkg.__path__[0], n, element)
             n+=1
