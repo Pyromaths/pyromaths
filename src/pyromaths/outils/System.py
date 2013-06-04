@@ -26,7 +26,7 @@ from lxml import etree
 from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 from re import findall
 from .TexFiles import mise_en_forme
-from pyromaths.Values import HOME, VERSION, CONFIGDIR, PACKAGES
+from pyromaths.Values import HOME, VERSION, CONFIGDIR
 
 
 #==============================================================
@@ -156,15 +156,11 @@ def creation(parametres):
             copie_tronq_modele(f1, parametres, 'entete')
 
     for exercice in parametres['liste_exos']:
-        pkg_no = exercice[0]
-        ex_no  = exercice[1]
-        # get exercise's TeX code (question & answer) 
-        enonce, correction = PACKAGES[pkg_no].EXERCICES[ex_no]()
-        # write to files
+        # write exercise's TeX code (question & answer) to files
         f0.write("\n")
-        f0.writelines(line + "\n" for line in enonce)
+        f0.writelines(line + "\n" for line in exercice.tex_statement())
         f1.write("\n")
-        f1.writelines(line + "\n" for line in correction)
+        f1.writelines(line + "\n" for line in exercice.tex_answer())
 
 
     if parametres['creer_pdf']:

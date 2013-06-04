@@ -73,51 +73,7 @@ ICONDIR = icon_dir()
 HOME = home()
 CONFIGDIR = configdir()
 
-def _exercices(pkg):
-    ''' Discover package exercises. '''
-    exercices = []
-    # search package modules
-    for _, name, ispkg in pkgutil.iter_modules(pkg.__path__, pkg.__name__+'.'):
-        # skip sub-packages (discovery is not recursive)
-        if ispkg: continue
-        # import discovered module
-        module = __import__(name, fromlist=pkg.__name__)
-        # search module for exercises: functions with a 'description' attribute
-        # of UnicodeType
-        for element in dir(module):
-            # list module elements
-            element = module.__dict__[element]
-            if not type(element) is types.FunctionType: continue
-            if 'description' not in dir(element): continue
-            description = element.__dict__['description']
-            if not isinstance(description, basestring): continue
-            # store discovered exercise
-            exercices.append(element)
-    return exercices
-
-def _packages(pkg):
-    ''' Discover all packages located in pkg. '''
-    packages = []
-    # search packages
-    for _, name, ispkg in pkgutil.iter_modules(pkg.__path__, pkg.__name__+'.'):
-        # skip modules
-        if not ispkg: continue
-        # import discovered package
-        package = __import__(name, fromlist=pkg.__name__)
-        # exercise packages must have a description property
-        if 'description' not in dir(package): continue
-        description = package.__dict__['description']
-        # description property must be a string
-        if not isinstance(description, basestring): continue
-        # valid exercise package
-        packages.append(package)
-    return packages
-
-# Packages d'exercices
-PACKAGES = _packages(ex)
-
 LESFICHES = []
-for pkg in PACKAGES:
-    pkg.EXERCICES = _exercices(pkg)
-    titles = [ex.description for ex in pkg.EXERCICES]
-    LESFICHES.append([pkg.description, '', titles])
+ex.load()
+for level, exercices in ex.levels.iteritems():
+    LESFICHES.append([level, '', exercices])

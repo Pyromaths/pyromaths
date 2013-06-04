@@ -256,7 +256,7 @@ def exo_variation():
     return exo,cor
 
 exo_variation.description = u"Sens de variations"
-exo_variation.level = u"1èreS, Term STG"
+exo_variation.level = [u"1èreS", u"Term STG"]
 
 
 def exo_variation_lim():

@@ -74,8 +74,8 @@ elif (len(sys.argv) == 1):
         parametres['fiche_cor'] = os.path.join(dt, 'exercices-corrige.tex')
         lst = []
         for n in range(len(LESFICHES)):
-            for i in range(len(LESFICHES[n][2])):
-                lst.append([n,i])
+            for exo in LESFICHES[n][2]:
+                lst.append(exo())
         parametres['liste_exos'] = lst
         creation(parametres)
         nettoyage(dt)

@@ -23,7 +23,7 @@
 from PyQt4 import QtGui, QtCore
 import os, lxml, codecs, sys
 from outils import System
-from Values import HOME, CONFIGDIR, DATADIR, PACKAGES, LESFICHES, COPYRIGHTS, VERSION, ICONDIR
+from Values import HOME, CONFIGDIR, DATADIR, LESFICHES, COPYRIGHTS, VERSION, ICONDIR
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -89,8 +89,8 @@ class Ui_MainWindow(object):
         #============================================================
 
         self.tabs = []
-        for pkg_no in range(len(PACKAGES)):
-            self.tabs.append(Tab(self.tabWidget, pkg_no, self.setNbExos))
+        for level in LESFICHES:
+            self.tabs.append(Tab(self.tabWidget, level, self.setNbExos))
 
         #============================================================
         #        Onglet options
@@ -449,13 +449,14 @@ class Ui_MainWindow(object):
             for i in range(len(self.liste_creation)):
                 niveau = self.liste_creation[i][0]
                 exo = self.liste_creation[i][1]
-                list.append("%se: %s" % (6-niveau,  LESFICHES[niveau][2][exo]))
+                list.append(LESFICHES[niveau][2][exo])
             self.List=QtGui.QListWidget()
             for i in range(len(list)):
-                item = QtGui.QListWidgetItem(list[i])
+                item = QtGui.QListWidgetItem(list[i].description)
                 item.setFlags(QtCore.Qt.ItemIsEnabled |
                               QtCore.Qt.ItemIsSelectable |
                               QtCore.Qt.ItemIsDragEnabled)
+                item.exercice = list[i]
                 self.List.addItem(item)
             bmono=True
             for i in range(len(list)):
@@ -651,14 +652,9 @@ def valide(list, LesFiches, parametres):
     """ Permet de choisir les noms et emplacements des fichiers tex, les écrits
     et lance la compilation LaTex"""
     corrige = parametres['corrige']
-    l=[]
     lesexos = []
     for i in range(list.count()):
-        l.append(unicode(list.item(i).text()))
-    for text in l:
-        niveau = 6 - int(text[0])
-        pos = LesFiches[niveau][2].index(text[4:])
-        lesexos.append((niveau,  pos))
+        lesexos.append(list.item(i).exercice())
 
     #============================================================
     #        Choix des noms des fichiers exercices et corrigés
@@ -695,11 +691,10 @@ def valide(list, LesFiches, parametres):
 class Tab(QtGui.QWidget):
     """Gère les onglets permettant de sélectionner des exercices"""
 
-    def __init__(self, parent, pkg_no, onchange):
+    def __init__(self, parent, level, onchange):
         QtGui.QWidget.__init__(self)             # Initialise la super-classe
-        self.pkg    = PACKAGES[pkg_no]
-        self.titre  = self.pkg.description
-        self.exos   = LESFICHES[pkg_no][2]
+        self.titre  = level[0]
+        self.exos   = level[2]
         self.layout = QtGui.QGridLayout(self)
         self.spinBox = []
         # Crée les widgets des exercices
@@ -732,13 +727,11 @@ class Tab(QtGui.QWidget):
         img = QtGui.QLabel(self)
         img.setText(r'<img src="%s"/>' %
                     os.path.join(DATADIR, 'images', 'whatsthis.png'))
-        img.setToolTip(r'<img src="%s"/>' %
-                       os.path.join(self.pkg.__path__[0], 'img',
-                                    'ex-%02d.png' % i))
+        img.setToolTip(r'<img src="%s"/>' % self.exos[i].thumb)
         layout.addWidget(img)
         # Label
         label = QtGui.QLabel(self)
-        label.setText(self.exos[i])
+        label.setText(self.exos[i].description)
         layout.addWidget(label)
         # Espacements
         spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
