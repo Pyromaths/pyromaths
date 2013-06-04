@@ -573,7 +573,7 @@ class Ui_MainWindow(object):
         et adapte le niveau affiché dans l'en-tête de la fiche en fonction du plus haut niveau d'exercice"""
         niveau=0
         self.liste_creation = []
-        for pkg_no in range(5):
+        for pkg_no in range(len(self.tabs)):
             for box in range(len(LESFICHES[pkg_no][2])):
                 qte = self.tabs[pkg_no].spinBox[box].value()
                 for i in range(qte):
