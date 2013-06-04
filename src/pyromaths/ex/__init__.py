@@ -46,7 +46,7 @@ class __LegacyExercise(TexExercise):
         return self.ans
 
 
-def __legacy(path, i, function):
+def __legacy(function, thumb):
     ''' Create a new class proxying for a legacy exercise 'function'. '''
     __LegacyExercise._id += 1
     # Create a proxy class inheriting from LegacyExercise for this function
@@ -54,7 +54,7 @@ def __legacy(path, i, function):
                 (__LegacyExercise,),
                 dict(description=function.description,
                      level=function.level,
-                     thumb=os.path.join(path, 'img', 'ex-%02d.png' % i),
+                     thumb=thumb,
                      function=(function,),
                      )
                 )
@@ -67,9 +67,13 @@ def __hasdescription(obj):
     if not isinstance(description, basestring): return False
     return True
 
-def __isexercise(obj):
+def __islegacy(obj):
     ''' Is target object an exercise in legacy format? '''
     return inspect.isfunction(obj) and __hasdescription(obj)
+
+def __isexercise(obj):
+    ''' Is target object an exercise (in new format)? '''
+    return inspect.isclass(obj) and issubclass(obj, Exercise)
 
 def __level(level):
     ''' Format academic level(s). '''
@@ -99,14 +103,21 @@ def _exercises(pkg):
         # import module
         mod = __import(name, pkg)
         if 'level' not in dir(mod): mod.level = pkg.level
+        # search exercises in module
         for element in dir(mod):
             element = mod.__dict__[element]
-            if not __isexercise(element): continue
-            # found an exercise: work out what level it is
-            element.level = __level(element.level if 'level' in dir(element)
-                                     else mod.level)
-            yield __legacy(pkg.__path__[0], n, element)
-            n+=1
+            level = __level(element.level if 'level' in dir(element)
+                              else mod.level)
+            thumb = os.path.join(pkg.__path__[0], 'img', 'ex-%02d.png' % n)
+            if __isexercise(element):
+                element.level = level
+                element.thumb = thumb
+                yield element
+                n += 1
+            elif __islegacy(element):
+                element.level = level
+                yield __legacy(element, thumb)
+                n += 1
 
 def _subpackages(pkg):
     ''' List 'pkg' sub-packages. '''
