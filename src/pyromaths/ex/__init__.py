@@ -1,3 +1,4 @@
+import inspect
 import os
 import types
 import pkgutil
@@ -58,10 +59,6 @@ def __legacy(path, i, function):
                      )
                 )
 
-def __isfunction(obj):
-    ''' Is 'obj' a function? '''
-    return type(obj) is types.FunctionType
-
 def __hasdescription(obj):
     ''' Has 'obj' a legit description? '''
     if 'description' not in dir(obj): return False
@@ -72,7 +69,7 @@ def __hasdescription(obj):
 
 def __isexercise(obj):
     ''' Is target object an exercise in legacy format? '''
-    return __isfunction(obj) and __hasdescription(obj)
+    return inspect.isfunction(obj) and __hasdescription(obj)
 
 def __levels(level):
     ''' Format academic level(s). '''
