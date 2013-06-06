@@ -9,10 +9,6 @@ levels = {}
 class Exercise(object):
     ''' Base class for all exercise types. '''
 
-    description = u'Description'
-    level       = u'Academic level'
-    thumb       = 'path/to/thumbnail.png'
-
     def __str__(self):
         return self.description
 
@@ -73,7 +69,7 @@ def __islegacy(obj):
 
 def __isexercise(obj):
     ''' Is target object an exercise (in new format)? '''
-    return inspect.isclass(obj) and issubclass(obj, Exercise)
+    return inspect.isclass(obj) and issubclass(obj, Exercise) and __hasdescription(obj)
 
 def __level(level):
     ''' Format academic level(s). '''
