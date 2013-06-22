@@ -1,0 +1,109 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-15 18:36+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: affine.py:214
+msgid " l'image de "
+msgstr ""
+
+#: affine.py:214
+msgid " un ant\303\251c\303\251dent de "
+msgstr ""
+
+#: affine.py:214
+msgid " un nombre qui a pour image "
+msgstr ""
+
+#: affine.py:215
+msgid " a pour image "
+msgstr ""
+
+#: affine.py:215
+msgid " est l'image de "
+msgstr ""
+
+#: affine.py:215
+msgid " est un ant\303\251c\303\251dent de "
+msgstr ""
+
+#: affine.py:221 affine.py:234
+msgid " par la fonction "
+msgstr ""
+
+#: affine.py:221 affine.py:234
+msgid "Donner "
+msgstr ""
+
+#: affine.py:222 affine.py:235
+msgid " par la \\hbox{fonction "
+msgstr ""
+
+#: affine.py:276 affine.py:278 affine.py:280 affine.py:282
+msgid "$ et $"
+msgstr ""
+
+#: affine.py:276 affine.py:278 affine.py:280 affine.py:282
+msgid "On sait que $"
+msgstr ""
+
+#: affine.py:280
+msgid " \\times ("
+msgstr ""
+
+#: affine.py:282
+msgid " \\times "
+msgstr ""
+
+#: affine.py:284
+msgid "$) de la fonction $"
+msgstr ""
+
+#: affine.py:284
+msgid "Tracer la droite repr\303\251sentative ($d_"
+msgstr ""
+
+#: affine.py:354
+msgid "$ repr\303\251sent\303\251e ci-contre par la droite ($d_"
+msgstr ""
+
+#: affine.py:354
+msgid "D\303\251terminer l'expression de la fonction $"
+msgstr ""
+
+#: affine.py:355
+msgid "On lit l'ordonn\303\251e \303\240 l'origine et le coefficient de la fonction affine sur le graphique.\\\\ "
+msgstr ""
+
+#: affine.py:356
+msgid "$ et $a="
+msgstr ""
+
+#: affine.py:356
+msgid "avec $b="
+msgstr ""
+
+#: affine.py:357
+msgid "$ est $"
+msgstr ""
+
+#: affine.py:357
+msgid "L'expression de la fonction $"
+msgstr ""
+
+#: affine.py:380 affine.py:401
+msgid "($d_1$) est la droite repr\303\251sentative de la fonction $"
+msgstr ""
+

@@ -1,0 +1,255 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-16 20:48+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: arithmetique.py:46 arithmetique.py:49
+msgid "\\item Donner la d\303\251composition"
+msgstr ""
+
+#: arithmetique.py:47 arithmetique.py:50
+msgid " en facteurs premiers des nombres suivants, et pr\303\251ciser quand il"
+msgstr ""
+
+#: arithmetique.py:48 arithmetique.py:51
+msgid " s'agit d'un nombre premier :\\par"
+msgstr ""
+
+#: arithmetique.py:88 arithmetique.py:91
+msgid "\\item En d\303\251duire le PGCD et le PPCM des nombres "
+msgstr ""
+
+#: arithmetique.py:89 arithmetique.py:92 arithmetique.py:96
+#: arithmetique.py:109 arithmetique.py:236 arithmetique.py:284
+msgid " et "
+msgstr ""
+
+#: arithmetique.py:95
+msgid "D'apr\303\250s la question 1), on sait que les nombres "
+msgstr ""
+
+#: arithmetique.py:97
+msgid " ont comme facteurs premiers communs : "
+msgstr ""
+
+#: arithmetique.py:108
+msgid "On en d\303\251duit que le PGCD des nombres "
+msgstr ""
+
+#: arithmetique.py:110
+msgid " est : "
+msgstr ""
+
+#: arithmetique.py:115 arithmetique.py:159 arithmetique.py:174
+#: arithmetique.py:191 arithmetique.py:195
+msgid " \\times "
+msgstr ""
+
+#: arithmetique.py:125 arithmetique.py:129
+msgid " est un multiple de "
+msgstr ""
+
+#: arithmetique.py:126 arithmetique.py:130
+msgid ", donc leur PPCM est directement "
+msgstr ""
+
+#: arithmetique.py:133
+msgid "Il existe plusieurs m\303\251thodes pour calculer le PPCM de "
+msgstr ""
+
+#: arithmetique.py:134
+msgid " et de "
+msgstr ""
+
+#: arithmetique.py:136
+msgid "En voici deux :"
+msgstr ""
+
+#: arithmetique.py:139
+msgid "\\item On peut simplement utiliser la formule :"
+msgstr ""
+
+#: arithmetique.py:140
+msgid "$a \\times b = PGCD(a;~b) \\times PPCM(a;~b)$.\\par"
+msgstr ""
+
+#: arithmetique.py:141
+msgid "Donc : $PPCM("
+msgstr ""
+
+#: arithmetique.py:143
+msgid "\\times"
+msgstr ""
+
+#: arithmetique.py:147
+msgid "\\item On peut aussi multiplier un nombre par les \"facteurs "
+msgstr ""
+
+#: arithmetique.py:148
+msgid "Ces \"facteurs "
+msgstr ""
+
+#: arithmetique.py:148
+msgid ""
+"compl\303\251mentaires\" de l'autre.\n"
+msgstr ""
+
+#: arithmetique.py:149
+msgid "compl\303\251mentaires\" sont les facteurs qui compl\303\250tent le PGCD pour "
+msgstr ""
+
+#: arithmetique.py:150
+msgid "former le nombre.\\par"
+msgstr ""
+
+#: arithmetique.py:152
+msgid "Comme $PGCD("
+msgstr ""
+
+#: arithmetique.py:166
+msgid "$, alors les \"facteurs compl\303\251mentaires\" de $"
+msgstr ""
+
+#: arithmetique.py:168
+msgid "$, alors le \"facteur compl\303\251mentaire\" de $"
+msgstr ""
+
+#: arithmetique.py:181
+msgid "$ est : "
+msgstr ""
+
+#: arithmetique.py:183
+msgid "$ sont : "
+msgstr ""
+
+#: arithmetique.py:189
+msgid "On en d\303\251duit que $PPCM("
+msgstr ""
+
+#: arithmetique.py:204
+msgid "\\item Quel est le plus petit nombre par lequel il faut "
+msgstr ""
+
+#: arithmetique.py:205
+msgid "multiplier "
+msgstr ""
+
+#: arithmetique.py:206
+msgid " pour obtenir un carr\303\251 parfait ?"
+msgstr ""
+
+#: arithmetique.py:208
+msgid " \\item Pour obtenir un carr\303\251 parfait, il faut que sa "
+msgstr ""
+
+#: arithmetique.py:209
+msgid "d\303\251composition en facteurs premiers ne contienne que des facteurs "
+msgstr ""
+
+#: arithmetique.py:210
+msgid "apparaissant un nombre pair de fois. D'apr\303\250s la question 1, "
+msgstr ""
+
+#: arithmetique.py:211
+msgid "la d\303\251composition en facteurs premiers de "
+msgstr ""
+
+#: arithmetique.py:217
+msgid " est lui-m\303\252me, car c'est un nombre premier."
+msgstr ""
+
+#: arithmetique.py:219
+msgid ""
+" est : \\par\n"
+"$"
+msgstr ""
+
+#: arithmetique.py:222
+msgid "Il faut donc encore multiplier ce nombre par "
+msgstr ""
+
+#: arithmetique.py:228
+msgid " le facteur "
+msgstr ""
+
+#: arithmetique.py:230
+msgid " les facteurs "
+msgstr ""
+
+#: arithmetique.py:240
+msgid "Le nombre cherch\303\251 est par cons\303\251quent "
+msgstr ""
+
+#: arithmetique.py:241
+msgid " et le carr\303\251 parfait obtenu est "
+msgstr ""
+
+#: arithmetique.py:245
+msgid "\\item Rendre la fraction $\\dfrac{"
+msgstr ""
+
+#: arithmetique.py:246
+msgid "}$ irr\303\251ductible."
+msgstr ""
+
+#: arithmetique.py:248
+msgid "\\item Le moyen le plus rapide de simplifier cette fraction est"
+msgstr ""
+
+#: arithmetique.py:249
+msgid "de diviser le num\303\251rateur et le d\303\251nominateur par leur PGCD."
+msgstr ""
+
+#: arithmetique.py:250
+msgid " D'apr\303\250s la question 2),  PGCD("
+msgstr ""
+
+#: arithmetique.py:252
+msgid ", donc on obtient :\\par"
+msgstr ""
+
+#: arithmetique.py:253 arithmetique.py:255 arithmetique.py:275
+msgid "{\\scriptstyle \\div "
+msgstr ""
+
+#: arithmetique.py:262
+msgid "\\item Calculer $\\dfrac{"
+msgstr ""
+
+#: arithmetique.py:282
+msgid "\\item Il faut mettre les fractions au m\303\252me d\303\251nominateur. Gr\303\242ce"
+msgstr ""
+
+#: arithmetique.py:283
+msgid "\303\240 la question 2), nous avons d\303\251j\303\240 un d\303\251nominateur commun : "
+msgstr ""
+
+#: arithmetique.py:284
+msgid "le PPCM des nombres "
+msgstr ""
+
+#: arithmetique.py:285
+msgid ", qui est par d\303\251finition le plus petit"
+msgstr ""
+
+#: arithmetique.py:286
+msgid "multiple commun de ces deux nombres.\\par"
+msgstr ""
+
+#: arithmetique.py:287 arithmetique.py:289 arithmetique.py:290
+#: arithmetique.py:291
+msgid "{\\scriptstyle \\times "
+msgstr ""
+

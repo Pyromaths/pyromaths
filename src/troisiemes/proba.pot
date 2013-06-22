@@ -1,0 +1,133 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-15 20:48+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: proba.py:28
+msgid "bleue"
+msgstr ""
+
+#: proba.py:28
+msgid "jaune"
+msgstr ""
+
+#: proba.py:28
+msgid "marron"
+msgstr ""
+
+#: proba.py:28
+msgid "orange"
+msgstr ""
+
+#: proba.py:28
+msgid "rouge"
+msgstr ""
+
+#: proba.py:28
+msgid "verte"
+msgstr ""
+
+#: proba.py:29
+msgid "B"
+msgstr ""
+
+#: proba.py:29
+msgid "J"
+msgstr ""
+
+#: proba.py:29
+msgid "M"
+msgstr ""
+
+#: proba.py:29
+msgid "O"
+msgstr ""
+
+#: proba.py:29
+msgid "R"
+msgstr ""
+
+#: proba.py:29
+msgid "V"
+msgstr ""
+
+#: proba.py:50 proba.py:64
+msgid "Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule%s %s%s (%s), indiscernables au toucher. On tire successivement et sans remise deux boules."
+msgstr ""
+
+#: proba.py:52
+msgid "\\item Quelle est la probabilit\303\251 de tirer une boule %s au premier tirage?"
+msgstr ""
+
+#: proba.py:53
+msgid "\\item Construire un arbre des probabilit\303\251s d\303\251crivant l'exp\303\251rience al\303\251atoire."
+msgstr ""
+
+#: proba.py:54
+msgid "\\item Quelle est la probabilit\303\251 que la premi\303\250re boule soit %s et la deuxi\303\250me soit %s?"
+msgstr ""
+
+#: proba.py:55
+msgid "\\item Quelle est la probabilit\303\251 que la deuxi\303\250me boule soit %s ?"
+msgstr ""
+
+#: proba.py:59 proba.py:60
+msgid "\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}+"
+msgstr ""
+
+#: proba.py:61
+msgid "\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}="
+msgstr ""
+
+#: proba.py:67
+msgid "\\item Quelle est la probabilit\303\251 de tirer une boule %s au premier tirage?\\par "
+msgstr ""
+
+#: proba.py:68
+msgid "Il y a %s boules dans l'urne dont %s boule%s %s%s. \\par"
+msgstr ""
+
+#: proba.py:69
+msgid " La probabilit\303\251 de tirer une boule %s au premier tirage est donc $\\dfrac{%s}{%s}$."
+msgstr ""
+
+#: proba.py:70
+msgid "\\item Construire un arbre des probabilit\303\251s d\303\251crivant l'exp\303\251rience al\303\251atoire.\\\\ [0,3cm] "
+msgstr ""
+
+#: proba.py:98
+msgid "\\item Quelle est la probabilit\303\251 que la premi\303\250re boule soit %s et la deuxi\303\250me soit %s?\\par"
+msgstr ""
+
+#: proba.py:99
+msgid "On utilise l'arbre construit pr\303\251c\303\251demment.\\par"
+msgstr ""
+
+#: proba.py:100
+msgid "$p(%s,%s)=%s \\times %s = %s$\\par"
+msgstr ""
+
+#: proba.py:104
+msgid "La probabilit\303\251 que la premi\303\250re boule soit %s et la deuxi\303\250me soit %s est \303\251gale \303\240 $\\dfrac{%s}{%s}$."
+msgstr ""
+
+#: proba.py:105
+msgid "\\item Quelle est la probabilit\303\251 que la deuxi\303\250me boule soit %s ?\\par"
+msgstr ""
+
+#: proba.py:106
+msgid "On note (?, %s) l'\303\251v\303\250nement: la deuxi\303\250me boule tir\303\251e est %s. \\par"
+msgstr ""
+

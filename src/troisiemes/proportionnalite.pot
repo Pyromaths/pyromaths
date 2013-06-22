@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-17 20:10+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: proportionnalite.py:71
+msgid "Lors d'un voyage scolaire, les \303\251l\303\250ves sont r\303\251partis dans deux bus :"
+msgstr ""
+
+#: proportionnalite.py:72
+msgid "Au coll\303\250ge Dubois, il y a $%s$ \303\251l\303\250ves en quatri\303\250mes et $%s$ \303\251l\303\250ves en troisi\303\250mes."
+msgstr ""
+
+#: proportionnalite.py:75
+msgid "\\item Bus A : %s \303\251l\303\250ves dont %s %s de gar\303\247ons."
+msgstr ""
+
+#: proportionnalite.py:76
+msgid "\\item $%s$ %s des \303\251l\303\250ves de quatri\303\250mes poss\303\250dent un ordinateur ;"
+msgstr ""
+
+#: proportionnalite.py:77
+msgid "\\item Bus B : %s \303\251l\303\250ves dont %s %s de gar\303\247ons."
+msgstr ""
+
+#: proportionnalite.py:78
+msgid "\\item $%s$ %s des \303\251l\303\250ves de troisi\303\250mes poss\303\250dent un ordinateur ;"
+msgstr ""
+
+#: proportionnalite.py:81
+msgid "Quel est, sur l'ensemble des deux bus, le pourcentage de gar\303\247ons ?\\par"
+msgstr ""
+
+#: proportionnalite.py:82
+msgid "Quel est le pourcentage des \303\251l\303\250ves qui poss\303\250dent un ordinateur ?\\par"
+msgstr ""
+
+#: proportionnalite.py:86
+msgid "Dans le bus A, il y a $\\cfrac{%s \\times %s}{100} = %s$ gar\303\247ons.\\par"
+msgstr ""
+
+#: proportionnalite.py:87
+msgid "Dans le bus B, il y a $\\cfrac{%s \\times %s}{100} = %s$ gar\303\247ons.\\par"
+msgstr ""
+
+#: proportionnalite.py:88
+msgid "On en d\303\251duit qu'il y a $%s + %s = %s$ gar\303\247ons sur un total de $%s + %s = %s $ \303\251l\303\250ves.\\par"
+msgstr ""
+
+#: proportionnalite.py:90
+msgid " Le pourcentage de gar\303\247ons sur l'ensemble des deux bus est donc de $\\cfrac{%s}{%s}\\times 100 %s %s%s$"
+msgstr ""
+
+#: proportionnalite.py:93
+msgid "En quatri\303\250mes, $\\cfrac{%s \\times %s}{100} = %s$ \303\251l\303\250ves poss\303\250dent un ordinateur.\\par"
+msgstr ""
+
+#: proportionnalite.py:94
+msgid "En troisi\303\250mes, $\\cfrac{%s \\times %s}{100} = %s$ \303\251l\303\250ves poss\303\250dent un ordinateur.\\par"
+msgstr ""
+
+#: proportionnalite.py:95
+msgid "On en d\303\251duit qu'il y a $%s + %s = %s$ \303\251l\303\250ves qui poss\303\250dent un ordinateur sur un total de $%s + %s = %s $ \303\251l\303\250ves.\\par"
+msgstr ""
+
+#: proportionnalite.py:97
+msgid " Le pourcentage d'\303\251l\303\250ves poss\303\251dant un ordinateur est donc de $\\cfrac{%s}{%s}\\times 100 %s %s%s$"
+msgstr ""
+

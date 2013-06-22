@@ -1,0 +1,168 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2013 ORGANIZATION
+# Administrador <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pyromaths 13.03\n"
+"POT-Creation-Date: 2013-06-15 20:48+Hora de verano romance\n"
+"PO-Revision-Date: 2013-06-16 20:18+0100\n"
+"Last-Translator: Jose Antonio Martinez Chico <jkuato@hotmail.com>\n"
+"Language-Team: Jérôme Ortais <jerome.ortais@pyromaths.org>\n"
+"Language: spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: proba.py:28
+msgid "bleue"
+msgstr "amarilla"
+
+#: proba.py:28
+msgid "jaune"
+msgstr "blanca"
+
+#: proba.py:28
+msgid "marron"
+msgstr "morada"
+
+#: proba.py:28
+msgid "orange"
+msgstr "negra"
+
+#: proba.py:28
+msgid "rouge"
+msgstr "roja"
+
+#: proba.py:28
+msgid "verte"
+msgstr "verde"
+
+#: proba.py:29
+msgid "B"
+msgstr "A"
+
+#: proba.py:29
+msgid "J"
+msgstr "B"
+
+#: proba.py:29
+msgid "M"
+msgstr "M"
+
+#: proba.py:29
+msgid "O"
+msgstr "N"
+
+#: proba.py:29
+msgid "R"
+msgstr "R"
+
+#: proba.py:29
+msgid "V"
+msgstr "V"
+
+#: proba.py:50 proba.py:64
+msgid ""
+"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule"
+"%s %s%s (%s), indiscernables au toucher. On tire successivement et sans "
+"remise deux boules."
+msgstr ""
+"En una urna, hay %s bola%s %s%s (%s), %s bola%s %s%s (%s) y %s bola%s %s%s "
+"(%s), indistinguibles al tacto. Se sacan sucesivamente y sin devolver dos "
+"bolas."
+
+#: proba.py:52
+msgid ""
+"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?"
+msgstr "\\item ¿Cuál es la probabilidad de que la primera bola sea %s?"
+
+#: proba.py:53
+msgid ""
+"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire."
+msgstr ""
+"\\item Construye un diagrama en árbol que describa las probabilidades de "
+"este experimento aleatorio."
+
+#: proba.py:54
+msgid ""
+"\\item Quelle est la probabilité que la première boule soit %s et la "
+"deuxième soit %s?"
+msgstr ""
+"\\item ¿Cuál es la probabilidad de que la primera bola sea %s y la segunda "
+"sea %s?"
+
+#: proba.py:55
+msgid "\\item Quelle est la probabilité que la deuxième boule soit %s ?"
+msgstr "\\item ¿Cuál es la probabilidad de que la segunda bola sea %s?"
+
+#: proba.py:59 proba.py:60
+msgid "\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}+"
+msgstr "\\dfrac{%s}{%s}\\cdot \\dfrac{%s}{%s}+"
+
+#: proba.py:61
+msgid "\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}="
+msgstr "\\dfrac{%s}{%s}\\cdot \\dfrac{%s}{%s}="
+
+#: proba.py:67
+msgid ""
+"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?"
+"\\par "
+msgstr "\\item ¿Cuál es la probabilidad de que la primera bola sea %s?\\par "
+
+#: proba.py:68
+msgid "Il y a %s boules dans l'urne dont %s boule%s %s%s. \\par"
+msgstr "Hay %s bolas en la urna de las cuáles %s bola%s son %s%s. \\par"
+
+#: proba.py:69
+msgid ""
+" La probabilité de tirer une boule %s au premier tirage est donc $\\dfrac{%s}"
+"{%s}$."
+msgstr ""
+" La probabilidad de sacar la primera bola %s es entonces de $\\dfrac{%s}"
+"{%s}$."
+
+#: proba.py:70
+msgid ""
+"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire."
+"\\\\ [0,3cm] "
+msgstr ""
+"\\item Construye un diagrama en árbol que describa las probabilidades de "
+"este experimento aleatorio.\\\\ [0,3cm] "
+
+#: proba.py:98
+msgid ""
+"\\item Quelle est la probabilité que la première boule soit %s et la "
+"deuxième soit %s?\\par"
+msgstr ""
+"\\item ¿Cuál es la probabilidad de que la primera bola sea %s y la segunda "
+"sea %s?\\par"
+
+#: proba.py:99
+msgid "On utilise l'arbre construit précédemment.\\par"
+msgstr "Utilizando el diagrama en árbol construido anteriormente.\\par"
+
+#: proba.py:100
+msgid "$p(%s,%s)=%s \\times %s = %s$\\par"
+msgstr "$p(%s,%s)=%s \\cdot %s = %s$\\par"
+
+#: proba.py:104
+msgid ""
+"La probabilité que la première boule soit %s et la deuxième soit %s est "
+"égale à $\\dfrac{%s}{%s}$."
+msgstr ""
+"La probabilidad de que la primera bola sea %s y la segunda sea %s es igual a "
+"$\\dfrac{%s}{%s}$."
+
+#: proba.py:105
+msgid "\\item Quelle est la probabilité que la deuxième boule soit %s ?\\par"
+msgstr "\\item ¿Cuál es la probabilidad de que la segunda bola sea %s?\\par"
+
+#: proba.py:106
+msgid "On note (?, %s) l'évènement: la deuxième boule tirée est %s. \\par"
+msgstr ""
+"Hay que sumar los sucesos (?, %s) del diagrama en árbol, es decir, los que "
+"su segunda bola sea %s. \\par"

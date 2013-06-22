@@ -61,8 +61,8 @@ def decomp_prod(a, b):  #renvoie un tuple contenant les deux fractions apres sim
 
     #simplifie le produit de fractions
 
-    c = pgcd(a[0], b[1])
-    d = pgcd(a[1], b[0])
+    c = abs(pgcd(a[0], b[1]))
+    d = abs(pgcd(a[1], b[0]))
     sgn1 = signe(a[1])
     sgn2 = signe(b[1])
     if c == d == 1:
@@ -123,11 +123,11 @@ def tex_decomp_prod(a):  #renvoie l'ecriture au format tex de la decomposition d
         # decomposition que du denominateur
 
         b = (a[0][0], a[0][1], a[2][1], a[1][0], a[2][1], a[1][1])
-        return '\cfrac{%s}{%s\\times\\bcancel{%s}}\\times\\cfrac{%s\\times\\bcancel{%s}}{%s}' % \
+        return _('\cfrac{%s}{%s\\times\\bcancel{%s}}\\times\\cfrac{%s\\times\\bcancel{%s}}{%s}') % \
             b
     elif a[2][1] == 1:
         b = (a[0][0], a[2][0], a[0][1], a[1][0], a[1][1], a[2][0])  # decomposition que du numerateur
-        return '\cfrac{%s\\times\\cancel{%s}}{%s}\\times\\cfrac{%s}{%s\\times\\cancel{%s}}' % \
+        return _('\cfrac{%s\\times\\cancel{%s}}{%s}\\times\\cfrac{%s}{%s\\times\\cancel{%s}}') % \
             b
     else:
 
@@ -135,7 +135,7 @@ def tex_decomp_prod(a):  #renvoie l'ecriture au format tex de la decomposition d
 
         b = (a[0][0], a[2][0], a[0][1], a[2][1], a[1][0], a[2][1], a[1][1],
              a[2][0])
-        return '\\cfrac{%s\\times\\cancel{%s}}{%s\\times\\bcancel{%s}}\\times\\cfrac{%s\\times\\bcancel{%s}}{%s\\times\\cancel{%s}}' % \
+        return _('\\cfrac{%s\\times\\cancel{%s}}{%s\\times\\bcancel{%s}}\\times\\cfrac{%s\\times\\bcancel{%s}}{%s\\times\\cancel{%s}}') % \
             b
 
 
@@ -143,17 +143,17 @@ def OOo_decomp_prod(a):  #renvoie l'ecriture au format OOo de la decomposition d
     if a[2][0] == 1:
         if a[2][1] == 1:  # pas de decomposition
             b = (a[0][0], a[2][1], a[1][0], a[1][1])
-            return '{{%s}over{%s}}times{{%s}over{%s}}' % b
+            return _('{{%s}over{%s}}times{{%s}over{%s}}') % b
         else:
 
             # decomposition que du denominateur
 
             b = (a[0][0], a[0][1], a[2][1], a[1][0], a[2][1], a[1][1])
-            return '{{%s}over{{%s}times overstrike{%s}}}times{{{%s}times overstrike{%s}}over{%s}}' % \
+            return _('{{%s}over{{%s}times overstrike{%s}}}times{{{%s}times overstrike{%s}}over{%s}}') % \
                 b
     elif a[2][1] == 1:
         b = (a[0][0], a[2][0], a[0][1], a[1][0], a[1][1], a[2][0])  # decomposition que du numerateur
-        return '{{{%s}times overstrike{%s}}over{%s}}times{{%s}over{{%s}times overstrike{%s}}}' % \
+        return _('{{{%s}times overstrike{%s}}over{%s}}times{{%s}over{{%s}times overstrike{%s}}}') % \
             b
     else:
 
@@ -161,7 +161,7 @@ def OOo_decomp_prod(a):  #renvoie l'ecriture au format OOo de la decomposition d
 
         b = (a[0][0], a[2][0], a[0][1], a[2][1], a[1][0], a[2][1], a[1][1],
              a[2][0])
-        return '{{{%s}times overstrike{%s}}over{{%s}times overstrike{%s}}}times{{{%s}times overstrike{%s}}over{{%s}times overstrike{%s}}}' % \
+        return _('{{{%s}times overstrike{%s}}over{{%s}times overstrike{%s}}}times{{{%s}times overstrike{%s}}over{{%s}times overstrike{%s}}}') % \
             b
 
 
@@ -177,12 +177,12 @@ def tex_den_com0(a, b, c, sgn):  # renvoie l'ecriture au format tex de la mise a
             else:
                 d = (a[0] * sgn1, a[1] * sgn1, sgn, b[0] * sgn2, c[1], b[1] *
                      sgn2, c[1])
-                return '\dfrac{%s}{%s}%s\\dfrac{%s_{\\times %s}}{%s_{\\times %s}}' % \
+                return _('\dfrac{%s}{%s}%s\\dfrac{%s_{\\times %s}}{%s_{\\times %s}}') % \
                     d
         elif c[1] == 1:
             d = (a[0] * sgn1, c[0], a[1] * sgn1, c[0], sgn, b[0] * sgn2,
                  b[1] * sgn2)
-            return '\dfrac{%s_{\\times %s}}{%s_{\\times %s}}%s\\dfrac{%s}{%s}' % \
+            return _('\dfrac{%s_{\\times %s}}{%s_{\\times %s}}%s\\dfrac{%s}{%s}') % \
                 d
         else:
             d = (
@@ -196,7 +196,7 @@ def tex_den_com0(a, b, c, sgn):  # renvoie l'ecriture au format tex de la mise a
                 b[1] * sgn2,
                 c[1],
                 )
-            return '\dfrac{%s_{\\times %s}}{%s_{\\times %s}}%s\\dfrac{%s_{\\times %s}}{%s_{\\times %s}}' % \
+            return _('\dfrac{%s_{\\times %s}}{%s_{\\times %s}}%s\\dfrac{%s_{\\times %s}}{%s_{\\times %s}}') % \
                 d
 
 
@@ -213,20 +213,20 @@ def tex_den_com1(a, sgn):  # renvoie l'ecriture au format tex de la somme des fr
 def tex_somme_prod(valeurs, exo, cor):  # calcul du type a+b*c, d contenant (+,*)
     (a, b, c, d) = (valeurs[0], valeurs[1], valeurs[2], valeurs[3])
     if d[1] == '*':
-        exo.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + d[0] + tex_frac(b) + '\\times' +
+        exo.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + d[0] + tex_frac(b) + _('\\times') +
                   tex_frac(c) + '\\] ')
-        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + d[0] + tex_frac(b) + '\\times' +
+        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + d[0] + tex_frac(b) + _('\\times') +
                   tex_frac(c) + '\\] ')
         e = decomp_prod(b, c)
         if e[2] != '':
             cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + d[0] + tex_decomp_prod(decomp_prod(b,
                       c)) + '\\] ')
     else:
-        exo.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + d[0] + tex_frac(b) + '\\div' +
+        exo.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + d[0] + tex_frac(b) + _('\\div') +
                   tex_frac(c) + '\\] ')
-        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + d[0] + tex_frac(b) + '\\div' +
+        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + d[0] + tex_frac(b) + _('\\div') +
                   tex_frac(c) + '\\] ')
-        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + d[0] + tex_frac(b) + '\\times' +
+        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + d[0] + tex_frac(b) + _('\\times') +
                   tex_frac(inverse(c)) + '\\] ')
         e = decomp_prod(b, inverse(c))
         if e[2] != '':
@@ -234,8 +234,9 @@ def tex_somme_prod(valeurs, exo, cor):  # calcul du type a+b*c, d contenant (+,*
                       inverse(c))) + '\\] ')
     f = produit(e[0], e[1])
     cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + d[0] + tex_frac(f) + '\\] ')
-    cor.append(u'\\[ \\thenocalcul = ' + tex_den_com0(a, f, den_com0(a, f), d[0]) + '\\] ')
-    cor.append(u'\\[ \\thenocalcul = ' + tex_den_com1(den_com1(a, f), d[0]) + '\\] ')
+    if a[1] != f[1]:
+        cor.append(u'\\[ \\thenocalcul = ' + tex_den_com0(a, f, den_com0(a, f), d[0]) + '\\] ')
+        cor.append(u'\\[ \\thenocalcul = ' + tex_den_com1(den_com1(a, f), d[0]) + '\\] ')
     g = somme(a, f, d[0])
     if isinstance(simplifie(g), tuple):
         cor.append(u'\\[ \\thenocalcul = ' + tex_frac(g) + '\\] ')
@@ -247,40 +248,41 @@ def tex_somme_prod(valeurs, exo, cor):  # calcul du type a+b*c, d contenant (+,*
 def tex_prod_parenth(valeurs, exo, cor):  # calcul du type a*(b+c), d contenant (*,+)
     (a, b, c, d) = (valeurs[0], valeurs[1], valeurs[2], valeurs[3])
     if d[0] == '*':
-        exo.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + '\\times\\left(' + tex_frac(b) + d[1] +
+        exo.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + _('\\times\\left(') + tex_frac(b) + d[1] +
                   tex_frac(c) + '\\right) \\] ')
-        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + '\\times\\left(' + tex_frac(b) + d[1] +
+        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + _('\\times\\left(') + tex_frac(b) + d[1] +
                   tex_frac(c) + '\\right) \\] ')
         if isinstance(den_com0(b, c), tuple):
-            cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + '\\times\\left(' + tex_den_com0(b,
+            cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + _('\\times\\left(') + tex_den_com0(b,
                       c, den_com0(b, c), d[1]) + '\\right) \\] ')
-            cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + '\\times\\left(' + tex_den_com1(den_com1(b,
+            cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + _('\\times\\left(') + tex_den_com1(den_com1(b,
                       c), d[1]) + '\\right) \\] ')
-        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + '\\times' + tex_frac(somme(b, c, d[1])) + '\\] ')
+        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + _('\\times') + tex_frac(somme(b, c, d[1])) + '\\] ')
         if isinstance(simplifie(somme(b, c, d[1])), tuple):
             e = simplifie(somme(b, c, d[1]))
-            cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + '\\times' + tex_frac(e) + '\\] ')
+            cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + _('\\times') + tex_frac(e) + '\\] ')
         else:
             e = somme(b, c, d[1])
     else:
-        exo.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + '\\div\\left(' + tex_frac(b) + d[1] +
+        exo.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + _('\\div\\left(') + tex_frac(b) + d[1] +
                   tex_frac(c) + '\\right) \\] ')
-        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + '\\div\\left(' + tex_frac(b) + d[1] +
+        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + _('\\div\\left(') + tex_frac(b) + d[1] +
                   tex_frac(c) + '\\right) \\] ')
         if isinstance(den_com0(b, c), tuple):
-            cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + '\\div\\left(' + tex_den_com0(b,
+            cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + _('\\div\\left(') + tex_den_com0(b,
                       c, den_com0(b, c), d[1]) + '\\right) \\] ')
-            cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + '\\div\\left(' + tex_den_com1(den_com1(b,
+            cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + _('\\div\\left(') + tex_den_com1(den_com1(b,
                       c), d[1]) + '\\right) \\] ')
-        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + '\\div' + tex_frac(somme(b, c, d[1])) + '\\] ')
+        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + _('\\div') + tex_frac(somme(b, c, d[1])) + '\\] ')
         if isinstance(simplifie(somme(b, c, d[1])), tuple):
             e = simplifie(inverse(somme(b, c, d[1])))
-            cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + '\\div' + tex_frac(inverse(e)) + '\\] ')
+            cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + _('\\div') + tex_frac(inverse(e)) + '\\] ')
         else:
             e = inverse(somme(b, c, d[1]))
-        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + '\\times' + tex_frac(e) + '\\] ')
+        cor.append(u'\\[ \\thenocalcul = ' + tex_frac(a) + _('\\times') + tex_frac(e) + '\\] ')
     f = decomp_prod(a, e)
-    cor.append(u'\\[ \\thenocalcul = ' + tex_decomp_prod(f) + '\\] ')
+    if f[2] != '':
+        cor.append(u'\\[ \\thenocalcul = ' + tex_decomp_prod(f) + '\\] ')
     if isinstance(simplifie(produit(f[0], f[1])), tuple):
         cor.append(u'\\[ \\thenocalcul = ' + tex_frac(produit(f[0], f[1])) + '\\] ')
         cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_frac(simplifie(produit(f[0], f[1]))) + '} \\] ')
@@ -302,12 +304,13 @@ def tex_quotient_frac(valeurs, exo, cor):  # effectue le quotient {a+b}/{c+d}, e
 
     #ecrit_tex(f1,'\\cfrac{'+tex_frac(somme(a,b,e[0]))+'}{'+tex_frac(somme(c,d,e[1]))+'}')
 
-    cor.append(u'\\[ \\thenocalcul = ' + tex_frac(somme(a, b, e[0])) + '\\div' + tex_frac(somme(c,
+    cor.append(u'\\[ \\thenocalcul = ' + tex_frac(somme(a, b, e[0])) + _('\\div') + tex_frac(somme(c,
               d, e[1])) + ' \\] ')
-    cor.append(u'\\[ \\thenocalcul = ' + tex_frac(somme(a, b, e[0])) + '\\times' + tex_frac(inverse(somme(c,
+    cor.append(u'\\[ \\thenocalcul = ' + tex_frac(somme(a, b, e[0])) + _('\\times') + tex_frac(inverse(somme(c,
               d, e[1]))) + ' \\] ')
     f = decomp_prod(somme(a, b, e[0]), inverse(somme(c, d, e[1])))
-    cor.append(u'\\[ \\thenocalcul = ' + tex_decomp_prod(f) + ' \\] ')
+    if f[2] != '':
+        cor.append(u'\\[ \\thenocalcul = ' + tex_decomp_prod(f) + '\\] ')
     if isinstance(simplifie(produit(f[0], f[1])), tuple):
         cor.append(u'\\[ \\thenocalcul = ' + tex_frac(produit(f[0], f[1])) + ' \\] ')
         cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_frac(simplifie(produit(f[0], f[1]))) + '} \\] ')
@@ -416,9 +419,9 @@ def tex_fractions():
                     valeurs_prod_parenth,
                     valeurs_quotient_frac)
     ordre_exos = [i for i in range(nb_exos)]
-    exo = ['''\n\\exercice''', u"Calculer les expressions suivantes et donner le résultat sous la forme d'une fraction irréductible."]
+    exo = ['''\n\\exercice''', _(u"Calculer les expressions suivantes et donner le résultat sous la forme d'une fraction irréductible.")]
     exo.append('\\begin{multicols}{3}\\noindent')
-    cor = ['''\\exercice*''', u"Calculer les expressions suivantes et donner le résultat sous la forme d'une fraction irréductible."]
+    cor = ['''\\exercice*''', _(u"Calculer les expressions suivantes et donner le résultat sous la forme d'une fraction irréductible.")]
     cor.append('\\begin{multicols}{3}\\noindent')
     for i in range(nb_exos):
         a = randrange(nb_exos - i)

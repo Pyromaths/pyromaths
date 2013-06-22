@@ -1,0 +1,29 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-22 14:18+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: equations.py:67
+msgid "\\cfrac{%s_{\\times%s}}{%s_{\\times%s}}"
+msgstr ""
+
+#: equations.py:161 equations.py:163
+msgid "R\303\251soudre les suivantes \303\251quations : "
+msgstr ""
+
+#: equations.py:179
+msgid "\\fbox{La solution de cette \303\251quation est $%s$\\,.}"
+msgstr ""
+

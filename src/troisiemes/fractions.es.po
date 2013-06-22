@@ -1,0 +1,104 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2013 ORGANIZATION
+# Administrador <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pyromaths 13.03\n"
+"POT-Creation-Date: 2013-06-15 19:55+Hora de verano romance\n"
+"PO-Revision-Date: 2013-06-15 19:56+0100\n"
+"Last-Translator: Jose Antonio Martinez Chico <jkuato@hotmail.com>\n"
+"Language-Team: Jérôme Ortais <jerome.ortais@pyromaths.org>\n"
+"Language: spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: fractions.py:126
+msgid ""
+"\\cfrac{%s}{%s\\times\\bcancel{%s}}\\times\\cfrac{%s\\times\\bcancel{%s}}{%s}"
+msgstr ""
+"\\cfrac{%s}{%s\\cdot\\bcancel{%s}}\\cdot\\cfrac{%s\\cdot\\bcancel{%s}}{%s}"
+
+#: fractions.py:130
+msgid ""
+"\\cfrac{%s\\times\\cancel{%s}}{%s}\\times\\cfrac{%s}{%s\\times\\cancel{%s}}"
+msgstr ""
+"\\cfrac{%s\\cdot\\cancel{%s}}{%s}\\cdot\\cfrac{%s}{%s\\cdot\\cancel{%s}}"
+
+#: fractions.py:138
+msgid ""
+"\\cfrac{%s\\times\\cancel{%s}}{%s\\times\\bcancel{%s}}\\times\\cfrac{%s"
+"\\times\\bcancel{%s}}{%s\\times\\cancel{%s}}"
+msgstr ""
+"\\cfrac{%s\\cdot\\cancel{%s}}{%s\\cdot\\bcancel{%s}}\\cdot\\cfrac{%s\\cdot"
+"\\bcancel{%s}}{%s\\cdot\\cancel{%s}}"
+
+#: fractions.py:146
+msgid "{{%s}over{%s}}times{{%s}over{%s}}"
+msgstr "{{%s}over{%s}}cdot{{%s}over{%s}}"
+
+#: fractions.py:152
+msgid ""
+"{{%s}over{{%s}times overstrike{%s}}}times{{{%s}times overstrike{%s}}over{%s}}"
+msgstr ""
+"{{%s}over{{%s}cdot overstrike{%s}}}cdot{{{%s}cdot overstrike{%s}}over{%s}}"
+
+#: fractions.py:156
+msgid ""
+"{{{%s}times overstrike{%s}}over{%s}}times{{%s}over{{%s}times overstrike{%s}}}"
+msgstr ""
+"{{{%s}cdot overstrike{%s}}over{%s}}cdot{{%s}over{{%s}cdot overstrike{%s}}}"
+
+#: fractions.py:164
+msgid ""
+"{{{%s}times overstrike{%s}}over{{%s}times overstrike{%s}}}times{{{%s}times "
+"overstrike{%s}}over{{%s}times overstrike{%s}}}"
+msgstr ""
+"{{{%s}cdot overstrike{%s}}over{{%s}cdot overstrike{%s}}}cdot{{{%s}cdot "
+"overstrike{%s}}over{{%s}cdot overstrike{%s}}}"
+
+#: fractions.py:180
+msgid "\\dfrac{%s}{%s}%s\\dfrac{%s_{\\times %s}}{%s_{\\times %s}}"
+msgstr "\\dfrac{%s}{%s}%s\\dfrac{%s_{\\cdot %s}}{%s_{\\cdot %s}}"
+
+#: fractions.py:185
+msgid "\\dfrac{%s_{\\times %s}}{%s_{\\times %s}}%s\\dfrac{%s}{%s}"
+msgstr "\\dfrac{%s_{\\cdot %s}}{%s_{\\cdot %s}}%s\\dfrac{%s}{%s}"
+
+#: fractions.py:199
+msgid ""
+"\\dfrac{%s_{\\times %s}}{%s_{\\times %s}}%s\\dfrac{%s_{\\times %s}}{%s_"
+"{\\times %s}}"
+msgstr ""
+"\\dfrac{%s_{\\cdot %s}}{%s_{\\cdot %s}}%s\\dfrac{%s_{\\cdot %s}}{%s_{\\cdot "
+"%s}}"
+
+#: fractions.py:216 fractions.py:218 fractions.py:229 fractions.py:260
+#: fractions.py:263 fractions.py:282 fractions.py:309
+msgid "\\times"
+msgstr "\\, \\cdot\\, "
+
+#: fractions.py:225 fractions.py:227 fractions.py:276 fractions.py:279
+#: fractions.py:307
+msgid "\\div"
+msgstr "\\, :\\, "
+
+#: fractions.py:251 fractions.py:253 fractions.py:256 fractions.py:258
+msgid "\\times\\left("
+msgstr "\\,\\cdot\\left("
+
+#: fractions.py:267 fractions.py:269 fractions.py:272 fractions.py:274
+msgid "\\div\\left("
+msgstr "\\, :\\left("
+
+#: fractions.py:422 fractions.py:424
+msgid ""
+"Calculer les expressions suivantes et donner le résultat sous la forme d'une "
+"fraction irréductible."
+msgstr ""
+"Calcula las siguientes expresiones y escribe el resultado en forma de su "
+"fracción irreducible."

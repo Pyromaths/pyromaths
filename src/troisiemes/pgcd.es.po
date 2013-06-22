@@ -1,0 +1,141 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2013 ORGANIZATION
+# Administrador <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pyromaths 13.03\n"
+"POT-Creation-Date: 2013-06-06 19:12+Hora de verano romance\n"
+"PO-Revision-Date: 2013-06-16 13:32+0100\n"
+"Last-Translator: Jose Antonio Martinez Chico <jkuato@hotmail.com>\n"
+"Language-Team: Jérôme Ortais <jerome.ortais@pyromaths.org>\n"
+"Language: spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: pgcd.py:32 pgcd.py:34 pgcd.py:37 pgcd.py:39 pgcd.py:42 pgcd.py:44
+#: pgcd.py:50 pgcd.py:56
+msgid "} et \\nombre{"
+msgstr "} y \\nombre{"
+
+#: pgcd.py:33
+msgid ""
+"} se terminent tous les deux par zéro donc ils sont divisibles par 10.\\par\n"
+msgstr "} acaban ambos en cero entonces son divisibles entre 10.\\par\n"
+
+#: pgcd.py:35 pgcd.py:40 pgcd.py:45 pgcd.py:51 pgcd.py:57
+msgid "} ne sont donc pas premiers entre eux"
+msgstr ""
+"} tienen un divisor común (distinto del 1) entonces no son primos entre sí."
+
+#: pgcd.py:38
+msgid "} sont deux nombres pairs donc ils sont divisibles par 2.\\par\n"
+msgstr "} son dos números pares entonces son divisibles entre 2.\\par\n"
+
+#: pgcd.py:43
+msgid ""
+"} se terminent tous les deux par zéro ou cinq donc ils sont divisibles par 5."
+"\\par\n"
+msgstr "} acaban ambos en cero o cinco entonces son divisibles entre 5.\\par\n"
+
+#: pgcd.py:47 pgcd.py:53
+msgid "La somme des chiffres de \\nombre{"
+msgstr "La suma de las cifras de \\nombre{"
+
+#: pgcd.py:48 pgcd.py:54
+msgid "} et celle de \\nombre{"
+msgstr "} y de las de \\nombre{"
+
+#: pgcd.py:49
+msgid "} sont divisibles par neuf donc ils sont divisibles par 9.\\par\n"
+msgstr ""
+"} son divisibles entre nueve entonces los números iniciales son divisibles "
+"entre 9.\\par\n"
+
+#: pgcd.py:55
+msgid "} sont divisibles par trois donc ils sont divisibles par 3.\\par\n"
+msgstr ""
+"} son divisibles entre tres entonces los números iniciales son divisibles "
+"entre 3.\\par\n"
+
+#: pgcd.py:94
+msgid "\\nombre{%s}=\\nombre{%s}\\times\\nombre{%s}+\\nombre{%s}"
+msgstr "\\nombre{%s}=\\nombre{%s}\\cdot\\nombre{%s}+\\nombre{%s}"
+
+#: pgcd.py:96
+msgid ""
+"\\fbox{Donc le \\textsc{pgcd} de \\nombre{%s} et \\nombre{%s} est %s}.\n"
+msgstr ""
+"\\fbox{Entonces el \\textsc{M.C.D.} de \\nombre{%s} y \\nombre{%s} es %s}\n"
+
+#: pgcd.py:102
+msgid ""
+"\\begin{align*}\n"
+"\\cfrac{\\nombre{%s}}{\\nombre{%s}} &= \\cfrac{\\nombre{%s}\\div%s}{\\nombre"
+"{%s}\\div%s}\\\\\n"
+"      &= \\boxed{\\cfrac{\\nombre{%s}}{\\nombre{%s}}}\n"
+"\\end{align*}"
+msgstr ""
+"\\begin{align*}\n"
+"\\cfrac{\\nombre{%s}}{\\nombre{%s}} &= \\cfrac{\\nombre{%s} : %s}{\\nombre"
+"{%s} : %s}\\\\\n"
+"      &= \\boxed{\\cfrac{\\nombre{%s}}{\\nombre{%s}}}\n"
+"\\end{align*}"
+
+#: pgcd.py:110
+msgid ""
+"\\item Les nombres \\nombre{%s} et \\nombre{%s} sont-ils premiers entre "
+"eux ?  "
+msgstr ""
+"\\item ¿Los números \\nombre{%s} y \\nombre{%s} son primos entre sí ?  "
+
+#: pgcd.py:111
+msgid ""
+"\\item Calculer le plus grand commun diviseur (\\textsc{pgcd}) de \\nombre"
+"{%s} et \\nombre{%s}."
+msgstr ""
+"\\item Calcula el máximo común divisor (\\textsc{M.C.D.}) de \\nombre{%s} y "
+"\\nombre{%s}."
+
+#: pgcd.py:112
+msgid ""
+"\\item Simplifier la fraction $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ pour la "
+"rendre irréductible en indiquant la méthode.\n"
+msgstr ""
+"\\item Simplifica la fracción $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ hasta "
+"hallar su irreducible, indicando los divisores usados.\n"
+
+#: pgcd.py:116
+msgid ""
+"\\item Les nombres \\nombre{%s} et \\nombre{%s} sont-ils premiers entre eux ?"
+"\\par "
+msgstr ""
+"\\item ¿Los números \\nombre{%s} y \\nombre{%s} son primos entre sí ?\\par "
+
+#: pgcd.py:118
+msgid ""
+"\\item Calculer le plus grand commun diviseur (\\textsc{pgcd}) de \\nombre"
+"{%s} et \\nombre{%s}.\\par"
+msgstr ""
+"\\item Calcula el máximo común divisor (\\textsc{M.C.D.}) de \\nombre{%s} y "
+"\\nombre{%s}.\\par"
+
+#: pgcd.py:119
+msgid ""
+"On calcule le \\textsc{pgcd} des nombres \\nombre{%s} et \\nombre{%s} en "
+"utilisant l'algorithme d'Euclide."
+msgstr ""
+"Vamos a calcular el \\textsc{M.C.D.} de los números \\nombre{%s} y \\nombre"
+"{%s} utilizando el algoritmo de Euclides."
+
+#: pgcd.py:125
+msgid ""
+"\\item Simplifier la fraction $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ pour la "
+"rendre irréductible en indiquant la méthode."
+msgstr ""
+"\\item Simplifica la fracción $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ hasta "
+"hallar su irreducible, indicando los divisores usados."

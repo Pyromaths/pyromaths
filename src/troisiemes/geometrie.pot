@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-15 20:26+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: geometrie.py:203
+msgid ""
+"Sur la figure ci-dessous, les droites $(%s)\\text{ et }(%s)$ sont parall\303\250les.\\par\n"
+msgstr ""
+
+#: geometrie.py:207
+msgid ""
+"On donne $%s=\\unit[%s]{cm},\\quad %s=\\unit[%s]{cm}, \\quad %s=\\unit[%s]{cm}\\quad\\text{et}\\quad %s~=~\\unit[%s]{cm}$.\\par\n"
+msgstr ""
+
+#: geometrie.py:209
+msgid "Calculer $%s\\text{ et }%s$."
+msgstr ""
+
+#: geometrie.py:214
+msgid ""
+"Les points $%s$,~ $%s$,~ $%s$ et $%s$, $%s$, $%s$ sont align\303\251s et les droites $(%s)$ et $(%s)$ sont parall\303\250les.\\par\n"
+"D'apr\303\250s le \\textbf{th\303\251or\303\250me de Thal\303\250s} :\n"
+"$\\qquad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$\n"
+msgstr ""
+
+#: geometrie.py:260
+msgid ""
+"\\vspace{1ex}\\par\n"
+"De plus $%s=%s%s%s=\\unit[%s]{cm}$"
+msgstr ""
+
+#: geometrie.py:322 geometrie.py:325
+msgid ""
+"$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n"
+msgstr ""
+
+#: geometrie.py:567
+msgid ""
+"Sur la figure ci-contre, on donne $%s=\\unit[%s]{cm}$, $%s=\\unit[%s]{cm}$, $%s=\\unit[%s]{cm}$ et $%s=\\unit[%s]{cm}$.\\par\n"
+"D\303\251montrer que les droites $(%s)$ et $(%s)$ sont parall\303\250les.\n"
+msgstr ""
+
+#: geometrie.py:599
+msgid ""
+"Les points $%s$, $%s$, $%s$~ et $%s$, $%s$, $%s$ sont align\303\251s dans le m\303\252me ordre.\\par\n"
+"De plus $%s=%s%s%s=\\unit[%s]{cm}$.\\par\n"
+msgstr ""
+
+#: geometrie.py:619
+msgid "=\\cfrac{%s_{\\div%s}}{%s_{\\div%s}}"
+msgstr ""
+
+#: geometrie.py:634
+msgid ""
+"$\\left.\n"
+"\\renewcommand{\\arraystretch}{2}\n"
+"\\begin{array}{l}\n"
+"\\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s\\\\\n"
+"    \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s\n"
+"\\end{array}\n"
+"\\right\\rbrace$\n"
+"Donc $\\cfrac{%s}{%s}=\\cfrac{%s}{%s}$\\,.\\par\n"
+"D'apr\303\250s la \\textbf{r\303\251ciproque du th\303\251or\303\250me de Thal\303\250s}, \\fbox{les droites $(%s)$ et $(%s)$ sont parall\303\250les.}\n"
+msgstr ""
+
+#: geometrie.py:681
+msgid "la longueur $%s$"
+msgstr ""
+
+#: geometrie.py:686
+msgid "la mesure de l'angle $%s$"
+msgstr ""
+
+#: geometrie.py:694 geometrie.py:700
+msgid "\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par "
+msgstr ""
+
+#: geometrie.py:696 geometrie.py:702 geometrie.py:716 geometrie.py:721
+msgid ""
+"%s et %s.\\par\n"
+"Calculer %s.\\par\n"
+msgstr ""
+
+#: geometrie.py:707 geometrie.py:725
+msgid "Dans le triangle $%s$ rectangle en $%s$,"
+msgstr ""
+
+#: geometrie.py:714 geometrie.py:719
+msgid "\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par"
+msgstr ""
+
+#: geometrie.py:776
+msgid "\\[ %s=%s%s\\times %s\\simeq\\unit[%s]{cm}"
+msgstr ""
+

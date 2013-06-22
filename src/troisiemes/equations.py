@@ -64,7 +64,7 @@ def tex_quotient1(a, b, c, d):  # renvoie l'ecriture de la mise au meme denomina
     if d == 1:
         return tex_quotient0(a, b, c)
     else:
-        return '\\cfrac{%s_{\\times%s}}{%s_{\\times%s}}' % (developpements.tex_binome((a,
+        return _('\\cfrac{%s_{\\times%s}}{%s_{\\times%s}}') % (developpements.tex_binome((a,
                 b), bpar=1), d, c, d)
 
 
@@ -138,7 +138,7 @@ def tex_equation5(valeurs):  # renvoie l'ecriture reduite de l'equation avec l'i
     texte = developpements.tex_coef((valeurs[4][0] + valeurs[4][2] *
                                     valeurs[3][1]) - valeurs[4][4], 'x')
     texte = texte + '=' + developpements.tex_coef((valeurs[4][5] -
-            valeurs[4][1]) - valeurs[4][3] * valeurs[3][1], '')
+            valeurs[4][1]) - valeurs[4][3] * valeurs[3][1], '', ecu=1)
     return texte
 
 
@@ -149,34 +149,43 @@ def tex_equation6(valeurs):  # renvoie la solution de l'equation
         1:
         texte = ''
     else:
-        texte = 'x=' + fractions.tex_frac(frac)
+        #texte = 'x=' + fractions.tex_frac(frac)    # <-- MIO
+        texte = 'x=\\cfrac{%s}{%s}' % frac
         simpl = fractions.simplifie(frac)
         if isinstance(simpl, tuple):
             texte = texte + '=' + fractions.tex_frac(simpl)
     return texte
 
 
-def equations(exo, cor, valeurs):  #resolution d'une equation
-    exo.append(u"Résoudre l'équation : ")
-    exo.append(u'\\[ ' + tex_equation0(valeurs) + '\\] ')
-    cor.append(u"Résoudre l'équation : ")
-    for i in range(7):
-        exec('cor.append(u\'\\\\[\' + tex_equation' + str(i) + '(valeurs) + \'\\\\] \')')
-        if i == 2 and valeurs[3][1] < 0:
-            cor.append(u'\\[ ' + tex_equation2bis(valeurs) + '\\] ')
-    frac = ((valeurs[4][5] - valeurs[4][1]) - valeurs[4][3] * valeurs[3][1],
-            (valeurs[4][0] + valeurs[4][2] * valeurs[3][1]) - valeurs[4][4])
-    simpl = fractions.simplifie(frac)
-    if isinstance(simpl, tuple):
-        sol = fractions.tex_frac(simpl)
-    else:
-        sol = fractions.tex_frac(frac)
-    cor.append(u'\\fbox{La solution de cette équation est $%s$\\,.}' %
+def equations(exo, cor):  #resolution d'une equation
+    exo.append(_(u"Résoudre les suivantes équations : "))
+    exo.append('\\begin{multicols}{2}\\noindent')
+    cor.append(_(u"Résoudre les suivantes équations : "))
+    cor.append('\\begin{multicols}{2}\\noindent')
+    for j in range(2):
+        vals = valeurs(10)
+        exo.append(u'$$ ' + tex_equation0(vals) + '$$ ')
+        for i in range(7):
+            exec('cor.append(u\'\\\\[\' + tex_equation' + str(i) + '(vals) + \'\\\\] \')')
+            if i == 2 and vals[3][1] < 0:
+                cor.append(u'\\[ ' + tex_equation2bis(vals) + '\\] ')
+        frac = ((vals[4][5] - vals[4][1]) - vals[4][3] * vals[3][1],
+                (vals[4][0] + vals[4][2] * vals[3][1]) - vals[4][4])
+        simpl = fractions.simplifie(frac)
+        if isinstance(simpl, tuple):
+            sol = fractions.tex_frac(simpl)
+        else:
+            sol = fractions.tex_frac(frac)
+        cor.append(_(u'\\fbox{La solution de cette équation est $%s$\\,.}') %
              sol)
+        if j % 2 == 0:
+            exo.append('\\columnbreak\\stepcounter{nocalcul}%')
+            cor.append('\\columnbreak\\stepcounter{nocalcul}%')
+    exo.append('\\end{multicols}')
+    cor.append('\\end{multicols}')
 
 def tex_equations():
-    vals = valeurs(10)
     exo = ['\\exercice']
     cor = ['\\exercice*']
-    equations(exo, cor, vals)
+    equations(exo, cor)
     return (exo, cor)
