@@ -1,0 +1,46 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2013 ORGANIZATION
+# Administrador <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pyromaths 13.03\n"
+"POT-Creation-Date: 2013-06-22 14:07+Hora de verano romance\n"
+"PO-Revision-Date: 2013-06-22 14:45+0100\n"
+"Last-Translator: Jose Antonio Martinez Chico <jkuato@hotmail.com>\n"
+"Language-Team: Jérôme Ortais <jerome.ortais@pyromaths.org>\n"
+"Language: spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: fractions.py:31 fractions.py:33
+msgid "Compléter :"
+msgstr "Completa :"
+
+#: fractions.py:49
+msgid " \\ldots "
+msgstr "\\hspace*{0.5cm}"
+
+#: fractions.py:60
+msgid "\\item $\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}=\\dfrac{%s}{%s}$"
+msgstr "\\item $\\dfrac{%s_{(\\cdot %s)}}{%s_{(\\cdot %s)}}=\\dfrac{%s}{%s}$"
+
+#: fractions.py:63
+msgid "\\item $\\dfrac{%s}{%s}=\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}$"
+msgstr "\\item $\\dfrac{%s}{%s}=\\dfrac{%s_{(\\cdot %s)}}{%s_{(\\cdot %s)}}$"
+
+#: fractions.py:72 fractions.py:75 fractions.py:126 fractions.py:129
+msgid ""
+"Effectuer les calculs suivants et donner le résultat sous la forme d'une "
+"fraction simplifiée :"
+msgstr ""
+"Efectua los siguientes cálculos y escribe el resultado en forma de su "
+"fracción irreducible :"
+
+#: fractions.py:145 fractions.py:147 fractions.py:152
+msgid "\\[ \\thenocalcul = %s \\times %s \\]"
+msgstr "\\[ \\thenocalcul = %s \\cdot %s \\]"

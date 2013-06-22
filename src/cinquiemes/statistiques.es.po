@@ -1,0 +1,733 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2013 ORGANIZATION
+# Administrador <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pyromaths 13.03\n"
+"POT-Creation-Date: 2013-06-22 18:30+Hora de verano romance\n"
+"PO-Revision-Date: 2013-06-22 18:31+0100\n"
+"Last-Translator: Jose Antonio Martinez Chico <jkuato@hotmail.com>\n"
+"Language-Team: Jérôme Ortais <jerome.ortais@pyromaths.org>\n"
+"Language: spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: statistiques.py:49
+msgid "Effectifs"
+msgstr "Recuento"
+
+#: statistiques.py:68 statistiques.py:191
+msgid "Fréquences ( \\% )"
+msgstr "Frecuencia ( \\% )"
+
+#: statistiques.py:106
+msgid "\\rput(0,11.2){\\small Fréquences (\\%)}\n"
+msgstr "\\rput(0,11.2){\\small Frecuencias (\\%)}\n"
+
+#: statistiques.py:199
+msgid ""
+"Comme 10\\% sont représentés par 1cm, il faut diviser chaque fréquence par "
+"10 pour obtenir la longueur ( arrondie au dixième ) du bâton à dessiner :"
+"\\par\n"
+msgstr ""
+"Como el 10\\% está representado por 1cm, hace falta dividir cada frecuencia "
+"entre 10 (redondeando a la décima) para conseguir la altura de la barra del "
+"dibujo :\\par\n"
+
+#: statistiques.py:201
+msgid "Hauteur ( cm )"
+msgstr "Altura ( cm )"
+
+#: statistiques.py:207
+msgid ""
+"Comme il y a $360^{\\circ}$ dans un cercle pour représenter 100\\%, il faut "
+"multiplier chaque fréquence par 3,6 pour connaître son angle ( arrondi au "
+"degré ) de représentation dans le diagramme :\\par\n"
+msgstr ""
+"Como hay $360^{\\circ}$ en un círculo que representa el 100\\%, hace falta "
+"multiplicar cada frecuencia por 3,6 (redondeado a grado) para conocer su "
+"ángulo de representación en el diagrama :\\par\n"
+
+#: statistiques.py:209 statistiques.py:217
+msgid "Angle ( Degrés )"
+msgstr "Ángulo ( Grados )"
+
+#: statistiques.py:215
+msgid ""
+"Comme il y a $180^{\\circ}$ dans un cercle pour représenter 100\\%, il faut "
+"multiplier chaque fréquence par 1,8 pour connaître son angle ( arrondi au "
+"degré ) de représentation dans le diagramme :\\par\n"
+msgstr ""
+"Como hay $180^{\\circ}$ en un semi-círculo que representa el 100\\%, hace "
+"falta multiplicar cada frecuencia por 1,8 (redondeado a grado) para conocer "
+"su ángulo de representación en el diagrama :\\par\n"
+
+#: statistiques.py:248 statistiques.py:249
+msgid "Chiffres"
+msgstr "Cifras"
+
+#: statistiques.py:251 statistiques.py:252
+msgid ""
+"Voici une liste de chiffres choisis au hasard dans les décimales de $\\pi$ :"
+"\\par"
+msgstr ""
+"Se ha escogido al azar una secuencia de las cifras decimales del número $\\pi"
+"$ :\\par"
+
+#: statistiques.py:257 statistiques.py:415
+msgid ""
+"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent "
+"être arrondies au centième."
+msgstr ""
+"\\item Completa la tabla de abajo, sabiendo que las frecuencias deben estar "
+"redondeadas a las centésimas."
+
+#: statistiques.py:258 statistiques.py:416
+msgid ""
+"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent "
+"être arrondies au centième.\\par"
+msgstr ""
+"\\item Completa la tabla de abajo, sabiendo que las frecuencias deben estar "
+"redondeadas a las centésimas.\\par"
+
+#: statistiques.py:262 statistiques.py:419
+msgid ""
+"Chaque effectif se complète en comptant le nombre d'apparition de chaque "
+"chiffre dans la liste de l'énoncé."
+msgstr ""
+"El recuento se completa indicando el número de veces que aparece cada cifra "
+"en la lista del enunciado."
+
+#: statistiques.py:263
+msgid ""
+"Comme les chiffres sont rangés par 20, on voit assez rapidement que le "
+"nombre total de chiffres est de "
+msgstr ""
+"Como las cifras están colocadas de 20 en 20, se ve facilmente que el número "
+"total de cifras es de "
+
+#: statistiques.py:264 statistiques.py:421
+msgid ""
+"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise "
+"par le nombre total de chiffres, puis il ne faut pas oublier d'arrondir au "
+"centième.\\par\n"
+msgstr ""
+"Para el cálculo de las frecuencias, se multiplica la casilla por 100, y se "
+"divide entre el número total de cifras, no olvidando redondear el resultado "
+"a las centésimas.\\par\n"
+
+#: statistiques.py:265 statistiques.py:332 statistiques.py:422
+msgid "\\times 100}{"
+msgstr "\\cdot 100}{"
+
+#: statistiques.py:265 statistiques.py:422
+msgid "Par exemple pour la fréquence du chiffre 1 : $\\dfrac{"
+msgstr "Por ejemplo, la frecuencia de la cifra 1 es : $\\dfrac{"
+
+#: statistiques.py:270
+msgid ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Représenter la répartition des "
+"chiffres dans un diagramme en bâtons avec 1~cm pour 10\\%."
+msgstr ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Representa la frecuencia de las "
+"cifras en un diagrama de barras tomando 1~cm por cada 10\\%."
+
+#: statistiques.py:271
+msgid ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Représenter la répartition des "
+"chiffres dans un diagramme en bâtons avec 1~cm pour 10\\%.\\par"
+msgstr ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Representa la frecuencia de las "
+"cifras en un diagrama de barras tomando 1~cm por cada 10\\%.\\par"
+
+#: statistiques.py:275 statistiques.py:276 statistiques.py:404
+#: statistiques.py:405 statistiques.py:428 statistiques.py:429
+msgid "Valeurs"
+msgstr "Valores"
+
+#: statistiques.py:295
+msgid "Classes de notes"
+msgstr "Notas del curso"
+
+#: statistiques.py:297 statistiques.py:298
+msgid ""
+"Voici un tableau regroupant les notes d'une classe lors d'un contrôle :\\par"
+msgstr ""
+"Se tiene una tabla donde se han agrupado las notas sobre 20 del examen de "
+"una curso :\\par"
+
+#: statistiques.py:304
+msgid "Notes"
+msgstr "Notas"
+
+#: statistiques.py:312 statistiques.py:313
+msgid ""
+"\\item Compléter le tableau ci-dessous afin de regrouper les notes par "
+"classes et effectuer le calcul des fréquences arrondies au centième :\\par"
+msgstr ""
+"\\item Completa la tabla de abajo con las notas del curso y efectua el "
+"cálculo de las frecuencias redondeándolas a las centésimas :\\par"
+
+#: statistiques.py:329
+msgid ""
+"Chaque effectif se complète en comptant le nombre d'apparition de chaque "
+"note dans le tableau de l'énoncé."
+msgstr ""
+"El recuento se completa sumando las notas de la tabla del enunciado que "
+"están dentro de su franja correspondiente."
+
+#: statistiques.py:330
+msgid ""
+"Le nombre de notes du contrôle, qui est aussi le nombre d'élèves, est donc "
+"de "
+msgstr ""
+"El número total de notas del examen, nos dice también el número total de "
+"alumnos del curso, que es de "
+
+#: statistiques.py:331
+msgid ""
+"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise "
+"par le nombre total de notes, puis il ne faut pas oublier d'arrondir au "
+"centième.\\par\n"
+msgstr ""
+"Para el cálculo de las frecuencias, se multiplica la casilla por 100, y se "
+"divide entre el número total de alumnos, no olvidando redondear el resultado "
+"a las centésimas.\\par\n"
+
+#: statistiques.py:332
+msgid ""
+"Par exemple pour la fréquence des notes dans la première classe : $\\dfrac{"
+msgstr ""
+"Por ejemplo, la frecuencia de las notas en el primer grupo es : $\\dfrac{"
+
+#: statistiques.py:344 statistiques.py:345
+msgid " ? Supérieure ou égale à "
+msgstr " ? ¿Y superior o igual a "
+
+#: statistiques.py:344 statistiques.py:345
+msgid ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Combien d'élèves ont une note "
+"strictement inférieure à "
+msgstr ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] ¿Cuántos alumnos tienen una nota "
+"estrictamente inferior a "
+
+#: statistiques.py:375
+msgid ""
+"D'après le tableau rempli précédemment, le nombre d'élèves ayant une note "
+"strictement inférieure à "
+msgstr ""
+"Según la tabla mostrada anteriormente, el número de alumnos que tienen una "
+"nota estrictamente inferior a "
+
+#: statistiques.py:376
+msgid " sont tous les élèves comptés dans les classes situées à gauche de "
+msgstr ""
+" es la suma de las casillas de los alumnos que se encuentran a la izquierda "
+"(incluida esta) de la casilla con el $<$ y "
+
+#: statistiques.py:377
+msgid ". En effectuant le total des élèves de ces classes, on obtient : "
+msgstr ".\\par El total de alumnos que cumplen lo indicado es de : "
+
+#: statistiques.py:377 statistiques.py:380
+msgid " élèves.\\par"
+msgstr " alumnos.\\par"
+
+#: statistiques.py:379
+msgid ""
+"La réponse à la seconde question se fait de même en comptant tous les "
+"effectifs des élèves se situant à droite de "
+msgstr ""
+"La respuesta a la segunda pregunta se hace sumando igualmente todas las "
+"casillas pero las que se hallen a la derecha (incluida esta) de la casilla "
+"con el $\\leq$ y "
+
+#: statistiques.py:380
+msgid "Le résultat est donc : "
+msgstr "El resultado es de : "
+
+#: statistiques.py:407 statistiques.py:408
+msgid ""
+"Voici une liste des résultats obtenus en lançant plusieurs fois un dé à six "
+"faces :\\par"
+msgstr ""
+"Se tiene una lista de los resultados obtenidos al lanzar varias veces un "
+"dado de seis caras :\\par"
+
+#: statistiques.py:420
+msgid ""
+"Comme les chiffres sont rangés par 25, on voit assez rapidement que le "
+"nombre total de chiffres est de "
+msgstr ""
+"Como las cifras están colocadas de 25 en 25, se ve fácilmente que el número "
+"total de cifras es de "
+
+#: statistiques.py:425 statistiques.py:426
+msgid ""
+"\\item Représenter la répartition des chiffres dans un diagramme en bâtons "
+"avec 1cm pour 10\\%.\\par"
+msgstr ""
+"\\item Representa la frecuencia de las cifras en un diagrama de barras "
+"tomando 1~cm por cada 10\\%.\\par"
+
+#: statistiques.py:462
+msgid "circulaire"
+msgstr "circular"
+
+#: statistiques.py:464
+msgid "semi-circulaire"
+msgstr "semi-circular"
+
+#: statistiques.py:471
+msgid "Entre 20 et 40 ans"
+msgstr "Entre 20 y 40 años"
+
+#: statistiques.py:471
+msgid "Entre 40 et 60 ans"
+msgstr "Entre 40 y 60 años"
+
+#: statistiques.py:471
+msgid "Entre 60 et 80 ans"
+msgstr "Entre 60 y 80 años"
+
+#: statistiques.py:471
+msgid "Moins de 20 ans"
+msgstr "Menos de 20 años"
+
+#: statistiques.py:471
+msgid "Plus de 80 ans"
+msgstr "Más de 80 años"
+
+#: statistiques.py:472
+msgid "20 - 40 ans"
+msgstr "20 - 40 años"
+
+#: statistiques.py:472
+msgid "40 - 60 ans"
+msgstr "40 - 60 años"
+
+#: statistiques.py:472
+msgid "60 - 80 ans"
+msgstr "60 - 80 años"
+
+#: statistiques.py:472
+msgid "<20 ans"
+msgstr "<20 años"
+
+#: statistiques.py:472
+msgid ">80 ans"
+msgstr ">80 años"
+
+#: statistiques.py:472
+msgid "Ages"
+msgstr "Años"
+
+#: statistiques.py:479 statistiques.py:480
+msgid ""
+" ci-dessus représente les différentes fréquences des classes d'âges dans une "
+"certaine région.\\par"
+msgstr ""
+" de arriba representa las diferentes frecuencias de los grupos de edad de "
+"una región.\\par"
+
+#: statistiques.py:479 statistiques.py:480 statistiques.py:494
+msgid "Le diagramme "
+msgstr "El diagrama "
+
+#: statistiques.py:483
+msgid "\\item Calculer les fréquences de chaque classe d'âges."
+msgstr "\\item Escribe la frecuencia de cada grupo de edad."
+
+#: statistiques.py:484
+msgid "\\item Calculer les fréquences de chaque classe d'âges.\\par"
+msgstr "\\item Escribe la frecuencia de cada grupo de edad.\\par"
+
+#: statistiques.py:486
+msgid "Classes d'âges"
+msgstr "Grupos de edad"
+
+#: statistiques.py:494
+msgid " est partagé en "
+msgstr " está cortado en "
+
+#: statistiques.py:494
+msgid " parts symbolisées par des lignes grises en pointillés.\\par"
+msgstr " partes indicadas por las líneas discontinuas grises.\\par"
+
+#: statistiques.py:495
+msgid "On en déduit que chacune de ces parts représente $\\dfrac{100}{"
+msgstr "Se deduce que cada una de estas partes representa el $\\dfrac{100}{"
+
+#: statistiques.py:495
+msgid ""
+"\\%$, puis en comptant le nombre de parts dans chaque classe, on obtient le "
+"tableau suivant :\\par"
+msgstr ""
+"\\%$, luego contando el número de partes en cada grupo, se consigue la "
+"siguiente tabla :\\par"
+
+#: statistiques.py:499
+msgid " personnes, calculer les effectifs de chaque classe d'âges."
+msgstr ""
+" personas, realiza una tabla que contenga el número de personas y la "
+"frecuencia de cada grupo de edad."
+
+#: statistiques.py:499
+msgid "\\item Sachant que la population étudiée est composée de "
+msgstr "\\item Sabiendo que la población estudiada está compuesta de "
+
+#: statistiques.py:500
+msgid " personnes, calculer les effectifs de chaque classe d'âges.\\par"
+msgstr ""
+" personas, realiza una tabla que contenga el número de personas y la "
+"frecuencia de cada grupo de edad.\\par"
+
+#: statistiques.py:500
+msgid ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Sachant que la population étudiée "
+"est composée de "
+msgstr ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Sabiendo que la población "
+"estudiada está compuesta de "
+
+#: statistiques.py:502
+msgid " \\% de "
+msgstr " \\% de "
+
+#: statistiques.py:502
+msgid " personnes, on peut calculer l'effectif concerné :\\par"
+msgstr ""
+" personas, puede calcularse el número de personas que forman dicho grupo y "
+"rellenar su casilla correspondiente :\\par"
+
+#: statistiques.py:502
+msgid "Sachant que la classe des moins de vingt ans est composée de "
+msgstr "Sabiendo que el grupo de menos de veinte años está compuesto del "
+
+#: statistiques.py:503
+msgid " \\times "
+msgstr " \\cdot "
+
+#: statistiques.py:504
+msgid ""
+"Avec le même type de calcul, on obtient les effectifs des autres classes, "
+"résumés dans le tableau ci-dessous :"
+msgstr ""
+"Con el mismo tipo de cálculo, se consigue completar las casillas de los "
+"demás grupos.\\par Finalmente, el resultado es la tabla :"
+
+#: statistiques.py:520
+msgid ""
+"\\item Les données du vote du délégué de classe ont été malheureusement "
+"partiellement perdues, mais on a réussi à regrouper les informations du "
+"tableau ci-dessous ( sachant que chaque élève a voté ) :"
+msgstr ""
+"\\item Desgraciadamente se han perdido una parte de los datos de la elección "
+"del delegado de clase y solo se ha logrado recuperar la información de la "
+"tabla de abajo (se sabe además que cada alumno ha votado) :"
+
+#: statistiques.py:521
+msgid ""
+"\\item Les données du vote du délégué de classe ont été malheureusement "
+"partiellement perdues, mais on a réussi à regrouper les informations du "
+"tableau ci-dessous ( sachant que chaque élève a voté ) :\\par"
+msgstr ""
+"\\item Desgraciadamente se han perdido una parte de los datos de la elección "
+"del delegado de clase y solo se ha logrado recuperar la información de la "
+"tabla de abajo (se sabe además que cada alumno ha votado) :\\par"
+
+#: statistiques.py:536
+msgid "Aline"
+msgstr "Alicia"
+
+#: statistiques.py:536
+msgid "Antoine"
+msgstr "Antonio"
+
+#: statistiques.py:536
+msgid "Caroline"
+msgstr "Carolina"
+
+#: statistiques.py:536
+msgid "Céline"
+msgstr "Celia"
+
+#: statistiques.py:536
+msgid "Denise"
+msgstr "Denisse"
+
+#: statistiques.py:536
+msgid "Isabelle"
+msgstr "Isabel"
+
+#: statistiques.py:536
+msgid "Jonathan"
+msgstr "Jonathan"
+
+#: statistiques.py:536
+msgid "Julie"
+msgstr "Julia"
+
+#: statistiques.py:536
+msgid "Karim"
+msgstr "Carlos"
+
+#: statistiques.py:536
+msgid "Léna"
+msgstr "Elena"
+
+#: statistiques.py:536
+msgid "Matteo"
+msgstr "Mateo"
+
+#: statistiques.py:536
+msgid "Muriel"
+msgstr "Manolo"
+
+#: statistiques.py:536
+msgid "Mélanie"
+msgstr "Marta"
+
+#: statistiques.py:536
+msgid "Patrick"
+msgstr "Patricia"
+
+#: statistiques.py:536
+msgid "Rémy"
+msgstr "Juan"
+
+#: statistiques.py:536
+msgid "Sophia"
+msgstr "Sofia"
+
+#: statistiques.py:536
+msgid "Thomas"
+msgstr "Tomás"
+
+#: statistiques.py:536
+msgid "Vincent"
+msgstr "Vicente"
+
+#: statistiques.py:536
+msgid "Yann"
+msgstr "Irene"
+
+#: statistiques.py:538
+msgid "Elève"
+msgstr "Candidatos"
+
+#: statistiques.py:545 statistiques.py:546
+msgid ""
+"Sachant qu'il y a 25 élèves dans la classe, compléter alors le tableau ci-"
+"dessus.\\par"
+msgstr "Sabiendo que hay 25 alumnos en la clase, completa dicha tabla.\\par"
+
+#: statistiques.py:554
+msgid " et on trouve : "
+msgstr ""
+" se multiplica por 25 y se divide entre 100 (simplificado es un cuarto) para "
+"averiguar su número de votantes, es decir, "
+
+#: statistiques.py:554
+msgid ""
+"Comme il y a 25 élèves dans la classe, ce qui représente 100 \\% des votes, "
+"il faut diviser la fréquence connue pour trouver l'effectif d'élèves ayant "
+"voté pour "
+msgstr ""
+"Como hay 25 alumnos en la clase, lo que representa el 100\\% de los votos, a "
+"partir de la frecuencia conocida de "
+
+#: statistiques.py:555 statistiques.py:557
+msgid "$ élève(s) pour "
+msgstr "$ alumno(s) votaron por "
+
+#: statistiques.py:556
+msgid ", il suffit de soustraire à 25 les effectifs connus :\\par"
+msgstr ""
+", basta con restar a 25 el número de votos de los demás candidatos :\\par"
+
+#: statistiques.py:556
+msgid "Ensuite, pour trouver l'effectif d'élèves ayant voté pour "
+msgstr ""
+"Entonces, para completar las casillas de los alumnos que han votado por "
+
+#: statistiques.py:558
+msgid ""
+"Enfin, pour le calcul des fréquences manquantes, il faut multiplier chaque "
+"effectif par 4, ce qui fourni le tableau ci-dessous.\\par"
+msgstr ""
+"Finalmente, para el cálculo de las frecuencias faltantes, hace falta "
+"multiplicar cada casilla de recuento por 100, y dividirla entre el número "
+"total de 25, tal que :\\par"
+
+#: statistiques.py:562 statistiques.py:563
+msgid ""
+"\\item Représenter la répartition des votes dans un diagramme circulaire de "
+"rayon 3 cm.\\par"
+msgstr ""
+"\\item Representa la frecuencia de los votos en un diagrama circular de "
+"radio 3 cm.\\par"
+
+#: statistiques.py:591
+msgid ""
+"\\renewcommand{\\arraystretch}{1.8}\n"
+"        \\item On a demandé aux élèves d'une classe de cinquième combien de "
+"temps par semaine était consacré à leur sport favori.\\par\n"
+"        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Durée t (en h)&  $0 \\le "
+"t < 1$ & $1 \\le t  < 2$ & $2 \\le t  < 3$ & $3 \\le t  < 4$ &  $4 \\le t  < "
+"5$ & $5 \\le t  < 6$ & $6 \\le t  < 7$ \\\\\\hline Effectif & %s & %s & %s & "
+"%s & %s & %s & %s \\\\\\hline \\end{tabular}\\par\n"
+"        À partir de ce tableau, construire un  histogramme pour représenter "
+"ces données.\\par"
+msgstr ""
+"\\renewcommand{\\arraystretch}{1.8}\n"
+"        \\item Se les ha preguntado a los alumnos de una clase de 1º ESO "
+"cuánto tiempo de la semana han dedicado a su deporte favorito.\\par\n"
+"        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Tiempo t (en h)&  $0 \\le "
+"t < 1$ & $1 \\le t  < 2$ & $2 \\le t  < 3$ & $3 \\le t  < 4$ &  $4 \\le t  < "
+"5$ & $5 \\le t  < 6$ & $6 \\le t  < 7$ \\\\\\hline Nº de respuestas & %s & "
+"%s & %s & %s & %s & %s & %s \\\\\\hline \\end{tabular}\\par\n"
+"        A partir de esta tabla, construye un histograma para representar "
+"estos datos.\\par"
+
+#: statistiques.py:596
+msgid ""
+"\\item On a demandé aux élèves quel était leur sport préféré. %s élèves "
+"préfèrent le basket-ball, %s le tennis, %s le football et %s le judo. "
+"Construire un diagramme circulaire représentant cette répartion.\\par"
+msgstr ""
+"\\item Se les ha preguntado a los alumnos cuál es su deporte favorito. %s "
+"alumnos prefieren el baloncesto, %s el tenis, %s el fútbol y %s las artes "
+"marciales. Construye un diagrama de sectores para representar estas "
+"respuestas.\\par"
+
+#: statistiques.py:603
+msgid ""
+"\\begin{minipage}{10cm}\n"
+"    \\begin{pspicture}(0,-1)(8.5,9.5)\n"
+"    \\psaxes[showorigin=false]{->}(7.5,8.5)\n"
+"    \\psset{fillstyle=solid, linewidth=0.5pt}\n"
+"    \\psframe(0,0)(1,%s)\n"
+"    \\psframe(1,0)(2,%s)\n"
+"    \\psframe(2,0)(3,%s)\n"
+"    \\psframe(3,0)(4,%s)\n"
+"    \\psframe(4,0)(5,%s)\n"
+"    \\psframe(5,0)(6,%s)\n"
+"    \\psframe(6,0)(7,%s)\n"
+"    \\rput(-0.2,-0.425){$0$}\n"
+"    \\rput(8.3,0){Durée}\n"
+"    \\rput(0,8.8){Effectif}\n"
+"    \\end{pspicture}\n"
+"    \\end{minipage}\n"
+"    \\begin{minipage}{6cm}\n"
+"    Sur l'axe horizontal, on représente les durées en heures et, sur l'axe "
+"vertical, on représente les effectifs.\n"
+"    \\end{minipage}"
+msgstr ""
+"\\begin{minipage}{10cm}\n"
+"    \\begin{pspicture}(0,-1)(8.5,9.5)\n"
+"    \\psaxes[showorigin=false]{->}(7.5,8.5)\n"
+"    \\psset{fillstyle=solid, linewidth=0.5pt}\n"
+"    \\psframe(0,0)(1,%s)\n"
+"    \\psframe(1,0)(2,%s)\n"
+"    \\psframe(2,0)(3,%s)\n"
+"    \\psframe(3,0)(4,%s)\n"
+"    \\psframe(4,0)(5,%s)\n"
+"    \\psframe(5,0)(6,%s)\n"
+"    \\psframe(6,0)(7,%s)\n"
+"    \\rput(-0.2,-0.425){$0$}\n"
+"    \\rput(8.3,0){Tiempo}\n"
+"    \\rput(0,8.8){Nº de respuestas}\n"
+"    \\end{pspicture}\n"
+"    \\end{minipage}\n"
+"    \\begin{minipage}{6cm}\n"
+"    Sobre el eje horizontal, se representa el tiempo en horas y, sobre el "
+"eje vertical, se representa el nº de respuestas.\n"
+"    \\end{minipage}"
+
+#: statistiques.py:623
+msgid ""
+"L'effectif total est égal à $ %s + %s + %s + %s = 30$. La mesure d'angle "
+"d'un secteur circulaire est proportionnelle à l'effectif du sport qu'il "
+"représente. Le coefficient de proportionnalité est égal au quotient de "
+"l'effectif total par 360\\degre c'est à dire $360 \\div 30=12$.\\par"
+msgstr ""
+"El nº de respuestas totales es de $ %s + %s + %s + %s = 30$. La medida del "
+"ángulo de un sector circular es proporcional al número dados de respuestas "
+"del deporte que representa. El coeficiente de proporcionalidad es igual al "
+"cociente de 360\\degre entre el número total de respuestas, es decir, $360 : "
+"30=12$.\\par"
+
+#: statistiques.py:624
+msgid ""
+"\\renewcommand\\tabcolsep{10pt}\n"
+"    \\begin{tabular}{|l|c|c|c|c|c|c}\n"
+"    \\cline{1-6}\n"
+"    Sport favori  & Basket-ball & Tennis & Football & Judo & Total &\\rnode"
+"{plan1}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    Effectif & %s & %s & %s & %s & 30 &\\rnode{plan1}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    Mesure (en degré)  & \\bf%s & \\bf%s & \\bf%s & \\bf%s & 360 &\\rnode"
+"{plan2}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    \\end{tabular}\n"
+"    \\ncbar{->}{plan1}{plan2}\\Aput{$\\times 12$}\\par\n"
+"    \\begin{minipage}{6cm}\n"
+"    En utilisant les mesures d'angles obtenues dans le tableau de "
+"proportionnalité, on trace le diagramme circulaire.\n"
+"    \\end{minipage}"
+msgstr ""
+"\\renewcommand\\tabcolsep{10pt}\n"
+"    \\begin{tabular}{|l|c|c|c|c|c|c}\n"
+"    \\cline{1-6}\n"
+"    Deporte favorito & Baloncesto & Tenis & Fútbol & Artes Marciales & Total "
+"&\\rnode{plan1}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    Nº de respuestas & %s & %s & %s & %s & 30 &\\rnode{plan1}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    Medida (en grados)  & \\bf%s & \\bf%s & \\bf%s & \\bf%s & 360 &\\rnode"
+"{plan2}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    \\end{tabular}\n"
+"    \\ncbar{->}{plan1}{plan2}\\Aput{$\\times 12$}\\par\n"
+"    \\begin{minipage}{6cm}\n"
+"    Utilizando las medidas de los ángulos conseguidos en el cuadro de "
+"proporcionalidad, se traza el diagrama de sectores.\n"
+"    \\end{minipage}"
+
+#: statistiques.py:638
+msgid ""
+"\\begin{minipage}{13cm}\n"
+"    \\psset{unit=3cm,fillstyle=solid}\n"
+"    \\pspicture(-1.5,-1)(1,1.5)\n"
+"    \\pswedge[fillcolor=Bisque]{1}{0}{%s}\n"
+"    \\pswedge[fillcolor=LightSalmon]{1}{%s}{%s}\n"
+"    \\pswedge[fillcolor=Chocolate]{1}{%s}{%s}\n"
+"    \\pswedge{1}{%s}{360}\n"
+"    \\rput(.6;%s){Basket}\n"
+"    \\rput(.6;%s){Tennis}\n"
+"    \\rput(.6;%s){\\white Football}\n"
+"    \\rput(.6;%s){Judo}\n"
+"    \\endpspicture\n"
+"    \\end{minipage}"
+msgstr ""
+"\\begin{minipage}{13cm}\n"
+"    \\psset{unit=3cm,fillstyle=solid}\n"
+"    \\pspicture(-1.5,-1)(1,1.5)\n"
+"    \\pswedge[fillcolor=Bisque]{1}{0}{%s}\n"
+"    \\pswedge[fillcolor=LightSalmon]{1}{%s}{%s}\n"
+"    \\pswedge[fillcolor=Chocolate]{1}{%s}{%s}\n"
+"    \\pswedge{1}{%s}{360}\n"
+"    \\rput(.6;%s){Baloncesto}\n"
+"    \\rput(.6;%s){Tenis}\n"
+"    \\rput(.6;%s){\\white Fútbol}\n"
+"    \\rput(.6;%s){Artes Marciales}\n"
+"    \\endpspicture\n"
+"    \\end{minipage}"
