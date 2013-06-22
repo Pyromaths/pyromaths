@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-09 11:57+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: CercleTrigo.py:211
+msgid "\\item Convertir les cinq mesures suivantes en radians : %s, %s, %s, %s et %s."
+msgstr ""
+
+#: CercleTrigo.py:212
+msgid "\\item Convertir les cinq mesures suivantes en degr\303\251s : %s, %s, %s, %s et %s~rad."
+msgstr ""
+
+#: CercleTrigo.py:213
+msgid "\\item D\303\251terminer les mesures principales des angles suivants en radians : %s, %s, %s, %s et %s~rad."
+msgstr ""
+
+#: CercleTrigo.py:214 CercleTrigo.py:243
+msgid "\\item Des angles ont \303\251t\303\251 plac\303\251s sur le cercle trigonom\303\251trique ci-dessous, repr\303\251sent\303\251s en rouge par les points $M_0$, $M_1$, $M_2$ et $M_3$. Lire leurs mesures principales en radians"
+msgstr ""
+
+#: CercleTrigo.py:215 CercleTrigo.py:244
+msgid "( les lignes vertes, grises et bleues repr\303\251sentent des angles multiples de $\\dfrac{\\pi}{3}$, de $\\dfrac{\\pi}{4}$ et de $\\dfrac{\\pi}{5}$ ).\\par"
+msgstr ""
+
+#: CercleTrigo.py:217 CercleTrigo.py:250
+msgid "\\item Placer les angles suivants sur le cercle trigonom\303\251trique : %s, %s, %s et %s~rad.\\par"
+msgstr ""
+
+#: CercleTrigo.py:222
+msgid "\\item Convertir les cinq mesures suivantes en radians : %s, %s, %s, %s et %s.\\par"
+msgstr ""
+
+#: CercleTrigo.py:224
+msgid "La conversion est en fait une simple r\303\250gle de proportionnalit\303\251 : il faut multiplier par $\\dfrac{\\pi}{180}$.\\par"
+msgstr ""
+
+#: CercleTrigo.py:225
+msgid "Par exemple pour la premi\303\250re mesure, on obtient avec simplification : $"
+msgstr ""
+
+#: CercleTrigo.py:225
+msgid "\\times\\dfrac{\\pi}{180}$ = "
+msgstr ""
+
+#: CercleTrigo.py:226 CercleTrigo.py:241
+msgid "De m\303\252me pour les autres mesures, on trouve alors respectivement : %s~rad, %s~rad, %s~rad, %s~rad et %s~rad."
+msgstr ""
+
+#: CercleTrigo.py:228
+msgid "\\item Convertir les cinq mesures suivantes en degr\303\251s : %s, %s, %s, %s et %s~rad.\\par"
+msgstr ""
+
+#: CercleTrigo.py:230
+msgid "On effectue alors la proportionnalit\303\251 inverse : il faut multiplier par $\\dfrac{180}{\\pi}$.\\par"
+msgstr ""
+
+#: CercleTrigo.py:231
+msgid "Apr\303\250s simplification, voici les r\303\251sultats : %s\\degres, %s\\degres, %s\\degres, %s\\degres et %s\\degres."
+msgstr ""
+
+#: CercleTrigo.py:233
+msgid "\\item D\303\251terminer les mesures principales des angles suivants en radians : %s, %s, %s, %s et %s~rad.\\par"
+msgstr ""
+
+#: CercleTrigo.py:238
+msgid "Une mesure d'angle en radians est d\303\251finie modulo $2\\pi$, c'est-\303\240-dire que l'ajout ou la suppression d'un tour ( qui vaut $2\\pi$ ou 360\\degres ) ne change pas un angle.\\par"
+msgstr ""
+
+#: CercleTrigo.py:239
+msgid "Concr\303\250tement, avec le premier angle de la question, on remarque que :\\par"
+msgstr ""
+
+#: CercleTrigo.py:246 CercleTrigo.py:252
+msgid "Les r\303\251ponses sont directement donn\303\251es sur le cercle trigonom\303\251trique ci-dessous :\\par"
+msgstr ""
+
+#: CercleTrigo.py:249
+msgid "Les points $M_0$, $M_1$, $M_2$ et $M_3$ d\303\251finissent alors respectivement les angles %s, %s, %s et %s~rad."
+msgstr ""
+
+#: CercleTrigo.py:255
+msgid "Ajoutons une simple remarque pour la derni\303\250re mesure, qui n'est pas principale : il faut effectuer en premier lieu une simplification, comme \303\240 la question 3. On obtient alors :\\par"
+msgstr ""
+

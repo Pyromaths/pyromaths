@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-09 14:09+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: Vecteurs.py:225 Vecteurs.py:226
+msgid "On se place dans un rep\303\250re orthonorm\303\251 et on consid\303\250re les vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$ ci-dessous."
+msgstr ""
+
+#: Vecteurs.py:231 Vecteurs.py:232
+msgid "\\item Lire les coordonn\303\251es de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$."
+msgstr ""
+
+#: Vecteurs.py:235
+msgid "Un petit rappel : l'abscisse d'un vecteur est la diff\303\251rence d'abscisse entre le fin et le d\303\251but du vecteur.                  Concernant le vecteur $\\overrightarrow{u}$, son abscisse est $"
+msgstr ""
+
+#: Vecteurs.py:236
+msgid "$.                  On lit \303\251galement son ordonn\303\251e : $"
+msgstr ""
+
+#: Vecteurs.py:237
+msgid "$.                  Donc les coordonn\303\251es de $\\overrightarrow{u}$ sont $("
+msgstr ""
+
+#: Vecteurs.py:238
+msgid " )$.                  Des pointill\303\251s ont \303\251t\303\251 ajout\303\251s sur la figure pour faciliter la lecture des coordonn\303\251es."
+msgstr ""
+
+#: Vecteurs.py:240
+msgid " )$                  et les coordonn\303\251es de $\\overrightarrow{w}$ sont $("
+msgstr ""
+
+#: Vecteurs.py:240
+msgid "De m\303\252me, les coordonn\303\251es de $\\overrightarrow{v}$ sont $("
+msgstr ""
+
+#: Vecteurs.py:243 Vecteurs.py:244
+msgid "\\item Placer un point B de sorte que le vecteur $\\overrightarrow{AB}$ soit \303\251gal \303\240 $"
+msgstr ""
+
+#: Vecteurs.py:243 Vecteurs.py:244 Vecteurs.py:247
+msgid " \\times \\overrightarrow{"
+msgstr ""
+
+#: Vecteurs.py:247
+msgid "Le plus simple pour r\303\251pondre \303\240 cette question est de calculer les coordonn\303\251es du vecteur $"
+msgstr ""
+
+#: Vecteurs.py:248
+msgid "$, ce qui donne comme r\303\251sultat $("
+msgstr ""
+
+#: Vecteurs.py:248
+msgid "Cela se fait en multipliant les coordonn\303\251es de $\\overrightarrow{"
+msgstr ""
+
+#: Vecteurs.py:248
+msgid "}$ par $"
+msgstr ""
+
+#: Vecteurs.py:249
+msgid "En partant du point A et en respectant ces coordonn\303\251es, on dessine un vecteur (en bleu sur la figure ci-dessus) qui indique l'emplacement du point B."
+msgstr ""
+
+#: Vecteurs.py:251 Vecteurs.py:252
+msgid "\\item Calculer les normes de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$."
+msgstr ""
+
+#: Vecteurs.py:272
+msgid "De la m\303\252me mani\303\250re, on obtient :"
+msgstr ""
+
+#: Vecteurs.py:275
+msgid " et \\par"
+msgstr ""
+
+#: Vecteurs.py:279 Vecteurs.py:281
+msgid "\\item Dessiner des repr\303\251sentants des vecteurs $\\overrightarrow{u}+\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{w}$                  et $\\overrightarrow{v}+\\overrightarrow{w}$."
+msgstr ""
+
+#: Vecteurs.py:285
+msgid "Pour dessiner les sommes ou diff\303\251rences de vecteurs, il faut les mettre \"bouts \303\240 bouts\",                  comme sur les figures qui suivent :\\par"
+msgstr ""
+

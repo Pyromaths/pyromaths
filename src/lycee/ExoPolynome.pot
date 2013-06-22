@@ -1,0 +1,321 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-09 12:30+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: ExoPolynome.py:29 ExoPolynome.py:30
+msgid "R\303\251soudre les \303\251quations suivantes :"
+msgstr ""
+
+#: ExoPolynome.py:82
+msgid "Factoriser les polyn\303\264mes suivants :"
+msgstr ""
+
+#: ExoPolynome.py:93
+msgid "\\item Factoriser  $%s(%s)=%s$ \303\240 l'aide d'une identit\303\251 remarquable."
+msgstr ""
+
+#: ExoPolynome.py:94
+msgid "\\item Factoriser $%s(%s)=%s$"
+msgstr ""
+
+#: ExoPolynome.py:110 ExoPolynome.py:122 ExoPolynome.py:137
+msgid "\\item Factoriser $%s(%s)=%s$\\par"
+msgstr ""
+
+#: ExoPolynome.py:216
+msgid "\\item \303\211tudier le signe du polyn\303\264me $%s=%s$ sur $I=%s$."
+msgstr ""
+
+#: ExoPolynome.py:217
+msgid "\\item \303\211tudier le signe du polyn\303\264me $%s=%s$ sur $I=%s$.\\par"
+msgstr ""
+
+#: ExoPolynome.py:285 ExoPolynome.py:374
+msgid "%s\\times%s-%s\\times%s"
+msgstr ""
+
+#: ExoPolynome.py:292 ExoPolynome.py:294
+msgid "\\item On consid\303\250re la fonction $%s$ d\303\251finie sur $I=[%s~;~%s]$ par $%s(%s)=\\dfrac{%s}{%s}$."
+msgstr ""
+
+#: ExoPolynome.py:297 ExoPolynome.py:298
+msgid "\\item Justifier que $%s$ est d\303\251finie et d\303\251rivable sur $I$."
+msgstr ""
+
+#: ExoPolynome.py:299
+msgid " Pour d\303\251terminer la valeur interdite, on doit r\303\251soudre $%s=0$."
+msgstr ""
+
+#: ExoPolynome.py:314
+msgid "Or $%s$ n'est pas dans l'intervalle $[%s~;~%s]$ et comme $%s$ est un quotient de polyn\303\264mes, alors $%s$ est d\303\251finie et d\303\251rivable sur $I$."
+msgstr ""
+
+#: ExoPolynome.py:316 ExoPolynome.py:318
+msgid "\\item D\303\251terminer $%s'(%s)$ pour tout $%s\\in[%s~;~%s]$."
+msgstr ""
+
+#: ExoPolynome.py:321
+msgid "\\item En d\303\251duire le sens de variations de $%s$ sur $I$."
+msgstr ""
+
+#: ExoPolynome.py:322
+msgid "\\item En d\303\251duire le sens de variations de $%s$ sur $I$.\\par"
+msgstr ""
+
+#: ExoPolynome.py:324 ExoPolynome.py:448
+msgid " Comme $%s$ est un carr\303\251, il est toujours positif.\\\\"
+msgstr ""
+
+#: ExoPolynome.py:328 ExoPolynome.py:452
+msgid " De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient "
+msgstr ""
+
+#: ExoPolynome.py:336 ExoPolynome.py:460
+msgid " De plus, $%s>0$ donc pour tout $%s$ de $I$, $%s'(%s)>0$."
+msgstr ""
+
+#: ExoPolynome.py:344 ExoPolynome.py:468
+msgid " Je ne sais pas faire avec un tel num\303\251rateur $%s$."
+msgstr ""
+
+#: ExoPolynome.py:383 ExoPolynome.py:385
+msgid "\\item On consid\303\250re la fonction $%s$ d\303\251finie  par $%s(%s)=\\dfrac{%s}{%s}$."
+msgstr ""
+
+#: ExoPolynome.py:388
+msgid "\\item D\303\251terminer l'ensemble de d\303\251finition $\\mathcal{D}_{%s}$ de $%s$."
+msgstr ""
+
+#: ExoPolynome.py:389
+msgid "\\item D\303\251terminer l'ensemble de d\303\251finition $\\mathcal{D}_{%s}$ de $%s$.\\par"
+msgstr ""
+
+#: ExoPolynome.py:390
+msgid " La fonction rationnelle $%s$ est d\303\251finie et d\303\251rivable en $%s$ si $%s\\neq0$."
+msgstr ""
+
+#: ExoPolynome.py:397
+msgid "On en d\303\251duit que $\\mathcal{D}_{%s}=\\mathcal{D'}_{%s}=]-\\infty~;~%s[\\cup]%s~;~+\\infty[$."
+msgstr ""
+
+#: ExoPolynome.py:399 ExoPolynome.py:401
+msgid "\\item D\303\251terminer $%s'(%s)$ pour tout $%s\\in\\mathcal{D'}_{%s}$."
+msgstr ""
+
+#: ExoPolynome.py:404 ExoPolynome.py:405
+msgid "\\item D\303\251terminer les limites de $%s$ aux bornes de $\\mathcal{D}_{%s}$."
+msgstr ""
+
+#: ExoPolynome.py:422
+msgid "Pour $%s=%s$, on a $%s=%s"
+msgstr ""
+
+#: ExoPolynome.py:435
+msgid "De plus, $%s>0$ si $%s<%s$"
+msgstr ""
+
+#: ExoPolynome.py:436
+msgid "et  $%s<0$ si $%s>%s$.\\\\"
+msgstr ""
+
+#: ExoPolynome.py:440
+msgid "De plus, $%s<0$ si $%s<%s$"
+msgstr ""
+
+#: ExoPolynome.py:441
+msgid "et  $%s>0$ si $%s>%s$.\\\\"
+msgstr ""
+
+#: ExoPolynome.py:445
+msgid "\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$."
+msgstr ""
+
+#: ExoPolynome.py:446
+msgid "\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$.\\par"
+msgstr ""
+
+#: ExoPolynome.py:504 ExoPolynome.py:505
+msgid "\\item \303\211tudier le sens de variations de $%s$ d\303\251finie par $%s(x)=%s$ sur $%s$."
+msgstr ""
+
+#: ExoPolynome.py:508
+msgid "Je dois \303\251tudier le signe de $%s'(%s)$ qui est un polyn\303\264me du second degr\303\251.\\par"
+msgstr ""
+
+#: ExoPolynome.py:520
+msgid "Donc la fonction polyn\303\264miale $%s$ est d\303\251croissante sur $%s$."
+msgstr ""
+
+#: ExoPolynome.py:522
+msgid "Donc la fonction polyn\303\264miale $%s$ est croissante sur $%s$."
+msgstr ""
+
+#: ExoPolynome.py:524
+msgid "On obtient ainsi le tableau de variation de $%s$."
+msgstr ""
+
+#: ExoPolynome.py:574
+msgid "Comme $\\Delta <0$, $%s(%s)$ ne s'annule pas et est toujours du signe de $a$"
+msgstr ""
+
+#: ExoPolynome.py:575
+msgid "Ainsi "
+msgstr ""
+
+#: ExoPolynome.py:581
+msgid "Comme $\\Delta =0$, $%s(%s)$ s'annule une seule fois pour $%s_0=%s$ et est toujours du signe de $a$.\\par"
+msgstr ""
+
+#: ExoPolynome.py:592
+msgid "Or $%s$ n'est pas dans l'intervalle $%s$ donc "
+msgstr ""
+
+#: ExoPolynome.py:607
+msgid "Comme $\\Delta >0$, $%s(%s)$ est du signe de $-a$ entre les racines."
+msgstr ""
+
+#: ExoPolynome.py:650
+msgid "\\par Or $%s$ et $%s$ ne sont pas dans $%s$."
+msgstr ""
+
+#: ExoPolynome.py:653 ExoPolynome.py:655
+msgid "\\par Or $%s$ n'est pas dans $%s$."
+msgstr ""
+
+#: ExoPolynome.py:656
+msgid "Ainsi"
+msgstr ""
+
+#: ExoPolynome.py:690
+msgid "%s \\times\\big[ %s \\big]"
+msgstr ""
+
+#: ExoPolynome.py:691
+msgid "%s\\times \\big["
+msgstr ""
+
+#: ExoPolynome.py:700
+msgid "-2 \\times "
+msgstr ""
+
+#: ExoPolynome.py:702
+msgid "+2 \\times "
+msgstr ""
+
+#: ExoPolynome.py:708
+msgid " \\times %s +"
+msgstr ""
+
+#: ExoPolynome.py:738 ExoPolynome.py:807
+msgid "\\dfrac{-%s}{2\\times %s}"
+msgstr ""
+
+#: ExoPolynome.py:764
+msgid "\\dfrac{-%s-\\sqrt{%s}}{2\\times %s}"
+msgstr ""
+
+#: ExoPolynome.py:765
+msgid "\\dfrac{-%s+\\sqrt{%s}}{2\\times %s}"
+msgstr ""
+
+#: ExoPolynome.py:838
+msgid "\\item Soit $%s =%s $"
+msgstr ""
+
+#: ExoPolynome.py:839
+msgid "\\item Soit $%s=%s $"
+msgstr ""
+
+#: ExoPolynome.py:846
+msgid "\\item V\303\251rifier si $%s $ poss\303\250de une racine \303\251vidente."
+msgstr ""
+
+#: ExoPolynome.py:848
+msgid "\\item V\303\251rifier que $%s$ est une racine de $%s$."
+msgstr ""
+
+#: ExoPolynome.py:849
+msgid "\\item Factoriser $%s $."
+msgstr ""
+
+#: ExoPolynome.py:857
+msgid "On remarque que $%s$ peut se factoriser par $%s$ et $%s=%s\\left(%s\\right)$"
+msgstr ""
+
+#: ExoPolynome.py:859
+msgid "On remarque que $%s$ peut se factoriser par $%s^2$ et $%s=%s^2\\left(%s\\right)$"
+msgstr ""
+
+#: ExoPolynome.py:865
+msgid "Comme $%s(%s)=0$, on peut diviser $%s$ par $%s$"
+msgstr ""
+
+#: ExoPolynome.py:868
+msgid "\\item On doit maintenant factoriser le polynome $%s_2=%s$\\\\"
+msgstr ""
+
+#: ExoPolynome.py:872
+msgid "On en conclue donc que $%s="
+msgstr ""
+
+#: ExoPolynome.py:884
+msgid "%s\\times%s$"
+msgstr ""
+
+#: ExoPolynome.py:887
+msgid "%s\\times{\\left(%s\\right)}^2$"
+msgstr ""
+
+#: ExoPolynome.py:909
+msgid "On ne peut pas factoriser $%s(%s)$."
+msgstr ""
+
+#: ExoPolynome.py:911 ExoPolynome.py:922
+msgid "On peut donc \303\251crire "
+msgstr ""
+
+#: ExoPolynome.py:916 ExoPolynome.py:927
+msgid "%s \\times "
+msgstr ""
+
+#: ExoPolynome.py:938
+msgid "Je calcule $\\Delta=%s^2-4\\times %s\\times %s=%s$"
+msgstr ""
+
+#: ExoPolynome.py:940
+msgid " et $%s=%s$.\\par"
+msgstr ""
+
+#: ExoPolynome.py:945
+msgid "Comme $\\Delta <0$, $%s(%s)$ n'a pas de racines."
+msgstr ""
+
+#: ExoPolynome.py:947
+msgid "Comme $\\Delta=0$, $%s(%s)$ a une seule racine $%s_0=%s=%s$.\\par"
+msgstr ""
+
+#: ExoPolynome.py:950
+msgid "Comme $\\Delta>0$, $%s(%s)$ a deux racines :"
+msgstr ""
+
+#: ExoPolynome.py:972
+msgid "Les racines de $%s$ sont $%s_1=%s$ et $%s_2=%s$.\\par"
+msgstr ""
+
+#: ExoPolynome.py:975
+msgid "Les racines de $%s$ sont $%s_1=%s=%s$ et $%s_2=%s=%s$."
+msgstr ""
+

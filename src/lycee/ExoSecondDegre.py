@@ -10,9 +10,9 @@ def exo_second_degre():
     """Créer une exercice comprenant des équations et inéquations du second degré. PAS FINI."""
     exo = "\\exercice\n\
            \\begin{multicols}{2}\n\
-           \\noindent "+ u"Question 1 : Chercher les racines des polynômes suivants :\\par\n"
+           \\noindent "+ _(u"Question 1 : Chercher les racines des polynômes suivants :\\par\n")
     cor = "\\exercice*\n\
-           \\begin{multicols}{2}\n\ \\noindent "+ u"Question 1 : Chercher les racines des polynômes suivants :\\par\n"
+           \\begin{multicols}{2}\n\ \\noindent "+ _(u"Question 1 : Chercher les racines des polynômes suivants :\\par\n")
 
     ## Equations
     pol1 = choix_coeffs(False, 2, True)
@@ -42,11 +42,11 @@ def exo_second_degre():
     cor+="\\par c)$" + pol3[1].print_signe("=")+"$\n"
     cor+="\\par d)$" + pol4[1].print_signe("=")+"$\n"
 
-    cor+="\\par a) On calcule le discriminant : $\\Delta = " + str(pol1[1].delta) + "$.\n"
-    cor+="\\par Comme le discrimimant est $" + pol1[1].signedelta + u"$, on en déduit que ce polynôme possède $" + str(pol1[1].nbrac) + "$ racines."
+    cor+=_("\\par a) On calcule le discriminant : $\\Delta = ") + str(pol1[1].delta) + "$.\n"
+    cor+=_("\\par Comme le discrimimant est $") + pol1[1].signedelta + _(u"$, on en déduit que ce polynôme possède $") + str(pol1[1].nbrac) + _("$ racines.")
 
-    exo+=u"\\par Question 2 : Résoudre les inéquations suivantes : "
-    cor+=u"\\par Question 2 : Résoudre les inéquations suivantes : "
+    exo+=_(u"\\par Question 2 : Résoudre les inéquations suivantes : ")
+    cor+=_(u"\\par Question 2 : Résoudre les inéquations suivantes : ")
 
     exo+="\\par a)$" + pol5[1].print_signe("\\le")+"$\n"
     exo+="\\par b)$" + pol6[1].print_signe("\\ge")+"$\n"
@@ -58,11 +58,11 @@ def exo_second_degre():
     cor+="\\par c)$" + pol7[1].print_signe(">")+"$\n"
     cor+="\\par d)$" + pol8[1].print_signe("<")+"$\n"
 
-    exo+="\\par Question 3 : Trouver deux nombres sachant que leur somme est " + str(pol9[1].b) + " et leur produit " + str(pol9[1].c) + ".\n"
-    cor+="\\par Question 3 : Trouver deux nombres sachant que leur somme est " + str(pol9[1].b) + " et leur produit " + str(pol9[1].c) + ".\n"
+    exo+=_("\\par Question 3 : Trouver deux nombres sachant que leur somme est ") + str(pol9[1].b) + _(" et leur produit ") + str(pol9[1].c) + ".\n"
+    cor+=_("\\par Question 3 : Trouver deux nombres sachant que leur somme est ") + str(pol9[1].b) + _(" et leur produit ") + str(pol9[1].c) + ".\n"
 
-    exo+=u"\\par Question 4 : Trouver les dimensions d'un rectangle, sachant que son périmètre est " + str(pol9[1].b) + " et son aire " + str(pol9[1].c) + "."
-    cor+=u"\\par Question 4 : Trouver les dimensions d'un rectangle, sachant que son périmètre est " + str(pol9[1].b) + " et son aire " + str(pol9[1].c) + "."
+    exo+=_(u"\\par Question 4 : Trouver les dimensions d'un rectangle, sachant que son périmètre est ") + str(pol9[1].b) + _(" et son aire ") + str(pol9[1].c) + "."
+    cor+=_(u"\\par Question 4 : Trouver les dimensions d'un rectangle, sachant que son périmètre est ") + str(pol9[1].b) + _(" et son aire ") + str(pol9[1].c) + "."
 
     exo+="\\end{multicols}\n"
     cor+="\\end{multicols}\n"
