@@ -32,9 +32,9 @@ def nodesep(ligne):
     @type ligne: string
     """
 
-    if ligne == 'une droite':
+    if ligne == _('une droite'):
         retour = ['-6', '-6']
-    elif ligne == 'une demi-droite':
+    elif ligne == _('une demi-droite'):
         retour = ['0', '-6']
     else:
         retour = ['0', '0']
@@ -62,7 +62,7 @@ def choix_ligne(n):
     @type n: interger
     """
 
-    lignes = ['une droite', 'une demi-droite', 'un segment']
+    lignes = [_('une droite'), _('une demi-droite'), _('un segment')]
     (liste_lignes, retour) = ([], [])
     for i in range((n - 1) // len(lignes) + 1):
         liste_lignes.extend(lignes)
@@ -78,9 +78,9 @@ def symboles(ligne):
     @type ligne: string
     """
 
-    if ligne == 'une droite':
+    if ligne == _('une droite'):
         retour = ['(', ')']
-    elif ligne == 'une demi-droite':
+    elif ligne == _('une demi-droite'):
         retour = ['[', ')']
     else:
         retour = ['[', ']']
@@ -118,15 +118,15 @@ def prepare_tuple(lpoints, ligne):
 
     alea = random.randrange(3)
     if alea > 1:
-        retour_exo = ['\\ldots', '\\ldots', '\\ldots', '\\ldots',
-                      '\\dotfill']
+        retour_exo = [_('\\ldots'), _('\\ldots'), _('\\ldots'), _('\\ldots'),
+                      _('\\dotfill')]
     elif alea > 0:
-        retour_exo = ['\\ldots']
+        retour_exo = [_('\\ldots')]
         retour_exo.extend(retour_sol[1:3])
-        retour_exo.extend(['\\ldots', retour_sol[4]])
+        retour_exo.extend([_('\\ldots'), retour_sol[4]])
     else:
         retour_exo = retour_sol[:4]
-        retour_exo.append('\\dotfill')
+        retour_exo.append(_('\\dotfill'))
     return (tuple(retour_exo), tuple(retour_sol))
 
 
@@ -173,14 +173,14 @@ def tex_ligne_tableau(exo, cor, ligne):
 
     lpoints = choix_points(3)
     (exer, solution) = prepare_tuple(lpoints, ligne)
-    exo.append('$%s %s%s %s$ est %s &' %
+    exo.append(_('$%s %s%s %s$ est %s &') %
              exer)
-    cor.append('$%s %s%s %s$ est %s &' %
+    cor.append(_('$%s %s%s %s$ est %s &') %
              solution)
     lnodesep = nodesep(ligne)
     lnodesep.extend(solution[1:3])
     points_coord=coord_points(lpoints)
-    if exer != ('\\ldots', '\\ldots', '\\ldots', '\\ldots', '\\dotfill'):
+    if exer != (_('\\ldots'), _('\\ldots'), _('\\ldots'), _('\\ldots'), _('\\dotfill')):
         tex_figure(exo, lpoints, points_coord)
     else:
         tex_figure(exo, lpoints, points_coord, lnodesep)
@@ -197,12 +197,12 @@ def Droites():
     @param cor: fichier de corrections
     @type cor: file
     """
-    exo = ["\\exercice", u"Compléter les pointillés et les figures :\\par",
+    exo = ["\\exercice", _(u"Compléter les pointillés et les figures :\\par"),
             '\\renewcommand{\\tabularxcolumn}[1]{m{#1}}',
             '\\begin{tabularx}{\\linewidth}{|X|>{\\centering}m{5cm}|}',
             '\\hline',
-            u'\\textbf{phrase} & \\textbf{Figure} \\tabularnewline \\hline']
-    cor = ["\\exercice*", u"Compléter les pointillés et les figures :\\par",
+            _(u'\\textbf{phrase} & \\textbf{Figure} \\tabularnewline \\hline')]
+    cor = ["\\exercice*", _(u"Compléter les pointillés et les figures :\\par"),
             '\\renewcommand{\\tabularxcolumn}[1]{m{#1}}',
             '\\begin{tabularx}{\\linewidth}{|X|>{\\centering}m{5cm}|}',
             '\\hline',
@@ -282,8 +282,7 @@ def enonce_perp(exo, cor):
     lval = [0, 1, 2, 3]
     for i in range(3):
         par.append(lval.pop(random.randrange(len(lval))))
-    while per==[] or (par[0], par[1]) == (per[0], per[1]) or \
-            (par[0], par[1]) == (per[1], per[0]) :
+    while per==[] or sorted(par) == sorted(per):
         lval = [0, 1, 2, 3]
         per = []
         for i in range(3):
@@ -292,8 +291,8 @@ def enonce_perp(exo, cor):
     cor.append(fig_perp(noms, coor, 1, per, par))
     exo.append('\end{pspicture*}\\par\n\\begin{enumerate}')
     cor.append('\\par\n\\begin{enumerate}')
-    s_per = u"\\item Tracer la droite perpendiculaire à la droite $(%s%s)$ passant par $%s$"
-    s_par = u"\\item Tracer la droite parallèle à la droite $(%s%s)$ passant par $%s$"
+    s_per = _(u"\\item Tracer la droite perpendiculaire à la droite $(%s%s)$ passant par $%s$")
+    s_par = _(u"\\item Tracer la droite parallèle à la droite $(%s%s)$ passant par $%s$")
     s_per = s_per % (noms[per[0]], noms[per[1]], noms[per[2]])
     s_par = s_par % (noms[par[0]], noms[par[1]], noms[par[2]])
     if random.randrange(2):
@@ -311,8 +310,8 @@ def enonce_perp(exo, cor):
 
 
 def Perpendiculaires():
-    exo = ["\\exercice", u"Réaliser les figures suivantes :\\par", '\\begin{multicols}{2}']
-    cor = ["\\exercice*", u"Réaliser les figures suivantes :\\par", '\\begin{multicols}{2}']
+    exo = ["\\exercice", _(u"Réaliser les figures suivantes :\\par"), '\\begin{multicols}{2}']
+    cor = ["\\exercice*", _(u"Réaliser les figures suivantes :\\par"), '\\begin{multicols}{2}']
 
     enonce_perp(exo, cor)
 
@@ -527,13 +526,13 @@ def enonce_prop(exo, cor):
     exo.append('\\renewcommand{\\tabularxcolumn}[1]{m{#1}}')
     exo.append('\\begin{tabularx}{\\textwidth}[t]{|m{3cm}|m{4cm}|X|m{3cm}|}')
     exo.append('\\hline')
-    exo.append(u'\\multicolumn{1}{|c|}{\\bf Données} & \\multicolumn{1}{|c|}{\\bf Figure codée}')
-    exo.append(u'& \\multicolumn{1}{|c|}{\\bf Propriété} & \\multicolumn{1}{|c|}{\\bf Conclusion}\\\\')
+    exo.append(_(u'\\multicolumn{1}{|c|}{\\bf Données} & \\multicolumn{1}{|c|}{\\bf Figure codée}'))
+    exo.append(_(u'& \\multicolumn{1}{|c|}{\\bf Propriété} & \\multicolumn{1}{|c|}{\\bf Conclusion}\\\\'))
     cor.append('\\renewcommand{\\tabularxcolumn}[1]{m{#1}}')
     cor.append('\\begin{tabularx}{\\textwidth}[t]{|m{3cm}|m{4cm}|X|m{3cm}|}')
     cor.append('\\hline')
-    cor.append(u'\\multicolumn{1}{|c|}{\\bf Données} & \\multicolumn{1}{|c|}{\\bf Figure codée}')
-    cor.append(u'& \\multicolumn{1}{|c|}{\\bf Propriété} & \\multicolumn{1}{|c|}{\\bf Conclusion}\\\\')
+    cor.append(_(u'\\multicolumn{1}{|c|}{\\bf Données} & \\multicolumn{1}{|c|}{\\bf Figure codée}'))
+    cor.append(_(u'& \\multicolumn{1}{|c|}{\\bf Propriété} & \\multicolumn{1}{|c|}{\\bf Conclusion}\\\\'))
     ltypes = [1, 2, 3]
     lexos = []
     for i in range(3):
@@ -544,26 +543,26 @@ def enonce_prop(exo, cor):
         v = valeurs_figures(lexos[i])
         if lexos[i] == 2:
             if v[5]:  #noms de la forme (AB), on ajoute des parenthèses
-                exo.append('''$(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ &
+                exo.append(_('''$(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ &
 \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
 \\end{pspicture*}
-& & \\\\''' %
+& & \\\\''') %
                          (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0], v[4][1],
                          v[4][4], v[4][5]))
-                cor.append('$(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ & ' %
+                cor.append(_('$(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ & ') %
                          (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0], v[4][1],
                          v[4][4], v[4][5]))
             else:
-                exo.append('''$%s//%s$\\par et\\par $%s//%s$ &
+                exo.append(_('''$%s//%s$\\par et\\par $%s//%s$ &
 \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
 \\end{pspicture*}
-& & \\\\''' %
+& & \\\\''') %
                          (v[4][0], v[4][1], v[4][0], v[4][2]))
-                cor.append('$%s//%s$\\par et\\par $%s//%s$ & ' % (v[4][0],
+                cor.append(_('$%s//%s$\\par et\\par $%s//%s$ & ') % (v[4][0],
                          v[4][1], v[4][0], v[4][2]))
             cor.append('%s & ' % ('\n').join(figure(v[0], v[1], v[2],
                      v[3], v[4], v[5], lexos[i], v[6])))#eror out of range in figure
-            cor.append(u'Si deux droites sont parallèles, alors toute parallèle à l\'une est parallèle à l\'autre. &')
+            cor.append(_(u'Si deux droites sont parallèles, alors toute parallèle à l\'une est parallèle à l\'autre. &'))
             if v[5]:
                 cor.append('$(%s%s)//(%s%s)$ \\\\\n  \\hline' % (v[4][2],
                          v[4][3], v[4][4], v[4][5]))
@@ -575,30 +574,30 @@ def enonce_prop(exo, cor):
             if lexos[i] == 1:
                 if v[5]:
                     if not fig:
-                        exo.append('''$(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
+                        exo.append(_('''$(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
 \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
 \\end{pspicture*}
-& & \\\\''' %
+& & \\\\''') %
                                  (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0],
                                  v[4][1], v[4][0], v[4][2]))
-                    cor.append('$(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &' %
+                    cor.append(_('$(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &') %
                              (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0],
                              v[4][1], v[4][0], v[4][2]))
                 else:
                     if not fig:
-                        exo.append('''$%s//%s$\\par et\\par $%s\perp%s$ &
+                        exo.append(_('''$%s//%s$\\par et\\par $%s\perp%s$ &
 \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
 \\end{pspicture*}
-& & \\\\''' %
+& & \\\\''') %
                                  (v[4][0], v[4][1], v[4][0], v[4][2]))
-                    cor.append('$%s//%s$\\par et\\par $%s\perp%s$ &' %
+                    cor.append(_('$%s//%s$\\par et\\par $%s\perp%s$ &') %
                              (v[4][0], v[4][1], v[4][0], v[4][2]))
                 if fig:
                     exo.append('& %s & & \\\\' % ('\n').join(figure(v[0],
                              v[1], v[2], v[3], v[4], v[5], lexos[i])))
                 cor.append('%s & ' % ('\n').join(figure(v[0], v[1], v[2],
                          v[3], v[4], v[5], lexos[i])))
-                cor.append(u'Si deux droites sont parallèles, alors toute perpendiculaire à l\'une est perpendiculaire à l\'autre. &')
+                cor.append(_(u'Si deux droites sont parallèles, alors toute perpendiculaire à l\'une est perpendiculaire à l\'autre. &'))
                 if v[5]:
                     cor.append('$(%s%s)\\perp(%s%s)$ \\\\\n  \\hline' %
                              (v[4][2], v[4][3], v[4][0], v[4][2]))
@@ -608,30 +607,30 @@ def enonce_prop(exo, cor):
             else:
                 if v[5]:
                     if not fig:
-                        exo.append('''$(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
+                        exo.append(_('''$(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
 \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
 \\end{pspicture*}
-& & \\\\''' %
+& & \\\\''') %
                                  (v[4][0], v[4][1], v[4][0], v[4][2], v[4][2],
                                  v[4][3], v[4][0], v[4][2]))
-                    cor.append('$(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &' %
+                    cor.append(_('$(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &') %
                              (v[4][0], v[4][1], v[4][0], v[4][2], v[4][2],
                              v[4][3], v[4][0], v[4][2]))
                 else:
                     if not fig:
-                        exo.append('''$%s\\perp%s$\\par et\\par $%s\perp%s$ &
+                        exo.append(_('''$%s\\perp%s$\\par et\\par $%s\perp%s$ &
 \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
 \\end{pspicture*}
-& & \\\\''' %
+& & \\\\''') %
                                  (v[4][0], v[4][2], v[4][1], v[4][2]))
-                    cor.append('$%s\\perp%s$\\par et\\par $%s\perp%s$ &' %
+                    cor.append(_('$%s\\perp%s$\\par et\\par $%s\perp%s$ &') %
                              (v[4][0], v[4][2], v[4][1], v[4][2]))
                 if fig:
                     exo.append('& %s & & \\\\' % ('\n').join(figure(v[0],
                              v[1], v[2], v[3], v[4], v[5], lexos[i])))
                 cor.append('%s &' % ('\n').join(figure(v[0], v[1], v[2],
                          v[3], v[4], v[5], lexos[i])))
-                cor.append(u'Si deux droites sont perpendiculaires à une même troisième alors elles sont parallèles entre elles. &')
+                cor.append(_(u'Si deux droites sont perpendiculaires à une même troisième alors elles sont parallèles entre elles. &'))
                 if v[5]:
                     cor.append('$(%s%s)//(%s%s)$ \\\\\n  \\hline' % (v[4][0],
                              v[4][1], v[4][2], v[4][3]))
@@ -645,8 +644,8 @@ def enonce_prop(exo, cor):
 
 
 def Proprietes():
-    exo = ["\\exercice", u"Compléter le tableau suivant :\\par Les droites en gras sont parallèles.\\par """]
-    cor = ["\\exercice*", u"Compléter le tableau suivant :\\par Les droites en gras sont parallèles.\\par """]
+    exo = ["\\exercice", _(u"Compléter le tableau suivant :\\par Les droites en gras sont parallèles.\\par ")]
+    cor = ["\\exercice*", _(u"Compléter le tableau suivant :\\par Les droites en gras sont parallèles.\\par ")]
 
     enonce_prop(exo, cor)
     return (exo, cor)

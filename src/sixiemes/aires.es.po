@@ -1,0 +1,95 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2013 ORGANIZATION
+# Administrador <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pyromaths 13.03\n"
+"POT-Creation-Date: 2013-06-13 08:53+Hora de verano romance\n"
+"PO-Revision-Date: 2013-06-15 18:17+0100\n"
+"Last-Translator: Jose Antonio Martinez Chico <jkuato@hotmail.com>\n"
+"Language-Team: Jérôme Ortais <jerome.ortais@pyromaths.org>\n"
+"Language: spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: aires.py:46 aires.py:88 aires.py:92 aires.py:109 aires.py:135
+msgid ""
+"{\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{figure %s}} "
+msgstr ""
+"{\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{figura %s}} "
+
+#: aires.py:47 aires.py:57
+msgid "Aire de la figure %s : $%s = %s$~unités d'aire"
+msgstr "Área de la figura %s es $%s = %s$~unidades de área"
+
+#: aires.py:56 aires.py:169
+msgid ""
+"{\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{figure %s}}"
+msgstr ""
+"{\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{figura %s}}"
+
+#: aires.py:93 aires.py:112 aires.py:139 aires.py:175
+msgid "Aire de la figure %s : "
+msgstr "Área de la figura %s  "
+
+#: aires.py:94
+msgid "c'est l'aire du rectangle en pointillés.\\par\n"
+msgstr "es igual al área del rectángulo marcado sobre la figura.\\par\n"
+
+#: aires.py:95
+msgid "$%s = %s$~unités d'aire"
+msgstr "$%s = %s$~unidades de área"
+
+#: aires.py:113 aires.py:140
+msgid "c'est la moitié de l'aire du rectangle en pointillés.\\par\n"
+msgstr ""
+"es igual a la mitad del área del rectángulo marcado sobre la figura.\\par\n"
+
+#: aires.py:114 aires.py:141
+msgid "$(%s) \\div 2= %s$~unités d'aire"
+msgstr "$(%s) : 2= %s$~unidades de área"
+
+#: aires.py:176
+msgid "on calcule l'aire du rectangle en pointillés et on soustrait "
+msgstr "es el área del rectángulo marcado sobre la figura, menos "
+
+#: aires.py:177
+msgid "les aires des triangles rectangles \\pscirclebox{1}, "
+msgstr "las áreas de los triángulos rectángulos \\pscirclebox{1}, "
+
+#: aires.py:178
+msgid "\\pscirclebox{2} et \\pscirclebox{3}.\\par\n"
+msgstr "\\pscirclebox{2} y \\pscirclebox{3}.\\par\n"
+
+#: aires.py:179
+msgid "$(%s) - (%s) \\div 2 - (%s) \\div 2 - (%s) \\div 2 "
+msgstr "$(%s) - (%s) : 2 - (%s) : 2 - (%s) : 2 "
+
+#: aires.py:182
+msgid "= %s$~unités d'aire"
+msgstr "= %s$~unidades de área"
+
+#: aires.py:192
+msgid "%s \\times %s"
+msgstr "%s \\cdot %s"
+
+#: aires.py:208
+msgid ""
+"\\rput[l](0.6,0.25){\\psframebox[linecolor=white, fillcolor=white, "
+"fillstyle=solid]{unité d'aire}}\n"
+msgstr ""
+"\\rput[l](0.6,0.25){\\psframebox[linecolor=white, fillcolor=white, "
+"fillstyle=solid]{unidad de área}}\n"
+
+#: aires.py:236 aires.py:237
+msgid ""
+"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :"
+"\\par"
+msgstr ""
+"Calcula el área de cada una de las siguientes figuras en la unidad de área "
+"dada :\\par"

@@ -1,0 +1,78 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2013 ORGANIZATION
+# Administrador <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pyromaths 13.03\n"
+"POT-Creation-Date: 2013-06-06 19:12+Hora de verano romance\n"
+"PO-Revision-Date: 2013-06-13 09:02+0100\n"
+"Last-Translator: Jose Antonio Martinez Chico <jkuato@hotmail.com>\n"
+"Language-Team: Jérôme Ortais <jerome.ortais@pyromaths.org>\n"
+"Language: spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: arrondi.py:36
+msgid "au centième"
+msgstr "a las centésimas"
+
+#: arrondi.py:36
+msgid "au dixième"
+msgstr "a las décimas"
+
+#: arrondi.py:36
+msgid "au millième"
+msgstr "a las milésimas"
+
+#: arrondi.py:36
+msgid "à l'unité"
+msgstr "a las unidades"
+
+#: arrondi.py:37
+msgid "au millier"
+msgstr "a los millares"
+
+#: arrondi.py:37
+msgid "à la centaine"
+msgstr "a las centenas"
+
+#: arrondi.py:37
+msgid "à la dizaine"
+msgstr "a las decenas"
+
+#: arrondi.py:38
+msgid "à la dizaine de milliers"
+msgstr "a las decenas de millar"
+
+#: arrondi.py:51
+msgid " par défaut"
+msgstr " por defecto"
+
+#: arrondi.py:51
+msgid " par excès"
+msgstr " por exceso"
+
+#: arrondi.py:69
+msgid "\\item Arrondir "
+msgstr "\\item Redondea "
+
+#: arrondi.py:90
+msgid "\\item L'encadrement de "
+msgstr "\\item La proximación de "
+
+#: arrondi.py:91
+msgid " est :\\par"
+msgstr " está entre :\\par"
+
+#: arrondi.py:94
+msgid "On en déduit que son arrondi "
+msgstr "Entonces su redondeo "
+
+#: arrondi.py:96
+msgid " est : "
+msgstr " es : "

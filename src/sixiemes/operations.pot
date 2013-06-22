@@ -1,0 +1,125 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-15 14:23+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: operations.py:152 operations.py:154
+msgid "\\item La somme des termes %s et %s.\\par"
+msgstr ""
+
+#: operations.py:183 operations.py:185
+msgid "\\item La diff\303\251rence des termes %s et %s.\\par"
+msgstr ""
+
+#: operations.py:233 operations.py:235
+msgid "\\item Le produit des facteurs %s et %s.\\par"
+msgstr ""
+
+#: operations.py:238
+msgid "\\item Premi\303\250re m\303\251thode :\\par"
+msgstr ""
+
+#: operations.py:241 operations.py:251
+msgid "$\\times$"
+msgstr ""
+
+#: operations.py:248
+msgid "\\item Seconde m\303\251thode :\\par"
+msgstr ""
+
+#: operations.py:267
+msgid "%s\\times%s = %s"
+msgstr ""
+
+#: operations.py:280 operations.py:281
+msgid "Poser et effectuer les op\303\251rations suivantes."
+msgstr ""
+
+#: operations.py:309
+msgid "\\times"
+msgstr ""
+
+#: operations.py:311
+msgid "\\div"
+msgstr ""
+
+#: operations.py:318
+msgid "\\item $%s %s %s = \\ldots\\ldots$"
+msgstr ""
+
+#: operations.py:323
+msgid "\\item $%s %s \\ldots\\ldots = %s$"
+msgstr ""
+
+#: operations.py:328
+msgid "\\item $\\ldots\\ldots %s %s = %s$"
+msgstr ""
+
+#: operations.py:355 operations.py:356
+msgid "Effectuer sans calculatrice :"
+msgstr ""
+
+#: operations.py:384
+msgid "\\item $%s \\quad\\times\\quad %s \\quad = \\quad \\dotfill$"
+msgstr ""
+
+#: operations.py:387
+msgid "\\item $%s \\times %s = \\mathbf{%s}$"
+msgstr ""
+
+#: operations.py:391
+msgid "\\item $%s \\quad\\times\\quad \\dotfill \\quad = \\quad %s$"
+msgstr ""
+
+#: operations.py:394
+msgid "\\item $%s \\times \\mathbf{%s} = %s$"
+msgstr ""
+
+#: operations.py:398
+msgid "\\item $\\dotfill \\quad\\times\\quad %s \\quad = \\quad %s$"
+msgstr ""
+
+#: operations.py:401
+msgid "\\item $\\mathbf{%s} \\times %s = %s$"
+msgstr ""
+
+#: operations.py:407
+msgid "\\item $%s \\quad\\div\\quad %s \\quad = \\quad \\dotfill$"
+msgstr ""
+
+#: operations.py:410
+msgid "\\item $%s \\div %s = \\mathbf{%s}$"
+msgstr ""
+
+#: operations.py:414
+msgid "\\item $%s \\quad\\div\\quad \\dotfill \\quad = \\quad %s$"
+msgstr ""
+
+#: operations.py:417
+msgid "\\item $%s \\div \\mathbf{%s} = %s$"
+msgstr ""
+
+#: operations.py:421
+msgid "\\item $\\dotfill \\quad\\div\\quad %s \\quad = \\quad %s$"
+msgstr ""
+
+#: operations.py:424
+msgid "\\item $\\mathbf{%s} \\div %s = %s$"
+msgstr ""
+
+#: operations.py:453 operations.py:454
+msgid "Compl\303\251ter sans calculatrice :"
+msgstr ""
+

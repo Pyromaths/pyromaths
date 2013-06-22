@@ -1,0 +1,157 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-13 21:12+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: droites.py:35 droites.py:65 droites.py:81
+msgid "une droite"
+msgstr ""
+
+#: droites.py:37 droites.py:65 droites.py:83
+msgid "une demi-droite"
+msgstr ""
+
+#: droites.py:65
+msgid "un segment"
+msgstr ""
+
+#: droites.py:121 droites.py:124 droites.py:126 droites.py:183
+msgid "\\ldots"
+msgstr ""
+
+#: droites.py:122 droites.py:129 droites.py:183
+msgid "\\dotfill"
+msgstr ""
+
+#: droites.py:176 droites.py:178
+msgid "$%s %s%s %s$ est %s &"
+msgstr ""
+
+#: droites.py:200 droites.py:205
+msgid "Compl\303\251ter les pointill\303\251s et les figures :\\par"
+msgstr ""
+
+#: droites.py:204
+msgid "\\textbf{phrase} & \\textbf{Figure} \\tabularnewline \\hline"
+msgstr ""
+
+#: droites.py:294
+msgid "\\item Tracer la droite perpendiculaire \303\240 la droite $(%s%s)$ passant par $%s$"
+msgstr ""
+
+#: droites.py:295
+msgid "\\item Tracer la droite parall\303\250le \303\240 la droite $(%s%s)$ passant par $%s$"
+msgstr ""
+
+#: droites.py:313 droites.py:314
+msgid "R\303\251aliser les figures suivantes :\\par"
+msgstr ""
+
+#: droites.py:529 droites.py:534
+msgid "\\multicolumn{1}{|c|}{\\bf Donn\303\251es} & \\multicolumn{1}{|c|}{\\bf Figure cod\303\251e}"
+msgstr ""
+
+#: droites.py:530 droites.py:535
+msgid "& \\multicolumn{1}{|c|}{\\bf Propri\303\251t\303\251} & \\multicolumn{1}{|c|}{\\bf Conclusion}\\\\"
+msgstr ""
+
+#: droites.py:546
+msgid ""
+"$(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ &\n"
+"\\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)\n"
+"\\end{pspicture*}\n"
+"& & \\\\"
+msgstr ""
+
+#: droites.py:552
+msgid "$(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ & "
+msgstr ""
+
+#: droites.py:556
+msgid ""
+"$%s//%s$\\par et\\par $%s//%s$ &\n"
+"\\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)\n"
+"\\end{pspicture*}\n"
+"& & \\\\"
+msgstr ""
+
+#: droites.py:561
+msgid "$%s//%s$\\par et\\par $%s//%s$ & "
+msgstr ""
+
+#: droites.py:565
+msgid "Si deux droites sont parall\303\250les, alors toute parall\303\250le \303\240 l'une est parall\303\250le \303\240 l'autre. &"
+msgstr ""
+
+#: droites.py:577
+msgid ""
+"$(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &\n"
+"\\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)\n"
+"\\end{pspicture*}\n"
+"& & \\\\"
+msgstr ""
+
+#: droites.py:583
+msgid "$(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &"
+msgstr ""
+
+#: droites.py:588
+msgid ""
+"$%s//%s$\\par et\\par $%s\\perp%s$ &\n"
+"\\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)\n"
+"\\end{pspicture*}\n"
+"& & \\\\"
+msgstr ""
+
+#: droites.py:593
+msgid "$%s//%s$\\par et\\par $%s\\perp%s$ &"
+msgstr ""
+
+#: droites.py:600
+msgid "Si deux droites sont parall\303\250les, alors toute perpendiculaire \303\240 l'une est perpendiculaire \303\240 l'autre. &"
+msgstr ""
+
+#: droites.py:610
+msgid ""
+"$(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &\n"
+"\\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)\n"
+"\\end{pspicture*}\n"
+"& & \\\\"
+msgstr ""
+
+#: droites.py:616
+msgid "$(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &"
+msgstr ""
+
+#: droites.py:621
+msgid ""
+"$%s\\perp%s$\\par et\\par $%s\\perp%s$ &\n"
+"\\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)\n"
+"\\end{pspicture*}\n"
+"& & \\\\"
+msgstr ""
+
+#: droites.py:626
+msgid "$%s\\perp%s$\\par et\\par $%s\\perp%s$ &"
+msgstr ""
+
+#: droites.py:633
+msgid "Si deux droites sont perpendiculaires \303\240 une m\303\252me troisi\303\250me alors elles sont parall\303\250les entre elles. &"
+msgstr ""
+
+#: droites.py:647 droites.py:648
+msgid "Compl\303\251ter le tableau suivant :\\par Les droites en gras sont parall\303\250les.\\par "
+msgstr ""
+

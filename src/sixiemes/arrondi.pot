@@ -1,0 +1,77 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-13 08:59+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: arrondi.py:36
+msgid "au centi\303\250me"
+msgstr ""
+
+#: arrondi.py:36
+msgid "au dixi\303\250me"
+msgstr ""
+
+#: arrondi.py:36
+msgid "au milli\303\250me"
+msgstr ""
+
+#: arrondi.py:36
+msgid "\303\240 l'unit\303\251"
+msgstr ""
+
+#: arrondi.py:37
+msgid "au millier"
+msgstr ""
+
+#: arrondi.py:37
+msgid "\303\240 la centaine"
+msgstr ""
+
+#: arrondi.py:37
+msgid "\303\240 la dizaine"
+msgstr ""
+
+#: arrondi.py:38
+msgid "\303\240 la dizaine de milliers"
+msgstr ""
+
+#: arrondi.py:51
+msgid " par d\303\251faut"
+msgstr ""
+
+#: arrondi.py:51
+msgid " par exc\303\250s"
+msgstr ""
+
+#: arrondi.py:69
+msgid "\\item Arrondir "
+msgstr ""
+
+#: arrondi.py:90
+msgid "\\item L'encadrement de "
+msgstr ""
+
+#: arrondi.py:91
+msgid " est :\\par"
+msgstr ""
+
+#: arrondi.py:94
+msgid "On en d\303\251duit que son arrondi "
+msgstr ""
+
+#: arrondi.py:96
+msgid " est : "
+msgstr ""
+

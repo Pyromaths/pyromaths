@@ -221,14 +221,14 @@ def reponses(exo, cor, lpoints, lnoms):
         cor.append("$\\widehat{%s%s%s}=%s\degres$\\par" % (lnoms[i][1],
                  lnoms[i][0], lnoms[i][2], lpoints[i][4]))
         if lpoints[i][4] < 90:
-            cor.append("angle aigu\\par")
+            cor.append(_("angle aigu\\par"))
         elif lpoints[i][4] > 90:
-            cor.append("angle obtus\\par")
+            cor.append(_("angle obtus\\par"))
         else:
-            cor.append("angle droit\\par")
+            cor.append(_("angle droit\\par"))
     cor.append("\\end{multicols}")
     exo.append("\\begin{tabularx}{\\textwidth}{|*{4}{X|}}")
-    exo.append("\\hline angle 1 : & angle 2 : & angle 3 : & angle 4 : \\\\")
+    exo.append(_("\\hline angle 1 : & angle 2 : & angle 3 : & angle 4 : \\\\"))
     exo.append("\\hline &&& \\\\ &&& \\\\ &&& \\\\ \\hline")
     exo.append("\\end{tabularx}")
 
@@ -248,8 +248,8 @@ def MesureAngles():
     tmpl = Geometrie.choix_points(3 * nb_angles)
     for i in range(nb_angles):
         lnoms.append(tuple(tmpl[3 * i:3 * i + 3]))
-    exo = ["\\exercice", "Nommer, mesurer et donner la nature de chacun des angles suivants :\\par "]
-    cor = ["\\exercice*", "Nommer, mesurer et donner la nature de chacun des angles suivants :\\par "]
+    exo = ["\\exercice", _("Nommer, mesurer et donner la nature de chacun des angles suivants :\\par ")]
+    cor = ["\\exercice*", _("Nommer, mesurer et donner la nature de chacun des angles suivants :\\par ")]
     figure(exo, cor, lpoints, lnoms, xmax, ymax)
     reponses(exo, cor, lpoints, lnoms)
     return (exo, cor)

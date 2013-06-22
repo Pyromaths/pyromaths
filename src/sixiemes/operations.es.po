@@ -1,0 +1,128 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2013 ORGANIZATION
+# Administrador <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pyromaths 13.03\n"
+"POT-Creation-Date: 2013-06-15 14:23+Hora de verano romance\n"
+"PO-Revision-Date: 2013-06-15 17:43+0100\n"
+"Last-Translator: Jose Antonio Martinez Chico <jkuato@hotmail.com>\n"
+"Language-Team: Jérôme Ortais <jerome.ortais@pyromaths.org>\n"
+"Language: spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: operations.py:152 operations.py:154
+msgid "\\item La somme des termes %s et %s.\\par"
+msgstr "\\item La suma de los términos %s y %s.\\par"
+
+#: operations.py:183 operations.py:185
+msgid "\\item La différence des termes %s et %s.\\par"
+msgstr "\\item La diferencia de los términos %s y %s.\\par"
+
+#: operations.py:233 operations.py:235
+msgid "\\item Le produit des facteurs %s et %s.\\par"
+msgstr "\\item El producto de los factores %s y %s.\\par"
+
+#: operations.py:238
+msgid "\\item Première méthode :\\par"
+msgstr "\\item Primera forma :\\par"
+
+#: operations.py:241 operations.py:251
+msgid "$\\times$"
+msgstr "$\\times$"
+
+#: operations.py:248
+msgid "\\item Seconde méthode :\\par"
+msgstr "\\item Segunda forma :\\par"
+
+#: operations.py:267
+msgid "%s\\times%s = %s"
+msgstr "%s\\cdot%s = %s"
+
+#: operations.py:280 operations.py:281
+msgid "Poser et effectuer les opérations suivantes."
+msgstr ""
+"Coloca uno debajo del otro correctamente y realiza las siguientes "
+"operaciones:"
+
+#: operations.py:309
+msgid "\\times"
+msgstr "\\, \\cdot \\,"
+
+#: operations.py:311
+msgid "\\div"
+msgstr "\\, : \\,"
+
+#: operations.py:318
+msgid "\\item $%s %s %s = \\ldots\\ldots$"
+msgstr "\\item $%s %s %s = \\underline{\\hspace*{0.5cm}}$"
+
+#: operations.py:323
+msgid "\\item $%s %s \\ldots\\ldots = %s$"
+msgstr "\\item $%s %s \\underline{\\hspace*{0.5cm}} = %s$"
+
+#: operations.py:328
+msgid "\\item $\\ldots\\ldots %s %s = %s$"
+msgstr "\\item $\\underline{\\hspace*{0.5cm}} %s %s = %s$"
+
+#: operations.py:355 operations.py:356
+msgid "Effectuer sans calculatrice :"
+msgstr "Realiza sin calculadora :"
+
+#: operations.py:384
+msgid "\\item $%s \\quad\\times\\quad %s \\quad = \\quad \\dotfill$"
+msgstr "\\item $%s \\, \\cdot \\, %s \\, = \\, \\underline{\\hspace*{1.5cm}}$"
+
+#: operations.py:387
+msgid "\\item $%s \\times %s = \\mathbf{%s}$"
+msgstr "\\item $%s \\cdot %s = \\mathbf{%s}$"
+
+#: operations.py:391
+msgid "\\item $%s \\quad\\times\\quad \\dotfill \\quad = \\quad %s$"
+msgstr "\\item $%s \\, \\cdot\\, \\underline{\\hspace*{1.5cm}} \\, = \\, %s$"
+
+#: operations.py:394
+msgid "\\item $%s \\times \\mathbf{%s} = %s$"
+msgstr "\\item $%s \\cdot \\mathbf{%s} = %s$"
+
+#: operations.py:398
+msgid "\\item $\\dotfill \\quad\\times\\quad %s \\quad = \\quad %s$"
+msgstr "\\item $\\underline{\\hspace*{1.5cm}} \\, \\cdot\\, %s \\, = \\, %s$"
+
+#: operations.py:401
+msgid "\\item $\\mathbf{%s} \\times %s = %s$"
+msgstr "\\item $\\mathbf{%s} \\cdot %s = %s$"
+
+#: operations.py:407
+msgid "\\item $%s \\quad\\div\\quad %s \\quad = \\quad \\dotfill$"
+msgstr "\\item $%s \\, : \\, %s \\, = \\, \\underline{\\hspace*{1.5cm}}$"
+
+#: operations.py:410
+msgid "\\item $%s \\div %s = \\mathbf{%s}$"
+msgstr "\\item $%s : %s = \\mathbf{%s}$"
+
+#: operations.py:414
+msgid "\\item $%s \\quad\\div\\quad \\dotfill \\quad = \\quad %s$"
+msgstr "\\item $%s \\, : \\, \\underline{\\hspace*{1.5cm}} \\, = \\, %s$"
+
+#: operations.py:417
+msgid "\\item $%s \\div \\mathbf{%s} = %s$"
+msgstr "\\item $%s : \\mathbf{%s} = %s$"
+
+#: operations.py:421
+msgid "\\item $\\dotfill \\quad\\div\\quad %s \\quad = \\quad %s$"
+msgstr "\\item $\\underline{\\hspace*{1.5cm}} \\, : \\, %s \\, = \\, %s$"
+
+#: operations.py:424
+msgid "\\item $\\mathbf{%s} \\div %s = %s$"
+msgstr "\\item $\\mathbf{%s} : %s = %s$"
+
+#: operations.py:453 operations.py:454
+msgid "Compléter sans calculatrice :"
+msgstr "Completa sin calculadora :"

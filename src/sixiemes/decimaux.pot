@@ -1,0 +1,165 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-22 14:16+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: decimaux.py:396 decimaux.py:406
+msgid " : \\dotfill"
+msgstr ""
+
+#: decimaux.py:423 decimaux.py:426
+msgid "\\item \303\211crire en chiffres les nombres suivants."
+msgstr ""
+
+#: decimaux.py:432 decimaux.py:435
+msgid "\\item \303\211crire en lettres les nombres suivants (sans utiliser le mot ``virgule\")."
+msgstr ""
+
+#: decimaux.py:451
+msgid "L"
+msgstr ""
+
+#: decimaux.py:451
+msgid "g"
+msgstr ""
+
+#: decimaux.py:451 decimaux.py:452
+msgid "m"
+msgstr ""
+
+#: decimaux.py:452
+msgid "c"
+msgstr ""
+
+#: decimaux.py:452
+msgid "d"
+msgstr ""
+
+#: decimaux.py:452
+msgid "da"
+msgstr ""
+
+#: decimaux.py:452
+msgid "h"
+msgstr ""
+
+#: decimaux.py:452
+msgid "k"
+msgstr ""
+
+#: decimaux.py:511 decimaux.py:518 decimaux.py:603 decimaux.py:610
+msgid "Effectuer les conversions suivantes :"
+msgstr ""
+
+#: decimaux.py:531
+msgid "\\item %s~%s%s=\\dotfill~%s%s"
+msgstr ""
+
+#: decimaux.py:562
+msgid "h%s & da%s & %s & d%s & c%s & m%s \\\\ \\hline"
+msgstr ""
+
+#: decimaux.py:570
+msgid "k%s & h%s & da%s & %s & d%s & c%s & m%s \\\\ \\hline"
+msgstr ""
+
+#: decimaux.py:661
+msgid "\\item $\\unit[%s]{%s}=\\unit[\\dotfill]{%s}$"
+msgstr ""
+
+#: decimaux.py:700
+msgid "centaines"
+msgstr ""
+
+#: decimaux.py:700
+msgid "dizaines"
+msgstr ""
+
+#: decimaux.py:700
+msgid "milliers"
+msgstr ""
+
+#: decimaux.py:700
+msgid "unit\303\251s"
+msgstr ""
+
+#: decimaux.py:701
+msgid "centi\303\250mes"
+msgstr ""
+
+#: decimaux.py:701
+msgid "dixi\303\250mes"
+msgstr ""
+
+#: decimaux.py:701
+msgid "milli\303\250mes"
+msgstr ""
+
+#: decimaux.py:726 decimaux.py:729
+msgid "Placer une virgule (en ajoutant \303\251ventuellement des z\303\251ros) dans            le nombre %s de telle sorte que :"
+msgstr ""
+
+#: decimaux.py:736 decimaux.py:738
+msgid "\\item le chiffre %s soit le chiffre des %s : "
+msgstr ""
+
+#: decimaux.py:742
+msgid "\\dotfill"
+msgstr ""
+
+#: decimaux.py:795
+msgid "\\item $\\cfrac{%s}{%s}=\\ldots$"
+msgstr ""
+
+#: decimaux.py:803
+msgid "\\item $\\cfrac{%s}{\\ldots}=%s$"
+msgstr ""
+
+#: decimaux.py:811
+msgid "\\item $\\cfrac{\\ldots}{%s}=%s$"
+msgstr ""
+
+#: decimaux.py:826 decimaux.py:828
+msgid "Compl\303\251ter :"
+msgstr ""
+
+#: decimaux.py:858 decimaux.py:860
+msgid "%s\\times \\cfrac{1}{%s}"
+msgstr ""
+
+#: decimaux.py:863 decimaux.py:865
+msgid "%s\\times %s"
+msgstr ""
+
+#: decimaux.py:873
+msgid "\\dotfill$"
+msgstr ""
+
+#: decimaux.py:888 decimaux.py:890
+msgid "Compl\303\251ter avec un nombre d\303\251cimal :"
+msgstr ""
+
+#: decimaux.py:925 decimaux.py:940
+msgid "croissant"
+msgstr ""
+
+#: decimaux.py:927
+msgid "d\303\251croissant"
+msgstr ""
+
+#: decimaux.py:928 decimaux.py:930
+msgid "\\item Classer les nombres suivants dans l'ordre %s.\\par    "
+msgstr ""
+

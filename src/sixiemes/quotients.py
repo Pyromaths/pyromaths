@@ -50,11 +50,11 @@ def Divisible():
     l = valeurs_diviseurs()
     reponse = liste_diviseurs(l)
 
-    exo = ["\\exercice", u'Cocher les bonnes réponses :\\par']
-    cor = ["\\exercice*", u'Cocher les bonnes réponses :\\par']
+    exo = ["\\exercice", _(u'Cocher les bonnes réponses :\\par')]
+    cor = ["\\exercice*", _(u'Cocher les bonnes réponses :\\par')]
 
-    exo.append("\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par 3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}")
-    cor.append("\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par 3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}")
+    exo.append(_("\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par 3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}"))
+    cor.append(_("\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par 3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}"))
     for i in range(len(l)):
         exo.append("%s & $\\square$ & $\\square$ & $\\square$ & $\\square$ & $\\square$ \\\\" %
                  l[i])
