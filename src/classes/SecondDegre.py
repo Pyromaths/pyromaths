@@ -9,19 +9,19 @@ class Poly2:
     """Classe pour les polynômes du second degré."""
     def __init__(self, a, b, c):
         if a == 0:
-            print "Erreur de définition ! a doit être différent de 0."
+            print _("Erreur de définition ! a doit être différent de 0.")
         self.a = a
         self.b = b
         self.c = c
         self.delta = suppr0(b**2 - 4*a*c)
         if self.delta > 0:
-            self.signedelta = "strictement positif"
+            self.signedelta = _("strictement positif")
             self.nbrac = 2
         elif self.delta < 0:
-            self.signedelta = "strictement négatif"
+            self.signedelta = _("strictement négatif")
             self.nbrac = 0
         else:
-            self.signedelta = "nul"
+            self.signedelta = _("nul")
             self.nbrac = 1
 
     def __add__(self, other):

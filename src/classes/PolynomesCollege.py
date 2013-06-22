@@ -70,14 +70,14 @@ class Polynome():
             for monome in _POLYNOME_FORMAT.finditer(monomes):
                 m = _MONOME_FORMAT.search(monome.group(0))
                 if m is None:
-                    raise ValueError(u'chaîne invalide pour un objet Polynôme : %s' % input)
+                    raise ValueError(_(u'chaîne invalide pour un objet Polynôme : %s') % input)
                 m_sign = m.group('sign') or '+'
                 m_coef = float(m.group('coef') or 1)
                 m_deg = int(m.group('deg') or (m.group('var') and '1') or '0')
                 m_var = m.group('var') or var
                 if m_var and not var: var = m_var # attribue une variable à var
                 if m_var != var:
-                    raise ValueError(u'Le nom de la variable (%s) est incorrect pour le Polynôme %s' % (var, monomes))
+                    raise ValueError(_(u'Le nom de la variable (%s) est incorrect pour le Polynôme %s') % (var, monomes))
                 if m_sign == '-': m_coef = -m_coef
                 if m_coef:
                     # supprime les monômes de coefficient 0
@@ -151,7 +151,7 @@ class Polynome():
         elif Polynome.degre(other)<=0:
             other.var = self.var
         if self.var != other.var:
-            raise ValueError(u'Pyromaths ne sait additionner que deux polynômes de même variable')
+            raise ValueError(_(u'Pyromaths ne sait additionner que deux polynômes de même variable'))
         else :
             m=[]
             m1.extend(m2)
@@ -223,7 +223,7 @@ class Polynome():
         elif Polynome.degre(other)==0:
             other.var = self.var
         if self.var != other.var:
-            raise ValueError(u'Pyromaths ne sait multiplier que deux polynômes de même variable')
+            raise ValueError(_(u'Pyromaths ne sait multiplier que deux polynômes de même variable'))
         p0, p1 = Polynome.reduit(self), Polynome.reduit(other)
         if len(p0) == len(p1) == 2 and (p0[0]==p1[0] or p0[1] == p1[1]) and\
             ((p0[0][0] == -p1[0][0] and p0[0][1] == p1[0][1]) or \
@@ -311,7 +311,7 @@ class Polynome():
                     ls.append("*")
                     ls.append("Polynome([%s], \"%s\")" %([1, self.monomes[0][1]], self.var))
                 return "".join(ls)
-        else: raise ValueError(u"Type non prévu. Bogue en perspective !")
+        else: raise ValueError(_(u"Type non prévu. Bogue en perspective !"))
 
     def __len__(self):
         "retourne le nombre de monômes d'un polynôme"

@@ -1,0 +1,37 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-08 19:06+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: PolynomesCollege.py:73
+msgid "cha\303\256ne invalide pour un objet Polyn\303\264me : %s"
+msgstr ""
+
+#: PolynomesCollege.py:80
+msgid "Le nom de la variable (%s) est incorrect pour le Polyn\303\264me %s"
+msgstr ""
+
+#: PolynomesCollege.py:154
+msgid "Pyromaths ne sait additionner que deux polyn\303\264mes de m\303\252me variable"
+msgstr ""
+
+#: PolynomesCollege.py:226
+msgid "Pyromaths ne sait multiplier que deux polyn\303\264mes de m\303\252me variable"
+msgstr ""
+
+#: PolynomesCollege.py:314
+msgid "Type non pr\303\251vu. Bogue en perspective !"
+msgstr ""
+

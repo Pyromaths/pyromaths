@@ -1,0 +1,33 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-09 10:10+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: Racine.py:12 Racine.py:110
+msgid " \\times "
+msgstr ""
+
+#: Racine.py:18
+msgid "Erreur de d\303\251finition ! Le radicande doit \303\252tre positif et l'indice un nombre entier !"
+msgstr ""
+
+#: Racine.py:189
+msgid "%s\\times "
+msgstr ""
+
+#: Racine.py:216 Racine.py:217 Racine.py:218
+msgid "%s_{\\times %s}"
+msgstr ""
+

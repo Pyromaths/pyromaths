@@ -3,7 +3,7 @@
 class Terme:
     def __init__(self, coeff, puiss = 1, var = 'x'):
         if (not (isinstance(puiss, int))) or (not (isinstance(var, str))):
-            print "Erreur de définition ! La puissance doit être un nombre relatif !"
+            print _("Erreur de définition ! La puissance doit être un nombre relatif !")
         self.puiss = puiss # Nombre entier
         self.coeff = coeff # Coeff devant le terme
         self.var = var # Lettre pour la var

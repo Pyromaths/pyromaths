@@ -1,0 +1,41 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-08 18:55+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: Fractions.py:59
+msgid "\\dfrac{%s_{\\times %s}}{%s_{\\times %s}}"
+msgstr ""
+
+#: Fractions.py:78 Fractions.py:79
+msgid "%s \\times \\cancel{%s}"
+msgstr ""
+
+#: Fractions.py:84 Fractions.py:85
+msgid "%s \\times \\bcancel{%s}"
+msgstr ""
+
+#: Fractions.py:89
+msgid "%s \\times %s"
+msgstr ""
+
+#: Fractions.py:98
+msgid "\\dfrac{%s_{\\times \\cancel %s}}{%s_{\\times \\cancel %s}}"
+msgstr ""
+
+#: Fractions.py:204
+msgid "La fraction n'est pas un nombre entier !"
+msgstr ""
+
