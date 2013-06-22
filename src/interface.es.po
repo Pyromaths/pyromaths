@@ -1,0 +1,348 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pyromaths 13.03\n"
+"POT-Creation-Date: 2013-06-22 14:22+Hora de verano romance\n"
+"PO-Revision-Date: 2013-06-22 14:23+0100\n"
+"Last-Translator: Jose Antonio Martinez Chico <jkuato@hotmail.com>\n"
+"Language-Team: Jérôme Ortais <jerome.ortais@pyromaths.org>\n"
+"Language: spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: interface.py:62
+msgid "Créer"
+msgstr "Crear"
+
+#: interface.py:68 interface.py:336
+msgid "Quitter"
+msgstr "Salir"
+
+#: interface.py:74
+msgid "Réinitialiser"
+msgstr "Reiniciar"
+
+#: interface.py:79
+msgid "Langue : "
+msgstr "Idioma : "
+
+#: interface.py:114
+msgid "Sixième"
+msgstr "6ºPrimaria"
+
+#: interface.py:115
+msgid "Cinquième"
+msgstr "1ºESO"
+
+#: interface.py:116
+msgid "Quatrième"
+msgstr "2ºESO"
+
+#: interface.py:117
+msgid "Troisième"
+msgstr "3ºESO"
+
+#: interface.py:118
+msgid "Lycée"
+msgstr "4º ESO"
+
+#: interface.py:128
+msgid "Options"
+msgstr "Opciones"
+
+#: interface.py:139
+msgid "Nom par défaut du fichier : "
+msgstr "Nombre por defecto del archivo : "
+
+#: interface.py:145
+msgid "Chemin par défaut pour enregistrer les fichiers : "
+msgstr "Carpeta por defecto donde se guarda : "
+
+#: interface.py:151
+msgid "Titre de la fiche d'exercices : "
+msgstr "Encabezado de la hoja de ejercicios : "
+
+#: interface.py:175
+msgid "Parcourir"
+msgstr "Explorar"
+
+#: interface.py:199
+msgid "Créer le corrigé"
+msgstr "Crear hoja de correcciones"
+
+#: interface.py:200
+msgid "Pyromaths doit-il créer la fiche de correction détaillée?"
+msgstr "¿ Quieres que Pyromaths cree la hoja de correciones ?"
+
+#: interface.py:207
+msgid "Créer un seul fiche"
+msgstr "Crear en un solo archivo"
+
+#: interface.py:208
+msgid "Le corrigé et les exercices doivent-ils être dans le même document ?"
+msgstr ""
+"¿ Quieres que las correciones y los ejercicios estén en un mismo archivo ?"
+
+#: interface.py:217
+msgid "Créer le pdf"
+msgstr "Crear PDF"
+
+#: interface.py:218
+msgid "Pyromaths doit-il créer les fiches au format pdf ?"
+msgstr "¿ Quieres que Pyromaths cree las hojas en formato PDF ?"
+
+#: interface.py:234
+msgid "Niveau :"
+msgstr "Nivel :"
+
+#: interface.py:235
+msgid ""
+"Niveau que montrera dans la fiche créée, par défaut utilise le majeur des "
+"exercices choisis"
+msgstr ""
+"Nivel que mostrará en la ficha creada, por defecto usa el mayor de los "
+"ejercicios escogidos"
+
+#: interface.py:241
+msgid "Modèle de mise en page :"
+msgstr "Modelo de página :"
+
+#: interface.py:242
+msgid "Modèle fonde TeX pour la création de la fiche"
+msgstr "Modelo base TeX para la creación de la ficha"
+
+#: interface.py:255
+msgid "Classe de 6\\ieme"
+msgstr "Curso 6º Primaria"
+
+#: interface.py:256
+msgid "Classe de 5\\ieme"
+msgstr "Curso 1º ESO"
+
+#: interface.py:257
+msgid "Classe de 4\\ieme"
+msgstr "Curso 2º ESO"
+
+#: interface.py:258
+msgid "Classe de 3\\ieme"
+msgstr "Curso 3º ESO"
+
+#: interface.py:259
+msgid "Classe de 2\\up{nde}"
+msgstr "Curso 4º ESO"
+
+#: interface.py:295
+msgid "Enregistrer dans les préférences"
+msgstr "Guardar las preferencias"
+
+#: interface.py:318
+msgid "Fichier"
+msgstr "Archivos"
+
+#: interface.py:321
+msgid "Aide"
+msgstr "Ayuda"
+
+#: interface.py:325
+msgid ""
+"Pour avoir un aperçu d'un exercice, positionner le curseur de la souris sur "
+"le point d'interrogation."
+msgstr ""
+"Para ver un ejemplo de cada ejercicio, coloca el cursor unos segundos sobre "
+"la interrogación."
+
+#: interface.py:333
+msgid "Tous les exercices"
+msgstr "Todos los ejercicios"
+
+#: interface.py:339
+msgid "Accéder au site"
+msgstr "Acceder a la web"
+
+#: interface.py:342
+msgid "À propos"
+msgstr "Acerca de"
+
+#: interface.py:393
+msgid ""
+"self.spinBox_%s_%s.setToolTip(u\"Choisissez le nombre d'exercices de ce type "
+"à créer.\")"
+msgstr ""
+"self.spinBox_%s_%s.setToolTip(u\"Marca el número de ejercicios de este tipo "
+"que quieras crear.\")"
+
+#: interface.py:403 interface.py:484
+msgid "Attention !"
+msgstr "Aviso !"
+
+#: interface.py:404
+msgid "Tu dois recommencer pyromaths pour voir les changements..."
+msgstr "Debes reiniciar pyromaths para que se aplique el cambio..."
+
+#: interface.py:410
+msgid "Erreur critique"
+msgstr "Error crítico"
+
+#: interface.py:417
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html>\n"
+"  <head>\n"
+"    <meta name=\"qrichtext\" content=\"1\" />\n"
+"    <style type=\"text/css\">\n"
+"      p, li { white-space: pre-wrap; align:\"justify\"; margin-top:0px; "
+"margin-bottom:0px; margin-left:0px; margin-right:5px; -qt-block-indent:0; "
+"text-indent:0px; }\n"
+"    </style>\n"
+"  </head>\n"
+"  <body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; "
+"font-style:normal;\" bgcolor=\"#f9efbe\">\n"
+"    <p align=\"center\">\n"
+"    <img src=\"%s\" />\n"
+"    <br /><br />\n"
+"    <span style=\"font-weight:600;\">Version %s</span>\n"
+"    </p>\n"
+"    <p>\n"
+"    <span style=\" font-weight:600;\">Pyromaths</span> est un programme qui "
+"permet de créer des  fiches d'exercices types de mathématiques niveau "
+"collège avec leur corrigé.\n"
+"    </p>\n"
+"    <p>\n"
+"    Les fiches sont produites au format LaTeX. Pyromaths lance ensuite les "
+"commandes nécessaires à la production de fichiers pdf (latex - dvips - "
+"ps2pdf) et les ouvre.\n"
+"    </p>\n"
+"    <p align=\"center\">\n"
+"    <span style=\" text-decoration: underline;\">Remerciements à&nbsp;:</"
+"span>\n"
+"    </p>\n"
+"    <p>\n"
+"    <ul style=\"-qt-list-indent:1;\">\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">David Robert</span> pour l'idée de "
+"départ&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Yves Gesnel</span> pour le portage "
+"de Pyromaths sur Mac OS X et la conception d'exercices&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Arnaud Kientz</span> pour ses "
+"graphismes, son implication dans le code de Pyromaths et son amitié&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Guillaume Barthélémy</span> pour ses "
+"exercices&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Nicolas Bissonnier</span> pour son "
+"arrivée dans l'équipe de développement&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Nicolas Pourcelot</span> pour ses "
+"conseils et son implication prochaine dans le code de Pyromaths&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Didier Roche</span> pour "
+"l'intégration de Pyromaths dans les dépôts Ubuntu&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Jacqueline Gouguenheim-Desloy</span> "
+"a porté Pyromaths sur Mac OS X à ses débuts. Son soutien et son amitié nous "
+"ont été précieux. Sa disparition est une perte douloureuse pour la "
+"communauté du logiciel libre.\n"
+"      </li>\n"
+"    </ul>\n"
+"    </p>\n"
+"    <p align=\"center\">\n"
+"    %s\n"
+"    </p>\n"
+"  </body>\n"
+"</html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\"><html>  <head>    <meta name=\"qrichtext\" content="
+"\"1\" />    <style type=\"text/css\">      p, li { white-space: pre-wrap; "
+"align:\"justify\"; margin-top:0px; margin-bottom:0px; margin-left:0px; "
+"margin-right:5px; -qt-block-indent:0; text-indent:0px; }    </style>  </"
+"head>  <body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\" bgcolor=\"#f9efbe\">    <p align=\"center"
+"\">    <img src=\"%s\" />    <br /><br />    <span style=\"font-weight:600;"
+"\">Versión %s</span>    </p>    <p>    <span style=\" font-weight:600;"
+"\">Pyromaths</span> es un programa que permite crear hojas de ejercicios del "
+"tipo matemático de nivel escolar con su correción.    </p>    <p>    Las "
+"hojas son creadas en formato LaTeX. Pyromaths lanza después los comandos "
+"necesarios para crear un ficheros pdf (LaTeX - dvips - ps2pdf) y lo abre.    "
+"</p>    <p align=\"center\">    <span style=\" text-decoration: underline;"
+"\">Agradecimientos a&nbsp;:</span>    </p>    <p>    <ul style=\"-qt-list-"
+"indent:1;\">      <li>      <span style=\" font-weight:600;\">David Robert</"
+"span> por la idea inicial&nbsp;;      </li>      <li>      <span style=\" "
+"font-weight:600;\">Yves Gesnel</span> por la conversión de Pyromaths a Mac "
+"OS X y la concepción de ejercicios&nbsp;;      </li>      <li>      <span "
+"style=\" font-weight:600;\">Arnaud Kientz</span> por sus grafismos, su "
+"implicación en el código de Pyromaths y su amistad&nbsp;;      </li>      "
+"<li>      <span style=\" font-weight:600;\">Guillaume Barthélémy</span> por "
+"sus ejercicios&nbsp;;      </li>      <li>      <span style=\" font-"
+"weight:600;\">Nicolas Bissonnier</span> por su entrada en el equipo de "
+"desarrollo&nbsp;;      </li>      <li>      <span style=\" font-weight:600;"
+"\">Nicolas Pourcelot</span> por sus consejos y su cercana implicación en el "
+"código de Pyromaths&nbsp;;      </li>      <li>      <span style=\" font-"
+"weight:600;\">Didier Roche</span> por la integración de Pyromaths en los "
+"repositorios Ubuntu&nbsp;;      </li>      <li>      <span style=\" font-"
+"weight:600;\">Jacqueline Gouguenheim-Desloy</span> por apostar por Pyromaths "
+"en Mac OS X desde sus inicios. Su ayuda y amistad nos ha sido de gran valor. "
+"Su desaparición es una pérdida dolorosa para la comunidad del software "
+"libre.      </li>    </ul>    </p>    <p align=\"center\">    %s    </p>  </"
+"body></html>"
+
+#: interface.py:477
+msgid "À propos de Pyromaths"
+msgstr "Acerca de Pyromaths"
+
+#: interface.py:485
+msgid "Veuillez sélectionner des exercices..."
+msgstr "Debes elegir antes algún ejercicio..."
+
+#: interface.py:534 interface.py:624
+msgid "Dossier où créer les fiches"
+msgstr "Carpeta donde crear las hojas"
+
+#: interface.py:542
+msgid "%s-tous.tex"
+msgstr "%s-todos.tex"
+
+#: interface.py:543
+msgid "%s-tous-corrige.tex"
+msgstr "%s-todos-solucion.tex"
+
+#: interface.py:550
+msgid "Exemple de fiche"
+msgstr "Hoja de ejemplo"
+
+#: interface.py:551
+msgid "%s\\ieme"
+msgstr "Curso %sº"
+
+#: interface.py:691
+msgid "Choisissez l'ordre des exercices"
+msgstr "Elige el orden de los ejercicios"
+
+#: interface.py:738 interface.py:744
+msgid "Enregistrer sous..."
+msgstr "Guardar como..."
+
+#: interface.py:740 interface.py:747
+msgid "Documents Tex (*.tex)"
+msgstr "Documentos Tex (*.tex)"
+
+#: interface.py:746 interface.py:749
+msgid "%s-corrige.tex"
+msgstr "%s-solucion.tex"

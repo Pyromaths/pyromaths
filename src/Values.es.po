@@ -1,0 +1,372 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pyromaths 13.03\n"
+"POT-Creation-Date: 2013-06-22 14:21+Hora de verano romance\n"
+"PO-Revision-Date: 2013-06-22 14:21+0100\n"
+"Last-Translator: Jose Antonio Martinez Chico <jkuato@hotmail.com>\n"
+"Language-Team: Jérôme Ortais <jerome.ortais@pyromaths.org>\n"
+"Language: spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: D:\\Cursos\\Hoja_de_Ejecicios-Generadores\\Pyromaths"
+"\\Python-Traduccion\\pyromaths-13.03\\src\n"
+
+#: Values.py:9
+msgid ""
+"© 2006 – %s Jérôme Ortais<br/>\n"
+"<span style=\" font-size:small;\">Pyromaths est distribué sous licence GPL.</"
+"span>"
+msgstr ""
+"© 2006 – %s Jérôme Ortais<br/>\n"
+"<span style=\" font-size:small;\">Pyromaths es una distribución bajo "
+"licencia GPL.</span>"
+
+#: Values.py:14
+msgid "6e"
+msgstr "6p"
+
+#: Values.py:14
+msgid "Sixième"
+msgstr "6ºPrimaria"
+
+#: Values.py:15 Values.py:54
+msgid "Calcul mental"
+msgstr "Cálculo mental"
+
+#: Values.py:16
+msgid "Écrire un nombre décimal"
+msgstr "Escritura del nombre decimal"
+
+#: Values.py:17
+msgid "Placer une virgule"
+msgstr "Colocación de la coma decimal"
+
+#: Values.py:18
+msgid "Écriture fractionnaire ou décimale"
+msgstr "Decimal de un fracción"
+
+#: Values.py:19
+msgid "Décomposition de décimaux"
+msgstr "Decimal de la descomposión"
+
+#: Values.py:20
+msgid "Conversions unités"
+msgstr "Conversión de unidades"
+
+#: Values.py:21
+msgid "Conversions unités d'aires"
+msgstr "Conversión de unidades de áreas"
+
+#: Values.py:22
+msgid "Conversions unités de volumes"
+msgstr "Conversión de unidades de volumen"
+
+#: Values.py:23
+msgid "Poser des opérations (sauf divisions)"
+msgstr "Cálculo de decimales (sin división)"
+
+#: Values.py:24
+msgid "Produits, quotients par 10, 100, 1000"
+msgstr "Productos y divisiones de 10, 100,.."
+
+#: Values.py:25
+msgid "Classer des nombres décimaux"
+msgstr "Ordenación de decimales"
+
+#: Values.py:26
+msgid "Droites, demi-droites, segments"
+msgstr "Rectas, semirrectas, segmentos"
+
+#: Values.py:27
+msgid "Droites perpendiculaires et parallèles"
+msgstr "Rectas perpendiculares y paralelas"
+
+#: Values.py:28
+msgid "Propriétés sur les droites"
+msgstr "Propiedades de las rectas"
+
+#: Values.py:29
+msgid "Multiples de 2, 3, 5, 9, 10"
+msgstr "Divisibilidad entre 2, 3, 5, 9, 10"
+
+#: Values.py:30
+msgid "Fractions partage"
+msgstr "Fracciones de un rectángulo"
+
+#: Values.py:31
+msgid "Fractions et abscisses"
+msgstr "Fracciones en la recta numérica"
+
+#: Values.py:32
+msgid "Aires et quadrillage"
+msgstr "Áreas en cuadrículas"
+
+#: Values.py:33
+msgid "Symétrie et quadrillages"
+msgstr "Simetrías axial"
+
+#: Values.py:34
+msgid "Mesurer des angles"
+msgstr "Medida de ángulos"
+
+#: Values.py:35
+msgid "Représentation dans l'espace"
+msgstr "Representación en el espacio"
+
+#: Values.py:36
+msgid "Arrondir des nombres décimaux"
+msgstr "Redondeos de decimales"
+
+#: Values.py:38
+msgid "5e"
+msgstr "1e"
+
+#: Values.py:38
+msgid "Cinquième"
+msgstr "1ºESO"
+
+#: Values.py:39
+msgid "Priorités opératoires"
+msgstr "Jerarquía de las operaciones"
+
+#: Values.py:40
+msgid "Symétrie centrale"
+msgstr "Simetría central"
+
+#: Values.py:41
+msgid "Fractions égales"
+msgstr "Fracciones equivalentes"
+
+#: Values.py:42 Values.py:55
+msgid "Sommes de fractions"
+msgstr "Sumas y restas de fracciones"
+
+#: Values.py:43
+msgid "Produits de fractions"
+msgstr "Productos de fracciones"
+
+#: Values.py:44
+msgid "Repérage"
+msgstr "Coordenadas de puntos"
+
+#: Values.py:45
+msgid "Addition de relatifs"
+msgstr "Sumas y restas relativas"
+
+#: Values.py:46
+msgid "Construction de triangles"
+msgstr "Construcción de triángulos"
+
+#: Values.py:47
+msgid "Construction de parallélogrammes"
+msgstr "Construcción de paralelogramos"
+
+#: Values.py:48
+msgid "Échelles"
+msgstr "Escalas"
+
+#: Values.py:49
+msgid "Proportionnalite (Problème)"
+msgstr "Proporcionalidad (Problema)"
+
+#: Values.py:50
+msgid "Aire de disques"
+msgstr "Área de una corona circular"
+
+#: Values.py:51
+msgid "Statistiques"
+msgstr "Estadística"
+
+#: Values.py:53
+msgid "4e"
+msgstr "2e"
+
+#: Values.py:53
+msgid "Quatrième"
+msgstr "2ºESO"
+
+#: Values.py:56
+msgid "Produits et quotients de fractions"
+msgstr "Productos y divisiones de fracciones"
+
+#: Values.py:57
+msgid "Fractions et priorités"
+msgstr "Jerarquía en fracciones"
+
+#: Values.py:58
+msgid "Bases du calcul littéral"
+msgstr "Cálculo básico de monomios"
+
+#: Values.py:59
+msgid "Réduire des expressions littérales"
+msgstr "Reducción de expresiones literales"
+
+#: Values.py:60
+msgid "Propriétés sur les puissances"
+msgstr "Propiedades de las potencias"
+
+#: Values.py:61
+msgid "Propriétés sur les puissances de 10"
+msgstr "Propiedades de las potencias de 10"
+
+#: Values.py:62
+msgid "Écritures scientifiques"
+msgstr "Notación científica"
+
+#: Values.py:63
+msgid "Puissances de 10"
+msgstr "Operaciones en notación científica"
+
+#: Values.py:64
+msgid "Distributivité"
+msgstr "Distributiva con monomios"
+
+#: Values.py:65
+msgid "Double distributivité"
+msgstr "Doble distributiva con monomios"
+
+#: Values.py:66
+msgid "Équations 1° degré(sans dénom.)"
+msgstr "Ecuaciones de 1° grado(sin denom.)"
+
+#: Values.py:67
+msgid "Théorème de Pythagore"
+msgstr "Teorema de Pitágoras"
+
+#: Values.py:68
+msgid "Réciproque du théorème de Pythagore"
+msgstr "Recíproco del Teorema de Pitágoras"
+
+#: Values.py:69
+msgid "Cercle et théorème de Pythagore"
+msgstr "Círculo y Teorema de Pitágoras"
+
+#: Values.py:70 Values.py:85
+msgid "Théorème de Thalès"
+msgstr "Teorema de Tales"
+
+#: Values.py:71
+msgid "Trigonométrie (Raisons)"
+msgstr "Trigonometría (Razones)"
+
+#: Values.py:73
+msgid "3e"
+msgstr "3e"
+
+#: Values.py:73
+msgid "Troisième"
+msgstr "3ºESO"
+
+#: Values.py:74
+msgid "Fractions"
+msgstr "Fracciones"
+
+#: Values.py:75
+msgid "Puissances"
+msgstr "Operaciones en notación científica"
+
+#: Values.py:76
+msgid "PGCD"
+msgstr "Máximo Común Dividor (MCD)"
+
+#: Values.py:77
+msgid "Développements"
+msgstr "Desarrollos de polinomios"
+
+#: Values.py:78
+msgid "Factorisations"
+msgstr "Factorizaciones de polinomios"
+
+#: Values.py:79
+msgid "Dévt, factorisat°, calcul et éq° produit"
+msgstr "Cuentas con polinomio y ecuación"
+
+#: Values.py:80
+msgid "Équations 1° degré(avec dénom.)"
+msgstr "Ecuaciones de 1° grado(con denom.)"
+
+#: Values.py:81
+msgid "Racines carrées"
+msgstr "Raíces cuadradas"
+
+#: Values.py:82
+msgid "Système d'équations"
+msgstr "Sistema de ecuaciones"
+
+#: Values.py:83
+msgid "Fonctions affines"
+msgstr "Funciones afines"
+
+#: Values.py:84
+msgid "Probabilités"
+msgstr "Probabilidad"
+
+#: Values.py:86
+msgid "Réciproque du théorème de Thalès"
+msgstr "Recíproco del Teorema de Tales"
+
+#: Values.py:87
+msgid "Trigonométrie (Mesures)"
+msgstr "Trigonometría (Medidas)"
+
+#: Values.py:88
+msgid "Arithmétique"
+msgstr "Aritmética del MCD y mcm"
+
+#: Values.py:89
+msgid "Pourcentages (Problème)"
+msgstr "Porcentajes (Problema)"
+
+#: Values.py:91
+msgid "Ly"
+msgstr "4e"
+
+#: Values.py:91
+msgid "Lycée"
+msgstr "4ºESO"
+
+#: Values.py:92
+msgid "Équations 2° degré"
+msgstr "Ecuaciones de 2° grado"
+
+#: Values.py:93
+msgid "Factorisations 2° degré"
+msgstr "Factorizaciones de 2° grado"
+
+#: Values.py:94
+msgid "Factorisations degré 3"
+msgstr "Factorizaciones de 3° grado"
+
+#: Values.py:95
+msgid "Étude de signe"
+msgstr "Estudio del signo"
+
+#: Values.py:96
+msgid "Sens de variations"
+msgstr "Intervalos de monotonía"
+
+#: Values.py:97
+msgid "Étude de fonctions"
+msgstr "Estudio de funciones"
+
+#: Values.py:98
+msgid "Vecteurs"
+msgstr "Vectores"
+
+#: Values.py:99
+msgid "Cercle trigonométrique"
+msgstr "Círculo trigonométrico"
+
+#~ msgid "Trigonométrie"
+#~ msgstr "Trigonometría"
+
+#~ msgid "Équation"
+#~ msgstr "Ecuaciones de 1º grado"
