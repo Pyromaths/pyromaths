@@ -28,9 +28,9 @@ from ..outils import Arithmetique
 
 
 def fractions_egales():
-    exo = ["\\exercice", u"Compléter :", "\\begin{multicols}{4}",
+    exo = ["\\exercice", _(u"Compléter :"), "\\begin{multicols}{4}",
            "  \\begin{enumerate}"]
-    cor = ["\\exercice*", u"Compléter :", "\\begin{multicols}{4}",
+    cor = ["\\exercice*", _(u"Compléter :"), "\\begin{multicols}{4}",
            "  \\begin{enumerate}"]
     for i in range(8):
         n = d = 1
@@ -46,7 +46,7 @@ def fractions_egales():
             enonce = [n * c, d * c, n, d]
             solution = [n * c, d * c, n, d]
         trou = random.randrange(4)
-        enonce[trou] = "\\ldots"
+        enonce[trou] = _(" \\ldots ")
         solution[trou] = "\\mathbf{%s}" % solution[trou]
         if cas:
             solution.insert(2, c)
@@ -57,10 +57,10 @@ def fractions_egales():
         exo.append("\\item $\\dfrac{%s}{%s}=\\dfrac{%s}{%s}$" %
                    tuple(enonce))
         if cas:
-            cor.append("\\item $\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}=\\dfrac{%s}{%s}$" %
+            cor.append(_("\\item $\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}=\\dfrac{%s}{%s}$") %
                        tuple(solution))
         else:
-            cor.append("\\item $\\dfrac{%s}{%s}=\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}$" %
+            cor.append(_("\\item $\\dfrac{%s}{%s}=\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}$") %
                        tuple(solution))
     exo.extend(["  \\end{enumerate}", "\end{multicols}\n"])
     cor.extend(["  \\end{enumerate}", "\end{multicols}\n"])
@@ -69,10 +69,10 @@ def fractions_egales():
 
 def sommes_fractions():
     exo = ["\\exercice",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           _(u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :"),
            "\\begin{multicols}{4}", "  \\noindent"]
     cor = ["\\exercice*",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           _(u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :"),
            "\\begin{multicols}{4}", "  \\noindent"]
     for i in range(8):
         if random.randrange(2):
@@ -123,10 +123,10 @@ def sommes_fractions():
 
 def produits_fractions():
     exo = ["\\exercice",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           _(u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :"),
            "\\begin{multicols}{4}", "  \\noindent"]
     cor = ["\\exercice*",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+           _(u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :"),
            "\\begin{multicols}{4}", "  \\noindent"]
     for i in range(8):
         n1=d1=n2=d2=a=b=2
@@ -142,14 +142,14 @@ def produits_fractions():
 
         fr1 = Fractions(n1*a, d1*b)
         fr2 = Fractions(n2*b, d2*a)
-        exo.append("\\[ \\thenocalcul = %s \\times %s \\]" % (Fractions.TeX(fr1),
+        exo.append(_("\\[ \\thenocalcul = %s \\times %s \\]") % (Fractions.TeX(fr1),
                    Fractions.TeX(fr2)))
-        cor.append("\\[ \\thenocalcul = %s \\times %s \\]" % (Fractions.TeX(fr1),
+        cor.append(_("\\[ \\thenocalcul = %s \\times %s \\]") % (Fractions.TeX(fr1),
                    Fractions.TeX(fr2)))
         fr1s = Fractions.simplifie(fr1)
         fr2s = Fractions.simplifie(fr2)
         if abs(fr1s.d) < abs(fr1.d) or abs(fr2s.d) < abs(fr2.d):
-            cor.append("\\[ \\thenocalcul = %s \\times %s \\]" % (Fractions.TeXSimplifie(fr1),
+            cor.append(_("\\[ \\thenocalcul = %s \\times %s \\]") % (Fractions.TeXSimplifie(fr1),
                        Fractions.TeXSimplifie(fr2)))
         fr = fr1s * fr2s
         frs = Fractions.simplifie(fr)

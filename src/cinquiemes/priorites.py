@@ -125,8 +125,8 @@ def affichage(loperateurs, loperandes):
     while j < len(loperateurs):
         calcul = calcul + '%s' % loperateurs[j]
         j = j + 1
-    calcul = ('\\times ').join(calcul.split('*', 2))
-    calcul = ('\\div ').join(calcul.split('/', 2))
+    calcul = (_('\\times ')).join(calcul.split('*', 2))
+    calcul = (_('\\div ')).join(calcul.split('/', 2))
     return calcul
 
 
@@ -231,10 +231,10 @@ def calcul(a, op, b, entier=1):  #retourne 'hp' (hors programme) ou le résultat
 def main():
     nb = 9  # nombre de calculs
     exo = ["\\exercice",
-           u"Calculer les expressions suivantes en détaillant les calculs.\n",
+           _(u"Calculer les expressions suivantes en détaillant les calculs.\n"),
            "\\begin{multicols}{3}", "\\noindent"]
     cor = ["\\exercice*",
-           u"Calculer les expressions suivantes en détaillant les calculs.",
+           _(u"Calculer les expressions suivantes en détaillant les calculs."),
            "\\begin{multicols}{3}", "\\noindent"]
     i = 0
     while i < nb:
