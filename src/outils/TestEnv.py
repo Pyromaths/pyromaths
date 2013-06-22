@@ -32,9 +32,8 @@
 
 from os.path import isfile, join
 
-def test(gui):
-    from ..Values import CONFIGDIR
+def test(gui, CONFIGDIR):
     if not isfile(join(CONFIGDIR, "pyromaths.xml")):
-        gui.erreur_critique(u"Impossible de lire le fichier de configuration." \
-                u"Veuillez vérifier ce dernier ou faire remonter l'erreur " \
-                u"sur le forum de Pyromaths.")
+        gui.erreur_critique(_(u"Impossible de lire le fichier de configuration.\n") +
+                _(u"Veuillez vérifier ce dernier ou faire remonter l'erreur ") +
+                _(u"sur le forum de Pyromaths."))

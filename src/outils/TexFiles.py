@@ -44,7 +44,7 @@ def mise_en_forme(file):
         cline = cline.strip()
         indent = trouve_indentation(cline, indent, lline)
         if indent < 0:
-            print "problème"
+            print _("problème")
         if cline:
             chaine, indent = traite_chaine(cline, indent)
             new_tex.extend(chaine)
@@ -57,13 +57,13 @@ def mise_en_forme(file):
 
 def trouve_indentation(cline, indent, lline):
     if lline.find(r"\begin{")>=0:
-        "indente tout ce qui suit \begin{...}"
+        _("indente tout ce qui suit \begin{...}")
         indent += 2
     if cline.find(r"\end{")==0:
-        "desindente tout ce qui suit \end{...}"
+        _("desindente tout ce qui suit \end{...}")
         indent -= 2
 #    if lline.find(r"\begin{enumerate}")>=0 or lline.find(r"\begin{itemize}")>=0:
-#        "n'indente pas ce qui suit un environnement itemize"
+#        _("n'indente pas ce qui suit un environnement itemize")
 #        indent -= 2
 #    if cline.find(r"\item") == 0 and lline.find(r"\begin{enumerate}") < 0 \
 #                                  and lline.find(r"\begin{itemize}") < 0:

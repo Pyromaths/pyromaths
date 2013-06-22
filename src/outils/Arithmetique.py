@@ -95,13 +95,13 @@ def factoriseTex(n):
         text = ' & = '
         for j in range(len(etapes[i])):
           if j != len(etapes[i]) - 1:
-            text += etapes[i][j] + ' \\times '
+            text += etapes[i][j] + _(' \\times ')
           else:
             text += etapes[i][j]
         corrige.append(text + '\\\\')
       corrige.append("\\end{align*}")
     else:
-      corrige = [str(n) + " est un nombre premier.\\par "]
+      corrige = [str(n) + _(" est un nombre premier.\\par ")]
 
     return (primes, corrige)
 

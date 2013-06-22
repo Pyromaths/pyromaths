@@ -425,8 +425,8 @@ def texify(liste_calculs):
         s = s.replace("**{", "^{")
         s = s.replace("(", "\\left( ")
         s = s.replace(")", "\\right) ")
-        s = s.replace("*", "\\times ")
-        s = s.replace("/", "\\div ")
+        s = s.replace("*", _("\\times "))
+        s = s.replace("/", _("\\div "))
         if not ls or s != ls[-1]:
             ls.append(s)
     return ls
@@ -500,7 +500,7 @@ def test_entiers(nbval, polynomes, entiers):
             break
         else:
             if not polynomes:
-                print u"%s ème calcul" % (c+1), a, " = ", eval(a), u" en %s étapes"%(len(r))
+                print _(u"%s ème calcul") % (c+1), a, " = ", eval(a), _(u" en %s étapes")%(len(r))
                 if eval(a) != eval("".join(r[-1])):
                     print a, " = ", eval(a)
                     print r
@@ -508,7 +508,7 @@ def test_entiers(nbval, polynomes, entiers):
             if polynomes:
                 from sympy import Symbol, expand
                 x = Symbol('x')
-                print u" : %s ème calcul en %s étapes" % (c+1, len(r))
+                print _(u" : %s ème calcul en %s étapes") % (c+1, len(r))
                 if not len(r):
                     print a
                     break
@@ -522,7 +522,7 @@ def test_entiers(nbval, polynomes, entiers):
                         print a, "=", t1
                         print "\n".join(sympyfy(r))
 
-                        print u"Devrait être : ", eval(t0).expand()
+                        print _(u"Devrait être : "), eval(t0).expand()
                         break
 
 def sympyfy(liste_calculs):
@@ -575,8 +575,8 @@ def sympyfy(liste_calculs):
 #        s = s.replace("(", "\\left( ")
 #        s = s.replace(")", "\\right) ")
 #        s = s.replace("**{", "^{")
-#        s = s.replace("*", "\\times ")
-#        s = s.replace("/", "\\div ")
+#        s = s.replace("*", _("\\times "))
+#        s = s.replace("/", _("\\div "))
         if not ls or s != ls[-1]:
             ls.append(s)
     return ls

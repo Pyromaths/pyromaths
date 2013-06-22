@@ -52,7 +52,7 @@ def TeX_division(dividende,diviseur):
         string+= "\\\\ \n"
     string+= "\\end{array}\n$$"
 
-    string+="\n On a $$"+dividende.TeX()+" = \\left(" + texquotient.TeX()+"\\right) \\times \\left("+diviseur.TeX()+"\\right)"
+    string+=_("\n On a $$")+dividende.TeX()+" = \\left(" + texquotient.TeX()+_("\\right) \\times \\left(")+diviseur.TeX()+"\\right)"
     if restera!=Polynome(0):
         if len(restera.puiss)==1 and restera[restera.deg]>0:#monome
             string +="+"+restera.TeX()
@@ -60,6 +60,7 @@ def TeX_division(dividende,diviseur):
             string+="+\\left("+restera.TeX()+"\\right)"
     string+="$$"
     return string
+
 def tab_print(polynome,longueur=0,parenthese=False,debut=0):
     '''utilisé par TeX_division pour décaler le reste dans la partie gauche'''
     degre=polynome.degre_max+debut
@@ -117,7 +118,10 @@ def poly_racines_fractionnaires(rac_min,rac_max,denom1,X):
     pol2=pol2.simplifie()
     simplifie=abs(pgcd(pgcd(int(pol2[0]),int(pol2[1])),int(pol2[2])))
     pol2= pol2/simplifie
-    return pol2.simplifie()
+    pol2=pol2.simplifie()
+    pol2.var = X.var
+    return pol2
+
 def poly_racines_entieres(rac_min,rac_max,X,a1=1):
     
     while 1:
