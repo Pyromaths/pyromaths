@@ -22,7 +22,7 @@
 #
 
 from . import puissances, developpements, calcul_mental, fractions, geometrie
-from . import litteral
+from . import litteral, equations
 
 def write(f0, f1, exos):
     f0.write("\n")
@@ -44,6 +44,7 @@ def main(exo, f0, f1):
         puissances.exo_puissances,
         developpements.exo_distributivite,
         developpements.exo_double_distributivite,
+        equations.tex_equations,
         geometrie.exo_pythagore,
         geometrie.exo_reciproque_pythagore,
         geometrie.exo_triangle_cercle,

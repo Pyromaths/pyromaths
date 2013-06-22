@@ -59,14 +59,14 @@ def tex_proprietes_val(exp_max, nb_max, type):
 
 def tex_proprietes():
     exo = ["\\exercice",
-           u"Compléter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :",
-           "\\begin{multicols}{4}", "  \\noindent%",
+           _(u"Compléter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :"),
+           "\\begin{multicols}{3}", "  \\noindent%",
            "  \\begin{enumerate}"]
     cor = ["\\exercice*",
-           u"Compléter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :",
-           "\\begin{multicols}{4}", "  \\noindent%",
+           _(u"Compléter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :"),
+           "\\begin{multicols}{3}", "  \\noindent%",
            "  \\begin{enumerate}"]
-    lexos = [0, 1, 2, 3, 0, 1, 2, 3]
+    lexos = [0, 1, 2, 3, 0, 1, 2, 3, 0]
 
     #0: a^n*a^p ; 1: (a^n)^p ; 2:a^n/a^p ; 3: a^n*b^n
 
@@ -74,31 +74,35 @@ def tex_proprietes():
         j = lexos.pop(randrange(len(lexos)))
         if j == 3:
             lval = tex_proprietes_val(12, 12, 1)
-            exo.append("\\item $%s^{%s} \\times %s^{%s} = \\dotfill$" %
+            exo.append(_("\\item $%s^{%s} \\times %s^{%s} = \\dotfill$") %
                        lval)
-            cor.append("\\item $%s^{%s}\\times%s^{%s}=" % lval)
-            cor.append("%s^{%s}$" % (lval[0] * lval[2], lval[1]))
+            cor.append(_("\\item $%s^{%s}\\times%s^{%s}=") % lval)
+            cor.append(_("$(%s\\times%s)^{%s}=") % (lval[0], lval[2], lval[1]))
+            cor.append("\\mathbf{%s^{%s}}$" % (lval[0] * lval[2], lval[1]))
         else:
             lval = tex_proprietes_val(12, 12, 0)
             if j == 0:
-                exo.append("\\item $%s^{%s}\\times%s^{%s}=\\dotfill$" %
+                exo.append(_("\\item $%s^{%s}\\times%s^{%s}=\\dotfill$") %
                            lval)
-                cor.append("\\item $%s^{%s}\\times%s^{%s}=" % lval)
-                cor.append("%s^{%s}$" % (lval[0], lval[1] + lval[3]))
+                cor.append(_("\\item $%s^{%s}\\times%s^{%s}=") % lval)
+                cor.append("$%s^{%s+%s}=" % (lval[0], lval[1], lval[3]))
+                cor.append("\\mathbf{%s^{%s}}$" % (lval[0], lval[1] + lval[3]))
             elif j == 1:
-                exo.append("\\item $(%s^{%s})^{%s}=\\dotfill$" % (lval[0],
+                exo.append(_("\\item $(%s^{%s})^{%s}=\\dotfill$") % (lval[0],
                            lval[1], lval[3]))
                 cor.append("\\item $(%s^{%s})^{%s}=" % (lval[0],
                            lval[1], lval[3]))
-                cor.append("%s^{%s}$" % (lval[0], lval[1] * lval[3]))
+                cor.append(_("$%s^{%s\\times%s}=") % (lval[0], lval[1], lval[3]))
+                cor.append("\\mathbf{%s^{%s}}$" % (lval[0], lval[1] * lval[3]))
             elif j == 2:
                 while lval[1] - lval[3] < 3:
                     lval = tex_proprietes_val(12, 12, 0)
-                exo.append("\\item $\\dfrac{%s^{%s}}{%s^{%s}}=\\dotfill$" %
+                exo.append(_("\\item $\\dfrac{%s^{%s}}{%s^{%s}}=\\dotfill$") %
                            lval)
                 cor.append("\\item $\\dfrac{%s^{%s}}{%s^{%s}}=" %
                            lval)
-                cor.append("%s^{%s}$" % (lval[0], lval[1] - lval[3]))
+                cor.append("$%s^{%s-%s}=" % (lval[0], lval[1], lval[3]))
+                cor.append("\\mathbf{%s^{%s}}$" % (lval[0], lval[1] - lval[3]))
     exo.append("\\end{enumerate}")
     exo.append("\\end{multicols}\n")
     cor.append("\\end{enumerate}")
@@ -141,12 +145,12 @@ def tex_proprietes_neg_val(exp_max, nb_max, type):
 
 def tex_proprietes_neg():
     exo = ["\\exercice",
-           u"Écrire sous la forme d'une puissance de 10 puis donner l'écriture",
-           u" décimale de ces nombres :", "\\begin{multicols}{2}",
+           _(u"Écrire sous la forme d'une puissance de 10 puis donner l'écriture"),
+           _(u" décimale de ces nombres :"), "\\begin{multicols}{2}",
            "  \\noindent%", "  \\begin{enumerate}"]
     cor = ["\\exercice*",
-           u"Écrire sous la forme d'une puissance de 10 puis donner l'écriture",
-           u" décimale de ces nombres :", "\\begin{multicols}{2}",
+           _(u"Écrire sous la forme d'une puissance de 10 puis donner l'écriture"),
+           _(u" décimale de ces nombres :"), "\\begin{multicols}{2}",
            "  \\noindent%", "  \\begin{enumerate}"]
     lexos = [0, 1, 2, 3, 0, 1, 2, 3]
 
@@ -161,9 +165,9 @@ def tex_proprietes_neg():
         if j == 0:
             while abs(lexp[0] + lexp[1]) > 10:
                 lexp = [randrange(-6, 6) for i in range(2)]
-            exo.append("\\item $10^{%s} \\times 10^{%s} = \\dotfill$" %
+            exo.append(_("\\item $10^{%s} \\times 10^{%s} = \\dotfill$") %
                        tuple(lexp))
-            cor.append("\\item $10^{%s}\\times 10^{%s}=" % tuple(lexp))
+            cor.append(_("\\item $10^{%s}\\times 10^{%s}=") % tuple(lexp))
             cor.append("10^{%s+%s}=" % (lexp[0], tex_coef(lexp[1],
                        '', bpn=1)))
             cor.append("10^{%s}=%s$" % (lexp[0] + lexp[1],
@@ -171,17 +175,17 @@ def tex_proprietes_neg():
         elif j == 1:
             while abs(lexp[0] * lexp[1]) > 10:
                 lexp = [randrange(-6, 6) for i in range(2)]
-            exo.append("\\item $(10^{%s})^{%s}=\\dotfill$" % (lexp[0],
+            exo.append(_("\\item $(10^{%s})^{%s}=\\dotfill$") % (lexp[0],
                        lexp[1]))
             cor.append("\\item $(10^{%s})^{%s}=" % tuple(lexp))
-            cor.append("10^{%s \\times %s}=" % (lexp[0], tex_coef(lexp[1],
+            cor.append(_("10^{%s \\times %s}=") % (lexp[0], tex_coef(lexp[1],
                        '', bpn=1)))
             cor.append("10^{%s}=%s$" % (lexp[0] * lexp[1],
                        decimaux(10 ** (lexp[0] * lexp[1]), 1)))
         elif j == 2:
             while abs(lexp[0] - lexp[1]) > 10:
                 lexp = [randrange(-6, 6) for i in range(2)]
-            exo.append("\\item $\\dfrac{10^{%s}}{10^{%s}}=\\dotfill$" %
+            exo.append(_("\\item $\\dfrac{10^{%s}}{10^{%s}}=\\dotfill$") %
                        tuple(lexp))
             cor.append("\\item $\\dfrac{10^{%s}}{10^{%s}}=" % tuple(lexp))
             cor.append("10^{%s-%s}=" % (lexp[0], tex_coef(lexp[1],
@@ -215,11 +219,11 @@ def val_sc():
 
 def ecr_sc():
     from math import log10, floor
-    exo = ["\\exercice", u"Compléter par le nombre qui convient :",
+    exo = ["\\exercice", _(u"Compléter par le nombre qui convient :"),
            "\\begin{multicols}{3}", "  \\noindent%",
            "  \\begin{enumerate}"]
     cor = ["\\exercice*",
-           u"Compléter par le nombre qui convient :",
+           _(u"Compléter par le nombre qui convient :"),
            "\\begin{multicols}{3}", "  \\noindent%",
            "  \\begin{enumerate}"]
     for i in range(6):
@@ -229,17 +233,17 @@ def ecr_sc():
         s_a = decimaux(a, 1)
         s_a_sc = decimaux(a_sc, 1)
         if randrange(2):  # forme : a=a_sc*...
-            exo.append("\\item $%s=%s\\times\\dotfill$" % (s_a,
+            exo.append(_("\\item $%s=%s\\times\\dotfill$") % (s_a,
                        s_a_sc))
-            cor.append("\\item $%s=%s\\times\\mathbf{10^{%s}}$" % (s_a,
+            cor.append(_("\\item $%s=%s\\times\\mathbf{10^{%s}}$") % (s_a,
                        s_a_sc, decimaux(exp, 1)))
         else:
 
               # forme : a_sc*...=a
 
-            exo.append("\\item $%s\\times\\dotfill=%s$" % (s_a_sc,
+            exo.append(_("\\item $%s\\times\\dotfill=%s$") % (s_a_sc,
                        s_a))
-            cor.append("\\item $%s\\times\\mathbf{10^{%s}}=%s$" % (s_a_sc,
+            cor.append(_("\\item $%s\\times\\mathbf{10^{%s}}=%s$") % (s_a_sc,
                        decimaux(exp, 1), s_a))
     exo.append("\\end{enumerate}")
     exo.append("\\end{multicols}\n")
@@ -253,40 +257,39 @@ def ecr_sc():
 
 def exo_puissances():
     from math import floor, log10
-    sd = string.maketrans('.', ',')  # convertit les . en , (separateur decimal)
     exo = ["\\exercice",
-           u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat.",
+           _(u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat."),
            "\\begin{multicols}{2}", "  \\noindent%"]
     cor = ["\\exercice*",
-           u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat.",
+           _(u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat."),
            "\\begin{multicols}{2}", "  \\noindent%"]
     valeurs = valeurs_puissances()
     i = randrange(2)
-    exo.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_0(valeurs[i]).translate(sd))
-    cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_0(valeurs[i]).translate(sd))
-    cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_1(valeurs[i]).translate(sd))
-    cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_2(valeurs[i]).translate(sd))
+    exo.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_0(valeurs[i]).replace(".",","))
+    cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_0(valeurs[i]).replace(".",","))
+    cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_1(valeurs[i]).replace(".",","))
+    cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_2(valeurs[i]).replace(".",","))
     if int(floor(log10(((valeurs[i][0] * valeurs[i][1]) * 1.) / valeurs[i][2]))) != \
         0:
-        cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_3(valeurs[i]).translate(sd))
+        cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_3(valeurs[i]).replace(".",","))
     cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" %
-               tex_puissances_4(valeurs[i]).translate(sd))
+               tex_puissances_4(valeurs[i]).replace(".",","))
     exo.append("\\columnbreak\\stepcounter{nocalcul}%")
     cor.append("\\columnbreak\\stepcounter{nocalcul}%")
     exo.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_0(valeurs[1 -
-               i]).translate(sd))
+               i]).replace(".",","))
     cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_0(valeurs[1 -
-               i]).translate(sd))
+               i]).replace(".",","))
     cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_1(valeurs[1 -
-               i]).translate(sd))
+               i]).replace(".",","))
     cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_2(valeurs[1 -
-               i]).translate(sd))
+               i]).replace(".",","))
     if int(floor(log10(((valeurs[1 - i][0] * valeurs[1 - i][1]) * 1.) /
            valeurs[1 - i][2]))) != 0:
         cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_3(valeurs[1 -
-                   i]).translate(sd))
-        cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" %
-                   tex_puissances_4(valeurs[1 - i]).translate(sd))
+                   i]).replace(".",","))
+    cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" %
+               tex_puissances_4(valeurs[1 - i]).replace(".",","))
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
     return (exo, cor)
@@ -294,17 +297,17 @@ def exo_puissances():
 
 def tex_puissances_0(a):
     if isinstance(a, tuple):
-        return '\\cfrac{\\nombre{%s} \\times 10^{%s} \\times \\nombre{%s} \\times 10^{%s}}{\\nombre{%s} \\times \\big( 10^{%s} \\big) ^%s}' % \
+        return _('\\cfrac{\\nombre{%s} \\times 10^{%s} \\times \\nombre{%s} \\times 10^{%s}}{\\nombre{%s} \\times \\big( 10^{%s} \\big) ^%s}') % \
             (a[0], a[3], a[1], a[4], a[2], a[5], a[6])
 
 
 def tex_puissances_1(a):
     if isinstance(a, tuple):
         if a[4] < 0:
-            return '\\cfrac{\\nombre{%s} \\times \\nombre{%s}}{\\nombre{%s}} \\times \\cfrac{10^{%s+(%s)}}{10^{%s \\times %s}}' % \
+            return _('\\cfrac{\\nombre{%s} \\times \\nombre{%s}}{\\nombre{%s}} \\times \\cfrac{10^{%s+(%s)}}{10^{%s \\times %s}}') % \
                 (a[0], a[1], a[2], a[3], a[4], a[5], a[6])
         else:
-            return '\\cfrac{\\nombre{%s} \\times \\nombre{%s}}{\\nombre{%s}} \\times \\cfrac{10^{%s+%s}}{10^{%s \\times %s}}' % \
+            return _('\\cfrac{\\nombre{%s} \\times \\nombre{%s}}{\\nombre{%s}} \\times \\cfrac{10^{%s+%s}}{10^{%s \\times %s}}') % \
                 (a[0], a[1], a[2], a[3], a[4], a[5], a[6])
 
 
@@ -312,19 +315,19 @@ def tex_puissances_2(a):
     if isinstance(a, tuple):
         if ((a[0] * a[1]) * 1.) / a[2] == (a[0] * a[1]) / a[2]:
             if a[5] * a[6] < 0:
-                return '\\nombre{%s} \\times 10^{%s-(%s)}' % \
+                return _('\\nombre{%s} \\times 10^{%s-(%s)}') % \
                     verifie_type(((a[0] * a[1]) / a[2], a[3] + a[4], a[5] *
                                  a[6]))
             else:
-                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type(((a[0] *
+                return _('\\nombre{%s} \\times 10^{%s-%s}') % verifie_type(((a[0] *
                         a[1]) / a[2], a[3] + a[4], a[5] * a[6]))
         else:
             if a[5] * a[6] < 0:
-                return '\\nombre{%s} \\times 10^{%s-(%s)}' % \
+                return _('\\nombre{%s} \\times 10^{%s-(%s)}') % \
                     verifie_type((((a[0] * a[1]) * 1.) / a[2], a[3] + a[4],
                                  a[5] * a[6]))
             else:
-                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type((((a[0] *
+                return _('\\nombre{%s} \\times 10^{%s-%s}') % verifie_type((((a[0] *
                         a[1]) * 1.) / a[2], a[3] + a[4], a[5] * a[6]))
 
 
@@ -332,7 +335,7 @@ def tex_puissances_3(a):
     from math import floor, log10
     b = int(floor(log10(((a[0] * a[1]) * 1.) / a[2])))
     if isinstance(a, tuple) and b != 0:
-        return '\\nombre{%s}  \\times 10^{%s} \\times 10^{%s}' % \
+        return _('\\nombre{%s}  \\times 10^{%s} \\times 10^{%s}') % \
             verifie_type(((((a[0] * a[1]) * 1.) / a[2]) / 10 ** b, b, (a[3] +
                          a[4]) - a[5] * a[6]))
 
@@ -341,7 +344,7 @@ def tex_puissances_4(a):
     from math import floor, log10
     b = int(floor(log10(((a[0] * a[1]) * 1.) / a[2])))
     if isinstance(a, tuple):
-        return '\\nombre{%s}  \\times 10^{%s}' % verifie_type(((((a[0] *
+        return _('\\nombre{%s}  \\times 10^{%s}') % verifie_type(((((a[0] *
                 a[1]) * 1.) / a[2]) / 10 ** b, (b + a[3] + a[4]) - a[5] *
                 a[6]))
 

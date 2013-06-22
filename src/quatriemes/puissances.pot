@@ -1,0 +1,129 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-12 20:33+Hora de verano romance\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: puissances.py:62 puissances.py:66
+msgid "Compl\303\251ter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :"
+msgstr ""
+
+#: puissances.py:77
+msgid "\\item $%s^{%s} \\times %s^{%s} = \\dotfill$"
+msgstr ""
+
+#: puissances.py:79 puissances.py:87
+msgid "\\item $%s^{%s}\\times%s^{%s}="
+msgstr ""
+
+#: puissances.py:80
+msgid "$(%s\\times%s)^{%s}="
+msgstr ""
+
+#: puissances.py:85
+msgid "\\item $%s^{%s}\\times%s^{%s}=\\dotfill$"
+msgstr ""
+
+#: puissances.py:91
+msgid "\\item $(%s^{%s})^{%s}=\\dotfill$"
+msgstr ""
+
+#: puissances.py:95
+msgid "$%s^{%s\\times%s}="
+msgstr ""
+
+#: puissances.py:100
+msgid "\\item $\\dfrac{%s^{%s}}{%s^{%s}}=\\dotfill$"
+msgstr ""
+
+#: puissances.py:148 puissances.py:152
+msgid "\303\211crire sous la forme d'une puissance de 10 puis donner l'\303\251criture"
+msgstr ""
+
+#: puissances.py:149 puissances.py:153
+msgid " d\303\251cimale de ces nombres :"
+msgstr ""
+
+#: puissances.py:168
+msgid "\\item $10^{%s} \\times 10^{%s} = \\dotfill$"
+msgstr ""
+
+#: puissances.py:170
+msgid "\\item $10^{%s}\\times 10^{%s}="
+msgstr ""
+
+#: puissances.py:178
+msgid "\\item $(10^{%s})^{%s}=\\dotfill$"
+msgstr ""
+
+#: puissances.py:181
+msgid "10^{%s \\times %s}="
+msgstr ""
+
+#: puissances.py:188
+msgid "\\item $\\dfrac{10^{%s}}{10^{%s}}=\\dotfill$"
+msgstr ""
+
+#: puissances.py:222 puissances.py:226
+msgid "Compl\303\251ter par le nombre qui convient :"
+msgstr ""
+
+#: puissances.py:236
+msgid "\\item $%s=%s\\times\\dotfill$"
+msgstr ""
+
+#: puissances.py:238
+msgid "\\item $%s=%s\\times\\mathbf{10^{%s}}$"
+msgstr ""
+
+#: puissances.py:244
+msgid "\\item $%s\\times\\dotfill=%s$"
+msgstr ""
+
+#: puissances.py:246
+msgid "\\item $%s\\times\\mathbf{10^{%s}}=%s$"
+msgstr ""
+
+#: puissances.py:261 puissances.py:264
+msgid "Calculer les expressions suivantes et donner l'\303\251criture scientifique du r\303\251sultat."
+msgstr ""
+
+#: puissances.py:300
+msgid "\\cfrac{\\nombre{%s} \\times 10^{%s} \\times \\nombre{%s} \\times 10^{%s}}{\\nombre{%s} \\times \\big( 10^{%s} \\big) ^%s}"
+msgstr ""
+
+#: puissances.py:307
+msgid "\\cfrac{\\nombre{%s} \\times \\nombre{%s}}{\\nombre{%s}} \\times \\cfrac{10^{%s+(%s)}}{10^{%s \\times %s}}"
+msgstr ""
+
+#: puissances.py:310
+msgid "\\cfrac{\\nombre{%s} \\times \\nombre{%s}}{\\nombre{%s}} \\times \\cfrac{10^{%s+%s}}{10^{%s \\times %s}}"
+msgstr ""
+
+#: puissances.py:318 puissances.py:326
+msgid "\\nombre{%s} \\times 10^{%s-(%s)}"
+msgstr ""
+
+#: puissances.py:322 puissances.py:330
+msgid "\\nombre{%s} \\times 10^{%s-%s}"
+msgstr ""
+
+#: puissances.py:338
+msgid "\\nombre{%s}  \\times 10^{%s} \\times 10^{%s}"
+msgstr ""
+
+#: puissances.py:347
+msgid "\\nombre{%s}  \\times 10^{%s}"
+msgstr ""
+
