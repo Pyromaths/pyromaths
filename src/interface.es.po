@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pyromaths 13.03\n"
 "POT-Creation-Date: 2013-06-22 14:22+Hora de verano romance\n"
-"PO-Revision-Date: 2013-06-22 14:23+0100\n"
+"PO-Revision-Date: 2013-06-23 13:40+0100\n"
 "Last-Translator: Jose Antonio Martinez Chico <jkuato@hotmail.com>\n"
 "Language-Team: Jérôme Ortais <jerome.ortais@pyromaths.org>\n"
 "Language: spanish\n"
@@ -107,7 +107,7 @@ msgid ""
 "Niveau que montrera dans la fiche créée, par défaut utilise le majeur des "
 "exercices choisis"
 msgstr ""
-"Nivel que mostrará en la ficha creada, por defecto usa el mayor de los "
+"Nivel que mostrará en la hoja creada, por defecto usa el mayor de los "
 "ejercicios escogidos"
 
 #: interface.py:241
@@ -116,7 +116,7 @@ msgstr "Modelo de página :"
 
 #: interface.py:242
 msgid "Modèle fonde TeX pour la création de la fiche"
-msgstr "Modelo base TeX para la creación de la ficha"
+msgstr "Modelo base TeX para la creación de la hoja"
 
 #: interface.py:255
 msgid "Classe de 6\\ieme"
