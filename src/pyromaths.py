@@ -82,9 +82,9 @@ def langue(LANG_NOM):
         lang = os.getenv('LANG')
     LANG_temp = [LANG_NOM[i][0] for i in range(len(LANG_NOM))]
     LANG_txt = lang[0:2]
-    if LANG_temp.count(LANG_txt) > 0:
+    try:
         LANG = LANG_temp.index(LANG_txt)
-    else:
+    except ValueError:
         LANG = "0"
     return LANG 
 
