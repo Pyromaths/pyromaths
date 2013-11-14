@@ -301,4 +301,4 @@ def vecteurs_add():
     return exo,cor
 
 vecteurs_add.description = u"Vecteurs"
-vecteurs_add.level = u"Seconde"
+vecteurs_add.level = u"2.Seconde"

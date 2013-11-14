@@ -35,7 +35,6 @@ class ArrondirNombreDecimal(ex.TexExercise):
     """ Exercice d'arrondis avec les encadrements. """
 
     description = u'Arrondir des nombres décimaux'
-    level       = u'Sixième'
 
     def __init__(self):
         hasard = [valide_hasard() for i in range(4)]

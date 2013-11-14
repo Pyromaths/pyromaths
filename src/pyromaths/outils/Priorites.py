@@ -4,18 +4,19 @@ import re, sys
 from Affichage import decimaux
 from . import Arithmetique, Affichage
 import math
+from pyromaths.classes.Fractions import Fraction
 from .Fractions import EffectueSommeFractions, EffectueQuotientFractions, EffectueProduitFractions
 
 def EffectueCalcul(op, nb1, nb2, pre="", post=""):
     denominateur_max = 20
     programme = 6  # Faisable pour toutes les classes
-    fr = Fractions(1, 1)  # Une fraction type pour vérifier le type de nb1 et nb2
+    fr = Fraction(1, 1)  # Une fraction type pour vérifier le type de nb1 et nb2
     bfr = type(nb1) == type(nb2) == type(fr)  # bfr est vrai si on calcul avec des fractions
     if type(nb1) == type(fr) and type(nb2) != type(fr):
-        nb2 = Fractions(nb2)
+        nb2 = Fraction(nb2)
         bfr = True
     if type(nb2) == type(fr) and type(nb1) != type(fr):
-        nb1 = Fractions(nb1)
+        nb1 = Fraction(nb1)
         bfr = True
     if not bfr and pre.rstrip().endswith('(') and post.lstrip().startswith(')'):
         pre = pre.rstrip()[:len(pre.rstrip()) - 1]
@@ -23,7 +24,7 @@ def EffectueCalcul(op, nb1, nb2, pre="", post=""):
     if op == "+":
         if bfr:
             l = EffectueSommeFractions(nb1, nb2, op, pre, post)
-            resultat = Fractions.simplifie(nb1 + nb2)
+            resultat = Fraction.simplifie(nb1 + nb2)
             if abs(resultat.d) > denominateur_max:
                 programme = 2
         else:
@@ -32,7 +33,7 @@ def EffectueCalcul(op, nb1, nb2, pre="", post=""):
     elif op == "-":
         if bfr:
             l = EffectueSommeFractions(nb1, nb2, op, pre, post)
-            resultat = Fractions.simplifie(nb1 - nb2)
+            resultat = Fraction.simplifie(nb1 - nb2)
             n = nb1 - nb2
             if n.n < 0:
                 programme = 4
@@ -48,7 +49,7 @@ def EffectueCalcul(op, nb1, nb2, pre="", post=""):
     elif op == "*":
         if bfr:
             l = EffectueProduitFractions(nb1, nb2, pre, post)
-            resultat = Fractions.simplifie(nb1 * nb2)
+            resultat = Fraction.simplifie(nb1 * nb2)
             if abs(resultat.d) > denominateur_max:
                 programme = 2
         else:
@@ -58,7 +59,7 @@ def EffectueCalcul(op, nb1, nb2, pre="", post=""):
         if bfr:
             if nb2.n:  # Pas de division par zéro
                 l = EffectueQuotientFractions(nb1, nb2, pre, post)
-                resultat = Fractions.simplifie(nb1 / nb2)
+                resultat = Fraction.simplifie(nb1 / nb2)
                 if abs(resultat.d) > denominateur_max:
                     programme = 2
             else:
@@ -335,7 +336,7 @@ def priorites_operations(calcul, pre = "", post = "", solution = []):
 ##print(priorites("-3**+2"))
 ##print(priorites("9+8*7"))
 
-from pyromaths.classes.Fractions import Fractions
+from pyromaths.classes.Fractions import Fraction
 from . import Arithmetique, Affichage
 import random
 import math

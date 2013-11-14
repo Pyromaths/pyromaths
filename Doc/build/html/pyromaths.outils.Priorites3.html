@@ -12,7 +12,7 @@
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/print.css" type="text/css" media="print" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -41,7 +41,7 @@
       <div class="topnav">
       
         <p>
-        «&#160;&#160;<a href="pyromaths.outils.Conversions.html">3.3. <tt class="docutils literal docutils literal docutils literal"><span class="pre">Conversions</span></tt> &#8212; Fonctions de conversions</a>
+        «&#160;&#160;<a href="pyromaths.outils.Conversions.html">3.3. <tt class="docutils literal"><span class="pre">Conversions</span></tt> &#8212; Fonctions de conversions</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contenu</a>
         </p>
@@ -61,7 +61,7 @@ analyser l&#8217;expression, afin de gagner du temps.</p>
 <dt id="pyromaths.outils.Priorites3.EstNombre">
 <tt class="descclassname">pyromaths.outils.Priorites3.</tt><tt class="descname">EstNombre</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Priorites3.html#EstNombre"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Priorites3.EstNombre" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><strong>EstNombre</strong>(<em>value</em>)</p>
-<p>Teste si <cite>value</cite> est une valeur, c&#8217;est à dire un entier, un réel, un polynôme</p>
+<p>Teste si <cite>value</cite> est une valeur, c&#8217;est à dire un entier, un réel, un polynôme, une fraction</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -84,6 +84,43 @@ analyser l&#8217;expression, afin de gagner du temps.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Priorites3.cherche_classe">
+<tt class="descclassname">pyromaths.outils.Priorites3.</tt><tt class="descname">cherche_classe</tt><big>(</big><em>calcul</em>, <em>index</em><big>)</big><a class="headerlink" href="#pyromaths.outils.Priorites3.cherche_classe" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>cherche_classe</strong>(<em>calcul</em>, <em>index</em>)</p>
+<p>Recherche le premier objet polynôme ou fraction dans la chaîne calcul à une
+position supérieure ou égale à index, sans expression régulière</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>calcul</strong> (<em>string</em>) &#8211; le calcul à tester</li>
+<li><strong>index</strong> (<em>integer</em>) &#8211; position à partir de laquelle effectuer le test</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Priorites3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="s">&#39;Polynome([[-4, 2]], &quot;x&quot;)-Polynome([[-5, 1], [4, 2], [1, 0]], &quot;x&quot;)+Polynome([[6,  0], [5, 1]], &quot;x&quot;)&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">cherche_classe</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">&#39;Polynome([[-5, 1], [4, 2], [1, 0]], &quot;x&quot;)&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="s">&#39;Polynome([[-4, 2]], &quot;x&quot;)+Fraction(3,2)+Polynome([[6,  0], [5, 1]], &quot;x&quot;)&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">cherche_classe</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">&#39;Fraction(3,2)&#39;</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">string</td>
 </tr>
 </tbody>
 </table>
@@ -133,40 +170,6 @@ un signe s&#8217;il est en début de chaîne.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pyromaths.outils.Priorites3.cherche_polynome">
-<tt class="descclassname">pyromaths.outils.Priorites3.</tt><tt class="descname">cherche_polynome</tt><big>(</big><em>calcul</em>, <em>index</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Priorites3.html#cherche_polynome"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Priorites3.cherche_polynome" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p><strong>cherche_polynome</strong>(<em>calcul</em>, <em>index</em>)</p>
-<p>Recherche le premier polynôme dans la chaîne calcul à une position
-supérieure ou égale à index, sans expression régulière</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
-<li><strong>calcul</strong> (<em>string</em>) &#8211; le calcul à tester</li>
-<li><strong>index</strong> (<em>integer</em>) &#8211; position à partir de laquelle effectuer le test</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Priorites3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="s">&#39;Polynome([[-4, 2]], &quot;x&quot;)-Polynome([[-5, 1], [4, 2], [1, 0]], &quot;x&quot;)+Polynome([[6,  0], [5, 1]], &quot;x&quot;)&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">cherche_polynome</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="go">&#39;Polynome([[-5, 1], [4, 2], [1, 0]], &quot;x&quot;)&#39; </span>
-</pre></div>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">string</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
 <dt id="pyromaths.outils.Priorites3.effectue_calcul">
 <tt class="descclassname">pyromaths.outils.Priorites3.</tt><tt class="descname">effectue_calcul</tt><big>(</big><em>calcul</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Priorites3.html#effectue_calcul"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Priorites3.effectue_calcul" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><strong>effectue_calcul</strong>(<em>calcul</em>)</p>
@@ -188,6 +191,40 @@ supérieure ou égale à index, sans expression régulière</p>
 <span class="go">[&#39;-5&#39;, &#39;-&#39;, &#39;10&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">effectue_calcul</span><span class="p">([</span><span class="s">&#39;-5&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;10&#39;</span><span class="p">])</span>
 <span class="go">[&#39;-15&#39;]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyromaths.outils.Priorites3.post_fractions">
+<tt class="descclassname">pyromaths.outils.Priorites3.</tt><tt class="descname">post_fractions</tt><big>(</big><em>calcul</em><big>)</big><a class="headerlink" href="#pyromaths.outils.Priorites3.post_fractions" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>post_fractions</strong>(<em>calcul</em>)</p>
+<p>Retourne la liste <cite>calcul</cite> dans laquelle</p>
+<ul class="simple">
+<li>les produits au numérateur et dénominateur sont effectuée dans les sommes et différences de fractions</li>
+<li>les produits au numérateur et dénominateur sont simplifiés sinon</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>calcul</strong> (<em>list</em>) &#8211; le calcul à traiter</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Fraction(3*4, 2*4) + Fraction(5,8))&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">post_fractions</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="go">[&#39;Fraction(12, 8) + Fraction(5,8)&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Fraction(3*4*5, 2*4)&#39;</span><span class="p">]</span>
+<span class="go">[&#39;Fraction(15, 2)&#39;]</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -347,7 +384,7 @@ nul).</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Priorites3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;-6&#39;</span><span class="p">,</span> <span class="s">&#39;**&#39;</span><span class="p">,</span> <span class="s">&#39;(-11)&#39;</span><span class="p">,</span> <span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="s">&#39;(-5)&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">recherche_operation</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s">&quot;*&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;**&quot;</span><span class="p">,</span> <span class="s">&quot;/&quot;</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span>
+<span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;-9&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;6&#39;</span><span class="p">,</span> <span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;4&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">recherche_operation</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s">&quot;*&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;**&quot;</span><span class="p">,</span> <span class="s">&quot;/&quot;</span><span class="p">))</span>
 <span class="go">3</span>
@@ -443,7 +480,7 @@ calculs. Elle doit être entourée de deux nombres.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Priorites3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;-6&#39;</span><span class="p">,</span> <span class="s">&#39;**&#39;</span><span class="p">,</span> <span class="s">&#39;(-11)&#39;</span><span class="p">,</span> <span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="s">&#39;(-5)&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">recherche_puissance</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-<span class="go">(0, 3) </span>
+<span class="go">(0, 3)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;Polynome([[-4, 2]], &quot;x&quot;)&#39;</span><span class="p">,</span> <span class="s">&#39;**&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;+&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">recherche_puissance</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 <span class="go">(1, 4)</span>
@@ -604,7 +641,7 @@ n nombres, qui sont soit des entiers, soit des décimaux, soit des polynômes.</
       <div class="bottomnav">
       
         <p>
-        «&#160;&#160;<a href="pyromaths.outils.Conversions.html">3.3. <tt class="docutils literal docutils literal docutils literal"><span class="pre">Conversions</span></tt> &#8212; Fonctions de conversions</a>
+        «&#160;&#160;<a href="pyromaths.outils.Conversions.html">3.3. <tt class="docutils literal"><span class="pre">Conversions</span></tt> &#8212; Fonctions de conversions</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contenu</a>
         </p>

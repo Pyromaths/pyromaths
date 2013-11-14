@@ -21,10 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from pyromaths.classes.Fractions import Fractions  #Fractions de pyromaths
+from pyromaths.classes.Fractions import Fraction  #Fractions de pyromaths
 import random
-import string
 from pyromaths.outils import Arithmetique
+from pyromaths.outils.Priorites3 import texify, priorites
 
 
 def fractions_egales():
@@ -69,70 +69,77 @@ def fractions_egales():
 fractions_egales.description = u'Fractions égales'
 
 
+def valeurs_somme():
+    """Travail sur les sommes de fractions en cinquième"""
+    l = []
+
+    for dummy in range(2):
+        op = "+-"[random.randrange(2)]
+        n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
+        if op == "-" and 1-n2/d2>0:
+            l.append('1 %s Fraction(%s, %s)' % (op, n2, d2))
+        else:
+            l.append('Fraction(%s, %s) %s 1' % (n2, d2, op))
+
+    for dummy in range(2):
+        op = "+-"[random.randrange(2)]
+        n1 = random.randrange(2, 11)
+        n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
+        if op == "-" and n1-n2/d2>0:
+            l.append('%s %s Fraction(%s, %s)' % (n1, op, n2, d2))
+        else:
+            l.append('Fraction(%s, %s) %s %s' % (n2, d2, op, n1))
+
+    op = "+-"[random.randrange(2)]
+    n1 = random.randrange(1, 11)
+    n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
+    if op == "-" and n1-n2>0:
+        l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n1, d2, op, n2, d2))
+    else:
+        l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n2, d2, op, n1, d2))
+
+    for dummy in range(3):
+        op = "+-"[random.randrange(2)]
+        n1, d1 = random.randrange(1, 11), random.randrange(2, 11)
+        n2, d2 = random.randrange(1, 11), random.randrange(2, 11) * d1
+        if op == "-" and n1/d1-n2/d2>0:
+            l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n1, d1, op, n2, d2))
+        else:
+            l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n2, d2, op, n1, d1))
+
+    random.shuffle(l)
+    return l
+
+
 def sommes_fractions():
     exo = ["\\exercice",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
-           "\\begin{multicols}{4}", "  \\noindent"]
+           u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible).",
+           "\\begin{multicols}{4}", "  \\begin{enumerate}"]
     cor = ["\\exercice*",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
-           "\\begin{multicols}{4}", "  \\noindent"]
-    for i in range(8):
-        if random.randrange(2):
-            s = "+"
-        else:
-            s = "-"
-        n = d = c = n2 = 2
-        while Arithmetique.pgcd(n, d) > 1:
-            n = random.randrange(1, 11)
-            d = random.randrange(2, 11)
-        while Arithmetique.pgcd(n2, d * c) > 1:
-            c = random.randrange(2, 11)
-            n2 = random.randrange(2, 11)
-        fr1 = Fractions(n, d)
-        fr2 = Fractions(n2, d * c)
-        if s == "-" and (fr1 - fr2).n * (fr1 - fr2).d < 0 or s == "+" and \
-            random.randrange(2):
-            (fr1, fr2) = (fr2, fr1)
-        exo.append("\\[ \\thenocalcul = %s%s%s \\]" % (Fractions.TeX(fr1),
-                   s, Fractions.TeX(fr2)))
-        cor.append("\\[ \\thenocalcul = %s%s%s \\]" % (Fractions.TeX(fr1),
-                   s, Fractions.TeX(fr2)))
-        if fr1.d < fr2.d:
-            cor.append("\\[ \\thenocalcul = %s%s%s \\]" % (Fractions.TeX(fr1,
-                       coef=c), s, Fractions.TeX(fr2)))
-        else:
-            cor.append("\\[ \\thenocalcul = %s%s%s \\]" % (Fractions.TeX(fr1),
-                       s, Fractions.TeX(fr2, coef=c)))
-        if s == "+":
-            fr = fr1 + fr2
-        else:
-            fr = fr1 - fr2
-        frs = Fractions.simplifie(fr)
-        if frs.d != fr.d:
-            cor.append("\\[ \\thenocalcul = %s \\]" % Fractions.TeX(frs,
-                       coef=fr.d // frs.d))
-            cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" %
-                       Fractions.TeX(frs))
-        else:
-            cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" %
-                       Fractions.TeX(fr))
-        exo.append("\\stepcounter{nocalcul}%")
-        cor.append("\\stepcounter{nocalcul}%")
-    exo.append("\end{multicols}\n")
-    cor.append("\end{multicols}\n")
+           u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible).",
+           "\\begin{multicols}{4}", "  \\begin{enumerate}"]
+    lexo = valeurs_somme()
+    for question in lexo:
+        solve = [question]
+        exo.append("\\item $\\thenocalcul = " + texify(solve)[0] + "$")
+        cor.append("\\item $\\thenocalcul = " + texify(solve)[0] + "$")
+        solve = priorites(question)
+        solve = texify(solve)
+        for e in solve:
+            cor.append("\\[\\thenocalcul = "  + e + "\\]")
+        exo.append("\\stepcounter{nocalcul}")
+        cor.append("\\stepcounter{nocalcul}")
+    exo.extend(["  \\end{enumerate}", "\\end{multicols}"])
+    cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
     return (exo, cor)
 
 sommes_fractions.description = u'Sommes de fractions'
 
 
-def produits_fractions():
-    exo = ["\\exercice",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
-           "\\begin{multicols}{4}", "  \\noindent"]
-    cor = ["\\exercice*",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
-           "\\begin{multicols}{4}", "  \\noindent"]
-    for i in range(8):
+def valeurs_produit():
+    l = []
+
+    for dummy in range(4):
         n1=d1=n2=d2=a=b=2
         while Arithmetique.pgcd(a,b)>1:
             a=random.randrange(1,11)
@@ -144,27 +151,31 @@ def produits_fractions():
             n2=random.randrange(1,11)
             d2=random.randrange(2,11)
 
-        fr1 = Fractions(n1*a, d1*b)
-        fr2 = Fractions(n2*b, d2*a)
-        exo.append("\\[ \\thenocalcul = %s \\times %s \\]" % (Fractions.TeX(fr1),
-                   Fractions.TeX(fr2)))
-        cor.append("\\[ \\thenocalcul = %s \\times %s \\]" % (Fractions.TeX(fr1),
-                   Fractions.TeX(fr2)))
-        fr1s = Fractions.simplifie(fr1)
-        fr2s = Fractions.simplifie(fr2)
-        if abs(fr1s.d) < abs(fr1.d) or abs(fr2s.d) < abs(fr2.d):
-            cor.append("\\[ \\thenocalcul = %s \\times %s \\]" % (Fractions.TeXSimplifie(fr1),
-                       Fractions.TeXSimplifie(fr2)))
-        fr = fr1s * fr2s
-        frs = Fractions.simplifie(fr)
-        if abs(frs.d) < abs(fr.d):
-            cor.append("\\[ \\thenocalcul = %s \\]" % Fractions.TeXProduit(fr1s,
-                       fr2s))
-        cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" % Fractions.TeX(frs))
-        exo.append("\\stepcounter{nocalcul}%")
-        cor.append("\\stepcounter{nocalcul}%")
-    exo.append("\end{multicols}\n")
-    cor.append("\end{multicols}\n")
+        l.append('Fraction(%s, %s)*Fraction(%s,%s)' % (n1*a, d1*b, n2*b, d2*a))
+
+    return l
+
+def produits_fractions():
+    exo = ["\\exercice",
+           u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible).",
+           "\\begin{multicols}{4}", "  \\begin{enumerate}"]
+    cor = ["\\exercice*",
+           u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible).",
+           "\\begin{multicols}{4}", "  \\begin{enumerate}"]
+    lexo = valeurs_produit()
+    for question in lexo:
+        solve = [question]
+        exo.append("\\item $\\thenocalcul = " + texify(solve)[0] + "$")
+        cor.append("\\item $\\thenocalcul = " + texify(solve)[0] + "$")
+        solve = priorites(question)
+        solve = texify(solve)
+        for e in solve:
+            cor.append("\\[\\thenocalcul = "  + e + "\\]")
+        exo.append("\\stepcounter{nocalcul}")
+        cor.append("\\stepcounter{nocalcul}")
+    exo.extend(["  \\end{enumerate}", "\\end{multicols}"])
+    cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
+
     return (exo, cor)
 
 produits_fractions.description = u'Produits de fractions'

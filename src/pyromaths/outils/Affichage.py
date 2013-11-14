@@ -21,9 +21,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import re
+#import re
+from pyromaths.classes import Racine
+from pyromaths.classes.Fractions import Fraction
+
 from .decimaux import decimaux
-from pyromaths.classes import Racine, Fractions
 
 
 def tex_coef(coef, var='', bplus=0, bpn=0, bpc=0):
@@ -124,7 +126,7 @@ def TeX(nombre,parenthese=False,terme=False,fractex="\\dfrac"):
 
     >>> from pyromaths.outils import Affichage
     >>> from pyromaths.classes import Fractions
-    >>> f=Fractions.Fractions(7,3)
+    >>> f=Fractions.Fraction(7,3)
     >>> Affichage.TeX(f)
     '\\dfrac{7}{3} '
     >>> Affichage.TeX(f,fractex='\\frac')
@@ -137,8 +139,8 @@ def TeX(nombre,parenthese=False,terme=False,fractex="\\dfrac"):
     #Affichage simplifié des racines ou fractions
     if isinstance(nombre,Racine.RacineDegre2) and nombre.radicande==0:
         #Affiche la RacineDegre2 comme une Fractions
-        nombre=Fractions.Fractions(nombre.numerateur,nombre.denominateur)
-    if isinstance(nombre,Fractions.Fractions) and nombre.denominateur==1:
+        nombre=Fraction(nombre.numerateur,nombre.denominateur)
+    if isinstance(nombre,Fraction) and nombre.denominateur==1:
         #Affiche la Fractions comme un entier
         nombre=nombre.numerateur
     #parentheses des fractions
@@ -146,7 +148,7 @@ def TeX(nombre,parenthese=False,terme=False,fractex="\\dfrac"):
         isinstance(nombre,Racine.RacineDegre2)
                        and nombre.denominateur==1 and (nombre.numerateur or nombre.coeff<0 )
         #RacineDegre2 avec radicande nécessairement grâce au tri
-        or isinstance(nombre,Fractions.Fractions) and nombre.numerateur<0
+        or isinstance(nombre,Fraction) and nombre.numerateur<0
         or isinstance(nombre,int) and nombre<0
         or isinstance(nombre,float) and nombre<0):
         strTeX="\\left("
@@ -164,7 +166,7 @@ def TeX(nombre,parenthese=False,terme=False,fractex="\\dfrac"):
         return "-\\infty "
     elif isinstance(nombre,int) or isinstance(nombre,float):
         return strTeX+decimaux(nombre)+finTeX
-    elif isinstance(nombre,Fractions.Fractions):
+    elif isinstance(nombre,Fraction):
         if nombre.numerateur < 0:
             strTeX += "-"+fractex+"{"+decimaux(-nombre.numerateur)+"}{"+decimaux(nombre.denominateur)+"} "
         else:

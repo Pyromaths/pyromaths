@@ -3,7 +3,7 @@
 from pyromaths.outils.decimaux import decimaux
 from pyromaths.outils.Arithmetique import carrerise, pgcd, ppcm, factor
 from math import sqrt
-from Fractions import Fractions
+from Fractions import Fraction
 
 def produitfacteurs(facteurs):
     """Affiche sous forme de produit les éléments d'une liste."""
@@ -102,7 +102,7 @@ class Racine:
         for element in facteurs:
             if facteurs.count(element) % self.indice == 0:
                 coeff *= element
-                for n in range(self.indice):
+                for dummy in range(self.indice):
                     facteurs.remove(element)
                 radicande = radicande // (element**(self.indice))
                 prodfacteurs = produitfacteurs(facteurs)
@@ -128,7 +128,7 @@ def pTeX(n):
         return "("+decimaux(n)+")"
     else:
         return decimaux(n)
-    
+
 def tTeX(n):
     if n==1:
         return ""
@@ -250,7 +250,7 @@ class RacineDegre2:
                                 radicande)
         elif isinstance(other,int):
             return self + RacineDegre2(other)
-        elif isinstance(other,Fractions):
+        elif isinstance(other,Fraction):
             return self + RacineDegre2(other.numerateur,other.denominateur)
 
     def __radd__(self,other):
@@ -265,7 +265,7 @@ class RacineDegre2:
         return -self + other
 
     def __mul__(self,other):
-        if isinstance(other,Fractions):
+        if isinstance(other,Fraction):
             return self*RacineDegre2(other.numerateur,other.denominateur,0,self.radicande)
         elif isinstance(other,int):
             return self*RacineDegre2(other,1,0,self.radicande)
@@ -289,7 +289,7 @@ class RacineDegre2:
         return self*other
     def __pow__(self,n):
         result=1
-        for i in range(n):
+        for dummy in range(n):
             result=result*self
         return result
     def __float__(self):

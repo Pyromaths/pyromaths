@@ -23,8 +23,6 @@
 #----------------------------------------------------------------------
 # Pyromaths : Initiation au calcul littéral
 #----------------------------------------------------------------------
-from pyromaths.outils import Arithmetique
-from pyromaths.outils.Affichage import tex_coef
 from pyromaths.outils.Priorites3 import texify, priorites
 import random
 
@@ -58,7 +56,7 @@ def reduire():
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     cor = ["\\exercice*", u"Réduire, si possible, les expressions suivantes :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
-    for i in range(9):
+    for dummy in range(9):
         a = valeurs_reduire()
         solve = [a]
         exo.append("\\item $\\thenocalcul = " + texify(solve)[0] + "$")
@@ -80,7 +78,6 @@ reduire.description = u'Bases du calcul littéral'
 
 def valeurs_reduire_somme():
     """Réduire une somme de six monômes de degrés 0, 1 et 2"""
-    import random
     var = "abcdfghkmnpqrstuvwxyz"
     var = var[random.randrange(len(var))]
     l=[]
@@ -98,7 +95,6 @@ def valeurs_reduire_somme():
 
 def valeurs_reduire_sommeprod():
     """Réduire une expression de six monômes de degrés 0, 1 et 2"""
-    import random
     var = "abcdfghkmnpqrstuvwxyz"
     var = var[random.randrange(len(var))]
     l=[]

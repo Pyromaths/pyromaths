@@ -24,6 +24,7 @@ from PyQt4 import QtGui, QtCore
 import os, lxml, codecs, sys
 from outils import System
 from Values import HOME, CONFIGDIR, DATADIR, LESFICHES, COPYRIGHTS, VERSION, ICONDIR
+from operator import itemgetter
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -89,7 +90,10 @@ class Ui_MainWindow(object):
         #============================================================
 
         self.tabs = []
-        for level in LESFICHES:
+        LESFICHES.sort(key=itemgetter(0), reverse=True)
+        MESFICHES = [[LESFICHES[i][0][2:], '', LESFICHES[i][2]] for i in range(len(LESFICHES))] 
+
+        for level in MESFICHES:
             self.tabs.append(Tab(self.tabWidget, level, self.setNbExos))
 
         #============================================================

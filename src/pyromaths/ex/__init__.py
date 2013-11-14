@@ -1,7 +1,8 @@
 import inspect
 import os
-import types
 import pkgutil
+import types
+
 
 levels = {}
 
@@ -75,6 +76,7 @@ def __level(level):
     ''' Format academic level(s). '''
     # level may be a string or a list (default)
     if not isinstance(level, list): level = [level]
+    level.sort()
     return level
 
 def __import(name=__name__, parent=None):

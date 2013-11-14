@@ -22,7 +22,7 @@
 
 import random
 from math import *
-from pyromaths.outils.Fractions import Fractions
+from pyromaths.outils.Fractions import Fraction
 
 def proba(exo, cor):
     couleur=['bleue','rouge','jaune','verte','marron','orange']
@@ -98,9 +98,9 @@ def proba(exo, cor):
          u"\\item Quelle est la probabilité que la première boule soit %s et la deuxième soit %s?\\par"%(c3,c2),
          u"On utilise l'arbre construit précédemment.\\par",
          "$p(%s,%s)=%s \\times %s = %s$\\par" % \
-                (i3,i2,Fractions.TeX(Fractions(n3,tot)),
-                 Fractions.TeX(Fractions(n2,tot-1)),
-                 Fractions.TeX(Fractions(n3*n2,tot*(tot-1)))),
+                (i3,i2,str(Fraction(n3,tot)),
+                 str(Fraction(n2,tot-1)),
+                 str(Fraction(n3*n2,tot*(tot-1)))),
          u"La probabilité que la première boule soit %s et la deuxième soit %s est égale à $\\dfrac{%s}{%s}$."%(c3,c2,n3*n2,tot*(tot-1)),
          u"\\item Quelle est la probabilité que la deuxième boule soit %s ?\\par"%c1,
          u"On note (?, %s) l'évènement: la deuxième boule tirée est %s. \\par"%(i1,c1),
@@ -110,7 +110,7 @@ def proba(exo, cor):
         exo.append(st)
     for st in cors:
         cor.append(st)
-        
+
 def tex_proba():
     exo=['\\exercice']
     cor=['\\exercice*']

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import random
-from pyromaths.outils.Arithmetique import factorise, carrerise
-from math import sqrt
-from pyromaths.outils.decimaux import suppr0, suppr0list
+#import random
+#from pyromaths.outils.Arithmetique import factorise, carrerise
+#from math import sqrt
+from pyromaths.outils.decimaux import suppr0#, suppr0list
 
 class Poly2:
     """Classe pour les polynômes du second degré."""

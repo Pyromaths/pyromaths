@@ -22,10 +22,12 @@
 #
 
 #fonction affine 3e
-import random
-from math import *
+#from math import *
+from math import sqrt
+from pyromaths.classes.Fractions import Fraction #fractions pyromaths
 from pyromaths.outils.Affichage import decimaux
-from pyromaths.outils.Fractions import Fractions  #fractions pyromaths
+import random
+
 
 def extreme(a,b,xmin,xmax,ymin,ymax):
 #donne les extremités de la droite passant par a et b (coordonnées)
@@ -193,20 +195,24 @@ def isdemi(x):
 def coefdir(A,B):
     #donne le coefficient directeur x/y sous forme de liste [x,y]
     #Si y=1 on ecrira x sinon on écrira la fraction x/y
-    x=float(B[1]-A[1])
-    y=float(B[0]-A[0])
+    x=decimaux(float(B[1]-A[1]))
+    y=decimaux(float(B[0]-A[0]))
 
-    if isint(x/y) or isdemi(x/y):
-        res=[x/y,1]
-    else:
-        res=[x,y]
-    if res[0]<0 and res[1]<0:
-        res=[abs(res[0]),abs(res[1])]
-    if res[1]<0:
-        res=[-res[0],abs(res[1])]
-    fr=Fractions.simplifie(Fractions(res[0],res[1]))
-
+    fr=Fraction.simplifie(Fraction(x,y))
     return [fr.n,fr.d]
+#===============================================================================
+#     if isint(x/y) or isdemi(x/y):
+#         res=[x/y,1]
+#     else:
+#         res=[x,y]
+#     if res[0]<0 and res[1]<0:
+#         res=[abs(res[0]),abs(res[1])]
+#     if res[1]<0:
+#         res=[-res[0],abs(res[1])]
+#     fr=Fraction.simplifie(Fraction(res[0],res[1]))
+# 
+#     return [fr.n,fr.d]
+#===============================================================================
 
 def anteimage(fonc,A,B):
     #Génère la 1ère question et sa réponse
@@ -244,34 +250,26 @@ def anteimage(fonc,A,B):
 def tracefonc(f,i,A,B,xmin,xmax,ymin,ymax):
 #A est sur l'axe des ordonnées, f est le nom de la fonction
 #Génère la 2e queston et sa réponse
-    u=coefdir(A,B)
+    u=coefdir(A,B)  
+    coef = str(Fraction(u[0], u[1]))
+    print A, B, u, coef
     if A[1]>=0:
-        b='+'+decimaux(str(A[1]))
+        b='+'+decimaux(A[1])
     else:
-        b=decimaux(str(A[1]))
+        b=decimaux(A[1])
     if u[1]==1:
-        coef=decimaux(str(u[0]))
-        if u[0]==-1:
-            coef='-'
-        if u[0]==1:
-            coef=''
-        x1=decimaux(str(B[0]))
-        y1=decimaux(str(B[1]))
+        x1=decimaux(B[0])
+        y1=decimaux(B[1])
         u[0]=u[0]*B[0]
     else:
         B=(u[1],u[0]+float(A[1]))
         if not dansrep(B,xmin,xmax,ymin,ymax):
             B=(-u[1],-u[0]+float(A[1]))
-
+   
         x1=decimaux(str(B[0]))
         y1=decimaux(str(B[1]))
-        if u[0]>0:
-            coef='\\dfrac{'+decimaux(str(u[0]))+'}{'+decimaux(str(u[1]))+'}'
-        else:
-            coef='-\\dfrac{'+decimaux(str(abs(u[0])))+'}{'+decimaux(str(u[1]))+'}'
-
-    x0='0'
-    y0=b
+#     x0='0'
+#     y0=b
     if coef=='' or (coef=='-' and B[0]>0) :
         st='On sait que $'+f+'(0)='+decimaux(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+x1+b+'='+y1+'$.'
     elif coef=='-' and B[0]<0:
@@ -281,7 +279,7 @@ def tracefonc(f,i,A,B,xmin,xmax,ymin,ymax):
     else:
         st='On sait que $'+f+'(0)='+decimaux(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+' \\times '+x1+b+'='+decimaux(str(u[0]))+b+'='+y1+'$.'
 
-    l=[u'Tracer la droite représentative ($d_'+str(i)+'$) de la fonction $'+f+':x\\longmapsto '+coef+'x'+b+'$.',
+    l=[u'Tracer la droite représentative ($d_'+str(i)+'$) de la fonction $'+f+':x\\longmapsto '+coef+'\\,x'+b+'$.',
        st,
        '\\psdot [dotsize=4.5pt,dotstyle=x]'+str(A),
        '\\psdot [dotsize=4.5pt,dotstyle=x]'+str(B),
