@@ -27,18 +27,18 @@ from random import choice, randrange
 import string
 
 
-def tex_proprietes_val(exp_max, nb_max, type):
+def tex_proprietes_val(exp_max, nb_max, typeexo):
     """
     Renvoie des valeurs pour l'exercice sur les propriétés des puissances
     @param exp_max: valeur maximale pour les exposants
     @type exp_max: Integer
     @param nb_max: Valeur maximale pour les nombres
     @type nb_max: integer
-    @param type: 0 : 2 exposants et 1 nombre ; 1 : 1 exposant et 2 nombres
-    @type type: integer
+    @param typeexo: 0 : 2 exposants et 1 nombre ; 1 : 1 exposant et 2 nombres
+    @type typeexo: integer
     """
 
-    if type:
+    if typeexo:
         while 1:
             nb1 = randrange(2, nb_max)
             nb2 = randrange(2, nb_max)
@@ -68,20 +68,20 @@ def tex_proprietes():
            "  \\begin{enumerate}"]
     lexos = [0, 1, 2, 3, 0, 1, 2, 3]
 
-    #0: a^n*a^p ; 1: (a^n)^p ; 2:a^n/a^p ; 3: a^n*b^n
+    # 0: a^n*a^p ; 1: (a^n)^p ; 2:a^n/a^p ; 3: a^n*b^n
 
-    for i in range(len(lexos)):
+    for dummy in range(len(lexos)):
         j = lexos.pop(randrange(len(lexos)))
         if j == 3:
             lval = tex_proprietes_val(12, 12, 1)
-            exo.append("\\item $%s^{%s} \\times %s^{%s} = \\dotfill$" %
+            exo.append("\\item $%s^{%s} \\times %s^{%s} = \\dotfill$" % 
                        lval)
             cor.append("\\item $%s^{%s}\\times%s^{%s}=" % lval)
             cor.append("%s^{%s}$" % (lval[0] * lval[2], lval[1]))
         else:
             lval = tex_proprietes_val(12, 12, 0)
             if j == 0:
-                exo.append("\\item $%s^{%s}\\times%s^{%s}=\\dotfill$" %
+                exo.append("\\item $%s^{%s}\\times%s^{%s}=\\dotfill$" % 
                            lval)
                 cor.append("\\item $%s^{%s}\\times%s^{%s}=" % lval)
                 cor.append("%s^{%s}$" % (lval[0], lval[1] + lval[3]))
@@ -94,9 +94,9 @@ def tex_proprietes():
             elif j == 2:
                 while lval[1] - lval[3] < 3:
                     lval = tex_proprietes_val(12, 12, 0)
-                exo.append("\\item $\\dfrac{%s^{%s}}{%s^{%s}}=\\dotfill$" %
+                exo.append("\\item $\\dfrac{%s^{%s}}{%s^{%s}}=\\dotfill$" % 
                            lval)
-                cor.append("\\item $\\dfrac{%s^{%s}}{%s^{%s}}=" %
+                cor.append("\\item $\\dfrac{%s^{%s}}{%s^{%s}}=" % 
                            lval)
                 cor.append("%s^{%s}$" % (lval[0], lval[1] - lval[3]))
     exo.append("\\end{enumerate}")
@@ -111,18 +111,18 @@ tex_proprietes.description = u'Propriétés sur les puissances'
 # ----PROPRIETES AVEC 10
 
 
-def tex_proprietes_neg_val(exp_max, nb_max, type):
+def tex_proprietes_neg_val(exp_max, nb_max, typeexo):
     """
     Renvoie des valeurs pour l'exercice sur les propriétés des puissances
     @param exp_max: valeur maximale pour les exposants
     @type exp_max: Integer
     @param nb_max: Valeur maximale pour les nombres
     @type nb_max: integer
-    @param type: 0 : 2 exposants et 1 nombre ; 1 : 1 exposant et 2 nombres
-    @type type: integer
+    @param typeexo: 0 : 2 exposants et 1 nombre ; 1 : 1 exposant et 2 nombres
+    @type typeexo: integer
     """
 
-    if type:
+    if typeexo:
         while 1:
             nb1 = randrange(2, nb_max)
             nb2 = randrange(2, nb_max)
@@ -152,18 +152,18 @@ def tex_proprietes_neg():
            "  \\noindent%", "  \\begin{enumerate}"]
     lexos = [0, 1, 2, 3, 0, 1, 2, 3]
 
-    #0: a^n*a^p ; 1: (a^n)^p ; 2:a^n/a^p
+    # 0: a^n*a^p ; 1: (a^n)^p ; 2:a^n/a^p
 
-    for i in range(len(lexos)):
-        lexp = [randrange(-6, 6) for i in range(2)]
+    for dummy in range(len(lexos)):
+        lexp = [randrange(-6, 6) for dummy in range(2)]
         j = lexos.pop(randrange(len(lexos)))
 
         # FIXME : À finir
 
         if j == 0:
             while abs(lexp[0] + lexp[1]) > 10:
-                lexp = [randrange(-6, 6) for i in range(2)]
-            exo.append("\\item $10^{%s} \\times 10^{%s} = \\dotfill$" %
+                lexp = [randrange(-6, 6) for dummy in range(2)]
+            exo.append("\\item $10^{%s} \\times 10^{%s} = \\dotfill$" % 
                        tuple(lexp))
             cor.append("\\item $10^{%s}\\times 10^{%s}=" % tuple(lexp))
             cor.append("10^{%s+%s}=" % (lexp[0], tex_coef(lexp[1],
@@ -172,7 +172,7 @@ def tex_proprietes_neg():
                        decimaux(10 ** (lexp[0] + lexp[1]), 1)))
         elif j == 1:
             while abs(lexp[0] * lexp[1]) > 10:
-                lexp = [randrange(-6, 6) for i in range(2)]
+                lexp = [randrange(-6, 6) for dummy in range(2)]
             exo.append("\\item $(10^{%s})^{%s}=\\dotfill$" % (lexp[0],
                        lexp[1]))
             cor.append("\\item $(10^{%s})^{%s}=" % tuple(lexp))
@@ -182,8 +182,8 @@ def tex_proprietes_neg():
                        decimaux(10 ** (lexp[0] * lexp[1]), 1)))
         elif j == 2:
             while abs(lexp[0] - lexp[1]) > 10:
-                lexp = [randrange(-6, 6) for i in range(2)]
-            exo.append("\\item $\\dfrac{10^{%s}}{10^{%s}}=\\dotfill$" %
+                lexp = [randrange(-6, 6) for dummy in range(2)]
+            exo.append("\\item $\\dfrac{10^{%s}}{10^{%s}}=\\dotfill$" % 
                        tuple(lexp))
             cor.append("\\item $\\dfrac{10^{%s}}{10^{%s}}=" % tuple(lexp))
             cor.append("10^{%s-%s}=" % (lexp[0], tex_coef(lexp[1],
@@ -210,9 +210,9 @@ def val_sc():
             (randrange(2) + 1)
         a = a * 10 ** randrange(-9, 6)
 
-        #a=randrange(1,9999)*10**randrange(-9,6)
+        # a=randrange(1,9999)*10**randrange(-9,6)
 
-        if a >= 10 or (a < 1 and a >0) :
+        if a >= 10 or (a < 1 and a > 0) :
             break
     return a
 
@@ -226,7 +226,7 @@ def ecr_sc():
            u"Compléter par le nombre qui convient :",
            "\\begin{multicols}{3}", "  \\noindent%",
            "  \\begin{enumerate}"]
-    for i in range(6):
+    for dummy in range(6):
         a = val_sc()
         exp = int(floor(log10(a)))
         a_sc = (a * 1.) / 10 ** exp
@@ -273,23 +273,23 @@ def exo_puissances():
     if int(floor(log10(((valeurs[i][0] * valeurs[i][1]) * 1.) / valeurs[i][2]))) != \
         0:
         cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_3(valeurs[i]).translate(sd))
-    cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" %
+    cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" % 
                tex_puissances_4(valeurs[i]).translate(sd))
     exo.append("\\columnbreak\\stepcounter{nocalcul}%")
     cor.append("\\columnbreak\\stepcounter{nocalcul}%")
-    exo.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_0(valeurs[1 -
+    exo.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_0(valeurs[1 - 
                i]).translate(sd))
-    cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_0(valeurs[1 -
+    cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_0(valeurs[1 - 
                i]).translate(sd))
-    cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_1(valeurs[1 -
+    cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_1(valeurs[1 - 
                i]).translate(sd))
-    cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_2(valeurs[1 -
+    cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_2(valeurs[1 - 
                i]).translate(sd))
-    if int(floor(log10(((valeurs[1 - i][0] * valeurs[1 - i][1]) * 1.) /
+    if int(floor(log10(((valeurs[1 - i][0] * valeurs[1 - i][1]) * 1.) / 
            valeurs[1 - i][2]))) != 0:
-        cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_3(valeurs[1 -
+        cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_3(valeurs[1 - 
                    i]).translate(sd))
-        cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" %
+        cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" % 
                    tex_puissances_4(valeurs[1 - i]).translate(sd))
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
@@ -319,10 +319,10 @@ def tex_puissances_2(a):
         if ((a[0] * a[1]) * 1.) / a[2] == (a[0] * a[1]) / a[2]:
             if a[5] * a[6] < 0:
                 return '\\nombre{%s} \\times 10^{%s-(%s)}' % \
-                    verifie_type(((a[0] * a[1]) / a[2], a[3] + a[4], a[5] *
+                    verifie_type(((a[0] * a[1]) / a[2], a[3] + a[4], a[5] * 
                                  a[6]))
             else:
-                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type(((a[0] *
+                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type(((a[0] * 
                         a[1]) / a[2], a[3] + a[4], a[5] * a[6]))
         else:
             if a[5] * a[6] < 0:
@@ -330,7 +330,7 @@ def tex_puissances_2(a):
                     verifie_type((((a[0] * a[1]) * 1.) / a[2], a[3] + a[4],
                                  a[5] * a[6]))
             else:
-                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type((((a[0] *
+                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type((((a[0] * 
                         a[1]) * 1.) / a[2], a[3] + a[4], a[5] * a[6]))
 
 
@@ -339,7 +339,7 @@ def tex_puissances_3(a):
     b = int(floor(log10(((a[0] * a[1]) * 1.) / a[2])))
     if isinstance(a, tuple) and b != 0:
         return '\\nombre{%s}  \\times 10^{%s} \\times 10^{%s}' % \
-            verifie_type(((((a[0] * a[1]) * 1.) / a[2]) / 10 ** b, b, (a[3] +
+            verifie_type(((((a[0] * a[1]) * 1.) / a[2]) / 10 ** b, b, (a[3] + 
                          a[4]) - a[5] * a[6]))
 
 
@@ -347,32 +347,32 @@ def tex_puissances_4(a):
     from math import floor, log10
     b = int(floor(log10(((a[0] * a[1]) * 1.) / a[2])))
     if isinstance(a, tuple):
-        return '\\nombre{%s}  \\times 10^{%s}' % verifie_type(((((a[0] *
-                a[1]) * 1.) / a[2]) / 10 ** b, (b + a[3] + a[4]) - a[5] *
+        return '\\nombre{%s}  \\times 10^{%s}' % verifie_type(((((a[0] * 
+                a[1]) * 1.) / a[2]) / 10 ** b, (b + a[3] + a[4]) - a[5] * 
                 a[6]))
 
 
 def verifie_type(a):  # verifie si des nombres reels dans le tuple a sont en fait des nombres entiers et change leur type
-    list = []
+    liste = []
     for i in range(len(a)):
         if str(a[i]).endswith('.0'):
-            list.append(int(a[i] + .1))
+            liste.append(int(a[i] + .1))
         else:
-            list.append(a[i])
-    return tuple(list)
+            liste.append(a[i])
+    return tuple(liste)
 
 
 def valeurs_puissances():  # renvoie un tuple contenant les valeurs pour les deux exercices sur les puissances
     from math import floor, log10
-    (max, emax) = (10, 2)
+    (maxi, emax) = (10, 2)
     while True:
-        (b1, b2) = (valeur_alea(2, max), valeur_alea(2, max))
+        (b1, b2) = (valeur_alea(2, maxi), valeur_alea(2, maxi))
         (b1, b2) = (b1 / pgcd(b1, b2), b2 / pgcd(b1, b2))
         if b1 != 1 and b2 != 1:
             break
     while True:
-        (n1, n2) = ((b1 * valeur_alea(2, max)) * 10 ** randrange(-emax,
-                    emax), (b2 * valeur_alea(2, max)) * 10 ** randrange(-emax,
+        (n1, n2) = ((b1 * valeur_alea(2, maxi)) * 10 ** randrange(-emax,
+                    emax), (b2 * valeur_alea(2, maxi)) * 10 ** randrange(-emax,
                     emax))
         n3 = ((b1 * b2) * choice((2, 4, 5, 8))) * 10 ** randrange(-emax,
                 emax)
@@ -383,12 +383,12 @@ def valeurs_puissances():  # renvoie un tuple contenant les valeurs pour les deu
                         valeur_alea(2, 10), valeur_alea(2, 5))
     a = verifie_type((n1, n2, n3, e1, e2, e3, e4))
     while True:
-        (b1, b2) = (valeur_alea(2, max), valeur_alea(2, max))
+        (b1, b2) = (valeur_alea(2, maxi), valeur_alea(2, maxi))
         (b1, b2) = (b1 / pgcd(b1, b2), b2 / pgcd(b1, b2))
         if b1 != 1 and b2 != 1:
             break
-    (n1, n2) = ((b1 * valeur_alea(2, max)) * 10 ** randrange(-emax, emax +
-                1), (b2 * valeur_alea(2, max)) * 10 ** randrange(-emax,
+    (n1, n2) = ((b1 * valeur_alea(2, maxi)) * 10 ** randrange(-emax, emax + 
+                1), (b2 * valeur_alea(2, maxi)) * 10 ** randrange(-emax,
                 emax + 1))
     n3 = ((b1 * b2) * choice((1, 2, 4, 5, 8))) * 10 ** randrange(-emax,
             emax + 1)

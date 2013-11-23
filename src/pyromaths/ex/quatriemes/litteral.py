@@ -33,13 +33,13 @@ def valeurs_reduire():
     op = "+*-*"[random.randrange(4)]
     if op == "*":
         deg1 = random.randrange(3)
-        if deg1 == 2: deg2=0
+        if deg1 == 2: deg2 = 0
         elif deg1 == 1: deg2 = random.randrange(2)
         else: deg2 = random.randrange(1, 3)
     else:
         deg1 = random.randrange(1, 3)
         deg2 = [i for i in range(3)]
-        deg2.extend([deg1]*7)
+        deg2.extend([deg1] * 7)
         random.shuffle(deg2)
         deg2 = deg2.pop(random.randrange(len(deg2)))
     a1, a2 = 0, 0
@@ -64,9 +64,9 @@ def reduire():
         solve = priorites(a)
         solve.insert(0, a)
         solve = texify(solve)
-        if len(solve)>1:
+        if len(solve) > 1:
             for e in solve[1:]:
-                cor.append("\\[\\thenocalcul = "  + e + "\\]")
+                cor.append("\\[\\thenocalcul = " + e + "\\]")
         exo.append("\\stepcounter{nocalcul}")
         cor.append("\\stepcounter{nocalcul}")
     exo.extend(["  \\end{enumerate}", "\\end{multicols}"])
@@ -80,10 +80,10 @@ def valeurs_reduire_somme():
     """Réduire une somme de six monômes de degrés 0, 1 et 2"""
     var = "abcdfghkmnpqrstuvwxyz"
     var = var[random.randrange(len(var))]
-    l=[]
+    l = []
     for i in range(6):
         a = 0
-        degre = i//2
+        degre = i // 2
         while not a:
             a = random.randrange(-10, 11)
         l.append("Polynome(\"%s%s^%s\")" % (a, var, degre))
@@ -97,17 +97,17 @@ def valeurs_reduire_sommeprod():
     """Réduire une expression de six monômes de degrés 0, 1 et 2"""
     var = "abcdfghkmnpqrstuvwxyz"
     var = var[random.randrange(len(var))]
-    l=[]
+    l = []
     for i in range(5):
         a = 0
-        degre = i//2
+        degre = i // 2
         while not a:
             a = random.randrange(-10, 11)
         l.append("Polynome(\"%s%s^%s\")" % (a, var, degre))
     random.shuffle(l)
     t = l[0]
     for i in range(1, len(l)):
-        if l[i-1][-3] in "01" and l[i][-3] in "01": t += "*" + l[i]
+        if l[i - 1][-3] in "01" and l[i][-3] in "01": t += "*" + l[i]
         else: t += "+-"[random.randrange(2)] + l[i]
     return t
 
@@ -126,9 +126,9 @@ def reduire_expressions():
         solve = priorites(a)
         solve.insert(0, a)
         solve = texify(solve)
-        if len(solve)>1:
+        if len(solve) > 1:
             for e in solve[1:]:
-                cor.append("\\[\\thenocalcul = "  + e + "\\]")
+                cor.append("\\[\\thenocalcul = " + e + "\\]")
         exo.append("\\stepcounter{nocalcul}")
         cor.append("\\stepcounter{nocalcul}")
     exo.extend(["  \\end{enumerate}", "\\end{multicols}"])

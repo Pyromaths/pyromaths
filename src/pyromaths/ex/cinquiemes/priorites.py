@@ -20,14 +20,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-#from pyromaths.outils import ecrit_tex, valeur_alea, signe, pgcd, ppcm
+# from pyromaths.outils import ecrit_tex, valeur_alea, signe, pgcd, ppcm
 
 import random
-import string
-
-#
-# -------------------  -------------------
-
 
 def valeurs(nb, entier=1):  # renvoie les 2 listes contenant les opérateurs et les opérandes.
     listoperateurs = [
@@ -46,12 +41,12 @@ def valeurs(nb, entier=1):  # renvoie les 2 listes contenant les opérateurs et 
         ]
     loperateurs = []
     loperandes = []
-    i = 0  #nombre d'opérateurs créés
-    p = 0  #nombre de parenthèses ouvertes
-    cpt = 0  #compteur pour éviter que le programme ne boucle.
+    i = 0  # nombre d'opérateurs créés
+    p = 0  # nombre de parenthèses ouvertes
+    cpt = 0  # compteur pour éviter que le programme ne boucle.
     while i < nb - 1:
         cpt = cpt + 1
-        if cpt > 10:  #On recommence
+        if cpt > 10:  # On recommence
             (cpt, i, p, loperateurs) = (0, 0, 0, [])
         if p:
             if loperateurs[-1] == '(':  # On n'écrit pas 2 parenthèses à suivre
@@ -75,16 +70,16 @@ def valeurs(nb, entier=1):  # renvoie les 2 listes contenant les opérateurs et 
                    loperateurs.count(operateur) < 1
         if test:
 
-            #On n'accepte pas plus de 1 produit, différence, quotient et de 2
-            #sommes ou parenthèses par calcul.
+            # On n'accepte pas plus de 1 produit, différence, quotient et de 2
+            # sommes ou parenthèses par calcul.
 
             if i == 0 or loperateurs[-1] != '(' or ('*/').find(operateur) < \
-                0:  #pas de * ou / dans une parenthèse.
+                0:  # pas de * ou / dans une parenthèse.
                 i = i + 1
                 loperateurs.append(operateur)
         elif operateur == '(' and (')+').find(loperateurs[-1]) < 0:
 
-            #Il ne peut y avoir de ( après une ) ou après un +
+            # Il ne peut y avoir de ( après une ) ou après un +
 
             p = p + 1
             loperateurs.append(operateur)
@@ -106,21 +101,21 @@ def valeurs(nb, entier=1):  # renvoie les 2 listes contenant les opérateurs et 
 
 
 def affichage(loperateurs, loperandes):
-    j = 0  #compteur des operateurs
-    calcul = '%s' % nb_decimal((loperandes[0], ))
+    j = 0  # compteur des operateurs
+    calcul = '%s' % nb_decimal((loperandes[0],))
     for i in range(len(loperandes) - 1):
-        if loperateurs[j] == ')':  #Il reste une opération mais je ferme d'abord une ou plusieurs parenthèses
+        if loperateurs[j] == ')':  # Il reste une opération mais je ferme d'abord une ou plusieurs parenthèses
             cpt = 1
             while loperateurs[j + cpt] == ')':
-                cpt = cpt + 1  #j+cpt est la position de l'opération qui suit
+                cpt = cpt + 1  # j+cpt est la position de l'opération qui suit
         else:
             cpt = 0
-        if j + cpt < len(loperateurs) - 1:  #Il reste au moins une opération, donc peut-etre une parenthèse ouvrante
-            while loperateurs[j + cpt + 1] == '(':  #j+cpt est la position de la dernière parenthèse (
+        if j + cpt < len(loperateurs) - 1:  # Il reste au moins une opération, donc peut-etre une parenthèse ouvrante
+            while loperateurs[j + cpt + 1] == '(':  # j+cpt est la position de la dernière parenthèse (
                 cpt = cpt + 1
         for k in range(cpt + 1):
             calcul = calcul + '%s' % loperateurs[j + k]
-        calcul = calcul + '%s' % nb_decimal((loperandes[i + 1], ))
+        calcul = calcul + '%s' % nb_decimal((loperandes[i + 1],))
         j = j + cpt + 1
     while j < len(loperateurs):
         calcul = calcul + '%s' % loperateurs[j]
@@ -131,18 +126,18 @@ def affichage(loperateurs, loperandes):
 
 
 def nb_decimal(a):  # verifie si des nombres décimaux dans le tuple a sont en fait des nombres entiers et change leur type
-    list = []
+    liste = []
     for i in range(len(a)):
         if str(a[i]).endswith('.0'):
-            list.append(int(a[i] + .1))
+            liste.append(int(a[i] + .1))
         else:
-            list.append(('{,}').join(str(a[i]).split('.', 2)))
-    return tuple(list)
+            liste.append(('{,}').join(str(a[i]).split('.', 2)))
+    return tuple(liste)
 
 
 def verifie_calcul(listoperateurs, listoperandes, entier=1):
 
-    #Vérifie que l'opération proposée est réalisable sans division
+    # Vérifie que l'opération proposée est réalisable sans division
     # décimale ni nombre négatif
 
     p = 0
@@ -163,7 +158,7 @@ def verifie_calcul(listoperateurs, listoperandes, entier=1):
                     loperateurs[index + 1:].index(')'):
                     nbpar = p
             if loperateurs[index + 2] == ')':
-                a = calcul(loperandes[(index + 1) - nbpar], loperateurs[index +
+                a = calcul(loperandes[(index + 1) - nbpar], loperateurs[index + 
                            1], loperandes[(index + 2) - nbpar], entier)
                 if a != 'hp':
                     al = loperateurs[:index]
@@ -183,7 +178,7 @@ def verifie_calcul(listoperateurs, listoperandes, entier=1):
             if nbdiv:
                 indexd = loperateurs.index('/')
             index = min(indexm, indexd)
-            a = calcul(loperandes[index], loperateurs[index], loperandes[index +
+            a = calcul(loperandes[index], loperateurs[index], loperandes[index + 
                        1], entier)
             if a != 'hp':
                 al = loperateurs[:index]
@@ -209,7 +204,7 @@ def verifie_calcul(listoperateurs, listoperandes, entier=1):
                 return verifie_calcul(listoperateurs, listoperandes)
 
 
-def calcul(a, op, b, entier=1):  #retourne 'hp' (hors programme) ou le résultat de l'opération
+def calcul(a, op, b, entier=1):  # retourne 'hp' (hors programme) ou le résultat de l'opération
     if op == '+':
         return a + b
     elif op == '*':
@@ -238,31 +233,31 @@ def main():
            "\\begin{multicols}{3}", "\\noindent"]
     i = 0
     while i < nb:
-        if i < 3:  #Les 3 premiers calculs ne comportent que 3 nombres
+        if i < 3:  # Les 3 premiers calculs ne comportent que 3 nombres
             (loperateurs, loperandes) = valeurs(3)
         elif i > 6:
-            (loperateurs, loperandes) = valeurs(5, 0)  #Les derniers calculs comportent des nombres décimaux
+            (loperateurs, loperandes) = valeurs(5, 0)  # Les derniers calculs comportent des nombres décimaux
         else:
             (loperateurs, loperandes) = valeurs(6)
 
         if i > 6:
-            list = verifie_calcul([loperateurs], [loperandes], entier=0)
+            liste = verifie_calcul([loperateurs], [loperandes], entier=0)
         else:
-            list = verifie_calcul([loperateurs], [loperandes], entier=1)
-        if list != None:
+            liste = verifie_calcul([loperateurs], [loperandes], entier=1)
+        if liste != None:
             i = i + 1
-            for j in range(len(list[0])):
+            for j in range(len(liste[0])):
                 if j == 0:
-                    exo.append("\\[ \\thenocalcul = %s \\]" %
-                               affichage(list[0][j], list[1][j]))
+                    exo.append("\\[ \\thenocalcul = %s \\]" % 
+                               affichage(liste[0][j], liste[1][j]))
                     exo.append('\\stepcounter{nocalcul}%')
-                if j == len(list[0]) - 1:
-                    cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" %
-                               affichage(list[0][j], list[1][j]))
+                if j == len(liste[0]) - 1:
+                    cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" % 
+                               affichage(liste[0][j], liste[1][j]))
                     cor.append('\\stepcounter{nocalcul}%')
                 else:
-                    cor.append("\\[ \\thenocalcul = %s \\]" %
-                               affichage(list[0][j], list[1][j]))
+                    cor.append("\\[ \\thenocalcul = %s \\]" % 
+                               affichage(liste[0][j], liste[1][j]))
     exo.append("\\end{multicols}")
     cor.append("\\end{multicols}")
     return (exo, cor)

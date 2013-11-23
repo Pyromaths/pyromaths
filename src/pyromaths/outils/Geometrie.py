@@ -162,20 +162,20 @@ couples_pythagore = (
 def trouve_couples_pythagore(max):
     ls = []
     for i in xrange(26):
-        for j in xrange(i-1):
+        for j in xrange(i - 1):
             a = i
-            b = j+1
+            b = j + 1
             for k in xrange(140):
-                x = (2*k+1)*(a**2-b**2)
-                y = (2*k+1)*(2*a*b)
-                z = (2*k+1)*(a**2+b**2)
+                x = (2 * k + 1) * (a ** 2 - b ** 2)
+                y = (2 * k + 1) * (2 * a * b)
+                z = (2 * k + 1) * (a ** 2 + b ** 2)
                 if z > max:
                     break
-                ls.append(tuple(sorted([x,y,z])))
-    ls.sort(key = operator.itemgetter(2))
+                ls.append(tuple(sorted([x, y, z])))
+    ls.sort(key=operator.itemgetter(2))
     cpt = 1
     while cpt < len(ls):
-        if ls[cpt]==ls[cpt-1]:
+        if ls[cpt] == ls[cpt - 1]:
             ls.pop(cpt)
         else:
             cpt += 1
@@ -187,21 +187,21 @@ def trouve_couples_pythagore(max):
 # cotation_h écrit au dessus du segment
 #----------------------------------------------------
 
-def cotation(A,B,longueur,couleur="",unite="cm"):
-    (xA,yA)=A
-    (xB,yB)=B
-    if couleur!="":
-        couleur="\\color{%s}"%couleur
-    return u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\bput{:U}{%s\\unit[%s]{%s}}" %(xA,yA,xB,yB,couleur,longueur,unite)
+def cotation(A, B, longueur, couleur="", unite="cm"):
+    (xA, yA) = A
+    (xB, yB) = B
+    if couleur != "":
+        couleur = "\\color{%s}" % couleur
+    return u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\bput{:U}{%s\\unit[%s]{%s}}" % (xA, yA, xB, yB, couleur, longueur, unite)
 
-def cotation_h(A,B,longueur,couleur="",unite="cm"):
-    (xA,yA)=A
-    (xB,yB)=B
-    if couleur!="":
-        couleur="\\color{%s}"%couleur
-    return u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\aput{:U}{%s\\unit[%s]{%s}}" %(xA,yA,xB,yB,couleur,longueur,unite)
+def cotation_h(A, B, longueur, couleur="", unite="cm"):
+    (xA, yA) = A
+    (xB, yB) = B
+    if couleur != "":
+        couleur = "\\color{%s}" % couleur
+    return u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\aput{:U}{%s\\unit[%s]{%s}}" % (xA, yA, xB, yB, couleur, longueur, unite)
 
-#def trouve_couples_pythagore(valeurmax):
+# def trouve_couples_pythagore(valeurmax):
 #    (liste, listecouples) = ([], [])
 #    for a in range(valeurmax):
 #        liste.append(a ** 2)
@@ -268,17 +268,17 @@ class Metapost:
         self.text.append("picture $;\n")
         self.text.append("  %s=origin;\n" % A)
         if angledroit:
-            marques=[0, 0, 0, "%s \degres" % alpha, "%s \degres" % beta, "%s \degres" % gamma]
-            if a: marques[0]="%s cm" % a
-            if b: marques[1]="%s cm" % b
-            if c: marques[2]="%s cm" % c
-            points=[A, B, C]
-        #on donne les trois longueurs des 3 côtés
+            marques = [0, 0, 0, "%s \degres" % alpha, "%s \degres" % beta, "%s \degres" % gamma]
+            if a: marques[0] = "%s cm" % a
+            if b: marques[1] = "%s cm" % b
+            if c: marques[2] = "%s cm" % c
+            points = [A, B, C]
+        # on donne les trois longueurs des 3 côtés
 
         if a and b and c:
-            alpha = degres(math.acos(((b ** 2 + c ** 2) - a ** 2 * 1.) / ((2 *
+            alpha = degres(math.acos(((b ** 2 + c ** 2) - a ** 2 * 1.) / ((2 * 
                      b) * c)))
-            beta = degres(math.acos(((c ** 2 + a ** 2) - b ** 2 * 1.) / ((2 *
+            beta = degres(math.acos(((c ** 2 + a ** 2) - b ** 2 * 1.) / ((2 * 
                     c) * a)))
         elif a and b and gamma:
 
@@ -319,28 +319,28 @@ class Metapost:
 
             pass  # on sait faire
         elif beta and gamma and a:
-            c = (a * math.sin((gamma * math.pi) / 180)) / math.sin(((beta +
+            c = (a * math.sin((gamma * math.pi) / 180)) / math.sin(((beta + 
                     gamma) * math.pi) / 180)
             alpha = (180 - beta) - gamma
         elif alpha and gamma and b:
-            c = (b * math.sin((gamma * math.pi) / 180)) / math.sin(((alpha +
+            c = (b * math.sin((gamma * math.pi) / 180)) / math.sin(((alpha + 
                     gamma) * math.pi) / 180)
             beta = (180 - alpha) - gamma
         elif a and alpha and beta:
 
         # Deux angles et un côté non commun
 
-            c = (a * math.sin(((alpha + beta) * math.pi) / 180)) / math.sin((alpha *
+            c = (a * math.sin(((alpha + beta) * math.pi) / 180)) / math.sin((alpha * 
                     math.pi) / 180)
         elif a and alpha and gamma:
-            c = (a * math.sin((gamma * math.pi) / 180)) / math.sin((alpha *
+            c = (a * math.sin((gamma * math.pi) / 180)) / math.sin((alpha * 
                     math.pi) / 180)
             beta = (180 - alpha) - gamma
         elif b and beta and alpha:
-            c = (b * math.sin(((alpha + beta) * math.pi) / 180)) / math.sin((beta *
+            c = (b * math.sin(((alpha + beta) * math.pi) / 180)) / math.sin((beta * 
                     math.pi) / 180)
         elif b and beta and gamma:
-            c = (b * math.sin((gamma * math.pi) / 180)) / math.sin((beta *
+            c = (b * math.sin((gamma * math.pi) / 180)) / math.sin((beta * 
                     math.pi) / 180)
             alpha = (180 - beta) - gamma
         elif c and alpha and gamma:
@@ -361,18 +361,18 @@ class Metapost:
         if angledroit:
             if alpha - rotation == 90:
                 self.text.append("  draw (%s+5*unitvector(%s-%s))--(%s+5*unitvector(%s-%s)+\n" % (A, B, A, A, B, A))
-                self.text.append("      5*unitvector(%s-%s))--(%s+5*unitvector(%s-%s));\n" % ( C, A, A, C, A))
+                self.text.append("      5*unitvector(%s-%s))--(%s+5*unitvector(%s-%s));\n" % (C, A, A, C, A))
             elif beta + rotation == 90:
                 self.text.append("  draw (%s+5*unitvector(%s-%s))--(%s+5*unitvector(%s-%s)+\n" % (B, A, B, B, A, B))
                 self.text.append("      5*unitvector(%s-%s))--(%s+5*unitvector(%s-%s));\n" % (C, B, B, C, B))
             elif gamma == 90:
                 self.text.append("  draw (%s+5*unitvector(%s-%s))--(%s+5*unitvector(%s-%s)+\n" % (C, A, C, C, A, C))
-                self.text.append("      5*unitvector(%s-%s))--(%s+5*unitvector(%s-%s));\n" % ( B, C, C, B, C))
+                self.text.append("      5*unitvector(%s-%s))--(%s+5*unitvector(%s-%s));\n" % (B, C, C, B, C))
             for i in range(3):
                 if marques[i]:
-                    self.text.append("  m3:=unitvector(%s-%s) rotated 90;\n" % (points[(i+1)%3], points[(i+2)%3]))
+                    self.text.append("  m3:=unitvector(%s-%s) rotated 90;\n" % (points[(i + 1) % 3], points[(i + 2) % 3]))
                     self.text.append("  $:=image(\n")
-                    self.text.append("    label(btex %s etex rotated angle(%s-%s),(%s+%s)/2+2mm*m3);\n" % (marques[i], points[(i+1)%3], points[(i+2)%3], points[(i+1)%3], points[(i+2)%3]))
+                    self.text.append("    label(btex %s etex rotated angle(%s-%s),(%s+%s)/2+2mm*m3);\n" % (marques[i], points[(i + 1) % 3], points[(i + 2) % 3], points[(i + 1) % 3], points[(i + 2) % 3]))
                     self.text.append("    );\n  draw $;\n")
         self.text.append("  label.llft(btex $%s$ etex, %s);\n" % (A, A))
         self.text.append("  label.lrt(btex $%s$ etex, %s);\n" % (B, B))
@@ -385,9 +385,9 @@ class Metapost:
 
     def triangle_angle_cotes_adjacents(self, a, b, gamma):
         c = math.sqrt(a ** 2 + b ** 2 - 2 * a * b * math.cos(radians(gamma)))
-        alpha = 90. - gamma / 2 + degres(math.atan((((a - b) * 1.) / (a + b)) /
+        alpha = 90. - gamma / 2 + degres(math.atan((((a - b) * 1.) / (a + b)) / 
                 math.tan(radians(gamma / 2))))
-        beta = 90. - gamma / 2 - degres(math.atan((a - b) * 1. / (a + b) /
+        beta = 90. - gamma / 2 - degres(math.atan((a - b) * 1. / (a + b) / 
                 math.tan(radians(gamma / 2))))
         return (c, beta, alpha)
 
@@ -395,23 +395,23 @@ class Metapost:
         if b <= c * math.sin((beta * math.pi) / 180):
             alpha = gamma = a = 0  # Pas possible de résoudre
         else:
-            gamma = degres(math.asin(((c * math.sin((beta * math.pi) / 180)) /
+            gamma = degres(math.asin(((c * math.sin((beta * math.pi) / 180)) / 
                      b) * 1.))
             alpha = (180 - beta) - gamma
-            a = math.sqrt(b ** 2 - c ** 2 * math.sin((beta * math.pi) /
-                          180) ** 2) + c * math.cos((beta * math.pi) /
+            a = math.sqrt(b ** 2 - c ** 2 * math.sin((beta * math.pi) / 
+                          180) ** 2) + c * math.cos((beta * math.pi) / 
                     180)
         return (a, alpha, gamma)
 
 
-#fig = Metapost()
-#fig = Metapost.triangle(
-    #fig, "A", "B",  "C", a=3, b=4.2, c=4.2, rotation=10, angledroit=1)
-#fig = Metapost.triangle(
-    #fig, "D", "E",  "F", a=4, b=5.7, c=6.5, rotation=90, angledroit=1)
-#fig = Metapost.triangle(
-    #fig, "G", "H",  "I", a=3.5, b=3.5, c=3.5, rotation=0, angledroit=1)
-#fig = Metapost.triangle(
-    #fig, "J", "K",  "L", a=4, b=4.5, c=4.5, rotation=30, angledroit=1)
-#fig = Metapost.fin(fig)
-#print string.join(fig.text, "")
+# fig = Metapost()
+# fig = Metapost.triangle(
+    # fig, "A", "B",  "C", a=3, b=4.2, c=4.2, rotation=10, angledroit=1)
+# fig = Metapost.triangle(
+    # fig, "D", "E",  "F", a=4, b=5.7, c=6.5, rotation=90, angledroit=1)
+# fig = Metapost.triangle(
+    # fig, "G", "H",  "I", a=3.5, b=3.5, c=3.5, rotation=0, angledroit=1)
+# fig = Metapost.triangle(
+    # fig, "J", "K",  "L", a=4, b=4.5, c=4.5, rotation=30, angledroit=1)
+# fig = Metapost.fin(fig)
+# print string.join(fig.text, "")

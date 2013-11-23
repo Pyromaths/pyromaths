@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from pyromaths.classes.Fractions import Fraction  #Fractions de pyromaths
+# from pyromaths.classes.Fractions import Fraction  # Fractions de pyromaths
 import random
 from pyromaths.outils import Arithmetique
 from pyromaths.outils.Priorites3 import texify, priorites
@@ -32,7 +32,7 @@ def fractions_egales():
            "  \\begin{enumerate}"]
     cor = ["\\exercice*", u"Compléter :", "\\begin{multicols}{4}",
            "  \\begin{enumerate}"]
-    for i in range(8):
+    for dummy in range(8):
         n = d = 1
         while n == d:
             n = random.randrange(1, 11)
@@ -54,13 +54,13 @@ def fractions_egales():
         else:
             solution.insert(4, c)
             solution.insert(3, c)
-        exo.append("\\item $\\dfrac{%s}{%s}=\\dfrac{%s}{%s}$" %
+        exo.append("\\item $\\dfrac{%s}{%s}=\\dfrac{%s}{%s}$" % 
                    tuple(enonce))
         if cas:
-            cor.append("\\item $\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}=\\dfrac{%s}{%s}$" %
+            cor.append("\\item $\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}=\\dfrac{%s}{%s}$" % 
                        tuple(solution))
         else:
-            cor.append("\\item $\\dfrac{%s}{%s}=\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}$" %
+            cor.append("\\item $\\dfrac{%s}{%s}=\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}$" % 
                        tuple(solution))
     exo.extend(["  \\end{enumerate}", "\end{multicols}\n"])
     cor.extend(["  \\end{enumerate}", "\end{multicols}\n"])
@@ -76,7 +76,7 @@ def valeurs_somme():
     for dummy in range(2):
         op = "+-"[random.randrange(2)]
         n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
-        if op == "-" and 1-n2/d2>0:
+        if op == "-" and 1 - n2 / d2 > 0:
             l.append('1 %s Fraction(%s, %s)' % (op, n2, d2))
         else:
             l.append('Fraction(%s, %s) %s 1' % (n2, d2, op))
@@ -85,7 +85,7 @@ def valeurs_somme():
         op = "+-"[random.randrange(2)]
         n1 = random.randrange(2, 11)
         n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
-        if op == "-" and n1-n2/d2>0:
+        if op == "-" and n1 - n2 / d2 > 0:
             l.append('%s %s Fraction(%s, %s)' % (n1, op, n2, d2))
         else:
             l.append('Fraction(%s, %s) %s %s' % (n2, d2, op, n1))
@@ -93,7 +93,7 @@ def valeurs_somme():
     op = "+-"[random.randrange(2)]
     n1 = random.randrange(1, 11)
     n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
-    if op == "-" and n1-n2>0:
+    if op == "-" and n1 - n2 > 0:
         l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n1, d2, op, n2, d2))
     else:
         l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n2, d2, op, n1, d2))
@@ -102,7 +102,7 @@ def valeurs_somme():
         op = "+-"[random.randrange(2)]
         n1, d1 = random.randrange(1, 11), random.randrange(2, 11)
         n2, d2 = random.randrange(1, 11), random.randrange(2, 11) * d1
-        if op == "-" and n1/d1-n2/d2>0:
+        if op == "-" and n1 / d1 - n2 / d2 > 0:
             l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n1, d1, op, n2, d2))
         else:
             l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n2, d2, op, n1, d1))
@@ -126,7 +126,7 @@ def sommes_fractions():
         solve = priorites(question)
         solve = texify(solve)
         for e in solve:
-            cor.append("\\[\\thenocalcul = "  + e + "\\]")
+            cor.append("\\[\\thenocalcul = " + e + "\\]")
         exo.append("\\stepcounter{nocalcul}")
         cor.append("\\stepcounter{nocalcul}")
     exo.extend(["  \\end{enumerate}", "\\end{multicols}"])
@@ -140,18 +140,18 @@ def valeurs_produit():
     l = []
 
     for dummy in range(4):
-        n1=d1=n2=d2=a=b=2
-        while Arithmetique.pgcd(a,b)>1:
-            a=random.randrange(1,11)
-            b=random.randrange(2,11)
-        while Arithmetique.pgcd(n1*a,d1*b)>1:
-            n1=random.randrange(1,11)
-            d1=random.randrange(2,11)
-        while Arithmetique.pgcd(n2*b,d2*a)>1:
-            n2=random.randrange(1,11)
-            d2=random.randrange(2,11)
+        n1 = d1 = n2 = d2 = a = b = 2
+        while Arithmetique.pgcd(a, b) > 1:
+            a = random.randrange(1, 11)
+            b = random.randrange(2, 11)
+        while Arithmetique.pgcd(n1 * a, d1 * b) > 1:
+            n1 = random.randrange(1, 11)
+            d1 = random.randrange(2, 11)
+        while Arithmetique.pgcd(n2 * b, d2 * a) > 1:
+            n2 = random.randrange(1, 11)
+            d2 = random.randrange(2, 11)
 
-        l.append('Fraction(%s, %s)*Fraction(%s,%s)' % (n1*a, d1*b, n2*b, d2*a))
+        l.append('Fraction(%s, %s)*Fraction(%s,%s)' % (n1 * a, d1 * b, n2 * b, d2 * a))
 
     return l
 
@@ -170,7 +170,7 @@ def produits_fractions():
         solve = priorites(question)
         solve = texify(solve)
         for e in solve:
-            cor.append("\\[\\thenocalcul = "  + e + "\\]")
+            cor.append("\\[\\thenocalcul = " + e + "\\]")
         exo.append("\\stepcounter{nocalcul}")
         cor.append("\\stepcounter{nocalcul}")
     exo.extend(["  \\end{enumerate}", "\\end{multicols}"])

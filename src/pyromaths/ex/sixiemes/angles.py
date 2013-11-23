@@ -23,7 +23,6 @@
 
 import math
 from random import randrange
-from pyromaths.outils import Arithmetique
 from pyromaths.outils import Geometrie
 
 
@@ -42,7 +41,7 @@ def inter_droites(A, B, C, D):
 
     (a1, b1) = eq_droites(A, B)
     (a2, b2) = eq_droites(C, D)
-    if a1 == a2:  #droites parallèles
+    if a1 == a2:  # droites parallèles
         xI = A[0]
         yI = A[1]
     else:
@@ -100,7 +99,7 @@ def verifie_distance_mini(A, B, C, D):
     (xD, yD) = D
     if xC > xD:
         (xC, yC, xD, yD) = (xD, yD, xC, yC)
-    (xI, yI) = inter_droites(A, B, C, D)
+    (xI, dummy) = inter_droites(A, B, C, D)
     if xA <= xI <= xB and xC <= xI <= xD or xA <= coord_projete(A, B, C)[0] <= \
         xB and dist_pt_droite(A, B, C) < dmin or xA <= coord_projete(A,
             B, D)[0] <= xB and dist_pt_droite(A, B, D) < dmin or xC <= \
@@ -119,7 +118,7 @@ def verifie_angle(lpoints, A, B, C):
     V\xc3\xa9rifie que l'angle BAC ne coupe pas les autres angles d\xc3\xa9j\xc3\xa0 trac\xc3\xa9s
     """
 
-    if len(lpoints) == 0:  #Premier angle créé
+    if len(lpoints) == 0:  # Premier angle créé
         isValid = True
     else:
         for i in range(len(lpoints)):
@@ -138,18 +137,18 @@ def cree_angles(nb_angles, xmax, ymax):
     cr\xc3\xa9e une s\xc3\xa9rie d\'angles "non s\xc3\xa9quents"
     '''
 
-    (xmax, ymax) = (xmax - .5, ymax - .5)  #taille de l'image en cm
-    lg_seg = 6  #longueur des côtés des angles
+    (xmax, ymax) = (xmax - .5, ymax - .5)  # taille de l'image en cm
+    lg_seg = 6  # longueur des côtés des angles
     lpoints = []
-    cpt = 0  #evite une boucle infinie
+    cpt = 0  # evite une boucle infinie
     while len(lpoints) < nb_angles and cpt < 1000:
-        (xA, yA) = (randrange(5, xmax * 10) / 10.0, randrange(5, ymax *
+        (xA, yA) = (randrange(5, xmax * 10) / 10.0, randrange(5, ymax * 
                     10) / 10.0)
-        alpha = randrange(360)  #angle entre un côté et l'horizontal
+        alpha = randrange(360)  # angle entre un côté et l'horizontal
         if len(lpoints) < nb_angles / 2:
-            beta = randrange(90, 180)  #crée un angle droit ou obtus
+            beta = randrange(90, 180)  # crée un angle droit ou obtus
         else:
-            beta = randrange(0, 75) + 15  #crée un angle aigu (entre 15° et 89°)
+            beta = randrange(0, 75) + 15  # crée un angle aigu (entre 15° et 89°)
         xB = xA + lg_seg * math.cos((alpha * math.pi) / 180)
         yB = yA + lg_seg * math.sin((alpha * math.pi) / 180)
         xC = xA + lg_seg * math.cos(((alpha + beta) * math.pi) / 180)
@@ -162,7 +161,7 @@ def cree_angles(nb_angles, xmax, ymax):
         else:
             cpt = cpt + 1
 
-    #print len(lpoints)
+    # print len(lpoints)
 
     return lpoints
 
@@ -177,10 +176,10 @@ def PosAngle(alpha, beta):
 
 
 def PointName(l3noms, indice):
-    list = []
+    liste = []
     for i in range(3):
-        list.append(l3noms[i])
-    return tuple(list)
+        liste.append(l3noms[i])
+    return tuple(liste)
 
 
 def figure(exo, cor, lpoints, lnoms, xmax, ymax):
@@ -204,8 +203,8 @@ def figure(exo, cor, lpoints, lnoms, xmax, ymax):
             points_cor += "{a%s%s}" % (j, i)
         exo.append(points_exo)
         cor.append(points_cor)
-        exo.append("\\pstMarkAngle{a%s%s}{a%s%s}{a%s%s}{}"%(1,i,0,i,2,i))
-        cor.append("\\pstMarkAngle{a%s%s}{a%s%s}{a%s%s}{}"%(1,i,0,i,2,i))
+        exo.append("\\pstMarkAngle{a%s%s}{a%s%s}{a%s%s}{}" % (1, i, 0, i, 2, i))
+        cor.append("\\pstMarkAngle{a%s%s}{a%s%s}{a%s%s}{}" % (1, i, 0, i, 2, i))
         exo.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a1%s}\\pstLineAB[arrows=-|,linestyle=none]{a0%s}{a1%s}" % (i, i, i, i))
         cor.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a1%s}\\pstLineAB[arrows=-|,linestyle=none]{a0%s}{a1%s}" % (i, i, i, i))
         exo.append("\\pstLineAB[nodesepB=-.5]{a0%s}{a2%s}\\pstLineAB[arrows=-|,linestyle=none]{a0%s}{a2%s}" % (i, i, i, i))
@@ -235,7 +234,7 @@ def reponses(exo, cor, lpoints, lnoms):
 
 def MesureAngles():
     nb_angles = 4
-    (xmax, ymax) = (18, 8)  #taille de l'image en cm
+    (xmax, ymax) = (18, 8)  # taille de l'image en cm
     lnoms = []
     lpoints = []
     cpt = 0

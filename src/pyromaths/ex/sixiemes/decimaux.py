@@ -114,7 +114,7 @@ def NombreEnLettres(n, France=True):
                 temp = unite[u]
 
         # ajout du 's' à Quatre-vingt si rien ne suit
-        #if (result == '') and (d == 8) and (u == 0) and France : result = 's'
+        # if (result == '') and (d == 8) and (u == 0) and France : result = 's'
 
             if d == 8 and u == 0 and France:
                 temp = temp + 's'
@@ -167,7 +167,7 @@ def nombreATrouver():
     a = [random.randrange(100) + random.randrange(1000) * 10 ** 3,
          random.randrange(1000) + random.randrange(100) * 10 ** 3,
          random.randrange(1000) * 10 ** 3, random.randrange(1000)]
-    (lnb, list) = ([], [])
+    (lnb, liste) = ([], [])
     for i in range(4):
         lnb.append(random.randrange(1, 1000) * 10 ** 6 + a[i])
     for i in range(4):
@@ -179,13 +179,13 @@ def nombreATrouver():
             e = random.randrange(4, 7)
             lnb.append(n * 10 ** (-e))
     for i in range(8):
-        list.append(lnb.pop(random.randrange(len(lnb))))
-    return list
+        liste.append(lnb.pop(random.randrange(len(lnb))))
+    return liste
 
 def EcritNombreDecimal(n):
     txt = ""
     if n != int(n):
-        #n n'est pas un nombre entier
+        # n n'est pas un nombre entier
         (e, d) = str(n).split('.')
         (e, d) = (int(e), int(d))
     else:
@@ -205,7 +205,7 @@ def EcritNombreDecimal(n):
             txt = txt + u' unité et '
         if e > 1:
             txt = txt + u' unités et '
-        txt = txt + NombreEnLettres(d) + partieDec[len(str(n).split('.')[1]) -
+        txt = txt + NombreEnLettres(d) + partieDec[len(str(n).split('.')[1]) - 
                 1]
         if d > 1:
             txt = txt + 's'
@@ -214,7 +214,7 @@ def EcritNombreDecimal(n):
 def EcritEnChiffre(exo, cor):
     lnb = nombreATrouver()
     for i in range(len(lnb)):
-        exo.append("\\item " + EcritNombreDecimal(lnb[i]) +
+        exo.append("\\item " + EcritNombreDecimal(lnb[i]) + 
                  " : \\dotfill")
         cor.append("\\item " + EcritNombreDecimal(lnb[i]) + " : ")
         cor.append(Affichage.decimaux(lnb[i], 0) + '')
@@ -223,9 +223,9 @@ def EcritEnChiffre(exo, cor):
 def EcritEnLettre(exo, cor):
     lnb = nombreATrouver()
     for i in range(8):
-        exo.append("\\item " + Affichage.decimaux(lnb[i], 0) +
+        exo.append("\\item " + Affichage.decimaux(lnb[i], 0) + 
                  " : \\dotfill")
-        cor.append("\\item " + Affichage.decimaux(lnb[i], 0) +
+        cor.append("\\item " + Affichage.decimaux(lnb[i], 0) + 
                 " : ")
         cor.append(EcritNombreDecimal(lnb[i]) + '')
 
@@ -265,11 +265,11 @@ EcrireNombreLettre.description = u'Écrire un nombre décimal'
 units = ["L", "m", "g"]
 division = ["k", "h", "da", "", "d", "c", "m"]
 
-#paramétrage des flèches : mofifie le paramétrage par défaut de PSTricks  s'il n'est pas limité par un environnement ou {groupe}
-## nodesepA = -1.5mm  : décale le départ de la flèche
-## linewidth = 0.6pt  : épaisseur de la flèches
-## linestyle = dotted : style pointillé
-## vref = -0.8mm      : décale la flèche vers le bas, sous les chiffres
+# paramétrage des flèches : mofifie le paramétrage par défaut de PSTricks  s'il n'est pas limité par un environnement ou {groupe}
+# # nodesepA = -1.5mm  : décale le départ de la flèche
+# # linewidth = 0.6pt  : épaisseur de la flèches
+# # linestyle = dotted : style pointillé
+# # vref = -0.8mm      : décale la flèche vers le bas, sous les chiffres
 PSSET_FLECHE = '\\psset{nodesepA = -1.5mm, linewidth = 0.6pt, linestyle = dotted, vref = -0.8mm}'
 
 
@@ -282,10 +282,10 @@ def valeurs_units():
     p = random.randrange(-2, 0)
     unit = random.randrange(3)
     if unit:
-        #mètres ou grammes, on peut utiliser les k
+        # mètres ou grammes, on peut utiliser les k
         imax = 7
     else:
-        #Litres, donc pas de kL
+        # Litres, donc pas de kL
         imax = 6
 
     div0 = random.randrange(imax + p)
@@ -295,15 +295,15 @@ def valeurs_units():
         if div0 != div1:
             break
 
-    if not unit: #Litres, donc pas de kL donc on décale d'un rang
+    if not unit:  # Litres, donc pas de kL donc on décale d'un rang
         div0, div1 = div0 + 1, div1 + 1
 
     return (a, p, unit, div0, div1)
-        #101< a <999 ex a = 245
-        #p = {-2,-1} donne 2,45 ou 24,5
-        #unit = {0, 1, 2} => {L, m, g}
-        #div0 unité 0
-        #div1 unité converti
+        # 101< a <999 ex a = 245
+        # p = {-2,-1} donne 2,45 ou 24,5
+        # unit = {0, 1, 2} => {L, m, g}
+        # div0 unité 0
+        # div1 unité converti
 
 def tex_units():
     """
@@ -316,14 +316,14 @@ def tex_units():
     exo = ["\\exercice", 'Effectuer les conversions suivantes :',
             '\\begin{multicols}{3}\\noindent', '\\begin{enumerate}']
     cor = ["\\exercice*",
-            #paramétrage des flèches, ce paramétrage est limité à l'exercice
+            # paramétrage des flèches, ce paramétrage est limité à l'exercice
             # et ne modifie pas le paramétrage PSTricks du document car sa portée est limité par le groupe ouvert par "{"
            "{",
             PSSET_FLECHE,
            'Effectuer les conversions suivantes :',
             '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
 
-    #Construit les 6 questions de l'exercice
+    # Construit les 6 questions de l'exercice
     for i in range(6):
         (a, p, unit, div0, div1) = valeurs_units()
         if unit:
@@ -353,7 +353,7 @@ def tex_units():
     exo.append('\\end{multicols}')
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
-    #ferme le groupe limitant la portée de PSSET_FLECHE
+    # ferme le groupe limitant la portée de PSSET_FLECHE
     cor.append('{')
     return (exo, cor)
 
@@ -363,11 +363,11 @@ tex_units.description = u'Conversions unités'
 def tex_tableau(cor, div0, div1, u, nblist, chf_unite):
     """tableau de conversion pour les unités simples : L, g ou m"""
 
-    #Si len(u) == 6, on a des Litres, on ne doit pas avoir la colonne kL
+    # Si len(u) == 6, on a des Litres, on ne doit pas avoir la colonne kL
     if len(u) == 6:
         cor.append("\\begin{tabular}{c|c|c|c|c|c}")
-        cor.append("h%s & da%s & %s & d%s & c%s & m%s \\\\ \\hline" %u )
-        #décale d'une colonne pour supprimer kL
+        cor.append("h%s & da%s & %s & d%s & c%s & m%s \\\\ \\hline" % u)
+        # décale d'une colonne pour supprimer kL
         delta = 1
         div0 = div0 - 1
         div1 = div1 - 1
@@ -375,30 +375,30 @@ def tex_tableau(cor, div0, div1, u, nblist, chf_unite):
     else:
         cor.append("\\begin{tabular}{c|c|c|c|c|c|c}")
         cor.append("k%s & h%s & da%s & %s & d%s & c%s & m%s \\\\ \\hline" % u)
-        #ne supprime pas le kg, km
+        # ne supprime pas le kg, km
         delta = 0
-    for i in range(-div0 + chf_unite):
+    for dummy in range(-div0 + chf_unite):
         tmp = nblist.pop(0)
         nblist[0] = tmp + nblist[0]
 
-    for i in range(div0 - chf_unite):
+    for dummy in range(div0 - chf_unite):
         nblist.insert(0, '0')
 
 
-    for i in range(-len(u) + len(nblist)):
+    for dummy in range(-len(u) + len(nblist)):
         tmp = nblist.pop(7)
         nblist[6] = nblist[6] + tmp
 
-    #les zéros à droites des chiffres significatifs
-    for i in range(len(u) - len(nblist)):
+    # les zéros à droites des chiffres significatifs
+    for dummy in range(len(u) - len(nblist)):
         nblist.append('0')
 
-    #place les \nodes et la virgule dans le tableau
-    nblist[div0] =  "%s\\Rnode{virg0}{\\ }"%(nblist[div0])
-    nblist[div1] = "{%s\\Rnode{virg1}{\\textcolor{red}{ \\LARGE ,}}}"%(nblist[div1])
+    # place les \nodes et la virgule dans le tableau
+    nblist[div0] = "%s\\Rnode{virg0}{\\ }" % (nblist[div0])
+    nblist[div1] = "{%s\\Rnode{virg1}{\\textcolor{red}{ \\LARGE ,}}}" % (nblist[div1])
 
-    #ajoute au tabular la ligne avec 6 ou 7 colonnes
-    cor.append(("%s "+("& %s"*(6-delta))) % tuple(nblist))
+    # ajoute au tabular la ligne avec 6 ou 7 colonnes
+    cor.append(("%s " + ("& %s"*(6 - delta))) % tuple(nblist))
 
 
 
@@ -410,39 +410,39 @@ def exo_conversion(exposant):
     exo = ["\\exercice", 'Effectuer les conversions suivantes :',
             '\\begin{multicols}{3}\\noindent', '\\begin{enumerate}']
     cor = ["\\exercice*",
-            #la portée de \psset est par le group ouvert par "{"
+            # la portée de \psset est par le group ouvert par "{"
             "{",
             PSSET_FLECHE,
             '\\def\\virgule{\\textcolor{red}{ \\LARGE ,}}',
             'Effectuer les conversions suivantes :',
             '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
 
-    #ajoute le ² ou ³ si nécessaire
-    str_exposant=(u"^%s"%(exposant))*(exposant > 1)
+    # ajoute le ² ou ³ si nécessaire
+    str_exposant = (u"^%s" % (exposant)) * (exposant > 1)
 
-    u = tuple([division[i]+"m%s"%str_exposant for i in range(7)])
-    entete_tableau = ((" \\multicolumn{%s}{c|}"%exposant +"{$\\rm %s$} &")*6 +"\\multicolumn{%s}{c}"%exposant+"{$\\rm %s$}" )%u
+    u = tuple([division[i] + "m%s" % str_exposant for i in range(7)])
+    entete_tableau = ((" \\multicolumn{%s}{c|}" % exposant + "{$\\rm %s$} &") * 6 + "\\multicolumn{%s}{c}" % exposant + "{$\\rm %s$}") % u
     ligne_tab = []
 
     for i in range(6):
-        #imprime la correction et sauvegarde la ligne et la flèche pour le tableau imprimé ensuite
-        ligne_tab += tex_conversion(exo, cor,exposant, u) + ["\\ncline{->}{virg0}{virg1} \\\\"]
+        # imprime la correction et sauvegarde la ligne et la flèche pour le tableau imprimé ensuite
+        ligne_tab += tex_conversion(exo, cor, exposant, u) + ["\\ncline{->}{virg0}{virg1} \\\\"]
 
-    #ferme la correction et l'énoncé
+    # ferme la correction et l'énoncé
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
     exo.append('\\end{enumerate}')
     exo.append('\\end{multicols}')
 
-    #impression du tableau et des lignes sauvegardées précédemment
-    cor.append("\\begin{tabular}{*{%s}{p{3.5mm}|}p{3.5mm}}"%(exposant*7-1))
+    # impression du tableau et des lignes sauvegardées précédemment
+    cor.append("\\begin{tabular}{*{%s}{p{3.5mm}|}p{3.5mm}}" % (exposant * 7 - 1))
     cor.append(entete_tableau + "\\\\ \\hline")
-    #ajoute les lignes affichant les conversions
+    # ajoute les lignes affichant les conversions
     cor += ligne_tab
     cor.append("\\end{tabular}")
-    #ferme le groupe dans lequel PSSET_FLECHE portait
+    # ferme le groupe dans lequel PSSET_FLECHE portait
     cor.append("}")
-    #C'est fini
+    # C'est fini
     return (exo, cor)
 
 def exo_conversion_2d():
@@ -462,20 +462,20 @@ def tex_conversion(exo, cor, exposant, u):
     exposant = 2 ou 3 pour les aires ou les volumes
     """
 
-    a = random.randint(101,999)
-    p = random.randint(-2,-1)
+    a = random.randint(101, 999)
+    p = random.randint(-2, -1)
     while True:
-        (div0,div1)=(random.randrange(6),random.randrange(7),)
-        #Pas de mm³ par ce que ça sort du tableau
-        if (div0-div1) in [-2,-1,1,2]:
-            #pas trop loin car ça fait de très longs nombres
+        (div0, div1) = (random.randrange(6), random.randrange(7),)
+        # Pas de mm³ par ce que ça sort du tableau
+        if (div0 - div1) in [-2, -1, 1, 2]:
+            # pas trop loin car ça fait de très longs nombres
             break
     nb0 = a * 10 ** p
-    nb1 = nb0 * 10 ** ( exposant * ( div1- div0))
+    nb1 = nb0 * 10 ** (exposant * (div1 - div0))
 
-    exo.append("\\item $\\unit[%s]{%s}=\\unit[\\dotfill]{%s}$"%
+    exo.append("\\item $\\unit[%s]{%s}=\\unit[\\dotfill]{%s}$" % 
             (Affichage.decimaux(nb0), u[div0], u[div1]))
-    cor.append("\\item $\\unit[%s]{%s}=\\unit[%s]{%s}$\\vspace{1ex}\\par" %
+    cor.append("\\item $\\unit[%s]{%s}=\\unit[%s]{%s}$\\vspace{1ex}\\par" % 
             (Affichage.decimaux(nb0), u[div0],
                 Affichage.decimaux(nb1), u[div1]))
 
@@ -483,27 +483,27 @@ def tex_conversion(exo, cor, exposant, u):
 
 
 def tex_tableau_conversion(div0, div1, nb0, u, exposant):
-    nb_dict = nbre_to_dict(nb0,div0,div1,exposant)
-    nblist = [str(nb_dict.get(i,"")) for i in range(7*exposant)]
-    nblist[exposant*(div0 + 1)-1] =  "%s\\Rnode{virg0}{\\ }"% nb_dict.get(exposant*(div0+1)-1,"0")
-    nblist[exposant*(div1 + 1)-1] = "{%s\\Rnode{virg1}{\\virgule}}"% nb_dict.get(exposant*(div1+1)-1,"0")
-    return [("%s " + "& %s"*(7*exposant-1)) % tuple(nblist)]
+    nb_dict = nbre_to_dict(nb0, div0, div1, exposant)
+    nblist = [str(nb_dict.get(i, "")) for i in range(7 * exposant)]
+    nblist[exposant * (div0 + 1) - 1] = "%s\\Rnode{virg0}{\\ }" % nb_dict.get(exposant * (div0 + 1) - 1, "0")
+    nblist[exposant * (div1 + 1) - 1] = "{%s\\Rnode{virg1}{\\virgule}}" % nb_dict.get(exposant * (div1 + 1) - 1, "0")
+    return [("%s " + "& %s"*(7 * exposant - 1)) % tuple(nblist)]
 
 
-def nbre_to_dict(nbre ,div0,div1,exposant):
-    #exposant peut être 2 ou 3 pour les m² ou les m³
-    nbre = int(round(nbre*100))
+def nbre_to_dict(nbre , div0, div1, exposant):
+    # exposant peut être 2 ou 3 pour les m² ou les m³
+    nbre = int(round(nbre * 100))
     nb_dict = {}
-    for i in range(min(exposant*(div0+1),exposant*(div1+1))-1,max(exposant*(div0+1),exposant*(div1+1))):
+    for i in range(min(exposant * (div0 + 1), exposant * (div1 + 1)) - 1, max(exposant * (div0 + 1), exposant * (div1 + 1))):
             nb_dict[i] = "\\textcolor{red}{0}"
-    curseur = 1+exposant*(div0+1)
+    curseur = 1 + exposant * (div0 + 1)
     while nbre % 10 == 0:
         nbre = nbre / 10
         curseur -= 1
     while nbre > 0:
         chiffre = nbre % 10
-        nbre = (nbre-chiffre)/10
-        nb_dict[curseur] = "\\textcolor{blue}{%s}"%chiffre
+        nbre = (nbre - chiffre) / 10
+        nb_dict[curseur] = "\\textcolor{blue}{%s}" % chiffre
         curseur -= 1
     return nb_dict
 
@@ -552,7 +552,7 @@ def tex_place_virgule(exo, cor):
                  % (dec[index_dec], valeurs[index_valeurs]))
         cor.append(u"\\item le chiffre %s soit le chiffre des %s : " \
                  % (dec[index_dec], valeurs[index_valeurs]))
-        resultat = ecrit_nombre_decimal(dec, (index_dec + 4) -
+        resultat = ecrit_nombre_decimal(dec, (index_dec + 4) - 
                 index_valeurs)
         exo.append('\\dotfill')
         cor.append(Affichage.decimaux(resultat, 0) + '')
@@ -608,34 +608,34 @@ def valeurs_frac():
 
 def choix_trou_frac(exo, cor, n1, p1):
     i = random.randrange(3)
-    p2 = random.randrange(2)  #sert à compliquer un peu l'exercice
+    p2 = random.randrange(2)  # sert à compliquer un peu l'exercice
     if i > 1:
-        exo.append('\\item $\\cfrac{%s}{%s}=\\ldots$' %
+        exo.append('\\item $\\cfrac{%s}{%s}=\\ldots$' % 
                 (Affichage.decimaux(n1 * 10 ** p2),
                     Affichage.decimaux(10 ** (p1 + p2))))
-        cor.append('\\item $\\cfrac{%s}{%s}=\\mathbf{%s}$' %
+        cor.append('\\item $\\cfrac{%s}{%s}=\\mathbf{%s}$' % 
                 (Affichage.decimaux(n1 * 10 ** p2),
                     Affichage.decimaux(10 ** (p1 + p2)),
                     Affichage.decimaux(n1 * 10 ** (-p1), 1)))
     elif i > 0:
-        exo.append('\\item $\\cfrac{%s}{\ldots}=%s$' %
+        exo.append('\\item $\\cfrac{%s}{\ldots}=%s$' % 
                 (Affichage.decimaux(n1 * 10 ** p2),
         Affichage.decimaux(n1 * 10 ** (-p1), 1)))
-        cor.append('\\item $\\cfrac{%s}{\\mathbf{%s}}=%s$' %
+        cor.append('\\item $\\cfrac{%s}{\\mathbf{%s}}=%s$' % 
                 (Affichage.decimaux(n1 * 10 ** p2),
-        Affichage.decimaux(10 ** (p1 + p2)),\
+        Affichage.decimaux(10 ** (p1 + p2)), \
                 Affichage.decimaux(n1 * 10 ** (-p1), 1)))
     else:
-        exo.append('\\item $\\cfrac{\ldots}{%s}=%s$' %
+        exo.append('\\item $\\cfrac{\ldots}{%s}=%s$' % 
                 (Affichage.decimaux(10 ** (p1 + p2)),
         Affichage.decimaux(n1 * 10 ** (-p1), 1)))
-        cor.append('\\item $\\cfrac{\\mathbf{%s}}{%s}=%s$' %
+        cor.append('\\item $\\cfrac{\\mathbf{%s}}{%s}=%s$' % 
                 (Affichage.decimaux(n1 * 10 ** p2),
                     Affichage.decimaux(10 ** (p1 + p2)),
                     Affichage.decimaux(n1 * 10 ** (-p1), 1)))
 
 def tex_frac(exo, cor):
-    for i in range(6):
+    for dummy in range(6):
         (nombre, puissance) = valeurs_frac()
         choix_trou_frac(exo, cor, nombre, puissance)
 
@@ -666,7 +666,7 @@ def valeurs_dec():
     lpuissances = [3, 2, 1, 0, -1, -2, -3]
     p = []
     v = []
-    for i in range(3):
+    for dummy in range(3):
         p.append(lpuissances.pop(random.randrange(len(lpuissances))))
         v.append(random.randrange(1, 10))
     return (v, p)
@@ -681,9 +681,9 @@ def tex_decomposition(v, p):
             cor.append('%s\\times \\cfrac{1}{%s}' % (v[i],
                 Affichage.decimaux(10 ** (-p[i]), 1)))
         else:
-            exo.append('%s\\times %s' % (v[i], Affichage.decimaux(10 **
+            exo.append('%s\\times %s' % (v[i], Affichage.decimaux(10 ** 
                      p[i], 1)))
-            cor.append('%s\\times %s' % (v[i], Affichage.decimaux(10 **
+            cor.append('%s\\times %s' % (v[i], Affichage.decimaux(10 ** 
                      p[i], 1)))
         if i < 2:
             exo.append('+')
@@ -692,13 +692,13 @@ def tex_decomposition(v, p):
             exo.append('=')
             cor.append('=')
     exo.append('\\dotfill$')
-    cor.append('%s$' % Affichage.decimaux(v[0] * 10 ** p[0] +
+    cor.append('%s$' % Affichage.decimaux(v[0] * 10 ** p[0] + 
              v[1] * 10 ** p[1] + v[2] * 10 ** p[2], 1))
     return " ".join(exo), " ".join(cor)
 
 
 def tex_dec(exo, cor):
-    for i in range(6):
+    for dummy in range(6):
         txt = '\\item $'
         (chiffres, puissances) = valeurs_dec()
         txt_exo, txt_cor = tex_decomposition(chiffres, puissances)
@@ -749,29 +749,29 @@ def classer(exo, cor):
         ordre = "croissant"
     else:
         ordre = u"décroissant"
-    exo.append("\\item Classer les nombres suivants dans l'ordre %s.\\par    " %
+    exo.append("\\item Classer les nombres suivants dans l'ordre %s.\\par    " % 
              ordre)
-    cor.append("\\item Classer les nombres suivants dans l'ordre %s.\\par    " %
+    cor.append("\\item Classer les nombres suivants dans l'ordre %s.\\par    " % 
              ordre)
-    str=""
+    phrase = ""
     for i in range(len(lnb)):
         if i:
-            str += " \\kern1cm ; \\kern1cm "
-        str += Affichage.decimaux(lnb[i], 0)
-    exo.append(str)
-    cor.append(str + "\\par")
+            phrase += " \\kern1cm ; \\kern1cm "
+        phrase += Affichage.decimaux(lnb[i], 0)
+    exo.append(phrase)
+    cor.append(phrase + "\\par")
     lnb.sort()
     if ordre == "croissant":
         ordre = "\\textless"
     else:
         ordre = "\\textgreater"
         lnb.reverse()
-    str=""
+    phrase = ""
     for i in range(len(lnb)):
         if i:
-            str +=" \\kern1cm %s \\kern1cm " % ordre
-        str += Affichage.decimaux(lnb[i], 0)
-    cor.append(str)
+            phrase += " \\kern1cm %s \\kern1cm " % ordre
+        phrase += Affichage.decimaux(lnb[i], 0)
+    cor.append(phrase)
 
 
 

@@ -61,17 +61,14 @@ permet de faire des calculs détaillés sur les polynômes.</p>
 <dl class="class">
 <dt id="pyromaths.classes.PolynomesCollege.Polynome">
 <em class="property">class </em><tt class="descclassname">pyromaths.classes.PolynomesCollege.</tt><tt class="descname">Polynome</tt><big>(</big><em>monomes</em>, <em>var=None</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/PolynomesCollege.html#Polynome"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.PolynomesCollege.Polynome" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Cette classe crée la notion de polynômes.</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.PolynomesCollege</span> <span class="kn">import</span> <span class="n">Polynome</span>
+<dd><p>Cette classe crée la notion de polynômes.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.PolynomesCollege</span> <span class="kn">import</span> <span class="n">Polynome</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Polynome</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="s">&#39;z&#39;</span><span class="p">)</span>
 <span class="go">Polynome([[2, 2], [3, 1], [4, 0]], &quot;z&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Polynome</span><span class="p">(</span><span class="s">&quot;2y^2+3y+4&quot;</span><span class="p">)</span>
 <span class="go">Polynome([[2.0, 2], [3.0, 1], [4.0, 0]], &quot;y&quot;)</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 <p>Les variables e, i, j, l, o, O sont interdites pour des raisons de
 lisibilité (l, o, O) ou parce qu&#8217;elles sont utilisées comme constantes (e,
 i, j).</p>
@@ -182,14 +179,18 @@ cette fonction ?</strong>Vérifier si elle est utilisée.</p>
 <dl class="method">
 <dt id="pyromaths.classes.PolynomesCollege.Polynome.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>monomes</em>, <em>var=None</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/PolynomesCollege.html#Polynome.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.PolynomesCollege.Polynome.__init__" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Crée un polynôme. Si <tt class="docutils literal"><span class="pre">var</span> <span class="pre">==</span> <span class="pre">None</span></tt> alors la variable est <tt class="docutils literal"><span class="pre">x</span></tt>.
-&gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome
-&gt;&gt;&gt; Polynome([[2,2],[3,1],[4,0]], &#8216;z&#8217;)
-Polynome([[2, 2], [3, 1], [4, 0]], &#8220;z&#8221;)
-&gt;&gt;&gt; Polynome(&#8220;2y^2+3y+4&#8221;)
-Polynome([[2.0, 2], [3.0, 1], [4.0, 0]], &#8220;y&#8221;)
-&gt;&gt;&gt; Polynome([[1, 1], [2, 2]])
-Polynome([[1, 1], [2, 2]], &#8220;x&#8221;)</p>
+<dd><p>Crée un polynôme. Si <tt class="docutils literal"><span class="pre">var</span> <span class="pre">==</span> <span class="pre">None</span></tt> alors la variable est <tt class="docutils literal"><span class="pre">x</span></tt>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.PolynomesCollege</span> <span class="kn">import</span> <span class="n">Polynome</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Polynome</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="s">&#39;z&#39;</span><span class="p">)</span>
+<span class="go">Polynome([[2, 2], [3, 1], [4, 0]], &quot;z&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Polynome</span><span class="p">(</span><span class="s">&quot;2y^2+3y+4&quot;</span><span class="p">)</span>
+<span class="go">Polynome([[2.0, 2], [3.0, 1], [4.0, 0]], &quot;y&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Polynome</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="go">Polynome([[1, 1], [2, 2]], &quot;x&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Polynome</span><span class="p">(</span><span class="s">&quot;Fraction(1,7)x^2-Fraction(3,8)x-1&quot;</span><span class="p">)</span>
+<span class="go">Polynome([[Fraction(1, 7), 2], [Fraction(-3, 8), 1], [-1, 0]], &quot;x&quot;)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -450,9 +451,10 @@ de rang 1, on effectue toutes les multiplications en une fois</li>
 <dl class="docutils">
 <dt>Renvoie une version LaTeX du polynôme.</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.PolynomesCollege</span> <span class="kn">import</span> <span class="n">Polynome</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">=</span><span class="n">Polynome</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="s">&#39;z&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">Polynome</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="s">&#39;z&#39;</span><span class="p">))</span>
 <span class="go">&#39;2\,z^{2}+3\,z+4&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">Polynome</span><span class="p">(</span><span class="s">&quot;y^2-Fraction(3,2)y-1&quot;</span><span class="p">))</span>
+<span class="go">&#39;y^{2}+\dfrac{-3}{2}\,y-1&#39;</span>
 </pre></div>
 </div>
 </dd>
@@ -491,6 +493,31 @@ de rang 1, on effectue toutes les multiplications en une fois</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyromaths.classes.PolynomesCollege.Polynome.evaluate">
+<tt class="descname">evaluate</tt><big>(</big><em>valeur</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/PolynomesCollege.html#Polynome.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.PolynomesCollege.Polynome.evaluate" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>evaluate</strong>(<em>object</em>,*valeur*)</p>
+<p>Retourne l&#8217;expression numérique du polynôme pour sa variable égale à
+valeur.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.PolynomesCollege</span> <span class="kn">import</span> <span class="n">Polynome</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Polynome</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">Polynome</span><span class="p">(</span><span class="s">&quot;4+x-x^2+x^3-2x^5&quot;</span><span class="p">),</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">&#39;4-5-(-5)**2+(-5)**3-2*(-5)**5&#39;</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param :</th><td class="field-body">valeur</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Type :</th><td class="field-body">integer, float or Fraction</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">string</td>
 </tr>
 </tbody>
 </table>

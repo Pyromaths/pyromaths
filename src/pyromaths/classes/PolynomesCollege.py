@@ -22,10 +22,12 @@
 #
 import re
 
-if __name__=="__main__":
-    import sys
-    sys.path.append('..')
+# if __name__=="__main__":
+#     import sys
+#     sys.path.append('..')
 from pyromaths.outils.Affichage import decimaux
+from pyromaths.outils import Priorites3
+from pyromaths.classes.Fractions import Fraction
 
 _POLYNOME_FORMAT = re.compile(r"""
     \s*                                         # éventuellement des espaces pour commencer
@@ -48,6 +50,7 @@ _MONOME_FORMAT = re.compile(r"""
 
 class Polynome():
     """Cette classe crée la notion de polynômes.
+    
         >>> from pyromaths.classes.PolynomesCollege import Polynome
         >>> Polynome([[2,2],[3,1],[4,0]], 'z')
         Polynome([[2, 2], [3, 1], [4, 0]], "z")
@@ -61,6 +64,7 @@ class Polynome():
 
     def __init__(self, monomes, var=None):
         """Crée un polynôme. Si ``var == None`` alors la variable est ``x``.
+        
             >>> from pyromaths.classes.PolynomesCollege import Polynome
             >>> Polynome([[2,2],[3,1],[4,0]], 'z')
             Polynome([[2, 2], [3, 1], [4, 0]], "z")
@@ -68,26 +72,83 @@ class Polynome():
             Polynome([[2.0, 2], [3.0, 1], [4.0, 0]], "y")
             >>> Polynome([[1, 1], [2, 2]])
             Polynome([[1, 1], [2, 2]], "x")
+            >>> Polynome("Fraction(1,7)x^2-Fraction(3,8)x-1")
+            Polynome([[Fraction(1, 7), 2], [Fraction(-3, 8), 1], [-1, 0]], "x")
         """
         monomes = monomes or '0' # monômes du polynôme, par défaut un polynôme nul
         if isinstance(monomes, basestring):
             # Gère la construction des polynôme à partir d'une chaîne de caractères
             listmonomes = []
-            for monome in _POLYNOME_FORMAT.finditer(monomes):
-                m = _MONOME_FORMAT.search(monome.group(0))
-                if m is None:
-                    raise ValueError(u'chaîne invalide pour un objet Polynôme : %s' % input)
-                m_sign = m.group('sign') or '+'
-                m_coef = float(m.group('coef') or 1)
-                m_deg = int(m.group('deg') or (m.group('var') and '1') or '0')
-                m_var = m.group('var') or var
-                if m_var and not var: var = m_var # attribue une variable à var
-                if m_var != var:
-                    raise ValueError(u'Le nom de la variable (%s) est incorrect pour le Polynôme %s' % (var, monomes))
-                if m_sign == '-': m_coef = -m_coef
-                if m_coef:
-                    # supprime les monômes de coefficient 0
+            #===================================================================
+            # for monome in _POLYNOME_FORMAT.finditer(monomes):
+            #     m = _MONOME_FORMAT.search(monome.group(0))
+            #     if m is None:
+            #         raise ValueError(u'chaîne invalide pour un objet Polynôme : %s' % input)
+            #     m_sign = m.group('sign') or '+'
+            #     m_coef = float(m.group('coef') or 1)
+            #     m_deg = int(m.group('deg') or (m.group('var') and '1') or '0')
+            #     m_var = m.group('var') or var
+            #     if m_var and not var: var = m_var # attribue une variable à var
+            #     if m_var != var:
+            #         raise ValueError(u'Le nom de la variable (%s) est incorrect pour le Polynôme %s' % (var, monomes))
+            #     if m_sign == '-': m_coef = -m_coef
+            #     if m_coef:
+            #         # supprime les monômes de coefficient 0
+            #         listmonomes.append([m_coef, m_deg])
+            #===================================================================
+            splitted = Priorites3.split_calcul(monomes)
+            m_coef, var, coef = None, None, ''
+            while splitted:
+                extract = splitted.pop(0)
+                if extract in '+-':
+                    if m_coef: 
+                        listmonomes.append([m_coef, 0])
+                        m_coef = None
+                    coef = extract
+                elif Priorites3.EstNombre(extract):
+                    m_coef = eval(coef + extract)
+                else:
+                    if var and extract != var:
+                        raise ValueError(u'Le nom de la variable (%s) est incorrect pour le Polynôme %s' % (var, monomes))
+                    if var is None: var = extract
+                    if splitted and splitted[0] == '^':
+                        splitted.remove('^')
+                        m_deg = eval(splitted.pop(0))
+                    else:
+                        m_deg = 1
+                    if m_coef is None: 
+                        if coef == '-':
+                            m_coef=-1
+                        else:
+                            m_coef=1
                     listmonomes.append([m_coef, m_deg])
+                    m_coef = None
+            #===================================================================
+            # for i in range(len(splitted)):
+            #     if splitted[i] in '+-':
+            #         if m_coef: 
+            #             listmonomes.append([m_coef, 0])
+            #             m_coef = None
+            #         coef = splitted[i]
+            #     elif Priorites3.EstNombre(splitted[i]):
+            #         try:
+            #             m_coef = eval(coef + splitted[i])
+            #         except:
+            #             m_coef=1
+            #     else:
+            #         if var and splitted[i][0] != var:
+            #             raise ValueError(u'Le nom de la variable (%s) est incorrect pour le Polynôme %s' % (var, monomes))
+            #         if var is None: var = splitted[i][0]
+            #         if len(splitted[i]) == 2:
+            #             i += 1
+            #             m_deg = eval(splitted[i])
+            #         else:
+            #             m_deg = 1
+            #         if m_coef is None: m_coef=1
+            #         listmonomes.append([m_coef, m_deg])
+            #         m_coef = None
+            #===================================================================
+            if m_coef: listmonomes.append([m_coef, 0])
             if listmonomes: self.monomes = listmonomes
             else: self.monomes = [[0, 0]]
             self.var = var or 'x'
@@ -119,9 +180,11 @@ class Polynome():
 
         Renvoie une version LaTeX du polynôme.
             >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> p=Polynome([[2,2],[3,1],[4,0]], 'z')
-            >>> str(p)
+            >>> str(Polynome([[2,2],[3,1],[4,0]], 'z'))
             '2\\,z^{2}+3\\,z+4'
+            >>> str(Polynome("y^2-Fraction(3,2)y-1"))
+            'y^{2}+\\dfrac{-3}{2}\\,y-1'
+
 
         :rtype: string
         """
@@ -136,9 +199,15 @@ class Polynome():
                     elif m[0] == -1:
                         s = s + "-" + var + "^{" + str(m[1]) + "}"
                     elif m[0] > 0:
-                        s = s + "+" +decimaux(m[0], 1) + r"\," + var + "^{" + str(m[1]) + "}"
+                        if isinstance(m[0], Fraction):
+                            s = s + "+" + str(m[0]) + r"\," + var + "^{" + str(m[1]) + "}"
+                        else:
+                            s = s + "+" +decimaux(m[0], 1) + r"\," + var + "^{" + str(m[1]) + "}"
                     else:
-                        s = s + decimaux(m[0], 1) + r"\," + var + "^{" + str(m[1]) + "}"
+                        if isinstance(m[0], Fraction):
+                            s = s + "+" + str(m[0]) + r"\," + var + "^{" + str(m[1]) + "}"
+                        else:
+                            s = s + decimaux(m[0], 1) + r"\," + var + "^{" + str(m[1]) + "}"
                 elif m[1] == 1:
                     # Monôme de degré 1
                     if m[0] == 1:
@@ -146,15 +215,29 @@ class Polynome():
                     elif m[0] == -1:
                         s = s + "-" + var
                     elif m[0] > 0:
-                        s = s + "+" + decimaux(m[0], 1) + r"\," + var
+                        if isinstance(m[0], Fraction):
+                            s = s + "+" + str(m[0]) + r"\," + var
+                        else:
+                            s = s + "+" +decimaux(m[0], 1) + r"\," + var
                     else:
-                        s = s + decimaux(m[0], 1) + r"\," + var
+                        if isinstance(m[0], Fraction):
+                            s = s + "+" + str(m[0]) + r"\," + var
+                        else:
+                            s = s + decimaux(m[0], 1) + r"\," + var
+                            
                 else:
                     # Monôme de degré 0
+
                     if m[0] < 0:
-                        s = s + decimaux(m[0], 1)
+                        if isinstance(m[0], Fraction):
+                            s = s + "+" + str(m[0])
+                        else:
+                            s = s + decimaux(m[0], 1)
                     else:
-                        s = s + "+" + decimaux(m[0], 1)
+                        if isinstance(m[0], Fraction):
+                            s = s + "+" + str(m[0])
+                        else:
+                            s = s + "+" + decimaux(m[0], 1)
         # supprime le + en début de séquence
         s = s.lstrip("+")
         if not s: s="0"
@@ -426,9 +509,9 @@ class Polynome():
                 # 3x*4 ou x*3x ou 3x*4x => 3*4*x ou 3*x*x ou 3*4*x*x
                 m = []
                 if m1[0][0] != 1:
-                    m.append(str(m1[0][0]))
-                if m2[0][0]<0: m.append("(" + str(m2[0][0]) + ")")
-                else: m.append(str(m2[0][0]))
+                    m.append(repr(m1[0][0]))
+                if m2[0][0]<0: m.append("(" + repr(m2[0][0]) + ")")
+                else: m.append(repr(m2[0][0]))
                 if m1[0][1]>0: m.append("Polynome(\"%s^%s\")" % (self.var, m1[0][1]))
                 if m2[0][1]>0: m.append("Polynome(\"%s^%s\")" % (self.var, m2[0][1]))
                 return "*".join(m)
@@ -475,8 +558,8 @@ class Polynome():
                 index = index or len(ls)
                 if self.monomes[0][0] != 1:
                     ls.insert(index, "*")
-                    if self.monomes[0][0] < 0: ls.insert(index, "(" + str(self.monomes[0][0]) + ")")
-                    else: ls.insert(index, str(self.monomes[0][0]))
+                    if self.monomes[0][0] < 0: ls.insert(index, "(" + repr(self.monomes[0][0]) + ")")
+                    else: ls.insert(index, repr(self.monomes[0][0]))
                 if self.monomes[0][1] > 0:
                     ls.append("*")
                     ls.append("Polynome([%s], \"%s\")" %([1, self.monomes[0][1]], self.var))
@@ -620,18 +703,18 @@ class Polynome():
             tmp = ""
             for i in range(len(m)):
                 if tmp == "":
-                    tmp = "(%s" % str(m[i][0])
+                    tmp = "(%s" % repr(m[i][0])
                 elif m[i][1] == m[i-1][1]:
                     if m[i][0]>0: tmp += "+"
-                    tmp += str(m[i][0])
+                    tmp += repr(m[i][0])
                     reductible = True
                 else:
                     if reductible:
                         tmp += ")"
                         s += "+%s*%r" % (tmp, Polynome('1%s^%s' % (var, m[i-1][1])))
                     else:
-                        s += "+Polynome(\"%s%s^%s\")" % (str(m[i-1][0]), var,  m[i-1][1])
-                    tmp = "(%s" % str(m[i][0])
+                        s += "+Polynome(\"%s%s^%s\")" % (repr(m[i-1][0]), var,  m[i-1][1])
+                    tmp = "(%s" % repr(m[i][0])
                     reductible = False
             if reductible:
                 tmp += ")"
@@ -641,7 +724,7 @@ class Polynome():
                 else:
                     s += "+%s*%r" % (tmp, Polynome('1%s^%s' % (var,  m[-1][1])))
             else:
-                s += "+Polynome(\"%s%s^%s\")" % (str(m[-1][0]), var,  m[-1][1])
+                s += "+Polynome(\"%s%s^%s\")" % (repr(m[-1][0]), var,  m[-1][1])
             s = s.lstrip("+") # suppression du + initial
             return s
 
@@ -680,3 +763,45 @@ class Polynome():
         m1 = self.monomes
         m1 = sorted(m1, key = lambda x: (-x[1]))
         return Polynome(m1, self.var)
+
+    def evaluate(self, valeur):
+            """**evaluate**\ (*object*\ ,*valeur*)
+    
+            Retourne l'expression numérique du polynôme pour sa variable égale à
+            valeur.
+    
+                >>> from pyromaths.classes.PolynomesCollege import Polynome
+                >>> Polynome.evaluate(Polynome("4+x-x^2+x^3-2x^5"), -5)
+                '4-5-(-5)**2+(-5)**3-2*(-5)**5'
+    
+            :param: valeur
+            :type: integer, float or Fraction
+            :rtype: string
+            """
+            if Polynome.degre(self) == 0:
+                return self.monomes[0][0]
+            if valeur == 0:
+                retour = ''
+                for m in self.monomes:
+                    if m[1] == 0: retour += '+%s' % m[0]
+                return retour.lstrip('+').replace('+-', '-')
+            if valeur < 0 and isinstance(valeur, (float, int)): nb = "(%s)" % valeur
+            else: nb = repr(valeur)
+            retour = ''
+            for m in self.monomes:
+                if m[1] == 0: retour += '+%r' % m[0]
+                elif m[1] == 1:
+                    if m[0] == 1:
+                        retour += '+%r' % valeur
+                    elif m[0] == -1:
+                        retour += '-' + nb
+                    else:
+                        retour += '+%r*' % m[0] + nb
+                else:
+                    if m[0] == 1:
+                        retour += '+' + nb + '**%s' % m[1]
+                    elif m[0] == -1:
+                        retour += '-' + nb + '**%s' % m[1]
+                    else:
+                        retour += '+%r*' % m[0] + nb + '**%s' % m[1]
+            return retour.lstrip('+').replace('+-', '-')

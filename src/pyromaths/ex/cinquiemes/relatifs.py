@@ -60,12 +60,12 @@ def moins(pyromax):
     return (a + b, a)
 
 def plus_dec(pyromax):
-    (a, b) = (Arithmetique.valeur_alea(-10*pyromax, 10*pyromax)/10.0, Arithmetique.valeur_alea(-10*pyromax, 10*pyromax)/10.0)
+    (a, b) = (Arithmetique.valeur_alea(-10 * pyromax, 10 * pyromax) / 10.0, Arithmetique.valeur_alea(-10 * pyromax, 10 * pyromax) / 10.0)
     return (a, b)
 
 
 def moins_dec(pyromax):
-    (a, b) = (Arithmetique.valeur_alea(-10*pyromax, 10*pyromax)/10.0, Arithmetique.valeur_alea(-10*pyromax, 10*pyromax)/10.0)
+    (a, b) = (Arithmetique.valeur_alea(-10 * pyromax, 10 * pyromax) / 10.0, Arithmetique.valeur_alea(-10 * pyromax, 10 * pyromax) / 10.0)
     return (a + b, a)
 
 
@@ -76,8 +76,8 @@ def main():
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     cor = ["\\exercice*", "Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
-    modules = (plus, moins, )
-    modules_dec= (plus_dec, moins_dec, )
+    modules = (plus, moins,)
+    modules_dec = (plus_dec, moins_dec,)
     calculs = [i for i in range(20)]
     random.shuffle(calculs)
     for j in range(4):
@@ -85,7 +85,7 @@ def main():
         choix_trou(a, tex_coef(b, '', bpn=1), a + b, '+', exo,
                        cor)
 
-    for j in range(4,14):
+    for j in range(4, 14):
         (a, b) = modules[calculs[j] // 10](10)
         if calculs[j] // 10 == 0:
             choix_trou(a, tex_coef(b, '', bpn=1), a + b, '+', exo,
@@ -93,7 +93,7 @@ def main():
         if calculs[j] // 10 == 1:
             choix_trou(a, tex_coef(b, '', bpn=1), a - b, '-', exo,
                        cor)
-    for j in range(14,20):
+    for j in range(14, 20):
         (a, b) = modules_dec[calculs[j] // 10](10)
         if calculs[j] // 10 == 0:
             choix_trou(TeX(a), tex_coef(b, '', bpn=1), TeX(a + b), '+', exo,

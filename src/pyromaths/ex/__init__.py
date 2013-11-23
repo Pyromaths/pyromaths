@@ -95,7 +95,7 @@ def _exercises(pkg):
     # level defaults to description, then unknown
     if 'level' not in dir(pkg): pkg.level = u"Inconnu"
     n = 0
-    for _, name, ispkg in pkgutil.iter_modules(pkg.__path__, pkg.__name__+'.'):
+    for _, name, ispkg in pkgutil.iter_modules(pkg.__path__, pkg.__name__ + '.'):
         # skip packages
         if ispkg: continue;
         # import module
@@ -119,7 +119,7 @@ def _exercises(pkg):
 
 def _subpackages(pkg):
     ''' List 'pkg' sub-packages. '''
-    for _, name, ispkg in pkgutil.iter_modules(pkg.__path__, pkg.__name__+'.'):
+    for _, name, ispkg in pkgutil.iter_modules(pkg.__path__, pkg.__name__ + '.'):
         # skip modules
         if not ispkg: continue;
         yield __import(name, pkg)

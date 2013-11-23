@@ -45,33 +45,33 @@ def suppr0list(liste):
 #---------------------------------------------------------------------
 # Affichages des nombres décimaux
 #---------------------------------------------------------------------
-def decimaux(nb, mathenv = 0):
+def decimaux(nb, mathenv=0):
     pattern = re.compile(r"^(-?\d+)\.*(\d*)e?([\+\-]?\d*)$")
-    entiere,  decimale,  exposant = pattern.search(str(nb)).groups()
+    entiere, decimale, exposant = pattern.search(str(nb)).groups()
     if exposant:
         if int(exposant) > 0:
             if int(exposant) < len(decimale):
                 entiere = entiere + decimale[:int(exposant)]
                 decimale = decimale[int(exposant):]
             else:
-                entiere = entiere + decimale + "0"*(int(exposant)-len(decimale))
+                entiere = entiere + decimale + "0"*(int(exposant) - len(decimale))
                 decimale = ''
         else:
             if -int(exposant) < len(entiere):
-                decimale = entiere[len(entiere)+int(exposant):] + decimale
-                entiere = entiere[:len(entiere)+int(exposant)]
+                decimale = entiere[len(entiere) + int(exposant):] + decimale
+                entiere = entiere[:len(entiere) + int(exposant)]
             else:
-                decimale = "0"*(-int(exposant)-len(entiere)) + str(abs(int(entiere))) + decimale.rstrip("0")
-                if entiere[0]=="-": entiere = "-0"
+                decimale = "0"*(-int(exposant) - len(entiere)) + str(abs(int(entiere))) + decimale.rstrip("0")
+                if entiere[0] == "-": entiere = "-0"
                 else: entiere = "0"
 
     pattern = re.compile(r"^(-?\d{1,3}?)" + "(\d{3})" * \
-                         ((len(entiere) - 1 - (entiere[0]=='-')) // 3) + "$")
+                         ((len(entiere) - 1 - (entiere[0] == '-')) // 3) + "$")
     partie_entiere = pattern.search(entiere).groups()
     if decimale and int(decimale):
         """Vérifie si la partie décimale existe et si elle est différente de
         zéro"""
-        pattern = re.compile(r"^" + "(\d{3})" * ((len(decimale) - 1)  // 3) + \
+        pattern = re.compile(r"^" + "(\d{3})" * ((len(decimale) - 1) // 3) + \
                              "(\d{1,3})?$")
         partie_decimale = pattern.search(decimale).groups()
         if mathenv:

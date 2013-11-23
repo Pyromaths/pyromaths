@@ -24,7 +24,7 @@
 from pyromaths.outils import Arithmetique
 from pyromaths.outils.Priorites3 import texify, priorites
 import random
-from pyromaths.classes.Fractions import Fraction #Classe Fractions de pyromaths
+# from pyromaths.classes.Fractions import Fraction  # Classe Fractions de pyromaths
 
 def valeurs_somme_positive():
     """Travail sur les sommes de fractions en quatrième"""
@@ -32,7 +32,7 @@ def valeurs_somme_positive():
 
     op = "+-"[random.randrange(2)]
     n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
-    if op == "-" and 1-n2/d2>0:
+    if op == "-" and 1 - n2 / d2 > 0:
         l.append('1 %s Fraction(%s, %s)' % (op, n2, d2))
     else:
         l.append('Fraction(%s, %s) %s 1' % (n2, d2, op))
@@ -40,15 +40,15 @@ def valeurs_somme_positive():
     op = "+-"[random.randrange(2)]
     n1 = random.randrange(2, 11)
     n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
-    if op == "-" and n1-n2/d2>0:
+    if op == "-" and n1 - n2 / d2 > 0:
         l.append('%s %s Fraction(%s, %s)' % (n1, op, n2, d2))
     else:
         l.append('Fraction(%s, %s) %s %s' % (n2, d2, op, n1))
 
     op = "+-"[random.randrange(2)]
-    n1 = random.randrange(1, 9) + random.randrange(1, 9)/10.
+    n1 = random.randrange(1, 9) + random.randrange(1, 9) / 10.
     n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
-    if op == "-" and n1-n2/d2>0:
+    if op == "-" and n1 - n2 / d2 > 0:
         l.append('%s %s Fraction(%s, %s)' % (n1, op, n2, d2))
     else:
         l.append('Fraction(%s, %s) %s %s' % (n2, d2, op, n1))
@@ -56,7 +56,7 @@ def valeurs_somme_positive():
     op = "+-"[random.randrange(2)]
     n1 = random.randrange(1, 11)
     n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
-    if op == "-" and n1-n2>0:
+    if op == "-" and n1 - n2 > 0:
         l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n1, d2, op, n2, d2))
     else:
         l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n2, d2, op, n1, d2))
@@ -64,7 +64,7 @@ def valeurs_somme_positive():
     op = "+-"[random.randrange(2)]
     n1, d1 = random.randrange(1, 11), random.randrange(2, 11)
     n2, d2 = random.randrange(1, 11), random.randrange(2, 11) * d1
-    if op == "-" and n1/d1-n2/d2>0:
+    if op == "-" and n1 / d1 - n2 / d2 > 0:
         l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n1, d1, op, n2, d2))
     else:
         l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n2, d2, op, n1, d1))
@@ -77,7 +77,7 @@ def valeurs_somme_positive():
             n1, d1 = random.randrange(1, 11), random.randrange(2, 11)
             n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
             lepgcd = Arithmetique.pgcd(d1, d2)
-        if op == "-" and n1/d1-n2/d2>0:
+        if op == "-" and n1 / d1 - n2 / d2 > 0:
             l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n1, d1, op, n2, d2))
         else:
             l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n2, d2, op, n1, d1))
@@ -100,7 +100,7 @@ def sommes_fractions_positives():
         solve = priorites(question)
         solve = texify(solve)
         for e in solve:
-            cor.append("\\[\\thenocalcul = "  + e + "\\]")
+            cor.append("\\[\\thenocalcul = " + e + "\\]")
         exo.append("\\stepcounter{nocalcul}")
         cor.append("\\stepcounter{nocalcul}")
     exo.extend(["  \\end{enumerate}", "\\end{multicols}"])

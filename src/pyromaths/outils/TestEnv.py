@@ -21,10 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-### Pour tester la boite de dialogue
-## Fichier à compléter par les tests d'environnement
+# ## Pour tester la boite de dialogue
+# # Fichier à compléter par les tests d'environnement
 
-### Tests à faire ?
+# ## Tests à faire ?
 # installation d'une distribution latex
 # installation des bonnes extensions latex
 # lecture de pyromaths.xml

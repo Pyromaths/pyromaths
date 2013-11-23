@@ -27,7 +27,7 @@ from . import fractions
 from pyromaths.outils.Arithmetique import valeur_alea, pgcd
 from pyromaths.outils.Geometrie import choix_points
 #---------------------------------------------------------------------
-#-                    THÉORÈME DE THALÈS                             -
+# -                    THÉORÈME DE THALÈS                             -
 #---------------------------------------------------------------------
 def cotes_sommets(noms):  # renvoie les noms des 3 cotes du triangle en finissant par l'hypotenuse
     return (noms[1] + noms[2], noms[0] + noms[2], noms[0] + noms[1])
@@ -38,8 +38,8 @@ def nom_triangle(noms):  # renvoie le nom du triangle dans un ordre aleatoire
     c = (3 - a) - b
     return '%s%s%s' % (noms[a], noms[b], noms[c])
 
-def valeurs_thales(valeurmax, type):
-    """type est égal à 1 pour la version triangle, -1 pour la version papillon"""
+def valeurs_thales(valeurmax, typeexo):
+    """typeexo est égal à 1 pour la version triangle, -1 pour la version papillon"""
     liste = [0, 0, 0, 0, 0, 0, 0, 0]
     while liste == [0, 0, 0, 0, 0, 0, 0, 0]:
         for i in range(3):
@@ -75,8 +75,8 @@ def valeurs_thales(valeurmax, type):
     if liste[7]:
         valeurs[7] = random.randrange(5, valeurmax) / 10.0
 
-    valeurs.append((rapport, type))
-    if test_valeurs_thales(valeurs, rapport, type):
+    valeurs.append((rapport, typeexo))
+    if test_valeurs_thales(valeurs, rapport, typeexo):
         return valeurs
     else:
         return 0
@@ -124,20 +124,20 @@ def inegalite_triangulaire(a):  # renvoie 1 si c'est un triangle, 0 sinon
 
 
 def thales(exo, cor):
-    type = [-1, 1]
-    random.shuffle(type)
+    typeexo = [-1, 1]
+    random.shuffle(typeexo)
     exo.append("\\begin{multicols}{2}")
     cor.append("\\begin{multicols}{2}")
     for i in range(2):
         noms = choix_points(5)  # les noms des sommets
         while True:
-            valeurs = valeurs_thales(70, type[i])  # les longueurs en mm
+            valeurs = valeurs_thales(70, typeexo[i])  # les longueurs en mm
             if valeurs:
                 break
         exo.append(tex_enonce_thales(noms, valeurs))
         exo.append(tex_fig_thales(noms, valeurs))
         cor.append(tex_enonce_thales(noms, valeurs))
-        cor.append(tex_fig_thales(noms, valeurs) +
+        cor.append(tex_fig_thales(noms, valeurs) + 
                  "\n\\par\\dotfill{}")
         cor.append(tex_resolution_thales0(noms))
         cor.append(tex_resolution_thales1(noms, valeurs))
@@ -311,12 +311,12 @@ def tex_resolution_thales3(n, v):
             if v[i]:  # on cherche i+3
                 donnees.extend([creer_noms(n, i + 3), nombre(v[i]),
                                nombre(v[r + 3]), nombre(v[r]),
-                               valeur_exacte(((v[i] * 1.0) * v[r + 3]) /
+                               valeur_exacte(((v[i] * 1.0) * v[r + 3]) / 
                                v[r])])
             else:
                 donnees.extend([creer_noms(n, i), nombre(v[i + 3]),
                                nombre(v[r]), nombre(v[r + 3]),
-                               valeur_exacte(((v[r] * 1.0) * v[i + 3]) /
+                               valeur_exacte(((v[r] * 1.0) * v[i + 3]) / 
                                v[r + 3])])
     texte = \
         '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n' % \
@@ -331,13 +331,13 @@ def tex_resolution_thales3(n, v):
 def fig_thales(noms, valeurs):
     v = test_valeurs_thales(valeurs[0:8], valeurs[8][0], valeurs[8][1])
     type_thales = valeurs[8][1]
-    angle = int(((100.0 * acos(((v[0] ** 2 + v[1] ** 2) - v[2] ** 2) / ((2 *
+    angle = int(((100.0 * acos(((v[0] ** 2 + v[1] ** 2) - v[2] ** 2) / ((2 * 
                 v[0]) * v[1]))) * 180) / pi) / 100.0
     v = [int(v[i] * 100) / 100.0 for i in range(8)]
-    mini_x = int(100.0 * min(0, v[1] * cos((angle * pi) / 180), v[3] *
-                 type_thales, (v[4] * cos((angle * pi) / 180)) *
+    mini_x = int(100.0 * min(0, v[1] * cos((angle * pi) / 180), v[3] * 
+                 type_thales, (v[4] * cos((angle * pi) / 180)) * 
                  type_thales)) / 100.0 - 1.5
-    mini_y = int(100.0 * min(0, (v[4] * sin((angle * pi) / 180)) *
+    mini_y = int(100.0 * min(0, (v[4] * sin((angle * pi) / 180)) * 
                  type_thales)) / 100.0 - 1.5
     maxi_x = int(100.0 * max(v[0], v[1] * cos((angle * pi) / 180))) / \
         100.0 + 1.5
@@ -359,7 +359,7 @@ def fig_thales(noms, valeurs):
             v[0],
             v[1],
             angle,
-            -45,
+            - 45,
             angle + 90,
             noms[3],
             noms[4],
@@ -386,8 +386,8 @@ def fig_thales(noms, valeurs):
             angle + 180,
             noms[3],
             noms[4],
-            -v[3],
-            -v[4],
+            - v[3],
+            - v[4],
             angle,
             )
 
@@ -457,10 +457,10 @@ def valeurs_reciproque_thales():
 def fig_rec_thales(noms, v):
     type_thales = v[9]
     angle = v[8]
-    mini_x = int(100.0 * min(0, v[1] * cos((angle * pi) / 180), v[3] *
-                 type_thales, (v[4] * cos((angle * pi) / 180)) *
+    mini_x = int(100.0 * min(0, v[1] * cos((angle * pi) / 180), v[3] * 
+                 type_thales, (v[4] * cos((angle * pi) / 180)) * 
                  type_thales)) / 100.0 - 1.5
-    mini_y = int(100.0 * min(0, (v[4] * sin((angle * pi) / 180)) *
+    mini_y = int(100.0 * min(0, (v[4] * sin((angle * pi) / 180)) * 
                  type_thales)) / 100.0 - 1.5
     maxi_x = int(100.0 * max(v[0], v[1] * cos((angle * pi) / 180))) / \
         100.0 + 1.5
@@ -482,7 +482,7 @@ def fig_rec_thales(noms, v):
             v[0],
             v[1],
             angle,
-            -45,
+            - 45,
             angle + 90,
             noms[3],
             noms[4],
@@ -509,8 +509,8 @@ def fig_rec_thales(noms, v):
             angle + 180,
             noms[3],
             noms[4],
-            -v[3],
-            -v[4],
+            - v[3],
+            - v[4],
             angle,
             )
 
@@ -535,9 +535,9 @@ def rec_thales(exo, cor):
     noms = choix_points(5)  # les noms des sommets
     valeurs = valeurs_reciproque_thales()
     exo.append(tex_fig_rec_thales(noms, valeurs))
-    exo.append(tex_enonce_rec_thales(noms, valeurs) + '\\vspace{2cm}}') #le dernier '}' ferme le bloc exercice
+    exo.append(tex_enonce_rec_thales(noms, valeurs) + '\\vspace{2cm}}')  # le dernier '}' ferme le bloc exercice
     cor.append(tex_fig_rec_thales(noms, valeurs))
-    cor.append(tex_enonce_rec_thales(noms, valeurs) +
+    cor.append(tex_enonce_rec_thales(noms, valeurs) + 
              "\\par\\dotfill{}\\\\}\n")
     cor.append(tex_resolution_rec_thales0(noms, valeurs))
     cor.append(tex_resolution_rec_thales1(noms, valeurs))
@@ -616,13 +616,13 @@ def resolution_rec_thales1(n, v):
             if v[i] != int(v[i]) or v[i + 3] != int(v[i + 3]):
                 p = pgcd(int(v[i] * 10), int(v[i + 3] * 10))
                 if p == 1:
-                    t = '=\\cfrac{%s}{%s}' % (nombre(v[i] * 10), nombre(v[i +
+                    t = '=\\cfrac{%s}{%s}' % (nombre(v[i] * 10), nombre(v[i + 
                             3] * 10))
                 else:
-                    t = '=\\cfrac{%s_{\\div%s}}{%s_{\\div%s}}' % (nombre(v[i] *
+                    t = '=\\cfrac{%s_{\\div%s}}{%s_{\\div%s}}' % (nombre(v[i] * 
                             10), p, nombre(v[i + 3] * 10), p)
             if fractions.simplifie((int(v[i] * 10), int(v[i + 3] * 10))):
-                d.append(t + '=' + fractions.tex_frac(fractions.simplifie((int(v[i] *
+                d.append(t + '=' + fractions.tex_frac(fractions.simplifie((int(v[i] * 
                          10), int(v[i + 3] * 10)))))
             else:
                 d.append(t + '=' + fractions.tex_frac((int(v[i] * 10),
@@ -686,7 +686,7 @@ def enonce_trigo(exo, cor, v):
                 else:
                     tmp = 'la longueur $%s$' % l[2 * i + 6 * j]
             elif l[2 * i + 6 * j + 1]:
-                lt.append('$%s=%s\\degres$' % (l[2 * i + 6 * j], l[2 * i +
+                lt.append('$%s=%s\\degres$' % (l[2 * i + 6 * j], l[2 * i + 
                           6 * j + 1]))
             else:
                 lt.append('la mesure de l\'angle $%s$' % l[2 * i + 6 * j])
@@ -697,12 +697,12 @@ def enonce_trigo(exo, cor, v):
     cor.append('\\begin{multicols}{2}')
     cor.append('\\begin{enumerate}')
     tr = nom_triangle(v[0][0])
-    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' %
+    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' % 
              (tr, v[0][0][0]))
     exo.append('''%s et %s.\\par
 Calculer %s.\\par
 ''' % tuple(lt[0:3]))
-    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' %
+    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' % 
              (tr, v[0][0][0]))
     cor.append('''%s et %s.\\par
 Calculer %s.\\par
@@ -715,12 +715,12 @@ Calculer %s.\\par
     tr = nom_triangle(v[1][0])
     exo.append('\\columnbreak')
     cor.append('\\columnbreak')
-    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
+    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' % 
              (tr, v[1][0][0]))
     exo.append('''%s et %s.\\par
 Calculer %s.\\par
 ''' % tuple(lt[3:6]))
-    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
+    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' % 
              (tr, v[1][0][0]))
     cor.append('''%s et %s.\\par
 Calculer %s.\\par
@@ -748,7 +748,7 @@ def resolution_trigo(cor, v2, l2):
             r = (acos(v2[1][1] / v2[1][2]) * 180) / pi
         else:
             r = (atan(v2[1][1] / v2[1][2]) * 180) / pi
-        cor.append(u'\\[ %s=%s^{-1}\\left(\\cfrac{%s}{%s}\\right)\\simeq%s\\degres' %
+        cor.append(u'\\[ %s=%s^{-1}\\left(\\cfrac{%s}{%s}\\right)\\simeq%s\\degres' % 
                   (l2[4], f[0], nombre(v2[1][1]), nombre(v2[1][2]),
                   nombre(int(r * 10) / 10.0)) + '\\] ')
     elif not v2[1][1]:
@@ -762,7 +762,7 @@ def resolution_trigo(cor, v2, l2):
             r = tan((v2[1][3] * pi) / 180)
         r = r * v2[1][2]
         cor.append(u'\\[ %s=%s%s\\times %s\\simeq\\unit[%s]{cm}' % (v2[0][f[1]],
-                  f[0], v2[1][3], nombre(v2[1][2]), nombre(int(r * 100) /
+                  f[0], v2[1][3], nombre(v2[1][2]), nombre(int(r * 100) / 
                   100.0)) + '\\] ')
     else:
         cor.append(u'\\[ %s%s=\\cfrac{%s}{%s}' % (f[0], v2[1][3], nombre(v2[1][1]),
@@ -775,7 +775,7 @@ def resolution_trigo(cor, v2, l2):
             r = tan((v2[1][3] * pi) / 180)
         r = v2[1][1] / r
         cor.append(u'\\[ %s=\\cfrac{%s}{%s%s}\\simeq\\unit[%s]{cm}' % (v2[0][f[2]],
-                  nombre(v2[1][1]), f[0], v2[1][3], nombre(int(r * 100) /
+                  nombre(v2[1][1]), f[0], v2[1][3], nombre(int(r * 100) / 
                   100.0)) + '\\] ')
 
 

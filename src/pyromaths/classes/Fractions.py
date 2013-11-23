@@ -35,13 +35,22 @@ class Fraction():
         Fraction("x", 6)
         >>> Fraction(3.4)
         Fraction(34, 10)
+        >>> Fraction(3.0, 4.0)
+        Fraction(3, 4)
 
     """
     def __init__(self, n, d = 1, code = ""):
+        from pyromaths.classes.PolynomesCollege import Polynome
         if isinstance(n, float):
-            e = len(str(n).partition('.')[2])
+            e = len(str(n).partition('.')[2].rstrip('0'))
             n = int(n * 10**e)
             d = d * 10**e
+        elif isinstance(n, Polynome):
+            n = repr(n)
+        if isinstance(d, float):
+            e = len(str(d).partition('.')[2].rstrip('0'))
+            d = int(d * 10**e)
+            n = n * 10**e
         self.n = n
         if n == 0 :
             self.d = 1
@@ -218,39 +227,53 @@ class Fraction():
         Fraction(8, 5)
         >>> Fraction(63,20) * Fraction(8,27)
         'Fraction("9*7*4*2", "4*5*9*3", "s")'
-
+        >>> Fraction(24,12) * 12
+        'Fraction("24*12", "12*1", "s")'
+        >>> 12*Fraction(24,12)
+        'Fraction("12*24", "1*12", "s")'
 
         :param: other
         :type: Fraction ou string
         :rtype: Fraction ou string
         """
-        if (isinstance(other,int) or isinstance(other,float)):
+        from pyromaths.classes.PolynomesCollege import Polynome
+        if isinstance(other, (int, float)):
             other=Fraction(other)
-        s = pgcd(self.n*other.n, self.d*other.d)
+        elif isinstance(other, Polynome):
+            return Polynome(repr(self))*other
+        s = abs(pgcd(self.n*other.n, self.d*other.d))
         if s - 1:
-            n1, d1 = pgcd(self.n, s), pgcd(self.d, s)
-            n2, d2 = s / n1, s / d1
-            t = "Fraction("
-            if n1 == 1 or n1 == self.n:
-                t += str(self.n)
+            if other.n == s:
+                n1, n2 = self.n, other.n
             else:
-                t += "%s*%s" % (n1, self.n/n1)
-            if n2 == 1 or n2 == other.n:
-                t += "*%s, " % other.n
+                n1 = pgcd(self.n, s)
+                n2 = s / n1
+            if other.d == s:
+                d1, d2 = self.d, other.d
             else:
-                t += "*%s*%s, " % (n2, other.n/n2)
-            if d1 == 1 or d1 == self.d:
-                t += str(self.d)
-            else:
-                t += "%s*%s" % (d1, self.d/d1)
-            if d2 == 1 or d2 == other.d:
-                t += "*%s, \"s\")" % other.d
-            else:
-                t += "*%s*%s, \"s\")" % (d2, other.d/d2)
-            n1, n2 = t[9:-6].split(",")
+                d1 = pgcd(self.d, s)
+                d2 = s / d1
+            t = "Fraction(%s*%s*%s*%s, %s*%s*%s*%s, \"s\")" % (n1, self.n/n1, n2, other.n/n2, d1, self.d/d1, d2, other.d/d2)
+            n1, d1 = t[9:-6].split(",")
+            n1, d1 = n1.strip(), d1.strip()
+            while n1[:2] == "1*": n1 = n1[2:]
+            while "*1*" in n1: n1 = n1.replace("*1*", "*", 1)
+            if n1[-2:] == "*1": n1 = n1[:-2]
+            if s == self.n * other.n:
+                # laisser un *1 ou 1* selon
+                if self.n ==1: n1 = "1*" + n1
+                else: n1 += "*1"   
+            while d1[:2] == "1*": d1 = d1[2:]
+            while "*1*" in d1: d1 = d1.replace("*1*", "*" ,1)
+            if d1[-2:] == "*1": d1 = d1[:-2]
+            if s == self.d * other.d:
+                # laisser un *1
+                if self.d ==1: d1 = "1*" + d1
+                else: d1 += "*1"   
+            
             if "*" in n1: n1 = "\"%s\"" % n1.strip()
-            if "*" in n2: n2 = "\"%s\"" % n2.strip()
-            t = "Fraction(%s, %s, \"s\")" % (n1, n2)
+            if "*" in d1: d1 = "\"%s\"" % d1.strip()
+            t = "Fraction(%s, %s, \"s\")" % (n1, d1)
             return t
         else:
             return Fraction(self.n * other.n, self.d * other.d)
@@ -318,6 +341,17 @@ class Fraction():
         Fraction(-8, 27)
         """
         return Fraction(-self.n,self.d)
+
+    def __pos__(self):
+        """**__pos__**\ (*self*)
+
+        ``__pos__(p)`` est équivalent à ``+p`` Renvoie la fraction p.
+
+        >>> from pyromaths.classes.Fractions import Fraction
+        >>> +Fraction(8,27)
+        Fraction(8, 27)
+        """
+        return Fraction(self.n,self.d)
 
     def __pow__(self,n):
         """**__pow__**\ (*self*, *n*)
@@ -437,7 +471,7 @@ class Fraction():
             'Fraction("2*4","5*4", "s")'
 
         :param type: Fraction
-        :rtype: Fraction ou None
+        :rtype: string
         """
         if isinstance(self.n, str): self.n = eval(self.n)
         if isinstance(self.d, str): self.d = eval(self.d)

@@ -51,9 +51,9 @@ def main():
         f.write(u"" + create_config_file())
         f.close()
     modify_config_file(join(CONFIGDIR, "pyromaths.xml"))
-    templatesdir = join(CONFIGDIR,  "templates")
+    templatesdir = join(CONFIGDIR, "templates")
     if not isdir(templatesdir): makedirs(templatesdir)
-    packagesdir = join(CONFIGDIR,  "packages")
+    packagesdir = join(CONFIGDIR, "packages")
     if not isdir(packagesdir): makedirs(packagesdir)
 
     app = QtGui.QApplication(argv)

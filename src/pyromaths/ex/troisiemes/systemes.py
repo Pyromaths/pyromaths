@@ -24,22 +24,22 @@
 from pyromaths.outils import Arithmetique
 from . import developpements
 
-##
+# #
 ##------------------- MÉTHODE PAR COMBINAISON -------------------
 
 
 def choix_valeurs(m):  # crée les valeurs du systeme de la forme a1.x+b1.y=c1 ; a2.x+b2.y=c2 et renvoie ((a1, b1, c1), (a2, b2, c2), (x, y))
     while True:
-        c = [Arithmetique.valeur_alea(-m, m) for i in range(6)]
+        c = [Arithmetique.valeur_alea(-m, m) for dummy in range(6)]
         if c[0] * c[3] - c[1] * c[2] and abs(c[0]) - 1 and abs(c[1]) - 1 and \
-            abs(c[2]) - 1 and abs(c[3]) - 1 and abs(c[1] * c[2] - c[0] *
+            abs(c[2]) - 1 and abs(c[3]) - 1 and abs(c[1] * c[2] - c[0] * 
                 c[3]) - 1 and abs(c[0]) - abs(c[2]) and abs(c[1]) - abs(c[3]) and \
             c[4] and c[5]:
             break
 
             # supprime des cas particuliers
 
-    return ((c[0], c[1], c[0] * c[4] + c[1] * c[5]), (c[2], c[3], c[2] *
+    return ((c[0], c[1], c[0] * c[4] + c[1] * c[5]), (c[2], c[3], c[2] * 
             c[4] + c[3] * c[5]), (c[4], c[5]))
 
 
@@ -70,13 +70,13 @@ def tex_systeme(v, p=None):  # renvoie l'écriture au format tex d'un système d
             signe(v[0][1]),
             developpements.tex_coef(abs(v[0][1]), 'y'),
             v[0][2],
-            '\\qquad\\hbox{\\footnotesize$\\mathit{(\\times %s)}$}' %
+            '\\qquad\\hbox{\\footnotesize$\\mathit{(\\times %s)}$}' % 
                 developpements.tex_coef(p[0], '', bpn=1),
             developpements.tex_coef(v[1][0], 'x'),
             signe(v[1][1]),
             developpements.tex_coef(abs(v[1][1]), 'y'),
             v[1][2],
-            '\\qquad\\hbox{\\footnotesize$\\mathit{(\\times %s)}$}' %
+            '\\qquad\\hbox{\\footnotesize$\\mathit{(\\times %s)}$}' % 
                 developpements.tex_coef(p[1], '', bpn=1),
             )
         return '''\\left\\lbrace
@@ -88,7 +88,7 @@ def tex_systeme(v, p=None):  # renvoie l'écriture au format tex d'un système d
 
 
 def combinaison1(v, a0, a1):
-    return ((v[0][0] * a0, v[0][1] * a0, v[0][2] * a0), (v[1][0] * a1, v[1][1] *
+    return ((v[0][0] * a0, v[0][1] * a0, v[0][2] * a0), (v[1][0] * a1, v[1][1] * 
             a1, v[1][2] * a1))
 
 
@@ -98,7 +98,7 @@ def combinaison2(v):  # renvoie les coefficients pour la somme des deux lignes
 
 def tex_comb2(v, c):
     if c[0]:
-        tv = (developpements.tex_coef(v[0][0], 'x'), '\\cancel{' +
+        tv = (developpements.tex_coef(v[0][0], 'x'), '\\cancel{' + 
               developpements.tex_coef(v[0][1], 'y', bplus=1) + '}',
               developpements.tex_coef(v[1][0], 'x', bplus=1),
               '\\cancel{' + developpements.tex_coef(v[1][1], 'y', bplus=
@@ -169,12 +169,12 @@ def tex_eq2(v, c):
 
 def tex_eq3(v, c):
     if c[0]:
-        tv = (developpements.tex_coef(1, 'y'), developpements.tex_coef(v[0][2] -
+        tv = (developpements.tex_coef(1, 'y'), developpements.tex_coef(v[0][2] - 
               v[0][0] * v[2][0], ''), developpements.tex_coef(v[0][1],
               ''), developpements.tex_coef(v[2][1], ''))
         t = '%s=\\frac{%s}{%s}=%s' % tv
     else:
-        tv = (developpements.tex_coef(1, 'x'), developpements.tex_coef(v[0][2] -
+        tv = (developpements.tex_coef(1, 'x'), developpements.tex_coef(v[0][2] - 
               v[0][1] * v[2][1], ''), developpements.tex_coef(v[0][0],
               ''), developpements.tex_coef(v[2][0], ''))
         t = '%s=\\frac{%s}{%s}=%s' % tv
@@ -223,7 +223,7 @@ def systemes(exo, cor, v):
     cor.append('''\\vspace{2ex}
   \\begin{multicols}{2}\\noindent
 ''')
-    cor.append(u'\\[ ' + tex_systeme(c1) +
+    cor.append(u'\\[ ' + tex_systeme(c1) + 
                      '\\quad\\text{\\footnotesize On ajoute les deux lignes}' + '\\] ')
     c2 = combinaison2(c1)
     cor.append(u'\\[ ' + tex_comb2(c1, c2) + '\\] ')
@@ -234,11 +234,11 @@ def systemes(exo, cor, v):
     cor.append(u'\\[ ' + tex_eq2(v, c2) + '\\] ')
     cor.append(u'\\[ \\boxed{' + tex_eq3(v, c2) + '} \\] ')
     cor.append('\\end{multicols}')
-    cor.append(u"\\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par" %
+    cor.append(u"\\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par" % 
              v[2])
     cor.append(u'{Vérification : $' + tex_verification(v) + '$}')
 
-def tex_systemes( ):
+def tex_systemes():
     valeurs = choix_valeurs(10)
     exo = ['\\exercice', u"Résoudre le système d'équations suivant :"]
     cor = ['\\exercice*', u"Résoudre le système d'équations suivant :"]

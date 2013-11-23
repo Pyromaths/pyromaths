@@ -68,7 +68,7 @@ def EffectueCalcul(op, nb1, nb2, pre="", post=""):
             if nb2 == 0:  # division par zéro
                 (l, resultat, programme) = ([], 1, 1)
             else:
-                l = ["%s%s%s" % (pre, Affichage.decimaux((nb1 * 1.0) /
+                l = ["%s%s%s" % (pre, Affichage.decimaux((nb1 * 1.0) / 
                      nb2, 1), post)]
                 resultat = (nb1 * 1.0) / nb2
                 if resultat - math.floor(resultat) == 0.0:
@@ -138,26 +138,26 @@ def split_calc(calcul):
 
 
 
-#a=testfraction.fraction(5,7)
-#b=testfraction.fraction(4,3)
-#c=testfraction.fraction(8,9)
+# a=testfraction.fraction(5,7)
+# b=testfraction.fraction(4,3)
+# c=testfraction.fraction(8,9)
 #
 #
-#c=split_calc('(a+b)*c')
+# c=split_calc('(a+b)*c')
 
 
-#calcul = raw_input("Un autre calcul ?\nIl faut mettre des parenthèses à chaque opération, même si inutiles.\n")
+# calcul = raw_input("Un autre calcul ?\nIl faut mettre des parenthèses à chaque opération, même si inutiles.\n")
 
-#split_calc(calcul)
+# split_calc(calcul)
 
-#TODO : étendre à des nombres avec plusieurs chiffres
+# TODO : étendre à des nombres avec plusieurs chiffres
 #---------------------------------------------------------------------
-#autre version des priorités
+# autre version des priorités
 #---------------------------------------------------------------------
 
 import re
 
-def priorites(calcul, pre = "", post = "", solution = []):
+def priorites(calcul, pre="", post="", solution=[]):
     if not solution: solution = [calcul]
     recherche_parentheses = r"""
     ^(.*)                           #des calculs dans le groupe 0
@@ -263,33 +263,33 @@ def traite_operation(operateur, calcul, pre, post, solution):
         sous_resultat = eval(sous_calcul[1])
         if isinstance(sous_resultat, list):
             for element in sous_resultat:
-                solution.extend([pre +
-                             sous_calcul[0] +
-                             str(element) +
-                             sous_calcul[2] +
+                solution.extend([pre + 
+                             sous_calcul[0] + 
+                             str(element) + 
+                             sous_calcul[2] + 
                              post])
             a = sous_resultat[-1]
             sous_resultat = 'a'
         elif (sous_calcul[0] and sous_calcul[0][-1] == '(') and \
            (sous_calcul[2][0] and sous_calcul[2][0] == ')') and \
            (post[:2] != '**' or sous_resultat > 0):
-            #permet de supprimer les parenthèses
-            solution.extend([pre +
-                             sous_calcul[0][:-1] +
-                             decimaux(sous_resultat, True) +
-                             sous_calcul[2][1:] +
+            # permet de supprimer les parenthèses
+            solution.extend([pre + 
+                             sous_calcul[0][:-1] + 
+                             decimaux(sous_resultat, True) + 
+                             sous_calcul[2][1:] + 
                              post])
         else:
-            solution.extend([pre +
-                             sous_calcul[0] +
-                             decimaux(sous_resultat, True) +
-                             sous_calcul[2] +
+            solution.extend([pre + 
+                             sous_calcul[0] + 
+                             decimaux(sous_resultat, True) + 
+                             sous_calcul[2] + 
                              post])
         calcul = sous_calcul[0] + decimaux(sous_resultat, True) + sous_calcul[2]
         test = re.search(pattern, calcul, re.VERBOSE)
     return (calcul, pre, post, solution)
 
-def priorites_operations(calcul, pre = "", post = "", solution = []):
+def priorites_operations(calcul, pre="", post="", solution=[]):
     for string in ["\*\*", "[\*/]", "[\+\-]"]:
         calcul, pre, post, solution = traite_operation(string, calcul, pre,
                                                    post, solution)
@@ -301,40 +301,40 @@ def priorites_operations(calcul, pre = "", post = "", solution = []):
 #                                                   post, solution)
     return (calcul, solution)
 
-##
-##print(priorites("(12-15)**2+(15-12)**3"))
-##print("_" * 40)
-###print(priorites("((-(-1)+-2)++3)"))
-###print("_" * 40)
-###print(priorites("4-((-1+-2)+3)"))
-###print("_" * 40)
-###print(priorites('8-(-5*(2-4))'))
-###print("_" * 40)
-##print(priorites("1+2+3+4"))
-##print("_" * 40)
-###print(priorites("-3**+2"))
-###print("_" * 40)
-###print(priorites("9+8*7"))
-###print("_" * 40)
-###print(priorites("8+1.3e+2"))
-###print("_" * 40)
-##a, b, c = Racine(5), Racine(5, 3), Racine(5, 2)
-##print(priorites("2*(a+b+c)"))
-##print("_" * 40)
-##a, b = Racine(5), Racine(5, 3)
-##print(priorites("a*b*2"))
-###print("_" * 40)
-###c, d = Terme(5, 2), Terme(-6, 2)
-###print(priorites("c*d"))
-###print("_" * 40)
-##print(priorites("8+1.3e+2"))
-##print(priorites("755*(12-15)**2+(15-12)**3"))
-##print(priorites("((-(-1)+-2)++3)"))
-##print(priorites("4-((-1+-2)+3)"))
-##print(priorites('8-(-5*(2-4))'))
-##print(priorites("1+2+3+4"))
-##print(priorites("-3**+2"))
-##print(priorites("9+8*7"))
+# #
+# #print(priorites("(12-15)**2+(15-12)**3"))
+# #print("_" * 40)
+# ##print(priorites("((-(-1)+-2)++3)"))
+# ##print("_" * 40)
+# ##print(priorites("4-((-1+-2)+3)"))
+# ##print("_" * 40)
+# ##print(priorites('8-(-5*(2-4))'))
+# ##print("_" * 40)
+# #print(priorites("1+2+3+4"))
+# #print("_" * 40)
+# ##print(priorites("-3**+2"))
+# ##print("_" * 40)
+# ##print(priorites("9+8*7"))
+# ##print("_" * 40)
+# ##print(priorites("8+1.3e+2"))
+# ##print("_" * 40)
+# #a, b, c = Racine(5), Racine(5, 3), Racine(5, 2)
+# #print(priorites("2*(a+b+c)"))
+# #print("_" * 40)
+# #a, b = Racine(5), Racine(5, 3)
+# #print(priorites("a*b*2"))
+# ##print("_" * 40)
+# ##c, d = Terme(5, 2), Terme(-6, 2)
+# ##print(priorites("c*d"))
+# ##print("_" * 40)
+# #print(priorites("8+1.3e+2"))
+# #print(priorites("755*(12-15)**2+(15-12)**3"))
+# #print(priorites("((-(-1)+-2)++3)"))
+# #print(priorites("4-((-1+-2)+3)"))
+# #print(priorites('8-(-5*(2-4))'))
+# #print(priorites("1+2+3+4"))
+# #print(priorites("-3**+2"))
+# #print(priorites("9+8*7"))
 
 from pyromaths.classes.Fractions import Fraction
 from . import Arithmetique, Affichage
@@ -420,7 +420,7 @@ def OperateurPrioritaire(exercice, niveau, pre="", post="", solution=[]):
                     i0 = exercice.index("-")
             pre1 = Affichage(exercice[:i0 - 1])  # Ce qui est avant le calcul en cours
             post1 = Affichage(exercice[i0 + 2:])  # Ce qui est après le calcul en cours
-            (l, res, programme) = EffectueCalcul(exercice[i0], exercice[i0 -
+            (l, res, programme) = EffectueCalcul(exercice[i0], exercice[i0 - 
                     1], exercice[i0 + 1], pre + pre1, post + post1)
             for i in l:
                 solution.append(i)
@@ -442,7 +442,7 @@ def TrouveParentheseInterieure(l):
     nbpar = l.count('(')
     if nbpar > 1:
         if l[l.index('(') + 1:].index('(') < l[l.index('(') + 1:].index(')'):  # Il existe une parenthèse dans les parenthèses
-            return l.index('(') + 1 + TrouveParentheseInterieure(l[l.index('(') +
+            return l.index('(') + 1 + TrouveParentheseInterieure(l[l.index('(') + 
                     1:])
         else:
             return l.index('(')
@@ -467,12 +467,12 @@ def valeurs_priorites_decimaux(nb, entier=1):  # renvoie les 2 listes contenant 
         ]
     loperateurs = []
     loperandes = []
-    i = 0  #nombre d'opérateurs créés
-    p = 0  #nombre de parenthèses ouvertes
-    cpt = 0  #compteur pour éviter que le programme ne boucle.
+    i = 0  # nombre d'opérateurs créés
+    p = 0  # nombre de parenthèses ouvertes
+    cpt = 0  # compteur pour éviter que le programme ne boucle.
     while i < nb - 1:
         cpt = cpt + 1
-        if cpt > 10:  #On recommence
+        if cpt > 10:  # On recommence
             (cpt, i, p, loperateurs) = (0, 0, 0, [])
         if p:
             if loperateurs[-1] == '(':  # On n'écrit pas 2 parenthèses à suivre
@@ -495,15 +495,15 @@ def valeurs_priorites_decimaux(nb, entier=1):  # renvoie les 2 listes contenant 
                 1
         if test:
 
-            #On n'accepte pas plus de 1 produit, différence, quotient et de 2 sommes ou parenthèses par calcul.
+            # On n'accepte pas plus de 1 produit, différence, quotient et de 2 sommes ou parenthèses par calcul.
 
             if i == 0 or loperateurs[-1] != '(' or ('*/').find(operateur) < \
-                0:  #pas de * ou / dans une parenthèse.
+                0:  # pas de * ou / dans une parenthèse.
                 i = i + 1
                 loperateurs.append(operateur)
         elif operateur == '(' and (')+').find(loperateurs[-1]) < 0:
 
-            #Il ne peut y avoir de ( après une ) ou après un +
+            # Il ne peut y avoir de ( après une ) ou après un +
 
             p = p + 1
             loperateurs.append(operateur)
@@ -535,7 +535,7 @@ def valeurs_priorites_decimaux(nb, entier=1):  # renvoie les 2 listes contenant 
     return exercice
 
 
-#for i in xrange(1):
+# for i in xrange(1):
 #    l=valeurs_priorites_fractions(3, 1)
 #    cor,res, programme=OperateurPrioritaire(l,6,pre="", post="",solution=[])
 #    while programme<5:

@@ -71,7 +71,7 @@ def tex_quotient1(a, b, c, d):  # renvoie l'ecriture de la mise au meme denomina
 def tex_equation0(valeurs):  # renvoie l'ecriture des quotients de l'enonce
     texte = ''
     for i in range(3):
-        texte = texte + tex_quotient0(valeurs[0][i * 2], valeurs[0][i *
+        texte = texte + tex_quotient0(valeurs[0][i * 2], valeurs[0][i * 
                 2 + 1], valeurs[1][i])
         if i == 0:
             texte = texte + valeurs[3][0]
@@ -83,7 +83,7 @@ def tex_equation0(valeurs):  # renvoie l'ecriture des quotients de l'enonce
 def tex_equation1(valeurs):  # renvoie l'ecriture de la mise au meme denominateur des quotients
     texte = ''
     for i in range(3):
-        texte = texte + tex_quotient1(valeurs[0][i * 2], valeurs[0][i *
+        texte = texte + tex_quotient1(valeurs[0][i * 2], valeurs[0][i * 
                 2 + 1], valeurs[1][i], valeurs[2][i])
         if i == 0:
             texte = texte + valeurs[3][0]
@@ -96,12 +96,12 @@ def tex_equation2(valeurs):  # renvoie l'ecriture des quotients au meme denomina
     texte = '\\cfrac{'
     for i in range(3):
         texte = texte + developpements.tex_binome((valeurs[4][i * 2],
-                valeurs[4][i * 2 + 1]), bplus=i == 1 and valeurs[3][1] >
+                valeurs[4][i * 2 + 1]), bplus=i == 1 and valeurs[3][1] > 
                 0, bpar=i == 1 and valeurs[3][1] < 0)
         if i == 0 and valeurs[3][1] < 0:
             texte = texte + valeurs[3][0]
         elif i == 1:
-            texte = texte + '}{\\cancel{%s}}=\cfrac{' % (valeurs[1][0] *
+            texte = texte + '}{\\cancel{%s}}=\cfrac{' % (valeurs[1][0] * 
                     valeurs[2][0])
     texte = texte + '}{\\cancel{%s}}' % (valeurs[1][0] * valeurs[2][0])
     return texte
@@ -117,7 +117,7 @@ def tex_equation2bis(valeurs):  # renvoie l'ecriture des quotients au meme denom
 
 
 def tex_equation3(valeurs):  # renvoie l'ecriture reduite de l'equation sans denominateur
-    texte = developpements.tex_binome((valeurs[4][0] + valeurs[4][2] *
+    texte = developpements.tex_binome((valeurs[4][0] + valeurs[4][2] * 
             valeurs[3][1], valeurs[4][1] + valeurs[4][3] * valeurs[3][1]))
     texte = texte + '=' + developpements.tex_binome((valeurs[4][4],
             valeurs[4][5]))
@@ -125,7 +125,7 @@ def tex_equation3(valeurs):  # renvoie l'ecriture reduite de l'equation sans den
 
 
 def tex_equation4(valeurs):  # renvoie l'ecriture de l'equation avec l'inconnue d'un cote de l'egalite
-    texte = developpements.tex_coef(valeurs[4][0] + valeurs[4][2] *
+    texte = developpements.tex_coef(valeurs[4][0] + valeurs[4][2] * 
                                     valeurs[3][1], 'x') + developpements.tex_coef(-valeurs[4][4],
             'x', bplus=1)
     texte = texte + '=' + developpements.tex_coef(valeurs[4][5], '') + \
@@ -135,9 +135,9 @@ def tex_equation4(valeurs):  # renvoie l'ecriture de l'equation avec l'inconnue 
 
 
 def tex_equation5(valeurs):  # renvoie l'ecriture reduite de l'equation avec l'inconnue d'un cote de l'egalite
-    texte = developpements.tex_coef((valeurs[4][0] + valeurs[4][2] *
+    texte = developpements.tex_coef((valeurs[4][0] + valeurs[4][2] * 
                                     valeurs[3][1]) - valeurs[4][4], 'x')
-    texte = texte + '=' + developpements.tex_coef((valeurs[4][5] -
+    texte = texte + '=' + developpements.tex_coef((valeurs[4][5] - 
             valeurs[4][1]) - valeurs[4][3] * valeurs[3][1], '')
     return texte
 
@@ -158,7 +158,7 @@ def tex_equation6(valeurs):  # renvoie la solution de l'equation
 tex_eqs = [tex_equation0, tex_equation1, tex_equation2, tex_equation3,
           tex_equation4, tex_equation5, tex_equation6]
 
-def equations(exo, cor, valeurs):  #resolution d'une equation
+def equations(exo, cor, valeurs):  # resolution d'une equation
     exo.append(u"Résoudre l'équation : ")
     exo.append(u'\\[ ' + tex_equation0(valeurs) + '\\] ')
     cor.append(u"Résoudre l'équation : ")
@@ -173,7 +173,7 @@ def equations(exo, cor, valeurs):  #resolution d'une equation
         sol = fractions.tex_frac(simpl)
     else:
         sol = fractions.tex_frac(frac)
-    cor.append(u'\\fbox{La solution de cette équation est $%s$\\,.}' %
+    cor.append(u'\\fbox{La solution de cette équation est $%s$\\,.}' % 
              sol)
 
 def tex_equations():

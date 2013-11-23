@@ -78,7 +78,7 @@ class TeXMiseEnForme:
         # décimal par une virgule
 
         dec = [str(nb)[i] for i in range(len(str(nb)))]
-        if dec.count('e'):  #nb ecrit en notation scientifique
+        if dec.count('e'):  # nb ecrit en notation scientifique
             exposant = int(("").join(dec[dec.index('e') + 1:]))
             dec = dec[:dec.index('e')]
             lg = len(dec)
@@ -87,7 +87,7 @@ class TeXMiseEnForme:
                 dec.remove('.')
             else:
                 virg = len(dec)
-            if virg + exposant < 0:  #L'ecriture decimale du nombre commence par 0,...
+            if virg + exposant < 0:  # L'ecriture decimale du nombre commence par 0,...
                 dec2 = ["0", '.']
                 for i in range(-virg - exposant):
                     dec2.append("0")
@@ -95,7 +95,7 @@ class TeXMiseEnForme:
                 dec = dec2
             elif virg + exposant > lg:
 
-                #L'ecriture decimale du nombre finit par des 0
+                # L'ecriture decimale du nombre finit par des 0
 
                 for i in range(-((lg - virg) - 1) + exposant):
                     dec.append("0")
@@ -148,7 +148,7 @@ class TeXMiseEnForme:
         else:
             return string.join(string.rsplit(nb, sep='.'), ',')
 
-sepmilliers=TeXMiseEnForme("").sepmilliers
+sepmilliers = TeXMiseEnForme("").sepmilliers
 
 def Affichage(l):
     """\xc3\x89crit une expressions contenant des d\xc3\xa9cimaux et des fractions au format TeX
@@ -163,16 +163,16 @@ def Affichage(l):
                 expr = expr + " \\times "
             elif l[i] == "/":
                 expr = expr + " \\div "
-            elif l[i] == ")" and type(l[i-1]) == type(Fractions(1, 1)):
+            elif l[i] == ")" and type(l[i - 1]) == type(Fractions(1, 1)):
                 expr = expr + " \\big) "
-            elif i<len(l)-2 and l[i] == "(":
-                if type(l[i+1]) == type(Fractions(1, 1)):
+            elif i < len(l) - 2 and l[i] == "(":
+                if type(l[i + 1]) == type(Fractions(1, 1)):
                     expr = expr + " \\big( "
             else:
                 expr = expr + " " + l[i] + " "
         elif type(l[i]) == type(Fractions(1, 1)):
             # C'est une fraction
-            expr = expr + "%s" % Fractions.TeX(l[i], signe = 0)
+            expr = expr + "%s" % Fractions.TeX(l[i], signe=0)
         else:
             # C'est un nombre
             expr = expr + "%s" % Affichage.decimaux(l[i], 1)

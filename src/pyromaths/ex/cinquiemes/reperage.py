@@ -35,51 +35,51 @@ def noms_sommets(nb):
 
 def angle(coordo):
     """Angle pour placer le nom du point en fonction du quadrant"""
-    l=[]
+    l = []
     for coord in coordo:
-        if coord[0]>=0 and coord[1]>=0:
-            ang='45'
-        if coord[0]>=0 and coord[1]<0:
-            ang='-45'
-        if coord[0]<0 and coord[1]<0:
-            ang='-135'
-        if coord[0]<0 and coord[1]>=0:
-            ang='135'
+        if coord[0] >= 0 and coord[1] >= 0:
+            ang = '45'
+        if coord[0] >= 0 and coord[1] < 0:
+            ang = '-45'
+        if coord[0] < 0 and coord[1] < 0:
+            ang = '-135'
+        if coord[0] < 0 and coord[1] >= 0:
+            ang = '135'
 
 
         l.append(ang)
     return l
 
-def place_points(coordo,points):
+def place_points(coordo, points):
     """coordo: liste de coordonnées ;
     points : noms des points associés
     génère le code latex pour placer tous les points"""
-    l= angle(coordo)
-    text="\\pstGeonode[PointSymbol=x,PosAngle={"
+    l = angle(coordo)
+    text = "\\pstGeonode[PointSymbol=x,PosAngle={"
     for ang in l :
-        text=text+ang+','
-    text=text+"},PointNameSep=0.4]"
-    i=0
-    while i<len(coordo):
-        text=text+str(coordo[i])+"{"+str(points[i])+"}"
-        i=i+1
+        text = text + ang + ','
+    text = text + "},PointNameSep=0.4]"
+    i = 0
+    while i < len(coordo):
+        text = text + str(coordo[i]) + "{" + str(points[i]) + "}"
+        i = i + 1
     return text
 
-def valide(coord,liste_coord):
+def valide(coord, liste_coord):
     """Évite deux points trop proches l'un de l'autre"""
-    rep=True
+    rep = True
     for c in liste_coord:
-        if abs(coord[0]-c[0])<=0.5 and abs(coord[1]-c[1])<=0.5:
-            rep=False
+        if abs(coord[0] - c[0]) <= 0.5 and abs(coord[1] - c[1]) <= 0.5:
+            rep = False
             break
     return rep
 
-def quadrant(coord,liste_coord):
+def quadrant(coord, liste_coord):
     """Évite 2 points dans le même quadrant"""
-    rep= True
+    rep = True
     for c in liste_coord:
-        if coord[0]*c[0]>=0 and coord[1]*c[1]>=0:
-            rep=False
+        if coord[0] * c[0] >= 0 and coord[1] * c[1] >= 0:
+            rep = False
             break
     return rep
 
@@ -87,103 +87,103 @@ def quadrant(coord,liste_coord):
 def coordo_pts(nb):
     """Génère une liste de nb coordonnées. Je m'arrange pour avoir des points
     sur les 4 quadrants et sur les deux axes"""
-    j=0
-    k=0
-    l=[]
-    i=0
-    while i<4 and i<nb:
-        j=j+1
-        if j==600:
+    j = 0
+    k = 0
+    l = []
+    i = 0
+    while i < 4 and i < nb:
+        j = j + 1
+        if j == 600:
             # Correction d'un bug
             l, i, j = [], 0, 0
-        a=float(random.randrange(-9,10))/2
-        b=float(random.randrange(-9,10))/2
-        if ((a,b) not in l) and valide((a,b),l)and quadrant((a,b),l):
-            l.append((a,b))
-            i=i+1
-    if nb>=4:
-        a=float(random.randrange(-9,10))/2
-        while not valide((0,a),l):
-            a=float(random.randrange(-9,10))/2
-        rg=random.randrange(0,len(l)-1)
-        l[rg:rg]=[(0,a)]
-        i=i+1
+        a = float(random.randrange(-9, 10)) / 2
+        b = float(random.randrange(-9, 10)) / 2
+        if ((a, b) not in l) and valide((a, b), l)and quadrant((a, b), l):
+            l.append((a, b))
+            i = i + 1
+    if nb >= 4:
+        a = float(random.randrange(-9, 10)) / 2
+        while not valide((0, a), l):
+            a = float(random.randrange(-9, 10)) / 2
+        rg = random.randrange(0, len(l) - 1)
+        l[rg:rg] = [(0, a)]
+        i = i + 1
 
-    if nb>=5:
-        b=float(random.randrange(-9,10))/2
-        while not valide((b,0),l):
-            b=float(random.randrange(-9,10))/2
-        rg=random.randrange(0,len(l)-1)
-        l[rg:rg]=[(b,0)]
-        i=i+1
+    if nb >= 5:
+        b = float(random.randrange(-9, 10)) / 2
+        while not valide((b, 0), l):
+            b = float(random.randrange(-9, 10)) / 2
+        rg = random.randrange(0, len(l) - 1)
+        l[rg:rg] = [(b, 0)]
+        i = i + 1
 
 
-    while i>=6 and i<nb and i<10:
-        a=float(random.randrange(-9,10))/2
-        b=float(random.randrange(-9,10))/2
-        j=j+1
-        if j==600:
+    while i >= 6 and i < nb and i < 10:
+        a = float(random.randrange(-9, 10)) / 2
+        b = float(random.randrange(-9, 10)) / 2
+        j = j + 1
+        if j == 600:
             break
-        if ((a,b) not in l) and valide((a,b),l)and quadrant((a,b),l[6:i]):
-            l.append((a,b))
-            i=i+1
-    if nb>=11 and len(l)==10:
-        a=float(random.randrange(-9,10))/2
-        while not valide((0,a),l):
-            a=float(random.randrange(-9,10))/2
-        rg=random.randrange(6,len(l)-1)
-        l[rg:rg]=[(0,a)]
-        i=i+1
-    if nb>=11 and len(l)==11:
-        b=float(random.randrange(-9,10))/2
-        while not valide((b,0),l):
-            b=float(random.randrange(-9,10))/2
-        rg=random.randrange(6,len(l)-1)
-        l[rg:rg]=[(b,0)]
-        i=i+1
+        if ((a, b) not in l) and valide((a, b), l)and quadrant((a, b), l[6:i]):
+            l.append((a, b))
+            i = i + 1
+    if nb >= 11 and len(l) == 10:
+        a = float(random.randrange(-9, 10)) / 2
+        while not valide((0, a), l):
+            a = float(random.randrange(-9, 10)) / 2
+        rg = random.randrange(6, len(l) - 1)
+        l[rg:rg] = [(0, a)]
+        i = i + 1
+    if nb >= 11 and len(l) == 11:
+        b = float(random.randrange(-9, 10)) / 2
+        while not valide((b, 0), l):
+            b = float(random.randrange(-9, 10)) / 2
+        rg = random.randrange(6, len(l) - 1)
+        l[rg:rg] = [(b, 0)]
+        i = i + 1
 
-    while i>=12 and i<nb :
-        a=float(random.randrange(-9,10))/2
-        b=float(random.randrange(-9,10))/2
-        k=k+1
-        if k==600:
+    while i >= 12 and i < nb :
+        a = float(random.randrange(-9, 10)) / 2
+        b = float(random.randrange(-9, 10)) / 2
+        k = k + 1
+        if k == 600:
             break
-        if ((a,b) not in l) and valide((a,b),l):
-            l.append((a,b))
-            i=i+1
+        if ((a, b) not in l) and valide((a, b), l):
+            l.append((a, b))
+            i = i + 1
     return l
 
 
 def affiche_coord(coord):
     """Affiche les coordonnées des points au format LaTeX"""
-    return '\\hbox{$('+decimaux(str(coord[0]), 1) + '~;~' + \
-                                             decimaux(str(coord[1]), 1)+')$}'
+    return '\\hbox{$(' + decimaux(str(coord[0]), 1) + '~;~' + \
+                                             decimaux(str(coord[1]), 1) + ')$}'
 
 def tex_liste_co(liste_coord):
     """prend une liste de coordonnées et renvoie la liste en string prête pour latex
     #\hbox évite que les coordonnées soient coupées à l'affichage"""
-    i=0
-    tlc=[]
+    i = 0
+    tlc = []
     while i < len(liste_coord):
         tlc.append(affiche_coord(liste_coord[i]))
-        i=i+1
+        i = i + 1
     return tlc
 
 def main():
     nbpts = 13
-    noms_pts=(noms_sommets(nbpts))
-    coord_pts=coordo_pts(nbpts)
-    voc=['abscisse',u'ordonnée']
-    rg1=random.randrange(0,2)
-    rg2=abs(rg1-1)
-    while len(coord_pts)<nbpts:
-        coord_pts=coordo_pts(nbpts)
-    exo=["\\exercice",
+    noms_pts = (noms_sommets(nbpts))
+    coord_pts = coordo_pts(nbpts)
+    voc = ['abscisse', u'ordonnée']
+    rg1 = random.randrange(0, 2)
+    rg2 = abs(rg1 - 1)
+    while len(coord_pts) < nbpts:
+        coord_pts = coordo_pts(nbpts)
+    exo = ["\\exercice",
          "\\parbox{0.4\\linewidth}{",
          "\\begin{enumerate}",
          u"\\item Donner les coordonnées des points %s, %s, %s, %s, %s et %s." % tuple(noms_pts[0:6]),
-         u"\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s" %noms_pts[6:12] +u" de coordonnées respectives %s, %s, %s, %s, %s et %s. " %tuple(tex_liste_co(coord_pts[6:12])),
-         u"\\item Placer dans le repère le point %s d'%s %s et d'%s %s" %(noms_pts[12],voc[rg1],decimaux(str(coord_pts[12][rg1])),voc[rg2],decimaux(str(coord_pts[12][rg2]))),
+         u"\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s" % noms_pts[6:12] + u" de coordonnées respectives %s, %s, %s, %s, %s et %s. " % tuple(tex_liste_co(coord_pts[6:12])),
+         u"\\item Placer dans le repère le point %s d'%s %s et d'%s %s" % (noms_pts[12], voc[rg1], decimaux(str(coord_pts[12][rg1])), voc[rg2], decimaux(str(coord_pts[12][rg2]))),
          "\\end{enumerate}}\\hfill ",
          "\\parbox{0.55\\linewidth}{",
          "\\psset{unit=0.8cm}",
@@ -191,28 +191,28 @@ def main():
          "\\psgrid[subgriddiv=2, subgridcolor=lightgray, gridlabels=8pt](0,0)(-5,-5)(5,5)",
          "\\psline[linewidth=1.2pt]{->}(-5,0)(5,0)",
          "\\psline[linewidth=1.2pt]{->}(0,-5)(0,5)",
-         place_points(coord_pts[0:6],noms_pts[0:6]),
+         place_points(coord_pts[0:6], noms_pts[0:6]),
          "\\end{pspicture}}"]
-    cor=["\\exercice*",
+    cor = ["\\exercice*",
          "\\parbox{0.4\\linewidth}{",
          "\\psset{unit=0.8cm}",
          "\\begin{pspicture}(-5,-5)(5,5)",
          "\\psgrid[subgriddiv=2, subgridcolor=lightgray, gridlabels=8pt](0,0)(-5,-5)(5,5)",
          "\\psline[linewidth=1.2pt]{->}(-5,0)(5,0)",
          "\\psline[linewidth=1.2pt]{->}(0,-5)(0,5)",
-         place_points(coord_pts[0:13],noms_pts[0:13]),
+         place_points(coord_pts[0:13], noms_pts[0:13]),
          "\\end{pspicture}}\\hfill",
          "\\parbox{0.5\\linewidth}{",
          "\\begin{enumerate}",
          u"\\item Donner les coordonnées des points %s, %s, %s, %s, %s et %s." % tuple(noms_pts[0:6])]
-    i=0
-    while i<6:
-        cor.append(u"Les coordonnées du point %s sont %s \n"%(noms_pts[i],affiche_coord(coord_pts[i])))
-        i=i+1
-    cor[len(cor):len(cor)]=[u"\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s" %noms_pts[6:12] +u" de coordonnées respectives %s, %s, %s, %s, %s et %s. " %tuple(tex_liste_co(coord_pts[6:12])),
-         u"\\item Placer dans le repère le point %s d'%s %s et d'%s %s" %(noms_pts[12],voc[rg1],decimaux(str(coord_pts[12][rg1])),voc[rg2],decimaux(str(coord_pts[12][rg2]))),
+    i = 0
+    while i < 6:
+        cor.append(u"Les coordonnées du point %s sont %s \n" % (noms_pts[i], affiche_coord(coord_pts[i])))
+        i = i + 1
+    cor[len(cor):len(cor)] = [u"\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s" % noms_pts[6:12] + u" de coordonnées respectives %s, %s, %s, %s, %s et %s. " % tuple(tex_liste_co(coord_pts[6:12])),
+         u"\\item Placer dans le repère le point %s d'%s %s et d'%s %s" % (noms_pts[12], voc[rg1], decimaux(str(coord_pts[12][rg1])), voc[rg2], decimaux(str(coord_pts[12][rg2]))),
          "\\end{enumerate}"]
     cor.append("}")
-    return(exo,cor)
+    return(exo, cor)
 
 main.description = u'Repérage'

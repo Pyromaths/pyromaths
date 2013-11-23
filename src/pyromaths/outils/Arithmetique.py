@@ -38,7 +38,7 @@ def pgcd(a, b):
     :rtype: integer
     """
     while b:
-        a, b = b, a%b
+        a, b = b, a % b
     return a
 
 def ppcm(a, b):
@@ -55,7 +55,7 @@ def ppcm(a, b):
 
     :rtype: integer
     """
-    return a*b/pgcd(a, b)
+    return a * b / pgcd(a, b)
 
 def premier(n):
     """**premier**\ (*n*)
@@ -71,8 +71,8 @@ def premier(n):
 
     :rtype: boolean
     """
-    return not [x for x in xrange(2,int(math.sqrt(n)) + 1)
-                if n%x == 0]
+    return not [x for x in xrange(2, int(math.sqrt(n)) + 1)
+                if n % x == 0]
 
 def eratosthene(n):
     """**eratosthene**\ (*n*)
@@ -108,12 +108,12 @@ def factor(n):
     :rtype: list
     """
     premiers = []
-    candidats = xrange(2,n+1)
+    candidats = xrange(2, n + 1)
     candidat = 2
     while not premiers and candidat in candidats:
-        if n%candidat == 0 and premier(candidat):
+        if n % candidat == 0 and premier(candidat):
             premiers.append(candidat)
-            premiers = premiers + factor(n/candidat)
+            premiers = premiers + factor(n / candidat)
         candidat += 1
     return premiers
 
@@ -136,14 +136,14 @@ def factorise(n):
     primes = []
     etapes = []
     primes_etapes = []
-    limite=int(math.sqrt(n))+1
+    limite = int(math.sqrt(n)) + 1
     candidate = 2
     while (candidate < limite):
         if n % candidate == 0:
             primes.append(candidate)
             primes_etapes.append(str(candidate))
             n = n / candidate
-            if n  == 1:
+            if n == 1:
                 break
             primes_etapes.append(str(n))
             etapes.append(primes_etapes)
@@ -206,17 +206,17 @@ def carrerise(n):
 
     :rtype: integer
     """
-    if round(math.sqrt(n), 0)==math.sqrt(n):
+    if round(math.sqrt(n), 0) == math.sqrt(n):
         return 1
-    elif n<=0:
+    elif n <= 0:
         return n
     else:
         primes = factorise(n)[0]
         q = {}
         for element in primes:
             if (primes.count(element) % 2 == 1):
-                q[element]=1
-        ncar=1
+                q[element] = 1
+        ncar = 1
         for element in q.iterkeys():
             ncar *= element
     return ncar
@@ -237,13 +237,13 @@ def combinaison(n, k):
 
     :rtype: integer
     """
-    if k > n//2:
-        k = n-k
+    if k > n // 2:
+        k = n - k
     x = 1
     y = 1
-    i = n-k+1
+    i = n - k + 1
     while i <= n:
-        x = (x*i)//y
+        x = (x * i) // y
         y += 1
         i += 1
     return x

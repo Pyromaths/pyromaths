@@ -23,7 +23,7 @@
 from PyQt4 import QtGui, QtCore
 import os, lxml, codecs, sys
 from outils import System
-from Values import HOME, CONFIGDIR, DATADIR, LESFICHES, COPYRIGHTS, VERSION, ICONDIR
+from Values import CONFIGDIR, DATADIR, LESFICHES, COPYRIGHTS, VERSION, ICONDIR
 from operator import itemgetter
 
 class Ui_MainWindow(object):
@@ -39,7 +39,7 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         MainWindow.setFont(font)
 
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
+#         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.gridLayout = QtGui.QGridLayout(self.centralwidget)
         self.verticalLayout = QtGui.QVBoxLayout()
@@ -449,22 +449,22 @@ class Ui_MainWindow(object):
             #============================================================
             #        Choix de l'ordre des exercices
             #============================================================
-            list=[]
+            liste=[]
             for i in range(len(self.liste_creation)):
                 niveau = self.liste_creation[i][0]
                 exo = self.liste_creation[i][1]
-                list.append(LESFICHES[niveau][2][exo])
+                liste.append(LESFICHES[niveau][2][exo])
             self.List=QtGui.QListWidget()
-            for i in range(len(list)):
-                item = QtGui.QListWidgetItem(list[i].description)
+            for i in range(len(liste)):
+                item = QtGui.QListWidgetItem(liste[i].description)
                 item.setFlags(QtCore.Qt.ItemIsEnabled |
                               QtCore.Qt.ItemIsSelectable |
                               QtCore.Qt.ItemIsDragEnabled)
-                item.exercice = list[i]
+                item.exercice = liste[i]
                 self.List.addItem(item)
             bmono=True
-            for i in range(len(list)):
-                if list[0] != list[i]: bmono=False
+            for i in range(len(liste)):
+                if liste[0] != liste[i]: bmono=False
             if bmono:
                 # S'il ny a qu'un seul type d'exercices, pas la peine de choisir
                 # l'ordre
@@ -580,7 +580,7 @@ class Ui_MainWindow(object):
         for pkg_no in range(len(self.tabs)):
             for box in range(len(LESFICHES[pkg_no][2])):
                 qte = self.tabs[pkg_no].spinBox[box].value()
-                for i in range(qte):
+                for dummy in range(qte):
                     self.liste_creation.append((pkg_no, box))
                     if pkg_no > niveau:
                         niveau = pkg_no
@@ -608,7 +608,7 @@ QCoreApplication::exec: The event loop is already runningteur avec le dictionnai
 
 class ChoixOrdreExos(QtGui.QDialog):
     """À appeler de la façon suivante :
-    form = ChoixOrdreExos(list, LesFiches, parametres)
+    form = ChoixOrdreExos(liste, LesFiches, parametres)
     Permet de choisir l'ordre dans lequel les exercices vont apparaître
     parametres = {'fiche_exo':
                   'fiche_cor':
@@ -621,10 +621,10 @@ class ChoixOrdreExos(QtGui.QDialog):
                   'chemin_fichier':
                  }"""
 
-    def __init__(self, list, LesFiches, parametres,  parent=None):
+    def __init__(self, liste, LesFiches, parametres,  parent=None):
         LESFICHES = LesFiches
         self.parametres = parametres
-        self.List = list
+        self.List = liste
         QtGui.QDialog.__init__(self, parent)
         self.setWindowTitle("Choisissez l'ordre des exercices")
         layout = QtGui.QHBoxLayout()
@@ -652,13 +652,13 @@ class ChoixOrdreExos(QtGui.QDialog):
         valide(self.List, LESFICHES, self.parametres)
         self.close()
 
-def valide(list, LesFiches, parametres):
+def valide(liste, LesFiches, parametres):
     """ Permet de choisir les noms et emplacements des fichiers tex, les écrits
     et lance la compilation LaTex"""
     corrige = parametres['corrige']
     lesexos = []
-    for i in range(list.count()):
-        lesexos.append(list.item(i).exercice())
+    for i in range(liste.count()):
+        lesexos.append(liste.item(i).exercice())
 
     #============================================================
     #        Choix des noms des fichiers exercices et corrigés

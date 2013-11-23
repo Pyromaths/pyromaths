@@ -21,9 +21,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import sys,  os,  codecs
+import sys, os, codecs
 from lxml import etree
-from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
+from lxml import _elementpath as DONTUSE  # Astuce pour inclure lxml dans Py2exe
 from re import findall
 from .TexFiles import mise_en_forme
 from pyromaths.Values import HOME, VERSION, CONFIGDIR
@@ -32,14 +32,14 @@ from pyromaths.Values import HOME, VERSION, CONFIGDIR
 #==============================================================
 #        Gestion des extensions de fichiers
 #==============================================================
-def supprime_extension(filename,  ext):
+def supprime_extension(filename, ext):
     """supprime l'éventuelle extension ext du nom de fichier filename.
     ext est de la forme '.tex'"""
     if os.path.splitext(filename)[1].lower():
         return os.path.splitext(filename)[0]
     return filename
 
-def ajoute_extension(filename,  ext):
+def ajoute_extension(filename, ext):
     """ajoute si nécessaire l'extension ext au nom de fichier filename.
     ext est de la forme '.tex'"""
     if os.path.splitext(filename)[1].lower() == ext:
@@ -54,23 +54,23 @@ def create_config_file():
     root = etree.Element("pyromaths")
 
     child = etree.SubElement(root, "options")
-    etree.SubElement(child, "nom_fichier").text="exercices"
-    etree.SubElement(child, "chemin_fichier").text="%s" % HOME
-    etree.SubElement(child, "titre_fiche").text=u"Fiche de révisions"
-    etree.SubElement(child, "corrige").text="True"
-    etree.SubElement(child, "pdf").text="True"
-    etree.SubElement(child, "unpdf").text="False"
-    etree.SubElement(child, "modele").text="pyromaths.tex"
+    etree.SubElement(child, "nom_fichier").text = "exercices"
+    etree.SubElement(child, "chemin_fichier").text = "%s" % HOME
+    etree.SubElement(child, "titre_fiche").text = u"Fiche de révisions"
+    etree.SubElement(child, "corrige").text = "True"
+    etree.SubElement(child, "pdf").text = "True"
+    etree.SubElement(child, "unpdf").text = "False"
+    etree.SubElement(child, "modele").text = "pyromaths.tex"
 
     child = etree.SubElement(root, "informations")
-    etree.SubElement(child, "version").text=VERSION
-    etree.SubElement(child, "description").text=u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
-    etree.SubElement(child, "icone").text="pyromaths.ico"
+    etree.SubElement(child, "version").text = VERSION
+    etree.SubElement(child, "description").text = u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
+    etree.SubElement(child, "icone").text = "pyromaths.ico"
 
-    subchild= etree.SubElement(child, "auteur")
-    etree.SubElement(subchild, "nom").text=u"Jérôme Ortais"
-    etree.SubElement(subchild, "email").text=u"jerome.ortais@pyromaths.org"
-    etree.SubElement(subchild, "site").text="http://www.pyromaths.org"
+    subchild = etree.SubElement(child, "auteur")
+    etree.SubElement(subchild, "nom").text = u"Jérôme Ortais"
+    etree.SubElement(subchild, "email").text = u"jerome.ortais@pyromaths.org"
+    etree.SubElement(subchild, "site").text = "http://www.pyromaths.org"
 
     return etree.tostring(root, pretty_print=True, encoding=unicode)
 
@@ -78,12 +78,12 @@ def indent(elem, level=0):
     """Indente correctement les fichiers xml.
     By Filip Salomonsson; published on February 06, 2007.
     http://infix.se/2007/02/06/gentlemen-indent-your-xml"""
-    i = "\n" + level*"  "
+    i = "\n" + level * "  "
     if len(elem):
         if not elem.text or not elem.text.strip():
             elem.text = i + "  "
         for e in elem:
-            indent(e, level+1)
+            indent(e, level + 1)
             if not e.tail or not e.tail.strip():
                 e.tail = i + "  "
         if not e.tail or not e.tail.strip():
@@ -104,29 +104,29 @@ def modify_config_file(file):
             parents = [element]
             e = element.getparent()
             while e is not None:
-                parents.insert(0,e)
+                parents.insert(0, e)
                 e = e.getparent()
             oldtag = oldroot
             for i in range(1, len(parents)):
                 if oldtag.find(parents[i].tag) is None and i < len(parents) - 1 :
                     if i > 1:
-                        etree.SubElement(oldroot.find(parents[i-1].tag), parents[i].tag)
+                        etree.SubElement(oldroot.find(parents[i - 1].tag), parents[i].tag)
                     else:
                         etree.SubElement(oldroot, parents[i].tag)
                     oldtag = oldtag.find(parents[i].tag)
                 else:
                     oldtag = oldtag.find(parents[i].tag)
-                if i == len(parents)-2: oldparent = oldtag
+                if i == len(parents) - 2: oldparent = oldtag
             if oldtag is None:
                 # Ajoute un nouvel item dans le fichier xml
                 modifie = True
-                etree.SubElement(oldparent, element.tag).text =  element.text
+                etree.SubElement(oldparent, element.tag).text = element.text
             elif oldtag.text != element.text and parents[1].tag != "options":
                 # Modifie un item existant s'il ne s'agit pas des options
                 modifie = True
-                oldtag.text =  element.text
+                oldtag.text = element.text
     if modifie:
-        f = codecs.open(os.path.join(CONFIGDIR, "pyromaths.xml"), encoding='utf-8', mode = 'w')
+        f = codecs.open(os.path.join(CONFIGDIR, "pyromaths.xml"), encoding='utf-8', mode='w')
         f.write(etree.tostring(indent(oldroot), pretty_print=True, encoding=unicode))
         f.close()
 
@@ -196,18 +196,18 @@ def creation(parametres):
         mise_en_forme(cor)
 
     # Dossiers et fichiers d'enregistrement, définitions qui doivent rester avant le if suivant.
-    dir0=os.path.dirname(exo)
-    dir1=os.path.dirname(cor)
+    dir0 = os.path.dirname(exo)
+    dir1 = os.path.dirname(cor)
     import socket
     if socket.gethostname() == "sd-20841.pyromaths.org":
         # Chemin complet pour Pyromaths en ligne car pas d'accents
-        f0noext=os.path.splitext(exo)[0].encode(sys.getfilesystemencoding())
-        f1noext=os.path.splitext(cor)[0].encode(sys.getfilesystemencoding())
+        f0noext = os.path.splitext(exo)[0].encode(sys.getfilesystemencoding())
+        f1noext = os.path.splitext(cor)[0].encode(sys.getfilesystemencoding())
     else:
         # Pas le chemin pour les autres, au cas où il y aurait un accent dans
         # le chemin (latex ne gère pas le 8 bits)
-        f0noext=os.path.splitext(os.path.basename(exo))[0].encode(sys.getfilesystemencoding())
-        f1noext=os.path.splitext(os.path.basename(cor))[0].encode(sys.getfilesystemencoding())
+        f0noext = os.path.splitext(os.path.basename(exo))[0].encode(sys.getfilesystemencoding())
+        f1noext = os.path.splitext(os.path.basename(cor))[0].encode(sys.getfilesystemencoding())
     if parametres['creer_pdf']:
         from subprocess import call
 
@@ -220,9 +220,9 @@ def creation(parametres):
         log.close()
         nettoyage(f0noext)
         if not "openpdf" in parametres or parametres["openpdf"]:
-            if os.name == "nt":  #Cas de Windows.
+            if os.name == "nt":  # Cas de Windows.
                 os.startfile('%s.pdf' % f0noext)
-            elif sys.platform == "darwin":  #Cas de Mac OS X.
+            elif sys.platform == "darwin":  # Cas de Mac OS X.
                 os.system('open %s.pdf' % f0noext)
             else:
                 os.system('xdg-open %s.pdf' % f0noext)
@@ -237,9 +237,9 @@ def creation(parametres):
             log.close()
             nettoyage(f1noext)
             if not "openpdf" in parametres or parametres["openpdf"]:
-                if os.name == "nt":  #Cas de Windows.
+                if os.name == "nt":  # Cas de Windows.
                     os.startfile('%s.pdf' % f1noext)
-                elif sys.platform == "darwin":  #Cas de Mac OS X.
+                elif sys.platform == "darwin":  # Cas de Mac OS X.
                     os.system('open %s.pdf' % f1noext)
                 else:
                     os.system('xdg-open %s.pdf' % f1noext)
@@ -248,12 +248,12 @@ def creation(parametres):
 
 def nettoyage(basefilename):
     """Supprime les fichiers temporaires créés par LaTeX"""
-    for ext in ('.aux', '.dvi', '.out', '.ps','.nav','.snm','.toc'):
+    for ext in ('.aux', '.dvi', '.out', '.ps', '.nav', '.snm', '.toc'):
         try:
-            os.remove(basefilename+ext)
+            os.remove(basefilename + ext)
         except OSError:
             pass
-            #le fichier à supprimer n'existe pas et on s'en moque.
+            # le fichier à supprimer n'existe pas et on s'en moque.
     if os.path.getsize('%s.pdf' % basefilename) > 1000 :
         os.remove('%s.log' % basefilename)
         os.remove('%s-pyromaths.log' % basefilename)
@@ -265,42 +265,42 @@ def copie_tronq_modele(dest, parametres, master):
     master = '% ' + master
     n = 0
 
-    ## Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
+    # # Le fichier source doit être un modèle, donc il se trouve dans le dossier 'modeles' de pyromaths.
     source = parametres['modele']
 
-    if os.path.isfile(os.path.join(parametres['datadir'], 'templates',source)):
+    if os.path.isfile(os.path.join(parametres['datadir'], 'templates', source)):
         source = os.path.join(parametres['datadir'], 'templates', source)
     elif os.path.isfile(os.path.join(parametres['datadir'], 'templates', source)):
         source = os.path.join(parametres['datadir'], 'templates', source)
     else:
-        #TODO: Message d'erreur, le modèle demandé n'existe pas
-        print(u"Le fichier modèle n'a pas été trouvé dans %s" %
+        # TODO: Message d'erreur, le modèle demandé n'existe pas
+        print(u"Le fichier modèle n'a pas été trouvé dans %s" % 
                 os.path.join(parametres['datadir'], 'templates'))
 
-    ## Les variables à remplacer :
+    # # Les variables à remplacer :
     titre = parametres['titre']
     niveau = parametres['niveau']
     if parametres['creer_unpdf']:
-        bookmark=u"\\currentpdfbookmark{Les énoncés des exercices}{Énoncés}"
+        bookmark = u"\\currentpdfbookmark{Les énoncés des exercices}{Énoncés}"
     else:
-        bookmark=""
+        bookmark = ""
     if os.name == 'nt':
-        os.environ['TEXINPUTS']= os.path.normpath(os.path.join(parametres['datadir'],
+        os.environ['TEXINPUTS'] = os.path.normpath(os.path.join(parametres['datadir'],
             'packages'))
         tabvar = 'tabvar.tex'
     else:
         tabvar = os.path.normpath(os.path.join(parametres['datadir'],
             'packages', 'tabvar.tex'))
-    #rawstring pour \tabvar -> tab + abvarsous windows
+    # rawstring pour \tabvar -> tab + abvarsous windows
     modele = codecs.open(source, encoding='utf-8', mode='r')
     for line in modele:
         if master_fin in line:
             break
         if n > 0:
-            temp = findall('##{{[A-Z]*}}##',line)
+            temp = findall('##{{[A-Z]*}}##', line)
             if temp:
-                occ = temp[0][4:len(temp)-5].lower()
-                #line = sub('##{{[A-Z]*}}##',eval(occ),line)
+                occ = temp[0][4:len(temp) - 5].lower()
+                # line = sub('##{{[A-Z]*}}##',eval(occ),line)
                 line = line.replace(temp[0], eval(occ))
             dest.write(line)
 

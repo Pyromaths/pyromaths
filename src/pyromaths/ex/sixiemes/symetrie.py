@@ -22,7 +22,7 @@
 #
 
 import random
-from math import atan, cos, pi, sin, floor, ceil
+from math import atan, cos, pi, sin
 
 #===============================================================================
 # Symétrique d'une figure par rapport à une droite avec quadrillage
@@ -32,10 +32,10 @@ from math import atan, cos, pi, sin, floor, ceil
 def valeurs_quad2(nb_pts):
     vals = []
     for i in range(nb_pts):
-        angle = random.randrange((i * 360) / nb_pts, ((i + 1) * 360) /
+        angle = random.randrange((i * 360) / nb_pts, ((i + 1) * 360) / 
                                  nb_pts)
-        vals.append(((random.randrange(1, 7) * .5) * cos((angle * pi) /
-                    180), (random.randrange(1, 7) * .5) * sin((angle *
+        vals.append(((random.randrange(1, 7) * .5) * cos((angle * pi) / 
+                    180), (random.randrange(1, 7) * .5) * sin((angle * 
                     pi) / 180)))
     return vals
 
@@ -44,7 +44,7 @@ def valeurs_quad(nb_pts):
     vals = []
     for i in range(nb_pts):
         (alpha, beta) = ((i * 360) / nb_pts, ((i + 1) * 360) / nb_pts)
-        (x, y) = (0, 0)
+        (x, y, angle) = (0, 0, 0)
         while x == 0 or angle < alpha or angle > beta:
             (x, y) = (random.randrange(-6, 7) * .5, random.randrange(-6,
                       7) * .5)

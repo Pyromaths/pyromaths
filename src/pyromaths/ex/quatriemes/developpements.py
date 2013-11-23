@@ -35,7 +35,7 @@ def exo_distributivite():
     cor = ["\\exercice*",
            u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
-    for i in range(8):
+    for dummy in range(8):
         (l1, l2) = tex_developpe1(valeurs_distr(10))
         exo.extend(l1)
         cor.extend(l2)
@@ -55,7 +55,7 @@ def exo_double_distributivite():
     cor = ["\\exercice*",
            u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
-    for i in range(6):
+    for dummy in range(6):
         (l1, l2) = tex_developpe1(valeurs_dbldistr(10))
         exo.extend(l1)
         cor.extend(l2)
@@ -76,16 +76,16 @@ def coef_opposes(a):  # renvoie un tuple dont les valeurs sont les opposees de c
 
 
 def dev(a):  # renvoi un tuple avec les 3 coefficients du developpement
-    return (a[0][0] * a[1][0], a[0][0] * a[1][1] + a[0][1] * a[1][0], a[0][1] *
+    return (a[0][0] * a[1][0], a[0][0] * a[1][1] + a[0][1] * a[1][0], a[0][1] * 
             a[1][1])
 
 
 def somme_polynomes(a, b):  # renvoie un tuple dont les valeurs sont les sommes des valeurs correspondantes dans a et b
     l = []
     if len(a) > len(b):
-        long = len(a)
+        longueur = len(a)
     else:
-        long = len(b)
+        longueur = len(b)
     for i in range(int):
         if (len(a) - i) - 1 < 0:
             l.append(b[(len(b) - 1) - i])
@@ -280,9 +280,9 @@ def tex_developpe2(a, nega, b, negb, f1, f0=None, tabs=1):  # developpe l'expres
         if negb:
             if b[1][0] == 0 and b[1][1] == 1:
                 if f0:
-                    ecrit_tex(f0, '-' + tex_dev0(a) + '-(' + tex_dev0(b) +
+                    ecrit_tex(f0, '-' + tex_dev0(a) + '-(' + tex_dev0(b) + 
                               ')', tabs=2)
-                ecrit_tex(f1, '-' + tex_dev0(a) + '-(' + tex_dev0(b) +
+                ecrit_tex(f1, '-' + tex_dev0(a) + '-(' + tex_dev0(b) + 
                           ')', tabs=tabs)
             elif a[1][0] == 0 and a[1][1] == 1:
                 if f0:
@@ -298,9 +298,9 @@ def tex_developpe2(a, nega, b, negb, f1, f0=None, tabs=1):  # developpe l'expres
                           tabs=tabs)
             ecrit_tex(f1, '-(' + tex_dev1(a) + ')-(' + tex_dev1(b) + ')',
                       tabs=tabs)
-            ecrit_tex(f1, '-(' + tex_trinome(dev(a)) + ')-(' +
+            ecrit_tex(f1, '-(' + tex_trinome(dev(a)) + ')-(' + 
                       tex_trinome(dev(b)) + ')', tabs=tabs)
-            ecrit_tex(f1, tex_trinome(coef_opposes(dev(a))) +
+            ecrit_tex(f1, tex_trinome(coef_opposes(dev(a))) + 
                       tex_trinome(coef_opposes(dev(b)), bplus=1), tabs=
                       tabs)
             ecrit_tex(f1, tex_trinome(somme_polynomes(coef_opposes(dev(a)),
@@ -314,7 +314,7 @@ def tex_developpe2(a, nega, b, negb, f1, f0=None, tabs=1):  # developpe l'expres
                           tabs=tabs)
                 ecrit_tex(f1, '-(' + tex_dev1(a) + ')+' + tex_dev1(b,
                           bpn=1), tabs=tabs)
-                ecrit_tex(f1, '-(' + tex_trinome(dev(a)) + ')+' +
+                ecrit_tex(f1, '-(' + tex_trinome(dev(a)) + ')+' + 
                           tex_trinome(dev(b)), tabs=tabs)
             elif b[1][0] == 0 and b[1][1] == 1:
                 if f0:
@@ -324,7 +324,7 @@ def tex_developpe2(a, nega, b, negb, f1, f0=None, tabs=1):  # developpe l'expres
                           tabs=tabs)
                 ecrit_tex(f1, '-(' + tex_dev1(a) + ')' + tex_dev1(b,
                           bplus=1), tabs=tabs)
-                ecrit_tex(f1, '-(' + tex_trinome(dev(a)) + ')' +
+                ecrit_tex(f1, '-(' + tex_trinome(dev(a)) + ')' + 
                           tex_trinome(dev(b), bplus=1), tabs=tabs)
             else:
                 if f0:
@@ -334,9 +334,9 @@ def tex_developpe2(a, nega, b, negb, f1, f0=None, tabs=1):  # developpe l'expres
                           tabs=tabs)
                 ecrit_tex(f1, '-(' + tex_dev1(a) + ')+' + tex_dev1(b,
                           bpn=1), tabs=tabs)
-                ecrit_tex(f1, '-(' + tex_trinome(dev(a)) + ')' +
+                ecrit_tex(f1, '-(' + tex_trinome(dev(a)) + ')' + 
                           tex_trinome(dev(b), bplus=1), tabs=tabs)
-            ecrit_tex(f1, tex_trinome(coef_opposes(dev(a))) +
+            ecrit_tex(f1, tex_trinome(coef_opposes(dev(a))) + 
                       tex_trinome(dev(b), bplus=1), tabs=tabs)
             ecrit_tex(f1, tex_trinome(somme_polynomes(coef_opposes(dev(a)),
                       dev(b))), cadre=True, tabs=tabs)
@@ -352,7 +352,7 @@ def tex_developpe2(a, nega, b, negb, f1, f0=None, tabs=1):  # developpe l'expres
                 ecrit_tex(f0, tex_dev0(a) + '-' + tex_dev0(b), tabs=2)
             ecrit_tex(f1, tex_dev0(a) + '-' + tex_dev0(b), tabs=tabs)
         ecrit_tex(f1, tex_dev1(a) + '-(' + tex_dev1(b) + ')', tabs=tabs)
-        ecrit_tex(f1, tex_trinome(dev(a)) + '-(' + tex_trinome(dev(b)) +
+        ecrit_tex(f1, tex_trinome(dev(a)) + '-(' + tex_trinome(dev(b)) + 
                   ')', tabs=tabs)
         ecrit_tex(f1, tex_trinome(dev(a)) + tex_trinome(coef_opposes(dev(b)),
                   bplus=1), tabs=tabs)
@@ -428,7 +428,7 @@ def valeurs_distr(pyromax):  # renvoie in tuple contenant ((a,b),(c,d)) avec a !
         l = [a, b, c]
         l.insert(randrange(4), 0)
         if abs(l[1]) != 1 and abs(l[3]) != 1:
-            break  #Pour qu'il y ait quelque chose à développer.
+            break  # Pour qu'il y ait quelque chose à développer.
     return ((l[0], l[1]), (l[2], l[3]))
 
 
@@ -451,7 +451,7 @@ def valeurs_dbldistr(pyromax):  # renvoie in tuple contenant ((a,b),(c,d)) avec 
 def def_vals():
     lexp = [0, 1, 2, 0, 1, 2]
     expr = []
-    for i in range(6):
+    for dummy in range(6):
         a = valeur_alea(-10, 10)
         e = lexp.pop(randrange(len(lexp)))
         expr.append([a, 'x', e])
@@ -461,7 +461,7 @@ def def_vals():
 def def_vals2():
     expr = []
     loper = ['+', '-', '\\times', '+', '-', '\\times', '+', '-']
-    for i in range(8):
+    for dummy in range(8):
         a = valeur_alea(-10, 10)
         e = randrange(3)
         o = loper.pop(randrange(len(loper)))

@@ -61,7 +61,7 @@ faire des calculs détaillés avec des nombres en écriture fractionnaire.</p>
 dénominateur.</p>
 <span class="target" id="module-pyromaths.classes.Fractions"></span><dl class="class">
 <dt id="pyromaths.classes.Fractions.Fraction">
-<em class="property">class </em><tt class="descclassname">pyromaths.classes.Fractions.</tt><tt class="descname">Fraction</tt><big>(</big><em>n</em>, <em>d=1</em>, <em>code=''</em><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction" title="Lien permanent vers cette définition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyromaths.classes.Fractions.</tt><tt class="descname">Fraction</tt><big>(</big><em>n</em>, <em>d=1</em>, <em>code=''</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p>Cette classe crée la notion de fractions.
 code permet de préciser si une décomposition a pour objectif une mise au
 même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
@@ -72,11 +72,13 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 <span class="go">Fraction(&quot;x&quot;, 6)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mf">3.4</span><span class="p">)</span>
 <span class="go">Fraction(34, 10)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span>
+<span class="go">Fraction(3, 4)</span>
 </pre></div>
 </div>
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__add__">
-<tt class="descname">__add__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__add__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__add__</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__add__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__add__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><em>object</em>.<strong>__add__</strong>(<em>other</em>)</p>
 <p><tt class="docutils literal"><span class="pre">p.__add__(q)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">p</span> <span class="pre">+</span> <span class="pre">q</span></tt>  calcule la somme de deux fractions.</p>
 <p><em>other</em> peut être une chaîne représentant une fraction, un entier ou un réel.</p>
@@ -108,7 +110,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__div__">
-<tt class="descname">__div__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__div__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__div__</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__div__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__div__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><em>object</em>.<strong>__div__</strong>(<em>other</em>)</p>
 <p><tt class="docutils literal"><span class="pre">p.__div__(q)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">p</span> <span class="pre">/</span> <span class="pre">q</span></tt>  calcule le quotient de deux fractions.</p>
 <p><em>other</em> peut être une chaîne représentant une fraction, un entier ou un réel.</p>
@@ -135,7 +137,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__invert__">
-<tt class="descname">__invert__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__invert__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__invert__</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__invert__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__invert__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><strong>__invert__</strong>(<em>self</em>)</p>
 <p><tt class="docutils literal"><span class="pre">__invert__(p)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">~p</span></tt> calcule l&#8217;inverse de la fraction p.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
@@ -147,7 +149,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__mul__">
-<tt class="descname">__mul__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__mul__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__mul__</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__mul__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__mul__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><em>object</em>.<strong>__mul__</strong>(<em>other</em>)</p>
 <p><tt class="docutils literal"><span class="pre">p.__mul__(q)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">p</span> <span class="pre">*</span> <span class="pre">q</span></tt>  calcule le produit deux fractions.</p>
 <p><em>other</em> peut être une chaîne représentant une fraction, un entier ou un réel.</p>
@@ -158,6 +160,10 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 <span class="go">Fraction(8, 5)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">63</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span> <span class="o">*</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">27</span><span class="p">)</span>
 <span class="go">&#39;Fraction(&quot;9*7*4*2&quot;, &quot;4*5*9*3&quot;, &quot;s&quot;)&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span> <span class="o">*</span> <span class="mi">12</span>
+<span class="go">&#39;Fraction(&quot;24*12&quot;, &quot;12*1&quot;, &quot;s&quot;)&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">12</span><span class="o">*</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
+<span class="go">&#39;Fraction(&quot;12*24&quot;, &quot;1*12&quot;, &quot;s&quot;)&#39;</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -176,7 +182,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__neg__">
-<tt class="descname">__neg__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__neg__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__neg__</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__neg__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__neg__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><strong>__neg__</strong>(<em>self</em>)</p>
 <p><tt class="docutils literal"><span class="pre">__neg__(p)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">-p</span></tt> calcule l&#8217;opposé de la fraction p.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
@@ -187,8 +193,20 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="pyromaths.classes.Fractions.Fraction.__pos__">
+<tt class="descname">__pos__</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__pos__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__pos__" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>__pos__</strong>(<em>self</em>)</p>
+<p><tt class="docutils literal"><span class="pre">__pos__(p)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">+p</span></tt> Renvoie la fraction p.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">+</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">27</span><span class="p">)</span>
+<span class="go">Fraction(8, 27)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__pow__">
-<tt class="descname">__pow__</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__pow__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__pow__</tt><big>(</big><em>n</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__pow__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__pow__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><strong>__pow__</strong>(<em>self</em>, <em>n</em>)</p>
 <p><tt class="docutils literal"><span class="pre">p__pow__(q)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">p**q</span></tt> calcule p à la puissance q.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
@@ -212,7 +230,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__radd__">
-<tt class="descname">__radd__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__radd__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__radd__</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__radd__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__radd__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><em>object</em>.<strong>__radd__</strong>(<em>other</em>)</p>
 <p><tt class="docutils literal"><span class="pre">p.__radd__(q)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">p</span> <span class="pre">+</span> <span class="pre">q</span></tt>  calcule la somme de l&#8217;objet p avec la fraction q</p>
 <p><em>other</em> peut être une chaîne représentant un entier ou un réel.</p>
@@ -237,7 +255,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__rdiv__">
-<tt class="descname">__rdiv__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__rdiv__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__rdiv__</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__rdiv__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__rdiv__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><em>object</em>.<strong>__rdiv__</strong>(<em>other</em>)</p>
 <p><tt class="docutils literal"><span class="pre">p.__rdiv__(q)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">p</span> <span class="pre">/</span> <span class="pre">q</span></tt>  calcule le produit de l&#8217;objet p par la fraction q.</p>
 <p><em>other</em> peut être un entier ou un réel.</p>
@@ -246,7 +264,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__repr__">
-<tt class="descname">__repr__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__repr__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__repr__</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__repr__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><strong>repr</strong>(<em>object</em>)</p>
 <p>Renvoie une chaîne de caractère représentant une <tt class="xref py py-mod docutils literal"><span class="pre">Fraction</span></tt>
 évaluable pour créer un <tt class="xref py py-mod docutils literal"><span class="pre">Fraction</span></tt>.</p>
@@ -271,7 +289,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__rmul__">
-<tt class="descname">__rmul__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__rmul__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__rmul__</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__rmul__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__rmul__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><em>object</em>.<strong>__rmul__</strong>(<em>other</em>)</p>
 <p><tt class="docutils literal"><span class="pre">p.__rmul__(q)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">p</span> <span class="pre">*</span> <span class="pre">q</span></tt>  calcule le produit de l&#8217;objet p par la fraction q.</p>
 <p><em>other</em> peut être un entier ou un réel.</p>
@@ -280,7 +298,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__rsub__">
-<tt class="descname">__rsub__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__rsub__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__rsub__</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__rsub__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__rsub__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><em>object</em>.<strong>__rsub__</strong>(<em>other</em>)</p>
 <p><tt class="docutils literal"><span class="pre">p.__rsub__(q)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">p</span> <span class="pre">-</span> <span class="pre">q</span></tt>  calcule la différence de l&#8217;objet p par la fraction q.</p>
 <p><em>other</em> peut être un entier ou un réel.</p>
@@ -289,7 +307,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__str__">
-<tt class="descname">__str__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__str__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__str__</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__str__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><strong>str</strong>(<em>object</em>)</p>
 <dl class="docutils">
 <dt>Renvoie une version LaTeX de la <a class="reference internal" href="#pyromaths.classes.Fractions.Fraction" title="pyromaths.classes.Fractions.Fraction"><tt class="xref py py-class docutils literal"><span class="pre">Fraction</span></tt></a>.</dt>
@@ -316,7 +334,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__sub__">
-<tt class="descname">__sub__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__sub__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__sub__</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__sub__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__sub__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><em>object</em>.<strong>__sub__</strong>(<em>other</em>)</p>
 <p><tt class="docutils literal"><span class="pre">p.__sub__(q)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">p</span> <span class="pre">-</span> <span class="pre">q</span></tt>  calcule la différence de deux fractions.</p>
 <p><em>other</em> peut être une chaîne représentant une fraction, un entier ou un réel.</p>
@@ -325,7 +343,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.decompose">
-<tt class="descname">decompose</tt><big>(</big><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.decompose" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">decompose</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.decompose"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.decompose" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><strong>decompose</strong>(<em>object</em>)</p>
 <p>Retourne une décomposition de la fraction afin de la simplifier</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
@@ -339,7 +357,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>type</strong> &#8211; Fraction</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Type retourné:</th><td class="field-body">Fraction ou None</td>
+<tr class="field-even field"><th class="field-name">Type retourné:</th><td class="field-body">string</td>
 </tr>
 </tbody>
 </table>
@@ -347,7 +365,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.reduit">
-<tt class="descname">reduit</tt><big>(</big><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.reduit" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">reduit</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.reduit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.reduit" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><strong>reduit</strong>(<em>object</em>)</p>
 <p>Retourne une version réduite de la fraction, ie calcule le numérateur et le dénominateur</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
@@ -371,7 +389,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.simplifie">
-<tt class="descname">simplifie</tt><big>(</big><big>)</big><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.simplifie" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">simplifie</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.simplifie"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.simplifie" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><strong>simplifie</strong>(<em>object</em>)</p>
 <p>Retourne une version irréductible de la fraction</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>

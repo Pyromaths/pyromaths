@@ -36,7 +36,7 @@ def radians(alpha):
 
     :rtype: float
     """
-    return alpha*math.pi/180
+    return alpha * math.pi / 180
 
 def degres(alpha):
     """**radians**\ (*alpha*)
@@ -53,4 +53,4 @@ def degres(alpha):
 
     :rtype: float
     """
-    return alpha*180/math.pi
+    return alpha * 180 / math.pi

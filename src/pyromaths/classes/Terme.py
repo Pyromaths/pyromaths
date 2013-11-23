@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 class Terme:
-    def __init__(self, coeff, puiss = 1, var = 'x'):
+    def __init__(self, coeff, puiss=1, var='x'):
         if (not (isinstance(puiss, int))) or (not (isinstance(var, str))):
             print "Erreur de définition ! La puissance doit être un nombre relatif !"
-        self.puiss = puiss # Nombre entier
-        self.coeff = coeff # Coeff devant le terme
-        self.var = var # Lettre pour la var
+        self.puiss = puiss  # Nombre entier
+        self.coeff = coeff  # Coeff devant le terme
+        self.var = var  # Lettre pour la var
 
     def __add__(self, other):
         if not (isinstance(other, Terme)):
@@ -17,7 +17,7 @@ class Terme:
             return str(self) + " + " + str(other)
 
     def __radd__(self, other):
-        return self + other
+        return self +other
 
     def __sub__(self, other):
         if not (isinstance(other, Terme)):
@@ -28,7 +28,7 @@ class Terme:
             return str(self) + " - " + str(other)
 
     def __rsub__(self, other):
-        return -(self - other)
+        return -(self -other)
 
     def __mul__(self, other):
         if (isinstance(other, float)) or (isinstance(other, int)):
@@ -53,7 +53,7 @@ class Terme:
         return self.inv() * other
 
     def inv(self):
-        return Terme(1.0 / self.coeff, - self.puiss, self.var)
+        return Terme(1.0 / self.coeff, -self.puiss, self.var)
 
     def __str__(self):
         if self.coeff == 1:

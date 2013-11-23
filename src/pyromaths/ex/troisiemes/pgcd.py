@@ -61,7 +61,7 @@ def valeurs_pgcd():  # creer un tuple contenant les deux nombres dont on cherche
     reste = random.choice((2, 3, 5, 9, 10)) * random.choice((7, 11, 13,
             17, 19, 23, 31))
     diviseur = reste * random.randrange(1, 10)
-    for i in range(random.randrange(2, 5)):
+    for dummy in range(random.randrange(2, 5)):
         (diviseur, reste) = (diviseur * random.randrange(1, 10) + reste,
                              diviseur)
     return (diviseur, reste)
@@ -91,9 +91,9 @@ def simplifie_fraction_pgcd(l):  # renvoie le nombre par lequel on peut simplifi
 def tex_algo_euclide(l):  # renvoie l'ecriture au format tex de l'algorithme d'Euclide
     lignes = []
     for i in range(len(l)):
-        lignes.append('\\nombre{%s}=\\nombre{%s}\\times\\nombre{%s}+\\nombre{%s}' %
+        lignes.append('\\nombre{%s}=\\nombre{%s}\\times\\nombre{%s}+\\nombre{%s}' % 
                       l[i])
-    lignes.append('\\fbox{Donc le \\textsc{pgcd} de \\nombre{%s} et \\nombre{%s} est %s}.\n' %
+    lignes.append('\\fbox{Donc le \\textsc{pgcd} de \\nombre{%s} et \\nombre{%s} est %s}.\n' % 
                   (l[0][0], l[0][1], l[len(l) - 1][1]))
     return lignes
 

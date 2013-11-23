@@ -64,9 +64,9 @@ def choix_ligne(n):
 
     lignes = ['une droite', 'une demi-droite', 'un segment']
     (liste_lignes, retour) = ([], [])
-    for i in range((n - 1) // len(lignes) + 1):
+    for dummy in range((n - 1) // len(lignes) + 1):
         liste_lignes.extend(lignes)
-    for i in range(n):
+    for dummy in range(n):
         retour.append(liste_lignes.pop(random.randrange(len(liste_lignes))))
     return retour
 
@@ -99,14 +99,14 @@ def prepare_tuple(lpoints, ligne):
 
     (retour_exo, retour_sol) = ([], [])
 
-    #choix des deux points permettant de tracer la ligne :
+    # choix des deux points permettant de tracer la ligne :
 
     templist = [i for i in range(len(lpoints))]
     deuxpoints = []
     for i in range(2):
         deuxpoints.append(lpoints[templist.pop(random.randrange(len(templist)))])
 
-    #choix des symbole correspondant à la ligne :
+    # choix des symbole correspondant à la ligne :
 
     lsymboles = symboles(ligne)
     retour_sol.append(lsymboles[0])
@@ -114,7 +114,7 @@ def prepare_tuple(lpoints, ligne):
     retour_sol.append(lsymboles[1])
     retour_sol.append(ligne)
 
-    #choix des trous pour l'exercice :
+    # choix des trous pour l'exercice :
 
     alea = random.randrange(3)
     if alea > 1:
@@ -143,21 +143,21 @@ def tex_figure(liste, lpoints, points_coord, nodesep=0):
     """
     liste.append('\\begin{pspicture*}(-0.5,0.2)(4.5,2.2)')
     liste.append('\\psset{PointSymbol=x}')
-    liste.append('\\pstGeonode[PosAngle=90](0.5,%s){%s}(2,%s){%s}(3.5,%s){%s}' %
+    liste.append('\\pstGeonode[PosAngle=90](0.5,%s){%s}(2,%s){%s}(3.5,%s){%s}' % 
                points_coord)
     if nodesep:
-        liste.append('\\pstLineAB[nodesepA=%s, nodesepB=%s]{%s}{%s}' %
+        liste.append('\\pstLineAB[nodesepA=%s, nodesepB=%s]{%s}{%s}' % 
                    tuple(nodesep))
     liste.append('\\end{pspicture*}\\tabularnewline')
 
 def coord_points(lpoints):
     """Définit les ordonnées de trois points nommés dont les noms sont dans lpoints"""
-    ordonnees = [random.randrange(5, 16)/10.for i in range(3)]
-    while abs(2*ordonnees[1]-ordonnees[0]-ordonnees[2])<.5:
-        ordonnees = [random.randrange(5, 16)/10.for i in range(3)]
+    ordonnees = [random.randrange(5, 16) / 10.for i in range(3)]
+    while abs(2 * ordonnees[1] - ordonnees[0] - ordonnees[2]) < .5:
+        ordonnees = [random.randrange(5, 16) / 10.for i in range(3)]
     random.shuffle(ordonnees)
     for i in range(3):
-        ordonnees.insert(2*i+1,  lpoints[i])
+        ordonnees.insert(2 * i + 1, lpoints[i])
     return tuple(ordonnees)
 
 def tex_ligne_tableau(exo, cor, ligne):
@@ -173,13 +173,13 @@ def tex_ligne_tableau(exo, cor, ligne):
 
     lpoints = choix_points(3)
     (exer, solution) = prepare_tuple(lpoints, ligne)
-    exo.append('$%s %s%s %s$ est %s &' %
+    exo.append('$%s %s%s %s$ est %s &' % 
              exer)
-    cor.append('$%s %s%s %s$ est %s &' %
+    cor.append('$%s %s%s %s$ est %s &' % 
              solution)
     lnodesep = nodesep(ligne)
     lnodesep.extend(solution[1:3])
-    points_coord=coord_points(lpoints)
+    points_coord = coord_points(lpoints)
     if exer != ('\\ldots', '\\ldots', '\\ldots', '\\ldots', '\\dotfill'):
         tex_figure(exo, lpoints, points_coord)
     else:
@@ -222,8 +222,8 @@ Droites.description = u'Droites, demi-droites, segments'
 #------------------------------------------------------------------------------
 # Parallèles et perpendiculaires
 #------------------------------------------------------------------------------
-#perp à (ac) passant par b => val2=('a', 'c', 'a', 'c', 'b', 'b', 'b', 'a'
-#para à (ab) passant apr d => val2=('a', 'b', 'a', 'b', 'd', 'd')
+# perp à (ac) passant par b => val2=('a', 'c', 'a', 'c', 'b', 'b', 'b', 'a'
+# para à (ab) passant apr d => val2=('a', 'b', 'a', 'b', 'd', 'd')
 
 
 def fig_perp(points, coor, solution=0, per=[], par=[]):
@@ -266,15 +266,15 @@ def noms_sommets(nb):  # renvoie nb noms de sommets
     return tuple(listepts)
 
 
-def cree_coordonnees(long=3):
+def cree_coordonnees(longueur=3):
     from math import floor
     alpha = random.randrange(180)
     k0 = random.randrange(50, 100) / 100.0
     a0 = alpha + random.randrange(30, 120)
     k1 = random.randrange(50, 100) / 100.0
     a1 = alpha + random.randrange(210, 300)
-    return (long, alpha, long, alpha + 180, floor((k0 * 10) * long) /
-            10.0, a0, floor((k1 * 10) * long) / 10.0, a1)
+    return (longueur,alpha, longueur, alpha + 180, floor((k0* 10) * longueur) / 
+            10.0, a0, floor((k1 * 10) * longueur) / 10.0, a1)
 
 
 def enonce_perp(exo, cor):
@@ -282,13 +282,13 @@ def enonce_perp(exo, cor):
     noms = noms_sommets(4)
     par, per = [], []
     lval = [0, 1, 2, 3]
-    for i in range(3):
+    for dummy in range(3):
         par.append(lval.pop(random.randrange(len(lval))))
-    while per==[] or (par[0], par[1]) == (per[0], per[1]) or \
+    while per == [] or (par[0], par[1]) == (per[0], per[1]) or \
             (par[0], par[1]) == (per[1], per[0]) :
         lval = [0, 1, 2, 3]
         per = []
-        for i in range(3):
+        for dummy in range(3):
             per.append(lval.pop(random.randrange(len(lval))))
     exo.append(fig_perp(noms, coor))
     cor.append(fig_perp(noms, coor, 1, per, par))
@@ -352,7 +352,7 @@ def fonction(angle, xa, ya, dist=0, droite='par'):
     angle_rad = (angle * math.pi) / 180
     if droite == 'par':
         coef = math.floor(math.tan(angle_rad) * 1000) / 1000.0
-        ord_or = math.floor(((ya - xa * math.tan(angle_rad)) - dist /
+        ord_or = math.floor(((ya - xa * math.tan(angle_rad)) - dist / 
                             math.cos(angle_rad)) * 1000) / 1000.0
         return '{x %s mul %s add}' % (coef, ord_or)
     else:
@@ -363,19 +363,19 @@ def fonction(angle, xa, ya, dist=0, droite='par'):
 def PointInter(angle, xa, ya, dist=0):
     angle_rad = (angle * math.pi) / 180
     coef1 = math.floor(math.tan(angle_rad) * 1000) / 1000.0
-    ord_or1 = math.floor(((ya - xa * math.tan(angle_rad)) - dist / math.cos(angle_rad)) *
+    ord_or1 = math.floor(((ya - xa * math.tan(angle_rad)) - dist / math.cos(angle_rad)) * 
                          1000) / 1000.0
     coef2 = math.floor(-1000 / math.tan(angle_rad)) / 1000.0
     x = ord_or1 / (coef2 - coef1)
     y = x * coef2
-    return ',PosAngle=%s](%s,%s)' % (45 + angle, math.floor(x * 1000) /
+    return ',PosAngle=%s](%s,%s)' % (45 + angle, math.floor(x * 1000) / 
             1000.0, math.floor(y * 1000) / 1000.0)
 
 
 def Points(angle, xa, ya, dist=0):
     angle_rad = (angle * math.pi) / 180
     coef = math.floor(math.tan(angle_rad) * 1000) / 1000.0
-    ord_or = math.floor(((ya - xa * math.tan(angle_rad)) - dist / math.cos(angle_rad)) *
+    ord_or = math.floor(((ya - xa * math.tan(angle_rad)) - dist / math.cos(angle_rad)) * 
                         1000) / 1000.0
     lpos = []
     if -1.5 < -2 * coef + ord_or < 1.5:
@@ -389,13 +389,13 @@ def Points(angle, xa, ya, dist=0):
     if -2.1 < (1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
         math.tan(angle_rad) < 2.1:
         y = 1.1
-        x = math.floor(((y - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) /
+        x = math.floor(((y - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / 
                        math.tan(angle_rad)) * 1000) / 1000.0
         lpos.append('(%s,%s)' % (x, y))
     if -2.1 < (-1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / \
         math.tan(angle_rad) < 2.1:
         y = -1.1
-        x = math.floor(((y - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) /
+        x = math.floor(((y - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / 
                        math.tan(angle_rad)) * 1000) / 1000.0
         lpos.append('(%s,%s)' % (x, y))
     return lpos
@@ -420,71 +420,71 @@ def figure(angle, xa, ya, dist, lpoints, noms, par_per, dist2=0):
     ltxt.append('\\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)')
     ltxt.append('\\footnotesize')
     if par_per < 3:
-        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2.1}{2.1}%s' %
+        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2.1}{2.1}%s' % 
                     fonction(angle, xa, ya))
-        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2.1}{2.1}%s' %
+        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2.1}{2.1}%s' % 
                     fonction(angle, xa, ya, dist))
     else:
         ltxt.append('\\psplot{-2.1}{2.1}%s' % fonction(angle, xa, ya))
         ltxt.append('\\psplot{-2.1}{2.1}%s' % fonction(angle, xa, ya,
                     dist))
     if par_per == 2:
-        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2.1}{2.1}%s' %
+        ltxt.append('\\psplot[linewidth=1.5\\pslinewidth]{-2.1}{2.1}%s' % 
                     fonction(angle, xa, ya, dist2))
     else:
         ltxt.append('\\psplot{-2.1}{2.1}%s' % fonction(angle, xa, ya,
                     droite='per'))
-    if noms:  #nomme les droites par deux points
-        if par_per != 2:  #2 points d'intersection
-            ltxt.append('\\pstGeonode[PointSymbol={none,x},PointName={%s,%s} %s{i1}%s{a1}' %
+    if noms:  # nomme les droites par deux points
+        if par_per != 2:  # 2 points d'intersection
+            ltxt.append('\\pstGeonode[PointSymbol={none,x},PointName={%s,%s} %s{i1}%s{a1}' % 
                         (lpoints[0], lpoints[1], PointInter(angle, xa,
                         ya), Points(angle, xa, ya)[0]))
-            ltxt.append('\\pstGeonode[PointSymbol={none,x},PointName={%s,%s} %s{i2}%s{b1}' %
+            ltxt.append('\\pstGeonode[PointSymbol={none,x},PointName={%s,%s} %s{i2}%s{b1}' % 
                         (lpoints[2], lpoints[3], PointInter(angle, xa,
                         ya, dist), Points(angle, xa, ya, dist)[0]))
-            ltxt.append('\\pstGeonode[PointSymbol=none,PointName=none]%s{c1}%s{c2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=none,PointName=none]%s{c1}%s{c2}' % 
                         (Points(angle + 90, 0, 0)[0], Points(angle + 90,
                         0, 0)[1]))
         else:
 
-                #pas de point d'intersection
+                # pas de point d'intersection
 
             pts = Points(angle, xa, ya)
-            ltxt.append('\\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{a1}%s{a2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{a1}%s{a2}' % 
                         (angle + 45, lpoints[0], lpoints[1], pts[0], pts[1]))
             pts = Points(angle, xa, ya, dist)
-            ltxt.append('\\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{b1}%s{b2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{b1}%s{b2}' % 
                         (angle - (45.0 * dist) / abs(dist), lpoints[2],
                         lpoints[3], pts[0], pts[1]))
             pts = Points(angle, xa, ya, dist2)
-            ltxt.append('\\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{c1}%s{c2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{c1}%s{c2}' % 
                         (angle - (45.0 * dist2) / abs(dist2), lpoints[4],
                         lpoints[5], pts[0], pts[1]))
     else:
 
-        #nomme les droites (d_1), ...
+        # nomme les droites (d_1), ...
 
-        if par_per != 2:  #2 points d'intersection
-            ltxt.append('\\pstGeonode[PointSymbol=none,PointName={none,%s} %s{i1}%s{a1}' %
+        if par_per != 2:  # 2 points d'intersection
+            ltxt.append('\\pstGeonode[PointSymbol=none,PointName={none,%s} %s{i1}%s{a1}' % 
                         (lpoints[0], PointInter(angle, xa, ya), Points(angle,
                         xa, ya)[0]))
-            ltxt.append('\\pstGeonode[PointSymbol=none,PointName={none,%s} %s{i2}%s{b1}' %
+            ltxt.append('\\pstGeonode[PointSymbol=none,PointName={none,%s} %s{i2}%s{b1}' % 
                         (lpoints[1], PointInter(angle, xa, ya, dist),
                         Points(angle, xa, ya, dist)[0]))
-            ltxt.append('\\pstGeonode[PointSymbol=none,PointName={none,%s}]%s{c1}%s{c2}' %
-                        (lpoints[2], Points(angle + 90, 0, 0)[0], Points(angle +
+            ltxt.append('\\pstGeonode[PointSymbol=none,PointName={none,%s}]%s{c1}%s{c2}' % 
+                        (lpoints[2], Points(angle + 90, 0, 0)[0], Points(angle + 
                         90, 0, 0)[1]))
         else:
             pts = Points(angle, xa, ya)
-            ltxt.append('\\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{a1}%s{a2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{a1}%s{a2}' % 
                         (angle + 45, lpoints[0], pts[0], pts[1]))
             pts = Points(angle, xa, ya, dist)
-            ltxt.append('\\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{b1}%s{b2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{b1}%s{b2}' % 
                         (angle - (45.0 * dist) / abs(dist), lpoints[1],
                         pts[0], pts[1]))
-                        #FIXME list index out of range
+                        # FIXME list index out of range
             pts = Points(angle, xa, ya, dist2)
-            ltxt.append('\\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{c1}%s{c2}' %
+            ltxt.append('\\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{c1}%s{c2}' % 
                         (angle - (45.0 * dist2) / abs(dist2), lpoints[2],
                         pts[0], pts[1]))
     if par_per != 2:
@@ -508,7 +508,7 @@ def valeurs_figures(par_per):
     else:
         lindices = [1, 2, 3]
         lpoints = []
-        for i in range(3):
+        for dummy in range(3):
             lpoints.append('(d_%s)' % lindices.pop(random.randrange(len(lindices))))
     angle = random.randrange(1, 90) + 90 * random.randrange(2)
     xa = random.randrange(-5, 5) / 10.0
@@ -547,26 +547,26 @@ def enonce_prop(exo, cor):
         cor.append('\\hline')
         v = valeurs_figures(lexos[i])
         if lexos[i] == 2:
-            if v[5]:  #noms de la forme (AB), on ajoute des parenthèses
+            if v[5]:  # noms de la forme (AB), on ajoute des parenthèses
                 exo.append('''$(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ &
 \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
 \\end{pspicture*}
-& & \\\\''' %
+& & \\\\''' % 
                          (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0], v[4][1],
                          v[4][4], v[4][5]))
-                cor.append('$(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ & ' %
+                cor.append('$(%s%s)//(%s%s)$\\par et\\par $(%s%s)//(%s%s)$ & ' % 
                          (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0], v[4][1],
                          v[4][4], v[4][5]))
             else:
                 exo.append('''$%s//%s$\\par et\\par $%s//%s$ &
 \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
 \\end{pspicture*}
-& & \\\\''' %
+& & \\\\''' % 
                          (v[4][0], v[4][1], v[4][0], v[4][2]))
                 cor.append('$%s//%s$\\par et\\par $%s//%s$ & ' % (v[4][0],
                          v[4][1], v[4][0], v[4][2]))
             cor.append('%s & ' % ('\n').join(figure(v[0], v[1], v[2],
-                     v[3], v[4], v[5], lexos[i], v[6])))#eror out of range in figure
+                     v[3], v[4], v[5], lexos[i], v[6])))  # eror out of range in figure
             cor.append(u'Si deux droites sont parallèles, alors toute parallèle à l\'une est parallèle à l\'autre. &')
             if v[5]:
                 cor.append('$(%s%s)//(%s%s)$ \\\\\n  \\hline' % (v[4][2],
@@ -582,10 +582,10 @@ def enonce_prop(exo, cor):
                         exo.append('''$(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
 \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
 \\end{pspicture*}
-& & \\\\''' %
+& & \\\\''' % 
                                  (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0],
                                  v[4][1], v[4][0], v[4][2]))
-                    cor.append('$(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &' %
+                    cor.append('$(%s%s)//(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &' % 
                              (v[4][0], v[4][1], v[4][2], v[4][3], v[4][0],
                              v[4][1], v[4][0], v[4][2]))
                 else:
@@ -593,9 +593,9 @@ def enonce_prop(exo, cor):
                         exo.append('''$%s//%s$\\par et\\par $%s\perp%s$ &
 \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
 \\end{pspicture*}
-& & \\\\''' %
+& & \\\\''' % 
                                  (v[4][0], v[4][1], v[4][0], v[4][2]))
-                    cor.append('$%s//%s$\\par et\\par $%s\perp%s$ &' %
+                    cor.append('$%s//%s$\\par et\\par $%s\perp%s$ &' % 
                              (v[4][0], v[4][1], v[4][0], v[4][2]))
                 if fig:
                     exo.append('& %s & & \\\\' % ('\n').join(figure(v[0],
@@ -604,7 +604,7 @@ def enonce_prop(exo, cor):
                          v[3], v[4], v[5], lexos[i])))
                 cor.append(u'Si deux droites sont parallèles, alors toute perpendiculaire à l\'une est perpendiculaire à l\'autre. &')
                 if v[5]:
-                    cor.append('$(%s%s)\\perp(%s%s)$ \\\\\n  \\hline' %
+                    cor.append('$(%s%s)\\perp(%s%s)$ \\\\\n  \\hline' % 
                              (v[4][2], v[4][3], v[4][0], v[4][2]))
                 else:
                     cor.append('$%s\perp%s$ \\\\\n  \\hline' % (v[4][1],
@@ -615,10 +615,10 @@ def enonce_prop(exo, cor):
                         exo.append('''$(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &
 \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
 \\end{pspicture*}
-& & \\\\''' %
+& & \\\\''' % 
                                  (v[4][0], v[4][1], v[4][0], v[4][2], v[4][2],
                                  v[4][3], v[4][0], v[4][2]))
-                    cor.append('$(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &' %
+                    cor.append('$(%s%s)\\perp(%s%s)$\\par et\\par $(%s%s)\\perp(%s%s)$ &' % 
                              (v[4][0], v[4][1], v[4][0], v[4][2], v[4][2],
                              v[4][3], v[4][0], v[4][2]))
                 else:
@@ -626,9 +626,9 @@ def enonce_prop(exo, cor):
                         exo.append('''$%s\\perp%s$\\par et\\par $%s\perp%s$ &
 \\begin{pspicture*}[shift=-1.5](-2.1,-1.6)(2.1,1.6)
 \\end{pspicture*}
-& & \\\\''' %
+& & \\\\''' % 
                                  (v[4][0], v[4][2], v[4][1], v[4][2]))
-                    cor.append('$%s\\perp%s$\\par et\\par $%s\perp%s$ &' %
+                    cor.append('$%s\\perp%s$\\par et\\par $%s\perp%s$ &' % 
                              (v[4][0], v[4][2], v[4][1], v[4][2]))
                 if fig:
                     exo.append('& %s & & \\\\' % ('\n').join(figure(v[0],

@@ -74,10 +74,10 @@ def numerateur_denominateur(l, h, cas):
 def trace_rectangle(exo, cor, l, h, cas):
     exo.append("\\psgrid[gridcolor=Olive,subgriddiv=0,gridlabels=0pt]")
     cor.append("\\psgrid[gridcolor=Olive,subgriddiv=0,gridlabels=0pt]")
-    exo.append("\\psframe[linewidth=1.5\\pslinewidth,linecolor=Maroon](0,0)(%s,%s)"% (l, h))
-    cor.append("\\psframe[linewidth=1.5\\pslinewidth,linecolor=Maroon](0,0)(%s,%s)"% (l, h))
+    exo.append("\\psframe[linewidth=1.5\\pslinewidth,linecolor=Maroon](0,0)(%s,%s)" % (l, h))
+    cor.append("\\psframe[linewidth=1.5\\pslinewidth,linecolor=Maroon](0,0)(%s,%s)" % (l, h))
     if cas == "nsd":
-        cor.append("\\psframe[linewidth=1.5\\pslinewidth,linecolor=Maroon](%s,0)(%s,%s)" %
+        cor.append("\\psframe[linewidth=1.5\\pslinewidth,linecolor=Maroon](%s,0)(%s,%s)" % 
                 (l + 1, 2 * l + 1, h))
 
 def fractions_partage_corrige(l, h, n, d):
@@ -101,31 +101,31 @@ def fractions_partage_corrige(l, h, n, d):
 
 def trace_partage(cor, l, h, lc, hc, cas):
     if lc < l:
-        cor.append("\\multips(%s,0)(%s,0){%s}{\\psline[linecolor=Maroon](0,0)(0,%s)}" %
+        cor.append("\\multips(%s,0)(%s,0){%s}{\\psline[linecolor=Maroon](0,0)(0,%s)}" % 
                  (lc, lc, l // lc - 1, h))
         if cas == "nsd":
-            cor.append("\\rput(%s,0){\\multips(%s,0)(%s,0){%s}{\\psline[linecolor=Maroon](0,0)(0,%s)}}" %
+            cor.append("\\rput(%s,0){\\multips(%s,0)(%s,0){%s}{\\psline[linecolor=Maroon](0,0)(0,%s)}}" % 
                      (l + 1, lc, lc, l // lc - 1, h))
     if hc < h:
-        cor.append("\\multips(0,%s)(0,%s){%s}{\\psline[linecolor=Maroon](0,0)(%s,0)}" %
+        cor.append("\\multips(0,%s)(0,%s){%s}{\\psline[linecolor=Maroon](0,0)(%s,0)}" % 
                  (hc, hc, h // hc - 1, l))
         if cas == "nsd":
-            cor.append("\\rput(%s,0){\\multips(0,%s)(0,%s){%s}{\\psline[linecolor=Maroon](0,0)(%s,0)}}" %
+            cor.append("\\rput(%s,0){\\multips(0,%s)(0,%s){%s}{\\psline[linecolor=Maroon](0,0)(%s,0)}}" % 
                      (l + 1, hc, hc, h // hc - 1, l))
 
 
 def coloriage(cor, n, d, l, h, lc, hc):
     if n == d:
-        cor.append("\\psframe[fillstyle=solid](0,0)(%s,%s)" %
+        cor.append("\\psframe[fillstyle=solid](0,0)(%s,%s)" % 
                  (l, h))
     else:
         (x, y, nfig) = (0, 0, 0)
-        for i in range(n):
+        for dummy in range(n):
             if nfig:
-                cor.append("\\rput(%s,0){\\psframe[fillstyle=solid](%s,%s)(%s,%s)}" %
+                cor.append("\\rput(%s,0){\\psframe[fillstyle=solid](%s,%s)(%s,%s)}" % 
                          (nfig, x, y, x + lc, y + hc))
             else:
-                cor.append("\\psframe[fillstyle=solid](%s,%s)(%s,%s)" %
+                cor.append("\\psframe[fillstyle=solid](%s,%s)(%s,%s)" % 
                          (x, y, x + lc, y + hc))
             if x + lc < l:
                 x = x + lc
@@ -163,9 +163,9 @@ def FractionPartage():
         (n, d) = numerateur_denominateur(l, h, cas)
         (lc, hc) = fractions_partage_corrige(l, h, n, d)
 
-        exo.append("\\item Colorer $\\frac{%s}{%s}$ de ce rectangle.\\par" %
+        exo.append("\\item Colorer $\\frac{%s}{%s}$ de ce rectangle.\\par" % 
                  (n, d))
-        cor.append("\\item Colorer $\\frac{%s}{%s}$ de ce rectangle.\\par" %
+        cor.append("\\item Colorer $\\frac{%s}{%s}$ de ce rectangle.\\par" % 
                  (n, d))
         exo.append("\\psset{unit=4mm}")
         cor.append("\\psset{unit=4mm}")
@@ -214,8 +214,8 @@ def valeurs_abscisses():
     subd = nb_subd[random.randrange(len(nb_subd) - 2) + 1]
     while subd < 3:
         subd = nb_subd[random.randrange(len(nb_subd) - 2) + 1]
-    nb_grad = 58  #nb de graduations sur la demi-droite graduée
-    lpts = [0 for i in range(7)]  #liste des places des points à trouver/placer sur la 1/2 droite graduée
+    nb_grad = 58  # nb de graduations sur la demi-droite graduée
+    lpts = [0 for i in range(7)]  # liste des places des points à trouver/placer sur la 1/2 droite graduée
     lpts[4] = random.randrange(1, nb_grad // div + 1) * div
     for i in range(2):
         a = random.randrange(1, nb_grad)
@@ -233,10 +233,10 @@ def valeurs_abscisses():
             a = random.randrange(1, (nb_grad * subd) // div)
         lpts[i + 5] = (a * div) // subd
 
-    #npts=noms_pts(7)
+    # npts=noms_pts(7)
 
     npts = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-    lnum = list(range(7))  #liste des numérateurs
+    lnum = list(range(7))  # liste des numérateurs
     lnum[0] = origine * div + lpts[0]
     lnum[1] = origine * div + lpts[1]
     lnum[2] = origine * subd + (lpts[2] * subd) // div
@@ -301,23 +301,23 @@ def trace_demi_droite(exo, cor, origine, div, subd, lpts, npts, lnum):
     exo.append("\\psline[arrowscale=2,linecolor=Maroon]{->}(0,0)(18,0)")
     exo.append("\\rput(2mm,0){%")
     exo.append("\\multips(0,0)(3 mm,0){58}{\\psline[linecolor=Maroon](0,-.1)(0,.1)}")
-    exo.append("\\multips(0,0)(%s mm,0){%s}{\\psline[linecolor=Maroon](0,-.2)(0,.2)}" %
+    exo.append("\\multips(0,0)(%s mm,0){%s}{\\psline[linecolor=Maroon](0,-.2)(0,.2)}" % 
              (div * 3, 58 // div + 1))
     cor.append("\\psline[arrowscale=2,linecolor=Maroon]{->}(0,0)(18,0)")
     cor.append("\\rput(2mm,0){%")
     cor.append("\\multips(0,0)(3 mm,0){58}{\\psline[linecolor=Maroon](0,-.1)(0,.1)}")
-    cor.append("\\multips(0,0)(%s mm,0){%s}{\\psline[linecolor=Maroon](0,-.2)(0,.2)}" %
+    cor.append("\\multips(0,0)(%s mm,0){%s}{\\psline[linecolor=Maroon](0,-.2)(0,.2)}" % 
              (div * 3, 58 // div + 1))
     for i in range(58 // div + 1):
-        exo.append("\\rput[t](%s mm,-3mm){\\centering %s}" % ((i * div) *
+        exo.append("\\rput[t](%s mm,-3mm){\\centering %s}" % ((i * div) * 
                  3, origine + i))
-        cor.append("\\rput[t](%s mm,-3mm){\\centering %s}" % ((i * div) *
+        cor.append("\\rput[t](%s mm,-3mm){\\centering %s}" % ((i * div) * 
                  3, origine + i))
     for i in range(2):
-        exo.append("\\rput[t](%s mm,4mm){\\centering $%s$}" % (lpts[i +
+        exo.append("\\rput[t](%s mm,4mm){\\centering $%s$}" % (lpts[i + 
                  5] * 3 + .1, npts[i + 5]))
     for i in range(7):
-        cor.append("\\rput[t](%s mm,4mm){\\centering $%s$}" % (lpts[i] *
+        cor.append("\\rput[t](%s mm,4mm){\\centering $%s$}" % (lpts[i] * 
                  3 + .1, npts[i]))
     exo.append("}")
     cor.append("}")
@@ -328,13 +328,13 @@ def ecrit_abscisses(exo, cor, origine, div, subd, lpts, lnum):
     exo.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[1], div))
     exo.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[2], subd))
     exo.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[3], subd))
-    exo.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (origine *
+    exo.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (origine * 
              lnum[4] + (lpts[4] // div) * lnum[4], lnum[4]))
     cor.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[0], div))
     cor.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[1], div))
     cor.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[2], subd))
     cor.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[3], subd))
-    cor.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (origine *
+    cor.append("\\item $\\left(\\cfrac{%s}{%s}\\right)$" % (origine * 
              lnum[4] + (lpts[4] // div) * lnum[4], lnum[4]))
 
 
@@ -344,10 +344,10 @@ def trouve_abscisses(exo, cor, div, subd, lnum):
     exo.append("\\item $G~\\left(\\cfrac{\\ldots}{%s}\\right)$" % div)
     exo.append("\\item $G~\\left(\\cfrac{\\ldots}{%s}\\right)$" % subd)
     cor.append("\\item $F~\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[5], div))
-    cor.append("\\item $F~\\left(\\cfrac{%s}{%s}\\right)$" % ((lnum[5] *
+    cor.append("\\item $F~\\left(\\cfrac{%s}{%s}\\right)$" % ((lnum[5] * 
              subd) // div, subd))
     cor.append("\\item $G~\\left(\\cfrac{%s}{%s}\\right)$" % (lnum[6], div))
-    cor.append("\\item $G~\\left(\\cfrac{%s}{%s}\\right)$" % ((lnum[6] *
+    cor.append("\\item $G~\\left(\\cfrac{%s}{%s}\\right)$" % ((lnum[6] * 
              subd) // div, subd))
 
 

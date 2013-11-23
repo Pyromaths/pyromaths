@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-#import random
-#from pyromaths.outils.Arithmetique import factorise, carrerise
-#from math import sqrt
-from pyromaths.outils.decimaux import suppr0#, suppr0list
+# import random
+# from pyromaths.outils.Arithmetique import factorise, carrerise
+# from math import sqrt
+from pyromaths.outils.decimaux import suppr0  # , suppr0list
 
 class Poly2:
     """Classe pour les polynômes du second degré."""
@@ -13,7 +13,7 @@ class Poly2:
         self.a = a
         self.b = b
         self.c = c
-        self.delta = suppr0(b**2 - 4*a*c)
+        self.delta = suppr0(b ** 2 - 4 * a * c)
         if self.delta > 0:
             self.signedelta = "strictement positif"
             self.nbrac = 2
@@ -37,11 +37,11 @@ class Poly2:
         return Poly2(self.a - other.a, self.b - other.b, self.c - other.c)
 
     def __str__(self):
-        if self.b<=0:
+        if self.b <= 0:
             sep1 = ''
         else:
             sep1 = '+'
-        if self.c<=0:
+        if self.c <= 0:
             sep2 = ''
         else:
             sep2 = '+'

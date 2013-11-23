@@ -33,7 +33,7 @@ def mise_en_forme(file):
     """
     f = codecs.open(file, encoding='utf-8', mode='r')
     old_tex = f.readlines()
-    new_tex=[]
+    new_tex = []
     indent = 0
     item = False
     for cline in old_tex:
@@ -56,10 +56,10 @@ def mise_en_forme(file):
     f.close()
 
 def trouve_indentation(cline, indent, lline):
-    if lline.find(r"\begin{")>=0:
+    if lline.find(r"\begin{") >= 0:
         "indente tout ce qui suit \begin{...}"
         indent += 2
-    if cline.find(r"\end{")==0:
+    if cline.find(r"\end{") == 0:
         "desindente tout ce qui suit \end{...}"
         indent -= 2
 #    if lline.find(r"\begin{enumerate}")>=0 or lline.find(r"\begin{itemize}")>=0:
@@ -75,7 +75,7 @@ def trouve_indentation(cline, indent, lline):
     indent += compte_paires_ouvertes(lline)
     return indent
 
-def traite_chaine(cline,  indent):
+def traite_chaine(cline, indent):
     """indente la chaine txt en fonction du paramètre indent"""
     list = []
     cline = " "*indent + cline
@@ -85,8 +85,8 @@ def traite_chaine(cline,  indent):
             for i in range(79, indent, -1):
                 if list[-1][i] == " ":
                     list.append(list[-1][:i])
-                    indent = trouve_indentation(list[-2][i+1:], indent, list[-1])
-                    list.append(" "*indent + list[-2][i+1:])
+                    indent = trouve_indentation(list[-2][i + 1:], indent, list[-1])
+                    list.append(" "*indent + list[-2][i + 1:])
                     list.pop(-3)
                     break
         else:
@@ -117,7 +117,7 @@ def compte_paires_ouvertes(txt):
         diff += txt.count(i)
     for i in ["}", r"\]"]:
         diff -= txt.count(i)
-    return 2*diff
+    return 2 * diff
 
-#mise_en_forme("/home/jerome/Documents/projets/pyromaths/exemples/3e-corrige.tex")
-#mise_en_forme("/tmp/4e.tex")
+# mise_en_forme("/home/jerome/Documents/projets/pyromaths/exemples/3e-corrige.tex")
+# mise_en_forme("/tmp/4e.tex")
