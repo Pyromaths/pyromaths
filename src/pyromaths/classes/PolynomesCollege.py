@@ -20,33 +20,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-import re
-
-# if __name__=="__main__":
-#     import sys
-#     sys.path.append('..')
 from pyromaths.outils.Affichage import decimaux
 from pyromaths.outils import Priorites3
 from pyromaths.classes.Fractions import Fraction
-
-_POLYNOME_FORMAT = re.compile(r"""
-    \s*                                         # éventuellement des espaces pour commencer
-    (                                           # chaque monôme
-        [-+]?\d+\.?\d*(?:e[-+]\d+)?[a-df-hkmnp-zA-NP-Z]?(?:\^\d+)?   # au moins un nombre décimal
-        |                                       # OU
-        [-+]?\d*\.?\d*(?:e[-+]\d+)?[a-df-hkmnp-zA-NP-Z](?:\^\d+)?    # au moins une variable
-
-    )
-    \s*                                         # éventuellement des espaces pour finir
-""", re.VERBOSE)
-
-_MONOME_FORMAT = re.compile(r"""
-    \s*                                         # éventuellement des espaces pour commencer
-    (?P<sign>[-+]?)                             # un éventuel signe
-    (?P<coef>\d*\.?\d*(?:e[-+]\d+)?)                     # un éventuel coefficient
-    (?:(?P<var>[a-df-hkmnp-zA-NP-Z])(?:\^(?P<deg>\d+))?)?   # une éventuelle variable avec son éventuel degré
-    \s*                                         # éventuellement des espaces pour finir
-""", re.VERBOSE)
 
 class Polynome():
     """Cette classe crée la notion de polynômes.
@@ -55,7 +31,7 @@ class Polynome():
         >>> Polynome([[2,2],[3,1],[4,0]], 'z')
         Polynome([[2, 2], [3, 1], [4, 0]], "z")
         >>> Polynome("2y^2+3y+4")
-        Polynome([[2.0, 2], [3.0, 1], [4.0, 0]], "y")
+        Polynome([[2, 2], [3, 1], [4, 0]], "y")
 
     Les variables e, i, j, l, o, O sont interdites pour des raisons de
     lisibilité (l, o, O) ou parce qu'elles sont utilisées comme constantes (e,
@@ -69,7 +45,7 @@ class Polynome():
             >>> Polynome([[2,2],[3,1],[4,0]], 'z')
             Polynome([[2, 2], [3, 1], [4, 0]], "z")
             >>> Polynome("2y^2+3y+4")
-            Polynome([[2.0, 2], [3.0, 1], [4.0, 0]], "y")
+            Polynome([[2, 2], [3, 1], [4, 0]], "y")
             >>> Polynome([[1, 1], [2, 2]])
             Polynome([[1, 1], [2, 2]], "x")
             >>> Polynome("Fraction(1,7)x^2-Fraction(3,8)x-1")
@@ -79,24 +55,7 @@ class Polynome():
         if isinstance(monomes, basestring):
             # Gère la construction des polynôme à partir d'une chaîne de caractères
             listmonomes = []
-            #===================================================================
-            # for monome in _POLYNOME_FORMAT.finditer(monomes):
-            #     m = _MONOME_FORMAT.search(monome.group(0))
-            #     if m is None:
-            #         raise ValueError(u'chaîne invalide pour un objet Polynôme : %s' % input)
-            #     m_sign = m.group('sign') or '+'
-            #     m_coef = float(m.group('coef') or 1)
-            #     m_deg = int(m.group('deg') or (m.group('var') and '1') or '0')
-            #     m_var = m.group('var') or var
-            #     if m_var and not var: var = m_var # attribue une variable à var
-            #     if m_var != var:
-            #         raise ValueError(u'Le nom de la variable (%s) est incorrect pour le Polynôme %s' % (var, monomes))
-            #     if m_sign == '-': m_coef = -m_coef
-            #     if m_coef:
-            #         # supprime les monômes de coefficient 0
-            #         listmonomes.append([m_coef, m_deg])
-            #===================================================================
-            splitted = Priorites3.split_calcul(monomes)
+            splitted = Priorites3.splitting(monomes)
             m_coef, var, coef = None, None, ''
             while splitted:
                 extract = splitted.pop(0)
@@ -123,31 +82,6 @@ class Polynome():
                             m_coef=1
                     listmonomes.append([m_coef, m_deg])
                     m_coef = None
-            #===================================================================
-            # for i in range(len(splitted)):
-            #     if splitted[i] in '+-':
-            #         if m_coef: 
-            #             listmonomes.append([m_coef, 0])
-            #             m_coef = None
-            #         coef = splitted[i]
-            #     elif Priorites3.EstNombre(splitted[i]):
-            #         try:
-            #             m_coef = eval(coef + splitted[i])
-            #         except:
-            #             m_coef=1
-            #     else:
-            #         if var and splitted[i][0] != var:
-            #             raise ValueError(u'Le nom de la variable (%s) est incorrect pour le Polynôme %s' % (var, monomes))
-            #         if var is None: var = splitted[i][0]
-            #         if len(splitted[i]) == 2:
-            #             i += 1
-            #             m_deg = eval(splitted[i])
-            #         else:
-            #             m_deg = 1
-            #         if m_coef is None: m_coef=1
-            #         listmonomes.append([m_coef, m_deg])
-            #         m_coef = None
-            #===================================================================
             if m_coef: listmonomes.append([m_coef, 0])
             if listmonomes: self.monomes = listmonomes
             else: self.monomes = [[0, 0]]
@@ -176,7 +110,7 @@ class Polynome():
         return "Polynome(%s, \"%s\")" % (self.monomes, self.var)
 
     def __str__(self):
-        """**str**\ (*object*)
+        r"""**str**\ (*object*)
 
         Renvoie une version LaTeX du polynôme.
             >>> from pyromaths.classes.PolynomesCollege import Polynome
@@ -184,7 +118,6 @@ class Polynome():
             '2\\,z^{2}+3\\,z+4'
             >>> str(Polynome("y^2-Fraction(3,2)y-1"))
             'y^{2}+\\dfrac{-3}{2}\\,y-1'
-
 
         :rtype: string
         """
@@ -243,6 +176,49 @@ class Polynome():
         if not s: s="0"
         return s
 
+    def __call__(self, valeur):
+        """**__call__**\ (*object*\ ,*valeur*)
+
+        ``p.__call__(valeur)`` est équivalent à ``p(valeur)``
+        Retourne l'expression numérique du polynôme pour sa variable égale à
+        valeur.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> Polynome("4+x-x^2+x^3-2x^5")(-5)
+            '4-5-(-5)**2+(-5)**3-2*(-5)**5'
+
+        :param: valeur
+        :type: integer, float or Fraction
+        :rtype: string
+        """
+        if Polynome.degre(self) == 0:
+            return self.monomes[0][0]
+        if valeur == 0:
+            retour = ''
+            for m in self.monomes:
+                if m[1] == 0: retour += '+%s' % m[0]
+            return retour.lstrip('+').replace('+-', '-')
+        if valeur < 0 and isinstance(valeur, (float, int)): nb = "(%s)" % valeur
+        else: nb = repr(valeur)
+        retour = ''
+        for m in self.monomes:
+            if m[1] == 0: retour += '+%r' % m[0]
+            elif m[1] == 1:
+                if m[0] == 1:
+                    retour += '+%r' % valeur
+                elif m[0] == -1:
+                    retour += '-' + nb
+                else:
+                    retour += '+%r*' % m[0] + nb
+            else:
+                if m[0] == 1:
+                    retour += '+' + nb + '**%s' % m[1]
+                elif m[0] == -1:
+                    retour += '-' + nb + '**%s' % m[1]
+                else:
+                    retour += '+%r*' % m[0] + nb + '**%s' % m[1]
+        return retour.lstrip('+').replace('+-', '-')
+
     def __getitem__(self, i):
         """*object*\ .\ **__getitem__**\ (*integer*)
 
@@ -251,9 +227,9 @@ class Polynome():
             >>> from pyromaths.classes.PolynomesCollege import Polynome
             >>> p=Polynome("2y+3y^2+4")
             >>> p
-            Polynome([[2.0, 1], [3.0, 2], [4.0, 0]], "y")
+            Polynome([[2, 1], [3, 2], [4, 0]], "y")
             >>> p.__getitem__(1)
-            [3.0, 2]
+            [3, 2]
 
         :rtype: list
         """
@@ -262,19 +238,20 @@ class Polynome():
     def __iadd__(self, other):
         """*object*\ .\ **__iadd__**\ (*other*)
 
-        ``p.__iadd__(q)`` est équivalent à ``p + q`` **Quel est l'intérêt de
-        cette fonction ?**\ Vérifier si elle est utilisée.
+        ``p.__iadd__(q)`` est équivalent à ``p + q``
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
             >>> p=Polynome("2y+3y^2+4")
             >>> q=Polynome('-y+6')
             >>> p.__iadd__(q)
-            Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+            Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], "y")
 
         :rtype: Polynome
         """
         if isinstance(other, (float, int)):
             other = Polynome([[other, 0]], self.var)
+        elif isinstance(self, (float, int)):
+            self = Polynome([[self, 0]], other.var)
         m1, m2 = [m for m in self.monomes], [m for m in other.monomes]
         if Polynome.degre(self) <= 0:
             self.var = other.var
@@ -343,11 +320,11 @@ class Polynome():
             >>> p=Polynome("2y+3y^2+4")
             >>> q=Polynome('-y+6')
             >>> p.__add__(q)
-            Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+            Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], "y")
             >>> p+q
-            Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+            Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], "y")
             >>> p.__add__("Polynome('-y+6')")
-            Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+            Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], "y")
 
         :param: other
         :type: Polynome ou string *évaluable comme Polynome*
@@ -363,6 +340,11 @@ class Polynome():
 
         ``p.__radd__(q)`` est équivalent à ``q + p``
 
+        >>> from pyromaths.classes.PolynomesCollege import Polynome
+        >>> from pyromaths.classes.Fractions import Fraction
+        >>> Fraction(5,4)+Polynome("3x")
+        Polynome([[Fraction(5, 4), 0], [3, 1]], "x")
+
         :param: other
         :type: Polynome ou string *évaluable comme Polynome*
         :rtype: Polynome
@@ -374,20 +356,56 @@ class Polynome():
         return other + self
 
     def __sub__(self, other):
-        """**Jamais utilisé !**"""
+        """*object*\ .\ **__sub__**\ (*other*)
+
+        ``p.__sub__(q)`` est équivalent à ``p + q``  calcule la somme de
+        polynômes.
+
+        *other* peut être une chaîne représentant un polynôme.
+
+            >>> from pyromaths.classes.PolynomesCollege import Polynome
+            >>> p=Polynome("2y+3y^2+4")
+            >>> q=Polynome('-y+6')
+            >>> p.__sub__(q)
+            'Polynome([[2, 1], [3, 2], [4, 0]], "y")+Polynome([[1, 1], [-6, 0]], "y")'
+            >>> p-q
+            'Polynome([[2, 1], [3, 2], [4, 0]], "y")+Polynome([[-1, 1], [6, 0]], "y")'
+            >>> Polynome("x+6")-Polynome("3x")
+            Polynome([[1, 1], [6, 0], [-3, 1]], "x")
+
+        :param: other
+        :type: Polynome ou string *évaluable comme Polynome*
+        :rtype: Polynome or string
+        """
         if not isinstance(other, Polynome):
             self.monomes.append([-other, 0])
             return self
-        elif len(other) == 1 and other.monomes[0][0]>0:
-            #Cas où on soustrait un polynôme de longueur 1 et de coef positif
+        elif len(other) == 1:
+            #Cas où on soustrait un polynôme de longueur 1
             return self + (-other)
         return "%r+%r" %(self, -other)
 
     def __rsub__(self, other):
-        """**Jamais utilisé !**"""
-        if not isinstance(other, str):
-            other=str(other)
-        return other + -self
+        """*object*\ .\ **__rsub__**\ (*other*)
+
+        ``p.__rsub__(q)`` est équivalent à ``q - p``
+
+        >>> from pyromaths.classes.PolynomesCollege import Polynome
+        >>> 1-Polynome([[-4, 1], [-9, 2], [-5, 0]], "x")
+        'Polynome([[1, 0]], "x")+Polynome([[4, 1], [9, 2], [5, 0]], "x")'
+        >>> from pyromaths.classes.Fractions import Fraction
+        >>> Fraction(5,4)-Polynome("3x")
+        Polynome([[Fraction(5, 4), 0], [-3, 1]], "x")
+
+        :param: other
+        :type: Polynome ou string *évaluable comme Polynome*
+        :rtype: Polynome
+        """
+        other = Polynome([[other, 0]], self.var)
+        if len(self) == 1:
+            #Cas où on soustrait un polynôme de longueur 1
+            return other + (-self)
+        return "%r+%r" %(other, -self)
 
     def __neg__(self):
         """*object*\ .\ **__neg__**\ ()
@@ -401,7 +419,7 @@ class Polynome():
             >>> from pyromaths.classes.PolynomesCollege import Polynome
             >>> p=Polynome("2y+3y^2+4")
             >>> p.__neg__()
-            Polynome([[-2.0, 1], [-3.0, 2], [-4.0, 0]], "y")
+            Polynome([[-2, 1], [-3, 2], [-4, 0]], "y")
 
         :rtype: Polynome
         """
@@ -420,7 +438,7 @@ class Polynome():
             >>> from pyromaths.classes.PolynomesCollege import Polynome
             >>> p=Polynome("2y+3y^2+4")
             >>> p.__pos__()
-            Polynome([[2.0, 1], [3.0, 2], [4.0, 0]], "y")
+            Polynome([[2, 1], [3, 2], [4, 0]], "y")
 
         :rtype: Polynome
         """
@@ -449,14 +467,14 @@ class Polynome():
             >>> p=Polynome('3x+4')
             >>> q=Polynome('2x+5')
             >>> p*q
-            'Polynome([[3.0, 1]], "x")*Polynome([[2.0, 1]], "x")+Polynome([[3.0, 1]], "x")*Polynome([[5.0, 0]], "x")+Polynome([[4.0, 0]], "x")*Polynome([[2.0, 1]], "x")+Polynome([[4.0, 0]], "x")*Polynome([[5.0, 0]], "x")'
+            'Polynome([[3, 1]], "x")*Polynome([[2, 1]], "x")+Polynome([[3, 1]], "x")*Polynome([[5, 0]], "x")+Polynome([[4, 0]], "x")*Polynome([[2, 1]], "x")+Polynome([[4, 0]], "x")*Polynome([[5, 0]], "x")'
             >>> p=Polynome('3x')
             >>> q=Polynome('2x')
             >>> p*q
-            '3.0*2.0*Polynome("x^1")*Polynome("x^1")'
+            '3*2*Polynome("x^1")*Polynome("x^1")'
             >>> q=Polynome('x')
             >>> p*q
-            Polynome([[3.0, 2]], "x")
+            Polynome([[3, 2]], "x")
 
         :param: other
         :type: Polynome ou string *évaluable comme Polynome*
@@ -471,7 +489,7 @@ class Polynome():
         elif Polynome.degre(other)==0:
             other.var = self.var
         if self.var != other.var:
-            raise ValueError(u'Pyromaths ne sait multiplier que deux polynômes de même variable')
+            raise ValueError(u'Pyromaths ne sait multiplier que deux polynômes de même variable : %r et %r' % (self, other))
         p0, p1 = Polynome.reduit(self), Polynome.reduit(other)
         if len(p0) == len(p1) == 2 and (p0[0]==p1[0] or p0[1] == p1[1]) and\
             ((p0[0][0] == -p1[0][0] and p0[0][1] == p1[0][1]) or \
@@ -527,8 +545,8 @@ class Polynome():
         :param: other
         :type: Polynome ou string *évaluable comme Polynome*
         :rtype: string ou Polynome"""
-        if isinstance(other, (int, float)):
-            other = Polynome(repr(other), self.var)
+        if isinstance(other, (int, float, Fraction)):
+            other = Polynome([[other, 0]], self.var)
             return other*self
         if isinstance(other, str):
             from pyromaths.outils.Priorites3 import splitting
@@ -620,14 +638,12 @@ class Polynome():
         **TODO :** si ``n == 2`` et ``len(p) > 2``, bug
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> p = Polynome("2y+4")
-            >>> p**2
-            'Polynome([[2.0, 1]], "y")**2+2*Polynome([[2.0, 1]], "y")*Polynome([[4.0, 0]], "y")+Polynome([[4.0, 0]], "y")**2'
-            >>> p = Polynome("2y")
-            >>> p**3
-            Polynome([[8.0, 3]], "y")
-            >>> p.__pow__(2)
-            Polynome([[4.0, 2]], "y")
+            >>> Polynome("2y+4")**2
+            'Polynome([[2, 1]], "y")**2+2*Polynome([[2, 1]], "y")*Polynome([[4, 0]], "y")+Polynome([[4, 0]], "y")**2'
+            >>> Polynome("2y")**3
+            Polynome([[8, 3]], "y")
+            >>> Polynome("2y").__pow__(2)
+            Polynome([[4, 2]], "y")
 
         :rtype: string ou Polynome
         """
@@ -655,9 +671,9 @@ class Polynome():
         Retourne une version réduite et ordonnée du polynôme
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> p = Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+            >>> p = Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], "y")
             >>> Polynome.reduit(p)
-            Polynome([[3.0, 2], [1.0, 1], [10.0, 0]], "y")
+            Polynome([[3, 2], [1, 1], [10, 0]], "y")
 
         :param type: Polynome
         :rtype: Polynome
@@ -682,12 +698,10 @@ class Polynome():
         * écrit les factorisation qui permettent de réduire un polynôme
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> p = Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
-            >>> Polynome.reduction_detaillee(p)
-            Polynome([[3.0, 2], [2.0, 1], [-1.0, 1], [4.0, 0], [6.0, 0]], "y")
-            >>> p = Polynome([[3.0, 2], [2.0, 1], [-1.0, 1], [4.0, 0], [6.0, 0]], "y")
-            >>> Polynome.reduction_detaillee(p)
-            'Polynome("3.0y^2")+(2.0-1.0)*Polynome([[1.0, 1]], "y")+Polynome("10.0")'
+            >>> Polynome.reduction_detaillee(Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], "y"))
+            Polynome([[3, 2], [2, 1], [-1, 1], [4, 0], [6, 0]], "y")
+            >>> Polynome.reduction_detaillee(Polynome([[3, 2], [2, 1], [-1, 1], [4, 0], [6, 0]], "y"))
+            'Polynome("3y^2")+(2-1)*Polynome([[1, 1]], "y")+Polynome("10")'
 
         :param type: Polynome
         :rtype: string ou Polynome
@@ -734,7 +748,7 @@ class Polynome():
         Retourne True si le polynôme est réductible, False sinon.
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> p = Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+            >>> p = Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], "y")
             >>> Polynome.reductible(p)
             True
 
@@ -753,9 +767,9 @@ class Polynome():
         monômes de degré supérieur.
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> p = Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], "y")
+            >>> p = Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], "y")
             >>> Polynome.ordonne(p)
-            Polynome([[3.0, 2], [2.0, 1], [-1.0, 1], [4.0, 0], [6.0, 0]], "y")
+            Polynome([[3, 2], [2, 1], [-1, 1], [4, 0], [6, 0]], "y")
 
         :param type: Polynome
         :rtype: Polynome
@@ -763,45 +777,3 @@ class Polynome():
         m1 = self.monomes
         m1 = sorted(m1, key = lambda x: (-x[1]))
         return Polynome(m1, self.var)
-
-    def evaluate(self, valeur):
-            """**evaluate**\ (*object*\ ,*valeur*)
-    
-            Retourne l'expression numérique du polynôme pour sa variable égale à
-            valeur.
-    
-                >>> from pyromaths.classes.PolynomesCollege import Polynome
-                >>> Polynome.evaluate(Polynome("4+x-x^2+x^3-2x^5"), -5)
-                '4-5-(-5)**2+(-5)**3-2*(-5)**5'
-    
-            :param: valeur
-            :type: integer, float or Fraction
-            :rtype: string
-            """
-            if Polynome.degre(self) == 0:
-                return self.monomes[0][0]
-            if valeur == 0:
-                retour = ''
-                for m in self.monomes:
-                    if m[1] == 0: retour += '+%s' % m[0]
-                return retour.lstrip('+').replace('+-', '-')
-            if valeur < 0 and isinstance(valeur, (float, int)): nb = "(%s)" % valeur
-            else: nb = repr(valeur)
-            retour = ''
-            for m in self.monomes:
-                if m[1] == 0: retour += '+%r' % m[0]
-                elif m[1] == 1:
-                    if m[0] == 1:
-                        retour += '+%r' % valeur
-                    elif m[0] == -1:
-                        retour += '-' + nb
-                    else:
-                        retour += '+%r*' % m[0] + nb
-                else:
-                    if m[0] == 1:
-                        retour += '+' + nb + '**%s' % m[1]
-                    elif m[0] == -1:
-                        retour += '-' + nb + '**%s' % m[1]
-                    else:
-                        retour += '+%r*' % m[0] + nb + '**%s' % m[1]
-            return retour.lstrip('+').replace('+-', '-')

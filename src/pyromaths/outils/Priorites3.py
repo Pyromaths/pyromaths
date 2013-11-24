@@ -38,6 +38,8 @@ def cherche_classe(calcul, index):
     :param index: position à partir de laquelle effectuer le test
     :type index: integer
 
+    >>> from pyromaths.classes.PolynomesCollege import Polynome
+    >>> from pyromaths.classes.Fractions import Fraction
     >>> from pyromaths.outils import Priorites3
     >>> Priorites3.cherche_classe('Polynome([[-4, 2]], "x")-Polynome([[-5, 1], [4, 2], [1, 0]], "x")+Polynome([[6,  0], [5, 1]], "x")', 5)
     'Polynome([[-5, 1], [4, 2], [1, 0]], "x")'
@@ -124,7 +126,7 @@ def cherche_decimal(calcul, index):
 def cherche_operateur(calcul, index):
     """**cherche_operateur**\ (*calcul*\ , *min_i*)
 
-    Recherche le premier opérateur +, -, *, /, ^ dans la chaîne calcul à une position
+    Recherche le premier opérateur +, -, \*, /, ^ dans la chaîne calcul à une position
     supérieure ou égale à min_i, sans expression régulière.
     
     :param calcul: le calcul à tester
@@ -142,7 +144,7 @@ def cherche_operateur(calcul, index):
     >>> Priorites3.cherche_decimal(p, 0)
     '6'
 
-        :rtype: string
+    :rtype: string
     """
     operateur = ['**', '+', '-', '*', '/', '^']
     l = []
@@ -172,8 +174,6 @@ def split_calcul(calcul):
     >>> from pyromaths.outils import Priorites3
     >>> Priorites3.split_calcul('-Polynome([[-4, 2]], "x")*6**2+3')
     ['-', 'Polynome([[-4, 2]], "x")', '*', '6', '**', '2', '+', '3']
-    >>> Priorites3.split_calcul('3x^2-6x+1')
-    ['3', 'x', '^', '2', '-', '6', 'x', '+', '1']
     >>> Priorites3.split_calcul('-6*(-11)*(-5)')
     ['-', '6', '*', '(-11)', '*', '(-5)']
     >>> Priorites3.split_calcul("Polynome('Fraction(1,3)x')+Polynome('x')")
@@ -184,7 +184,7 @@ def split_calcul(calcul):
     :rtype: list
     """
     l = []
-    findings = (cherche_classe, cherche_decimal, cherche_operateur)
+    findings = (cherche_classe, cherche_decimal)#, cherche_operateur)
     for finding in findings:
         nb = finding(calcul, 0)
         while nb:
@@ -245,10 +245,10 @@ def splitting(calcul):
     >>> from pyromaths.outils import Priorites3
     >>> Priorites3.splitting('-Polynome([[-4, 2]], "x")*6**2+3')
     ['-', 'Polynome([[-4, 2]], "x")', '*', '6', '**', '2', '+', '3']
-    >>> Priorites3.split_calcul('-6*(-11)*(-5)')
+    >>> Priorites3.splitting('-6*(-11)*(-5)')
     ['-6', '*', '(-11)', '*', '(-5)']
-
-    **TODO :** Ce dernier exemple fonctionne ici. Quelle différence avec split_calcul ?
+    >>> Priorites3.splitting("Fraction(1,7)x^2-Fraction(3,8)x-1")
+    ['Fraction(1,7)', 'x', '^', '2', '-', 'Fraction(3,8)', 'x', '-', '1']
 
     :rtype: list
     """
@@ -261,10 +261,14 @@ def splitting(calcul):
         op, i, t = l[j], 0, []
         if op == "**": j+= 1
         else:
-            while i < len(op) and op[i] in '+-*/()':
-                t.append(op[i])
-                i += 1
-            if i == len(op):
+            if not EstNombre(op):
+                while i < len(op):
+                    if op[i:i+2] == "**":
+                        t.append("**")
+                        i += 2
+                    else: 
+                        t.append(op[i])
+                        i += 1
                 l[j:j+1] = t
                 j += len(t)
             else: j += 1
@@ -433,6 +437,12 @@ def recherche_somme(calcul):
     soustraction, ni suivie d'un exposant, d'une multiplaication ou d'une
     division.
 
+    >>> from pyromaths.outils import Priorites3
+    >>> Priorites3.recherche_somme(['1', '-', '2', '-', '3'])
+    (0, 5)
+    >>> Priorites3.recherche_somme(['Polynome("x+1")', '-', 'Polynome("x+2")', '-', 'Polynome("x+3")'])
+    (0, 5)
+
     :param calcul: le calcul à traiter
     :type calcul: list
     :rtype: tuple
@@ -456,14 +466,11 @@ def recherche_neg(calcul):
     :type calcul: list
     :rtype: tuple
     """
-    from pyromaths.classes.PolynomesCollege import Polynome
-    from pyromaths.classes.Fractions import Fraction
     ind, debut, fin = 0, None, len(calcul)
     for dummy in range(calcul.count("-")):
         ind = calcul.index("-", ind)
         if ind < fin-1 and EstNombre(calcul[ind+1]):
-            n = eval(calcul[ind+1])
-            if calcul[ind+1][0] == "(" or isinstance(n, Polynome):
+            if calcul[ind+1][0] == "(":# or isinstance(n, Polynome):
 #                or (isinstance(n, Polynome) and (len(n)>1 or n.monomes[0][0]<0)):
                 debut = ind
                 break
@@ -493,15 +500,15 @@ def post_polynomes(calcul):
     :param calcul: le calcul à traiter
     :type calcul: list
 
+    >>> from pyromaths.classes.Fractions import Fraction
     >>> Priorites3.post_polynomes(['Polynome([[1, 2], [-1, 0], [3, 1], [-9, 2], [-8, 1]], "x")'])
     ['Polynome([[1, 2], [-9, 2], [3, 1], [-8, 1], [-1, 0]], "x")']
     >>> Priorites3.post_polynomes(['Polynome([[1, 2], [-9, 2], [3, 1], [-8, 1], [-1, 0]], "x")'])
-    ['(', '1', '-', '9', ')', '*', 'Polynome([[1.0, 2]], "x")', '+', '(', '3', '-', '8', ')', '*', 'Polynome([[1.0, 1]], "x")', '+', 'Polynome("-1x^0")']
+    ['(', '1', '-', '9', ')', '*', 'Polynome([[1, 2]], "x")', '+', '(', '3', '-', '8', ')', '*', 'Polynome([[1, 1]], "x")', '+', 'Polynome("-1x^0")']
 
     :rtype: list
     """
     from pyromaths.classes.PolynomesCollege import Polynome
-    from pyromaths.classes.Fractions import Fraction
     for k in range(len(calcul)):
         if 'Polynome(' in calcul[k]:
             p = eval(calcul[k])
@@ -529,16 +536,15 @@ def post_fractions(calcul, final = False):
     :param final: si le calcul est fini, simplifie toutes les fractions restantes
     :type final: boolean
 
-    >>> f = ['Fraction(3*4, 2*4) + Fraction(5,8))']
-    >>> Priorites3.post_fractions(f)
-    ['Fraction(12, 8) + Fraction(5,8)']
-    >>> f = ['Fraction(3*4*5, 2*4)']
+    >>> from pyromaths.classes.PolynomesCollege import Polynome
+    >>> Priorites3.post_fractions(['Fraction(3*4, 2*4, "r") + Fraction(5, 8)'])
+    ['Fraction(12, 8) + Fraction(5, 8)']
+    >>> Priorites3.post_fractions(['Fraction(3*4*5, 2*4, "s")'])
     ['Fraction(15, 2)']
 
     :rtype: list
     """
     from pyromaths.classes.Fractions import Fraction
-    #from pyromaths.classes.PolynomesCollege import Polynome
     e = [calcul[k] for k in range(len(calcul))]
     if final:
         index = 0
@@ -574,17 +580,6 @@ def post_fractions(calcul, final = False):
             else:
                 e[0] = e[0][:index] + Fraction.decompose(frac) + splitted[2]
             index += 1
-#             print e
-#             time.sleep(2)
-        #=======================================================================
-        # if 'Fraction(' in e[0] and '*' in e[0] and "\"s\")" in e[0][-4:]:
-        #     f = eval(e[0])
-        #     e[0] = repr(Fraction.simplifie(f))
-        # elif 'Fraction(' in e[0] and '*' in e[0] and "\"r\")" in e[0][-4:]:
-        #     e[0] = repr(Fraction.reduit(eval(e[0])))
-        # elif 'Fraction(' in e[0]:
-        #     e[0] = Fraction.decompose(eval(e[0]))
-        #=======================================================================
     return e
 
 def effectue_calcul(calcul):
@@ -595,8 +590,8 @@ def effectue_calcul(calcul):
     :param calcul: le calcul à traiter
     :type calcul: list
 
-    >>> c = ['-5', '-', '(', '(-6)', '-', '1', '+', '(-3)', ')', '*', '(-1)']
-    >>> Priorites3.effectue_calcul(c)
+    >>> from pyromaths.outils import Priorites3
+    >>> Priorites3.effectue_calcul(['-5', '-', '(', '(-6)', '-', '1', '+', '(-3)', ')', '*', '(-1)'])
     ['-5', '-', '(', '-7', '-', '3', ')', '*', '(-1)']
     >>> Priorites3.effectue_calcul(['-5', '-', '(', '-7', '-', '3', ')', '*', '(-1)'])
     ['-5', '-', '-10', '*', '(-1)']
@@ -643,29 +638,22 @@ def effectue_calcul(calcul):
                 if len(sol)>1:
                     sol.insert(0, "(")
                     sol.append(")")
-                elif sol and isinstance(eval(sol[0]), (int, float)) and post and post[0] == "*" and \
-                        'Polynome(' in post[1] and len(eval(post[1])) == 1 and \
-                        eval(post[1])[0][0] == 1:
+                elif sol and isinstance(eval(sol[0]), (int, float, Fraction)) and post and post[0] == "*" and \
+                        'Polynome(' in post[1] and len(eval(post[1])) == 1 and eval(post[1])[0][0] == 1:
                             # Sans doute une factorisation de sommes de polynômes
-                            sol = [repr(eval(sol[0])*eval(post [1]))]
+                            sol = [repr(eval(sol[0])*eval(post[1]))]
                             post = post[2:]
                             #Suppression des parenthèses autour de ((9.0-80.0)*Polynome("x")) devenu (Polynome("-71.0x"))
                             if post and result and post[0] == ")" and result[-1] == "(" :
                                 result,  post = result[:-1],  post[1:]
             else:
-                # Transforme les réels en polynômes afin de permettre les opérations
-                #TODO: C'est une aberration !
-                bpoly = False
-                for k in range(len(calc)):
-                    if not bpoly and calc[k][:9] == "Polynome(": bpoly = True
-                    elif bpoly and calc[k] not in "**/-+()" and calc[k-1] != "**" and isinstance(eval(calc[k]), (float, int)):
-                        calc[k] = "Polynome([[%s, 0]])" % eval(calc[k])
                 sol = eval("".join(calc))
                 if isinstance(sol, basestring): sol = splitting(sol)
                 elif isinstance(sol, (int, float)): sol = [str(sol)]
                 elif isinstance(sol, (Polynome, Fraction)): sol = [repr(sol)]
                 else : raise ValueError(u"Le résultat a un format inattendu")
-            if recherche == recherche_neg and len(sol) > 1:
+#             if recherche == recherche_neg and len(sol) > 1:
+            if recherche == recherche_neg and pre:
                 # Ajoute le "+" ou sépare le "-":
                 # "1-(-9)" => "1 + 9" et "1+(-9)" => "1 - 9"
                 if sol[0][0] == "-": sol = ["-", sol[0][1:]]
@@ -687,14 +675,6 @@ def effectue_calcul(calcul):
             if post and recherche == recherche_neg: break_somme=True
     result.extend(post)
     if not result: result = calcul
-    tmp = "".join(result)
-#    if cherche_classe(tmp, 0):
-#        index = tmp.find("+-")
-#        while index >=0 :
-#            nb = cherche_decimal(tmp, index+2)
-#            tmp = tmp[:index+1] + "(-" + nb + ")" + tmp[index+2+len(nb):]
-#            index = tmp.find("+-")
-#        result = splitting(tmp)
     return result
 
 def priorites(calcul):
@@ -706,15 +686,12 @@ def priorites(calcul):
     :param calcul: le calcul à traiter
     :type calcul: string
 
-    >>> c = '-1+5-(-5)+(-6)*1'
-    >>> Priorites3.priorites(c)
+    >>> from pyromaths.outils import Priorites3
+    >>> Priorites3.priorites('-1+5-(-5)+(-6)*1')
     [['4', '+', '5', '-', '6'], ['9', '-', '6'], ['3']]
 
     :rtype: list
     """
-#    if cherche_classe(calcul, 0)>=0: litteral = True
-#    else: litteral = False
-#    from pyromaths.classes.Fractions import Fraction
     calcul = splitting(calcul)
     solution = []
     while len(calcul)>1:
@@ -731,12 +708,6 @@ def priorites(calcul):
             # Finit la réduction du polynôme résultat
             solution.append(calcul)
         if len(calcul) == 1 and 'Fraction(' in calcul[0]:
-            #===================================================================
-            # s[0] = post_fractions(s, True)
-            # if s[0] != calcul[0]:
-            #     calcul = [[s[0]]]
-            #     solution.append(calcul[0])
-            #===================================================================
             s = post_fractions(s, True)
             if s[0] != calcul[0]:
                 calcul = [[s[0]]]
@@ -744,7 +715,7 @@ def priorites(calcul):
     return solution
 
 def texify(liste_calculs):
-    """**texify**\ (*liste_calculs*)
+    r"""**texify**\ (*liste_calculs*)
 
     Convertit la liste de chaînes de caractères `liste_calculs` contenant
     des polynômes en liste de chaînes de caractères au format TeX
@@ -755,17 +726,18 @@ def texify(liste_calculs):
     :param calcul: le calcul à traiter
     :type calcul: string
 
+    >>> from pyromaths.outils import Priorites3
+    >>> from pyromaths.classes.PolynomesCollege import Polynome
     >>> l = [['4', '+', '5', '-', '6'], ['9', '-', '6'], ['3']]
     >>> Priorites3.texify(l)
     ['4+5-6', '9-6', '3']
-    >>> p = '(-7)+8-Polynome([[-4, 1], [-9, 2], [-5, 0]], "x")'
-    >>> Priorites3.texify(Priorites3.priorites(p))
-    ['1+4\\,x+9\\,x^{2}+5', '9\\,x^{2}+4\\,x+1+5', '9\\,x^{2}+4\\,x+6']
+    >>> Priorites3.texify(Priorites3.priorites('(-7)+8-Polynome([[-4, 1], [-9, 2], [-5, 0]], "x")'))
+    ['1-\\left( -4\\,x-9\\,x^{2}-5\\right) ', '1+4\\,x+9\\,x^{2}+5', '9\\,x^{2}+4\\,x+1+5', '9\\,x^{2}+4\\,x+6']
 
     :rtype: list
     """
-    from pyromaths.classes.Fractions import Fraction
     from pyromaths.classes.PolynomesCollege import Polynome
+    from pyromaths.classes.Fractions import Fraction
     ls = []
     for calcul in liste_calculs:
         if isinstance(calcul,  basestring): calcul = splitting(calcul)

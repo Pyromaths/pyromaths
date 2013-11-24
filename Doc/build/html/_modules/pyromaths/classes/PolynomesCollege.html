@@ -70,33 +70,9 @@
 <span class="c"># along with this program; if not, write to the Free Software</span>
 <span class="c"># Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA</span>
 <span class="c">#</span>
-<span class="kn">import</span> <span class="nn">re</span>
-
-<span class="c"># if __name__==&quot;__main__&quot;:</span>
-<span class="c">#     import sys</span>
-<span class="c">#     sys.path.append(&#39;..&#39;)</span>
 <span class="kn">from</span> <span class="nn">pyromaths.outils.Affichage</span> <span class="kn">import</span> <span class="n">decimaux</span>
 <span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Priorites3</span>
 <span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
-
-<span class="n">_POLYNOME_FORMAT</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&quot;&quot;&quot;</span>
-<span class="s">    \s*                                         # éventuellement des espaces pour commencer</span>
-<span class="s">    (                                           # chaque monôme</span>
-<span class="s">        [-+]?\d+\.?\d*(?:e[-+]\d+)?[a-df-hkmnp-zA-NP-Z]?(?:\^\d+)?   # au moins un nombre décimal</span>
-<span class="s">        |                                       # OU</span>
-<span class="s">        [-+]?\d*\.?\d*(?:e[-+]\d+)?[a-df-hkmnp-zA-NP-Z](?:\^\d+)?    # au moins une variable</span>
-
-<span class="s">    )</span>
-<span class="s">    \s*                                         # éventuellement des espaces pour finir</span>
-<span class="s">&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
-
-<span class="n">_MONOME_FORMAT</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&quot;&quot;&quot;</span>
-<span class="s">    \s*                                         # éventuellement des espaces pour commencer</span>
-<span class="s">    (?P&lt;sign&gt;[-+]?)                             # un éventuel signe</span>
-<span class="s">    (?P&lt;coef&gt;\d*\.?\d*(?:e[-+]\d+)?)                     # un éventuel coefficient</span>
-<span class="s">    (?:(?P&lt;var&gt;[a-df-hkmnp-zA-NP-Z])(?:\^(?P&lt;deg&gt;\d+))?)?   # une éventuelle variable avec son éventuel degré</span>
-<span class="s">    \s*                                         # éventuellement des espaces pour finir</span>
-<span class="s">&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Polynome"><a class="viewcode-back" href="../../../pyromaths.classes.PolynomesCollege.html#pyromaths.classes.PolynomesCollege.Polynome">[docs]</a><span class="k">class</span> <span class="nc">Polynome</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Cette classe crée la notion de polynômes.</span>
@@ -105,7 +81,7 @@
 <span class="sd">        &gt;&gt;&gt; Polynome([[2,2],[3,1],[4,0]], &#39;z&#39;)</span>
 <span class="sd">        Polynome([[2, 2], [3, 1], [4, 0]], &quot;z&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; Polynome(&quot;2y^2+3y+4&quot;)</span>
-<span class="sd">        Polynome([[2.0, 2], [3.0, 1], [4.0, 0]], &quot;y&quot;)</span>
+<span class="sd">        Polynome([[2, 2], [3, 1], [4, 0]], &quot;y&quot;)</span>
 
 <span class="sd">    Les variables e, i, j, l, o, O sont interdites pour des raisons de</span>
 <span class="sd">    lisibilité (l, o, O) ou parce qu&#39;elles sont utilisées comme constantes (e,</span>
@@ -119,7 +95,7 @@
 <span class="sd">            &gt;&gt;&gt; Polynome([[2,2],[3,1],[4,0]], &#39;z&#39;)</span>
 <span class="sd">            Polynome([[2, 2], [3, 1], [4, 0]], &quot;z&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; Polynome(&quot;2y^2+3y+4&quot;)</span>
-<span class="sd">            Polynome([[2.0, 2], [3.0, 1], [4.0, 0]], &quot;y&quot;)</span>
+<span class="sd">            Polynome([[2, 2], [3, 1], [4, 0]], &quot;y&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; Polynome([[1, 1], [2, 2]])</span>
 <span class="sd">            Polynome([[1, 1], [2, 2]], &quot;x&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; Polynome(&quot;Fraction(1,7)x^2-Fraction(3,8)x-1&quot;)</span>
@@ -129,24 +105,7 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">monomes</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
             <span class="c"># Gère la construction des polynôme à partir d&#39;une chaîne de caractères</span>
             <span class="n">listmonomes</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="c">#===================================================================</span>
-            <span class="c"># for monome in _POLYNOME_FORMAT.finditer(monomes):</span>
-            <span class="c">#     m = _MONOME_FORMAT.search(monome.group(0))</span>
-            <span class="c">#     if m is None:</span>
-            <span class="c">#         raise ValueError(u&#39;chaîne invalide pour un objet Polynôme : %s&#39; % input)</span>
-            <span class="c">#     m_sign = m.group(&#39;sign&#39;) or &#39;+&#39;</span>
-            <span class="c">#     m_coef = float(m.group(&#39;coef&#39;) or 1)</span>
-            <span class="c">#     m_deg = int(m.group(&#39;deg&#39;) or (m.group(&#39;var&#39;) and &#39;1&#39;) or &#39;0&#39;)</span>
-            <span class="c">#     m_var = m.group(&#39;var&#39;) or var</span>
-            <span class="c">#     if m_var and not var: var = m_var # attribue une variable à var</span>
-            <span class="c">#     if m_var != var:</span>
-            <span class="c">#         raise ValueError(u&#39;Le nom de la variable (%s) est incorrect pour le Polynôme %s&#39; % (var, monomes))</span>
-            <span class="c">#     if m_sign == &#39;-&#39;: m_coef = -m_coef</span>
-            <span class="c">#     if m_coef:</span>
-            <span class="c">#         # supprime les monômes de coefficient 0</span>
-            <span class="c">#         listmonomes.append([m_coef, m_deg])</span>
-            <span class="c">#===================================================================</span>
-            <span class="n">splitted</span> <span class="o">=</span> <span class="n">Priorites3</span><span class="o">.</span><span class="n">split_calcul</span><span class="p">(</span><span class="n">monomes</span><span class="p">)</span>
+            <span class="n">splitted</span> <span class="o">=</span> <span class="n">Priorites3</span><span class="o">.</span><span class="n">splitting</span><span class="p">(</span><span class="n">monomes</span><span class="p">)</span>
             <span class="n">m_coef</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">coef</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;&#39;</span>
             <span class="k">while</span> <span class="n">splitted</span><span class="p">:</span>
                 <span class="n">extract</span> <span class="o">=</span> <span class="n">splitted</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -173,31 +132,6 @@
                             <span class="n">m_coef</span><span class="o">=</span><span class="mi">1</span>
                     <span class="n">listmonomes</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">m_coef</span><span class="p">,</span> <span class="n">m_deg</span><span class="p">])</span>
                     <span class="n">m_coef</span> <span class="o">=</span> <span class="bp">None</span>
-            <span class="c">#===================================================================</span>
-            <span class="c"># for i in range(len(splitted)):</span>
-            <span class="c">#     if splitted[i] in &#39;+-&#39;:</span>
-            <span class="c">#         if m_coef: </span>
-            <span class="c">#             listmonomes.append([m_coef, 0])</span>
-            <span class="c">#             m_coef = None</span>
-            <span class="c">#         coef = splitted[i]</span>
-            <span class="c">#     elif Priorites3.EstNombre(splitted[i]):</span>
-            <span class="c">#         try:</span>
-            <span class="c">#             m_coef = eval(coef + splitted[i])</span>
-            <span class="c">#         except:</span>
-            <span class="c">#             m_coef=1</span>
-            <span class="c">#     else:</span>
-            <span class="c">#         if var and splitted[i][0] != var:</span>
-            <span class="c">#             raise ValueError(u&#39;Le nom de la variable (%s) est incorrect pour le Polynôme %s&#39; % (var, monomes))</span>
-            <span class="c">#         if var is None: var = splitted[i][0]</span>
-            <span class="c">#         if len(splitted[i]) == 2:</span>
-            <span class="c">#             i += 1</span>
-            <span class="c">#             m_deg = eval(splitted[i])</span>
-            <span class="c">#         else:</span>
-            <span class="c">#             m_deg = 1</span>
-            <span class="c">#         if m_coef is None: m_coef=1</span>
-            <span class="c">#         listmonomes.append([m_coef, m_deg])</span>
-            <span class="c">#         m_coef = None</span>
-            <span class="c">#===================================================================</span>
             <span class="k">if</span> <span class="n">m_coef</span><span class="p">:</span> <span class="n">listmonomes</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">m_coef</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
             <span class="k">if</span> <span class="n">listmonomes</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">monomes</span> <span class="o">=</span> <span class="n">listmonomes</span>
             <span class="k">else</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">monomes</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
@@ -226,7 +160,7 @@
         <span class="k">return</span> <span class="s">&quot;Polynome(</span><span class="si">%s</span><span class="s">, </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">monomes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="Polynome.__str__"><a class="viewcode-back" href="../../../pyromaths.classes.PolynomesCollege.html#pyromaths.classes.PolynomesCollege.Polynome.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;**str**\ (*object*)</span>
+        <span class="sd">r&quot;&quot;&quot;**str**\ (*object*)</span>
 
 <span class="sd">        Renvoie une version LaTeX du polynôme.</span>
 <span class="sd">            &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
@@ -234,7 +168,6 @@
 <span class="sd">            &#39;2\\,z^{2}+3\\,z+4&#39;</span>
 <span class="sd">            &gt;&gt;&gt; str(Polynome(&quot;y^2-Fraction(3,2)y-1&quot;))</span>
 <span class="sd">            &#39;y^{2}+\\dfrac{-3}{2}\\,y-1&#39;</span>
-
 
 <span class="sd">        :rtype: string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -293,6 +226,49 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">=</span><span class="s">&quot;0&quot;</span>
         <span class="k">return</span> <span class="n">s</span>
 </div>
+<div class="viewcode-block" id="Polynome.__call__"><a class="viewcode-back" href="../../../pyromaths.classes.PolynomesCollege.html#pyromaths.classes.PolynomesCollege.Polynome.__call__">[docs]</a>    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valeur</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;**__call__**\ (*object*\ ,*valeur*)</span>
+
+<span class="sd">        ``p.__call__(valeur)`` est équivalent à ``p(valeur)``</span>
+<span class="sd">        Retourne l&#39;expression numérique du polynôme pour sa variable égale à</span>
+<span class="sd">        valeur.</span>
+
+<span class="sd">            &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
+<span class="sd">            &gt;&gt;&gt; Polynome(&quot;4+x-x^2+x^3-2x^5&quot;)(-5)</span>
+<span class="sd">            &#39;4-5-(-5)**2+(-5)**3-2*(-5)**5&#39;</span>
+
+<span class="sd">        :param: valeur</span>
+<span class="sd">        :type: integer, float or Fraction</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">Polynome</span><span class="o">.</span><span class="n">degre</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">monomes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">valeur</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">retour</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">monomes</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;+</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">retour</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;+-&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">valeur</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">valeur</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span> <span class="n">nb</span> <span class="o">=</span> <span class="s">&quot;(</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="n">valeur</span>
+        <span class="k">else</span><span class="p">:</span> <span class="n">nb</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">valeur</span><span class="p">)</span>
+        <span class="n">retour</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">monomes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;+</span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;+</span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">valeur</span>
+                <span class="k">elif</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;-&#39;</span> <span class="o">+</span> <span class="n">nb</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;+</span><span class="si">%r</span><span class="s">*&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">nb</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;+&#39;</span> <span class="o">+</span> <span class="n">nb</span> <span class="o">+</span> <span class="s">&#39;**</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;-&#39;</span> <span class="o">+</span> <span class="n">nb</span> <span class="o">+</span> <span class="s">&#39;**</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;+</span><span class="si">%r</span><span class="s">*&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">nb</span> <span class="o">+</span> <span class="s">&#39;**</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">retour</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;+-&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="Polynome.__getitem__"><a class="viewcode-back" href="../../../pyromaths.classes.PolynomesCollege.html#pyromaths.classes.PolynomesCollege.Polynome.__getitem__">[docs]</a>    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;*object*\ .\ **__getitem__**\ (*integer*)</span>
 
@@ -301,9 +277,9 @@
 <span class="sd">            &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
 <span class="sd">            &gt;&gt;&gt; p=Polynome(&quot;2y+3y^2+4&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; p</span>
-<span class="sd">            Polynome([[2.0, 1], [3.0, 2], [4.0, 0]], &quot;y&quot;)</span>
+<span class="sd">            Polynome([[2, 1], [3, 2], [4, 0]], &quot;y&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; p.__getitem__(1)</span>
-<span class="sd">            [3.0, 2]</span>
+<span class="sd">            [3, 2]</span>
 
 <span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -312,19 +288,20 @@
 <div class="viewcode-block" id="Polynome.__iadd__"><a class="viewcode-back" href="../../../pyromaths.classes.PolynomesCollege.html#pyromaths.classes.PolynomesCollege.Polynome.__iadd__">[docs]</a>    <span class="k">def</span> <span class="nf">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;*object*\ .\ **__iadd__**\ (*other*)</span>
 
-<span class="sd">        ``p.__iadd__(q)`` est équivalent à ``p + q`` **Quel est l&#39;intérêt de</span>
-<span class="sd">        cette fonction ?**\ Vérifier si elle est utilisée.</span>
+<span class="sd">        ``p.__iadd__(q)`` est équivalent à ``p + q``</span>
 
 <span class="sd">            &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
 <span class="sd">            &gt;&gt;&gt; p=Polynome(&quot;2y+3y^2+4&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; q=Polynome(&#39;-y+6&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; p.__iadd__(q)</span>
-<span class="sd">            Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], &quot;y&quot;)</span>
+<span class="sd">            Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], &quot;y&quot;)</span>
 
 <span class="sd">        :rtype: Polynome</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
             <span class="n">other</span> <span class="o">=</span> <span class="n">Polynome</span><span class="p">([[</span><span class="n">other</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="bp">self</span> <span class="o">=</span> <span class="n">Polynome</span><span class="p">([[</span><span class="bp">self</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">other</span><span class="o">.</span><span class="n">var</span><span class="p">)</span>
         <span class="n">m1</span><span class="p">,</span> <span class="n">m2</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">monomes</span><span class="p">],</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">monomes</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">Polynome</span><span class="o">.</span><span class="n">degre</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">var</span>
@@ -393,11 +370,11 @@
 <span class="sd">            &gt;&gt;&gt; p=Polynome(&quot;2y+3y^2+4&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; q=Polynome(&#39;-y+6&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; p.__add__(q)</span>
-<span class="sd">            Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], &quot;y&quot;)</span>
+<span class="sd">            Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], &quot;y&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; p+q</span>
-<span class="sd">            Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], &quot;y&quot;)</span>
+<span class="sd">            Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], &quot;y&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; p.__add__(&quot;Polynome(&#39;-y+6&#39;)&quot;)</span>
-<span class="sd">            Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], &quot;y&quot;)</span>
+<span class="sd">            Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], &quot;y&quot;)</span>
 
 <span class="sd">        :param: other</span>
 <span class="sd">        :type: Polynome ou string *évaluable comme Polynome*</span>
@@ -413,6 +390,11 @@
 
 <span class="sd">        ``p.__radd__(q)`` est équivalent à ``q + p``</span>
 
+<span class="sd">        &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
+<span class="sd">        &gt;&gt;&gt; from pyromaths.classes.Fractions import Fraction</span>
+<span class="sd">        &gt;&gt;&gt; Fraction(5,4)+Polynome(&quot;3x&quot;)</span>
+<span class="sd">        Polynome([[Fraction(5, 4), 0], [3, 1]], &quot;x&quot;)</span>
+
 <span class="sd">        :param: other</span>
 <span class="sd">        :type: Polynome ou string *évaluable comme Polynome*</span>
 <span class="sd">        :rtype: Polynome</span>
@@ -424,20 +406,56 @@
         <span class="k">return</span> <span class="n">other</span> <span class="o">+</span> <span class="bp">self</span>
 </div>
 <div class="viewcode-block" id="Polynome.__sub__"><a class="viewcode-back" href="../../../pyromaths.classes.PolynomesCollege.html#pyromaths.classes.PolynomesCollege.Polynome.__sub__">[docs]</a>    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;**Jamais utilisé !**&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;*object*\ .\ **__sub__**\ (*other*)</span>
+
+<span class="sd">        ``p.__sub__(q)`` est équivalent à ``p + q``  calcule la somme de</span>
+<span class="sd">        polynômes.</span>
+
+<span class="sd">        *other* peut être une chaîne représentant un polynôme.</span>
+
+<span class="sd">            &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
+<span class="sd">            &gt;&gt;&gt; p=Polynome(&quot;2y+3y^2+4&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; q=Polynome(&#39;-y+6&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; p.__sub__(q)</span>
+<span class="sd">            &#39;Polynome([[2, 1], [3, 2], [4, 0]], &quot;y&quot;)+Polynome([[1, 1], [-6, 0]], &quot;y&quot;)&#39;</span>
+<span class="sd">            &gt;&gt;&gt; p-q</span>
+<span class="sd">            &#39;Polynome([[2, 1], [3, 2], [4, 0]], &quot;y&quot;)+Polynome([[-1, 1], [6, 0]], &quot;y&quot;)&#39;</span>
+<span class="sd">            &gt;&gt;&gt; Polynome(&quot;x+6&quot;)-Polynome(&quot;3x&quot;)</span>
+<span class="sd">            Polynome([[1, 1], [6, 0], [-3, 1]], &quot;x&quot;)</span>
+
+<span class="sd">        :param: other</span>
+<span class="sd">        :type: Polynome ou string *évaluable comme Polynome*</span>
+<span class="sd">        :rtype: Polynome or string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Polynome</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">monomes</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="o">-</span><span class="n">other</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
             <span class="k">return</span> <span class="bp">self</span>
-        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">monomes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
-            <span class="c">#Cas où on soustrait un polynôme de longueur 1 et de coef positif</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c">#Cas où on soustrait un polynôme de longueur 1</span>
             <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">other</span><span class="p">)</span>
         <span class="k">return</span> <span class="s">&quot;</span><span class="si">%r</span><span class="s">+</span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="n">other</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="Polynome.__rsub__"><a class="viewcode-back" href="../../../pyromaths.classes.PolynomesCollege.html#pyromaths.classes.PolynomesCollege.Polynome.__rsub__">[docs]</a>    <span class="k">def</span> <span class="nf">__rsub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;**Jamais utilisé !**&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">other</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">other</span> <span class="o">+</span> <span class="o">-</span><span class="bp">self</span>
+        <span class="sd">&quot;&quot;&quot;*object*\ .\ **__rsub__**\ (*other*)</span>
+
+<span class="sd">        ``p.__rsub__(q)`` est équivalent à ``q - p``</span>
+
+<span class="sd">        &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
+<span class="sd">        &gt;&gt;&gt; 1-Polynome([[-4, 1], [-9, 2], [-5, 0]], &quot;x&quot;)</span>
+<span class="sd">        &#39;Polynome([[1, 0]], &quot;x&quot;)+Polynome([[4, 1], [9, 2], [5, 0]], &quot;x&quot;)&#39;</span>
+<span class="sd">        &gt;&gt;&gt; from pyromaths.classes.Fractions import Fraction</span>
+<span class="sd">        &gt;&gt;&gt; Fraction(5,4)-Polynome(&quot;3x&quot;)</span>
+<span class="sd">        Polynome([[Fraction(5, 4), 0], [-3, 1]], &quot;x&quot;)</span>
+
+<span class="sd">        :param: other</span>
+<span class="sd">        :type: Polynome ou string *évaluable comme Polynome*</span>
+<span class="sd">        :rtype: Polynome</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">other</span> <span class="o">=</span> <span class="n">Polynome</span><span class="p">([[</span><span class="n">other</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c">#Cas où on soustrait un polynôme de longueur 1</span>
+            <span class="k">return</span> <span class="n">other</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&quot;</span><span class="si">%r</span><span class="s">+</span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="Polynome.__neg__"><a class="viewcode-back" href="../../../pyromaths.classes.PolynomesCollege.html#pyromaths.classes.PolynomesCollege.Polynome.__neg__">[docs]</a>    <span class="k">def</span> <span class="nf">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;*object*\ .\ **__neg__**\ ()</span>
@@ -451,7 +469,7 @@
 <span class="sd">            &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
 <span class="sd">            &gt;&gt;&gt; p=Polynome(&quot;2y+3y^2+4&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; p.__neg__()</span>
-<span class="sd">            Polynome([[-2.0, 1], [-3.0, 2], [-4.0, 0]], &quot;y&quot;)</span>
+<span class="sd">            Polynome([[-2, 1], [-3, 2], [-4, 0]], &quot;y&quot;)</span>
 
 <span class="sd">        :rtype: Polynome</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -470,7 +488,7 @@
 <span class="sd">            &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
 <span class="sd">            &gt;&gt;&gt; p=Polynome(&quot;2y+3y^2+4&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; p.__pos__()</span>
-<span class="sd">            Polynome([[2.0, 1], [3.0, 2], [4.0, 0]], &quot;y&quot;)</span>
+<span class="sd">            Polynome([[2, 1], [3, 2], [4, 0]], &quot;y&quot;)</span>
 
 <span class="sd">        :rtype: Polynome</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -499,14 +517,14 @@
 <span class="sd">            &gt;&gt;&gt; p=Polynome(&#39;3x+4&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; q=Polynome(&#39;2x+5&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; p*q</span>
-<span class="sd">            &#39;Polynome([[3.0, 1]], &quot;x&quot;)*Polynome([[2.0, 1]], &quot;x&quot;)+Polynome([[3.0, 1]], &quot;x&quot;)*Polynome([[5.0, 0]], &quot;x&quot;)+Polynome([[4.0, 0]], &quot;x&quot;)*Polynome([[2.0, 1]], &quot;x&quot;)+Polynome([[4.0, 0]], &quot;x&quot;)*Polynome([[5.0, 0]], &quot;x&quot;)&#39;</span>
+<span class="sd">            &#39;Polynome([[3, 1]], &quot;x&quot;)*Polynome([[2, 1]], &quot;x&quot;)+Polynome([[3, 1]], &quot;x&quot;)*Polynome([[5, 0]], &quot;x&quot;)+Polynome([[4, 0]], &quot;x&quot;)*Polynome([[2, 1]], &quot;x&quot;)+Polynome([[4, 0]], &quot;x&quot;)*Polynome([[5, 0]], &quot;x&quot;)&#39;</span>
 <span class="sd">            &gt;&gt;&gt; p=Polynome(&#39;3x&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; q=Polynome(&#39;2x&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; p*q</span>
-<span class="sd">            &#39;3.0*2.0*Polynome(&quot;x^1&quot;)*Polynome(&quot;x^1&quot;)&#39;</span>
+<span class="sd">            &#39;3*2*Polynome(&quot;x^1&quot;)*Polynome(&quot;x^1&quot;)&#39;</span>
 <span class="sd">            &gt;&gt;&gt; q=Polynome(&#39;x&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; p*q</span>
-<span class="sd">            Polynome([[3.0, 2]], &quot;x&quot;)</span>
+<span class="sd">            Polynome([[3, 2]], &quot;x&quot;)</span>
 
 <span class="sd">        :param: other</span>
 <span class="sd">        :type: Polynome ou string *évaluable comme Polynome*</span>
@@ -521,7 +539,7 @@
         <span class="k">elif</span> <span class="n">Polynome</span><span class="o">.</span><span class="n">degre</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
             <span class="n">other</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">var</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">u&#39;Pyromaths ne sait multiplier que deux polynômes de même variable&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">u&#39;Pyromaths ne sait multiplier que deux polynômes de même variable : </span><span class="si">%r</span><span class="s"> et </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span>
         <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">Polynome</span><span class="o">.</span><span class="n">reduit</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">Polynome</span><span class="o">.</span><span class="n">reduit</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="p">(</span><span class="n">p0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">p0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span>\
             <span class="p">((</span><span class="n">p0</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">p0</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="ow">or</span> \
@@ -577,8 +595,8 @@
 <span class="sd">        :param: other</span>
 <span class="sd">        :type: Polynome ou string *évaluable comme Polynome*</span>
 <span class="sd">        :rtype: string ou Polynome&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
-            <span class="n">other</span> <span class="o">=</span> <span class="n">Polynome</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">other</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">)):</span>
+            <span class="n">other</span> <span class="o">=</span> <span class="n">Polynome</span><span class="p">([[</span><span class="n">other</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">other</span><span class="o">*</span><span class="bp">self</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="kn">from</span> <span class="nn">pyromaths.outils.Priorites3</span> <span class="kn">import</span> <span class="n">splitting</span>
@@ -670,14 +688,12 @@
 <span class="sd">        **TODO :** si ``n == 2`` et ``len(p) &gt; 2``, bug</span>
 
 <span class="sd">            &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
-<span class="sd">            &gt;&gt;&gt; p = Polynome(&quot;2y+4&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; p**2</span>
-<span class="sd">            &#39;Polynome([[2.0, 1]], &quot;y&quot;)**2+2*Polynome([[2.0, 1]], &quot;y&quot;)*Polynome([[4.0, 0]], &quot;y&quot;)+Polynome([[4.0, 0]], &quot;y&quot;)**2&#39;</span>
-<span class="sd">            &gt;&gt;&gt; p = Polynome(&quot;2y&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; p**3</span>
-<span class="sd">            Polynome([[8.0, 3]], &quot;y&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; p.__pow__(2)</span>
-<span class="sd">            Polynome([[4.0, 2]], &quot;y&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; Polynome(&quot;2y+4&quot;)**2</span>
+<span class="sd">            &#39;Polynome([[2, 1]], &quot;y&quot;)**2+2*Polynome([[2, 1]], &quot;y&quot;)*Polynome([[4, 0]], &quot;y&quot;)+Polynome([[4, 0]], &quot;y&quot;)**2&#39;</span>
+<span class="sd">            &gt;&gt;&gt; Polynome(&quot;2y&quot;)**3</span>
+<span class="sd">            Polynome([[8, 3]], &quot;y&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; Polynome(&quot;2y&quot;).__pow__(2)</span>
+<span class="sd">            Polynome([[4, 2]], &quot;y&quot;)</span>
 
 <span class="sd">        :rtype: string ou Polynome</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -705,9 +721,9 @@
 <span class="sd">        Retourne une version réduite et ordonnée du polynôme</span>
 
 <span class="sd">            &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
-<span class="sd">            &gt;&gt;&gt; p = Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], &quot;y&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; p = Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], &quot;y&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; Polynome.reduit(p)</span>
-<span class="sd">            Polynome([[3.0, 2], [1.0, 1], [10.0, 0]], &quot;y&quot;)</span>
+<span class="sd">            Polynome([[3, 2], [1, 1], [10, 0]], &quot;y&quot;)</span>
 
 <span class="sd">        :param type: Polynome</span>
 <span class="sd">        :rtype: Polynome</span>
@@ -732,12 +748,10 @@
 <span class="sd">        * écrit les factorisation qui permettent de réduire un polynôme</span>
 
 <span class="sd">            &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
-<span class="sd">            &gt;&gt;&gt; p = Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], &quot;y&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; Polynome.reduction_detaillee(p)</span>
-<span class="sd">            Polynome([[3.0, 2], [2.0, 1], [-1.0, 1], [4.0, 0], [6.0, 0]], &quot;y&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; p = Polynome([[3.0, 2], [2.0, 1], [-1.0, 1], [4.0, 0], [6.0, 0]], &quot;y&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; Polynome.reduction_detaillee(p)</span>
-<span class="sd">            &#39;Polynome(&quot;3.0y^2&quot;)+(2.0-1.0)*Polynome([[1.0, 1]], &quot;y&quot;)+Polynome(&quot;10.0&quot;)&#39;</span>
+<span class="sd">            &gt;&gt;&gt; Polynome.reduction_detaillee(Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], &quot;y&quot;))</span>
+<span class="sd">            Polynome([[3, 2], [2, 1], [-1, 1], [4, 0], [6, 0]], &quot;y&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; Polynome.reduction_detaillee(Polynome([[3, 2], [2, 1], [-1, 1], [4, 0], [6, 0]], &quot;y&quot;))</span>
+<span class="sd">            &#39;Polynome(&quot;3y^2&quot;)+(2-1)*Polynome([[1, 1]], &quot;y&quot;)+Polynome(&quot;10&quot;)&#39;</span>
 
 <span class="sd">        :param type: Polynome</span>
 <span class="sd">        :rtype: string ou Polynome</span>
@@ -784,7 +798,7 @@
 <span class="sd">        Retourne True si le polynôme est réductible, False sinon.</span>
 
 <span class="sd">            &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
-<span class="sd">            &gt;&gt;&gt; p = Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], &quot;y&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; p = Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], &quot;y&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; Polynome.reductible(p)</span>
 <span class="sd">            True</span>
 
@@ -803,58 +817,16 @@
 <span class="sd">        monômes de degré supérieur.</span>
 
 <span class="sd">            &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
-<span class="sd">            &gt;&gt;&gt; p = Polynome([[2.0, 1], [3.0, 2], [4.0, 0], [-1.0, 1], [6.0, 0]], &quot;y&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; p = Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], &quot;y&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; Polynome.ordonne(p)</span>
-<span class="sd">            Polynome([[3.0, 2], [2.0, 1], [-1.0, 1], [4.0, 0], [6.0, 0]], &quot;y&quot;)</span>
+<span class="sd">            Polynome([[3, 2], [2, 1], [-1, 1], [4, 0], [6, 0]], &quot;y&quot;)</span>
 
 <span class="sd">        :param type: Polynome</span>
 <span class="sd">        :rtype: Polynome</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">m1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">monomes</span>
         <span class="n">m1</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-        <span class="k">return</span> <span class="n">Polynome</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="Polynome.evaluate"><a class="viewcode-back" href="../../../pyromaths.classes.PolynomesCollege.html#pyromaths.classes.PolynomesCollege.Polynome.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valeur</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;**evaluate**\ (*object*\ ,*valeur*)</span>
-<span class="sd">    </span>
-<span class="sd">            Retourne l&#39;expression numérique du polynôme pour sa variable égale à</span>
-<span class="sd">            valeur.</span>
-<span class="sd">    </span>
-<span class="sd">                &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
-<span class="sd">                &gt;&gt;&gt; Polynome.evaluate(Polynome(&quot;4+x-x^2+x^3-2x^5&quot;), -5)</span>
-<span class="sd">                &#39;4-5-(-5)**2+(-5)**3-2*(-5)**5&#39;</span>
-<span class="sd">    </span>
-<span class="sd">            :param: valeur</span>
-<span class="sd">            :type: integer, float or Fraction</span>
-<span class="sd">            :rtype: string</span>
-<span class="sd">            &quot;&quot;&quot;</span>
-            <span class="k">if</span> <span class="n">Polynome</span><span class="o">.</span><span class="n">degre</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">monomes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">valeur</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">retour</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-                <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">monomes</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;+</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="k">return</span> <span class="n">retour</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;+-&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">valeur</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">valeur</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span> <span class="n">nb</span> <span class="o">=</span> <span class="s">&quot;(</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="n">valeur</span>
-            <span class="k">else</span><span class="p">:</span> <span class="n">nb</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">valeur</span><span class="p">)</span>
-            <span class="n">retour</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">monomes</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;+</span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="k">elif</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;+</span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">valeur</span>
-                    <span class="k">elif</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                        <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;-&#39;</span> <span class="o">+</span> <span class="n">nb</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;+</span><span class="si">%r</span><span class="s">*&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">nb</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;+&#39;</span> <span class="o">+</span> <span class="n">nb</span> <span class="o">+</span> <span class="s">&#39;**</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                    <span class="k">elif</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                        <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;-&#39;</span> <span class="o">+</span> <span class="n">nb</span> <span class="o">+</span> <span class="s">&#39;**</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">retour</span> <span class="o">+=</span> <span class="s">&#39;+</span><span class="si">%r</span><span class="s">*&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">nb</span> <span class="o">+</span> <span class="s">&#39;**</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="k">return</span> <span class="n">retour</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;+-&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">Polynome</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)</span></div></div>
 </pre></div>
 
       </div>

@@ -23,9 +23,12 @@
 
 from random import randrange
 from pyromaths.classes.Polynome import Polynome, TeX, RacineDegre2
+from pyromaths.classes.Racine import simplifie_racine
 from pyromaths.outils.Polynomes import poly_racines_entieres, poly_racines_fractionnaires, poly_racines_quelconques, poly_id_remarquables, poly_degre3_racines_entieres, TeX_division, poly_degre3_racines_fractionnaires, randint
-from pyromaths.outils.decimaux import decimaux
+# from pyromaths.outils.decimaux import decimaux
+from pyromaths.outils.Affichage import pTeX, radicalTeX, fTeX
 from pyromaths.outils.Arithmetique import pgcd
+from math import sqrt
 
 
 
@@ -38,14 +41,14 @@ def exo_racines_degre2():
     rac_min = -10
     rac_max = 10
     # denominateur maximmum pour les racines fractionnaires
-    denom_max = denom1 = 12
+    denom_max =  12
     # Valeurs absolues maximales des coefficients d'un polynôme quelconque
     abs_a = 1
     abs_b = 10
     abs_c = 10
     # X est le polynome P=x pour faciliter la construction des polynômes,
     inconnues = ['x', 'y', 'z', 't']
-    nom_poly = ['P', 'Q', 'R', 'S']
+#     nom_poly = ['P', 'Q', 'R', 'S']
 
     exo.append(u"Résoudre les équations suivantes :")
     cor.append(u"Résoudre les équations suivantes :")
@@ -118,7 +121,7 @@ def exo_factorisation_degre2():
     exo.append(u"\\item Factoriser  $%s(%s)=%s$ à l'aide d'une identité remarquable." % (nomP, var, P(var)))
     cor.append("\\item Factoriser $%s(%s)=%s$" % (nomP, var, P(var)))
 
-    factorisation, racines = factorise_identites_remarquables(P, sgns, var, racines=True)
+    factorisation, dummy = factorise_identites_remarquables(P, sgns, var, racines=True)
 
     factorise = "$$%s" % P
     for i in range(len(factorisation)):
@@ -177,14 +180,14 @@ def exo_factorisation_degre3():
     rac_min = -10
     rac_max = 10
     # denominateur maximmum pour les racines fractionnaires
-    denom_max = denom1 = 12
-    # Valeurs absolues maximales des coefficients d'un polynôme quelconque
-    abs_a = 1
-    abs_b = 10
-    abs_c = 10
-    # X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
-    inconnues = ['x', 'y', 'z', 't']
-    nom_poly = ['P', 'Q', 'R', 'S']
+    denom1 = 12
+    #Valeurs absolues maximales des coefficients d'un polynôme quelconque
+#     abs_a = 1
+#     abs_b = 10
+#     abs_c = 10
+    #X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
+#     inconnues = ['x', 'y', 'z', 't']
+#     nom_poly = ['P', 'Q', 'R', 'S']
     exo = ["\\exercice",
         "\\begin{enumerate}"]
     cor = ["\\exercice*",
@@ -210,14 +213,14 @@ def exo_tableau_de_signe():
     rac_min = -10
     rac_max = 10
     # denominateur maximmum pour les racines fractionnaires
-    denom_max = denom1 = 12
+    denom1 = 12
     # Valeurs absolues maximales des coefficients d'un polynôme quelconque
     abs_a = 1
     abs_b = 10
     abs_c = 10
     # X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
-    inconnues = ['x', 'y', 'z', 't']
-    nom_poly = ['P', 'Q', 'R', 'S']
+#     inconnues = ['x', 'y', 'z', 't']
+#     nom_poly = ['P', 'Q', 'R', 'S']
     borneinf = -5  # float("-inf")
     bornesup = 5  # float("inf")
     var = "x"
@@ -249,7 +252,7 @@ def exo_tableau_de_signe():
         exo.append(u"\\item Étudier le signe du polynôme $%s=%s$ sur $I=%s$." % (nomP, P, TeXintervalle))
         cor.append(u"\\item Étudier le signe du polynôme $%s=%s$ sur $I=%s$.\\par" % (nomP, P, TeXintervalle))
 
-        delta, simplrac, racines, str_racines, factorisation = factorisation_degre2(P, factorisation=False)
+        delta, dummy, racines, dummy, dummy = factorisation_degre2(P, factorisation=False)
         redaction_racines(P, nomP, var, cor)
         tableau_de_signe(P, nomP, delta, racines, cor, borneinf, bornesup, detail=False)
     exo.append("\\end{enumerate}")
@@ -299,7 +302,7 @@ exo_variation_lim.description = u"Étude de fonctions"
 exo_variation_lim.level = u"0.Term S"
 
 def quest_fonctions_rationnelles():
-
+    from pyromaths.classes.Fractions import Fraction
     nomf = ['f', 'g', 'h', 'k'][randrange(4)]
     var = ['t', 'x'][randrange(2)]
     X = Polynome({1:1}, var)
@@ -332,7 +335,7 @@ def quest_fonctions_rationnelles():
     denominateur = u"%s^2" % (Q.TeX(parenthese=True))
     f_derivee = "\\dfrac{%s}{%s}" % (numerateur, denominateur)
     f_derivee_simplifiee = "\\dfrac{%s}{%s}" % (numerateur_simplifie, denominateur)
-    VI = (-Q[0] * Fractions(1) / Q[1]).simplifie()
+    VI = (-Q[0] * Fraction(1) / Q[1]).simplifie()
     exo = [u"\\item On considère la fonction $%s$ définie sur $I=[%s~;~%s]$ par $%s(%s)=\dfrac{%s}{%s}$." % (nomf, Intervalle[0], Intervalle[1], nomf, var, P, Q),
          "\\begin{enumerate}"]
     cor = [u"\\item On considère la fonction $%s$ définie sur $I=[%s~;~%s]$ par $%s(%s)=\dfrac{%s}{%s}$." % (nomf, Intervalle[0], Intervalle[1], nomf, var, P, Q),
@@ -346,9 +349,9 @@ def quest_fonctions_rationnelles():
     cor.append("%s&=%s" % ((Q - Q[0]), TeX(-Q[0])))
     cor.append("\\\\")
     if Q[1] != 1:
-        x0 = -Q[0] * Fractions(1) / Q[1]
+        x0 = -Q[0] * Fraction(1) / Q[1]
         x1 = x0.simplifie()
-        cor.append("%s&=%s" % (var, TeX(-Q[0] * Fractions(1) / Q[1])))
+        cor.append("%s&=%s" % (var, TeX(-Q[0] * Fraction(1) / Q[1])))
         cor.append("\\\\")
         if x0.denominateur != x1.denominateur:
             cor.append("%s&=%s" % (var, TeX(x1)))
@@ -366,8 +369,8 @@ def quest_fonctions_rationnelles():
     cor.append(u"\\item En déduire le sens de variations de $%s$ sur $I$.\\par" % (nomf))
     if numerateur_simplifie.degre_max == 0:
         cor.append(u" Comme $%s$ est un carré, il est toujours positif.\\\\" % (denominateur))
-        f_xmin = TeX((Fractions(1) * P(Intervalle[0]) / Q(Intervalle[0])).simplifie())
-        f_xmax = TeX((Fractions(1) * P(Intervalle[1]) / Q(Intervalle[1])).simplifie())
+        f_xmin = TeX((Fraction(1) * P(Intervalle[0]) / Q(Intervalle[0])).simplifie())
+        f_xmax = TeX((Fraction(1) * P(Intervalle[1]) / Q(Intervalle[1])).simplifie())
         if numerateur_simplifie[0] < 0:
             cor.append(u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient " % \
                   (numerateur_simplifie[0], var, nomf, var))
@@ -391,6 +394,7 @@ def quest_fonctions_rationnelles():
     return exo, cor
 
 def quest_fonctions_rationnelles_sur_R():
+    from pyromaths.classes.Fractions import Fraction
 
     nomf = ['f', 'g', 'h', 'k'][randrange(4)]
     var = ['t', 'x'][randrange(2)]
@@ -412,13 +416,13 @@ def quest_fonctions_rationnelles_sur_R():
     borneinf = float("-inf")
     bornesup = float("+inf")
     Intervalle = [borneinf, bornesup]
-    TeXintervalle = "\\mathbb R"
+#     TeXintervalle = "\\mathbb R"
 
     # dérivée
     numerateur = "%s\\times%s-%s\\times%s" % (P.derive().TeX(parenthese=True), Q.TeX(parenthese=True),
                                           P.TeX(parenthese=True), Q.derive().TeX(parenthese=True))
     numerateur_simplifie = (P.derive() * Q - P * Q.derive()).simplifie()
-    VI = (-Q[0] * Fractions(1) / Q[1]).simplifie()
+    VI = (-Q[0] * Fraction(1) / Q[1]).simplifie()
 
     denominateur = u"%s^2" % (Q.TeX(parenthese=True))
     f_derivee = "\\dfrac{%s}{%s}" % (numerateur, denominateur)
@@ -437,7 +441,7 @@ def quest_fonctions_rationnelles_sur_R():
             %s&=%s\\\\\n\
             %s&=%s\\\\\n\
             %s&=%s\n\
-            \\end{align*}" % (Q, (Q - Q[0]), TeX(-Q[0]), var, TeX(-Q[0] * Fractions(1) / Q[1]), var, TeX(VI)))
+            \\end{align*}" % (Q, (Q - Q[0]), TeX(-Q[0]), var, TeX(-Q[0] * Fraction(1) / Q[1]), var, TeX(VI)))
     cor.append(u"On en déduit que $\\mathcal{D}_{%s}=\\mathcal{D'}_{%s}=]-\\infty~;~%s[\cup]%s~;~+\\infty[$." % \
           (nomf, nomf, TeX(VI), TeX(VI)))
     exo.append(u"\\item Déterminer $%s'(%s)$ pour tout $%s\in\\mathcal{D'}_{%s}$." % \
@@ -521,7 +525,7 @@ def coeffTeX(a):
 
 def quest_variation_degre3(borneinf=float("-inf"), bornesup=float("+inf")):
     '''Question qui propose l'étude du sens de variation d'un polynôme de degré 3'''
-    Intervalle = [borneinf, bornesup]
+#     Intervalle = [borneinf, bornesup]
     if borneinf == float("-inf") and bornesup == float("+inf"):
         TeX_intervalle = "\\mathbb R"
     else:
@@ -531,14 +535,14 @@ def quest_variation_degre3(borneinf=float("-inf"), bornesup=float("+inf")):
     rac_min = -9
     rac_max = 9
     # denominateur maximmum pour les racines fractionnaires
-    denom_max = denom1 = 12
+#     denom_max = denom1 = 12
     # Valeurs absolues maximales des coefficients d'un polynôme quelconque
-    abs_a = 6
-    abs_b = 10
+#     abs_a = 6
+#     abs_b = 10
     abs_c = 10
     # X est le polynome P=x pour faciliter la construction des polynômes,
-    inconnues = ['x', 'y', 'z', 't']
-    nom_poly = ['P', 'Q', 'R', 'S']
+#     inconnues = ['x', 'y', 'z', 't']
+#     nom_poly = ['P', 'Q', 'R', 'S']
     var = "x"
     X = Polynome({1:1}, var=var)
     nomP = ["f", "g", "h", "k", "p", "q"][randrange(6)]
@@ -566,7 +570,7 @@ def quest_variation_degre3(borneinf=float("-inf"), bornesup=float("+inf")):
         cor.append(u"Donc la fonction polynômiale $%s$ est croissante sur $%s$." % (nomP, TeX_intervalle))
     else:
         cor.append("On obtient ainsi le tableau de variation de $%s$." % nomP)
-        [x1, x2] = racines
+#         [x1, x2] = racines
         # macro=[["txb","txh"],["fm","fd"]]
 
         var_de_P = "\\tx{%s}& \\%s{\\rnode{neu0}{%s}}&&" % (nomP, ["txb", "txh"]["-" == signes[0]], TeX(P(ligne_valeurs[0])))
@@ -712,6 +716,7 @@ def tableau_de_signe(P, nomP, delta, racines, cor, borneinf=float("-inf"), borne
 
 def factorise_identites_remarquables(pol1, sgns, var='', racines=True):
     '''Factorise un polynomes grâce aux identités remarquables'''
+    from pyromaths.classes.Fractions import Fraction
     if var == '':
         var = pol1.var
     X = Polynome({1:1}, var)
@@ -763,10 +768,10 @@ def factorise_identites_remarquables(pol1, sgns, var='', racines=True):
         facteur3 += TeX(a1)
     sgns = sgns / 2
     if sgns:  # (cx-b)² ou (cx+b)²
-        liste_racines = [Fractions(-(sgns)) * b / c]
+        liste_racines = [Fraction(-(sgns)) * b / c]
         facteur3 += "{(%s)}^2" % (c * X + sgns * b)
     else:  # (cx-b)(cx+b)
-        liste_racines = [Fractions(-1) * b / c, Fractions(1) * b / c]
+        liste_racines = [Fraction(-1) * b / c, Fraction(1) * b / c]
         facteur3 += "(%s)(%s)" % (c * X + b, c * X - b)
     factorisation.append(facteur3)
     if racines:
@@ -775,9 +780,10 @@ def factorise_identites_remarquables(pol1, sgns, var='', racines=True):
 
 def racines_degre2(P):
     """renvoie les racines d'un polynôme de degré 2"""
+    from pyromaths.classes.Fractions import Fraction
     delta = int(P[1] ** 2 - 4 * P[2] * P[0])
     if delta == 0:
-        x0 = Fractions(-1, 2) * P[1] / P[2]
+        x0 = Fraction(-1, 2) * P[1] / P[2]
         liste_racines = [x0.simplifie()]
         liste_str_racines = ["\\dfrac{-%s}{2\\times %s}" % (pTeX(P[1]), pTeX(P[2]))]
         simplrac = [False]
@@ -803,7 +809,7 @@ def listeracines(a, b, delta, parentheses=False):
        simplrac est True si racine de delta se simplifie'''
     a = int(a)
     b = int(b)
-    parenthesex1 = parenthesex2 = True  # par défaut
+#     parenthesex1 = parenthesex2 = True  # par défaut
     # simplrac=True
     strx1 = "\\dfrac{-%s-\\sqrt{%s}}{2\\times %s}" % (pTeX(b), TeX(delta), pTeX(a))
     strx2 = "\\dfrac{-%s+\\sqrt{%s}}{2\\times %s}" % (pTeX(b), TeX(delta), pTeX(a))
@@ -836,6 +842,8 @@ def listeracines(a, b, delta, parentheses=False):
 
 def factorisation_degre2(P, factorisation=True):
     # x1=x2=0
+    from pyromaths.classes.Fractions import Fraction
+
     var = P.var
     X = Polynome({1:1}, var)
     delta = int(P[1] ** 2 - 4 * P[2] * P[0])
@@ -845,7 +853,7 @@ def factorisation_degre2(P, factorisation=True):
         racines = []
         simplrac = [False]
     elif delta == 0:
-        x0 = Fractions(-1, 2) * P[1] / P[2]
+        x0 = Fraction(-1, 2) * P[1] / P[2]
         simplrac = [False]
         racines = [x0.simplifie()]
         str_racines = ["\\dfrac{-%s}{2\\times %s}" % (pTeX(P[1]), pTeX(P[2]))]
@@ -914,7 +922,7 @@ def factorisation_degre3(E, nomE, exo=[], cor=[], racines=[0, 1, -1, 2, -2]):
     cor = redaction_factorisation(E2, nomP=nomE + "_2", exo=[], cor=cor)[1]
     cor.append("\\par")
     cor.append("On en conclue donc que $%s=" % (nomE))
-    final = 0
+#     final = 0
     if x0 == 0:
         P0 = E.var
     else:
@@ -993,7 +1001,7 @@ def redaction_racines(P, nomP, var, cor=[]):
         [x1, x2] = liste_racines
         cor.append("Comme $\\Delta>0$, $%s(%s)$ a deux racines :" % (nomP, var))
         if isinstance(x1, RacineDegre2):
-            simplification1 = simplification2 = ""
+#             simplification1 = simplification2 = ""
             x1, detail1 = x1.simplifie(True)
             x2, detail2 = x2.simplifie(True)
             max_len = max(len(detail1), len(detail2))
@@ -1019,4 +1027,3 @@ def redaction_racines(P, nomP, var, cor=[]):
             cor.append("Les racines de $%s$ sont $%s_1=%s=%s$ et $%s_2=%s=%s$." % (nomP, var, strx1, x1, var, strx2, x2))
 
     return cor
-

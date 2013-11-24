@@ -88,6 +88,8 @@
 <span class="sd">    :param index: position à partir de laquelle effectuer le test</span>
 <span class="sd">    :type index: integer</span>
 
+<span class="sd">    &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
+<span class="sd">    &gt;&gt;&gt; from pyromaths.classes.Fractions import Fraction</span>
 <span class="sd">    &gt;&gt;&gt; from pyromaths.outils import Priorites3</span>
 <span class="sd">    &gt;&gt;&gt; Priorites3.cherche_classe(&#39;Polynome([[-4, 2]], &quot;x&quot;)-Polynome([[-5, 1], [4, 2], [1, 0]], &quot;x&quot;)+Polynome([[6,  0], [5, 1]], &quot;x&quot;)&#39;, 5)</span>
 <span class="sd">    &#39;Polynome([[-5, 1], [4, 2], [1, 0]], &quot;x&quot;)&#39;</span>
@@ -174,7 +176,7 @@
 <div class="viewcode-block" id="cherche_operateur"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.cherche_operateur">[docs]</a><span class="k">def</span> <span class="nf">cherche_operateur</span><span class="p">(</span><span class="n">calcul</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;**cherche_operateur**\ (*calcul*\ , *min_i*)</span>
 
-<span class="sd">    Recherche le premier opérateur +, -, *, /, ^ dans la chaîne calcul à une position</span>
+<span class="sd">    Recherche le premier opérateur +, -, \*, /, ^ dans la chaîne calcul à une position</span>
 <span class="sd">    supérieure ou égale à min_i, sans expression régulière.</span>
 <span class="sd">    </span>
 <span class="sd">    :param calcul: le calcul à tester</span>
@@ -192,7 +194,7 @@
 <span class="sd">    &gt;&gt;&gt; Priorites3.cherche_decimal(p, 0)</span>
 <span class="sd">    &#39;6&#39;</span>
 
-<span class="sd">        :rtype: string</span>
+<span class="sd">    :rtype: string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">operateur</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;**&#39;</span><span class="p">,</span> <span class="s">&#39;+&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;^&#39;</span><span class="p">]</span>
     <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
@@ -222,8 +224,6 @@
 <span class="sd">    &gt;&gt;&gt; from pyromaths.outils import Priorites3</span>
 <span class="sd">    &gt;&gt;&gt; Priorites3.split_calcul(&#39;-Polynome([[-4, 2]], &quot;x&quot;)*6**2+3&#39;)</span>
 <span class="sd">    [&#39;-&#39;, &#39;Polynome([[-4, 2]], &quot;x&quot;)&#39;, &#39;*&#39;, &#39;6&#39;, &#39;**&#39;, &#39;2&#39;, &#39;+&#39;, &#39;3&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; Priorites3.split_calcul(&#39;3x^2-6x+1&#39;)</span>
-<span class="sd">    [&#39;3&#39;, &#39;x&#39;, &#39;^&#39;, &#39;2&#39;, &#39;-&#39;, &#39;6&#39;, &#39;x&#39;, &#39;+&#39;, &#39;1&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; Priorites3.split_calcul(&#39;-6*(-11)*(-5)&#39;)</span>
 <span class="sd">    [&#39;-&#39;, &#39;6&#39;, &#39;*&#39;, &#39;(-11)&#39;, &#39;*&#39;, &#39;(-5)&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; Priorites3.split_calcul(&quot;Polynome(&#39;Fraction(1,3)x&#39;)+Polynome(&#39;x&#39;)&quot;)</span>
@@ -234,7 +234,7 @@
 <span class="sd">    :rtype: list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">findings</span> <span class="o">=</span> <span class="p">(</span><span class="n">cherche_classe</span><span class="p">,</span> <span class="n">cherche_decimal</span><span class="p">,</span> <span class="n">cherche_operateur</span><span class="p">)</span>
+    <span class="n">findings</span> <span class="o">=</span> <span class="p">(</span><span class="n">cherche_classe</span><span class="p">,</span> <span class="n">cherche_decimal</span><span class="p">)</span><span class="c">#, cherche_operateur)</span>
     <span class="k">for</span> <span class="n">finding</span> <span class="ow">in</span> <span class="n">findings</span><span class="p">:</span>
         <span class="n">nb</span> <span class="o">=</span> <span class="n">finding</span><span class="p">(</span><span class="n">calcul</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">while</span> <span class="n">nb</span><span class="p">:</span>
@@ -295,10 +295,10 @@
 <span class="sd">    &gt;&gt;&gt; from pyromaths.outils import Priorites3</span>
 <span class="sd">    &gt;&gt;&gt; Priorites3.splitting(&#39;-Polynome([[-4, 2]], &quot;x&quot;)*6**2+3&#39;)</span>
 <span class="sd">    [&#39;-&#39;, &#39;Polynome([[-4, 2]], &quot;x&quot;)&#39;, &#39;*&#39;, &#39;6&#39;, &#39;**&#39;, &#39;2&#39;, &#39;+&#39;, &#39;3&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; Priorites3.split_calcul(&#39;-6*(-11)*(-5)&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; Priorites3.splitting(&#39;-6*(-11)*(-5)&#39;)</span>
 <span class="sd">    [&#39;-6&#39;, &#39;*&#39;, &#39;(-11)&#39;, &#39;*&#39;, &#39;(-5)&#39;]</span>
-
-<span class="sd">    **TODO :** Ce dernier exemple fonctionne ici. Quelle différence avec split_calcul ?</span>
+<span class="sd">    &gt;&gt;&gt; Priorites3.splitting(&quot;Fraction(1,7)x^2-Fraction(3,8)x-1&quot;)</span>
+<span class="sd">    [&#39;Fraction(1,7)&#39;, &#39;x&#39;, &#39;^&#39;, &#39;2&#39;, &#39;-&#39;, &#39;Fraction(3,8)&#39;, &#39;x&#39;, &#39;-&#39;, &#39;1&#39;]</span>
 
 <span class="sd">    :rtype: list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -311,10 +311,14 @@
         <span class="n">op</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="s">&quot;**&quot;</span><span class="p">:</span> <span class="n">j</span><span class="o">+=</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">op</span><span class="p">)</span> <span class="ow">and</span> <span class="n">op</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="s">&#39;+-*/()&#39;</span><span class="p">:</span>
-                <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">op</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">op</span><span class="p">):</span>
+                <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">op</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">op</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;**&quot;</span><span class="p">:</span>
+                        <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;**&quot;</span><span class="p">)</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
+                    <span class="k">else</span><span class="p">:</span> 
+                        <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">l</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
                 <span class="n">j</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span> <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -483,6 +487,12 @@
 <span class="sd">    soustraction, ni suivie d&#39;un exposant, d&#39;une multiplaication ou d&#39;une</span>
 <span class="sd">    division.</span>
 
+<span class="sd">    &gt;&gt;&gt; from pyromaths.outils import Priorites3</span>
+<span class="sd">    &gt;&gt;&gt; Priorites3.recherche_somme([&#39;1&#39;, &#39;-&#39;, &#39;2&#39;, &#39;-&#39;, &#39;3&#39;])</span>
+<span class="sd">    (0, 5)</span>
+<span class="sd">    &gt;&gt;&gt; Priorites3.recherche_somme([&#39;Polynome(&quot;x+1&quot;)&#39;, &#39;-&#39;, &#39;Polynome(&quot;x+2&quot;)&#39;, &#39;-&#39;, &#39;Polynome(&quot;x+3&quot;)&#39;])</span>
+<span class="sd">    (0, 5)</span>
+
 <span class="sd">    :param calcul: le calcul à traiter</span>
 <span class="sd">    :type calcul: list</span>
 <span class="sd">    :rtype: tuple</span>
@@ -506,14 +516,11 @@
 <span class="sd">    :type calcul: list</span>
 <span class="sd">    :rtype: tuple</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">pyromaths.classes.PolynomesCollege</span> <span class="kn">import</span> <span class="n">Polynome</span>
-    <span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
     <span class="n">ind</span><span class="p">,</span> <span class="n">debut</span><span class="p">,</span> <span class="n">fin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">dummy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">calcul</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">)):</span>
         <span class="n">ind</span> <span class="o">=</span> <span class="n">calcul</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ind</span> <span class="o">&lt;</span> <span class="n">fin</span><span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-            <span class="k">if</span> <span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;(&quot;</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">Polynome</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;(&quot;</span><span class="p">:</span><span class="c"># or isinstance(n, Polynome):</span>
 <span class="c">#                or (isinstance(n, Polynome) and (len(n)&gt;1 or n.monomes[0][0]&lt;0)):</span>
                 <span class="n">debut</span> <span class="o">=</span> <span class="n">ind</span>
                 <span class="k">break</span>
@@ -543,15 +550,15 @@
 <span class="sd">    :param calcul: le calcul à traiter</span>
 <span class="sd">    :type calcul: list</span>
 
+<span class="sd">    &gt;&gt;&gt; from pyromaths.classes.Fractions import Fraction</span>
 <span class="sd">    &gt;&gt;&gt; Priorites3.post_polynomes([&#39;Polynome([[1, 2], [-1, 0], [3, 1], [-9, 2], [-8, 1]], &quot;x&quot;)&#39;])</span>
 <span class="sd">    [&#39;Polynome([[1, 2], [-9, 2], [3, 1], [-8, 1], [-1, 0]], &quot;x&quot;)&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; Priorites3.post_polynomes([&#39;Polynome([[1, 2], [-9, 2], [3, 1], [-8, 1], [-1, 0]], &quot;x&quot;)&#39;])</span>
-<span class="sd">    [&#39;(&#39;, &#39;1&#39;, &#39;-&#39;, &#39;9&#39;, &#39;)&#39;, &#39;*&#39;, &#39;Polynome([[1.0, 2]], &quot;x&quot;)&#39;, &#39;+&#39;, &#39;(&#39;, &#39;3&#39;, &#39;-&#39;, &#39;8&#39;, &#39;)&#39;, &#39;*&#39;, &#39;Polynome([[1.0, 1]], &quot;x&quot;)&#39;, &#39;+&#39;, &#39;Polynome(&quot;-1x^0&quot;)&#39;]</span>
+<span class="sd">    [&#39;(&#39;, &#39;1&#39;, &#39;-&#39;, &#39;9&#39;, &#39;)&#39;, &#39;*&#39;, &#39;Polynome([[1, 2]], &quot;x&quot;)&#39;, &#39;+&#39;, &#39;(&#39;, &#39;3&#39;, &#39;-&#39;, &#39;8&#39;, &#39;)&#39;, &#39;*&#39;, &#39;Polynome([[1, 1]], &quot;x&quot;)&#39;, &#39;+&#39;, &#39;Polynome(&quot;-1x^0&quot;)&#39;]</span>
 
 <span class="sd">    :rtype: list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">pyromaths.classes.PolynomesCollege</span> <span class="kn">import</span> <span class="n">Polynome</span>
-    <span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)):</span>
         <span class="k">if</span> <span class="s">&#39;Polynome(&#39;</span> <span class="ow">in</span> <span class="n">calcul</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
             <span class="n">p</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
@@ -579,16 +586,15 @@
 <span class="sd">    :param final: si le calcul est fini, simplifie toutes les fractions restantes</span>
 <span class="sd">    :type final: boolean</span>
 
-<span class="sd">    &gt;&gt;&gt; f = [&#39;Fraction(3*4, 2*4) + Fraction(5,8))&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; Priorites3.post_fractions(f)</span>
-<span class="sd">    [&#39;Fraction(12, 8) + Fraction(5,8)&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; f = [&#39;Fraction(3*4*5, 2*4)&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
+<span class="sd">    &gt;&gt;&gt; Priorites3.post_fractions([&#39;Fraction(3*4, 2*4, &quot;r&quot;) + Fraction(5, 8)&#39;])</span>
+<span class="sd">    [&#39;Fraction(12, 8) + Fraction(5, 8)&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; Priorites3.post_fractions([&#39;Fraction(3*4*5, 2*4, &quot;s&quot;)&#39;])</span>
 <span class="sd">    [&#39;Fraction(15, 2)&#39;]</span>
 
 <span class="sd">    :rtype: list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
-    <span class="c">#from pyromaths.classes.PolynomesCollege import Polynome</span>
     <span class="n">e</span> <span class="o">=</span> <span class="p">[</span><span class="n">calcul</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">))]</span>
     <span class="k">if</span> <span class="n">final</span><span class="p">:</span>
         <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
@@ -624,17 +630,6 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="n">Fraction</span><span class="o">.</span><span class="n">decompose</span><span class="p">(</span><span class="n">frac</span><span class="p">)</span> <span class="o">+</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
             <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="c">#             print e</span>
-<span class="c">#             time.sleep(2)</span>
-        <span class="c">#=======================================================================</span>
-        <span class="c"># if &#39;Fraction(&#39; in e[0] and &#39;*&#39; in e[0] and &quot;\&quot;s\&quot;)&quot; in e[0][-4:]:</span>
-        <span class="c">#     f = eval(e[0])</span>
-        <span class="c">#     e[0] = repr(Fraction.simplifie(f))</span>
-        <span class="c"># elif &#39;Fraction(&#39; in e[0] and &#39;*&#39; in e[0] and &quot;\&quot;r\&quot;)&quot; in e[0][-4:]:</span>
-        <span class="c">#     e[0] = repr(Fraction.reduit(eval(e[0])))</span>
-        <span class="c"># elif &#39;Fraction(&#39; in e[0]:</span>
-        <span class="c">#     e[0] = Fraction.decompose(eval(e[0]))</span>
-        <span class="c">#=======================================================================</span>
     <span class="k">return</span> <span class="n">e</span>
 </div>
 <div class="viewcode-block" id="effectue_calcul"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.effectue_calcul">[docs]</a><span class="k">def</span> <span class="nf">effectue_calcul</span><span class="p">(</span><span class="n">calcul</span><span class="p">):</span>
@@ -645,8 +640,8 @@
 <span class="sd">    :param calcul: le calcul à traiter</span>
 <span class="sd">    :type calcul: list</span>
 
-<span class="sd">    &gt;&gt;&gt; c = [&#39;-5&#39;, &#39;-&#39;, &#39;(&#39;, &#39;(-6)&#39;, &#39;-&#39;, &#39;1&#39;, &#39;+&#39;, &#39;(-3)&#39;, &#39;)&#39;, &#39;*&#39;, &#39;(-1)&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; Priorites3.effectue_calcul(c)</span>
+<span class="sd">    &gt;&gt;&gt; from pyromaths.outils import Priorites3</span>
+<span class="sd">    &gt;&gt;&gt; Priorites3.effectue_calcul([&#39;-5&#39;, &#39;-&#39;, &#39;(&#39;, &#39;(-6)&#39;, &#39;-&#39;, &#39;1&#39;, &#39;+&#39;, &#39;(-3)&#39;, &#39;)&#39;, &#39;*&#39;, &#39;(-1)&#39;])</span>
 <span class="sd">    [&#39;-5&#39;, &#39;-&#39;, &#39;(&#39;, &#39;-7&#39;, &#39;-&#39;, &#39;3&#39;, &#39;)&#39;, &#39;*&#39;, &#39;(-1)&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; Priorites3.effectue_calcul([&#39;-5&#39;, &#39;-&#39;, &#39;(&#39;, &#39;-7&#39;, &#39;-&#39;, &#39;3&#39;, &#39;)&#39;, &#39;*&#39;, &#39;(-1)&#39;])</span>
 <span class="sd">    [&#39;-5&#39;, &#39;-&#39;, &#39;-10&#39;, &#39;*&#39;, &#39;(-1)&#39;]</span>
@@ -693,29 +688,22 @@
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
                     <span class="n">sol</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&quot;(&quot;</span><span class="p">)</span>
                     <span class="n">sol</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">sol</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">and</span> <span class="n">post</span> <span class="ow">and</span> <span class="n">post</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;*&quot;</span> <span class="ow">and</span> \
-                        <span class="s">&#39;Polynome(&#39;</span> <span class="ow">in</span> <span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> \
-                        <span class="nb">eval</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">elif</span> <span class="n">sol</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">))</span> <span class="ow">and</span> <span class="n">post</span> <span class="ow">and</span> <span class="n">post</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;*&quot;</span> <span class="ow">and</span> \
+                        <span class="s">&#39;Polynome(&#39;</span> <span class="ow">in</span> <span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">eval</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                             <span class="c"># Sans doute une factorisation de sommes de polynômes</span>
-                            <span class="n">sol</span> <span class="o">=</span> <span class="p">[</span><span class="nb">repr</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="nb">eval</span><span class="p">(</span><span class="n">post</span> <span class="p">[</span><span class="mi">1</span><span class="p">]))]</span>
+                            <span class="n">sol</span> <span class="o">=</span> <span class="p">[</span><span class="nb">repr</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="nb">eval</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">]))]</span>
                             <span class="n">post</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
                             <span class="c">#Suppression des parenthèses autour de ((9.0-80.0)*Polynome(&quot;x&quot;)) devenu (Polynome(&quot;-71.0x&quot;))</span>
                             <span class="k">if</span> <span class="n">post</span> <span class="ow">and</span> <span class="n">result</span> <span class="ow">and</span> <span class="n">post</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;)&quot;</span> <span class="ow">and</span> <span class="n">result</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;(&quot;</span> <span class="p">:</span>
                                 <span class="n">result</span><span class="p">,</span>  <span class="n">post</span> <span class="o">=</span> <span class="n">result</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>  <span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="c"># Transforme les réels en polynômes afin de permettre les opérations</span>
-                <span class="c">#TODO: C&#39;est une aberration !</span>
-                <span class="n">bpoly</span> <span class="o">=</span> <span class="bp">False</span>
-                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">calc</span><span class="p">)):</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">bpoly</span> <span class="ow">and</span> <span class="n">calc</span><span class="p">[</span><span class="n">k</span><span class="p">][:</span><span class="mi">9</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;Polynome(&quot;</span><span class="p">:</span> <span class="n">bpoly</span> <span class="o">=</span> <span class="bp">True</span>
-                    <span class="k">elif</span> <span class="n">bpoly</span> <span class="ow">and</span> <span class="n">calc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s">&quot;**/-+()&quot;</span> <span class="ow">and</span> <span class="n">calc</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&quot;**&quot;</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">calc</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
-                        <span class="n">calc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Polynome([[</span><span class="si">%s</span><span class="s">, 0]])&quot;</span> <span class="o">%</span> <span class="nb">eval</span><span class="p">(</span><span class="n">calc</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
                 <span class="n">sol</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">calc</span><span class="p">))</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span> <span class="n">sol</span> <span class="o">=</span> <span class="n">splitting</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span> <span class="n">sol</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">sol</span><span class="p">)]</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="p">(</span><span class="n">Polynome</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">)):</span> <span class="n">sol</span> <span class="o">=</span> <span class="p">[</span><span class="nb">repr</span><span class="p">(</span><span class="n">sol</span><span class="p">)]</span>
                 <span class="k">else</span> <span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">u&quot;Le résultat a un format inattendu&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">recherche</span> <span class="o">==</span> <span class="n">recherche_neg</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="c">#             if recherche == recherche_neg and len(sol) &gt; 1:</span>
+            <span class="k">if</span> <span class="n">recherche</span> <span class="o">==</span> <span class="n">recherche_neg</span> <span class="ow">and</span> <span class="n">pre</span><span class="p">:</span>
                 <span class="c"># Ajoute le &quot;+&quot; ou sépare le &quot;-&quot;:</span>
                 <span class="c"># &quot;1-(-9)&quot; =&gt; &quot;1 + 9&quot; et &quot;1+(-9)&quot; =&gt; &quot;1 - 9&quot;</span>
                 <span class="k">if</span> <span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;-&quot;</span><span class="p">:</span> <span class="n">sol</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:]]</span>
@@ -737,14 +725,6 @@
             <span class="k">if</span> <span class="n">post</span> <span class="ow">and</span> <span class="n">recherche</span> <span class="o">==</span> <span class="n">recherche_neg</span><span class="p">:</span> <span class="n">break_somme</span><span class="o">=</span><span class="bp">True</span>
     <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span> <span class="n">result</span> <span class="o">=</span> <span class="n">calcul</span>
-    <span class="n">tmp</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-<span class="c">#    if cherche_classe(tmp, 0):</span>
-<span class="c">#        index = tmp.find(&quot;+-&quot;)</span>
-<span class="c">#        while index &gt;=0 :</span>
-<span class="c">#            nb = cherche_decimal(tmp, index+2)</span>
-<span class="c">#            tmp = tmp[:index+1] + &quot;(-&quot; + nb + &quot;)&quot; + tmp[index+2+len(nb):]</span>
-<span class="c">#            index = tmp.find(&quot;+-&quot;)</span>
-<span class="c">#        result = splitting(tmp)</span>
     <span class="k">return</span> <span class="n">result</span>
 </div>
 <div class="viewcode-block" id="priorites"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.priorites">[docs]</a><span class="k">def</span> <span class="nf">priorites</span><span class="p">(</span><span class="n">calcul</span><span class="p">):</span>
@@ -756,15 +736,12 @@
 <span class="sd">    :param calcul: le calcul à traiter</span>
 <span class="sd">    :type calcul: string</span>
 
-<span class="sd">    &gt;&gt;&gt; c = &#39;-1+5-(-5)+(-6)*1&#39;</span>
-<span class="sd">    &gt;&gt;&gt; Priorites3.priorites(c)</span>
+<span class="sd">    &gt;&gt;&gt; from pyromaths.outils import Priorites3</span>
+<span class="sd">    &gt;&gt;&gt; Priorites3.priorites(&#39;-1+5-(-5)+(-6)*1&#39;)</span>
 <span class="sd">    [[&#39;4&#39;, &#39;+&#39;, &#39;5&#39;, &#39;-&#39;, &#39;6&#39;], [&#39;9&#39;, &#39;-&#39;, &#39;6&#39;], [&#39;3&#39;]]</span>
 
 <span class="sd">    :rtype: list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<span class="c">#    if cherche_classe(calcul, 0)&gt;=0: litteral = True</span>
-<span class="c">#    else: litteral = False</span>
-<span class="c">#    from pyromaths.classes.Fractions import Fraction</span>
     <span class="n">calcul</span> <span class="o">=</span> <span class="n">splitting</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
     <span class="n">solution</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
@@ -781,12 +758,6 @@
             <span class="c"># Finit la réduction du polynôme résultat</span>
             <span class="n">solution</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s">&#39;Fraction(&#39;</span> <span class="ow">in</span> <span class="n">calcul</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="c">#===================================================================</span>
-            <span class="c"># s[0] = post_fractions(s, True)</span>
-            <span class="c"># if s[0] != calcul[0]:</span>
-            <span class="c">#     calcul = [[s[0]]]</span>
-            <span class="c">#     solution.append(calcul[0])</span>
-            <span class="c">#===================================================================</span>
             <span class="n">s</span> <span class="o">=</span> <span class="n">post_fractions</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">calcul</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
                 <span class="n">calcul</span> <span class="o">=</span> <span class="p">[[</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span>
@@ -794,7 +765,7 @@
     <span class="k">return</span> <span class="n">solution</span>
 </div>
 <div class="viewcode-block" id="texify"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.texify">[docs]</a><span class="k">def</span> <span class="nf">texify</span><span class="p">(</span><span class="n">liste_calculs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;**texify**\ (*liste_calculs*)</span>
+    <span class="sd">r&quot;&quot;&quot;**texify**\ (*liste_calculs*)</span>
 
 <span class="sd">    Convertit la liste de chaînes de caractères `liste_calculs` contenant</span>
 <span class="sd">    des polynômes en liste de chaînes de caractères au format TeX</span>
@@ -805,17 +776,18 @@
 <span class="sd">    :param calcul: le calcul à traiter</span>
 <span class="sd">    :type calcul: string</span>
 
+<span class="sd">    &gt;&gt;&gt; from pyromaths.outils import Priorites3</span>
+<span class="sd">    &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
 <span class="sd">    &gt;&gt;&gt; l = [[&#39;4&#39;, &#39;+&#39;, &#39;5&#39;, &#39;-&#39;, &#39;6&#39;], [&#39;9&#39;, &#39;-&#39;, &#39;6&#39;], [&#39;3&#39;]]</span>
 <span class="sd">    &gt;&gt;&gt; Priorites3.texify(l)</span>
 <span class="sd">    [&#39;4+5-6&#39;, &#39;9-6&#39;, &#39;3&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; p = &#39;(-7)+8-Polynome([[-4, 1], [-9, 2], [-5, 0]], &quot;x&quot;)&#39;</span>
-<span class="sd">    &gt;&gt;&gt; Priorites3.texify(Priorites3.priorites(p))</span>
-<span class="sd">    [&#39;1+4\\,x+9\\,x^{2}+5&#39;, &#39;9\\,x^{2}+4\\,x+1+5&#39;, &#39;9\\,x^{2}+4\\,x+6&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; Priorites3.texify(Priorites3.priorites(&#39;(-7)+8-Polynome([[-4, 1], [-9, 2], [-5, 0]], &quot;x&quot;)&#39;))</span>
+<span class="sd">    [&#39;1-\\left( -4\\,x-9\\,x^{2}-5\\right) &#39;, &#39;1+4\\,x+9\\,x^{2}+5&#39;, &#39;9\\,x^{2}+4\\,x+1+5&#39;, &#39;9\\,x^{2}+4\\,x+6&#39;]</span>
 
 <span class="sd">    :rtype: list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
     <span class="kn">from</span> <span class="nn">pyromaths.classes.PolynomesCollege</span> <span class="kn">import</span> <span class="n">Polynome</span>
+    <span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
     <span class="n">ls</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">calcul</span> <span class="ow">in</span> <span class="n">liste_calculs</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">calcul</span><span class="p">,</span>  <span class="nb">basestring</span><span class="p">):</span> <span class="n">calcul</span> <span class="o">=</span> <span class="n">splitting</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>

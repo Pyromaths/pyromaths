@@ -257,8 +257,8 @@ def tracefonc(f, i, A, B, xmin, xmax, ymin, ymax):
         if not dansrep(B, xmin, xmax, ymin, ymax):
             B = (-u.d, -u.n + float(A[1]))
         x1 = decimaux(str(B[0]))
-    l = Priorites3.texify([Polynome.evaluate(Polynome([[u, 1],[A[1], 0]], "x"), B[0])])
-    l.extend(Priorites3.texify(Priorites3.priorites(Polynome.evaluate(Polynome([[u, 1],[A[1], 0]], "x"), B[0]))))
+    l = Priorites3.texify([Polynome([[u, 1],[A[1], 0]], "x")(B[0])])
+    l.extend(Priorites3.texify(Priorites3.priorites(Polynome([[u, 1],[A[1], 0]], "x")(B[0]))))
     l = [u'Tracer la droite représentative ($d_' + str(i) + '$) de la fonction $' + f + ':x\\longmapsto ' + str(Polynome([[u,1],[A[1], 0]], "x")) + '$.',
        'On sait que $' + f + '(0)=' + decimaux(str(A[1])) + '$ et $' + f + '(' + x1 + ')=' + "=".join(l),
        '\\psdot [dotsize=4.5pt,dotstyle=x]' + str(A),
@@ -270,7 +270,7 @@ def exprfonc(f, i, A, B):
 # Génère la 3e question.
 # A est sur l'axe des ordonnées, f est le nom de la fonction
     u = coefdir(A, B)
-    Polynome.evaluate(Polynome([[u, 1],[A[1], 0]], "x"), B[0])
+    Polynome([[u, 1],[A[1], 0]], "x")(B[0])
     #===========================================================================
     # if A[1] >= 0:
     #     b = '+' + decimaux(str(A[1]))

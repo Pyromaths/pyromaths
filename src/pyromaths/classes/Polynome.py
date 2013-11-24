@@ -137,6 +137,7 @@ class Polynome:
             for i in self.dictio.iterkeys():
                 for j in other.dictio.iterkeys():
                     exposant = i + j
+                    print self.dictio[i], other.dictio[j]
                     coefficient = self.dictio[i] * other.dictio[j]
                     result = result + Polynome({exposant:coefficient}, var=self.var)
             return result

@@ -50,8 +50,8 @@ def ppcm(a, b):
     :type a,b: integer
 
     >>> from pyromaths.outils import Arithmetique
-    >>> Arithmetique.ppcm(64,72)
-    572
+    >>> Arithmetique.ppcm(64, 72)
+    576
 
     :rtype: integer
     """
@@ -156,7 +156,7 @@ def factorise(n):
 
 
 def factoriseTex(n):
-    """**factoriseTex**\ (*n*)
+    r"""**factoriseTex**\ (*n*)
 
     Retourne la liste des facteurs premiers du nombre n, ainsi que le détail de
     la factorisation au format TeX.
@@ -278,7 +278,7 @@ def valeur_alea(a, b):
     :type a,b: integer
 
     >>> from pyromaths.outils import Arithmetique
-    >>> Arithmetique.valeur_alea(-7,7)
+    >>> Arithmetique.valeur_alea(-7,7)  # doctest: +SKIP
     2
 
     :rtype: integer

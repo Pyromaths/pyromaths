@@ -31,7 +31,7 @@ def radians(alpha):
     :type alpha: float
 
     >>> from pyromaths.outils import Conversions
-    >>> Conversions.randians(30)
+    >>> Conversions.radians(30)
     0.5235987755982988
 
     :rtype: float

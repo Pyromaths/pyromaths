@@ -3,21 +3,21 @@ from pyromaths.classes.Polynome import Polynome
 from .Arithmetique import pgcd
 
 from random import randint, randrange
-from math import *
+# from math import *
 
 
 #--------------outils pour la class Polynome----------------------
 
 def TeX_division(dividende, diviseur):
     '''renvoie une chaine de caractere TeX pour afficher la division en détail'''
-    quotient = Polynome({0:0})
+#     quotient = Polynome({0:0})
     texquotient, restera = dividende / diviseur
     reste = dividende
     diviseur_degre = diviseur.deg
     sauve = min(dividende.puiss + restera.puiss)
     longueur = dividende.degre_max - sauve
     string = "$$\\renewcommand\\arraycolsep{0cm}\n\\begin{array}{c"
-    for i in range(longueur):
+    for dummy in range(longueur):
         string += "c"
     string += "|c}\n"
     string += tab_print(dividende, longueur + 1)
@@ -25,14 +25,14 @@ def TeX_division(dividende, diviseur):
     string += "\\cline{" + str(dividende.deg + 2 - sauve) + "-" + str(dividende.deg + 2 - sauve) + "}\n"
     i = 0
     while reste.deg >= diviseur.deg:
-        for k in range(i):
+        for dummy in range(i):
             string += " &"
         ajout_quotient_deg = reste.deg - diviseur_degre
         facteur = reste.dictio[max(0, reste.deg)] / diviseur.dictio[diviseur.deg]
         ajout_quotient = Polynome({ajout_quotient_deg:facteur}, var=dividende.var)
         soustrait_reste = ajout_quotient * diviseur
         string += tab_print(soustrait_reste, diviseur_degre + 1 - sauve, parenthese=True)
-        for k in range(longueur - i - diviseur.deg + sauve):
+        for dummy in range(longueur - i - diviseur.deg + sauve):
             string += " & "
         if i == 0:
             string += str(texquotient)
@@ -41,13 +41,13 @@ def TeX_division(dividende, diviseur):
         avant = reste.deg
         reste = reste - soustrait_reste
         delta = avant - reste.degre_max
-        for k in range(i):
+        for dummy in range(i):
             string += " &"
         i = i + delta
-        prochain = 1
+#         prochain = 1
         string += tab_print(reste, min(diviseur.deg + 1, reste.degre_max + 1) + delta - sauve, debut=delta)
         # fait descendre les monome du dividende
-        for k in range(longueur - i - diviseur.deg + sauve):
+        for dummy in range(longueur - i - diviseur.deg + sauve):
             string += " & "
         string += "\\\\ \n"
     string += "\\end{array}\n$$"
@@ -110,7 +110,7 @@ def poly_racines_fractionnaires(rac_min, rac_max, denom1, X):
     while 1:
         # pour éviter P=77x^2
         a2 = 2 * randrange(2) - 1  # a2=-1 ou 1
-        p2facteur = [randint(1, denom1) * X - randint(rac_min, rac_max)for i in range(2)]
+        p2facteur = [randint(1, denom1) * X - randint(rac_min, rac_max)for dummy in range(2)]
         pol2 = a2 * p2facteur[0] * p2facteur[1]
         if pol2[1] != 0 and pol2[0] != 0:
             break
@@ -121,7 +121,7 @@ def poly_racines_fractionnaires(rac_min, rac_max, denom1, X):
 def poly_racines_entieres(rac_min, rac_max, X, a1=1):
     
     while 1:
-        p1facteur = [X - randrange(rac_min, rac_max) for i in range(2)]
+        p1facteur = [X - randrange(rac_min, rac_max) for dummy in range(2)]
         pol1 = a1 * p1facteur[0] * p1facteur[1]
         if pol1[1] != 0 or pol1[1] != 0:
             break
@@ -139,7 +139,7 @@ def poly_id_remarquables(rac_min, rac_max, X):
         racine = randrange(rac_min, rac_max)
         if coeff != 0 and racine != 0:
             break
-    sgns = [[-1, 1][randrange(2)]for i in range(2)]
+    sgns = [[-1, 1][randrange(2)]for dummy in range(2)]
     p1facteur = [coeff * X + sgns[i] * racine for i in range(2)]
     return a * p1facteur[0] * p1facteur[1], sum(sgns)   
         # sum(sgns) permet de connaître l'identité remarquable

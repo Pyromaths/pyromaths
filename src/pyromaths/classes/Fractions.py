@@ -28,7 +28,7 @@ class Fraction():
     code permet de préciser si une décomposition a pour objectif une mise au
     même dénominateur 'r' ou une simplification 's'
 
-        >>> from pyromaths.Fractions.Fractions import Fraction
+        >>> from pyromaths.classes.Fractions import Fraction
         >>> Fraction(5,6)
         Fraction(5, 6)
         >>> Fraction('x',6)
@@ -60,16 +60,16 @@ class Fraction():
 
 
     def __str__(self):
-        """**str**\ (*object*)
+        r"""**str**\ (*object*)
 
         Renvoie une version LaTeX de la :class:`Fraction`.
             >>> from pyromaths.classes.Fractions import Fraction
             >>> str(Fraction(5,6))
-            '\\\\dfrac{5}{6}'
+            '\\dfrac{5}{6}'
             >>> str(Fraction('-72*2', '11*2', 'r'))
-            '\\\\dfrac{-72_{\\\\times 2}}{11_{\\\\times 2}}'
+            '\\dfrac{-72_{\\times 2}}{11_{\\times 2}}'
             >>> str(Fraction('-72*2', '11*2', 's'))
-            '\\\\dfrac{-72\\\\times \\\\cancel{2}}{11\\\\times \\\\cancel{2}}'
+            '\\dfrac{-72\\times \\cancel{2}}{11\\times \\cancel{2}}'
 
         :rtype: string
         """
@@ -77,18 +77,18 @@ class Fraction():
             if self.d == 1:
                 text = "%s" % self.n
             elif self.code == "r":
-                text = "\\dfrac{%s_{\\times %s}}" % (tuple(self.n.split("*")))
-                text += "{%s_{\\times %s}}" % (tuple(self.d.split('*')))
+                text = r"\dfrac{%s_{\times %s}}" % (tuple(self.n.split("*")))
+                text += r"{%s_{\times %s}}" % (tuple(self.d.split('*')))
             elif self.code == "s":
                 ln = self.n.split('*')
                 ld = self.d.split('*')
                 for i in range(len(ln)):
                     if ld.count(ln[i]):
-                        ld[ld.index(ln[i])] = "\\cancel{%s}" % ln[i]
-                        ln[i] = "\\cancel{%s}" % ln[i]
-                text = "\\dfrac{%s}{%s}" % ("\\times ".join(ln), "\\times ".join(ld))
+                        ld[ld.index(ln[i])] = r"\cancel{%s}" % ln[i]
+                        ln[i] = r"\cancel{%s}" % ln[i]
+                text = r"\dfrac{%s}{%s}" % (r"\times ".join(ln), r"\times ".join(ld))
             else:
-                text = "\\dfrac{%s}{%s}" % (self.n, self.d)
+                text = r"\dfrac{%s}{%s}" % (self.n, self.d)
         else:
             text = "0"
         return text
@@ -145,8 +145,11 @@ class Fraction():
 
         **TODO :** Attention, 1+3/4 donne 1*4/1*4 + 3/4 à la place de 4/4+3/4. À corriger
         """
-        if (isinstance(other,int) or isinstance(other,float)):
+        from pyromaths.classes.PolynomesCollege import Polynome
+        if isinstance(other,(int, float)):
             other=Fraction(other)
+        elif isinstance(other, Polynome):
+            return Polynome([[self, 0]], other.var) + other
         leppcm = ppcm(self.d, other.d)
         if other.d == self.d:
             return Fraction(self.n + other.n, leppcm)
@@ -186,9 +189,11 @@ class Fraction():
         *other* peut être une chaîne représentant une fraction, un entier ou un réel.
 
         Pour plus de détails, voir :py:func:`__add__`"""
-#         return self + (-fraction)
-        if (isinstance(other,int) or isinstance(other,float)):
+        from pyromaths.classes.PolynomesCollege import Polynome
+        if isinstance(other,(int, float)):
             other=Fraction(other)
+        elif isinstance(other, Polynome):
+            return Polynome([[self, 0]], other.var) - other
         leppcm = ppcm(self.d, other.d)
         if other.d == self.d:
             return Fraction(self.n - other.n, leppcm)
@@ -237,10 +242,13 @@ class Fraction():
         :rtype: Fraction ou string
         """
         from pyromaths.classes.PolynomesCollege import Polynome
+        from pyromaths.classes.Polynome import Polynome as PolynomeLycee
         if isinstance(other, (int, float)):
             other=Fraction(other)
         elif isinstance(other, Polynome):
             return Polynome(repr(self))*other
+        elif isinstance(other, PolynomeLycee):
+            return PolynomeLycee({1: self}, var=other.var)*other
         s = abs(pgcd(self.n*other.n, self.d*other.d))
         if s - 1:
             if other.n == s:
@@ -327,7 +335,7 @@ class Fraction():
 
         >>> from pyromaths.classes.Fractions import Fraction
         >>> ~Fraction(8,27)
-        Fraction(27, 8, )
+        Fraction(27, 8)
         """
         return Fraction(self.d,self.n)
 

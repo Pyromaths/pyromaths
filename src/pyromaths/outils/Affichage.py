@@ -29,7 +29,7 @@ from .decimaux import decimaux
 
 
 def tex_coef(coef, var='', bplus=0, bpn=0, bpc=0):
-    """**tex_coef**\ (*coef*\ [, *var*\ [, *bplus*\ [, *bpn*\ [, *bpc*\ ]]]])
+    r"""**tex_coef**\ (*coef*\ [, *var*\ [, *bplus*\ [, *bpn*\ [, *bpc*\ ]]]])
 
     Gère l'affichage d'un monôme (par défaut de degré 0) au format TeX. Permet
 
@@ -105,7 +105,7 @@ def fTeX(nombre):
     return TeX(nombre, fractex="\\frac")
 
 def TeX(nombre, parenthese=False, terme=False, fractex="\\dfrac"):
-    """**TeX**\ (*nombre*\ [, *parenthese*\ [, *terme*\ [, *fractex*\ ]]])
+    r"""**TeX**\ (*nombre*\ [, *parenthese*\ [, *terme*\ [, *fractex*\ ]]])
 
     Permet l'affichage de nombres au format TeX. Fait en partie double emploi avec tex_coef. Permet
 
@@ -125,11 +125,10 @@ def TeX(nombre, parenthese=False, terme=False, fractex="\\dfrac"):
     :type fractex: string
 
     >>> from pyromaths.outils import Affichage
-    >>> from pyromaths.classes import Fractions
-    >>> f=Fractions.Fraction(7,3)
-    >>> Affichage.TeX(f)
+    >>> from pyromaths.classes.Fractions import Fraction
+    >>> Affichage.TeX(Fraction(7,3))
     '\\dfrac{7}{3} '
-    >>> Affichage.TeX(f,fractex='\\frac')
+    >>> Affichage.TeX(Fraction(7,3),fractex='\\frac')
     '\\frac{7}{3} '
 
     :rtype: string
@@ -140,37 +139,37 @@ def TeX(nombre, parenthese=False, terme=False, fractex="\\dfrac"):
     if isinstance(nombre, Racine.RacineDegre2) and nombre.radicande == 0:
         # Affiche la RacineDegre2 comme une Fractions
         nombre = Fraction(nombre.numerateur, nombre.denominateur)
-    if isinstance(nombre, Fraction) and nombre.denominateur == 1:
+    if isinstance(nombre, Fraction) and nombre.d == 1:
         # Affiche la Fractions comme un entier
-        nombre = nombre.numerateur
+        nombre = nombre.n
     # parentheses des fractions
     if parenthese and (
         isinstance(nombre, Racine.RacineDegre2)
-                       and nombre.denominateur == 1 and (nombre.numerateur or nombre.coeff < 0)
+                       and nombre.d == 1 and (nombre.n or nombre.coeff < 0)
         # RacineDegre2 avec radicande nécessairement grâce au tri
-        or isinstance(nombre, Fraction) and nombre.numerateur < 0
+        or isinstance(nombre, Fraction) and nombre.n < 0
         or isinstance(nombre, int) and nombre < 0
         or isinstance(nombre, float) and nombre < 0):
         strTeX = "\\left("
         finTeX = "\\right)"
     elif terme and (isinstance(nombre, Racine.RacineDegre2) and
-                        (nombre.denominateur != 1 or (nombre.numerateur > 0 or nombre.numerateur == 0 and nombre.coeff >= 0))
+                        (nombre.d != 1 or (nombre.n > 0 or nombre.n == 0 and nombre.coeff >= 0))
                     or nombre >= 0) :
         strTeX = "+"
         finTeX = ""
 
     # #Affichage
-    if nombre == float("inf"):
+    if isinstance(nombre, (int, float)) and nombre == float("inf"):
         return "+\\infty "
-    elif nombre == float("-inf"):
+    elif isinstance(nombre, (int, float)) and nombre == float("-inf"):
         return "-\\infty "
     elif isinstance(nombre, int) or isinstance(nombre, float):
         return strTeX + decimaux(nombre) + finTeX
     elif isinstance(nombre, Fraction):
-        if nombre.numerateur < 0:
-            strTeX += "-" + fractex + "{" + decimaux(-nombre.numerateur) + "}{" + decimaux(nombre.denominateur) + "} "
+        if nombre.n < 0:
+            strTeX += "-" + fractex + "{" + decimaux(-nombre.n) + "}{" + decimaux(nombre.d) + "} "
         else:
-            strTeX += fractex + "{" + decimaux(nombre.numerateur) + "}{" + decimaux(nombre.denominateur) + "} "
+            strTeX += fractex + "{" + decimaux(nombre.n) + "}{" + decimaux(nombre.d) + "} "
         strTeX += finTeX
         return strTeX
     elif isinstance(nombre, Racine.RacineDegre2):
