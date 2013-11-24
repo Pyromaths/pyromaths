@@ -530,6 +530,7 @@ def post_fractions(calcul, final = False):
 
     * les produits au numérateur et dénominateur sont effectuée dans les sommes et différences de fractions
     * les produits au numérateur et dénominateur sont simplifiés sinon
+    * les fractions de dénominateur 1 sont changées en entier
 
     :param calcul: le calcul à traiter
     :type calcul: list
@@ -537,8 +538,8 @@ def post_fractions(calcul, final = False):
     :type final: boolean
 
     >>> from pyromaths.classes.PolynomesCollege import Polynome
-    >>> Priorites3.post_fractions(['Fraction(3*4, 2*4, "r") + Fraction(5, 8)'])
-    ['Fraction(12, 8) + Fraction(5, 8)']
+    >>> Priorites3.post_fractions(['Fraction(3*4, 2*4, "r")', '+', 'Fraction(5, 8)'])
+    ['Fraction(12, 8)', '+', 'Fraction(5, 8)']
     >>> Priorites3.post_fractions(['Fraction(3*4*5, 2*4, "s")'])
     ['Fraction(15, 2)']
 
@@ -556,7 +557,8 @@ def post_fractions(calcul, final = False):
             index += 1
         return e
     if len(e) > 1:
-        for k in range(len(e)):
+        k = 0
+        while k < len(e):
             index = 0
             while index < len(e[k]) and 'Fraction(' in e[k][index:]:
                 index = e[k].index('Fraction(', index)
@@ -566,7 +568,20 @@ def post_fractions(calcul, final = False):
                     e[k] = e[k][:index] + repr(Fraction.simplifie(frac)) + splitted[2]
                 elif frac.code == "r":
                     e[k] = e[k][:index] + repr(Fraction.reduit(frac)) + splitted[2]
+                elif frac.d == 1:
+                    if frac.n < 0: 
+                        if k and e[k-1] == '+':
+                            e[k-1] = '-'
+                            e[k] = str(abs(frac.n))
+                        else:
+                            e.insert(k+1, ')')
+                            e.insert(k+1, str(frac.n))
+                            e[k] = '('
+                            k+=2
+                    else:
+                        e[k] = str(frac.n)
                 index += 1
+            k += 1
     else:
         index = 0
         while index < len(e[0]) and 'Fraction(' in e[0][index:]:
