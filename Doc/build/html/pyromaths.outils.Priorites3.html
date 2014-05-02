@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,15 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.4. Priorites3 — Évaluation d’une expression calculatoire &mdash; Pyromaths 13.03 documentation</title>
+    <title>3.4. Priorites3 — Évaluation d’une expression calculatoire &mdash; documentation Pyromaths 13.03</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '13.03',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -28,14 +25,14 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="_static/theme_extras.js"></script>
-    <link rel="top" title="Pyromaths 13.03 documentation" href="index.html" />
+    <link rel="top" title="documentation Pyromaths 13.03" href="index.html" />
     <link rel="up" title="3. Les outils de Pyromaths" href="pyromaths.outils.html" />
+    <link rel="next" title="4. Les exercices de troisièmes de Pyromaths" href="pyromaths.ex.troisiemes.html" />
     <link rel="prev" title="3.3. Conversions — Fonctions de conversions" href="pyromaths.outils.Conversions.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="_static/bandeau.png" alt="Logo"/><h1 class="heading"><a href="index.html">
-          <span>Pyromaths 13.03 documentation</span></a></h1>
+          <span>documentation Pyromaths 13.03</span></a></h1>
         <h2 class="heading"><span>3.4. Priorites3 — Évaluation d’une expression calculatoire</span></h2>
       </div>
       <div class="topnav">
@@ -44,6 +41,8 @@
         «&#160;&#160;<a href="pyromaths.outils.Conversions.html">3.3. <tt class="docutils literal"><span class="pre">Conversions</span></tt> &#8212; Fonctions de conversions</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="pyromaths.ex.troisiemes.html">4. Les exercices de troisièmes de Pyromaths</a>&#160;&#160;»
         </p>
 
       </div>
@@ -241,73 +240,30 @@ supérieure ou égale à min_i, sans expression régulière.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pyromaths.outils.Priorites3.post_fractions">
-<tt class="descclassname">pyromaths.outils.Priorites3.</tt><tt class="descname">post_fractions</tt><big>(</big><em>calcul</em>, <em>final=False</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Priorites3.html#post_fractions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Priorites3.post_fractions" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p><strong>post_fractions</strong>(<em>calcul</em>,[, <em>final</em>])</p>
-<p>Retourne la liste <cite>calcul</cite> dans laquelle</p>
-<ul class="simple">
-<li>les produits au numérateur et dénominateur sont effectuée dans les sommes et différences de fractions</li>
-<li>les produits au numérateur et dénominateur sont simplifiés sinon</li>
-<li>les fractions de dénominateur 1 sont changées en entier</li>
-</ul>
+<dt id="pyromaths.outils.Priorites3.plotify">
+<tt class="descclassname">pyromaths.outils.Priorites3.</tt><tt class="descname">plotify</tt><big>(</big><em>calcul</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Priorites3.html#plotify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Priorites3.plotify" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>plotify</strong>(<em>calcul</em>)</p>
+<p>Convertit la chaîne de caractères <cite>calcul</cite> contenant
+des polynômes une chaîne de caractères au format psplot</p>
+<p><strong>TODO :</strong> intégrer cela dans <tt class="xref py py-mod docutils literal"><span class="pre">outils.Affichage</span></tt> et gérer l&#8217;ensemble des
+classes de Pyromaths.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
-<li><strong>calcul</strong> (<em>list</em>) &#8211; le calcul à traiter</li>
-<li><strong>final</strong> (<em>boolean</em>) &#8211; si le calcul est fini, simplifie toutes les fractions restantes</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>calcul</strong> (<em>string</em>) &#8211; le calcul à traiter</td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.PolynomesCollege</span> <span class="kn">import</span> <span class="n">Polynome</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">post_fractions</span><span class="p">([</span><span class="s">&#39;Fraction(3*4, 2*4, &quot;r&quot;)&#39;</span><span class="p">,</span> <span class="s">&#39;+&#39;</span><span class="p">,</span> <span class="s">&#39;Fraction(5, 8)&#39;</span><span class="p">])</span>
-<span class="go">[&#39;Fraction(12, 8)&#39;, &#39;+&#39;, &#39;Fraction(5, 8)&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">post_fractions</span><span class="p">([</span><span class="s">&#39;Fraction(3*4*5, 2*4, &quot;s&quot;)&#39;</span><span class="p">])</span>
-<span class="go">[&#39;Fraction(15, 2)&#39;]</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">plotify</span><span class="p">(</span><span class="s">&#39;Polynome([[Fraction(-5, 192), 4], [Fraction(2, 96), 3], [Fraction(41, 48), 2], [Fraction(-7, 12), 1], [-4, 0]], &quot;x&quot;, False, False)&#39;</span><span class="p">)</span>
+<span class="go">&#39;-5/192*x^4+2/96*x^3+41/48*x^2-7/12*x^1-4&#39;</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">list</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="pyromaths.outils.Priorites3.post_polynomes">
-<tt class="descclassname">pyromaths.outils.Priorites3.</tt><tt class="descname">post_polynomes</tt><big>(</big><em>calcul</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Priorites3.html#post_polynomes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Priorites3.post_polynomes" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p><strong>post_polynomes</strong>(<em>calcul</em>)</p>
-<p>Retourne la liste <cite>calcul</cite> dans laquelle</p>
-<ul class="simple">
-<li>les polynômes sont ordonnés si nécessaire</li>
-<li>les polynômes sont réduits s&#8217;ils sont déjà ordonnés</li>
-</ul>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>calcul</strong> (<em>list</em>) &#8211; le calcul à traiter</td>
-</tr>
-</tbody>
-</table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">post_polynomes</span><span class="p">([</span><span class="s">&#39;Polynome([[1, 2], [-1, 0], [3, 1], [-9, 2], [-8, 1]], &quot;x&quot;)&#39;</span><span class="p">])</span>
-<span class="go">[&#39;Polynome([[1, 2], [-9, 2], [3, 1], [-8, 1], [-1, 0]], &quot;x&quot;)&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">post_polynomes</span><span class="p">([</span><span class="s">&#39;Polynome([[1, 2], [-9, 2], [3, 1], [-8, 1], [-1, 0]], &quot;x&quot;)&#39;</span><span class="p">])</span>
-<span class="go">[&#39;(&#39;, &#39;1&#39;, &#39;-&#39;, &#39;9&#39;, &#39;)&#39;, &#39;*&#39;, &#39;Polynome([[1, 2]], &quot;x&quot;)&#39;, &#39;+&#39;, &#39;(&#39;, &#39;3&#39;, &#39;-&#39;, &#39;8&#39;, &#39;)&#39;, &#39;*&#39;, &#39;Polynome([[1, 1]], &quot;x&quot;)&#39;, &#39;+&#39;, &#39;Polynome(&quot;-1x^0&quot;)&#39;]</span>
-</pre></div>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">list</td>
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">str</td>
 </tr>
 </tbody>
 </table>
@@ -330,6 +286,10 @@ respectant les priorités et en détaillant les étapes.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Priorites3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">priorites</span><span class="p">(</span><span class="s">&#39;-1+5-(-5)+(-6)*1&#39;</span><span class="p">)</span>
 <span class="go">[[&#39;4&#39;, &#39;+&#39;, &#39;5&#39;, &#39;-&#39;, &#39;6&#39;], [&#39;9&#39;, &#39;-&#39;, &#39;6&#39;], [&#39;3&#39;]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">priorites</span><span class="p">(</span><span class="s">&#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;)*Polynome([[Fraction(1,3), 1], [1,0]], &quot;x&quot;)&#39;</span><span class="p">)</span>
+<span class="go">[[&#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;, &#39;*&#39;, &#39;Polynome([[Fraction(1, 3), 1]], &quot;x&quot;, False, True)&#39;, &#39;+&#39;, &#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;, &#39;*&#39;, &#39;Polynome([[1, 0]], &quot;x&quot;, False, True)&#39;], [&#39;Fraction(6, 7)&#39;, &#39;*&#39;, &#39;Fraction(1, 3)&#39;, &#39;*&#39;, &quot;Polynome([[1, 1]], &#39;x&#39;, False, True)&quot;, &#39;+&#39;, &#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;], [&#39;Polynome([[Fraction(&quot;3*2&quot;, &quot;7*3&quot;, &quot;s&quot;), 1]], &quot;x&quot;, False, True)&#39;, &#39;+&#39;, &#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;], [&#39;Polynome([[Fraction(2, 7), 1], [Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">priorites</span><span class="p">(</span><span class="s">&#39;-Fraction(-6,1)/Fraction(-4,1)&#39;</span><span class="p">)</span>
+<span class="go">[[&#39;-&#39;, &#39;(&#39;, &#39;Fraction(-6, 1)&#39;, &#39;*&#39;, &#39;Fraction(1, -4)&#39;, &#39;)&#39;], [&#39;-&#39;, &#39;Fraction(&quot;2*-3&quot;, &quot;2*-2&quot;, &quot;s&quot;)&#39;], [&#39;Fraction(-3, 2)&#39;]]</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -677,13 +637,15 @@ classes de Pyromaths.</p>
         «&#160;&#160;<a href="pyromaths.outils.Conversions.html">3.3. <tt class="docutils literal"><span class="pre">Conversions</span></tt> &#8212; Fonctions de conversions</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="pyromaths.ex.troisiemes.html">4. Les exercices de troisièmes de Pyromaths</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer">
         &copy; Copyright 2013, Jérôme Ortais.
-      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

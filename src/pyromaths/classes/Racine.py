@@ -302,4 +302,3 @@ class RacineDegre2:
             return -1
         else:
             return 0
-

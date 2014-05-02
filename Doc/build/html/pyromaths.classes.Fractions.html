@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,15 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.1. Fractions — Nombres rationnels &mdash; Pyromaths 13.03 documentation</title>
+    <title>2.1. Fractions — Nombres rationnels &mdash; documentation Pyromaths 13.03</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '13.03',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -28,15 +25,14 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="_static/theme_extras.js"></script>
-    <link rel="top" title="Pyromaths 13.03 documentation" href="index.html" />
+    <link rel="top" title="documentation Pyromaths 13.03" href="index.html" />
     <link rel="up" title="2. Les classes de Pyromaths" href="pyromaths.classes.html" />
     <link rel="next" title="2.2. PolynomesCollege — Fonctions polynômes" href="pyromaths.classes.PolynomesCollege.html" />
     <link rel="prev" title="2. Les classes de Pyromaths" href="pyromaths.classes.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="_static/bandeau.png" alt="Logo"/><h1 class="heading"><a href="index.html">
-          <span>Pyromaths 13.03 documentation</span></a></h1>
+          <span>documentation Pyromaths 13.03</span></a></h1>
         <h2 class="heading"><span>2.1. Fractions — Nombres rationnels</span></h2>
       </div>
       <div class="topnav">
@@ -74,11 +70,13 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 <span class="go">Fraction(34, 10)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span>
 <span class="go">Fraction(3, 4)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">Fraction(1, 3)</span>
 </pre></div>
 </div>
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__add__">
-<tt class="descname">__add__</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__add__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__add__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__add__</tt><big>(</big><em>*others</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__add__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__add__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><em>object</em>.<strong>__add__</strong>(<em>other</em>)</p>
 <p><tt class="docutils literal"><span class="pre">p.__add__(q)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">p</span> <span class="pre">+</span> <span class="pre">q</span></tt>  calcule la somme de deux fractions.</p>
 <p><em>other</em> peut être une chaîne représentant une fraction, un entier ou un réel.</p>
@@ -97,9 +95,9 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param :</th><td class="field-body">other</td>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">other</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Type :</th><td class="field-body">Fraction ou string</td>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">Fraction ou string</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">Fraction ou string</td>
 </tr>
@@ -125,9 +123,9 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param :</th><td class="field-body">other</td>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">other</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Type :</th><td class="field-body">Fraction ou string</td>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">Fraction ou string</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">Fraction ou string</td>
 </tr>
@@ -149,30 +147,30 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__mul__">
-<tt class="descname">__mul__</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__mul__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__mul__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__mul__</tt><big>(</big><em>*others</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__mul__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__mul__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><em>object</em>.<strong>__mul__</strong>(<em>other</em>)</p>
 <p><tt class="docutils literal"><span class="pre">p.__mul__(q)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">p</span> <span class="pre">*</span> <span class="pre">q</span></tt>  calcule le produit deux fractions.</p>
 <p><em>other</em> peut être une chaîne représentant une fraction, un entier ou un réel.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
-<span class="go">&#39;Fraction(&quot;2*2&quot;, &quot;5*2*5&quot;, &quot;s&quot;)&#39;</span>
+<span class="go">Fraction(&quot;2*2&quot;, &quot;5*2*5&quot;, &quot;s&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span>
 <span class="go">Fraction(8, 5)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">63</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span> <span class="o">*</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">27</span><span class="p">)</span>
-<span class="go">&#39;Fraction(&quot;9*7*4*2&quot;, &quot;4*5*9*3&quot;, &quot;s&quot;)&#39;</span>
+<span class="go">Fraction(&quot;9*7*4*2&quot;, &quot;4*5*9*3&quot;, &quot;s&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span> <span class="o">*</span> <span class="mi">12</span>
-<span class="go">&#39;Fraction(&quot;24*12&quot;, &quot;12*1&quot;, &quot;s&quot;)&#39;</span>
+<span class="go">Fraction(&quot;24*12&quot;, &quot;12*1&quot;, &quot;s&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="mi">12</span><span class="o">*</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
-<span class="go">&#39;Fraction(&quot;12*24&quot;, &quot;1*12&quot;, &quot;s&quot;)&#39;</span>
+<span class="go">Fraction(&quot;12*24&quot;, &quot;1*12&quot;, &quot;s&quot;)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param :</th><td class="field-body">other</td>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">other</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Type :</th><td class="field-body">Fraction ou string</td>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">Fraction ou string</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">Fraction ou string</td>
 </tr>
@@ -218,9 +216,9 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param :</th><td class="field-body">n</td>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">n</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Type :</th><td class="field-body">Integer</td>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">Fraction</td>
 </tr>
@@ -243,9 +241,9 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param :</th><td class="field-body">other</td>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">other</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Type :</th><td class="field-body">real ou integer</td>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">real ou integer</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">string</td>
 </tr>
@@ -334,11 +332,17 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__sub__">
-<tt class="descname">__sub__</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__sub__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__sub__" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">__sub__</tt><big>(</big><em>*others</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__sub__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__sub__" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p><em>object</em>.<strong>__sub__</strong>(<em>other</em>)</p>
 <p><tt class="docutils literal"><span class="pre">p.__sub__(q)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">p</span> <span class="pre">-</span> <span class="pre">q</span></tt>  calcule la différence de deux fractions.</p>
 <p><em>other</em> peut être une chaîne représentant une fraction, un entier ou un réel.</p>
 <p>Pour plus de détails, voir <a class="reference internal" href="#pyromaths.classes.Fractions.Fraction.__add__" title="pyromaths.classes.Fractions.Fraction.__add__"><tt class="xref py py-func docutils literal"><span class="pre">__add__()</span></tt></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyromaths.classes.Fractions.Fraction.choix_denominateur">
+<tt class="descname">choix_denominateur</tt><big>(</big><em>denominateur</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.choix_denominateur"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.choix_denominateur" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Écrit la fraction self avec le dénominateur denominateur</p>
 </dd></dl>
 
 <dl class="method">
@@ -348,7 +352,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 <p>Retourne une décomposition de la fraction afin de la simplifier</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="o">.</span><span class="n">decompose</span><span class="p">(</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
-<span class="go">&#39;Fraction(&quot;2*4&quot;,&quot;5*4&quot;, &quot;s&quot;)&#39;</span>
+<span class="go">Fraction(&quot;2*4&quot;, &quot;5*4&quot;, &quot;s&quot;)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -357,7 +361,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>type</strong> &#8211; Fraction</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Type retourné:</th><td class="field-body">string</td>
+<tr class="field-even field"><th class="field-name">Type retourné:</th><td class="field-body">Fraction</td>
 </tr>
 </tbody>
 </table>
@@ -411,6 +415,37 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="pyromaths.classes.Fractions.Fraction.traitement">
+<tt class="descname">traitement</tt><big>(</big><em>final=False</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.traitement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.traitement" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>traitement</strong>(<em>object</em>,<em>self</em>)</p>
+<p>Finit la mise au même dénominatuer ou la simplicfication de la fraction.
+Si <em>final</em> est vrai, alors essaie de simplifier la fraction.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="s">&quot;3*4&quot;</span><span class="p">,</span> <span class="s">&quot;3*7&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">traitement</span><span class="p">()</span>
+<span class="go">Fraction(12, 21)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="s">&quot;3*4&quot;</span><span class="p">,</span> <span class="s">&quot;3*7&quot;</span><span class="p">,</span> <span class="s">&quot;s&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">traitement</span><span class="p">()</span>
+<span class="go">Fraction(4, 7)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span><span class="o">.</span><span class="n">traitement</span><span class="p">()</span>
+<span class="go">Fraction(12, 21)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span><span class="o">.</span><span class="n">traitement</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">Fraction(&quot;4*3&quot;, &quot;7*3&quot;, &quot;s&quot;)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">final</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body">Fraction</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -431,7 +466,7 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 
     <div class="footer">
         &copy; Copyright 2013, Jérôme Ortais.
-      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

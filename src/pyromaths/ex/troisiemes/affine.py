@@ -249,7 +249,7 @@ def tracefonc(f, i, A, B, xmin, xmax, ymin, ymax):
 
         :rtype: list of string
         """
-    u = coefdir(A, B)  
+    u = coefdir(A, B)
     if u.d == 1:
         x1 = decimaux(B[0])
     else:
@@ -257,9 +257,9 @@ def tracefonc(f, i, A, B, xmin, xmax, ymin, ymax):
         if not dansrep(B, xmin, xmax, ymin, ymax):
             B = (-u.d, -u.n + float(A[1]))
         x1 = decimaux(str(B[0]))
-    l = Priorites3.texify([Polynome([[u, 1],[A[1], 0]], "x")(B[0])])
-    l.extend(Priorites3.texify(Priorites3.priorites(Polynome([[u, 1],[A[1], 0]], "x")(B[0]))))
-    l = [u'Tracer la droite représentative ($d_' + str(i) + '$) de la fonction $' + f + ':x\\longmapsto ' + str(Polynome([[u,1],[A[1], 0]], "x")) + '$.',
+    l = Priorites3.texify([Polynome([[u, 1], [A[1], 0]], "x")(B[0])])
+    l.extend(Priorites3.texify(Priorites3.priorites(Polynome([[u, 1], [A[1], 0]], "x")(B[0]))))
+    l = [u'Tracer la droite représentative ($d_' + str(i) + '$) de la fonction $' + f + ':x\\longmapsto ' + str(Polynome([[u, 1], [A[1], 0]], "x")) + '$.',
        'On sait que $' + f + '(0)=' + decimaux(str(A[1])) + '$ et $' + f + '(' + x1 + ')=' + "=".join(l),
        '\\psdot [dotsize=4.5pt,dotstyle=x]' + str(A),
        '\\psdot [dotsize=4.5pt,dotstyle=x]' + str(B),
@@ -270,7 +270,7 @@ def exprfonc(f, i, A, B):
 # Génère la 3e question.
 # A est sur l'axe des ordonnées, f est le nom de la fonction
     u = coefdir(A, B)
-    Polynome([[u, 1],[A[1], 0]], "x")(B[0])
+    Polynome([[u, 1], [A[1], 0]], "x")(B[0])
     #===========================================================================
     # if A[1] >= 0:
     #     b = '+' + decimaux(str(A[1]))
@@ -290,7 +290,7 @@ def exprfonc(f, i, A, B):
     #         coef = '-\\dfrac{' + decimaux(str(abs(u.n))) + '}{' + decimaux(str(u.d)) + '}'
     #     coefres = coef
     #===========================================================================
- 
+
     if A[1] - B[1] > 0:
         deltay = '+' + decimaux(str(A[1] - B[1]))
     else :
@@ -333,7 +333,7 @@ def exprfonc(f, i, A, B):
     l = [u'Déterminer l\'expression de la fonction $' + f + u'$ représentée ci-contre par la droite ($d_' + str(i) + '$).',
        u'On lit l\'ordonnée à l\'origine et le coefficient de la fonction affine sur le graphique.\\\ ',
        '$' + f + '(x)=a\\,x+b$ ' + 'avec $b=' + decimaux(str(A[1])) + '$ et $a=' + '\\dfrac{' + deltay + '}{' + deltax + '}=' + str(u) + '$.\\\ ',
-       'L\'expression de la fonction $' + f + '$ est $' + f + '(x)=' + str(Polynome([[u, 1],[A[1], 0]], "x")) + '$.',
+       'L\'expression de la fonction $' + f + '$ est $' + f + '(x)=' + str(Polynome([[u, 1], [A[1], 0]], "x")) + '$.',
        doublefleche(B, (B[0], A[1])),
        doublefleche((B[0], A[1]), A),
        '\\rput' + str(mid1) + '{(' + deltay + ')}',

@@ -23,39 +23,58 @@
 
 import math, random
 
-def pgcd(a, b):
-    """**pgcd**\ (*a*\ , *b*\ )
+def pgcd(*n):
+    """**pgcd**\ (*n*)
 
-    Calcule le pgcd de deux entiers.
+    Calcule le pgcd de plusieurs entiers entiers.
+    
+    Merci à http://python.jpvweb.com/mesrecettespython/doku.php?id=pgcd_ppcm
 
-    :param a,b: Les entiers dont on veut le pgcd
-    :type a,b: integer
+    :param n: Les entiers dont on veut le pgcd
+    :type n: integer
 
     >>> from pyromaths.outils import Arithmetique
-    >>> Arithmetique.pgcd(64,72)
-    8
+    >>> Arithmetique.pgcd(64,72,36)
+    4
 
     :rtype: integer
     """
-    while b:
-        a, b = b, a % b
-    return a
+    def _pgcd(a, b):
+        #=======================================================================
+        # print "pgcd dans arithmetique ", a, b, isinstance(a, int), isinstance(b, int)
+        # print repr(a), repr(b)
+        #=======================================================================
+        if abs(a) == float('inf') or abs(b) == float('inf'): return 1
+        while b: a, b = b, a % b
+        return a
+    p = _pgcd(n[0], n[1])
+    for x in n[2:]:
+        p = _pgcd(p, x)
+    return p
 
-def ppcm(a, b):
-    """**ppcm**\ (*a*\ , *b*\ )
+def ppcm(*n):
+    """**ppcm**\ (*n*)
 
-    Calcule le ppcm de deux entiers.
+    Calcule le ppcm de plusieurs entiers.
+    
+    Merci à http://python.jpvweb.com/mesrecettespython/doku.php?id=pgcd_ppcm
 
-    :param a,b: Les entiers dont on veut le ppcm
-    :type a,b: integer
+    :param n: Les entiers dont on veut le ppcm
+    :type n: integer
 
     >>> from pyromaths.outils import Arithmetique
-    >>> Arithmetique.ppcm(64, 72)
+    >>> Arithmetique.ppcm(64, 72, 36)
     576
 
     :rtype: integer
     """
-    return a * b / pgcd(a, b)
+    def _pgcd(a, b):
+        while b: a, b = b, a % b
+        return a
+    p = abs(n[0] * n[1]) // _pgcd(n[0], n[1])
+    for x in n[2:]:
+        p = abs(p * x) // _pgcd(p, x)
+    return p
 
 def premier(n):
     """**premier**\ (*n*)

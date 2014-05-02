@@ -22,41 +22,47 @@
 #
 
 from pyromaths.outils.Arithmetique import pgcd, ppcm
+from collections import Counter
 
 class Fraction():
     """Cette classe crée la notion de fractions.
     code permet de préciser si une décomposition a pour objectif une mise au
     même dénominateur 'r' ou une simplification 's'
 
-        >>> from pyromaths.classes.Fractions import Fraction
-        >>> Fraction(5,6)
-        Fraction(5, 6)
-        >>> Fraction('x',6)
-        Fraction("x", 6)
-        >>> Fraction(3.4)
-        Fraction(34, 10)
-        >>> Fraction(3.0, 4.0)
-        Fraction(3, 4)
+    >>> from pyromaths.classes.Fractions import Fraction
+    >>> Fraction(5,6)
+    Fraction(5, 6)
+    >>> Fraction('x',6)
+    Fraction("x", 6)
+    >>> Fraction(3.4)
+    Fraction(34, 10)
+    >>> Fraction(3.0, 4.0)
+    Fraction(3, 4)
+    >>> Fraction(Fraction(1,3))
+    Fraction(1, 3)
 
     """
-    def __init__(self, n, d = 1, code = ""):
+    def __init__(self, n, d=1, code=""):
         from pyromaths.classes.PolynomesCollege import Polynome
-        if isinstance(n, float):
+        if isinstance(n, float) and abs(n) != float("inf"):
             e = len(str(n).partition('.')[2].rstrip('0'))
-            n = int(n * 10**e)
-            d = d * 10**e
-        elif isinstance(n, Polynome):
-            n = repr(n)
+            n = int(n * 10 ** e)
+            d = d * 10 ** e
         if isinstance(d, float):
             e = len(str(d).partition('.')[2].rstrip('0'))
-            d = int(d * 10**e)
-            n = n * 10**e
+            d = int(d * 10 ** e)
+            n = n * 10 ** e
         self.n = n
         if n == 0 :
             self.d = 1
         else:
             self.d = d
         self.code = code
+        if isinstance(n, Fraction) and d == 1 and code == "":
+            # Fraction(Fraction(1, 3)) renvoie Fraction(1, 3)
+            self.n = n.n
+            self.d = n.d
+            self.code = n.code
 
 
     def __str__(self):
@@ -80,8 +86,14 @@ class Fraction():
                 text = r"\dfrac{%s_{\times %s}}" % (tuple(self.n.split("*")))
                 text += r"{%s_{\times %s}}" % (tuple(self.d.split('*')))
             elif self.code == "s":
-                ln = self.n.split('*')
-                ld = self.d.split('*')
+                if isinstance(self.n, str) and isinstance(self.d, str):
+                    ln = self.n.split('*')
+                    ld = self.d.split('*')
+                elif isinstance(self.n, (int, float)) and isinstance(self.d, (int, float)):
+                    lepgcd = pgcd(self.n, self.d)
+                    ln, ld = [str(self.n // lepgcd), str(lepgcd)], [str(self.d // lepgcd), str(lepgcd)]
+                else:
+                    raise ValueError(u'Cas non prévu : mélange str et int dans une fraction')
                 for i in range(len(ln)):
                     if ld.count(ln[i]):
                         ld[ld.index(ln[i])] = r"\cancel{%s}" % ln[i]
@@ -112,17 +124,17 @@ class Fraction():
         if isinstance(self.n, str):
             num = "\"%s\"" % self.n
         else:
-            num = "%s" % self.n
+            num = "%r" % self.n
         if isinstance(self.d, str):
             den = "\"%s\"" % self.d
         else:
-            den = "%s" % self.d
+            den = "%r" % self.d
         if self.code:
             return "Fraction(%s, %s, \"%s\")" % (num, den, self.code)
         else:
             return "Fraction(%s, %s)" % (num, den)
 
-    def __add__(self, other):
+    def __add__(self, *others):
         """*object*\ .\ **__add__**\ (*other*)
 
         ``p.__add__(q)`` est équivalent à ``p + q``  calcule la somme de deux fractions.
@@ -146,25 +158,68 @@ class Fraction():
         **TODO :** Attention, 1+3/4 donne 1*4/1*4 + 3/4 à la place de 4/4+3/4. À corriger
         """
         from pyromaths.classes.PolynomesCollege import Polynome
-        if isinstance(other,(int, float)):
-            other=Fraction(other)
-        elif isinstance(other, Polynome):
-            return Polynome([[self, 0]], other.var) + other
-        leppcm = ppcm(self.d, other.d)
-        if other.d == self.d:
-            return Fraction(self.n + other.n, leppcm)
-        else:
-            if leppcm != self.d and leppcm != other.d:
-                return "Fraction(\"%s*%s\", \"%s*%s\", \"r\")+Fraction(\"%s*%s\", \"%s*%s\", \"r\")" % \
-                    (self.n, leppcm/self.d, self.d, leppcm/self.d, other.n, leppcm/other.d, other.d, leppcm/other.d)
-            elif leppcm != other.d:
-                return "Fraction(%s, %s)+Fraction(\"%s*%s\", \"%s*%s\", \"r\")" % \
-                    (self.n, self.d, other.n, leppcm/other.d, other.d, leppcm/other.d)
+        lother, lden, traiter = [], [], False
+        if self.code: traiter = True
+        detailler, var = '', ''
+        for other in others:
+            if other == 0:
+                pass
+            elif isinstance(other, Polynome):
+                var = other.var
+                if detailler and not other.detailler: detailler = False
+                else: detailler = other.detailler
+                lother.append(other)
+            elif isinstance(other, (int, float)):
+                    lother.append(Fraction(other))
+                    lden.append(1)
+            elif isinstance(other, Fraction):
+                lother.append(other)
+                if other.code: traiter = True
+                try: lden.append(eval(other.d))
+                except TypeError: lden.append(other.d)
             else:
-                return "Fraction(\"%s*%s\", \"%s*%s\", \"r\")+Fraction(%s, %s)" % \
-                    (self.n, leppcm/self.d, self.d, leppcm/self.d, other.n, other.d)
+                raise ValueError(u'Format incorrect : %s' % (other))
+        if var:
+            self = Polynome([[self, 0]], var, False, detailler)
+            for i in range(len(lother)):
+                if not isinstance(lother[i], Polynome): lother[i] = Polynome([[lother[i], 0]], var, False, detailler)
+            return Polynome.__add__(self, *lother)
 
-    def __radd__(self,other):
+        if traiter:
+            lfrac = [repr(self.traitement())]
+            for other in lother:
+                lfrac.append(repr(other.traitement()))
+            return "+".join(lfrac)
+        try: self.d = eval(self.d)
+        except TypeError: pass
+        if not lother: return self  # On a ajouté 0
+        leppcm = ppcm(self.d, *lden)
+        if self.d == leppcm:
+            # Vérifions si toutes les fractions ont le même dénominateur
+            d = Counter(lden)
+            if d[leppcm] == len(lden):
+                try: num = eval(self.n)
+                except TypeError: num = self.n
+                for other in lother:
+                    try: num += eval(other.n)
+                    except TypeError: num += other.n
+                return Fraction(num, leppcm)
+        if self.n: lfrac = [repr(self.choix_denominateur(leppcm))]
+        else: lfrac = []
+        for other in lother: lfrac.append(repr(other.choix_denominateur(leppcm)))
+        if lfrac: return "+".join(lfrac)
+        else: return "0"
+
+    def choix_denominateur(self, denominateur):
+        """
+        Écrit la fraction self avec le dénominateur denominateur
+        """
+        if denominateur != self.d:
+            return Fraction("%s*%s" % (self.n, denominateur / self.d), "%s*%s" % (self.d, denominateur / self.d), "r")
+        else:
+            return self
+
+    def __radd__(self, other):
         """*object*\ .\ **__radd__**\ (*other*)
 
         ``p.__radd__(q)`` est équivalent à ``p + q``  calcule la somme de l'objet p avec la fraction q
@@ -179,9 +234,15 @@ class Fraction():
         :type: real ou integer
         :rtype: string
         """
-        return Fraction(other)+self
+        if other == 0 : return self
+        if self == 0 : return other
+        if isinstance(other, str):
+            other = eval(other)
+            if isinstance(other, str): return '%s+%r' % (other, self)
+            else: return '%r+%r' % (other, self)
+        return Fraction(other) + self
 
-    def __sub__(self, other):
+    def __sub__(self, *others):
         """*object*\ .\ **__sub__**\ (*other*)
 
         ``p.__sub__(q)`` est équivalent à ``p - q``  calcule la différence de deux fractions.
@@ -190,25 +251,58 @@ class Fraction():
 
         Pour plus de détails, voir :py:func:`__add__`"""
         from pyromaths.classes.PolynomesCollege import Polynome
-        if isinstance(other,(int, float)):
-            other=Fraction(other)
-        elif isinstance(other, Polynome):
-            return Polynome([[self, 0]], other.var) - other
-        leppcm = ppcm(self.d, other.d)
-        if other.d == self.d:
-            return Fraction(self.n - other.n, leppcm)
-        else:
-            if leppcm != self.d and leppcm != other.d:
-                return "Fraction(\"%s*%s\", \"%s*%s\", \"r\")-Fraction(\"%s*%s\", \"%s*%s\", \"r\")" % \
-                    (self.n, leppcm/self.d, self.d, leppcm/self.d, other.n, leppcm/other.d, other.d, leppcm/other.d)
-            elif leppcm != other.d:
-                return "Fraction(%s, %s)-Fraction(\"%s*%s\", \"%s*%s\", \"r\")" % \
-                    (self.n, self.d, other.n, leppcm/other.d, other.d, leppcm/other.d)
+        lother, lden, traiter = [], [], False
+        if self.code: traiter = True
+        detailler, var = True, ''
+        for other in others:
+            if other == 0:
+                pass
+            elif isinstance(other, Polynome):
+                var = other.var
+                detailler = detailler and other.detailler
+                lother.append(other)
+            elif isinstance(other, (int, float)):
+                    lother.append(Fraction(other))
+                    lden.append(1)
+            elif isinstance(other, Fraction):
+                lother.append(other)
+                if other.code: traiter = True
+                try: lden.append(eval(other.d))
+                except TypeError: lden.append(other.d)
             else:
-                return "Fraction(\"%s*%s\", \"%s*%s\", \"r\")-Fraction(%s, %s)" % \
-                    (self.n, leppcm/self.d, self.d, leppcm/self.d, other.n, other.d)
+                raise ValueError(u'Format incorrect : %s' % (other))
+        if var:
+            self = Polynome([[self, 0]], var, False, detailler)
+            for i in range(len(lother)):
+                if not isinstance(lother[i], Polynome): lother[i] = Polynome([[lother[i], 0]], var, False, detailler)
+            return Polynome.__sub__(self, *lother)
 
-    def __rsub__(self,other):
+        if traiter:
+            lfrac = [repr(self.traitement())]
+            for other in lother:
+                lfrac.append(repr(other.traitement()))
+            return "-".join(lfrac)
+        try: self.d = eval(self.d)
+        except TypeError: pass
+        if not lother: return self  # On a ajouté 0
+        leppcm = ppcm(self.d, *lden)
+        if self.d == leppcm:
+            # Vérifions si toutes les fractions ont le même dénominateur
+            d = Counter(lden)
+            if d[leppcm] == len(lden):
+                try: num = eval(self.n)
+                except TypeError: num = self.n
+                for other in lother:
+                    try: num += -eval(other.n)
+                    except TypeError: num += -other.n
+                return Fraction(num, leppcm)
+        if self.n: lfrac = [repr(self.choix_denominateur(leppcm))]
+        else: lfrac = []
+        for other in lother: lfrac.append(repr(other.choix_denominateur(leppcm)))
+        if lfrac: return "-".join(lfrac)
+        else: return "0"
+
+    def __rsub__(self, other):
         """*object*\ .\ **__rsub__**\ (*other*)
 
         ``p.__rsub__(q)`` est équivalent à ``p - q``  calcule la différence de l'objet p par la fraction q.
@@ -216,9 +310,9 @@ class Fraction():
         *other* peut être un entier ou un réel.
 
         Pour plus de détails, voir :py:func:`__radd__`"""
-        return Fraction(other)-self
+        return Fraction(other) - self
 
-    def __mul__(self, other):
+    def __mul__(self, *others):
         """*object*\ .\ **__mul__**\ (*other*)
 
         ``p.__mul__(q)`` est équivalent à ``p * q``  calcule le produit deux fractions.
@@ -227,15 +321,15 @@ class Fraction():
 
         >>> from pyromaths.classes.Fractions import Fraction
         >>> Fraction(2,5) * Fraction(2,10)
-        'Fraction("2*2", "5*2*5", "s")'
+        Fraction("2*2", "5*2*5", "s")
         >>> Fraction(2,5) * 4
         Fraction(8, 5)
         >>> Fraction(63,20) * Fraction(8,27)
-        'Fraction("9*7*4*2", "4*5*9*3", "s")'
+        Fraction("9*7*4*2", "4*5*9*3", "s")
         >>> Fraction(24,12) * 12
-        'Fraction("24*12", "12*1", "s")'
+        Fraction("24*12", "12*1", "s")
         >>> 12*Fraction(24,12)
-        'Fraction("12*24", "1*12", "s")'
+        Fraction("12*24", "1*12", "s")
 
         :param: other
         :type: Fraction ou string
@@ -243,50 +337,104 @@ class Fraction():
         """
         from pyromaths.classes.PolynomesCollege import Polynome
         from pyromaths.classes.Polynome import Polynome as PolynomeLycee
-        if isinstance(other, (int, float)):
-            other=Fraction(other)
-        elif isinstance(other, Polynome):
-            return Polynome(repr(self))*other
-        elif isinstance(other, PolynomeLycee):
-            return PolynomeLycee({1: self}, var=other.var)*other
-        s = abs(pgcd(self.n*other.n, self.d*other.d))
-        if s - 1:
-            if other.n == s:
-                n1, n2 = self.n, other.n
-            else:
-                n1 = pgcd(self.n, s)
-                n2 = s / n1
-            if other.d == s:
-                d1, d2 = self.d, other.d
-            else:
-                d1 = pgcd(self.d, s)
-                d2 = s / d1
-            t = "Fraction(%s*%s*%s*%s, %s*%s*%s*%s, \"s\")" % (n1, self.n/n1, n2, other.n/n2, d1, self.d/d1, d2, other.d/d2)
-            n1, d1 = t[9:-6].split(",")
-            n1, d1 = n1.strip(), d1.strip()
-            while n1[:2] == "1*": n1 = n1[2:]
-            while "*1*" in n1: n1 = n1.replace("*1*", "*", 1)
-            if n1[-2:] == "*1": n1 = n1[:-2]
-            if s == self.n * other.n:
-                # laisser un *1 ou 1* selon
-                if self.n ==1: n1 = "1*" + n1
-                else: n1 += "*1"   
-            while d1[:2] == "1*": d1 = d1[2:]
-            while "*1*" in d1: d1 = d1.replace("*1*", "*" ,1)
-            if d1[-2:] == "*1": d1 = d1[:-2]
-            if s == self.d * other.d:
-                # laisser un *1
-                if self.d ==1: d1 = "1*" + d1
-                else: d1 += "*1"   
-            
-            if "*" in n1: n1 = "\"%s\"" % n1.strip()
-            if "*" in d1: d1 = "\"%s\"" % d1.strip()
-            t = "Fraction(%s, %s, \"s\")" % (n1, d1)
-            return t
-        else:
-            return Fraction(self.n * other.n, self.d * other.d)
+        from .Racine import RacineDegre2
 
-    def __rmul__(self,other):
+        if self == 0: return 0
+        self = Fraction(self.n, self.d)  # Pour contourner le cas où self = Fraction(Fraction(1, 1), 1)
+        lother, lnum, lden, detailler, var, traiter, lycee = [self], [self.n], [self.d], '', '', False, False
+        for other in others:
+            if other == 0:
+                return 0
+            elif isinstance(other, Polynome):
+                var = other.var
+                if detailler and not other.detailler: detailler = False
+                else: detailler = other.detailler
+                lother.append(other)
+            elif isinstance(other, PolynomeLycee):
+                var = other.var
+                lycee = True
+                lother.append(other)
+            elif isinstance(other, (int, float)):
+                lden.append(1)
+                lnum.append(other)
+                lother.append(Fraction(other))
+            elif isinstance(other, Fraction):
+                lother.append(other)
+                if other.code: traiter = True
+                try: lden.append(eval(other.d))
+                except TypeError: lden.append(other.d)
+                try: lnum.append(eval(other.n))
+                except TypeError: lnum.append(other.n)
+            elif isinstance(other, RacineDegre2):
+                lother.append(other)
+                lden.append(other.denominateur)
+                lnum.append(other.numerateur)
+            else:
+                raise ValueError(u'Format incorrect : %s' % (other))
+        if var:
+            if lycee:
+                self = PolynomeLycee({0:self}, var)
+                return PolynomeLycee.__mul__(self, other)
+            else:
+                self = Polynome([[self, 0]], var, False, detailler)
+                for i in range(len(lother)):
+                    if not isinstance(lother[i], Polynome): lother[i] = Polynome([[lother[i], 0]], var, False, detailler)
+                return Polynome.__mul__(self, *lother)
+
+        if traiter:
+            lfrac = [repr(self.traitement())]
+            for other in lother:
+                lfrac.append(repr(other.traitement()))
+            return "*".join(lfrac)
+        try: self.d = eval(self.d)
+        except TypeError: pass
+        s = abs(pgcd(reduce(lambda x, y: x * y, lnum), reduce(lambda x, y: x * y, lden)))
+        if s == 1: return Fraction(reduce(lambda x, y: x * y, lnum), reduce(lambda x, y: x * y, lden))
+        lepgcd, num, den = s, [], []
+        i = 0
+        while i < len(lnum):
+            if lepgcd == 1 or lepgcd in lnum:
+                num.append("*".join([repr(lnum[k]) for k in range(i, len(lnum))]))
+                break
+            else:
+                lepgcdtmp = pgcd(lnum[i], lepgcd)
+                if lepgcdtmp != 1: num.append("%r*%r" % (lepgcdtmp, lnum[i] // lepgcdtmp))
+                else: num.append("%r" % lnum[i])
+                lepgcd = lepgcd / lepgcdtmp
+                i += 1
+        i, lepgcd = 0, s
+        while i < len(lden):
+            if lepgcd == 1 or lepgcd in lden:
+                den.append("*".join([repr(lden[k]) for k in range(i, len(lden))]))
+                break
+            else:
+                lepgcdtmp = pgcd(lden[i], lepgcd)
+                if lepgcdtmp != 1: den.append("%r*%r" % (lepgcdtmp, lden[i] // lepgcdtmp))
+                else: den.append("%r" % lden[i])
+                lepgcd = lepgcd / lepgcdtmp
+                i += 1
+        num, den = "*".join(num), "*".join(den)
+        while num[:2] == "1*": num = num[2:]
+        while "*1*" in num: num = num.replace("*1*", "*", 1)
+        if num[-2:] == "*1": num = num[:-2]
+        if s == reduce(lambda x, y: x * y, lnum):
+            # laisser un *1 ou 1* selon
+            if self.n == 1: num = "1*" + num
+            else: num += "*1"
+        while den[:2] == "1*": den = den[2:]
+        while "*1*" in den: den = den.replace("*1*", "*" , 1)
+        if den[-2:] == "*1": den = den[:-2]
+        if s == reduce(lambda x, y: x * y, lden):
+            # laisser un *1
+            if self.d == 1: den = "1*" + den
+            else: den += "*1"
+
+        if "*" in num: num = num.strip()
+        if "*" in den: den = den.strip()
+        return Fraction(num, den, "s")
+
+
+    def __rmul__(self, other):
         """*object*\ .\ **__rmul__**\ (*other*)
 
         ``p.__rmul__(q)`` est équivalent à ``p * q``  calcule le produit de l'objet p par la fraction q.
@@ -296,7 +444,7 @@ class Fraction():
         Pour plus de détails, voir :py:func:`__radd__`"""
         return Fraction(other) * self
 
-    #def __truediv__(self, fraction): # pour Python 3
+    # def __truediv__(self, fraction): # pour Python 3
     def __div__(self, other):
         """*object*\ .\ **__div__**\ (*other*)
 
@@ -314,11 +462,11 @@ class Fraction():
         :type: Fraction ou string
         :rtype: Fraction ou string
         """
-        if (isinstance(other,int) or isinstance(other,float)):
-            other=Fraction(other)
+        if (isinstance(other, int) or isinstance(other, float)):
+            other = Fraction(other)
         return "%r*%r" % (self, ~other)
 
-    def __rdiv__(self,other):
+    def __rdiv__(self, other):
         """*object*\ .\ **__rdiv__**\ (*other*)
 
         ``p.__rdiv__(q)`` est équivalent à ``p / q``  calcule le produit de l'objet p par la fraction q.
@@ -337,7 +485,7 @@ class Fraction():
         >>> ~Fraction(8,27)
         Fraction(27, 8)
         """
-        return Fraction(self.d,self.n)
+        return Fraction(self.d, self.n)
 
     def __neg__(self):
         """**__neg__**\ (*self*)
@@ -348,7 +496,8 @@ class Fraction():
         >>> -Fraction(8,27)
         Fraction(-8, 27)
         """
-        return Fraction(-self.n,self.d)
+        if self.code: self = self.traitement()
+        return Fraction(-self.n, self.d)
 
     def __pos__(self):
         """**__pos__**\ (*self*)
@@ -359,9 +508,9 @@ class Fraction():
         >>> +Fraction(8,27)
         Fraction(8, 27)
         """
-        return Fraction(self.n,self.d)
+        return Fraction(self.n, self.d)
 
-    def __pow__(self,n):
+    def __pow__(self, n):
         """**__pow__**\ (*self*, *n*)
 
         ``p__pow__(q)`` est équivalent à ``p**q`` calcule p à la puissance q.
@@ -374,56 +523,56 @@ class Fraction():
         :type: Integer
         :rtype: Fraction
         """
-        return Fraction(self.n**n, self.d**n)
+        return Fraction(self.n ** n, self.d ** n)
 
     def __trunc__(self):
-        return self.n//self.d
+        return self.n // self.d
 
     def __lt__(self, other):
-        if isinstance(other,int) or isinstance(other,float):
-            other=Fraction(other)
-        if other.d*self.d > 0:
-            return self.n*other.d < self.d * other.n
+        if isinstance(other, int) or isinstance(other, float):
+            other = Fraction(other)
+        if other.d * self.d > 0:
+            return self.n * other.d < self.d * other.n
         else :
-            return not(self.n*other.d < self.d * other.n)
+            return not(self.n * other.d < self.d * other.n)
 
     def __le__(self, other):
-        if isinstance(other,int) or isinstance(other,float):
-            other=Fraction(other)
-        if other.d*self.d > 0:
-            return self.n*other.d <= self.d * other.n
+        if isinstance(other, int) or isinstance(other, float):
+            other = Fraction(other)
+        if other.d * self.d > 0:
+            return self.n * other.d <= self.d * other.n
         else :
-            return not(self.n*other.d <= self.d * other.n)
+            return not(self.n * other.d <= self.d * other.n)
 
     def __eq__(self, other):
-        if isinstance(other,int) or isinstance(other,float):
-            other=Fraction(other)
-        if isinstance(other,Fraction):
-            return self.n*other.d == self.d * other.n
+        if isinstance(other, int) or isinstance(other, float):
+            other = Fraction(other)
+        if isinstance(other, Fraction):
+            return self.reduit().n * other.reduit().d == self.reduit().d * other.reduit().n
 
     def __ne__(self, other):
-        if isinstance(other,int) or isinstance(other,float):
-            other=Fraction(other)
-        return self.n*other.d != self.d * other.n
+        if isinstance(other, int) or isinstance(other, float):
+            other = Fraction(other)
+        return self.n * other.d != self.d * other.n
 
     def __gt__(self, other):
-        if isinstance(other,int) or isinstance(other,float):
-            other=Fraction(other)
-        if other.d*self.d > 0:
-            return self.n*other.d > self.d * other.n
+        if isinstance(other, int) or isinstance(other, float):
+            other = Fraction(other)
+        if other.d * self.d > 0:
+            return self.n * other.d > self.d * other.n
         else :
-            return not(self.n*other.d > self.d * other.n)
+            return not(self.n * other.d > self.d * other.n)
 
     def __ge__(self, other):
-        if isinstance(other,int) or isinstance(other,float):
-            other=Fraction(other)
-        if other.d*self.d > 0:
-            return self.n*other.d >= self.d * other.n
+        if isinstance(other, int) or isinstance(other, float):
+            other = Fraction(other)
+        if other.d * self.d > 0:
+            return self.n * other.d >= self.d * other.n
         else :
-            return not(self.n*other.d >= self.d * other.n)
+            return not(self.n * other.d >= self.d * other.n)
 
     def __float__(self):
-        return 1.0*self.n/self.d
+        return 1.0 * self.n / self.d
 
     def __int__(self):
         try:
@@ -464,8 +613,14 @@ class Fraction():
         :param type: Fraction
         :rtype: Fraction
         """
-        if isinstance(self.n, str): self.n = eval(self.n)
-        if isinstance(self.d, str): self.d = eval(self.d)
+        conv = False
+        if isinstance(self.n, str):
+            self.n = eval(self.n)
+            conv = True
+        if isinstance(self.d, str):
+            self.d = eval(self.d)
+            conv = True
+        if conv : self = Fraction(self.n, self.d)
         s = pgcd(self.n, self.d)
         return Fraction(self.n // s, self.d // s)
 
@@ -476,18 +631,56 @@ class Fraction():
 
             >>> from pyromaths.classes.Fractions import Fraction
             >>> Fraction.decompose(Fraction(8,20))
-            'Fraction("2*4","5*4", "s")'
+            Fraction("2*4", "5*4", "s")
 
         :param type: Fraction
-        :rtype: string
+        :rtype: Fraction
         """
         if isinstance(self.n, str): self.n = eval(self.n)
         if isinstance(self.d, str): self.d = eval(self.d)
         if self.d == self.n:
-            return "1"
+            return 1
         else:
             lepgcd = pgcd(self.n, self.d)
             if lepgcd == 1:
-                return repr(self)
+                return self
             else:
-                return "Fraction(\"%s*%s\",\"%s*%s\", \"s\")" % (self.n // lepgcd, lepgcd, self.d // lepgcd, lepgcd)
+                return Fraction("%s*%s" % (self.n // lepgcd, lepgcd), "%s*%s" % (self.d // lepgcd, lepgcd), "s")
+
+    def traitement(self, final=False):
+        """**traitement**\ (*object*,\ *self*)
+
+        Finit la mise au même dénominatuer ou la simplicfication de la fraction.
+        Si *final* est vrai, alors essaie de simplifier la fraction.
+
+            >>> from pyromaths.classes.Fractions import Fraction
+            >>> Fraction("3*4", "3*7", "r").traitement()
+            Fraction(12, 21)
+            >>> Fraction("3*4", "3*7", "s").traitement()
+            Fraction(4, 7)
+            >>> Fraction(12, 21).traitement()
+            Fraction(12, 21)
+            >>> Fraction(12, 21).traitement(True)
+            Fraction("4*3", "7*3", "s")
+
+        :param: final
+        :type: boolean
+        :rtype: Fraction
+        """
+        if self.code == "r":
+            if isinstance(self.n, str): n = eval(self.n)
+            else: n = self.n
+            if isinstance(self.d, str): d = eval(self.d)
+            else: d = self.d
+            return Fraction(n, d)
+        if self.code == "s":
+            if isinstance(self.n, str): n = eval(self.n)
+            else: n = self.n
+            if isinstance(self.d, str): d = eval(self.d)
+            else: d = self.d
+            s = pgcd(n, d)
+            return Fraction(n // s, d // s)
+        if final:
+            return self.decompose()
+        "Pas de traitement spécifique nécessaire"
+        return self

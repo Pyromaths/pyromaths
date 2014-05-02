@@ -37,7 +37,7 @@ Niveau 2 : quatrième
 Niveau 3 : troisième
 Niveau 4 : lycée
 """
-dt = tempfile.mkdtemp(prefix = 'pyromaths_tests-', dir = '/tmp')
+dt = tempfile.mkdtemp(prefix='pyromaths_tests-', dir='/tmp')
 parametres = {
         'creer_pdf': True,
         'creer_unpdf': True,
@@ -59,16 +59,16 @@ parametres = {
 if (len(sys.argv) == 4):
     lst = []
     for i in range(int(sys.argv[3])):
-      lst.append([int(sys.argv[1]),int(sys.argv[2])])
+        lst.append([int(sys.argv[1]), int(sys.argv[2])])
     parametres['liste_exos'] = lst
     creation(parametres)
     nettoyage(dt)
 
 elif (len(sys.argv) == 1):
     os.rmdir(dt)
-    for j in range(1000):
-        print('Test n° %03d' % (j+1))
-        dt = tempfile.mkdtemp(prefix = 'pyromaths_tests-', dir = '/tmp')
+    for j in range(100):
+        print('Test n° %03d' % (j + 1))
+        dt = tempfile.mkdtemp(prefix='pyromaths_tests-', dir='/tmp')
         parametres['chemin_fichier'] = dt
         parametres['fiche_exo'] = os.path.join(dt, 'exercices.tex')
         parametres['fiche_cor'] = os.path.join(dt, 'exercices-corrige.tex')

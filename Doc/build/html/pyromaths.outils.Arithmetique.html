@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,15 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.2. Arithmetique — Fonctions arithmétiques &mdash; Pyromaths 13.03 documentation</title>
+    <title>3.2. Arithmetique — Fonctions arithmétiques &mdash; documentation Pyromaths 13.03</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '13.03',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -28,15 +25,14 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="_static/theme_extras.js"></script>
-    <link rel="top" title="Pyromaths 13.03 documentation" href="index.html" />
+    <link rel="top" title="documentation Pyromaths 13.03" href="index.html" />
     <link rel="up" title="3. Les outils de Pyromaths" href="pyromaths.outils.html" />
     <link rel="next" title="3.3. Conversions — Fonctions de conversions" href="pyromaths.outils.Conversions.html" />
     <link rel="prev" title="3.1. Affichage — Fonctions d’affichage" href="pyromaths.outils.Affichage.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="_static/bandeau.png" alt="Logo"/><h1 class="heading"><a href="index.html">
-          <span>Pyromaths 13.03 documentation</span></a></h1>
+          <span>documentation Pyromaths 13.03</span></a></h1>
         <h2 class="heading"><span>3.2. Arithmetique — Fonctions arithmétiques</span></h2>
       </div>
       <div class="topnav">
@@ -260,20 +256,21 @@ la factorisation au format TeX.</p>
 
 <dl class="function">
 <dt id="pyromaths.outils.Arithmetique.pgcd">
-<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">pgcd</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#pgcd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.pgcd" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p><strong>pgcd</strong>(<em>a</em>, <em>b</em>)</p>
-<p>Calcule le pgcd de deux entiers.</p>
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">pgcd</tt><big>(</big><em>*n</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#pgcd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.pgcd" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>pgcd</strong>(<em>n</em>)</p>
+<p>Calcule le pgcd de plusieurs entiers entiers.</p>
+<p>Merci à <a class="reference external" href="http://python.jpvweb.com/mesrecettespython/doku.php?id=pgcd_ppcm">http://python.jpvweb.com/mesrecettespython/doku.php?id=pgcd_ppcm</a></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>a,b</strong> (<em>integer</em>) &#8211; Les entiers dont on veut le pgcd</td>
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>n</strong> (<em>integer</em>) &#8211; Les entiers dont on veut le pgcd</td>
 </tr>
 </tbody>
 </table>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">pgcd</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">72</span><span class="p">)</span>
-<span class="go">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">pgcd</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">36</span><span class="p">)</span>
+<span class="go">4</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -288,19 +285,20 @@ la factorisation au format TeX.</p>
 
 <dl class="function">
 <dt id="pyromaths.outils.Arithmetique.ppcm">
-<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">ppcm</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#ppcm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.ppcm" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p><strong>ppcm</strong>(<em>a</em>, <em>b</em>)</p>
-<p>Calcule le ppcm de deux entiers.</p>
+<tt class="descclassname">pyromaths.outils.Arithmetique.</tt><tt class="descname">ppcm</tt><big>(</big><em>*n</em><big>)</big><a class="reference internal" href="_modules/pyromaths/outils/Arithmetique.html#ppcm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.outils.Arithmetique.ppcm" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p><strong>ppcm</strong>(<em>n</em>)</p>
+<p>Calcule le ppcm de plusieurs entiers.</p>
+<p>Merci à <a class="reference external" href="http://python.jpvweb.com/mesrecettespython/doku.php?id=pgcd_ppcm">http://python.jpvweb.com/mesrecettespython/doku.php?id=pgcd_ppcm</a></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>a,b</strong> (<em>integer</em>) &#8211; Les entiers dont on veut le ppcm</td>
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>n</strong> (<em>integer</em>) &#8211; Les entiers dont on veut le ppcm</td>
 </tr>
 </tbody>
 </table>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">ppcm</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">72</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Arithmetique</span><span class="o">.</span><span class="n">ppcm</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">36</span><span class="p">)</span>
 <span class="go">576</span>
 </pre></div>
 </div>
@@ -418,7 +416,7 @@ la factorisation au format TeX.</p>
 
     <div class="footer">
         &copy; Copyright 2013, Jérôme Ortais.
-      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

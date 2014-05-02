@@ -23,9 +23,10 @@
 #----------------------------------------------------------------------
 # Pyromaths : GESTION DES PRIORITES
 #----------------------------------------------------------------------
-#from pyromaths.classes.PolynomesCollege import Polynome
-#from pyromaths.classes.Fractions import Fraction
+
 from Affichage import decimaux
+from pyromaths.outils import Arithmetique
+
 
 def cherche_classe(calcul, index):
     """**cherche_classe**\ (*calcul*\ , *index*)
@@ -52,15 +53,15 @@ def cherche_classe(calcul, index):
     indexes = [calcul.find(classe, index) for classe in classes]
     position, i = 0, 1
     while i < len(classes):
-        if 0 <= indexes[i] and (indexes[position] < 0 or indexes[i]< indexes[position]):
+        if 0 <= indexes[i] and (indexes[position] < 0 or indexes[i] < indexes[position]):
             position = i
         i += 1
     if indexes[position] < 0: return None
     classe = classes[position]
     index = indexes[position]
-    par, i = 1, index + len(classe) # nombre de parenthèses ouvertes, début de recherche
+    par, i = 1, index + len(classe)  # nombre de parenthèses ouvertes, début de recherche
     while par:
-        if calcul.find("(", i)>0:
+        if calcul.find("(", i) > 0:
             i = min(calcul.find("(", i), calcul.find(")", i))
         else:
             i = calcul.find(")", i)
@@ -99,24 +100,24 @@ def cherche_decimal(calcul, index):
     :rtype: string
     """
     end = len(calcul)
-    while index<=end:
+    while index <= end:
         try:
             int(calcul[index])
         except:
-            index+=1
+            index += 1
         else:
             break
-    if index>end: return None
-    while end>index:
+    if index > end: return None
+    while end > index:
         try:
             float(calcul[index:end])
         except ValueError:
             end -= 1
         else:
             break
-    if index>1 and (calcul[index-2:index] == "(+" or calcul[index-2:index] ==
+    if index > 1 and (calcul[index - 2:index] == "(+" or calcul[index - 2:index] ==
             "(-") :
-        if end < len(calcul) and calcul[end]==")":
+        if end < len(calcul) and calcul[end] == ")":
             index -= 2
             end += 1
         else:
@@ -150,10 +151,10 @@ def cherche_operateur(calcul, index):
     l = []
     for op in operateur:
         try:
-            l.append(calcul[index:].index(op)+index)
+            l.append(calcul[index:].index(op) + index)
         except:
             l.append(None)
-    min_i=0
+    min_i = 0
     for i in range (1, len(l)):
         if l[i] is not None and (l[i] < l[min_i] or l[min_i] is None):
             min_i = i
@@ -184,7 +185,7 @@ def split_calcul(calcul):
     :rtype: list
     """
     l = []
-    findings = (cherche_classe, cherche_decimal)#, cherche_operateur)
+    findings = (cherche_classe, cherche_decimal)  # , cherche_operateur)
     for finding in findings:
         nb = finding(calcul, 0)
         while nb:
@@ -259,19 +260,28 @@ def splitting(calcul):
     j = 0
     while j < len(l):
         op, i, t = l[j], 0, []
-        if op == "**": j+= 1
+        if op == "**": j += 1
         else:
             if not EstNombre(op):
                 while i < len(op):
-                    if op[i:i+2] == "**":
+                    if op[i:i + 2] == "**":
                         t.append("**")
                         i += 2
-                    else: 
+                    else:
                         t.append(op[i])
                         i += 1
-                l[j:j+1] = t
+                l[j:j + 1] = t
                 j += len(t)
             else: j += 1
+    # Recherche les erreurs d'écriture du style 3+-5 à la place de 3+(-5)
+    index = 0
+    while l[index:].count('-'):
+        i = l.index('-', index)
+        if i and l[i - 1][-1] in '+-*/^':
+            del l[i]
+            if l[i][0] == '-': l[i] == l[i][1:]
+            else:l[i] = '(-%s)' % l[i]
+        index = i + 1
     return l
 
 def recherche_parentheses(calcul):
@@ -292,11 +302,11 @@ def recherche_parentheses(calcul):
     """
     if calcul.count("("):
         debut = calcul.index("(")
-        if calcul[debut+1:].count(")"): fin = calcul[debut:].index(")") + debut
+        if calcul[debut + 1:].count(")"): fin = calcul[debut:].index(")") + debut
         else: return None
         for dummy in range(calcul[debut + 1:fin].count("(")):
-            debut += calcul[debut+1:].index("(") + 1
-        return (debut, fin+1)
+            debut += calcul[debut + 1:].index("(") + 1
+        return (debut, fin + 1)
     else:
         return None
 
@@ -321,11 +331,11 @@ def recherche_puissance(calcul):
     """
     if calcul.count("**"):
         i = calcul.index("**")
-        return (i-1, i+2)
+        return (i - 1, i + 2)
     else:
         return None
 
-def recherche_operation(calcul, op, l_interdit, debut = 0):
+def recherche_operation(calcul, op, l_interdit, debut=0):
     """**recherche_operation**\ (*calcul*\ , *op*\ , *l_interdit*\ [, *debut*])
 
     Recherche la première occurrence de l'opération op dans la liste de
@@ -356,13 +366,13 @@ def recherche_operation(calcul, op, l_interdit, debut = 0):
     ind, fin = 0, len(calcul)
     for dummy in range(calcul.count(op)):
         ind = calcul.index(op, ind)
-        if ind == 1 and ind < fin-1 and EstNombre(calcul[ind-1]) and\
-            EstNombre(calcul[ind+1]):
+        if ind == 1 and ind < fin - 1 and EstNombre(calcul[ind - 1]) and\
+            EstNombre(calcul[ind + 1]):
                 if debut: debut = min(debut, ind)
                 else: debut = ind
                 break
-        elif ind > 1 and ind < fin -1 and EstNombre(calcul[ind-1]) and\
-            EstNombre(calcul[ind+1]) and calcul[ind-2] not in l_interdit:
+        elif ind > 1 and ind < fin - 1 and EstNombre(calcul[ind - 1]) and\
+            EstNombre(calcul[ind + 1]) and calcul[ind - 2] not in l_interdit:
                 if debut: debut = min(debut, ind)
                 else: debut = ind
                 break
@@ -397,10 +407,10 @@ def recherche_fin_operation(calcul, op, l_interdit, debut):
     :rtype: integer
     """
     index, fin = debut + 2, len(calcul)
-    while index < fin-1 and calcul[index] == op and EstNombre(calcul[index+1]):
-        index +=2
+    while index < fin - 1 and calcul[index] == op and EstNombre(calcul[index + 1]):
+        index += 2
     if index < fin and calcul[index] in l_interdit:
-        index -=2
+        index -= 2
     if index == debut: return None
     return index
 
@@ -469,133 +479,25 @@ def recherche_neg(calcul):
     ind, debut, fin = 0, None, len(calcul)
     for dummy in range(calcul.count("-")):
         ind = calcul.index("-", ind)
-        if ind < fin-1 and EstNombre(calcul[ind+1]):
-            if calcul[ind+1][0] == "(":# or isinstance(n, Polynome):
+        if ind < fin - 1 and EstNombre(calcul[ind + 1]):
+            if calcul[ind + 1][0] == "(" or ind == 0:  # or isinstance(n, Polynome):
 #                or (isinstance(n, Polynome) and (len(n)>1 or n.monomes[0][0]<0)):
                 debut = ind
                 break
         else:
             ind += 1
-    for dummy in range(calcul[ind+1:].count("+")):
+    for dummy in range(calcul[ind + 1:].count("+")):
         ind = calcul.index("+", ind)
-        if ind < fin-1 and EstNombre(calcul[ind+1]) and calcul[ind+1][0] == "(":
+        if ind < fin - 1 and EstNombre(calcul[ind + 1]) and calcul[ind + 1][0] == "(":
             if debut is not None: debut = min(debut, ind)
             else: debut = ind
             break
         else:
             ind += 1
-    if debut is not None and (debut+2 == fin or (debut+2<fin and
-        calcul[debut+2] != "**")):
-        return (debut, debut+2)
+    if debut is not None and (debut + 2 == fin or (debut + 2 < fin and
+        calcul[debut + 2] != "**")):
+        return (debut, debut + 2)
     else: return None
-
-def post_polynomes(calcul):
-    """**post_polynomes**\ (*calcul*)
-
-    Retourne la liste `calcul` dans laquelle
-
-    * les polynômes sont ordonnés si nécessaire
-    * les polynômes sont réduits s'ils sont déjà ordonnés
-
-    :param calcul: le calcul à traiter
-    :type calcul: list
-
-    >>> from pyromaths.classes.Fractions import Fraction
-    >>> Priorites3.post_polynomes(['Polynome([[1, 2], [-1, 0], [3, 1], [-9, 2], [-8, 1]], "x")'])
-    ['Polynome([[1, 2], [-9, 2], [3, 1], [-8, 1], [-1, 0]], "x")']
-    >>> Priorites3.post_polynomes(['Polynome([[1, 2], [-9, 2], [3, 1], [-8, 1], [-1, 0]], "x")'])
-    ['(', '1', '-', '9', ')', '*', 'Polynome([[1, 2]], "x")', '+', '(', '3', '-', '8', ')', '*', 'Polynome([[1, 1]], "x")', '+', 'Polynome("-1x^0")']
-
-    :rtype: list
-    """
-    from pyromaths.classes.PolynomesCollege import Polynome
-    for k in range(len(calcul)):
-        if 'Polynome(' in calcul[k]:
-            p = eval(calcul[k])
-            if Polynome.reductible(p):
-                p = Polynome.reduction_detaillee(p)
-                if isinstance(p, Polynome): calcul[k] = repr(p)
-                else:
-                    if isinstance(p, basestring): p = splitting(p)
-                    if (k and calcul[k-1] in "*-") or (k<len(calcul)-1 and calcul[k+1] in "**"):
-                        p.insert(0, "(")
-                        p.append(")")
-                    calcul[k:k+1] = p
-    return calcul
-
-def post_fractions(calcul, final = False):
-    """**post_fractions**\ (*calcul*,\ [, *final*])
-
-    Retourne la liste `calcul` dans laquelle
-
-    * les produits au numérateur et dénominateur sont effectuée dans les sommes et différences de fractions
-    * les produits au numérateur et dénominateur sont simplifiés sinon
-    * les fractions de dénominateur 1 sont changées en entier
-
-    :param calcul: le calcul à traiter
-    :type calcul: list
-    :param final: si le calcul est fini, simplifie toutes les fractions restantes
-    :type final: boolean
-
-    >>> from pyromaths.classes.PolynomesCollege import Polynome
-    >>> Priorites3.post_fractions(['Fraction(3*4, 2*4, "r")', '+', 'Fraction(5, 8)'])
-    ['Fraction(12, 8)', '+', 'Fraction(5, 8)']
-    >>> Priorites3.post_fractions(['Fraction(3*4*5, 2*4, "s")'])
-    ['Fraction(15, 2)']
-
-    :rtype: list
-    """
-    from pyromaths.classes.Fractions import Fraction
-    e = [calcul[k] for k in range(len(calcul))]
-    if final:
-        index = 0
-        while index < len(e[0]) and 'Fraction(' in e[0][index:]:
-            index = e[0].index('Fraction', index)
-            splitted = e[0].partition(cherche_classe(e[0], index))
-            frac = eval(splitted[1])
-            e[0] = e[0][:index] + repr(Fraction.simplifie(frac)) + splitted[2]
-            index += 1
-        return e
-    if len(e) > 1:
-        k = 0
-        while k < len(e):
-            index = 0
-            while index < len(e[k]) and 'Fraction(' in e[k][index:]:
-                index = e[k].index('Fraction(', index)
-                splitted = e[k].partition(cherche_classe(e[k], index))
-                frac = eval(splitted[1])
-                if frac.code == "s": 
-                    e[k] = e[k][:index] + repr(Fraction.simplifie(frac)) + splitted[2]
-                elif frac.code == "r":
-                    e[k] = e[k][:index] + repr(Fraction.reduit(frac)) + splitted[2]
-                elif frac.d == 1:
-                    if frac.n < 0: 
-                        if k and e[k-1] == '+':
-                            e[k-1] = '-'
-                            e[k] = str(abs(frac.n))
-                        else:
-                            e.insert(k+1, ')')
-                            e.insert(k+1, str(frac.n))
-                            e[k] = '('
-                            k+=2
-                    else:
-                        e[k] = str(frac.n)
-                index += 1
-            k += 1
-    else:
-        index = 0
-        while index < len(e[0]) and 'Fraction(' in e[0][index:]:
-            index = e[0].index('Fraction(', index)
-            splitted = e[0].partition(cherche_classe(e[0], index))
-            frac = eval(splitted[1])
-            if frac.code == "s": 
-                e[0] = e[0][:index] + repr(Fraction.simplifie(frac)) + splitted[2]
-            elif frac.code == "r":
-                e[0] = e[0][:index] + repr(Fraction.reduit(frac)) + splitted[2]
-            else:
-                e[0] = e[0][:index] + Fraction.decompose(frac) + splitted[2]
-            index += 1
-    return e
 
 def effectue_calcul(calcul):
     """**effectue_calcul**\ (*calcul*)
@@ -649,26 +551,65 @@ def effectue_calcul(calcul):
                 calc = calc[1:-1]
                 # On réduit directement les calculs numériques dans une
                 # expression littérale
+                "Effectue les calculs entre parenthèses et remet les parenthèses si l'expression est de longueur supérieure à 1"
                 sol = effectue_calcul(calc)
-                if len(sol)>1:
+                if len(sol) > 1:
                     sol.insert(0, "(")
                     sol.append(")")
                 elif sol and isinstance(eval(sol[0]), (int, float, Fraction)) and post and post[0] == "*" and \
                         'Polynome(' in post[1] and len(eval(post[1])) == 1 and eval(post[1])[0][0] == 1:
                             # Sans doute une factorisation de sommes de polynômes
-                            sol = [repr(eval(sol[0])*eval(post[1]))]
+                            sol = [repr(eval(sol[0]) * eval(post[1]))]
                             post = post[2:]
-                            #Suppression des parenthèses autour de ((9.0-80.0)*Polynome("x")) devenu (Polynome("-71.0x"))
+                            # Suppression des parenthèses autour de ((9.0-80.0)*Polynome("x")) devenu (Polynome("-71.0x"))
                             if post and result and post[0] == ")" and result[-1] == "(" :
-                                result,  post = result[:-1],  post[1:]
+                                result, post = result[:-1], post[1:]
+
             else:
-                sol = eval("".join(calc))
+                if recherche == recherche_somme:
+                    # Permet les cas 1 + Fraction(1, 2) + 1
+                    # ou 3 + Polynome("5x") + 4
+                    frac, poly, nombres = False, False, []
+                    for i in range(0, len(calc), 2):
+                        nombres.append(eval(calc[i]))
+                        if isinstance(nombres[-1], Fraction): frac = True
+                        elif isinstance(nombres[-1], Polynome): poly, var, detailler = True, nombres[-1].var, nombres[-1].detailler
+                    if poly: nombres = [(Polynome([[i, 0]], var, detailler) , i)[isinstance(i, Polynome)] for i in nombres]
+                    elif frac: nombres = [(Fraction(i, 1), i)[isinstance(i, Fraction)] for i in nombres]
+                    if poly: classe = Polynome
+                    elif frac: classe = Fraction
+                    if poly or frac:
+                        if calc[1] == '+': operation = classe.__add__
+                        else: operation = classe.__sub__
+                        if isinstance(nombres[0], (int, float)):
+                            sol = operation(classe(nombres[0]), *nombres[1:])
+                        else:
+                            sol = operation(nombres[0], *nombres[1:])
+                    else: sol = eval("".join(calc))
+                elif recherche == recherche_produit and calc[1] == "*":
+                    frac, poly, nombres = False, False, []
+                    for i in range(0, len(calc), 2):
+                        nombres.append(eval(calc[i]))
+                        if isinstance(nombres[-1], Fraction): frac = True
+                        elif isinstance(nombres[-1], Polynome): poly, var, detailler = True, nombres[-1].var, nombres[-1].detailler
+                    if poly: nombres = [(Polynome([[i, 0]], var, isinstance(i, str), detailler) , i)[isinstance(i, Polynome)] for i in nombres]
+                    elif frac: nombres = [(Fraction(i, 1), i)[isinstance(i, Fraction)] for i in nombres]
+                    if poly: classe = Polynome
+                    elif frac: classe = Fraction
+                    if poly or frac:
+                        if isinstance(nombres[0], (int, float)):
+                            sol = classe.__mul__(classe(nombres[0]), *nombres[1:])
+                        else:
+                            sol = classe.__mul__(nombres[0], *nombres[1:])
+                    else: sol = eval("".join(calc))
+                else:
+                    sol = eval("".join(calc))
                 if isinstance(sol, basestring): sol = splitting(sol)
                 elif isinstance(sol, (int, float)): sol = [str(sol)]
                 elif isinstance(sol, (Polynome, Fraction)): sol = [repr(sol)]
-                else : raise ValueError(u"Le résultat a un format inattendu")
-#             if recherche == recherche_neg and len(sol) > 1:
-            if recherche == recherche_neg and pre:
+                else :
+                    raise ValueError(u"Le résultat a un format inattendu")
+            if recherche == recherche_neg and (pre or result):
                 # Ajoute le "+" ou sépare le "-":
                 # "1-(-9)" => "1 + 9" et "1+(-9)" => "1 - 9"
                 if sol[0][0] == "-": sol = ["-", sol[0][1:]]
@@ -687,13 +628,13 @@ def effectue_calcul(calcul):
             calcul = post
             if calcul: test = recherche(calcul)
             else: test = None
-            if post and recherche == recherche_neg: break_somme=True
+            if post and recherche == recherche_neg: break_somme = True
     result.extend(post)
     if not result: result = calcul
     return result
 
 def priorites(calcul):
-    """**priorites**\ (*calcul*)
+    r"""**priorites**\ (*calcul*)
 
     Effectue un enchaînement d'opérations contenues dans calcul en
     respectant les priorités et en détaillant les étapes.
@@ -704,29 +645,38 @@ def priorites(calcul):
     >>> from pyromaths.outils import Priorites3
     >>> Priorites3.priorites('-1+5-(-5)+(-6)*1')
     [['4', '+', '5', '-', '6'], ['9', '-', '6'], ['3']]
-
+    >>> Priorites3.priorites('Polynome([[Fraction(6, 7), 0]], "x")*Polynome([[Fraction(1,3), 1], [1,0]], "x")')
+    [['Polynome([[Fraction(6, 7), 0]], "x", False, True)', '*', 'Polynome([[Fraction(1, 3), 1]], "x", False, True)', '+', 'Polynome([[Fraction(6, 7), 0]], "x", False, True)', '*', 'Polynome([[1, 0]], "x", False, True)'], ['Fraction(6, 7)', '*', 'Fraction(1, 3)', '*', "Polynome([[1, 1]], 'x', False, True)", '+', 'Polynome([[Fraction(6, 7), 0]], "x", False, True)'], ['Polynome([[Fraction("3*2", "7*3", "s"), 1]], "x", False, True)', '+', 'Polynome([[Fraction(6, 7), 0]], "x", False, True)'], ['Polynome([[Fraction(2, 7), 1], [Fraction(6, 7), 0]], "x", False, True)']]
+    >>> Priorites3.priorites('-Fraction(-6,1)/Fraction(-4,1)')
+    [['-', '(', 'Fraction(-6, 1)', '*', 'Fraction(1, -4)', ')'], ['-', 'Fraction("2*-3", "2*-2", "s")'], ['Fraction(-3, 2)']]
+    
     :rtype: list
     """
     calcul = splitting(calcul)
     solution = []
-    while len(calcul)>1:
-        s= effectue_calcul(calcul)
+    while len(calcul) > 1:
+        s = effectue_calcul(calcul)
         if s:
-            s = post_polynomes(s)
             solution.append(s)
-            s2 = post_fractions(s)
-            if s2 != s:
-                solution.append(s2)
-                s = [k for k in s2]
-        calcul = [k for k in s] # dissocie calcul et s
-        if len(calcul) == 1 and post_polynomes(calcul) != s:
-            # Finit la réduction du polynôme résultat
-            solution.append(calcul)
-        if len(calcul) == 1 and 'Fraction(' in calcul[0]:
-            s = post_fractions(s, True)
-            if s[0] != calcul[0]:
-                calcul = [[s[0]]]
-                solution.append(calcul[0])
+        calcul = [k for k in s]  # dissocie calcul et s
+    if 'Polynome(' in calcul[0][:9]:
+        from pyromaths.classes.PolynomesCollege import Polynome
+        from pyromaths.classes.Fractions import Fraction
+        p = eval(calcul[0])
+        p = p.reduction(True)
+        while (solution and repr(p) != solution[-1][0]) or (not solution and repr(p) != calcul[0]):
+            solution.append([repr(p)])
+            p = p.reduction(True)
+    if 'Fraction(' in calcul[0][:9]:
+        from pyromaths.classes.Fractions import Fraction
+        f = eval(calcul[0])
+        f = f.traitement(True)
+        while (solution and repr(f) != solution[-1][0]) or (not solution and repr(f) != calcul[0]):
+            solution.append([repr(f)])
+            # si la fraction est écrite sous la forme d'un entier, c'est fini
+            if isinstance(f, str): f = eval(f)
+            if isinstance(f, int): break
+            f = f.traitement(True)
     return solution
 
 def texify(liste_calculs):
@@ -755,7 +705,7 @@ def texify(liste_calculs):
     from pyromaths.classes.Fractions import Fraction
     ls = []
     for calcul in liste_calculs:
-        if isinstance(calcul,  basestring): calcul = splitting(calcul)
+        if isinstance(calcul, basestring): calcul = splitting(calcul)
         s = ""
         puiss = 0
         for i in range(len(calcul)):
@@ -763,17 +713,17 @@ def texify(liste_calculs):
             if el[:9] == "Polynome(":
                 # Doit-on entourer ce polynôme de parenthèses ?
                 p = eval(el)
-                if i+1 < len(calcul): q = calcul[i+1]
-                else: q= ""
+                if i + 1 < len(calcul): q = calcul[i + 1]
+                else: q = ""
                 """ 3 cas :
                 * {*,-}(2x+3) ou {*,-}(-2x)
                 * (2x+3)*...
                 * (2x+1)**2"""
-                if (s and s[-1] in "*-" and (len(p)>1 or p.monomes[0][0]<0)) \
-                    or (q and q == "*" and len(p)>1) \
-                    or ((len(p)>1 or p.monomes[0][0]!=1) and q and q == "**"):
-                    s += "(" + str(p) +")"
-                elif s and s[-1] == "+" and p.monomes[0][0]<0:
+                if (s and s[-1] in "*-" and (len(p) > 1 or p.monomes[0][0] < 0)) \
+                    or (q and q == "*" and len(p) > 1) \
+                    or ((len(p) > 1 or p.monomes[0][0] != 1) and q and q == "**"):
+                    s += "(" + str(p) + ")"
+                elif s and s[-1] == "+" and p.monomes[0][0] < 0:
                     s = s[:-1]
                     s += str(p)
                 else:
@@ -785,14 +735,14 @@ def texify(liste_calculs):
                     texfrac = str(Fraction(eval(p[0]), eval(p[1])))
                 else:
                     texfrac = str(Fraction(eval(p[0]), eval(p[1]), eval(p[2])))
-                if i+1 < len(calcul): q = calcul[i+1]
-                else: q= ""
+                if i + 1 < len(calcul): q = calcul[i + 1]
+                else: q = ""
                 if (eval(p[0]) < 0 or p[1] != "1") and q and q == "**":
                     s += "\\left( " + texfrac + " \\right)"
                 else:
                     s += texfrac
             elif EstNombre(el):
-                if el[0]=="(": s += "(" + decimaux(el[1:-1]) + ")"
+                if el[0] == "(": s += "(" + decimaux(el[1:-1]) + ")"
                 else: s += decimaux(el)
             elif el == "**":
                 s += "**{"
@@ -818,170 +768,89 @@ def texify(liste_calculs):
             ls.append(s)
     return ls
 
-#===============================================================================
-# #----------------------------------------------------------------------
-# # Pyromaths : FICHIERS DE TESTS
-# #----------------------------------------------------------------------
-# def valeurs(n, polynomes=0, entier=1):
-#     """*fichier de tests :* Renvoie une chaîne de caractères contenant un calcul aléatoire de
-#     n nombres, qui sont soit des entiers, soit des décimaux, soit des polynômes."""
-#     import random
-#     def deci(entier):
-#         if entier:
-#             return random.randrange(-11, 11)
-#         else:
-#             return random.randrange(-110, 110)/10.
-#     def poly(entier):
-#         lg = random.randrange(3)
-#         degre=[0, 1, 2]
-#         p = [[deci(entier), degre.pop(random.randrange(len(degre)))] for dummy in range(lg+1)]
-#         p = Polynome(p, "x")
-#         while p == Polynome([[0, 0]], "x"):
-#             degre=[0, 1, 2]
-#             p = [[deci(entier), degre.pop(random.randrange(len(degre)))] for dummy in range(lg+1)]
-#             p = Polynome(p, "x")
-#         if len(p) == 1 and Polynome.degre(p) == 0:
-#             p = p[0][0]
-#             if p < 0: p = "(" + str(p) +")"
-#             else: p = str(p)
-#         else: p = repr(p)
-#         return p
-#     if polynomes: nb=poly
-#     else: nb=deci
-#     nbp = []
-#     lo = ['+','*','-']
-#     for i in range(n):
-#         if not i:
-#             s = "%s" % nb(entier)
-#         else:
-#             if nbp and nbp[-1] > 2 and not random.randrange(2):
-#                 s += ')'
-#                 nbp.pop(-1)
-#             s += lo[random.randrange(3)]
-#             if nbp:
-#                 for cpt in range(len(nbp)):
-#                     nbp[cpt] += 1
-#             a = random.randrange(3)
-#             if s[-1] in '*-/' and i<=n-2 and not a:
-#                 s += '('
-#                 nbp.append(1)
-#             nombre = nb(entier)
-#             if nombre < 0: s += "(" + str(nombre) + ")"
-#             else: s += str(nombre)
-#             if not polynomes: #TODO: tester les puissances avec les polynômes
-#                 a = random.randrange(10)
-#                 if (not nbp or nbp[-1]>1) and not a:
-#                     s += "**2"
-#     while nbp:
-#         s += ')'
-#         nbp.pop(-1)
-#     return s
-# 
-# def test_entiers(nbval, polynomes, entiers):
-#     for c in range(10000):
-#         a = valeurs(nbval, polynomes, entiers)
-#         try:
-#             r = priorites(a)
-#             texify(r)
-#         except:
-#             print(a)
-#             break
-#         else:
-#             if not polynomes:
-#                 print u"%s ème calcul" % (c+1), a, " = ", eval(a), u" en %s étapes"%(len(r))
-#                 if eval(a) != eval("".join(r[-1])):
-#                     print a, " = ", eval(a)
-#                     print r
-#                     break
-#             if polynomes:
-#                 from sympy import Symbol, expand
-#                 x = Symbol('x')
-#                 print u" : %s ème calcul en %s étapes" % (c+1, len(r))
-#                 if not len(r):
-#                     print a
-#                     break
-#                 else:
-#                     t0=sympyfy([a])[0]
-#                     t1=sympyfy(r[-1])
-#                     if isinstance(eval(t1[0]), (int, float)) : t1[0] = "%s+x-x" % (t1[0])
-#                     if isinstance(eval(t0), (int, float)) : t0 = "%s+x-x" % (t0)
-# 
-#                     if eval(t0).expand()!=eval(t1[0]).expand():
-#                         print a, "=", t1
-#                         print "\n".join(sympyfy(r))
-# 
-#                         print u"Devrait être : ", eval(t0).expand()
-#                         break
-# 
-# def sympyfy(liste_calculs):
-#     """*fichier de tests :* Convertit une liste de chaînes de caractères 'liste_calculs' contenant
-#     des polynômes en liste de chaînes de caractères au format Sympy"""
-#     ls = []
-#     for calcul in liste_calculs:
-#         if isinstance(calcul,  basestring): calcul = splitting(calcul)
-#         s = ""
-#         puiss = 0
-#         for i in range(len(calcul)):
-#             el = calcul[i]
-#             if el[:9] == "Polynome(":
-#                 # Doit-on entourer ce polynôme de parenthèses ?
-#                 p = eval(el)
-#                 if i+1 < len(calcul): q = calcul[i+1]
-#                 else: q= ""
-#                 if (s and s[-1] in "*-" and (len(p)>1 or p.monomes[0][0]<0)) \
-#                     or (q and q == "*" and len(p)>1) \
-#                     or ((len(p)>1 or p.monomes[0][0]!=1) and q and q == "**"):
-#                     s += "(" + str(p) +")"
-#                 elif s and s[-1] == "+" and p.monomes[0][0]<0:
-#                     s = s[:-1]
-#                     s += str(p)
-#                 else:
-#                     s += str(p)
-#             elif EstNombre(el):
-#                 if el[0]=="(": s += "(" + decimaux(el[1:-1]) + ")"
-#                 else: s += decimaux(el)
-#             elif el == "**":
-#                 s += "**{"
-#                 puiss += 1
-#             elif el == "(":
-#                 if puiss: puiss += 1
-#                 s += "("
-#             elif el == ")":
-#                 if puiss: puiss -= 1
-#                 s += ")"
-#             else :
-#                 # "+", "-", "*", "/"
-#                 s += el
-#             if puiss == 1:
-#                 puiss = 0
-#                 s += "}"
-#         s = s.replace("\\,x", "*x")
-#         s = s.replace("\\,", "")
-#         s = s.replace("**{", "**")
-#         s = s.replace("^{", "**")
-#         s = s.replace("}", "")
-# #        s = s.replace("(", "\\left( ")
-# #        s = s.replace(")", "\\right) ")
-# #        s = s.replace("**{", "^{")
-# #        s = s.replace("*", "\\times ")
-# #        s = s.replace("/", "\\div ")
-#         if not ls or s != ls[-1]:
-#             ls.append(s)
-#     return ls
-# 
-# def main():
-#     from sympy import Symbol, expand
-#     x = Symbol('x')
-#     test_entiers(nbval=13, polynomes=1, entiers=1)
-# #    a = valeurs(2, 1, 1)
-# #    a = 'Polynome([[8, 2]], "x")*Polynome([[3, 1]], "x")-Polynome([[-3, 0], [4, 2], [10, 1]], "x")*Polynome([[-4, 2], [5, 0], [-11, 1]], "x")-Polynome([[3, 2], [-5, 1]], "x")-(Polynome([[3, 2], [-1, 0]], "x")*Polynome([[3, 2], [1, 0]], "x")*Polynome([[-6, 2], [10, 1], [2, 0]], "x"))*Polynome([[-9, 0], [-7, 2], [8, 1]], "x")-Polynome([[-8, 1]], "x")+Polynome([[-8, 2], [4, 0]], "x")+Polynome([[10, 1]], "x")+Polynome([[-9, 2], [6, 1], [7, 0]], "x")'
-# #    print(a)
-# ##    s= sympyfy([a])
-# #    print sympyfy(priorites(a))
-# #    r = texify(priorites(a))
-# #    print "\\item $A=", texify([a])[0] , "$\\par"
-# #    for i in r:
-# #        print "$A=",
-# #        print "".join(i),
-# #        print "$\\par"
-#===============================================================================
+def plotify(calcul):
+    r"""**plotify**\ (*calcul*)
+
+    Convertit la chaîne de caractères `calcul` contenant
+    des polynômes une chaîne de caractères au format psplot
+
+    **TODO :** intégrer cela dans :mod:`outils.Affichage` et gérer l'ensemble des
+    classes de Pyromaths.
+
+    :param calcul: le calcul à traiter
+    :type calcul: string
+
+    >>> Priorites3.plotify('Polynome([[Fraction(-5, 192), 4], [Fraction(2, 96), 3], [Fraction(41, 48), 2], [Fraction(-7, 12), 1], [-4, 0]], "x", False, False)')
+    '-5/192*x^4+2/96*x^3+41/48*x^2-7/12*x^1-4'
+
+    :rtype: str
+    """
+    from pyromaths.classes.PolynomesCollege import Polynome
+    from pyromaths.classes.Fractions import Fraction
+
+    if isinstance(calcul, basestring): calcul = splitting(calcul)
+    s = ""
+    puiss = 0
+    for i in range(len(calcul)):
+        el = calcul[i]
+        if el[:9] == "Polynome(":
+            # Doit-on entourer ce polynôme de parenthèses ?
+            p = eval(el)
+            if i + 1 < len(calcul): q = calcul[i + 1]
+            else: q = ""
+            """ 3 cas :
+            * {*,-}(2x+3) ou {*,-}(-2x)
+            * (2x+3)*...
+            * (2x+1)**2"""
+            res = []
+            for m in p.monomes:
+                texte = ''
+                if isinstance(m[0], Fraction): texte = str(m[0].n) + "/" + str(m[0].d)
+                elif isinstance(m[0], (float, int)): texte = str(m[0])
+                if m[1]: texte += "*x^%s" % m[1]
+                res.append(texte)
+            t = "+".join(res)
+            t = t.replace("+-", "-")
+            if (s and s[-1] in "*-" and (len(p) > 1 or p.monomes[0][0] < 0)) \
+                or (q and q == "*" and len(p) > 1) \
+                or ((len(p) > 1 or p.monomes[0][0] != 1) and q and q == "**"):
+                s += "(" + t + ")"
+            elif s and s[-1] == "+" and p.monomes[0][0] < 0:
+                s = s[:-1]
+                s += t
+            else:
+                s += t
+        elif el[:9] == "Fraction(":
+            # Doit-on entourer cette fraction de parenthèses ?
+            p = el[9:-1].split(",")
+            if len(p) == 2:
+                texfrac = p[0] + "/" + p[1]
+            else:
+                raise ValueError(u'On ne devrait pas rencontrer de fraction non simplifiée ici')
+            if i + 1 < len(calcul): q = calcul[i + 1]
+            else: q = ""
+            if (eval(p[0]) < 0 or p[1] != "1") and q and q == "**":
+                s += "( " + texfrac + " )"
+            else:
+                s += texfrac
+        elif EstNombre(el):
+            if el[0] == "(": s += "(" + decimaux(el[1:-1]) + ")"
+            else: s += decimaux(el)
+        elif el == "**":
+            s += "^("
+            puiss += 1
+        elif el == "(":
+            if puiss: puiss += 1
+            s += "("
+        elif el == ")":
+            if puiss: puiss -= 1
+            s += ")"
+        else :
+            # "+", "-", "*", "/"
+            s += el
+        if puiss == 1 and s[-1] != "":
+            puiss = 0
+            s += ")"
+    s = s.replace("**{", "^(")
+    s = s.replace(r"\,", "*")
+    return s

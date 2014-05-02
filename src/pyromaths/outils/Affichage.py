@@ -145,7 +145,7 @@ def TeX(nombre, parenthese=False, terme=False, fractex="\\dfrac"):
     # parentheses des fractions
     if parenthese and (
         isinstance(nombre, Racine.RacineDegre2)
-                       and nombre.d == 1 and (nombre.n or nombre.coeff < 0)
+                       and nombre.denominateur == 1 and (nombre.numerateur or nombre.coeff < 0)
         # RacineDegre2 avec radicande nécessairement grâce au tri
         or isinstance(nombre, Fraction) and nombre.n < 0
         or isinstance(nombre, int) and nombre < 0

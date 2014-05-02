@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,11 +6,10 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyromaths.outils.Priorites3 &mdash; Pyromaths 13.03 documentation</title>
+    <title>pyromaths.outils.Priorites3 &mdash; documentation Pyromaths 13.03</title>
     
     <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -28,13 +25,12 @@
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../_static/translations.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="../../../_static/theme_extras.js"></script>
-    <link rel="top" title="Pyromaths 13.03 documentation" href="../../../index.html" />
+    <link rel="top" title="documentation Pyromaths 13.03" href="../../../index.html" />
     <link rel="up" title="Code du module" href="../../index.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="../../../_static/bandeau.png" alt="Logo"/><h1 class="heading"><a href="../../../index.html">
-          <span>Pyromaths 13.03 documentation</span></a></h1>
+          <span>documentation Pyromaths 13.03</span></a></h1>
         <h2 class="heading"><span>pyromaths.outils.Priorites3</span></h2>
       </div>
       <div class="topnav">
@@ -73,9 +69,10 @@
 <span class="c">#----------------------------------------------------------------------</span>
 <span class="c"># Pyromaths : GESTION DES PRIORITES</span>
 <span class="c">#----------------------------------------------------------------------</span>
-<span class="c">#from pyromaths.classes.PolynomesCollege import Polynome</span>
-<span class="c">#from pyromaths.classes.Fractions import Fraction</span>
+
 <span class="kn">from</span> <span class="nn">Affichage</span> <span class="kn">import</span> <span class="n">decimaux</span>
+<span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Arithmetique</span>
+
 
 <div class="viewcode-block" id="cherche_classe"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.cherche_classe">[docs]</a><span class="k">def</span> <span class="nf">cherche_classe</span><span class="p">(</span><span class="n">calcul</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;**cherche_classe**\ (*calcul*\ , *index*)</span>
@@ -102,15 +99,15 @@
     <span class="n">indexes</span> <span class="o">=</span> <span class="p">[</span><span class="n">calcul</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">classe</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="k">for</span> <span class="n">classe</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">]</span>
     <span class="n">position</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
     <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">):</span>
-        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">indexes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span> <span class="p">(</span><span class="n">indexes</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">indexes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span> <span class="n">indexes</span><span class="p">[</span><span class="n">position</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">indexes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span> <span class="p">(</span><span class="n">indexes</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">indexes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">indexes</span><span class="p">[</span><span class="n">position</span><span class="p">]):</span>
             <span class="n">position</span> <span class="o">=</span> <span class="n">i</span>
         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">if</span> <span class="n">indexes</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">None</span>
     <span class="n">classe</span> <span class="o">=</span> <span class="n">classes</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
     <span class="n">index</span> <span class="o">=</span> <span class="n">indexes</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
-    <span class="n">par</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">index</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">classe</span><span class="p">)</span> <span class="c"># nombre de parenthèses ouvertes, début de recherche</span>
+    <span class="n">par</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">index</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">classe</span><span class="p">)</span>  <span class="c"># nombre de parenthèses ouvertes, début de recherche</span>
     <span class="k">while</span> <span class="n">par</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">calcul</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;(&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">calcul</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;(&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">i</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">calcul</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;(&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="n">calcul</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">i</span> <span class="o">=</span> <span class="n">calcul</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
@@ -149,24 +146,24 @@
 <span class="sd">    :rtype: string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
-    <span class="k">while</span> <span class="n">index</span><span class="o">&lt;=</span><span class="n">end</span><span class="p">:</span>
+    <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="nb">int</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="n">index</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">break</span>
-    <span class="k">if</span> <span class="n">index</span><span class="o">&gt;</span><span class="n">end</span><span class="p">:</span> <span class="k">return</span> <span class="bp">None</span>
-    <span class="k">while</span> <span class="n">end</span><span class="o">&gt;</span><span class="n">index</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="n">end</span><span class="p">:</span> <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">while</span> <span class="n">end</span> <span class="o">&gt;</span> <span class="n">index</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="nb">float</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">index</span><span class="p">:</span><span class="n">end</span><span class="p">])</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="n">end</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">break</span>
-    <span class="k">if</span> <span class="n">index</span><span class="o">&gt;</span><span class="mi">1</span> <span class="ow">and</span> <span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">index</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;(+&quot;</span> <span class="ow">or</span> <span class="n">calcul</span><span class="p">[</span><span class="n">index</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;(+&quot;</span> <span class="ow">or</span> <span class="n">calcul</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span>
             <span class="s">&quot;(-&quot;</span><span class="p">)</span> <span class="p">:</span>
-        <span class="k">if</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span> <span class="ow">and</span> <span class="n">calcul</span><span class="p">[</span><span class="n">end</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;)&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span> <span class="ow">and</span> <span class="n">calcul</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;)&quot;</span><span class="p">:</span>
             <span class="n">index</span> <span class="o">-=</span> <span class="mi">2</span>
             <span class="n">end</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
@@ -200,10 +197,10 @@
     <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">operateur</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">op</span><span class="p">)</span><span class="o">+</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">op</span><span class="p">)</span> <span class="o">+</span> <span class="n">index</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-    <span class="n">min_i</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">min_i</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">l</span><span class="p">[</span><span class="n">min_i</span><span class="p">]</span> <span class="ow">or</span> <span class="n">l</span><span class="p">[</span><span class="n">min_i</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
             <span class="n">min_i</span> <span class="o">=</span> <span class="n">i</span>
@@ -234,7 +231,7 @@
 <span class="sd">    :rtype: list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">findings</span> <span class="o">=</span> <span class="p">(</span><span class="n">cherche_classe</span><span class="p">,</span> <span class="n">cherche_decimal</span><span class="p">)</span><span class="c">#, cherche_operateur)</span>
+    <span class="n">findings</span> <span class="o">=</span> <span class="p">(</span><span class="n">cherche_classe</span><span class="p">,</span> <span class="n">cherche_decimal</span><span class="p">)</span>  <span class="c"># , cherche_operateur)</span>
     <span class="k">for</span> <span class="n">finding</span> <span class="ow">in</span> <span class="n">findings</span><span class="p">:</span>
         <span class="n">nb</span> <span class="o">=</span> <span class="n">finding</span><span class="p">(</span><span class="n">calcul</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">while</span> <span class="n">nb</span><span class="p">:</span>
@@ -309,19 +306,28 @@
     <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
         <span class="n">op</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="s">&quot;**&quot;</span><span class="p">:</span> <span class="n">j</span><span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="s">&quot;**&quot;</span><span class="p">:</span> <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">op</span><span class="p">):</span>
                 <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">op</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="n">op</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;**&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">op</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;**&quot;</span><span class="p">:</span>
                         <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;**&quot;</span><span class="p">)</span>
                         <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
-                    <span class="k">else</span><span class="p">:</span> 
+                    <span class="k">else</span><span class="p">:</span>
                         <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
                         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">l</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+                <span class="n">l</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
                 <span class="n">j</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span> <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c"># Recherche les erreurs d&#39;écriture du style 3+-5 à la place de 3+(-5)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">and</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s">&#39;+-*/^&#39;</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;-&#39;</span><span class="p">:</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="k">else</span><span class="p">:</span><span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;(-</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">l</span>
 </div>
 <div class="viewcode-block" id="recherche_parentheses"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.recherche_parentheses">[docs]</a><span class="k">def</span> <span class="nf">recherche_parentheses</span><span class="p">(</span><span class="n">calcul</span><span class="p">):</span>
@@ -342,11 +348,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">calcul</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;(&quot;</span><span class="p">):</span>
         <span class="n">debut</span> <span class="o">=</span> <span class="n">calcul</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;(&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">calcul</span><span class="p">[</span><span class="n">debut</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">):</span> <span class="n">fin</span> <span class="o">=</span> <span class="n">calcul</span><span class="p">[</span><span class="n">debut</span><span class="p">:]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">debut</span>
+        <span class="k">if</span> <span class="n">calcul</span><span class="p">[</span><span class="n">debut</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">):</span> <span class="n">fin</span> <span class="o">=</span> <span class="n">calcul</span><span class="p">[</span><span class="n">debut</span><span class="p">:]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">debut</span>
         <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="bp">None</span>
         <span class="k">for</span> <span class="n">dummy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">debut</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span><span class="n">fin</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;(&quot;</span><span class="p">)):</span>
-            <span class="n">debut</span> <span class="o">+=</span> <span class="n">calcul</span><span class="p">[</span><span class="n">debut</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;(&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">debut</span><span class="p">,</span> <span class="n">fin</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">debut</span> <span class="o">+=</span> <span class="n">calcul</span><span class="p">[</span><span class="n">debut</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;(&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">debut</span><span class="p">,</span> <span class="n">fin</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">None</span>
 </div>
@@ -371,11 +377,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">calcul</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;**&quot;</span><span class="p">):</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">calcul</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;**&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">None</span>
 </div>
-<div class="viewcode-block" id="recherche_operation"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.recherche_operation">[docs]</a><span class="k">def</span> <span class="nf">recherche_operation</span><span class="p">(</span><span class="n">calcul</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">l_interdit</span><span class="p">,</span> <span class="n">debut</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="recherche_operation"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.recherche_operation">[docs]</a><span class="k">def</span> <span class="nf">recherche_operation</span><span class="p">(</span><span class="n">calcul</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">l_interdit</span><span class="p">,</span> <span class="n">debut</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;**recherche_operation**\ (*calcul*\ , *op*\ , *l_interdit*\ [, *debut*])</span>
 
 <span class="sd">    Recherche la première occurrence de l&#39;opération op dans la liste de</span>
@@ -406,13 +412,13 @@
     <span class="n">ind</span><span class="p">,</span> <span class="n">fin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">dummy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">calcul</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">op</span><span class="p">)):</span>
         <span class="n">ind</span> <span class="o">=</span> <span class="n">calcul</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ind</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">ind</span> <span class="o">&lt;</span> <span class="n">fin</span><span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span>\
-            <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">ind</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">ind</span> <span class="o">&lt;</span> <span class="n">fin</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="ow">and</span>\
+            <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]):</span>
                 <span class="k">if</span> <span class="n">debut</span><span class="p">:</span> <span class="n">debut</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">debut</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span> <span class="n">debut</span> <span class="o">=</span> <span class="n">ind</span>
                 <span class="k">break</span>
-        <span class="k">elif</span> <span class="n">ind</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">ind</span> <span class="o">&lt;</span> <span class="n">fin</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span>\
-            <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">l_interdit</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">ind</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">ind</span> <span class="o">&lt;</span> <span class="n">fin</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="ow">and</span>\
+            <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="n">calcul</span><span class="p">[</span><span class="n">ind</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">l_interdit</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">debut</span><span class="p">:</span> <span class="n">debut</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">debut</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span> <span class="n">debut</span> <span class="o">=</span> <span class="n">ind</span>
                 <span class="k">break</span>
@@ -447,10 +453,10 @@
 <span class="sd">    :rtype: integer</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">index</span><span class="p">,</span> <span class="n">fin</span> <span class="o">=</span> <span class="n">debut</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
-    <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">fin</span><span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">calcul</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="n">op</span> <span class="ow">and</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
-        <span class="n">index</span> <span class="o">+=</span><span class="mi">2</span>
+    <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">fin</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">calcul</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="n">op</span> <span class="ow">and</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]):</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">2</span>
     <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">fin</span> <span class="ow">and</span> <span class="n">calcul</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="ow">in</span> <span class="n">l_interdit</span><span class="p">:</span>
-        <span class="n">index</span> <span class="o">-=</span><span class="mi">2</span>
+        <span class="n">index</span> <span class="o">-=</span> <span class="mi">2</span>
     <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="n">debut</span><span class="p">:</span> <span class="k">return</span> <span class="bp">None</span>
     <span class="k">return</span> <span class="n">index</span>
 </div>
@@ -519,133 +525,25 @@
     <span class="n">ind</span><span class="p">,</span> <span class="n">debut</span><span class="p">,</span> <span class="n">fin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">dummy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">calcul</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">)):</span>
         <span class="n">ind</span> <span class="o">=</span> <span class="n">calcul</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ind</span> <span class="o">&lt;</span> <span class="n">fin</span><span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
-            <span class="k">if</span> <span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;(&quot;</span><span class="p">:</span><span class="c"># or isinstance(n, Polynome):</span>
+        <span class="k">if</span> <span class="n">ind</span> <span class="o">&lt;</span> <span class="n">fin</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">calcul</span><span class="p">[</span><span class="n">ind</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;(&quot;</span> <span class="ow">or</span> <span class="n">ind</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c"># or isinstance(n, Polynome):</span>
 <span class="c">#                or (isinstance(n, Polynome) and (len(n)&gt;1 or n.monomes[0][0]&lt;0)):</span>
                 <span class="n">debut</span> <span class="o">=</span> <span class="n">ind</span>
                 <span class="k">break</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">ind</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">for</span> <span class="n">dummy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">dummy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="p">)):</span>
         <span class="n">ind</span> <span class="o">=</span> <span class="n">calcul</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ind</span> <span class="o">&lt;</span> <span class="n">fin</span><span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="n">calcul</span><span class="p">[</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;(&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ind</span> <span class="o">&lt;</span> <span class="n">fin</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">ind</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="n">calcul</span><span class="p">[</span><span class="n">ind</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;(&quot;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">debut</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span> <span class="n">debut</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">debut</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span> <span class="n">debut</span> <span class="o">=</span> <span class="n">ind</span>
             <span class="k">break</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">ind</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">if</span> <span class="n">debut</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">debut</span><span class="o">+</span><span class="mi">2</span> <span class="o">==</span> <span class="n">fin</span> <span class="ow">or</span> <span class="p">(</span><span class="n">debut</span><span class="o">+</span><span class="mi">2</span><span class="o">&lt;</span><span class="n">fin</span> <span class="ow">and</span>
-        <span class="n">calcul</span><span class="p">[</span><span class="n">debut</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&quot;**&quot;</span><span class="p">)):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">debut</span><span class="p">,</span> <span class="n">debut</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">debut</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">debut</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">==</span> <span class="n">fin</span> <span class="ow">or</span> <span class="p">(</span><span class="n">debut</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">fin</span> <span class="ow">and</span>
+        <span class="n">calcul</span><span class="p">[</span><span class="n">debut</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&quot;**&quot;</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">debut</span><span class="p">,</span> <span class="n">debut</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="bp">None</span>
-</div>
-<div class="viewcode-block" id="post_polynomes"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.post_polynomes">[docs]</a><span class="k">def</span> <span class="nf">post_polynomes</span><span class="p">(</span><span class="n">calcul</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;**post_polynomes**\ (*calcul*)</span>
-
-<span class="sd">    Retourne la liste `calcul` dans laquelle</span>
-
-<span class="sd">    * les polynômes sont ordonnés si nécessaire</span>
-<span class="sd">    * les polynômes sont réduits s&#39;ils sont déjà ordonnés</span>
-
-<span class="sd">    :param calcul: le calcul à traiter</span>
-<span class="sd">    :type calcul: list</span>
-
-<span class="sd">    &gt;&gt;&gt; from pyromaths.classes.Fractions import Fraction</span>
-<span class="sd">    &gt;&gt;&gt; Priorites3.post_polynomes([&#39;Polynome([[1, 2], [-1, 0], [3, 1], [-9, 2], [-8, 1]], &quot;x&quot;)&#39;])</span>
-<span class="sd">    [&#39;Polynome([[1, 2], [-9, 2], [3, 1], [-8, 1], [-1, 0]], &quot;x&quot;)&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; Priorites3.post_polynomes([&#39;Polynome([[1, 2], [-9, 2], [3, 1], [-8, 1], [-1, 0]], &quot;x&quot;)&#39;])</span>
-<span class="sd">    [&#39;(&#39;, &#39;1&#39;, &#39;-&#39;, &#39;9&#39;, &#39;)&#39;, &#39;*&#39;, &#39;Polynome([[1, 2]], &quot;x&quot;)&#39;, &#39;+&#39;, &#39;(&#39;, &#39;3&#39;, &#39;-&#39;, &#39;8&#39;, &#39;)&#39;, &#39;*&#39;, &#39;Polynome([[1, 1]], &quot;x&quot;)&#39;, &#39;+&#39;, &#39;Polynome(&quot;-1x^0&quot;)&#39;]</span>
-
-<span class="sd">    :rtype: list</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">pyromaths.classes.PolynomesCollege</span> <span class="kn">import</span> <span class="n">Polynome</span>
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="s">&#39;Polynome(&#39;</span> <span class="ow">in</span> <span class="n">calcul</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
-            <span class="n">p</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
-            <span class="k">if</span> <span class="n">Polynome</span><span class="o">.</span><span class="n">reductible</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-                <span class="n">p</span> <span class="o">=</span> <span class="n">Polynome</span><span class="o">.</span><span class="n">reduction_detaillee</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Polynome</span><span class="p">):</span> <span class="n">calcul</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span> <span class="n">p</span> <span class="o">=</span> <span class="n">splitting</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="ow">and</span> <span class="n">calcul</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s">&quot;*-&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">k</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">calcul</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s">&quot;**&quot;</span><span class="p">):</span>
-                        <span class="n">p</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&quot;(&quot;</span><span class="p">)</span>
-                        <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">)</span>
-                    <span class="n">calcul</span><span class="p">[</span><span class="n">k</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
-    <span class="k">return</span> <span class="n">calcul</span>
-</div>
-<div class="viewcode-block" id="post_fractions"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.post_fractions">[docs]</a><span class="k">def</span> <span class="nf">post_fractions</span><span class="p">(</span><span class="n">calcul</span><span class="p">,</span> <span class="n">final</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;**post_fractions**\ (*calcul*,\ [, *final*])</span>
-
-<span class="sd">    Retourne la liste `calcul` dans laquelle</span>
-
-<span class="sd">    * les produits au numérateur et dénominateur sont effectuée dans les sommes et différences de fractions</span>
-<span class="sd">    * les produits au numérateur et dénominateur sont simplifiés sinon</span>
-<span class="sd">    * les fractions de dénominateur 1 sont changées en entier</span>
-
-<span class="sd">    :param calcul: le calcul à traiter</span>
-<span class="sd">    :type calcul: list</span>
-<span class="sd">    :param final: si le calcul est fini, simplifie toutes les fractions restantes</span>
-<span class="sd">    :type final: boolean</span>
-
-<span class="sd">    &gt;&gt;&gt; from pyromaths.classes.PolynomesCollege import Polynome</span>
-<span class="sd">    &gt;&gt;&gt; Priorites3.post_fractions([&#39;Fraction(3*4, 2*4, &quot;r&quot;)&#39;, &#39;+&#39;, &#39;Fraction(5, 8)&#39;])</span>
-<span class="sd">    [&#39;Fraction(12, 8)&#39;, &#39;+&#39;, &#39;Fraction(5, 8)&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; Priorites3.post_fractions([&#39;Fraction(3*4*5, 2*4, &quot;s&quot;)&#39;])</span>
-<span class="sd">    [&#39;Fraction(15, 2)&#39;]</span>
-
-<span class="sd">    :rtype: list</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
-    <span class="n">e</span> <span class="o">=</span> <span class="p">[</span><span class="n">calcul</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">))]</span>
-    <span class="k">if</span> <span class="n">final</span><span class="p">:</span>
-        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span> <span class="s">&#39;Fraction(&#39;</span> <span class="ow">in</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">index</span><span class="p">:]:</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;Fraction&#39;</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
-            <span class="n">splitted</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="n">cherche_classe</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">index</span><span class="p">))</span>
-            <span class="n">frac</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">Fraction</span><span class="o">.</span><span class="n">simplifie</span><span class="p">(</span><span class="n">frac</span><span class="p">))</span> <span class="o">+</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">e</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">while</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="ow">and</span> <span class="s">&#39;Fraction(&#39;</span> <span class="ow">in</span> <span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">index</span><span class="p">:]:</span>
-                <span class="n">index</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;Fraction(&#39;</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
-                <span class="n">splitted</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="n">cherche_classe</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">index</span><span class="p">))</span>
-                <span class="n">frac</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                <span class="k">if</span> <span class="n">frac</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="s">&quot;s&quot;</span><span class="p">:</span> 
-                    <span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="p">][:</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">Fraction</span><span class="o">.</span><span class="n">simplifie</span><span class="p">(</span><span class="n">frac</span><span class="p">))</span> <span class="o">+</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-                <span class="k">elif</span> <span class="n">frac</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="s">&quot;r&quot;</span><span class="p">:</span>
-                    <span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="p">][:</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">Fraction</span><span class="o">.</span><span class="n">reduit</span><span class="p">(</span><span class="n">frac</span><span class="p">))</span> <span class="o">+</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-                <span class="k">elif</span> <span class="n">frac</span><span class="o">.</span><span class="n">d</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">frac</span><span class="o">.</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> 
-                        <span class="k">if</span> <span class="n">k</span> <span class="ow">and</span> <span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;+&#39;</span><span class="p">:</span>
-                            <span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;-&#39;</span>
-                            <span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">frac</span><span class="o">.</span><span class="n">n</span><span class="p">))</span>
-                        <span class="k">else</span><span class="p">:</span>
-                            <span class="n">e</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;)&#39;</span><span class="p">)</span>
-                            <span class="n">e</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">frac</span><span class="o">.</span><span class="n">n</span><span class="p">))</span>
-                            <span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;(&#39;</span>
-                            <span class="n">k</span><span class="o">+=</span><span class="mi">2</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">frac</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
-                <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span> <span class="s">&#39;Fraction(&#39;</span> <span class="ow">in</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">index</span><span class="p">:]:</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;Fraction(&#39;</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
-            <span class="n">splitted</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="n">cherche_classe</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">index</span><span class="p">))</span>
-            <span class="n">frac</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="k">if</span> <span class="n">frac</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="s">&quot;s&quot;</span><span class="p">:</span> 
-                <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">Fraction</span><span class="o">.</span><span class="n">simplifie</span><span class="p">(</span><span class="n">frac</span><span class="p">))</span> <span class="o">+</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="k">elif</span> <span class="n">frac</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="s">&quot;r&quot;</span><span class="p">:</span>
-                <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">Fraction</span><span class="o">.</span><span class="n">reduit</span><span class="p">(</span><span class="n">frac</span><span class="p">))</span> <span class="o">+</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="n">Fraction</span><span class="o">.</span><span class="n">decompose</span><span class="p">(</span><span class="n">frac</span><span class="p">)</span> <span class="o">+</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">e</span>
 </div>
 <div class="viewcode-block" id="effectue_calcul"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.effectue_calcul">[docs]</a><span class="k">def</span> <span class="nf">effectue_calcul</span><span class="p">(</span><span class="n">calcul</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;**effectue_calcul**\ (*calcul*)</span>
@@ -699,26 +597,65 @@
                 <span class="n">calc</span> <span class="o">=</span> <span class="n">calc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                 <span class="c"># On réduit directement les calculs numériques dans une</span>
                 <span class="c"># expression littérale</span>
+                <span class="s">&quot;Effectue les calculs entre parenthèses et remet les parenthèses si l&#39;expression est de longueur supérieure à 1&quot;</span>
                 <span class="n">sol</span> <span class="o">=</span> <span class="n">effectue_calcul</span><span class="p">(</span><span class="n">calc</span><span class="p">)</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="n">sol</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&quot;(&quot;</span><span class="p">)</span>
                     <span class="n">sol</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="n">sol</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">))</span> <span class="ow">and</span> <span class="n">post</span> <span class="ow">and</span> <span class="n">post</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;*&quot;</span> <span class="ow">and</span> \
                         <span class="s">&#39;Polynome(&#39;</span> <span class="ow">in</span> <span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">eval</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                             <span class="c"># Sans doute une factorisation de sommes de polynômes</span>
-                            <span class="n">sol</span> <span class="o">=</span> <span class="p">[</span><span class="nb">repr</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="nb">eval</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">]))]</span>
+                            <span class="n">sol</span> <span class="o">=</span> <span class="p">[</span><span class="nb">repr</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="nb">eval</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">]))]</span>
                             <span class="n">post</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
-                            <span class="c">#Suppression des parenthèses autour de ((9.0-80.0)*Polynome(&quot;x&quot;)) devenu (Polynome(&quot;-71.0x&quot;))</span>
+                            <span class="c"># Suppression des parenthèses autour de ((9.0-80.0)*Polynome(&quot;x&quot;)) devenu (Polynome(&quot;-71.0x&quot;))</span>
                             <span class="k">if</span> <span class="n">post</span> <span class="ow">and</span> <span class="n">result</span> <span class="ow">and</span> <span class="n">post</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;)&quot;</span> <span class="ow">and</span> <span class="n">result</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;(&quot;</span> <span class="p">:</span>
-                                <span class="n">result</span><span class="p">,</span>  <span class="n">post</span> <span class="o">=</span> <span class="n">result</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>  <span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+                                <span class="n">result</span><span class="p">,</span> <span class="n">post</span> <span class="o">=</span> <span class="n">result</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">sol</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">calc</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">recherche</span> <span class="o">==</span> <span class="n">recherche_somme</span><span class="p">:</span>
+                    <span class="c"># Permet les cas 1 + Fraction(1, 2) + 1</span>
+                    <span class="c"># ou 3 + Polynome(&quot;5x&quot;) + 4</span>
+                    <span class="n">frac</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">nombres</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">calc</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+                        <span class="n">nombres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">calc</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nombres</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">Fraction</span><span class="p">):</span> <span class="n">frac</span> <span class="o">=</span> <span class="bp">True</span>
+                        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nombres</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">Polynome</span><span class="p">):</span> <span class="n">poly</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">detailler</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">nombres</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">var</span><span class="p">,</span> <span class="n">nombres</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">detailler</span>
+                    <span class="k">if</span> <span class="n">poly</span><span class="p">:</span> <span class="n">nombres</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Polynome</span><span class="p">([[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">var</span><span class="p">,</span> <span class="n">detailler</span><span class="p">)</span> <span class="p">,</span> <span class="n">i</span><span class="p">)[</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Polynome</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nombres</span><span class="p">]</span>
+                    <span class="k">elif</span> <span class="n">frac</span><span class="p">:</span> <span class="n">nombres</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Fraction</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">i</span><span class="p">)[</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nombres</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">poly</span><span class="p">:</span> <span class="n">classe</span> <span class="o">=</span> <span class="n">Polynome</span>
+                    <span class="k">elif</span> <span class="n">frac</span><span class="p">:</span> <span class="n">classe</span> <span class="o">=</span> <span class="n">Fraction</span>
+                    <span class="k">if</span> <span class="n">poly</span> <span class="ow">or</span> <span class="n">frac</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">calc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;+&#39;</span><span class="p">:</span> <span class="n">operation</span> <span class="o">=</span> <span class="n">classe</span><span class="o">.</span><span class="n">__add__</span>
+                        <span class="k">else</span><span class="p">:</span> <span class="n">operation</span> <span class="o">=</span> <span class="n">classe</span><span class="o">.</span><span class="n">__sub__</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nombres</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+                            <span class="n">sol</span> <span class="o">=</span> <span class="n">operation</span><span class="p">(</span><span class="n">classe</span><span class="p">(</span><span class="n">nombres</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="o">*</span><span class="n">nombres</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">sol</span> <span class="o">=</span> <span class="n">operation</span><span class="p">(</span><span class="n">nombres</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="n">nombres</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+                    <span class="k">else</span><span class="p">:</span> <span class="n">sol</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">calc</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">recherche</span> <span class="o">==</span> <span class="n">recherche_produit</span> <span class="ow">and</span> <span class="n">calc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;*&quot;</span><span class="p">:</span>
+                    <span class="n">frac</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">nombres</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">calc</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+                        <span class="n">nombres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">calc</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nombres</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">Fraction</span><span class="p">):</span> <span class="n">frac</span> <span class="o">=</span> <span class="bp">True</span>
+                        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nombres</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">Polynome</span><span class="p">):</span> <span class="n">poly</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">detailler</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">nombres</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">var</span><span class="p">,</span> <span class="n">nombres</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">detailler</span>
+                    <span class="k">if</span> <span class="n">poly</span><span class="p">:</span> <span class="n">nombres</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Polynome</span><span class="p">([[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">var</span><span class="p">,</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span> <span class="n">detailler</span><span class="p">)</span> <span class="p">,</span> <span class="n">i</span><span class="p">)[</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Polynome</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nombres</span><span class="p">]</span>
+                    <span class="k">elif</span> <span class="n">frac</span><span class="p">:</span> <span class="n">nombres</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Fraction</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">i</span><span class="p">)[</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nombres</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">poly</span><span class="p">:</span> <span class="n">classe</span> <span class="o">=</span> <span class="n">Polynome</span>
+                    <span class="k">elif</span> <span class="n">frac</span><span class="p">:</span> <span class="n">classe</span> <span class="o">=</span> <span class="n">Fraction</span>
+                    <span class="k">if</span> <span class="n">poly</span> <span class="ow">or</span> <span class="n">frac</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nombres</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+                            <span class="n">sol</span> <span class="o">=</span> <span class="n">classe</span><span class="o">.</span><span class="n">__mul__</span><span class="p">(</span><span class="n">classe</span><span class="p">(</span><span class="n">nombres</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="o">*</span><span class="n">nombres</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">sol</span> <span class="o">=</span> <span class="n">classe</span><span class="o">.</span><span class="n">__mul__</span><span class="p">(</span><span class="n">nombres</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="n">nombres</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+                    <span class="k">else</span><span class="p">:</span> <span class="n">sol</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">calc</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">sol</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">calc</span><span class="p">))</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span> <span class="n">sol</span> <span class="o">=</span> <span class="n">splitting</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span> <span class="n">sol</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">sol</span><span class="p">)]</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="p">(</span><span class="n">Polynome</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">)):</span> <span class="n">sol</span> <span class="o">=</span> <span class="p">[</span><span class="nb">repr</span><span class="p">(</span><span class="n">sol</span><span class="p">)]</span>
-                <span class="k">else</span> <span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">u&quot;Le résultat a un format inattendu&quot;</span><span class="p">)</span>
-<span class="c">#             if recherche == recherche_neg and len(sol) &gt; 1:</span>
-            <span class="k">if</span> <span class="n">recherche</span> <span class="o">==</span> <span class="n">recherche_neg</span> <span class="ow">and</span> <span class="n">pre</span><span class="p">:</span>
+                <span class="k">else</span> <span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">u&quot;Le résultat a un format inattendu&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">recherche</span> <span class="o">==</span> <span class="n">recherche_neg</span> <span class="ow">and</span> <span class="p">(</span><span class="n">pre</span> <span class="ow">or</span> <span class="n">result</span><span class="p">):</span>
                 <span class="c"># Ajoute le &quot;+&quot; ou sépare le &quot;-&quot;:</span>
                 <span class="c"># &quot;1-(-9)&quot; =&gt; &quot;1 + 9&quot; et &quot;1+(-9)&quot; =&gt; &quot;1 - 9&quot;</span>
                 <span class="k">if</span> <span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;-&quot;</span><span class="p">:</span> <span class="n">sol</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:]]</span>
@@ -737,13 +674,13 @@
             <span class="n">calcul</span> <span class="o">=</span> <span class="n">post</span>
             <span class="k">if</span> <span class="n">calcul</span><span class="p">:</span> <span class="n">test</span> <span class="o">=</span> <span class="n">recherche</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span> <span class="n">test</span> <span class="o">=</span> <span class="bp">None</span>
-            <span class="k">if</span> <span class="n">post</span> <span class="ow">and</span> <span class="n">recherche</span> <span class="o">==</span> <span class="n">recherche_neg</span><span class="p">:</span> <span class="n">break_somme</span><span class="o">=</span><span class="bp">True</span>
+            <span class="k">if</span> <span class="n">post</span> <span class="ow">and</span> <span class="n">recherche</span> <span class="o">==</span> <span class="n">recherche_neg</span><span class="p">:</span> <span class="n">break_somme</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span> <span class="n">result</span> <span class="o">=</span> <span class="n">calcul</span>
     <span class="k">return</span> <span class="n">result</span>
 </div>
 <div class="viewcode-block" id="priorites"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.priorites">[docs]</a><span class="k">def</span> <span class="nf">priorites</span><span class="p">(</span><span class="n">calcul</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;**priorites**\ (*calcul*)</span>
+    <span class="sd">r&quot;&quot;&quot;**priorites**\ (*calcul*)</span>
 
 <span class="sd">    Effectue un enchaînement d&#39;opérations contenues dans calcul en</span>
 <span class="sd">    respectant les priorités et en détaillant les étapes.</span>
@@ -754,29 +691,38 @@
 <span class="sd">    &gt;&gt;&gt; from pyromaths.outils import Priorites3</span>
 <span class="sd">    &gt;&gt;&gt; Priorites3.priorites(&#39;-1+5-(-5)+(-6)*1&#39;)</span>
 <span class="sd">    [[&#39;4&#39;, &#39;+&#39;, &#39;5&#39;, &#39;-&#39;, &#39;6&#39;], [&#39;9&#39;, &#39;-&#39;, &#39;6&#39;], [&#39;3&#39;]]</span>
-
+<span class="sd">    &gt;&gt;&gt; Priorites3.priorites(&#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;)*Polynome([[Fraction(1,3), 1], [1,0]], &quot;x&quot;)&#39;)</span>
+<span class="sd">    [[&#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;, &#39;*&#39;, &#39;Polynome([[Fraction(1, 3), 1]], &quot;x&quot;, False, True)&#39;, &#39;+&#39;, &#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;, &#39;*&#39;, &#39;Polynome([[1, 0]], &quot;x&quot;, False, True)&#39;], [&#39;Fraction(6, 7)&#39;, &#39;*&#39;, &#39;Fraction(1, 3)&#39;, &#39;*&#39;, &quot;Polynome([[1, 1]], &#39;x&#39;, False, True)&quot;, &#39;+&#39;, &#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;], [&#39;Polynome([[Fraction(&quot;3*2&quot;, &quot;7*3&quot;, &quot;s&quot;), 1]], &quot;x&quot;, False, True)&#39;, &#39;+&#39;, &#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;], [&#39;Polynome([[Fraction(2, 7), 1], [Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;]]</span>
+<span class="sd">    &gt;&gt;&gt; Priorites3.priorites(&#39;-Fraction(-6,1)/Fraction(-4,1)&#39;)</span>
+<span class="sd">    [[&#39;-&#39;, &#39;(&#39;, &#39;Fraction(-6, 1)&#39;, &#39;*&#39;, &#39;Fraction(1, -4)&#39;, &#39;)&#39;], [&#39;-&#39;, &#39;Fraction(&quot;2*-3&quot;, &quot;2*-2&quot;, &quot;s&quot;)&#39;], [&#39;Fraction(-3, 2)&#39;]]</span>
+<span class="sd">    </span>
 <span class="sd">    :rtype: list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">calcul</span> <span class="o">=</span> <span class="n">splitting</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
     <span class="n">solution</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">s</span><span class="o">=</span> <span class="n">effectue_calcul</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">effectue_calcul</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">s</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="n">post_polynomes</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
             <span class="n">solution</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-            <span class="n">s2</span> <span class="o">=</span> <span class="n">post_fractions</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">s2</span> <span class="o">!=</span> <span class="n">s</span><span class="p">:</span>
-                <span class="n">solution</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
-                <span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">s2</span><span class="p">]</span>
-        <span class="n">calcul</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">s</span><span class="p">]</span> <span class="c"># dissocie calcul et s</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">post_polynomes</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span> <span class="o">!=</span> <span class="n">s</span><span class="p">:</span>
-            <span class="c"># Finit la réduction du polynôme résultat</span>
-            <span class="n">solution</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s">&#39;Fraction(&#39;</span> <span class="ow">in</span> <span class="n">calcul</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="n">post_fractions</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">calcul</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-                <span class="n">calcul</span> <span class="o">=</span> <span class="p">[[</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span>
-                <span class="n">solution</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">calcul</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">s</span><span class="p">]</span>  <span class="c"># dissocie calcul et s</span>
+    <span class="k">if</span> <span class="s">&#39;Polynome(&#39;</span> <span class="ow">in</span> <span class="n">calcul</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">9</span><span class="p">]:</span>
+        <span class="kn">from</span> <span class="nn">pyromaths.classes.PolynomesCollege</span> <span class="kn">import</span> <span class="n">Polynome</span>
+        <span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">reduction</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">solution</span> <span class="ow">and</span> <span class="nb">repr</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="n">solution</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">solution</span> <span class="ow">and</span> <span class="nb">repr</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="n">calcul</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">solution</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">repr</span><span class="p">(</span><span class="n">p</span><span class="p">)])</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">reduction</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">&#39;Fraction(&#39;</span> <span class="ow">in</span> <span class="n">calcul</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">9</span><span class="p">]:</span>
+        <span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">calcul</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">traitement</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">solution</span> <span class="ow">and</span> <span class="nb">repr</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">!=</span> <span class="n">solution</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">solution</span> <span class="ow">and</span> <span class="nb">repr</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">!=</span> <span class="n">calcul</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">solution</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">repr</span><span class="p">(</span><span class="n">f</span><span class="p">)])</span>
+            <span class="c"># si la fraction est écrite sous la forme d&#39;un entier, c&#39;est fini</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span> <span class="k">break</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">traitement</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">solution</span>
 </div>
 <div class="viewcode-block" id="texify"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.texify">[docs]</a><span class="k">def</span> <span class="nf">texify</span><span class="p">(</span><span class="n">liste_calculs</span><span class="p">):</span>
@@ -805,7 +751,7 @@
     <span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
     <span class="n">ls</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">calcul</span> <span class="ow">in</span> <span class="n">liste_calculs</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">calcul</span><span class="p">,</span>  <span class="nb">basestring</span><span class="p">):</span> <span class="n">calcul</span> <span class="o">=</span> <span class="n">splitting</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">calcul</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span> <span class="n">calcul</span> <span class="o">=</span> <span class="n">splitting</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
         <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
         <span class="n">puiss</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)):</span>
@@ -813,17 +759,17 @@
             <span class="k">if</span> <span class="n">el</span><span class="p">[:</span><span class="mi">9</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;Polynome(&quot;</span><span class="p">:</span>
                 <span class="c"># Doit-on entourer ce polynôme de parenthèses ?</span>
                 <span class="n">p</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">):</span> <span class="n">q</span> <span class="o">=</span> <span class="n">calcul</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-                <span class="k">else</span><span class="p">:</span> <span class="n">q</span><span class="o">=</span> <span class="s">&quot;&quot;</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">):</span> <span class="n">q</span> <span class="o">=</span> <span class="n">calcul</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
                 <span class="sd">&quot;&quot;&quot; 3 cas :</span>
 <span class="sd">                * {*,-}(2x+3) ou {*,-}(-2x)</span>
 <span class="sd">                * (2x+3)*...</span>
 <span class="sd">                * (2x+1)**2&quot;&quot;&quot;</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s">&quot;*-&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">p</span><span class="o">.</span><span class="n">monomes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">))</span> \
-                    <span class="ow">or</span> <span class="p">(</span><span class="n">q</span> <span class="ow">and</span> <span class="n">q</span> <span class="o">==</span> <span class="s">&quot;*&quot;</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span> \
-                    <span class="ow">or</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">p</span><span class="o">.</span><span class="n">monomes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">!=</span><span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">q</span> <span class="ow">and</span> <span class="n">q</span> <span class="o">==</span> <span class="s">&quot;**&quot;</span><span class="p">):</span>
-                    <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;)&quot;</span>
-                <span class="k">elif</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;+&quot;</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">monomes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s">&quot;*-&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">p</span><span class="o">.</span><span class="n">monomes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span> \
+                    <span class="ow">or</span> <span class="p">(</span><span class="n">q</span> <span class="ow">and</span> <span class="n">q</span> <span class="o">==</span> <span class="s">&quot;*&quot;</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> \
+                    <span class="ow">or</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">p</span><span class="o">.</span><span class="n">monomes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">q</span> <span class="ow">and</span> <span class="n">q</span> <span class="o">==</span> <span class="s">&quot;**&quot;</span><span class="p">):</span>
+                    <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span>
+                <span class="k">elif</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;+&quot;</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">monomes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                     <span class="n">s</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
@@ -835,14 +781,14 @@
                     <span class="n">texfrac</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Fraction</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">eval</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">texfrac</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Fraction</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">eval</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">eval</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span>
-                <span class="k">if</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">):</span> <span class="n">q</span> <span class="o">=</span> <span class="n">calcul</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-                <span class="k">else</span><span class="p">:</span> <span class="n">q</span><span class="o">=</span> <span class="s">&quot;&quot;</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">):</span> <span class="n">q</span> <span class="o">=</span> <span class="n">calcul</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
                 <span class="k">if</span> <span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&quot;1&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">q</span> <span class="ow">and</span> <span class="n">q</span> <span class="o">==</span> <span class="s">&quot;**&quot;</span><span class="p">:</span>
                     <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">left( &quot;</span> <span class="o">+</span> <span class="n">texfrac</span> <span class="o">+</span> <span class="s">&quot; </span><span class="se">\\</span><span class="s">right)&quot;</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">s</span> <span class="o">+=</span> <span class="n">texfrac</span>
             <span class="k">elif</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">el</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;(&quot;</span><span class="p">:</span> <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="n">decimaux</span><span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span>
+                <span class="k">if</span> <span class="n">el</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;(&quot;</span><span class="p">:</span> <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="n">decimaux</span><span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span>
                 <span class="k">else</span><span class="p">:</span> <span class="n">s</span> <span class="o">+=</span> <span class="n">decimaux</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">el</span> <span class="o">==</span> <span class="s">&quot;**&quot;</span><span class="p">:</span>
                 <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;**{&quot;</span>
@@ -867,174 +813,93 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">ls</span> <span class="ow">or</span> <span class="n">s</span> <span class="o">!=</span> <span class="n">ls</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
             <span class="n">ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">ls</span>
+</div>
+<div class="viewcode-block" id="plotify"><a class="viewcode-back" href="../../../pyromaths.outils.Priorites3.html#pyromaths.outils.Priorites3.plotify">[docs]</a><span class="k">def</span> <span class="nf">plotify</span><span class="p">(</span><span class="n">calcul</span><span class="p">):</span>
+    <span class="sd">r&quot;&quot;&quot;**plotify**\ (*calcul*)</span>
 
-<span class="c">#===============================================================================</span>
-<span class="c"># #----------------------------------------------------------------------</span>
-<span class="c"># # Pyromaths : FICHIERS DE TESTS</span>
-<span class="c"># #----------------------------------------------------------------------</span>
-<span class="c"># def valeurs(n, polynomes=0, entier=1):</span>
-<span class="c">#     &quot;&quot;&quot;*fichier de tests :* Renvoie une chaîne de caractères contenant un calcul aléatoire de</span>
-<span class="c">#     n nombres, qui sont soit des entiers, soit des décimaux, soit des polynômes.&quot;&quot;&quot;</span>
-<span class="c">#     import random</span>
-<span class="c">#     def deci(entier):</span>
-<span class="c">#         if entier:</span>
-<span class="c">#             return random.randrange(-11, 11)</span>
-<span class="c">#         else:</span>
-<span class="c">#             return random.randrange(-110, 110)/10.</span>
-<span class="c">#     def poly(entier):</span>
-<span class="c">#         lg = random.randrange(3)</span>
-<span class="c">#         degre=[0, 1, 2]</span>
-<span class="c">#         p = [[deci(entier), degre.pop(random.randrange(len(degre)))] for dummy in range(lg+1)]</span>
-<span class="c">#         p = Polynome(p, &quot;x&quot;)</span>
-<span class="c">#         while p == Polynome([[0, 0]], &quot;x&quot;):</span>
-<span class="c">#             degre=[0, 1, 2]</span>
-<span class="c">#             p = [[deci(entier), degre.pop(random.randrange(len(degre)))] for dummy in range(lg+1)]</span>
-<span class="c">#             p = Polynome(p, &quot;x&quot;)</span>
-<span class="c">#         if len(p) == 1 and Polynome.degre(p) == 0:</span>
-<span class="c">#             p = p[0][0]</span>
-<span class="c">#             if p &lt; 0: p = &quot;(&quot; + str(p) +&quot;)&quot;</span>
-<span class="c">#             else: p = str(p)</span>
-<span class="c">#         else: p = repr(p)</span>
-<span class="c">#         return p</span>
-<span class="c">#     if polynomes: nb=poly</span>
-<span class="c">#     else: nb=deci</span>
-<span class="c">#     nbp = []</span>
-<span class="c">#     lo = [&#39;+&#39;,&#39;*&#39;,&#39;-&#39;]</span>
-<span class="c">#     for i in range(n):</span>
-<span class="c">#         if not i:</span>
-<span class="c">#             s = &quot;%s&quot; % nb(entier)</span>
-<span class="c">#         else:</span>
-<span class="c">#             if nbp and nbp[-1] &gt; 2 and not random.randrange(2):</span>
-<span class="c">#                 s += &#39;)&#39;</span>
-<span class="c">#                 nbp.pop(-1)</span>
-<span class="c">#             s += lo[random.randrange(3)]</span>
-<span class="c">#             if nbp:</span>
-<span class="c">#                 for cpt in range(len(nbp)):</span>
-<span class="c">#                     nbp[cpt] += 1</span>
-<span class="c">#             a = random.randrange(3)</span>
-<span class="c">#             if s[-1] in &#39;*-/&#39; and i&lt;=n-2 and not a:</span>
-<span class="c">#                 s += &#39;(&#39;</span>
-<span class="c">#                 nbp.append(1)</span>
-<span class="c">#             nombre = nb(entier)</span>
-<span class="c">#             if nombre &lt; 0: s += &quot;(&quot; + str(nombre) + &quot;)&quot;</span>
-<span class="c">#             else: s += str(nombre)</span>
-<span class="c">#             if not polynomes: #TODO: tester les puissances avec les polynômes</span>
-<span class="c">#                 a = random.randrange(10)</span>
-<span class="c">#                 if (not nbp or nbp[-1]&gt;1) and not a:</span>
-<span class="c">#                     s += &quot;**2&quot;</span>
-<span class="c">#     while nbp:</span>
-<span class="c">#         s += &#39;)&#39;</span>
-<span class="c">#         nbp.pop(-1)</span>
-<span class="c">#     return s</span>
-<span class="c"># </span>
-<span class="c"># def test_entiers(nbval, polynomes, entiers):</span>
-<span class="c">#     for c in range(10000):</span>
-<span class="c">#         a = valeurs(nbval, polynomes, entiers)</span>
-<span class="c">#         try:</span>
-<span class="c">#             r = priorites(a)</span>
-<span class="c">#             texify(r)</span>
-<span class="c">#         except:</span>
-<span class="c">#             print(a)</span>
-<span class="c">#             break</span>
-<span class="c">#         else:</span>
-<span class="c">#             if not polynomes:</span>
-<span class="c">#                 print u&quot;%s ème calcul&quot; % (c+1), a, &quot; = &quot;, eval(a), u&quot; en %s étapes&quot;%(len(r))</span>
-<span class="c">#                 if eval(a) != eval(&quot;&quot;.join(r[-1])):</span>
-<span class="c">#                     print a, &quot; = &quot;, eval(a)</span>
-<span class="c">#                     print r</span>
-<span class="c">#                     break</span>
-<span class="c">#             if polynomes:</span>
-<span class="c">#                 from sympy import Symbol, expand</span>
-<span class="c">#                 x = Symbol(&#39;x&#39;)</span>
-<span class="c">#                 print u&quot; : %s ème calcul en %s étapes&quot; % (c+1, len(r))</span>
-<span class="c">#                 if not len(r):</span>
-<span class="c">#                     print a</span>
-<span class="c">#                     break</span>
-<span class="c">#                 else:</span>
-<span class="c">#                     t0=sympyfy([a])[0]</span>
-<span class="c">#                     t1=sympyfy(r[-1])</span>
-<span class="c">#                     if isinstance(eval(t1[0]), (int, float)) : t1[0] = &quot;%s+x-x&quot; % (t1[0])</span>
-<span class="c">#                     if isinstance(eval(t0), (int, float)) : t0 = &quot;%s+x-x&quot; % (t0)</span>
-<span class="c"># </span>
-<span class="c">#                     if eval(t0).expand()!=eval(t1[0]).expand():</span>
-<span class="c">#                         print a, &quot;=&quot;, t1</span>
-<span class="c">#                         print &quot;\n&quot;.join(sympyfy(r))</span>
-<span class="c"># </span>
-<span class="c">#                         print u&quot;Devrait être : &quot;, eval(t0).expand()</span>
-<span class="c">#                         break</span>
-<span class="c"># </span>
-<span class="c"># def sympyfy(liste_calculs):</span>
-<span class="c">#     &quot;&quot;&quot;*fichier de tests :* Convertit une liste de chaînes de caractères &#39;liste_calculs&#39; contenant</span>
-<span class="c">#     des polynômes en liste de chaînes de caractères au format Sympy&quot;&quot;&quot;</span>
-<span class="c">#     ls = []</span>
-<span class="c">#     for calcul in liste_calculs:</span>
-<span class="c">#         if isinstance(calcul,  basestring): calcul = splitting(calcul)</span>
-<span class="c">#         s = &quot;&quot;</span>
-<span class="c">#         puiss = 0</span>
-<span class="c">#         for i in range(len(calcul)):</span>
-<span class="c">#             el = calcul[i]</span>
-<span class="c">#             if el[:9] == &quot;Polynome(&quot;:</span>
-<span class="c">#                 # Doit-on entourer ce polynôme de parenthèses ?</span>
-<span class="c">#                 p = eval(el)</span>
-<span class="c">#                 if i+1 &lt; len(calcul): q = calcul[i+1]</span>
-<span class="c">#                 else: q= &quot;&quot;</span>
-<span class="c">#                 if (s and s[-1] in &quot;*-&quot; and (len(p)&gt;1 or p.monomes[0][0]&lt;0)) \</span>
-<span class="c">#                     or (q and q == &quot;*&quot; and len(p)&gt;1) \</span>
-<span class="c">#                     or ((len(p)&gt;1 or p.monomes[0][0]!=1) and q and q == &quot;**&quot;):</span>
-<span class="c">#                     s += &quot;(&quot; + str(p) +&quot;)&quot;</span>
-<span class="c">#                 elif s and s[-1] == &quot;+&quot; and p.monomes[0][0]&lt;0:</span>
-<span class="c">#                     s = s[:-1]</span>
-<span class="c">#                     s += str(p)</span>
-<span class="c">#                 else:</span>
-<span class="c">#                     s += str(p)</span>
-<span class="c">#             elif EstNombre(el):</span>
-<span class="c">#                 if el[0]==&quot;(&quot;: s += &quot;(&quot; + decimaux(el[1:-1]) + &quot;)&quot;</span>
-<span class="c">#                 else: s += decimaux(el)</span>
-<span class="c">#             elif el == &quot;**&quot;:</span>
-<span class="c">#                 s += &quot;**{&quot;</span>
-<span class="c">#                 puiss += 1</span>
-<span class="c">#             elif el == &quot;(&quot;:</span>
-<span class="c">#                 if puiss: puiss += 1</span>
-<span class="c">#                 s += &quot;(&quot;</span>
-<span class="c">#             elif el == &quot;)&quot;:</span>
-<span class="c">#                 if puiss: puiss -= 1</span>
-<span class="c">#                 s += &quot;)&quot;</span>
-<span class="c">#             else :</span>
-<span class="c">#                 # &quot;+&quot;, &quot;-&quot;, &quot;*&quot;, &quot;/&quot;</span>
-<span class="c">#                 s += el</span>
-<span class="c">#             if puiss == 1:</span>
-<span class="c">#                 puiss = 0</span>
-<span class="c">#                 s += &quot;}&quot;</span>
-<span class="c">#         s = s.replace(&quot;\\,x&quot;, &quot;*x&quot;)</span>
-<span class="c">#         s = s.replace(&quot;\\,&quot;, &quot;&quot;)</span>
-<span class="c">#         s = s.replace(&quot;**{&quot;, &quot;**&quot;)</span>
-<span class="c">#         s = s.replace(&quot;^{&quot;, &quot;**&quot;)</span>
-<span class="c">#         s = s.replace(&quot;}&quot;, &quot;&quot;)</span>
-<span class="c"># #        s = s.replace(&quot;(&quot;, &quot;\\left( &quot;)</span>
-<span class="c"># #        s = s.replace(&quot;)&quot;, &quot;\\right) &quot;)</span>
-<span class="c"># #        s = s.replace(&quot;**{&quot;, &quot;^{&quot;)</span>
-<span class="c"># #        s = s.replace(&quot;*&quot;, &quot;\\times &quot;)</span>
-<span class="c"># #        s = s.replace(&quot;/&quot;, &quot;\\div &quot;)</span>
-<span class="c">#         if not ls or s != ls[-1]:</span>
-<span class="c">#             ls.append(s)</span>
-<span class="c">#     return ls</span>
-<span class="c"># </span>
-<span class="c"># def main():</span>
-<span class="c">#     from sympy import Symbol, expand</span>
-<span class="c">#     x = Symbol(&#39;x&#39;)</span>
-<span class="c">#     test_entiers(nbval=13, polynomes=1, entiers=1)</span>
-<span class="c"># #    a = valeurs(2, 1, 1)</span>
-<span class="c"># #    a = &#39;Polynome([[8, 2]], &quot;x&quot;)*Polynome([[3, 1]], &quot;x&quot;)-Polynome([[-3, 0], [4, 2], [10, 1]], &quot;x&quot;)*Polynome([[-4, 2], [5, 0], [-11, 1]], &quot;x&quot;)-Polynome([[3, 2], [-5, 1]], &quot;x&quot;)-(Polynome([[3, 2], [-1, 0]], &quot;x&quot;)*Polynome([[3, 2], [1, 0]], &quot;x&quot;)*Polynome([[-6, 2], [10, 1], [2, 0]], &quot;x&quot;))*Polynome([[-9, 0], [-7, 2], [8, 1]], &quot;x&quot;)-Polynome([[-8, 1]], &quot;x&quot;)+Polynome([[-8, 2], [4, 0]], &quot;x&quot;)+Polynome([[10, 1]], &quot;x&quot;)+Polynome([[-9, 2], [6, 1], [7, 0]], &quot;x&quot;)&#39;</span>
-<span class="c"># #    print(a)</span>
-<span class="c"># ##    s= sympyfy([a])</span>
-<span class="c"># #    print sympyfy(priorites(a))</span>
-<span class="c"># #    r = texify(priorites(a))</span>
-<span class="c"># #    print &quot;\\item $A=&quot;, texify([a])[0] , &quot;$\\par&quot;</span>
-<span class="c"># #    for i in r:</span>
-<span class="c"># #        print &quot;$A=&quot;,</span>
-<span class="c"># #        print &quot;&quot;.join(i),</span>
-<span class="c"># #        print &quot;$\\par&quot;</span>
-<span class="c">#===============================================================================</span></div>
+<span class="sd">    Convertit la chaîne de caractères `calcul` contenant</span>
+<span class="sd">    des polynômes une chaîne de caractères au format psplot</span>
+
+<span class="sd">    **TODO :** intégrer cela dans :mod:`outils.Affichage` et gérer l&#39;ensemble des</span>
+<span class="sd">    classes de Pyromaths.</span>
+
+<span class="sd">    :param calcul: le calcul à traiter</span>
+<span class="sd">    :type calcul: string</span>
+
+<span class="sd">    &gt;&gt;&gt; Priorites3.plotify(&#39;Polynome([[Fraction(-5, 192), 4], [Fraction(2, 96), 3], [Fraction(41, 48), 2], [Fraction(-7, 12), 1], [-4, 0]], &quot;x&quot;, False, False)&#39;)</span>
+<span class="sd">    &#39;-5/192*x^4+2/96*x^3+41/48*x^2-7/12*x^1-4&#39;</span>
+
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">pyromaths.classes.PolynomesCollege</span> <span class="kn">import</span> <span class="n">Polynome</span>
+    <span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">calcul</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span> <span class="n">calcul</span> <span class="o">=</span> <span class="n">splitting</span><span class="p">(</span><span class="n">calcul</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+    <span class="n">puiss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">)):</span>
+        <span class="n">el</span> <span class="o">=</span> <span class="n">calcul</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">el</span><span class="p">[:</span><span class="mi">9</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;Polynome(&quot;</span><span class="p">:</span>
+            <span class="c"># Doit-on entourer ce polynôme de parenthèses ?</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">):</span> <span class="n">q</span> <span class="o">=</span> <span class="n">calcul</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="sd">&quot;&quot;&quot; 3 cas :</span>
+<span class="sd">            * {*,-}(2x+3) ou {*,-}(-2x)</span>
+<span class="sd">            * (2x+3)*...</span>
+<span class="sd">            * (2x+1)**2&quot;&quot;&quot;</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">monomes</span><span class="p">:</span>
+                <span class="n">texte</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Fraction</span><span class="p">):</span> <span class="n">texte</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">d</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span> <span class="n">texte</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">texte</span> <span class="o">+=</span> <span class="s">&quot;*x^</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="s">&quot;+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;+-&quot;</span><span class="p">,</span> <span class="s">&quot;-&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s">&quot;*-&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">p</span><span class="o">.</span><span class="n">monomes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span> \
+                <span class="ow">or</span> <span class="p">(</span><span class="n">q</span> <span class="ow">and</span> <span class="n">q</span> <span class="o">==</span> <span class="s">&quot;*&quot;</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> \
+                <span class="ow">or</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">p</span><span class="o">.</span><span class="n">monomes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">q</span> <span class="ow">and</span> <span class="n">q</span> <span class="o">==</span> <span class="s">&quot;**&quot;</span><span class="p">):</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span>
+            <span class="k">elif</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;+&quot;</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">monomes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="n">t</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="n">t</span>
+        <span class="k">elif</span> <span class="n">el</span><span class="p">[:</span><span class="mi">9</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;Fraction(&quot;</span><span class="p">:</span>
+            <span class="c"># Doit-on entourer cette fraction de parenthèses ?</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">texfrac</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">u&#39;On ne devrait pas rencontrer de fraction non simplifiée ici&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">calcul</span><span class="p">):</span> <span class="n">q</span> <span class="o">=</span> <span class="n">calcul</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&quot;1&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">q</span> <span class="ow">and</span> <span class="n">q</span> <span class="o">==</span> <span class="s">&quot;**&quot;</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;( &quot;</span> <span class="o">+</span> <span class="n">texfrac</span> <span class="o">+</span> <span class="s">&quot; )&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="n">texfrac</span>
+        <span class="k">elif</span> <span class="n">EstNombre</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">el</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;(&quot;</span><span class="p">:</span> <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="n">decimaux</span><span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span>
+            <span class="k">else</span><span class="p">:</span> <span class="n">s</span> <span class="o">+=</span> <span class="n">decimaux</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">el</span> <span class="o">==</span> <span class="s">&quot;**&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;^(&quot;</span>
+            <span class="n">puiss</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">el</span> <span class="o">==</span> <span class="s">&quot;(&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">puiss</span><span class="p">:</span> <span class="n">puiss</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;(&quot;</span>
+        <span class="k">elif</span> <span class="n">el</span> <span class="o">==</span> <span class="s">&quot;)&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">puiss</span><span class="p">:</span> <span class="n">puiss</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;)&quot;</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="c"># &quot;+&quot;, &quot;-&quot;, &quot;*&quot;, &quot;/&quot;</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">el</span>
+        <span class="k">if</span> <span class="n">puiss</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">puiss</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;)&quot;</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;**{&quot;</span><span class="p">,</span> <span class="s">&quot;^(&quot;</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">r&quot;\,&quot;</span><span class="p">,</span> <span class="s">&quot;*&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span></div>
 </pre></div>
 
       </div>
@@ -1048,7 +913,7 @@
 
     <div class="footer">
         &copy; Copyright 2013, Jérôme Ortais.
-      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

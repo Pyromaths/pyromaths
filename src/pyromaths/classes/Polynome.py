@@ -28,6 +28,7 @@ if __name__ == "__main__":
 # from .Racine import simplifie_racine, RacineDegre2, sqrt
 from .Racine import RacineDegre2
 from .Fractions import Fraction
+from pyromaths.outils import Priorites3
 import re
 # from pyromaths.outils.Affichage import pTeX, TeX, radicalTeX, fTeX, Fractions, tTeX
 from pyromaths.outils.Affichage import TeX, tTeX
@@ -45,7 +46,13 @@ class Polynome:
             liste_coeff = {0:liste_coeff}
         for i in liste_coeff.iterkeys():
             if liste_coeff[i] != 0:
-                liste_reduite[i] = liste_coeff[i] + Fraction(0, 1)
+                if isinstance(liste_coeff[i], (RacineDegre2, Fraction)):
+                    #===========================================================
+                    # print liste_coeff[i]
+                    #===========================================================
+                    liste_reduite[i] = liste_coeff[i].simplifie()
+                else:
+                    liste_reduite[i] = Fraction(liste_coeff[i], 1)
         if liste_reduite == {} or liste_coeff == []:
             liste_reduite = {0:0}
         self.dictio = liste_reduite
@@ -137,7 +144,6 @@ class Polynome:
             for i in self.dictio.iterkeys():
                 for j in other.dictio.iterkeys():
                     exposant = i + j
-                    print self.dictio[i], other.dictio[j]
                     coefficient = self.dictio[i] * other.dictio[j]
                     result = result + Polynome({exposant:coefficient}, var=self.var)
             return result
@@ -221,9 +227,17 @@ class Polynome:
             result = 0
             for i in self.dictio.iterkeys():
                 result = result + self[i] * x ** i
-            if isinstance(result, Fraction):
+            if isinstance(result, str):
+                result = eval(Priorites3.priorites(result)[-1][0])
+            if isinstance(result, (int, float)):
+                return result
+            elif isinstance(result, Fraction):
                 result = result.simplifie()
-            if result.denominateur == 1:
+                if result.d == 1:
+                    return result.n
+                else:
+                    return result
+            elif result.denominateur == 1:
                 return result.numerateur
             else:
                 return result

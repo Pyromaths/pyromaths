@@ -17,6 +17,7 @@ Contenu :
     intro.rst
     pyromaths.classes.rst
     pyromaths.outils.rst
+    pyromaths.ex.troisiemes.rst
 
 
 

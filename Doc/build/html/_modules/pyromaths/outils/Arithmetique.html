@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,11 +6,10 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyromaths.outils.Arithmetique &mdash; Pyromaths 13.03 documentation</title>
+    <title>pyromaths.outils.Arithmetique &mdash; documentation Pyromaths 13.03</title>
     
     <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -28,13 +25,12 @@
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../_static/translations.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="../../../_static/theme_extras.js"></script>
-    <link rel="top" title="Pyromaths 13.03 documentation" href="../../../index.html" />
+    <link rel="top" title="documentation Pyromaths 13.03" href="../../../index.html" />
     <link rel="up" title="Code du module" href="../../index.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="../../../_static/bandeau.png" alt="Logo"/><h1 class="heading"><a href="../../../index.html">
-          <span>Pyromaths 13.03 documentation</span></a></h1>
+          <span>documentation Pyromaths 13.03</span></a></h1>
         <h2 class="heading"><span>pyromaths.outils.Arithmetique</span></h2>
       </div>
       <div class="topnav">
@@ -73,39 +69,58 @@
 
 <span class="kn">import</span> <span class="nn">math</span><span class="o">,</span> <span class="nn">random</span>
 
-<div class="viewcode-block" id="pgcd"><a class="viewcode-back" href="../../../pyromaths.outils.Arithmetique.html#pyromaths.outils.Arithmetique.pgcd">[docs]</a><span class="k">def</span> <span class="nf">pgcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;**pgcd**\ (*a*\ , *b*\ )</span>
+<div class="viewcode-block" id="pgcd"><a class="viewcode-back" href="../../../pyromaths.outils.Arithmetique.html#pyromaths.outils.Arithmetique.pgcd">[docs]</a><span class="k">def</span> <span class="nf">pgcd</span><span class="p">(</span><span class="o">*</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;**pgcd**\ (*n*)</span>
 
-<span class="sd">    Calcule le pgcd de deux entiers.</span>
+<span class="sd">    Calcule le pgcd de plusieurs entiers entiers.</span>
+<span class="sd">    </span>
+<span class="sd">    Merci à http://python.jpvweb.com/mesrecettespython/doku.php?id=pgcd_ppcm</span>
 
-<span class="sd">    :param a,b: Les entiers dont on veut le pgcd</span>
-<span class="sd">    :type a,b: integer</span>
+<span class="sd">    :param n: Les entiers dont on veut le pgcd</span>
+<span class="sd">    :type n: integer</span>
 
 <span class="sd">    &gt;&gt;&gt; from pyromaths.outils import Arithmetique</span>
-<span class="sd">    &gt;&gt;&gt; Arithmetique.pgcd(64,72)</span>
-<span class="sd">    8</span>
+<span class="sd">    &gt;&gt;&gt; Arithmetique.pgcd(64,72,36)</span>
+<span class="sd">    4</span>
 
 <span class="sd">    :rtype: integer</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">while</span> <span class="n">b</span><span class="p">:</span>
-        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
-    <span class="k">return</span> <span class="n">a</span>
+    <span class="k">def</span> <span class="nf">_pgcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="c">#=======================================================================</span>
+        <span class="c"># print &quot;pgcd dans arithmetique &quot;, a, b, isinstance(a, int), isinstance(b, int)</span>
+        <span class="c"># print repr(a), repr(b)</span>
+        <span class="c">#=======================================================================</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">):</span> <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
+        <span class="k">return</span> <span class="n">a</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">_pgcd</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">_pgcd</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">p</span>
 </div>
-<div class="viewcode-block" id="ppcm"><a class="viewcode-back" href="../../../pyromaths.outils.Arithmetique.html#pyromaths.outils.Arithmetique.ppcm">[docs]</a><span class="k">def</span> <span class="nf">ppcm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;**ppcm**\ (*a*\ , *b*\ )</span>
+<div class="viewcode-block" id="ppcm"><a class="viewcode-back" href="../../../pyromaths.outils.Arithmetique.html#pyromaths.outils.Arithmetique.ppcm">[docs]</a><span class="k">def</span> <span class="nf">ppcm</span><span class="p">(</span><span class="o">*</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;**ppcm**\ (*n*)</span>
 
-<span class="sd">    Calcule le ppcm de deux entiers.</span>
+<span class="sd">    Calcule le ppcm de plusieurs entiers.</span>
+<span class="sd">    </span>
+<span class="sd">    Merci à http://python.jpvweb.com/mesrecettespython/doku.php?id=pgcd_ppcm</span>
 
-<span class="sd">    :param a,b: Les entiers dont on veut le ppcm</span>
-<span class="sd">    :type a,b: integer</span>
+<span class="sd">    :param n: Les entiers dont on veut le ppcm</span>
+<span class="sd">    :type n: integer</span>
 
 <span class="sd">    &gt;&gt;&gt; from pyromaths.outils import Arithmetique</span>
-<span class="sd">    &gt;&gt;&gt; Arithmetique.ppcm(64, 72)</span>
+<span class="sd">    &gt;&gt;&gt; Arithmetique.ppcm(64, 72, 36)</span>
 <span class="sd">    576</span>
 
 <span class="sd">    :rtype: integer</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">/</span> <span class="n">pgcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_pgcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
+        <span class="k">return</span> <span class="n">a</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">//</span> <span class="n">_pgcd</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">//</span> <span class="n">_pgcd</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">p</span>
 </div>
 <div class="viewcode-block" id="premier"><a class="viewcode-back" href="../../../pyromaths.outils.Arithmetique.html#pyromaths.outils.Arithmetique.premier">[docs]</a><span class="k">def</span> <span class="nf">premier</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;**premier**\ (*n*)</span>
@@ -382,7 +397,7 @@
 
     <div class="footer">
         &copy; Copyright 2013, Jérôme Ortais.
-      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

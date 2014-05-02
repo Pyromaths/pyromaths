@@ -24,6 +24,7 @@
 from random import randrange
 from pyromaths.classes.Polynome import Polynome, TeX, RacineDegre2
 from pyromaths.classes.Racine import simplifie_racine
+from pyromaths.outils.Priorites3 import priorites
 from pyromaths.outils.Polynomes import poly_racines_entieres, poly_racines_fractionnaires, poly_racines_quelconques, poly_id_remarquables, poly_degre3_racines_entieres, TeX_division, poly_degre3_racines_fractionnaires, randint
 # from pyromaths.outils.decimaux import decimaux
 from pyromaths.outils.Affichage import pTeX, radicalTeX, fTeX
@@ -41,7 +42,7 @@ def exo_racines_degre2():
     rac_min = -10
     rac_max = 10
     # denominateur maximmum pour les racines fractionnaires
-    denom_max =  12
+    denom_max = 12
     # Valeurs absolues maximales des coefficients d'un polynôme quelconque
     abs_a = 1
     abs_b = 10
@@ -181,11 +182,11 @@ def exo_factorisation_degre3():
     rac_max = 10
     # denominateur maximmum pour les racines fractionnaires
     denom1 = 12
-    #Valeurs absolues maximales des coefficients d'un polynôme quelconque
+    # Valeurs absolues maximales des coefficients d'un polynôme quelconque
 #     abs_a = 1
 #     abs_b = 10
 #     abs_c = 10
-    #X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
+    # X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
 #     inconnues = ['x', 'y', 'z', 't']
 #     nom_poly = ['P', 'Q', 'R', 'S']
     exo = ["\\exercice",
@@ -327,6 +328,8 @@ def quest_fonctions_rationnelles():
             Intervalle = [int(round(-Q[0] / Q[1])) + 1, bornesup]
         else:
             Intervalle = [borneinf, int(round(-Q[0] / Q[1])) - 1]
+    else:
+        Intervalle = [borneinf, bornesup]
 
     # dérivée
     numerateur = "%s\\times%s-%s\\times%s" % (P.derive().TeX(parenthese=True), Q.TeX(parenthese=True),
@@ -335,7 +338,8 @@ def quest_fonctions_rationnelles():
     denominateur = u"%s^2" % (Q.TeX(parenthese=True))
     f_derivee = "\\dfrac{%s}{%s}" % (numerateur, denominateur)
     f_derivee_simplifiee = "\\dfrac{%s}{%s}" % (numerateur_simplifie, denominateur)
-    VI = (-Q[0] * Fraction(1) / Q[1]).simplifie()
+    VI = eval(priorites('-%r*Fraction(1)/%r' % (Q[0], Q[1]))[-1][0])
+    if isinstance(VI, (Fraction, RacineDegre2)): VI = VI.simplifie()
     exo = [u"\\item On considère la fonction $%s$ définie sur $I=[%s~;~%s]$ par $%s(%s)=\dfrac{%s}{%s}$." % (nomf, Intervalle[0], Intervalle[1], nomf, var, P, Q),
          "\\begin{enumerate}"]
     cor = [u"\\item On considère la fonction $%s$ définie sur $I=[%s~;~%s]$ par $%s(%s)=\dfrac{%s}{%s}$." % (nomf, Intervalle[0], Intervalle[1], nomf, var, P, Q),
@@ -349,11 +353,14 @@ def quest_fonctions_rationnelles():
     cor.append("%s&=%s" % ((Q - Q[0]), TeX(-Q[0])))
     cor.append("\\\\")
     if Q[1] != 1:
-        x0 = -Q[0] * Fraction(1) / Q[1]
-        x1 = x0.simplifie()
+        x0 = eval(priorites('-%r*Fraction(1)/%r' % (Q[0], Q[1]))[-1][0])
+        if isinstance(x0, (Fraction, RacineDegre2)):
+            x1 = x0.simplifie()
+        else:
+            x1 = x0
         cor.append("%s&=%s" % (var, TeX(-Q[0] * Fraction(1) / Q[1])))
         cor.append("\\\\")
-        if x0.denominateur != x1.denominateur:
+        if isinstance(x0, (Fraction, RacineDegre2)) and (not isinstance(x1, (Fraction, RacineDegre2)) or x0.d != x1.d):
             cor.append("%s&=%s" % (var, TeX(x1)))
             cor.append("\\\\")
     cor.pop(-1)
@@ -369,8 +376,12 @@ def quest_fonctions_rationnelles():
     cor.append(u"\\item En déduire le sens de variations de $%s$ sur $I$.\\par" % (nomf))
     if numerateur_simplifie.degre_max == 0:
         cor.append(u" Comme $%s$ est un carré, il est toujours positif.\\\\" % (denominateur))
-        f_xmin = TeX((Fraction(1) * P(Intervalle[0]) / Q(Intervalle[0])).simplifie())
-        f_xmax = TeX((Fraction(1) * P(Intervalle[1]) / Q(Intervalle[1])).simplifie())
+        f_xmin = eval(priorites('%r*Fraction(1)/%r' % (P(Intervalle[0]), Q(Intervalle[0])))[-1][0])
+        f_xmax = eval(priorites('%r*Fraction(1)/%r' % (P(Intervalle[1]), Q(Intervalle[1])))[-1][0])
+        if isinstance(f_xmin, (Fraction, RacineDegre2)): f_xmin = f_xmin.simplifie()
+        if isinstance(f_xmax, (Fraction, RacineDegre2)): f_xmax = f_xmax.simplifie()
+        f_xmin = TeX(f_xmin)
+        f_xmax = TeX(f_xmax)
         if numerateur_simplifie[0] < 0:
             cor.append(u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient " % \
                   (numerateur_simplifie[0], var, nomf, var))
@@ -422,8 +433,12 @@ def quest_fonctions_rationnelles_sur_R():
     numerateur = "%s\\times%s-%s\\times%s" % (P.derive().TeX(parenthese=True), Q.TeX(parenthese=True),
                                           P.TeX(parenthese=True), Q.derive().TeX(parenthese=True))
     numerateur_simplifie = (P.derive() * Q - P * Q.derive()).simplifie()
-    VI = (-Q[0] * Fraction(1) / Q[1]).simplifie()
-
+    # VI = (-Q[0] * Fraction(1) / Q[1]).simplifie()
+    #===========================================================================
+    # print "A simplifier : ", priorites('-%r*Fraction(1)/%r' % (Q[0], Q[1]))[-1][0]
+    #===========================================================================
+    VI = eval(priorites('-%r*Fraction(1)/%r' % (Q[0], Q[1]))[-1][0])
+    if isinstance(VI, (Fraction, RacineDegre2)): VI.simplifie()
     denominateur = u"%s^2" % (Q.TeX(parenthese=True))
     f_derivee = "\\dfrac{%s}{%s}" % (numerateur, denominateur)
     f_derivee_simplifiee = "\\dfrac{%s}{%s}" % (numerateur_simplifie, denominateur)
@@ -451,19 +466,25 @@ def quest_fonctions_rationnelles_sur_R():
     cor.append(u"$$%s'(%s)=%s=%s$$" % (nomf, var, f_derivee, f_derivee_simplifiee))
     exo.append(u"\\item Déterminer les limites de $%s$ aux bornes de $\\mathcal{D}_{%s}$." % (nomf, nomf))
     cor.append(u"\\item Déterminer les limites de $%s$ aux bornes de $\\mathcal{D}_{%s}$." % (nomf, nomf))
-    limite = P[1] / Q[1]
-    limite_simple = limite.simplifie()
+    #===========================================================================
+    # limite = P[1] / Q[1]
+    #===========================================================================
+    limite = eval(priorites('-%r*Fraction(1)/%r' % (P[1], Q[1]))[-1][0])
+    if isinstance(limite, (Fraction, RacineDegre2)):
+        limite_simple = limite.simplifie()
+    else:
+        limite_simple = limite
 
     cor.append("$$\\lim_{%s\\to -\\infty}\\dfrac{%s}{%s}= " % (var, P, Q))
 
     cor.append("\\lim_{%s\\to -\\infty}\\dfrac{%s%s}{%s%s} = %s" % (var, coeffTeX(P[1]), var, coeffTeX(Q[1]), var, limite))
-    if limite.n == limite_simple.n:
+    if isinstance(limite, (int, float)) or (isinstance(limite_simple, (Fraction, RacineDegre2)) and limite.n == limite_simple.n):
         cor.append("$$")
     else:
         cor.append("= %s $$" % (TeX(limite_simple)))
     cor.append("$$\\lim_{%s\\to +\\infty}\\dfrac{%s}{%s}= " % (var, P, Q))
     cor.append("\\lim_{%s\\to +\\infty}\\dfrac{%s%s}{%s%s} = %s" % (var, coeffTeX(P[1]), var, coeffTeX(Q[1]), var, limite))
-    if limite.n == limite_simple.n:
+    if isinstance(limite, (int, float)) or (isinstance(limite_simple, (Fraction, RacineDegre2)) and limite.n == limite_simple.n):
         cor.append("$$")
     else:
         cor.append("= %s $$" % (TeX(limite_simple)))
@@ -494,7 +515,9 @@ def quest_fonctions_rationnelles_sur_R():
     cor.append(u"\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$.\\par" % (nomf, nomf))
     if numerateur_simplifie.degre_max == 0:
         cor.append(u" Comme $%s$ est un carré, il est toujours positif.\\\\" % (denominateur))
-        f_xmin = TeX((P[1] / Q[1]).simplifie())
+        f_xmin = eval(priorites('-%r*Fraction(1)/%r' % (P[1], Q[1]))[-1][0])
+        if isinstance(f_xmin, (Fraction, RacineDegre2)):
+            f_xmin = f_xmin.simplifie()
         f_xmax = f_xmin
         if numerateur_simplifie[0] < 0:
             cor.append(u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient " % \
@@ -783,8 +806,11 @@ def racines_degre2(P):
     from pyromaths.classes.Fractions import Fraction
     delta = int(P[1] ** 2 - 4 * P[2] * P[0])
     if delta == 0:
-        x0 = Fraction(-1, 2) * P[1] / P[2]
-        liste_racines = [x0.simplifie()]
+        x0 = eval(priorites('Fraction(-1, 2)*%r/%r' % (P[1], P[2]))[-1][0])
+        if isinstance(x0, (Fraction, RacineDegre2)):
+            liste_racines = [x0.simplifie()]
+        else:
+            liste_racines = [x0]
         liste_str_racines = ["\\dfrac{-%s}{2\\times %s}" % (pTeX(P[1]), pTeX(P[2]))]
         simplrac = [False]
     elif delta > 0:
@@ -846,16 +872,19 @@ def factorisation_degre2(P, factorisation=True):
 
     var = P.var
     X = Polynome({1:1}, var)
-    delta = int(P[1] ** 2 - 4 * P[2] * P[0])
+    delta = int(eval(priorites('%r**2-4*%r*%r' % (P[1], P[2], P[0]))[-1][0]))
     if delta < 0:
         factorisation = []
         str_racines = []
         racines = []
         simplrac = [False]
     elif delta == 0:
-        x0 = Fraction(-1, 2) * P[1] / P[2]
+        x0 = eval(priorites('Fraction(-1, 2)*%r/%r' % (P[1], P[2]))[-1][0])
         simplrac = [False]
-        racines = [x0.simplifie()]
+        if isinstance(x0, (Fraction, RacineDegre2)):
+            racines = [x0.simplifie()]
+        else:
+            racines = [x0]
         str_racines = ["\\dfrac{-%s}{2\\times %s}" % (pTeX(P[1]), pTeX(P[2]))]
 
 

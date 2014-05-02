@@ -38,7 +38,7 @@ def coef_opposes(a):  # renvoie un tuple dont les valeurs sont les opposees de c
 
 
 def dev(a):  # renvoi un tuple avec les 3 coefficients du developpement
-    return (a[0][0] * a[1][0], a[0][0] * a[1][1] + a[0][1] * a[1][0], a[0][1] * 
+    return (a[0][0] * a[1][0], a[0][0] * a[1][1] + a[0][1] * a[1][0], a[0][1] *
             a[1][1])
 
 
@@ -222,9 +222,9 @@ def tex_developpe2(a, nega, b, negb, cor, exo=None):  # developpe l'expression a
         if negb:
             if b[1][0] == 0 and b[1][1] == 1:
                 if exo:
-                    exo.append(u'\\[ \\thenocalcul = ' + '-' + tex_dev0(a) + '-(' + tex_dev0(b) + 
+                    exo.append(u'\\[ \\thenocalcul = ' + '-' + tex_dev0(a) + '-(' + tex_dev0(b) +
                               ')' + '\\]')
-                cor.append(u'\\[ \\thenocalcul = ' + '-' + tex_dev0(a) + '-(' + tex_dev0(b) + 
+                cor.append(u'\\[ \\thenocalcul = ' + '-' + tex_dev0(a) + '-(' + tex_dev0(b) +
                           ')' + '\\]')
             elif a[1][0] == 0 and a[1][1] == 1:
                 if exo:
@@ -235,9 +235,9 @@ def tex_developpe2(a, nega, b, negb, cor, exo=None):  # developpe l'expression a
                     exo.append(u'\\[ \\thenocalcul = ' + '-' + tex_dev0(a) + '-' + tex_dev0(b) + '\\]')
                 cor.append(u'\\[ \\thenocalcul = ' + '-' + tex_dev0(a) + '-' + tex_dev0(b) + '\\]')
             cor.append(u'\\[ \\thenocalcul = ' + '-(' + tex_dev1(a) + ')-(' + tex_dev1(b) + ')' + '\\]')
-            cor.append(u'\\[ \\thenocalcul = ' + '-(' + tex_trinome(dev(a)) + ')-(' + 
+            cor.append(u'\\[ \\thenocalcul = ' + '-(' + tex_trinome(dev(a)) + ')-(' +
                       tex_trinome(dev(b)) + ')' + '\\]')
-            cor.append(u'\\[ \\thenocalcul = ' + tex_trinome(coef_opposes(dev(a))) + 
+            cor.append(u'\\[ \\thenocalcul = ' + tex_trinome(coef_opposes(dev(a))) +
                       tex_trinome(coef_opposes(dev(b)), bplus=1) + '\\]')
             cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_trinome(somme_polynomes(coef_opposes(dev(a)),
                       coef_opposes(dev(b)))) + '} \\]')
@@ -248,7 +248,7 @@ def tex_developpe2(a, nega, b, negb, cor, exo=None):  # developpe l'expression a
                 cor.append(u'\\[ \\thenocalcul = ' + '-(' + tex_dev0(a) + ')+' + tex_dev0(b) + '\\]')
                 cor.append(u'\\[ \\thenocalcul = ' + '-(' + tex_dev1(a) + ')+' + tex_dev1(b,
                           bpn=1) + '\\]')
-                cor.append(u'\\[ \\thenocalcul = ' + '-(' + tex_trinome(dev(a)) + ')+' + 
+                cor.append(u'\\[ \\thenocalcul = ' + '-(' + tex_trinome(dev(a)) + ')+' +
                           tex_trinome(dev(b)) + '\\]')
             elif b[1][0] == 0 and b[1][1] == 1:
                 if exo:
@@ -257,7 +257,7 @@ def tex_developpe2(a, nega, b, negb, cor, exo=None):  # developpe l'expression a
                 cor.append(u'\\[ \\thenocalcul = ' + '-' + tex_dev0(a) + tex_dev0(b, bplus=1) + '\\]')
                 cor.append(u'\\[ \\thenocalcul = ' + '-(' + tex_dev1(a) + ')' + tex_dev1(b,
                           bplus=1) + '\\]')
-                cor.append(u'\\[ \\thenocalcul = ' + '-(' + tex_trinome(dev(a)) + ')' + 
+                cor.append(u'\\[ \\thenocalcul = ' + '-(' + tex_trinome(dev(a)) + ')' +
                           tex_trinome(dev(b), bplus=1) + '\\]')
             else:
                 if exo:
@@ -265,9 +265,9 @@ def tex_developpe2(a, nega, b, negb, cor, exo=None):  # developpe l'expression a
                 cor.append(u'\\[ \\thenocalcul = ' + '-' + tex_dev0(a) + '+' + tex_dev0(b) + '\\]')
                 cor.append(u'\\[ \\thenocalcul = ' + '-(' + tex_dev1(a) + ')+' + tex_dev1(b,
                           bpn=1) + '\\]')
-                cor.append(u'\\[ \\thenocalcul = ' + '-(' + tex_trinome(dev(a)) + ')' + 
+                cor.append(u'\\[ \\thenocalcul = ' + '-(' + tex_trinome(dev(a)) + ')' +
                           tex_trinome(dev(b), bplus=1) + '\\]')
-            cor.append(u'\\[ \\thenocalcul = ' + tex_trinome(coef_opposes(dev(a))) + 
+            cor.append(u'\\[ \\thenocalcul = ' + tex_trinome(coef_opposes(dev(a))) +
                       tex_trinome(dev(b), bplus=1) + '\\]')
             cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_trinome(somme_polynomes(coef_opposes(dev(a)),
                       dev(b))) + '} \\]')
@@ -281,7 +281,7 @@ def tex_developpe2(a, nega, b, negb, cor, exo=None):  # developpe l'expression a
                 exo.append(u'\\[ \\thenocalcul = ' + tex_dev0(a) + '-' + tex_dev0(b) + '\\]')
             cor.append(u'\\[ \\thenocalcul = ' + tex_dev0(a) + '-' + tex_dev0(b) + '\\]')
         cor.append(u'\\[ \\thenocalcul = ' + tex_dev1(a) + '-(' + tex_dev1(b) + ')' + '\\]')
-        cor.append(u'\\[ \\thenocalcul = ' + tex_trinome(dev(a)) + '-(' + tex_trinome(dev(b)) + 
+        cor.append(u'\\[ \\thenocalcul = ' + tex_trinome(dev(a)) + '-(' + tex_trinome(dev(b)) +
                   ')' + '\\]')
         cor.append(u'\\[ \\thenocalcul = ' + tex_trinome(dev(a)) + tex_trinome(coef_opposes(dev(b)),
                   bplus=1) + '\\]')
@@ -328,22 +328,22 @@ def tex_trinome(a, bplus=0, bpar=0):  # renvoi le trinome ax²+bx+c
 def valeurs_apb2(pyromax):  # renvoie un tuple contenant ((3,5),(3,5))
     a = valeur_alea(1, pyromax)
     b = valeur_alea(1, pyromax)
-    return ((a, b), (a, b))
+    return 'Polynome("%sx+%s")**2' % (a, b)
 
 
 def valeurs_amb2(pyromax):  # renvoie un tuple contenant ((3,-5),(3,-5))
     a = valeur_alea(1, pyromax)
-    b = valeur_alea(-pyromax, -1)
-    return ((a, b), (a, b))
+    b = valeur_alea(1, pyromax)
+    return 'Polynome("%sx-%s")**2' % (a, b)
 
 
 def valeurs_apbamb(pyromax):  # renvoie un tuple contenant ((3,-5),(3,+5))
     a = valeur_alea(1, pyromax)
     b = valeur_alea(1, pyromax)
     if random.randrange(2):
-        return ((a, -b), (a, b))
-    else:
         return ((a, b), (a, -b))
+    else:
+        return ((a, -b), (a, b))
 
 
 def valeurs_distr(pyromax):
@@ -358,7 +358,7 @@ def valeurs_distr(pyromax):
     while abs(a) == abs(c) and abs(b) == abs(d):
         c = valeur_alea(-pyromax, pyromax)
         d = valeur_alea(-pyromax, pyromax)
-    return ((a, b), (c, d))
+    return 'Polynome("%sx+%s")*Polynome("%sx+%s")' % (a, b, c, d)
 
 
 #
@@ -705,6 +705,7 @@ def factorisation4(cor, exo=None, valeurs=None):  # factorise 64-(x-5)²
 def factorisation5(cor, exo=None, valeurs=None):  # factorise a²-b²
     if not valeurs:
         valeurs = valeurs_apbamb(10)
+    print valeurs
     if valeurs[0][0] == -valeurs[1][0]:
         valeurs = ((valeurs[0][0], abs(valeurs[0][1])), (valeurs[1][0],
                    abs(valeurs[1][1])))
@@ -789,7 +790,7 @@ def fin_fact(a):  # renvoie un tuple contenant la version factorisee de a
 
 
 def tex_equations(fact, cor):  # renvoie un tuple contenant les deux binomes egaux a 0
-    cor.append(u'Nous savons que $A=%s$. Nous devons donc résoudre $%s=0$.\\par' % 
+    cor.append(u'Nous savons que $A=%s$. Nous devons donc résoudre $%s=0$.\\par' %
              (tex_dev0(fact), tex_dev0(fact)))
     cor.append('Un produit de facteurs est nul signifie qu\'un des facteurs est nul. Donc :')
     cor.append('\\[%s=0 \\qquad\\text{ou}\\qquad %s=0\\]' % (tex_binome(fact[0]),
@@ -801,21 +802,21 @@ def tex_equations(fact, cor):  # renvoie un tuple contenant les deux binomes ega
         cor.append('\\[ %s=%s \\]' % (tex_coef(eq[1][0], 'x'), eq[1][1]))
         if eq[1][0] != 1:
             cor.append('\\[ x=%s \\]' % tex_frac(equations2(eq)[1]))
-        cor.append(u'\\fbox{La solution de cette équation est \\,$%s$\\,.}' % 
+        cor.append(u'\\fbox{La solution de cette équation est \\,$%s$\\,.}' %
                  tex_frac(equations3(eq)[1]))
     elif not isinstance(eq[1], tuple):
         cor.append('\\[ %s=%s \\]' % (tex_coef(eq[0][0], 'x'), eq[0][1]))
         if eq[0][0] != 1:
             cor.append('\\[ x=%s \\]' % tex_frac(equations2(eq)[0]))
-        cor.append(u'\\fbox{La solution de cette équation est \\,$%s$\\,.}' % 
+        cor.append(u'\\fbox{La solution de cette équation est \\,$%s$\\,.}' %
                  tex_frac(equations3(eq)[0]))
     else:
         cor.append('\\[%s=%s \\qquad\\text{ou}\\qquad %s=%s\\]' % (tex_coef(eq[0][0],
                  'x'), eq[0][1], tex_coef(eq[1][0], 'x'), eq[1][1]))
         if eq[0][0] != 1 or eq[1][0] != 1:
-            cor.append('\\[x=%s \\qquad\\text{ou}\\qquad x=%s\\]' % 
+            cor.append('\\[x=%s \\qquad\\text{ou}\\qquad x=%s\\]' %
                      (tex_frac(equations2(eq)[0]), tex_frac(equations2(eq)[1])))
-        cor.append(u'\\fbox{Les solutions de cette équation sont \\,$%s\\,\\text{ et }\\,%s$\\,.}' % 
+        cor.append(u'\\fbox{Les solutions de cette équation sont \\,$%s\\,\\text{ et }\\,%s$\\,.}' %
                  (tex_frac(equations3(eq)[0]), tex_frac(equations3(eq)[1])))
 
 
@@ -883,7 +884,7 @@ def developpements(expr, exos, cor):  # effectue les developpements
         else:
             sigb = ''
         cor.append(u'\\[ \\thenocalcul = ' + '%s%s%s%s' % (siga, tex_trinome(dev(expr[0])),
-                  sigb, tex_dev1(expr[1], bpar=expr[3], bplus=expr[3] - 
+                  sigb, tex_dev1(expr[1], bpar=expr[3], bplus=expr[3] -
                   1)) + '\\]')
         if expr[2]:
             a = coef_opposes(dev(expr[0]))
@@ -934,7 +935,7 @@ def version_developpee(expr):  # renvoie la version developpe de A
 
 def tex_fractions(expr, nb, cor):  # repond a la question sur la valeur de x
     a = version_developpee(expr)
-    cor.append('Nous savons que $A=%s$\\,. Donc pour $x=%s$\\, : ' % 
+    cor.append('Nous savons que $A=%s$\\,. Donc pour $x=%s$\\, : ' %
              (tex_trinome(a), tex_frac(nb)))
     cor.append(u'\\[ \\thenocalcul = ' + tex_valeurx0(a, nb) + '\\]')
     if nb == (0, 1):
@@ -958,7 +959,7 @@ def tex_valeurx0(a, nb):
                            bplus=a[0]), tex_coef(a[2], '', bplus=a[0] or
                            a[1]))
     else:
-        return '%s%s%s' % (tex_coef(a[0], '\\times\\left(%s\\right)^2' % 
+        return '%s%s%s' % (tex_coef(a[0], '\\times\\left(%s\\right)^2' %
                            tex_frac(nb)), tex_coef(a[1],
                            '\\times\\left(%s\\right)' % tex_frac(nb),
                            bplus=a[0]), tex_coef(a[2], '', bplus=a[0] or
@@ -1002,13 +1003,13 @@ def tex_valeurx2(a, nb):
             c = den_com0(a[0], a[1])
             texte = ''
             if a[0][0] != 0:
-                texte = tex_coef(1, tex_frac((a[0][0] * c[0], a[0][1] * 
+                texte = tex_coef(1, tex_frac((a[0][0] * c[0], a[0][1] *
                                  c[0])))
             if a[1][0] != 0:
-                texte = texte + tex_coef(1, tex_frac((a[1][0] * c[1], a[1][1] * 
+                texte = texte + tex_coef(1, tex_frac((a[1][0] * c[1], a[1][1] *
                         c[1])), bplus=texte)
             if a[2][0] != 0:
-                texte = texte + tex_coef(1, tex_frac(((a[2][0] * a[0][1]) * 
+                texte = texte + tex_coef(1, tex_frac(((a[2][0] * a[0][1]) *
                         c[0], a[0][1] * c[0])), bplus=texte)
             return texte
 
@@ -1056,10 +1057,11 @@ def tex_devfacteq():
     cor.append('\\end{enumerate}')
     return (exo, cor)
 
-tex_devfacteq.description = u'Dévt, factorisat°, calcul et éq° produit'
+# tex_devfacteq.description = u'Dévt, factorisat°, calcul et éq° produit'
 
 
 def tex_developpements():
+    from pyromaths.outils import Priorites3
     nb_exos = 4
     liste_exos = (valeurs_apb2,
                   valeurs_amb2,
@@ -1076,33 +1078,22 @@ def tex_developpements():
     cor = ['\\exercice*']
     cor.append(u'Développer et réduire les expressions suivantes.')
     cor.append('\\begin{multicols}{2}\\noindent')
-    tex_developpe1(exos[0], exo, cor)
-    exo.append('\\stepcounter{nocalcul}%')
-    cor.append('\\stepcounter{nocalcul}%')
-    tex_developpe1(exos[1], exo, cor)
-    exo.append('\\stepcounter{nocalcul}%')
-    cor.append('\\columnbreak\\stepcounter{nocalcul}%')
-    tex_developpe1(exos[2], exo, cor)
-    exo.append('\\stepcounter{nocalcul}%')
-    cor.append('\\stepcounter{nocalcul}%')
-    tex_developpe1(exos[3], exo, cor)
+    for i in range(4):
+        solve = Priorites3.texify([exos[i]])[0]
+        exo.append("\\[\\thenocalcul = " + solve + "\\]")
+        cor.append("\\[\\thenocalcul = " + solve + "\\]")
+        solve = Priorites3.priorites(exos[i])
+        solve = Priorites3.texify(solve)
+        for e in solve:
+            cor.append("\\[\\thenocalcul = " + e + "\\]")
+        exo.append('\\stepcounter{nocalcul}%')
+        cor.append('\\stepcounter{nocalcul}%')
+        if i == 1: cor.append('\\columnbreak\\stepcounter{nocalcul}%')
+    exo.append('\\end{multicols}%')
     cor.append('\\end{multicols}%')
-    exos = []
-    sig = [random.randrange(2) for i in range(4)]
-    ordre_exos = [i for i in range(nb_exos)]
-    for i in range(nb_exos):
-        a = random.randrange(nb_exos - i)
-        exos.append(liste_exos[ordre_exos.pop(a)](10))
-    exo.append('\\stepcounter{nocalcul}%')
-    cor.append('\\stepcounter{nocalcul}%')
-    tex_developpe2(exos[0], sig[0], exos[1], sig[1], cor, exo)
-    exo.append('\\stepcounter{nocalcul}%')
-    cor.append('\\stepcounter{nocalcul}%')
-    tex_developpe2(exos[2], sig[2], exos[3], sig[3], cor, exo)
-    exo.append('\\end{multicols}')
     return (exo, cor)
 
-tex_developpements.description = u'Développements'
+# tex_developpements.description = u'Développements'
 
 
 def tex_factorisations():
@@ -1125,5 +1116,5 @@ def tex_factorisations():
     exo.append('\\end{multicols}')
     cor.append('\\end{multicols}')
     return (exo, cor)
-
-tex_factorisations.description = u'Factorisations'
+# TODO: refaire les exos factorisations
+# tex_factorisations.description = u'Factorisations'

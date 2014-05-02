@@ -1,4 +1,4 @@
-﻿#!/usr/bin/python
+﻿  #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Pyromaths
@@ -28,13 +28,13 @@ from operator import itemgetter
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        self.configfile = os.path.join(CONFIGDIR,  "pyromaths.xml")
-        self.liste_creation=[]
-        if sys.platform != "darwin":  #Cas de Mac OS X.
+        self.configfile = os.path.join(CONFIGDIR, "pyromaths.xml")
+        self.liste_creation = []
+        if sys.platform != "darwin":  # Cas de Mac OS X.
             MainWindow.setStyleSheet("background-color: rgb(251, 245, 225);")
             MainWindow.setWindowIcon(QtGui.QIcon(ICONDIR))
         MainWindow.setWindowTitle("Pyromaths")
-        MainWindow.setGeometry(0,44, 500, 200)
+        MainWindow.setGeometry(0, 44, 500, 200)
         font = QtGui.QFont()
         font.setPointSize(10)
         MainWindow.setFont(font)
@@ -56,19 +56,19 @@ class Ui_MainWindow(object):
         self.pushButton_ok = QtGui.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_ok)
         self.pushButton_ok.setText(u"Créer")
-        if sys.platform != "darwin":  #Cas de Mac OS X.
+        if sys.platform != "darwin":  # Cas de Mac OS X.
             self.pushButton_ok.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         self.pushButton_quit = QtGui.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_quit)
         self.pushButton_quit.setText("Quitter")
-        if sys.platform != "darwin":  #Cas de Mac OS X.
+        if sys.platform != "darwin":  # Cas de Mac OS X.
             self.pushButton_quit.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         self.pushButton_erase = QtGui.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_erase)
         self.pushButton_erase.setText(u"Réinitialiser")
-        if sys.platform != "darwin":  #Cas de Mac OS X.
+        if sys.platform != "darwin":  # Cas de Mac OS X.
             self.pushButton_erase.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
 
@@ -82,7 +82,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(self.verticalLayout, 0, 1, 1, 1)
         self.tabWidget = QtGui.QTabWidget(self.centralwidget)
         self.tabWidget.setAutoFillBackground(True)
-        if sys.platform != "darwin":  #Cas de Mac OS X.
+        if sys.platform != "darwin":  # Cas de Mac OS X.
             self.tabWidget.setStyleSheet("background-color: rgb(251, 231, 178);")
 
         #============================================================
@@ -91,7 +91,7 @@ class Ui_MainWindow(object):
 
         self.tabs = []
         LESFICHES.sort(key=itemgetter(0), reverse=True)
-        MESFICHES = [[LESFICHES[i][0][2:], '', LESFICHES[i][2]] for i in range(len(LESFICHES))] 
+        MESFICHES = [[LESFICHES[i][0][2:], '', LESFICHES[i][2]] for i in range(len(LESFICHES))]
 
         for level in MESFICHES:
             self.tabs.append(Tab(self.tabWidget, level, self.setNbExos))
@@ -215,7 +215,7 @@ class Ui_MainWindow(object):
 
         self.label_modele = QtGui.QLabel(self.tab_options)
         self.label_modele.setText(u"Modèle de mise en page :")
-        #self.label_modele.setEnabled(False)
+        # self.label_modele.setEnabled(False)
         self.verticalLayout_18.addWidget(self.label_modele)
         self.horizontalLayout_2.addLayout(self.verticalLayout_18)
 
@@ -226,7 +226,7 @@ class Ui_MainWindow(object):
         ############## ComboBox niveau
 
         self.comboBox_niveau = QtGui.QComboBox(self.tab_options)
-        self.comboBox_niveau.setEditable(True) # l’utilisateur peut entrer son propre texte
+        self.comboBox_niveau.setEditable(True)  # l’utilisateur peut entrer son propre texte
         self.comboBox_niveau.addItem("Classe de 6\\ieme")
         self.comboBox_niveau.addItem("Classe de 5\\ieme")
         self.comboBox_niveau.addItem("Classe de 4\\ieme")
@@ -244,14 +244,14 @@ class Ui_MainWindow(object):
         count = 0
         for element in modeles:
             if os.path.splitext(element)[1] == ".tex":
-                self.comboBox_modele.addItem(str(element[:len(element)-4]))
+                self.comboBox_modele.addItem(str(element[:len(element) - 4]))
                 if element == self.config['modele']:
                     self.comboBox_modele.setCurrentIndex(count)
                 count += 1
         for element in modeles_home:
             if os.path.splitext(element)[1] == ".tex":
                 self.comboBox_modele.addItem(QtCore.QString())
-                self.comboBox_modele.setItemText(count, str(element[:len(element)-4]))
+                self.comboBox_modele.setItemText(count, str(element[:len(element) - 4]))
                 if element == self.config['modele']:
                     self.comboBox_modele.setCurrentIndex(count)
                 count += 1
@@ -266,7 +266,7 @@ class Ui_MainWindow(object):
 
         self.pushButton_enr_opt = QtGui.QPushButton(self.tab_options)
         self.pushButton_enr_opt.setText(u"Enregistrer dans les préférences")
-        if sys.platform != "darwin":  #Cas de Mac OS X.
+        if sys.platform != "darwin":  # Cas de Mac OS X.
             self.pushButton_enr_opt.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
 
         self.gridLayout_2.addWidget(self.pushButton_enr_opt, 4, 1, 1, 1)
@@ -283,7 +283,7 @@ class Ui_MainWindow(object):
 
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 700, 22))
-        if sys.platform != "darwin":  #Cas de Mac OS X.
+        if sys.platform != "darwin":  # Cas de Mac OS X.
             self.menubar.setStyleSheet("background-color: rgb(251, 231, 178);")
         MainWindow.setMenuBar(self.menubar)
 
@@ -296,7 +296,7 @@ class Ui_MainWindow(object):
         self.statusbar = QtGui.QStatusBar(MainWindow)
         MainWindow.setStatusBar(self.statusbar)
         self.statusbar.showMessage(u"Pour avoir un aperçu d'un exercice, positionner le curseur de la souris sur le point d'interrogation.")
-        if sys.platform != "darwin":  #Cas de Mac OS X.
+        if sys.platform != "darwin":  # Cas de Mac OS X.
             self.statusbar.setStyleSheet("background-color: rgb(251, 231, 178);")
 
         #============================================================
@@ -342,10 +342,10 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.pushButton_quit, QtCore.SIGNAL("clicked()"), QtGui.qApp,
                                                                  QtCore.SLOT("quit()"))
         QtCore.QObject.connect(self.pushButton_erase, QtCore.SIGNAL("clicked()"), self.effacer_choix_exercices)
-        QtCore.QObject.connect(self.pushButton_ok,QtCore.SIGNAL("clicked()"), self.creer_les_exercices)
-        QtCore.QObject.connect(self.pushButton_enr_opt,QtCore.SIGNAL("clicked()"), self.enregistrer_config)
-        QtCore.QObject.connect(self.pushButton_parcourir,QtCore.SIGNAL("clicked()"), self.option_parcourir)
-        QtCore.QObject.connect(self.checkBox_corrige,QtCore.SIGNAL("stateChanged(int)"), self.option_corrige)
+        QtCore.QObject.connect(self.pushButton_ok, QtCore.SIGNAL("clicked()"), self.creer_les_exercices)
+        QtCore.QObject.connect(self.pushButton_enr_opt, QtCore.SIGNAL("clicked()"), self.enregistrer_config)
+        QtCore.QObject.connect(self.pushButton_parcourir, QtCore.SIGNAL("clicked()"), self.option_parcourir)
+        QtCore.QObject.connect(self.checkBox_corrige, QtCore.SIGNAL("stateChanged(int)"), self.option_corrige)
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -353,7 +353,7 @@ class Ui_MainWindow(object):
     #        Début des fonctions
     #============================================================
 
-    ### Gestion des erreurs
+    # ## Gestion des erreurs
     def erreur_critique(self, message):
         """Dialogue si pyromaths.xml est défectueux."""
         reply = QtGui.QMessageBox.critical(self, "Erreur critique", message)
@@ -419,11 +419,11 @@ class Ui_MainWindow(object):
     </p>
   </body>
 </html>"""
-        if sys.platform == "darwin":  #Cas de Mac OS X.
+        if sys.platform == "darwin":  # Cas de Mac OS X.
             banniere = os.path.join(DATADIR, 'images', 'pyromaths.png')
         else:
             banniere = os.path.join(DATADIR, 'images', 'pyromaths-banniere.png')
-        QtGui.QMessageBox.about(None, u'À propos de Pyromaths', text % (banniere,  VERSION, COPYRIGHTS))
+        QtGui.QMessageBox.about(None, u'À propos de Pyromaths', text % (banniere, VERSION, COPYRIGHTS))
 
     def creer_les_exercices(self):
         """Vérifie si la liste d'exercices n'est pas vide puis sélectionne les noms des fichiers exercices et
@@ -432,7 +432,7 @@ class Ui_MainWindow(object):
         if self.liste_creation == [] :
             QtGui.QMessageBox.warning(None, 'Attention !',
                     u"Veuillez sélectionner des exercices...",
-                    QtGui.QMessageBox.Ok )
+                    QtGui.QMessageBox.Ok)
         else:
             parametres = {
                 'creer_pdf': self.checkBox_pdf.isChecked(),
@@ -449,12 +449,12 @@ class Ui_MainWindow(object):
             #============================================================
             #        Choix de l'ordre des exercices
             #============================================================
-            liste=[]
+            liste = []
             for i in range(len(self.liste_creation)):
                 niveau = self.liste_creation[i][0]
                 exo = self.liste_creation[i][1]
                 liste.append(LESFICHES[niveau][2][exo])
-            self.List=QtGui.QListWidget()
+            self.List = QtGui.QListWidget()
             for i in range(len(liste)):
                 item = QtGui.QListWidgetItem(liste[i].description)
                 item.setFlags(QtCore.Qt.ItemIsEnabled |
@@ -462,15 +462,15 @@ class Ui_MainWindow(object):
                               QtCore.Qt.ItemIsDragEnabled)
                 item.exercice = liste[i]
                 self.List.addItem(item)
-            bmono=True
+            bmono = True
             for i in range(len(liste)):
-                if liste[0] != liste[i]: bmono=False
+                if liste[0] != liste[i]: bmono = False
             if bmono:
                 # S'il ny a qu'un seul type d'exercices, pas la peine de choisir
                 # l'ordre
                 valide(self.List, LESFICHES, parametres)
             else:
-                form = ChoixOrdreExos(self.List,  LESFICHES,  parametres)
+                form = ChoixOrdreExos(self.List, LESFICHES, parametres)
                 form.exec_()
 
     def creer_tous_les_exercices(self):
@@ -486,7 +486,7 @@ class Ui_MainWindow(object):
             for niveau in range(5):
                 liste = []
                 for i in range(len(LESFICHES[niveau][2])):
-                    liste.append((niveau,  i))
+                    liste.append((niveau, i))
                 if niveau != 4:
                     exo = os.path.join(d0, "%se.tex" % (6 - niveau))
                     cor = os.path.join(d0, "%se-corrige.tex" % (6 - niveau))
@@ -496,7 +496,7 @@ class Ui_MainWindow(object):
                                   'liste_exos': liste,
                                   'creer_pdf': '1',
                                   'titre': "Exemple de fiche",
-                                  'niveau': "%s\\ieme" % (6-niveau),
+                                  'niveau': "%s\\ieme" % (6 - niveau),
                                   'modele': str(self.comboBox_modele.currentText() + '.tex'),
                                   'corrige': True,
                                   'creer_unpdf': True,
@@ -504,8 +504,8 @@ class Ui_MainWindow(object):
                                   'configdir': CONFIGDIR
                                   }
                 else:
-                    exo = os.path.join(d0, "Lycee.tex" )
-                    cor = os.path.join(d0, "Lycee-corrige.tex" )
+                    exo = os.path.join(d0, "Lycee.tex")
+                    cor = os.path.join(d0, "Lycee-corrige.tex")
                     parametres = {'les_fiches': LESFICHES,
                                   'fiche_exo': exo,
                                   'fiche_cor': cor,
@@ -523,7 +523,7 @@ class Ui_MainWindow(object):
 
     def effacer_choix_exercices(self):
         """Remet toutes les SpinBox à zéro et vide la liste d'exercices sélectionnés"""
-        self.liste_creation=[]
+        self.liste_creation = []
         for tab in self.tabs:
             tab.reset()
 
@@ -537,8 +537,8 @@ class Ui_MainWindow(object):
         options .find('chemin_fichier').text = unicode(self.chemin_fichier.text())
         options .find('titre_fiche').text = unicode(self.titre_fiche.text())
         options .find('corrige').text = str(self.checkBox_corrige.isChecked())
-        options .find('pdf').text  = str(self.checkBox_pdf.isChecked())
-        options .find('unpdf').text  = str(self.checkBox_unpdf.isChecked())
+        options .find('pdf').text = str(self.checkBox_pdf.isChecked())
+        options .find('unpdf').text = str(self.checkBox_unpdf.isChecked())
         options .find('modele').text = unicode(self.comboBox_modele.currentText() + '.tex')
 
         f = codecs.open(self.configfile, encoding='utf-8', mode='w')
@@ -546,7 +546,7 @@ class Ui_MainWindow(object):
                                xml_declaration=True).decode('utf-8', 'strict'))
         f.close()
 
-    def lire_config(self,  section):
+    def lire_config(self, section):
         """Lis le fichier de configuration pyromaths.conf, enregistre les données dans un dictionnaire config"""
         config = {}
         tree = lxml.etree.parse(self.configfile)
@@ -575,7 +575,7 @@ class Ui_MainWindow(object):
     def setNbExos(self):
         """Modifie le nombre d'exercices dans la variable liste_creation lorsqu'on  modifie une spinBox
         et adapte le niveau affiché dans l'en-tête de la fiche en fonction du plus haut niveau d'exercice"""
-        niveau=0
+        niveau = 0
         self.liste_creation = []
         for pkg_no in range(len(self.tabs)):
             for box in range(len(LESFICHES[pkg_no][2])):
@@ -621,7 +621,7 @@ class ChoixOrdreExos(QtGui.QDialog):
                   'chemin_fichier':
                  }"""
 
-    def __init__(self, liste, LesFiches, parametres,  parent=None):
+    def __init__(self, liste, LesFiches, parametres, parent=None):
         LESFICHES = LesFiches
         self.parametres = parametres
         self.List = liste
@@ -631,7 +631,7 @@ class ChoixOrdreExos(QtGui.QDialog):
 
         buttonBox = QtGui.QDialogButtonBox()
         buttonBox.setOrientation(QtCore.Qt.Vertical)
-        buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+        buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel | QtGui.QDialogButtonBox.Ok)
 
         self.List.setAlternatingRowColors(True)
         self.List.setDragEnabled(True)
@@ -658,6 +658,7 @@ def valide(liste, LesFiches, parametres):
     corrige = parametres['corrige']
     lesexos = []
     for i in range(liste.count()):
+        print liste.item(i)
         lesexos.append(liste.item(i).exercice())
 
     #============================================================
@@ -674,10 +675,10 @@ def valide(liste, LesFiches, parametres):
         if corrige and not parametres['creer_unpdf']:
             f1 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(os.path.dirname(f0),
-                u"%s-corrige.tex"  % os.path.splitext(os.path.basename(f0))[0]),
+                u"%s-corrige.tex" % os.path.splitext(os.path.basename(f0))[0]),
                 "Documents Tex (*.tex)"))
         else:
-            f1 = os.path.join(os.path.dirname(f0), u"%s-corrige.tex"  %
+            f1 = os.path.join(os.path.dirname(f0), u"%s-corrige.tex" %
                               os.path.splitext(os.path.basename(f0))[0])
         if f1:
             if corrige:
@@ -685,7 +686,7 @@ def valide(liste, LesFiches, parametres):
             parametres ['fiche_exo'] = f0
             parametres ['fiche_cor'] = f1
             parametres ['liste_exos'] = lesexos
-            parametres ['les_fiches'] =  LesFiches
+            parametres ['les_fiches'] = LesFiches
             System.creation(parametres)
 
 #================================================================
@@ -696,19 +697,19 @@ class Tab(QtGui.QWidget):
     """Gère les onglets permettant de sélectionner des exercices"""
 
     def __init__(self, parent, level, onchange):
-        QtGui.QWidget.__init__(self)             # Initialise la super-classe
-        self.titre  = level[0]
-        self.exos   = level[2]
+        QtGui.QWidget.__init__(self)  # Initialise la super-classe
+        self.titre = level[0]
+        self.exos = level[2]
         self.layout = QtGui.QGridLayout(self)
         self.spinBox = []
         # Crée les widgets des exercices
         nb_exos = len(self.exos)
-        spacer  = QtGui.QSpacerItem(20, 0, QtGui.QSizePolicy.Minimum,
+        spacer = QtGui.QSpacerItem(20, 0, QtGui.QSizePolicy.Minimum,
                                     QtGui.QSizePolicy.Expanding)
         for i in range(nb_exos):
             self.add_exercise(i, onchange)
-            self.layout.addItem(spacer, (nb_exos+1)/2, 0, 1, 1)
-            self.layout.addItem(spacer, (nb_exos+1)/2, 1, 1, 1)
+            self.layout.addItem(spacer, (nb_exos + 1) / 2, 0, 1, 1)
+            self.layout.addItem(spacer, (nb_exos + 1) / 2, 1, 1, 1)
         # Ajoute ce tab au widget parent
         parent.addTab(self, self.titre)
 
@@ -742,7 +743,7 @@ class Tab(QtGui.QWidget):
         layout.addItem(spacer)
         layout.addItem(spacer)
         # Ajoute cet exercice à l'onglet
-        self.layout.addLayout(layout, i/2, i%2, 1, 1)
+        self.layout.addLayout(layout, i / 2, i % 2, 1, 1)
 
     def reset(self):
         """Remet les compteurs à zéro"""
