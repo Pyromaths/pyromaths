@@ -33,12 +33,16 @@ Created on 13 avr. 2013
 import os
 import sys
 from glob import glob
+from os.path import dirname, normpath, join, abspath, realpath
 
 from setuptools import setup, find_packages
 
 # Import pyromaths VERSION from source
-sys.path.append('src')
+_path = normpath(join(abspath(dirname(__file__)), "./src"))
+sys.path[0] = realpath(_path)
+#sys.path.append('src')
 from pyromaths.Values import VERSION
+print VERSION
 
 def _unix_opt():
     '''UNIX/Linux: generate Python eggs and RPM packages.'''
@@ -76,15 +80,15 @@ def _mac_opt():
                  'QtMultimedia', 'QtNetwork', 'QtOpenGL', 'QtScript',
                  'QtScriptTools', 'QtSql', 'QtSvg', 'QtTest', 'QtWebKit',
                  'QtXml', 'QtXmlPatterns', 'phonon']
-    lib_dynload_unused = ['_AE', '_codecs_cn', '_codecs_hk', '_codecs_2022', 
-                          '_codecs_iso2022', '_codecs_jp', '_codecs_kr', 
-                          '_codecs_tw', '_Evt', '_File', '_hashlib', '_heapq', 
+    lib_dynload_unused = ['_AE', '_codecs_cn', '_codecs_hk', '_codecs_2022',
+                          '_codecs_iso2022', '_codecs_jp', '_codecs_kr',
+                          '_codecs_tw', '_Evt', '_File', '_hashlib', '_heapq',
                           '_locale', '_multibytecodec', '_Res','_ssl', 'array',
                           'bz2', 'cPickle', 'datetime', 'gestalt', 'MacOS',
                           'pyexpat', 'rurce', 'strop', 'unicodedata']
-    site_packages_unused = ['_osx_support', '_builtinSuites', 'Carbon', 
+    site_packages_unused = ['_osx_support', '_builtinSuites', 'Carbon',
                             'distutils', 'Finder', 'StdSuites', 'unittest',
-                            'xml', 'StringIO', 'getopt', 'repr','_strptime', 
+                            'xml', 'StringIO', 'getopt', 'repr','_strptime',
                             'gettext', 'sets', '_threading_local', 'glob',
                             'base64', 'locale', 'sre', 'bdb', 'optparse.',
                             'ssl', 'calendar', 'pdb', 'stringprep', 'cmd',

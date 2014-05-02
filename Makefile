@@ -5,7 +5,7 @@
 ### CONFIG
 #
 # Pyromaths version
-VERSION ?= 13.03
+VERSION ?= 14.05
 # Archive format(s) produced by 'make src' (bztar,gztar,zip...)
 FORMATS ?= bztar,zip
 # Verbosity and logging
@@ -117,6 +117,8 @@ clean:
 	# Clean
 	rm -r $(BUILD)/* || mkdir -p $(BUILD)
 	rm -r $(DIST)/*  || mkdir -p $(DIST)
+	rmdir $(BUILD)
+	rmdir $(DIST)
 	$(clean)
 
 version:

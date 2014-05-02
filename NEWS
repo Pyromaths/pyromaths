@@ -1,3 +1,4 @@
+Version 14.05
 * Construction et packaging:
 ** Factorisation des setup.py en un seul, commun à toutes les plateformes
 ** Utilisation de Make pour tout ce qui déborde du périmètre de setup.py (traductions, optimisations...)

@@ -1,3 +1,9 @@
+pyromaths (14.05-1) quantal; urgency=low
+
+  * À compléter
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Mon, 11 Mar 2013 21:10:00 +0100
+
 pyromaths (13.03-1) quantal; urgency=low
 
   * Correction d'un bug d'affichage des pdf
