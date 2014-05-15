@@ -23,7 +23,7 @@
 
 from pyromaths.outils import Arithmetique
 import random
-from .developpements import tex_coef
+from pyromaths.outils.Affichage import tex_coef
 
 # carres=[2,3,5,6,7,10,11,13,15,17,19]
 
@@ -39,8 +39,8 @@ def exoaRb0(exo, cor, v):
     a = (tex_coef(v[0], '\\sqrt{%s}' % v[3] ** 2), v[6], tex_coef(v[1],
          '\\sqrt{%s}' % v[4] ** 2, bplus=1), v[6], tex_coef(v[2],
          '\\sqrt{%s}' % v[5] ** 2, bplus=1), v[6])
-    cor.append(u'\\[ \\thenocalcul = ' + 
-                     '%s\\times\\sqrt{%s}%s\\times\\sqrt{%s}%s\\times\\sqrt{%s}' % 
+    cor.append(u'\\[ \\thenocalcul = ' +
+                     '%s\\times\\sqrt{%s}%s\\times\\sqrt{%s}%s\\times\\sqrt{%s}' %
                      a + '\\] ')
     a = (
         tex_coef(v[0], ''),
@@ -53,15 +53,15 @@ def exoaRb0(exo, cor, v):
         v[5],
         v[6],
         )
-    cor.append(u'\\[ \\thenocalcul = ' + 
-                     '%s\\times%s\\times\\sqrt{%s}%s\\times%s\\times\\sqrt{%s}%s\\times%s\\times\\sqrt{%s}' % 
+    cor.append(u'\\[ \\thenocalcul = ' +
+                     '%s\\times%s\\times\\sqrt{%s}%s\\times%s\\times\\sqrt{%s}%s\\times%s\\times\\sqrt{%s}' %
                      a + '\\] ')
     a = (tex_coef(v[0] * v[3], '\\sqrt{%s}' % v[6]), tex_coef(v[1] * v[4],
          '\\sqrt{%s}' % v[6], bplus=1), tex_coef(v[2] * v[5],
          '\\sqrt{%s}' % v[6], bplus=1))
     cor.append(u'\\[ \\thenocalcul = ' + '%s%s%s' % a + '\\] ')
     del a
-    cor.append(u'\\[ \\boxed{\\thenocalcul = ' + '%s' % tex_coef(v[0] * v[3] + v[1] * v[4] + v[2] * 
+    cor.append(u'\\[ \\boxed{\\thenocalcul = ' + '%s' % tex_coef(v[0] * v[3] + v[1] * v[4] + v[2] *
                      v[5], '\\sqrt{%s}' % v[6]) + '} \\] ')
 
 
@@ -79,21 +79,21 @@ def valeurs_aRb0(pyromax):  # renvoie (coef0, coef1, coef2, carre0, carre1, carr
 
 def exoaRb1(exo, cor, v):
     a = (v[3] * v[0] ** 2, v[3] * v[1] ** 2, v[3] * v[2] ** 2)
-    exo.append(u'\\[ \\thenocalcul = ' + '\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}' % 
+    exo.append(u'\\[ \\thenocalcul = ' + '\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}' %
                      a + '\\] ')
-    cor.append(u'\\[ \\thenocalcul = ' + '\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}' % 
+    cor.append(u'\\[ \\thenocalcul = ' + '\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}' %
                      a + '\\] ')
     a = (v[0] ** 2, v[3], v[1] ** 2, v[3], v[2] ** 2, v[3])
-    cor.append(u'\\[ \\thenocalcul = ' + 
-                     '\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}' % 
+    cor.append(u'\\[ \\thenocalcul = ' +
+                     '\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}\\times\\sqrt{%s}' %
                      a + '\\] ')
     a = (v[0], v[3], v[1], v[3], v[2], v[3])
-    cor.append(u'\\[ \\thenocalcul = ' + 
-                     '%s\\times\\sqrt{%s}\\times%s\\times\\sqrt{%s}\\times%s\\times\\sqrt{%s}' % 
+    cor.append(u'\\[ \\thenocalcul = ' +
+                     '%s\\times\\sqrt{%s}\\times%s\\times\\sqrt{%s}\\times%s\\times\\sqrt{%s}' %
                      a + '\\] ')
     a = ((v[0] * v[1]) * v[2], v[3], v[3])
-    cor.append(u'\\[ \\thenocalcul = ' + 
-                     '%s\\times\\left(\\sqrt{%s}\\right)^2\\times\\sqrt{%s}' % 
+    cor.append(u'\\[ \\thenocalcul = ' +
+                     '%s\\times\\left(\\sqrt{%s}\\right)^2\\times\\sqrt{%s}' %
                      a + '\\] ')
     a = ((v[0] * v[1]) * v[2], v[3], v[3])
     cor.append(u'\\[ \\thenocalcul = ' + '%s\\times%s\\times\\sqrt{%s}' % a + '\\] ')
@@ -139,7 +139,7 @@ def exo_aPbRc(exo, cor, v):
          '\\sqrt{%s}' % v[1]), tex_coef(abs(v[2]), '\\sqrt{%s}' % v[3]),
          tex_coef(abs(v[2]), '\\sqrt{%s}' % v[3], bpc=1))
     cor.append(u'\\[ \\thenocalcul = ' + '%s^2%s2\\times%s\\times%s+%s^2' % a + '\\] ')
-    a = (v[0] ** 2, v[1], tex_coef((2 * v[0]) * v[2], '\\sqrt{%s}' % (v[1] * 
+    a = (v[0] ** 2, v[1], tex_coef((2 * v[0]) * v[2], '\\sqrt{%s}' % (v[1] *
          v[3]), bplus=1), v[2] ** 2, v[3])
     cor.append(u'\\[ \\thenocalcul = ' + '%s\\times %s %s+%s\\times %s' % a + '\\] ')
     a = (v[0] ** 2 * v[1] + v[2] ** 2 * v[3], tex_coef((2 * v[0]) * v[2],
@@ -160,9 +160,9 @@ def valeurs_entier0(pyromax):  # renvoie (coef0, coef1, coef2, carre0, carre1, c
 def exo_entier0(exo, cor, v):
     a = (v[0], tex_coef(v[1], '\\sqrt{%s}' % v[2], bplus=1), v[0],
          tex_coef(-v[1], '\\sqrt{%s}' % v[2], bplus=1))
-    exo.append(u'\\[ \\thenocalcul = ' + '\\left( %s%s \\right)\\left( %s%s \\right)' % 
+    exo.append(u'\\[ \\thenocalcul = ' + '\\left( %s%s \\right)\\left( %s%s \\right)' %
                      a + '\\] ')
-    cor.append(u'\\[ \\thenocalcul = ' + '\\left( %s%s \\right)\\left( %s%s \\right)' % 
+    cor.append(u'\\[ \\thenocalcul = ' + '\\left( %s%s \\right)\\left( %s%s \\right)' %
                      a + '\\] ')
     a = (tex_coef(v[0], '', bpc=1), tex_coef(abs(v[1]), '\\sqrt{%s}' % v[2],
          bpc=1))
@@ -192,8 +192,8 @@ def exo_entier1(exo, cor, v):
     exo.append(u'\\[ \\thenocalcul = ' + '\\frac{%s}{%s}' % a + '\\] ')
     cor.append(u'\\[ \\thenocalcul = ' + '\\frac{%s}{%s}' % a + '\\] ')
     a = (v[0], v[1] ** 2, v[4], v[2], v[3] ** 2, v[4])
-    cor.append(u'\\[ \\thenocalcul = ' + 
-                     '\\frac{%s\\times\\sqrt{%s}\\times\\cancel{\\sqrt{%s}}}{%s\\times\\sqrt{%s}\\times\\cancel{\\sqrt{%s}}}' % 
+    cor.append(u'\\[ \\thenocalcul = ' +
+                     '\\frac{%s\\times\\sqrt{%s}\\times\\cancel{\\sqrt{%s}}}{%s\\times\\sqrt{%s}\\times\\cancel{\\sqrt{%s}}}' %
                      a + '\\] ')
     cor.append(u'\\[ \\thenocalcul = ' + '\\frac{%s\\times %s}{%s\\times %s}' % v[0:4] + '\\] ')
     cor.append(u'\\[ \\boxed{\\thenocalcul = ' + '%s' % (((v[0] * v[1]) // v[2]) // v[3]) + '} \\] ')

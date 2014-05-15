@@ -1,12 +1,17 @@
 Version 14.05
-* Construction et packaging:
+* Construction et packaging :
 ** Factorisation des setup.py en un seul, commun à toutes les plateformes
 ** Utilisation de Make pour tout ce qui déborde du périmètre de setup.py (traductions, optimisations...)
 ** Modification de l'arborescence
 ** Support du format python EGG (packaging et installation)
-* Amélioration de la traduction des boîtes de dialogue (version OSX)
-* Déplacement de «À propos de Pyromaths» dans le menu Pyromaths (application OSX) 
-* Version 64 bits (application OSX) 
+* Nouvel exercice niveau seconde : cercle trigonométrique
+* Application OSX :
+** Amélioration de la traduction des boîtes de dialogue (version OSX)
+** Déplacement de «À propos de Pyromaths» dans le menu Pyromaths (application OSX) 
+** Version 64 bits (application OSX)
+* Modification des classes Fraction et Polynome pour que les coefficients des objet Polynome puissent être des objets Fraction
+* Modification des exercices de calcul littéral en 4e et 3e.
+
 
 Version 13.03
 * Correction d'un bug d'affichage des pdf

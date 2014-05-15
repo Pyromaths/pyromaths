@@ -47,6 +47,8 @@ def pgcd(*n):
         if abs(a) == float('inf') or abs(b) == float('inf'): return 1
         while b: a, b = b, a % b
         return a
+    if isinstance(n[0], (list, tuple)): n = n[0]
+    # Pour pouvoir utiliser pgcd(a) où a=(2,4,6)
     p = _pgcd(n[0], n[1])
     for x in n[2:]:
         p = _pgcd(p, x)

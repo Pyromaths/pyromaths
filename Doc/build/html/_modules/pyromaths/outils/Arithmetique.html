@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyromaths.outils.Arithmetique &mdash; documentation Pyromaths 13.03</title>
+    <title>pyromaths.outils.Arithmetique &mdash; documentation Pyromaths 14.05</title>
     
     <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '13.03',
+        VERSION:     '14.05',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,12 +25,12 @@
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../_static/translations.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="documentation Pyromaths 13.03" href="../../../index.html" />
+    <link rel="top" title="documentation Pyromaths 14.05" href="../../../index.html" />
     <link rel="up" title="Code du module" href="../../index.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="../../../_static/bandeau.png" alt="Logo"/><h1 class="heading"><a href="../../../index.html">
-          <span>documentation Pyromaths 13.03</span></a></h1>
+          <span>documentation Pyromaths 14.05</span></a></h1>
         <h2 class="heading"><span>pyromaths.outils.Arithmetique</span></h2>
       </div>
       <div class="topnav">
@@ -93,6 +93,8 @@
         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">):</span> <span class="k">return</span> <span class="mi">1</span>
         <span class="k">while</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
         <span class="k">return</span> <span class="n">a</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c"># Pour pouvoir utiliser pgcd(a) où a=(2,4,6)</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">_pgcd</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">_pgcd</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
@@ -396,7 +398,7 @@
       </div>
 
     <div class="footer">
-        &copy; Copyright 2013, Jérôme Ortais.
+        &copy; Copyright 2013-2014, Jérôme Ortais.
       Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>

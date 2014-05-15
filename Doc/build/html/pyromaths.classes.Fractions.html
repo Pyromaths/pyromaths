@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.1. Fractions — Nombres rationnels &mdash; documentation Pyromaths 13.03</title>
+    <title>2.1. Fractions — Nombres rationnels &mdash; documentation Pyromaths 14.05</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '13.03',
+        VERSION:     '14.05',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,14 +25,14 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="documentation Pyromaths 13.03" href="index.html" />
+    <link rel="top" title="documentation Pyromaths 14.05" href="index.html" />
     <link rel="up" title="2. Les classes de Pyromaths" href="pyromaths.classes.html" />
     <link rel="next" title="2.2. PolynomesCollege — Fonctions polynômes" href="pyromaths.classes.PolynomesCollege.html" />
     <link rel="prev" title="2. Les classes de Pyromaths" href="pyromaths.classes.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="_static/bandeau.png" alt="Logo"/><h1 class="heading"><a href="index.html">
-          <span>documentation Pyromaths 13.03</span></a></h1>
+          <span>documentation Pyromaths 14.05</span></a></h1>
         <h2 class="heading"><span>2.1. Fractions — Nombres rationnels</span></h2>
       </div>
       <div class="topnav">
@@ -74,6 +74,12 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 <span class="go">Fraction(1, 3)</span>
 </pre></div>
 </div>
+<dl class="method">
+<dt id="pyromaths.classes.Fractions.Fraction.__abs__">
+<tt class="descname">__abs__</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__abs__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__abs__" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Renvoie la valeur absolue d&#8217;une fraction</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="pyromaths.classes.Fractions.Fraction.__add__">
 <tt class="descname">__add__</tt><big>(</big><em>*others</em><big>)</big><a class="reference internal" href="_modules/pyromaths/classes/Fractions.html#Fraction.__add__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyromaths.classes.Fractions.Fraction.__add__" title="Lien permanent vers cette définition">¶</a></dt>
@@ -257,6 +263,11 @@ même dénominateur &#8216;r&#8217; ou une simplification &#8216;s&#8217;</p>
 <dd><p><em>object</em>.<strong>__rdiv__</strong>(<em>other</em>)</p>
 <p><tt class="docutils literal"><span class="pre">p.__rdiv__(q)</span></tt> est équivalent à <tt class="docutils literal"><span class="pre">p</span> <span class="pre">/</span> <span class="pre">q</span></tt>  calcule le produit de l&#8217;objet p par la fraction q.</p>
 <p><em>other</em> peut être un entier ou un réel.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.classes.Fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span><span class="o">/</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">&#39;1*Fraction(3, 1)&#39;</span>
+</pre></div>
+</div>
 <p>Pour plus de détails, voir <a class="reference internal" href="#pyromaths.classes.Fractions.Fraction.__radd__" title="pyromaths.classes.Fractions.Fraction.__radd__"><tt class="xref py py-func docutils literal"><span class="pre">__radd__()</span></tt></a></p>
 </dd></dl>
 
@@ -465,7 +476,7 @@ Si <em>final</em> est vrai, alors essaie de simplifier la fraction.</p>
       </div>
 
     <div class="footer">
-        &copy; Copyright 2013, Jérôme Ortais.
+        &copy; Copyright 2013-2014, Jérôme Ortais.
       Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>

@@ -136,14 +136,13 @@ def cherche_operateur(calcul, index):
     :type min_i: integer
 
     >>> from pyromaths.outils import Priorites3
-    >>> p = '-Polynome([[-4, 2]], "x")*6**2+3'
-    >>> Priorites3.cherche_decimal(p, 1)
-    '4'
+    >>> Priorites3.cherche_operateur('-Polynome([[-4, 2]], "x")*6**2+3', 1)
+    '-'
     >>> p = '-6*(-11)*(-5)'
-    >>> Priorites3.cherche_decimal(p, 1)
-    '6'
-    >>> Priorites3.cherche_decimal(p, 0)
-    '6'
+    >>> Priorites3.cherche_operateur(p, 1)
+    '*'
+    >>> Priorites3.cherche_operateur(p, 0)
+    '-'
 
     :rtype: string
     """
@@ -331,9 +330,9 @@ def recherche_puissance(calcul):
     """
     if calcul.count("**"):
         i = calcul.index("**")
-        return (i - 1, i + 2)
-    else:
-        return None
+        # Si le calcul commence par '**', il n'y a rien à faire
+        if i: return (i - 1, i + 2)
+    return None
 
 def recherche_operation(calcul, op, l_interdit, debut=0):
     """**recherche_operation**\ (*calcul*\ , *op*\ , *l_interdit*\ [, *debut*])
@@ -516,6 +515,10 @@ def effectue_calcul(calcul):
     ['-5', '-', '10']
     >>> Priorites3.effectue_calcul(['-5', '-', '10'])
     ['-15']
+    >>> Priorites3.effectue_calcul(['-', 'Polynome("x-1")', '*', '2'])
+    ['-', '(', 'Polynome([[2, 1]], "x", 0)', '+', 'Polynome([[-2, 0]], "x", 0)', ')']
+    >>> Priorites3.effectue_calcul(['4', '*', 'Polynome("x+1")', '**', '2'])
+    ['4', '*', '(', 'Polynome([[1, 1]], "x", 0)', '**', '2', '+', '2', '*', 'Polynome([[1, 1]], "x", 0)', '*', 'Polynome([[1, 0]], "x", 0)', '+', 'Polynome([[1, 0]], "x", 0)', '**', '2', ')']
 
     :rtype: list
     """
@@ -573,8 +576,8 @@ def effectue_calcul(calcul):
                     for i in range(0, len(calc), 2):
                         nombres.append(eval(calc[i]))
                         if isinstance(nombres[-1], Fraction): frac = True
-                        elif isinstance(nombres[-1], Polynome): poly, var, detailler = True, nombres[-1].var, nombres[-1].detailler
-                    if poly: nombres = [(Polynome([[i, 0]], var, detailler) , i)[isinstance(i, Polynome)] for i in nombres]
+                        elif isinstance(nombres[-1], Polynome): poly, var, details = True, nombres[-1].var, nombres[-1].details
+                    if poly: nombres = [(Polynome([[i, 0]], var, details) , i)[isinstance(i, Polynome)] for i in nombres]
                     elif frac: nombres = [(Fraction(i, 1), i)[isinstance(i, Fraction)] for i in nombres]
                     if poly: classe = Polynome
                     elif frac: classe = Fraction
@@ -591,8 +594,8 @@ def effectue_calcul(calcul):
                     for i in range(0, len(calc), 2):
                         nombres.append(eval(calc[i]))
                         if isinstance(nombres[-1], Fraction): frac = True
-                        elif isinstance(nombres[-1], Polynome): poly, var, detailler = True, nombres[-1].var, nombres[-1].detailler
-                    if poly: nombres = [(Polynome([[i, 0]], var, isinstance(i, str), detailler) , i)[isinstance(i, Polynome)] for i in nombres]
+                        elif isinstance(nombres[-1], Polynome): poly, var, details = True, nombres[-1].var, nombres[-1].details
+                    if poly: nombres = [(Polynome([[i, 0]], var, details) , i)[isinstance(i, Polynome)] for i in nombres]
                     elif frac: nombres = [(Fraction(i, 1), i)[isinstance(i, Fraction)] for i in nombres]
                     if poly: classe = Polynome
                     elif frac: classe = Fraction
@@ -614,10 +617,15 @@ def effectue_calcul(calcul):
                 # "1-(-9)" => "1 + 9" et "1+(-9)" => "1 - 9"
                 if sol[0][0] == "-": sol = ["-", sol[0][1:]]
                 else: sol = ["+", sol[0]]
-            if recherche == recherche_produit and len(sol) > 1:
-                # Ajoute les parenthèses si produit précédé d'un "-" ou "*"
+            #===================================================================
+            # if recherche == recherche_produit and len(sol) > 1:
+            #     # Ajoute les parenthèses si produit précédé d'un "-" ou "*"
+            #     # ou suivi d'un "*"
+            #===================================================================
+            if len(sol) > 1 and sol[0] != "(" and sol[-1] != ")":
+                # Ajoute les parenthèses si le résultat est précédé d'un "-" ou "*"
                 # ou suivi d'un "*"
-                if (result and result[-1] in "*-") or (post and post[0] == "*"):
+                if (result and result[-1] in "*-") or (pre and pre[-1] in "*-") or (post and post[0] == "*"):
                     sol.insert(0, "(")
                     sol.append(")")
             # Si @sol est négatif et @result se termine par un "+", on l'enlève
@@ -646,7 +654,7 @@ def priorites(calcul):
     >>> Priorites3.priorites('-1+5-(-5)+(-6)*1')
     [['4', '+', '5', '-', '6'], ['9', '-', '6'], ['3']]
     >>> Priorites3.priorites('Polynome([[Fraction(6, 7), 0]], "x")*Polynome([[Fraction(1,3), 1], [1,0]], "x")')
-    [['Polynome([[Fraction(6, 7), 0]], "x", False, True)', '*', 'Polynome([[Fraction(1, 3), 1]], "x", False, True)', '+', 'Polynome([[Fraction(6, 7), 0]], "x", False, True)', '*', 'Polynome([[1, 0]], "x", False, True)'], ['Fraction(6, 7)', '*', 'Fraction(1, 3)', '*', "Polynome([[1, 1]], 'x', False, True)", '+', 'Polynome([[Fraction(6, 7), 0]], "x", False, True)'], ['Polynome([[Fraction("3*2", "7*3", "s"), 1]], "x", False, True)', '+', 'Polynome([[Fraction(6, 7), 0]], "x", False, True)'], ['Polynome([[Fraction(2, 7), 1], [Fraction(6, 7), 0]], "x", False, True)']]
+    [['Polynome([[Fraction(6, 21, "s"), 1]], "x", 0)', '+', 'Polynome([[Fraction(6, 7), 0]], "x", 0)'], ['Polynome([[Fraction(2, 7), 1], [Fraction(6, 7), 0]], "x", 0)']]
     >>> Priorites3.priorites('-Fraction(-6,1)/Fraction(-4,1)')
     [['-', '(', 'Fraction(-6, 1)', '*', 'Fraction(1, -4)', ')'], ['-', 'Fraction("2*-3", "2*-2", "s")'], ['Fraction(-3, 2)']]
     
@@ -663,10 +671,10 @@ def priorites(calcul):
         from pyromaths.classes.PolynomesCollege import Polynome
         from pyromaths.classes.Fractions import Fraction
         p = eval(calcul[0])
-        p = p.reduction(True)
+        p = p.nreduction()
         while (solution and repr(p) != solution[-1][0]) or (not solution and repr(p) != calcul[0]):
             solution.append([repr(p)])
-            p = p.reduction(True)
+            p = p.nreduction()
     if 'Fraction(' in calcul[0][:9]:
         from pyromaths.classes.Fractions import Fraction
         f = eval(calcul[0])
@@ -697,7 +705,9 @@ def texify(liste_calculs):
     >>> Priorites3.texify(l)
     ['4+5-6', '9-6', '3']
     >>> Priorites3.texify(Priorites3.priorites('(-7)+8-Polynome([[-4, 1], [-9, 2], [-5, 0]], "x")'))
-    ['1-\\left( -4\\,x-9\\,x^{2}-5\\right) ', '1+4\\,x+9\\,x^{2}+5', '9\\,x^{2}+4\\,x+1+5', '9\\,x^{2}+4\\,x+6']
+    ['1-\\left( -4\\,x-9\\,x^{2}-5\\right) ', '1+4\\,x+9\\,x^{2}+5', '9\\,x^{2}+4\\,x+6']
+    >>> Priorites3.texify(['Fraction(5,6)', '**', '2'])
+    ['\\dfrac{5}{6}', '^{', '2']
 
     :rtype: list
     """
@@ -721,7 +731,9 @@ def texify(liste_calculs):
                 * (2x+1)**2"""
                 if (s and s[-1] in "*-" and (len(p) > 1 or p.monomes[0][0] < 0)) \
                     or (q and q == "*" and len(p) > 1) \
-                    or ((len(p) > 1 or p.monomes[0][0] != 1) and q and q == "**"):
+                    or ((len(p) > 1 or (p.monomes[0][0] != 1 and p.monomes[0][1] > 0) or \
+                         p.monomes[0][0] < 0 or \
+                         (p.monomes[0][0] != 1 and isinstance(p.monomes[0][0], Fraction) and p.monomes[0][0].d != 1)) and q and q == "**"):
                     s += "(" + str(p) + ")"
                 elif s and s[-1] == "+" and p.monomes[0][0] < 0:
                     s = s[:-1]
@@ -737,8 +749,8 @@ def texify(liste_calculs):
                     texfrac = str(Fraction(eval(p[0]), eval(p[1]), eval(p[2])))
                 if i + 1 < len(calcul): q = calcul[i + 1]
                 else: q = ""
-                if (eval(p[0]) < 0 or p[1] != "1") and q and q == "**":
-                    s += "\\left( " + texfrac + " \\right)"
+                if (eval(p[0]) < 0 or p[1] != "1") and q == "**":
+                    s += "( " + texfrac + " )"
                 else:
                     s += texfrac
             elif EstNombre(el):
@@ -780,7 +792,8 @@ def plotify(calcul):
     :param calcul: le calcul à traiter
     :type calcul: string
 
-    >>> Priorites3.plotify('Polynome([[Fraction(-5, 192), 4], [Fraction(2, 96), 3], [Fraction(41, 48), 2], [Fraction(-7, 12), 1], [-4, 0]], "x", False, False)')
+    >>> from pyromaths.outils import Priorites3
+    >>> Priorites3.plotify('Polynome([[Fraction(-5, 192), 4], [Fraction(2, 96), 3], [Fraction(41, 48), 2], [Fraction(-7, 12), 1], [-4, 0]], "x", False)')
     '-5/192*x^4+2/96*x^3+41/48*x^2-7/12*x^1-4'
 
     :rtype: str

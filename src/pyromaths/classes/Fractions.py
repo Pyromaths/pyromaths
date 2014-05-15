@@ -134,6 +134,15 @@ class Fraction():
         else:
             return "Fraction(%s, %s)" % (num, den)
 
+    def __abs__(self):
+        """Renvoie la valeur absolue d'une fraction
+        """
+        self = Fraction(self.n, self.d)
+        if self.n * self.d > 0:
+            return self
+        else:
+            return -self
+
     def __add__(self, *others):
         """*object*\ .\ **__add__**\ (*other*)
 
@@ -160,14 +169,14 @@ class Fraction():
         from pyromaths.classes.PolynomesCollege import Polynome
         lother, lden, traiter = [], [], False
         if self.code: traiter = True
-        detailler, var = '', ''
+        details, var = '', ''
         for other in others:
             if other == 0:
                 pass
             elif isinstance(other, Polynome):
                 var = other.var
-                if detailler and not other.detailler: detailler = False
-                else: detailler = other.detailler
+                if details != 0  : details = min(details, other.details)
+                else: details = other.details
                 lother.append(other)
             elif isinstance(other, (int, float)):
                     lother.append(Fraction(other))
@@ -180,9 +189,9 @@ class Fraction():
             else:
                 raise ValueError(u'Format incorrect : %s' % (other))
         if var:
-            self = Polynome([[self, 0]], var, False, detailler)
+            self = Polynome([[self, 0]], var, details)
             for i in range(len(lother)):
-                if not isinstance(lother[i], Polynome): lother[i] = Polynome([[lother[i], 0]], var, False, detailler)
+                if not isinstance(lother[i], Polynome): lother[i] = Polynome([[lother[i], 0]], var, details)
             return Polynome.__add__(self, *lother)
 
         if traiter:
@@ -253,13 +262,14 @@ class Fraction():
         from pyromaths.classes.PolynomesCollege import Polynome
         lother, lden, traiter = [], [], False
         if self.code: traiter = True
-        detailler, var = True, ''
+        details, var = True, ''
         for other in others:
             if other == 0:
                 pass
             elif isinstance(other, Polynome):
                 var = other.var
-                detailler = detailler and other.detailler
+                if details != 0 : details = min(details, other.details)
+                else: details = other.details
                 lother.append(other)
             elif isinstance(other, (int, float)):
                     lother.append(Fraction(other))
@@ -272,9 +282,9 @@ class Fraction():
             else:
                 raise ValueError(u'Format incorrect : %s' % (other))
         if var:
-            self = Polynome([[self, 0]], var, False, detailler)
+            self = Polynome([[self, 0]], var, details)
             for i in range(len(lother)):
-                if not isinstance(lother[i], Polynome): lother[i] = Polynome([[lother[i], 0]], var, False, detailler)
+                if not isinstance(lother[i], Polynome): lother[i] = Polynome([[lother[i], 0]], var, details)
             return Polynome.__sub__(self, *lother)
 
         if traiter:
@@ -341,14 +351,13 @@ class Fraction():
 
         if self == 0: return 0
         self = Fraction(self.n, self.d)  # Pour contourner le cas où self = Fraction(Fraction(1, 1), 1)
-        lother, lnum, lden, detailler, var, traiter, lycee = [self], [self.n], [self.d], '', '', False, False
+        lother, lnum, lden, details, var, traiter, lycee = [self], [self.n], [self.d], 0, '', False, False
         for other in others:
             if other == 0:
                 return 0
             elif isinstance(other, Polynome):
                 var = other.var
-                if detailler and not other.detailler: detailler = False
-                else: detailler = other.detailler
+                details = min(details, other.details)
                 lother.append(other)
             elif isinstance(other, PolynomeLycee):
                 var = other.var
@@ -376,10 +385,8 @@ class Fraction():
                 self = PolynomeLycee({0:self}, var)
                 return PolynomeLycee.__mul__(self, other)
             else:
-                self = Polynome([[self, 0]], var, False, detailler)
-                for i in range(len(lother)):
-                    if not isinstance(lother[i], Polynome): lother[i] = Polynome([[lother[i], 0]], var, False, detailler)
-                return Polynome.__mul__(self, *lother)
+                self = Polynome([[self, 0]], var, details)
+                return Polynome.__mul__(self, *lother[1:])
 
         if traiter:
             lfrac = [repr(self.traitement())]
@@ -472,9 +479,13 @@ class Fraction():
         ``p.__rdiv__(q)`` est équivalent à ``p / q``  calcule le produit de l'objet p par la fraction q.
 
         *other* peut être un entier ou un réel.
+        
+        >>> from pyromaths.classes.Fractions import Fraction
+        >>> 1/Fraction(1,3)
+        '1*Fraction(3, 1)'
 
         Pour plus de détails, voir :py:func:`__radd__`"""
-        return "%r*%r" % (self, ~other)
+        return "%r*%r" % (other, ~self)
 
     def __invert__(self):
         """**__invert__**\ (*self*)

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.4. Priorites3 — Évaluation d’une expression calculatoire &mdash; documentation Pyromaths 13.03</title>
+    <title>3.4. Priorites3 — Évaluation d’une expression calculatoire &mdash; documentation Pyromaths 14.05</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '13.03',
+        VERSION:     '14.05',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,14 +25,14 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="documentation Pyromaths 13.03" href="index.html" />
+    <link rel="top" title="documentation Pyromaths 14.05" href="index.html" />
     <link rel="up" title="3. Les outils de Pyromaths" href="pyromaths.outils.html" />
     <link rel="next" title="4. Les exercices de troisièmes de Pyromaths" href="pyromaths.ex.troisiemes.html" />
     <link rel="prev" title="3.3. Conversions — Fonctions de conversions" href="pyromaths.outils.Conversions.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="_static/bandeau.png" alt="Logo"/><h1 class="heading"><a href="index.html">
-          <span>documentation Pyromaths 13.03</span></a></h1>
+          <span>documentation Pyromaths 14.05</span></a></h1>
         <h2 class="heading"><span>3.4. Priorites3 — Évaluation d’une expression calculatoire</span></h2>
       </div>
       <div class="topnav">
@@ -185,14 +185,13 @@ supérieure ou égale à min_i, sans expression régulière.</p>
 </tbody>
 </table>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Priorites3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="s">&#39;-Polynome([[-4, 2]], &quot;x&quot;)*6**2+3&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">cherche_decimal</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">&#39;4&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">cherche_operateur</span><span class="p">(</span><span class="s">&#39;-Polynome([[-4, 2]], &quot;x&quot;)*6**2+3&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;-&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="s">&#39;-6*(-11)*(-5)&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">cherche_decimal</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">&#39;6&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">cherche_decimal</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="go">&#39;6&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">cherche_operateur</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;*&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">cherche_operateur</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">&#39;-&#39;</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -227,6 +226,10 @@ supérieure ou égale à min_i, sans expression régulière.</p>
 <span class="go">[&#39;-5&#39;, &#39;-&#39;, &#39;10&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">effectue_calcul</span><span class="p">([</span><span class="s">&#39;-5&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;10&#39;</span><span class="p">])</span>
 <span class="go">[&#39;-15&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">effectue_calcul</span><span class="p">([</span><span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;Polynome(&quot;x-1&quot;)&#39;</span><span class="p">,</span> <span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">])</span>
+<span class="go">[&#39;-&#39;, &#39;(&#39;, &#39;Polynome([[2, 1]], &quot;x&quot;, 0)&#39;, &#39;+&#39;, &#39;Polynome([[-2, 0]], &quot;x&quot;, 0)&#39;, &#39;)&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">effectue_calcul</span><span class="p">([</span><span class="s">&#39;4&#39;</span><span class="p">,</span> <span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="s">&#39;Polynome(&quot;x+1&quot;)&#39;</span><span class="p">,</span> <span class="s">&#39;**&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">])</span>
+<span class="go">[&#39;4&#39;, &#39;*&#39;, &#39;(&#39;, &#39;Polynome([[1, 1]], &quot;x&quot;, 0)&#39;, &#39;**&#39;, &#39;2&#39;, &#39;+&#39;, &#39;2&#39;, &#39;*&#39;, &#39;Polynome([[1, 1]], &quot;x&quot;, 0)&#39;, &#39;*&#39;, &#39;Polynome([[1, 0]], &quot;x&quot;, 0)&#39;, &#39;+&#39;, &#39;Polynome([[1, 0]], &quot;x&quot;, 0)&#39;, &#39;**&#39;, &#39;2&#39;, &#39;)&#39;]</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -255,7 +258,8 @@ classes de Pyromaths.</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">plotify</span><span class="p">(</span><span class="s">&#39;Polynome([[Fraction(-5, 192), 4], [Fraction(2, 96), 3], [Fraction(41, 48), 2], [Fraction(-7, 12), 1], [-4, 0]], &quot;x&quot;, False, False)&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyromaths.outils</span> <span class="kn">import</span> <span class="n">Priorites3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">plotify</span><span class="p">(</span><span class="s">&#39;Polynome([[Fraction(-5, 192), 4], [Fraction(2, 96), 3], [Fraction(41, 48), 2], [Fraction(-7, 12), 1], [-4, 0]], &quot;x&quot;, False)&#39;</span><span class="p">)</span>
 <span class="go">&#39;-5/192*x^4+2/96*x^3+41/48*x^2-7/12*x^1-4&#39;</span>
 </pre></div>
 </div>
@@ -287,7 +291,7 @@ respectant les priorités et en détaillant les étapes.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">priorites</span><span class="p">(</span><span class="s">&#39;-1+5-(-5)+(-6)*1&#39;</span><span class="p">)</span>
 <span class="go">[[&#39;4&#39;, &#39;+&#39;, &#39;5&#39;, &#39;-&#39;, &#39;6&#39;], [&#39;9&#39;, &#39;-&#39;, &#39;6&#39;], [&#39;3&#39;]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">priorites</span><span class="p">(</span><span class="s">&#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;)*Polynome([[Fraction(1,3), 1], [1,0]], &quot;x&quot;)&#39;</span><span class="p">)</span>
-<span class="go">[[&#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;, &#39;*&#39;, &#39;Polynome([[Fraction(1, 3), 1]], &quot;x&quot;, False, True)&#39;, &#39;+&#39;, &#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;, &#39;*&#39;, &#39;Polynome([[1, 0]], &quot;x&quot;, False, True)&#39;], [&#39;Fraction(6, 7)&#39;, &#39;*&#39;, &#39;Fraction(1, 3)&#39;, &#39;*&#39;, &quot;Polynome([[1, 1]], &#39;x&#39;, False, True)&quot;, &#39;+&#39;, &#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;], [&#39;Polynome([[Fraction(&quot;3*2&quot;, &quot;7*3&quot;, &quot;s&quot;), 1]], &quot;x&quot;, False, True)&#39;, &#39;+&#39;, &#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;], [&#39;Polynome([[Fraction(2, 7), 1], [Fraction(6, 7), 0]], &quot;x&quot;, False, True)&#39;]]</span>
+<span class="go">[[&#39;Polynome([[Fraction(6, 21, &quot;s&quot;), 1]], &quot;x&quot;, 0)&#39;, &#39;+&#39;, &#39;Polynome([[Fraction(6, 7), 0]], &quot;x&quot;, 0)&#39;], [&#39;Polynome([[Fraction(2, 7), 1], [Fraction(6, 7), 0]], &quot;x&quot;, 0)&#39;]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">priorites</span><span class="p">(</span><span class="s">&#39;-Fraction(-6,1)/Fraction(-4,1)&#39;</span><span class="p">)</span>
 <span class="go">[[&#39;-&#39;, &#39;(&#39;, &#39;Fraction(-6, 1)&#39;, &#39;*&#39;, &#39;Fraction(1, -4)&#39;, &#39;)&#39;], [&#39;-&#39;, &#39;Fraction(&quot;2*-3&quot;, &quot;2*-2&quot;, &quot;s&quot;)&#39;], [&#39;Fraction(-3, 2)&#39;]]</span>
 </pre></div>
@@ -614,7 +618,9 @@ classes de Pyromaths.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">texify</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
 <span class="go">[&#39;4+5-6&#39;, &#39;9-6&#39;, &#39;3&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">texify</span><span class="p">(</span><span class="n">Priorites3</span><span class="o">.</span><span class="n">priorites</span><span class="p">(</span><span class="s">&#39;(-7)+8-Polynome([[-4, 1], [-9, 2], [-5, 0]], &quot;x&quot;)&#39;</span><span class="p">))</span>
-<span class="go">[&#39;1-\\left( -4\\,x-9\\,x^{2}-5\\right) &#39;, &#39;1+4\\,x+9\\,x^{2}+5&#39;, &#39;9\\,x^{2}+4\\,x+1+5&#39;, &#39;9\\,x^{2}+4\\,x+6&#39;]</span>
+<span class="go">[&#39;1-\\left( -4\\,x-9\\,x^{2}-5\\right) &#39;, &#39;1+4\\,x+9\\,x^{2}+5&#39;, &#39;9\\,x^{2}+4\\,x+6&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Priorites3</span><span class="o">.</span><span class="n">texify</span><span class="p">([</span><span class="s">&#39;Fraction(5,6)&#39;</span><span class="p">,</span> <span class="s">&#39;**&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">])</span>
+<span class="go">[&#39;\\dfrac{5}{6}&#39;, &#39;^{&#39;, &#39;2&#39;]</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -644,7 +650,7 @@ classes de Pyromaths.</p>
       </div>
 
     <div class="footer">
-        &copy; Copyright 2013, Jérôme Ortais.
+        &copy; Copyright 2013-2014, Jérôme Ortais.
       Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
