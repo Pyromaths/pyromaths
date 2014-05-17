@@ -10,7 +10,8 @@ Version 14.05
 ** Déplacement de «À propos de Pyromaths» dans le menu Pyromaths (application OSX) 
 ** Version 64 bits (application OSX)
 * Modification des classes Fraction et Polynome pour que les coefficients des objet Polynome puissent être des objets Fraction
-* Modification des exercices de calcul littéral en 4e et 3e.
+* Modification des exercices de calcul littéral en 4e et 3e
+* Ajout de deux exercices de calcul littéral en 4e : exercice de réduction et exercice de soustraction d'expressions littérales
 
 
 Version 13.03

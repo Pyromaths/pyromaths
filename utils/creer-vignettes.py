@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import os, sys, codecs, shutil
+import os, sys, codecs, shutil, glob
 from os.path import dirname, normpath, join, abspath, realpath, split
 from subprocess import call, Popen
 
@@ -45,6 +45,9 @@ def _thumb(exercise, outfile=None):
 def thumbs(pkg=ex, recursive=True):
     ''' Create all exercise thumbnails. '''
     imgdir = join(pkg.__path__[0], "img")
+    for fl in glob.glob(join(imgdir, "ex-??.png")):
+       #Do what you want with the file
+       os.remove(fl)
     for e in ex._exercises(pkg):
         _thumb(e)
     if not recursive: return
