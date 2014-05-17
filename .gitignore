@@ -16,11 +16,9 @@ dist/
 /.project
 /.pydevproject
 /.settings/
-/src/.bank
 /src/.project
 /src/.pydevproject
 /src/.settings/
-#
 
 # tests persos
 /src/test.py

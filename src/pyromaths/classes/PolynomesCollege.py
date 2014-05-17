@@ -480,7 +480,7 @@ class Polynome():
             >>> Polynome('3x', details=1)*Polynome('2x+5', details=1)
             'Polynome([[3, 1]], "x", 1)*Polynome([[2, 1]], "x", 1)+Polynome([[3, 1]], "x", 1)*Polynome([[5, 0]], "x", 1)'
             >>> Polynome('3x', details=3) * Polynome('2x', details=3)
-            "3*2*Polynome([[1, 1]], 'x', 3)*Polynome([[1, 1]], 'x', 3)"
+            "Polynome([[3, 0]], var = 'x', details=3)*Polynome([[1, 1]], var = 'x', details=3)*Polynome([[2, 0]], var = 'x', details=3)*Polynome([[1, 1]], var = 'x', details=3)"
             >>> Polynome('3', details=3)*Polynome('x', details=3)
             Polynome([[3, 1]], "x", 3)
 
