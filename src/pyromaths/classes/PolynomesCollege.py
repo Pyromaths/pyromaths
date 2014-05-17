@@ -516,7 +516,7 @@ class Polynome():
                 # On commence par réduire la chaîne
                 return "*".join([repr(other.nreduction()) for other in lother])
 
-        lcoeff, lexp, reduire = [], [], True
+        lcoeff, lexp, reduire, ordonne = [], [], True, True
         for i in range(len(lother)):
             lother[i] = self._convert_other(lother[i])
             if len(lother[i]) == 1:
@@ -525,14 +525,29 @@ class Polynome():
                 if coeff != 1: lcoeff.append(coeff)
                 if exp != 0: lexp.append(exp)
                 if coeff != 1 and exp != 0: reduire = False
+                if lexp and exp < lexp[-1]: ordonne = False
                 if lother[i] == 0: return 0
             if len(lother[i]) > 1 or i + 1 == len(lother):
                 # Ce n'est pas un monôme, il va donc falloir utiliser la distributivité
-                # ou alors la chaine est fini et on calcul
+                # ou alors la chaine est fini et on calcule
                 if len(lother[i]) == 1 or len(lcoeff) > 1 or len(lexp) > 1:
                     # on a multiplié au moins 2 monômes auparavant
                     if lother[i].details == 3 and not reduire:
                         # TODO: cas où un coeff est une str
+                        #=======================================================
+                        # return "*".join([repr(coeff) for coeff in lcoeff]) + "*" + \
+                        #     "*".join(["Polynome([[1, %s]], '%s', %s)" % (exp, self.var, self.details) for exp in lexp]) + \
+                        #     "*".join([repr(other.nreduction()) for other in lother[i + 1:]])
+                        #=======================================================
+                        produit = []
+                        for j in lother:
+                            if j[0][0] != 1 and j[0][1] > 0:
+                                produit.append("*".join(['Polynome([[%s, 0]], var = \'%s\', details=%s)' % (j[0][0], j.var, j.details), \
+                                                'Polynome([[1, %s]], var = \'%s\', details=%s)' % (j[0][1], j.var, j.details)]))
+                            else:
+                                produit.append(repr(j))
+                        return "*".join(produit)
+                    if lother[i].details == 3 and not ordonne:
                         return "*".join([repr(coeff) for coeff in lcoeff]) + "*" + \
                             "*".join(["Polynome([[1, %s]], '%s', %s)" % (exp, self.var, self.details) for exp in lexp]) + \
                             "*".join([repr(other.nreduction()) for other in lother[i + 1:]])
@@ -562,6 +577,22 @@ class Polynome():
                         produit = id_rem(lother[0], lother[1])
                         if produit == None:
                             # Distributivité
+                            # TODO: Convertir (a-b) en (a+(-b)) pour details=3
+                            #===================================================
+                            # if self.details == 3:
+                            #     difference, produit = False, []
+                            #     for poly in lother:
+                            #         if len(poly) > 1:
+                            #             for j in range(1, len(poly)):
+                            #                 if poly[j][0] < 0:
+                            #                     difference = True
+                            #                     produit.append("(" + "+".join(['Polynome(%s, var = \'%s\', details=%s)' % (poly[i], poly.var, poly.details) for i in range(len(poly))]) + ")")
+                            #                     break
+                            #         if not difference: produit.append(repr(poly))
+                            #     if difference:
+                            #         return "*".join(produit)
+                            #===================================================
+
                             if self.details > 0:
                                 produit = "+".join(["+".join([repr(Polynome([premier], self.var, self.details)) + \
                                                               "*" + repr(Polynome([second], self.var, self.details)) \

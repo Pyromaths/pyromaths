@@ -658,7 +658,6 @@ def valide(liste, LesFiches, parametres):
     corrige = parametres['corrige']
     lesexos = []
     for i in range(liste.count()):
-        print liste.item(i)
         lesexos.append(liste.item(i).exercice())
 
     #============================================================

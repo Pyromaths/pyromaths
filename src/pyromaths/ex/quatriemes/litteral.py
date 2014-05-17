@@ -24,28 +24,28 @@
 # Pyromaths : Initiation au calcul littéral
 #----------------------------------------------------------------------
 from pyromaths.outils.Priorites3 import texify, priorites, splitting
-import random
+from random import randrange, shuffle
 
 def valeurs_reduire():
     """Travail sur les bases du calcul littéral en quatrième"""
     var = "atxy"
-    var = var[random.randrange(len(var))]
-    op = "+*-*"[random.randrange(4)]
+    var = var[randrange(len(var))]
+    op = "+*-*"[randrange(4)]
     if op == "*":
-        deg1 = random.randrange(3)
+        deg1 = randrange(3)
         if deg1 == 2: deg2 = 0
-        elif deg1 == 1: deg2 = random.randrange(2)
-        else: deg2 = random.randrange(1, 3)
+        elif deg1 == 1: deg2 = randrange(2)
+        else: deg2 = randrange(1, 3)
     else:
-        deg1 = random.randrange(1, 3)
+        deg1 = randrange(1, 3)
         deg2 = [i for i in range(3)]
         deg2.extend([deg1] * 7)
-        random.shuffle(deg2)
-        deg2 = deg2.pop(random.randrange(len(deg2)))
+        shuffle(deg2)
+        deg2 = deg2.pop(randrange(len(deg2)))
     a1, a2 = 0, 0
     while not a1 or not a2:
-        a1 = random.randrange(-10, 11)
-        a2 = random.randrange(-10, 11)
+        a1 = randrange(-10, 11)
+        a2 = randrange(-10, 11)
     p1 = "Polynome(\"%s%s^%s\", details=3)" % (a1, var, deg1)
     p2 = "Polynome(\"%s%s^%s\", details=3)" % (a2, var, deg2)
     return p1 + op + p2
@@ -75,14 +75,150 @@ def reduire():
 
 reduire.description = u'Bases du calcul littéral'
 
+def distributivite():
+    """Crée un exercice permettant de s'entrainer sur la distributivité
+    """
+    lcalc, expr = [], []
+    for i in range(2):
+        tmp = ['Polynome([[%s, 1]], details=3)' % randrange(2, 10), 'Polynome([[%s, 0]], details=3)' % randrange(2, 10)]
+        shuffle(tmp)
+        lcalc.append(["*".join(tmp)])
+        lcalc[i].extend(priorites(lcalc[i][0]))
+        lcalc[i][0] = splitting(lcalc[i][0])
+        expr.append(texify(lcalc[i]))
+    tmp = [0, 1, 2]
+    for i in range(2, 5):
+        k = 'Polynome([[%s, 0]], details=3)' % randrange(2, 11)
+        if i > 1:
+            a = valeurs_reduire_somme(2)
+        else:
+            sgn = (-1) ** randrange(2)
+            a = [[sgn, 1] for dummy2 in range(randrange(2, 5))]
+            a.append([randrange(1, 11) * (-1) ** randrange(2), 0])
+            a = 'Polynome(%s, var=\'x\', details=3)' % a
+        exp = tmp.pop(randrange(len(tmp)))
+        if exp != 2:
+            b = 'Polynome([[%s, %s]], details=3)' % (randrange(1, 11) * (-1) ** randrange(3), exp)
+        else:
+            b = valeurs_reduire_somme(2)
+
+        lpoly = [a, k]
+        shuffle(lpoly)
+        if randrange(2):lpoly.insert(0, b)
+        else:lpoly.append(b)
+        if b == lpoly[0]:
+            lcalc.append(['%s+%s*%s' % (lpoly[0], lpoly[1], lpoly[2])])
+        else:
+            lcalc.append(['%s*%s+%s' % (lpoly[0], lpoly[1], lpoly[2])])
+        lcalc[i].extend(priorites(lcalc[i][0]))
+        lcalc[i][0] = splitting(lcalc[i][0])
+        expr.append(texify(lcalc[i]))
+    exo = ["\\exercice", u"Développer et réduire chacune des expressions littérales suivantes :"]
+    exo.append("\\begin{multicols}{2}")
+    cor = ["\\exercice*", u"Développer et réduire chacune des expressions littérales suivantes :"]
+    cor.append("\\begin{multicols}{2}")
+
+    for i in range(len(lcalc)):
+        cor.append('\\\\\n'.join(['$%s=%s$' % (chr(i + 65), expr[i][j]) for j in range(len(expr[i]) - 1)]))
+        cor.append('\\\\')
+        cor.append('\\fbox{$%s=%s$}\\\\\n' % (chr(i + 65), expr[i][-1]))
+    exo.append('\\\\\n'.join(['$%s=%s$' % (chr(i + 65), expr[i][0]) for i in range(len(expr))]))
+    exo.append("\\end{multicols}")
+    cor.append("\\end{multicols}")
+    return exo, cor
+
+distributivite.description = u'Distributivité'
+
+def double_distributivite():
+    """Crée un exercice permettant de s'entrainer sur la double distributivité
+    """
+    lcalc, expr = [], []
+    for i in range(2):
+        tmp = ['Polynome([[%s, 1]], details=3)' % ([1, randrange(2, 10)][i]), 'Polynome([[%s, 1]], details=3)' % randrange(2, 10)]
+        shuffle(tmp)
+        lcalc.append(["*".join(tmp)])
+        lcalc[i].extend(priorites(lcalc[i][0]))
+        lcalc[i][0] = splitting(lcalc[i][0])
+        expr.append(texify(lcalc[i]))
+    tmp = [0, 1, 2]
+    for i in range(2, 5):
+        a = valeurs_reduire_somme(2)
+        b = valeurs_reduire_somme(2)
+        exp = tmp.pop(randrange(len(tmp)))
+        if exp != 1:
+            c = 'Polynome([[%s, %s]], details=3)' % (randrange(1, 11) * (-1) ** randrange(3), exp)
+        else:
+            c = valeurs_reduire_somme(2)
+        lpoly = [a, b]
+        if randrange(2): lpoly.insert(0, c)
+        else: lpoly.append(c)
+        if c == lpoly[0]:
+            lcalc.append(['%s+%s*%s' % (lpoly[0], lpoly[1], lpoly[2])])
+        else:
+            lcalc.append(['%s*%s+%s' % (lpoly[0], lpoly[1], lpoly[2])])
+        lcalc[i].extend(priorites(lcalc[i][0]))
+        lcalc[i][0] = splitting(lcalc[i][0])
+        expr.append(texify(lcalc[i]))
+    exo = ["\\exercice", u"Développer et réduire chacune des expressions littérales suivantes :"]
+    exo.append("\\begin{multicols}{2}")
+    cor = ["\\exercice*", u"Développer et réduire chacune des expressions littérales suivantes :"]
+    cor.append("\\begin{multicols}{2}")
+    for i in range(len(lcalc)):
+        if i == 2: cor.append("\\end{multicols}")
+        cor.append('\\\\\n'.join(['$%s=%s$' % (chr(i + 65), expr[i][j]) for j in range(len(expr[i]) - 1)]))
+        cor.append('\\\\')
+        cor.append('\\fbox{$%s=%s$}\\\\\n' % (chr(i + 65), expr[i][-1]))
+    exo.append('\\\\\n'.join(['$%s=%s$' % (chr(i + 65), expr[i][0]) for i in range(len(expr))]))
+    exo.append("\\end{multicols}")
+    return exo, cor
+
+double_distributivite.description = u'Double distributivité'
+
+def soustraction():
+    """Réduction d'expressions du type 5a+3-(5+a)
+    """
+    lcalc, expr = [], []
+    sgn = ['-', '-', '-', '-', '+', '+']
+    for i in range(len(sgn)):
+        a = valeurs_reduire_somme(2)
+        b = 'Polynome([[%s,0]], var=\'x\', details=3)' % (randrange(2, 11) * (-1) ** randrange(2))
+        c = 'Polynome([[%s,1]], var=\'x\', details=3)' % (randrange(2, 11) * (-1) ** randrange(2))
+        poly = [a, b, c]
+        shuffle(poly)
+        signe = sgn.pop(randrange(len(sgn)))
+        poly.insert(poly.index(a), signe)
+        if signe == '+':
+            poly.insert(poly.index(a), '(')
+            poly.insert(poly.index(a) + 1, ')')
+        poly.insert(poly.index(b), '+')
+        poly.insert(poly.index(c), '+')
+        if poly[0] == '+': del poly[0]
+        lcalc.append(["".join(poly)])
+        lcalc[i].extend(priorites(lcalc[i][0]))
+        lcalc[i][0] = splitting(lcalc[i][0])
+        expr.append(texify(lcalc[i]))
+    exo = ["\\exercice", u"Réduire chacune des expressions littérales suivantes :"]
+    exo.append("\\begin{multicols}{2}")
+    cor = ["\\exercice*", u"Réduire chacune des expressions littérales suivantes :"]
+    cor.append("\\begin{multicols}{2}")
+    for i in range(len(lcalc)):
+        cor.append('\\\\\n'.join(['$%s=%s$' % (chr(i + 65), expr[i][j]) for j in range(len(expr[i]) - 1)]))
+        cor.append('\\\\')
+        cor.append('\\fbox{$%s=%s$}\\\\\n' % (chr(i + 65), expr[i][-1]))
+    exo.append('\\\\\n'.join(['$%s=%s$' % (chr(i + 65), expr[i][0]) for i in range(len(expr))]))
+    exo.append("\\end{multicols}")
+    cor.append("\\end{multicols}")
+    return exo, cor
+
+soustraction.description = u'Soustraire une expression entre parenthèses'
 
 def valeurs_reduire_somme(nbval=4):
     """Réduire une somme de quatre monômes de degrés 0 et 1"""
     var = "x"
     #===========================================================================
-    # var = var[random.randrange(len(var))]
+    # var = var[randrange(len(var))]
     #===========================================================================
-    l = [[random.randrange(1, 11) * (-1) ** random.randrange(2), (i + 1) % 2] for i in range(nbval)]
+    l = [[randrange(1, 11) * (-1) ** randrange(2), (i + 1) % 2] for i in range(nbval)]
     return "Polynome(%s, var=\"%s\", details=3)" % (l, var)
 
 def exo_comptable():
@@ -166,24 +302,26 @@ def exo_comptable():
 
     return exo, cor
 exo_comptable.description = u'Réduire des expressions littérales'
-
-def reduire_expressions():
-    """Fait double emploi avec l'exercice du comptable"""
-    """Travail sur les bases du calcul littéral en quatrième"""
-    exo = ["\\exercice", u"Réduire les expressions littérales suivantes :",
-           "\\begin{multicols}{2}"]
-    cor = ["\\exercice*", u"Réduire les expressions littérales suivantes :",
-           "\\begin{multicols}{2}"]
-    lexo = [valeurs_reduire_somme() for dummy in range(4)]
-    expr = [texify([splitting(lexo[i])]) for i in range(4)]
-    for i in range(4):
-        expr[i].extend(texify(priorites(lexo[i])))
-        exo.append('\\\\\n$%s=%s$' % (chr(i + 65), expr[i][0]))
-        cor.append('\\\\\n'.join(['$%s=%s$' % (chr(i + 65), expr[i][j]) for j in range(len(expr[i]) - 1)]))
-        cor.append('\\\\')
-        cor.append('\\fbox{$%s=%s$}\\\\\n' % (chr(i + 65), expr[i][-1]))
-    exo.append("\\end{multicols}")
-    cor.append("\\end{multicols}")
-    return exo, cor
-
-# eduire_expressions.description = u'Réduire des expressions littérales'
+#===============================================================================
+#
+# def reduire_expressions():
+#     """Fait double emploi avec l'exercice du comptable"""
+#     """Travail sur les bases du calcul littéral en quatrième"""
+#     exo = ["\\exercice", u"Réduire les expressions littérales suivantes :",
+#            "\\begin{multicols}{2}"]
+#     cor = ["\\exercice*", u"Réduire les expressions littérales suivantes :",
+#            "\\begin{multicols}{2}"]
+#     lexo = [valeurs_reduire_somme() for dummy in range(4)]
+#     expr = [texify([splitting(lexo[i])]) for i in range(4)]
+#     for i in range(4):
+#         expr[i].extend(texify(priorites(lexo[i])))
+#         exo.append('\\\\\n$%s=%s$' % (chr(i + 65), expr[i][0]))
+#         cor.append('\\\\\n'.join(['$%s=%s$' % (chr(i + 65), expr[i][j]) for j in range(len(expr[i]) - 1)]))
+#         cor.append('\\\\')
+#         cor.append('\\fbox{$%s=%s$}\\\\\n' % (chr(i + 65), expr[i][-1]))
+#     exo.append("\\end{multicols}")
+#     cor.append("\\end{multicols}")
+#     return exo, cor
+#
+# # eduire_expressions.description = u'Réduire des expressions littérales'
+#===============================================================================
