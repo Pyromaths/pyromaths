@@ -32,17 +32,25 @@ Created on 13 avr. 2013
 """
 import os
 import sys
-from glob import glob
+import codecs
+from glob import glob, has_magic
 from os.path import dirname, normpath, join, abspath, realpath
 
 from setuptools import setup, find_packages
+
+py2exe, innosetup = None, None
+try:
+    import py2exe
+    import innosetup
+except ImportError:
+    pass
 
 # Import pyromaths VERSION from source
 _path = normpath(join(abspath(dirname(__file__)), "./src"))
 sys.path[0] = realpath(_path)
 #sys.path.append('src')
 from pyromaths.Values import VERSION
-print VERSION
+print "Version ", VERSION
 
 def _unix_opt():
     '''UNIX/Linux: generate Python eggs and RPM packages.'''
@@ -119,40 +127,57 @@ def _mac_opt():
 
 def _win_opt():
     '''M$ Win: py2exe helps generate a self-contained app.'''
+#   import py2exe, innosetup
     inno_script = '''
 [Setup]
-Compression=lzma/max
-OutputBaseFilename=pyromaths-%s-win32
+Compression = lzma/max
+OutputBaseFilename = pyromaths-%s-win32
 [Languages]
-Name:         "french";
-MessagesFile: "compiler:Languages\French.isl"
+Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 [Tasks]
-Name:         "desktopicon";
-Description:  "{cm:CreateDesktopIcon}";
-GroupDescription: "{cm:AdditionalIcons}";
-Flags:        unchecked
+Name: "desktopicon"; Description:  "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 [Icons]
-Name:         "{commondesktop}\Pyromaths";
-Filename:     "{app}\pyromaths.exe"
+Name: "{commondesktop}\Pyromaths"; Filename: "{app}\pyromaths.exe"
 ''' % VERSION
     return dict(
         platforms  = ['windows'],
-        app        = ["src/pyromaths.py"],
-        data_files = [('data', glob('data/*'))],
+        data_files=[
+          ('data/images', ['data/images/pyromaths.ico',
+            'data/images/pyromaths.png', 'data/images/pyromaths-banniere.png',
+            'data/images/whatsthis.png']
+           ),
+          (r'data/templates', glob(r'data/templates/*.tex')),
+          (r'data/packages', glob(r'data/packages/*')),
+          (r'data/packages', glob(r'data/packages/*')),
+        ] + find_data_files('src/pyromaths/ex','data/ex/',['*/img/ex-*.png']),
         zipfile = None,
-        windows = [dict(script="Pyromaths.py",
+        windows = [dict(script="src/pyromaths.py",
                         icon_resources=[(1, 'data/images/pyromaths.ico')],
                         )
                    ],
         setup_requires = ['py2exe'],
-        options = dict(py2exe=dict(compressed   = 1,
+        options = dict(py2exe=dict(compressed   = True,
                                    optimize     = 2,
                                    bundle_files = 3,
-                                   includes     = ["sip", "gzip"],
+                                   packages = ['pyromaths.ex', ],
+                                   includes     = ['sip', 'gzip', ],
                                    ),
                        innosetup=dict(inno_script=inno_script, compressed=True)
                        )
     )
+
+def find_data_files(source,target,patterns):
+  if has_magic(source) or has_magic(target):
+    raise ValueError("Magic not allowed in src, target")
+  ret = {}
+  for pattern in patterns:
+    pattern = os.path.join(source,pattern)
+    for filename in glob(pattern):
+      if os.path.isfile(filename):
+        targetpath = os.path.join(target, os.path.relpath(filename, source))
+        path = os.path.dirname(targetpath)
+        ret.setdefault(path,[]).append(filename)
+  return sorted(ret.items())
 
 # Set platform-specific options
 if "py2app" in sys.argv:
@@ -163,8 +188,12 @@ else:
     options = _unix_opt()
 
 # Long description is copied from README file
-with open('README') as file:
-    README = file.read()
+if innosetup:
+    # innosetup fails with generated multiline long description
+    README = "Create maths exercises in LaTeX and PDF format"
+else:
+    with codecs.open('README', encoding='utf-8', mode='r') as file:
+        README = file.read()
 
 setup(
     # project metadata

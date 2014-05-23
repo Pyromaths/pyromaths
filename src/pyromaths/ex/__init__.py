@@ -1,7 +1,11 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
 import inspect
 import os
 import pkgutil
 import types
+import sys
 
 
 levels = {}
@@ -84,6 +88,10 @@ def __import(name=__name__, parent=None):
     if not isinstance(name, basestring):
         name = name.__name__
     # parent is None: assume 'name' is a package name
+    # hack tout moche pour l'import des exercices dans la version Windows de Pyromaths :
+    # Les modules sixiemes, quatriemes doivent être appelés avec le chemin complet,
+    # alors que les exercices cinquiemes.aires ne doivent être appelés qu'ainsi.
+    if "." not in name and hasattr(sys, "frozen"): name = "pyromaths.ex." + name
     if parent is None: parent = name
     elif not isinstance(parent, basestring):
         # assume 'parent' is a package instance
@@ -106,7 +114,17 @@ def _exercises(pkg):
             element = mod.__dict__[element]
             level = __level(element.level if 'level' in dir(element)
                               else mod.level)
-            thumb = os.path.join(pkg.__path__[0], 'img', 'ex-%02d.png' % n)
+            if hasattr(sys, "frozen"):
+                # Hack pour déplacer les vignettes de la version Windows dans
+                # le dossier data/ex/{{ classe }}/img
+                dirlevel = os.path.split(pkg.__path__[0])[1]
+                thumb = os.path.join(os.path.normpath(\
+                        os.path.dirname(unicode(sys.executable, \
+                            sys.getfilesystemencoding()))), 'data', 'ex', \
+                            dirlevel, 'img', 'ex-%02d.png' % n)
+
+            else:
+                thumb = os.path.join(pkg.__path__[0], 'img', 'ex-%02d.png' % n)
             if __isexercise(element):
                 element.level = level
                 element.thumb = thumb
