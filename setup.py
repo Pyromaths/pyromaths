@@ -100,7 +100,7 @@ def _mac_opt():
                             'gettext', 'sets', '_threading_local', 'glob',
                             'base64', 'locale', 'sre', 'bdb', 'optparse.',
                             'ssl', 'calendar', 'pdb', 'stringprep', 'cmd',
-                            'pkg_resources' 'tempfile','copy', 'pkgutil',
+                            'pkg_resources' 'tempfile','copy',
                             'textwrap', 'difflib', 'platform', 'threading',
                             'dummy_thread', 'plistlib', 'quopri', 'fnmatch',
                             'pprint']
@@ -209,7 +209,6 @@ setup(
     # python packages
     packages    = find_packages('src'),
     package_dir = {'': 'src'},
-    include_package_data = True,
     # dependencies
     provides    = ["pyromaths"],
     # platform-specific options
@@ -229,3 +228,8 @@ if "py2app" in sys.argv:
 PWD=$(dirname "$0"); /usr/bin/env PATH="$PATH:%s" $PWD/pyromaths''' % path)
     os.system("chmod +x dist/Pyromaths.app/Contents/MacOS/setenv.sh")
     os.system("sed -i '' '23s/pyromaths/setenv.sh/' dist/Pyromaths.app/Contents/Info.plist")
+    # hack to add dependencies that cannot be found
+    os.system("cp -r src/pyromaths dist/Pyromaths.app/Contents/Resources/lib/python2.7")
+    os.system("find dist/Pyromaths.app/Contents/Resources/lib/python2.7/pyromaths/ \( -name '*.pyc' \) -delete")
+    os.system("rm -r dist/Pyromaths.app/Contents/Resources/lib/python2.7/pyromaths/ex/examples")
+    

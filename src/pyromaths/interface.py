@@ -283,12 +283,13 @@ class Ui_MainWindow(object):
 
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 700, 22))
-        if sys.platform != "darwin":  # Cas de Mac OS X.
+        if sys.platform != "darwin":
             self.menubar.setStyleSheet("background-color: rgb(251, 231, 178);")
         MainWindow.setMenuBar(self.menubar)
 
-        self.menuFichier = QtGui.QMenu(self.menubar)
-        self.menuFichier.setTitle("Fichier")
+        if sys.platform != "darwin":  # Cas de Mac OS X.
+                self.menuFichier = QtGui.QMenu(self.menubar)
+                self.menuFichier.setTitle("Fichier")
 
         self.menu_propos = QtGui.QMenu(self.menubar)
         self.menu_propos.setTitle("Aide")
@@ -302,9 +303,6 @@ class Ui_MainWindow(object):
         #============================================================
         #        Menus de la barre de menus
         #============================================================
-        self.actionTous_les_exercices = QtGui.QAction(MainWindow)
-        self.actionTous_les_exercices.setText("Tous les exercices")
-
         self.actionQuitter = QtGui.QAction(MainWindow)
         self.actionQuitter.setText("Quitter")
 
@@ -315,13 +313,14 @@ class Ui_MainWindow(object):
         self.action_a_propos.setText(u"À propos")
         self.action_a_propos.setMenuRole(QtGui.QAction.AboutRole)
 
-        self.menuFichier.addAction(self.actionTous_les_exercices)
-        self.menuFichier.addSeparator()
-        self.menuFichier.addAction(self.actionQuitter)
+        if sys.platform != "darwin":
+            self.menuFichier.addSeparator()
+            self.menuFichier.addAction(self.actionQuitter)
         self.menu_propos.addAction(self.actionAcceder_au_site)
         self.menu_propos.addSeparator()
         self.menu_propos.addAction(self.action_a_propos)
-        self.menubar.addAction(self.menuFichier.menuAction())
+        if sys.platform != "darwin":
+            self.menubar.addAction(self.menuFichier.menuAction())
         self.menubar.addAction(self.menu_propos.menuAction())
 
         #============================================================
@@ -334,7 +333,6 @@ class Ui_MainWindow(object):
         #============================================================
         #    Actions des boutons et menus
         #============================================================
-        QtCore.QObject.connect(self.actionTous_les_exercices, QtCore.SIGNAL("triggered()"), self.creer_tous_les_exercices)
         QtCore.QObject.connect(self.actionQuitter, QtCore.SIGNAL("triggered()"), QtGui.qApp,
                                                                  QtCore.SLOT("quit()"))
         QtCore.QObject.connect(self.actionAcceder_au_site, QtCore.SIGNAL("triggered()"), self.site)
@@ -472,54 +470,6 @@ class Ui_MainWindow(object):
             else:
                 form = ChoixOrdreExos(self.List, LESFICHES, parametres)
                 form.exec_()
-
-    def creer_tous_les_exercices(self):
-        """
-        Créer des fiches exemples pour tous les niveaux avec tous les exercices
-        dans le dossier /home/jerome/workspace/Pyromaths/src/exemples
-        """
-        self.valide_options()
-        d0 = unicode(QtGui.QFileDialog().getExistingDirectory(None, u"Dossier où créer les fiches",
-                                                         self.config['chemin_fichier'], QtGui.QFileDialog.ShowDirsOnly))
-        i = 0
-        if d0:
-            for niveau in range(5):
-                liste = []
-                for i in range(len(LESFICHES[niveau][2])):
-                    liste.append((niveau, i))
-                if niveau != 4:
-                    exo = os.path.join(d0, "%se.tex" % (6 - niveau))
-                    cor = os.path.join(d0, "%se-corrige.tex" % (6 - niveau))
-                    parametres = {'les_fiches': LESFICHES,
-                                  'fiche_exo': exo,
-                                  'fiche_cor': cor,
-                                  'liste_exos': liste,
-                                  'creer_pdf': '1',
-                                  'titre': "Exemple de fiche",
-                                  'niveau': "%s\\ieme" % (6 - niveau),
-                                  'modele': str(self.comboBox_modele.currentText() + '.tex'),
-                                  'corrige': True,
-                                  'creer_unpdf': True,
-                                  'datadir': DATADIR,
-                                  'configdir': CONFIGDIR
-                                  }
-                else:
-                    exo = os.path.join(d0, "Lycee.tex")
-                    cor = os.path.join(d0, "Lycee-corrige.tex")
-                    parametres = {'les_fiches': LESFICHES,
-                                  'fiche_exo': exo,
-                                  'fiche_cor': cor,
-                                  'liste_exos': liste,
-                                  'creer_pdf': '1',
-                                  'titre': "Exemple de fiche",
-                                  'niveau': u"Lycée",
-                                  'modele': str(self.comboBox_modele.currentText() + '.tex'),
-                                  'corrige': True,
-                                  'creer_unpdf': True,
-                                  'datadir': DATADIR,
-                                  'configdir': CONFIGDIR
-                                  }
-                System.creation(parametres)
 
     def effacer_choix_exercices(self):
         """Remet toutes les SpinBox à zéro et vide la liste d'exercices sélectionnés"""
