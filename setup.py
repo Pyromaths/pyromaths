@@ -101,6 +101,7 @@ def _mac_opt():
     py2app = dict(plist    = plist,
                   iconfile = 'data/images/pyromaths.icns',
                   includes = ['gzip'],
+                  packages = ['pyromaths.ex'],
                   excludes = excludes,
                   argv_emulation = True,
                   )
@@ -199,8 +200,4 @@ if "py2app" in sys.argv:
 PWD=$(dirname "$0"); /usr/bin/env PATH="$PATH:%s" $PWD/pyromaths''' % path)
     os.system("chmod +x dist/Pyromaths.app/Contents/MacOS/setenv.sh")
     os.system("sed -i '' '23s/pyromaths/setenv.sh/' dist/Pyromaths.app/Contents/Info.plist")
-    # hack to add dependencies that cannot be found
-    os.system("cp -r src/pyromaths dist/Pyromaths.app/Contents/Resources/lib/python2.7")
-    os.system("find dist/Pyromaths.app/Contents/Resources/lib/python2.7/pyromaths/ \( -name '*.pyc' \) -delete")
-    os.system("rm -r dist/Pyromaths.app/Contents/Resources/lib/python2.7/pyromaths/ex/examples")
     
