@@ -194,6 +194,7 @@ app: version data/qtmac_fr.qm
 	    rm -rf include lib Resources
 	rm -rf $(APP)/Resources/lib/python2.7/pyromaths.ex/examples
 	find $(APP)/Resources/lib/python2.7/pyromaths.ex \( -name '*.pyc' \) -delete
+	rm -rf $(APP)/Frameworks/pyromaths
 	# ..Remove all architectures but x86_64..."
 	ditto --rsrc --arch x86_64 --hfsCompression $(DIST)/Pyromaths.app $(DIST)/Pyromaths-x86_64.app
 
