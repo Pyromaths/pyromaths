@@ -232,4 +232,4 @@ PWD=$(dirname "$0"); /usr/bin/env PATH="$PATH:%s" $PWD/pyromaths''' % path)
     os.system("cp -r src/pyromaths dist/Pyromaths.app/Contents/Resources/lib/python2.7")
     os.system("find dist/Pyromaths.app/Contents/Resources/lib/python2.7/pyromaths/ \( -name '*.pyc' \) -delete")
     os.system("rm -r dist/Pyromaths.app/Contents/Resources/lib/python2.7/pyromaths/ex/examples")
-    
+
