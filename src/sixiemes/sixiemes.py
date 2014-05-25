@@ -33,7 +33,7 @@ def write(f0, f1, exos):
     f0.writelines(x + "\n" for x in exos[0])
     f1.writelines(x + "\n" for x in exos[1])
 
-def main(exo, f0, f1, langue = ""):
+def main(exo, f0, f1):
     modules = (
         operations.CalculMental,
         decimaux.EcrireNombreLettre,
@@ -58,7 +58,4 @@ def main(exo, f0, f1, langue = ""):
 	espace.main,
         arrondi.ArrondirNombreDecimal
         )
-    if exo == 1:
-        write(f0, f1, modules[exo](langue))
-    else:
-        write(f0, f1, modules[exo]())
+    write(f0, f1, modules[exo]())

@@ -41,6 +41,13 @@ def dist_bords(a,b):
     y = min(b,10-b) # la hauteur vaut 10
     return (x,y)
 
+def pair(n):
+    '''Retourne le plus petit entier pair strictement plus grand que n'''
+    if (n % 2 == 0):
+      return n+2
+    else:
+      return n+1
+
 def AffNom(u,crd = 0):
     '''Renvoie les coordonnées pour l'affichage du nom du vecteur u.'''
     if u.x == 0 and math.fabs(u.y) > 2:
@@ -103,16 +110,14 @@ def repr_somme(u,v,u1,u2,cor,larg=0):
       else:
          departy = -u.y
 
-    somme_largeur = larg + largeur + 1
-    if somme_largeur > 18:
+    if int(larg) + largeur > 18:
       cor.append("\\par") # Figure trop large avec la précédente, il faut passer à une nouvelle ligne.
-      somme_largeur -= 18
 
-    depart = "(" + str(departx+1) + "," + str(departy+1) + ")"  ## MIO y eliminación de "def pair(n)"
-    largeur = str(float(largeur)+1.5)                           ## MIO
-    hauteur = str(float(hauteur)+1.5)                           ## MIO
-    
-    cor.append(u"\\begin{pspicture*}(0.5,0.5)(" + largeur + "," + hauteur + ")")    ## MIO
+    depart = "(" + str(departx) + "," + str(departy) + ")"
+    largeur = str(pair(int(largeur)))
+    hauteur = str(pair(int(hauteur)))
+
+    cor.append(u"\\begin{pspicture*}(0,0)(" + largeur + "," + hauteur + ")")
     cor.append(u"\\psgrid[subgriddiv=2, gridlabels=0pt]")
     cor.append(u"\\psset{unit=10mm,arrowscale=2}")
 
@@ -135,7 +140,7 @@ def repr_somme(u,v,u1,u2,cor,larg=0):
 
     cor.append(u"}")
     cor.append(u"\\end{pspicture*}")
-    return somme_largeur ## récupérer la largeur pour éviter d'aligner des figures trop larges sur la feuille
+    return largeur ## récupérer la largeur pour éviter d'aligner des figures trop larges sur la feuille
 
 def vecteurs_add():
     '''Exercice sur la définition des vecteurs et leurs sommes.'''
@@ -222,46 +227,46 @@ def vecteurs_add():
 
     exo.append("\\par")
     cor.append("\\par")
-    exo.append(_(u"On se place dans un repère orthonormé et on considère les vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$ ci-dessous."))
-    cor.append(_(u"On se place dans un repère orthonormé et on considère les vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$ ci-dessous."))
+    exo.append(u"On se place dans un repère orthonormé et on considère les vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$ ci-dessous.")
+    cor.append(u"On se place dans un repère orthonormé et on considère les vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$ ci-dessous.")
 
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
 
-    exo.append(_(u"\\item Lire les coordonnées de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$."))
-    cor.append(_(u"\\item Lire les coordonnées de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$."))
+    exo.append(u"\\item Lire les coordonnées de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$.")
+    cor.append(u"\\item Lire les coordonnées de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$.")
 
     cor.append("\\par")
-    cor.append(_(u"Un petit rappel : l'abscisse d'un vecteur est la différence d'abscisse entre le fin et le début du vecteur. \
-                 Concernant le vecteur $\\overrightarrow{u}$, son abscisse est $") + str(u.x) + _(u"$. \
-                 On lit également son ordonnée : $") + str(u.x) + _(u"$. \
-                 Donc les coordonnées de $\\overrightarrow{u}$ sont $(") + str(u.x) + ", " + str(u.y) + _(u" )$. \
-                 Des pointillés ont été ajoutés sur la figure pour faciliter la lecture des coordonnées."))
-    cor.append(_(u"De même, les coordonnées de $\\overrightarrow{v}$ sont $(") + str(v.x) + ", " + str(v.y) + _(u" )$ \
-                 et les coordonnées de $\\overrightarrow{w}$ sont $(") + str(w.x) + ", " + str(w.y) + " )$.")
+    cor.append(u"Un petit rappel : l'abscisse d'un vecteur est la différence d'abscisse entre le fin et le début du vecteur. \
+                 Concernant le vecteur $\\overrightarrow{u}$, son abscisse est $" + str(u.x) + u"$. \
+                 On lit également son ordonnée : $" + str(u.x) + u"$. \
+                 Donc les coordonnées de $\\overrightarrow{u}$ sont $(" + str(u.x) + ", " + str(u.y) + u" )$. \
+                 Des pointillés ont été ajoutés sur la figure pour faciliter la lecture des coordonnées.")
+    cor.append(u"De même, les coordonnées de $\\overrightarrow{v}$ sont $(" + str(v.x) + ", " + str(v.y) + u" )$ \
+                 et les coordonnées de $\\overrightarrow{w}$ sont $(" + str(w.x) + ", " + str(w.y) + " )$.")
 
-    exo.append(_(u"\\item Placer un point B de sorte que le vecteur $\\overrightarrow{AB}$ soit égal à $") + str(t[0]) + _(" \\times \\overrightarrow{") + t[2] + "}$.")
-    cor.append(_(u"\\item Placer un point B de sorte que le vecteur $\\overrightarrow{AB}$ soit égal à $") + str(t[0]) + _(" \\times \\overrightarrow{") + t[2] + "}$.")
+    exo.append(u"\\item Placer un point B de sorte que le vecteur $\\overrightarrow{AB}$ soit égal à $" + str(t[0]) + " \\times \\overrightarrow{" + t[2] + "}$.")
+    cor.append(u"\\item Placer un point B de sorte que le vecteur $\\overrightarrow{AB}$ soit égal à $" + str(t[0]) + " \\times \\overrightarrow{" + t[2] + "}$.")
 
     cor.append(u"\\par")
-    cor.append(_(u"Le plus simple pour répondre à cette question est de calculer les coordonnées du vecteur $") + str(t[0]) + _(" \\times \\overrightarrow{") + str(t[2]) + "}$.")
-    cor.append(_(u"Cela se fait en multipliant les coordonnées de $\\overrightarrow{") + str(t[2]) + _("}$ par $") + str(t[0]) + _(u"$, ce qui donne comme résultat $(") + str(t[1].x) + ";" + str(t[1].y) + ")$.")
-    cor.append(_(u"En partant du point A et en respectant ces coordonnées, on dessine un vecteur (en bleu sur la figure ci-dessus) qui indique l'emplacement du point B."))
+    cor.append(u"Le plus simple pour répondre à cette question est de calculer les coordonnées du vecteur $" + str(t[0]) + " \\times \\overrightarrow{" + str(t[2]) + "}$.")
+    cor.append(u"Cela se fait en multipliant les coordonnées de $\\overrightarrow{" + str(t[2]) + "}$ par $" + str(t[0]) + u"$, ce qui donne comme résultat $(" + str(t[1].x) + ";" + str(t[1].y) + ")$.")
+    cor.append(u"En partant du point A et en respectant ces coordonnées, on dessine un vecteur (en bleu sur la figure ci-dessus) qui indique l'emplacement du point B.")
 
-    exo.append(_(u"\\item Calculer les normes de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$."))
-    cor.append(_(u"\\item Calculer les normes de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$."))
+    exo.append(u"\\item Calculer les normes de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$.")
+    cor.append(u"\\item Calculer les normes de chacun des vecteurs $\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$.")
 
-    if u.x**2+u.y**2 == simplifie_racine(u.x**2+u.y**2)[1] and u.x**2+u.y**2 > 1: # Cas où la simplification est la même, donc inutile d'écrire deux fois la même chose.
+    if u.x**2+u.y**2 == simplifie_racine(u.x**2+u.y**2)[1]: # Cas où la simplification est la même, donc inutile d'écrire deux fois la même chose.
       Norm_u = "$"
     else:
       Norm_u = "=" + str(u.normeTex()) + "$"
 
-    if v.x**2+v.y**2 == simplifie_racine(v.x**2+v.y**2)[1] and v.x**2+v.y**2 > 1:
+    if v.x**2+v.y**2 == simplifie_racine(v.x**2+v.y**2)[1]:
       Norm_v = "$"
     else:
       Norm_v = "=" + str(v.normeTex()) + "$"
 
-    if w.x**2+w.y**2 == simplifie_racine(w.x**2+w.y**2)[1] and w.x**2+w.y**2 > 1:
+    if w.x**2+w.y**2 == simplifie_racine(w.x**2+w.y**2)[1]:
       Norm_w = "$"
     else:
       Norm_w = "=" + str(w.normeTex()) + "$"
@@ -269,28 +274,28 @@ def vecteurs_add():
     cor.append("\\par")
     cor.append(u"$\|\\overrightarrow{u}\|=\\sqrt{(" + str(u.x) + ")^2+(" + str(u.y) + ")^2}=\\sqrt{" + str(u.x**2) + " + " + str(u.y**2) + "}= \
                  \\sqrt{" + str(u.x**2 + u.y**2) + "}" + Norm_u + ".\\par")
-    cor.append(_(u"De la même manière, on obtient :"))
+    cor.append(u"De la même manière, on obtient :")
 
     cor.append(u"$\|\\overrightarrow{v}\|=\\sqrt{(" + str(v.x) + ")^2+(" + str(v.y) + ")^2}=\\sqrt{" + str(v.x**2) + " + " + str(v.y**2) + "}= \
-                 \\sqrt{" + str(v.x**2 + v.y**2) + "}" + Norm_v + _(" et \\par"))
+                 \\sqrt{" + str(v.x**2 + v.y**2) + "}" + Norm_v + " et \\par")
     cor.append(u"$\|\\overrightarrow{w}\|=\\sqrt{(" + str(w.x) + ")^2+(" + str(w.y) + ")^2}=\\sqrt{" + str(w.x**2) + " + " + str(w.y**2) + "}= \
                  \\sqrt{" + str(w.x**2 + w.y**2) + "}" + Norm_w + ".\\par")
 
-    exo.append(_(u"\\item Dessiner des représentants des vecteurs $\\overrightarrow{u}+\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{w}$ \
-                 et $\\overrightarrow{v}+\\overrightarrow{w}$."))
-    cor.append(_(u"\\item Dessiner des représentants des vecteurs $\\overrightarrow{u}+\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{w}$ \
-                 et $\\overrightarrow{v}+\\overrightarrow{w}$."))
+    exo.append(u"\\item Dessiner des représentants des vecteurs $\\overrightarrow{u}+\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{w}$ \
+                 et $\\overrightarrow{v}+\\overrightarrow{w}$.")
+    cor.append(u"\\item Dessiner des représentants des vecteurs $\\overrightarrow{u}+\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{w}$ \
+                 et $\\overrightarrow{v}+\\overrightarrow{w}$.")
 
     cor.append("\\par")
-    cor.append(_(u"Pour dessiner les sommes ou différences de vecteurs, il faut les mettre \"bouts à bouts\", \
-                 comme sur les figures qui suivent :\\par"))
-    
+    cor.append(u"Pour dessiner les sommes ou différences de vecteurs, il faut les mettre \"bouts à bouts\", \
+                 comme sur les figures qui suivent :\\par")
+    i = repr_somme(u,v,'u','v',cor)
+    repr_somme(u,-v,'u','-v',cor,i)
+    cor.append("\\par")
+    i = repr_somme(u,-w,'u','-w',cor)
+    repr_somme(v,w,'v','w',cor,i)
+
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
-               
-    i = repr_somme(u,v,'u','v',cor)
-    j = repr_somme(u,-v,'u','-v',cor,i)
-    k = repr_somme(u,-w,'u','-w',cor,j)
-    repr_somme(v,w,'v','w',cor,k)
 
     return exo,cor

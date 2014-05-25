@@ -160,9 +160,9 @@ def Affichage(l):
     for i in range(len(l)):  # on parcourt la liste
         if ["+", "-", "*", "/", '(', ')'].count(l[i]):  # Un opérateur
             if l[i] == "*":
-                expr = expr + _(" \\times ")
+                expr = expr + " \\times "
             elif l[i] == "/":
-                expr = expr + _(" \\div ")
+                expr = expr + " \\div "
             elif l[i] == ")" and type(l[i-1]) == type(Fractions(1, 1)):
                 expr = expr + " \\big) "
             elif i<len(l)-2 and l[i] == "(":

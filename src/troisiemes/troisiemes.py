@@ -23,7 +23,7 @@
 
 
 from . import fractions, puissances, pgcd, developpements, equations, racines
-from . import systemes, proba, affine, geometrie, arithmetique, proportionnalite
+from . import systemes, proba, affine, geometrie, arithmetique
 
 def write(f0, f1, exos):
     f0.write("\n")
@@ -47,7 +47,6 @@ def main(exo, f0, f1):
         geometrie.tex_thales,
         geometrie.tex_reciproque_thales,
         geometrie.tex_trigo,
-        arithmetique.Arithmetique,
-		proportionnalite.proportionnalite_3eme
+        arithmetique.Arithmetique
         )
     write(f0, f1, modules[exo]())

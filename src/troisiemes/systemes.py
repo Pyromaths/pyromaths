@@ -70,13 +70,13 @@ def tex_systeme(v, p=None):  # renvoie l'écriture au format tex d'un système d
             signe(v[0][1]),
             developpements.tex_coef(abs(v[0][1]), 'y'),
             v[0][2],
-            _('\\qquad\\hbox{\\footnotesize$\\mathit{(\\times %s)}$}') %
+            '\\qquad\\hbox{\\footnotesize$\\mathit{(\\times %s)}$}' %
                 developpements.tex_coef(p[0], '', bpn=1),
             developpements.tex_coef(v[1][0], 'x'),
             signe(v[1][1]),
             developpements.tex_coef(abs(v[1][1]), 'y'),
             v[1][2],
-            _('\\qquad\\hbox{\\footnotesize$\\mathit{(\\times %s)}$}') %
+            '\\qquad\\hbox{\\footnotesize$\\mathit{(\\times %s)}$}' %
                 developpements.tex_coef(p[1], '', bpn=1),
             )
         return '''\\left\\lbrace
@@ -137,19 +137,19 @@ def tex_comb4(v):
 def tex_equation(v, c):
     tv = (developpements.tex_coef(v[0][0], 'x'), developpements.tex_coef(v[0][1],
           'y', bplus=1), v[0][2])
-    t = _('$%s%s=%s\\quad\\text{et}\\quad ') % tv
+    t = '$%s%s=%s\\quad\\text{et}\\quad ' % tv
     if c[0]:
-        t = t + _('x=%s$\\par\\vspace{0.2cm} donc :\\par\\vspace{0.2cm}\n') % v[2][0]
+        t = t + 'x=%s\\quad\\text{donc :}$\n' % v[2][0]
         tv = (developpements.tex_coef(v[0][0], ''), developpements.tex_coef(v[2][0],
               '', bpn=1), developpements.tex_coef(v[0][1], 'y', bplus=1),
               v[0][2])
-        t = t + _('$%s\\times %s %s=%s$\n') % tv
+        t = t + '\\[%s\\times %s %s=%s\\]\n' % tv
     else:
-        t = t + _('y=%s$\\par\\vspace{0.2cm} donc :\\par\\vspace{0.2cm}\n') % v[2][1]
+        t = t + 'y=%s\\quad\\text{donc :}$\n' % v[2][1]
         tv = (developpements.tex_coef(v[0][0], 'x'), developpements.tex_coef(v[0][1],
               '', bplus=1), developpements.tex_coef(v[2][1], '', bpn=1),
               v[0][2])
-        t = t + _('$%s %s\\times %s=%s$\n') % tv
+        t = t + '\\[%s %s\\times %s=%s\\]\n' % tv
     return t
 
 
@@ -158,12 +158,12 @@ def tex_eq2(v, c):
         tv = (developpements.tex_coef(v[0][1], 'y'), developpements.tex_coef(v[0][2],
               ''), developpements.tex_coef(-v[0][0] * v[2][0], '', bplus=
               1))
-        t = '$%s=%s%s$' % tv
+        t = '%s=%s%s' % tv
     else:
         tv = (developpements.tex_coef(v[0][0], 'x'), developpements.tex_coef(v[0][2],
               ''), developpements.tex_coef(-v[0][1] * v[2][1], '', bplus=
               1))
-        t = '$%s=%s%s$' % tv
+        t = '%s=%s%s' % tv
     return t
 
 
@@ -183,16 +183,16 @@ def tex_eq3(v, c):
 
 def tex_verification(v):  # renvoie la vérification de lasolution du système d'équations.
     tv = (
-        developpements.tex_coef(v[0][0], _('\\times %s') % developpements.tex_coef(v[2][0],
+        developpements.tex_coef(v[0][0], '\\times %s' % developpements.tex_coef(v[2][0],
                                 '', bpn=1)),
-        developpements.tex_coef(v[0][1], _('\\times %s') % developpements.tex_coef(v[2][1],
+        developpements.tex_coef(v[0][1], '\\times %s' % developpements.tex_coef(v[2][1],
                                 '', bpn=1), bplus=1),
         developpements.tex_coef(v[0][0] * v[2][0], ''),
         developpements.tex_coef(v[0][1] * v[2][1], '', bplus=1),
         v[0][2],
-        developpements.tex_coef(v[1][0], _('\\times %s') % developpements.tex_coef(v[2][0],
+        developpements.tex_coef(v[1][0], '\\times %s' % developpements.tex_coef(v[2][0],
                                 '', bpn=1)),
-        developpements.tex_coef(v[1][1], _('\\times %s') % developpements.tex_coef(v[2][1],
+        developpements.tex_coef(v[1][1], '\\times %s' % developpements.tex_coef(v[2][1],
                                 '', bpn=1), bplus=1),
         developpements.tex_coef(v[1][0] * v[2][0], ''),
         developpements.tex_coef(v[1][1] * v[2][1], '', bplus=1),
@@ -223,25 +223,24 @@ def systemes(exo, cor, v):
     cor.append('''\\vspace{2ex}
   \\begin{multicols}{2}\\noindent
 ''')
-    cor.append(u'$ ' + tex_systeme(c1) +
-               _('\\quad\\text{\\footnotesize On ajoute les deux lignes}') +
-               '$ \\par\\vspace{0.2cm}')
+    cor.append(u'\\[ ' + tex_systeme(c1) +
+                     '\\quad\\text{\\footnotesize On ajoute les deux lignes}' + '\\] ')
     c2 = combinaison2(c1)
-    cor.append(u'$' + tex_comb2(c1, c2) + '$\\par\\vspace{0.2cm}')
-    cor.append(u'$' + tex_comb3(c2) + '$\\par\\vspace{0.2cm}')
-    cor.append(u'\\boxed{' + tex_comb4(c2) + '}')
+    cor.append(u'\\[ ' + tex_comb2(c1, c2) + '\\] ')
+    cor.append(u'\\[ ' + tex_comb3(c2) + '\\] ')
+    cor.append(u'\\[ \\boxed{' + tex_comb4(c2) + '} \\] ')
     cor.append('\\columnbreak\\par')
-    cor.append(tex_equation(v, c2)+ '\\par\\vspace{0.2cm}')
-    cor.append(tex_eq2(v, c2) + '\\par\\vspace{0.2cm}')
-    cor.append(u'\\boxed{' + tex_eq3(v, c2) + '}')
+    cor.append(tex_equation(v, c2))
+    cor.append(u'\\[ ' + tex_eq2(v, c2) + '\\] ')
+    cor.append(u'\\[ \\boxed{' + tex_eq3(v, c2) + '} \\] ')
     cor.append('\\end{multicols}')
-    cor.append(_(u"\\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par") %
+    cor.append(u"\\underline{La solution de ce système d'équations est $(x;~y)=(%s;~%s)$.}\\par" %
              v[2])
-    cor.append(_(u'{Vérification : $') + tex_verification(v) + '$}')
+    cor.append(u'{Vérification : $' + tex_verification(v) + '$}')
 
 def tex_systemes( ):
     valeurs = choix_valeurs(10)
-    exo = ['\\exercice', _(u"Résoudre le système d'équations suivant :")]
-    cor = ['\\exercice*', _(u"Résoudre le système d'équations suivant :")]
+    exo = ['\\exercice', u"Résoudre le système d'équations suivant :"]
+    cor = ['\\exercice*', u"Résoudre le système d'équations suivant :"]
     systemes(exo, cor, valeurs)
     return (exo, cor)

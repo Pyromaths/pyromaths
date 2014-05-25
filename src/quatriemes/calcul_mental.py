@@ -32,19 +32,19 @@ import random
 def choix_trou(nb1, nb2, tot, operateur, exo, cor):
     nbaleatoire = random.randrange(4)
     if nbaleatoire > 1:
-        exo.append(_("\\item $%s %s %s = \\ldots\\ldots$") % (nb1,
+        exo.append("\\item $%s %s %s = \\ldots\\ldots$" % (nb1,
                    operateur, nb2))
-        cor.append(_("\\item $%s %s %s = \\mathbf{%s}$") % (nb1,
+        cor.append("\\item $%s %s %s = \\mathbf{%s}$" % (nb1,
                    operateur, nb2, tot))
     elif nbaleatoire > 0:
-        exo.append(_("\\item $%s %s \\ldots\\ldots = %s$") % (nb1,
+        exo.append("\\item $%s %s \\ldots\\ldots = %s$" % (nb1,
                    operateur, tot))
-        cor.append(_("\\item $%s %s \\mathbf{%s} = %s$") % (nb1,
+        cor.append("\\item $%s %s \\mathbf{%s} = %s$" % (nb1,
                    operateur, nb2, tot))
     else:
-        exo.append(_("\\item $\\ldots\\ldots %s %s = %s$") % (operateur,
+        exo.append("\\item $\\ldots\\ldots %s %s = %s$" % (operateur,
                    nb2, tot))
-        cor.append(_("\\item $\\mathbf{%s} %s %s = %s$") % (nb1,
+        cor.append("\\item $\\mathbf{%s} %s %s = %s$" % (nb1,
                    operateur, nb2, tot))
 
 
@@ -67,9 +67,9 @@ def div(pyromax):
 
 
 def main():
-    exo = ["\\exercice", _("Effectuer sans calculatrice :"),
+    exo = ["\\exercice", "Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
-    cor = ["\\exercice*", _("Effectuer sans calculatrice :"),
+    cor = ["\\exercice*", "Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     modules = (plus, moins, plus, div)
     calculs = [i for i in range(20)]
@@ -84,9 +84,9 @@ def main():
                        cor)
         if calculs[j] // 5 == 2:
             choix_trou(a, tex_coef(b, '', bpn=1), a * b,
-                       _('\\times'), exo, cor)
+                       '\\times', exo, cor)
         if calculs[j] // 5 == 3:
-            choix_trou(a, tex_coef(b, '', bpn=1), a // b, _('\\div'),
+            choix_trou(a, tex_coef(b, '', bpn=1), a // b, '\\div',
                        exo, cor)
         calculs.pop(j)
     exo.extend(["  \\end{enumerate}", "\\end{multicols}"])

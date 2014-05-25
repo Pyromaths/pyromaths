@@ -211,15 +211,15 @@ def coefdir(A,B):
 def anteimage(fonc,A,B):
     #Génère la 1ère question et sa réponse
 
-    l=[_(' l\'image de '),_(' un nombre qui a pour image '),_(u' un antécédent de ')]
-    lcor=[_(' est l\'image de '),_(' a pour image '),_(u' est un antécédent de ')] #liste pour le corrigé
+    l=[' l\'image de ',' un nombre qui a pour image ',u' un antécédent de ']
+    lcor=[' est l\'image de ',' a pour image ',u' est un antécédent de '] #liste pour le corrigé
     i=random.randrange(0,2)
     j=i
     if i==1:
         j=i+random.randrange(0,2)
     res=[]
-    res.append(_('Donner ')+l[j]+'$'+decimaux(str(A[i]))+'$'+_(' par la fonction ')+'\\textit{'+fonc+'}.')
-    res.append('$'+decimaux(str(A[abs(i-1)]))+'$' + lcor[j]+'$'+decimaux(str(A[i]))+'$'+_(' par la \\hbox{fonction ')+'\\textit{'+fonc+'}}.')
+    res.append('Donner '+l[j]+'$'+decimaux(str(A[i]))+'$'+' par la fonction '+'\\textit{'+fonc+'}.')
+    res.append('$'+decimaux(str(A[abs(i-1)]))+'$' + lcor[j]+'$'+decimaux(str(A[i]))+'$'+' par la \\hbox{fonction '+'\\textit{'+fonc+'}}.')
     if i==0:
         res.append(doublefleche((A[0],0),A))
         res.append(doublefleche(A,(0,A[1])))
@@ -231,8 +231,8 @@ def anteimage(fonc,A,B):
     j=i
     if i==1:
         j=i+random.randrange(0,2)
-    res.append(_('Donner ')+l[j]+'$'+decimaux(str(B[i]))+'$'+_(' par la fonction ')+'\\textit{'+fonc+'}.')
-    res.append('$'+decimaux(str(B[abs(i-1)]))+'$'+lcor[j]+'$'+decimaux(str(B[i]))+'$'+_(' par la \\hbox{fonction ')+'\\textit{'+fonc+'}}.')
+    res.append('Donner '+l[j]+'$'+decimaux(str(B[i]))+'$'+' par la fonction '+'\\textit{'+fonc+'}.')
+    res.append('$'+decimaux(str(B[abs(i-1)]))+'$'+lcor[j]+'$'+decimaux(str(B[i]))+'$'+' par la \\hbox{fonction '+'\\textit{'+fonc+'}}.')
     if i==0:
         res.append(doublefleche((B[0],0),B))
         res.append(doublefleche(B,(0,B[1])))
@@ -273,15 +273,15 @@ def tracefonc(f,i,A,B,xmin,xmax,ymin,ymax):
     x0='0'
     y0=b
     if coef=='' or (coef=='-' and B[0]>0) :
-        st=_('On sait que $')+f+'(0)='+decimaux(str(A[1]))+_('$ et $')+f+'('+x1+')='+coef+x1+b+'='+y1+'$.'
+        st='On sait que $'+f+'(0)='+decimaux(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+x1+b+'='+y1+'$.'
     elif coef=='-' and B[0]<0:
-        st=_('On sait que $')+f+'(0)='+decimaux(str(A[1]))+_('$ et $')+f+'('+x1+')='+coef+'('+x1+')'+b+'='+y1+'$.'
+        st='On sait que $'+f+'(0)='+decimaux(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+'('+x1+')'+b+'='+y1+'$.'
     elif B[0]<0:
-        st=_('On sait que $')+f+'(0)='+decimaux(str(A[1]))+_('$ et $')+f+'('+x1+')='+coef+_(' \\times (')+x1+')'+b+'='+decimaux(str(u[0]))+b+'='+y1+'$.'
+        st='On sait que $'+f+'(0)='+decimaux(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+' \\times ('+x1+')'+b+'='+decimaux(str(u[0]))+b+'='+y1+'$.'
     else:
-        st=_('On sait que $')+f+'(0)='+decimaux(str(A[1]))+_('$ et $')+f+'('+x1+')='+coef+_(' \\times ')+x1+b+'='+decimaux(str(u[0]))+b+'='+y1+'$.'
+        st='On sait que $'+f+'(0)='+decimaux(str(A[1]))+'$ et $'+f+'('+x1+')='+coef+' \\times '+x1+b+'='+decimaux(str(u[0]))+b+'='+y1+'$.'
 
-    l=[_(u'Tracer la droite représentative ($d_')+str(i)+_('$) de la fonction $')+f+':x\\longmapsto '+coef+'x'+b+'$.',
+    l=[u'Tracer la droite représentative ($d_'+str(i)+'$) de la fonction $'+f+':x\\longmapsto '+coef+'x'+b+'$.',
        st,
        '\\psdot [dotsize=4.5pt,dotstyle=x]'+str(A),
        '\\psdot [dotsize=4.5pt,dotstyle=x]'+str(B),
@@ -351,10 +351,10 @@ def exprfonc(f,i,A,B):
     mid1=(mid11,mid12)
     mid2=(mid21,mid22)
 
-    l=[_(u'Déterminer l\'expression de la fonction $')+f+_(u'$ représentée ci-contre par la droite ($d_')+str(i)+'$).',
-       _(u'On lit l\'ordonnée à l\'origine et le coefficient de la fonction affine sur le graphique.\\\ '),
-       '$'+f+'(x)=ax+b$ ' +_('avec $b=')+ decimaux(str(A[1]))+_('$ et $a=')+'\\dfrac{'+deltay+'}{'+deltax+'}='+coefres+'$.\\\ ',
-       _('L\'expression de la fonction $')+f+_('$ est $')+f+'(x)='+coef+'x'+b+'$.',
+    l=[u'Déterminer l\'expression de la fonction $'+f+u'$ représentée ci-contre par la droite ($d_'+str(i)+'$).',
+       u'On lit l\'ordonnée à l\'origine et le coefficient de la fonction affine sur le graphique.\\\ ',
+       '$'+f+'(x)=ax+b$ ' +'avec $b='+ decimaux(str(A[1]))+'$ et $a='+'\\dfrac{'+deltay+'}{'+deltax+'}='+coefres+'$.\\\ ',
+       'L\'expression de la fonction $'+f+'$ est $'+f+'(x)='+coef+'x'+b+'$.',
        doublefleche(B,(B[0],A[1])),
        doublefleche((B[0],A[1]),A),
        '\\rput'+str(mid1)+'{('+deltay+')}',
@@ -377,7 +377,7 @@ def affine():
     l3=exprfonc(fonc3,3,E,F)
     noms=nom3droites(A,B,C,D,E,F,xmin,xmax,ymin,ymax)
     exo=["\\exercice", "\\parbox{0.5\\linewidth}{",
-         _(u"($d_1$) est la droite représentative de la fonction $")+fonc1+"$.",
+         u"($d_1$) est la droite représentative de la fonction $"+fonc1+"$.",
          "\\begin{enumerate}",
          "\\item "+l[0],
          "\\item "+l[4],
@@ -398,7 +398,7 @@ def affine():
 
     cor=["\\exercice*", "\\setlength{\\columnsep}{2mm}",
          "\\begin{multicols}{2}\\noindent \\small",
-         _(u"($d_1$) est la droite représentative de la fonction $")+fonc1+"$.",
+         u"($d_1$) est la droite représentative de la fonction $"+fonc1+"$.",
          "\\begin{enumerate}",
          "\\item "+l[1],
          "\\item "+l[5],

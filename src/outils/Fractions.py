@@ -46,9 +46,9 @@ def EffectueProduitFractions(fr1, fr2, pre, post):
     cor = []
     if fr1.n and fr2.n:
         if abs(fr1s.d) < abs(fr1.d) or abs(fr2s.d) < abs(fr2.d):
-            cor.append(_("%s%s \\times %s%s") % (pre, Fractions.TeXSimplifie(fr1),
+            cor.append("%s%s \\times %s%s" % (pre, Fractions.TeXSimplifie(fr1),
                        Fractions.TeXSimplifie(fr2), post))
-            cor.append(_("%s%s \\times %s%s") % (pre, Fractions.TeX(fr1s,
+            cor.append("%s%s \\times %s%s" % (pre, Fractions.TeX(fr1s,
                        True), Fractions.TeX(fr2s, True), post))
         fr = fr1s * fr2s
         frs = Fractions.simplifie(fr)
@@ -64,7 +64,7 @@ def EffectueProduitFractions(fr1, fr2, pre, post):
 
 def EffectueQuotientFractions(fr1, fr2, pre, post):
     fr2 = Fractions(1, 1) / fr2
-    cor = [_("%s%s \\times %s%s") % (pre, Fractions.TeX(fr1, True),
+    cor = ["%s%s \\times %s%s" % (pre, Fractions.TeX(fr1, True),
            Fractions.TeX(fr2, True), post)]
     cor.extend(EffectueProduitFractions(fr1, fr2, pre, post))
     return cor

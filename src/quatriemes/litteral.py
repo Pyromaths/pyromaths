@@ -54,9 +54,9 @@ def valeurs_reduire():
 
 def reduire():
     """Travail sur les bases du calcul littéral en quatrième"""
-    exo = ["\\exercice", _(u"Réduire, si possible, les expressions suivantes :"),
+    exo = ["\\exercice", u"Réduire, si possible, les expressions suivantes :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
-    cor = ["\\exercice*", _(u"Réduire, si possible, les expressions suivantes :"),
+    cor = ["\\exercice*", u"Réduire, si possible, les expressions suivantes :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     for i in range(9):
         a = valeurs_reduire()
@@ -114,9 +114,9 @@ def valeurs_reduire_sommeprod():
 
 def reduire_expressions():
     """Travail sur les bases du calcul littéral en quatrième"""
-    exo = ["\\exercice", _(u"Réduire les expressions littérales suivantes :"),
+    exo = ["\\exercice", u"Réduire les expressions littérales suivantes :",
            "\\begin{multicols}{2}\\noindent", "  \\begin{enumerate}"]
-    cor = ["\\exercice*", _(u"Réduire les expressions littérales suivantes :"),
+    cor = ["\\exercice*", u"Réduire les expressions littérales suivantes :",
            "\\begin{multicols}{2}\\noindent", "  \\begin{enumerate}"]
     for i in range(6):
         if i < 3: a = valeurs_reduire_somme()

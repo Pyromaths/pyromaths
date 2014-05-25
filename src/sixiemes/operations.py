@@ -129,7 +129,7 @@ def retenues_diff(ligne1, ligne2):
             else:
                 tmpret = 0
             if ret:
-                ligne2[(lg - i) - 1] = '%s$_{+1}$' % ligne2[(lg - i) - 1]
+                ligne2[(lg - i) - 1] = '%s$_1$' % ligne2[(lg - i) - 1]
             ret = tmpret
     return (ligne1, ligne2)
 
@@ -149,9 +149,9 @@ def tex_somme(exo, cor):
     ligne0 = retenues_somme(ligne1, ligne2)
     if ligne0[0] == '1':
         ligne0[0] = '\\tiny 1'
-    exo.append(_('\\item La somme des termes %s et %s.\\par') % (Affichage.decimaux(nba),
+    exo.append('\\item La somme des termes %s et %s.\\par' % (Affichage.decimaux(nba),
              Affichage.decimaux(nbb)))
-    cor.append(_('\\item La somme des termes %s et %s.\\par') % (Affichage.decimaux(nba),
+    cor.append('\\item La somme des termes %s et %s.\\par' % (Affichage.decimaux(nba),
              Affichage.decimaux(nbb)))
     cor.append('\\begin{tabular}[t]{*{%s}{c}}' % (lavtvirg +
              laprvirg + 1))
@@ -180,9 +180,9 @@ def tex_difference(exo, cor):
     ligne2 = lignes(ligne2, decb, lavtvirg, laprvirg)
     ligne3 = lignes(ligne3, dectotal, lavtvirg, laprvirg)
     (ligne1, ligne2) = retenues_diff(ligne1, ligne2)
-    exo.append(_(u"\\item La différence des termes %s et %s.\\par") %
+    exo.append(u"\\item La différence des termes %s et %s.\\par" %
              (Affichage.decimaux(nba), Affichage.decimaux(nbb)))
-    cor.append(_(u"\\item La différence des termes %s et %s.\\par") %
+    cor.append(u"\\item La différence des termes %s et %s.\\par" %
              (Affichage.decimaux(nba), Affichage.decimaux(nbb)))
     cor.append('\\begin{tabular}[t]{*{%s}{c}}' % (lavtvirg +
              laprvirg + 1))
@@ -230,25 +230,25 @@ def tex_produit(exo, cor):
         dec4.pop(i)  # supprime le point décimal
         dec4[i - 1] = '%s\\Huge ,' % dec4[i - 1]  # et ajoute une Huge virgule au chiffre des unités
     lg = max(len(dec4), max(len(deca), len(decb)))  # nombre de colonnes dans le tableau
-    exo.append(_('\\item Le produit des facteurs %s et %s.\\par') % (Affichage.decimaux(nba *
+    exo.append('\\item Le produit des facteurs %s et %s.\\par' % (Affichage.decimaux(nba *
              10 ** puisa), Affichage.decimaux(nbb * 10 ** puisb)))
-    cor.append(_('\\item Le produit des facteurs %s et %s.\\par') % (Affichage.decimaux(nba *
+    cor.append('\\item Le produit des facteurs %s et %s.\\par' % (Affichage.decimaux(nba *
              10 ** puisa), Affichage.decimaux(nbb * 10 ** puisb)))
     cor.append('\\begin{enumerate}')
-    cor.append(_(u'\\item Première méthode :\\par'))
+    cor.append(u'\\item Première méthode :\\par')
     cor.append('\\begin{tabular}[t]{*{%s}{c}}' % lg)
     cor.append('%s \\\\' % ' & '.join(ligneprod([], deca,lg)))
-    cor.append('%s \\\\\n\\hline' % ' & '.join(ligneprod([_('$\\times$')], decb, lg)))
+    cor.append('%s \\\\\n\\hline' % ' & '.join(ligneprod(['$\\times$'], decb, lg)))
     for i in range(len(dec3)):
         dec = [str(dec3[i])[j] for j in range(len(str(dec3[i])))]
         cor.append('%s \\\\' % ' & '.join(ligneprod([], dec, lg)))
     cor.append('\\hline \\\\')
     cor.append('%s \\\\' % ' & '.join(ligneprod([], dec4, lg)))
     cor.append('\\end{tabular}')
-    cor.append(_(u'\\item Seconde méthode :\\par'))
+    cor.append(u'\\item Seconde méthode :\\par')
     cor.append('\\begin{tabular}[t]{*{%s}{c}}' % len(dec4))
     cor.append('%s \\\\' % ' & '.join(ligneprod([], decb, lg)))
-    cor.append('%s \\\\\n\\hline' % ' & '.join(ligneprod([_('$\\times$')], deca, lg)))
+    cor.append('%s \\\\\n\\hline' % ' & '.join(ligneprod(['$\\times$'], deca, lg)))
     for i in range(len(dec3bis)):
         dec = [str(dec3bis[i])[j] for j in range(len(str(dec3bis[i])))]
         cor.append('%s \\\\' % ' & '.join(ligneprod([], dec, lg)))
@@ -264,7 +264,7 @@ def tex_produit(exo, cor):
 
     #### Remplacement de la fonction Arithmetique.ecrit_tex :
 
-    formule = _('%s\\times%s = %s') % (Affichage.decimaux(nba *
+    formule = '%s\\times%s = %s' % (Affichage.decimaux(nba *
                      10 ** puisa, 1), Affichage.decimaux(nbb * 10 **
                      puisb, 1), Affichage.decimaux((nba * nbb) * 10 ** (puisa +
                      puisb), 1))
@@ -277,8 +277,8 @@ def Operations():
 
     ordre_exos = [i for i in range(nb_exos)]
 
-    exo = ["\\exercice", _(u'Poser et effectuer les opérations suivantes.'), '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
-    cor = ["\\exercice*", _(u'Poser et effectuer les opérations suivantes.'), '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
+    exo = ["\\exercice", u'Poser et effectuer les opérations suivantes.', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
+    cor = ["\\exercice*", u'Poser et effectuer les opérations suivantes.', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
 
     for i in range(nb_exos):
         a = random.randrange(nb_exos - i)
@@ -306,26 +306,26 @@ def tex_calcul_mental(exo, cor):
         if calculs[j] // 5 == 1:
             choix_trou(a, b, a - b, '-', exo, cor)
         if calculs[j] // 5 == 2:
-            choix_trou(a, b, a * b, _('\\times'), exo, cor)
+            choix_trou(a, b, a * b, '\\times', exo, cor)
         if calculs[j] // 5 == 3:
-            choix_trou(a, b, a // b, _('\\div'), exo, cor)
+            choix_trou(a, b, a // b, '\\div', exo, cor)
         calculs.pop(j)
 
 
 def choix_trou(nb1, nb2, tot, operateur, exo, cor):
     nbaleatoire = random.randrange(4)
     if nbaleatoire > 1:
-        exo.append(_('\\item $%s %s %s = \\ldots\\ldots$') % (nb1,
+        exo.append('\\item $%s %s %s = \\ldots\\ldots$' % (nb1,
                  operateur, nb2))
         cor.append('\\item $%s %s %s = \\mathbf{%s}$' % (nb1,
                  operateur, nb2, tot))
     elif nbaleatoire > 0:
-        exo.append(_('\\item $%s %s \\ldots\\ldots = %s$') % (nb1,
+        exo.append('\\item $%s %s \\ldots\\ldots = %s$' % (nb1,
                  operateur, tot))
         cor.append('\\item $%s %s \\mathbf{%s} = %s$' % (nb1,
                  operateur, nb2, tot))
     else:
-        exo.append(_('\\item $\\ldots\\ldots %s %s = %s$') % (operateur,
+        exo.append('\\item $\\ldots\\ldots %s %s = %s$' % (operateur,
                  nb2, tot))
         cor.append('\\item $\\mathbf{%s} %s %s = %s$' % (nb1,
                  operateur, nb2, tot))
@@ -352,8 +352,8 @@ def div(valeurmax):
 
 
 def CalculMental():
-    exo = ["\\exercice", _('Effectuer sans calculatrice :'), '\\begin{multicols}{4}\\noindent', '\\begin{enumerate}']
-    cor = ["\\exercice*", _('Effectuer sans calculatrice :'), '\\begin{multicols}{4}\\noindent', '\\begin{enumerate}']
+    exo = ["\\exercice", 'Effectuer sans calculatrice :', '\\begin{multicols}{4}\\noindent', '\\begin{enumerate}']
+    cor = ["\\exercice*", 'Effectuer sans calculatrice :', '\\begin{multicols}{4}\\noindent', '\\begin{enumerate}']
 
     tex_calcul_mental(exo, cor)
 
@@ -381,47 +381,47 @@ def tex_formule_dix(l, exo, cor):
     if l[2] == '*':
         alea = random.randrange(0, 5)
         if alea > 1:
-            exo.append(_('\\item $%s \\quad\\times\\quad %s \\quad = \\quad \\dotfill$') %
+            exo.append('\\item $%s \\quad\\times\\quad %s \\quad = \\quad \\dotfill$' %
                      (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],
                      1)))
-            cor.append(_('\\item $%s \\times %s = \\mathbf{%s}$') %
+            cor.append('\\item $%s \\times %s = \\mathbf{%s}$' %
                      (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],
                      1), Affichage.decimaux(l[0] * l[1], 1)))
         elif alea > 0:
-            exo.append(_('\\item $%s \\quad\\times\\quad \\dotfill \\quad = \\quad %s$') %
+            exo.append('\\item $%s \\quad\\times\\quad \\dotfill \\quad = \\quad %s$' %
                      (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[0] *
                      l[1], 1)))
-            cor.append(_('\\item $%s \\times \\mathbf{%s} = %s$') %
+            cor.append('\\item $%s \\times \\mathbf{%s} = %s$' %
                      (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],
                      1), Affichage.decimaux(l[0] * l[1], 1)))
         else:
-            exo.append(_('\\item $\\dotfill \\quad\\times\\quad %s \\quad = \\quad %s$') %
+            exo.append('\\item $\\dotfill \\quad\\times\\quad %s \\quad = \\quad %s$' %
                      (Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] *
                      l[1], 1)))
-            cor.append(_('\\item $\\mathbf{%s} \\times %s = %s$') %
+            cor.append('\\item $\\mathbf{%s} \\times %s = %s$' %
                      (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],
                      1), Affichage.decimaux(l[0] * l[1], 1)))
     else:
         alea = random.randrange(0, 5)
         if alea > 1:
-            exo.append(_('\\item $%s \\quad\\div\\quad %s \\quad = \\quad \\dotfill$') %
+            exo.append('\\item $%s \\quad\\div\\quad %s \\quad = \\quad \\dotfill$' %
                      (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],
                      1)))
-            cor.append(_('\\item $%s \\div %s = \\mathbf{%s}$') % (Affichage.decimaux(l[0],
+            cor.append('\\item $%s \\div %s = \\mathbf{%s}$' % (Affichage.decimaux(l[0],
                      1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] /
                      l[1], 1)))
         elif alea > 0:
-            exo.append(_('\\item $%s \\quad\\div\\quad \\dotfill \\quad = \\quad %s$') %
+            exo.append('\\item $%s \\quad\\div\\quad \\dotfill \\quad = \\quad %s$' %
                      (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[0] /
                      l[1], 1)))
-            cor.append(_('\\item $%s \\div \\mathbf{%s} = %s$') % (Affichage.decimaux(l[0],
+            cor.append('\\item $%s \\div \\mathbf{%s} = %s$' % (Affichage.decimaux(l[0],
                      1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] /
                      l[1], 1)))
         else:
-            exo.append(_('\\item $\\dotfill \\quad\\div\\quad %s \\quad = \\quad %s$') %
+            exo.append('\\item $\\dotfill \\quad\\div\\quad %s \\quad = \\quad %s$' %
                      (Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] /
                      l[1], 1)))
-            cor.append(_('\\item $\\mathbf{%s} \\div %s = %s$') % (Affichage.decimaux(l[0],
+            cor.append('\\item $\\mathbf{%s} \\div %s = %s$' % (Affichage.decimaux(l[0],
                      1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] /
                      l[1], 1)))
 
@@ -450,8 +450,8 @@ def valeurs10(nb):  # renvoie nb valeur de chaque type : *10, /10, *0.1
 
 
 def ProduitPuissanceDix():
-    exo = ["\\exercice", _(u'Compléter sans calculatrice :'), '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
-    cor = ["\\exercice*", _(u'Compléter sans calculatrice :'), '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
+    exo = ["\\exercice", u'Compléter sans calculatrice :', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
+    cor = ["\\exercice*", u'Compléter sans calculatrice :', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
 
     tex_dix(exo, cor)
 

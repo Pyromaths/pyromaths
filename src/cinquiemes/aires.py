@@ -40,13 +40,13 @@ def exo_aire_diques():
     rayon2 = int(1.5*rayon1)
     i=random.randrange(2)
     if i==0:
-        donnees=(_('rayons'), rayon1, rayon2)
+        donnees=('rayons', rayon1, rayon2)
     else:
-        donnees=(_(u'diamètres'), 2*rayon1, 2*rayon2)
+        donnees=(u'diamètres', 2*rayon1, 2*rayon2)
     difference_des_carres = rayon2**2-rayon1**2
     aire_arrondie = arrondir(str(3.14 * difference_des_carres))
     enonce = \
-        _(u"""\\begin{minipage}{4cm}
+        u"""\\begin{minipage}{4cm}
 \\begin{pspicture}(-2,-2)(2,2)
 \\pscircle[fillstyle=solid](0,0){1.5}
 \\pscircle[fillstyle=solid, fillcolor=white](0,0){1}
@@ -56,26 +56,26 @@ def exo_aire_diques():
 \\end{minipage}\\hfill
 \\begin{minipage}{13cm}
 On considère deux cercles de centre $O$ et de %s respectifs $\\unit[%s]{cm}$ et $\\unit[%s]{cm}$.\\par
-Calculer l'aire de la couronne circulaire (partie colorée) comprise entre les deux cercles en arrondissant le résultat au $\\unit{cm^2}$ le plus proche.""") % donnees
+Calculer l'aire de la couronne circulaire (partie colorée) comprise entre les deux cercles en arrondissant le résultat au $\\unit{cm^2}$ le plus proche.""" % donnees
     exo.append(enonce)
     cor.append(enonce)
     cor.append("\\par\\dotfill{}\\\\\n")
     if i==0:
-        cor.append(_(u"On calcule l'aire du disque de rayon $\\unit[%s]{cm}$:") % rayon2)
-        cor.append(_(u"\\[\\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\\]") % (rayon2,  rayon2, rayon2, decimaux(rayon2**2)))
-        cor.append(_(u"On calcule l'aire du disque de rayon $\\unit[%s]{cm}$:") % rayon1)
-        cor.append(_(u"\\[ \\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\]") % (rayon1, rayon1, rayon1, decimaux(rayon1**2)))
+        cor.append(u"On calcule l'aire du disque de rayon $\\unit[%s]{cm}$:" % rayon2)
+        cor.append(u"\\[\\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\\]" % (rayon2,  rayon2, rayon2, decimaux(rayon2**2)))
+        cor.append(u"On calcule l'aire du disque de rayon $\\unit[%s]{cm}$:" % rayon1)
+        cor.append(u"\\[ \\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\]" % (rayon1, rayon1, rayon1, decimaux(rayon1**2)))
     else:
-        cor.append(_(u"Un disque de diamètre $\\unit[%s]{cm}$ a pour rayon $%s \div 2 = \\unit[%s]{cm}$. Calculons son aire:") % (2*rayon2, 2*rayon2, rayon2))
-        cor.append(_(u"\\[\\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\\]") % (rayon2,  rayon2, rayon2, decimaux(rayon2**2)))
-        cor.append(_(u"Un disque de diamètre $\\unit[%s]{cm}$ a pour rayon $%s \div 2 = \\unit[%s]{cm}$. Calculons son aire:") % (2*rayon1, 2*rayon1, rayon1))
-        cor.append(_(u"\\[\\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\\]") % (rayon1,  rayon1, rayon1, decimaux(rayon1**2)))
-    cor.append(_(u"L'aire $\\mathcal{A}$ de la couronne est obtenue en retranchant l'aire du disque de rayon  $\\unit[%s]{cm}$  à l'aire du disque de rayon  $\\unit[%s]{cm}$:")% (rayon1, rayon2))
-    cor.append(_(u"\\[\\mathcal{A} = %s \\pi  - %s \\pi= (%s - %s)\\pi =\\unit[%s \\pi]{cm^2}\\]") % (decimaux(rayon2**2), decimaux(rayon1**2), decimaux(rayon2**2), decimaux(rayon1**2), decimaux(difference_des_carres)))
-    cor.append(_(u"L'aire exacte de la couronne est $\\unit[%s \\pi]{cm^2}$.") % (decimaux(difference_des_carres)))
-    cor.append(_(u"En prenant 3,14 comme valeur approchée du nombre $\\pi$, on obtient :"))
-    cor.append(_(u"\\[\\mathcal{A}  \\approx %s \\times 3,14\\]") % decimaux(difference_des_carres))
-    cor.append(_(u"\\[\\boxed{\\mathcal{A} \\approx  \\unit[%s]{cm^2}}\\]") % decimaux(aire_arrondie))
+        cor.append(u"Un disque de diamètre $\\unit[%s]{cm}$ a pour rayon $%s \div 2 = \\unit[%s]{cm}$. Calculons son aire:" % (2*rayon2, 2*rayon2, rayon2))
+        cor.append(u"\\[\\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\\]" % (rayon2,  rayon2, rayon2, decimaux(rayon2**2)))
+        cor.append(u"Un disque de diamètre $\\unit[%s]{cm}$ a pour rayon $%s \div 2 = \\unit[%s]{cm}$. Calculons son aire:" % (2*rayon1, 2*rayon1, rayon1))
+        cor.append(u"\\[\\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\\]" % (rayon1,  rayon1, rayon1, decimaux(rayon1**2)))
+    cor.append(u"L'aire $\\mathcal{A}$ de la couronne est obtenue en retranchant l'aire du disque de rayon  $\\unit[%s]{cm}$  à l'aire du disque de rayon  $\\unit[%s]{cm}$:"% (rayon1, rayon2))
+    cor.append(u"\\[\\mathcal{A} = %s \\pi  - %s \\pi= (%s - %s)\\pi =\\unit[%s \\pi]{cm^2}\\]" % (decimaux(rayon2**2), decimaux(rayon1**2), decimaux(rayon2**2), decimaux(rayon1**2), decimaux(difference_des_carres)))
+    cor.append(u"L'aire exacte de la couronne est $\\unit[%s \\pi]{cm^2}$." % (decimaux(difference_des_carres)))
+    cor.append(u"En prenant 3,14 comme valeur approchée du nombre $\\pi$, on obtient :")
+    cor.append(u"\\[\\mathcal{A}  \\approx %s \\times 3,14\\]" % decimaux(difference_des_carres))
+    cor.append(u"\\[\\boxed{\\mathcal{A} \\approx  \\unit[%s]{cm^2}}\\]" % decimaux(aire_arrondie))
     exo.append("\\end{minipage}\n")
     cor.append("\\end{minipage}\n")
     return (exo, cor)

@@ -68,33 +68,33 @@ def proportionnalite_3eme():
         approx = "\\approx"
     
     #La situation
-    texte = [_(u"Lors d'un voyage scolaire, les élèves sont répartis dans deux bus :"),
-             _(u"Au collège Dubois, il y a $%s$ élèves en quatrièmes et $%s$ élèves en troisièmes.")%(totA,totB)][i]
+    texte = [u"Lors d'un voyage scolaire, les élèves sont répartis dans deux bus :",
+             u"Au collège Dubois, il y a $%s$ élèves en quatrièmes et $%s$ élèves en troisièmes."%(totA,totB)][i]
 
     #Les deux groupes
-    ligne1 = [_(u"\\item Bus A : %s élèves dont %s %s de garçons.")%(totA, prctA,"\\%"),
-              _(u"\\item $%s$ %s des élèves de quatrièmes possèdent un ordinateur ;")%(prctA,"\\%")][i]
-    ligne2 = [_(u"\\item Bus B : %s élèves dont %s %s de garçons.")%(totB, prctB,"\\%"),
-              _(u"\\item $%s$ %s des élèves de troisièmes possèdent un ordinateur ;")%(prctB,"\\%")][i]
+    ligne1 = [u"\\item Bus A : %s élèves dont %s %s de garçons."%(totA, prctA,"\\%"),
+              u"\\item $%s$ %s des élèves de quatrièmes possèdent un ordinateur ;"%(prctA,"\\%")][i]
+    ligne2 = [u"\\item Bus A : %s élèves dont %s %s de garçons."%(totB, prctB,"\\%"),
+              u"\\item $%s$ %s des élèves de troisièmes possèdent un ordinateur ;"%(prctB,"\\%")][i]
 
     #La question
-    question = [_(u"Quel est, sur l'ensemble des deux bus, le pourcentage de garçons ?\\par"),
-                _(u"Quel est le pourcentage des élèves qui possèdent un ordinateur ?\\par")][i]
+    question = [u"Quel est, sur l'ensemble des deux bus, le pourcentage de garçons ?\\par",
+                u"Quel est le pourcentage des élèves qui possèdent un ordinateur ?\\par"][i]
 
     #La correction
     correction =[#Dans le bus
-        [_(u"Dans le bus A, il y a $\\cfrac{%s \\times %s}{100} = %s$ garçons.\\par")%(prctA, totA, decimaux(nbA)),
-           _(u"Dans le bus B, il y a $\\cfrac{%s \\times %s}{100} = %s$ garçons.\\par")%(prctB, totB, decimaux(nbB)),
-           _(u"On en déduit qu'il y a $%s + %s = %s$ garçons sur un total de $%s + %s = %s $ élèves.\\par")
+        [u"Dans le bus A, il y a $\\cfrac{%s \\times %s}{100} = %s$ garçons.\\par"%(prctA, totA, decimaux(nbA)),
+           u"Dans le bus B, il y a $\\cfrac{%s \\times %s}{100} = %s$ garçons.\\par"%(prctB, totB, decimaux(nbB)),
+           u"On en déduit qu'il y a $%s + %s = %s$ garçons sur un total de $%s + %s = %s $ élèves.\\par"
                    %(decimaux(nbA), decimaux(nbB), nbTotal, totA, totB, Total),
-            _(u" Le pourcentage de garçons sur l'ensemble des deux bus est donc de $\\cfrac{%s}{%s}\\times 100 %s %s%s$")
+            u" Le pourcentage de garçons sur l'ensemble des deux bus est donc de $\\cfrac{%s}{%s}\\times 100 %s %s%s$"
                   %(nbTotal, Total, approx, decimaux(prct_final_arrondi), "\,\\%")],
         #À l'ordinateurs
-                 [_(u"En quatrièmes, $\\cfrac{%s \\times %s}{100} = %s$ élèves possèdent un ordinateur.\\par")%(prctA, totA, decimaux(nbA)),
-                  _(u"En troisièmes, $\\cfrac{%s \\times %s}{100} = %s$ élèves possèdent un ordinateur.\\par")%(prctB, totB, decimaux(nbB)),
-                  _(u"On en déduit qu'il y a $%s + %s = %s$ élèves qui possèdent un ordinateur sur un total de $%s + %s = %s $ élèves.\\par")
+                 [u"En quatrièmes, $\\cfrac{%s \\times %s}{100} = %s$ élèves possèdent un ordinateur.\\par"%(prctA, totA, decimaux(nbA)),
+                  u"En troisièmes, $\\cfrac{%s \\times %s}{100} = %s$ élèves possèdent un ordinateur.\\par"%(prctB, totB, decimaux(nbB)),
+                  u"On en déduit qu'il y a $%s + %s = %s$ élèves qui possèdent un ordinateur sur un total de $%s + %s = %s $ élèves.\\par"
                    %(decimaux(nbA), decimaux(nbB), nbTotal, totA, totB, Total),
-                   _(u" Le pourcentage d'élèves possédant un ordinateur est donc de $\\cfrac{%s}{%s}\\times 100 %s %s%s$")
+                   u" Le pourcentage d'élèves possédant un ordinateur est donc de $\\cfrac{%s}{%s}\\times 100 %s %s%s$"
                   %(nbTotal, Total, approx, decimaux(prct_final_arrondi), "\,\\%")],
                    ][i]
     exo = ["\\exercice",
@@ -112,10 +112,27 @@ def proportionnalite_3eme():
            ligne1,
            ligne2,
            "\\end{itemize}",
-           question + "\\par",
+           question,
            "\\dotfill\\par"
            ] + correction
     
     
     return (exo,cor)
+
+
+
+
+
+            
+              
+
+
+
+
+
+
+
+
+
+
 

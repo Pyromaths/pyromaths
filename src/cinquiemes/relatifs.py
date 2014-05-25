@@ -28,20 +28,21 @@ from ..outils import Arithmetique
 from ..outils.Affichage import TeX, tex_coef
 import random
 
+
 def choix_trou(nb1, nb2, tot, operateur, exo, cor):
     nbaleatoire = random.randrange(4)
     if nbaleatoire > 1:
-        exo.append(_("\\item $%s %s %s = \\ldots\\ldots\\ldots$") % (nb1,
+        exo.append("\\item $%s %s %s = \\ldots\\ldots\\ldots$" % (nb1,
                    operateur, nb2))
         cor.append("\\item $%s %s %s = \\mathbf{%s}$" % (nb1,
                    operateur, nb2, tot))
     elif nbaleatoire > 0:
-        exo.append(_("\\item $%s %s \\ldots\\ldots\\ldots = %s$") % (nb1,
+        exo.append("\\item $%s %s \\ldots\\ldots\\ldots = %s$" % (nb1,
                    operateur, tot))
         cor.append("\\item $%s %s \\mathbf{%s} = %s$" % (nb1,
                    operateur, nb2, tot))
     else:
-        exo.append(_("\\item $\\ldots\\ldots\\ldots %s %s = %s$") % (operateur,
+        exo.append("\\item $\\ldots\\ldots\\ldots %s %s = %s$" % (operateur,
                    nb2, tot))
         cor.append("\\item $\\mathbf{%s} %s %s = %s$" % (nb1,
                    operateur, nb2, tot))
@@ -71,9 +72,9 @@ def moins_dec(pyromax):
 
 
 def main():
-    exo = ["\\exercice", _("Effectuer sans calculatrice :"),
+    exo = ["\\exercice", "Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
-    cor = ["\\exercice*", _("Effectuer sans calculatrice :"),
+    cor = ["\\exercice*", "Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     modules = (plus, moins, )
     modules_dec= (plus_dec, moins_dec, )

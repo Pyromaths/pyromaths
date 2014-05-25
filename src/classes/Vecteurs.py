@@ -24,7 +24,7 @@
 
 import math
 import random
-from .Racine import simplifie_racine
+from ..classes.Racine import simplifie_racine
 
 class Vecteur:
 
@@ -72,9 +72,7 @@ class Vecteur:
     def normeTex(self):
         '''Affichage TeX de la racine simplifiée de la racine, sans les dollars.'''
         norme = abs(self)
-        if norme[0] == 0 or norme[1] == 0:
-            return "0"
-        elif norme[0] == 1 and norme[1] > 1:
+        if norme[0] == 1:
             return "\sqrt{" + str(norme[1]) + "}"
         elif norme[1] == 1:
             return str(norme[0])

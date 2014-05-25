@@ -26,7 +26,6 @@ from lxml import etree
 from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 from re import findall
 from .TexFiles import mise_en_forme
-import gettext
 
 
 #==============================================================
@@ -49,41 +48,29 @@ def ajoute_extension(filename,  ext):
 #==============================================================
 #        Gestion du fichier de configuration de Pyromaths
 #==============================================================
-def create_config_file(HOME, DIR_LANG, LANG_NOM, LANG):
+def create_config_file():
     """Crée le fichier de configuration au format xml"""
-
-    if LANG != "0":
-        gettext_lang = gettext.translation("pyromaths", DIR_LANG, languages=[LANG_NOM[int(LANG)][0]])
-        gettext_lang.install(unicode=True)
-    else:
-        gettext_lang = gettext.NullTranslations()
-        gettext_lang.install()
-        
-    from ..Values import VERSION, WEBSITE
+    from ..Values import HOME
     root = etree.Element("pyromaths")
 
     child = etree.SubElement(root, "options")
-    etree.SubElement(child, "nom_fichier").text=_("exercices")
+    etree.SubElement(child, "nom_fichier").text="exercices"
     etree.SubElement(child, "chemin_fichier").text="%s" % HOME
-    etree.SubElement(child, "titre_fiche").text=_(u"Fiche de révisions")
+    etree.SubElement(child, "titre_fiche").text=u"Fiche de révisions"
     etree.SubElement(child, "corrige").text="True"
     etree.SubElement(child, "pdf").text="True"
     etree.SubElement(child, "unpdf").text="False"
-    if LANG != "0":
-        etree.SubElement(child, "modele").text="pyromaths_%s.tex" %LANG_NOM[int(LANG)][0] 
-    else:
-        etree.SubElement(child, "modele").text="pyromaths.tex"
-    etree.SubElement(child, "langue").text=str(LANG)
-    
+    etree.SubElement(child, "modele").text="pyromaths.tex"
+
     child = etree.SubElement(root, "informations")
-    etree.SubElement(child, "version").text=str(VERSION)
-    etree.SubElement(child, "description").text=_(u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran.")
+    etree.SubElement(child, "version").text="10.10"
+    etree.SubElement(child, "description").text=u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
     etree.SubElement(child, "icone").text="pyromaths.ico"
 
     subchild= etree.SubElement(child, "auteur")
     etree.SubElement(subchild, "nom").text=u"Jérôme Ortais"
     etree.SubElement(subchild, "email").text=u"jerome.ortais@pyromaths.org"
-    etree.SubElement(subchild, "site").text=unicode(WEBSITE)
+    etree.SubElement(subchild, "site").text="http://www.pyromaths.org"
 
     return etree.tostring(root, pretty_print=True, encoding=unicode)
 
@@ -106,13 +93,13 @@ def indent(elem, level=0):
             elem.tail = i
     return elem
 
-def modify_config_file(file, HOME, CONFIGDIR, DIR_LANG, LANG_NOM):
+def modify_config_file(file):
     """Modifie le fichier de configuration si besoin, excepté les options utilisateur déjà configurées"""
+    from ..Values import CONFIGDIR
     modifie = False
     oldtree = etree.parse(file)
     oldroot = oldtree.getroot()
-    LANG = oldroot.find('options').find('langue').text
-    newroot = etree.XML(create_config_file(HOME, DIR_LANG, LANG_NOM, LANG))
+    newroot = etree.XML(create_config_file())
     for element in newroot.iter(tag=etree.Element):
         if not len(element):
             parents = [element]
@@ -144,13 +131,6 @@ def modify_config_file(file, HOME, CONFIGDIR, DIR_LANG, LANG_NOM):
         f.write(etree.tostring(indent(oldroot), pretty_print=True, encoding=unicode))
         f.close()
 
-    if LANG != "0":
-        gettext_lang = gettext.translation("pyromaths", DIR_LANG, languages=[LANG_NOM[int(LANG)][0]])
-        gettext_lang.install(unicode=True)
-    else:
-        gettext_lang = gettext.NullTranslations()
-        gettext_lang.install()
-
 #==============================================================
 #        Créer et lance la compilation des fichiers TeX
 #==============================================================
@@ -163,7 +143,6 @@ def creation(parametres):
                   'creer_unpdf': self.checkBox_unpdf.isChecked() and self.checkBox_unpdf.isEnabled(),
                   'titre': unicode(self.lineEdit_titre.text()),
                   'niveau': unicode(self.comboBox_niveau.currentText()),
-                  'langue': self.LANG_NOM[int(self.LANG)][0]
                 }"""
     exo = unicode(parametres['fiche_exo'])
     cor = unicode(parametres['fiche_cor'])
@@ -185,17 +164,14 @@ def creation(parametres):
         from ..lycee import lycee
         fonction = {0: sixiemes, 1: cinquiemes, 2: quatriemes, 3: troisiemes,
                 4: lycee}
-        if exercice == (0, 1):
-            fonction[exercice[0]].main(exercice[1], f0, f1, parametres['langue'])
-        else:
-            fonction[exercice[0]].main(exercice[1], f0, f1)
+        fonction[exercice[0]].main(exercice[1], f0, f1)
 
     if parametres['creer_pdf']:
         if parametres['creer_unpdf']:
             f0.write("\\label{LastPage}\n")
             f0.write("\\newpage\n")
-            f0.write(_(u"\\currentpdfbookmark{Le corrigé des exercices}{Corrigé}"))
-            f0.write(_(u"\\lhead{\\textsl{\\footnotesize{Page \\thepage/ \\pageref{LastCorPage}}}}\n"))
+            f0.write(u"\\currentpdfbookmark{Le corrigé des exercices}{Corrigé}")
+            f0.write("\\lhead{\\textsl{\\footnotesize{Page \\thepage/ \\pageref{LastCorPage}}}}\n")
             f0.write("\\setcounter{page}{1} ")
             f0.write("\\setcounter{exo}{0}\n")
             f1.write("\\label{LastCorPage}\n")
@@ -271,7 +247,7 @@ def creation(parametres):
                 else:
                     os.system('xdg-open %s.pdf' % f1noext)
         else:
-            os.remove(_('%s-corrige.tex') % f0noext)
+            os.remove('%s-corrige.tex' % f0noext)
 
 def nettoyage(basefilename):
     """Supprime les fichiers temporaires créés par LaTeX"""
@@ -301,14 +277,14 @@ def copie_tronq_modele(dest, parametres, master):
         source = os.path.join(parametres['datadir'], 'templates', source)
     else:
         #TODO: Message d'erreur, le modèle demandé n'existe pas
-        print(_(u"Le fichier modèle n'a pas été trouvé dans %s") %
+        print(u"Le fichier modèle n'a pas été trouvé dans %s" %
                 os.path.join(parametres['datadir'], 'templates'))
 
     ## Les variables à remplacer :
     titre = parametres['titre']
     niveau = parametres['niveau']
     if parametres['creer_unpdf']:
-        bookmark=_(u"\\currentpdfbookmark{Les énoncés des exercices}{Énoncés}")
+        bookmark=u"\\currentpdfbookmark{Les énoncés des exercices}{Énoncés}"
     else:
         bookmark=""
     if os.name == 'nt':

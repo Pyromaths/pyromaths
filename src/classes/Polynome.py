@@ -224,9 +224,9 @@ class Polynome:
                 stringTeX+=facteurs[0].TeX()
             for i in facteurs[1:]:
                 if i[0]!=0:
-                    stringTeX+="\\left("+i.TeX()+_("\\right) \\times ")
+                    stringTeX+="\\left("+i.TeX()+"\\right) \\times "
                 else:
-                    stringTeX+=i.TeX()+_(" \\times ")
+                    stringTeX+=i.TeX()+" \\times "
             if developpe==Polynome({0:1},var=self.var):
                 return stringTeX[:-7]
             else:

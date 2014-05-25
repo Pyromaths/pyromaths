@@ -59,7 +59,7 @@ def somme_polynomes(a, b):  # renvoie un tuple dont les valeurs sont les sommes 
     return tuple(l)
 
 
-def tex_coef(coef, var, bplus=0, bpn=0, bpc=0, ecu=0):
+def tex_coef(coef, var, bplus=0, bpn=0, bpc=0):
 
     # coef est le coefficient à écrire devant la variable var
     # bplus est un booleen : s'il est vrai, il faut ecrire le signe +
@@ -87,10 +87,7 @@ def tex_coef(coef, var, bplus=0, bpn=0, bpc=0, ecu=0):
         if bplus:
             a = '+' + a
     elif coef == 0:
-        if ecu:
-            a = '0'
-        else:
-            a = ''
+        a = ''
     elif coef == -1:
         if var == '':
             a = '-1'
@@ -125,7 +122,7 @@ def tex_dev0(a, bplus=0):  # renvoi (a+b)², (a-b)² ou (a+b)(c+d) ou a(c+d) ou 
 
         if ca == 0 or cb == 0:
             if cc == 0 or cd == 0:
-                return _('%s%s\\times %s%s') % (tex_coef(ca, 'x'), tex_coef(cb,
+                return '%s%s\\times %s%s' % (tex_coef(ca, 'x'), tex_coef(cb,
                         '', bplus=ca != 0), tex_coef(cc, 'x', bpn=1),
                         tex_coef(cd, '', bplus=cc != 0, bpn=1))
             else:
@@ -137,7 +134,7 @@ def tex_dev0(a, bplus=0):  # renvoi (a+b)², (a-b)² ou (a+b)(c+d) ou a(c+d) ou 
                 return '%s%s' % (tex_coef(ca, 'x', bplus=bplus),
                                  tex_coef(cb, '', bplus=ca != 0))
             else:
-                return _('(%s%s)\\times %s%s') % (tex_coef(ca, 'x'),
+                return '(%s%s)\\times %s%s' % (tex_coef(ca, 'x'),
                         tex_coef(cb, '', bplus=ca != 0), tex_coef(cc,
                         'x', bpn=1), tex_coef(cd, '', bplus=cc != 0, bpn=
                         1))
@@ -155,7 +152,7 @@ def tex_dev1(a, bplus=0, bpar=0, bpn=0):  # renvoi le developpement (a)²+2*a*b+
     if a[0] == a[1]:  # (a+b)² ou (a-b)²
         if signe(ca) == signe(cb):  # (a+b)²
             (ca, cb) = (abs(ca), abs(cb))
-            texte = _('%s^2+2\\times %s\\times %s+%s^2') % (tex_coef(ca,
+            texte = '%s^2+2\\times %s\\times %s+%s^2' % (tex_coef(ca,
                     'x', bpc=1), tex_coef(ca, 'x', bpn=1), tex_coef(cb,
                     '', bpn=1), tex_coef(cb, '', bpn=1, bpc=1))
             if bpar:
@@ -167,7 +164,7 @@ def tex_dev1(a, bplus=0, bpar=0, bpn=0):  # renvoi le developpement (a)²+2*a*b+
             # (a-b)²
 
             (ca, cb) = (abs(ca), abs(cb))
-            texte = _('%s^2-2\\times %s\\times %s+%s^2') % (tex_coef(ca,
+            texte = '%s^2-2\\times %s\\times %s+%s^2' % (tex_coef(ca,
                     'x', bpc=1), tex_coef(ca, 'x', bpn=1), tex_coef(cb,
                     '', bpn=1), tex_coef(cb, '', bpn=1, bpc=1))
             if bpar:
@@ -490,8 +487,8 @@ def tex_a2moinsb2_3(a):  # renvoie (4+2x+3)(4-2x-3)
                                     bplus=1), tex_binome(a[0]),
                                     tex_binome(coef_opposes(a[1]), bplus=
                                     1))
-    #else:
-    #    return ''
+    else:
+        return ''
 
 
 def tex_facteur_commun(valeurs, cor, exo=None):  # ecrit toutes les etapes de la factorisation
@@ -515,8 +512,7 @@ def tex_a2moinsb2(valeurs, cor, exo):  # ecrit toutes les etapes de la factorisa
     cor.append(u'\\[ \\thenocalcul = ' + '%s^2-%s^2' % (tex_binome(valeurs[0], bpar=1),
               tex_binome(valeurs[1], bpar=1)) + '\\]')
     cor.append(u'\\[ \\thenocalcul = ' + tex_a2moinsb2_2(valeurs) + '\\]')
-    if valeurs[0][0] == 0:
-        cor.append(u'\\[ \\thenocalcul = ' + tex_a2moinsb2_3(valeurs) + '\\]')
+    cor.append(u'\\[ \\thenocalcul = ' + tex_a2moinsb2_3(valeurs) + '\\]')
     cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_dev0((somme_polynomes(valeurs[0], valeurs[1]),
               somme_polynomes(valeurs[0], coef_opposes(valeurs[1])))) + '} \\]')
 
@@ -643,7 +639,7 @@ def factorisation1(cor, exo=None, valeurs=None):  # factorise (ax+b)(cx+d)+(ax+b
         cor.append(u'\\[ \\thenocalcul = ' + texte + '\\]')
         if exo:
             exo.append(u'\\[ \\thenocalcul = ' + texte + '\\]')
-        texte = _('%s%s\\times1%s%s') % (siga, tex_trinome(dev(valeurs[0]),
+        texte = '%s%s\\times1%s%s' % (siga, tex_trinome(dev(valeurs[0]),
                 bpar=1), sigb, tex_dev0(valeurs[1]))
         cor.append(u'\\[ \\thenocalcul = ' + texte + '\\]')
     else:
@@ -652,7 +648,7 @@ def factorisation1(cor, exo=None, valeurs=None):  # factorise (ax+b)(cx+d)+(ax+b
         cor.append(u'\\[ \\thenocalcul = ' + texte + '\\]')
         if exo:
             exo.append(u'\\[ \\thenocalcul = ' + texte + '\\]')
-        texte = _('%s%s%s%s\\times1') % (siga, tex_dev0(valeurs[0]), sigb,
+        texte = '%s%s%s%s\\times1' % (siga, tex_dev0(valeurs[0]), sigb,
                 tex_trinome(dev(valeurs[1]), bpar=1))
         cor.append(u'\\[ \\thenocalcul = ' + texte + '\\]')
     f = facteur_commun(valeurs[0], valeurs[1])
@@ -791,33 +787,33 @@ def fin_fact(a):  # renvoie un tuple contenant la version factorisee de a
 
 
 def tex_equations(fact, cor):  # renvoie un tuple contenant les deux binomes egaux a 0
-    cor.append(_(u'Nous savons que $A=%s$. Nous devons donc résoudre $%s=0$.\\par') %
+    cor.append(u'Nous savons que $A=%s$. Nous devons donc résoudre $%s=0$.\\par' %
              (tex_dev0(fact), tex_dev0(fact)))
-    cor.append(_('Un produit de facteurs est nul signifie qu\'un des facteurs est nul. Donc :'))
-    cor.append(_('\\[%s=0 \\qquad\\text{ou}\\qquad %s=0\\]') % (tex_binome(fact[0]),
+    cor.append('Un produit de facteurs est nul signifie qu\'un des facteurs est nul. Donc :')
+    cor.append('\\[%s=0 \\qquad\\text{ou}\\qquad %s=0\\]' % (tex_binome(fact[0]),
              tex_binome(fact[1])))
     eq = equations1(fact)
     if not isinstance(eq, tuple):
-        cor.append(_("\\fbox{Cette équation n'admet aucune solution.}"))
+        cor.append("\\fbox{Cette équation n'admet aucune solution.}")
     elif not isinstance(eq[0], tuple):
         cor.append('\\[ %s=%s \\]' % (tex_coef(eq[1][0], 'x'), eq[1][1]))
         if eq[1][0] != 1:
             cor.append('\\[ x=%s \\]' % tex_frac(equations2(eq)[1]))
-        cor.append(_(u'\\fbox{La solution de cette équation est \\,$%s$\\,.}') %
+        cor.append(u'\\fbox{La solution de cette équation est \\,$%s$\\,.}' %
                  tex_frac(equations3(eq)[1]))
     elif not isinstance(eq[1], tuple):
         cor.append('\\[ %s=%s \\]' % (tex_coef(eq[0][0], 'x'), eq[0][1]))
         if eq[0][0] != 1:
             cor.append('\\[ x=%s \\]' % tex_frac(equations2(eq)[0]))
-        cor.append(_(u'\\fbox{La solution de cette équation est \\,$%s$\\,.}') %
+        cor.append(u'\\fbox{La solution de cette équation est \\,$%s$\\,.}' %
                  tex_frac(equations3(eq)[0]))
     else:
-        cor.append(_('\\[%s=%s \\qquad\\text{ou}\\qquad %s=%s\\]') % (tex_coef(eq[0][0],
+        cor.append('\\[%s=%s \\qquad\\text{ou}\\qquad %s=%s\\]' % (tex_coef(eq[0][0],
                  'x'), eq[0][1], tex_coef(eq[1][0], 'x'), eq[1][1]))
         if eq[0][0] != 1 or eq[1][0] != 1:
-            cor.append(_('\\[x=%s \\qquad\\text{ou}\\qquad x=%s\\]') %
+            cor.append('\\[x=%s \\qquad\\text{ou}\\qquad x=%s\\]' %
                      (tex_frac(equations2(eq)[0]), tex_frac(equations2(eq)[1])))
-        cor.append(_(u'\\fbox{Les solutions de cette équation sont \\,$%s\\,\\text{ et }\\,%s$\\,.}') %
+        cor.append(u'\\fbox{Les solutions de cette équation sont \\,$%s\\,\\text{ et }\\,%s$\\,.}' %
                  (tex_frac(equations3(eq)[0]), tex_frac(equations3(eq)[1])))
 
 
@@ -936,33 +932,33 @@ def version_developpee(expr):  # renvoie la version developpe de A
 
 def tex_fractions(expr, nb, cor):  # repond a la question sur la valeur de x
     a = version_developpee(expr)
-    cor.append(_('Nous savons que $A=%s$\\,. Donc pour $x=%s$\\, : ') %
+    cor.append('Nous savons que $A=%s$\\,. Donc pour $x=%s$\\, : ' %
              (tex_trinome(a), tex_frac(nb)))
     cor.append(u'\\[ \\thenocalcul = ' + tex_valeurx0(a, nb) + '\\]')
     if nb == (0, 1):
-        cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_valeurx1(a, nb) + '} \\]')
+      cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_valeurx1(a, nb) + '} \\]')
     else:
-        cor.append(u'\\[ \\thenocalcul = ' + tex_valeurx1(a, nb) + '\\]')
-        b = decomp_prod((a[0], 1), (nb[0] ** 2, nb[1] ** 2))[0:2]
-        c = decomp_prod((a[1], 1), (nb[0], nb[1]))[0:2]
-        a = (produit(b[0], b[1]), produit(c[0], c[1]), (a[2], 1))
-        if a[0][1] == a[1][1] == 1:
-            cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_valeurx2(a, nb) + '} \\]')
-        else:
-            cor.append(u'\\[ \\thenocalcul = ' + tex_valeurx2(a, nb) + '\\]')
-            cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_valeurx3(a, nb) + '} \\]')
+      cor.append(u'\\[ \\thenocalcul = ' + tex_valeurx1(a, nb) + '\\]')
+    b = decomp_prod((a[0], 1), (nb[0] ** 2, nb[1] ** 2))[0:2]
+    c = decomp_prod((a[1], 1), (nb[0], nb[1]))[0:2]
+    a = (produit(b[0], b[1]), produit(c[0], c[1]), (a[2], 1))
+    if a[0][1] == a[1][1] == 1:
+      cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_valeurx2(a, nb) + '} \\]')
+    else:
+      cor.append(u'\\[ \\thenocalcul = ' + tex_valeurx2(a, nb) + '\\]')
+    cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_valeurx3(a, nb) + '} \\]')
 
 
 def tex_valeurx0(a, nb):
     if nb == (0, 1):
-        return '%s%s%s' % (tex_coef(a[0], _('\\times %s^2') % tex_frac(nb)),
-                           tex_coef(a[1], _('\\times %s') % tex_frac(nb),
+        return '%s%s%s' % (tex_coef(a[0], '\\times %s^2' % tex_frac(nb)),
+                           tex_coef(a[1], '\\times %s' % tex_frac(nb),
                            bplus=a[0]), tex_coef(a[2], '', bplus=a[0] or
                            a[1]))
     else:
-        return '%s%s%s' % (tex_coef(a[0], _('\\times\\left(%s\\right)^2') %
+        return '%s%s%s' % (tex_coef(a[0], '\\times\\left(%s\\right)^2' %
                            tex_frac(nb)), tex_coef(a[1],
-                           _('\\times\\left(%s\\right)') % tex_frac(nb),
+                           '\\times\\left(%s\\right)' % tex_frac(nb),
                            bplus=a[0]), tex_coef(a[2], '', bplus=a[0] or
                            a[1]))
 
@@ -996,7 +992,7 @@ def tex_valeurx1(a, nb):
 
 def tex_valeurx2(a, nb):
     if nb == (0, 1):
-        return '0'
+        return ''
     else:
         if a[0][1] == a[1][1] == 1:
             return tex_coef(a[0][0] + a[1][0] + a[2][0], '')
@@ -1017,7 +1013,7 @@ def tex_valeurx2(a, nb):
 
 def tex_valeurx3(a, nb):
     if nb == (0, 1) or a[0][1] == a[1][1] == 1:
-        return '0'
+        return ''
     else:
         c = den_com0(a[0], a[1])
         b = (a[0][0] * c[0] + a[1][0] * c[1] + (a[2][0] * a[0][1]) * c[0],
@@ -1033,27 +1029,27 @@ def tex_devfacteq():
     valeurx = valeur_quotient()
     fact = fin_fact(expr)
     exo = ['\\exercice']
-    exo.append(_('On donne $A=%s$\\,.') % tex_initial(exos,
+    exo.append('On donne $A=%s$\\,.' % tex_initial(exos,
              expr))
     exo.append('\\begin{enumerate}')
-    exo.append(_(u'\\item Développer et réduire $A$\\,.'))
-    exo.append(_('\\item Factoriser $A$\\,.'))
-    exo.append(_('\\item Calculer $A$ pour $x=%s$\\,.') % \
+    exo.append(u'\\item Développer et réduire $A$\\,.')
+    exo.append('\\item Factoriser $A$\\,.')
+    exo.append('\\item Calculer $A$ pour $x=%s$\\,.' % \
              tex_frac(valeurx))
-    exo.append(_(u"\\item Résoudre l'équation $A=0$\\,."))  # % tex_dev0(fact))
+    exo.append(u"\\item Résoudre l'équation $A=0$\\,.")  # % tex_dev0(fact))
     exo.append('\\end{enumerate}')
     cor = ['\\exercice*']
-    cor.append(_('On donne $A=%s$\\,.') % tex_initial(exos,
+    cor.append('On donne $A=%s$\\,.' % tex_initial(exos,
              expr))
     cor.append('\\begin{enumerate}')
-    cor.append(_(u'\\item Développer et réduire $A$\\,.'))
+    cor.append(u'\\item Développer et réduire $A$\\,.')
     developpements(expr, exos, cor)
-    cor.append(_('\\item Factoriser $A$\\,.'))
+    cor.append('\\item Factoriser $A$\\,.')
     exec('factorisation' + str(exos) + '(cor,valeurs=expr)')
-    cor.append(_('\\item Calculer $A$ pour $x=%s$\\,.\\par') % \
+    cor.append('\\item Calculer $A$ pour $x=%s$\\,.\\par' % \
              tex_frac(valeurx))
     tex_fractions(expr, valeurx, cor)
-    cor.append(_(u"\\item Résoudre l'équation $A=0$\\,.\\par"))  # % tex_dev0(fact))
+    cor.append(u"\\item Résoudre l'équation $A=0$\\,.\\par")  # % tex_dev0(fact))
     tex_equations(fact, cor)
     cor.append('\\end{enumerate}')
     return (exo, cor)
@@ -1070,10 +1066,10 @@ def tex_developpements():
         a = random.randrange(nb_exos - i)
         exos.append(liste_exos[ordre_exos.pop(a)](10))
     exo = ['\\exercice']
-    exo.append(_(u'Développer et réduire les expressions suivantes.'))
+    exo.append(u'Développer et réduire les expressions suivantes.')
     exo.append('\\begin{multicols}{2}\\noindent')
     cor = ['\\exercice*']
-    cor.append(_(u'Développer et réduire les expressions suivantes.'))
+    cor.append(u'Développer et réduire les expressions suivantes.')
     cor.append('\\begin{multicols}{2}\\noindent')
     tex_developpe1(exos[0], exo, cor)
     exo.append('\\stepcounter{nocalcul}%')
@@ -1110,10 +1106,10 @@ def tex_factorisations():
         ordre_exos.append(ordre.pop(random.randrange(nb_exos - i)))
     del ordre
     exo = ['\\exercice']
-    exo.append(_('Factoriser les expressions suivantes.'))
+    exo.append('Factoriser les expressions suivantes.')
     exo.append('\\begin{multicols}{2}\\noindent')
     cor = ['\\exercice*']
-    cor.append(_('Factoriser les expressions suivantes.'))
+    cor.append('Factoriser les expressions suivantes.')
     cor.append('\\begin{multicols}{2}\\noindent')
     for i in range(nb_exos):
         exec('factorisation' + str(ordre_exos[i]) + \

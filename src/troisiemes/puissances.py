@@ -31,16 +31,16 @@ import string, math
 
 def tex_puissances_0(a):
     if isinstance(a, tuple):
-        return _('\\cfrac{\\nombre{%s} \\times 10^{%s} \\times \\nombre{%s} \\times 10^{%s}}{\\nombre{%s} \\times \\big( 10^{%s} \\big) ^%s}') % \
+        return '\\cfrac{\\nombre{%s} \\times 10^{%s} \\times \\nombre{%s} \\times 10^{%s}}{\\nombre{%s} \\times \\big( 10^{%s} \\big) ^%s}' % \
             (a[0], a[3], a[1], a[4], a[2], a[5], a[6])
 
 def tex_puissances_1(a):
     if isinstance(a, tuple):
         if a[4] < 0:
-            return _('\\cfrac{\\nombre{%s} \\times \\nombre{%s}}{\\nombre{%s}} \\times \\cfrac{10^{%s+(%s)}}{10^{%s \\times %s}}') % \
+            return '\\cfrac{\\nombre{%s} \\times \\nombre{%s}}{\\nombre{%s}} \\times \\cfrac{10^{%s+(%s)}}{10^{%s \\times %s}}' % \
                 (a[0], a[1], a[2], a[3], a[4], a[5], a[6])
         else:
-            return _('\\cfrac{\\nombre{%s} \\times \\nombre{%s}}{\\nombre{%s}} \\times \\cfrac{10^{%s+%s}}{10^{%s \\times %s}}') % \
+            return '\\cfrac{\\nombre{%s} \\times \\nombre{%s}}{\\nombre{%s}} \\times \\cfrac{10^{%s+%s}}{10^{%s \\times %s}}' % \
                 (a[0], a[1], a[2], a[3], a[4], a[5], a[6])
 
 
@@ -48,19 +48,19 @@ def tex_puissances_2(a):
     if isinstance(a, tuple):
         if ((a[0] * a[1]) * 1.) / a[2] == (a[0] * a[1]) / a[2]:
             if a[5] * a[6] < 0:
-                return _('\\nombre{%s} \\times 10^{%s-(%s)}') % \
+                return '\\nombre{%s} \\times 10^{%s-(%s)}' % \
                     verifie_type(((a[0] * a[1]) / a[2], a[3] + a[4], a[5] *
                                  a[6]))
             else:
-                return _('\\nombre{%s} \\times 10^{%s-%s}') % verifie_type(((a[0] *
+                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type(((a[0] *
                         a[1]) / a[2], a[3] + a[4], a[5] * a[6]))
         else:
             if a[5] * a[6] < 0:
-                return _('\\nombre{%s} \\times 10^{%s-(%s)}') % \
+                return '\\nombre{%s} \\times 10^{%s-(%s)}' % \
                     verifie_type((((a[0] * a[1]) * 1.) / a[2], a[3] + a[4],
                                  a[5] * a[6]))
             else:
-                return _('\\nombre{%s} \\times 10^{%s-%s}') % verifie_type((((a[0] *
+                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type((((a[0] *
                         a[1]) * 1.) / a[2], a[3] + a[4], a[5] * a[6]))
 
 
@@ -68,7 +68,7 @@ def tex_puissances_3(a):
     from math import floor, log10
     b = int(floor(log10(((a[0] * a[1]) * 1.) / a[2])))
     if isinstance(a, tuple) and b != 0:
-        return _('\\nombre{%s}  \\times 10^{%s} \\times 10^{%s}') % \
+        return '\\nombre{%s}  \\times 10^{%s} \\times 10^{%s}' % \
             verifie_type(((((a[0] * a[1]) * 1.) / a[2]) / 10 ** b, b, (a[3] +
                          a[4]) - a[5] * a[6]))
 
@@ -77,7 +77,7 @@ def tex_puissances_4(a):
     from math import floor, log10
     b = int(floor(log10(((a[0] * a[1]) * 1.) / a[2])))
     if isinstance(a, tuple):
-        return _('\\nombre{%s}  \\times 10^{%s}') % verifie_type(((((a[0] *
+        return '\\nombre{%s}  \\times 10^{%s}' % verifie_type(((((a[0] *
                 a[1]) * 1.) / a[2]) / 10 ** b, (b + a[3] + a[4]) - a[5] *
                 a[6]))
 
@@ -128,30 +128,31 @@ def valeurs_puissances():  # renvoie un tuple contenant les valeurs pour les deu
     return (a, b)
 
 def tex_puissances():
+    sd = string.maketrans('.', ',')  # convertit les . en , (separateur decimal)
     valeurs = valeurs_puissances()
     i = randrange(2)
-    exo = ['\\exercice''', _(u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat.")]
+    exo = ['\\exercice''', u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat."]
     exo.append('\\begin{multicols}{2}\\noindent')
-    cor = ['\\exercice*''', _(u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat.")]
+    cor = ['\\exercice*''', u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat."]
     cor.append('\\begin{multicols}{2}\\noindent')
-    exo.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[i]).replace('.',',') + '\\] ')
-    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[i]).replace('.',',') + '\\] ')
-    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_1(valeurs[i]).replace('.',',') + '\\] ')
-    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_2(valeurs[i]).replace('.',',') + '\\] ')
+    exo.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_1(valeurs[i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_2(valeurs[i]).translate(sd) + '\\] ')
     if int(math.floor(math.log10(((valeurs[i][0] * valeurs[i][1]) * 1.) / valeurs[i][2]))) != \
         0:
-        cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_3(valeurs[i]).replace('.',',') + '\\] ')
-    cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_puissances_4(valeurs[i]).replace('.',',') + '} \\] ')
+        cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_3(valeurs[i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_puissances_4(valeurs[i]).translate(sd) + '} \\] ')
     exo.append('\\columnbreak\\stepcounter{nocalcul}%')
     cor.append('\\columnbreak\\stepcounter{nocalcul}%')
-    exo.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[1 - i]).replace('.',',') + '\\] ')
-    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[1 - i]).replace('.',',') + '\\] ')
-    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_1(valeurs[1 - i]).replace('.',',') + '\\] ')
-    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_2(valeurs[1 - i]).replace('.',',') + '\\] ')
+    exo.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[1 - i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[1 - i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_1(valeurs[1 - i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_2(valeurs[1 - i]).translate(sd) + '\\] ')
     if int(math.floor(math.log10(((valeurs[1 - i][0] * valeurs[1 - i][1]) * 1.) /
            valeurs[1 - i][2]))) != 0:
-        cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_3(valeurs[1 - i]).replace('.',',') + '\\] ')
-    cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_puissances_4(valeurs[1 - i]).replace('.',',') + '} \\] ')
+        cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_3(valeurs[1 - i]).translate(sd) + '\\] ')
+    cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_puissances_4(valeurs[1 - i]).translate(sd) + '} \\] ')
     exo.append('\\end{multicols}')
     cor.append('\\end{multicols}')
     return (exo, cor)

@@ -3,19 +3,19 @@
 from ..outils.decimaux import decimaux
 from ..outils.Arithmetique import carrerise, pgcd, ppcm
 from math import sqrt
-from .Fractions import Fractions
+from Fractions import Fractions
 
 def produitfacteurs(facteurs):
     """Affiche sous forme de produit les éléments d'une liste."""
     prodfacteurs = ''
     for element in facteurs:
-        prodfacteurs += str(element) + _(' \\times ')
+        prodfacteurs += str(element) + ' \\times '
     return prodfacteurs[:-7]
 
 class Racine:
     def __init__(self, radicande, coeff = 1, indice = 2):
         if (radicande < 0) or not (isinstance(indice, int)):
-            print(_("Erreur de définition ! Le radicande doit être positif et l'indice un nombre entier !"))
+            print "Erreur de définition ! Le radicande doit être positif et l'indice un nombre entier !"
         self.radicande = radicande
         self.indice = indice # Nombre entier
         self.coeff = coeff # Coeff devant la racine
@@ -107,7 +107,7 @@ class Racine:
                 radicande = radicande // (element**(self.indice))
                 prodfacteurs = produitfacteurs(facteurs)
                 detail.append(' = ')
-                detail.append(str(coeff) + _(' \\times ') + racine + prodfacteurs + '}')
+                detail.append(str(coeff) + ' \\times ' + racine + prodfacteurs + '}')
         if radicande == 1:
             return (coeff, detail)
         else:
@@ -148,13 +148,13 @@ class RacineDegre2:
         self.radicande=radicande
 
     def __str__(self):
-        if isinstance(self.numerateur,str) or isinstance(self.numerateur,unicode):
+        if isinstance(self.numerateur,str):
             #utilisé dans le détail de la simplification
             numerateur=self.numerateur
         else:
             numerateur=decimaux(self.numerateur)*(self.numerateur!=0)   #renvoie "" si self.numerateur=0
         if self.radicande!=0:
-            if isinstance(self.coeff,str) or isinstance(self.coeff,unicode):#utilisé dans le détail de la simplification
+            if isinstance(self.coeff,str):#utilisé dans le détail de la simplification
                 if self.coeff[0]!="-" and self.coeff[0]!="+":
                     numerateur+="+"
                 numerateur+=self.coeff+"\\sqrt{"+decimaux(self.radicande)+"}"
@@ -186,13 +186,13 @@ class RacineDegre2:
             elif self.coeff==-1:
                 det_coeff="- "
             else:
-                det_coeff=(_("%s\\times "))%(self.coeff)
+                det_coeff="%s\\times "%(self.coeff)
             if coeff!=1 or radicande==1:
                 det_coeff+=str(coeff)
         else:
             det_coeff="0"
         if radicande==1:
-            #det_coeff=_("%s\\times%s")%(tTeX(self.coeff),coeff)
+            #det_coeff="%s\\times%s"%(tTeX(self.coeff),coeff)
             liste_detail.append("\\dfrac{%s %s}{%s}"%\
                                     (self.numerateur,det_coeff ,self.denominateur))
             radicande=0
@@ -213,9 +213,9 @@ class RacineDegre2:
         denominateur=self.denominateur//simplifie
         if simplifie!=1:
             if radicande!=0 or denominateur!=1:
-                det_numerateur=_("%s_{\\times %s}")%(numerateur,pTeX(simplifie))
-                det_denominateur=_("%s_{\\times %s}")%(denominateur,pTeX(simplifie))
-                det_coeff=_("%s_{\\times %s}")%(coeff,pTeX(simplifie))
+                det_numerateur="%s_{\\times %s}"%(numerateur,pTeX(simplifie))
+                det_denominateur="%s_{\\times %s}"%(denominateur,pTeX(simplifie))
+                det_coeff="%s_{\\times %s}"%(coeff,pTeX(simplifie))
                 liste_detail.append(str(RacineDegre2(det_numerateur,det_denominateur,det_coeff,radicande)))
             liste_detail.append(str(RacineDegre2(numerateur,denominateur,coeff,radicande)))
         if detail:

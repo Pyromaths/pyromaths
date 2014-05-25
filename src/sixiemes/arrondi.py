@@ -33,11 +33,11 @@ def ArrondirNombreDecimal():
     """Crée et corrige un exercice d'arrondis avec les encadrements."""
     hasard = [valide_hasard() for i in range(4)]
 
-    precision = [_(u'au millième'), _(u'au centième'), _(u'au dixième'), _(u'à l\'unité'),
-            _(u'à la dizaine'), _(u'à la centaine'), _('au millier'),
-            _(u'à la dizaine de milliers')]
+    precision = [u'au millième', u'au centième', u'au dixième', u'à l\'unité',
+            u'à la dizaine', u'à la centaine', 'au millier',
+            u'à la dizaine de milliers']
 
-    choix = [(i,j) for i in range(8)  for j in range(3)]
+    choix = [(i,j) for i in range(7)  for j in range(3)]
     shuffle(choix)
 
     choix_precision = [choix[i][0] for i in range(4)]
@@ -48,7 +48,7 @@ def ArrondirNombreDecimal():
 
 ##    choix_supinf = [randint(0, 2), randint(0, 2), randint(0, 2), randint(0, 2)]
 
-    supinf = ['', _(u' par défaut'), _(u' par excès')]
+    supinf = ['', u' par défaut', u' par excès']
 #FIXME
     #Arrondir n'est pas synonyme de valeur approchée
     #Valeur approchée par excès 
@@ -66,7 +66,7 @@ def ArrondirNombreDecimal():
 
 
     for k in range(4):
-        exo.append( _("\\item Arrondir ") + decimaux(nombres[k]) + " " +
+        exo.append( "\\item Arrondir " + decimaux(nombres[k]) + " " +
                 precision[choix_precision[k]] + supinf[choix_supinf[k]] +
                 '.' )
 
@@ -87,13 +87,13 @@ def ArrondirNombreDecimal():
         elif (choix_supinf[k] == 2):
             solution = exc
 
-        cor.append( _('\\item L\'encadrement de ') + decimaux(nombres[k]) + ' ' +
-                precision[choix_precision[k]] + _(' est :\\par') )
+        cor.append( '\\item L\'encadrement de ' + decimaux(nombres[k]) + ' ' +
+                precision[choix_precision[k]] + ' est :\\par' )
         cor.append( decimaux(defaut) + ' < ' + decimaux(nombres[k]) + ' < ' +
                 decimaux(exc) + '\\par' )
-        cor.append( _(u'On en déduit que son arrondi ') +
+        cor.append( u'On en déduit que son arrondi ' +
                 precision[choix_precision[k]] + ' ' + supinf[choix_supinf[k]] +
-                _(' est : ') + decimaux(solution) + '.')
+                ' est : ' + decimaux(solution) + '.')
 
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")

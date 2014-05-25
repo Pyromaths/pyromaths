@@ -1,102 +1,153 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-
 from time import strftime
+from os.path import normpath, dirname, exists, abspath, join
+from os import environ, name
+from sys import executable, getfilesystemencoding
+import sys
+#import troisiemes.troisiemes, quatriemes.quatriemes, cinquiemes.cinquiemes
+#import sixiemes.sixiemes, lycee.lycee
+
+def we_are_frozen():
+    """Returns whether we are frozen via py2exe.
+    This will affect how we find out where we are located."""
+    return hasattr(sys, "frozen")
+
+def data_dir():
+    """Renvoie le dossier data, selon qu'on utilise pyromaths à partir des
+    sources, de l'exécutable win32 ou du paquet deb"""
+    if we_are_frozen():
+        return join(normpath(dirname(unicode(executable,
+            getfilesystemencoding()))), 'data')
+    elif exists(join(abspath(dirname(__file__)),'../data/')):
+        return normpath(join(abspath(dirname(__file__)),'../data/'))
+    else:
+        return '/usr/share/pyromaths/'
+
+def icon_dir():
+    """Renvoie le dossier où se trouve l'icône, selon qu'on utilise pyromaths à
+    partir des sources, de l'exécutable win32 ou du paquet deb"""
+    if we_are_frozen() or exists(join(abspath(dirname(__file__)),'../data/')):
+        return join(DATADIR, 'images', 'pyromaths.png')
+    else:
+        return join('/usr/share/pixmaps', 'pyromaths.png')
+        
+if name == 'nt':
+    def home():
+        return unicode(environ['USERPROFILE'], getfilesystemencoding())
+    def configdir():
+        return join(unicode(environ['APPDATA'], getfilesystemencoding()),
+                "pyromaths")
+elif sys.platform == "darwin":  #Cas de Mac OS X.
+    def home():
+        return unicode(environ['HOME'], getfilesystemencoding())
+    def configdir():
+        return join(home(), "Library", "Application Support", "Pyromaths")
+else:
+    def home():
+        try:
+            return unicode(environ['HOME'], getfilesystemencoding())
+        except KeyError:
+            # Pyromaths en ligne, l'user apache n'a pas de $HOME
+            return ""
+    def configdir():
+        return join(home(), ".config", "pyromaths")
 
 VERSION = '13.03'
 COPYRIGHT_YEAR = strftime('%Y')
-COPYRIGHTS = _(u'© 2006 – %s Jérôme Ortais<br/>\n' \
+COPYRIGHTS = u'© 2006 – %s Jérôme Ortais<br/>\n' \
         u'<span style=" font-size:small;">Pyromaths est distribué sous ' \
-        u'licence GPL.</span>') % (COPYRIGHT_YEAR)
+        u'licence GPL.</span>' % (COPYRIGHT_YEAR)
 WEBSITE = 'http://www.pyromaths.org/'
+DATADIR = data_dir()
+ICONDIR = icon_dir()
+HOME = home()
+CONFIGDIR = configdir()
 
-LESFICHES = [[_(u'Sixième'), _('6e'), [
-_(u'Calcul mental'),
-_(u'Écrire un nombre décimal'),
-_(u'Placer une virgule'),
-_(u'Écriture fractionnaire ou décimale'),
-_(u'Décomposition de décimaux'),
-_(u'Conversions unités'),
-_(u"Conversions unités d'aires"),
-_(u"Conversions unités de volumes"),
-_(u'Poser des opérations (sauf divisions)'),
-_(u'Produits, quotients par 10, 100, 1000'),
-_(u'Classer des nombres décimaux'),
-_(u'Droites, demi-droites, segments'),
-_(u'Droites perpendiculaires et parallèles'),
-_(u'Propriétés sur les droites'),
-_(u'Multiples de 2, 3, 5, 9, 10'),
-_(u'Fractions partage'),
-_(u'Fractions et abscisses'),
-_(u'Aires et quadrillage'),
-_(u'Symétrie et quadrillages'),
-_(u'Mesurer des angles'),
-_(u'Représentation dans l\'espace'),
-_(u'Arrondir des nombres décimaux')
+LESFICHES = [[u'Sixième', '', [
+u'Calcul mental',
+u'Écrire un nombre décimal',
+u'Placer une virgule',
+u'Écriture fractionnaire ou décimale',
+u'Décomposition de décimaux',
+u'Conversions unités',
+u"Conversions unités d'aires",
+u"Conversions unités de volumes",
+u'Poser des opérations (sauf divisions)',
+u'Produits, quotients par 10, 100, 1000',
+u'Classer des nombres décimaux',
+u'Droites, demi-droites, segments',
+u'Droites perpendiculaires et parallèles',
+u'Propriétés sur les droites',
+u'Multiples de 2, 3, 5, 9, 10',
+u'Fractions partage',
+u'Fractions et abscisses',
+u'Aires et quadrillage',
+u'Symétrie et quadrillages',
+u'Mesurer des angles',
+u'Représentation dans l\'espace',
+u'Arrondir des nombres décimaux'
 ]],
-[_(u'Cinquième'), _('5e'), [
-_(u'Priorités opératoires'),
-_(u'Symétrie centrale'),
-_(u'Fractions égales'),
-_(u'Sommes de fractions'),
-_(u'Produits de fractions'),
-_(u'Repérage'),
-_(u'Addition de relatifs'),
-_(u'Construction de triangles'),
-_(u'Construction de parallélogrammes'),
-_(u'Échelles'),
-_(u'Proportionnalite (Problème)'),
-_(u'Aire de disques'),
-_(u'Statistiques'),
+[u'Cinquième', '', [
+u'Priorités opératoires',
+u'Symétrie centrale',
+u'Fractions égales',
+u'Sommes de fractions',
+u'Produits de fractions',
+u'Repérage',
+u'Addition de relatifs',
+u'Construction de triangles',
+u'Construction de parallélogrammes',
+u'Échelles',
+u'Aire de disques',
+u'Statistiques',
 ]],
-[_(u'Quatrième'), _('4e'), [
-_(u'Calcul mental'),
-_(u'Sommes de fractions'),
-_(u'Produits et quotients de fractions'),
-_(u'Fractions et priorités'),
-_(u'Bases du calcul littéral'),
-_(u'Réduire des expressions littérales'),
-_(u'Propriétés sur les puissances'),
-_(u'Propriétés sur les puissances de 10'),
-_(u'Écritures scientifiques'),
-_(u'Puissances de 10'),
-_(u'Distributivité'),
-_(u'Double distributivité'),
-_(u'Équations 1° degré(sans dénom.)'),
-_(u'Théorème de Pythagore'),
-_(u'Réciproque du théorème de Pythagore'),
-_(u'Cercle et théorème de Pythagore'),
-_(u'Théorème de Thalès'),
-_(u'Trigonométrie (Raisons)'),
+[u'Quatrième', '', [
+u'Calcul mental',
+u'Sommes de fractions',
+u'Produits et quotients de fractions',
+u'Fractions et priorités',
+u'Bases du calcul littéral',
+u'Réduire des expressions littérales',
+u'Propriétés sur les puissances',
+u'Propriétés sur les puissances de 10',
+u'Écritures scientifiques',
+u'Puissances de 10',
+u'Distributivité',
+u'Double distributivité',
+u'Théorème de Pythagore',
+u'Réciproque du théorème de Pythagore',
+u'Cercle et théorème de Pythagore',
+u'Théorème de Thalès',
+u'Trigonométrie',
 ]],
-[_(u'Troisième'), _('3e'), [
-_(u'Fractions'),
-_(u'Puissances'),
-_(u'PGCD'),
-_(u'Développements'),
-_(u'Factorisations'),
-_(u'Dévt, factorisat°, calcul et éq° produit'),
-_(u'Équations 1° degré(avec dénom.)'),
-_(u'Racines carrées'),
-_(u'Système d\'équations'),
-_(u'Fonctions affines'),
-_(u'Probabilités'),
-_(u'Théorème de Thalès'),
-_(u'Réciproque du théorème de Thalès'),
-_(u'Trigonométrie (Mesures)'),
-_(u'Arithmétique'),
-_(u'Pourcentages (Problème)')
+[u'Troisième', '', [
+u'Fractions',
+u'Puissances',
+u'PGCD',
+u'Développements',
+u'Factorisations',
+u'Dévt, factorisat°, calcul et éq° produit',
+u'Équation',
+u'Racines carrées',
+u'Système d\'équations',
+u'Fonctions affines',
+u'Probabilités',
+u'Théorème de Thalès',
+u'Réciproque du théorème de Thalès',
+u'Trigonométrie',
+u'Arithmétique'
 ]],
-[_(u'Lycée'), _('Ly'), [
-_(u'Équations 2° degré'),
-_(u'Factorisations 2° degré'),
-_(u'Factorisations degré 3'),
-_(u'Étude de signe'),
-_(u"Sens de variations"),
-_(u"Étude de fonctions"),
-_(u"Vecteurs"),
-_(u"Cercle trigonométrique"),
+[u'Lycée', '', [
+u'Équations 2° degré',
+u'Factorisations 2° degré',
+u'Factorisations degré 3',
+u'Étude de signe',
+u"Sens de variations",
+u"Étude de fonctions",
+u"Vecteurs",
+u"Cercle trigonométrique",
 ], [
 u'Niveau 1èreS',
 u'Niveau 1èreS',
@@ -108,3 +159,4 @@ u"Niveau Seconde",
 u"Niveau Seconde",
 ]],
 ]
+

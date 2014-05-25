@@ -74,8 +74,8 @@ def quest_equilateral(exo,cor):
     nom=shuffle_nom([A,B,C])
     c=0.1*random.randint(40,70)#longueur AB
     angBAC=angABC=60
-    exo.append(_(u"\\item Trace un triangle $%s$ équilatéral de côté $\\unit[%s]{cm}$.\\par")%(nom,decimaux(c)))
-    cor.append(_(u"\\item Trace un triangle $%s$ équilatéral de côté $\\unit[%s]{cm}$.\\par")%(nom,decimaux(c)))
+    exo.append(u"\\item Trace un triangle $%s$ équilatéral de côté $\\unit[%s]{cm}$.\\par"%(nom,decimaux(c)))
+    cor.append(u"\\item Trace un triangle $%s$ équilatéral de côté $\\unit[%s]{cm}$.\\par"%(nom,decimaux(c)))
     x_C=(c*tan(angABC))/(tan(angABC)+tan(angBAC))
     y_C=x_C*tan(angBAC)
     cor.append(u"\\begin{pspicture}(-1,-1)(%s,%s)"%(c+1,y_C+1))
@@ -101,9 +101,9 @@ def quest_LAL(exo,cor):
     b=0.1*random.randint(20,100)#longueur BC
     angBAC=3*random.randint(7,50)#BAC mesure entre 21° et 150°
     
-    exo.append(_(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$")
+    exo.append(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$"
                %(nom,A,B,decimaux(c),A,C,decimaux(b),B,A,C,angBAC))
-    cor.append(_(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    cor.append(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,B,decimaux(c),A,C,decimaux(b),B,A,C,angBAC))
     cor.append(u"\\begin{pspicture}(%s,%s)(%s,%s)"%(min(0,b*cos(angBAC))-0.4,-1,max(b,b*cos(angBAC))+0.4,b*sin(angBAC)+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s;%s){%s}(%s,0){%s}"%(A,b,angBAC,C,c,B))
@@ -129,9 +129,9 @@ def quest_ALA(exo,cor):
     c=0.1*random.randint(40,70)#longueur AB
     angBAC=5*random.randint(4,12)
     angABC=5*random.randint(4,12)
-    exo.append(_(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$")
+    exo.append(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$"
                %(nom,A,B,decimaux(c),B,A,C,angBAC,A,B,C,angABC))
-    cor.append(_(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$\\par")
+    cor.append(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$\\par"
                %(nom,A,B,decimaux(c),B,A,C,angBAC,A,B,C,angABC))
     x_C=(c*tan(angABC))/(tan(angABC)+tan(angBAC))
     y_C=x_C*tan(angBAC)
@@ -154,13 +154,13 @@ def quest_AAL(exo,cor):
     ABmax=int(35*(tan(angABC)+tan(angBAC))/(tan(angBAC)*tan(angABC)))#donne une hauteur inférieur à 35*0.2=7 cm
     c=0.2*random.randint(20,max(20,ABmax))#longueur AB
     
-    exo.append(_(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$")
+    exo.append(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$"
                %(nom,A,B,decimaux(c),B,A,C,angBAC,A,C,B,angACB))
-    cor.append(_(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$\\par")
+    cor.append(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$\\par"
                %(nom,A,B,decimaux(c),B,A,C,angBAC,A,C,B,angACB))
-    cor.append(_(u"On doit d'abord calculer la mesure de $\\widehat{%s%s%s}$.\\\\")
+    cor.append(u"On doit d'abord calculer la mesure de $\\widehat{%s%s%s}$.\\\\"
                %(A,B,C))
-    cor.append(_(u"Or la somme des trois angles d'un triangle est égale à 180\\degres donc $\\widehat{%s%s%s}=180\\degres-%s\\degres-%s\\degres=%s\\degres$.\\par")
+    cor.append(u"Or la somme des trois angles d'un triangle est égale à 180\\degres donc $\\widehat{%s%s%s}=180\\degres-%s\\degres-%s\\degres=%s\\degres$.\\par"
                %(A,B,C,angBAC,angACB,angABC))
     x_C=(c*tan(angABC))/(tan(angABC)+tan(angBAC))
     y_C=x_C*tan(angBAC)
@@ -185,12 +185,12 @@ def quest_isocele_angbase(exo,cor):
     x_C=c/2
     y_C=x_C*tan(angBAC)
 
-    exo.append(_(u"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$.")
+    exo.append(u"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$."
                %(nom,C,A,B,decimaux(c),B,A,C,angBAC))
-    cor.append(_(u"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$. \\par")
+    cor.append(u"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$. \\par"
                %(nom,C,A,B,decimaux(c),B,A,C,angBAC))
-    cor.append(_(u"Comme $%s%s%s$ est un triangle isocèle en $%s$, je sais que les angles adjacents à la base sont de même mesure \
-donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=%s\\degres$.\\par")%(A,B,C,C,A,B,C,B,A,C,angBAC))
+    cor.append(u"Comme $%s%s%s$ est un triangle isocèle en $%s$, je sais que les angles adjacents à la base sont de même mesure \
+donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=%s\\degres$.\\par"%(A,B,C,C,A,B,C,B,A,C,angBAC))
     cor.append(u"\\begin{pspicture}(-1,-1)(%s,%s)"%(c+1,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,c,B,x_C,y_C,C))
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,C))
@@ -214,14 +214,14 @@ def quest_isocele_angprincipal(exo,cor):
     x_C=c/2
     y_C=x_C*tan(angBAC)
     
-    exo.append(_(u"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$.")
+    exo.append(u"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$."
                %(nom,C,A,B,decimaux(c),A,C,B,angACB))
-    cor.append(_(u"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    cor.append(u"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,C,A,B,decimaux(c),A,C,B,angACB))
-    cor.append(_(u"Comme $%s%s%s$ est un triangle isocèle en $%s$, je sais que les angles adjacents à la base sont de même mesure \
-donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}$.\\par")%(A,B,C,C,A,B,C,B,A,C))
-    cor.append(_(u"De plus, je sais que la somme des mesures des trois angles d'un triangle est égale à 180\\degres \\\\ \
-donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=(180\\degres-%s\\degres)\\div 2=%s\\degres$. \\par")
+    cor.append(u"Comme $%s%s%s$ est un triangle isocèle en $%s$, je sais que les angles adjacents à la base sont de même mesure \
+donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}$.\\par"%(A,B,C,C,A,B,C,B,A,C))
+    cor.append(u"De plus, je sais que la somme des mesures des trois angles d'un triangle est égale à 180\\degres \\\\ \
+donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=(180\\degres-%s\\degres)\\div 2=%s\\degres$. \\par"
                %(B,A,C,A,B,C,angACB,angBAC))
     cor.append(u"\\begin{pspicture}(-1,-1)(%s,%s)"%(c+1,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,c,B,x_C,y_C,C))
@@ -247,13 +247,13 @@ def quest_rectangle_hypo_angle(exo,cor):
     x_C=(c*tan(angABC))/(tan(angABC)+tan(angBAC))
     y_C=x_C*tan(angBAC)
     
-    exo.append(_(u"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    exo.append(u"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,C,A,B,decimaux(c),B,A,C,angBAC))
-    cor.append(_(u"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    cor.append(u"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,C,A,B,decimaux(c),B,A,C,angBAC))
 ##    cor.append("\\begin{multicols}{2}")
-    cor.append(_(u"Je sais que dans un triangle rectangle, les deux angles aigus sont complémentaires \\\\ \
-donc $\widehat{%s%s%s}=90\\degres-%s\\degres=%s\\degres$.\\par")%(B,A,C,angBAC,angABC))
+    cor.append(u"Je sais que dans un triangle rectangle, les deux angles aigus sont complémentaires \\\\ \
+donc $\widehat{%s%s%s}=90\\degres-%s\\degres=%s\\degres$.\\par"%(B,A,C,angBAC,angABC))
     
     cor.append("\\figureadroite{")
     cor.append(u"\\begin{pspicture}(-0.4,-1)(%s,%s)"%(c+0.4,y_C+1))
@@ -265,10 +265,10 @@ donc $\widehat{%s%s%s}=90\\degres-%s\\degres=%s\\degres$.\\par")%(B,A,C,angBAC,a
     cor.append(u"\\color{calcul}\\pstMarkAngle[linecolor=calcul]{%s}{%s}{%s}{%s\\degres}"%(C,B,A,angABC))
     cor.append(u"\\end{pspicture}}{")
     cor.append("\\begin{enumerate}")
-    cor.append(_(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;")%(A,B,decimaux(c)))
-    cor.append(_(u"\\item puis la demi-droite $[%s%s)$ en traçant l'angle~$\widehat{%s%s%s}$ ;")%(A,C,B,A,C))
-    cor.append(_(u"\\item puis la demi-droite $[%s%s)$ en traçant l'angle~$\widehat{%s%s%s}$ ;")%(B,C,A,B,C))
-##    cor.append(_(u"\\item enfin je vérifie les trois {\\color{enonce}conditions de l'énoncé}."))
+    cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(c)))
+    cor.append(u"\\item puis la demi-droite $[%s%s)$ en traçant l'angle~$\widehat{%s%s%s}$ ;"%(A,C,B,A,C))
+    cor.append(u"\\item puis la demi-droite $[%s%s)$ en traçant l'angle~$\widehat{%s%s%s}$ ;"%(B,C,A,B,C))
+##    cor.append(u"\\item enfin je vérifie les trois {\\color{enonce}conditions de l'énoncé}.")
     cor.append("\\end{enumerate}\n")
 ##    cor.append("\\end{multicols}")
     cor.append("}")
@@ -285,9 +285,9 @@ def quest_rectangle_hypo_cote(exo,cor):
     x_C=(c*tan(angABC))/(tan(angABC)+tan(angBAC))
     y_C=x_C*tan(angBAC)
     
-    exo.append(_(u"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $%s%s=\\unit[%s]{cm}$.\\par")
+    exo.append(u"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $%s%s=\\unit[%s]{cm}$.\\par"
                %(nom,B,A,B,decimaux(c),A,C,decimaux(b)))
-    cor.append(_(u"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$.\\par")
+    cor.append(u"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$.\\par"
                %(nom,B,A,B,decimaux(c),A,C,decimaux(b)))
 ##    cor.append("\\begin{multicols}{2}")
     cor.append("\\figureadroite{")
@@ -302,9 +302,9 @@ def quest_rectangle_hypo_cote(exo,cor):
     cor.append(cotation_h((0,0),(x_C,y_C),decimaux(b),couleur="enonce"))
     cor.append(u"\\end{pspicture}}{")
     cor.append(u"\\begin{enumerate}")
-    cor.append(_(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;")%(A,B,decimaux(c)))
-    cor.append(_(u"\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;")%(A,B,C))
-    cor.append(_(u"\\item enfin, je reporte au compas la longueur \\mbox{$%s%s=\\unit[%s]{cm}$} à partir de $%s$.")%(A,C,decimaux(b),A))
+    cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(c)))
+    cor.append(u"\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;"%(A,B,C))
+    cor.append(u"\\item enfin, je reporte au compas la longueur \\mbox{$%s%s=\\unit[%s]{cm}$} à partir de $%s$."%(A,C,decimaux(b),A))
     cor.append("\\end{enumerate}}")
 ##    cor.append("\\end{multicols}")
 
@@ -382,9 +382,9 @@ def quest_rectangle_diag(exo,cor):
     x_C=L
     y_C=x_C*tan(angBAC)
     
-    exo.append(_(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $%s%s=\\unit[%s]{cm}$.\\par")
+    exo.append(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $%s%s=\\unit[%s]{cm}$.\\par"
                %(nom,A,B,decimaux(L),A,C,decimaux(Diag)))
-    cor.append(_(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $%s%s=\\unit[%s]{cm}$.\\par")
+    cor.append(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $%s%s=\\unit[%s]{cm}$.\\par"
                %(nom,A,B,decimaux(L),A,C,decimaux(Diag)))
     #figure
     cor.append("\\figureadroite{")
@@ -404,10 +404,10 @@ def quest_rectangle_diag(exo,cor):
     cor.append(u"\\end{pspicture}}{")
     #Programme de construction
     cor.append(u"\\begin{enumerate}")
-    cor.append(_(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;")%(A,B,decimaux(L)))
-    cor.append(_(u"\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;")%(A,B,C))
-    cor.append(_(u"\\item je reporte au compas la longueur $%s%s=\\unit[%s]{cm}$ à partir de $%s$ ;")%(A,C,decimaux(Diag),A))
-    cor.append(_(u"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour placer le point $%s$.")%(A,C,D))
+    cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(L)))
+    cor.append(u"\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;"%(A,B,C))
+    cor.append(u"\\item je reporte au compas la longueur $%s%s=\\unit[%s]{cm}$ à partir de $%s$ ;"%(A,C,decimaux(Diag),A))
+    cor.append(u"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour placer le point $%s$."%(A,C,D))
     cor.append("\\end{enumerate}}")
     
 
@@ -422,9 +422,9 @@ def quest_rectangle_angle(exo,cor):
     x_C=L
     y_C=x_C*tan(angBAC)
     
-    exo.append(_(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    exo.append(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,B,decimaux(L),B,A,C,angBAC))
-    cor.append(_(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    cor.append(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,B,decimaux(L),B,A,C,angBAC))
     
     cor.append("\\figureadroite{")
@@ -441,10 +441,10 @@ def quest_rectangle_angle(exo,cor):
     cor.append(u"\\end{pspicture}}{")
     #Programme de construction
     cor.append(u"\\begin{enumerate}")
-    cor.append(_(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;")%(A,B,decimaux(L)))
-    cor.append(_(u"\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;")%(A,B,C))
-    cor.append(_(u"\\item la demi-droite $[%s%s)$ en mesurant $\\widehat{%s%s%s}=%s\\degres$.")%(A,C,B,A,C,angBAC))
-    cor.append(_(u"\\item je trace enfin les angles droit en $%s$ et en $%s$ pour placer le point $%s$.")%(A,C,D))
+    cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(L)))
+    cor.append(u"\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;"%(A,B,C))
+    cor.append(u"\\item la demi-droite $[%s%s)$ en mesurant $\\widehat{%s%s%s}=%s\\degres$."%(A,C,B,A,C,angBAC))
+    cor.append(u"\\item je trace enfin les angles droit en $%s$ et en $%s$ pour placer le point $%s$."%(A,C,D))
     cor.append("\\end{enumerate}}")
 
 def quest_rectangle_angle_diag(exo,cor):
@@ -459,9 +459,9 @@ def quest_rectangle_angle_diag(exo,cor):
     x_C=L
     y_C=x_C*tan(angBAC)
     
-    exo.append(_(u"\\item Trace un rectangle $%s$ de centre $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    exo.append(u"\\item Trace un rectangle $%s$ de centre $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,E,A,C,decimaux(Diag),A,E,B,angAEB))
-    cor.append(_(u"\\item Trace un rectangle $%s$ de centre $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    cor.append(u"\\item Trace un rectangle $%s$ de centre $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,E,A,C,decimaux(Diag),A,E,B,angAEB))
 ##    cor.append("\\begin{multicols}{2}")
     #Programme de construction
@@ -486,11 +486,11 @@ def quest_rectangle_angle_diag(exo,cor):
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(A,E,B,angAEB))
     cor.append(u"\\end{pspicture}}{")
     cor.append(u"\\begin{enumerate}")
-    cor.append(_(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;")%(A,C,decimaux(Diag)))
-    cor.append(_(u"\\item le centre du rectangle est le milieu des diagonales donc $%s$ est le milieu de $[%s%s]$ ;")%(E,A,C))
-    cor.append(_(u"\\item je trace la diagonale $(%s%s)$ passant par $%s$ en mesurant \\mbox{$\\widehat{%s%s%s}=%s\\degres$} ;")
+    cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,C,decimaux(Diag)))
+    cor.append(u"\\item le centre du rectangle est le milieu des diagonales donc $%s$ est le milieu de $[%s%s]$ ;"%(E,A,C))
+    cor.append(u"\\item je trace la diagonale $(%s%s)$ passant par $%s$ en mesurant \\mbox{$\\widehat{%s%s%s}=%s\\degres$} ;"
                %(B,D,E,A,E,B,angAEB))
-    cor.append(_(u"\\item Comme les diagonales du rectangle sont de même longueur, je reporte les longueurs $%s%s=%s%s=\\unit[%s]{cm}$.")
+    cor.append(u"\\item Comme les diagonales du rectangle sont de même longueur, je reporte les longueurs $%s%s=%s%s=\\unit[%s]{cm}$."
                %(E,D,E,B,decimaux(Diag/2)))
 ##    cor.append(u"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour palcer le point $%s$."%(A,C,D))
     cor.append("\\end{enumerate}}")
@@ -508,9 +508,9 @@ def quest_rectangle_diag_angle(exo,cor):
     x_C=L
     y_C=x_C*tan(angBAC)
     
-    exo.append(_(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    exo.append(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,C,decimaux(Diag),B,A,C,angBAC))
-    cor.append(_(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    cor.append(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,C,decimaux(Diag),B,A,C,angBAC))
     
 ##    cor.append("\\begin{multicols}{2}")
@@ -531,10 +531,10 @@ def quest_rectangle_diag_angle(exo,cor):
     cor.append(u"\\end{pspicture}}{")
     #Programme de construction
     cor.append(u"\\begin{enumerate}")
-    cor.append(_(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;")%(A,C,decimaux(Diag)))
-    cor.append(_(u"\\item la demi-droite $[%s%s)$ en mesurant \\mbox{$\\widehat{%s%s%s}=%s\\degres$} ;")%(A,B,B,A,C,angBAC))
-    cor.append(_(u"\\item puis la perpendiculaire à $[%s%s)$ passant par~$%s$ ;")%(A,B,C))
-    cor.append(_(u"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour placer le point~$%s$.")%(A,C,D))
+    cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,C,decimaux(Diag)))
+    cor.append(u"\\item la demi-droite $[%s%s)$ en mesurant \\mbox{$\\widehat{%s%s%s}=%s\\degres$} ;"%(A,B,B,A,C,angBAC))
+    cor.append(u"\\item puis la perpendiculaire à $[%s%s)$ passant par~$%s$ ;"%(A,B,C))
+    cor.append(u"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour placer le point~$%s$."%(A,C,D))
     cor.append("\\end{enumerate}}")
 ##    cor.append("\\end{multicols}")
 
@@ -552,14 +552,14 @@ def quest_parallelogramme_CCA(exo,cor):
     x_C=AB+AD*cos(angBAD)
     y_C=AD*sin(angBAD)
     
-    exo.append(_(u"\\item Trace un parallélogramme $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    exo.append(u"\\item Trace un parallélogramme $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,B,decimaux(AB),D,A,decimaux(AD),B,A,D,angBAD))
-    cor.append(_(u"\\item Trace un parallélogramme $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    cor.append(u"\\item Trace un parallélogramme $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,B,decimaux(AB),D,A,decimaux(AD),B,A,D,angBAD))
     cor.append(u"\\begin{enumerate}")
-    cor.append(_(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;")%(A,B,decimaux(AB)))
-    cor.append(_(u"\\item je mesure l'angle  $\\widehat{%s%s%s}=%s\\degres$ puis je place le point~$%s$ ;")%(B,A,D,angBAD,D))
-    cor.append(_(u"\\item enfin je reporte les longueurs $%s%s=%s%s$ et $%s%s=%s%s$ pour place le point~$%s$.")
+    cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(AB)))
+    cor.append(u"\\item je mesure l'angle  $\\widehat{%s%s%s}=%s\\degres$ puis je place le point~$%s$ ;"%(B,A,D,angBAD,D))
+    cor.append(u"\\item enfin je reporte les longueurs $%s%s=%s%s$ et $%s%s=%s%s$ pour place le point~$%s$."
                %(D,C,A,B,B,C,A,D,C))
     cor.append("\\end{enumerate}\n")
     cor.append(u"\\begin{pspicture}(-0.4,-1)(%s,%s)"%(max(AB,x_C)+0.4,y_C+1))
@@ -597,16 +597,16 @@ def quest_parallelogramme_CDA(exo,cor):
     y_D=y_C=AC*sin(angBAC)
     x_D=round(x_C-AB,4)
     
-    exo.append(_(u"\\item Trace un parallélogramme $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    exo.append(u"\\item Trace un parallélogramme $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,B,decimaux(AB),C,A,decimaux(AC),B,A,C,angBAC))
-    cor.append(_(u"\\item Trace un parallélogramme $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    cor.append(u"\\item Trace un parallélogramme $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,B,decimaux(AB),C,A,decimaux(AC),B,A,C,angBAC))
     #Programme de construction
     cor.append(u"\\begin{enumerate}")
-    cor.append(_(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;")%(A,B,decimaux(AB)))
-    cor.append(_(u"\\item je trace la demi-droite $[%s%s)$ en mesurant $\\widehat{%s%s%s}=%s\\degres$ ;")%(A,C,B,A,C,angBAC))
-    cor.append(_(u"\\item je place le point $%s$ en mesurant $%s%s=\\unit[%s]{cm}$ ;")%(C,A,C,decimaux(AC)))
-    cor.append(_(u"\\item je construis le point $%s$ en reportant au compas $%s%s=%s%s$ et $%s%s=%s%s$.")
+    cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(AB)))
+    cor.append(u"\\item je trace la demi-droite $[%s%s)$ en mesurant $\\widehat{%s%s%s}=%s\\degres$ ;"%(A,C,B,A,C,angBAC))
+    cor.append(u"\\item je place le point $%s$ en mesurant $%s%s=\\unit[%s]{cm}$ ;"%(C,A,C,decimaux(AC)))
+    cor.append(u"\\item je construis le point $%s$ en reportant au compas $%s%s=%s%s$ et $%s%s=%s%s$."
                %(D,C,D,B,A,A,D,B,C))
     cor.append("\\end{enumerate}\n")
     #Figure
@@ -653,13 +653,13 @@ def quest_parallelogramme_DDA(exo,cor):
     y_D=y_C=round(AC*sin(angBAC),4)
     x_D=round(x_C-AB,4)
     
-    exo.append(_(u"\\item Trace un parallélogramme $%s$ de centre $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    exo.append(u"\\item Trace un parallélogramme $%s$ de centre $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,E,A,C,decimaux(AC),B,D,decimaux(BD),A,E,B,angAEB))
-    cor.append(_(u"\\item Trace un parallélogramme $%s$ de centre $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    cor.append(u"\\item Trace un parallélogramme $%s$ de centre $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,E,A,C,decimaux(AC),B,D,decimaux(BD),A,E,B,angAEB))
     cor.append(u"\\begin{enumerate}")
-    cor.append(_(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;")%(A,C,decimaux(AC)))
-    cor.append(_(u"\\item Dans un parallélogramme les diagonales se coupent en leur milieu donc $%s%s=%s%s=\\unit[%s]{cm}$ et $%s%s=%s%s=\\unit[%s]{cm}$ ;")
+    cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,C,decimaux(AC)))
+    cor.append(u"\\item Dans un parallélogramme les diagonales se coupent en leur milieu donc $%s%s=%s%s=\\unit[%s]{cm}$ et $%s%s=%s%s=\\unit[%s]{cm}$ ;"
                %(A,E,C,E,decimaux(AC/2),B,E,E,D,decimaux(BD/2)))
     cor.append("\\end{enumerate}\n")
     cor.append(u"\\begin{pspicture}(%s,-1)(%s,%s)"%(min(0,x_D)-0.4,max(AB,x_C)+0.4,y_C+1))
@@ -686,12 +686,12 @@ def quest_losange_DD(exo,cor):
     BD=0.2*random.randint(15,25)#AB mesure entre 4cm et 8cm, tracé horizontalement
     AC=0.2*random.randint(20,40)#AC mesure entre 4cm et 8cm, tracé horizontalement
     
-    exo.append(_(u"\\item Trace un losange $%s$  tel que $%s%s=\\unit[%s]{cm}$ et $%s%s=\\unit[%s]{cm}$.\\par")
+    exo.append(u"\\item Trace un losange $%s$  tel que $%s%s=\\unit[%s]{cm}$ et $%s%s=\\unit[%s]{cm}$.\\par"
                %(nom,A,C,decimaux(AC),B,D,decimaux(BD)))
-    cor.append(_(u"\\item Trace un losange $%s$  tel que $%s%s=\\unit[%s]{cm}$ et $%s%s=\\unit[%s]{cm}$.\\par")
+    cor.append(u"\\item Trace un losange $%s$  tel que $%s%s=\\unit[%s]{cm}$ et $%s%s=\\unit[%s]{cm}$.\\par"
                %(nom,A,C,decimaux(AC),B,D,decimaux(BD)))
     
-    cor.append(_(u"Je note $%s$ le centre du losange.\\par")%E)
+    cor.append(u"Je note $%s$ le centre du losange.\\par"%E)
     
     cor.append("\\figureadroite{")
     cor.append(u"\\begin{pspicture}(%s,%s)(%s,%s)"%(-BD/2-0.7,-AC/2-0.4,BD/2+0.4,AC/2+0.4))
@@ -711,7 +711,7 @@ def quest_losange_DD(exo,cor):
     cor.append(cotation_h((-BD/2,0),(0,0),decimaux(BD/2),couleur="enonce"))
     cor.append(cotation_h((0,-AC/2),(0,0),decimaux(AC/2),couleur="enonce"))
     cor.append(u"\\end{pspicture}}{")
-    cor.append(_(u"Les diagonales du losange se coupent perpendiculairement en leur milieu~$%s$ ;  on a donc :")%E)
+    cor.append(u"Les diagonales du losange se coupent perpendiculairement en leur milieu~$%s$ ;  on a donc :"%E)
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item $%s%s=%s%s=\\unit[%s]{cm}$ \\item $%s%s=%s%s=\\unit[%s]{cm}$ ;"
                %(A,E,C,E,decimaux(AC/2),B,E,E,D,decimaux(BD/2)))
@@ -730,15 +730,15 @@ def quest_losange_CC(exo,cor):
     y_D=y_C=AB*sin(angBAD)
     x_C=x_D+AB
     
-    exo.append(_(u"\\item Trace un losange $%s$  tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    exo.append(u"\\item Trace un losange $%s$  tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,B,decimaux(AB),B,A,D,angBAD))
-    cor.append(_(u"\\item Trace un losange $%s$  tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    cor.append(u"\\item Trace un losange $%s$  tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,B,decimaux(AB),B,A,D,angBAD))
     
-    cor.append(_(u"Les quatre côtés du losange sont de même longueur donc $%s%s=%s%s=%s%s=%s%s=\\unit[%s]{cm}$ ;")%(A,B,B,C,C,D,D,A,decimaux(AB)))
+    cor.append(u"Les quatre côtés du losange sont de même longueur donc $%s%s=%s%s=%s%s=%s%s=\\unit[%s]{cm}$ ;"%(A,B,B,C,C,D,D,A,decimaux(AB)))
     cor.append(u"\\begin{enumerate}")
-    cor.append(_(u"\\item On trace le côté $[%s%s]$ puis on mesure l'angle $\\widehat{%s%s%s}=%s\\degres$ ;")%(A,B,B,A,D,angBAD))
-    cor.append(_(u"\\item ensuite on reporte au compas les longueurs $%s%s$ et $%s%s$ pour construire le point $%s$.")%(C,D,B,C,C))
+    cor.append(u"\\item On trace le côté $[%s%s]$ puis on mesure l'angle $\\widehat{%s%s%s}=%s\\degres$ ;"%(A,B,B,A,D,angBAD))
+    cor.append(u"\\item ensuite on reporte au compas les longueurs $%s%s$ et $%s%s$ pour construire le point $%s$."%(C,D,B,C,C))
     cor.append("\\end{enumerate}\n")
     cor.append(u"\\begin{pspicture}(%s,%s)(%s,%s)"%(min(0,x_D)-0.4,0-0.4,max(AB,x_C),y_D+0.4))
     cor.append(u"\\pstGeonode[PosAngle={%s,%s,%s,%s}](0,0){%s}(%s,0){%s}(%s,%s){%s}(%s,%s){%s}"
@@ -770,18 +770,18 @@ def quest_losange_CD(exo,cor):
     x_D=AC/2
     y_D=AC/2*tan(angBAC)
     
-    exo.append(_(u"\\item Trace un losange $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    exo.append(u"\\item Trace un losange $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,C,decimaux(AC),B,A,C,angBAC))
-    cor.append(_(u"\\item Trace un losange $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    cor.append(u"\\item Trace un losange $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,C,decimaux(AC),B,A,C,angBAC))
     #Rédaction
-    cor.append(_(u" Comme $%s$ est un losange, je sais que $\\widehat{%s%s%s}=\\widehat{%s%s%s}=\\widehat{%s%s%s}=\\widehat{%s%s%s}=%s\\degres$.")
+    cor.append(u" Comme $%s$ est un losange, je sais que $\\widehat{%s%s%s}=\\widehat{%s%s%s}=\\widehat{%s%s%s}=\\widehat{%s%s%s}=%s\\degres$."
                %(nom,B,A,C,A,C,B,A,C,D,C,A,D,angBAC))
     #Programme de construction
     cor.append(u"\\begin{enumerate}")
-    cor.append(_(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;")%(A,C,decimaux(AC)))
-    cor.append(_(u"\\item je trace $\\widehat{%s%s%s}$ et $\\widehat{%s%s%s}$ pour construire le point $%s$ ;")%(B,A,C,A,C,B,B))
-    cor.append(_(u"\\item je trace $\\widehat{%s%s%s}$ et $\\widehat{%s%s%s}$ pour construire le point $%s$ ;")%(A,C,D,C,A,D,D))
+    cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,C,decimaux(AC)))
+    cor.append(u"\\item je trace $\\widehat{%s%s%s}$ et $\\widehat{%s%s%s}$ pour construire le point $%s$ ;"%(B,A,C,A,C,B,B))
+    cor.append(u"\\item je trace $\\widehat{%s%s%s}$ et $\\widehat{%s%s%s}$ pour construire le point $%s$ ;"%(A,C,D,C,A,D,D))
     cor.append("\\end{enumerate}\n")
     cor.append(u"\\begin{pspicture}(-0.4,%s)(%s,%s)"%(-y_D-1,AC+0.4,y_D+1))
     #figure
@@ -810,22 +810,22 @@ def quest_losange_CDbis(exo,cor):
     x_D=AC/2
     y_D=AC/2*tan(angCAD)
     
-    exo.append(_(u"\\item Trace un losange $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    exo.append(u"\\item Trace un losange $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,C,decimaux(AC),C,D,A,angCDA))
-    cor.append(_(u"\\item Trace un losange $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par")
+    cor.append(u"\\item Trace un losange $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,C,decimaux(AC),C,D,A,angCDA))
 
     #Rédaction des calculs
-    cor.append(_(u"Les quatre côtés du losange sont de même longueur donc $%s%s=%s%s=%s%s=%s%s$.\\par")%(A,B,B,C,C,D,D,A))
-    cor.append(_(u"Ainsi, le triangle $%s%s%s$ est isocèle en $%s$ et je peux calculer la mesure des angles $\\widehat{%s%s%s}=\\widehat{%s%s%s}$.\\par")
+    cor.append(u"Les quatre côtés du losange sont de même longueur donc $%s%s=%s%s=%s%s=%s%s$.\\par"%(A,B,B,C,C,D,D,A))
+    cor.append(u"Ainsi, le triangle $%s%s%s$ est isocèle en $%s$ et je peux calculer la mesure des angles $\\widehat{%s%s%s}=\\widehat{%s%s%s}$.\\par"
                %(A,C,D,A,A,C,D,C,A,D))
-    cor.append(_(u"Dans un triangle, la somme des angles du triangle est égale à 180\\degres\\\\"))
-    cor.append(_(u"donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=(180\\degres-%s)\\div2=%s\\degres$")%(A,C,D,C,A,D,angCDA,angCAD))
+    cor.append(u"Dans un triangle, la somme des angles du triangle est égale à 180\\degres\\\\")
+    cor.append(u"donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=(180\\degres-%s)\\div2=%s\\degres$"%(A,C,D,C,A,D,angCDA,angCAD))
     #Programme de construction
     cor.append(u"\\begin{enumerate}")
-    cor.append(_(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;")%(A,C,decimaux(AC)))
-    cor.append(_(u"\\item je trace $\\widehat{%s%s%s}$ et $\\widehat{%s%s%s}$ pour construire le point $%s$ ;")%(B,A,C,A,C,B,B))
-    cor.append(_(u"\\item je trace $\\widehat{%s%s%s}$ et $\\widehat{%s%s%s}$ pour construire le point $%s$ ;")%(A,C,D,C,A,D,D))
+    cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,C,decimaux(AC)))
+    cor.append(u"\\item je trace $\\widehat{%s%s%s}$ et $\\widehat{%s%s%s}$ pour construire le point $%s$ ;"%(B,A,C,A,C,B,B))
+    cor.append(u"\\item je trace $\\widehat{%s%s%s}$ et $\\widehat{%s%s%s}$ pour construire le point $%s$ ;"%(A,C,D,C,A,D,D))
     cor.append("\\end{enumerate}\n")
     
     cor.append(u"\\begin{pspicture}(-0.4,%s)(%s,%s)"%(-y_D-1,AC+0.4,y_D+1))
@@ -858,13 +858,13 @@ def carre_diag(exo,cor):
     nom=shuffle_nom([A,B,C,D])
     BD=AC=0.2*random.randint(20,40)#AC mesure entre 4cm et 8cm, tracé horizontalement
     
-    exo.append(_(u"\\item Trace un carré $%s$  tel que $%s%s=\\unit[%s]{cm}$.\\par")
+    exo.append(u"\\item Trace un carré $%s$  tel que $%s%s=\\unit[%s]{cm}$.\\par"
                %(nom,A,C,decimaux(AC)))
-    cor.append(_(u"\\item Trace un carré $%s$  tel que $%s%s=\\unit[%s]{cm}$.\\par")
+    cor.append(u"\\item Trace un carré $%s$  tel que $%s%s=\\unit[%s]{cm}$.\\par"
                %(nom,A,C,decimaux(AC)))
 
-    cor.append(_(u"Je note $%s$ le centre du carré.\\par")%(E))
-    cor.append(_(u" Les diagonales du carré se coupent perpendiculairement en leur milieu $%s$ donc on a :")%E)
+    cor.append(u"Je note $%s$ le centre du carré.\\par"%(E))
+    cor.append(u" Les diagonales du carré se coupent perpendiculairement en leur milieu $%s$ donc on a :"%E)
     cor.append("\\begin{enumerate}")
     cor.append(u"\\item $(%s%s)\\perp(%s%s)$."%(A,C,B,D))
     cor.append(u"\\item  $%s%s=%s%s=%s%s=%s%s=\\unit[%s]{cm}$ ;"

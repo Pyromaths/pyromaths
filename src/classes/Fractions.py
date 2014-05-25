@@ -56,7 +56,7 @@ class Fractions:
             (self.n, self.d) = ((self.n * abs(self.d)) // self.d, abs(self.d))
         if self.n:
             if coef and coef != 1:
-                text = _("\\dfrac{%s_{\\times %s}}{%s_{\\times %s}}") % (self.n,
+                text = "\\dfrac{%s_{\\times %s}}{%s_{\\times %s}}" % (self.n,
                         coef, self.d, coef)
             elif self.d != 1:
                 text = "\\dfrac{%s}{%s}" % (self.n, self.d)
@@ -75,18 +75,18 @@ class Fractions:
         c2 = abs(Arithmetique.pgcd(self.d, fraction.n))
         simplifiable = 0  # permet de savoir si on a simplifiée le produit
         if c1 > 1:
-            n1 = _("%s \\times \\cancel{%s}") % (self.n // c1, c1)
-            d2 = _("%s \\times \\cancel{%s}") % (fraction.d // c1, c1)
+            n1 = "%s \\times \\cancel{%s}" % (self.n // c1, c1)
+            d2 = "%s \\times \\cancel{%s}" % (fraction.d // c1, c1)
         else:
             n1 = self.n
             d2 = fraction.d
         if c2 > 1:
-            d1 = _("%s \\times \\bcancel{%s}") % (self.d // c2, c2)
-            n2 = _("%s \\times \\bcancel{%s}") % (fraction.n // c2, c2)
+            d1 = "%s \\times \\bcancel{%s}" % (self.d // c2, c2)
+            n2 = "%s \\times \\bcancel{%s}" % (fraction.n // c2, c2)
         else:
             d1 = self.d
             n2 = fraction.n
-        return _("%s \\times %s") % (Fractions.TeX(Fractions(n1, d1), signe=
+        return "%s \\times %s" % (Fractions.TeX(Fractions(n1, d1), signe=
                                   None), Fractions.TeX(Fractions(n2, d2),
                                   signe=None))
 
@@ -95,7 +95,7 @@ class Fractions:
         coef = abs(self.n // frs.n)
         if coef > 1:
             texte = \
-                _("\\dfrac{%s_{\\times \\cancel %s}}{%s_{\\times \\cancel %s}}") % \
+                "\\dfrac{%s_{\\times \\cancel %s}}{%s_{\\times \\cancel %s}}" % \
                 (self.n // coef, coef, self.d // coef, coef)
         else:
             texte = Fractions.TeX(self, signe=None)
@@ -201,7 +201,7 @@ class Fractions:
 
     def __int__(self):
         try:
-          assert (self.n / self.d == int(self.n / self.d)), _('La fraction n\'est pas un nombre entier !')
+          assert (self.n / self.d == int(self.n / self.d)), 'La fraction n\'est pas un nombre entier !'
           return int(self.n)
         except AssertionError, args:
           print '%s: %s' % (args.__class__.__name__, args)

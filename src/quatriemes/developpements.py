@@ -30,10 +30,10 @@ from random import randrange
 
 def exo_distributivite():
     exo = ["\\exercice",
-           _(u"Développer et réduire les expressions suivantes :"),
+           u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
     cor = ["\\exercice*",
-           _(u"Développer et réduire les expressions suivantes :"),
+           u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
     for i in range(8):
         (l1, l2) = tex_developpe1(valeurs_distr(10))
@@ -48,10 +48,10 @@ def exo_distributivite():
 
 def exo_double_distributivite():
     exo = ["\\exercice",
-           _(u"Développer et réduire les expressions suivantes :"),
+           u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
     cor = ["\\exercice*",
-           _(u"Développer et réduire les expressions suivantes :"),
+           u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
     for i in range(6):
         (l1, l2) = tex_developpe1(valeurs_dbldistr(10))
@@ -93,7 +93,7 @@ def somme_polynomes(a, b):  # renvoie un tuple dont les valeurs sont les sommes 
     return tuple(l)
 
 
-def tex_coef(coef, var, bplus=0, bpn=0, bpc=0, ecu=0):
+def tex_coef(coef, var, bplus=0, bpn=0, bpc=0):
 
     # coef est le coefficient à écrire devant la variable var
     # bplus est un booleen : s'il est vrai, il faut ecrire le signe +
@@ -121,10 +121,7 @@ def tex_coef(coef, var, bplus=0, bpn=0, bpc=0, ecu=0):
         if bplus:
             a = '+' + a
     elif coef == 0:
-        if ecu:
-            a = '0'
-        else:
-            a = ''
+        a = ''
     elif coef == -1:
         if var == '':
             a = '-1'
@@ -159,7 +156,7 @@ def tex_dev0(a, bplus=0):  # renvoi (a+b)², (a-b)² ou (a+b)(c+d) ou a(c+d) ou 
 
         if ca == 0 or cb == 0:
             if cc == 0 or cd == 0:
-                return _('%s%s\\times %s%s') % (tex_coef(ca, 'x'), tex_coef(cb,
+                return '%s%s\\times %s%s' % (tex_coef(ca, 'x'), tex_coef(cb,
                         '', bplus=ca != 0), tex_coef(cc, 'x', bpn=1),
                         tex_coef(cd, '', bplus=cc != 0, bpn=1))
             else:
@@ -171,7 +168,7 @@ def tex_dev0(a, bplus=0):  # renvoi (a+b)², (a-b)² ou (a+b)(c+d) ou a(c+d) ou 
                 return '%s%s' % (tex_coef(ca, 'x', bplus=bplus),
                                  tex_coef(cb, '', bplus=ca != 0))
             else:
-                return _('(%s%s)\\times %s%s') % (tex_coef(ca, 'x'),
+                return '(%s%s)\\times %s%s' % (tex_coef(ca, 'x'),
                         tex_coef(cb, '', bplus=ca != 0), tex_coef(cc,
                         'x', bpn=1), tex_coef(cd, '', bplus=cc != 0, bpn=
                         1))
@@ -189,7 +186,7 @@ def tex_dev1(a, bplus=0, bpar=0, bpn=0):  # renvoi le developpement (a)²+2*a*b+
     if a[0] == a[1]:  # (a+b)² ou (a-b)²
         if signe(ca) == signe(cb):  # (a+b)²
             (ca, cb) = (abs(ca), abs(cb))
-            texte = _('%s^2+2\\times %s\\times %s+%s^2') % (tex_coef(ca,
+            texte = '%s^2+2\\times %s\\times %s+%s^2' % (tex_coef(ca,
                     'x', bpc=1), tex_coef(ca, 'x', bpn=1), tex_coef(cb,
                     '', bpn=1), tex_coef(cb, '', bpn=1, bpc=1))
             if bpar:
@@ -201,7 +198,7 @@ def tex_dev1(a, bplus=0, bpar=0, bpn=0):  # renvoi le developpement (a)²+2*a*b+
             # (a-b)²
 
             (ca, cb) = (abs(ca), abs(cb))
-            texte = _('%s^2-2\\times %s\\times %s+%s^2') % (tex_coef(ca,
+            texte = '%s^2-2\\times %s\\times %s+%s^2' % (tex_coef(ca,
                     'x', bpc=1), tex_coef(ca, 'x', bpn=1), tex_coef(cb,
                     '', bpn=1), tex_coef(cb, '', bpn=1, bpc=1))
             if bpar:
@@ -239,19 +236,19 @@ def tex_dev1(a, bplus=0, bpar=0, bpn=0):  # renvoi le developpement (a)²+2*a*b+
                 return texte
         elif ca == 0 or cb == 0 or cc == 0 or cd == 0:
             if ca == 0:
-                texte = _('%s\\times %s+%s\\times %s') % (tex_coef(cb, '',
+                texte = '%s\\times %s+%s\\times %s' % (tex_coef(cb, '',
                         bpn=bpn), tex_coef(cc, 'x', bpn=1), tex_coef(cb,
                         '', bpn=1), tex_coef(cd, '', bpn=1))
             elif cb == 0:
-                texte = _('%s\\times %s+%s\\times %s') % (tex_coef(ca, 'x',
+                texte = '%s\\times %s+%s\\times %s' % (tex_coef(ca, 'x',
                         bpn=bpn), tex_coef(cc, 'x', bpn=1), tex_coef(ca,
                         'x', bpn=1), tex_coef(cd, '', bpn=1))
             elif cc == 0:
-                texte = _('%s\\times %s+%s\\times %s') % (tex_coef(cd, '',
+                texte = '%s\\times %s+%s\\times %s' % (tex_coef(cd, '',
                         bpn=bpn), tex_coef(ca, 'x', bpn=1), tex_coef(cd,
                         '', bpn=1), tex_coef(cb, '', bpn=1))
             else:
-                texte = _('%s\\times %s+%s\\times %s') % (tex_coef(cc, 'x',
+                texte = '%s\\times %s+%s\\times %s' % (tex_coef(cc, 'x',
                         bpn=bpn), tex_coef(ca, 'x', bpn=1), tex_coef(cc,
                         'x', bpn=1), tex_coef(cb, '', bpn=1))
             return texte
@@ -459,7 +456,7 @@ def def_vals():
 
 def def_vals2():
     expr = []
-    loper = ['+', '-', _('\\times'), '+', '-', _('\\times'), '+', '-']
+    loper = ['+', '-', '\\times', '+', '-', '\\times', '+', '-']
     for i in range(8):
         a = valeur_alea(-10, 10)
         e = randrange(3)

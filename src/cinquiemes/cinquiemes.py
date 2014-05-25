@@ -34,7 +34,6 @@ def main(exo,f0, f1):
             fractions.sommes_fractions, fractions.produits_fractions,
             reperage.main, relatifs.main, construction.exo_triangle,
             construction.exo_quadrilatere,
-            proportionnalite.exo_echelles, proportionnalite.exo_fruits,
-            aires.exo_aire_diques, statistiques.statistiques)
+            proportionnalite.exo_echelles, aires.exo_aire_diques, statistiques.statistiques)
 
     write(f0, f1, modules[exo]())
