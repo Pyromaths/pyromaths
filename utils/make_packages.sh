@@ -1,7 +1,7 @@
 #!/bin/bash
 DIR=$(cd `dirname $0` && pwd)
 PYROPATH=$(cd `dirname $0` && cd .. && pwd)
-ARCHIVEPATH=$(cd `dirname $0` && cd ../.. && pwd)
+ARCHIVEPATH=$(cd `dirname $0` && cd ../dist && pwd)
 
 # Install build dependencies (if needed)
 if [ ! -f /usr/bin/debuild ];
@@ -40,11 +40,11 @@ read touche
 echo "*** Update pyromaths web-site links..."
 cat > ${ARCHIVEPATH}/pyrosite.txt << EOF
 
-* !/media/img/debian.png(Linux)! "Pyromaths pour Linux - deb":/telecharger/pyromaths_${VERSION}_all.deb
-* !/media/img/redhat.png(Linux)! "Pyromaths pour Linux - rpm":/telecharger/pyromaths-${VERSION}-1.noarch.rpm
-* !/media/img/macosx.png(Mac OS X)! "Pyromaths pour Mac OS X":/telecharger/pyromaths-${VERSION}-macos.dmg
-* !/media/img/winvista.png(Windows)! "Pyromaths pour Windows":/telecharger/pyromaths-${VERSION}-win32.exe
-* !/media/img/source.png(Sources)! "Sources de Pyromaths":/telecharger/pyromaths-${VERSION}-sources.tar.bz2
+* !/static/img/debian.png(Linux)! "Pyromaths pour Linux - deb":/telecharger/pyromaths_${VERSION}_all.deb
+* !/static/img/redhat.png(Linux)! "Pyromaths pour Linux - rpm":/telecharger/pyromaths-${VERSION}-1.noarch.rpm
+* !/static/img/macosx.png(Mac OS X)! "Pyromaths pour Mac OS X":/telecharger/pyromaths-${VERSION}-macos.dmg
+* !/static/img/winvista.png(Windows)! "Pyromaths pour Windows":/telecharger/pyromaths-${VERSION}-win32.exe
+* !/static/img/source.png(Sources)! "Sources de Pyromaths":/telecharger/pyromaths-${VERSION}-sources.tar.bz2
 
 <hr/>
 

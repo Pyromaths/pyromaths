@@ -40,7 +40,7 @@ def icon_dir():
     if we_are_frozen() or exists(join(abspath(dirname(__file__)), '../../data/')):
         return join(DATADIR, 'images', 'pyromaths.png')
     return join('/usr/share/pixmaps', 'pyromaths.png')
-        
+
 if name == 'nt':
     def home():
         return unicode(environ['USERPROFILE'], getfilesystemencoding())

@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Bienvenue dans la documentation de Pyromaths !
-==============================================
+Bienvenue  !
+============
 
 Ce document a pour objectif d'essayer de documenter le code de Pyromaths afin de permettre à un maximum de développeurs de participer au développement de Pyromaths en sachant quels modules sont déjà développés.
 

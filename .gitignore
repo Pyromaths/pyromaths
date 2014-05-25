@@ -23,3 +23,7 @@ dist/
 # tests persos
 /src/test.py
 /src/tous.py
+
+# Documentation sphinx
+/Doc/build/doctrees/
+/Doc/build/doctest/
