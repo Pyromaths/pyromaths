@@ -114,7 +114,7 @@ def _exercises(pkg):
             element = mod.__dict__[element]
             level = __level(element.level if 'level' in dir(element)
                               else mod.level)
-            if hasattr(sys, "frozen"):
+            if (hasattr(sys, "frozen") and sys.platform != "darwin"):
                 # Hack pour déplacer les vignettes de la version Windows dans
                 # le dossier data/ex/{{ classe }}/img
                 dirlevel = os.path.split(pkg.__path__[0])[1]
