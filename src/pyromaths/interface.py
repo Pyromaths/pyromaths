@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 from PyQt4 import QtGui, QtCore
+from PyQt4 import Qt # Cas de Mac OS X, QTBUG-36212
 import os, lxml, codecs, sys
 from outils import System
 from Values import CONFIGDIR, DATADIR, LESFICHES, COPYRIGHTS, VERSION, ICONDIR
@@ -616,13 +617,24 @@ def valide(liste, LesFiches, parametres):
     saveas = QtGui.QFileDialog()
     filename = System.supprime_extension(parametres['nom_fichier'],
                                          '.tex')
-    f0 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
+    if sys.platform == "darwin":  # Cas de Mac OS X, QTBUG-36212
+        f0 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
+                    os.path.join(parametres['chemin_fichier'],
+                             u'%s.tex' % filename), "Documents Tex (*.tex)", '', Qt.QFileDialog.DontUseNativeDialog))
+    else:
+        f0 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(parametres['chemin_fichier'],
                              u'%s.tex' % filename), "Documents Tex (*.tex)"))
     if f0:
         System.ajoute_extension(f0, '.tex')
         if corrige and not parametres['creer_unpdf']:
-            f1 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
+            if sys.platform == "darwin":  # Cas de Mac OS X, QTBUG-36212
+                f1 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
+                    os.path.join(os.path.dirname(f0),
+                    u"%s-corrige.tex" % os.path.splitext(os.path.basename(f0))[0]),
+                    "Documents Tex (*.tex)", '', Qt.QFileDialog.DontUseNativeDialog))
+            else:
+                f1 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(os.path.dirname(f0),
                 u"%s-corrige.tex" % os.path.splitext(os.path.basename(f0))[0]),
                 "Documents Tex (*.tex)"))
