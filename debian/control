@@ -2,9 +2,8 @@ Source: pyromaths
 Section: math
 Priority: optional
 Maintainer: Jérôme Ortais <jerome.ortais@pyromaths.org>
-Build-Depends: debhelper (>= 7)
-Build-Depends-Indep: python-support (>= 0.5.3)
-Standards-Version: 3.9.4
+Build-Depends: debhelper (>= 7), dh-python, python
+Standards-Version: 3.9.5
 Homepage: http://www.pyromaths.org/
 
 Package: pyromaths

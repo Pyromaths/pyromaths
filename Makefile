@@ -159,6 +159,7 @@ deb: min
 	cp -r debian $(BUILDIR)
 	cd $(BUILDIR) && debuild clean $(OUT)
 	cd $(BUILDIR) && debuild -kB39EE5B6 $(OUT) || exit 0
+	mkdir -p $(DIST)
 	mv $(BUILD)/pyromaths_$(VERSION)-*_all.deb $(DIST)
 
 repo: deb
