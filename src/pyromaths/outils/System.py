@@ -270,8 +270,8 @@ def copie_tronq_modele(dest, parametres, master):
 
     if os.path.isfile(os.path.join(parametres['datadir'], 'templates', source)):
         source = os.path.join(parametres['datadir'], 'templates', source)
-    elif os.path.isfile(os.path.join(parametres['datadir'], 'templates', source)):
-        source = os.path.join(parametres['datadir'], 'templates', source)
+    elif os.path.isfile(os.path.join(parametres['configdir'], 'templates', source)):
+        source = os.path.join(parametres['configdir'], 'templates', source)
     else:
         # TODO: Message d'erreur, le modèle demandé n'existe pas
         print(u"Le fichier modèle n'a pas été trouvé dans %s" %
