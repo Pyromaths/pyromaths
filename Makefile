@@ -182,7 +182,6 @@ data/%.qm: data/%.ts
 
 app: version data/qtmac_fr.qm
 	# Make standalone Mac application
-	$(clean)
 	$(setup) py2app -O2 -b $(BUILD) -d $(DIST) $(OUT)
 	# ..Clean-up unnecessary files/folders
 	rm -f $(APP)/PkgInfo
