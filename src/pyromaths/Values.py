@@ -40,7 +40,7 @@ def icon_dir():
     if we_are_frozen() or exists(join(abspath(dirname(__file__)), '../../data/')):
         return join(DATADIR, 'images', 'pyromaths.png')
     return join('/usr/share/pixmaps', 'pyromaths.png')
-        
+
 if name == 'nt':
     def home():
         return unicode(environ['USERPROFILE'], getfilesystemencoding())
@@ -62,7 +62,7 @@ else:
     def configdir():
         return join(home(), ".config", "pyromaths")
 
-VERSION = '14.05'
+VERSION = '14.06'
 COPYRIGHT_YEAR = strftime('%Y')
 COPYRIGHTS = u'© 2006 – %s Jérôme Ortais<br/>\n' \
         u'<span style=" font-size:small;">Pyromaths est distribué sous ' \

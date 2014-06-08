@@ -7,7 +7,6 @@ import pkgutil
 import types
 import sys
 
-
 levels = {}
 
 
@@ -100,6 +99,7 @@ def __import(name=__name__, parent=None):
 
 def _exercises(pkg):
     ''' List exercises in 'pkg' modules. '''
+    from pyromaths.Values import data_dir
     # level defaults to description, then unknown
     if 'level' not in dir(pkg): pkg.level = u"Inconnu"
     n = 0
@@ -114,17 +114,9 @@ def _exercises(pkg):
             element = mod.__dict__[element]
             level = __level(element.level if 'level' in dir(element)
                               else mod.level)
-            if (hasattr(sys, "frozen") and sys.platform != "darwin"):
-                # Hack pour déplacer les vignettes de la version Windows dans
-                # le dossier data/ex/{{ classe }}/img
-                dirlevel = os.path.split(pkg.__path__[0])[1]
-                thumb = os.path.join(os.path.normpath(\
-                        os.path.dirname(unicode(sys.executable, \
-                            sys.getfilesystemencoding()))), 'data', 'ex', \
-                            dirlevel, 'img', 'ex-%02d.png' % n)
 
-            else:
-                thumb = os.path.join(pkg.__path__[0], 'img', 'ex-%02d.png' % n)
+            dirlevel = os.path.split(pkg.__path__[0])[1]
+            thumb = os.path.join(data_dir(), 'ex', dirlevel, 'img', 'ex-%02d.png' % n)
             if __isexercise(element):
                 element.level = level
                 element.thumb = thumb
