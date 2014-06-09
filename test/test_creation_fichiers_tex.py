@@ -31,11 +31,14 @@ niveau i dans le dossier /tmp.
 
 Par exemple, "python test_creation_fichiers_tex.py 1 5 10" génère 10 exercices
 de "Repérage" du niveau cinquième.
-Niveau 0 : sixième
-Niveau 1 : cinquième
-Niveau 2 : quatrième
-Niveau 3 : troisième
-Niveau 4 : lycée
+Niveau 0 : première S
+Niveau 1 : seconde
+Niveau 2 : terminale STG
+Niveau 3 : cinquième
+Niveau 4 : quatrième
+Niveau 5 : troisième
+Niveau 6 : terminale S
+Niveau 7 : sixième
 """
 dt = tempfile.mkdtemp(prefix='pyromaths_tests-', dir='/tmp')
 parametres = {
@@ -57,12 +60,19 @@ parametres = {
         }
 
 if (len(sys.argv) == 4):
+    os.rmdir(dt)
     lst = []
-    for i in range(int(sys.argv[3])):
-        lst.append([int(sys.argv[1]), int(sys.argv[2])])
+    for j in range(int(sys.argv[3])):
+        print('Test n° %03d' % (j + 1))
+        lst.append(LESFICHES[int(sys.argv[1])][2][int(sys.argv[2])]())
     parametres['liste_exos'] = lst
+    #dt = tempfile.mkdtemp(prefix='pyromaths_tests-', dir='/tmp')
+    dt = '/tmp'
+    parametres['chemin_fichier'] = '/tmp'
+    parametres['fiche_exo'] = os.path.join(dt, 'exercices.tex')
+    parametres['fiche_cor'] = os.path.join(dt, 'exercices-corrige.tex')
     creation(parametres)
-    nettoyage(dt)
+    #nettoyage(dt)
 
 elif (len(sys.argv) == 1):
     os.rmdir(dt)

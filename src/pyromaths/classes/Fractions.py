@@ -308,7 +308,10 @@ class Fraction():
                 return Fraction(num, leppcm)
         if self.n: lfrac = [repr(self.choix_denominateur(leppcm))]
         else: lfrac = []
-        for other in lother: lfrac.append(repr(other.choix_denominateur(leppcm)))
+        for other in lother:
+            if lfrac: lfrac.append(repr(other.choix_denominateur(leppcm)))
+            else: lfrac.append(repr(-other.choix_denominateur(leppcm)))
+            # On effectue Fraction(0,3)-Fraction(2,3), il faut donc prendre l'opposé de Fraction(2,3), puisque Fraction(0,3) a été supprimée
         if lfrac: return "-".join(lfrac)
         else: return "0"
 

@@ -29,7 +29,9 @@
     <link rel="up" title="Code du module" href="../../index.html" /> 
   </head>
   <body>
-      <div class="header"><img class="rightlogo" src="../../../_static/bandeau.png" alt="Logo"/><h1 class="heading"><a href="../../../index.html">
+      <div class="header"><a href="http://www.pyromaths.org/" >
+          <img class="rightlogo" src="../../../_static/bandeau.png" alt="Logo"/>
+        </a><h1 class="heading"><a href="../../../index.html">
           <span>documentation Pyromaths 14.05</span></a></h1>
         <h2 class="heading"><span>pyromaths.classes.Fractions</span></h2>
       </div>
@@ -354,7 +356,10 @@
                 <span class="k">return</span> <span class="n">Fraction</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">leppcm</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">:</span> <span class="n">lfrac</span> <span class="o">=</span> <span class="p">[</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">choix_denominateur</span><span class="p">(</span><span class="n">leppcm</span><span class="p">))]</span>
         <span class="k">else</span><span class="p">:</span> <span class="n">lfrac</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">lother</span><span class="p">:</span> <span class="n">lfrac</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">choix_denominateur</span><span class="p">(</span><span class="n">leppcm</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">lother</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">lfrac</span><span class="p">:</span> <span class="n">lfrac</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">choix_denominateur</span><span class="p">(</span><span class="n">leppcm</span><span class="p">)))</span>
+            <span class="k">else</span><span class="p">:</span> <span class="n">lfrac</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="o">-</span><span class="n">other</span><span class="o">.</span><span class="n">choix_denominateur</span><span class="p">(</span><span class="n">leppcm</span><span class="p">)))</span>
+            <span class="c"># On effectue Fraction(0,3)-Fraction(2,3), il faut donc prendre l&#39;opposé de Fraction(2,3), puisque Fraction(0,3) a été supprimée</span>
         <span class="k">if</span> <span class="n">lfrac</span><span class="p">:</span> <span class="k">return</span> <span class="s">&quot;-&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lfrac</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="s">&quot;0&quot;</span>
 </div>

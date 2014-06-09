@@ -1,3 +1,11 @@
+Version 14.06
+* Nouvel exercice niveau troisième : Bilan sur la notion de fonction
+* Ajout de la notion d'arrondi au dixième, centième, millième dans les exercices sur le théorème de Thalès 4e et 3e, ainsi que les exercices de trigonométrie 4e et 3e.
+* Correction d'un bug dans les sommes de Polynomes
+* Amélioration de la réduction des Polynomes
+* Correction d'un bug dans l'affichage des vignettes sous Linux
+* Déplacement des vignettes dans data
+
 Version 14.05
 * Construction et packaging :
 ** Factorisation des setup.py en un seul, commun à toutes les plateformes
@@ -12,7 +20,6 @@ Version 14.05
 * Modification des classes Fraction et Polynome pour que les coefficients des objet Polynome puissent être des objets Fraction
 * Modification des exercices de calcul littéral en 4e et 3e
 * Ajout de deux exercices de calcul littéral en 4e : exercice de réduction et exercice de soustraction d'expressions littérales
-
 
 Version 13.03
 * Correction d'un bug d'affichage des pdf
