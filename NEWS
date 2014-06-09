@@ -5,6 +5,7 @@ Version 14.06
 * Amélioration de la réduction des Polynomes
 * Correction d'un bug dans l'affichage des vignettes sous Linux
 * Déplacement des vignettes dans data
+* Correction d'un bug avec les modèles de document
 
 Version 14.05
 * Construction et packaging :

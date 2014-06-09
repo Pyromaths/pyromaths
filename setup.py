@@ -122,7 +122,7 @@ def _mac_opt():
                      'data/images/whatsthis.png']),
             ('data/templates',        glob('data/templates/*.tex')),
             ('data/packages',         glob('data/packages/*')),
-        ],
+        ] + find_data_files('data/ex','data/ex/',['*/img/ex-*.png']),
         setup_requires = ['py2app>=0.7.3', 'lxml>=2.2.2'],
         options    = {'py2app': py2app},
     )
