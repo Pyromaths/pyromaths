@@ -8,6 +8,10 @@
 build/
 dist/
 
+# Documentation
+Doc/build/doctrees/
+Doc/build/.doctrees/
+Doc/build/.buildinfo
 # Last package manifest used
 /MANIFEST.in
 
