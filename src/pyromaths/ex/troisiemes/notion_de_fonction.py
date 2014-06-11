@@ -198,14 +198,14 @@ def notion_fonction():
                 r"\psset{unit=8mm, algebraic, dotsize=4pt 4}", r"\begin{pspicture*}(-4.2,-4.2)(4.2,4.2)"])
     exo.append(r"\psgrid[subgriddiv=2, gridwidth=.6pt,subgridcolor=lightgray, gridlabels=0pt]")
     exo.append(r"\psaxes[linewidth=1.2pt,]{->}(0,0)(-4.2,-4.2)(4.2,4.2)")
-    exo.append(r"\psplot[linewidth=1.5pt, linecolor=DarkRed]{-4.2}{4.2}{%s}" % p)
+    exo.append(r"\psplot[plotpoints=200, linewidth=1.5pt, linecolor=DarkRed]{-4.2}{4.2}{%s}" % p)
     exo.append(r"\psdots %s" % " ".join([str(val) for val in val_exo3]))
     exo.extend([r"\end{pspicture*}", r"\end{center}", r"\begin{enumerate}"])
     cor.extend([u"\\item Le graphique ci-après représente une fonction $k$ : \\par", r"\begin{center}",
                 r"\psset{unit=8mm, algebraic, dotsize=4pt 4}", r"\begin{pspicture*}(-4.2,-4.2)(4.2,4.2)"])
     cor.append(r"\psgrid[subgriddiv=2, gridwidth=.6pt,subgridcolor=lightgray, gridlabels=0pt]")
     cor.append(r"\psaxes[linewidth=1.2pt,]{->}(0,0)(-4.2,-4.2)(4.2,4.2)")
-    cor.append(r"\psplot[linewidth=1.5pt, linecolor=DarkRed]{-4.2}{4.2}{%s}" % p)
+    cor.append(r"\psplot[plotpoints=200, linewidth=1.5pt, linecolor=DarkRed]{-4.2}{4.2}{%s}" % p)
     cor.append(r"\psdots %s" % " ".join([str(val) for val in val_exo3]))
     lpos31 = [i for i in range(5)]
     for dummy in range(1):
