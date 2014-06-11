@@ -32,7 +32,7 @@ FILES   := AUTHORS COPYING NEWS pyromaths README setup.py MANIFEST.in src data
 MANIFEST :=                                     \
     include AUTHORS COPYING NEWS                \n\
     exclude MANIFEST.in                         \n\
-    global-include src/pyromaths/ex/*/img/*.png \n\
+    #global-include src/pyromaths/ex/*/img/*.png \n\
     graft data                                  \n
 # Minimal install (i.e. without test/ dir):
 MANIFEST-min := $(MANIFEST)                     \
