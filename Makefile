@@ -181,6 +181,8 @@ data/%.qm: data/%.ts
 	lrelease $< -qm $@
 
 app: version data/qtmac_fr.qm
+	# ..Remove previous build
+	rm -rf $(BUILD) $(DIST)
 	# Make standalone Mac application
 	$(setup) py2app -O2 -b $(BUILD) -d $(DIST) $(OUT)
 	# ..Clean-up unnecessary files/folders
