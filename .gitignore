@@ -26,4 +26,6 @@ dist/
 
 # Documentation sphinx
 /Doc/build/doctrees/
+/Doc/build/.doctrees/
 /Doc/build/doctest/
+/Doc/build/.buildinfo

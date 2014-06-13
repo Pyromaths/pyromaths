@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 from PyQt4 import QtGui, QtCore
-from PyQt4 import Qt # Cas de Mac OS X, QTBUG-36212
+from PyQt4 import Qt  # Cas de Mac OS X, QTBUG-36212
 import os, lxml, codecs, sys
 from outils import System
 from Values import CONFIGDIR, DATADIR, LESFICHES, COPYRIGHTS, VERSION, ICONDIR

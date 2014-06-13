@@ -44,7 +44,10 @@ def _thumb(exercise, outfile=None):
 
 def thumbs(pkg=ex, recursive=True):
     ''' Create all exercise thumbnails. '''
-    imgdir = join(pkg.__path__[0], "img")
+    dirlevel = os.path.split(pkg.__path__[0])[1]
+    imgdir = join(_param['datadir'], 'ex', dirlevel, 'img')
+    print imgdir
+    #raise ValueError('voila')
     for fl in glob.glob(join(imgdir, "ex-??.png")):
        #Do what you want with the file
        os.remove(fl)

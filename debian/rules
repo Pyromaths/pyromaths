@@ -41,7 +41,7 @@ binary-indep: build install
 	dh_compress -X.pdf -X.py
 	dh_fixperms
 	#dh_python2 -i -V '2.5-3.0' -p pyromaths -v
-	dh_pysupport
+	dh_python2
 	dh_installdeb
 	dh_gencontrol
 	dh_md5sums

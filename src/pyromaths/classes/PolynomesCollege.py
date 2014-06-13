@@ -530,7 +530,7 @@ class Polynome():
             if len(lother[i]) > 1 or i + 1 == len(lother):
                 # Ce n'est pas un monôme, il va donc falloir utiliser la distributivité
                 # ou alors la chaine est fini et on calcule
-                if len(lother[i]) == 1 or len(lcoeff) > 1 or len(lexp) > 1:
+                if i > 1 or len(lother[i]) == 1 or len(lcoeff) > 1 or len(lexp) > 1:
                     # on a multiplié au moins 2 monômes auparavant
                     if lother[i].details == 3 and not reduire:
                         # TODO: cas où un coeff est une str
@@ -558,7 +558,7 @@ class Polynome():
                                           reduce(lambda x, y: x + y, lexp)]], self.var, self.details)
                         if i + 1 == len(lother): return poly
                         else: return \
-                            "*".join([repr(poly)] + [repr(other.nreduction()) for other in lother[i + 1:]])
+                            "*".join([repr(poly)] + [repr(other.nreduction()) for other in lother[i:]])
                 else:
                     # On distribue :
                     if i:
@@ -819,8 +819,8 @@ class Polynome():
             elif ldegres and m[1] > ldegres[-1]: return True
             # Polynome non ordonné
             else: ldegres.append(m[1])
-            if isinstance(m[0], str) and Priorites3.priorites(m[0]): return True
-            if isinstance(m[0], Fraction) and Priorites3.priorites(repr(m[0])): return True
+            if isinstance(m[0], str) and Priorites3.effectue_calcul(Priorites3.splitting(m[0])) != [m[0]]: return True
+            if isinstance(m[0], Fraction) and repr(m[0].traitement(True)) != repr(m[0]): return True
             # une simplification de fraction ou un calcul est à faire
         return False
 
@@ -871,31 +871,36 @@ class Polynome():
             if isinstance(monome[0], str) or isinstance(monome[0], Fraction):
             # une réduction peut-être à faire ici
                 if isinstance(monome[0], Fraction):
-                    monome[0] = repr(monome[0])
-                res = Priorites3.priorites(monome[0])
-                if res and len(res[0]) == 1:  # Le calcul s'effectue en une seule étape
-                    monome[0] = eval(res[0][0])
-                elif res:
+                    monome[0] = repr(monome[0].traitement(True))
+                    res = []
+                else:
+                    splitted = Priorites3.splitting(monome[0])
+                    if len(splitted) > 1:
+                        res = Priorites3.effectue_calcul(splitted)
+                        if len(res) == 1:  # Le calcul s'effectue en une seule étape
+                            monome[0] = res[0]
+                if len(res) > 1:
                 # Il y a un calcul à effectuer en plusieurs étapes
                     if bdirecte:  # on ne détaille pas
-                        monome[0] = eval(res[-1][0])
+                        monome[0] = eval(Priorites3.priorites(monome[0])[-1][0])
                     else:
                         bdec = True
                         # *bdec* est un booléen qui est True si le calcul ne contient que des décimaux
-                        for nb in res[0]:
+                        for nb in res:
                             if nb[0] not in "+-*/0123456789(":
                                 bdec = False
+                                break
 
                         if bdec:  # on calcule en une étape 3+4-5
-                            monome[0] = eval(res[-1][0])
+                            monome[0] = eval(Priorites3.priorites(monome[0])[-1][0])
                         else:
-                            monome[0] = ''.join(res[0])  # on calcule étape par étape
+                            monome[0] = ''.join(res)  # on calcule étape par étape
                 else:
                     monome[0] = eval(monome[0])  # le texte n'était pas nécessaire, c'est un nombre ou la fraction était irréductible
             return monome
 
 
-        if not self.reductible: return self
+        if not self.reductible(): return self
         else:
             if self.ordonnable() and self.details > 0 and not bdirecte:
                 return self.ordonne()
@@ -1098,7 +1103,7 @@ def factoriser(calcul):
         # C'est soit une somme de polynomes qu'il faut factoriser, soit déjà un produit
         if EstFactorise(lcalcul):
             # Il faut réduire les sommes
-            poly = Priorites3.priorites("".join(lcalcul))[0]
+            poly = Priorites3.effectue_calcul(lcalcul)
             if EstFactorise(poly): return "".join(poly)
             else: return None
         else:

@@ -35,7 +35,7 @@ def fig_tr_rect(lg):
         b = a + 180
     else:
         b = a - 180
-    c = (int((180 - ((2 * acos((lg[1] * 1.0) / lg[2])) * 180) / pi) * 
+    c = (int((180 - ((2 * acos((lg[1] * 1.0) / lg[2])) * 180) / pi) *
          100) * 1.0) / 100 + a
     if c < 0:
         c = c + 360
@@ -96,7 +96,7 @@ def exo_pythagore():
         cotes = cotes_sommets(noms)
         enonce = \
             """    \\item Soit $%s$ un triangle rectangle en $%s$ tel que :\\par
-$%s=\\unit[%s]{cm} \\text{ et }%s=\\unit[%s]{cm}$.\\par
+$%s=\\unit[%s]{cm}$ et $%s=\\unit[%s]{cm}$.\\par
 Calculer la longueur $%s$.""" % \
             enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
                              long1)
@@ -109,38 +109,38 @@ Calculer la longueur $%s$.""" % \
         cor.append(u"D'après le \\textbf{théorème de Pythagore} :")
         cor.append("\\[%s^2=%s^2+%s^2\\]" % (cotes[2], cotes[0], cotes[1]))
         if long0 == 2 or long1 == 2:
-            cor.append("\\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]" % 
-                       (cotes[(3 - long0) - long1], cotes[2], cotes[((4 - 
+            cor.append("\\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]" %
+                       (cotes[(3 - long0) - long1], cotes[2], cotes[((4 -
                        long0) - long1) % 2], cotes[(3 - long0) - long1]))
         if long0 == 2 or long1 == 2:
             cor.append("\\[%s^2=%s^2-%s^2\\]" % (cotes[(3 - long0) - long1],
-                       nombre(longueurs[2]), nombre(longueurs[((4 - long0) - 
+                       nombre(longueurs[2]), nombre(longueurs[((4 - long0) -
                        long1) % 2])))
         else:
             cor.append("\\[%s^2=%s^2+%s^2\\]" % (cotes[2], nombre(longueurs[0]),
                        nombre(longueurs[1])))
         if long0 == 2 or long1 == 2:
             cor.append("\\[%s^2=%s-%s\\]" % (cotes[(3 - long0) - long1],
-                       nombre(longueurs[2] ** 2), nombre(longueurs[((4 - 
+                       nombre(longueurs[2] ** 2), nombre(longueurs[((4 -
                        long0) - long1) % 2] ** 2)))
         else:
-            cor.append("\\[%s^2=%s+%s\\]" % (cotes[2], nombre(longueurs[0] ** 
+            cor.append("\\[%s^2=%s+%s\\]" % (cotes[2], nombre(longueurs[0] **
                        2), nombre(longueurs[1] ** 2)))
         if long0 == 2 or long1 == 2:
             cor.append("\\[%s^2=%s\\]" % (cotes[(3 - long0) - long1],
-                       nombre(longueurs[2] ** 2 - longueurs[((4 - long0) - 
+                       nombre(longueurs[2] ** 2 - longueurs[((4 - long0) -
                        long1) % 2] ** 2)))
         else:
-            cor.append("\\[%s^2=%s\\]" % (cotes[2], nombre(longueurs[0] ** 
+            cor.append("\\[%s^2=%s\\]" % (cotes[2], nombre(longueurs[0] **
                        2 + longueurs[1] ** 2)))
         if long0 == 2 or long1 == 2:
-            cor.append("\\[ \\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" % 
-                       (cotes[(3 - long0) - long1], nombre(longueurs[2] ** 2 - 
-                       longueurs[((4 - long0) - long1) % 2] ** 2), nombre(longueurs[(3 - 
+            cor.append("\\[ \\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" %
+                       (cotes[(3 - long0) - long1], nombre(longueurs[2] ** 2 -
+                       longueurs[((4 - long0) - long1) % 2] ** 2), nombre(longueurs[(3 -
                        long0) - long1])))
         else:
-            cor.append("\\[\\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" % 
-                       (cotes[2], nombre(longueurs[0] ** 2 + longueurs[1] ** 
+            cor.append("\\[\\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" %
+                       (cotes[2], nombre(longueurs[0] ** 2 + longueurs[1] **
                        2), nombre(longueurs[2])))
         if j == 0:
             exo.append("\\columnbreak")
@@ -185,7 +185,7 @@ def exo_triangle_cercle():
     enonce = \
         u"""\\begin{minipage}{4cm}
 \\begin{pspicture}(-2,-2)(2,2)
-\\SpecialCoor\\psset{PointSymbol=x}
+\\SpecialCoor\\psset{PointSymbol=none}
 \\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){a}
 \\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){b}
 \\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){c}
@@ -195,53 +195,53 @@ def exo_triangle_cercle():
 \\end{minipage}\\hfill
 \\begin{minipage}{13cm}
 $\\big(\\mathcal{C}\\big)$ est un cercle de diamètre $[%s]$ et $%s$ est un point de $\\big(\\mathcal{C}\\big)$.\\par
-On donne $%s=\\unit[%s]{cm}\\text{ et }%s=\\unit[%s]{cm}$.\\par
+On donne $%s=\\unit[%s]{cm}$ et $%s=\\unit[%s]{cm}$.\\par
 Calculer la longueur $%s$.""" % \
         enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
                          long1, diam=1)
     exo.append(enonce)
     cor.append(enonce)
     cor.append("\\par\\dotfill{}\\\\\n")
-    cor.append(u"$[%s]$ est le diamètre du cercle circonscrit au triangle $%s$.\\par" % 
+    cor.append(u"$[%s]$ est le diamètre du cercle circonscrit au triangle $%s$.\\par" %
                (cotes[2], nom_tr))
-    cor.append("\\fbox{Donc le triangle %s est rectangle en %s.}\\\\\n" % 
+    cor.append("\\fbox{Donc le triangle %s est rectangle en %s.}\\\\\n" %
                (nom_tr, noms[2]))
     cor.append(u"D'après le \\textbf{théorème de Pythagore} :")
-    cor.append(u"\\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]" % 
+    cor.append(u"\\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est \\emph{l'hypoténuse})}\\]" %
                (cotes[2], cotes[0], cotes[1], cotes[2]))
     if long0 == 2 or long1 == 2:
-        cor.append("\\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]" % 
-                   (cotes[(3 - long0) - long1], cotes[2], cotes[((4 - 
+        cor.append("\\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]" %
+                   (cotes[(3 - long0) - long1], cotes[2], cotes[((4 -
                    long0) - long1) % 2], cotes[(3 - long0) - long1]))
     if long0 == 2 or long1 == 2:
         cor.append("\\[%s^2=%s^2-%s^2\\]" % (cotes[(3 - long0) - long1],
-                   nombre(longueurs[2]), nombre(longueurs[((4 - long0) - 
+                   nombre(longueurs[2]), nombre(longueurs[((4 - long0) -
                    long1) % 2])))
     else:
         cor.append("\\[%s^2=%s^2+%s^2\\]" % (cotes[2], nombre(longueurs[0]),
                    nombre(longueurs[1])))
     if long0 == 2 or long1 == 2:
         cor.append("\\[%s^2=%s-%s\\]" % (cotes[(3 - long0) - long1],
-                   nombre(longueurs[2] ** 2), nombre(longueurs[((4 - 
+                   nombre(longueurs[2] ** 2), nombre(longueurs[((4 -
                    long0) - long1) % 2] ** 2)))
     else:
-        cor.append("\\[%s^2=%s+%s\\]" % (cotes[2], nombre(longueurs[0] ** 
+        cor.append("\\[%s^2=%s+%s\\]" % (cotes[2], nombre(longueurs[0] **
                    2), nombre(longueurs[1] ** 2)))
     if long0 == 2 or long1 == 2:
         cor.append("\\[%s^2=%s\\]" % (cotes[(3 - long0) - long1],
-                   nombre(longueurs[2] ** 2 - longueurs[((4 - long0) - 
+                   nombre(longueurs[2] ** 2 - longueurs[((4 - long0) -
                    long1) % 2] ** 2)))
     else:
-        cor.append("\\[%s^2=%s\\]" % (cotes[2], nombre(longueurs[0] ** 
+        cor.append("\\[%s^2=%s\\]" % (cotes[2], nombre(longueurs[0] **
                    2 + longueurs[1] ** 2)))
     if long0 == 2 or long1 == 2:
-        cor.append("\\[\\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" % 
-                   (cotes[(3 - long0) - long1], nombre(longueurs[2] ** 2 - 
-                   longueurs[((4 - long0) - long1) % 2] ** 2), nombre(longueurs[(3 - 
+        cor.append("\\[\\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" %
+                   (cotes[(3 - long0) - long1], nombre(longueurs[2] ** 2 -
+                   longueurs[((4 - long0) - long1) % 2] ** 2), nombre(longueurs[(3 -
                    long0) - long1])))
     else:
-        cor.append("\\[\\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" % 
-                   (cotes[2], nombre(longueurs[0] ** 2 + longueurs[1] ** 
+        cor.append("\\[\\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]" %
+                   (cotes[2], nombre(longueurs[0] ** 2 + longueurs[1] **
                    2), nombre(longueurs[2])))
     exo.append("\\end{minipage}\n")
     cor.append("\\end{minipage}\n")
@@ -278,22 +278,22 @@ Quelle est la nature du triangle $%s$?
     exo.append(enonce)
     cor.append(enonce)
     cor.append("\\par\\dotfill{}\\\\\n")
-    cor.append(u"Le triangle %s n'est ni isocèle, ni équilatéral.\\par\n" % 
+    cor.append(u"Le triangle %s n'est ni isocèle, ni équilatéral.\\par\n" %
                nom_tr)
     cor.append("$\\left.")
     cor.append("\\renewcommand{\\arraystretch}{2}")
     cor.append("\\begin{array}{l}")
 
-    cor.append(u"\\bullet %s^2=%s^2=%s\\qquad\\text{(}[%s]\\text{ est le plus grand côté.)}\\\\\n" % 
+    cor.append(u"\\bullet %s^2=%s^2=%s\\qquad\\text{(}[%s]\\text{ est le plus grand côté.)}\\\\\n" %
                (c[2], nombre(longueurs[2]), nombre(longueurs[2] ** 2), c[2]))
     cor.append("\\bullet  %s^2+%s^2=%s^2+%s^2=%s \n" % (c[0], c[1],
-               nombre(longueurs[0]), nombre(longueurs[1]), nombre(longueurs[0] ** 
+               nombre(longueurs[0]), nombre(longueurs[1]), nombre(longueurs[0] **
                2 + longueurs[1] ** 2)))
     cor.append("\\end{array}")
     cor.append("\\right\\rbrace$")
     cor.append(u"""Donc $%s^2=%s^2+%s^2$.\\par
 D'après la \\textbf{réciproque du théorème de Pythagore},
-\\fbox{le triangle $%s$ est rectangle en $%s$.}""" % 
+\\fbox{le triangle $%s$ est rectangle en $%s$.}""" %
                (c[2], c[0], c[1], nom_tr, noms[2]))
     return (exo, cor)
 
@@ -397,18 +397,20 @@ def exo_thales():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
     noms = choix_points(5)  # les noms des sommets
+    arrondi = random.randrange(1, 4)
+    text_arrondi = ['dix', 'cent', 'mill'][arrondi - 1] + u'ième'
     while True:
         valeurs = valeurs_thales(70)  # les longueurs en mm
         if valeurs:
             break
     exo.append(tex_fig_thales(noms, valeurs))
-    exo.append(tex_enonce_thales(noms, valeurs))
+    exo.append(tex_enonce_thales(noms, valeurs, text_arrondi))
     cor.append(tex_fig_thales(noms, valeurs))
-    cor.append(tex_enonce_thales(noms, valeurs))
+    cor.append(tex_enonce_thales(noms, valeurs, text_arrondi))
     cor.append(tex_resolution_thales0(noms, valeurs))
     cor.append(tex_resolution_thales1(noms, valeurs))
     cor.append(tex_resolution_thales2(noms, valeurs))
-    cor.append(tex_resolution_thales3(noms, valeurs))
+    cor.append(tex_resolution_thales3(noms, valeurs, arrondi))
     return (exo, cor)
 
 exo_thales.description = u'Théorème de Thalès'
@@ -462,15 +464,16 @@ def creer_noms(noms, i):
         return str(noms[4]) + str(noms[2])
 
 
-def tex_enonce_thales(noms, valeurs):
+def tex_enonce_thales(noms, valeurs, arrondi):
     texte = \
-        u'{Sur la figure ci-contre, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par\n' % \
+        u'{Sur la figure ci-contre, les droites $(%s)$ et $(%s)$ sont parallèles.\\par\n' % \
         (lAB(noms[1:3]), lAB(noms[3:5]))
     liste = long_val(noms, valeurs)
     texte = texte + \
-        'On donne $%s=\\unit[%s]{cm},\\quad %s=\\unit[%s]{cm}, \\quad %s=\\unit[%s]{cm}\\quad\\text{et}\\quad %s~=~\\unit[%s]{cm}$.\\par\n' % \
+        'On donne $%s=\\unit[%s]{cm}$,$\\quad %s=\\unit[%s]{cm}$, $\\quad %s=\\unit[%s]{cm}\\quad$ et $\\quad %s~=~\\unit[%s]{cm}$.\\par\n' % \
         tuple(liste[0:8])
-    texte = texte + 'Calculer $%s\\text{ et }%s$.}\n' % tuple(liste[8:10])
+    texte = texte + 'Calculer $%s$ et $%s$, ' % tuple(liste[8:10])
+    texte = texte + 'arrondies au %s}\n' % arrondi
     return texte
 
 
@@ -552,18 +555,17 @@ def valeur_exacte(a, approx=3, unit=1):
     nb = nombre(a)
     if unit:
         if nb.count(',') and (len(nb) - nb.find(',')) - 1 > approx:
-            return '\\simeq\\unit[' + nombre(int(1000.0 * a) / 1000.0) + \
-                ']{cm}'
+            return '\\simeq\\unit[' + nombre(round(a, approx)) + ']{cm}'
         else:
             return '=\\unit[' + nombre(a) + ']{cm}'
     else:
         if nb.count(',') and (len(nb) - nb.find(',')) - 1 > approx:
-            return '\\simeq' + nombre(int(1000.0 * a) / 1000.0)
+            return '\\simeq' + nombre(round(a, approx))
         else:
             return '=' + nombre(a)
 
 
-def tex_resolution_thales3(n, v):
+def tex_resolution_thales3(n, v, arrondi):
     r = v[8][0][0] % 3  # grand rapport
     donnees = []
     for i in range(3):
@@ -574,13 +576,13 @@ def tex_resolution_thales3(n, v):
             if v[i]:  # on cherche i+3
                 donnees.extend([creer_noms(n, i + 3), nombre(v[i]),
                                nombre(v[r + 3]), nombre(v[r]),
-                               valeur_exacte(((v[i] * 1.0) * v[r + 3]) / 
-                               v[r])])
+                               valeur_exacte(((v[i] * 1.0) * v[r + 3]) /
+                               v[r], approx=arrondi)])
             else:
                 donnees.extend([creer_noms(n, i), nombre(v[i + 3]),
                                nombre(v[r]), nombre(v[r + 3]),
-                               valeur_exacte(((v[r] * 1.0) * v[i + 3]) / 
-                               v[r + 3])])
+                               valeur_exacte(((v[r] * 1.0) * v[i + 3]) /
+                               v[r + 3], approx=arrondi)])
     texte = \
         '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad \\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n ' % tuple(donnees[0:9])
     texte = texte + \
@@ -607,13 +609,13 @@ def tex_resolution_thales3(n, v):
 def fig_thales(noms, valeurs):
     v = test_valeurs_thales(valeurs[0:8], valeurs[8][0], valeurs[8][1])
     type_thales = valeurs[8][1]
-    angle = int(((100.0 * acos(((v[0] ** 2 + v[1] ** 2) - v[2] ** 2) / ((2 * 
+    angle = int(((100.0 * acos(((v[0] ** 2 + v[1] ** 2) - v[2] ** 2) / ((2 *
                 v[0]) * v[1]))) * 180) / pi) / 100.0
     v = [int(v[i] * 100) / 100.0 for i in range(8)]
-    mini_x = int(100.0 * min(0, v[1] * cos((angle * pi) / 180), v[3] * 
-                 type_thales, (v[4] * cos((angle * pi) / 180)) * 
+    mini_x = int(100.0 * min(0, v[1] * cos((angle * pi) / 180), v[3] *
+                 type_thales, (v[4] * cos((angle * pi) / 180)) *
                  type_thales)) / 100.0 - 1.5
-    mini_y = int(100.0 * min(0, (v[4] * sin((angle * pi) / 180)) * 
+    mini_y = int(100.0 * min(0, (v[4] * sin((angle * pi) / 180)) *
                  type_thales)) / 100.0 - 1.5
     maxi_x = int(100.0 * max(v[0], v[1] * cos((angle * pi) / 180))) / \
         100.0 + 1.5
@@ -672,7 +674,7 @@ def tex_fig_thales(noms, valeurs):
     donnees = fig_thales(noms, valeurs)
     enonce = \
         '''\\figureadroite{
-  \\psset{PointSymbol=x,unit=%s}
+  \\psset{PointSymbol=none,unit=%s}
   \\begin{pspicture}(%s,%s)(%s,%s)
     \\SpecialCoor
     \\pstTriangle[PosAngleA=%s,PosAngleB=-45,PosAngleC=%s,PointNameA=%s,
@@ -702,7 +704,7 @@ def exo_trigo():
     cor.extend(l2)
     return (exo, cor)
 
-exo_trigo.description = u'Trigonométrie'
+exo_trigo.description = u'Cosinus d\'un angle aigu'
 
 
 def enonce_trigo(v):
@@ -725,7 +727,7 @@ def enonce_trigo(v):
                 else:
                     tmp = 'la longueur $%s$' % l[2 * i + 6 * j]
             elif l[2 * i + 6 * j + 1]:
-                lt.append('$%s=%s\\degres$' % (l[2 * i + 6 * j], l[2 * i + 
+                lt.append('$%s=%s\\degres$' % (l[2 * i + 6 * j], l[2 * i +
                           6 * j + 1]))
             else:
                 lt.append('la mesure de l\'angle $%s$' % l[2 * i + 6 * j])
@@ -735,33 +737,37 @@ def enonce_trigo(v):
     exo.append('\\begin{enumerate}')
     cor.append('\\begin{multicols}{2}')
     cor.append('\\begin{enumerate}')
+    arrondi = random.randrange(1, 4)
+    text_arrondi = ['dix', 'cent', 'mill'][arrondi - 1] + u'ième'
     tr = nom_triangle(v[0][0])
-    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' % 
+    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
                (tr, v[0][0][0]))
-    exo.append('%s et %s.\\par\nCalculer %s.\\par' % tuple(lt[0:3]))
-    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' % 
+    exo.append('%s et %s.\\par\nCalculer %s, arrondie au %s.\\par' % tuple(lt[0:3] + [text_arrondi]))
+    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
                (tr, v[0][0][0]))
-    cor.append('%s et %s.\\par\nCalculer %s.\\par' % tuple(lt[0:3]))
+    cor.append('%s et %s.\\par\nCalculer %s, arrondie au %s.\\par' % tuple(lt[0:3] + [text_arrondi]))
     cor.append('Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[0][0][0]))  # résolution
     v2 = (v[0][1], v[0][2])
     l2 = l[0:6]
-    cor.extend(resolution_trigo(v2, l2))
+    cor.extend(resolution_trigo(v2, l2, arrondi))
     tr = nom_triangle(v[1][0])
     exo.append('\\columnbreak')
     cor.append('\\columnbreak')
-    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' % 
+    arrondi = random.randrange(1, 4)
+    text_arrondi = ['dix', 'cent', 'mill'][arrondi - 1] + u'ième'
+    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
                (tr, v[1][0][0]))
     exo.append('''%s et %s.\\par
-Calculer %s.\\par''' % 
-               tuple(lt[3:6]))
-    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' % 
+Calculer %s, arrondie au %s.\\par''' %
+               tuple(lt[3:6] + [text_arrondi]))
+    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
                (tr, v[1][0][0]))
-    cor.append('%s et %s.\\par\nCalculer %s.\\par' % tuple(lt[3:6]))
+    cor.append('%s et %s.\\par\nCalculer %s, arrondie au %s.\\par' % tuple(lt[3:6] + [text_arrondi]))
 #    cor.append("""\\dotfill{}\\par\\vspace{2ex}")
     cor.append('Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[1][0][0]))  # résolution
     v2 = (v[1][1], v[1][2])
     l2 = l[6:12]
-    cor.extend(resolution_trigo(v2, l2))
+    cor.extend(resolution_trigo(v2, l2, arrondi))
     exo.append('\\end{enumerate}')
     exo.append('\\end{multicols}')
     cor.append('\\end{enumerate}')
@@ -769,7 +775,7 @@ Calculer %s.\\par''' %
     return (exo, cor)
 
 
-def resolution_trigo(v2, l2):
+def resolution_trigo(v2, l2, arrondi):
     cor = []
     f = (('\\sin', 1, 0), ('\\cos', 2, 0), ('\\tan', 1, 2))[v2[1][0]]
     cor.append('\\[ %s%s=\\cfrac{%s}{%s} \\]' % (f[0], l2[4], v2[0][f[1]],
@@ -783,9 +789,9 @@ def resolution_trigo(v2, l2):
             r = (acos(v2[1][1] / v2[1][2]) * 180) / pi
         else:
             r = (atan(v2[1][1] / v2[1][2]) * 180) / pi
-        cor.append('\\[ \\boxed{%s=%s^{-1}\\left(\\cfrac{%s}{%s}\\right)\\simeq%s\\degres} \\]' % 
+        cor.append(r'\[ \boxed{%s=%s^{-1}\left(\cfrac{%s}{%s}\right) %s\degres} \]' %
                    (l2[4], f[0], nombre(v2[1][1]), nombre(v2[1][2]),
-                   nombre(int(r * 10) / 10.0)))
+                   valeur_exacte(r, approx=arrondi, unit=0)))
     elif not v2[1][1]:
         cor.append('\\[ %s%s=\\cfrac{%s}{%s} \\]' % (f[0], v2[1][3],
                    v2[0][f[1]], nombre(v2[1][2])))
@@ -796,9 +802,9 @@ def resolution_trigo(v2, l2):
         else:
             r = tan((v2[1][3] * pi) / 180)
         r = r * v2[1][2]
-        cor.append('\\[ \\boxed{%s=%s%s\\times %s\\simeq\\unit[%s]{cm}} \\]' % 
+        cor.append(r'\[ \boxed{%s=%s%s\times %s %s} \]' %
                    (v2[0][f[1]], f[0], v2[1][3], nombre(v2[1][2]),
-                   nombre(int(r * 100) / 100.0)))
+                   valeur_exacte(r, approx=arrondi)))
     else:
         cor.append('\\[ %s%s=\\cfrac{%s}{%s} \\]' % (f[0], v2[1][3],
                    nombre(v2[1][1]), v2[0][f[2]]))
@@ -809,9 +815,9 @@ def resolution_trigo(v2, l2):
         else:
             r = tan((v2[1][3] * pi) / 180)
         r = v2[1][1] / r
-        cor.append('\\[ \\boxed{%s=\\cfrac{%s}{%s%s}\\simeq\\unit[%s]{cm}} \\]' % 
+        cor.append(r'\[ \boxed{%s=\cfrac{%s}{%s%s} %s} \]' %
                    (v2[0][f[2]], nombre(v2[1][1]), f[0], v2[1][3],
-                   nombre(int(r * 100) / 100.0)))
+                   valeur_exacte(r, approx=arrondi)))
     return cor
 
 

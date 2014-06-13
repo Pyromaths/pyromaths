@@ -213,10 +213,14 @@ def creation(parametres):
 
         os.chdir(dir0)
         log = open('%s-pyromaths.log' % f0noext, 'w')
-        for i in range(2):
-            call(["latex", "-interaction=batchmode", "%s.tex" % f0noext], stdout=log)
-        call(["dvips", "-q", "%s.dvi" % f0noext, "-o%s.ps" % f0noext], stdout=log)
-        call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % f0noext, "%s.pdf" % f0noext], stdout=log)
+        if socket.gethostname() == "sd-20841.pyromaths.org":
+            call(["latexmk", "-silent", "-output-directory=%s" % dir0, "-pdfps", "%s.tex" % f0noext], stdout=log)
+            call(["latexmk", "-silent", "-output-directory=%s" % dir0, "-c", "%s.tex" % f0noext], stdout=log)
+        else:
+            for i in range(2):
+                call(["latex", "-interaction=batchmode", "%s.tex" % f0noext], stdout=log)
+            call(["dvips", "-q", "%s.dvi" % f0noext, "-o%s.ps" % f0noext], stdout=log)
+            call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % f0noext, "%s.pdf" % f0noext], stdout=log)
         log.close()
         nettoyage(f0noext)
         if not "openpdf" in parametres or parametres["openpdf"]:
@@ -254,9 +258,12 @@ def nettoyage(basefilename):
         except OSError:
             pass
             # le fichier à supprimer n'existe pas et on s'en moque.
-    if os.path.getsize('%s.pdf' % basefilename) > 1000 :
-        os.remove('%s.log' % basefilename)
-        os.remove('%s-pyromaths.log' % basefilename)
+    try:
+        if os.path.getsize('%s.pdf' % basefilename) > 1000 :
+            os.remove('%s.log' % basefilename)
+            os.remove('%s-pyromaths.log' % basefilename)
+    except OSError:
+            pass
 
 
 def copie_tronq_modele(dest, parametres, master):
@@ -270,8 +277,8 @@ def copie_tronq_modele(dest, parametres, master):
 
     if os.path.isfile(os.path.join(parametres['datadir'], 'templates', source)):
         source = os.path.join(parametres['datadir'], 'templates', source)
-    elif os.path.isfile(os.path.join(parametres['datadir'], 'templates', source)):
-        source = os.path.join(parametres['datadir'], 'templates', source)
+    elif os.path.isfile(os.path.join(parametres['configdir'], 'templates', source)):
+        source = os.path.join(parametres['configdir'], 'templates', source)
     else:
         # TODO: Message d'erreur, le modèle demandé n'existe pas
         print(u"Le fichier modèle n'a pas été trouvé dans %s" %

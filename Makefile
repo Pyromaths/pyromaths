@@ -5,7 +5,7 @@
 ### CONFIG
 #
 # Pyromaths version
-VERSION ?= 14.05
+VERSION ?= 14.06
 # Archive format(s) produced by 'make src' (bztar,gztar,zip...)
 FORMATS ?= bztar,zip
 # Verbosity and logging
@@ -32,7 +32,7 @@ FILES   := AUTHORS COPYING NEWS pyromaths README setup.py MANIFEST.in src data
 MANIFEST :=                                     \
     include AUTHORS COPYING NEWS                \n\
     exclude MANIFEST.in                         \n\
-    global-include src/pyromaths/ex/*/img/*.png \n\
+    #global-include src/pyromaths/ex/*/img/*.png \n\
     graft data                                  \n
 # Minimal install (i.e. without test/ dir):
 MANIFEST-min := $(MANIFEST)                     \
@@ -159,6 +159,7 @@ deb: min
 	cp -r debian $(BUILDIR)
 	cd $(BUILDIR) && debuild clean $(OUT)
 	cd $(BUILDIR) && debuild -kB39EE5B6 $(OUT) || exit 0
+	mkdir -p $(DIST)
 	mv $(BUILD)/pyromaths_$(VERSION)-*_all.deb $(DIST)
 
 repo: deb
@@ -181,7 +182,6 @@ data/%.qm: data/%.ts
 
 app: version data/qtmac_fr.qm
 	# Make standalone Mac application
-	$(clean)
 	$(setup) py2app -O2 -b $(BUILD) -d $(DIST) $(OUT)
 	# ..Clean-up unnecessary files/folders
 	rm -f $(APP)/PkgInfo

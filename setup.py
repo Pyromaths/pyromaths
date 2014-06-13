@@ -65,7 +65,8 @@ def _unix_opt():
                                         'data/images/whatsthis.png']),
             ('share/pyromaths/templates', glob('data/templates/*.tex')),
             ('share/pyromaths/packages',  glob('data/packages/*'))
-            ],
+            ] + \
+            find_data_files('data/ex','share/pyromaths/ex/',['*/img/ex-*.png']),
             install_requires = ["lxml>=2.2.2"],
     )
 
@@ -121,7 +122,7 @@ def _mac_opt():
                      'data/images/whatsthis.png']),
             ('data/templates',        glob('data/templates/*.tex')),
             ('data/packages',         glob('data/packages/*')),
-        ],
+        ] + find_data_files('data/ex','data/ex/',['*/img/ex-*.png']),
         setup_requires = ['py2app>=0.7.3', 'lxml>=2.2.2'],
         options    = {'py2app': py2app},
     )
@@ -150,7 +151,7 @@ Name: "{commondesktop}\Pyromaths"; Filename: "{app}\pyromaths.exe"
           (r'data/templates', glob(r'data/templates/*.tex')),
           (r'data/packages', glob(r'data/packages/*')),
           (r'data/packages', glob(r'data/packages/*')),
-        ] + find_data_files('src/pyromaths/ex','data/ex/',['*/img/ex-*.png']),
+        ] + find_data_files('data/ex','data/ex/',['*/img/ex-*.png']),
         zipfile = None,
         windows = [dict(script="src/pyromaths.py",
                         icon_resources=[(1, 'data/images/pyromaths.ico')],
@@ -162,6 +163,7 @@ Name: "{commondesktop}\Pyromaths"; Filename: "{app}\pyromaths.exe"
                                    bundle_files = 3,
                                    packages = ['pyromaths.ex', ],
                                    includes     = ['sip', 'gzip', ],
+                                   dll_excludes = ['msvcr90.dll', 'msvcp90.dll'],
                                    ),
                        innosetup=dict(inno_script=inno_script, compressed=True)
                        )

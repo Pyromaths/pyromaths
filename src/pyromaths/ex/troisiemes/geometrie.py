@@ -129,20 +129,22 @@ def thales(exo, cor):
     exo.append("\\begin{multicols}{2}")
     cor.append("\\begin{multicols}{2}")
     for i in range(2):
+        arrondi = random.randrange(1, 4)
+        text_arrondi = ['dix', 'cent', 'mill'][arrondi - 1] + u'ième'
         noms = choix_points(5)  # les noms des sommets
         while True:
             valeurs = valeurs_thales(70, typeexo[i])  # les longueurs en mm
             if valeurs:
                 break
-        exo.append(tex_enonce_thales(noms, valeurs))
+        exo.append(tex_enonce_thales(noms, valeurs, text_arrondi))
         exo.append(tex_fig_thales(noms, valeurs))
-        cor.append(tex_enonce_thales(noms, valeurs))
-        cor.append(tex_fig_thales(noms, valeurs) + 
+        cor.append(tex_enonce_thales(noms, valeurs, text_arrondi))
+        cor.append(tex_fig_thales(noms, valeurs) +
                  "\n\\par\\dotfill{}")
         cor.append(tex_resolution_thales0(noms))
         cor.append(tex_resolution_thales1(noms, valeurs))
         cor.append(tex_resolution_thales2(noms, valeurs))
-        cor.append(tex_resolution_thales3(noms, valeurs))
+        cor.append(tex_resolution_thales3(noms, valeurs, arrondi))
         if not i:
             exo.append("\\columnbreak")
             cor.append("\\columnbreak")
@@ -198,15 +200,16 @@ def creer_noms(noms, i):
         return str(noms[4]) + str(noms[2])
 
 
-def tex_enonce_thales(noms, valeurs):
+def tex_enonce_thales(noms, valeurs, text_arrondi):
     texte = \
             u'Sur la figure ci-dessous, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par\n' % \
         (lAB(noms[1:3]), lAB(noms[3:5]))
     liste = long_val(noms, valeurs)
-    texte = texte + \
+    texte += \
         'On donne $%s=\\unit[%s]{cm},\\quad %s=\\unit[%s]{cm}, \\quad %s=\\unit[%s]{cm}\\quad\\text{et}\\quad %s~=~\\unit[%s]{cm}$.\\par\n' % \
         tuple(liste[0:8])
-    texte = texte + 'Calculer $%s\\text{ et }%s$.' % tuple(liste[8:10])
+    texte += 'Calculer $%s$ et $%s$, ' % tuple(liste[8:10])
+    texte += u'arrondies au %s.' % text_arrondi
     return texte
 
 
@@ -289,18 +292,17 @@ def valeur_exacte(a, approx=3, unit=1):
     nb = nombre(a)
     if unit:
         if nb.count(',') and (len(nb) - nb.find(',')) - 1 > approx:
-            return '\\simeq\\unit[' + nombre(int(1000.0 * a) / 1000.0) + \
-                ']{cm}'
+            return '\\simeq\\unit[' + nombre(round(a, approx)) + ']{cm}'
         else:
             return '=\\unit[' + nombre(a) + ']{cm}'
     else:
         if nb.count(',') and (len(nb) - nb.find(',')) - 1 > approx:
-            return '\\simeq' + nombre(int(1000.0 * a) / 1000.0)
+            return '\\simeq' + nombre(round(a, approx))
         else:
             return '=' + nombre(a)
 
 
-def tex_resolution_thales3(n, v):
+def tex_resolution_thales3(n, v, arrondi):
     r = v[8][0][0] % 3  # grand rapport
     donnees = []
     for i in range(3):
@@ -311,13 +313,13 @@ def tex_resolution_thales3(n, v):
             if v[i]:  # on cherche i+3
                 donnees.extend([creer_noms(n, i + 3), nombre(v[i]),
                                nombre(v[r + 3]), nombre(v[r]),
-                               valeur_exacte(((v[i] * 1.0) * v[r + 3]) / 
-                               v[r])])
+                               valeur_exacte(((v[i] * 1.0) * v[r + 3]) /
+                               v[r], approx=arrondi)])
             else:
                 donnees.extend([creer_noms(n, i), nombre(v[i + 3]),
                                nombre(v[r]), nombre(v[r + 3]),
-                               valeur_exacte(((v[r] * 1.0) * v[i + 3]) / 
-                               v[r + 3])])
+                               valeur_exacte(((v[r] * 1.0) * v[i + 3]) /
+                               v[r + 3], approx=arrondi)])
     texte = \
         '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n' % \
         tuple(donnees[0:9])
@@ -331,13 +333,13 @@ def tex_resolution_thales3(n, v):
 def fig_thales(noms, valeurs):
     v = test_valeurs_thales(valeurs[0:8], valeurs[8][0], valeurs[8][1])
     type_thales = valeurs[8][1]
-    angle = int(((100.0 * acos(((v[0] ** 2 + v[1] ** 2) - v[2] ** 2) / ((2 * 
+    angle = int(((100.0 * acos(((v[0] ** 2 + v[1] ** 2) - v[2] ** 2) / ((2 *
                 v[0]) * v[1]))) * 180) / pi) / 100.0
     v = [int(v[i] * 100) / 100.0 for i in range(8)]
-    mini_x = int(100.0 * min(0, v[1] * cos((angle * pi) / 180), v[3] * 
-                 type_thales, (v[4] * cos((angle * pi) / 180)) * 
+    mini_x = int(100.0 * min(0, v[1] * cos((angle * pi) / 180), v[3] *
+                 type_thales, (v[4] * cos((angle * pi) / 180)) *
                  type_thales)) / 100.0 - 1.5
-    mini_y = int(100.0 * min(0, (v[4] * sin((angle * pi) / 180)) * 
+    mini_y = int(100.0 * min(0, (v[4] * sin((angle * pi) / 180)) *
                  type_thales)) / 100.0 - 1.5
     maxi_x = int(100.0 * max(v[0], v[1] * cos((angle * pi) / 180))) / \
         100.0 + 1.5
@@ -396,7 +398,7 @@ def tex_fig_thales(noms, valeurs):
     donnees = fig_thales(noms, valeurs)
     enonce = \
         '''\\begin{center}
-\\psset{PointSymbol=x,unit=%s}
+\\psset{PointSymbol=none,unit=%s}
 \\begin{pspicture}(%s,%s)(%s,%s)
 \\SpecialCoor
 \\pstTriangle[PosAngleA=%s, PosAngleB=-45, PosAngleC=%s, PointNameA=%s, PointNameB=%s, PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
@@ -457,10 +459,10 @@ def valeurs_reciproque_thales():
 def fig_rec_thales(noms, v):
     type_thales = v[9]
     angle = v[8]
-    mini_x = int(100.0 * min(0, v[1] * cos((angle * pi) / 180), v[3] * 
-                 type_thales, (v[4] * cos((angle * pi) / 180)) * 
+    mini_x = int(100.0 * min(0, v[1] * cos((angle * pi) / 180), v[3] *
+                 type_thales, (v[4] * cos((angle * pi) / 180)) *
                  type_thales)) / 100.0 - 1.5
-    mini_y = int(100.0 * min(0, (v[4] * sin((angle * pi) / 180)) * 
+    mini_y = int(100.0 * min(0, (v[4] * sin((angle * pi) / 180)) *
                  type_thales)) / 100.0 - 1.5
     maxi_x = int(100.0 * max(v[0], v[1] * cos((angle * pi) / 180))) / \
         100.0 + 1.5
@@ -519,7 +521,7 @@ def tex_fig_rec_thales(noms, valeurs):
     donnees = fig_rec_thales(noms, valeurs)
     enonce = \
         '''{\\begin{wrapfigure}{r}{4cm}
-\\psset{PointSymbol=x,unit=%s}
+\\psset{PointSymbol=none,unit=%s}
 \\begin{pspicture}(%s,%s)(%s,%s)
 \\SpecialCoor
 \\pstTriangle[PosAngleA=%s,PosAngleB=-45,PosAngleC=%s,PointNameA=%s,PointNameB=%s,PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
@@ -537,7 +539,7 @@ def rec_thales(exo, cor):
     exo.append(tex_fig_rec_thales(noms, valeurs))
     exo.append(tex_enonce_rec_thales(noms, valeurs) + '\\vspace{2cm}}')  # le dernier '}' ferme le bloc exercice
     cor.append(tex_fig_rec_thales(noms, valeurs))
-    cor.append(tex_enonce_rec_thales(noms, valeurs) + 
+    cor.append(tex_enonce_rec_thales(noms, valeurs) +
              "\\par\\dotfill{}\\\\}\n")
     cor.append(tex_resolution_rec_thales0(noms, valeurs))
     cor.append(tex_resolution_rec_thales1(noms, valeurs))
@@ -616,13 +618,13 @@ def resolution_rec_thales1(n, v):
             if v[i] != int(v[i]) or v[i + 3] != int(v[i + 3]):
                 p = pgcd(int(v[i] * 10), int(v[i + 3] * 10))
                 if p == 1:
-                    t = '=\\cfrac{%s}{%s}' % (nombre(v[i] * 10), nombre(v[i + 
+                    t = '=\\cfrac{%s}{%s}' % (nombre(v[i] * 10), nombre(v[i +
                             3] * 10))
                 else:
-                    t = '=\\cfrac{%s_{\\div%s}}{%s_{\\div%s}}' % (nombre(v[i] * 
+                    t = '=\\cfrac{%s_{\\div%s}}{%s_{\\div%s}}' % (nombre(v[i] *
                             10), p, nombre(v[i + 3] * 10), p)
             if fractions.simplifie((int(v[i] * 10), int(v[i + 3] * 10))):
-                d.append(t + '=' + fractions.tex_frac(fractions.simplifie((int(v[i] * 
+                d.append(t + '=' + fractions.tex_frac(fractions.simplifie((int(v[i] *
                          10), int(v[i + 3] * 10)))))
             else:
                 d.append(t + '=' + fractions.tex_frac((int(v[i] * 10),
@@ -669,6 +671,8 @@ def trigo_init(exo, cor):
 
 def enonce_trigo(exo, cor, v):
     (l, lt) = ([], [])
+    arrondi = random.randrange(1, 4)
+    text_arrondi = ['dix', 'cent', 'mill'][arrondi - 1] + u'ième'
     for j in range(2):
         f = (('\\sin', 1, 0), ('\\cos', 2, 0), ('\\tan', 1, 2))[v[j][2][0]]
         for i in range(2):
@@ -686,7 +690,7 @@ def enonce_trigo(exo, cor, v):
                 else:
                     tmp = 'la longueur $%s$' % l[2 * i + 6 * j]
             elif l[2 * i + 6 * j + 1]:
-                lt.append('$%s=%s\\degres$' % (l[2 * i + 6 * j], l[2 * i + 
+                lt.append('$%s=%s\\degres$' % (l[2 * i + 6 * j], l[2 * i +
                           6 * j + 1]))
             else:
                 lt.append('la mesure de l\'angle $%s$' % l[2 * i + 6 * j])
@@ -697,46 +701,40 @@ def enonce_trigo(exo, cor, v):
     cor.append('\\begin{multicols}{2}')
     cor.append('\\begin{enumerate}')
     tr = nom_triangle(v[0][0])
-    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' % 
+    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' %
              (tr, v[0][0][0]))
-    exo.append('''%s et %s.\\par
-Calculer %s.\\par
-''' % tuple(lt[0:3]))
-    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' % 
+    exo.append('%s et %s.\\par\nCalculer %s, arrondie au %s.\\par' % tuple(lt[0:3] + [text_arrondi]))
+    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par ' %
              (tr, v[0][0][0]))
-    cor.append('''%s et %s.\\par
-Calculer %s.\\par
-''' % tuple(lt[0:3]))
+    cor.append('%s et %s.\\par\nCalculer %s, arrondie au %s.\\par' % tuple(lt[0:3] + [text_arrondi]))
     cor.append("\\dotfill{}\\par\\vspace{2ex}")
     cor.append('Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[0][0][0]))  # résolution
     v2 = (v[0][1], v[0][2])
     l2 = l[0:6]
-    resolution_trigo(cor, v2, l2)
+    resolution_trigo(cor, v2, l2, arrondi)
     tr = nom_triangle(v[1][0])
     exo.append('\\columnbreak')
     cor.append('\\columnbreak')
-    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' % 
+    arrondi = random.randrange(1, 4)
+    text_arrondi = ['dix', 'cent', 'mill'][arrondi - 1] + u'ième'
+    exo.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
              (tr, v[1][0][0]))
-    exo.append('''%s et %s.\\par
-Calculer %s.\\par
-''' % tuple(lt[3:6]))
-    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' % 
+    exo.append('%s et %s.\\par\nCalculer %s, arrondie au %s.\\par' % tuple(lt[3:6] + [text_arrondi]))
+    cor.append('\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par' %
              (tr, v[1][0][0]))
-    cor.append('''%s et %s.\\par
-Calculer %s.\\par
-''' % tuple(lt[3:6]))
+    cor.append('%s et %s.\\par\nCalculer %s, arrondie au %s.\\par' % tuple(lt[3:6] + [text_arrondi]))
     cor.append("\\dotfill{}\\par\\vspace{2ex}")
     cor.append('Dans le triangle $%s$ rectangle en $%s$,' % (tr, v[1][0][0]))  # résolution
     v2 = (v[1][1], v[1][2])
     l2 = l[6:12]
-    resolution_trigo(cor, v2, l2)
+    resolution_trigo(cor, v2, l2, arrondi)
     exo.append('\\end{enumerate}')
     exo.append('\\end{multicols}')
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
 
 
-def resolution_trigo(cor, v2, l2):
+def resolution_trigo(cor, v2, l2, arrondi):
     f = (('\\sin', 1, 0), ('\\cos', 2, 0), ('\\tan', 1, 2))[v2[1][0]]
     cor.append(u'\\[%s%s=\\cfrac{%s}{%s}' % (f[0], l2[4], v2[0][f[1]], v2[0][f[2]]) + '\\] ')
     if not v2[1][3]:
@@ -748,9 +746,8 @@ def resolution_trigo(cor, v2, l2):
             r = (acos(v2[1][1] / v2[1][2]) * 180) / pi
         else:
             r = (atan(v2[1][1] / v2[1][2]) * 180) / pi
-        cor.append(u'\\[ %s=%s^{-1}\\left(\\cfrac{%s}{%s}\\right)\\simeq%s\\degres' % 
-                  (l2[4], f[0], nombre(v2[1][1]), nombre(v2[1][2]),
-                  nombre(int(r * 10) / 10.0)) + '\\] ')
+        cor.append(r'\[ \boxed{%s=%s^{-1}\left(\cfrac{%s}{%s}\right) %s\degres} \]' %
+                  (l2[4], f[0], nombre(v2[1][1]), v2[1][2], valeur_exacte(r, approx=arrondi, unit=0)))
     elif not v2[1][1]:
         cor.append(u'\\[ %s%s=\\cfrac{%s}{%s}' % (f[0], v2[1][3], v2[0][f[1]],
                   nombre(v2[1][2])) + '\\] ')
@@ -761,9 +758,8 @@ def resolution_trigo(cor, v2, l2):
         else:
             r = tan((v2[1][3] * pi) / 180)
         r = r * v2[1][2]
-        cor.append(u'\\[ %s=%s%s\\times %s\\simeq\\unit[%s]{cm}' % (v2[0][f[1]],
-                  f[0], v2[1][3], nombre(v2[1][2]), nombre(int(r * 100) / 
-                  100.0)) + '\\] ')
+        cor.append(r'\[ \boxed{%s=%s%s\times %s %s } \]' % (v2[0][f[1]],
+                  f[0], v2[1][3], nombre(v2[1][2]), valeur_exacte(r, approx=arrondi)))
     else:
         cor.append(u'\\[ %s%s=\\cfrac{%s}{%s}' % (f[0], v2[1][3], nombre(v2[1][1]),
                   v2[0][f[2]]) + '\\] ')
@@ -774,9 +770,8 @@ def resolution_trigo(cor, v2, l2):
         else:
             r = tan((v2[1][3] * pi) / 180)
         r = v2[1][1] / r
-        cor.append(u'\\[ %s=\\cfrac{%s}{%s%s}\\simeq\\unit[%s]{cm}' % (v2[0][f[2]],
-                  nombre(v2[1][1]), f[0], v2[1][3], nombre(int(r * 100) / 
-                  100.0)) + '\\] ')
+        cor.append(r'\[ \boxed{%s=\cfrac{%s}{%s%s} %s} \]' % (v2[0][f[2]],
+                  nombre(v2[1][1]), f[0], v2[1][3], valeur_exacte(r, approx=arrondi)))
 
 
 def tex_angle(s, n):  # renvoie \\widehat{ABC} où s est la liste des 3 sommets du triangle et n est le rang du sommet de l'angle dans cette liste
