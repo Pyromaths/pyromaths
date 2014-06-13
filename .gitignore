@@ -27,3 +27,6 @@ Doc/build/.buildinfo
 # tests persos
 /src/test.py
 /src/tous.py
+
+# script confidentiel
+/utils/transfert_sur_le_site.sh

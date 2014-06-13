@@ -174,7 +174,7 @@ repo: deb
 	    apt-ftparchive release . > /tmp/Release.tmp                   &&\
 	    mv /tmp/Release.tmp Release                                   &&\
 	    gpg --default-key "Jérôme Ortais" -bao Release.gpg Release    &&\
-	    tar vjcf $(ARCHIVE)/debs-$(VERSION).tar.bz2 dists/ Packages Packages.gz Packages.bz2 Release Release.gpg
+	    tar vjcf $(DIST)/debs-$(VERSION).tar.bz2 dists/ Packages Packages.gz Packages.bz2 Release Release.gpg
 
 data/%.qm: data/%.ts
 	# Translate new/updated language files
