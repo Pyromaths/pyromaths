@@ -548,9 +548,13 @@ class Polynome():
                                 produit.append(repr(j))
                         return "*".join(produit)
                     if lother[i].details == 3 and not ordonne:
-                        return "*".join([repr(coeff) for coeff in lcoeff]) + "*" + \
-                            "*".join(["Polynome([[1, %s]], '%s', %s)" % (exp, self.var, self.details) for exp in lexp]) + \
-                            "*".join([repr(other.nreduction()) for other in lother[i + 1:]])
+                        coeff = "*".join([repr(coeff) for coeff in lcoeff])
+                        if coeff: sol = [coeff]
+                        else: sol = []
+                        exp = "*".join(["Polynome([[1, %s]], '%s', %s)" % (exp, self.var, self.details) for exp in lexp])
+                        if exp: sol.append(exp)
+                        if lother[i + 1:]: sol.append("*".join([repr(other.nreduction()) for other in lother[i + 1:]]))
+                        return "*".join(sol)
                     else:
                         lcoeff.append(1)
                         lexp.append(0)

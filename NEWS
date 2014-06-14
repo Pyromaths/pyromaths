@@ -1,3 +1,7 @@
+Version 14.06.2
+* Nouvel exercice niveau sixième : Construire des angles de mesure donnée, d'après le manuel "des maths ensemble et pour chacun"
+* bugfix dans pyromaths.outils.Priorites3
+
 Version 14.06
 * Nouvel exercice niveau troisième : Bilan sur la notion de fonction
 * Ajout de la notion d'arrondi au dixième, centième, millième dans les exercices sur le théorème de Thalès 4e et 3e, ainsi que les exercices de trigonométrie 4e et 3e.

@@ -24,6 +24,7 @@
 import math
 from random import randrange
 from pyromaths.outils import Geometrie
+from pyromaths import ex
 
 
 def eq_droites(A, B):
@@ -36,7 +37,7 @@ def eq_droites(A, B):
 
 def inter_droites(A, B, C, D):
     """
-    Calcule les coordonn\xc3\xa9es du point d'intersection des droites (AB) et (CD)
+    Calcule les coordonnées du point d'intersection des droites (AB) et (CD)
     """
 
     (a1, b1) = eq_droites(A, B)
@@ -52,7 +53,7 @@ def inter_droites(A, B, C, D):
 
 def dist_pt_droite(A, B, C):
     """
-    calcule la distance du point C \xc3\xa0 la droite (AB)
+    calcule la distance du point C à la droite (AB)
     """
 
     (a, b) = eq_droites(A, B)
@@ -72,7 +73,7 @@ def dist_points(A, B):
 
 def coord_projete(A, B, C):
     """
-    Calcule les coordonn\xc3\xa9es du projet\xc3\xa9 orthogonal de C sur la droite (AB)
+    Calcule les coordonnées du projeté orthogonal de C sur la droite (AB)
     """
 
     (xA, yA) = A
@@ -87,7 +88,7 @@ def coord_projete(A, B, C):
 
 def verifie_distance_mini(A, B, C, D):
     """
-    V\xc3\xa9rifie que la distance minimale entre [AB] et [AC] est sup\xc3\xa9rieure \xc3\xa0 dmin
+    Vérifie que la distance minimale entre [AB] et [AC] est supérieure à dmin
     """
 
     dmin = 1.2
@@ -115,7 +116,7 @@ def verifie_distance_mini(A, B, C, D):
 
 def verifie_angle(lpoints, A, B, C):
     """
-    V\xc3\xa9rifie que l'angle BAC ne coupe pas les autres angles d\xc3\xa9j\xc3\xa0 trac\xc3\xa9s
+    Vérifie que l'angle BAC ne coupe pas les autres angles déjà tracés
     """
 
     if len(lpoints) == 0:  # Premier angle créé
@@ -134,7 +135,7 @@ def verifie_angle(lpoints, A, B, C):
 
 def cree_angles(nb_angles, xmax, ymax):
     '''
-    cr\xc3\xa9e une s\xc3\xa9rie d\'angles "non s\xc3\xa9quents"
+    crée une série d\'angles "non séquents"
     '''
 
     (xmax, ymax) = (xmax - .5, ymax - .5)  # taille de l'image en cm
@@ -142,7 +143,7 @@ def cree_angles(nb_angles, xmax, ymax):
     lpoints = []
     cpt = 0  # evite une boucle infinie
     while len(lpoints) < nb_angles and cpt < 1000:
-        (xA, yA) = (randrange(5, xmax * 10) / 10.0, randrange(5, ymax * 
+        (xA, yA) = (randrange(5, xmax * 10) / 10.0, randrange(5, ymax *
                     10) / 10.0)
         alpha = randrange(360)  # angle entre un côté et l'horizontal
         if len(lpoints) < nb_angles / 2:
@@ -254,3 +255,162 @@ def MesureAngles():
     return (exo, cor)
 
 MesureAngles.description = u'Mesurer des angles'
+
+class ConstruireZigZag(ex.TexExercise):
+
+    description = u'Construire des angles'
+
+    def __init__(self):
+        """ Crée une liste de nbp points situés à la distance lg les uns des
+        autres"""
+        from pyromaths.outils.Conversions import radians
+        from math import sin, cos
+        self.lg, nbp = 4, 6
+        fini = False
+        while not fini:
+            ar = randrange(80, 91)
+            angles_relatifs = [ar]
+            angles_absolus = [ar]
+            ar = radians(ar)
+            points = [(.2, .2), (.2 + self.lg * cos(ar), .2 + self.lg * sin(ar))]
+            for i in range(nbp - 1):
+                point = (-1, -1)
+                cpt = 0  # évite les boucles infinies
+                while (not point[0] < 16.2 or not 0.2 < point[1] < self.lg + 1) and cpt < 100:
+                    if i % 2:
+                        aa = randrange(angles_absolus[-1], 80)
+                    else:
+                        aa = randrange(-80, angles_absolus[-1])
+                    ar = 180 - abs(aa - angles_absolus[-1])
+                    aar = radians(aa)
+                    point = (points[-1][0] + self.lg * cos(aar), points[-1][1] + self.lg * sin(aar))
+                    cpt += 1
+                if cpt == 100:
+                    break
+                else:
+                    points.append(point)
+                    angles_absolus.append(aa)
+                    angles_relatifs.append(ar)
+            if cpt < 100: fini = True
+        self.points, self.angles_relatifs, self.angles_absolus = points, angles_relatifs, angles_absolus
+
+    def tex_place_les_points_zigzag(self, corrige=False):
+        exo = "\\pstGeonode[PosAngle=%.2f, PointSymbol=x](%.2f, %.2f){%s} " % \
+                (self.angles_absolus[0] - 180, self.points[0][0], self.points[0][1], chr(65))
+        if not corrige:
+            exo += "\\pstGeonode[PosAngle=%.2f, PointSymbol=x](%.2f, %.2f){B} " % \
+                (self.angles_absolus[1] + self.angles_relatifs[1] / 2. - 180, self.points[1][0], self.points[1][1])
+            exo += "\pstSegmentMark{A}{B}\n"
+        x1, y1 = inter_droites(self.points[0], self.points[-1], self.points[1], self.points[-2])
+        if 0 < x1 < 18 and 0 < y1 < self.lg + 2:
+            cas = 0
+        else:
+            x1, y1 = inter_droites(self.points[0], self.points[-2], self.points[1], self.points[-1])
+            cas = 1
+        for i in range(1, 5):
+            exo += "\pscircle[linecolor=Gray](%.2f, %.2f){%.1f}\n" % (x1, y1, i / 10.)
+        if corrige:
+            for i in range(1, len(self.angles_relatifs)):
+                if self.angles_absolus[i - 1] > self.angles_absolus[i]:
+                    exo += "\\pstGeonode[PosAngle=%.2f](%.2f, %.2f){%s} " % \
+                            (self.angles_absolus[i] - self.angles_relatifs[i] / 2. - 180, self.points[i][0], self.points[i][1], chr(i + 65))
+                else:
+                    exo += "\\pstGeonode[PosAngle=%.2f](%.2f, %.2f){%s} " % \
+                            (self.angles_absolus[i] + self.angles_relatifs[i] / 2. - 180, self.points[i][0], self.points[i][1], chr(i + 65))
+
+                exo += "\pstSegmentMark{%s}{%s}\n" % (chr(i + 64), chr(i + 65))
+            exo += "\\pstGeonode[PosAngle=%.2f, PointSymbol=x](%.2f, %.2f){%s} " % \
+                    (self.angles_absolus[-1], self.points[-1][0], self.points[-1][1], chr(len(self.points) + 64))
+            exo += "\pstSegmentMark{%s}{%s}\n" % (chr(len(self.points) + 63), chr(len(self.points) + 64))
+            for i in range(len(self.angles_relatifs) - 1):
+                if self.angles_absolus[i] > self.angles_absolus[i + 1]:
+                    if self.angles_relatifs[i + 1] == 90:
+                        exo += "\\pstRightAngle{%s}{%s}{%s}\n" % \
+                                (chr(i + 65), chr(i + 66), chr(i + 67))
+                    else:
+                        exo += "\\pstMarkAngle{%s}{%s}{%s}{%s\\degres}\n" % \
+                                (chr(i + 65), chr(i + 66), chr(i + 67), self.angles_relatifs[i + 1])
+                else:
+                    if self.angles_relatifs[i + 1] == 90:
+                        exo += "\\pstRightAngle{%s}{%s}{%s}\n" % \
+                                (chr(i + 67), chr(i + 66), chr(i + 65))
+                    else:
+                        exo += "\\pstMarkAngle{%s}{%s}{%s}{%s\\degres}\n" % \
+                                (chr(i + 67), chr(i + 66), chr(i + 65), self.angles_relatifs[i + 1])
+            if cas:
+                exo += "\psline[linestyle=dotted](B)(G) "
+                exo += "\psline[linestyle=dotted](A)(F)"
+            else:
+                exo += "\psline[linestyle=dotted](B)(F) "
+                exo += "\psline[linestyle=dotted](A)(G)"
+        return exo
+
+    def tex_commun(self):
+        exo = [u'Construire sur la figure ci-dessous les points $C$, $D$, $E$, $F$ et $G$ pour obtenir un zigzag tel que :\\par']
+        exo_t = '$'
+        for i in range(len(self.angles_relatifs) - 1):
+            exo_t += r"\widehat{%s%s%s}=%s\degres \qquad " % (chr(i + 65), chr(i + 66), chr(i + 67), self.angles_relatifs[i + 1])
+        exo_t += r'$\par'
+        exo.append(exo_t)
+        exo.append(u"Quand le travail est fait avec une bonne précision, les ")
+        x1, y1 = inter_droites(self.points[0], self.points[-1], self.points[1], self.points[-2])
+        if 0 < x1 < 18 and 0 < y1 < self.lg + 2:
+            exo.append(u"droites $(AF)$ et $(BG)$ se coupent au c\\oe ur de la cible.\\par")
+        else:
+            exo.append(u"droites $(AG)$ et $(BF)$ se coupent au c\\oe ur de la cible.")
+        exo.append(r'\begin{center}')
+        exo.append("\\fbox{\n\\begin{pspicture}(-.4,-.4)(16.4, %s)\n" % (self.lg + 1.5))
+        return exo
+
+
+    def tex_statement(self):
+        exo = [r'\exercice']
+        exo.append(u'Voici deux exemples de zigzags :\par')
+        exo.append(r'\psset{unit=3.5mm,PointSymbol=none}')
+        exo.append(r'\begin{pspicture}(-.4,-1)(16.4, 7.5)')
+        exo.append(r'%\psgrid')
+        exo.append(r'\pstGeonode[PosAngle=-96.00,PointSymbol=x](0.20, 0.20){A}')
+        exo.append(r'\pstGeonode[PosAngle=-265.00](0.83, 6.17){B} \pstSegmentMark{A}{B}')
+        exo.append(r'\pstGeonode[PosAngle=-87.50](2.48, 0.40){C} \pstSegmentMark{B}{C}')
+        exo.append(r'\pstGeonode[PosAngle=-241.00](3.63, 6.29){D} \pstSegmentMark{C}{D}')
+        exo.append(r'\pstGeonode[PosAngle=-90.00](9.23, 4.14){E} \pstSegmentMark{D}{E}')
+        exo.append(r'\pstGeonode[PosAngle=-299.50](14.83, 6.29){F} \pstSegmentMark{E}{F}')
+        exo.append(r'\pstGeonode[PosAngle=-80.00,PointSymbol=x](15.87, 0.38){G}')
+        exo.append(r'\pstSegmentMark{F}{G}')
+        exo.append(r'\pstMarkAngle[MarkAngleRadius=1.5]{A}{B}{C}{}')
+        exo.append(r'\pstMarkAngle[MarkAngleRadius=1.5]{D}{C}{B}{}')
+        exo.append(r'\pstMarkAngle[MarkAngleRadius=1.5]{C}{D}{E}{}')
+        exo.append(r'\pstMarkAngle[MarkAngleRadius=1.5]{F}{E}{D}{}')
+        exo.append(r'\pstMarkAngle[MarkAngleRadius=1.5]{E}{F}{G}{}')
+        exo.append(r'\end{pspicture}')
+        exo.append(r'\hspace{2cm}')
+        exo.append(r'\begin{pspicture}(-.4,-1)(16.4, 7.5)')
+        exo.append(r'\pstGeonode[PosAngle=-91.00,PointSymbol=x](0.20, 0.20){A}')
+        exo.append(r'\pstGeonode[PosAngle=-263.50](0.30, 6.20){B} \pstSegmentMark{A}{B}')
+        exo.append(r'\pstGeonode[PosAngle=-101.00](1.76, 0.38){C} \pstSegmentMark{B}{C}')
+        exo.append(r'\pstGeonode[PosAngle=-259.00](5.28, 5.23){D} \pstSegmentMark{C}{D}')
+        exo.append(r'\pstGeonode[PosAngle=-82.50](10.37, 2.05){E} \pstSegmentMark{D}{E}')
+        exo.append(r'\pstGeonode[PosAngle=-286.00](14.46, 6.44){F} \pstSegmentMark{E}{F}')
+        exo.append(r'\pstGeonode[PosAngle=-79.00,PointSymbol=x](15.61, 0.55){G}')
+        exo.append(r'\pstSegmentMark{F}{G}')
+        exo.append(r'\pstMarkAngle[MarkAngleRadius=1.5]{A}{B}{C}{}')
+        exo.append(r'\pstMarkAngle[MarkAngleRadius=1.5]{D}{C}{B}{}')
+        exo.append(r'\pstMarkAngle[MarkAngleRadius=1.5]{C}{D}{E}{}')
+        exo.append(r'\pstMarkAngle[MarkAngleRadius=1.5]{F}{E}{D}{}')
+        exo.append(r'\pstMarkAngle[MarkAngleRadius=1.5]{E}{F}{G}{}')
+        exo.append(r'\end{pspicture}\par')
+        exo.append(r'\psset{unit=1cm}')
+        exo.extend(self.tex_commun())
+        exo.append(self.tex_place_les_points_zigzag(corrige=False))
+        exo.append(r'\end{pspicture}')
+        exo.append('}\n\\end{center}')
+        return exo
+
+    def tex_answer(self):
+        exo = [r'\exercice*']
+        exo.extend(self.tex_commun())
+        exo.append(self.tex_place_les_points_zigzag(corrige=True))
+        exo.append(r'\end{pspicture}')
+        exo.append('}\n\\end{center}')
+        return exo
+
