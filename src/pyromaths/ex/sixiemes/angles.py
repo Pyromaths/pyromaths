@@ -355,9 +355,9 @@ class ConstruireZigZag(ex.TexExercise):
         exo.append(u"Quand le travail est fait avec une bonne précision, les ")
         x1, y1 = inter_droites(self.points[0], self.points[-1], self.points[1], self.points[-2])
         if 0 < x1 < 18 and 0 < y1 < self.lg + 2:
-            exo.append(u"droites $(AF)$ et $(BG)$ se coupent au c\\oe ur de la cible.\\par")
+            exo.append(u"droites $(AG)$ et $(BF)$ se coupent au c\\oe ur de la cible.\\par")
         else:
-            exo.append(u"droites $(AG)$ et $(BF)$ se coupent au c\\oe ur de la cible.")
+            exo.append(u"droites $(AF)$ et $(BG)$ se coupent au c\\oe ur de la cible.")
         exo.append(r'\begin{center}')
         exo.append("\\fbox{\n\\begin{pspicture}(-.4,-.4)(16.4, %s)\n" % (self.lg + 1.5))
         return exo
