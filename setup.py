@@ -104,7 +104,8 @@ def _mac_opt():
                             'pkg_resources' 'tempfile','copy',
                             'textwrap', 'difflib', 'platform', 'threading',
                             'dummy_thread', 'plistlib', 'quopri', 'fnmatch',
-                            'pprint']
+                            'pprint', 'doctest', 'ntpath', 'OpenSSL', 
+                            'os2emxpath', 'tempfile', 'PyQt4.uic']
     excludes = lib_dynload_unused + site_packages_unused + ['PyQt4.%s' % f for f in qt_unused]
     # py2app
     py2app = dict(plist    = plist,
