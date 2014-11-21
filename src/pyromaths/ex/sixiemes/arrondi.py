@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 from random import randint, shuffle
+import textwrap
 
 from pyromaths import ex
 from pyromaths.outils.Affichage import decimaux
@@ -87,6 +88,37 @@ class ArrondirNombreDecimal(ex.TexExercise):
                     ' est : ' + decimaux(solution) + '.')
         cor.append("\\end{enumerate}")
         return cor
+
+    tests = {
+        0: {
+            'tex_statement': textwrap.dedent(ur"""
+                \exercice
+                \begin{enumerate}
+                \item Arrondir 845\,987 à la dizaine par défaut.
+                \item Arrondir 4\,263,73 au dixième par défaut.
+                \item Arrondir 51,616\,4 au millième par défaut.
+                \item Arrondir 78,596\,3 au millième.
+                \end{enumerate}
+                """),
+            'tex_answer': textwrap.dedent(ur"""
+                \exercice*
+                \begin{enumerate}
+                \item L'encadrement de 845\,987 à la dizaine est :\par
+                845\,980 < 845\,987 < 845\,990\par
+                On en déduit que son arrondi à la dizaine  par défaut est : 845\,980.
+                \item L'encadrement de 4\,263,73 au dixième est :\par
+                4\,263,7 < 4\,263,73 < 4\,263,8\par
+                On en déduit que son arrondi au dixième  par défaut est : 4\,263,7.
+                \item L'encadrement de 51,616\,4 au millième est :\par
+                51,616 < 51,616\,4 < 51,617\par
+                On en déduit que son arrondi au millième  par défaut est : 51,616.
+                \item L'encadrement de 78,596\,3 au millième est :\par
+                78,596 < 78,596\,3 < 78,597\par
+                On en déduit que son arrondi au millième  est : 78,596.
+                \end{enumerate}
+                """),
+            }
+        }
 
 def valide_hasard():
     """renvoie un nombre float non multiple de 10000"""
