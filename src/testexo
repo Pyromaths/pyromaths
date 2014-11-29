@@ -1,0 +1,165 @@
+#!/usr/bin/env python
+
+import argparse
+import importlib
+import os
+import pkgutil
+import textwrap
+import sys
+
+import pyromaths.ex.test
+
+VERSION = "0.1.0"
+
+def match_exercise(path):
+    exercises = []
+    for level in pyromaths.ex.levels:
+        for exercise in pyromaths.ex.levels[level]:
+            if pyromaths.ex.__LegacyExercise in exercise.__bases__:
+                continue
+            if exercise.__module__.startswith(path):
+                exercises.append(exercise)
+    return exercises
+
+def exercise_argument(string):
+    splitted = string.split(":")
+    if len(splitted) == 1:
+        path = string
+        seeds = []
+    elif len(splitted) == 2:
+        path, seeds = string.split(":")
+        try:
+            seeds = [int(seed) for seed in seeds.split(",")]
+        except ValueError:
+            raise argparse.ArgumentTypeError("TODO")
+    else:
+        raise argparse.ArgumentTypeError("TODO")
+
+    if path.endswith(".py"):
+        path = path[:-3]
+
+    return dict([
+        (exo, seeds) for exo in match_exercise(path.replace('/', '.'))
+        ])
+
+def argument_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-v', '--version',
+        action='version',
+        version='%(prog)s {version}'.format(version=VERSION),
+        )
+    subparsers = parser.add_subparsers(title='Commands', dest='command')
+    subparsers.required = True
+    subparsers.dest = 'command'
+
+    # Create
+    create = subparsers.add_parser(
+        'create',
+        help='Create test given in argument. If not, create missing tests.',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        )
+    create.add_argument(
+        "exercise",
+        metavar='EXERCISE[:SEED[,SEED]]',
+        nargs='*', type=exercise_argument, default=None,
+        help='Exercices to test. If empty, all exercises are tested.'
+        )
+
+    # Remove
+    remove = subparsers.add_parser(
+        'remove',
+        help='Remove a test',
+        )
+    remove.add_argument(
+        "exercise",
+        metavar='EXERCISE[:SEED[,SEED]]',
+        nargs='+', type=exercise_argument, default=None,
+        help='Exercices to remove.',
+        )
+
+    # Update
+    update = subparsers.add_parser(
+        'update',
+        help='Perform tests given in argument (if not, update all tests). Update tests that have changed.',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        )
+    update.add_argument(
+        "exercise",
+        metavar='EXERCISE[:SEED[,SEED]]',
+        nargs='*', type=exercise_argument, default=None,
+        help='Exercices to test. If empty, all exercises are tested.'
+        )
+
+    # Show
+    show = subparsers.add_parser(
+        'show',
+        help='Compile and show some exercises.',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        )
+    show.add_argument(
+        "exercise",
+        metavar='EXERCISE[:SEED[,SEED]]',
+        nargs='*', type=exercise_argument, default=None,
+        help='Exercices to show. If empty, all exercises are showed.'
+        )
+
+    return parser
+
+def main():
+    pyromaths.ex.load()
+    options = argument_parser().parse_args(sys.argv[1:])
+    test_suite = pyromaths.ex.test.create_test_dictionary()
+
+    exercises = {}
+    for exo_option in options.exercise:
+        for exo in exo_option:
+            if exo not in exercises:
+                exercises[exo] = set()
+            exercises[exo] |= set(exo_option[exo])
+
+    if options.command == 'create':
+        for exo in exercises:
+            if not exercises[exo]:
+                seeds = set([0])
+            else:
+                seeds = exercises[exo]
+            for seed in seeds:
+                if not test_suite.has_test(exo, seed):
+                    test_suite.create_test(exo, seed)
+        test_suite.write_testfiles()
+
+    if options.command == 'remove':
+        for exo in exercises:
+            if not exercises[exo]:
+                seeds = test_suite.get_exercise(exo).seeds
+            else:
+                seeds = exercises[exo]
+            for seed in list(seeds.keys()):
+                if test_suite.has_test(exo, seed):
+                    test_suite.remove_test(exo,seed)
+        test_suite.write_testfiles()
+
+    if options.command == 'update':
+        for exo in exercises:
+            if not exercises[exo]:
+                seeds = test_suite.get_exercise(exo).seeds
+            else:
+                seeds = exercises[exo]
+            for seed in seeds:
+                if not pyromaths.ex.test.simple_runtest(test_suite.get_exercise(exo)[seed]):
+                    test_suite.create_test(exo,seed)
+        test_suite.write_testfiles()
+
+    if options.command == 'show':
+        for exo in exercises:
+            if not exercises[exo]:
+                seeds = test_suite.get_exercise(exo).seeds
+            else:
+                seeds = exercises[exo]
+            for seed in seeds:
+                test_suite.get_exercise(exo)[seed].compile()
+                test_suite.get_exercise(exo)[seed].show()
+
+if __name__ == "__main__":
+    main()
