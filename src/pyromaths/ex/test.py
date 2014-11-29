@@ -32,17 +32,24 @@ does just as expected.
 import codecs
 import json
 import os
+import logging
 import random
+import shutil
+import tempfile
 import textwrap
 import unittest
 
 import pyromaths
 from pyromaths import ex
+from pyromaths.outils import System
 
-class ActionCancel(Exception):
-    pass
+# Logging configuration
+logging.basicConfig(level=logging.INFO)
+LOGGER = logging.getLogger()
+
 
 class ActionCancelAll(Exception):
+    """Cancel an action by user input."""
     pass
 
 def fullclassname(argument):
@@ -163,22 +170,33 @@ class TestModule(Test):
             return False
         return self[exercise].has_test(seed)
 
-    def read_testfile(self):
-        """Read test files of exercises."""
-        testfile_name = "{}.prt".format(os.path.join(*(
+    @property
+    def _testfile_name(self):
+        """Return the name of the file holding test results."""
+        return "{}.prt".format(os.path.join(*(
             pyromaths.__path__
             + [".."]
             + self.name.split('.')
             )))
-        if os.access(testfile_name, os.R_OK):
-            with codecs.open(testfile_name, "r", "utf8") as testfile:
+
+    def read_testfile(self):
+        """Read test files of exercises."""
+        if os.access(self._testfile_name, os.R_OK):
+            with codecs.open(self._testfile_name, "r", "utf8") as testfile:
                 for exercise, seeds in json.loads(testfile.read()).items():
                     for seed in seeds:
-                        self[exercise].add_seed(seed, seeds[seed])
+                        self[exercise].add_seed(int(seed), seeds[seed])
 
     def write_testfile(self):
         """Write test files of exercises"""
-        TODO(write)
+        with codecs.open(self._testfile_name, "w", "utf8") as testfile:
+            json.dump(
+                self.dictionary(),
+                testfile,
+                ensure_ascii=False,
+                sort_keys=True,
+                indent=4,
+                )
 
     def add_exercise(self, exercise):
         """Add an exercise to the test suite."""
@@ -196,6 +214,16 @@ class TestModule(Test):
         for exercise in self:
             for test in self[exercise].iter_tests():
                 yield test
+
+    def dictionary(self):
+        """Return a ``dict`` version of ``self``, suitable for json encoding.
+        """
+        return dict([
+            (name, exercise.dictionary())
+            for name, exercise
+            in self.exercises.items()
+            if not isinstance(exercise, WIPTestSeed)
+            ])
 
 class TestExercise(Test):
     """Test of an exercise"""
@@ -224,13 +252,25 @@ class TestExercise(Test):
             self.exercise.__name__,
             ])
 
-    def add_seed(self, seed, expected):
-        """Add a test with a particular seed."""
-        if int(seed) not in self:
+    def add_seed(self, seed, expected=None):
+        """Add a test with a particular seed.
+
+        :param dict expected: The expected result, as a dictionray with keys
+            ``tex_statement`` and ``tex_answer``. If omitted, a
+            :class:`WIPTestSeed` is used, which does not inherit from
+            :class:`unittest.TestCase`, and represent a test which is being
+            produced: its expected output is not known yet.
+        """
+        if expected:
             self.seeds[int(seed)] = create_exercise_test_case(
                 self.exercise,
                 seed,
                 expected,
+                )
+        else:
+            self.seeds[int(seed)] = WIPTestSeed(
+                self.exercise,
+                seed,
                 )
 
     def remove_test(self, seed):
@@ -247,12 +287,11 @@ class TestExercise(Test):
 
         If test already exists, replace it.
         """
-        print "TODO Creating exo for {}[{}]".format(self.exercise, seed)
-        try:
-            if ask_confirm("Create"):
-                TODO(WRITE)
-        except ActionCancel:
-            return
+        LOGGER.info("Creating test for {}[{}]".format(self.exercise, seed))
+        self.add_seed(seed)
+        self[seed].show()
+        if ask_confirm("Is the test valid"):
+            self.add_seed(seed, self[seed].generate())
 
     def has_test(self, seed):
         """Return True iff there is a test for ``seed``."""
@@ -272,31 +311,35 @@ class TestExercise(Test):
     def __getitem__(self, key):
         return self.seeds[key]
 
+    def dictionary(self):
+        """Return a ``dict`` version of ``self``, suitable for json encoding."""
+        return dict([
+            (seed, test.dictionary())
+            for seed, test in self.seeds.items()
+            ])
+
 def ask_confirm(message):
     """Ask a confirmation for some message.
 
     :rtype bool:
     :return: True iff user agreed (answered ``y``), False if user did not
         (answered ``n``).
-    :raises ActionCancel: if user cancelled, for this case only.
     :raises ActionCancelAll: if user cancelled, for all casess.
     """
     while True:
         try:
-            answer = raw_input("{} (y/n/c/C/?) [?]? ".format(message))
+            answer = raw_input("{} (y/n/c/?) [?]? ".format(message))
         except KeyboardInterrupt:
-            answer = 'C'
+            answer = 'c'
         except EOFError:
-            answer = 'C'
+            answer = 'c'
         if answer == 'y':
             return True
         elif answer == 'n':
             return False
         elif answer == 'c':
-            raise ActionCancel()
-        elif answer == 'C':
             print
-            print "Cancelling… Changes were not saved."
+            LOGGER.warning("Cancelling… Changes were not saved.")
             raise ActionCancelAll()
         print textwrap.dedent("""
             [y]es: accept.
@@ -305,6 +348,94 @@ def ask_confirm(message):
             [C]ancel: all cases (and lose changes made so far).
             """)
 
+class WIPTestSeed(Test):
+    """Test in progress: expected output is not known yet."""
+
+    _tempdir = None
+
+    def __init__(self, exercise, seed):
+        super(WIPTestSeed, self).__init__()
+
+        self.seed = seed
+        random.seed(seed)
+
+        self.exercise = exercise
+        self.exercise_instance = exercise()
+
+    @property
+    def tempdir(self, *args, **kwargs):
+        """Return a temporary directory for this file, creating it if necessary
+
+        This directory will be removed when ``self`` is deleted.
+        """
+        if self._tempdir is None:
+            self._tempdir = tempfile.mkdtemp(*args, **kwargs)
+        return self._tempdir
+
+    def __del__(self):
+        if self._tempdir is not None:
+            shutil.rmtree(self._tempdir)
+        if hasattr(super(WIPTestSeed, self), "__del__"):
+            super(WIPTestSeed, self).__del__()
+
+    def compile(self, openpdf=0, movefile=False):
+        """Compile exercise (an produce a PDF file).
+
+        :rvalue: string
+        :returns: The path of the compiled file.
+        """
+        random.seed(self.seed)
+
+        old_dir = os.path.abspath(os.getcwd())
+        System.creation({
+            'creer_pdf': True,
+            'creer_unpdf': True,
+            'titre': u"Fiche de révisions",
+            'corrige': True,
+            'niveau': "test",
+            'nom_fichier': u'test.tex',
+            'chemin_fichier': self.tempdir,
+            'fiche_exo': os.path.join(self.tempdir, 'exercices.tex'),
+            'fiche_cor': os.path.join(self.tempdir, 'exercices-corrige.tex'),
+            'datadir': pyromaths.Values.data_dir(),
+            'configdir': pyromaths.Values.configdir(),
+            'modele': 'pyromaths.tex',
+            'liste_exos': [self.exercise_instance],
+            'les_fiches': pyromaths.Values.LESFICHES,
+            'openpdf': openpdf,
+        })
+        os.chdir(old_dir)
+
+        if movefile:
+            destname = "{}.{}-{}.pdf".format(
+                self.exercise.__module__,
+                self.exercise.__name__,
+                self.seed,
+                )
+            shutil.move(
+                os.path.join(self.tempdir, 'exercices.pdf'),
+                destname,
+            )
+        else:
+            destname = os.path.join(self.tempdir, 'exercices.pdf')
+
+        return destname
+
+    def show(self):
+        """Display exercise (compiling it before).
+
+        The corresponding PDF is displayed in a PDF viewer.
+        """
+        self.compile(openpdf=1)
+
+    def generate(self):
+        """Return the expected statement and answer, as a dictionary.
+        """
+        return {
+            "tex_statement": self.exercise_instance.tex_statement(),
+            "tex_answer": self.exercise_instance.tex_answer(),
+            }
+
 def create_exercise_test_case(exercise, seed, expected):
     """Return the `unittest.TestCase` for an exercise.
 
@@ -312,44 +443,30 @@ def create_exercise_test_case(exercise, seed, expected):
     :param int seed: Random seed to use to test exercise.
     :param dict expected: Expected output for the exercises.
     """
-    random.seed(seed)
-    exercise_instance = exercise()
-
-    class _TestSeed(Test, unittest.TestCase):
+    class _TestSeed(WIPTestSeed, unittest.TestCase):
         """Test an exercise, with a particular seed."""
 
         longMessage = True
 
         def __init__(self, seed):
-            super(_TestSeed, self).__init__()
-            self.seed = seed
+            super(_TestSeed, self).__init__(exercise, seed)
 
         def runTest(self):
             """Perform test"""
             self.assertListEqual(
-                exercise_instance.tex_statement(),
+                self.exercise_instance.tex_statement(),
                 expected['tex_statement'],
                 )
 
             self.assertListEqual(
-                exercise_instance.tex_answer(),
+                self.exercise_instance.tex_answer(),
                 expected['tex_answer'],
                 )
 
-        def compile(self):
-            """Compile exercise (an produce a PDF file).
-
-            :rvalue: string
-            :returns: The path of the compiled file.
-            """
-            TODO(compile)
-
-        def show(self):
-            """Display exercise (compiling it before).
-
-            The corresponding PDF is displayed in a PDF viewer.
-            """
-            TODO(show)
+        @staticmethod
+        def dictionary():
+            """Return a ``dict`` version of ``self``, for json encoding."""
+            return expected
 
     return type(
         '{}.{}[{}]'.format(exercise.__module__, exercise.__name__, seed),
@@ -371,9 +488,10 @@ def create_test_suite():
 
 def simple_runtest(test):
     """Perform a single test, and return True iff it was successful."""
-    return unittest.TextTestRunner().run(unittest.TestSuite([test])).wasSuccessful()
+    testrunner = unittest.TextTestRunner()
+    return testrunner.run(unittest.TestSuite([test])).wasSuccessful()
 
-def load_tests(*args, **kwargs):
+def load_tests(*__args, **__kwargs):
     """Return an `unittest.TestSuite` containing tests from all exercises."""
     suite = unittest.TestSuite()
     tests = create_test_suite()

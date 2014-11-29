@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 """Pyromaths exercise regression tests
 
@@ -8,10 +9,15 @@ To display help:
 """
 
 import argparse
+import logging
 import sys
 import unittest
 
 import pyromaths.ex.test
+
+# Logging configuration
+logging.basicConfig(level=logging.INFO)
+LOGGER = logging.getLogger()
 
 VERSION = "0.1.0"
 
@@ -26,7 +32,7 @@ def match_exercise(path):
                 exercises.append(exercise)
     return exercises
 
-def exercise_argument(string):
+def exercise_argument(string=""):
     """Return the exercises matching ``string``.
 
     :param str string: a string, option of one of `testexo` commands.
@@ -95,7 +101,7 @@ def argument_parser():
     update = subparsers.add_parser(
         'update',
         help=(
-            "Perform tests given in argument (if not, update all tests)."
+            "Perform tests given in argument. "
             "Update tests that have changed."
             ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -107,23 +113,26 @@ def argument_parser():
         help='Exercices to test. If empty, all exercises are tested.'
         )
 
-    # Show
-    show = subparsers.add_parser(
-        'show',
-        help='Compile and show some exercises.',
+    # Compile
+    compile_parser = subparsers.add_parser(
+        'compile',
+        help='Compile some exercises.',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         )
-    show.add_argument(
+    compile_parser.add_argument(
         "exercise",
         metavar='EXERCISE[:SEED[,SEED]]',
         nargs='*', type=exercise_argument, default=None,
-        help='Exercices to show. If empty, all exercises are showed.'
+        help='Exercices to compile. If empty, all exercises are compiled.'
         )
 
     # Check
     check = subparsers.add_parser(
         'check',
-        help='Test exercises.',
+        help=(
+            "Test exercises (equivalent to `python -m unittest discover`, "
+            "for exercises only)."
+            ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
         )
     check.add_argument(
@@ -154,7 +163,7 @@ def do_remove(exercises, test_suite):
             seeds = test_suite.get_exercise(exo).seeds
         else:
             seeds = exercises[exo]
-        for seed in seeds:
+        for seed in list(seeds.keys()):
             if test_suite.has_test(exo, seed):
                 test_suite.remove_test(exo, seed)
     test_suite.write_testfiles()
@@ -167,23 +176,31 @@ def do_update(exercises, test_suite):
         else:
             seeds = exercises[exo]
         for seed in seeds:
+            exo_instance = test_suite.get_exercise(exo)
+            LOGGER.info(u"Testing exercise {}[{}]…".format(
+                exo_instance.name,
+                seed,
+                ))
             if not pyromaths.ex.test.simple_runtest(
-                    test_suite.get_exercise(exo)[seed]
+                    exo_instance[seed]
                 ):
                 test_suite.create_test(exo, seed)
     test_suite.write_testfiles()
 
-def do_show(exercises, test_suite):
-    """Action for command line 'show'."""
+def do_compile(exercises, test_suite):
+    """Action for command line 'compile'."""
     for exo in exercises:
         if not exercises[exo]:
             seeds = test_suite.get_exercise(exo).seeds
         else:
             seeds = exercises[exo]
+        exo_instance = test_suite.get_exercise(exo)
+        if not exo_instance.seeds:
+            exo_instance.add_seed(0)
         for seed in seeds:
-            test_suite.get_exercise(exo)[seed].show()
+            exo_instance[seed].compile(movefile=True)
 
-def do_check(exercises, test_suite):
+def do_check(__exercises, test_suite):
     """Run the tests"""
     suite = unittest.TestSuite(list(test_suite.iter_tests()))
     unittest.TextTestRunner(verbosity=2).run(suite)
@@ -192,7 +209,7 @@ COMMANDS = {
     "check": do_check,
     "create": do_create,
     "remove": do_remove,
-    "show": do_show,
+    "compile": do_compile,
     "update": do_update,
     }
 
@@ -203,6 +220,8 @@ def main():
     test_suite = pyromaths.ex.test.create_test_suite()
 
     exercises = {}
+    if not options.exercise:
+        options.exercise = [exercise_argument()]
     for exo_option in options.exercise:
         for exo in exo_option:
             if exo not in exercises:
