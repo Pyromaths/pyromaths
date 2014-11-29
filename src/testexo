@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 
+"""Pyromaths exercise regression tests
+
+To display help:
+
+> testexo --help
+"""
+
 import argparse
-import importlib
-import os
-import pkgutil
-import textwrap
 import sys
 
 import pyromaths.ex.test
@@ -12,16 +15,24 @@ import pyromaths.ex.test
 VERSION = "0.1.0"
 
 def match_exercise(path):
+    """Return the exercises in `path`."""
     exercises = []
     for level in pyromaths.ex.levels:
         for exercise in pyromaths.ex.levels[level]:
-            if pyromaths.ex.__LegacyExercise in exercise.__bases__:
+            if pyromaths.ex.LegacyExercise in exercise.__bases__:
                 continue
             if exercise.__module__.startswith(path):
                 exercises.append(exercise)
     return exercises
 
 def exercise_argument(string):
+    """Return the exercises matching ``string``.
+
+    :param str string: a string, option of one of `testexo` commands.
+    :rtype: dict
+    :return: A dictionary with exercises as keys, and sets of integers (seeds)
+    as values.
+    """
     splitted = string.split(":")
     if len(splitted) == 1:
         path = string
@@ -43,6 +54,7 @@ def exercise_argument(string):
         ])
 
 def argument_parser():
+    """Return an argument parser"""
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '-v', '--version',
@@ -81,7 +93,10 @@ def argument_parser():
     # Update
     update = subparsers.add_parser(
         'update',
-        help='Perform tests given in argument (if not, update all tests). Update tests that have changed.',
+        help=(
+            "Perform tests given in argument (if not, update all tests)."
+            "Update tests that have changed."
+            ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
         )
     update.add_argument(
@@ -106,10 +121,66 @@ def argument_parser():
 
     return parser
 
+def do_create(exercises, test_suite):
+    """Action for command line 'create'."""
+    for exo in exercises:
+        if not exercises[exo]:
+            seeds = set([0])
+        else:
+            seeds = exercises[exo]
+        for seed in seeds:
+            if not test_suite.has_test(exo, seed):
+                test_suite.create_test(exo, seed)
+    test_suite.write_testfiles()
+
+def do_remove(exercises, test_suite):
+    """Action for command line 'remove'."""
+    for exo in exercises:
+        if not exercises[exo]:
+            seeds = test_suite.get_exercise(exo).seeds
+        else:
+            seeds = exercises[exo]
+        for seed in seeds:
+            if test_suite.has_test(exo, seed):
+                test_suite.remove_test(exo, seed)
+    test_suite.write_testfiles()
+
+def do_update(exercises, test_suite):
+    """Action for command line 'update'."""
+    for exo in exercises:
+        if not exercises[exo]:
+            seeds = test_suite.get_exercise(exo).seeds
+        else:
+            seeds = exercises[exo]
+        for seed in seeds:
+            if not pyromaths.ex.test.simple_runtest(
+                    test_suite.get_exercise(exo)[seed]
+                ):
+                test_suite.create_test(exo, seed)
+    test_suite.write_testfiles()
+
+def do_show(exercises, test_suite):
+    """Action for command line 'show'."""
+    for exo in exercises:
+        if not exercises[exo]:
+            seeds = test_suite.get_exercise(exo).seeds
+        else:
+            seeds = exercises[exo]
+        for seed in seeds:
+            test_suite.get_exercise(exo)[seed].show()
+
+COMMANDS = {
+    "create": do_create,
+    "update": do_update,
+    "remove": do_remove,
+    "show": do_show,
+    }
+
 def main():
+    """Main function"""
     pyromaths.ex.load()
     options = argument_parser().parse_args(sys.argv[1:])
-    test_suite = pyromaths.ex.test.create_test_dictionary()
+    test_suite = pyromaths.ex.test.create_test_suite()
 
     exercises = {}
     for exo_option in options.exercise:
@@ -118,48 +189,7 @@ def main():
                 exercises[exo] = set()
             exercises[exo] |= set(exo_option[exo])
 
-    if options.command == 'create':
-        for exo in exercises:
-            if not exercises[exo]:
-                seeds = set([0])
-            else:
-                seeds = exercises[exo]
-            for seed in seeds:
-                if not test_suite.has_test(exo, seed):
-                    test_suite.create_test(exo, seed)
-        test_suite.write_testfiles()
-
-    if options.command == 'remove':
-        for exo in exercises:
-            if not exercises[exo]:
-                seeds = test_suite.get_exercise(exo).seeds
-            else:
-                seeds = exercises[exo]
-            for seed in list(seeds.keys()):
-                if test_suite.has_test(exo, seed):
-                    test_suite.remove_test(exo,seed)
-        test_suite.write_testfiles()
-
-    if options.command == 'update':
-        for exo in exercises:
-            if not exercises[exo]:
-                seeds = test_suite.get_exercise(exo).seeds
-            else:
-                seeds = exercises[exo]
-            for seed in seeds:
-                if not pyromaths.ex.test.simple_runtest(test_suite.get_exercise(exo)[seed]):
-                    test_suite.create_test(exo,seed)
-        test_suite.write_testfiles()
-
-    if options.command == 'show':
-        for exo in exercises:
-            if not exercises[exo]:
-                seeds = test_suite.get_exercise(exo).seeds
-            else:
-                seeds = exercises[exo]
-            for seed in seeds:
-                test_suite.get_exercise(exo)[seed].compile()
-                test_suite.get_exercise(exo)[seed].show()
+    COMMANDS[options.command](exercises, test_suite)
 
 if __name__ == "__main__":
     main()
