@@ -209,7 +209,10 @@ def main():
                 exercises[exo] = set()
             exercises[exo] |= set(exo_option[exo])
 
-    COMMANDS[options.command](exercises, test_suite)
+    try:
+        COMMANDS[options.command](exercises, test_suite)
+    except pyromaths.ex.test.ActionCancelAll:
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

@@ -39,6 +39,12 @@ import unittest
 import pyromaths
 from pyromaths import ex
 
+class ActionCancel(Exception):
+    pass
+
+class ActionCancelAll(Exception):
+    pass
+
 def fullclassname(argument):
     """Return the full name of a python object.
 
@@ -242,8 +248,11 @@ class TestExercise(Test):
         If test already exists, replace it.
         """
         print "TODO Creating exo for {}[{}]".format(self.exercise, seed)
-        if ask_confirm("Create"):
-            TODO(WRITE)
+        try:
+            if ask_confirm("Create"):
+                TODO(WRITE)
+        except ActionCancel:
+            return
 
     def has_test(self, seed):
         """Return True iff there is a test for ``seed``."""
@@ -273,7 +282,12 @@ def ask_confirm(message):
     :raises ActionCancelAll: if user cancelled, for all casess.
     """
     while True:
-        answer = raw_input("{} (y/n/c/C/?) [?]? ".format(message))
+        try:
+            answer = raw_input("{} (y/n/c/C/?) [?]? ".format(message))
+        except KeyboardInterrupt:
+            answer = 'C'
+        except EOFError:
+            answer = 'C'
         if answer == 'y':
             return True
         elif answer == 'n':
@@ -281,12 +295,14 @@ def ask_confirm(message):
         elif answer == 'c':
             raise ActionCancel()
         elif answer == 'C':
+            print
+            print "Cancelling… Changes were not saved."
             raise ActionCancelAll()
         print textwrap.dedent("""
             [y]es: accept.
             [n]o: reject.
             [c]ancel: just this case.
-            [C]ancel: all cases.
+            [C]ancel: all cases (and lose changes made so far).
             """)
 
 def create_exercise_test_case(exercise, seed, expected):
