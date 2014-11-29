@@ -9,6 +9,7 @@ To display help:
 
 import argparse
 import sys
+import unittest
 
 import pyromaths.ex.test
 
@@ -119,6 +120,19 @@ def argument_parser():
         help='Exercices to show. If empty, all exercises are showed.'
         )
 
+    # Check
+    check = subparsers.add_parser(
+        'check',
+        help='Test exercises.',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        )
+    check.add_argument(
+        "exercise",
+        metavar='EXERCISE[:SEED[,SEED]]',
+        nargs='*', type=exercise_argument, default=None,
+        help='Exercices to check. If empty, all exercises are checked.'
+        )
+
     return parser
 
 def do_create(exercises, test_suite):
@@ -169,11 +183,17 @@ def do_show(exercises, test_suite):
         for seed in seeds:
             test_suite.get_exercise(exo)[seed].show()
 
+def do_check(exercises, test_suite):
+    """Run the tests"""
+    suite = unittest.TestSuite(list(test_suite.iter_tests()))
+    unittest.TextTestRunner(verbosity=2).run(suite)
+
 COMMANDS = {
+    "check": do_check,
     "create": do_create,
-    "update": do_update,
     "remove": do_remove,
     "show": do_show,
+    "update": do_update,
     }
 
 def main():
