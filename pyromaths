@@ -3,7 +3,7 @@ try:
     from pyromaths import pyromaths
 except ImportError:
     import sys, os.path
-    basedir = path.dirname(path.realpath(__file__))
-    sys.path.insert(0, path.join(basedir,'src'))
+    basedir = os.path.dirname(os.path.realpath(__file__))
+    sys.path.insert(0, os.path.join(basedir,'src'))
     from pyromaths import pyromaths
 pyromaths.main()
