@@ -182,10 +182,11 @@ class TestModule(Test):
     def read_testfile(self):
         """Read test files of exercises."""
         if os.access(self._testfile_name, os.R_OK):
-            with codecs.open(self._testfile_name, "r", "utf8") as testfile:
-                for exercise, seeds in json.loads(testfile.read()).items():
-                    for seed in seeds:
-                        self[exercise].add_seed(int(seed), seeds[seed])
+            if os.stat(self._testfile_name)[6] != 0: # File is not empty
+                with codecs.open(self._testfile_name, "r", "utf8") as testfile:
+                    for exercise, seeds in json.loads(testfile.read()).items():
+                        for seed in seeds:
+                            self[exercise].add_seed(int(seed), seeds[seed])
 
     def write_testfile(self):
         """Write test files of exercises"""
@@ -222,7 +223,6 @@ class TestModule(Test):
             (name, exercise.dictionary())
             for name, exercise
             in self.exercises.items()
-            if not isinstance(exercise, WIPTestSeed)
             ])
 
 class TestExercise(Test):
@@ -316,6 +316,7 @@ class TestExercise(Test):
         return dict([
             (seed, test.dictionary())
             for seed, test in self.seeds.items()
+            if isinstance(test, unittest.TestCase)
             ])
 
 def ask_confirm(message):
