@@ -1,6 +1,7 @@
-Version 14.06.2
+Version 14.10
 * Nouvel exercice niveau sixième : Construire des angles de mesure donnée, d'après le manuel "des maths ensemble et pour chacun"
 * bugfix dans pyromaths.outils.Priorites3
+* bugfix dans pyromaths.ex.lycee.ExoPolynome.quest_fonctions_rationnelles. Merci à jcl de m'en avoir averti.
 
 Version 14.06
 * Nouvel exercice niveau troisième : Bilan sur la notion de fonction

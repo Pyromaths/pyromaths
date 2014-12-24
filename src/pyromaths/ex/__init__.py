@@ -144,6 +144,7 @@ def load(pkg=None, recursive=True):
             # new level? create its exercise list
             if lvl not in levels.keys(): levels[lvl] = []
             levels[lvl].append(ex)
+
     if not recursive: return
     # load sub-packages
     for pk in _subpackages(pkg): load(pk)

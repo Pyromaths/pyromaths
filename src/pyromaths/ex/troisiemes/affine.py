@@ -250,7 +250,7 @@ def tracefonc(f, i, A, B, xmin, xmax, ymin, ymax):
         :rtype: list of string
         """
     u = coefdir(A, B)
-    if u.d == 1:
+    if isinstance(u, int) or u.d == 1:
         x1 = decimaux(B[0])
     else:
         B = (u.d, u.n + float(A[1]))
@@ -270,6 +270,7 @@ def exprfonc(f, i, A, B):
 # Génère la 3e question.
 # A est sur l'axe des ordonnées, f est le nom de la fonction
     u = coefdir(A, B)
+    if isinstance(u, int): u = Fraction(u, 1)
     Polynome([[u, 1], [A[1], 0]], "x")(B[0])
     #===========================================================================
     # if A[1] >= 0:

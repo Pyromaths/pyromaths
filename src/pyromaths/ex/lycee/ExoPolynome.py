@@ -304,6 +304,8 @@ exo_variation_lim.level = u"0.Term S"
 
 def quest_fonctions_rationnelles():
     from pyromaths.classes.Fractions import Fraction
+    from pyromaths.outils import Priorites3
+
     nomf = ['f', 'g', 'h', 'k'][randrange(4)]
     var = ['t', 'x'][randrange(2)]
     X = Polynome({1:1}, var)
@@ -322,12 +324,13 @@ def quest_fonctions_rationnelles():
 
     borneinf = -10
     bornesup = 10
+    racine = eval(Priorites3.priorites("-%r/%r" % (Q[0], Q[1]))[-1][0])
     # Je veux que f soit définie et dérivable sur I=Intervalle
-    if (-Q[0] / Q[1]) >= borneinf and (-Q[0] / Q[1]) <= bornesup:
-        if ((-Q[0] / Q[1]) - borneinf) < (bornesup - (-Q[0] / Q[1])):
-            Intervalle = [int(round(-Q[0] / Q[1])) + 1, bornesup]
+    if (racine >= borneinf) and (racine <= bornesup):
+        if (racine - borneinf) < (bornesup - racine):
+            Intervalle = [int(round(racine)) + 1, bornesup]
         else:
-            Intervalle = [borneinf, int(round(-Q[0] / Q[1])) - 1]
+            Intervalle = [borneinf, int(round(racine)) - 1]
     else:
         Intervalle = [borneinf, bornesup]
 
@@ -358,7 +361,7 @@ def quest_fonctions_rationnelles():
             x1 = x0.simplifie()
         else:
             x1 = x0
-        cor.append("%s&=%s" % (var, TeX(-Q[0] * Fraction(1) / Q[1])))
+        cor.append("%s&=%s" % (var, Fraction(-Q[0], Q[1])))
         cor.append("\\\\")
         if isinstance(x0, (Fraction, RacineDegre2)) and (not isinstance(x1, (Fraction, RacineDegre2)) or x0.d != x1.d):
             cor.append("%s&=%s" % (var, TeX(x1)))
@@ -961,13 +964,13 @@ def factorisation_degre3(E, nomE, exo=[], cor=[], racines=[0, 1, -1, 2, -2]):
     elif E[3] != 1:
         cor.append(TeX(E[3]))
     if delta < 0:
-        P1 = factorisation[-1][0]
-        E_factorise = "%s\\times%s$" % (P0, P1)
+        # P1 = factorisation[-1][0]
+        E_factorise = "%s\\times%s$" % (P0, E2)
+        print P0, E2
     elif delta == 0:
         P1 = factorisation[-1][0]
         E_factorise = "%s\\times{\\left(%s\\right)}^2$" % (P0, P1)
     else:
-
         P1 = factorisation[-1][0]
         P2 = factorisation[-1][1]
         E_factorise = "%s\\left(%s\\right)\\left(%s\\right)$" % (P0, P1, P2)

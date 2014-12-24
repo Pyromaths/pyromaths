@@ -5,7 +5,7 @@
 ### CONFIG
 #
 # Pyromaths version
-VERSION ?= 14.06.2
+VERSION ?= 14.10
 # Archive format(s) produced by 'make src' (bztar,gztar,zip...)
 FORMATS ?= bztar,zip
 # Verbosity and logging
@@ -36,11 +36,13 @@ MANIFEST :=                                     \
     graft data                                  \n
 # Minimal install (i.e. without test/ dir):
 MANIFEST-min := $(MANIFEST)                     \
+    graft data                                  \n\
     prune test                                  \n
 # Full project sources:
 MANIFEST-all := $(MANIFEST)                     \
     graft debian                                \n\
     graft utils                                 \n\
+    graft data                                  \n\
     include Makefile                            \n
 # Unix:
 MANIFEST-unix := $(MANIFEST-min)                \

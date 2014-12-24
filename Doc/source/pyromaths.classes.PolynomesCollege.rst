@@ -11,10 +11,3 @@ Un objet Polynome peut être construit à partir d'une liste et d'une chaîne co
 ..    :private-members:
       :undoc-members:
       :show-inheritance:
-
-.. automodule:: pyromaths.classes.PolynomesCollege
-    :members:
-    :special-members:
-    :undoc-members:
-..    :private-members:
-      :show-inheritance:

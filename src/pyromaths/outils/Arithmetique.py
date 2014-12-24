@@ -39,6 +39,7 @@ def pgcd(*n):
 
     :rtype: integer
     """
+    from pyromaths.classes.SquareRoot import SquareRoot
     def _pgcd(a, b):
         #=======================================================================
         # print "pgcd dans arithmetique ", a, b, isinstance(a, int), isinstance(b, int)
@@ -47,8 +48,19 @@ def pgcd(*n):
         if abs(a) == float('inf') or abs(b) == float('inf'): return 1
         while b: a, b = b, a % b
         return a
+    # Pour pouvoir utiliser pgcd(a) où a=(2,4,6) :
+    n = list(n)
     if isinstance(n[0], (list, tuple)): n = n[0]
-    # Pour pouvoir utiliser pgcd(a) où a=(2,4,6)
+    # Pour chercher à simplifier une fraction avec un objet SquareRoot
+    if isinstance(n[0], SquareRoot):
+        if len(n[0]) > 1:
+            n[0] = pgcd(*[n[0][i][0] for i in range(len(n[0]))])
+        else:
+            n[0] = n[0][0][0]
+    if isinstance(n[1], SquareRoot):
+        if len(n[1]) > 1:
+            n[1] = pgcd(*[n[1][i][0] for i in range(len(n[0]))])
+        else: n[1] = n[1][0][0]
     p = _pgcd(n[0], n[1])
     for x in n[2:]:
         p = _pgcd(p, x)

@@ -23,6 +23,7 @@
 
 from pyromaths.outils.Arithmetique import pgcd, ppcm
 from collections import Counter
+from pyromaths.classes.SquareRoot import SquareRoot
 
 class Fraction():
     """Cette classe crée la notion de fractions.
@@ -635,8 +636,23 @@ class Fraction():
             self.d = eval(self.d)
             conv = True
         if conv : self = Fraction(self.n, self.d)
+        conv = False
+        if isinstance(self.n, SquareRoot):
+            s = self.n.simplifie()
+            if s != self.n:
+                self.n = s
+                conv = True
+        if isinstance(self.d, SquareRoot):
+            s = self.d.simplifie()
+            if s != self.d:
+                self.d = s
+                conv = True
+        if conv: return self
         s = pgcd(self.n, self.d)
-        return Fraction(self.n // s, self.d // s)
+        if self.d != s:
+            return Fraction(self.n // s, self.d // s)
+        else:
+            return self.n // s
 
     def decompose(self):
         """**decompose**\ (*object*)
@@ -652,6 +668,19 @@ class Fraction():
         """
         if isinstance(self.n, str): self.n = eval(self.n)
         if isinstance(self.d, str): self.d = eval(self.d)
+        conv = False
+        if isinstance(self.n, SquareRoot):
+            s = self.n.simplifie()
+            if s != self.n:
+                self.n = s
+                conv = True
+        if isinstance(self.d, SquareRoot):
+            s = self.d.simplifie()
+            if s != self.d:
+                self.d = s
+                conv = True
+        if conv:
+            return self
         if self.d == self.n:
             return 1
         else:
@@ -659,7 +688,7 @@ class Fraction():
             if lepgcd == 1:
                 return self
             else:
-                return Fraction("%s*%s" % (self.n // lepgcd, lepgcd), "%s*%s" % (self.d // lepgcd, lepgcd), "s")
+                return Fraction("%r*%s" % (self.n // lepgcd, lepgcd), "%r*%s" % (self.d // lepgcd, lepgcd), "s")
 
     def traitement(self, final=False):
         """**traitement**\ (*object*,\ *self*)

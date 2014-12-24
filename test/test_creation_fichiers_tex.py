@@ -72,7 +72,7 @@ if (len(sys.argv) == 4):
     parametres['fiche_exo'] = os.path.join(dt, 'exercices.tex')
     parametres['fiche_cor'] = os.path.join(dt, 'exercices-corrige.tex')
     creation(parametres)
-    #nettoyage(dt)
+#    nettoyage(dt)
 
 elif (len(sys.argv) == 1):
     os.rmdir(dt)

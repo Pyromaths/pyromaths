@@ -6,4 +6,4 @@ Les classes de Pyromaths
 
     pyromaths.classes.Fractions
     pyromaths.classes.PolynomesCollege
-
+    pyromaths.classes.SquareRoot
