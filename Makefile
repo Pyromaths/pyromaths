@@ -29,11 +29,12 @@ FILES   := AUTHORS COPYING NEWS pyromaths README setup.py MANIFEST.in src data
 ### MANIFESTS
 #
 # Base manifest (README, src/ and test/ auto-included):
-MANIFEST :=                                     \
-    include AUTHORS COPYING NEWS                \n\
-    exclude MANIFEST.in                         \n\
-    #global-include src/pyromaths/ex/*/img/*.png \n\
-    graft data                                  \n
+MANIFEST :=                                      \
+    include AUTHORS COPYING NEWS                 \n\
+    exclude MANIFEST.in	                         \n\
+    prune test                                   \n\
+    prune utils                                  \n\
+    graft data                                   \n
 # Minimal install (i.e. without test/ dir):
 MANIFEST-min := $(MANIFEST)                     \
     graft data                                  \n\
@@ -43,6 +44,8 @@ MANIFEST-all := $(MANIFEST)                     \
     graft debian                                \n\
     graft utils                                 \n\
     graft data                                  \n\
+    graft Doc                                   \n\
+    graft Doc/source                            \n\
     include Makefile                            \n
 # Unix:
 MANIFEST-unix := $(MANIFEST-min)                \
