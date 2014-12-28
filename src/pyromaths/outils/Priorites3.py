@@ -144,7 +144,7 @@ def cherche_operateur(calcul, index):
 
     Recherche le premier opérateur +, -, \*, /, ^ dans la chaîne calcul à une position
     supérieure ou égale à min_i, sans expression régulière.
-    
+
     :param calcul: le calcul à tester
     :type calcul: string
     :param min_i: position à partir de laquelle effectuer le test
@@ -226,7 +226,8 @@ def split_calcul(calcul):
 def EstNombre(value):
     """**EstNombre**\ (*value*)
 
-    Teste si `value` est une valeur, c'est à dire un entier, un réel, un polynôme, une fraction
+    Teste si `value` est une valeur, c'est à dire un entier, un réel, un polynôme, une fraction, une racine carrée.
+    Attention : (-11) est considéré comme un nombre
 
     :param value: la valeur à traiter
     :type value: string
@@ -242,6 +243,14 @@ def EstNombre(value):
     from pyromaths.classes.PolynomesCollege import Polynome
     from pyromaths.classes.Fractions import Fraction
     from pyromaths.classes.SquareRoot import SquareRoot
+    classe = cherche_classe(value, 0)
+    if  classe:
+        if classe != value: return False
+        else: return True
+    #===========================================================================
+    # if cherche_operateur(value, 1):
+    #     return False
+    #===========================================================================
     try:
         return isinstance(eval(value), (float, int, Polynome, Fraction, SquareRoot))
     except:
@@ -678,7 +687,7 @@ def priorites(calcul):
     [['Polynome([[Fraction(6, 21, "s"), 1]], "x", 0)', '+', 'Polynome([[Fraction(6, 7), 0]], "x", 0)'], ['Polynome([[Fraction(2, 7), 1], [Fraction(6, 7), 0]], "x", 0)']]
     >>> Priorites3.priorites('-Fraction(-6,1)/Fraction(-4,1)')
     [['-', '(', 'Fraction(-6, 1)', '*', 'Fraction(1, -4)', ')'], ['-', 'Fraction("2*-3", "2*-2", "s")'], ['Fraction(-3, 2)']]
-    
+
     :rtype: list
     """
     calcul = splitting(calcul)
@@ -712,8 +721,8 @@ def priorites(calcul):
 
 def texifystring(calcul):
     r"""**texify**\ (*calcul*)
-    
-    convertit la chaîne de caractères en chaîne au format TeX. 
+
+    convertit la chaîne de caractères en chaîne au format TeX.
     """
     return texify([splitting(calcul)])[0]
 
@@ -736,8 +745,8 @@ def texify(liste_calculs):
     ['4+5-6', '9-6', '3']
     >>> Priorites3.texify(Priorites3.priorites('(-7)+8-Polynome([[-4, 1], [-9, 2], [-5, 0]], "x")'))
     ['1-\\left( -4\\,x-9\\,x^{2}-5\\right) ', '1+4\\,x+9\\,x^{2}+5', '9\\,x^{2}+4\\,x+6']
-    >>> Priorites3.texify(['Fraction(5,6)', '**', '2'])
-    ['\\dfrac{5}{6}', '^{', '2']
+    >>> Priorites3.texify([['Fraction(5,6)', '**', '2']])
+    ['\\dfrac{5}{6}^{2}']
 
     :rtype: list
     """
@@ -746,16 +755,27 @@ def texify(liste_calculs):
     from pyromaths.classes.SquareRoot import SquareRoot
     from Affichage import decimaux
     ls = []
+    enluminures = {'indice': r'_{', 'cancel':r'\cancel{'}
+    isEnlumine = {'indice': False, 'cancel':False}
     for calcul in liste_calculs:
         if isinstance(calcul, basestring): calcul = splitting(calcul)
         s = ""
         puiss = 0
-        for i in range(len(calcul)):
-            el = calcul[i]
+        for index in range(len(calcul)):
+            el = calcul[index]
+            for cle in isEnlumine.keys():
+                if isEnlumine[cle] and (not isinstance(el, list) or el[1] != cle):
+                    s += '}'
+                    isEnlumine[cle] = False
+            if isinstance(el, list):
+                if not isEnlumine[el[1]]:
+                    s += enluminures[el[1]]
+                    isEnlumine[el[1]] = True
+                el = el[0]
             if el[:9] == "Polynome(":
                 # Doit-on entourer ce polynôme de parenthèses ?
                 p = eval(el)
-                if i + 1 < len(calcul): q = calcul[i + 1]
+                if index + 1 < len(calcul): q = calcul[index + 1]
                 else: q = ""
                 """ 3 cas :
                 * {*,-}(2x+3) ou {*,-}(-2x)
@@ -782,10 +802,11 @@ def texify(liste_calculs):
                     else: t[-1] += p[i]
                 p = t
                 if len(p) == 2:
-                    texfrac = str(Fraction(eval(p[0]), eval(p[1])))
+                    # texfrac = str(Fraction(eval(p[0]), eval(p[1])))
+                    texfrac = str(Fraction(p[0], p[1]))
                 else:
                     texfrac = str(Fraction(p[0], p[1], p[2]))
-                if i + 1 < len(calcul): q = calcul[i + 1]
+                if index + 1 < len(calcul): q = calcul[index + 1]
                 else: q = ""
                 if (eval(p[0]) < 0 or p[1] != "1") and q == "**":
                     s += "( " + texfrac + " )"
@@ -793,7 +814,7 @@ def texify(liste_calculs):
                     s += texfrac
             elif el[:11] == "SquareRoot(":
                 p = eval(el)
-                if i + 1 < len(calcul): q = calcul[i + 1]
+                if index + 1 < len(calcul): q = calcul[index + 1]
                 else: q = ""
                 """ 3 cas :
                 * {*,-}(2x+3) ou {*,-}(-2x)
@@ -811,7 +832,7 @@ def texify(liste_calculs):
                 else:
                     s += str(p)
             elif EstNombre(el):
-                if i + 1 < len(calcul): q = calcul[i + 1]
+                if index + 1 < len(calcul): q = calcul[index + 1]
                 else: q = ""
                 if el[0] == "(": s += "(" + decimaux(el[1:-1]) + ")"
 
@@ -822,7 +843,7 @@ def texify(liste_calculs):
                 else: s += decimaux(el)
             elif el == "**":
                 s += "**{"
-                puiss += 1
+                puiss = 1
             elif el == "(":
                 if puiss: puiss += 1
                 s += "("
@@ -832,9 +853,12 @@ def texify(liste_calculs):
             else :
                 # "+", "-", "*", "/"
                 s += el
-            if puiss == 1 and s[-1] != "{":
+            if puiss == 1 and s[-1] != r"{":
                 puiss = 0
                 s += "}"
+        for cle in isEnlumine.keys():
+            if isEnlumine[cle] and (not isinstance(el, list) or el[1] != cle):
+                s += '}'
         s = s.replace("**{", "^{")
         s = s.replace("(", "\\left( ")
         s = s.replace(")", "\\right) ")

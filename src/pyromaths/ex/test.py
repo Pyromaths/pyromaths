@@ -182,7 +182,7 @@ class TestModule(Test):
     def read_testfile(self):
         """Read test files of exercises."""
         if os.access(self._testfile_name, os.R_OK):
-            if os.stat(self._testfile_name)[6] != 0: # File is not empty
+            if os.stat(self._testfile_name)[6] != 0:  # File is not empty
                 with codecs.open(self._testfile_name, "r", "utf8") as testfile:
                     for exercise, seeds in json.loads(testfile.read()).items():
                         for seed in seeds:

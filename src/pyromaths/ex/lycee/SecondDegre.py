@@ -283,7 +283,7 @@ class Sd2aRacines(ex.TexExercise):
                 question[i].append(r'\begin{tabularx}{\linewidth}[t]{XXX}')
                 question[i].append(r'{$\! \begin{aligned}')
                 sol = [[str(m[1][0]), '**', '2', '-', '4', '*', str(m[0][0]), '*', str(m[2][0])]]
-                sol.extend(Priorites3.priorites('(%s)**2-4*%s*%s' % (m[1][0], m[0][0], m[2][0])))
+                sol.extend(Priorites3.priorites('%s**2-4*%s*%s' % (m[1][0], m[0][0], m[2][0])))
                 solTeX = Priorites3.texify(sol)
                 for s in solTeX:
                     question[i].append(u'\\Delta &= %s\\\\' % s)
@@ -291,7 +291,7 @@ class Sd2aRacines(ex.TexExercise):
                 question[i].append(r'&')
                 question[i].append(r'{$\! \begin{aligned}')
                 delta = sol[-1][0]
-                sol = [['Fraction(SquareRoot([[%s, None], [-1, %s]]),\'2*(%s)\')' % (-m[1][0], delta, m[0][0])]]
+                sol = [['Fraction(SquareRoot([[%s, None], [-1, %s]]),\'2*%s\')' % (-m[1][0], delta, m[0][0])]]
                 sol.extend(Priorites3.priorites(sol[0][0]))
                 sol = Priorites3.texify(sol)
                 for s in sol:
@@ -300,7 +300,7 @@ class Sd2aRacines(ex.TexExercise):
                 question[i].append(r'\end{aligned}$}')
                 question[i].append(r'&')
                 question[i].append(r'{$\! \begin{aligned}')
-                sol = [['Fraction(SquareRoot([[%s, None], [1, %s]]),\'2*(%s)\')' % (-m[1][0], delta, m[0][0])]]
+                sol = [['Fraction(SquareRoot([[%s, None], [1, %s]]),\'2*%s\')' % (-m[1][0], delta, m[0][0])]]
                 sol.extend(Priorites3.priorites(sol[0][0]))
                 sol = Priorites3.texify(sol)
                 for s in sol:
