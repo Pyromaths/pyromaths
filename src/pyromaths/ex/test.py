@@ -41,7 +41,6 @@ import unittest
 
 import pyromaths
 from pyromaths import ex
-from pyromaths.outils import System
 
 # Logging configuration
 logging.basicConfig(level=logging.INFO)
@@ -388,6 +387,8 @@ class WIPTestSeed(Test):
         random.seed(self.seed)
 
         old_dir = os.path.abspath(os.getcwd())
+
+        from pyromaths.outils import System
         System.creation({
             'creer_pdf': True,
             'creer_unpdf': True,
