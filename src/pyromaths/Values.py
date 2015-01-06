@@ -73,7 +73,10 @@ ICONDIR = icon_dir()
 HOME = home()
 CONFIGDIR = configdir()
 
-LESFICHES = []
-ex.load()
-for level, exercices in ex.levels.iteritems():
-    LESFICHES.append([level, '', exercices])
+def lesfiches():
+    """Charge et renvoie les fiches d'exercices"""
+    fiches = []
+    ex.load()
+    for level, exercices in ex.levels.iteritems():
+        fiches.append([level, '', exercices])
+    return fiches

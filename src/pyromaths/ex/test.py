@@ -403,7 +403,7 @@ class WIPTestSeed(Test):
             'configdir': pyromaths.Values.configdir(),
             'modele': 'pyromaths.tex',
             'liste_exos': [self.exercise_instance],
-            'les_fiches': pyromaths.Values.LESFICHES,
+            'les_fiches': pyromaths.Values.lesfiches(),
             'openpdf': openpdf,
         })
         os.chdir(old_dir)

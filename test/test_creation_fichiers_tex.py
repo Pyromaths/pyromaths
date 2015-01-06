@@ -8,7 +8,7 @@ _path = normpath(join(abspath(dirname(__file__)), "../src"))
 sys.path[0] = realpath(_path)
 from pyromaths import pyromaths
 
-from pyromaths.Values import LESFICHES, data_dir, configdir
+from pyromaths.Values import lesfiches, data_dir, configdir
 from pyromaths.outils.System import creation
 import codecs, tempfile
 
@@ -40,6 +40,8 @@ Niveau 5 : troisième
 Niveau 6 : terminale S
 Niveau 7 : sixième
 """
+
+LESFICHES = lesfiches()
 dt = tempfile.mkdtemp(prefix='pyromaths_tests-', dir='/tmp')
 parametres = {
         'creer_pdf': True,
