@@ -47,6 +47,12 @@ from pyromaths.outils import System
 logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger()
 
+def all2unicode(argument):
+    """Convert the argument to unicode. If the argument is a list, convert its content."""
+    if isinstance(argument, list):
+        return [all2unicode(item) for item in argument]
+    else:
+        return unicode(argument)
 
 class ActionCancelAll(Exception):
     """Cancel an action by user input."""
@@ -455,13 +461,13 @@ def create_exercise_test_case(exercise, seed, expected):
         def runTest(self):
             """Perform test"""
             self.assertListEqual(
-                self.exercise_instance.tex_statement(),
-                expected['tex_statement'],
+                all2unicode(self.exercise_instance.tex_statement()),
+                all2unicode(expected['tex_statement']),
                 )
 
             self.assertListEqual(
-                self.exercise_instance.tex_answer(),
-                expected['tex_answer'],
+                all2unicode(self.exercise_instance.tex_answer()),
+                all2unicode(expected['tex_answer']),
                 )
 
         @staticmethod
