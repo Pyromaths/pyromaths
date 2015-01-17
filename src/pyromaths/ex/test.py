@@ -137,7 +137,7 @@ class TestPackage(Test):
     def iter_tests(self):
         """Return an iterator over tests.
 
-        The iterator iterates over :class:`unittest.TestCase` intances.
+        The iterator iterates over :class:`unittest.TestCase` instances.
         """
         for module in self:
             for test in self[module].iter_tests():
@@ -216,7 +216,7 @@ class TestModule(Test):
     def iter_tests(self):
         """Return an iterator over tests.
 
-        The iterator iterates over :class:`unittest.TestCase` intances.
+        The iterator iterates over :class:`unittest.TestCase` instances.
         """
         for exercise in self:
             for test in self[exercise].iter_tests():
@@ -309,7 +309,7 @@ class TestExercise(Test):
     def iter_tests(self):
         """Return an iterator over tests.
 
-        The iterator iterates over :class:`unittest.TestCase` intances.
+        The iterator iterates over :class:`unittest.TestCase` instances.
         """
         for seed in self:
             yield self[seed]
@@ -482,7 +482,7 @@ def create_exercise_test_case(exercise, seed, expected):
         )(seed)
 
 def create_test_suite():
-    """Gather all exercise tests in a :class:`TestPackage` intance."""
+    """Gather all exercise tests in a :class:`TestPackage` instance."""
     ex.load()
     tests = TestPackage()
     for __level, exercises in ex.levels.iteritems():
