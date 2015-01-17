@@ -33,7 +33,6 @@ class TexExercise(Exercise):
 class LegacyExercise(TexExercise):
     ''' Base class for legacy format exercise proxies. '''
 
-    _id = 0
     function = []
 
     def __init__(self):
@@ -45,15 +44,29 @@ class LegacyExercise(TexExercise):
     def tex_answer(self):
         return self.ans
 
+def __module(filename):
+    """Expect an absolute path, subpath of this module's path. Return a relative path."""
+    # Get root of this application
+    root = '/'.join(__file__.split('/')[:-len(__name__.split('.')) - 1])
+    # Get filename, relative to said root
+    relative = filename[len(root)+1:]
+    # Remove extension
+    relative = relative[:-len('.py')]
+    # Turn file system path into python package
+    relative = relative.replace('/', '.')
+
+    return relative
 
 def __legacy(function, thumb):
     ''' Create a new class proxying for a legacy exercise 'function'. '''
-    LegacyExercise._id += 1
     # Create a proxy class inheriting from LegacyExercise for this function
-    return type('LegacyExercise%u' % LegacyExercise._id,
+    module = __module(function.func_code.co_filename)
+    name = function.func_name.title().replace('_', '')
+    return type("{}.{}".format(module, name),
                 (LegacyExercise,),
                 dict(description=function.description,
                      level=function.level,
+                     module=module,
                      thumb=thumb,
                      function=(function,),
                      )
