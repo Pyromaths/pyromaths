@@ -26,9 +26,11 @@ def match_exercise(path):
     exercises = []
     for level in pyromaths.ex.levels:
         for exercise in pyromaths.ex.levels[level]:
-            if pyromaths.ex.LegacyExercise in exercise.__bases__:
-                continue
-            if exercise.__module__.startswith(path):
+            if (
+                    issubclass(exercise, pyromaths.ex.TexExercise) and exercise.__module__.startswith(path)
+                ) or (
+                    issubclass(exercise, pyromaths.ex.LegacyExercise) and exercise.module.startswith(path)
+                ):
                 exercises.append(exercise)
     return exercises
 

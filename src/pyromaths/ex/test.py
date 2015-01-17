@@ -487,8 +487,6 @@ def create_test_suite():
     tests = TestPackage()
     for __level, exercises in ex.levels.iteritems():
         for exo in exercises:
-            if ex.LegacyExercise in exo.__bases__:
-                continue
             tests.add_exercise(exo)
     tests.read_testfiles()
     return tests
