@@ -96,16 +96,14 @@ def _mac_opt():
                           'bz2', 'cPickle', 'datetime', 'gestalt', 'MacOS',
                           'pyexpat', 'rurce', 'strop', 'unicodedata']
     site_packages_unused = ['_osx_support', '_builtinSuites', 'Carbon',
-                            'distutils', 'Finder', 'StdSuites', 'unittest',
-                            'xml', 'StringIO', 'getopt', 'repr','_strptime',
-                            'gettext', 'sets', '_threading_local', 'glob',
-                            'base64', 'locale', 'sre', 'bdb', 'optparse.',
-                            'ssl', 'calendar', 'pdb', 'stringprep', 'cmd',
-                            'pkg_resources' 'tempfile','copy',
-                            'textwrap', 'difflib', 'platform', 'threading',
-                            'dummy_thread', 'plistlib', 'quopri', 'fnmatch',
-                            'pprint', 'doctest', 'ntpath', 'OpenSSL', 
-                            'os2emxpath', 'tempfile', 'PyQt4.uic']
+                            'distutils', 'Finder', 'StdSuites','xml',
+                            'getopt', 'repr', '_strptime','gettext', 'sets',
+                            '_threading_local', 'glob','base64', 'locale',
+                            'sre', 'bdb', 'optparse.', 'ssl', 'calendar', 'pdb',
+                            'stringprep', 'cmd', 'pkg_resources', 'copy',
+                            'platform', 'threading', 'dummy_thread', 'plistlib',
+                            'quopri', 'doctest', 'ntpath', 'OpenSSL',
+                            'os2emxpath', 'PyQt4.uic']
     excludes = lib_dynload_unused + site_packages_unused + ['PyQt4.%s' % f for f in qt_unused]
     # py2app
     py2app = dict(plist    = plist,
