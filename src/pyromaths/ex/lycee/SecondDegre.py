@@ -220,7 +220,10 @@ class Sd2aRacines(ex.TexExercise):
         pol.pop(randrange(1, len(pol)))
         pol.pop(randrange(1, len(pol)))
         shuffle(pol)
-
+        for i in range(3):
+            m = list(pol[i])
+            shuffle(m)
+            pol[i] = m
         self.exercice = pol
 
     def tex_statement(self):
@@ -230,9 +233,7 @@ class Sd2aRacines(ex.TexExercise):
         noms = [r'P\,(x) &= ', r'Q\,(x) &= ', r'R\,(x) &= ']
         r = ''
         for i in range(3):
-            m = list(self.exercice[i])
-            shuffle(m)
-            r += noms[i] + str(Polynome(m, 'x'))
+            r += noms[i] + str(Polynome(self.exercice[i], 'x'))
             if i < 2: r += ' & '
         exo.append(r)
         exo.append('\\end{align*}')
@@ -246,7 +247,7 @@ class Sd2aRacines(ex.TexExercise):
         question = [[], [], []]
         for i in range(3):
             p = []
-            m = list(self.exercice[i])
+            m = Polynome(list(self.exercice[i])).ordonne()
             if factoriser('%r' % Polynome(m)):
                 p = [factoriser('%r' % Polynome(m))]
                 while factoriser(p[-1]):

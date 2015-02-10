@@ -217,8 +217,13 @@ def creation(parametres):
             call(["latexmk", "-silent", "-output-directory=%s" % dir0, "-pdfps", "%s.tex" % f0noext], stdout=log)
             call(["latexmk", "-silent", "-output-directory=%s" % dir0, "-c", "%s.tex" % f0noext], stdout=log)
         else:
-            for i in range(2):
-                call(["latex", "-interaction=batchmode", "%s.tex" % f0noext], stdout=log)
+            call(["latex", "-shell-escape", "-interaction=nonstopmode", "%s.tex" % f0noext], stdout=log)
+            asycpt = 1
+            while os.path.isfile(f0noext + '-' + str(asycpt) + '.asy'):
+                call(["asy", f0noext + '-' + str(asycpt) + '.asy'], stdout=log)
+                asycpt += 1
+            for dummy in range(2):
+                call(["latex", "-shell-escape", "-interaction=nonstopmode", "%s.tex" % f0noext], stdout=log)
             call(["dvips", "-q", "%s.dvi" % f0noext, "-o%s.ps" % f0noext], stdout=log)
             call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % f0noext, "%s.pdf" % f0noext], stdout=log)
         log.close()

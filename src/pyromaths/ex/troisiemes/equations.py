@@ -25,7 +25,7 @@ from pyromaths.outils import Arithmetique
 from . import fractions
 from pyromaths.classes.PolynomesCollege import Polynome
 from pyromaths.outils.Affichage import TeX, tex_coef
-
+from pyromaths.outils.Priorites3 import texify
 
 #
 # ------------------- ÉQUATIONS -------------------
@@ -66,7 +66,7 @@ def tex_quotient1(a, b, c, d):  # renvoie l'ecriture de la mise au meme denomina
     if d == 1:
         return tex_quotient0(a, b, c)
     else:
-        return '\\cfrac{%s_{\\times%s}}{%s_{\\times%s}}' % (str(Polynome('%sx+%s' % (a, b))), d, c, d)
+        return '\\cfrac{(%s)_{\\times%s}}{%s_{\\times%s}}' % (str(Polynome([[a, 1], [b, 0]])), d, c, d)
 
 
 def tex_equation0(valeurs):  # renvoie l'ecriture des quotients de l'enonce
@@ -95,13 +95,10 @@ def tex_equation1(valeurs):  # renvoie l'ecriture de la mise au meme denominateu
 
 def tex_equation2(valeurs):  # renvoie l'ecriture des quotients au meme denominateur
     texte = '\\cfrac{'
-    for i in range(3):
-        texte = texte + str(Polynome('%sx+%s' % (valeurs[4][i * 2], valeurs[4][i * 2 + 1])))
-        if i == 0 and valeurs[3][1] < 0:
-            texte = texte + valeurs[3][0]
-        elif i == 1:
-            texte = texte + '}{\\cancel{%s}}=\cfrac{' % (valeurs[1][0] *
-                    valeurs[2][0])
+    print valeurs
+    texte += texify([['Polynome([[%s, 1], [%s, 0]])' % (valeurs[4][0], valeurs[4][1]), valeurs[3][0], 'Polynome([[%s, 1], [%s, 0]])' % (valeurs[4][2], valeurs[4][3])]])[0]
+    texte = texte + '}{\\cancel{%s}}=\cfrac{' % (valeurs[1][0] * valeurs[2][0])
+    texte += str(Polynome([[valeurs[4][4], 1] , [valeurs[4][5], 0]]))
     texte = texte + '}{\\cancel{%s}}' % (valeurs[1][0] * valeurs[2][0])
     return texte
 

@@ -635,6 +635,8 @@ def effectue_calcul(calcul):
                         else:
                             sol = classe.__mul__(nombres[0], *nombres[1:])
                     else: sol = eval("".join(calc))
+                elif recherche == recherche_puissance:
+                    sol = eval('(' + calc[0] + ')**' + calc[2])
                 else:
                     sol = eval("".join(calc))
                 if isinstance(sol, basestring): sol = splitting(sol)

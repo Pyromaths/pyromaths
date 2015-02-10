@@ -196,12 +196,12 @@ class Polynome():
         :rtype: string
         """
         if Polynome.degre(self) == 0:
-            return self.monomes[0][0]
+            return self.monomes[0][0] or '0'
         if valeur == 0:
             retour = ''
             for m in self.monomes:
                 if m[1] == 0: retour += '+%r' % m[0]
-            return retour.lstrip('+').replace('+-', '-')
+            return retour.lstrip('+').replace('+-', '-') or '0'
         if valeur < 0 and isinstance(valeur, (float, int)): nb = "(%s)" % valeur
         else: nb = repr(valeur)
         retour = ''
@@ -222,6 +222,17 @@ class Polynome():
                 else:
                     retour += '+%r*' % m[0] + nb + '**%s' % m[1]
         return retour.lstrip('+').replace('+-', '-')
+
+    def derive(self):
+        if self.degre < 1:
+            return Polynome([0, 0], self.var, self.details)
+        else:
+            p = []
+            for m in self:
+                if m[1] > 0:
+                    p.append([m[0] * m[1], m[1] - 1])
+            return Polynome(p, self.var, self.details)
+
 
     def __getitem__(self, i):
         """*object*\ .\ **__getitem__**\ (*integer*)

@@ -357,6 +357,7 @@ def quest_fonctions_rationnelles():
     cor.append("\\\\")
     if Q[1] != 1:
         x0 = eval(priorites('-%r*Fraction(1)/%r' % (Q[0], Q[1]))[-1][0])
+        print x0
         if isinstance(x0, (Fraction, RacineDegre2)):
             x1 = x0.simplifie()
         else:

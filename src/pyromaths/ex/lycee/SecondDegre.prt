@@ -37,12 +37,12 @@
                 "\\underline{Les racines de $P\\,(x)$ sont }\\fbox{$0$}\\underline{ et }\\fbox{$\\dfrac{-7}{6}$}", 
                 "&", 
                 "{$\\! \\begin{aligned}", 
-                "R\\,(x) &= 4\\,x^{2}-64\\\\", 
+                "R\\,(x) &= -64+4\\,x^{2}\\\\", 
                 "&=\\left( \\sqrt{4}\\,x\\right) ^{2}-\\sqrt{64}^{2}\\\\\n&=\\left( \\sqrt{4}\\,x+\\sqrt{64}\\right) \\times \\left( \\sqrt{4}\\,x-\\sqrt{64}\\right) \\\\\n&=\\left( 2\\,x+8\\right) \\times \\left( 2\\,x-8\\right) ", 
                 "\\end{aligned}$}\\par", 
                 "\\underline{Les racines de $R\\,(x)$ sont }\\fbox{$-4$}\\underline{ et }\\fbox{$4$}", 
                 "\\end{tabularx}\\par\\medskip", 
-                "$Q\\,(x) = x^{2}+12\\,x-9\\quad$", 
+                "$Q\\,(x) = 12\\,x-9+x^{2}\\quad$", 
                 "On calcule le discriminant de $Q\\,(x)$ avec $a=1$, $b=12$ et $c=-9$ :\\par\\medskip", 
                 "\\begin{tabularx}{\\linewidth}[t]{XXX}", 
                 "{$\\! \\begin{aligned}", 
@@ -71,7 +71,7 @@
                 "\\exercice", 
                 "Déterminer les racines des polynômes :", 
                 "\\begin{align*}", 
-                "P\\,(x) &= 6\\,x^{2}+7\\,x & Q\\,(x) &= x^{2}-9+12\\,x & R\\,(x) &= -64+4\\,x^{2}", 
+                "P\\,(x) &= 6\\,x^{2}+7\\,x & Q\\,(x) &= 12\\,x-9+x^{2} & R\\,(x) &= -64+4\\,x^{2}", 
                 "\\end{align*}"
             ]
         }
