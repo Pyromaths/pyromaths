@@ -5,7 +5,7 @@
 ### CONFIG
 #
 # Pyromaths version
-VERSION ?= 14.10
+VERSION ?= 15.02
 # Archive format(s) produced by 'make src' (bztar,gztar,zip...)
 FORMATS ?= bztar,zip
 # Verbosity and logging
