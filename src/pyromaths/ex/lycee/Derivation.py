@@ -32,7 +32,7 @@ from pyromaths.classes.Fractions import Fraction
 from random import randrange, shuffle
 from string import zfill
 
-def InitPoints(min=-6.1, max=6.1, nbval=3):
+def InitPoints(minimum=-6.1, maximum=6.1, nbval=3):
     dY = []
     directions = [(-1) ** i for i in range(nbval - 1)]
     directions.append(0)
@@ -55,24 +55,30 @@ def InitPoints(min=-6.1, max=6.1, nbval=3):
     dY.append(0)
     redo = True
     while redo:
-        lX = [int(min) + 1 + int(1.*i * (max - min - 2) / nbval) + randrange(4) for i in range(nbval)]
+        lX = [int(minimum) + 1 + int(1.*i * (maximum - minimum - 2) / nbval) + randrange(4) for i in range(nbval)]
         for i in range(len(lX) - 1):
             if lX[i + 1:].count(lX[i]):
                 redo = True
                 break
             else:
                 redo = False
-    lX.insert(0, min)
-    lX.append(max)
+    lX.insert(0, minimum)
+    lX.append(maximum)
     lX.sort()
     lY = [randrange(-4, 5)]
     for i in range(1, len(lX)):
-        while True:
-            lg = randrange(1, 4) * (-1) ** randrange(2) * int(lX[i] - lX[i - 1])
-            nY = lY[-1] + lg
-            if -4 <= nY <= 4 :
-                lY.append(nY)
-                break
+        inf = lY[-1] - 4 * int(lX[i] - lX[i - 1])
+        sup = lY[-1] + 4 * int(lX[i] - lX[i - 1])
+        nY = randrange(int(max(-4, inf)), int(min(5, sup)))
+        lY.append(nY)
+        #=======================================================================
+        # while True:
+        #     lg = randrange(1, 4) * (-1) ** randrange(2) * int(lX[i] - lX[i - 1])
+        #     nY = lY[-1] + lg
+        #     if -4 <= nY <= 4 :
+        #         lY.append(nY)
+        #         break
+        #=======================================================================
     return lX, lY, dY
 
 
@@ -89,8 +95,8 @@ class Fd1Tangentes(ex.TexExercise):
         Constructor
         '''
 
-        self.lX1, self.lY1, self.dY1 = InitPoints(min=-6.1, max=6.1, nbval=3)
-        self.lX2, self.lY2, self.dY2 = InitPoints(min=-6.1, max=6.1, nbval=4)
+        self.lX1, self.lY1, self.dY1 = InitPoints(minimum=-6.1, maximum=6.1, nbval=3)
+        self.lX2, self.lY2, self.dY2 = InitPoints(minimum=-6.1, maximum=6.1, nbval=4)
 
 
     def tex_statement(self):
