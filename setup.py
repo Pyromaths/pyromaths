@@ -152,7 +152,7 @@ Name: "{commondesktop}\Pyromaths"; Filename: "{app}\pyromaths.exe"
           (r'data/packages', glob(r'data/packages/*')),
         ] + find_data_files('data/ex','data/ex/',['*/img/ex-*.png']),
         zipfile = None,
-        windows = [dict(script="src/pyromaths.py",
+        windows = [dict(script="pyromaths",
                         icon_resources=[(1, 'data/images/pyromaths.ico')],
                         )
                    ],

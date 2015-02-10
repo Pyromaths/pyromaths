@@ -4,7 +4,7 @@ PYROPATH=$(cd `dirname $0` && cd .. && pwd)
 # Install build dependencies (if needed)
 if [ ! -f /usr/bin/debuild ];
 then
-    sudo apt-get install devscripts
+    sudo apt-get install devscripts equivs
 fi
 if [ ! -f /usr/bin/rpm ];
 then
@@ -51,8 +51,8 @@ echo "Do you want to commit and tag the git develop branch (o/N)?"
 read touche
 case "$touche" in
   [oO] )
-  git commit -am 'Pyromaths Release' 
-  git tag -u B39EE5B6 version-${VERSION} -m "Pyromaths ${VERSION}" 
+  git commit -am 'Pyromaths Release'
+  git tag -u B39EE5B6 version-${VERSION} -m "Pyromaths ${VERSION}"
   #git push --tags:
   ;;
 esac

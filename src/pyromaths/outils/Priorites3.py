@@ -748,7 +748,7 @@ def texify(liste_calculs):
     >>> Priorites3.texify(Priorites3.priorites('(-7)+8-Polynome([[-4, 1], [-9, 2], [-5, 0]], "x")'))
     ['1-\\left( -4\\,x-9\\,x^{2}-5\\right) ', '1+4\\,x+9\\,x^{2}+5', '9\\,x^{2}+4\\,x+6']
     >>> Priorites3.texify([['Fraction(5,6)', '**', '2']])
-    ['\\dfrac{5}{6}^{2}']
+    ['\\left(  \\dfrac{5}{6} \\right) ^{2}']
 
     :rtype: list
     """
