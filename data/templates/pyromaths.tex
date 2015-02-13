@@ -24,7 +24,6 @@
 \usepackage{wasysym} % Symbole Euro
 \usepackage{mathtools} % Encadrement dans align*
 \usepackage[inline]{asymptote}
-%\def\asydir{asy}
 \usepackage{tkz-tab}
 \usetikzlibrary{external} % set up externalization
 \tikzexternalize[shell escape=-enable-write18] % activate externalisation
@@ -38,7 +37,6 @@
 }
 
 %\usepackage{textcomp}
-\input{##{{TABVAR}}##}
 
 \usepackage[a4paper, dvips, left=1.5cm, right=1.5cm, top=2cm,%
   bottom=2cm, marginpar=5mm, marginparsep=5pt]{geometry}
@@ -102,7 +100,7 @@
 \lhead{\textsl{\footnotesize{Page \thepage/ \pageref{LastPage}}}}
 \chead{\Large{\textsc{##{{TITRE}}##}}}
 \rhead{\textsl{\footnotesize{##{{NIVEAU}}##}}}
-\DecimalMathComma
+
 \begin{document}
 ##{{BOOKMARK}}##
 \newcounter{nocalcul}[exo]

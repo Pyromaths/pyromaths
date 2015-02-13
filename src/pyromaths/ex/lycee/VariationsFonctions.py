@@ -517,7 +517,7 @@ class Vf3VariationVersCourbe(ex.TexExercise):
         exo.append(u'\\item Sur $[%s~;~%s]$ , le \\textbf{minimum} de $g$ est $y = %s$. Il est \\textbf{atteint en} $x = %s$.' % (self.lX[0], self.lX[-1], extr[0][1], extr[0][0]))
         exo.append(r'\end{itemize}')
         exo.append(r'\end{enumerate}')
-        exo.append(r'\item')
+        exo.append(r'\item\ ')
         exo.append(r'\begin{center}')
         exo.append(r'\begin{tabular}[t]{cc}')
         exo.append(r'\begin{adjustbox}{valign=t}')

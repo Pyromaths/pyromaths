@@ -864,6 +864,8 @@ def texify(liste_calculs):
         s = s.replace("**{", "^{")
         s = s.replace("(", "\\left( ")
         s = s.replace(")", "\\right) ")
+        s = s.replace("\\left\\left", "\\left ")
+        s = s.replace("\\right\\right", "\\right ")
         s = s.replace("*", "\\times ")
         s = s.replace("/", "\\div ")
         if not ls or s != ls[-1]:

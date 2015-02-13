@@ -357,7 +357,6 @@ def quest_fonctions_rationnelles():
     cor.append("\\\\")
     if Q[1] != 1:
         x0 = eval(priorites('-%r*Fraction(1)/%r' % (Q[0], Q[1]))[-1][0])
-        print x0
         if isinstance(x0, (Fraction, RacineDegre2)):
             x1 = x0.simplifie()
         else:
@@ -387,21 +386,37 @@ def quest_fonctions_rationnelles():
         f_xmin = TeX(f_xmin)
         f_xmax = TeX(f_xmax)
         if numerateur_simplifie[0] < 0:
-            cor.append(u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient " % \
+            cor.append(u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient \\par" % \
                   (numerateur_simplifie[0], var, nomf, var))
-            cor.append("$$\\tabvar{")
-            cor.append("\\tx{%s}&\\tx{%s}&&\\tx{%s}\\cr" % (var, TeX(Intervalle[0]), TeX(Intervalle[1])))
-            cor.append("\\tx{%s'(%s)}&&\\tx{-}&&\\cr" % (nomf, var))
-            cor.append("\\tx{%s}&\\txh{%s}&\\fd&\\txb{%s}\\cr" % (nomf, f_xmin, f_xmax))
-            cor.append("}$$")
+            cor.append("\\begin{tikzpicture}\n\\tkzTabInit[espcl=2.5]")
+            cor.append("{$%s$ /1, $%s'\\,(x)$/1, $%s\\,(x)$/1.5}" % (var, nomf, nomf))
+            cor.append("{$%s$,$%s$}" % (TeX(Intervalle[0]), TeX(Intervalle[1])))
+            cor.append("\\tkzTabLine{,-,}")
+            cor.append("\\tkzTabVar{+/$%s$/, -/$%s$/}" % (f_xmin, f_xmax))
+            cor.append(r'\end{tikzpicture}\par')
+            #===================================================================
+            # cor.append("$$\\tabvar{")
+            # cor.append("\\tx{%s}&\\tx{%s}&&\\tx{%s}\\cr" % (var, TeX(Intervalle[0]), TeX(Intervalle[1])))
+            # cor.append("\\tx{%s'(%s)}&&\\tx{-}&&\\cr" % (nomf, var))
+            # cor.append("\\tx{%s}&\\txh{%s}&\\fd&\\txb{%s}\\cr" % (nomf, f_xmin, f_xmax))
+            # cor.append("}$$")
+            #===================================================================
         else:
-            cor.append(u" De plus, $%s>0$ donc pour tout $%s$ de $I$, $%s'(%s)>0$." % \
+            cor.append(u" De plus, $%s>0$ donc pour tout $%s$ de $I$, $%s'(%s)>0$.\\par" % \
                   (numerateur_simplifie[0], var, nomf, var))
-            cor.append("$$\\tabvar{")
-            cor.append("\\tx{%s}&\\tx{%s}&&\\tx{%s}\\cr" % (var, TeX(Intervalle[0]), TeX(Intervalle[1])))
-            cor.append("\\tx{%s'(%s)}&&\\tx{+}&&\\cr" % (nomf, var))
-            cor.append("\\tx{%s}&\\txb{%s}&\\fm&\\txh{%s}\\cr" % (nomf, f_xmin, f_xmax))
-            cor.append("}$$")
+            cor.append("\\begin{tikzpicture}\n\\tkzTabInit[espcl=2.5]")
+            cor.append("{$%s$ /1, $%s'\\,(x)$/1, $%s\\,(x)$/1.5}" % (var, nomf, nomf))
+            cor.append("{$%s$,$%s$}" % (TeX(Intervalle[0]), TeX(Intervalle[1])))
+            cor.append("\\tkzTabLine{,+,}")
+            cor.append("\\tkzTabVar{-/$%s$/, +/$%s$/}" % (f_xmin, f_xmax))
+            cor.append(r'\end{tikzpicture}\par')
+            #===================================================================
+            # cor.append("$$\\tabvar{")
+            # cor.append("\\tx{%s}&\\tx{%s}&&\\tx{%s}\\cr" % (var, TeX(Intervalle[0]), TeX(Intervalle[1])))
+            # cor.append("\\tx{%s'(%s)}&&\\tx{+}&&\\cr" % (nomf, var))
+            # cor.append("\\tx{%s}&\\txb{%s}&\\fm&\\txh{%s}\\cr" % (nomf, f_xmin, f_xmax))
+            # cor.append("}$$")
+            #===================================================================
     else:
         cor.append(u" Je ne sais pas faire avec un tel numérateur $%s$." % (numerateur_simplifie))
     exo.append("\\end{enumerate}")
@@ -524,21 +539,37 @@ def quest_fonctions_rationnelles_sur_R():
             f_xmin = f_xmin.simplifie()
         f_xmax = f_xmin
         if numerateur_simplifie[0] < 0:
-            cor.append(u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient " % \
+            cor.append(u" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient \\par" % \
                   (numerateur_simplifie[0], var, nomf, var))
-            cor.append("$$\\tabvar{")
-            cor.append("\\tx{%s}&\\tx{%s}&&&\\tx{%s}&&&\\tx{%s}\\cr" % (var, TeX(Intervalle[0]), TeX(VI), TeX(Intervalle[1])))
-            cor.append("\\tx{%s'(%s)}&&\\tx{-}&&\\dbt &&\\tx{-}&\\cr" % (nomf, var))
-            cor.append("\\tx{%s}&\\txh{%s}&\\fd&\\txb{-\\infty}&\\dbt&\\txh{+\\infty}&\\fd&\\txb{%s}\\cr" % (nomf, f_xmin, f_xmax))
-            cor.append("}$$")
+            cor.append("\\begin{tikzpicture}\n\\tkzTabInit[espcl=2.5]")
+            cor.append("{$%s$ /1, $%s'\\,(x)$/1, $%s\\,(x)$/1.5}" % (var, nomf, nomf))
+            cor.append("{$%s$,$%s$,$%s$}" % (TeX(Intervalle[0]), TeX(VI), TeX(Intervalle[1])))
+            cor.append("\\tkzTabLine{,-,d,-}")
+            cor.append("\\tkzTabVar{+/$%s$ / ,-D+/ $-\\infty$ /$+\infty$, -/$%s$/}" % (f_xmin, f_xmax))
+            cor.append(r'\end{tikzpicture}\par')
+            #===================================================================
+            # cor.append("$$\\tabvar{")
+            # cor.append("\\tx{%s}&\\tx{%s}&&&\\tx{%s}&&&\\tx{%s}\\cr" % (var, TeX(Intervalle[0]), TeX(VI), TeX(Intervalle[1])))
+            # cor.append("\\tx{%s'(%s)}&&\\tx{-}&&\\dbt &&\\tx{-}&\\cr" % (nomf, var))
+            # cor.append("\\tx{%s}&\\txh{%s}&\\fd&\\txb{-\\infty}&\\dbt&\\txh{+\\infty}&\\fd&\\txb{%s}\\cr" % (nomf, f_xmin, f_xmax))
+            # cor.append("}$$")
+            #===================================================================
         else:
-            cor.append(u" De plus, $%s>0$ donc pour tout $%s$ de $I$, $%s'(%s)>0$." % \
+            cor.append(u" De plus, $%s>0$ donc pour tout $%s$ de $I$, $%s'(%s)>0$. \\par" % \
                   (numerateur_simplifie[0], var, nomf, var))
-            cor.append("$$\\tabvar{")
-            cor.append("\\tx{%s}&\\tx{%s}&&&\\tx{%s}&&&\\tx{%s}\\cr" % (var, TeX(Intervalle[0]), TeX(VI), TeX(Intervalle[1])))
-            cor.append("\\tx{%s'(%s)}&&\\tx{+}&&\\dbt&&\\tx{+}&\\cr" % (nomf, var))
-            cor.append("\\tx{%s}&\\txb{%s}&\\fm&\\txh{+\\infty}&\\dbt&\\txb{-\\infty}&\\fm&\\txh{%s}\\cr" % (nomf, f_xmin, f_xmax))
-            cor.append("}$$")
+            cor.append("\\begin{tikzpicture}\n\\tkzTabInit[espcl=2.5]")
+            cor.append("{$%s$ /1, $%s'\\,(x)$/1, $%s\\,(x)$/1.5}" % (var, nomf, nomf))
+            cor.append("{$%s$,$%s$,$%s$}" % (TeX(Intervalle[0]), TeX(VI), TeX(Intervalle[1])))
+            cor.append("\\tkzTabLine{,+,d,+}")
+            cor.append("\\tkzTabVar{-/$-\\infty$ / ,+D-/ $%s$ /$%s$, +/$+\\infty$/}" % (f_xmin, f_xmax))
+            cor.append(r'\end{tikzpicture}\par')
+            #===================================================================
+            # cor.append("$$\\tabvar{")
+            # cor.append("\\tx{%s}&\\tx{%s}&&&\\tx{%s}&&&\\tx{%s}\\cr" % (var, TeX(Intervalle[0]), TeX(VI), TeX(Intervalle[1])))
+            # cor.append("\\tx{%s'(%s)}&&\\tx{+}&&\\dbt&&\\tx{+}&\\cr" % (nomf, var))
+            # cor.append("\\tx{%s}&\\txb{%s}&\\fm&\\txh{+\\infty}&\\dbt&\\txb{-\\infty}&\\fm&\\txh{%s}\\cr" % (nomf, f_xmin, f_xmax))
+            # cor.append("}$$")
+            #===================================================================
     else:
         cor.append(u" Je ne sais pas faire avec un tel numérateur $%s$." % (numerateur_simplifie))
     exo.append("\\end{enumerate}")
@@ -586,7 +617,7 @@ def quest_variation_degre3(borneinf=float("-inf"), bornesup=float("+inf")):
     # cor=redaction_factorisation(Pprime,nomP+"'",exo=[],cor=cor)[1]
     # cor.pop(-5)
     redaction_racines(Pprime, nomP + "'", var, cor)
-    str_signe, str_valeurs, signes, ligne_valeurs = tableau_de_signe(Pprime, nomP + "'", delta, racines, cor, borneinf, bornesup, detail=True)
+    str_variables, str_signes, str_valeurs, signes, ligne_valeurs = tableau_de_signe(Pprime, nomP + "'", delta, racines, cor, borneinf, bornesup, detail=True)
 
     # cor.append(tab_signe)
 
@@ -596,11 +627,17 @@ def quest_variation_degre3(borneinf=float("-inf"), bornesup=float("+inf")):
     elif (delta <= 0 and P[3] > 0):
         cor.append(u"Donc la fonction polynômiale $%s$ est croissante sur $%s$." % (nomP, TeX_intervalle))
     else:
-        cor.append("On obtient ainsi le tableau de variation de $%s$." % nomP)
+        cor.append("On obtient ainsi le tableau de variation de $%s$.\\par" % nomP)
 #         [x1, x2] = racines
         # macro=[["txb","txh"],["fm","fd"]]
-
-        var_de_P = "\\tx{%s}& \\%s{\\rnode{neu0}{%s}}&&" % (nomP, ["txb", "txh"]["-" == signes[0]], TeX(P(ligne_valeurs[0])))
+        cor.append("\\begin{tikzpicture}\n\\tkzTabInit[espcl=2.5]")
+        cor.append(str_variables[:-1] + ', $%s\\,(x)$/1.5}' % nomP)
+        cor.append(str_valeurs)
+        cor.append(str_signes)
+        var_de_P = "\\tkzTabVar{%s/$%s$, " % (["-", "+"]["-" == signes[0]], TeX(P(ligne_valeurs[0])))  # +/$%s$/, -/$%s$/}" % (f_xmin, f_xmax))
+        #=======================================================================
+        # var_de_P = "\\tx{%s}& \\%s{\\rnode{neu0}{%s}}&&" % (nomP, ["txb", "txh"]["-" == signes[0]], TeX(P(ligne_valeurs[0])))
+        #=======================================================================
         compteur = 0
         for i in range(0, len(signes) - 1):
             if signes[i] == '+':
@@ -608,23 +645,42 @@ def quest_variation_degre3(borneinf=float("-inf"), bornesup=float("+inf")):
                     var_de_P += "&&"
                 else:
                     compteur += 1
-                    var_de_P += "\\txh{\\rnode{neu%s}{%s}}&&" % (compteur, TeX(P(ligne_valeurs[i + 1])))
+                    var_de_P += "+/$%s$/, " % TeX(P(ligne_valeurs[i + 1]))
+                    #===========================================================
+                    # var_de_P += "\\txh{\\rnode{neu%s}{%s}}&&" % (compteur, TeX(P(ligne_valeurs[i + 1])))
+                    #===========================================================
             else:
                 if 0 and signes[i + 1] == "-":
                     var_de_P += "&&"
                 else:
                     compteur += 1
-                    var_de_P += "\\txb{\\rnode{neu%s}{%s}}&&" % (compteur, TeX(P(ligne_valeurs[i + 1])))
+                    var_de_P += "-/$%s$/, " % TeX(P(ligne_valeurs[i + 1]))
+                    #===========================================================
+                    # var_de_P += "\\txb{\\rnode{neu%s}{%s}}&&" % (compteur, TeX(P(ligne_valeurs[i + 1])))
+                    #===========================================================
         compteur += 1
         if signes[-1] == "+":
-            var_de_P += "\\txh{\\rnode{neu%s}{%s}}\\cr" % (compteur, TeX(P(ligne_valeurs[-1])))
+            var_de_P += "+/$%s$/} " % TeX(P(ligne_valeurs[-1]))
+            #===================================================================
+            # var_de_P += "\\txh{\\rnode{neu%s}{%s}}\\cr" % (compteur, TeX(P(ligne_valeurs[-1])))
+            #===================================================================
         else:
-            var_de_P += "\\txb{\\rnode{neu%s}{%s}}\\cr" % (compteur, TeX(P(ligne_valeurs[-1])))
+            var_de_P += "-/$%s$/} " % TeX(P(ligne_valeurs[-1]))
+            #===================================================================
+            # var_de_P += "\\txb{\\rnode{neu%s}{%s}}\\cr" % (compteur, TeX(P(ligne_valeurs[-1])))
+            #===================================================================
 
-        cor.append("$$ \\tabvar{\n %s\n %s\n %s}$$" % \
-                   (str_valeurs, str_signe, var_de_P))
-        for i in range(1, compteur + 1):
-            cor.append("\\ncline[nodesep=0.15,linewidth=0.5pt]{->}{neu%s}{neu%s}" % (i - 1, i))
+        cor.append(var_de_P)
+        #=======================================================================
+        # cor.append("$$ \\tabvar{\n %s\n %s\n %s}$$" % \
+        #            (str_valeurs, str_signes, var_de_P))
+        #=======================================================================
+        #=======================================================================
+        # for i in range(1, compteur + 1):
+        #     cor.append("\\ncline[nodesep=0.15,linewidth=0.5pt]{->}{neu%s}{neu%s}" % (i - 1, i))
+        #=======================================================================
+        cor.append(r'\end{tikzpicture}\par')
+
         if borneinf == float("-inf"):
             cor.append(u"$$\\lim_{%s\\to %s} %s= \\lim_{%s\\to %s} %s%s^3=%s $$  " % (var, "-\\infty", P, var, "-\\infty", P[3], var, TeX(P(float("-inf")))))
         if bornesup == float("+inf"):
@@ -645,15 +701,18 @@ def tableau_de_signe(P, nomP, delta, racines, cor, borneinf=float("-inf"), borne
     var = P.var
     signe_moinsa, signe_a = [('+', '-'), ('-', '+')][P[2] > 0]  # Ca donne bien ce qu'on veut...
     signes = []
+    str_variables = "{$%s$/1, $%s\\,(x)$/1}" % (var, nomP)
     if delta < 0:
         cor.append("Comme $\\Delta <0$, $%s(%s)$ ne s'annule pas et est toujours du signe de $a$" % (nomP, var))
         cor.append("Ainsi ")
-        str_valeurs = "\\tx{%s}&\\tx{%s}&& \\tx{%s}\\cr" % (var, TeX(borneinf), TeX(bornesup))
-        str_signe = "\\tx{%s(%s)}&&\\tx{%s}&\\cr" % (nomP, var, signe_a)
+        str_valeurs = "{$%s$,$%s$}" % (TeX(borneinf), TeX(bornesup))
+        str_signes = "\\tkzTabLine{,%s}" % signe_a
+        # str_valeurs = "\\tx{%s}&\\tx{%s}&& \\tx{%s}\\cr" % (var, TeX(borneinf), TeX(bornesup))
+        # str_signe = "\\tx{%s(%s)}&&\\tx{%s}&\\cr" % (nomP, var, signe_a)
         signes = [signe_a]
         ligne_valeurs = [borneinf, bornesup]
     elif delta == 0:
-        cor.append("Comme $\\Delta =0$, $%s(%s)$ s'annule une seule fois pour $%s_0=%s$ et est toujours du signe de $a$.\par" % (nomP, var, var, racines[0]))
+        cor.append("Comme $\\Delta =0$, $%s(%s)$ s'annule une seule fois pour $%s_0=%s$ et est toujours du signe de $a$.\\par" % (nomP, var, var, racines[0]))
         if racines[0] < borneinf or racines[0] > bornesup:
             if borneinf != float("-inf"):
                 intervalle = "["
@@ -667,15 +726,23 @@ def tableau_de_signe(P, nomP, delta, racines, cor, borneinf=float("-inf"), borne
             cor.append("Or $%s$ n'est pas dans l'intervalle $%s$ donc " % (TeX(racines[0]), intervalle))
             ligne_valeurs = [borneinf, bornesup]
 
-            str_valeurs = "\\tx{%s}&\\tx{%s}&& \\tx{%s}\\cr" % (var, TeX(borneinf), TeX(bornesup))
-
-            str_signe = "\\tx{%s(%s)}&&\\tx{%s}&\\cr" % (nomP, var, signe_a)
+            str_valeurs = "{$%s$,$%s$}" % (TeX(borneinf), TeX(bornesup))
+            str_signes = "\\tkzTabLine{,%s}" % signe_a
+#===============================================================================
+#             str_valeurs = "\\tx{%s}&\\tx{%s}&& \\tx{%s}\\cr" % (var, TeX(borneinf), TeX(bornesup))
+#
+#             str_signe = "\\tx{%s(%s)}&&\\tx{%s}&\\cr" % (nomP, var, signe_a)
+#===============================================================================
             signes = [signe_a]
         else:
 
             ligne_valeurs = [borneinf, racines[0], bornesup]
-            str_valeurs = "\\tx{%s}&\\tx{%s}&& \\tx{%s}&& \\tx{%s}\\cr" % (var, TeX(borneinf), TeX(racines[0]), TeX(bornesup))
-            str_signe = "\\tx{%s(%s)}&&\\tx{%s}&\\tx{0}&\\tx{%s}&\\cr" % (nomP, var, signe_a, signe_a)
+            str_valeurs = "{$%s$,$%s$,$%s$}" % (TeX(borneinf), TeX(racines[0]), TeX(bornesup))
+            str_signes = "\\tkzTabLine{,%s,0,%s}" % (signe_a, signe_a)
+            #===================================================================
+            # str_valeurs = "\\tx{%s}&\\tx{%s}&& \\tx{%s}&& \\tx{%s}\\cr" % (var, TeX(borneinf), TeX(racines[0]), TeX(bornesup))
+            # str_signe = "\\tx{%s(%s)}&&\\tx{%s}&\\tx{0}&\\tx{%s}&\\cr" % (nomP, var, signe_a, signe_a)
+            #===================================================================
             signes = [signe_a, signe_a]
     elif delta > 0:
         [x1, x2] = racines
@@ -697,24 +764,24 @@ def tableau_de_signe(P, nomP, delta, racines, cor, borneinf=float("-inf"), borne
         if compare[0] >= 1 or compare[1] == 2:
             x_x1 = sign_x1 = ""
         else:
-            x_x1 = "&\\tx{%s}&" % (TeX(x1))
+            x_x1 = "$%s$," % (TeX(x1))
             ligne_valeurs += [x1]
-            sign_x1 = "&\\tx{%s}&\\tx{0}" % (signe_a)
+            sign_x1 = ",%s,0" % (signe_a)
             signes += [signe_a]
 
         if 2 in compare:
-            entreracines = "&\\tx{%s}" % (signe_a)
+            entreracines = ",%s" % (signe_a)
             signes += [signe_a]
         else:
-            entreracines = "&\\tx{%s}" % (signe_moinsa)
+            entreracines = ",%s" % (signe_moinsa)
             signes += [signe_moinsa]
 
         if compare[1] >= 1 or compare[0] == 2:
             x_x2 = sign_x2 = ""
         else:
-            x_x2 = "&\\tx{%s}&" % (TeX(x2))
+            x_x2 = "$%s$," % (TeX(x2))
             ligne_valeurs += [x2]
-            sign_x2 = "&\\tx{0}&\\tx{%s}" % (signe_a)
+            sign_x2 = ",0,%s" % (signe_a)
             signes += [signe_a]
         ligne_valeurs += [bornesup]
         # Ne rien dire si une racine est égale à une borne
@@ -728,18 +795,29 @@ def tableau_de_signe(P, nomP, delta, racines, cor, borneinf=float("-inf"), borne
             cor.append("\\par Or $%s$ n'est pas dans $%s$." % (TeX(x1), intervalle))
         elif compare[1] == 1:
             cor.append("\\par Or $%s$ n'est pas dans $%s$." % (TeX(x2), intervalle))
-        cor.append("Ainsi")
+        cor.append("Ainsi \\par")
 
-        str_valeurs = "\\tx{%s}& \\tx{%s}& %s %s & \\tx{%s}\\cr" % (var, TeX(borneinf), x_x1, x_x2, TeX(bornesup))
+        str_valeurs = "{$%s$, %s %s $%s$}" % (TeX(borneinf), x_x1, x_x2, TeX(bornesup))
+        str_signes = "\\tkzTabLine{%s%s%s}" % (sign_x1, entreracines, sign_x2)
 
-        str_signe = "\\tx{%s(%s)}&%s %s %s&\\cr" % (nomP, var, sign_x1, entreracines, sign_x2)
+#===============================================================================
+#         str_valeurs = "\\tx{%s}& \\tx{%s}& %s %s & \\tx{%s}\\cr" % (var, TeX(borneinf), x_x1, x_x2, TeX(bornesup))
+#
+#         str_signe = "\\tx{%s(%s)}&%s %s %s&\\cr" % (nomP, var, sign_x1, entreracines, sign_x2)
+#===============================================================================
 
-
-    cor.append("$$\\tabvar{")
+    cor.append("\\begin{tikzpicture}\n\\tkzTabInit[espcl=2.5]")
+    cor.append(str_variables)
     cor.append(str_valeurs)
-    cor.append("%s}$$" % (str_signe))
+    cor.append(str_signes)
+    cor.append(r'\end{tikzpicture}\par')
+    #===========================================================================
+    # cor.append("$$\\tabvar{")
+    # cor.append(str_valeurs)
+    # cor.append("%s}$$" % (str_signe))
+    #===========================================================================
     if detail:
-        return str_signe, str_valeurs, signes, ligne_valeurs
+        return str_variables, str_signes, str_valeurs, signes, ligne_valeurs
 
 def factorise_identites_remarquables(pol1, sgns, var='', racines=True):
     '''Factorise un polynomes grâce aux identités remarquables'''
@@ -967,7 +1045,6 @@ def factorisation_degre3(E, nomE, exo=[], cor=[], racines=[0, 1, -1, 2, -2]):
     if delta < 0:
         # P1 = factorisation[-1][0]
         E_factorise = "%s\\times%s$" % (P0, E2)
-        print P0, E2
     elif delta == 0:
         P1 = factorisation[-1][0]
         E_factorise = "%s\\times{\\left(%s\\right)}^2$" % (P0, P1)
@@ -1039,16 +1116,16 @@ def redaction_racines(P, nomP, var, cor=[]):
             x2, detail2 = x2.simplifie(True)
             max_len = max(len(detail1), len(detail2))
             cor.append("\\begin{align*}")
-            cor.append("%s =&%s  &%s =&%s" % \
+            cor.append("%s &= %s  &%s &= %s" % \
                        (liste_str_racines[0], liste_racines[0], liste_str_racines[1], liste_racines[1]))
             cor.append("\\\\")
             for i in range(0, max_len):
                 if i < len(detail1):
-                    cor.append("=&%s&" % (detail1[i]))
+                    cor.append("&= %s&" % (detail1[i]))
                 else:
                     cor.append("&&")
                 if i < len(detail2):
-                    cor.append("=&%s" % (detail2[i]))
+                    cor.append("&= %s" % (detail2[i]))
                 else:
                     cor.append("& ")
                 cor.append("\\\\")

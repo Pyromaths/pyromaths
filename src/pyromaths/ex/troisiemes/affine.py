@@ -260,7 +260,7 @@ def tracefonc(f, i, A, B, xmin, xmax, ymin, ymax):
     l = Priorites3.texify([Polynome([[u, 1], [A[1], 0]], "x")(B[0])])
     l.extend(Priorites3.texify(Priorites3.priorites(Polynome([[u, 1], [A[1], 0]], "x")(B[0]))))
     l = [u'Tracer la droite représentative ($d_' + str(i) + '$) de la fonction $' + f + ':x\\longmapsto ' + str(Polynome([[u, 1], [A[1], 0]], "x")) + '$.',
-       'On sait que $' + f + '(0)=' + decimaux(str(A[1])) + '$ et $' + f + '(' + x1 + ')=' + "=".join(l),
+       'On sait que $' + f + '(0)=' + decimaux(str(A[1])) + '$ et $' + f + '(' + x1 + ')=' + "=".join(l) + "$.",
        '\\psdot [dotsize=4.5pt,dotstyle=x]' + str(A),
        '\\psdot [dotsize=4.5pt,dotstyle=x]' + str(B),
        ]

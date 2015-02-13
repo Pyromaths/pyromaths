@@ -90,7 +90,7 @@ elif (len(sys.argv) == 1):
                 lst.append(exo())
         parametres['liste_exos'] = lst
         creation(parametres)
-        nettoyage(dt)
+        # nettoyage(dt)
 else:
     print(usage)
 

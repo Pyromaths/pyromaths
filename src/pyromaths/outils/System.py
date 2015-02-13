@@ -93,10 +93,10 @@ def indent(elem, level=0):
             elem.tail = i
     return elem
 
-def modify_config_file(file):
+def modify_config_file(fichier):
     """Modifie le fichier de configuration si besoin, excepté les options utilisateur déjà configurées"""
     modifie = False
-    oldtree = etree.parse(file)
+    oldtree = etree.parse(fichier)
     oldroot = oldtree.getroot()
     newroot = etree.XML(create_config_file())
     for element in newroot.iter(tag=etree.Element):
@@ -147,8 +147,6 @@ def creation(parametres):
     cor = unicode(parametres['fiche_cor'])
     f0 = codecs.open(exo, encoding='utf-8', mode='w')
     f1 = codecs.open(cor, encoding='utf-8', mode='w')
-    titre = parametres['titre']
-    fiche_metapost = os.path.splitext(exo)[0] + '.mp'
 
     if parametres['creer_pdf']:
         copie_tronq_modele(f0, parametres, 'entete')
@@ -167,8 +165,8 @@ def creation(parametres):
         if parametres['creer_unpdf']:
             f0.write("\\label{LastPage}\n")
             f0.write("\\newpage\n")
-            f0.write(u"\\currentpdfbookmark{Le corrigé des exercices}{Corrigé}")
-            f0.write("\\lhead{\\textsl{\\footnotesize{Page \\thepage/ \\pageref{LastCorPage}}}}\n")
+            f0.write(u"\\currentpdfbookmark{Le corrigé des exercices}{Corrigé}\n")
+            f0.write("\\lhead{\\textsl{{\\footnotesize Page \\thepage/ \\pageref{LastCorPage}}}}\n")
             f0.write("\\setcounter{page}{1} ")
             f0.write("\\setcounter{exo}{0}\n")
             f1.write("\\label{LastCorPage}\n")
@@ -199,7 +197,7 @@ def creation(parametres):
     dir0 = os.path.dirname(exo)
     dir1 = os.path.dirname(cor)
     import socket
-    if socket.gethostname() == "sd-20841.pyromaths.org":
+    if socket.gethostname() == "sd-27355.pyromaths.org":
         # Chemin complet pour Pyromaths en ligne car pas d'accents
         f0noext = os.path.splitext(exo)[0].encode(sys.getfilesystemencoding())
         f1noext = os.path.splitext(cor)[0].encode(sys.getfilesystemencoding())
@@ -212,20 +210,31 @@ def creation(parametres):
         from subprocess import call
 
         os.chdir(dir0)
+        latexmkrc = open('latexmkrc', 'w')
+        latexmkrc.write('sub asy {return system("asy \'$_[0]\'");}')
+        latexmkrc.write('add_cus_dep("asy","eps",0,"asy");')
+        latexmkrc.write('add_cus_dep("asy","pdf",0,"asy");')
+        latexmkrc.write('add_cus_dep("asy","tex",0,"asy");')
+        latexmkrc.write('@generated_exts = qw(pre dvi ps auxlock");')
+        latexmkrc.write('$clean_ext = "%s-figure* %s-?.asy %s-?_0.eps %s-?.tex %s-??.asy %s-??_0.eps %s-??.tex %s.auxlock %s.fdb_latexmk %s.fls %s-*.pre %s.pre";' % tuple([f0noext] * 12))
+        latexmkrc.write('sub cleanup1 {')
+        latexmkrc.write('  my $dir = fix_pattern( shift );')
+        latexmkrc.write('  foreach (@_) {')
+        latexmkrc.write('    (my $name = (/%%R/ || /[\*\.\?]/) ? $_ : "%%R.$_") =~ s/%%R/$dir$root_filename/;')
+        latexmkrc.write('    unlink_or_move( glob( "$name" ) );')
+        latexmkrc.write('  }\n}')
+        latexmkrc.close()
         log = open('%s-pyromaths.log' % f0noext, 'w')
-        if socket.gethostname() == "sd-20841.pyromaths.org":
-            call(["latexmk", "-silent", "-output-directory=%s" % dir0, "-pdfps", "%s.tex" % f0noext], stdout=log)
-            call(["latexmk", "-silent", "-output-directory=%s" % dir0, "-c", "%s.tex" % f0noext], stdout=log)
+        if socket.gethostname() == "sd-27355.pyromaths.org":
+            os.environ['PATH'] += os.pathsep + "/usr/local/texlive/2014/bin/x86_64-linux"
+            call(["latexmk", "-shell-escape", "-interaction=nonstopmode", "-output-directory=%s" % dir0, "-pdfps", "%s.tex" % f0noext], env=os.environ, stdout=log)
+            call(["latexmk", "-c", "-output-directory=%s" % dir0], env=os.environ, stdout=log)
+        elif os.name == 'nt':
+            call(["latexmk", "-pdfps", "-shell-escape", "-interaction=nonstopmode", "%s.tex" % f0noext], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
+            call(["latexmk", "-c"], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
         else:
-            call(["latex", "-shell-escape", "-interaction=nonstopmode", "%s.tex" % f0noext], stdout=log)
-            asycpt = 1
-            while os.path.isfile(f0noext + '-' + str(asycpt) + '.asy'):
-                call(["asy", f0noext + '-' + str(asycpt) + '.asy'], stdout=log)
-                asycpt += 1
-            for dummy in range(2):
-                call(["latex", "-shell-escape", "-interaction=nonstopmode", "%s.tex" % f0noext], stdout=log)
-            call(["dvips", "-q", "%s.dvi" % f0noext, "-o%s.ps" % f0noext], stdout=log)
-            call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % f0noext, "%s.pdf" % f0noext], stdout=log)
+            call(["latexmk", "-pdfps", "-shell-escape", "-interaction=nonstopmode", "%s.tex" % f0noext], stdout=log)
+            call(["latexmk", "-c"], stdout=log)
         log.close()
         nettoyage(f0noext)
         if not "openpdf" in parametres or parametres["openpdf"]:
@@ -239,7 +248,7 @@ def creation(parametres):
         if parametres['corrige'] and not parametres['creer_unpdf']:
             os.chdir(dir1)
             log = open('%s-pyromaths.log' % f1noext, 'w')
-            for i in range(2):
+            for dummy in range(2):
                 call(["latex", "-interaction=batchmode", "%s.tex" % f1noext], stdout=log)
             call(["dvips", "-q", "%s.dvi" % f1noext, "-o%s.ps" % f1noext], stdout=log)
             call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % f1noext, "%s.pdf" % f1noext], stdout=log)
@@ -286,7 +295,7 @@ def copie_tronq_modele(dest, parametres, master):
         source = os.path.join(parametres['configdir'], 'templates', source)
     else:
         # TODO: Message d'erreur, le modèle demandé n'existe pas
-        print(u"Le fichier modèle n'a pas été trouvé dans %s" %
+        print(u"Template file not found in %s" %
                 os.path.join(parametres['datadir'], 'templates'))
 
     # # Les variables à remplacer :
@@ -296,13 +305,15 @@ def copie_tronq_modele(dest, parametres, master):
         bookmark = u"\\currentpdfbookmark{Les énoncés des exercices}{Énoncés}"
     else:
         bookmark = ""
-    if os.name == 'nt':
-        os.environ['TEXINPUTS'] = os.path.normpath(os.path.join(parametres['datadir'],
-            'packages'))
-        tabvar = 'tabvar.tex'
-    else:
-        tabvar = os.path.normpath(os.path.join(parametres['datadir'],
-            'packages', 'tabvar.tex'))
+    #===========================================================================
+    # if os.name == 'nt':
+    #     os.environ['TEXINPUTS'] = os.path.normpath(os.path.join(parametres['datadir'],
+    #         'packages'))
+    #     tabvar = 'tabvar.tex'
+    # else:
+    #     tabvar = os.path.normpath(os.path.join(parametres['datadir'],
+    #         'packages', 'tabvar.tex'))
+    #===========================================================================
     # rawstring pour \tabvar -> tab + abvarsous windows
     modele = codecs.open(source, encoding='utf-8', mode='r')
     for line in modele:

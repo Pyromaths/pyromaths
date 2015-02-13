@@ -95,7 +95,6 @@ def tex_equation1(valeurs):  # renvoie l'ecriture de la mise au meme denominateu
 
 def tex_equation2(valeurs):  # renvoie l'ecriture des quotients au meme denominateur
     texte = '\\cfrac{'
-    print valeurs
     texte += texify([['Polynome([[%s, 1], [%s, 0]])' % (valeurs[4][0], valeurs[4][1]), valeurs[3][0], 'Polynome([[%s, 1], [%s, 0]])' % (valeurs[4][2], valeurs[4][3])]])[0]
     texte = texte + '}{\\cancel{%s}}=\cfrac{' % (valeurs[1][0] * valeurs[2][0])
     texte += str(Polynome([[valeurs[4][4], 1] , [valeurs[4][5], 0]]))
