@@ -1,0 +1,6 @@
+.. _library-intro:
+
+************
+Introduction
+************
+

@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+from pyromaths import ex
+
+class HelloWorld(ex.TexExercise):
+
+    # Un-comment to show this exercise:
+#    description = u'Exemple HelloWorld'
+
+    def tex_statement(self):
+        return ['\\exercice', 'Hello, world!']
+
+    def tex_answer(self):
+        return ['\\exercice*', 'Hello, world corrigé!']

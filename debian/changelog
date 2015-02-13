@@ -1,0 +1,75 @@
+pyromaths (15.02-1) trusty; urgency=medium
+
+  * Nouvel exercice niveau sixième : Construire des angles de mesure donnée,
+    d'après le manuel "des maths ensemble et pour chacun"
+  * Nouveaux exercices niveau 2nde : Tableaux de variations en 5 exercices.
+  * Nouvel exercice niveau 1reS : Nombre dérivé graphiquement.
+  * Nouveaux exercices niveau 1reS : Forme canonique et racines de polynômes
+    de degré 2.
+  * Modification de la classe PolynomesCollege pour qu'elle puisse utiliser
+    des coefficients de la classe Fractions.
+  * Ajout d'une nouvelle classe SquareRoot.
+  * Modification des templates pour qu'il prennent en charge Asymptote et tikz
+    pour le niveau lycée.
+  * Chaîne de compilation modifiée pour utiliser le module external de tikz.
+  * Mise en place de tests de non régression pour les exercices, par Louis.
+  * bugfix dans pyromaths.outils.Priorites3
+  * bugfix dans pyromaths.ex.lycee.ExoPolynome.quest_fonctions_rationnelles.
+    Merci à jcl de m'en avoir averti.
+  * bugfix d'affichage dans l'exercice équation 3e : merci à Arnaud de me
+    l'avoir signalé.
+  * bugfix dans outils.Priorites3 : le carré des nombres négatifs étaient
+    négatifs...*
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Tue, 10 Feb 2015 21:48:36 +0100
+
+pyromaths (14.06-1) trusty; urgency=low
+
+  * Correction d'un bug dans l'affichage des vignettes sous Linux
+  * Déplacement des vignettes dans data
+  * Nouvel exercice niveau troisième : Bilan sur la notion de fonction
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Sun, 08 Jun 2014 21:10:00 +0100
+
+pyromaths (14.05-1) trusty; urgency=low
+
+  * Construction et packaging :
+  ** Factorisation des setup.py en un seul, commun à toutes les plateformes
+  ** Utilisation de Make pour tout ce qui déborde du périmètre de setup.py
+  ** Modification de l'arborescence
+  ** Support du format python EGG (packaging et installation)
+  * Nouvel exercice niveau seconde : cercle trigonométrique
+  * Application OSX :
+  ** Amélioration de la traduction des boîtes de dialogue
+  ** Déplacement de «À propos de Pyromaths» dans le menu Pyromaths
+  ** Version 64 bits
+  * Modification des classes Fraction et Polynome
+  * Modification des exercices de calcul littéral en 4e et 3e
+  * Ajout de deux exercices de calcul littéral en 4e :
+  ** exercice de réduction et exercice de soustraction d'expressions littérales
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Mon, 26 May 2014 22:34:00 +0100
+
+pyromaths (13.03-1) quantal; urgency=low
+
+  * Correction d'un bug d'affichage des pdf
+  * Ajout de cinq exercices de statistiques niveau cinquième
+  * Conversion degrés/radians et mesures principales d'un angle sur le cercle trigonométrique niveau Lycée
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Mon, 11 Mar 2013 21:10:00 +0100
+
+pyromaths (11.05.1b1-1) unstable; urgency=low
+
+  * Gestion des version 2.5 à 2.7 de Python
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Thu, 05 May 2011 16:16:00 +0100
+
+pyromaths (11.05-1) unstable; urgency=low
+
+  * Initial release
+  * Sommes de vecteurs niveau lycée
+  * Deux exercices sur le calcul littéral niveau quatrième
+  * Quelques corrections de bugs et améliorations
+  * Switch to dpkg-source 3.0 (quilt) format
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Tue, 02 May 2011 10:48:02 +0100

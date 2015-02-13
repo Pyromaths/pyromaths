@@ -1,0 +1,32 @@
+# Compiled python files
+*.pyc
+
+# Python egg info
+*.egg-info/
+
+# Build and distribution folders
+build/
+dist/
+
+# Documentation
+Doc/build/doctrees/
+Doc/build/.doctrees/
+Doc/build/.buildinfo
+# Last package manifest used
+/MANIFEST.in
+
+# Eclipse files
+/.metadata/
+/.project
+/.pydevproject
+/.settings/
+/src/.project
+/src/.pydevproject
+/src/.settings/
+
+# tests persos
+/src/test.py
+/src/tous.py
+
+# script confidentiel
+/utils/transfert_sur_le_site.sh
