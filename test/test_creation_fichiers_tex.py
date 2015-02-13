@@ -14,8 +14,9 @@ import codecs, tempfile
 
 
 def nettoyage(dt):
-    for file in ["exercices.tex", "exercices.pdf"]:
+    for file in ["exercices.tex", "exercices.pdf", "latexmkrc"]:
         os.remove(os.path.join(dt, file))
+    os.rmdir(os.path.join(dt, 'asy'))
     os.rmdir(dt)
 
 usage = u"""
@@ -90,7 +91,7 @@ elif (len(sys.argv) == 1):
                 lst.append(exo())
         parametres['liste_exos'] = lst
         creation(parametres)
-        # nettoyage(dt)
+        nettoyage(dt)
 else:
     print(usage)
 

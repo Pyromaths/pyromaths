@@ -12,6 +12,7 @@ Version 15.02
 * bugfix dans pyromaths.ex.lycee.ExoPolynome.quest_fonctions_rationnelles. Merci à jcl de m'en avoir averti.
 * bugfix d'affichage dans l'exercice équation 3e : merci à Arnaud de me l'avoir signalé.
 * bugfix dans outils.Priorites3 : le carré des nombres négatifs étaient négatifs...
+* ajout de sommes MD5 pour les vignettes afin de ne changer que celles qui ont été modifiées.
 
 Version 14.06
 * Nouvel exercice niveau troisième : Bilan sur la notion de fonction

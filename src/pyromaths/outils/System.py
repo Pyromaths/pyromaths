@@ -227,14 +227,14 @@ def creation(parametres):
         log = open('%s-pyromaths.log' % f0noext, 'w')
         if socket.gethostname() == "sd-27355.pyromaths.org":
             os.environ['PATH'] += os.pathsep + "/usr/local/texlive/2014/bin/x86_64-linux"
-            call(["latexmk", "-shell-escape", "-interaction=nonstopmode", "-output-directory=%s" % dir0, "-pdfps", "%s.tex" % f0noext], env=os.environ, stdout=log)
-            call(["latexmk", "-c", "-output-directory=%s" % dir0], env=os.environ, stdout=log)
+            call(["latexmk", "-shell-escape", "-silent", "-interaction=nonstopmode", "-output-directory=%s" % dir0, "-pdfps", "%s.tex" % f0noext], env=os.environ, stdout=log)
+            call(["latexmk", "-c", "-silent", "-output-directory=%s" % dir0], env=os.environ, stdout=log)
         elif os.name == 'nt':
-            call(["latexmk", "-pdfps", "-shell-escape", "-interaction=nonstopmode", "%s.tex" % f0noext], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
-            call(["latexmk", "-c"], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
+            call(["latexmk", "-pdfps", "-shell-escape", "-silent", "-interaction=nonstopmode", "%s.tex" % f0noext], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
+            call(["latexmk", "-silent", "-c"], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
         else:
-            call(["latexmk", "-pdfps", "-shell-escape", "-interaction=nonstopmode", "%s.tex" % f0noext], stdout=log)
-            call(["latexmk", "-c"], stdout=log)
+            call(["latexmk", "-pdfps", "-shell-escape", "-silent", "-interaction=nonstopmode", "%s.tex" % f0noext], stdout=log)
+            call(["latexmk", "-silent", "-c"], stdout=log)
         log.close()
         nettoyage(f0noext)
         if not "openpdf" in parametres or parametres["openpdf"]:
