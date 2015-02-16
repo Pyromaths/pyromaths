@@ -5,7 +5,7 @@
 ### CONFIG
 #
 # Pyromaths version
-VERSION ?= 14.06
+VERSION ?= 15.02
 # Archive format(s) produced by 'make src' (bztar,gztar,zip...)
 FORMATS ?= bztar,zip
 # Verbosity and logging
@@ -29,18 +29,23 @@ FILES   := AUTHORS COPYING NEWS pyromaths README setup.py MANIFEST.in src data
 ### MANIFESTS
 #
 # Base manifest (README, src/ and test/ auto-included):
-MANIFEST :=                                     \
-    include AUTHORS COPYING NEWS                \n\
-    exclude MANIFEST.in                         \n\
-    #global-include src/pyromaths/ex/*/img/*.png \n\
-    graft data                                  \n
+MANIFEST :=                                      \
+    include AUTHORS COPYING NEWS                 \n\
+    exclude MANIFEST.in	                         \n\
+    prune test                                   \n\
+    prune utils                                  \n\
+    graft data                                   \n
 # Minimal install (i.e. without test/ dir):
 MANIFEST-min := $(MANIFEST)                     \
+    graft data                                  \n\
     prune test                                  \n
 # Full project sources:
 MANIFEST-all := $(MANIFEST)                     \
     graft debian                                \n\
     graft utils                                 \n\
+    graft data                                  \n\
+    graft Doc                                   \n\
+    graft Doc/source                            \n\
     include Makefile                            \n
 # Unix:
 MANIFEST-unix := $(MANIFEST-min)                \
@@ -181,6 +186,8 @@ data/%.qm: data/%.ts
 	lrelease $< -qm $@
 
 app: version data/qtmac_fr.qm
+	# ..Remove previous build
+	rm -rf $(BUILD) $(DIST)
 	# Make standalone Mac application
 	$(setup) py2app -O2 -b $(BUILD) -d $(DIST) $(OUT)
 	# ..Clean-up unnecessary files/folders

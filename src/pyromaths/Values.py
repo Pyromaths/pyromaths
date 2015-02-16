@@ -62,7 +62,7 @@ else:
     def configdir():
         return join(home(), ".config", "pyromaths")
 
-VERSION = '14.06'
+VERSION = '15.02'
 COPYRIGHT_YEAR = strftime('%Y')
 COPYRIGHTS = u'© 2006 – %s Jérôme Ortais<br/>\n' \
         u'<span style=" font-size:small;">Pyromaths est distribué sous ' \
@@ -73,7 +73,10 @@ ICONDIR = icon_dir()
 HOME = home()
 CONFIGDIR = configdir()
 
-LESFICHES = []
-ex.load()
-for level, exercices in ex.levels.iteritems():
-    LESFICHES.append([level, '', exercices])
+def lesfiches():
+    """Charge et renvoie les fiches d'exercices"""
+    fiches = []
+    ex.load()
+    for level, exercices in ex.levels.iteritems():
+        fiches.append([level, '', exercices])
+    return fiches

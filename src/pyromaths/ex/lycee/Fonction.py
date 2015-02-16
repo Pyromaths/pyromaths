@@ -101,6 +101,15 @@ def bezier(simple=False, xmin=-15, xmax=15, ymin=-12, ymax=12):
                 ]{->}(0,0)"
     textbezier += "(" + str(xmin) + "," + str(ymin) + ")(" + str(liste_points[-1][0]) + "," + str(ymax) + ")\n"
     impression = textbezier + "\psbezier" + string + "\n" + "\\end{pspicture}\n\\vspace{2cm}\n\n"
+    impression += "\\begin{tikzpicture}\n\\tkzTabInit[espcl=1]\n{$x$ / .5,$f'\\,(x)$ / .5}\n"
+    impression += "{$" + "$,$".join([str(i) for i in x_variation]) + "$}\n"
+    impression += "\\tkzTabLine{," + ",".join(y_variation) + "}\n\end{tikzpicture}\n"
+#===============================================================================
+# {$x$ / 1,$g(x)$ / 1}%
+# {$0$,$1$,$2$}%
+# \tkzTabLine{d,+,0,-,d}
+# \end{tikzpicture}"
+#===============================================================================
     impression += "$$\n\
                 \\tabvar{%\n\
                 \\tx{x}&\\tx{" + str(x_variation[0]) + "}"
@@ -118,7 +127,7 @@ def bezier(simple=False, xmin=-15, xmax=15, ymin=-12, ymax=12):
     else:
         impression += "&\\txb{" + str(points[-1][1]) + "}"
     return impression + "\\cr\n}$$\n\n"
-        
+
 
 def tab_var(fonc, Intervalle=["-\\infty", "+\\infty"]):
     from pyromaths.classes.Polynome import Polynome
@@ -153,7 +162,7 @@ def tab_var_poly(P, borneinf="-\\infty" , bornesup=u"+\\infty"):
             if P.dictio[0] > 0:
                 tab_var_y = "\\tx{f(" + P.var + ")}& &\\fd&\\txb{" + nombre_TeX(extremum) + "}&\\fm&\\cr\n"
             else:
-                tab_var_y = "\\tx{f(" + P.var + ")}& &\\fm&\\txh{" + nombre_TeX(extremum) + "}&\\fd&\\cr\n"     
+                tab_var_y = "\\tx{f(" + P.var + ")}& &\\fm&\\txh{" + nombre_TeX(extremum) + "}&\\fd&\\cr\n"
         else:
             listex = Intervalle
             if P.dictio > 0:
@@ -175,7 +184,7 @@ def tab_var_poly(P, borneinf="-\\infty" , bornesup=u"+\\infty"):
     else:
         return u"Degré trop élevé"
             # #Cas particulier où P' a une racine évidente, ou polynome bicarré
-        
+
 
 def tabvar_x(listex, var):
     '''imprime la premiere ligne du tabvar'''

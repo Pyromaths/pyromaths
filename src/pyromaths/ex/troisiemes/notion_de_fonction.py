@@ -227,9 +227,9 @@ def notion_fonction():
         elif lpos32[i] == 1:
             cor.append(u"\\item Un antécédent de $%s$ par la fonction $k$ est $\\mathbf{%s}$." % (val_exo3[lpos31[1]][1], val_exo3[lpos31[1]][0]))
         if lpos32[i] == 2:
-            cor.append(u"\\item $h\\,(%s)=\\mathbf{%s}$." % (val_exo3[lpos31[2]][0], val_exo3[lpos31[2]][1]))
+            cor.append(u"\\item $k\\,(%s)=\\mathbf{%s}$." % (val_exo3[lpos31[2]][0], val_exo3[lpos31[2]][1]))
         elif lpos32[i] == 1:
-            cor.append(u"\\item $h\\,(\\mathbf{%s})=%s$." % (val_exo3[lpos31[3]][0], val_exo3[lpos31[3]][1]))
+            cor.append(u"\\item $k\\,(\\mathbf{%s})=%s$." % (val_exo3[lpos31[3]][0], val_exo3[lpos31[3]][1]))
     exo.append(r"\end{enumerate}")
     cor.append(r"\end{enumerate}")
 

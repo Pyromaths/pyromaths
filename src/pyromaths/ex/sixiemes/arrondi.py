@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 from random import randint, shuffle
+import textwrap
 
 from pyromaths import ex
 from pyromaths.outils.Affichage import decimaux

@@ -5,6 +5,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern} % Prévient un bug d'affichage evince lié à [T1]{fontenc}
 \usepackage[frenchb]{babel} % francisation
+\usepackage{adjustbox}
 \usepackage[fleqn]{amsmath} % aligne le mode maths à gauche
 \usepackage{amssymb} % the amsfont symbols
 \usepackage[table, usenames, svgnames]{xcolor} % Couleurs
@@ -19,13 +20,28 @@
                           % automatically expands
 \usepackage{wrapfig} % allows figures or tables to have text wrapped around
 \usepackage{pst-eucl, pst-plot} % figures géométriques
+\usepackage{enumitem}
 \usepackage{wasysym} % Symbole Euro
+\usepackage{mathtools} % Encadrement dans align*
+\usepackage[inline]{asymptote}
+\usepackage{tkz-tab}
+\usetikzlibrary{external} % set up externalization
+\tikzexternalize[shell escape=-enable-write18] % activate externalisation
+\tikzset{%
+  external/system call={%
+    latex \tikzexternalcheckshellescape -halt-on-error
+    -interaction=batchmode -jobname "\image" "\texsource" &&
+    dvips -o "\image".ps "\image".dvi &&
+    ps2eps -f "\image.ps"
+  }
+}
+
 %\usepackage{textcomp}
-\input{##{{TABVAR}}##}
 
 \usepackage[a4paper, dvips, left=1.5cm, right=1.5cm, top=2cm,%
   bottom=2cm, marginpar=5mm, marginparsep=5pt]{geometry}
 \newcounter{exo}
+\frenchbsetup{StandardItemLabels} % remet \textbullet pour les listes
 \setlength{\headheight}{18pt}
 \setlength{\fboxsep}{1em}
 \setlength\parindent{0em}
@@ -84,7 +100,7 @@
 \lhead{\textsl{\footnotesize{Page \thepage/ \pageref{LastPage}}}}
 \chead{\Large{\textsc{##{{TITRE}}##}}}
 \rhead{\textsl{\footnotesize{##{{NIVEAU}}##}}}
-\DecimalMathComma
+
 \begin{document}
 ##{{BOOKMARK}}##
 \newcounter{nocalcul}[exo]

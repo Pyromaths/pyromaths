@@ -30,7 +30,7 @@ class TexExercise(Exercise):
         return ["\\exercice* TODO"]
 
 
-class __LegacyExercise(TexExercise):
+class LegacyExercise(TexExercise):
     ''' Base class for legacy format exercise proxies. '''
 
     _id = 0
@@ -48,10 +48,10 @@ class __LegacyExercise(TexExercise):
 
 def __legacy(function, thumb):
     ''' Create a new class proxying for a legacy exercise 'function'. '''
-    __LegacyExercise._id += 1
+    LegacyExercise._id += 1
     # Create a proxy class inheriting from LegacyExercise for this function
-    return type('LegacyExercise%u' % __LegacyExercise._id,
-                (__LegacyExercise,),
+    return type('LegacyExercise%u' % LegacyExercise._id,
+                (LegacyExercise,),
                 dict(description=function.description,
                      level=function.level,
                      thumb=thumb,
@@ -144,6 +144,7 @@ def load(pkg=None, recursive=True):
             # new level? create its exercise list
             if lvl not in levels.keys(): levels[lvl] = []
             levels[lvl].append(ex)
+
     if not recursive: return
     # load sub-packages
     for pk in _subpackages(pkg): load(pk)

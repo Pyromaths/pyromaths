@@ -96,15 +96,14 @@ def _mac_opt():
                           'bz2', 'cPickle', 'datetime', 'gestalt', 'MacOS',
                           'pyexpat', 'rurce', 'strop', 'unicodedata']
     site_packages_unused = ['_osx_support', '_builtinSuites', 'Carbon',
-                            'distutils', 'Finder', 'StdSuites', 'unittest',
-                            'xml', 'StringIO', 'getopt', 'repr','_strptime',
-                            'gettext', 'sets', '_threading_local', 'glob',
-                            'base64', 'locale', 'sre', 'bdb', 'optparse.',
-                            'ssl', 'calendar', 'pdb', 'stringprep', 'cmd',
-                            'pkg_resources' 'tempfile','copy',
-                            'textwrap', 'difflib', 'platform', 'threading',
-                            'dummy_thread', 'plistlib', 'quopri', 'fnmatch',
-                            'pprint']
+                            'distutils', 'Finder', 'StdSuites','xml',
+                            'getopt', 'repr', '_strptime','gettext', 'sets',
+                            '_threading_local', 'glob','base64', 'locale',
+                            'sre', 'bdb', 'optparse.', 'ssl', 'calendar', 'pdb',
+                            'stringprep', 'cmd', 'pkg_resources', 'copy',
+                            'platform', 'threading', 'dummy_thread', 'plistlib',
+                            'quopri', 'doctest', 'ntpath', 'OpenSSL',
+                            'os2emxpath', 'PyQt4.uic']
     excludes = lib_dynload_unused + site_packages_unused + ['PyQt4.%s' % f for f in qt_unused]
     # py2app
     py2app = dict(plist    = plist,
@@ -153,7 +152,7 @@ Name: "{commondesktop}\Pyromaths"; Filename: "{app}\pyromaths.exe"
           (r'data/packages', glob(r'data/packages/*')),
         ] + find_data_files('data/ex','data/ex/',['*/img/ex-*.png']),
         zipfile = None,
-        windows = [dict(script="src/pyromaths.py",
+        windows = [dict(script="pyromaths",
                         icon_resources=[(1, 'data/images/pyromaths.ico')],
                         )
                    ],

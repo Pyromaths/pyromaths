@@ -1,3 +1,28 @@
+pyromaths (15.02-1) trusty; urgency=medium
+
+  * Nouvel exercice niveau sixième : Construire des angles de mesure donnée,
+    d'après le manuel "des maths ensemble et pour chacun"
+  * Nouveaux exercices niveau 2nde : Tableaux de variations en 5 exercices.
+  * Nouvel exercice niveau 1reS : Nombre dérivé graphiquement.
+  * Nouveaux exercices niveau 1reS : Forme canonique et racines de polynômes
+    de degré 2.
+  * Modification de la classe PolynomesCollege pour qu'elle puisse utiliser
+    des coefficients de la classe Fractions.
+  * Ajout d'une nouvelle classe SquareRoot.
+  * Modification des templates pour qu'il prennent en charge Asymptote et tikz
+    pour le niveau lycée.
+  * Chaîne de compilation modifiée pour utiliser le module external de tikz.
+  * Mise en place de tests de non régression pour les exercices, par Louis.
+  * bugfix dans pyromaths.outils.Priorites3
+  * bugfix dans pyromaths.ex.lycee.ExoPolynome.quest_fonctions_rationnelles.
+    Merci à jcl de m'en avoir averti.
+  * bugfix d'affichage dans l'exercice équation 3e : merci à Arnaud de me
+    l'avoir signalé.
+  * bugfix dans outils.Priorites3 : le carré des nombres négatifs étaient
+    négatifs...*
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Tue, 10 Feb 2015 21:48:36 +0100
+
 pyromaths (14.06-1) trusty; urgency=low
 
   * Correction d'un bug dans l'affichage des vignettes sous Linux

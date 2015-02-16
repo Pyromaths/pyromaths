@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import random
+import textwrap
+
 from pyromaths import ex
 
 class RandomHelloWorld(ex.TexExercise):
@@ -15,3 +17,10 @@ class RandomHelloWorld(ex.TexExercise):
 
     def tex_answer(self):
         return ['\\exercice*', '%u times goodbye, World!' % self.times]
+
+    tests = {
+            0: {
+                'tex_statement': """Here comes the expected output of tex_statement() with random seed 0.""",
+                'tex_statement': """Here comes the expected output of tex_answer() with random seed 0.""",
+                },
+            }

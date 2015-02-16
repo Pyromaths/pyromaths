@@ -24,7 +24,7 @@
 # Pyromaths : GESTION DES PRIORITES
 #----------------------------------------------------------------------
 
-from Affichage import decimaux
+# from Affichage import decimaux
 from pyromaths.outils import Arithmetique
 
 
@@ -49,7 +49,7 @@ def cherche_classe(calcul, index):
 
     :rtype: string
     """
-    classes = ["Polynome(", "Fraction("]
+    classes = ["Polynome(", "Fraction(", "SquareRoot("]
     indexes = [calcul.find(classe, index) for classe in classes]
     position, i = 0, 1
     while i < len(classes):
@@ -124,12 +124,27 @@ def cherche_decimal(calcul, index):
             index -= 1
     return calcul[index:end]
 
+def cherche_string(calcul, index):
+    apostrophes = ["'", "\""]
+    indexes = [calcul.find(apostrophe, index) for apostrophe in apostrophes]
+    position, i = 0, 1
+    while i < len(apostrophes):
+        if 0 <= indexes[i] and (indexes[position] < 0 or indexes[i] < indexes[position]):
+            position = i
+        i += 1
+    if indexes[position] < 0: return None
+    apostrophe = apostrophes[position]
+    index = indexes[position] + 1
+    i = calcul.find(apostrophe, index)
+
+    return calcul[index:i]
+
 def cherche_operateur(calcul, index):
     """**cherche_operateur**\ (*calcul*\ , *min_i*)
 
     Recherche le premier opérateur +, -, \*, /, ^ dans la chaîne calcul à une position
     supérieure ou égale à min_i, sans expression régulière.
-    
+
     :param calcul: le calcul à tester
     :type calcul: string
     :param min_i: position à partir de laquelle effectuer le test
@@ -184,7 +199,7 @@ def split_calcul(calcul):
     :rtype: list
     """
     l = []
-    findings = (cherche_classe, cherche_decimal)  # , cherche_operateur)
+    findings = (cherche_classe, cherche_string, cherche_decimal)  # , cherche_operateur)
     for finding in findings:
         nb = finding(calcul, 0)
         while nb:
@@ -211,7 +226,8 @@ def split_calcul(calcul):
 def EstNombre(value):
     """**EstNombre**\ (*value*)
 
-    Teste si `value` est une valeur, c'est à dire un entier, un réel, un polynôme, une fraction
+    Teste si `value` est une valeur, c'est à dire un entier, un réel, un polynôme, une fraction, une racine carrée.
+    Attention : (-11) est considéré comme un nombre
 
     :param value: la valeur à traiter
     :type value: string
@@ -226,8 +242,17 @@ def EstNombre(value):
     """
     from pyromaths.classes.PolynomesCollege import Polynome
     from pyromaths.classes.Fractions import Fraction
+    from pyromaths.classes.SquareRoot import SquareRoot
+    classe = cherche_classe(value, 0)
+    if  classe:
+        if classe != value: return False
+        else: return True
+    #===========================================================================
+    # if cherche_operateur(value, 1):
+    #     return False
+    #===========================================================================
     try:
-        return isinstance(eval(value), (float, int, Polynome, Fraction))
+        return isinstance(eval(value), (float, int, Polynome, Fraction, SquareRoot))
     except:
         return False
 
@@ -281,6 +306,10 @@ def splitting(calcul):
             if l[i][0] == '-': l[i] == l[i][1:]
             else:l[i] = '(-%s)' % l[i]
         index = i + 1
+    for dummy in range(l.count('\'')):
+        l.remove('\'')
+    for dummy in range(l.count('"')):
+        l.remove('"')
     return l
 
 def recherche_parentheses(calcul):
@@ -524,6 +553,7 @@ def effectue_calcul(calcul):
     """
     from pyromaths.classes.PolynomesCollege import Polynome
     from pyromaths.classes.Fractions import Fraction
+    from pyromaths.classes.SquareRoot import SquareRoot
     serie = (recherche_parentheses, recherche_puissance, recherche_produit,
             recherche_neg, recherche_somme)
     result, post, break_somme = [], "", False
@@ -605,13 +635,15 @@ def effectue_calcul(calcul):
                         else:
                             sol = classe.__mul__(nombres[0], *nombres[1:])
                     else: sol = eval("".join(calc))
+                elif recherche == recherche_puissance:
+                    sol = eval('(' + calc[0] + ')**' + calc[2])
                 else:
                     sol = eval("".join(calc))
                 if isinstance(sol, basestring): sol = splitting(sol)
                 elif isinstance(sol, (int, float)): sol = [str(sol)]
-                elif isinstance(sol, (Polynome, Fraction)): sol = [repr(sol)]
+                elif isinstance(sol, (Polynome, Fraction, SquareRoot)): sol = [repr(sol)]
                 else :
-                    raise ValueError(u"Le résultat a un format inattendu")
+                    raise ValueError(u"Le résultat %s a un format inattendu" % sol)
             if recherche == recherche_neg and (pre or result):
                 # Ajoute le "+" ou sépare le "-":
                 # "1-(-9)" => "1 + 9" et "1+(-9)" => "1 - 9"
@@ -657,7 +689,7 @@ def priorites(calcul):
     [['Polynome([[Fraction(6, 21, "s"), 1]], "x", 0)', '+', 'Polynome([[Fraction(6, 7), 0]], "x", 0)'], ['Polynome([[Fraction(2, 7), 1], [Fraction(6, 7), 0]], "x", 0)']]
     >>> Priorites3.priorites('-Fraction(-6,1)/Fraction(-4,1)')
     [['-', '(', 'Fraction(-6, 1)', '*', 'Fraction(1, -4)', ')'], ['-', 'Fraction("2*-3", "2*-2", "s")'], ['Fraction(-3, 2)']]
-    
+
     :rtype: list
     """
     calcul = splitting(calcul)
@@ -665,8 +697,9 @@ def priorites(calcul):
     while len(calcul) > 1:
         s = effectue_calcul(calcul)
         if s:
+            if s == calcul: s, solution[0]
             solution.append(s)
-        calcul = [k for k in s]  # dissocie calcul et s
+        calcul = list(s)  # dissocie calcul et s
     if 'Polynome(' in calcul[0][:9]:
         from pyromaths.classes.PolynomesCollege import Polynome
         from pyromaths.classes.Fractions import Fraction
@@ -677,6 +710,7 @@ def priorites(calcul):
             p = p.nreduction()
     if 'Fraction(' in calcul[0][:9]:
         from pyromaths.classes.Fractions import Fraction
+        from pyromaths.classes.SquareRoot import SquareRoot
         f = eval(calcul[0])
         f = f.traitement(True)
         while (solution and repr(f) != solution[-1][0]) or (not solution and repr(f) != calcul[0]):
@@ -686,6 +720,13 @@ def priorites(calcul):
             if isinstance(f, int): break
             f = f.traitement(True)
     return solution
+
+def texifystring(calcul):
+    r"""**texify**\ (*calcul*)
+
+    convertit la chaîne de caractères en chaîne au format TeX.
+    """
+    return texify([splitting(calcul)])[0]
 
 def texify(liste_calculs):
     r"""**texify**\ (*liste_calculs*)
@@ -706,24 +747,37 @@ def texify(liste_calculs):
     ['4+5-6', '9-6', '3']
     >>> Priorites3.texify(Priorites3.priorites('(-7)+8-Polynome([[-4, 1], [-9, 2], [-5, 0]], "x")'))
     ['1-\\left( -4\\,x-9\\,x^{2}-5\\right) ', '1+4\\,x+9\\,x^{2}+5', '9\\,x^{2}+4\\,x+6']
-    >>> Priorites3.texify(['Fraction(5,6)', '**', '2'])
-    ['\\dfrac{5}{6}', '^{', '2']
+    >>> Priorites3.texify([['Fraction(5,6)', '**', '2']])
+    ['\\left(  \\dfrac{5}{6} \\right) ^{2}']
 
     :rtype: list
     """
     from pyromaths.classes.PolynomesCollege import Polynome
     from pyromaths.classes.Fractions import Fraction
+    from pyromaths.classes.SquareRoot import SquareRoot
+    from Affichage import decimaux
     ls = []
+    enluminures = {'indice': r'_{', 'cancel':r'\cancel{'}
+    isEnlumine = {'indice': False, 'cancel':False}
     for calcul in liste_calculs:
         if isinstance(calcul, basestring): calcul = splitting(calcul)
         s = ""
         puiss = 0
-        for i in range(len(calcul)):
-            el = calcul[i]
+        for index in range(len(calcul)):
+            el = calcul[index]
+            for cle in isEnlumine.keys():
+                if isEnlumine[cle] and (not isinstance(el, list) or el[1] != cle):
+                    s += '}'
+                    isEnlumine[cle] = False
+            if isinstance(el, list):
+                if not isEnlumine[el[1]]:
+                    s += enluminures[el[1]]
+                    isEnlumine[el[1]] = True
+                el = el[0]
             if el[:9] == "Polynome(":
                 # Doit-on entourer ce polynôme de parenthèses ?
                 p = eval(el)
-                if i + 1 < len(calcul): q = calcul[i + 1]
+                if index + 1 < len(calcul): q = calcul[index + 1]
                 else: q = ""
                 """ 3 cas :
                 * {*,-}(2x+3) ou {*,-}(-2x)
@@ -742,23 +796,56 @@ def texify(liste_calculs):
                     s += str(p)
             elif el[:9] == "Fraction(":
                 # Doit-on entourer cette fraction de parenthèses ?
-                p = el[9:-1].split(",")
+                p = splitting(el[9:-1])
+                # Gère le cas ou la fraction comprend des objets SquareRoot
+                t = [""]
+                for i in range(len(p)):
+                    if p[i] == ',': t.append("")
+                    else: t[-1] += p[i]
+                p = t
                 if len(p) == 2:
-                    texfrac = str(Fraction(eval(p[0]), eval(p[1])))
+                    # texfrac = str(Fraction(eval(p[0]), eval(p[1])))
+                    texfrac = str(Fraction(p[0], p[1]))
                 else:
-                    texfrac = str(Fraction(eval(p[0]), eval(p[1]), eval(p[2])))
-                if i + 1 < len(calcul): q = calcul[i + 1]
+                    texfrac = str(Fraction(p[0], p[1], p[2]))
+                if index + 1 < len(calcul): q = calcul[index + 1]
                 else: q = ""
                 if (eval(p[0]) < 0 or p[1] != "1") and q == "**":
                     s += "( " + texfrac + " )"
                 else:
                     s += texfrac
+            elif el[:11] == "SquareRoot(":
+                p = eval(el)
+                if index + 1 < len(calcul): q = calcul[index + 1]
+                else: q = ""
+                """ 3 cas :
+                * {*,-}(2x+3) ou {*,-}(-2x)
+                * (2x+3)*...
+                * (2x+1)**2"""
+                if (s and s[-1] in "*-" and (len(p) > 1 or p[0][0] < 0)) \
+                    or (q and q == "*" and len(p) > 1) \
+                    or ((len(p) > 1 or (p[0][0] != 1 and p[0][1] > 0) or \
+                         p[0][0] < 0 or \
+                         (p[0][0] != 1 and isinstance(p[0][0], Fraction) and p[0][0].d != 1)) and q and q == "**"):
+                    s += "(" + str(p) + ")"
+                elif s and s[-1] == "+" and p[0][0] < 0:
+                    s = s[:-1]
+                    s += str(p)
+                else:
+                    s += str(p)
             elif EstNombre(el):
+                if index + 1 < len(calcul): q = calcul[index + 1]
+                else: q = ""
                 if el[0] == "(": s += "(" + decimaux(el[1:-1]) + ")"
+
+                elif el[0] == '-' and ((s and s[-1] in "+/*-") \
+                    or (q and q == "**")):
+                    s += "(" + decimaux(el) + ")"
+
                 else: s += decimaux(el)
             elif el == "**":
                 s += "**{"
-                puiss += 1
+                puiss = 1
             elif el == "(":
                 if puiss: puiss += 1
                 s += "("
@@ -768,12 +855,17 @@ def texify(liste_calculs):
             else :
                 # "+", "-", "*", "/"
                 s += el
-            if puiss == 1 and s[-1] != "{":
+            if puiss == 1 and s[-1] != r"{":
                 puiss = 0
                 s += "}"
+        for cle in isEnlumine.keys():
+            if isEnlumine[cle] and (not isinstance(el, list) or el[1] != cle):
+                s += '}'
         s = s.replace("**{", "^{")
         s = s.replace("(", "\\left( ")
         s = s.replace(")", "\\right) ")
+        s = s.replace("\\left\\left", "\\left ")
+        s = s.replace("\\right\\right", "\\right ")
         s = s.replace("*", "\\times ")
         s = s.replace("/", "\\div ")
         if not ls or s != ls[-1]:
@@ -800,6 +892,7 @@ def plotify(calcul):
     """
     from pyromaths.classes.PolynomesCollege import Polynome
     from pyromaths.classes.Fractions import Fraction
+    from Affichage import decimaux
 
     if isinstance(calcul, basestring): calcul = splitting(calcul)
     s = ""

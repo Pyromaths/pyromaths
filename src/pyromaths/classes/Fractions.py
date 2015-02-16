@@ -23,6 +23,9 @@
 
 from pyromaths.outils.Arithmetique import pgcd, ppcm
 from collections import Counter
+from pyromaths.classes.SquareRoot import SquareRoot
+from pyromaths.outils.Priorites3 import EstNombre, texify
+from __builtin__ import str
 
 class Fraction():
     """Cette classe crée la notion de fractions.
@@ -70,40 +73,60 @@ class Fraction():
 
         Renvoie une version LaTeX de la :class:`Fraction`.
             >>> from pyromaths.classes.Fractions import Fraction
+            >>> str(Fraction(8,1))
+            '8'
             >>> str(Fraction(5,6))
             '\\dfrac{5}{6}'
-            >>> str(Fraction('-72*2', '11*2', 'r'))
-            '\\dfrac{-72_{\\times 2}}{11_{\\times 2}}'
-            >>> str(Fraction('-72*2', '11*2', 's'))
+            >>> str(Fraction('-5*2', '3*2', 'r'))
+            '\\dfrac{-5_{\\times 2}}{3_{\\times 2}}'
+            >>> str(Fraction('5*-7*2', '11*2*5', 's'))
+            '\\dfrac{\\cancel{5}\\times \\left( -7\\right) \\times \\cancel{2}}{11\\times \\cancel{2}\\times \\cancel{5}}'
+            >>> str(Fraction('-144', '22', 's'))
             '\\dfrac{-72\\times \\cancel{2}}{11\\times \\cancel{2}}'
-
+            >>> from pyromaths.classes.SquareRoot import SquareRoot
+            >>> str(Fraction(SquareRoot([[-10, None], [-1, 80]]), -2))
+            '\\dfrac{-10-\\sqrt{80}}{-2}'
+            >>> str(Fraction(SquareRoot([[-10, None], [-4, 5]]), -2, 's'))
+            '\\dfrac{\\left( 5+2\\,\\sqrt{5}\\right) \\times \\cancel{-2}}{1\\times \\cancel{-2}}'
+            
         :rtype: string
         """
-        if self.n:
-            if self.d == 1:
-                text = "%s" % self.n
-            elif self.code == "r":
-                text = r"\dfrac{%s_{\times %s}}" % (tuple(self.n.split("*")))
-                text += r"{%s_{\times %s}}" % (tuple(self.d.split('*')))
-            elif self.code == "s":
-                if isinstance(self.n, str) and isinstance(self.d, str):
-                    ln = self.n.split('*')
-                    ld = self.d.split('*')
-                elif isinstance(self.n, (int, float)) and isinstance(self.d, (int, float)):
-                    lepgcd = pgcd(self.n, self.d)
-                    ln, ld = [str(self.n // lepgcd), str(lepgcd)], [str(self.d // lepgcd), str(lepgcd)]
-                else:
-                    raise ValueError(u'Cas non prévu : mélange str et int dans une fraction')
-                for i in range(len(ln)):
-                    if ld.count(ln[i]):
-                        ld[ld.index(ln[i])] = r"\cancel{%s}" % ln[i]
-                        ln[i] = r"\cancel{%s}" % ln[i]
-                text = r"\dfrac{%s}{%s}" % (r"\times ".join(ln), r"\times ".join(ld))
+        from pyromaths.outils.Priorites3 import splitting
+        #=======================================================================
+        # print (repr(self))
+        #=======================================================================
+        if self.n == 0 or self.n == '0':
+            return '0'
+        lnum, lden = [], []
+        if isinstance(self.n, str): lnum = splitting(self.n)
+        if isinstance(self.d, str): lden = splitting(self.d)
+        if len(lnum) == 1: self.n, lnum = eval(self.n), []
+        if len(lden) == 1: self.d, lden = eval(self.d), []
+        if self.d == 1:
+            return (str(self.n), texify([lnum])[0])[lnum != []]
+        if self.code == "r":
+            # lnum et lden doivent être définis et se terminer par [..., '*', valeur]
+            if not lnum or not lden or lnum[-2:] != lden[-2:]:
+                raise ValueError(u'Mauvais usage de l\'étiquettes "r" dans %r' % self)
+            lden[-2], lden[-1], lnum[-2], lnum[-1] = [lden[-2], 'indice'], [lden[-1], 'indice'], [lnum[-2], 'indice'], [lnum[-1], 'indice']
+            return '\\dfrac{%s}{%s}' % (texify([lnum])[0], texify([lden])[0])
+        if self.code == "s":
+            if isinstance(self.n, (int, float, SquareRoot)) and isinstance(self.d, (int, float, SquareRoot)):
+                lepgcd = pgcd(self.n, self.d)
+                lnum, lden = [repr(self.n // lepgcd), '*', [str(lepgcd), 'cancel']], [repr(self.d // lepgcd), '*', [str(lepgcd), 'cancel']]
             else:
-                text = r"\dfrac{%s}{%s}" % (self.n, self.d)
-        else:
-            text = "0"
-        return text
+                for i in range(len(lnum)):
+                    if lnum[i] != '*' and lden.count(lnum[i]):
+                        # On doit simplifier la fraction par ce nombre
+                        j = lden.index(lnum[i])
+                        lden[j] = [lden[j], 'cancel']
+                        lnum[i] = [lnum[i], 'cancel']
+            return '\\dfrac{%s}{%s}' % (texify([lnum])[0], texify([lden])[0])
+        s = r'\dfrac'
+        s += '{%s}' % (self.n, texify([lnum])[0])[lnum != []]
+        s += '{%s}' % (self.d, texify([lden])[0])[lden != []]
+        return s
+
 
     def __repr__(self):
         """**repr**\ (*object*)
@@ -635,8 +658,23 @@ class Fraction():
             self.d = eval(self.d)
             conv = True
         if conv : self = Fraction(self.n, self.d)
+        conv = False
+        if isinstance(self.n, SquareRoot):
+            s = self.n.simplifie()
+            if s != self.n:
+                self.n = s
+                conv = True
+        if isinstance(self.d, SquareRoot):
+            s = self.d.simplifie()
+            if s != self.d:
+                self.d = s
+                conv = True
+        if conv: return self
         s = pgcd(self.n, self.d)
-        return Fraction(self.n // s, self.d // s)
+        if self.d != s:
+            return Fraction(self.n // s, self.d // s)
+        else:
+            return self.n // s
 
     def decompose(self):
         """**decompose**\ (*object*)
@@ -652,6 +690,19 @@ class Fraction():
         """
         if isinstance(self.n, str): self.n = eval(self.n)
         if isinstance(self.d, str): self.d = eval(self.d)
+        conv = False
+        if isinstance(self.n, SquareRoot):
+            s = self.n.simplifie()
+            if s != self.n:
+                self.n = s
+                conv = True
+        if isinstance(self.d, SquareRoot):
+            s = self.d.simplifie()
+            if s != self.d:
+                self.d = s
+                conv = True
+        if conv:
+            return self
         if self.d == self.n:
             return 1
         else:
@@ -659,7 +710,7 @@ class Fraction():
             if lepgcd == 1:
                 return self
             else:
-                return Fraction("%s*%s" % (self.n // lepgcd, lepgcd), "%s*%s" % (self.d // lepgcd, lepgcd), "s")
+                return Fraction("%r*%s" % (self.n // lepgcd, lepgcd), "%r*%s" % (self.d // lepgcd, lepgcd), "s")
 
     def traitement(self, final=False):
         """**traitement**\ (*object*,\ *self*)

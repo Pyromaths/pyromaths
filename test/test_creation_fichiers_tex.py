@@ -8,14 +8,15 @@ _path = normpath(join(abspath(dirname(__file__)), "../src"))
 sys.path[0] = realpath(_path)
 from pyromaths import pyromaths
 
-from pyromaths.Values import LESFICHES, data_dir, configdir
+from pyromaths.Values import lesfiches, data_dir, configdir
 from pyromaths.outils.System import creation
 import codecs, tempfile
 
 
 def nettoyage(dt):
-    for file in ["exercices.tex", "exercices.pdf"]:
+    for file in ["exercices.tex", "exercices.pdf", "latexmkrc"]:
         os.remove(os.path.join(dt, file))
+    os.rmdir(os.path.join(dt, 'asy'))
     os.rmdir(dt)
 
 usage = u"""
@@ -40,6 +41,8 @@ Niveau 5 : troisième
 Niveau 6 : terminale S
 Niveau 7 : sixième
 """
+
+LESFICHES = lesfiches()
 dt = tempfile.mkdtemp(prefix='pyromaths_tests-', dir='/tmp')
 parametres = {
         'creer_pdf': True,
@@ -72,7 +75,7 @@ if (len(sys.argv) == 4):
     parametres['fiche_exo'] = os.path.join(dt, 'exercices.tex')
     parametres['fiche_cor'] = os.path.join(dt, 'exercices-corrige.tex')
     creation(parametres)
-    #nettoyage(dt)
+#    nettoyage(dt)
 
 elif (len(sys.argv) == 1):
     os.rmdir(dt)

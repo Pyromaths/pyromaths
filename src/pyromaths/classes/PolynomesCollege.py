@@ -22,24 +22,14 @@
 #
 from pyromaths.outils.decimaux import decimaux
 from pyromaths.outils import Priorites3
+from pyromaths.classes.SquareRoot import SquareRoot
 from pyromaths.classes.Fractions import Fraction
 
 class Polynome():
-    """Cette classe crée la notion de polynômes.
-
-        >>> from pyromaths.classes.PolynomesCollege import Polynome
-        >>> Polynome([[2,2],[3,1],[4,0]], 'z')
-        Polynome([[2, 2], [3, 1], [4, 0]], "z", 0)
-        >>> Polynome("2y^2+3y+4")
-        Polynome([[2, 2], [3, 1], [4, 0]], "y", 0)
-
-    Les variables e, i, j, l, o, O sont à éviter pour des raisons de lisibilité (l, o, O) ou parce qu'elles
-    sont utilisées comme constantes (e, i, j).
-    """
-
-    def __init__(self, monomes, var=None, details=0):
-        """Crée un polynôme. Si ``var == None`` alors la variable est ``x``.
-
+    """ Cette classe crée la notion de polynômes.
+    
+        Si ``var == None`` alors la variable est ``x``.
+        
         *details* donne le niveau de détails attendus dans les développements et réductions :
 
         - 0 : pas de détails : 3x+4x => 7x
@@ -47,17 +37,19 @@ class Polynome():
         - 2 : ordonne puis factorise les réductions : 3x+4x=(3+4)x
         - 3 : comme 2 et détaille les produits : 2x*3x=2*3*x*x
 
-            >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> Polynome([[2,2],[3,1],[4,0]], 'z')
-            Polynome([[2, 2], [3, 1], [4, 0]], "z", 0)
-            >>> Polynome("2y^2+3y+4")
-            Polynome([[2, 2], [3, 1], [4, 0]], "y", 0)
-            >>> Polynome([[1, 1], [2, 2]])
-            Polynome([[1, 1], [2, 2]], "x", 0)
-            >>> Polynome("Fraction(1,7)x^2-Fraction(3,8)x-1")
-            Polynome([[Fraction(1, 7), 2], [Fraction(-3, 8), 1], [-1, 0]], "x", 0)
+        >>> from pyromaths.classes.PolynomesCollege import Polynome
+        >>> Polynome([[2,2],[3,1],[4,0]], 'z')
+        Polynome([[2, 2], [3, 1], [4, 0]], "z", 0)
+        >>> Polynome("2y^2+3y+4")
+        Polynome([[2, 2], [3, 1], [4, 0]], "y", 0)
+        >>> Polynome([[1, 1], [2, 2]])
+        Polynome([[1, 1], [2, 2]], "x", 0)
+        >>> Polynome("Fraction(1,7)x^2-Fraction(3,8)x-1")
+        Polynome([[Fraction(1, 7), 2], [Fraction(-3, 8), 1], [-1, 0]], "x", 0)
+    """
 
-        """
+    def __init__(self, monomes, var=None, details=0):
+        """Crée un polynôme."""
         monomes = monomes or '0'  # monômes du polynôme, par défaut un polynôme nul
         if isinstance(monomes, Polynome):
             self.monomes = monomes.monomes
@@ -147,10 +139,18 @@ class Polynome():
                 if isinstance(coef.n, int) and isinstance(coef.d, int) and coef.n < 0 and coef.d > 0:
                     return "-" + str(Fraction(-coef.n, coef.d, coef.code))
                 return "+" + str(coef)
+            if isinstance(coef, SquareRoot):
+                if len(coef) > 1: coef = str(coef)
+                else:
+                    if coef[0][0] > 0:
+                        return '+' + str(coef)
+                    else:
+                        return str(coef)
             if isinstance(coef, str):
                 texte = "(" + "".join(Priorites3.texify([Priorites3.splitting(coef)])) + ")"
                 if texte[0] != "-": return "+" + texte
                 else: return texte
+            raise ValueError(u'Not Implemented : Coefficient %s' % coef)
 
         var = self.var
         s = ""
@@ -196,12 +196,12 @@ class Polynome():
         :rtype: string
         """
         if Polynome.degre(self) == 0:
-            return self.monomes[0][0]
+            return self.monomes[0][0] or '0'
         if valeur == 0:
             retour = ''
             for m in self.monomes:
                 if m[1] == 0: retour += '+%r' % m[0]
-            return retour.lstrip('+').replace('+-', '-')
+            return retour.lstrip('+').replace('+-', '-') or '0'
         if valeur < 0 and isinstance(valeur, (float, int)): nb = "(%s)" % valeur
         else: nb = repr(valeur)
         retour = ''
@@ -222,6 +222,17 @@ class Polynome():
                 else:
                     retour += '+%r*' % m[0] + nb + '**%s' % m[1]
         return retour.lstrip('+').replace('+-', '-')
+
+    def derive(self):
+        if self.degre < 1:
+            return Polynome([0, 0], self.var, self.details)
+        else:
+            p = []
+            for m in self:
+                if m[1] > 0:
+                    p.append([m[0] * m[1], m[1] - 1])
+            return Polynome(p, self.var, self.details)
+
 
     def __getitem__(self, i):
         """*object*\ .\ **__getitem__**\ (*integer*)
@@ -548,9 +559,13 @@ class Polynome():
                                 produit.append(repr(j))
                         return "*".join(produit)
                     if lother[i].details == 3 and not ordonne:
-                        return "*".join([repr(coeff) for coeff in lcoeff]) + "*" + \
-                            "*".join(["Polynome([[1, %s]], '%s', %s)" % (exp, self.var, self.details) for exp in lexp]) + \
-                            "*".join([repr(other.nreduction()) for other in lother[i + 1:]])
+                        coeff = "*".join([repr(coeff) for coeff in lcoeff])
+                        if coeff: sol = [coeff]
+                        else: sol = []
+                        exp = "*".join(["Polynome([[1, %s]], '%s', %s)" % (exp, self.var, self.details) for exp in lexp])
+                        if exp: sol.append(exp)
+                        if lother[i + 1:]: sol.append("*".join([repr(other.nreduction()) for other in lother[i + 1:]]))
+                        return "*".join(sol)
                     else:
                         lcoeff.append(1)
                         lexp.append(0)
@@ -821,6 +836,7 @@ class Polynome():
             else: ldegres.append(m[1])
             if isinstance(m[0], str) and Priorites3.effectue_calcul(Priorites3.splitting(m[0])) != [m[0]]: return True
             if isinstance(m[0], Fraction) and repr(m[0].traitement(True)) != repr(m[0]): return True
+            if isinstance(m[0], SquareRoot) and repr(m[0].simplifie()) != repr(m[0]): return True
             # une simplification de fraction ou un calcul est à faire
         return False
 
@@ -868,10 +884,13 @@ class Polynome():
         :rtype: Polynome
         """
         def _reduit_monome(monome, bdirecte):
-            if isinstance(monome[0], str) or isinstance(monome[0], Fraction):
+            if isinstance(monome[0], (str, Fraction, SquareRoot)):
             # une réduction peut-être à faire ici
                 if isinstance(monome[0], Fraction):
                     monome[0] = repr(monome[0].traitement(True))
+                    res = []
+                elif isinstance(monome[0], SquareRoot):
+                    monome[0] = repr(monome[0].simplifie())
                     res = []
                 else:
                     splitted = Priorites3.splitting(monome[0])
@@ -974,7 +993,9 @@ def factoriser(calcul):
     >>> factoriser("Polynome('-4x^2+12x-9')")
     '-(Polynome([[2.0, 1]], "x", 0)**2-2*Polynome([[2.0, 1]], "x", 0)*Polynome([[3.0, 0]], "x", 0)+Polynome([[3.0, 0]], "x", 0)**2)'
     >>> factoriser("Polynome('4x^2-9')")
-    'Polynome([[2.0, 1]], "x", 0)**2-Polynome([[3.0, 0]], "x", 0)**2'
+    'Polynome([[SquareRoot([[1, 4]]), 1]], "x", 0)**2-Polynome([[SquareRoot([[1, 9]]), 0]], "x", 0)**2'
+    >>> factoriser("Polynome('3x^2-5')")
+    'Polynome([[SquareRoot([[1, 3]]), 1]], "x", 0)**2-Polynome([[SquareRoot([[1, 5]]), 0]], "x", 0)**2'
     >>> factoriser("Polynome('4x^2')")
     'Polynome([[2.0, 1]], "x", 0)**2'
     >>> factoriser("Polynome('4x')")
@@ -1012,14 +1033,17 @@ def factoriser(calcul):
         :rtype: str ou None
         """
         from math import sqrt
+        from pyromaths.classes.SquareRoot import SquareRoot
         poly = poly.ordonne()
         if len(poly) == 1:
             if poly[0][1] % 2 == 0 and isinstance(poly[0][0], int) and \
               Arithmetique.carrerise(poly[0][0]) == 1:
                 return "%r**2" % (Polynome([[sqrt(abs(poly[0][0])), poly[0][1] // 2]], poly.var, poly.details))
         elif len(poly) == 2:
-            a = repr(Polynome([[sqrt(abs(poly[0][0])), poly[0][1] // 2]], poly.var, poly.details))
-            b = repr(Polynome([[sqrt(abs(poly[1][0])), poly[1][1] // 2]], poly.var, poly.details))
+            # if isinstance(SquareRoot([1, abs(poly[0][0])]).simplifie(),str):
+
+            a = repr(Polynome([[SquareRoot([1, abs(poly[0][0])]), poly[0][1] // 2]], poly.var, poly.details))
+            b = repr(Polynome([[SquareRoot([1, abs(poly[1][0])]), poly[1][1] // 2]], poly.var, poly.details))
             if not poly[0][1] % 2 and not poly[1][1] % 2:
                 # Les deux exposants sont des carrés
                 if poly[0][0] * poly[1][0] < 0:
@@ -1171,11 +1195,13 @@ def factoriser(calcul):
 
             if (('+' in lsgn or '' in lsgn) and '-' in lsgn) and calcul.count("**") == lcalcul.count("2") == 2 and len(ltermes) == 2:
                 # 3ème identité remarquable
+                # print ltermes[0][0], ltermes[1][0]
                 a, b = eval(ltermes[0][0]), eval(ltermes[1][0])
                 if lsgn[0] == '-': return '(%r+%r)*(%r-%r)' % (b, a, b, a)
                 else: return '(%r+%r)*(%r-%r)' % (a, b, a, b)
 
             for k in ltermes[0]:
+                commun = False
                 if k[:9] == 'Polynome(':
                     commun = False
                     bdetail = False

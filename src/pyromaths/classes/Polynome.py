@@ -233,6 +233,8 @@ class Polynome:
                 return result
             elif isinstance(result, Fraction):
                 result = result.simplifie()
+                if isinstance(result, int):
+                    return result
                 if result.d == 1:
                     return result.n
                 else:

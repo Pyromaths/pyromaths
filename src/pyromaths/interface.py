@@ -24,10 +24,15 @@ from PyQt4 import QtGui, QtCore
 from PyQt4 import Qt  # Cas de Mac OS X, QTBUG-36212
 import os, lxml, codecs, sys
 from outils import System
-from Values import CONFIGDIR, DATADIR, LESFICHES, COPYRIGHTS, VERSION, ICONDIR
+from Values import CONFIGDIR, DATADIR, COPYRIGHTS, VERSION, ICONDIR
+from Values import lesfiches
 from operator import itemgetter
 
 class Ui_MainWindow(object):
+    def __init__(self, *args, **kwargs):
+        super(Ui_MainWindow, self).__init__(*args, **kwargs)
+        self.lesfiches = lesfiches()
+
     def setupUi(self, MainWindow):
         self.configfile = os.path.join(CONFIGDIR, "pyromaths.xml")
         self.liste_creation = []
@@ -91,8 +96,8 @@ class Ui_MainWindow(object):
         #============================================================
 
         self.tabs = []
-        LESFICHES.sort(key=itemgetter(0), reverse=True)
-        MESFICHES = [[LESFICHES[i][0][2:], '', LESFICHES[i][2]] for i in range(len(LESFICHES))]
+        self.lesfiches.sort(key=itemgetter(0), reverse=True)
+        MESFICHES = [[self.lesfiches[i][0][2:], '', self.lesfiches[i][2]] for i in range(len(self.lesfiches))]
 
         for level in MESFICHES:
             self.tabs.append(Tab(self.tabWidget, level, self.setNbExos))
@@ -452,7 +457,7 @@ class Ui_MainWindow(object):
             for i in range(len(self.liste_creation)):
                 niveau = self.liste_creation[i][0]
                 exo = self.liste_creation[i][1]
-                liste.append(LESFICHES[niveau][2][exo])
+                liste.append(self.lesfiches[niveau][2][exo])
             self.List = QtGui.QListWidget()
             for i in range(len(liste)):
                 item = QtGui.QListWidgetItem(liste[i].description)
@@ -467,9 +472,9 @@ class Ui_MainWindow(object):
             if bmono:
                 # S'il ny a qu'un seul type d'exercices, pas la peine de choisir
                 # l'ordre
-                valide(self.List, LESFICHES, parametres)
+                valide(self.List, self.lesfiches, parametres)
             else:
-                form = ChoixOrdreExos(self.List, LESFICHES, parametres)
+                form = ChoixOrdreExos(self.List, self.lesfiches, parametres)
                 form.exec_()
 
     def effacer_choix_exercices(self):
@@ -529,7 +534,7 @@ class Ui_MainWindow(object):
         niveau = 0
         self.liste_creation = []
         for pkg_no in range(len(self.tabs)):
-            for box in range(len(LESFICHES[pkg_no][2])):
+            for box in range(len(self.lesfiches[pkg_no][2])):
                 qte = self.tabs[pkg_no].spinBox[box].value()
                 for dummy in range(qte):
                     self.liste_creation.append((pkg_no, box))
@@ -573,7 +578,7 @@ class ChoixOrdreExos(QtGui.QDialog):
                  }"""
 
     def __init__(self, liste, LesFiches, parametres, parent=None):
-        LESFICHES = LesFiches
+        self.lesfiches = LesFiches
         self.parametres = parametres
         self.List = liste
         QtGui.QDialog.__init__(self, parent)
@@ -600,7 +605,7 @@ class ChoixOrdreExos(QtGui.QDialog):
     def accept(self):
         """Écrit une liste contenant la liste des exercices dans l'ordre choisit par l'utilisateur et demande à
         celui-ci les noms de fichiers pour les exercices et les corrigés"""
-        valide(self.List, LESFICHES, self.parametres)
+        valide(self.List, self.lesfiches, self.parametres)
         self.close()
 
 def valide(liste, LesFiches, parametres):

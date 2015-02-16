@@ -25,7 +25,7 @@ dist/
 /src/tous.py
 
 # Documentation sphinx
-/Doc/build/doctrees/
-/Doc/build/.doctrees/
-/Doc/build/doctest/
-/Doc/build/.buildinfo
+/Doc/build/
+
+# script confidentiel
+/utils/transfert_sur_le_site.sh
