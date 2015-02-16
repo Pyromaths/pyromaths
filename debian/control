@@ -1,5 +1,6 @@
 Source: pyromaths
-Section: math
+Distribution: unstable
+Section: contrib/math
 Priority: optional
 Maintainer: Jérôme Ortais <jerome.ortais@pyromaths.org>
 Build-Depends: debhelper (>= 7), python
@@ -10,7 +11,7 @@ Homepage: http://www.pyromaths.org/
 
 Package: pyromaths
 Architecture: all
-Depends: ${python:Depends}, python-qt4, python-lxml, texlive-pstricks, texlive-latex-base, texlive-latex-extra, texlive-fonts-recommended, texlive-latex-recommended
+Depends: ${misc:Depends}, ${python:Depends}, python-qt4, python-lxml, texlive-pstricks, texlive-latex-base, texlive-latex-extra, texlive-fonts-recommended, texlive-latex-recommended, latexmk
 Description: Exerciseur de mathématiques créant des fiches LaTeX
  Pyromaths est un programme qui a pour but de créer des exercices
  type de mathématiques niveau collège et lycée ainsi que leur corrigé. C'est

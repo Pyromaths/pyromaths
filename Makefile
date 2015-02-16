@@ -165,21 +165,13 @@ deb: min
 	cd $(BUILDIR) && debuild clean $(OUT)
 	cd $(BUILDIR) && debuild -kB39EE5B6 $(OUT) || exit 0
 	mkdir -p $(DIST)
-	mv $(BUILD)/pyromaths_$(VERSION)-*_all.deb $(DIST)
+	cp $(BUILD)/pyromaths_$(VERSION)-*_all.deb $(DIST)
 
 repo: deb
-	# Create DEB repository
+	# update apt repository
 	$(clean)
-	mkdir -p $(BUILDIR)/dists
-	cp $(DIST)/pyromaths_$(VERSION)*.deb $(BUILDIR)/dists
-	cd $(BUILDIR)                                                     &&\
-	    sudo dpkg-scanpackages . /dev/null > Packages                 &&\
-	    sudo dpkg-scanpackages . /dev/null | gzip -c9 > Packages.gz   &&\
-	    sudo dpkg-scanpackages . /dev/null | bzip2 -c9 > Packages.bz2 &&\
-	    apt-ftparchive release . > /tmp/Release.tmp                   &&\
-	    mv /tmp/Release.tmp Release                                   &&\
-	    gpg --default-key "Jérôme Ortais" -bao Release.gpg Release    &&\
-	    tar vjcf $(DIST)/debs-$(VERSION).tar.bz2 dists/ Packages Packages.gz Packages.bz2 Release Release.gpg
+	cd $(BUILD)
+	dput -l pyromaths_$(VERSION)-1_amd64.changes
 
 data/%.qm: data/%.ts
 	# Translate new/updated language files
