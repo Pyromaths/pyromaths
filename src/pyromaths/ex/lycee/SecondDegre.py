@@ -66,7 +66,7 @@ def creerPolydegre2(nb_racines=2, rac_radical=True, rac_quotient=False):
 
 class Sd1FormeCanonique(ex.TexExercise):
 
-    description = u'Sd. 1 - Forme canonique'
+    description = u'Forme canonique'
     level = u"1.1èreS"
 
     def __init__(self):
@@ -203,7 +203,7 @@ class Sd1FormeCanonique(ex.TexExercise):
         return exo
 
 class Sd2aRacines(ex.TexExercise):
-    description = u'Sd. 2a - Racines d\'un polynôme de degré 2'
+    description = u'Racines d\'un polynôme de degré 2'
     level = u"1.1èreS"
     def __init__(self):
         pol = [creerPolydegre2(nb_racines=2, rac_radical=True, rac_quotient=False)]
@@ -325,7 +325,7 @@ class Sd2aRacines(ex.TexExercise):
         return exo
 
 class Sd2bEquations(ex.TexExercise):
-    # description = u'Sd. 2b - Équations et polynômes de degré 2'
+    # description = u'Équations et polynômes de degré 2'
     level = u"1.1èreS"
     def __init__(self):
         pol = [creerPolydegre2(nb_racines=2, rac_radical=False, rac_quotient=False)]
@@ -367,7 +367,7 @@ class Sd2bEquations(ex.TexExercise):
         return exo
 
 class Sd3aSigne(ex.TexExercise):
-    # description = u'Sd. 3a - Signe d\'un polynôme de degré 2'
+    # description = u'Signe d\'un polynôme de degré 2'
     level = u"1.1èreS"
     def __init__(self):
         pol = [[valeur_alea(-9, 9), 2 - dummy] for dummy in range(3)]
@@ -408,7 +408,7 @@ class Sd3aSigne(ex.TexExercise):
         return exo
 
 class Sd3bInequations(ex.TexExercise):
-    # description = u'Sd. 3b - Inéquations et polynômes de degré 2'
+    # description = u'Inéquations et polynômes de degré 2'
     level = u"1.1èreS"
     def __init__(self):
         pol = creerPolydegre2(nb_racines=2, rac_radical=False, rac_quotient=False).monomes
@@ -428,7 +428,7 @@ class Sd3bInequations(ex.TexExercise):
         return exo
 
 class Sd4Factorisation(ex.TexExercise):
-    # description = u'Sd. 4a - Racines et factorisation d\'un polynôme de degré 2'
+    # description = u'Racines et factorisation d\'un polynôme de degré 2'
     level = u"1.1èreS"
     def __init__(self):
         val = [valeur_alea(-9, 9), valeur_alea(-9, 9)]
@@ -471,7 +471,7 @@ class Sd4Factorisation(ex.TexExercise):
         return exo
 
 class Sd5Caracteristiques(ex.TexExercise):
-    # description = u'Sd. 5 - Caractéristiques d\'une parabole'
+    # description = u'Caractéristiques d\'une parabole'
     level = u"1.1èreS"
     def __init__(self):
         val = [valeur_alea(-9, 9), valeur_alea(-9, 9) , valeur_alea(-9, 9)]
@@ -508,7 +508,7 @@ class Sd5Caracteristiques(ex.TexExercise):
         return exo
 
 class Sd6Parametre(ex.TexExercise):
-    # description = u'Sd. 6 - Polynôme paramétré de degré 2'
+    # description = u'Polynôme paramétré de degré 2'
     level = u"1.1èreS"
     def __init__(self):
         [a, b, c, d] = [randrange(-5, 6) for dummy in range(4)]
