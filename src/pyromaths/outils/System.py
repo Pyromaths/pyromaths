@@ -266,12 +266,16 @@ def creation(parametres):
 
 def nettoyage(basefilename):
     """Supprime les fichiers temporaires créés par LaTeX"""
-    for ext in ('.aux', '.dvi', '.out', '.ps', '.nav', '.snm', '.toc'):
+    for ext in ('.aux', '.dvi', '.out', '.ps', '.nav', '.snm', '.toc', '.log', '.pre', '.auxlock', '-pyromaths.log'):
         try:
             os.remove(basefilename + ext)
         except OSError:
             pass
             # le fichier à supprimer n'existe pas et on s'en moque.
+    try:
+        os.remove('latexmkrc')
+    except OSError:
+            pass
     try:
         if os.path.getsize('%s.pdf' % basefilename) > 1000 :
             os.remove('%s.log' % basefilename)
