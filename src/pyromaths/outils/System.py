@@ -276,15 +276,13 @@ def latexmkrc(basefilename):
 
 
 def nettoyage(basefilename):
-    """Supprime les fichiers temporaires créés par LaTeX"""
     try:
         os.remove('latexmkrc')
     except OSError:
             pass
     try:
-        if os.path.getsize('%s.pdf' % basefilename) > 1000 :
-            os.remove('%s.log' % basefilename)
-            os.remove('%s-pyromaths.log' % basefilename)
+        if os.path.getsize(basefilename + '-pyromaths.log') > 400 :
+            os.remove(basefilename + '-pyromaths.log')
     except OSError:
             pass
 
