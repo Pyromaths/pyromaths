@@ -281,7 +281,12 @@ def nettoyage(basefilename):
     except OSError:
             pass
     try:
-        if os.path.getsize(basefilename + '-pyromaths.log') > 400 :
+        if os.path.getsize('%s.pdf' % basefilename) > 1000 :
+            os.remove(basefilename + '.log')
+    except OSError:
+            pass
+    try:
+        if os.path.getsize('%s.pdf' % basefilename) > 1000 :
             os.remove(basefilename + '-pyromaths.log')
     except OSError:
             pass
