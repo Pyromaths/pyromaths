@@ -221,7 +221,7 @@ def creation(parametres):
             call(["latexmk", "-silent", "-c"], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
         else:
             call(["latexmk", "-pdfps", "-shell-escape", "-silent", "-interaction=nonstopmode", "%s.tex" % f0noext], stdout=log)
-            call(["latexmk", "-silent", "-c"], stdout=log)
+            call(["latexmk", "-silent", "-c", "-f"], stdout=log)
         log.close()
         nettoyage(f0noext)
         if not "openpdf" in parametres or parametres["openpdf"]:
@@ -245,7 +245,7 @@ def creation(parametres):
                 call(["latexmk", "-silent", "-c"], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
             else:
                 call(["latexmk", "-pdfps", "-shell-escape", "-silent", "-interaction=nonstopmode", "%s.tex" % f1noext], stdout=log)
-                call(["latexmk", "-silent", "-c"], stdout=log)
+                call(["latexmk", "-silent", "-c", "-f"], stdout=log)
             log.close()
             nettoyage(f1noext)
             if not "openpdf" in parametres or parametres["openpdf"]:
