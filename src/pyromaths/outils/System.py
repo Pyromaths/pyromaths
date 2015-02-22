@@ -280,16 +280,12 @@ def nettoyage(basefilename):
         os.remove('latexmkrc')
     except OSError:
             pass
-    try:
-        if os.path.getsize('%s.pdf' % basefilename) > 1000 :
-            os.remove(basefilename + '.log')
-    except OSError:
-            pass
-    try:
-        if os.path.getsize('%s.pdf' % basefilename) > 1000 :
-            os.remove(basefilename + '-pyromaths.log')
-    except OSError:
-            pass
+    if os.path.getsize('%s.pdf' % basefilename) > 1000 :
+        for ext in ('.log', '-pyromaths.log'):
+            try:
+                os.remove(basefilename + ext)
+            except OSError:
+                pass        
 
 
 def copie_tronq_modele(dest, parametres, master):
