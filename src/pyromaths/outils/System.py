@@ -276,6 +276,7 @@ def latexmkrc(basefilename):
 
 
 def nettoyage(basefilename):
+    """Supprime les fichiers temporaires créés par LaTeX"""
     try:
         os.remove('latexmkrc')
     except OSError:
