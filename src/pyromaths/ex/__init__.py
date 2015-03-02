@@ -147,17 +147,27 @@ def _subpackages(pkg):
         if not ispkg: continue;
         yield __import(name, pkg)
 
-def load(pkg=None, recursive=True):
+def load_levels(pkg=None, recursive=True):
     ''' Discover exercises. '''
+    levels = {}
     # target package defaults to this package (pyromaths.ex)
     if pkg is None: pkg = __import()
     # load package exercises
     for ex in _exercises(pkg):
         for lvl in ex.level:
             # new level? create its exercise list
-            if lvl not in levels.keys(): levels[lvl] = []
+            if lvl not in levels.keys():
+                levels[lvl] = []
             levels[lvl].append(ex)
 
-    if not recursive: return
-    # load sub-packages
-    for pk in _subpackages(pkg): load(pk)
+    if recursive:
+        # load sub-packages
+        for pk in _subpackages(pkg):
+            sublevels = load_levels(pk)
+            for lvl in sublevels:
+                if lvl in levels:
+                    levels[lvl].extend(sublevels[lvl])
+                else:
+                    levels[lvl] = sublevels[lvl]
+
+    return levels

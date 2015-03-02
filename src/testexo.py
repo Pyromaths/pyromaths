@@ -24,8 +24,9 @@ VERSION = "0.1.0"
 def match_exercise(path):
     """Return the exercises in `path`."""
     exercises = []
-    for level in pyromaths.ex.levels:
-        for exercise in pyromaths.ex.levels[level]:
+    levels = pyromaths.ex.load_levels()
+    for level in levels:
+        for exercise in levels[level]:
             if (
                     issubclass(exercise, pyromaths.ex.TexExercise) and exercise.__module__.startswith(path)
                 ) or (

@@ -76,7 +76,6 @@ CONFIGDIR = configdir()
 def lesfiches():
     """Charge et renvoie les fiches d'exercices"""
     fiches = []
-    ex.load()
-    for level, exercices in ex.levels.iteritems():
+    for level, exercices in ex.load_levels().iteritems():
         fiches.append([level, '', exercices])
     return fiches
