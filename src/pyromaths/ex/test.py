@@ -485,7 +485,7 @@ def create_test_suite():
     """Gather all exercise tests in a :class:`TestPackage` instance."""
     ex.load()
     tests = TestPackage()
-    for __level, exercises in ex.levels.iteritems():
+    for __level, exercises in ex.load_levels().iteritems():
         for exo in exercises:
             tests.add_exercise(exo)
     tests.read_testfiles()

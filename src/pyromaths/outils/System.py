@@ -210,20 +210,7 @@ def creation(parametres):
         from subprocess import call
 
         os.chdir(dir0)
-        latexmkrc = open('latexmkrc', 'w')
-        latexmkrc.write('sub asy {return system("asy \'$_[0]\'");}')
-        latexmkrc.write('add_cus_dep("asy","eps",0,"asy");')
-        latexmkrc.write('add_cus_dep("asy","pdf",0,"asy");')
-        latexmkrc.write('add_cus_dep("asy","tex",0,"asy");')
-        latexmkrc.write('@generated_exts = qw(pre dvi ps auxlock");')
-        latexmkrc.write('$clean_ext = "%s-figure* %s-?.asy %s-?_0.eps %s-?.tex %s-??.asy %s-??_0.eps %s-??.tex %s.auxlock %s.fdb_latexmk %s.fls %s-*.pre %s.pre";' % tuple([f0noext] * 12))
-        latexmkrc.write('sub cleanup1 {')
-        latexmkrc.write('  my $dir = fix_pattern( shift );')
-        latexmkrc.write('  foreach (@_) {')
-        latexmkrc.write('    (my $name = (/%%R/ || /[\*\.\?]/) ? $_ : "%%R.$_") =~ s/%%R/$dir$root_filename/;')
-        latexmkrc.write('    unlink_or_move( glob( "$name" ) );')
-        latexmkrc.write('  }\n}')
-        latexmkrc.close()
+        latexmkrc(f0noext)
         log = open('%s-pyromaths.log' % f0noext, 'w')
         if socket.gethostname() == "sd-27355.pyromaths.org":
             os.environ['PATH'] += os.pathsep + "/usr/local/texlive/2014/bin/x86_64-linux"
@@ -234,7 +221,7 @@ def creation(parametres):
             call(["latexmk", "-silent", "-c"], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
         else:
             call(["latexmk", "-pdfps", "-shell-escape", "-silent", "-interaction=nonstopmode", "%s.tex" % f0noext], stdout=log)
-            call(["latexmk", "-silent", "-c"], stdout=log)
+            call(["latexmk", "-silent", "-c", "-f"], stdout=log)
         log.close()
         nettoyage(f0noext)
         if not "openpdf" in parametres or parametres["openpdf"]:
@@ -247,11 +234,18 @@ def creation(parametres):
 
         if parametres['corrige'] and not parametres['creer_unpdf']:
             os.chdir(dir1)
+            latexmkrc(f1noext)
             log = open('%s-pyromaths.log' % f1noext, 'w')
-            for dummy in range(2):
-                call(["latex", "-interaction=batchmode", "%s.tex" % f1noext], stdout=log)
-            call(["dvips", "-q", "%s.dvi" % f1noext, "-o%s.ps" % f1noext], stdout=log)
-            call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % f1noext, "%s.pdf" % f1noext], stdout=log)
+            if socket.gethostname() == "sd-27355.pyromaths.org":
+                os.environ['PATH'] += os.pathsep + "/usr/local/texlive/2014/bin/x86_64-linux"
+                call(["latexmk", "-shell-escape", "-silent", "-interaction=nonstopmode", "-output-directory=%s" % dir1, "-pdfps", "%s.tex" % f1noext], env=os.environ, stdout=log)
+                call(["latexmk", "-c", "-silent", "-output-directory=%s" % dir1], env=os.environ, stdout=log)
+            elif os.name == 'nt':
+                call(["latexmk", "-pdfps", "-shell-escape", "-silent", "-interaction=nonstopmode", "%s.tex" % f1noext], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
+                call(["latexmk", "-silent", "-c"], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
+            else:
+                call(["latexmk", "-pdfps", "-shell-escape", "-silent", "-interaction=nonstopmode", "%s.tex" % f1noext], stdout=log)
+                call(["latexmk", "-silent", "-c", "-f"], stdout=log)
             log.close()
             nettoyage(f1noext)
             if not "openpdf" in parametres or parametres["openpdf"]:
@@ -264,20 +258,35 @@ def creation(parametres):
         else:
             os.remove('%s-corrige.tex' % f0noext)
 
+def latexmkrc(basefilename):
+    latexmkrc = open('latexmkrc', 'w')
+    latexmkrc.write('sub asy {return system("asy \'$_[0]\'");}')
+    latexmkrc.write('add_cus_dep("asy","eps",0,"asy");')
+    latexmkrc.write('add_cus_dep("asy","pdf",0,"asy");')
+    latexmkrc.write('add_cus_dep("asy","tex",0,"asy");')
+    latexmkrc.write('@generated_exts = qw(pre dvi ps auxlock");')
+    latexmkrc.write('$clean_ext = "%s-figure* %s-?.asy %s-?_0.eps %s-?.tex %s-??.asy %s-??_0.eps %s-??.tex %s.auxlock %s.fdb_latexmk %s.fls %s-*.pre %s.pre %s.out %s.aux";' % tuple([basefilename] * 14))
+    latexmkrc.write('sub cleanup1 {')
+    latexmkrc.write('  my $dir = fix_pattern( shift );')
+    latexmkrc.write('  foreach (@_) {')
+    latexmkrc.write('    (my $name = (/%%R/ || /[\*\.\?]/) ? $_ : "%%R.$_") =~ s/%%R/$dir$root_filename/;')
+    latexmkrc.write('    unlink_or_move( glob( "$name" ) );')
+    latexmkrc.write('  }\n}')
+    latexmkrc.close()
+
+
 def nettoyage(basefilename):
     """Supprime les fichiers temporaires créés par LaTeX"""
-    for ext in ('.aux', '.dvi', '.out', '.ps', '.nav', '.snm', '.toc'):
-        try:
-            os.remove(basefilename + ext)
-        except OSError:
-            pass
-            # le fichier à supprimer n'existe pas et on s'en moque.
     try:
-        if os.path.getsize('%s.pdf' % basefilename) > 1000 :
-            os.remove('%s.log' % basefilename)
-            os.remove('%s-pyromaths.log' % basefilename)
+        os.remove('latexmkrc')
     except OSError:
             pass
+    if os.path.getsize('%s.pdf' % basefilename) > 1000 :
+        for ext in ('.log', '-pyromaths.log'):
+            try:
+                os.remove(basefilename + ext)
+            except OSError:
+                pass        
 
 
 def copie_tronq_modele(dest, parametres, master):
