@@ -7,8 +7,6 @@ import pkgutil
 import types
 import sys
 
-levels = {}
-
 
 class Exercise(object):
     ''' Base class for all exercise types. '''
