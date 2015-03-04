@@ -192,14 +192,14 @@ def cotation(A, B, longueur, couleur="", unite="cm"):
     (xB, yB) = B
     if couleur != "":
         couleur = "\\color{%s}" % couleur
-    return u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\bput{:U}{%s\\unit[%s]{%s}}" % (xA, yA, xB, yB, couleur, longueur, unite)
+    return u"\\pcline[linestyle=none](%.3f,%.3f)(%.3f,%.3f)  \\bput{:U}{%s\\unit[%s]{%s}}" % (xA, yA, xB, yB, couleur, longueur, unite)
 
 def cotation_h(A, B, longueur, couleur="", unite="cm"):
     (xA, yA) = A
     (xB, yB) = B
     if couleur != "":
         couleur = "\\color{%s}" % couleur
-    return u"\\pcline[linestyle=none](%s,%s)(%s,%s)  \\aput{:U}{%s\\unit[%s]{%s}}" % (xA, yA, xB, yB, couleur, longueur, unite)
+    return u"\\pcline[linestyle=none](%.3f,%.3f)(%.3f,%.3f)  \\aput{:U}{%s\\unit[%s]{%s}}" % (xA, yA, xB, yB, couleur, longueur, unite)
 
 # def trouve_couples_pythagore(valeurmax):
 #    (liste, listecouples) = ([], [])
