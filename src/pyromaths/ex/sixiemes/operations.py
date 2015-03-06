@@ -235,6 +235,7 @@ def tex_produit(exo, cor):
              10 ** puisa), Affichage.decimaux(nbb * 10 ** puisb)))
     cor.append('\\begin{enumerate}')
     cor.append(u'\\item Première méthode :\\par')
+    lg = max(len(dec4), max(len(deca), len(decb)+1))
     cor.append('\\begin{tabular}[t]{*{%s}{c}}' % lg)
     cor.append('%s \\\\' % ' & '.join(ligneprod([], deca, lg)))
     cor.append('%s \\\\\n\\hline' % ' & '.join(ligneprod(['$\\times$'], decb, lg)))
@@ -245,7 +246,8 @@ def tex_produit(exo, cor):
     cor.append('%s \\\\' % ' & '.join(ligneprod([], dec4, lg)))
     cor.append('\\end{tabular}')
     cor.append(u'\\item Seconde méthode :\\par')
-    cor.append('\\begin{tabular}[t]{*{%s}{c}}' % len(dec4))
+    lg = max(len(dec4), max(len(deca)+1, len(decb)))
+    cor.append('\\begin{tabular}[t]{*{%s}{c}}' % lg)
     cor.append('%s \\\\' % ' & '.join(ligneprod([], decb, lg)))
     cor.append('%s \\\\\n\\hline' % ' & '.join(ligneprod(['$\\times$'], deca, lg)))
     for i in range(len(dec3bis)):
