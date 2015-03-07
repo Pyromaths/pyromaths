@@ -241,11 +241,11 @@ def creation(parametres):
                 call(["latexmk", "-shell-escape", "-silent", "-interaction=nonstopmode", "-output-directory=%s" % dir1, "-pdfps", "%s.tex" % f1noext], env=os.environ, stdout=log)
                 call(["latexmk", "-c", "-silent", "-output-directory=%s" % dir1], env=os.environ, stdout=log)
             elif os.name == 'nt':
-                call(["latexmk", "-pdfps", "-shell-escape", "-silent", "-interaction=nonstopmode", "%s.tex" % f1noext], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
-                call(["latexmk", "-silent", "-c"], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
+                call(["latexmk", "%s.tex" % f1noext], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
+                call(["latexmk", "-c"], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
             else:
-                call(["latexmk", "-pdfps", "-shell-escape", "-silent", "-interaction=nonstopmode", "%s.tex" % f1noext], stdout=log)
-                call(["latexmk", "-silent", "-c", "-f"], stdout=log)
+                call(["latexmk", "%s.tex" % f1noext], stdout=log)
+                call(["latexmk", "-c"], stdout=log)
             log.close()
             nettoyage(f1noext)
             if not "openpdf" in parametres or parametres["openpdf"]:
@@ -260,20 +260,16 @@ def creation(parametres):
 
 def latexmkrc(basefilename):
     latexmkrc = open('latexmkrc', 'w')
-    latexmkrc.write('sub asy {return system("asy \'$_[0]\'");}')
-    latexmkrc.write('add_cus_dep("asy","eps",0,"asy");')
-    latexmkrc.write('add_cus_dep("asy","pdf",0,"asy");')
-    latexmkrc.write('add_cus_dep("asy","tex",0,"asy");')
-    latexmkrc.write("push @generated_exts, 'pre', 'dvi', 'ps', 'auxlock', 'fdb_latexmk', 'fls', 'out', 'aux';")
-    latexmkrc.write('$clean_ext .= "%s-figure* %s-?.asy %s-?_0.eps %s-?.tex %s-??.asy %s-??_0.eps %s-??.tex  %s-*.pre";' % tuple([basefilename] * 8))
-    latexmkrc.write('sub cleanup1 {')
-    latexmkrc.write('  my $dir = fix_pattern( shift );')
-    latexmkrc.write('  foreach (@_) {')
-    latexmkrc.write('    (my $name = (/%%R/ || /[\*\.\?]/) ? $_ : "%%R.$_") =~ s/%%R/$dir$root_filename/;')
-    latexmkrc.write('    unlink_or_move( glob( "$name" ) );')
-    latexmkrc.write('  }\n}')
+    latexmkrc.write('$pdf_mode = 2;\n')
+    latexmkrc.write('$ps2pdf = "ps2pdf %O %S %D";\n')
+    latexmkrc.write('$latex = "latex --shell-escape -silent -interaction=nonstopmode  %O %S";\n')
+    latexmkrc.write('sub asy {return system("asy \'$_[0]\'");}\n')
+    latexmkrc.write('add_cus_dep("asy","eps",0,"asy");\n')
+    latexmkrc.write('add_cus_dep("asy","pdf",0,"asy");\n')
+    latexmkrc.write('add_cus_dep("asy","tex",0,"asy");\n')
+    latexmkrc.write('push @generated_exts, \'pre\', \'dvi\', \'ps\', \'auxlock\', \'fdb_latexmk\', \'fls\', \'out\', \'aux\';\n')
+    latexmkrc.write('$clean_ext .= "%R-*.tex %R-figure*.dpth %R-figure*.dvi %R-figure*.eps %R-figure*.log %R-figure*.md5 %R-figure*.pre %R-figure*.ps %R-figure*.asy %R-*.asy %R-*_0.eps %R-*.pre";')
     latexmkrc.close()
-
 
 def nettoyage(basefilename):
     """Supprime les fichiers temporaires créés par LaTeX"""
@@ -286,8 +282,7 @@ def nettoyage(basefilename):
             try:
                 os.remove(basefilename + ext)
             except OSError:
-                pass        
-
+                pass
 
 def copie_tronq_modele(dest, parametres, master):
     """Copie des morceaux des modèles, suivant le schéma du master."""
