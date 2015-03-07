@@ -268,15 +268,15 @@ def latexmkrc(basefilename):
     latexmkrc.write('add_cus_dep("asy","pdf",0,"asy");\n')
     latexmkrc.write('add_cus_dep("asy","tex",0,"asy");\n')
     latexmkrc.write('push @generated_exts, \'pre\', \'dvi\', \'ps\', \'auxlock\', \'fdb_latexmk\', \'fls\', \'out\', \'aux\';\n')
-    latexmkrc.write('$clean_ext .= "%R-*.tex %R-figure*.dpth %R-figure*.dvi %R-figure*.eps %R-figure*.log %R-figure*.md5 %R-figure*.pre %R-figure*.ps %R-figure*.asy %R-*.asy %R-*_0.eps %R-*.pre";')
+    latexmkrc.write('$clean_ext .= " %R-?.tex %R-??.tex %R-figure*.dpth %R-figure*.dvi %R-figure*.eps %R-figure*.log %R-figure*.md5 %R-figure*.pre %R-figure*.ps %R-figure*.asy %R-*.asy %R-*_0.eps %R-*.pre";')
     latexmkrc.close()
 
 def nettoyage(basefilename):
     """Supprime les fichiers temporaires créés par LaTeX"""
-    try:
-        os.remove('latexmkrc')
-    except OSError:
-            pass
+    #try:
+    #    os.remove('latexmkrc')
+    #except OSError:
+    #        pass
     if os.path.getsize('%s.pdf' % basefilename) > 1000 :
         for ext in ('.log', '-pyromaths.log'):
             try:
