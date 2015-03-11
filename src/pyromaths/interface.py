@@ -302,7 +302,9 @@ class Ui_MainWindow(object):
 
         self.statusbar = QtGui.QStatusBar(MainWindow)
         MainWindow.setStatusBar(self.statusbar)
-        self.statusbar.showMessage(u"Pour avoir un aperçu d'un exercice, positionner le curseur de la souris sur le point d'interrogation.")
+        self.statusbar_label= QtGui.QLabel(self.statusbar)
+        self.statusbar_label.setText(u"Pour avoir un aperçu d'un exercice, positionner le curseur de la souris sur le point d'interrogation.")
+        self.statusbar.addWidget(self.statusbar_label,1)
         if sys.platform != "darwin":  # Cas de Mac OS X.
             self.statusbar.setStyleSheet("background-color: rgb(251, 231, 178);")
 
