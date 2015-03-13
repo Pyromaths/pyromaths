@@ -334,9 +334,7 @@ class Ui_MainWindow(object):
         #============================================================
         #    Raccourcis clavier
         #============================================================
-        keyQuit = QtGui.QShortcut("Ctrl+Q", MainWindow)
-        QtCore.QObject.connect(keyQuit, QtCore.SIGNAL("triggered()"), QtGui.qApp,
-                                                                 QtCore.SLOT("quit()"))
+        self.actionQuitter.setShortcut('Ctrl+Q')
 
         #============================================================
         #    Actions des boutons et menus
