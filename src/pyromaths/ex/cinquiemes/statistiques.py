@@ -65,7 +65,7 @@ def tableau_tex(titres, larg="c", eff=1, freq=1, val=[[], []], total=1):
             tableau_tex += "\\\\\\hline\n"
 
     if freq:
-        tableau_tex += u"Fréquences ( \\% )"
+        tableau_tex += u"Fréquences (\\%)"
         if len(val[1]) > 0:
             for frequence in val[1]:
                 somme = "100"
@@ -187,7 +187,7 @@ def tableau_diagramme_tex(typed=2, val=[[], []], larg="c"):
         tab += u"\\textbf{" + titre + "} & "
     tab += u"\\textbf{Total} \\\\\\hline\n"
     
-    tab += u"Fréquences ( \\% )"
+    tab += u"Fréquences (\\%)"
 
     for frequence in val[1]:
         tab += " & " + decimaux(frequence)
@@ -195,25 +195,25 @@ def tableau_diagramme_tex(typed=2, val=[[], []], larg="c"):
     tab += " & 100 \\\\\\hline\n"
       
     if typed == 1:  # Diagramme en bâtons
-        texte = u"Comme 10\\% sont représentés par 1cm, il faut diviser chaque fréquence par 10 pour obtenir la longueur ( arrondie au dixième ) du bâton à dessiner :\\par\n"
+        texte = u"Comme 10\\% sont représentés par 1cm, il faut diviser chaque fréquence par 10 pour obtenir la longueur (arrondie au dixième) du bâton à dessiner :\\par\n"
         tab = texte + tab
-        tab += u"Hauteur ( cm )"
+        tab += u"Hauteur (cm)"
         for frequence in val[1]:
             tab += " & " + decimaux(round(frequence / 10.0, 1))
         tab += " & 10 \\\\\\hline\n"
         
     elif typed == 2:  # Diagramme circulaire
-        texte = u"Comme il y a $360^{\circ}$ dans un cercle pour représenter 100\\%, il faut multiplier chaque fréquence par 3,6 pour connaître son angle ( arrondi au degré ) de représentation dans le diagramme :\\par\n"
+        texte = u"Comme il y a $360^{\circ}$ dans un cercle pour représenter 100\\%, il faut multiplier chaque fréquence par 3,6 pour connaître son angle (arrondi au degré) de représentation dans le diagramme :\\par\n"
         tab = texte + tab
-        tab += u"Angle ( Degrés )"        
+        tab += u"Angle (Degrés)"        
         for frequence in val[1]:
             tab += " & " + decimaux(round(frequence * 3.6, 0))
         tab += " & 360 \\\\\\hline\n"
         
     elif typed == 3:  # Diagramme semi-circulaire
-        texte = u"Comme il y a $180^{\circ}$ dans un cercle pour représenter 100\\%, il faut multiplier chaque fréquence par 1,8 pour connaître son angle ( arrondi au degré ) de représentation dans le diagramme :\\par\n"
+        texte = u"Comme il y a $180^{\circ}$ dans un cercle pour représenter 100\\%, il faut multiplier chaque fréquence par 1,8 pour connaître son angle (arrondi au degré) de représentation dans le diagramme :\\par\n"
         tab = texte + tab
-        tab += u"Angle ( Degrés )"        
+        tab += u"Angle (Degrés)"        
         for frequence in val[1]:
             tab += " & " + decimaux(round(frequence * 1.8, 0))
         tab += " & 180 \\\\\\hline\n"        
@@ -253,7 +253,7 @@ def exo_pi():
     cor.append(dec_tex)
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
-    exo.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.")
+    exo.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.\\par")
     cor.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.\\par")   
     exo.append("\\end{enumerate}")    
     exo.append(tableau)
@@ -411,7 +411,7 @@ def exo_de():
     cor.append(u"\\bigskip")
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
-    exo.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.")
+    exo.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.\\par")
     cor.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.\\par")   
     exo.append(tableau)
     exo.append(u"\\bigskip")
@@ -515,8 +515,8 @@ def exo_vote():
     
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
-    exo.append(u"\\item Les données du vote du délégué de classe ont été malheureusement partiellement perdues, mais on a réussi à regrouper les informations du tableau ci-dessous ( sachant que chaque élève a voté ) :")
-    cor.append(u"\\item Les données du vote du délégué de classe ont été malheureusement partiellement perdues, mais on a réussi à regrouper les informations du tableau ci-dessous ( sachant que chaque élève a voté ) :\\par")
+    exo.append(u"\\item Les données du vote du délégué de classe ont été malheureusement partiellement perdues, mais on a réussi à regrouper les informations du tableau ci-dessous (sachant que chaque élève a voté) :")
+    cor.append(u"\\item Les données du vote du délégué de classe ont été malheureusement partiellement perdues, mais on a réussi à regrouper les informations du tableau ci-dessous (sachant que chaque élève a voté) :\\par")
     
     eff1 = random.randint(1, 15)
     eff2 = random.randint(1, 24 - eff1)
