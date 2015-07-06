@@ -79,7 +79,13 @@ class Entier:
     def __init__(self, valeur):
         self.valeur = valeur
 
-    def latex(self, signe):
+    def __int__(self):
+        return self.valeur
+
+    def __neg__(self):
+        return self.__class__(- self.valeur)
+
+    def latex(self, signe="-"):
         if signe == "+":
             if self.valeur > 0:
                 return "+" + str(self.valeur)
@@ -255,6 +261,8 @@ class FrancaisOppose(Fonction):
         yield Entier(-argument.valeur).latex("-")
 
     def calcul(self, argument):
+        if not isinstance(argument, Entier):
+            raise TypeError("Argument must be an instance of `Entier`.")
         return - argument
 
 class FrancaisInverse(Fonction):
@@ -276,7 +284,7 @@ class Francais(Question):
 
     def __init__(self, index0max):
         self.indice0 = random.randint(0, index0max-1)
-        self.terme0 = random.randint(-10, 10)
+        self.terme0 = Entier(random.randint(-10, 10))
         self.fonction = random.choice([ # TODO S'assurer que tout fonctionne
             FrancaisGeometrique,
             FrancaisArithmetique,
@@ -286,10 +294,10 @@ class Francais(Question):
             ])()
 
     @property
-    def params(self):
+    def latex_params(self):
         return {
             'indice0': self.indice0,
-            'terme0': self.terme0,
+            'terme0': self.terme0.latex("-"),
             'suivant': self.fonction.francais,
             }
 
@@ -307,7 +315,7 @@ class General(Question):
             ])()
 
     @property
-    def params(self):
+    def latex_params(self):
         return {
             'indice0': self.indice0,
             'fonction': self.fonction.expression(ur"n"),
@@ -317,7 +325,7 @@ class Recursif(Question):
 
     def __init__(self, index0max):
         self.indice0 = random.randint(0, index0max-1)
-        self.terme0 = random.randint(-10, 10)
+        self.terme0 = Entier(random.randint(-10, 10))
         self.fonction = random.choice([ # TODO S'assurer que tout fonctionne
             Affine,
             IdentiteTranslatee,
@@ -325,10 +333,10 @@ class Recursif(Question):
             ])()
 
     @property
-    def params(self):
+    def latex_params(self):
         return {
             'indice0': self.indice0,
-            'terme0': self.terme0,
+            'terme0': self.terme0.latex("-"),
             'fonction': self.fonction.expression(ur"u_n"),
             }
 
@@ -357,15 +365,15 @@ class TermesDUneSuite(ex.TexExercise):
         exo.append(ur' (c) $u_{}$.'.format(self.rang[2]))
 
         exo.append(ur'\begin{enumerate}')
-        exo.append(ur'  \item $u$ est une suite de premier terme $u_{indice0}={terme0}$, et dont chaque terme (sauf le premier) est égal {suivant}.'.format(**self.questions[0].params))
-        exo.append(ur'  \item $u$ est la suite définie pour $n\geq{indice0}$ par $u_n={fonction}$.'.format(**self.questions[1].params))
+        exo.append(ur'  \item $u$ est une suite de premier terme $u_{indice0}={terme0}$, et dont chaque terme (sauf le premier) est égal {suivant}.'.format(**self.questions[0].latex_params))
+        exo.append(ur'  \item $u$ est la suite définie pour $n\geq{indice0}$ par $u_n={fonction}$.'.format(**self.questions[1].latex_params))
         exo.append(textwrap.dedent(ur"""
             \item $u$ est la suite définie pour $n\geq{indice0}$ par :
                 \[\left\{{\begin{{array}}{{l}}
                   u_{indice0}={terme0}\\
                   \text{{Pour tout $n\geq{indice0}$ : }} u_{{n+1}}={fonction}.
               \end{{array}}\right.\]
-              """).format(**self.questions[2].params))
+              """).format(**self.questions[2].latex_params))
         exo.append(ur'\end{enumerate}')
         return exo
 
@@ -375,7 +383,7 @@ class TermesDUneSuite(ex.TexExercise):
         #for question in self.questions: #TODO
         for question in [self.questions[0]]:
             if question == self.questions[0]:
-                exo.append(ur"  \item Selon l'énoncé, le premier terme est $u_{indice0}={terme0}$. Puisque chaque terme (sauf le premier) est égal {suivant}, on a :".format(**question.params))
+                exo.append(ur"  \item Selon l'énoncé, le premier terme est $u_{indice0}={terme0}$. Puisque chaque terme (sauf le premier) est égal {suivant}, on a :".format(**question.latex_params))
             else:
                 exo.append(ur"TODO")
             if question != self.questions[1]:
@@ -386,10 +394,10 @@ class TermesDUneSuite(ex.TexExercise):
                         indice=indice+1,
                         fonction=question.fonction.expression("u_{}".format(indice)),
                         )
-                    for etape in question.fonction.etapes(Entier(termes[indice])): # TODO Voir le type de l'argument de etapes()
+                    for etape in question.fonction.etapes(termes[indice]):
                         calcul += " =" + etape
                     calcul += "$"
-                    termes[indice+1] = question.fonction.calcul(termes[indice]) # TODO Voir le type de l'argument de calcul()
+                    termes[indice+1] = question.fonction.calcul(termes[indice])
                     calcul_termes.append(calcul)
                 exo.append(" ; ".join(calcul_termes) + ".")
             else:
@@ -400,9 +408,9 @@ class TermesDUneSuite(ex.TexExercise):
             for indice in range(question.indice0, self.rang[0]+1):
                 enumeration.append(u"le {ordinal} terme est $u_{indice}$".format(ordinal=FRANCAIS_ORDINAL[indice], indice=indice))
             exo.append(" ; ".join(enumeration) + ".")
-            exo.append(u"Le terme demandé est donc $u_{}={}$.".format(self.rang[0], termes[self.rang[0]]))
-            exo.append(ur'\item Le terme de rang {indice} est $u_{indice}={valeur}$.'.format(indice=self.rang[1], valeur=termes[self.rang[1]]))
-            exo.append(ur'\item Nous avons calculé que $u_{indice}={valeur}$.'.format(indice=self.rang[2], valeur=termes[self.rang[2]]))
+            exo.append(ur"Le terme demandé est donc \fbox{{$u_{}={}$}}.".format(self.rang[0], termes[self.rang[0]].latex()))
+            exo.append(ur'\item Le terme de rang {indice} est \fbox{{$u_{indice}={valeur}$}}.'.format(indice=self.rang[1], valeur=termes[self.rang[1]].latex()))
+            exo.append(ur'\item Nous avons calculé que \fbox{{$u_{indice}={valeur}$}}.'.format(indice=self.rang[2], valeur=termes[self.rang[2]].latex()))
             exo.append(ur'\end{enumerate}')
         exo.append(ur'\end{enumerate}')
         return exo
