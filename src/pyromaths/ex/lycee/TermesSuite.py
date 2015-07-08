@@ -422,12 +422,12 @@ class General(Question):
     def __init__(self, index0max):
         self.indice0 = random.randint(0, index0max-1)
         self.fonction = random.choice([ # TODO S'assurer que toutes les fonctions fonctionnent
-            #FractionProduit,
+            #TODO FractionProduit,
             Trinome,
-            #Affine,
-            #Lineaire,
-            #IdentiteTranslatee,
-            #Harmonique,
+            #TODO Affine,
+            #TODO Lineaire,
+            #TODO IdentiteTranslatee,
+            #TODO Harmonique,
             ])()
 
     @property
@@ -462,6 +462,7 @@ class TermesDUneSuite(ex.TexExercise):
     level = u"1.1èreS"
 
     def __init__(self):
+        random.seed(1) # TODO
         self.rang = [0,0,0]
         while self.rang[0] == self.rang[1]:
             self.rang = [random.randint(2, 5), random.randint(2, 5), random.randint(3, 6)]
@@ -536,8 +537,23 @@ class TermesDUneSuite(ex.TexExercise):
             calcul.append(etape)
         exo.append(u" = ".join(calcul) + ur"$.")
         exo.append(ur"Le terme demandé est donc \fbox{{$u_{{ {} }}={}$}}.".format(self.rang[0]+self.questions[1].indice0-1, self.questions[1].fonction.resultat(Entier(self.rang[0]+self.questions[1].indice0-1))))
+        exo.append(ur"\item Le terme de rang {rang} est $u_{{ {rang} }}$.".format(rang=self.rang[1]))
+        if self.rang[0] + self.questions[1].indice0 - 1 == self.rang[1]:
+            exo.append(ur"Ce terme a déjà été calculé, et \fbox{{$u_{{ {} }}={}$}}.".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1]))))
+        else:
+            calcul = []
+            for etape in self.questions[1].fonction.calcul(Entier(self.rang[1])):
+                calcul.append(etape)
+            exo.append(ur"Le terme demandé est donc $u_{{ {} }}=".format(self.rang[1]) + " = ".join(calcul) + ur"$.")
+            exo.append(ur"La solution est donc \fbox{{ $u_{{ {} }}={}$}}".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1]))))
+        exo.append(ur"\item")
+        calcul = []
+        for etape in self.questions[1].fonction.calcul(Entier(self.rang[2])):
+            calcul.append(etape)
+        exo.append(ur"On a : $u_{{ {} }}=".format(self.rang[2]) + " = ".join(calcul) + ur"$.")
+        exo.append(ur"La solution est donc \fbox{{ $u_{{ {} }}={}$}}".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2]))))
         exo.append(ur'\end{enumerate}')
-        exo.append(ur"TODO")
+        exo.append(ur"\item")
 
         # Question 2
         exo.append(textwrap.dedent(ur"""
