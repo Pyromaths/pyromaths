@@ -20,6 +20,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
+import gettext
 from sys import argv, exit
 import sys
 from os import access, R_OK, makedirs
@@ -30,6 +31,12 @@ def main():
 #===============================================================================
 # Imports spécifiques à Pyromaths
 #===============================================================================
+
+    locale_dir = join(dirname(__file__), '../locale/')
+    locale_dir = realpath(locale_dir)
+    gettext.install('pyromaths', localedir=locale_dir, unicode=1, codeset='utf-8', names=['en_US'])
+
+
     from outils.System import create_config_file, modify_config_file
     from outils.TestEnv import test
     from Values import CONFIGDIR

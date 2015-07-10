@@ -1,0 +1,23 @@
+#run from root directory to obtain .pot file
+#xgettext -L Python -d pyromaths --from-code utf-8 -o locale/pyromaths.pot -f locale/fichiersTraductibles.txt
+
+src/pyromaths/interface.py
+src/pyromaths/Values.py
+
+src/pyromaths/ex/cinquiemes/__init__.py
+src/pyromaths/ex/cinquiemes/aires.py
+src/pyromaths/ex/cinquiemes/construction.py
+src/pyromaths/ex/cinquiemes/fractions.py
+src/pyromaths/ex/cinquiemes/priorites.py
+src/pyromaths/ex/cinquiemes/proportionnalite.py
+src/pyromaths/ex/cinquiemes/relatifs.py
+src/pyromaths/ex/cinquiemes/reperage.py
+src/pyromaths/ex/cinquiemes/statistiques.py
+src/pyromaths/ex/cinquiemes/symetrie.py
+
+src/pyromaths/outils/Arithmetique.py
+src/pyromaths/outils/Priorites3.py
+src/pyromaths/outils/System.py
+src/pyromaths/outils/TestEnv.py
+src/pyromaths/outils/TexFiles.py
+src/pyromaths/outils/TeXMiseEnForme.py

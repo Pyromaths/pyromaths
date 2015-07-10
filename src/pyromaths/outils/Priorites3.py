@@ -590,7 +590,7 @@ def effectue_calcul(calcul):
                     sol.insert(0, "(")
                     sol.append(")")
                 elif sol and isinstance(eval(sol[0]), (int, float, Fraction)) and post and post[0] == "*" and \
-                        'Polynome(' in post[1] and len(eval(post[1])) == 1 and eval(post[1])[0][0] == 1:
+                        _('Polynome(') in post[1] and len(eval(post[1])) == 1 and eval(post[1])[0][0] == 1:
                             # Sans doute une factorisation de sommes de polynômes
                             sol = [repr(eval(sol[0]) * eval(post[1]))]
                             post = post[2:]
@@ -643,7 +643,7 @@ def effectue_calcul(calcul):
                 elif isinstance(sol, (int, float)): sol = [str(sol)]
                 elif isinstance(sol, (Polynome, Fraction, SquareRoot)): sol = [repr(sol)]
                 else :
-                    raise ValueError(u"Le résultat %s a un format inattendu" % sol)
+                    raise ValueError(_(u"Le résultat %s a un format inattendu") % sol)
             if recherche == recherche_neg and (pre or result):
                 # Ajoute le "+" ou sépare le "-":
                 # "1-(-9)" => "1 + 9" et "1+(-9)" => "1 - 9"
@@ -757,8 +757,8 @@ def texify(liste_calculs):
     from pyromaths.classes.SquareRoot import SquareRoot
     from Affichage import decimaux
     ls = []
-    enluminures = {'indice': r'_{', 'cancel':r'\cancel{'}
-    isEnlumine = {'indice': False, 'cancel':False}
+    enluminures = {_('indice'): r'_{', _('cancel'):r'\cancel{'}
+    isEnlumine = {_('indice'): False, _('cancel'):False}
     for calcul in liste_calculs:
         if isinstance(calcul, basestring): calcul = splitting(calcul)
         s = ""
@@ -932,7 +932,7 @@ def plotify(calcul):
             if len(p) == 2:
                 texfrac = p[0] + "/" + p[1]
             else:
-                raise ValueError(u'On ne devrait pas rencontrer de fraction non simplifiée ici')
+                raise ValueError(_(u'On ne devrait pas rencontrer de fraction non simplifiée ici'))
             if i + 1 < len(calcul): q = calcul[i + 1]
             else: q = ""
             if (eval(p[0]) < 0 or p[1] != "1") and q and q == "**":

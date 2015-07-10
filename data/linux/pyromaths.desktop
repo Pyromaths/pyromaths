@@ -4,6 +4,7 @@ Version=1.0
 Name=Pyromaths
 Comment=Generator for math worksheets for french college
 Comment[fr]=Générateur d'exercices de maths
+Comment[pl]=Generator zadań matematycznych
 Exec=/usr/bin/pyromaths
 Terminal=false
 Type=Application

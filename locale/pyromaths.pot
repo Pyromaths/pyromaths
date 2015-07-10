@@ -1,0 +1,1713 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-10 15:54+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/pyromaths/interface.py:69
+msgid "Créer"
+msgstr ""
+
+#: src/pyromaths/interface.py:76 src/pyromaths/interface.py:319
+msgid "Quitter"
+msgstr ""
+
+#: src/pyromaths/interface.py:83
+msgid "Réinitialiser"
+msgstr ""
+
+#: src/pyromaths/interface.py:116
+msgid "Options"
+msgstr ""
+
+#: src/pyromaths/interface.py:137
+msgid "Nom par défaut du fichier : "
+msgstr ""
+
+#: src/pyromaths/interface.py:143
+msgid "Chemin par défaut pour enregistrer les fichiers : "
+msgstr ""
+
+#: src/pyromaths/interface.py:149
+msgid "Titre de la fiche d'exercices : "
+msgstr ""
+
+#: src/pyromaths/interface.py:175
+msgid "Parcourir"
+msgstr ""
+
+#: src/pyromaths/interface.py:203
+msgid "Créer le corrigé"
+msgstr ""
+
+#: src/pyromaths/interface.py:204
+msgid "Pyromaths doit-il créer la fiche de correction détaillée?"
+msgstr ""
+
+#: src/pyromaths/interface.py:212
+msgid "Créer le pdf"
+msgstr ""
+
+#: src/pyromaths/interface.py:213
+msgid "Pyromaths doit-il créer les fiches au format pdf ?"
+msgstr ""
+
+#: src/pyromaths/interface.py:220
+msgid "Créer un seul pdf"
+msgstr ""
+
+#: src/pyromaths/interface.py:221
+msgid "Le corrigé et les exercices doivent-ils être dans le même document ?"
+msgstr ""
+
+#: src/pyromaths/interface.py:237
+msgid "Niveau :"
+msgstr ""
+
+#: src/pyromaths/interface.py:243
+msgid "Modèle de mise en page :"
+msgstr ""
+
+#: src/pyromaths/interface.py:257
+msgid "Classe de 6\\ieme"
+msgstr ""
+
+#: src/pyromaths/interface.py:258
+msgid "Classe de 5\\ieme"
+msgstr ""
+
+#: src/pyromaths/interface.py:259
+msgid "Classe de 4\\ieme"
+msgstr ""
+
+#: src/pyromaths/interface.py:260
+msgid "Classe de 3\\ieme"
+msgstr ""
+
+#: src/pyromaths/interface.py:261
+#, python-brace-format
+msgid "Classe de 2\\up{nde}"
+msgstr ""
+
+#: src/pyromaths/interface.py:295
+msgid "Enregistrer dans les préférences"
+msgstr ""
+
+#: src/pyromaths/interface.py:316
+msgid "Fichier"
+msgstr ""
+
+#: src/pyromaths/interface.py:324
+msgid "Aide"
+msgstr ""
+
+#: src/pyromaths/interface.py:327
+msgid "Accéder au site"
+msgstr ""
+
+#: src/pyromaths/interface.py:331
+msgid "À propos"
+msgstr ""
+
+#: src/pyromaths/interface.py:353
+msgid ""
+"Pour avoir un aperçu d'un exercice, positionner le curseur de la souris sur "
+"le point d'interrogation."
+msgstr ""
+
+#: src/pyromaths/interface.py:372
+#, python-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html>\n"
+"  <head>\n"
+"    <meta name=\"qrichtext\" content=\"1\" />\n"
+"    <style type=\"text/css\">\n"
+"      p, li { white-space: pre-wrap; align:\"justify\"; margin-top:0px; "
+"margin-bottom:0px; margin-left:0px; margin-right:5px; -qt-block-indent:0; "
+"text-indent:0px; }\n"
+"    </style>\n"
+"  </head>\n"
+"  <body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; "
+"font-style:normal;\" bgcolor=\"#f9efbe\">\n"
+"    <p align=\"center\">\n"
+"    <img src=\"%s\" />\n"
+"    <br /><br />\n"
+"    <span style=\"font-weight:600;\">Version %s</span>\n"
+"    </p>\n"
+"    <p>\n"
+"    <span style=\" font-weight:600;\">Pyromaths</span> est un programme qui "
+"permet de créer des  fiches d'exercices types de mathématiques niveau "
+"collège avec leur corrigé.\n"
+"    </p>\n"
+"    <p>\n"
+"    Les fiches sont produites au format LaTeX. Pyromaths lance ensuite les "
+"commandes nécessaires à la production de fichiers pdf (latex - dvips - "
+"ps2pdf) et les ouvre.\n"
+"    </p>\n"
+"    <p align=\"center\">\n"
+"    <span style=\" text-decoration: underline;\">Remerciements à&nbsp;:</"
+"span>\n"
+"    </p>\n"
+"    <p>\n"
+"    <ul style=\"-qt-list-indent:1;\">\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">David Robert</span> pour l'idée de "
+"départ&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Yves Gesnel</span> pour le portage "
+"de Pyromaths sur Mac OS X et la conception d'exercices&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Arnaud Kientz</span> pour ses "
+"graphismes, son implication dans le code de Pyromaths et son amitié&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Guillaume Barthélémy</span> pour ses "
+"exercices&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Nicolas Bissonnier</span> pour son "
+"arrivée dans l'équipe de développement&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Didier Roche</span> pour "
+"l'intégration de Pyromaths dans les dépôts Ubuntu&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Olivier Cornu</span> pour son "
+"travail sur l'API exercice et sur la diffusion de Pyromaths via Makefile et "
+"Setup.py&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Jacqueline Gouguenheim-Desloy</span> "
+"a porté Pyromaths sur Mac OS X à ses débuts. Son soutien et son amitié nous "
+"ont été précieux. Sa disparition est une perte douloureuse pour la "
+"communauté du logiciel libre.\n"
+"      </li>\n"
+"    </ul>\n"
+"    </p>\n"
+"    <p align=\"center\">\n"
+"    %s\n"
+"    </p>\n"
+"  </body>\n"
+"</html>"
+msgstr ""
+
+#: src/pyromaths/interface.py:432
+msgid "À propos de Pyromaths"
+msgstr ""
+
+#: src/pyromaths/interface.py:439
+msgid "Attention !"
+msgstr ""
+
+#: src/pyromaths/interface.py:440
+msgid "Veuillez sélectionner des exercices..."
+msgstr ""
+
+#: src/pyromaths/interface.py:521
+msgid "Dossier où créer les fiches"
+msgstr ""
+
+#: src/pyromaths/interface.py:587
+msgid "Choisissez l'ordre des exercices"
+msgstr ""
+
+#: src/pyromaths/interface.py:628 src/pyromaths/interface.py:633
+#: src/pyromaths/interface.py:640
+msgid "Enregistrer sous..."
+msgstr ""
+
+#: src/pyromaths/interface.py:630 src/pyromaths/interface.py:635
+#: src/pyromaths/interface.py:643 src/pyromaths/interface.py:648
+msgid "Documents Tex (*.tex)"
+msgstr ""
+
+#: src/pyromaths/interface.py:642 src/pyromaths/interface.py:647
+#: src/pyromaths/interface.py:650
+#, python-format
+msgid "%s-corrige.tex"
+msgstr ""
+
+#: src/pyromaths/interface.py:703
+msgid "Choisissez le nombre d'exercices de ce type à créer."
+msgstr ""
+
+#: src/pyromaths/Values.py:67
+#, python-format
+msgid ""
+"© 2006 – %s Jérôme Ortais<br/>\n"
+"<span style=\" font-size:small;\">Pyromaths est distribué sous licence GPL.</"
+"span>"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/__init__.py:23
+msgid "5.Cinquième"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/aires.py:43
+msgid "rayons"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/aires.py:45
+msgid "diamètres"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/aires.py:49
+#, python-format
+msgid ""
+"\\begin{minipage}{4cm}\n"
+"\\begin{pspicture}(-2,-2)(2,2)\n"
+"\\pscircle[fillstyle=solid](0,0){1.5}\n"
+"\\pscircle[fillstyle=solid, fillcolor=white](0,0){1}\n"
+"\\psdots[dotstyle=x](0,0)\n"
+"\\rput(0.3;60){$O$}\n"
+"\\end{pspicture}\n"
+"\\end{minipage}\\hfill\n"
+"\\begin{minipage}{13cm}\n"
+"On considère deux cercles de centre $O$ et de %s respectifs $\\unit[%s]{cm}$ "
+"et $\\unit[%s]{cm}$.\\par\n"
+"Calculer l'aire de la couronne circulaire (partie colorée) comprise entre "
+"les deux cercles en arrondissant le résultat au $\\unit{cm^2}$ le plus "
+"proche."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/aires.py:62
+msgid "\\par\\dotfill{}\\\\\n"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/aires.py:64
+#: src/pyromaths/ex/cinquiemes/aires.py:66
+#, python-format, python-brace-format
+msgid "On calcule l'aire du disque de rayon $\\unit[%s]{cm}$:"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/aires.py:65
+#: src/pyromaths/ex/cinquiemes/aires.py:70
+#: src/pyromaths/ex/cinquiemes/aires.py:72
+#, python-format
+msgid ""
+"\\[\\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\\]"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/aires.py:67
+#, python-format
+msgid ""
+"\\[ \\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\\]"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/aires.py:69
+#: src/pyromaths/ex/cinquiemes/aires.py:71
+#, python-format, python-brace-format
+msgid ""
+"Un disque de diamètre $\\unit[%s]{cm}$ a pour rayon $%s \\div 2 = \\unit[%s]"
+"{cm}$. Calculons son aire:"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/aires.py:73
+#, python-format, python-brace-format
+msgid ""
+"L'aire $\\mathcal{A}$ de la couronne est obtenue en retranchant l'aire du "
+"disque de rayon  $\\unit[%s]{cm}$  à l'aire du disque de rayon  $\\unit[%s]"
+"{cm}$:"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/aires.py:75
+#, python-format
+msgid "L'aire exacte de la couronne est $\\unit[%s \\pi]{cm^2}$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/aires.py:76
+msgid "En prenant 3,14 comme valeur approchée du nombre $\\pi$, on obtient :"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/aires.py:83
+msgid "Aire de disques"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:72
+msgid "Construction de triangles"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:80
+#: src/pyromaths/ex/cinquiemes/construction.py:81
+#, python-format, python-brace-format
+msgid ""
+"\\item Trace un triangle $%s$ équilatéral de côté $\\unit[%s]{cm}$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:107
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]"
+"{cm}$ et $\\widehat{%s%s%s}=%s\\degres$"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:109
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]"
+"{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:135
+#: src/pyromaths/ex/cinquiemes/construction.py:160
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s"
+"%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:137
+#: src/pyromaths/ex/cinquiemes/construction.py:162
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s"
+"%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:164
+#, python-format
+msgid "On doit d'abord calculer la mesure de $\\widehat{%s%s%s}$.\\\\"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:166
+#, python-format
+msgid ""
+"Or la somme des trois angles d'un triangle est égale à 180\\degres donc $"
+"\\widehat{%s%s%s}=180\\degres-%s\\degres-%s\\degres=%s\\degres$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:191
+#: src/pyromaths/ex/cinquiemes/construction.py:220
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$,  $\\widehat{%s%s%s}=%s\\degres$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:193
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$,  $\\widehat{%s%s%s}=%s\\degres$. \\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:195
+#, python-format
+msgid ""
+"Comme $%s%s%s$ est un triangle isocèle en $%s$, je sais que les angles "
+"adjacents à la base sont de même mesure donc $\\widehat{%s%s%s}=\\widehat{%s"
+"%s%s}=%s\\degres$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:222
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$,  $\\widehat{%s%s%s}=%s\\degres$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:224
+#, python-format
+msgid ""
+"Comme $%s%s%s$ est un triangle isocèle en $%s$, je sais que les angles "
+"adjacents à la base sont de même mesure donc $\\widehat{%s%s%s}=\\widehat{%s"
+"%s%s}$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:226
+#, python-format
+msgid ""
+"De plus, je sais que la somme des mesures des trois angles d'un triangle est "
+"égale à 180\\degres \\\\ donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}"
+"=(180\\degres-%s\\degres)\\div 2=%s\\degres$. \\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:253
+#: src/pyromaths/ex/cinquiemes/construction.py:255
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:258
+#, python-format
+msgid ""
+"Je sais que dans un triangle rectangle, les deux angles aigus sont "
+"complémentaires \\\\ donc $\\widehat{%s%s%s}=90\\degres-%s\\degres=%s\\degres"
+"$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:271
+#: src/pyromaths/ex/cinquiemes/construction.py:308
+#: src/pyromaths/ex/cinquiemes/construction.py:413
+#: src/pyromaths/ex/cinquiemes/construction.py:450
+#: src/pyromaths/ex/cinquiemes/construction.py:495
+#: src/pyromaths/ex/cinquiemes/construction.py:539
+#: src/pyromaths/ex/cinquiemes/construction.py:565
+#: src/pyromaths/ex/cinquiemes/construction.py:611
+#: src/pyromaths/ex/cinquiemes/construction.py:666
+#: src/pyromaths/ex/cinquiemes/construction.py:787
+#: src/pyromaths/ex/cinquiemes/construction.py:831
+#, python-format, python-brace-format
+msgid "\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:272
+#: src/pyromaths/ex/cinquiemes/construction.py:273
+#, python-format
+msgid ""
+"\\item puis la demi-droite $[%s%s)$ en traçant l'angle~$\\widehat{%s%s%s}$ ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:291
+#, python-format, python-brace-format
+msgid ""
+"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$,  $%s%s=\\unit[%s]{cm}$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:293
+#, python-format, python-brace-format
+msgid ""
+"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$, $%s%s=\\unit[%s]{cm}$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:309
+#: src/pyromaths/ex/cinquiemes/construction.py:414
+#: src/pyromaths/ex/cinquiemes/construction.py:451
+#, python-format
+msgid "\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:310
+#, python-format
+msgid ""
+"\\item enfin, je reporte au compas la longueur \\mbox{$%s%s=\\unit[%s]{cm}$} "
+"à partir de $%s$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:373
+msgid "Construction de parallélogrammes"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:391
+#: src/pyromaths/ex/cinquiemes/construction.py:393
+#, python-format, python-brace-format
+msgid ""
+"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $%s%s="
+"\\unit[%s]{cm}$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:415
+#, python-format, python-brace-format
+msgid ""
+"\\item je reporte au compas la longueur $%s%s=\\unit[%s]{cm}$ à partir de $%s"
+"$ ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:416
+#, python-format
+msgid ""
+"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour placer le "
+"point $%s$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:431
+#: src/pyromaths/ex/cinquiemes/construction.py:433
+#: src/pyromaths/ex/cinquiemes/construction.py:516
+#: src/pyromaths/ex/cinquiemes/construction.py:518
+#, python-format
+msgid ""
+"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s"
+"%s%s}=%s\\degres$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:452
+#, python-format
+msgid ""
+"\\item la demi-droite $[%s%s)$ en mesurant $\\widehat{%s%s%s}=%s\\degres$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:453
+#, python-format
+msgid ""
+"\\item je trace enfin les angles droit en $%s$ et en $%s$ pour placer le "
+"point $%s$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:468
+#: src/pyromaths/ex/cinquiemes/construction.py:470
+#, python-format
+msgid ""
+"\\item Trace un rectangle $%s$ de centre $%s$ tel que $%s%s=\\unit[%s]{cm}$ "
+"et $\\widehat{%s%s%s}=%s\\degres$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:496
+#, python-format
+msgid ""
+"\\item le centre du rectangle est le milieu des diagonales donc $%s$ est le "
+"milieu de $[%s%s]$ ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:497
+#, python-format
+msgid ""
+"\\item je trace la diagonale $(%s%s)$ passant par $%s$ en mesurant \\mbox{$"
+"\\widehat{%s%s%s}=%s\\degres$} ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:499
+#, python-format, python-brace-format
+msgid ""
+"\\item Comme les diagonales du rectangle sont de même longueur, je reporte "
+"les longueurs $%s%s=%s%s=\\unit[%s]{cm}$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:540
+#, python-format
+msgid ""
+"\\item la demi-droite $[%s%s)$ en mesurant \\mbox{$\\widehat{%s%s%s}=%s"
+"\\degres$} ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:541
+#, python-format
+msgid "\\item puis la perpendiculaire à $[%s%s)$ passant par~$%s$ ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:542
+#, python-format
+msgid ""
+"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour placer le "
+"point~$%s$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:560
+#: src/pyromaths/ex/cinquiemes/construction.py:562
+#: src/pyromaths/ex/cinquiemes/construction.py:605
+#: src/pyromaths/ex/cinquiemes/construction.py:607
+#, python-format
+msgid ""
+"\\item Trace un parallélogramme $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s="
+"\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:566
+#, python-format
+msgid ""
+"\\item je mesure l'angle  $\\widehat{%s%s%s}=%s\\degres$ puis je place le "
+"point~$%s$ ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:567
+#, python-format
+msgid ""
+"\\item enfin je reporte les longueurs $%s%s=%s%s$ et $%s%s=%s%s$ pour place "
+"le point~$%s$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:612
+#, python-format
+msgid ""
+"\\item je trace la demi-droite $[%s%s)$ en mesurant $\\widehat{%s%s%s}=%s"
+"\\degres$ ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:613
+#, python-format, python-brace-format
+msgid "\\item je place le point $%s$ en mesurant $%s%s=\\unit[%s]{cm}$ ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:614
+#, python-format
+msgid ""
+"\\item je construis le point $%s$ en reportant au compas $%s%s=%s%s$ et $%s"
+"%s=%s%s$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:661
+#: src/pyromaths/ex/cinquiemes/construction.py:663
+#, python-format
+msgid ""
+"\\item Trace un parallélogramme $%s$ de centre $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:667
+#, python-format, python-brace-format
+msgid ""
+"\\item Dans un parallélogramme les diagonales se coupent en leur milieu donc "
+"$%s%s=%s%s=\\unit[%s]{cm}$ et $%s%s=%s%s=\\unit[%s]{cm}$ ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:694
+#: src/pyromaths/ex/cinquiemes/construction.py:696
+#, python-format, python-brace-format
+msgid ""
+"\\item Trace un losange $%s$  tel que $%s%s=\\unit[%s]{cm}$ et $%s%s="
+"\\unit[%s]{cm}$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:699
+#, python-format
+msgid "Je note $%s$ le centre du losange.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:719
+#, python-format
+msgid ""
+"Les diagonales du losange se coupent perpendiculairement en leur milieu~$%s"
+"$ ;  on a donc :"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:738
+#: src/pyromaths/ex/cinquiemes/construction.py:740
+#, python-format
+msgid ""
+"\\item Trace un losange $%s$  tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s"
+"%s%s}=%s\\degres$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:743
+#, python-format, python-brace-format
+msgid ""
+"Les quatre côtés du losange sont de même longueur donc $%s%s=%s%s=%s%s=%s%s="
+"\\unit[%s]{cm}$ ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:745
+#, python-format
+msgid ""
+"\\item On trace le côté $[%s%s]$ puis on mesure l'angle $\\widehat{%s%s%s}=%s"
+"\\degres$ ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:746
+#, python-format
+msgid ""
+"\\item ensuite on reporte au compas les longueurs $%s%s$ et $%s%s$ pour "
+"construire le point $%s$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:778
+#: src/pyromaths/ex/cinquiemes/construction.py:780
+#: src/pyromaths/ex/cinquiemes/construction.py:818
+#: src/pyromaths/ex/cinquiemes/construction.py:820
+#, python-format
+msgid ""
+"\\item Trace un losange $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s"
+"%s}=%s\\degres$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:783
+#, python-format
+msgid ""
+" Comme $%s$ est un losange, je sais que $\\widehat{%s%s%s}=\\widehat{%s%s%s}="
+"\\widehat{%s%s%s}=\\widehat{%s%s%s}=%s\\degres$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:788
+#: src/pyromaths/ex/cinquiemes/construction.py:789
+#: src/pyromaths/ex/cinquiemes/construction.py:832
+#: src/pyromaths/ex/cinquiemes/construction.py:833
+#, python-format
+msgid ""
+"\\item je trace $\\widehat{%s%s%s}$ et $\\widehat{%s%s%s}$ pour construire "
+"le point $%s$ ;"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:824
+#, python-format
+msgid ""
+"Les quatre côtés du losange sont de même longueur donc $%s%s=%s%s=%s%s=%s%s$."
+"\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:825
+#, python-format
+msgid ""
+"Ainsi, le triangle $%s%s%s$ est isocèle en $%s$ et je peux calculer la "
+"mesure des angles $\\widehat{%s%s%s}=\\widehat{%s%s%s}$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:827
+msgid ""
+"Dans un triangle, la somme des angles du triangle est égale à 180\\degres\\\\"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:828
+#, python-format
+msgid ""
+"donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=(180\\degres-%s)\\div2=%s\\degres$"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:866
+#: src/pyromaths/ex/cinquiemes/construction.py:868
+#, python-format, python-brace-format
+msgid "\\item Trace un carré $%s$  tel que $%s%s=\\unit[%s]{cm}$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:871
+#, python-format
+msgid "Je note $%s$ le centre du carré.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/construction.py:872
+#, python-format
+msgid ""
+" Les diagonales du carré se coupent perpendiculairement en leur milieu $%s$ "
+"donc on a :"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:31
+#: src/pyromaths/ex/cinquiemes/fractions.py:33
+msgid "Compléter :"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:80
+#, python-format
+msgid "1 %s Fraction(%s, %s)"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:82
+#, python-format
+msgid "Fraction(%s, %s) %s 1"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:89
+#, python-format
+msgid "%s %s Fraction(%s, %s)"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:91
+#, python-format
+msgid "Fraction(%s, %s) %s %s"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:97
+#: src/pyromaths/ex/cinquiemes/fractions.py:99
+#: src/pyromaths/ex/cinquiemes/fractions.py:106
+#: src/pyromaths/ex/cinquiemes/fractions.py:108
+#, python-format
+msgid "Fraction(%s, %s) %s Fraction(%s, %s)"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:115
+#: src/pyromaths/ex/cinquiemes/fractions.py:159
+#: src/pyromaths/ex/cinquiemes/relatifs.py:75
+msgid "\\exercice"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:116
+#: src/pyromaths/ex/cinquiemes/fractions.py:119
+#: src/pyromaths/ex/cinquiemes/fractions.py:160
+#: src/pyromaths/ex/cinquiemes/fractions.py:163
+msgid ""
+"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une "
+"fraction la plus simple possible (ou d’un entier lorsque c’est possible)."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:118
+#: src/pyromaths/ex/cinquiemes/fractions.py:162
+#: src/pyromaths/ex/cinquiemes/relatifs.py:77
+msgid "\\exercice*"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:136
+msgid "Sommes de fractions"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:154
+#, python-format
+msgid "Fraction(%s, %s)*Fraction(%s,%s)"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:181
+msgid "Produits de fractions"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/priorites.py:265
+msgid "Priorités opératoires"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:103
+#, python-format, python-brace-format
+msgid ""
+"\\exercice Sur ce plan, la longueur $%s$ mesure en réalité \\unit[%s]{m} :\n"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:106
+msgid "\\item Déterminer l'échelle de ce plan."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:107
+#, python-format
+msgid "\\item Déterminer les longueurs réelles $%s$, $%s$ et $%s$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:109
+#, python-format, python-brace-format
+msgid ""
+"\\exercice* Sur ce plan, la longueur $%s$ mesure en réalité \\unit[%s]"
+"{m} : \n"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:112
+msgid "\\item Déterminer l'échelle de ce plan.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:113
+#, python-format, python-brace-format
+msgid "Sur le plan, je mesure que $%s=\\unit[%s]{cm}$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:114
+#, python-format, python-brace-format
+msgid "Or on sait que en réalité $%s = \\unit[%s]{m} = \\unit[%s]{cm}$"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:115
+#, python-format
+msgid " et  $%s \\div %s = %s$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:116
+#, python-format
+msgid "L'échelle de ce plan est donc $1/%s^e$."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:117
+#, python-format
+msgid "\\item Déterminer les longueurs réelles $%s$, $%s$ et $%s$.\n"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:118
+msgid "Grâce à la question précédente, je peux compléter le tableau :\n"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:122
+#, python-format
+msgid "Sur le plan (en cm)  & %s & %s & %s & %s &\\rnode{plan1}{}\\\\"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:124
+#, python-format
+msgid "En réalité (en cm)  & %s & %s & %s & %s &\\rnode{plan2}{}\\\\"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:128
+msgid "Pour conclure, on convertit ses longueurs en m :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:135
+msgid "Échelles"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:139
+msgid "Cerises"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:139
+msgid "Tomates"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:139
+msgid "Pommes"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:139
+msgid "Poires"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:139
+msgid "Raisin"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:139
+msgid "Oranges"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:147
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:148
+msgid "prix"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:153
+#, python-format
+msgid "%s (en kg) & %s & %s &  %s  \\\\"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:155
+#, python-format
+msgid "%s (en \\euro)  & %s &  %s  & %s \\\\"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:160
+#, python-format
+msgid "%s (en kg) & %s & %s &  \\bf %s  \\\\"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:162
+#, python-format
+msgid "%s (en \\euro)  & %s &  \\bf %s  & %s \\\\"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:165
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:167
+msgid ""
+"\\exercice Le prix à payer est proportionnel à la masse de fruits achetés."
+"\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:166
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:168
+msgid "Détermine la valeur des cases vides"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/relatifs.py:108
+msgid "Addition de relatifs"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:176
+msgid "abscisse"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:176
+msgid "ordonnée"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:184
+#: src/pyromaths/ex/cinquiemes/reperage.py:207
+#, python-format
+msgid "\\item Donner les coordonnées des points %s, %s, %s, %s, %s et %s."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:185
+#: src/pyromaths/ex/cinquiemes/reperage.py:212
+#, python-format
+msgid "\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:185
+#: src/pyromaths/ex/cinquiemes/reperage.py:212
+#, python-format
+msgid " de coordonnées respectives %s, %s, %s, %s, %s et %s. "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:186
+#: src/pyromaths/ex/cinquiemes/reperage.py:213
+#, python-format
+msgid "\\item Placer dans le repère le point %s d'%s %s et d'%s %s"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:210
+#, python-format
+msgid "Les coordonnées du point %s sont %s \n"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:218
+msgid "Repérage"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:49
+msgid "Effectifs"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:68
+#: src/pyromaths/ex/cinquiemes/statistiques.py:190
+msgid "Fréquences (\\%)"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:93
+msgid "AliceBlue"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:93
+msgid "Bisque"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:93
+msgid "PaleGreen"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:93
+msgid "Thistle"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:93
+msgid "LightGray"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:93
+msgid "Khaki"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:93
+msgid "LightBlue"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:93
+msgid "LightSalmon"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:93
+msgid "PaleGoldenrod"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:93
+msgid "PapayaWhip"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:93
+msgid "Plum"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:93
+msgid "Gainsboro"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:198
+#, python-format
+msgid ""
+"Comme 10\\% sont représentés par 1cm, il faut diviser chaque fréquence par "
+"10 pour obtenir la longueur (arrondie au dixième) du bâton à dessiner :"
+"\\par\n"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:200
+msgid "Hauteur (cm)"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:206
+msgid ""
+"Comme il y a $360^{\\circ}$ dans un cercle pour représenter 100\\%, il faut "
+"multiplier chaque fréquence par 3,6 pour connaître son angle (arrondi au "
+"degré) de représentation dans le diagramme :\\par\n"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:208
+#: src/pyromaths/ex/cinquiemes/statistiques.py:216
+msgid "Angle (Degrés)"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:214
+msgid ""
+"Comme il y a $180^{\\circ}$ dans un cercle pour représenter 100\\%, il faut "
+"multiplier chaque fréquence par 1,8 pour connaître son angle (arrondi au "
+"degré) de représentation dans le diagramme :\\par\n"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:247
+#: src/pyromaths/ex/cinquiemes/statistiques.py:248
+msgid "Chiffres"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:250
+#: src/pyromaths/ex/cinquiemes/statistiques.py:251
+msgid ""
+"Voici une liste de chiffres choisis au hasard dans les décimales de $\\pi$ :"
+"\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:256
+#: src/pyromaths/ex/cinquiemes/statistiques.py:257
+#: src/pyromaths/ex/cinquiemes/statistiques.py:414
+#: src/pyromaths/ex/cinquiemes/statistiques.py:415
+msgid ""
+"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent "
+"être arrondies au centième.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:261
+#: src/pyromaths/ex/cinquiemes/statistiques.py:418
+msgid ""
+"Chaque effectif se complète en comptant le nombre d'apparition de chaque "
+"chiffre dans la liste de l'énoncé."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:262
+msgid ""
+"Comme les chiffres sont rangés par 20, on voit assez rapidement que le "
+"nombre total de chiffres est de "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:263
+#: src/pyromaths/ex/cinquiemes/statistiques.py:420
+msgid ""
+"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise "
+"par le nombre total de chiffres, puis il ne faut pas oublier d'arrondir au "
+"centième.\\par\n"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:264
+#: src/pyromaths/ex/cinquiemes/statistiques.py:421
+msgid "Par exemple pour la fréquence du chiffre 1 : $\\dfrac{"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:269
+msgid ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Représenter la répartition des "
+"chiffres dans un diagramme en bâtons avec 1~cm pour 10\\%."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:270
+msgid ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Représenter la répartition des "
+"chiffres dans un diagramme en bâtons avec 1~cm pour 10\\%.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:274
+#: src/pyromaths/ex/cinquiemes/statistiques.py:275
+#: src/pyromaths/ex/cinquiemes/statistiques.py:403
+#: src/pyromaths/ex/cinquiemes/statistiques.py:427
+#: src/pyromaths/ex/cinquiemes/statistiques.py:428
+msgid "Valeurs"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:294
+msgid "Classes de notes"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:296
+#: src/pyromaths/ex/cinquiemes/statistiques.py:297
+msgid ""
+"Voici un tableau regroupant les notes d'une classe lors d'un contrôle :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:303
+msgid "Notes"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:311
+#: src/pyromaths/ex/cinquiemes/statistiques.py:312
+msgid ""
+"\\item Compléter le tableau ci-dessous afin de regrouper les notes par "
+"classes et effectuer le calcul des fréquences arrondies au centième :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:328
+msgid ""
+"Chaque effectif se complète en comptant le nombre d'apparition de chaque "
+"note dans le tableau de l'énoncé."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:329
+msgid ""
+"Le nombre de notes du contrôle, qui est aussi le nombre d'élèves, est donc "
+"de "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:330
+msgid ""
+"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise "
+"par le nombre total de notes, puis il ne faut pas oublier d'arrondir au "
+"centième.\\par\n"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:331
+msgid ""
+"Par exemple pour la fréquence des notes dans la première classe : $\\dfrac{"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:343
+#: src/pyromaths/ex/cinquiemes/statistiques.py:344
+msgid ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Combien d'élèves ont une note "
+"strictement inférieure à "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:343
+#: src/pyromaths/ex/cinquiemes/statistiques.py:344
+msgid " ? Supérieure ou égale à "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:374
+msgid ""
+"D'après le tableau rempli précédemment, le nombre d'élèves ayant une note "
+"strictement inférieure à "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:375
+msgid " sont tous les élèves comptés dans les classes situées à gauche de "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:376
+msgid ". En effectuant le total des élèves de ces classes, on obtient : "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:376
+#: src/pyromaths/ex/cinquiemes/statistiques.py:379
+msgid " élèves.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:378
+msgid ""
+"La réponse à la seconde question se fait de même en comptant tous les "
+"effectifs des élèves se situant à droite de "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:379
+msgid "Le résultat est donc : "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:404
+msgid "Valeurs)"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:406
+#: src/pyromaths/ex/cinquiemes/statistiques.py:407
+msgid ""
+"Voici une liste des résultats obtenus en lançant plusieurs fois un dé à six "
+"faces :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:419
+msgid ""
+"Comme les chiffres sont rangés par 25, on voit assez rapidement que le "
+"nombre total de chiffres est de "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:424
+#: src/pyromaths/ex/cinquiemes/statistiques.py:425
+msgid ""
+"\\item Représenter la répartition des chiffres dans un diagramme en bâtons "
+"avec 1cm pour 10\\%.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:461
+msgid "circulaire"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:463
+msgid "semi-circulaire"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:470
+msgid "Ages"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:470
+msgid "<20 ans"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:470
+msgid "20 - 40 ans"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:470
+msgid "40 - 60 ans"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:470
+msgid "60 - 80 ans"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:470
+msgid ">80 ans"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:477
+#: src/pyromaths/ex/cinquiemes/statistiques.py:478
+#: src/pyromaths/ex/cinquiemes/statistiques.py:492
+msgid "Le diagramme "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:477
+#: src/pyromaths/ex/cinquiemes/statistiques.py:478
+msgid ""
+" ci-dessus représente les différentes fréquences des classes d'âges dans une "
+"certaine région.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:481
+msgid "\\item Calculer les fréquences de chaque classe d'âges."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:482
+msgid "\\item Calculer les fréquences de chaque classe d'âges.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:484
+msgid "Classes d'âges"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:492
+msgid " est partagé en "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:492
+msgid " parts symbolisées par des lignes grises en pointillés.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:493
+msgid "On en déduit que chacune de ces parts représente $\\dfrac{100}{"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:493
+msgid ""
+"\\%$, puis en comptant le nombre de parts dans chaque classe, on obtient le "
+"tableau suivant :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:497
+msgid "\\item Sachant que la population étudiée est composée de "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:497
+msgid " personnes, calculer les effectifs de chaque classe d'âges."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:498
+msgid ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Sachant que la population étudiée "
+"est composée de "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:498
+msgid " personnes, calculer les effectifs de chaque classe d'âges.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:500
+msgid "Sachant que la classe des moins de vingt ans est composée de "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:500
+msgid " personnes, on peut calculer l'effectif concerné :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:502
+msgid ""
+"Avec le même type de calcul, on obtient les effectifs des autres classes, "
+"résumés dans le tableau ci-dessous :"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:518
+msgid ""
+"\\item Les données du vote du délégué de classe ont été malheureusement "
+"partiellement perdues, mais on a réussi à regrouper les informations du "
+"tableau ci-dessous (sachant que chaque élève a voté) :"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:519
+msgid ""
+"\\item Les données du vote du délégué de classe ont été malheureusement "
+"partiellement perdues, mais on a réussi à regrouper les informations du "
+"tableau ci-dessous (sachant que chaque élève a voté) :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Vincent"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Sophia"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Karim"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Denise"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Aline"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Jonathan"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Isabelle"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Thomas"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Léna"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Matteo"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Céline"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Antoine"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Julie"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Rémy"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Caroline"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Yann"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Muriel"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Patrick"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Mélanie"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:536
+msgid "Elève"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:543
+#: src/pyromaths/ex/cinquiemes/statistiques.py:544
+msgid ""
+"Sachant qu'il y a 25 élèves dans la classe, compléter alors le tableau ci-"
+"dessus.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:552
+#, python-format
+msgid ""
+"Comme il y a 25 élèves dans la classe, ce qui représente 100 \\% des votes, "
+"il faut diviser la fréquence connue pour trouver l'effectif d'élèves ayant "
+"voté pour "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:552
+msgid " et on trouve : "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:553
+#: src/pyromaths/ex/cinquiemes/statistiques.py:555
+msgid "$ élève(s) pour "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:554
+msgid "Ensuite, pour trouver l'effectif d'élèves ayant voté pour "
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:554
+msgid ", il suffit de soustraire à 25 les effectifs connus :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:556
+msgid ""
+"Enfin, pour le calcul des fréquences manquantes, il faut multiplier chaque "
+"effectif par 4, ce qui fourni le tableau ci-dessous.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:560
+#: src/pyromaths/ex/cinquiemes/statistiques.py:561
+msgid ""
+"\\item Représenter la répartition des votes dans un diagramme circulaire de "
+"rayon 3 cm.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:589
+#, python-format
+msgid ""
+"\\renewcommand{\\arraystretch}{1.8}\n"
+"        \\item On a demandé aux élèves d'une classe de cinquième combien de "
+"temps par semaine était consacré à leur sport favori.\\par\n"
+"        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Durée t (en h)&  $0 \\le "
+"t < 1$ & $1 \\le t  < 2$ & $2 \\le t  < 3$ & $3 \\le t  < 4$ &  $4 \\le t  < "
+"5$ & $5 \\le t  < 6$ & $6 \\le t  < 7$ \\\\\\hline Effectif & %s & %s & %s & "
+"%s & %s & %s & %s \\\\\\hline \\end{tabular}\\par\n"
+"        À partir de ce tableau, construire un  histogramme pour représenter "
+"ces données.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:594
+#, python-format
+msgid ""
+"\\item On a demandé aux élèves quel était leur sport préféré. %s élèves "
+"préfèrent le basket-ball, %s le tennis, %s le football et %s le judo. "
+"Construire un diagramme circulaire représentant cette répartion.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:601
+#, python-format
+msgid ""
+"\\begin{minipage}{10cm}\n"
+"    \\begin{pspicture}(0,-1)(8.5,9.5)\n"
+"    \\psaxes[showorigin=false]{->}(7.5,8.5)\n"
+"    \\psset{fillstyle=solid, linewidth=0.5pt}\n"
+"    \\psframe(0,0)(1,%s)\n"
+"    \\psframe(1,0)(2,%s)\n"
+"    \\psframe(2,0)(3,%s)\n"
+"    \\psframe(3,0)(4,%s)\n"
+"    \\psframe(4,0)(5,%s)\n"
+"    \\psframe(5,0)(6,%s)\n"
+"    \\psframe(6,0)(7,%s)\n"
+"    \\rput(-0.2,-0.425){$0$}\n"
+"    \\rput(8.3,0){Durée}\n"
+"    \\rput(0,8.8){Effectif}\n"
+"    \\end{pspicture}\n"
+"    \\end{minipage}\n"
+"    \\begin{minipage}{6cm}\n"
+"    Sur l'axe horizontal, on représente les durées en heures et, sur l'axe "
+"vertical, on représente les effectifs.\n"
+"    \\end{minipage}"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:621
+#, python-format
+msgid ""
+"L'effectif total est égal à $ %s + %s + %s + %s = 30$. La mesure d'angle "
+"d'un secteur circulaire est proportionnelle à l'effectif du sport qu'il "
+"représente. Le coefficient de proportionnalité est égal au quotient de "
+"l'effectif total par 360\\degre c'est à dire $360 \\div 30=12$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:622
+#, python-format
+msgid ""
+"\\renewcommand\\tabcolsep{10pt}\n"
+"    \\begin{tabular}{|l|c|c|c|c|c|c}\n"
+"    \\cline{1-6}\n"
+"    Sport favori  & Basket-ball & Tennis & Football & Judo & Total &"
+"\\rnode{plan1}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    Effectif & %s & %s & %s & %s & 30 &\\rnode{plan1}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    Mesure (en degré)  & \\bf%s & \\bf%s & \\bf%s & \\bf%s & 360 &"
+"\\rnode{plan2}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    \\end{tabular}\n"
+"    \\ncbar{->}{plan1}{plan2}\\Aput{$\\times 12$}\\par\n"
+"    \\begin{minipage}{6cm}\n"
+"    En utilisant les mesures d'angles obtenues dans le tableau de "
+"proportionnalité, on trace le diagramme circulaire.\n"
+"    \\end{minipage}"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:678
+msgid "Statistiques"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/symetrie.py:107
+#: src/pyromaths/ex/cinquiemes/symetrie.py:110
+msgid ""
+"Construire la symétrique de chacune des figures par rapport au point O en"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/symetrie.py:108
+#: src/pyromaths/ex/cinquiemes/symetrie.py:111
+msgid "utilisant le quadrillage :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/symetrie.py:133
+msgid "Symétrie centrale"
+msgstr ""
+
+#: src/pyromaths/outils/Arithmetique.py:223
+msgid " est un nombre premier.\\par "
+msgstr ""
+
+#: src/pyromaths/outils/Priorites3.py:593
+msgid "Polynome("
+msgstr ""
+
+#: src/pyromaths/outils/Priorites3.py:646
+#, python-format
+msgid "Le résultat %s a un format inattendu"
+msgstr ""
+
+#: src/pyromaths/outils/Priorites3.py:760
+#: src/pyromaths/outils/Priorites3.py:761
+msgid "indice"
+msgstr ""
+
+#: src/pyromaths/outils/Priorites3.py:760
+#: src/pyromaths/outils/Priorites3.py:761
+msgid "cancel"
+msgstr ""
+
+#: src/pyromaths/outils/Priorites3.py:935
+msgid "On ne devrait pas rencontrer de fraction non simplifiée ici"
+msgstr ""
+
+#: src/pyromaths/outils/System.py:57
+msgid "exercices"
+msgstr ""
+
+#: src/pyromaths/outils/System.py:59
+msgid "Fiche de révisions"
+msgstr ""
+
+#: src/pyromaths/outils/System.py:67
+msgid ""
+"Pyromaths est un programme qui permet de générer des fiches d’exercices de "
+"mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au "
+"format pdf qui peuvent ensuite être imprimés ou lus sur écran."
+msgstr ""
+
+#: src/pyromaths/outils/System.py:168
+msgid "\\currentpdfbookmark{Le corrigé des exercices}{Corrigé}\n"
+msgstr ""
+
+#: src/pyromaths/outils/TestEnv.py:38
+msgid ""
+"Impossible de lire le fichier de configuration.Veuillez vérifier ce dernier "
+"ou faire remonter l'erreur sur le forum de Pyromaths."
+msgstr ""
+
+#: src/pyromaths/outils/TexFiles.py:47
+msgid "problème"
+msgstr ""
+
+#: src/pyromaths/outils/TexFiles.py:60
+msgid "indente tout ce qui suit \begin{...}"
+msgstr ""
+
+#: src/pyromaths/outils/TexFiles.py:63
+msgid "desindente tout ce qui suit \\end{...}"
+msgstr ""
+
+#: src/pyromaths/outils/TeXMiseEnForme.py:46
+#, python-format
+msgid "\\nombre{%s}"
+msgstr ""
+
+#: src/pyromaths/outils/TeXMiseEnForme.py:51
+#, python-format
+msgid "\\nombre{%s}\\,%s"
+msgstr ""
