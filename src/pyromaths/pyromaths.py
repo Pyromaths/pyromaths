@@ -34,7 +34,14 @@ def main():
 
     locale_dir = join(dirname(__file__), '../locale/')
     locale_dir = realpath(locale_dir)
-    gettext.install('pyromaths', localedir=locale_dir, unicode=1, codeset='utf-8', names=['en_US'])
+    
+    gettext.install('pyromaths', localedir=locale_dir, unicode=1)
+
+    #gettext.install('pyromaths', localedir=locale_dir, unicode=1, codeset='utf-8', names=['en_US'])
+
+    #gettext.bindtextdomain("pyromaths", locale_dir)
+    #gettext.textdomain("pyromaths")
+    #_ = gettext.gettext
 
 
     from outils.System import create_config_file, modify_config_file
