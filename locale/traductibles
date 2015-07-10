@@ -1,5 +1,4 @@
-#run from root directory to obtain .pot file
-#xgettext -L Python -d pyromaths --from-code utf-8 -o locale/pyromaths.pot -f locale/fichiersTraductibles.txt
+# Cette fichier comporte un liste des fichiers source qui ont des strings pour traduire.
 
 src/pyromaths/interface.py
 src/pyromaths/Values.py
