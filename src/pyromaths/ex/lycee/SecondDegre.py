@@ -538,7 +538,7 @@ class Sd6Parametre(ex.TexExercise):
         exo.append(r'\begin{enumerate}')
         exo.append(_(u'\\item On donne le polynôme $\\quad P\\,(x) = %s\\quad$ où $m$ est un réel.\\par') % self.exercice[0][0])
         # TODO: Affichage des paramètres et parenthèses
-        exo.append(_(u'Quelles sont les valeurs de $m$ pour lesquelles $P$ %s ?\n' % ['a une seule racine', 'n\'a pas de racine'),
+        exo.append(_(u'Quelles sont les valeurs de $m$ pour lesquelles $P$ %s ?\n') % [_('a une seule racine'), _('n\'a pas de racine'),
                 _('a deux racines distinctes')][self.exercice[0][1]])
         # exo.append(u'\\par Solution : Polynôme en m : $%s$\\par\n' % (Polynome([[a ** 2, 2], [2 * a * b - 4 * c, 1], [b ** 2 - 4 * d, 0]], "m"))
         # exo.append( u'Solution : discriminant $\\Delta_m = %s$\\par\n' % (16 * (a ** 2 * d - a * b * c + c ** 2))

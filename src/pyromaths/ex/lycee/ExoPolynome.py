@@ -380,7 +380,7 @@ def quest_fonctions_rationnelles():
     if numerateur_simplifie.degre_max == 0:
         cor.append(_(u" Comme $%s$ est un carré, il est toujours positif.\\\\") % (denominateur))
         f_xmin = eval(priorites('%r*Fraction(1)/%r' % (P(Intervalle[0]), Q(Intervalle[0])))[-1][0])
-        f_xmax = eval(priorites('%r*Fraction(1)/%r) % (P(Intervalle[1]), Q(Intervalle[1])))[-1][0])
+        f_xmax = eval(priorites('%r*Fraction(1)/%r' % (P(Intervalle[1]), Q(Intervalle[1])))[-1][0])
         if isinstance(f_xmin, (Fraction, RacineDegre2)): f_xmin = f_xmin.simplifie()
         if isinstance(f_xmax, (Fraction, RacineDegre2)): f_xmax = f_xmax.simplifie()
         f_xmin = TeX(f_xmin)
@@ -1000,7 +1000,7 @@ def factorisation_degre3(E, nomE, exo=[], cor=[], racines=[0, 1, -1, 2, -2]):
     var = E.var
     X = Polynome({1:1}, var)
     exo.append(_("\\item Soit $%s =%s $") % (nomE, E))
-    cor.append(_("\\item Soit $%s=%s $)" % (nomE, E))
+    cor.append(_("\\item Soit $%s=%s $)") % (nomE, E))
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
     for x0 in racines:
