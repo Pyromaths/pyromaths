@@ -37,12 +37,6 @@ def main():
 
     gettext.install('pyromaths', localedir=locale_dir, unicode=1)
 
-    #gettext.install('pyromaths', localedir=locale_dir, unicode=1, codeset='utf-8', names=['en_US'])
-
-    #gettext.bindtextdomain("pyromaths", locale_dir)
-    #gettext.textdomain("pyromaths")
-    #_ = gettext.gettext
-
 
     from outils.System import create_config_file, modify_config_file
     from outils.TestEnv import test
