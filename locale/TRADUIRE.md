@@ -13,7 +13,7 @@ brew install gettext
 Tout les distributions des systèmes Unix fournissent Gettext et Msgfmt par défaut.
 
 ### Windows:
-Il est [là](http://gnuwin32.sourceforge.net/packages/gettext.htm).
+Gettext est [là](http://gnuwin32.sourceforge.net/packages/gettext.htm).
 
 
 ## Géneration des fichiers à traduire
@@ -29,6 +29,10 @@ Dedans, il faut qu'un nouveau directoire existe: `LC_MESSAGES`.
 Copiez le fichier `.pot` dans le directoire crée sous le nom de `.po`, (exemple pour Italien):
 ```
 cp pyromaths.pot it/LC_MESSAGES/pyromaths.po
+```
+Pour copiage le fichier `.pot` vers tout les directoires de langue, lancez depuis `/locale/`:
+```
+find . -name "LC_MESSAGES" -exec cp pyromaths.pot {}/pyromaths.po \;
 ```
 
 ## Traduction

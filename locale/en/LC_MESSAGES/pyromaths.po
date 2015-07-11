@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-10 15:54+0200\n"
+"POT-Creation-Date: 2015-07-11 23:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,35 +19,35 @@ msgstr ""
 
 #: src/pyromaths/interface.py:69
 msgid "Créer"
-msgstr "Create"
+msgstr ""
 
 #: src/pyromaths/interface.py:76 src/pyromaths/interface.py:319
 msgid "Quitter"
-msgstr "Quit"
+msgstr ""
 
 #: src/pyromaths/interface.py:83
 msgid "Réinitialiser"
-msgstr "Reinitialize"
+msgstr ""
 
 #: src/pyromaths/interface.py:116
 msgid "Options"
-msgstr "Options"
+msgstr ""
 
 #: src/pyromaths/interface.py:137
 msgid "Nom par défaut du fichier : "
-msgstr "Default filename : "
+msgstr ""
 
 #: src/pyromaths/interface.py:143
 msgid "Chemin par défaut pour enregistrer les fichiers : "
-msgstr "Default path for saved files : "
+msgstr ""
 
 #: src/pyromaths/interface.py:149
 msgid "Titre de la fiche d'exercices : "
-msgstr "Exercise file name : "
+msgstr ""
 
 #: src/pyromaths/interface.py:175
 msgid "Parcourir"
-msgstr "Browse"
+msgstr ""
 
 #: src/pyromaths/interface.py:203
 msgid "Créer le corrigé"
@@ -814,7 +814,6 @@ msgid "Fraction(%s, %s) %s Fraction(%s, %s)"
 msgstr ""
 
 #: src/pyromaths/ex/cinquiemes/fractions.py:115
-#: src/pyromaths/ex/cinquiemes/fractions.py:159
 #: src/pyromaths/ex/cinquiemes/relatifs.py:75
 msgid "\\exercice"
 msgstr ""
@@ -829,7 +828,6 @@ msgid ""
 msgstr ""
 
 #: src/pyromaths/ex/cinquiemes/fractions.py:118
-#: src/pyromaths/ex/cinquiemes/fractions.py:162
 #: src/pyromaths/ex/cinquiemes/relatifs.py:77
 msgid "\\exercice*"
 msgstr ""
@@ -1180,6 +1178,7 @@ msgstr ""
 #: src/pyromaths/ex/cinquiemes/statistiques.py:274
 #: src/pyromaths/ex/cinquiemes/statistiques.py:275
 #: src/pyromaths/ex/cinquiemes/statistiques.py:403
+#: src/pyromaths/ex/cinquiemes/statistiques.py:404
 #: src/pyromaths/ex/cinquiemes/statistiques.py:427
 #: src/pyromaths/ex/cinquiemes/statistiques.py:428
 msgid "Valeurs"
@@ -1269,10 +1268,6 @@ msgstr ""
 
 #: src/pyromaths/ex/cinquiemes/statistiques.py:379
 msgid "Le résultat est donc : "
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/statistiques.py:404
-msgid "Valeurs)"
 msgstr ""
 
 #: src/pyromaths/ex/cinquiemes/statistiques.py:406
@@ -1636,6 +1631,1128 @@ msgstr ""
 
 #: src/pyromaths/ex/cinquiemes/symetrie.py:133
 msgid "Symétrie centrale"
+msgstr ""
+
+#: src/pyromaths/ex/examples/helloworld.py:13
+msgid "Hello, world corrigé!"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/__init__.py:23
+msgid "2.Lycée"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:160
+#, python-format
+msgid "$%s\\degres$"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:211
+#, python-format
+msgid ""
+"\\item Convertir les cinq mesures suivantes en radians : %s, %s, %s, %s et "
+"%s."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:212
+#, python-format
+msgid ""
+"\\item Convertir les cinq mesures suivantes en degrés : %s, %s, %s, %s et "
+"%s~rad."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:213
+#, python-format
+msgid ""
+"\\item Déterminer les mesures principales des angles suivants en radians : "
+"%s, %s, %s, %s et %s~rad."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:214
+#: src/pyromaths/ex/lycee/CercleTrigo.py:243
+msgid ""
+"\\item Des angles ont été placés sur le cercle trigonométrique ci-dessous, "
+"représentés en rouge par les points $M_0$, $M_1$, $M_2$ et $M_3$. Lire leurs "
+"mesures principales en radians"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:215
+#: src/pyromaths/ex/lycee/CercleTrigo.py:244
+msgid ""
+"( les lignes vertes, grises et bleues représentent des angles multiples de $"
+"\\dfrac{\\pi}{3}$, de $\\dfrac{\\pi}{4}$ et de $\\dfrac{\\pi}{5}$ ).\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:217
+#: src/pyromaths/ex/lycee/CercleTrigo.py:250
+#, python-format
+msgid ""
+"\\item Placer les angles suivants sur le cercle trigonométrique : %s, %s, %s "
+"et %s~rad.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:222
+#, python-format
+msgid ""
+"\\item Convertir les cinq mesures suivantes en radians : %s, %s, %s, %s et "
+"%s.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:224
+msgid ""
+"La conversion est en fait une simple règle de proportionnalité : il faut "
+"multiplier par $\\dfrac{\\pi}{180}$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:225
+msgid "Par exemple pour la première mesure, on obtient avec simplification : $"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:226
+#: src/pyromaths/ex/lycee/CercleTrigo.py:241
+#, python-format
+msgid ""
+"De même pour les autres mesures, on trouve alors respectivement : %s~rad, "
+"%s~rad, %s~rad, %s~rad et %s~rad."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:228
+#, python-format
+msgid ""
+"\\item Convertir les cinq mesures suivantes en degrés : %s, %s, %s, %s et "
+"%s~rad.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:230
+msgid ""
+"On effectue alors la proportionnalité inverse : il faut multiplier par $"
+"\\dfrac{180}{\\pi}$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:231
+#, python-format
+msgid ""
+"Après simplification, voici les résultats : %s\\degres, %s\\degres, %s"
+"\\degres, %s\\degres et %s\\degres."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:233
+#, python-format
+msgid ""
+"\\item Déterminer les mesures principales des angles suivants en radians : "
+"%s, %s, %s, %s et %s~rad.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:238
+msgid ""
+"Une mesure d'angle en radians est définie modulo $2\\pi$, c'est-à-dire que "
+"l'ajout ou la suppression d'un tour ( qui vaut $2\\pi$ ou 360\\degres ) ne "
+"change pas un angle.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:239
+msgid ""
+"Concrètement, avec le premier angle de la question, on remarque que :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:246
+#: src/pyromaths/ex/lycee/CercleTrigo.py:252
+msgid ""
+"Les réponses sont directement données sur le cercle trigonométrique ci-"
+"dessous :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:249
+#, python-format
+msgid ""
+"Les points $M_0$, $M_1$, $M_2$ et $M_3$ définissent alors respectivement les "
+"angles %s, %s, %s et %s~rad."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:255
+msgid ""
+"Ajoutons une simple remarque pour la dernière mesure, qui n'est pas "
+"principale : il faut effectuer en premier lieu une simplification, comme à "
+"la question 3. On obtient alors :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:261
+msgid "Cercle trigonométrique"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:262
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:113
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:268
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:399
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:640
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:799
+#: src/pyromaths/ex/lycee/Vecteurs.py:304
+msgid "2.Seconde"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Derivation.py:89
+msgid "Nombre dérivé graphiquement"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Derivation.py:90
+#: src/pyromaths/ex/lycee/ExoPolynome.py:95
+#: src/pyromaths/ex/lycee/ExoPolynome.py:174
+#: src/pyromaths/ex/lycee/ExoPolynome.py:209
+#: src/pyromaths/ex/lycee/ExoPolynome.py:264
+#: src/pyromaths/ex/lycee/ExoPolynome.py:284
+#: src/pyromaths/ex/lycee/SecondDegre.py:70
+#: src/pyromaths/ex/lycee/SecondDegre.py:207
+#: src/pyromaths/ex/lycee/SecondDegre.py:329
+#: src/pyromaths/ex/lycee/SecondDegre.py:371
+#: src/pyromaths/ex/lycee/SecondDegre.py:412
+#: src/pyromaths/ex/lycee/SecondDegre.py:432
+#: src/pyromaths/ex/lycee/SecondDegre.py:475
+#: src/pyromaths/ex/lycee/SecondDegre.py:512
+msgid "1.1èreS"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Derivation.py:109
+#, python-format
+msgid ""
+"\\item Déterminer graphiquement les nombres dérivés de la fonction $f$ en $"
+"\\qquad x=%s \\qquad x=%s \\qquad x=%s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Derivation.py:110
+msgid "\\item On considère le tableau de valeurs suivant :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Derivation.py:119
+#, python-brace-format
+msgid ""
+"\\item Dans un nouveau repère, placer les points de la courbe $\\mathcal{C}_g"
+"$ ainsi connus."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Derivation.py:120
+#, python-brace-format
+msgid "\\item Tracer les tangentes à $\\mathcal{C}_g$ en ces points."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Derivation.py:121
+#, python-brace-format
+msgid "\\item Donner une allure possible de la courbe $\\mathcal{C}_g$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Derivation.py:175
+msgid ""
+"\\item  On lit graphiquement le coefficient directeur de chacune des "
+"tangentes en ces points.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:54
+#: src/pyromaths/ex/lycee/ExoPolynome.py:55
+msgid "Résoudre les équations suivantes :"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:94
+msgid "Équations 2° degré"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:111
+msgid "Factoriser les polynômes suivants :"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:122
+#, python-format
+msgid "\\item Factoriser  $%s(%s)=%s$ à l'aide d'une identité remarquable."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:123
+#, python-format
+msgid "\\item Factoriser $%s(%s)=%s$"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:139
+#: src/pyromaths/ex/lycee/ExoPolynome.py:151
+#: src/pyromaths/ex/lycee/ExoPolynome.py:166
+#, python-format
+msgid "\\item Factoriser $%s(%s)=%s$\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:173
+msgid "Factorisations 2° degré"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:208
+msgid "Factorisations degré 3"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:253
+#, python-format
+msgid "\\item Étudier le signe du polynôme $%s=%s$ sur $I=%s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:254
+#, python-format
+msgid "\\item Étudier le signe du polynôme $%s=%s$ sur $I=%s$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:263
+msgid "Étude de signe"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:283
+msgid "Sens de variations"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:284
+msgid "0.Term STG"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:302
+msgid "Étude de fonctions"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:303
+msgid "0.Term S"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:346
+#: src/pyromaths/ex/lycee/ExoPolynome.py:348
+#, python-format
+msgid ""
+"\\item On considère la fonction $%s$ définie sur $I=[%s~;~%s]$ par $%s(%s)="
+"\\dfrac{%s}{%s}$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:351
+#: src/pyromaths/ex/lycee/ExoPolynome.py:352
+#, python-format
+msgid "\\item Justifier que $%s$ est définie et dérivable sur $I$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:353
+#, python-format
+msgid " Pour déterminer la valeur interdite, on doit résoudre $%s=0$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:371
+#, python-format
+msgid ""
+"Or $%s$ n'est pas dans l'intervalle $[%s~;~%s]$ et comme $%s$ est un "
+"quotient de polynômes, alors $%s$ est définie et dérivable sur $I$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:373
+#: src/pyromaths/ex/lycee/ExoPolynome.py:375
+#, python-format
+msgid "\\item Déterminer $%s'(%s)$ pour tout $%s\\in[%s~;~%s]$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:378
+#, python-format
+msgid "\\item En déduire le sens de variations de $%s$ sur $I$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:379
+#, python-format
+msgid "\\item En déduire le sens de variations de $%s$ sur $I$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:381
+#: src/pyromaths/ex/lycee/ExoPolynome.py:537
+#, python-format
+msgid " Comme $%s$ est un carré, il est toujours positif.\\\\"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:389
+#: src/pyromaths/ex/lycee/ExoPolynome.py:543
+#, python-format
+msgid ""
+" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient "
+"\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:405
+#, python-format
+msgid " De plus, $%s>0$ donc pour tout $%s$ de $I$, $%s'(%s)>0$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:421
+#: src/pyromaths/ex/lycee/ExoPolynome.py:575
+#, python-format
+msgid " Je ne sais pas faire avec un tel numérateur $%s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:465
+#: src/pyromaths/ex/lycee/ExoPolynome.py:467
+#, python-format
+msgid ""
+"\\item On considère la fonction $%s$ définie  par $%s(%s)=\\dfrac{%s}{%s}$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:470
+#, python-format
+msgid "\\item Déterminer l'ensemble de définition $\\mathcal{D}_{%s}$ de $%s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:471
+#, python-format
+msgid ""
+"\\item Déterminer l'ensemble de définition $\\mathcal{D}_{%s}$ de $%s$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:472
+#, python-format
+msgid ""
+" La fonction rationnelle $%s$ est définie et dérivable en $%s$ si $%s\\neq0$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:479
+#, python-format
+msgid ""
+"On en déduit que $\\mathcal{D}_{%s}=\\mathcal{D'}_{%s}=]-\\infty~;~"
+"%s[\\cup]%s~;~+\\infty[$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:481
+#: src/pyromaths/ex/lycee/ExoPolynome.py:483
+#, python-format
+msgid "\\item Déterminer $%s'(%s)$ pour tout $%s\\in\\mathcal{D'}_{%s}$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:486
+#: src/pyromaths/ex/lycee/ExoPolynome.py:487
+#, python-format
+msgid ""
+"\\item Déterminer les limites de $%s$ aux bornes de $\\mathcal{D}_{%s}$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:523
+#, python-format
+msgid "De plus, $%s>0$ si $%s<%s$"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:524
+#, python-format
+msgid "et  $%s<0$ si $%s>%s$.\\\\"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:526
+#, python-format
+msgid "De plus, $%s<0$ si $%s<%s$"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:527
+#, python-format
+msgid "et  $%s>0$ si $%s>%s$.\\\\"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:534
+#, python-format
+msgid ""
+"\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:535
+#, python-format
+msgid ""
+"\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:559
+#, python-format
+msgid " De plus, $%s>0$ donc pour tout $%s$ de $I$, $%s'(%s)>0$. \\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:611
+#: src/pyromaths/ex/lycee/ExoPolynome.py:612
+#, python-format
+msgid ""
+"\\item Étudier le sens de variations de $%s$ définie par $%s(x)=%s$ sur $%s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:615
+#, python-format
+msgid ""
+"Je dois étudier le signe de $%s'(%s)$ qui est un polynôme du second degré."
+"\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:627
+#, python-format
+msgid "Donc la fonction polynômiale $%s$ est décroissante sur $%s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:629
+#, python-format
+msgid "Donc la fonction polynômiale $%s$ est croissante sur $%s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:631
+#, python-format
+msgid "On obtient ainsi le tableau de variation de $%s$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:707
+#, python-format
+msgid ""
+"Comme $\\Delta <0$, $%s(%s)$ ne s'annule pas et est toujours du signe de $a$"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:708
+msgid "Ainsi "
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:716
+#, python-format
+msgid ""
+"Comme $\\Delta =0$, $%s(%s)$ s'annule une seule fois pour $%s_0=%s$ et est "
+"toujours du signe de $a$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:727
+#, python-format
+msgid "Or $%s$ n'est pas dans l'intervalle $%s$ donc "
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:750
+#, python-format
+msgid "Comme $\\Delta >0$, $%s(%s)$ est du signe de $-a$ entre les racines."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:793
+#, python-format
+msgid "\\par Or $%s$ et $%s$ ne sont pas dans $%s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:796
+#: src/pyromaths/ex/lycee/ExoPolynome.py:798
+#, python-format
+msgid "\\par Or $%s$ n'est pas dans $%s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1002
+#, python-format
+msgid "\\item Soit $%s =%s $"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1003
+#, python-format
+msgid "\\item Soit $%s=%s $)"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1010
+#, python-format
+msgid "\\item Vérifier si $%s $ possède une racine évidente."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1012
+#, python-format
+msgid "\\item Vérifier que $%s$ est une racine de $%s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1013
+#, python-format
+msgid "\\item Factoriser $%s $."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1021
+#, python-format
+msgid ""
+"On remarque que $%s$ peut se factoriser par $%s$ et $%s=%s\\left(%s\\right)$"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1023
+#, python-format
+msgid ""
+"On remarque que $%s$ peut se factoriser par $%s^2$ et $%s=%s^2\\left(%s"
+"\\right)$"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1029
+#, python-format
+msgid "Comme $%s(%s)=0$, on peut diviser $%s$ par $%s$"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1032
+#, python-format
+msgid "\\item On doit maintenant factoriser le polynome $%s_2=%s$\\\\"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1036
+#, python-format
+msgid "On en conclue donc que $%s="
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1072
+#, python-format
+msgid "On ne peut pas factoriser $%s(%s)$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1074
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1085
+msgid "On peut donc écrire "
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1101
+#, python-format
+msgid "Je calcule $\\Delta=%s^2-4\\times %s\\times %s=%s$"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1103
+#, python-format
+msgid " et $%s=%s$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1108
+#, python-format
+msgid "Comme $\\Delta <0$, $%s(%s)$ n'a pas de racines."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1110
+#, python-format
+msgid "Comme $\\Delta=0$, $%s(%s)$ a une seule racine $%s_0=%s=%s$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1113
+#, python-format
+msgid "Comme $\\Delta>0$, $%s(%s)$ a deux racines :"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1135
+#, python-format
+msgid "Les racines de $%s$ sont $%s_1=%s$ et $%s_2=%s$.\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1138
+#, python-format
+msgid "Les racines de $%s$ sont $%s_1=%s=%s$ et $%s_2=%s=%s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:10
+#, python-brace-format
+msgid ""
+"\\exercice\n"
+"           \\begin{multicols}{2}\n"
+"           \\noindent Question 1 : Chercher les racines des polynômes "
+"suivants :\\par\n"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:13
+#, python-brace-format
+msgid ""
+"\\exercice*\n"
+"           \\begin{multicols}{2}\n"
+"\\ \\noindent Question 1 : Chercher les racines des polynômes suivants :"
+"\\par\n"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:44
+msgid "\\par a) On calcule le discriminant : $\\Delta = "
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:45
+msgid "\\par Comme le discrimimant est $"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:45
+msgid "$, on en déduit que ce polynôme possède $"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:45
+msgid "$ racines."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:47
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:48
+msgid "\\par Question 2 : Résoudre les inéquations suivantes : "
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:60
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:61
+msgid "\\par Question 3 : Trouver deux nombres sachant que leur somme est "
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:60
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:61
+msgid " et leur produit "
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:63
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:64
+msgid ""
+"\\par Question 4 : Trouver les dimensions d'un rectangle, sachant que son "
+"périmètre est "
+msgstr ""
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:63
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:64
+msgid " et son aire "
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Fonction.py:137
+msgid "Je ne sais pas étudier les variations de cette fonction."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Fonction.py:182
+msgid "attends un peu pour le degré 3"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Fonction.py:185
+msgid "Degré trop élevé"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:69
+msgid "Forme canonique"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:156
+#: src/pyromaths/ex/lycee/SecondDegre.py:172
+msgid "Donner la forme canonique des polynômes $P$ , $Q$ , $R$ et $S$ ."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:206
+msgid "Racines d'un polynôme de degré 2"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:231
+msgid "Déterminer les racines des polynômes :"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:244
+msgid "Déterminer les racines des polynômes :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:271
+#: src/pyromaths/ex/lycee/SecondDegre.py:312
+#, python-format
+msgid "\\underline{Les racines de $%s$ sont }\\fbox{$%s$}"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:273
+#, python-format
+msgid "\\underline{L'unique racine de $%s$ est }\\fbox{$%s$}"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:279
+#, python-format
+msgid ""
+"car un carré est toujours positif.\\par\n"
+"\\underline{$%s$ n'a donc pas de racine.}"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:283
+#, python-format
+msgid ""
+"On calcule le discriminant de $%s$ avec $a=%s$, $b=%s$ et $c=%s$ :\\par"
+"\\medskip"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:312
+msgid "$}\\underline{ et }\\fbox{$"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:358
+msgid "Résoudre les équations :"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:402
+#, python-format
+msgid "\\item Déterminer le signe du polynôme $P\\,(x) = %s$"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:403
+#, python-format
+msgid ""
+"\\item Le polynôme $Q\\,(x) = %s$ admet deux racines $%s$ et $%s\\,$. "
+"Dresser son tableau de signes."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:405
+#, python-format
+msgid ""
+"\\item Le polynôme $R\\,(x) = %s$ admet deux racines $%s$ et $%s\\,$. "
+"Dresser son tableau de signes."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:425
+#, python-format
+msgid "Résoudre l'inéquation : $\\qquad \\cfrac{%s}{%s} %s 0$"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:466
+#, python-format
+msgid ""
+"\\item Le polynôme $\\quad P\\,(x) = %s \\quad$ admet deux racines $%s$ et $"
+"%s\\,$. Donner sa forme factorisée.\n"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:468
+#, python-format
+msgid ""
+"\\item Factoriser si possible les polynômes $\\quad Q\\,(x) = %s\\quad$ et $"
+"\\quad R\\,(x) = %s$.\n"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:502
+#, python-format
+msgid ""
+"On donne les polynômes $\\quad p\\,(x) = %s \\quad$ et $\\quad Q\\,(x) = %s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:504
+msgid ""
+"\\item Donner les caractéristiques de leurs courbes respectives (sommet, "
+"intersections avec les axes du repère)."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:505
+msgid "\\item Tracer l’allure de ces deux courbes sur un même graphique."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:539
+#, python-format
+msgid ""
+"\\item On donne le polynôme $\\quad P\\,(x) = %s\\quad$ où $m$ est un réel."
+"\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:542
+msgid "a deux racines distinctes"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:541
+#, python-format
+msgid "Quelles sont les valeurs de $m$ pour lesquelles $P$ %s ?\n"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:545
+#, python-format
+msgid ""
+"\\item Soit $a$ un réel différent de $%s$. On donne $Q\\,(x) = %s$.\\par\n"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:546
+#, python-format
+msgid "Déterminer $a$ pour que $%s$ soit une racine de $Q$.\n"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Statitisiques.py:62
+msgid "Tracer l'histogramme de la série ci-dessous :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Statitisiques.py:64
+#, python-format
+msgid "\\hline Classe & %s \\\\"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Statitisiques.py:65
+#, python-format
+msgid "\\hline Effectif & %s \\\\ \\hline"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:112
+msgid "Sens et Tableau de variations"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:126
+msgid ""
+"\\item Quel est le sens de variation de la fonction $f$ ? Répondre par une "
+"phrase en précisant les intervalles."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:127
+msgid "\\item Tracer les tableaux de variation des fonctions $f$ et $g$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:188
+msgid "\\item la fonction $f$ est"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:189
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:192
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:195
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:737
+msgid "décroissante"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:189
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:191
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:196
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:737
+msgid "croissante"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:189
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:193
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:197
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:737
+msgid "constante"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:194
+msgid "variation non attendue"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:267
+msgid "Extrema et représentation graphique"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:309
+msgid "\\item Quels sont les extrema de la fonction $f$ ?"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:310
+#, python-format
+msgid "\\item Quel est le %s de $f$ sur l'intervalle $[%s~;~%s]$ ?"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:311
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:414
+msgid "\\item Quels sont les extrema de la fonction $g$ ?"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:312
+#, python-format
+msgid "\\item Quels sont les extrema de $g$ sur l'intervalle $[%s~;~%s]$ ?"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:376
+#, python-format
+msgid ""
+"\\item Sur $[%s~;~%s]$ , le \\textbf{maximum} de $f$ est $y = %s$. Il est "
+"\\textbf{atteint en} $x = %s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:377
+#, python-format
+msgid ""
+"\\item Sur $[%s~;~%s]$ , le \\textbf{minimum} de $f$ est $y = %s$. Il est "
+"\\textbf{atteint en} $x = %s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:381
+#, python-format
+msgid ""
+"\\item Sur $[%s~;~%s]$, le \\textbf{%s} de $f$ est $y = %s$. Il est "
+"\\textbf{atteint en} $x = %s$. "
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:385
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:391
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:516
+#, python-format
+msgid ""
+"\\item Sur $[%s~;~%s]$ , le \\textbf{maximum} de $g$ est $y = %s$. Il est "
+"\\textbf{atteint en} $x = %s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:386
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:392
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:517
+#, python-format
+msgid ""
+"\\item Sur $[%s~;~%s]$ , le \\textbf{minimum} de $g$ est $y = %s$. Il est "
+"\\textbf{atteint en} $x = %s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:398
+msgid "Tableaux de variations et courbe"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:410
+msgid ""
+"\\item Pour chaque question, répondre avec une phrase en précisant les "
+"intervalles.\\vspace{-2ex}"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:413
+msgid "\\item Quel est le signe de la fonction $f$ ?"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:417
+msgid ""
+"\\item Tracer une représentation graphique de $f$ et $g$ sur leurs ensembles "
+"de définition."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:512
+#, python-format
+msgid ""
+"\\item La fonction $f$ est \\textbf{négative} sur %s et \\textbf{positive} "
+"sur %s."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:639
+msgid "Comparer des images à partir du sens de variation"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:671
+msgid ""
+"\\item À partir du tableau de variation ci-dessous, recopier et compléter "
+"les égalités ou inégalités suivantes en justifiant :\\vspace{-2ex}"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:679
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:680
+#, python-format
+msgid "\\item Peut-on comparer l’image des nombres $%s$ et $%s$ ? Justifier."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:737
+#, python-format
+msgid ""
+"\\item $f\\,(%s) %s f\\,(%s)$ car $%s < %s$ et $f$ est %s sur $[%s~;~%s]$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:741
+#, python-format
+msgid ""
+"\\item $f\\,(%s) %s f\\,(%s)$ car d’après le signe de la fonction $f\\,(%s) "
+"%s 0$ et $f\\,(%s) %s 0$ (par contre, on ne peut pas utiliser le sens de "
+"variation qui change sur l’intervalle $[%s~;~%s]$)."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:746
+#, python-format
+msgid ""
+"\\item On ne peut pas comparer $f\\,(%s)$ et $f\\,(%s)$ car la fonction $f$ "
+"n'est pas monotone (elle change de sens de variation) sur $[%s~;~%s]$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:798
+msgid "Extrema locaux à partir du tableau de variation"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:822
+msgid ""
+"\\item À partir du tableau de variation de la fonction $f$, compléter les "
+"égalités ou inégalités suivantes :\\vspace{-2ex}"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:832
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:833
+#, python-format
+msgid ""
+"\\item Donner un encadrement de la fonction $f$ sur l’intervalle $[%s~;~%s]$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:892
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:893
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:894
+#, python-format
+msgid "\\item Pour $x \\in [%s~;~%s],\\quad f\\,(x) %s %s$"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:899
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:900
+#, python-format
+msgid "\\item Sur $[%s~;~%s],\\quad %s \\le f\\,(x) \\le %s$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:230
+#: src/pyromaths/ex/lycee/Vecteurs.py:231
+#, python-brace-format
+msgid ""
+"On se place dans un repère orthonormé et on considère les vecteurs $"
+"\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$ ci-"
+"dessous."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:236
+#: src/pyromaths/ex/lycee/Vecteurs.py:237
+#, python-brace-format
+msgid ""
+"\\item Lire les coordonnées de chacun des vecteurs $\\overrightarrow{u}$, $"
+"\\overrightarrow{v}$, et $\\overrightarrow{w}$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:240
+#, python-brace-format
+msgid ""
+"Un petit rappel : l'abscisse d'un vecteur est la différence d'abscisse entre "
+"le fin et le début du vecteur.                  Concernant le vecteur $"
+"\\overrightarrow{u}$, son abscisse est $"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:242
+#, python-brace-format
+msgid ""
+"$.                  Donc les coordonnées de $\\overrightarrow{u}$ sont $("
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:243
+msgid ""
+" )$.                  Des pointillés ont été ajoutés sur la figure pour "
+"faciliter la lecture des coordonnées."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:245
+#, python-brace-format
+msgid "De même, les coordonnées de $\\overrightarrow{v}$ sont $("
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:245
+#, python-brace-format
+msgid ""
+" )$                  et les coordonnées de $\\overrightarrow{w}$ sont $("
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:248
+#: src/pyromaths/ex/lycee/Vecteurs.py:249
+#, python-brace-format
+msgid ""
+"\\item Placer un point B de sorte que le vecteur $\\overrightarrow{AB}$ soit "
+"égal à $"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:252
+msgid ""
+"Le plus simple pour répondre à cette question est de calculer les "
+"coordonnées du vecteur $"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:253
+msgid "Cela se fait en multipliant les coordonnées de $\\overrightarrow{"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:253
+msgid "$, ce qui donne comme résultat $("
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:254
+msgid ""
+"En partant du point A et en respectant ces coordonnées, on dessine un "
+"vecteur (en bleu sur la figure ci-dessus) qui indique l'emplacement du point "
+"B."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:256
+#: src/pyromaths/ex/lycee/Vecteurs.py:257
+#, python-brace-format
+msgid ""
+"\\item Calculer les normes de chacun des vecteurs $\\overrightarrow{u}$, $"
+"\\overrightarrow{v}$, et $\\overrightarrow{w}$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:277
+msgid "De la même manière, on obtient :"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:284
+#: src/pyromaths/ex/lycee/Vecteurs.py:286
+#, python-brace-format
+msgid ""
+"\\item Dessiner des représentants des vecteurs $\\overrightarrow{u}+"
+"\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{v}$, $"
+"\\overrightarrow{u}-\\overrightarrow{w}$                  et $"
+"\\overrightarrow{v}+\\overrightarrow{w}$."
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:290
+msgid ""
+"Pour dessiner les sommes ou différences de vecteurs, il faut les mettre "
+"\"bouts à bouts\",                  comme sur les figures qui suivent :\\par"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:303
+msgid "Vecteurs"
 msgstr ""
 
 #: src/pyromaths/outils/Arithmetique.py:223
