@@ -14,6 +14,20 @@ src/pyromaths/ex/cinquiemes/reperage.py
 src/pyromaths/ex/cinquiemes/statistiques.py
 src/pyromaths/ex/cinquiemes/symetrie.py
 
+src/pyromaths/ex/examples/helloworld.py
+
+src/pyromaths/ex/lycee/__init__.py
+src/pyromaths/ex/lycee/CercleTrigo.py
+src/pyromaths/ex/lycee/Derivation.py
+### src/pyromaths/ex/lycee/equations.py
+src/pyromaths/ex/lycee/ExoPolynome.py
+src/pyromaths/ex/lycee/ExoSecondDegre.py
+src/pyromaths/ex/lycee/Fonction.py
+src/pyromaths/ex/lycee/SecondDegre.py
+src/pyromaths/ex/lycee/Statitisiques.py
+src/pyromaths/ex/lycee/VariationsFonctions.py
+src/pyromaths/ex/lycee/Vecteurs.py
+
 src/pyromaths/outils/Arithmetique.py
 src/pyromaths/outils/Priorites3.py
 src/pyromaths/outils/System.py

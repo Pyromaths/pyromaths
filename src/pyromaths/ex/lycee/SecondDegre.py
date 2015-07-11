@@ -66,8 +66,8 @@ def creerPolydegre2(nb_racines=2, rac_radical=True, rac_quotient=False):
 
 class Sd1FormeCanonique(ex.TexExercise):
 
-    description = u'Forme canonique'
-    level = u"1.1èreS"
+    description = _(u'Forme canonique')
+    level = _(u"1.1èreS")
 
     def __init__(self):
         m = [[1, 2], [2 * randrange(1, 10) * (-1) ** randrange(2), 1], [randrange(1, 10) * (-1) ** randrange(2), 0]]
@@ -153,7 +153,7 @@ class Sd1FormeCanonique(ex.TexExercise):
 
     def tex_statement(self):
         exo = [r'\exercice']
-        exo.append(u'Donner la forme canonique des polynômes $P$ , $Q$ , $R$ et $S$ .')
+        exo.append(_(u'Donner la forme canonique des polynômes $P$ , $Q$ , $R$ et $S$ .'))
         exo.append(r'\begin{align*}')
         noms = [r'P\,(x) &= ', r'Q\,(x) &= ', r'R\,(x) &= ', r'S\,(x) &= ']
         exercice = list(self.exercice)
@@ -169,7 +169,7 @@ class Sd1FormeCanonique(ex.TexExercise):
 
     def tex_answer(self):
         exo = [r'\exercice*']
-        exo.append(u'Donner la forme canonique des polynômes $P$ , $Q$ , $R$ et $S$ .')
+        exo.append(_(u'Donner la forme canonique des polynômes $P$ , $Q$ , $R$ et $S$ .'))
         noms = [r'P\,(x) &= ', r'Q\,(x) &= ', r'R\,(x) &= ', r'S\,(x) &= ']
         exercice = list(self.exercice)
         for i in range(len(exercice)):
@@ -203,8 +203,8 @@ class Sd1FormeCanonique(ex.TexExercise):
         return exo
 
 class Sd2aRacines(ex.TexExercise):
-    description = u'Racines d\'un polynôme de degré 2'
-    level = u"1.1èreS"
+    description = _(u'Racines d\'un polynôme de degré 2')
+    level = _(u"1.1èreS")
     def __init__(self):
         pol = [creerPolydegre2(nb_racines=2, rac_radical=True, rac_quotient=False)]
         pol.append(creerPolydegre2(nb_racines=1))
@@ -228,7 +228,7 @@ class Sd2aRacines(ex.TexExercise):
 
     def tex_statement(self):
         exo = [r'\exercice']
-        exo.append(u'Déterminer les racines des polynômes :')
+        exo.append(_(u'Déterminer les racines des polynômes :'))
         exo.append('\\begin{align*}')
         noms = [r'P\,(x) &= ', r'Q\,(x) &= ', r'R\,(x) &= ']
         r = ''
@@ -241,7 +241,7 @@ class Sd2aRacines(ex.TexExercise):
 
     def tex_answer(self):
         exo = [r'\exercice*']
-        exo.append(u'Déterminer les racines des polynômes :\\par')
+        exo.append(_(u'Déterminer les racines des polynômes :\\par'))
         noms = [r'P\,(x) &= ', r'Q\,(x) &= ', r'R\,(x) &= ']
         r = ''
         question = [[], [], []]
@@ -268,19 +268,19 @@ class Sd2aRacines(ex.TexExercise):
                         else:
                             racines.append('0')
                 if len(racines) > 1:
-                    question[i].append(u'\\underline{Les racines de $%s$ sont }\\fbox{$%s$}' % (noms[i].rstrip(r' &= '), '$}\\underline{ et }\\fbox{$'.join(racines)))
+                    question[i].append(_(u'\\underline{Les racines de $%s$ sont }\\fbox{$%s$}') % (noms[i].rstrip(r' &= '), '$}\\underline{ et }\\fbox{$'.join(racines)))
                 elif len(racines) == 1:
-                    question[i].append(u'\\underline{L\'unique racine de $%s$ est }\\fbox{$%s$}' % (noms[i].rstrip(r' &= '), racines[0]))
+                    question[i].append(_(u'\\underline{L\'unique racine de $%s$ est }\\fbox{$%s$}') % (noms[i].rstrip(r' &= '), racines[0]))
             elif len(m) == 2 and m[0][1] == 2 and m[1][1] == 0 and m[0][0] * m[1][0] > 0:
                 question[i].append('$' + noms[i] + str(Polynome(m, 'x')) + r'$\par')
                 question[i][-1] = question[i][-1].replace('&', '')
                 if m[1][0] > 0: question[i].append('$' + noms[i][:7] + ' \\ge %r$' % m[1][0])
                 else: question[i].append('$' + noms[i][:7] + ' \\le %r$' % m[1][0])
-                question[i].append(u'car un carré est toujours positif.\\par\n\\underline{$%s$ n\'a donc pas de racine.}' % (noms[i].rstrip(r' &= ')))
+                question[i].append(_(u'car un carré est toujours positif.\\par\n\\underline{$%s$ n\'a donc pas de racine.}') % (noms[i].rstrip(r' &= ')))
             else:
                 question[i].append('$' + noms[i] + str(Polynome(m, 'x')) + r'\quad$')
                 question[i][-1] = question[i][-1].replace('&', '')
-                question[i].append(u'On calcule le discriminant de $%s$ avec $a=%s$, $b=%s$ et $c=%s$ :\\par\\medskip' % (noms[i].rstrip(r' &= '), m[0][0], m[1][0], m[2][0]))
+                question[i].append(_(u'On calcule le discriminant de $%s$ avec $a=%s$, $b=%s$ et $c=%s$ :\\par\\medskip') % (noms[i].rstrip(r' &= '), m[0][0], m[1][0], m[2][0]))
                 question[i].append(r'\begin{tabularx}{\linewidth}[t]{XXX}')
                 question[i].append(r'{$\! \begin{aligned}')
                 sol = [[str(m[1][0]), '**', '2', '-', '4', '*', str(m[0][0]), '*', str(m[2][0])]]
@@ -309,7 +309,7 @@ class Sd2aRacines(ex.TexExercise):
                 racines.append(sol[-1])
                 question[i].append(r'\end{aligned}$}')
                 question[i].append(r'\end{tabularx}\par')
-                question[i].append(u'\\underline{Les racines de $%s$ sont }\\fbox{$%s$}' % (noms[i].rstrip(r' &= '), '$}\\underline{ et }\\fbox{$'.join(racines)))
+                question[i].append(_(u'\\underline{Les racines de $%s$ sont }\\fbox{$%s$}') % (noms[i].rstrip(r' &= '), _('$}\\underline{ et }\\fbox{$').join(racines)))
                 if i == 1: question.append(question[1])
         if len(question) == 4:
             question.pop(1)
@@ -326,7 +326,7 @@ class Sd2aRacines(ex.TexExercise):
 
 class Sd2bEquations(ex.TexExercise):
     # description = u'Équations et polynômes de degré 2'
-    level = u"1.1èreS"
+    level = _(u"1.1èreS")
     def __init__(self):
         pol = [creerPolydegre2(nb_racines=2, rac_radical=False, rac_quotient=False)]
         pol.append(creerPolydegre2(nb_racines=1))
@@ -355,7 +355,7 @@ class Sd2bEquations(ex.TexExercise):
 
     def tex_statement(self):
         exo = [r'\exercice']
-        exo.append(u'Résoudre les équations :')
+        exo.append(_(u'Résoudre les équations :'))
         exo.append('\\begin{align*}')
         for e in self.exercice:
             if len(e) == 2:
@@ -368,7 +368,7 @@ class Sd2bEquations(ex.TexExercise):
 
 class Sd3aSigne(ex.TexExercise):
     # description = u'Signe d\'un polynôme de degré 2'
-    level = u"1.1èreS"
+    level = _(u"1.1èreS")
     def __init__(self):
         pol = [[valeur_alea(-9, 9), 2 - dummy] for dummy in range(3)]
         while pol[1][0] ** 2 - 4 * pol[0][0] * pol[2][0] >= 0:
@@ -399,17 +399,17 @@ class Sd3aSigne(ex.TexExercise):
     def tex_statement(self):
         exo = [r'\exercice']
         exo.append(r'\begin{enumerate}')
-        exo.append(u'\\item Déterminer le signe du polynôme $P\\,(x) = %s$' % Polynome(self.exercice[0]))
-        exo.append(u'\\item Le polynôme $Q\\,(x) = %s$ admet deux racines $%s$ et $%s\\,$. Dresser son tableau de signes.' \
+        exo.append(_(u'\\item Déterminer le signe du polynôme $P\\,(x) = %s$') % Polynome(self.exercice[0]))
+        exo.append(_(u'\\item Le polynôme $Q\\,(x) = %s$ admet deux racines $%s$ et $%s\\,$. Dresser son tableau de signes.') \
             % (Polynome(self.exercice[1][0]), self.exercice[1][1], self.exercice[1][2]))
-        exo.append(u'\\item Le polynôme $R\\,(x) = %s$ admet deux racines $%s$ et $%s\\,$. Dresser son tableau de signes.' \
+        exo.append(_(u'\\item Le polynôme $R\\,(x) = %s$ admet deux racines $%s$ et $%s\\,$. Dresser son tableau de signes.') \
             % (Polynome(self.exercice[2][0]), self.exercice[2][1], self.exercice[2][2]))
         exo.append('\\end{enumerate}')
         return exo
 
 class Sd3bInequations(ex.TexExercise):
     # description = u'Inéquations et polynômes de degré 2'
-    level = u"1.1èreS"
+    level = _(u"1.1èreS")
     def __init__(self):
         pol = creerPolydegre2(nb_racines=2, rac_radical=False, rac_quotient=False).monomes
         pol2 = [[valeur_alea(-9, 9), 1], [valeur_alea(-9, 9), 0]]
@@ -422,14 +422,14 @@ class Sd3bInequations(ex.TexExercise):
 
     def tex_statement(self):
         exo = [r'\exercice']
-        exo.append(u'Résoudre l\'inéquation : $\qquad \\cfrac{%s}{%s} %s 0$' % (Polynome(self.exercice[0]),
+        exo.append(_(u'Résoudre l\'inéquation : $\qquad \\cfrac{%s}{%s} %s 0$') % (Polynome(self.exercice[0]),
                                                                                   Polynome(self.exercice[1]),
                                                                                   self.exercice[2]))
         return exo
 
 class Sd4Factorisation(ex.TexExercise):
     # description = u'Racines et factorisation d\'un polynôme de degré 2'
-    level = u"1.1èreS"
+    level = _(u"1.1èreS")
     def __init__(self):
         val = [valeur_alea(-9, 9), valeur_alea(-9, 9)]
         val.append(Fraction(valeur_alea(-9, 9), val[0]))
@@ -463,16 +463,16 @@ class Sd4Factorisation(ex.TexExercise):
     def tex_statement(self):
         exo = [r'\exercice']
         exo.append(r'\begin{enumerate}')
-        exo.append(u'\\item Le polynôme $\\quad P\\,(x) = %s \\quad$ admet deux racines $%s$ et $%s\\,$. Donner sa forme factorisée.\n' \
+        exo.append(_(u'\\item Le polynôme $\\quad P\\,(x) = %s \\quad$ admet deux racines $%s$ et $%s\\,$. Donner sa forme factorisée.\n') \
             % (Polynome(self.exercice[0][0]), self.exercice[0][1], self.exercice[0][2]))
-        exo.append(u'\\item Factoriser si possible les polynômes $\quad Q\\,(x) = %s\\quad$ et $\\quad R\\,(x) = %s$.\n' % (Polynome(self.exercice[1][0]), Polynome(self.exercice[1][1])))
+        exo.append(_(u'\\item Factoriser si possible les polynômes $\quad Q\\,(x) = %s\\quad$ et $\\quad R\\,(x) = %s$.\n') % (Polynome(self.exercice[1][0]), Polynome(self.exercice[1][1])))
         exo.append(r'\end{enumerate}')
 
         return exo
 
 class Sd5Caracteristiques(ex.TexExercise):
     # description = u'Caractéristiques d\'une parabole'
-    level = u"1.1èreS"
+    level = _(u"1.1èreS")
     def __init__(self):
         val = [valeur_alea(-9, 9), valeur_alea(-9, 9) , valeur_alea(-9, 9)]
         pol = Polynome([[val[0], 2], [(-val[0] * (val[1] + val[2])), 1], [(val[0] * val[1] * val[2]), 0]])
@@ -499,17 +499,17 @@ class Sd5Caracteristiques(ex.TexExercise):
 
     def tex_statement(self):
         exo = [r'\exercice']
-        exo.append(u'On donne les polynômes $\\quad p\\,(x) = %s \\quad$ et $\\quad Q\\,(x) = %s$.' % (self.exercice[0], self.exercice[1]))
+        exo.append(_(u'On donne les polynômes $\\quad p\\,(x) = %s \\quad$ et $\\quad Q\\,(x) = %s$.') % (self.exercice[0], self.exercice[1]))
         exo.append(r'\begin{enumerate}')
-        exo.append(u'\\item Donner les caractéristiques de leurs courbes respectives (sommet, intersections avec les axes du repère).')
-        exo.append(u'\\item Tracer l’allure de ces deux courbes sur un même graphique.')
+        exo.append(_(u'\\item Donner les caractéristiques de leurs courbes respectives (sommet, intersections avec les axes du repère).'))
+        exo.append(_(u'\\item Tracer l’allure de ces deux courbes sur un même graphique.'))
         exo.append(r'\end{enumerate}')
 
         return exo
 
 class Sd6Parametre(ex.TexExercise):
     # description = u'Polynôme paramétré de degré 2'
-    level = u"1.1èreS"
+    level = _(u"1.1èreS")
     def __init__(self):
         [a, b, c, d] = [randrange(-5, 6) for dummy in range(4)]
         while a == 0 or c == 0 or a ** 2 * d - a * b * c + c ** 2 < 0 or carrerise(a ** 2 * d - a * b * c + c ** 2) != 1:
@@ -536,14 +536,14 @@ class Sd6Parametre(ex.TexExercise):
     def tex_statement(self):
         exo = [r'\exercice']
         exo.append(r'\begin{enumerate}')
-        exo.append(u'\\item On donne le polynôme $\\quad P\\,(x) = %s\\quad$ où $m$ est un réel.\\par' % self.exercice[0][0])
+        exo.append(_(u'\\item On donne le polynôme $\\quad P\\,(x) = %s\\quad$ où $m$ est un réel.\\par') % self.exercice[0][0])
         # TODO: Affichage des paramètres et parenthèses
-        exo.append(u'Quelles sont les valeurs de $m$ pour lesquelles $P$ %s ?\n' % ['a une seule racine', 'n\'a pas de racine',
-                'a deux racines distinctes'][self.exercice[0][1]])
+        exo.append(_(u'Quelles sont les valeurs de $m$ pour lesquelles $P$ %s ?\n' % ['a une seule racine', 'n\'a pas de racine'),
+                _('a deux racines distinctes')][self.exercice[0][1]])
         # exo.append(u'\\par Solution : Polynôme en m : $%s$\\par\n' % (Polynome([[a ** 2, 2], [2 * a * b - 4 * c, 1], [b ** 2 - 4 * d, 0]], "m"))
         # exo.append( u'Solution : discriminant $\\Delta_m = %s$\\par\n' % (16 * (a ** 2 * d - a * b * c + c ** 2))
-        exo.append(u'\\item Soit $a$ un réel différent de $%s$. On donne $Q\\,(x) = %s$.\\par\n' % (self.exercice[1][1], Polynome(self.exercice[1][0])))
-        exo.append(u'Déterminer $a$ pour que $%s$ soit une racine de $Q$.\n' % self.exercice[1][2])
+        exo.append(_(u'\\item Soit $a$ un réel différent de $%s$. On donne $Q\\,(x) = %s$.\\par\n') % (self.exercice[1][1], Polynome(self.exercice[1][0])))
+        exo.append(_(u'Déterminer $a$ pour que $%s$ soit une racine de $Q$.\n') % self.exercice[1][2])
         exo.append(r'\end{enumerate}')
 
         return exo
