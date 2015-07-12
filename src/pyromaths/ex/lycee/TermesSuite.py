@@ -335,10 +335,28 @@ class Harmonique(Fonction):
 
     def expression(self, variable):
         return ur"\frac{{ {numerateur[1]}{variable}{numerateur[0]} }}{{ {denominateur[1]}{variable}{denominateur[0]} }}".format(
-                numerateur=[self.numerateur[0].latex("-"), self.numerateur[0].latex("+")],
-                denominateur=[self.denominateur[0].latex("-"), self.denominateur[0].latex("+")],
+                numerateur=[self.numerateur[0].latex("+"), self.numerateur[0].latex("-")],
+                denominateur=[self.denominateur[0].latex("+"), self.denominateur[0].latex("-")],
                 variable=variable,
                 )
+
+    def calcul(self, argument):
+        yield self.expression(ur"\times " + argument.latex())
+        yield Fraction(
+            self.numerateur[0].valeur * argument.valeur + self.numerateur[1].valeur,
+            self.denominateur[0].valeur * argument.valeur + self.denominateur[1].valeur,
+            ).latex()
+        if pgcd(
+            self.numerateur[0].valeur * argument.valeur + self.numerateur[1].valeur,
+            self.denominateur[0].valeur * argument.valeur + self.denominateur[1].valeur,
+            ) != 1:
+            yield self.resultat(argument)
+
+    def resultat(self, argument):
+        return Fraction(
+            self.numerateur[0].valeur * argument.valeur + self.numerateur[1].valeur,
+            self.denominateur[0].valeur * argument.valeur + self.denominateur[1].valeur,
+            ).simplifie().latex()
 
 class IdentiteTranslatee(Fonction):
 
@@ -536,8 +554,8 @@ class General(Question):
             #Trinome,
             #Affine,
             #Lineaire,
-            IdentiteTranslatee,
-            #TODO Harmonique,
+            #IdentiteTranslatee,
+            Harmonique,
             ])()
 
     @property
@@ -574,7 +592,7 @@ class TermesDUneSuite(ex.TexExercise):
     level = u"1.1èreS"
 
     def __init__(self):
-        random.seed(9) # TODO
+        random.seed(7) # TODO
         self.rang = [0,0,0]
         while self.rang[0] == self.rang[1]:
             self.rang = [random.randint(2, 5), random.randint(2, 5), random.randint(3, 6)]
