@@ -125,12 +125,12 @@ class Entier:
 
     def latex(self, signe="-"):
         if signe == "+":
-            if self.valeur > 0:
+            if self.valeur >= 0:
                 return "+" + str(self.valeur)
             else:
                 return "-" + str(abs(self.valeur))
         else:
-            if self.valeur > 0:
+            if self.valeur >= 0:
                 return str(self.valeur)
             else:
                 return "-" + str(abs(self.valeur))
