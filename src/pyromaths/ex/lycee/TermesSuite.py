@@ -354,6 +354,13 @@ class IdentiteTranslatee(Fonction):
             ordonnee=self.ordonnee.latex("+"),
             )
 
+    def calcul(self, argument):
+        yield self.expression(argument.latex())
+        yield self.resultat(argument)
+
+    def resultat(self, variable):
+        return Entier(variable.valeur + self.ordonnee.valeur).latex()
+
 class FrancaisGeometrique(Fonction):
 
     def __init__(self):
@@ -528,8 +535,8 @@ class General(Question):
             #FractionProduit,
             #Trinome,
             #Affine,
-            Lineaire,
-            #TODO IdentiteTranslatee,
+            #Lineaire,
+            IdentiteTranslatee,
             #TODO Harmonique,
             ])()
 
