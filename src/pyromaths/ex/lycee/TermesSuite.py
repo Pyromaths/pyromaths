@@ -159,7 +159,7 @@ FRACTIONS = [
 
 class Fonction:
 
-    def calcule(self, x):
+    def calcul(self, argument):
         raise NotImplementedError()
 
     def resultat(self, variable):
@@ -274,7 +274,11 @@ class FractionProduit(Fonction):
                 self.numerateur.valeur ** argument.valeur,
                 self.denominateur.valeur * argument.valeur,
                 )
-        yield self.resultat(argument)
+        if pgcd(
+                self.numerateur.valeur ** argument.valeur,
+                self.denominateur.valeur * argument.valeur,
+                ) != 1:
+            yield self.resultat(argument)
 
     def resultat(self, argument):
         return Fraction(
@@ -398,11 +402,11 @@ class FrancaisGeometrique(Fonction):
         # L'argument est du code LaTeX
         return ur"{} {}".format(self.raison.latex(), variable)
 
-    def etapes(self, argument):
+    def calcul(self, argument):
         yield ur"{} \times {}".format(self.raison.latex(), argument.latex())
-        resultat = self.calcul(argument)
+        resultat = self.resultat(argument)
         if isinstance(resultat, Entier):
-            yield self.calcul(argument).latex()
+            yield self.resultat(argument).latex()
         else:
             if isinstance(argument, Entier):
                 argument = Fraction(argument.valeur, 1)
@@ -422,7 +426,7 @@ class FrancaisGeometrique(Fonction):
 
             yield Fraction(numerateur/diviseur, denominateur/diviseur).latex()
 
-    def calcul(self, argument):
+    def resultat(self, argument):
         if isinstance(argument, Entier) and isinstance(self.raison, Entier):
             return Entier(argument.valeur * self.raison.valeur)
         else:
@@ -457,11 +461,11 @@ class FrancaisArithmetique(Fonction):
         # L'argument est du code LaTeX
         return ur"{} {}".format(variable, Entier(self.raison).latex("+"))
 
-    def etapes(self, argument):
-        yield self.expression(argument.latex())
-        yield self.calcul(argument).latex()
-
     def calcul(self, argument):
+        yield self.expression(argument.latex())
+        yield self.resultat(argument).latex()
+
+    def resultat(self, argument):
         return Entier(argument.valeur + self.raison)
 
 class FrancaisOppose(Fonction):
@@ -477,10 +481,10 @@ class FrancaisOppose(Fonction):
         else:
             return ur"-{}".format(variable)
 
-    def etapes(self, argument):
+    def calcul(self, argument):
         yield Entier(-argument.valeur).latex("-")
 
-    def calcul(self, argument):
+    def resultat(self, argument):
         if not isinstance(argument, Entier):
             raise TypeError("Argument must be an instance of `Entier`.")
         return - argument
@@ -495,16 +499,16 @@ class FrancaisInverse(Fonction):
         # L'argument est du code LaTeX
         return ur"\frac{{1}}{{ {} }}".format(variable)
 
-    def etapes(self, argument):
+    def calcul(self, argument):
         yield self.expression(argument.latex())
         if isinstance(argument, Entier):
             pass
         elif isinstance(argument, Fraction):
-            yield self.calcul(argument).latex()
+            yield self.resultat(argument).latex()
         else:
             raise TypeError("Argument must be an instance of `Entier` or `Fraction`.")
 
-    def calcul(self, argument):
+    def resultat(self, argument):
         if isinstance(argument, Fraction):
             if argument.numerateur == 1:
                 return Entier(argument.denominateur)
@@ -549,12 +553,12 @@ class General(Question):
 
     def __init__(self, index0max):
         super(General, self).__init__(index0max)
-        self.fonction = random.choice([ # TODO S'assurer que toutes les fonctions fonctionnent
-            #FractionProduit,
-            #Trinome,
-            #Affine,
-            #Lineaire,
-            #IdentiteTranslatee,
+        self.fonction = random.choice([
+            FractionProduit,
+            Trinome,
+            Affine,
+            Lineaire,
+            IdentiteTranslatee,
             Harmonique,
             ])()
 
@@ -573,8 +577,8 @@ class Recursif(Question):
         self.terme0 = Entier(random.randint(-10, 10))
         self.fonction = random.choice([ # TODO S'assurer que tout fonctionne
             Affine,
-            IdentiteTranslatee,
-            Lineaire,
+            #IdentiteTranslatee,
+            #Lineaire,
             ])()
 
     @property
@@ -634,10 +638,10 @@ class TermesDUneSuite(ex.TexExercise):
                 indice=indice+1,
                 fonction=self.questions[0].fonction.expression("u_{}".format(indice)),
                 )
-            for etape in self.questions[0].fonction.etapes(termes[indice]):
+            for etape in self.questions[0].fonction.calcul(termes[indice]):
                 calcul += " =" + etape
             calcul += "$"
-            termes[indice+1] = self.questions[0].fonction.calcul(termes[indice])
+            termes[indice+1] = self.questions[0].fonction.resultat(termes[indice])
             calcul_termes.append(calcul)
         exo.append(" ; ".join(calcul_termes) + ".")
         exo.append(ur'\begin{enumerate}')
@@ -682,7 +686,6 @@ class TermesDUneSuite(ex.TexExercise):
         exo.append(ur"On a : $u_{{ {} }}=".format(self.rang[2]) + " = ".join(calcul) + ur"$.")
         exo.append(ur"La solution est donc \fbox{{ $u_{{ {} }}={}$}}".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2]))))
         exo.append(ur'\end{enumerate}')
-        exo.append(ur"\item")
 
         # Question 2
         exo.append(textwrap.dedent(ur"""
@@ -692,6 +695,19 @@ class TermesDUneSuite(ex.TexExercise):
                   \text{{Pour tout $n\geq{indice0}$ : }} u_{{n+1}}={fonction}.
               \end{{array}}\right.\]
               """).format(**self.questions[2].latex_params))
+        termes = dict([(self.questions[0].indice0, self.questions[0].terme0)])
+        calcul_termes = []
+        for indice in xrange(self.questions[2].indice0, max(self.questions[2].indice0 + self.rang[0] - 1, self.rang[1], self.rang[2])):
+            calcul = ur"$u_{indice}={fonction}".format(
+                indice=indice+1,
+                fonction=self.questions[2].fonction.expression("u_{}".format(indice)),
+                )
+            for etape in self.questions[2].fonction.calcul(termes[indice]):
+                calcul += " =" + etape
+            calcul += "$"
+            termes[indice+1] = self.questions[2].fonction.calcul(termes[indice])
+            calcul_termes.append(calcul)
+        exo.append(" ; ".join(calcul_termes) + ".")
         exo.append(ur"TODO")
         exo.append(ur'\end{enumerate}')
         return exo
