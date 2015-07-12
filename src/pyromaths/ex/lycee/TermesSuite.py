@@ -61,6 +61,11 @@ FRANCAIS_MULTIPLE = {
     9: u"à neuf fois le",
     10: u"à dix fois le",
     }
+NOTATIONS = [
+    ur"u",
+    ur"\left(u_n\right)",
+    ur"\left(u_n\right)_{n\in\mathbb{N}}",
+    ]
 
 class Fraction:
     def __init__(self, numerateur, denominateur):
@@ -357,7 +362,7 @@ class FrancaisOppose(Fonction):
             return ur"-{}".format(variable)
 
     def etapes(self, argument):
-        yield self.__class__(-argument.valeur).latex("-")
+        yield Entier(-argument.valeur).latex("-")
 
     def calcul(self, argument):
         if not isinstance(argument, Entier):
@@ -394,13 +399,19 @@ class FrancaisInverse(Fonction):
         raise TypeError("Argument must be an instance of `Entier` or `Fraction`.")
 
 
-class Question:
-    pass
+class Question(object):
+
+    def __init__(self, index0max):
+        self.indice0 = random.randint(0, index0max-1)
+        if self.indice0 == 0:
+            self.notation = NOTATIONS[random.randint(0, 2)]
+        else:
+            self.notation = NOTATIONS[random.randint(0, 1)]
 
 class Francais(Question):
 
     def __init__(self, index0max):
-        self.indice0 = random.randint(0, index0max-1)
+        super(Francais, self).__init__(index0max)
         self.terme0 = Entier(random.randint(-10, 10))
         self.fonction = random.choice([
             FrancaisGeometrique,
@@ -415,12 +426,13 @@ class Francais(Question):
             'indice0': self.indice0,
             'terme0': self.terme0.latex("-"),
             'suivant': self.fonction.francais,
+            'notation': self.notation,
             }
 
 class General(Question):
 
     def __init__(self, index0max):
-        self.indice0 = random.randint(0, index0max-1)
+        super(General, self).__init__(index0max)
         self.fonction = random.choice([ # TODO S'assurer que toutes les fonctions fonctionnent
             #TODO FractionProduit,
             Trinome,
@@ -435,12 +447,13 @@ class General(Question):
         return {
             'indice0': self.indice0,
             'fonction': self.fonction.expression(ur"n"),
+            'notation': self.notation,
             }
 
 class Recursif(Question):
 
     def __init__(self, index0max):
-        self.indice0 = random.randint(0, index0max-1)
+        super(Recursif, self).__init__(index0max)
         self.terme0 = Entier(random.randint(-10, 10))
         self.fonction = random.choice([ # TODO S'assurer que tout fonctionne
             Affine,
@@ -454,6 +467,7 @@ class Recursif(Question):
             'indice0': self.indice0,
             'terme0': self.terme0.latex("-"),
             'fonction': self.fonction.expression(ur"u_n"),
+            'notation': self.notation,
             }
 
 class TermesDUneSuite(ex.TexExercise):
@@ -481,10 +495,10 @@ class TermesDUneSuite(ex.TexExercise):
         exo.append(ur' (c) $u_{}$.'.format(self.rang[2]))
 
         exo.append(ur'\begin{enumerate}')
-        exo.append(ur'  \item $u$ est une suite de premier terme $u_{indice0}={terme0}$, et dont chaque terme (sauf le premier) est égal {suivant}.'.format(**self.questions[0].latex_params))
-        exo.append(ur'  \item $u$ est la suite définie pour $n\geq{indice0}$ par $u_n={fonction}$.'.format(**self.questions[1].latex_params))
+        exo.append(ur'  \item ${notation}$ est une suite de premier terme $u_{indice0}={terme0}$, et dont chaque terme (sauf le premier) est égal {suivant}.'.format(**self.questions[0].latex_params))
+        exo.append(ur'  \item ${notation}$ est la suite définie pour $n\geq{indice0}$ par $u_n={fonction}$.'.format(**self.questions[1].latex_params))
         exo.append(textwrap.dedent(ur"""
-            \item $u$ est la suite définie pour $n\geq{indice0}$ par :
+            \item ${notation}$ est la suite définie pour $n\geq{indice0}$ par :
                 \[\left\{{\begin{{array}}{{l}}
                   u_{indice0}={terme0}\\
                   \text{{Pour tout $n\geq{indice0}$ : }} u_{{n+1}}={fonction}.
@@ -497,7 +511,7 @@ class TermesDUneSuite(ex.TexExercise):
         exo = [r'\exercice*']
         exo.append(ur'\begin{enumerate}')
         # Question 0
-        exo.append(ur"  \item Selon l'énoncé, le premier terme est $u_{indice0}={terme0}$. Puisque chaque terme (sauf le premier) est égal {suivant}, on a :".format(**self.questions[0].latex_params))
+        exo.append(ur"  \item Selon l'énoncé, le premier terme de ${notation}$ est $u_{indice0}={terme0}$. Puisque chaque terme (sauf le premier) est égal {suivant}, on a :".format(**self.questions[0].latex_params))
         termes = dict([(self.questions[0].indice0, self.questions[0].terme0)])
         calcul_termes = []
         for indice in xrange(self.questions[0].indice0, max(self.questions[0].indice0 + self.rang[0] - 1, self.rang[1], self.rang[2])):
@@ -523,7 +537,7 @@ class TermesDUneSuite(ex.TexExercise):
         exo.append(ur'\end{enumerate}')
 
         # Question 1
-        exo.append(ur'  \item La suite $u$ est la définie pour $n\geq{indice0}$ par $u_n={fonction}$.'.format(**self.questions[1].latex_params))
+        exo.append(ur'  \item La suite ${notation}$ est définie pour $n\geq{indice0}$ par $u_n={fonction}$.'.format(**self.questions[1].latex_params))
         exo.append(ur"Elle est donc définie par son terme général : pour calculer un terme de rang $n$, on peut calculer directement l'image de $n$ par la suite.")
         exo.append(ur'\begin{enumerate}')
         exo.append(ur' \item Calcul du {} terme :'.format(FRANCAIS_ORDINAL[self.rang[0]]))
@@ -557,7 +571,7 @@ class TermesDUneSuite(ex.TexExercise):
 
         # Question 2
         exo.append(textwrap.dedent(ur"""
-            \item La suite $u$ est définie de manière récursive, pour $n\geq{indice0}$, par :
+            \item La suite ${notation}$ est définie de manière récursive, pour $n\geq{indice0}$, par :
                 \[\left\{{\begin{{array}}{{l}}
                   u_{indice0}={terme0}\\
                   \text{{Pour tout $n\geq{indice0}$ : }} u_{{n+1}}={fonction}.
