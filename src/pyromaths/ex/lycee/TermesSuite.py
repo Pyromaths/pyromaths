@@ -179,6 +179,28 @@ class Lineaire(Fonction):
             variable=variable,
             )
 
+    def calcul(self, argument):
+        if float(argument) < 0:
+            arg = ur"\left( {} \right)".format(argument.latex())
+        else:
+            arg = argument.latex()
+        yield self.expression(ur"\times " + arg)
+        if isinstance(self.coeff.simplifie(), Fraction):
+            yield Fraction(
+                        self.coeff.numerateur * argument.valeur,
+                        self.coeff.denominateur,
+                        ).latex()
+            if pgcd(self.coeff.numerateur * argument.valeur, self.coeff.denominateur) != 1:
+                yield self.resultat(argument)
+        else:
+            yield self.resultat(argument)
+
+    def resultat(self, variable):
+        return Fraction(
+            self.coeff.numerateur * variable.valeur,
+            self.coeff.denominateur,
+            ).simplifie().latex()
+
 class Affine(Fonction):
 
     def __init__(self):
@@ -505,8 +527,8 @@ class General(Question):
         self.fonction = random.choice([ # TODO S'assurer que toutes les fonctions fonctionnent
             #FractionProduit,
             #Trinome,
-            Affine,
-            #TODO Lineaire,
+            #Affine,
+            Lineaire,
             #TODO IdentiteTranslatee,
             #TODO Harmonique,
             ])()
@@ -545,11 +567,10 @@ class TermesDUneSuite(ex.TexExercise):
     level = u"1.1èreS"
 
     def __init__(self):
-        random.seed(1) # TODO
+        random.seed(9) # TODO
         self.rang = [0,0,0]
         while self.rang[0] == self.rang[1]:
             self.rang = [random.randint(2, 5), random.randint(2, 5), random.randint(3, 6)]
-
         self.questions = [
                 Francais(index0max=min(self.rang[1:3])),
                 General(index0max=min(self.rang[1:3])),
