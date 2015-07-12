@@ -180,26 +180,40 @@ class Lineaire(Fonction):
             )
 
     def calcul(self, argument):
-        if float(argument) < 0:
-            arg = ur"\left( {} \right)".format(argument.latex())
-        else:
-            arg = argument.latex()
-        yield self.expression(ur"\times " + arg)
-        if isinstance(self.coeff.simplifie(), Fraction):
-            yield Fraction(
-                        self.coeff.numerateur * argument.valeur,
-                        self.coeff.denominateur,
-                        ).latex()
-            if pgcd(self.coeff.numerateur * argument.valeur, self.coeff.denominateur) != 1:
+        if isinstance(argument, Entier):
+            if float(argument) < 0:
+                arg = ur"\left( {} \right)".format(argument.latex())
+            else:
+                arg = argument.latex()
+            yield self.expression(ur"\times " + arg)
+            if isinstance(self.coeff.simplifie(), Fraction):
+                yield Fraction(
+                            self.coeff.numerateur * argument.valeur,
+                            self.coeff.denominateur,
+                            ).latex()
+                if pgcd(self.coeff.numerateur * argument.valeur, self.coeff.denominateur) != 1:
+                    yield self.resultat(argument).latex()
+            else:
                 yield self.resultat(argument).latex()
         else:
-            yield self.resultat(argument).latex()
+            yield self.expression(ur"\times " + argument.latex())
+            yield Fraction(
+                self.coeff.numerateur * argument.numerateur,
+                self.coeff.denominateur * argument.denominateur,
+                ).latex()
+            if pgcd(
+                self.coeff.numerateur * argument.numerateur,
+                self.coeff.denominateur * argument.denominateur,
+                ) != 1:
+                yield self.resultat(argument).latex()
 
     def resultat(self, variable):
+        if isinstance(variable, Entier):
+            variable = Fraction(variable.valeur, 1)
         return Fraction(
-            self.coeff.numerateur * variable.valeur,
-            self.coeff.denominateur,
-            ).simplifie().latex()
+            self.coeff.numerateur * variable.numerateur,
+            self.coeff.denominateur * variable.denominateur,
+            ).simplifie()
 
 class Affine(Fonction):
 
@@ -593,10 +607,10 @@ class Recursif(Question):
     def __init__(self, index0max):
         super(Recursif, self).__init__(index0max)
         self.terme0 = Entier(random.randint(-10, 10))
-        self.fonction = random.choice([ # TODO S'assurer que tout fonctionne
+        self.fonction = random.choice([
             Affine,
-            #IdentiteTranslatee,
-            #Lineaire,
+            IdentiteTranslatee,
+            Lineaire,
             ])()
 
     @property
@@ -614,7 +628,6 @@ class TermesDUneSuite(ex.TexExercise):
     level = u"1.1èreS"
 
     def __init__(self):
-        random.seed(3) # TODO
         self.rang = [0,0,0]
         while self.rang[0] == self.rang[1]:
             self.rang = [random.randint(2, 5), random.randint(2, 5), random.randint(3, 6)]
@@ -725,7 +738,7 @@ class TermesDUneSuite(ex.TexExercise):
             termes[indice+1] = self.questions[2].fonction.resultat(termes[indice])
             calcul_termes.append(calcul)
         exo.append(ur"\begin{align*}")
-        exo.append(ur" \\".join(calcul_termes) + ".") # TODO align
+        exo.append(ur" \\".join(calcul_termes))
         exo.append(ur"\end{align*}")
         exo.append(ur'\begin{enumerate}')
         exo.append(ur' \item Calcul du {} terme :'.format(FRANCAIS_ORDINAL[self.rang[0]]))
