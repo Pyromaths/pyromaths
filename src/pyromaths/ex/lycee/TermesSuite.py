@@ -191,9 +191,9 @@ class Lineaire(Fonction):
                         self.coeff.denominateur,
                         ).latex()
             if pgcd(self.coeff.numerateur * argument.valeur, self.coeff.denominateur) != 1:
-                yield self.resultat(argument)
+                yield self.resultat(argument).latex()
         else:
-            yield self.resultat(argument)
+            yield self.resultat(argument).latex()
 
     def resultat(self, variable):
         return Fraction(
@@ -223,28 +223,46 @@ class Affine(Fonction):
         else:
             arg = argument.latex()
         yield self.expression(ur"\times " + arg)
-        if isinstance(self.coeff.simplifie(), Fraction):
-            yield ur"{fraction} {signe} \frac{{ {ordonnee} \times {denom} }}{{ {denom} }}".format(
-                    fraction=Fraction(
-                        self.coeff.numerateur * argument.valeur,
-                        self.coeff.denominateur,
-                        ).latex(),
-                    ordonnee=abs(self.ordonnee.valeur),
-                    denom=self.coeff.denominateur,
-                    signe=Entier(self.coeff.denominateur * self.ordonnee.valeur).latex("+")[0],
-                    )
-            yield ur"\frac{{ {gauche} {droite} }}{{ {denom} }}".format(
-                    gauche=self.coeff.numerateur * argument.valeur,
-                    droite=Entier(self.coeff.denominateur * self.ordonnee.valeur).latex("+"),
-                    denom=self.coeff.denominateur,
-                    )
-        yield self.resultat(argument)
+        if isinstance(argument, Entier):
+            if isinstance(self.coeff.simplifie(), Fraction):
+                yield ur"{fraction} {signe} \frac{{ {ordonnee} \times {denom} }}{{ {denom} }}".format(
+                        fraction=Fraction(
+                            self.coeff.numerateur * argument.valeur,
+                            self.coeff.denominateur,
+                            ).latex(),
+                        ordonnee=abs(self.ordonnee.valeur),
+                        denom=self.coeff.denominateur,
+                        signe=Entier(self.coeff.denominateur * self.ordonnee.valeur).latex("+")[0],
+                        )
+                yield ur"\frac{{ {gauche} {droite} }}{{ {denom} }}".format(
+                        gauche=self.coeff.numerateur * argument.valeur,
+                        droite=Entier(self.coeff.denominateur * self.ordonnee.valeur).latex("+"),
+                        denom=self.coeff.denominateur,
+                        )
+        else:
+            yield ur"{} + \frac{{ {} \times {} }}{{ {} }}".format(
+                Fraction(
+                    self.coeff.numerateur * argument.numerateur,
+                    self.coeff.denominateur * argument.denominateur,
+                    ).latex(),
+                self.ordonnee.valeur,
+                self.coeff.denominateur * argument.denominateur,
+                self.coeff.denominateur * argument.denominateur,
+                )
+            yield ur"\frac{{ {} {} }}{{ {} }}".format(
+                self.coeff.numerateur * argument.numerateur,
+                Entier(self.ordonnee.valeur * self.coeff.denominateur * argument.denominateur).latex("+"),
+                self.coeff.denominateur * argument.denominateur,
+                )
+        yield self.resultat(argument).latex()
 
     def resultat(self, variable):
+        if isinstance(variable, Entier):
+            variable = Fraction(variable.valeur, 1)
         return Fraction(
-            self.coeff.numerateur * variable.valeur + self.ordonnee.valeur * self.coeff.denominateur,
-            self.coeff.denominateur,
-            ).simplifie().latex()
+            self.coeff.numerateur * variable.numerateur + self.ordonnee.valeur * self.coeff.denominateur * variable.denominateur,
+            self.coeff.denominateur * variable.denominateur,
+            ).simplifie()
 
 class FractionProduit(Fonction):
 
@@ -278,13 +296,13 @@ class FractionProduit(Fonction):
                 self.numerateur.valeur ** argument.valeur,
                 self.denominateur.valeur * argument.valeur,
                 ) != 1:
-            yield self.resultat(argument)
+            yield self.resultat(argument).latex()
 
     def resultat(self, argument):
         return Fraction(
                 self.numerateur.valeur ** argument.valeur,
                 self.denominateur.valeur * argument.valeur,
-                ).simplifie().latex()
+                ).simplifie()
 
 class Trinome(Fonction):
 
@@ -323,7 +341,7 @@ class Trinome(Fonction):
             ).latex()
 
     def resultat(self, argument):
-        return self.coef[2].valeur * argument.valeur**2 + self.coef[1].valeur * argument.valeur + self.coef[0].valeur
+        return Entier(self.coef[2].valeur * argument.valeur**2 + self.coef[1].valeur * argument.valeur + self.coef[0].valeur)
 
 
 class Harmonique(Fonction):
@@ -354,13 +372,13 @@ class Harmonique(Fonction):
             self.numerateur[0].valeur * argument.valeur + self.numerateur[1].valeur,
             self.denominateur[0].valeur * argument.valeur + self.denominateur[1].valeur,
             ) != 1:
-            yield self.resultat(argument)
+            yield self.resultat(argument).latex()
 
     def resultat(self, argument):
         return Fraction(
             self.numerateur[0].valeur * argument.valeur + self.numerateur[1].valeur,
             self.denominateur[0].valeur * argument.valeur + self.denominateur[1].valeur,
-            ).simplifie().latex()
+            ).simplifie()
 
 class IdentiteTranslatee(Fonction):
 
@@ -378,10 +396,10 @@ class IdentiteTranslatee(Fonction):
 
     def calcul(self, argument):
         yield self.expression(argument.latex())
-        yield self.resultat(argument)
+        yield self.resultat(argument).latex()
 
     def resultat(self, variable):
-        return Entier(variable.valeur + self.ordonnee.valeur).latex()
+        return Entier(variable.valeur + self.ordonnee.valeur)
 
 class FrancaisGeometrique(Fonction):
 
@@ -404,7 +422,7 @@ class FrancaisGeometrique(Fonction):
 
     def calcul(self, argument):
         yield ur"{} \times {}".format(self.raison.latex(), argument.latex())
-        resultat = self.resultat(argument)
+        resultat = self.resultat(argument).latex()
         if isinstance(resultat, Entier):
             yield self.resultat(argument).latex()
         else:
@@ -596,7 +614,7 @@ class TermesDUneSuite(ex.TexExercise):
     level = u"1.1èreS"
 
     def __init__(self):
-        random.seed(7) # TODO
+        random.seed(3) # TODO
         self.rang = [0,0,0]
         while self.rang[0] == self.rang[1]:
             self.rang = [random.randint(2, 5), random.randint(2, 5), random.randint(3, 6)]
@@ -664,27 +682,27 @@ class TermesDUneSuite(ex.TexExercise):
         for indice in range(0, self.rang[0]):
             enumeration.append(u"le {ordinal} terme est $u_{indice}$".format(ordinal=FRANCAIS_ORDINAL[indice+1], indice=self.questions[1].indice0+indice))
         exo.append(" ; ".join(enumeration) + ".")
-        exo.append(ur"Le terme demandé est donc $u_{}=".format(self.rang[0]+self.questions[1].indice0-1, termes[self.rang[0]+self.questions[1].indice0-1].latex()))
+        exo.append(ur"Le terme demandé est donc $u_{}=".format(self.rang[0]+self.questions[1].indice0-1))
         calcul = []
         for etape in self.questions[1].fonction.calcul(Entier(self.rang[0]+self.questions[1].indice0-1)):
             calcul.append(etape)
         exo.append(u" = ".join(calcul) + ur"$.")
-        exo.append(ur"Le terme demandé est donc \fbox{{$u_{{ {} }}={}$}}.".format(self.rang[0]+self.questions[1].indice0-1, self.questions[1].fonction.resultat(Entier(self.rang[0]+self.questions[1].indice0-1))))
+        exo.append(ur"La solution est \fbox{{$u_{{ {} }}={}$}}.".format(self.rang[0]+self.questions[1].indice0-1, self.questions[1].fonction.resultat(Entier(self.rang[0]+self.questions[1].indice0-1)).latex()))
         exo.append(ur"\item Le terme de rang {rang} est $u_{{ {rang} }}$.".format(rang=self.rang[1]))
         if self.rang[0] + self.questions[1].indice0 - 1 == self.rang[1]:
-            exo.append(ur"Ce terme a déjà été calculé, et \fbox{{$u_{{ {} }}={}$}}.".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1]))))
+            exo.append(ur"Ce terme a déjà été calculé, et \fbox{{$u_{{ {} }}={}$}}.".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1])).latex()))
         else:
             calcul = []
             for etape in self.questions[1].fonction.calcul(Entier(self.rang[1])):
                 calcul.append(etape)
             exo.append(ur"Le terme demandé est donc $u_{{ {} }}=".format(self.rang[1]) + " = ".join(calcul) + ur"$.")
-            exo.append(ur"La solution est donc \fbox{{ $u_{{ {} }}={}$}}".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1]))))
+            exo.append(ur"La solution est donc \fbox{{ $u_{{ {} }}={}$}}".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1])).latex()))
         exo.append(ur"\item")
         calcul = []
         for etape in self.questions[1].fonction.calcul(Entier(self.rang[2])):
             calcul.append(etape)
         exo.append(ur"On a : $u_{{ {} }}=".format(self.rang[2]) + " = ".join(calcul) + ur"$.")
-        exo.append(ur"La solution est donc \fbox{{ $u_{{ {} }}={}$}}".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2]))))
+        exo.append(ur"La solution est donc \fbox{{ $u_{{ {} }}={}$}}".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2])).latex()))
         exo.append(ur'\end{enumerate}')
 
         # Question 2
@@ -695,19 +713,30 @@ class TermesDUneSuite(ex.TexExercise):
                   \text{{Pour tout $n\geq{indice0}$ : }} u_{{n+1}}={fonction}.
               \end{{array}}\right.\]
               """).format(**self.questions[2].latex_params))
-        termes = dict([(self.questions[0].indice0, self.questions[0].terme0)])
+        termes = dict([(self.questions[2].indice0, self.questions[2].terme0)])
         calcul_termes = []
         for indice in xrange(self.questions[2].indice0, max(self.questions[2].indice0 + self.rang[0] - 1, self.rang[1], self.rang[2])):
-            calcul = ur"$u_{indice}={fonction}".format(
+            calcul = ur"u_{indice} &= {fonction}".format(
                 indice=indice+1,
                 fonction=self.questions[2].fonction.expression("u_{}".format(indice)),
                 )
             for etape in self.questions[2].fonction.calcul(termes[indice]):
                 calcul += " =" + etape
-            calcul += "$"
-            termes[indice+1] = self.questions[2].fonction.calcul(termes[indice])
+            termes[indice+1] = self.questions[2].fonction.resultat(termes[indice])
             calcul_termes.append(calcul)
-        exo.append(" ; ".join(calcul_termes) + ".")
-        exo.append(ur"TODO")
+        exo.append(ur"\begin{align*}")
+        exo.append(ur" \\".join(calcul_termes) + ".") # TODO align
+        exo.append(ur"\end{align*}")
+        exo.append(ur'\begin{enumerate}')
+        exo.append(ur' \item Calcul du {} terme :'.format(FRANCAIS_ORDINAL[self.rang[0]]))
+        enumeration = []
+        for indice in range(0, self.rang[0]):
+            enumeration.append(u"le {ordinal} terme est $u_{indice}$".format(ordinal=FRANCAIS_ORDINAL[indice+1], indice=self.questions[2].indice0+indice))
+        exo.append(" ; ".join(enumeration) + ".")
+        exo.append(ur"Le terme demandé est donc \fbox{{$u_{}={}$}}.".format(self.rang[0]+self.questions[2].indice0-1, termes[self.rang[0]+self.questions[2].indice0-1].latex()))
+        exo.append(ur'\item Le terme de rang {indice} est \fbox{{$u_{indice}={valeur}$}}.'.format(indice=self.rang[1], valeur=termes[self.rang[1]].latex()))
+        exo.append(ur'\item Nous avons calculé que \fbox{{$u_{indice}={valeur}$}}.'.format(indice=self.rang[2], valeur=termes[self.rang[2]].latex()))
+        exo.append(ur'\end{enumerate}')
+
         exo.append(ur'\end{enumerate}')
         return exo
