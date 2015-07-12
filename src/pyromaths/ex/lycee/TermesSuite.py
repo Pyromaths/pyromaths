@@ -81,6 +81,20 @@ class Fraction:
                     self.denominateur,
                     )
 
+    def simplifie(self):
+        if self.numerateur % self.denominateur == 0:
+            return Entier(self.numerateur / self.denominateur)
+        diviseur = pgcd(self.numerateur, self.denominateur)
+        return Fraction(
+                self.numerateur/diviseur,
+                self.denominateur/diviseur,
+                )
+
+    def __float__(self):
+        return float(self.numerateur /self.denominateur)
+
+
+
 @functools.total_ordering
 class Entier:
     def __init__(self, valeur):
@@ -120,6 +134,9 @@ class Entier:
                 return str(self.valeur)
             else:
                 return "-" + str(abs(self.valeur))
+
+    def __float__(self):
+        return float(self.valeur)
 
 FRACTIONS = [
         Fraction(2, 1),
@@ -178,6 +195,35 @@ class Affine(Fonction):
             variable=variable,
             )
 
+    def calcul(self, argument):
+        if float(argument) < 0:
+            arg = ur"\left( {} \right)".format(argument.latex())
+        else:
+            arg = argument.latex()
+        yield self.expression(ur"\times " + arg)
+        if isinstance(self.coeff.simplifie(), Fraction):
+            yield ur"{fraction} {signe} \frac{{ {ordonnee} \times {denom} }}{{ {denom} }}".format(
+                    fraction=Fraction(
+                        self.coeff.numerateur * argument.valeur,
+                        self.coeff.denominateur,
+                        ).latex(),
+                    ordonnee=abs(self.ordonnee.valeur),
+                    denom=self.coeff.denominateur,
+                    signe=Entier(self.coeff.denominateur * self.ordonnee.valeur).latex("+")[0],
+                    )
+            yield ur"\frac{{ {gauche} {droite} }}{{ {denom} }}".format(
+                    gauche=self.coeff.numerateur * argument.valeur,
+                    droite=Entier(self.coeff.denominateur * self.ordonnee.valeur).latex("+"),
+                    denom=self.coeff.denominateur,
+                    )
+        yield self.resultat(argument)
+
+    def resultat(self, variable):
+        return Fraction(
+            self.coeff.numerateur * variable.valeur + self.ordonnee.valeur * self.coeff.denominateur,
+            self.coeff.denominateur,
+            ).simplifie().latex()
+
 class FractionProduit(Fonction):
 
     def __init__(self):
@@ -190,6 +236,29 @@ class FractionProduit(Fonction):
                 denominateur=self.denominateur.latex("-"),
                 variable=variable,
             )
+
+    def calcul(self, argument):
+        if argument.valeur < 0:
+            arg2 = ur"\left( {} \right)".format(argument.latex())
+        else:
+            arg2 = argument.latex()
+        yield ur"\frac{{ {numerateur}^{{ {argument} }}}}{{ {denominateur}\times{arg2} }}".format(
+                numerateur=self.numerateur.latex(),
+                denominateur=self.denominateur.latex(),
+                argument=argument.latex(),
+                arg2=arg2,
+            )
+        yield ur"\frac{{ {} }}{{ {} }}".format(
+                self.numerateur.valeur ** argument.valeur,
+                self.denominateur.valeur * argument.valeur,
+                )
+        yield self.resultat(argument)
+
+    def resultat(self, argument):
+        return Fraction(
+                self.numerateur.valeur ** argument.valeur,
+                self.denominateur.valeur * argument.valeur,
+                ).simplifie().latex()
 
 class Trinome(Fonction):
 
@@ -434,9 +503,9 @@ class General(Question):
     def __init__(self, index0max):
         super(General, self).__init__(index0max)
         self.fonction = random.choice([ # TODO S'assurer que toutes les fonctions fonctionnent
-            #TODO FractionProduit,
-            Trinome,
-            #TODO Affine,
+            #FractionProduit,
+            #Trinome,
+            Affine,
             #TODO Lineaire,
             #TODO IdentiteTranslatee,
             #TODO Harmonique,
