@@ -21,16 +21,16 @@ Pour obtenir le fichier `.po`, lancez
 ```
 xgettext -L Python -d pyromaths --from-code utf-8 -o locale/pyromaths.pot -f locale/traductibles
 ```
-depuis directoire racine du code source.
+depuis répertoire racine du code source.
 
-Créez le directoire de nom de votre [code de langue](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) dans '/locale/'.
-Dedans, il faut qu'un nouveau directoire existe: `LC_MESSAGES`.
+Créez le répertoire de nom de votre [code de langue](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) dans '/locale/'.
+Dedans, il faut qu'un nouveau répertoire existe: `LC_MESSAGES`.
 
-Copiez le fichier `.pot` dans le directoire crée sous le nom de `.po`, (exemple pour Italien):
+Copiez le fichier `.pot` dans le répertoire crée sous le nom de `.po`, (exemple pour Italien):
 ```
 cp pyromaths.pot it/LC_MESSAGES/pyromaths.po
 ```
-Pour copiage le fichier `.pot` vers tout les directoires de langue, lancez depuis `/locale/`:
+Pour copiage le fichier `.pot` vers tout les répertoires de langue, lancez depuis `/locale/`:
 ```
 find . -name "LC_MESSAGES" -exec cp pyromaths.pot {}/pyromaths.po \;
 ```
@@ -45,7 +45,7 @@ msgstr "Quit"
 
 ## Finir
 
-Après avoir traduit ce que vous voulez, mettez à jour les fichiers binaires `.mo` depuis votre directoire de langue (p. ex. `/locale/it/LC_MESSAGES`) pour voir les résultats:
+Après avoir traduit ce que vous voulez, mettez à jour les fichiers binaires `.mo` depuis votre répertoire de langue (p. ex. `/locale/it/LC_MESSAGES`) pour voir les résultats:
 ```
 msgfmt -o pyromaths.mo pyromaths.po
 ```

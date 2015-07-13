@@ -2,4 +2,4 @@
 
 Il permet par exemple de proposer des devoirs maison aux élèves et de leur distribuer ensuite la correction. Il peut aussi servir à des familles afin qu'un élève puisse travailler un point du programme et se corriger ensuite.
 
-Si vous voulez aider avec la traduction, consultez [cette page](https://github.com/Pyromaths/pyromaths/blob/develop/locale/TRADUIRE.md).
+Si vous voulez participer à la traduction, consultez [cette page](https://github.com/Pyromaths/pyromaths/blob/develop/locale/TRADUIRE.md).

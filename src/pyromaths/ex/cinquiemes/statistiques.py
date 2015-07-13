@@ -90,7 +90,7 @@ def diagramme_tex(typed=2, val=[[], []], aide=0):
     """Génère un diagramme en bâtons (type 1), circulaire (type2) ou semi-circulaire (type3) à partir des fréquences (liste val[1]) et son tableau de calculs."""
     diag = ""
 
-    couleur = [_("AliceBlue"), _("Bisque"), _("PaleGreen"), _("Thistle"), _("LightGray"), _("Khaki"), _("LightBlue"), _("LightSalmon"), _("PaleGoldenrod"), _("PapayaWhip"), _("Plum"), _("Gainsboro")]
+    couleur = ["AliceBlue", "Bisque", "PaleGreen", "Thistle", "LightGray", "Khaki", "LightBlue", "LightSalmon", "PaleGoldenrod", "PapayaWhip", "Plum", "Gainsboro"]
 
     if typed == 1:  # Diagramme en bâtons
 

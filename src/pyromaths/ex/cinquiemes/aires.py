@@ -59,7 +59,7 @@ On considère deux cercles de centre $O$ et de %s respectifs $\\unit[%s]{cm}$ et
 Calculer l'aire de la couronne circulaire (partie colorée) comprise entre les deux cercles en arrondissant le résultat au $\\unit{cm^2}$ le plus proche.""") % donnees
     exo.append(enonce)
     cor.append(enonce)
-    cor.append(_("\\par\\dotfill{}\\\\\n"))
+    cor.append("\\par\\dotfill{}\\\\\n")
     if i == 0:
         cor.append(_(u"On calcule l'aire du disque de rayon $\\unit[%s]{cm}$:") % rayon2)
         cor.append(_(u"\\[\\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\\]") % (rayon2, rayon2, rayon2, decimaux(rayon2 ** 2)))
