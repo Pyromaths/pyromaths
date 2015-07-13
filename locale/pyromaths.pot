@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-11 23:10+0200\n"
+"POT-Creation-Date: 2015-07-13 13:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -286,10 +286,6 @@ msgid ""
 "Calculer l'aire de la couronne circulaire (partie colorée) comprise entre "
 "les deux cercles en arrondissant le résultat au $\\unit{cm^2}$ le plus "
 "proche."
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/aires.py:62
-msgid "\\par\\dotfill{}\\\\\n"
 msgstr ""
 
 #: src/pyromaths/ex/cinquiemes/aires.py:64
@@ -1035,54 +1031,6 @@ msgstr ""
 #: src/pyromaths/ex/cinquiemes/statistiques.py:68
 #: src/pyromaths/ex/cinquiemes/statistiques.py:190
 msgid "Fréquences (\\%)"
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/statistiques.py:93
-msgid "AliceBlue"
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/statistiques.py:93
-msgid "Bisque"
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/statistiques.py:93
-msgid "PaleGreen"
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/statistiques.py:93
-msgid "Thistle"
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/statistiques.py:93
-msgid "LightGray"
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/statistiques.py:93
-msgid "Khaki"
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/statistiques.py:93
-msgid "LightBlue"
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/statistiques.py:93
-msgid "LightSalmon"
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/statistiques.py:93
-msgid "PaleGoldenrod"
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/statistiques.py:93
-msgid "PapayaWhip"
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/statistiques.py:93
-msgid "Plum"
-msgstr ""
-
-#: src/pyromaths/ex/cinquiemes/statistiques.py:93
-msgid "Gainsboro"
 msgstr ""
 
 #: src/pyromaths/ex/cinquiemes/statistiques.py:198
@@ -2413,13 +2361,21 @@ msgid ""
 "\\par"
 msgstr ""
 
-#: src/pyromaths/ex/lycee/SecondDegre.py:542
-msgid "a deux racines distinctes"
-msgstr ""
-
 #: src/pyromaths/ex/lycee/SecondDegre.py:541
 #, python-format
 msgid "Quelles sont les valeurs de $m$ pour lesquelles $P$ %s ?\n"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:541
+msgid "a une seule racine"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:541
+msgid "n'a pas de racine"
+msgstr ""
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:542
+msgid "a deux racines distinctes"
 msgstr ""
 
 #: src/pyromaths/ex/lycee/SecondDegre.py:545
