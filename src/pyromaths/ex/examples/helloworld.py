@@ -10,4 +10,4 @@ class HelloWorld(ex.TexExercise):
         return ['\\exercice', 'Hello, world!']
 
     def tex_answer(self):
-        return ['\\exercice*', 'Hello, world corrigé!']
+        return ['\\exercice*', _('Hello, world corrigé!')]

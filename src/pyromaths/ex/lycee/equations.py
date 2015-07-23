@@ -50,14 +50,14 @@ def racines(p, lracines):
     return (-float(q[1][0]) + sqrt(d)) / 2 / float(q[0][0]), (-float(q[1][0]) - sqrt(d)) / 2 / float(q[0][0])
 
 class EquationGraphique(ex.TexExercise):
-    # description = u'Résolution graphique d\'équations'
-    # level = u"2.Seconde"
+    # description = _(u'Résolution graphique d\'équations')
+    # level = _(u"2.Seconde")
 
     def __init__(self):
         """
         l1, l2 et l3 sont les abscisses remarquables,
         y1, y2 et y3 sont les ordonnées correspondantes
-        
+
         l1 contient trois abscisses de même ordonnée
         l2 contient deux abscisses de même ordonnée
         l3 contient 2 abscisses séparées d'un dixième (un extremum local j'espère) de même ordonnée
@@ -116,5 +116,3 @@ class EquationGraphique(ex.TexExercise):
         # print racines(self.polynome, [self.points[i][0] for i in range(3, 6)])
         #=======================================================================
         return exo
-
-
