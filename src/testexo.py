@@ -218,7 +218,6 @@ COMMANDS = {
 
 def main():
     """Main function"""
-    pyromaths.ex.load()
     options = argument_parser().parse_args(sys.argv[1:])
     test_suite = pyromaths.ex.test.create_test_suite()
 
