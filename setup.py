@@ -221,7 +221,7 @@ setup(
 if "py2app" in sys.argv:
     # py2app/setenv hack: replace executable with one appending several LaTeX
     # distributions locations to the path.
-    mactex   = "/usr/texbin:/usr/local/bin"
+    mactex   = "/Library/TeX/texbin:/usr/texbin:/usr/local/bin"
     macports = "/opt/local/bin:/opt/local/sbin"
     fink     = "/sw/bin"
     path     = "%s:%s:%s" % (mactex, macports, fink)
