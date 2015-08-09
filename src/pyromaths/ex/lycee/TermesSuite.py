@@ -374,42 +374,6 @@ class Trinome(Fonction):
         return Entier(self.coef[2].valeur * argument.valeur**2 + self.coef[1].valeur * argument.valeur + self.coef[0].valeur)
 
 
-class Harmonique(Fonction):
-
-    def __init__(self):
-        for attr in ["numerateur", "denominateur"]:
-            binome = [0, 0]
-            for i in [0, 1]:
-                binome[i] = random.randint(2, 5)
-                if random.randint(0,1) == 0:
-                    binome[i] = -binome[i]
-            setattr(self, attr, [Entier(i) for i in binome])
-
-    def expression(self, variable):
-        return ur"\frac{{ {numerateur[1]}{variable}{numerateur[0]} }}{{ {denominateur[1]}{variable}{denominateur[0]} }}".format(
-                numerateur=[self.numerateur[0].latex("+"), self.numerateur[0].latex("-")],
-                denominateur=[self.denominateur[0].latex("+"), self.denominateur[0].latex("-")],
-                variable=variable,
-                )
-
-    def calcul(self, argument):
-        yield self.expression(ur"\times " + argument.latex())
-        yield Fraction(
-            self.numerateur[0].valeur * argument.valeur + self.numerateur[1].valeur,
-            self.denominateur[0].valeur * argument.valeur + self.denominateur[1].valeur,
-            ).latex()
-        if pgcd(
-            self.numerateur[0].valeur * argument.valeur + self.numerateur[1].valeur,
-            self.denominateur[0].valeur * argument.valeur + self.denominateur[1].valeur,
-            ) != 1:
-            yield self.resultat(argument).latex()
-
-    def resultat(self, argument):
-        return Fraction(
-            self.numerateur[0].valeur * argument.valeur + self.numerateur[1].valeur,
-            self.denominateur[0].valeur * argument.valeur + self.denominateur[1].valeur,
-            ).simplifie()
-
 class IdentiteTranslatee(Fonction):
 
     def __init__(self):
@@ -613,7 +577,6 @@ class General(Question):
             Affine,
             Lineaire,
             IdentiteTranslatee,
-            Harmonique,
             ])()
 
     @property
