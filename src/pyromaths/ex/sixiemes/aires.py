@@ -231,7 +231,7 @@ def figure():
     cor.append("\\end{enumerate}")
     return("\n".join(exo), "\n".join(cor))
 
-def main():
+def aires():
     exo = ["\\exercice", u"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
     cor = ["\\exercice*", u"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
     exercice = figure()
@@ -239,4 +239,4 @@ def main():
     cor.append(exercice[1])
     return(exo, cor)
 
-main.description = u'Aires et quadrillage'
+aires.description = u'Aires et quadrillage'
