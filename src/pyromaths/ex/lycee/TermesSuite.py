@@ -38,6 +38,8 @@ FRANCAIS_ORDINAL = {
     3: u"troisième",
     4: u"quatrième",
     5: u"cinquième",
+    6: u"sixième",
+    7: u"septième",
     }
 FRANCAIS_INVERSE = {
     2: u"à la moitié du",
@@ -67,8 +69,16 @@ NOTATIONS = [
     ur"\left(u_n\right)_{n\in\mathbb{N}}",
     ]
 
+def signe(nombre):
+    if nombre > 0:
+        return 1
+    if nombre < 0:
+        return -1
+    raise ValueError
+
 class Fraction:
-    def __init__(self, numerateur, denominateur):
+    def __init__(self, numerateur, denominateur, signe=1):
+        self.signe = signe
         self.numerateur = numerateur
         self.denominateur = denominateur
 
@@ -76,22 +86,28 @@ class Fraction:
         if self.denominateur == 1:
             return str(self.numerateur)
         else:
-            return ur"\frac{{ {} }}{{ {} }}".format(
+            if self.signe == 1:
+                signe = ""
+            else:
+                signe = "-"
+            return ur"{}\frac{{ {} }}{{ {} }}".format(
+                    signe,
                     self.numerateur,
                     self.denominateur,
                     )
 
     def simplifie(self):
         if self.numerateur % self.denominateur == 0:
-            return Entier(self.numerateur / self.denominateur)
+            return Entier(self.signe * self.numerateur / self.denominateur)
         diviseur = pgcd(self.numerateur, self.denominateur)
         return Fraction(
                 self.numerateur/diviseur,
                 self.denominateur/diviseur,
+                self.signe,
                 )
 
     def __float__(self):
-        return float(self.numerateur /self.denominateur)
+        return float(self.signe * self.numerateur / self.denominateur)
 
 
 
@@ -533,8 +549,10 @@ class FrancaisInverse(Fonction):
 
     def calcul(self, argument):
         yield self.expression(argument.latex())
-        if isinstance(argument, Entier):
+        if isinstance(argument, Entier) and argument > 0:
             pass
+        elif isinstance(argument, Entier) and argument < 0:
+            yield ur"-{}".format(self.expression((-argument).latex()))
         elif isinstance(argument, Fraction):
             yield self.resultat(argument).latex()
         else:
@@ -543,18 +561,22 @@ class FrancaisInverse(Fonction):
     def resultat(self, argument):
         if isinstance(argument, Fraction):
             if argument.numerateur == 1:
-                return Entier(argument.denominateur)
+                return Entier(argument.denominateur * argument.signe)
             else:
-                return Fraction(argument.denominateur, argument.numerateur)
+                return Fraction(
+                    abs(argument.denominateur),
+                    abs(argument.numerateur),
+                    signe(argument.numerateur * argument.denominateur),
+                    )
         elif isinstance(argument, Entier):
-            return Fraction(1, argument.valeur)
+            return Fraction(1, abs(argument.valeur), signe(argument.valeur))
         raise TypeError("Argument must be an instance of `Entier` or `Fraction`.")
 
 
 class Question(object):
 
-    def __init__(self, index0max):
-        self.indice0 = random.randint(0, index0max-1)
+    def __init__(self, indice0):
+        self.indice0 = indice0
         if self.indice0 == 0:
             self.notation = NOTATIONS[random.randint(0, 2)]
         else:
@@ -562,8 +584,8 @@ class Question(object):
 
 class Francais(Question):
 
-    def __init__(self, index0max):
-        super(Francais, self).__init__(index0max)
+    def __init__(self, indice0):
+        super(Francais, self).__init__(indice0)
         self.terme0 = Entier(random.randint(-10, 10))
         self.fonction = random.choice([
             FrancaisGeometrique,
@@ -583,8 +605,8 @@ class Francais(Question):
 
 class General(Question):
 
-    def __init__(self, index0max):
-        super(General, self).__init__(index0max)
+    def __init__(self, indice0):
+        super(General, self).__init__(indice0)
         self.fonction = random.choice([
             FractionProduit,
             Trinome,
@@ -604,8 +626,8 @@ class General(Question):
 
 class Recursif(Question):
 
-    def __init__(self, index0max):
-        super(Recursif, self).__init__(index0max)
+    def __init__(self, indice0):
+        super(Recursif, self).__init__(indice0)
         self.terme0 = Entier(random.randint(-10, 10))
         self.fonction = random.choice([
             Affine,
@@ -628,13 +650,17 @@ class TermesDUneSuite(ex.TexExercise):
     level = u"1.1èreS"
 
     def __init__(self):
-        self.rang = [0,0,0]
-        while self.rang[0] == self.rang[1]:
-            self.rang = [random.randint(2, 5), random.randint(2, 5), random.randint(3, 6)]
+        # * `self.rang[0]` désigne l'ordinal du premier terme demandé (pour la
+        #   première question de chacune des trois suites) ;
+        # * `self.rang[1]` et `self.rang[2]` sont les rangs demandés pour les
+        #   deux questions suivantes dans chacune des trois suites.
+        random.seed(4)
+        self.rang = [random.randint(2, 7)] + random.sample(range(3, 7), 2)
+
         self.questions = [
-                Francais(index0max=min(self.rang[1:3])),
-                General(index0max=min(self.rang[1:3])),
-                Recursif(index0max=min(self.rang[1:3])),
+                Francais(random.randint(0, min(self.rang[1:])-1)),
+                General(random.randint(0, min(self.rang[1:])-1)),
+                Recursif(random.randint(0, min(self.rang[1:])-1)),
                 ]
 
     def tex_statement(self):
@@ -664,7 +690,7 @@ class TermesDUneSuite(ex.TexExercise):
         exo.append(ur"  \item Selon l'énoncé, le premier terme de ${notation}$ est $u_{indice0}={terme0}$. Puisque chaque terme (sauf le premier) est égal {suivant}, on a :".format(**self.questions[0].latex_params))
         termes = dict([(self.questions[0].indice0, self.questions[0].terme0)])
         calcul_termes = []
-        for indice in xrange(self.questions[0].indice0, max(self.questions[0].indice0 + self.rang[0] - 1, self.rang[1], self.rang[2])):
+        for indice in xrange(self.questions[0].indice0, max(self.rang[0] + self.questions[0].indice0 - 1, self.rang[1], self.rang[2])):
             calcul = ur"$u_{indice}={fonction}".format(
                 indice=indice+1,
                 fonction=self.questions[0].fonction.expression("u_{}".format(indice)),
@@ -681,7 +707,7 @@ class TermesDUneSuite(ex.TexExercise):
         for indice in range(0, self.rang[0]):
             enumeration.append(u"le {ordinal} terme est $u_{indice}$".format(ordinal=FRANCAIS_ORDINAL[indice+1], indice=self.questions[0].indice0+indice))
         exo.append(" ; ".join(enumeration) + ".")
-        exo.append(ur"Le terme demandé est donc $u_{}={}$.".format(self.rang[0]+self.questions[0].indice0-1, termes[self.rang[0]+self.questions[0].indice0-1].latex()))
+        exo.append(ur"Le terme demandé est donc $u_{}={}$.".format(self.rang[0] + self.questions[0].indice0 - 1, termes[self.rang[0] + self.questions[0].indice0 - 1].latex()))
         exo.append(ur'\item Le terme de rang {indice} est $u_{indice}={valeur}$.'.format(indice=self.rang[1], valeur=termes[self.rang[1]].latex()))
         exo.append(ur'\item Nous avons calculé que $u_{indice}={valeur}$.'.format(indice=self.rang[2], valeur=termes[self.rang[2]].latex()))
         exo.append(ur'\end{enumerate}')
@@ -695,12 +721,12 @@ class TermesDUneSuite(ex.TexExercise):
         for indice in range(0, self.rang[0]):
             enumeration.append(u"le {ordinal} terme est $u_{indice}$".format(ordinal=FRANCAIS_ORDINAL[indice+1], indice=self.questions[1].indice0+indice))
         exo.append(" ; ".join(enumeration) + ".")
-        exo.append(ur"Le terme demandé est donc $u_{}=".format(self.rang[0]+self.questions[1].indice0-1))
+        exo.append(ur"Le terme demandé est donc $u_{}=".format(self.rang[0] + self.questions[1].indice0 - 1))
         calcul = []
-        for etape in self.questions[1].fonction.calcul(Entier(self.rang[0]+self.questions[1].indice0-1)):
+        for etape in self.questions[1].fonction.calcul(Entier(self.rang[0] + self.questions[1].indice0 - 1)):
             calcul.append(etape)
         exo.append(u" = ".join(calcul) + ur"$.")
-        exo.append(ur"La solution est $u_{{ {} }}={}$.".format(self.rang[0]+self.questions[1].indice0-1, self.questions[1].fonction.resultat(Entier(self.rang[0]+self.questions[1].indice0-1)).latex()))
+        exo.append(ur"La solution est $u_{{ {} }}={}$.".format(self.rang[0] + self.questions[1].indice0 - 1, self.questions[1].fonction.resultat(Entier(self.rang[0] + self.questions[1].indice0 - 1)).latex()))
         exo.append(ur"\item Le terme de rang {rang} est $u_{{ {rang} }}$.".format(rang=self.rang[1]))
         if self.rang[0] + self.questions[1].indice0 - 1 == self.rang[1]:
             exo.append(ur"Ce terme a déjà été calculé, et $u_{{ {} }}={}$.".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1])).latex()))
@@ -711,11 +737,14 @@ class TermesDUneSuite(ex.TexExercise):
             exo.append(ur"Le terme demandé est donc $u_{{ {} }}=".format(self.rang[1]) + " = ".join(calcul) + ur"$.")
             exo.append(ur"La solution est donc  $u_{{ {} }}={}$.".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1])).latex()))
         exo.append(ur"\item")
-        calcul = []
-        for etape in self.questions[1].fonction.calcul(Entier(self.rang[2])):
-            calcul.append(etape)
-        exo.append(ur"On a : $u_{{ {} }}=".format(self.rang[2]) + " = ".join(calcul) + ur"$.")
-        exo.append(ur"La solution est donc  $u_{{ {} }}={}$.".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2])).latex()))
+        if self.rang[0] + self.questions[1].indice0 - 1 == self.rang[2]:
+            exo.append(ur"Ce terme a déjà été calculé, et $u_{{ {} }}={}$.".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2])).latex()))
+        else:
+            calcul = []
+            for etape in self.questions[1].fonction.calcul(Entier(self.rang[2])):
+                calcul.append(etape)
+            exo.append(ur"On a : $u_{{ {} }}=".format(self.rang[2]) + " = ".join(calcul) + ur"$.")
+            exo.append(ur"La solution est donc  $u_{{ {} }}={}$.".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2])).latex()))
         exo.append(ur'\end{enumerate}')
 
         # Question 2
@@ -728,7 +757,7 @@ class TermesDUneSuite(ex.TexExercise):
               """).format(**self.questions[2].latex_params))
         termes = dict([(self.questions[2].indice0, self.questions[2].terme0)])
         calcul_termes = []
-        for indice in xrange(self.questions[2].indice0, max(self.questions[2].indice0 + self.rang[0] - 1, self.rang[1], self.rang[2])):
+        for indice in xrange(self.questions[2].indice0, max(self.rang[0] + self.questions[2].indice0 - 1, self.rang[1], self.rang[2])):
             calcul = ur"u_{indice} &= {fonction}".format(
                 indice=indice+1,
                 fonction=self.questions[2].fonction.expression("u_{}".format(indice)),
@@ -746,7 +775,7 @@ class TermesDUneSuite(ex.TexExercise):
         for indice in range(0, self.rang[0]):
             enumeration.append(u"le {ordinal} terme est $u_{indice}$".format(ordinal=FRANCAIS_ORDINAL[indice+1], indice=self.questions[2].indice0+indice))
         exo.append(" ; ".join(enumeration) + ".")
-        exo.append(ur"Le terme demandé est donc $u_{}={}$.".format(self.rang[0]+self.questions[2].indice0-1, termes[self.rang[0]+self.questions[2].indice0-1].latex()))
+        exo.append(ur"Le terme demandé est donc $u_{}={}$.".format(self.rang[0] + self.questions[2].indice0 - 1, termes[self.rang[0] + self.questions[2].indice0 - 1].latex()))
         exo.append(ur'\item Le terme de rang {indice} est $u_{indice}={valeur}$.'.format(indice=self.rang[1], valeur=termes[self.rang[1]].latex()))
         exo.append(ur'\item Nous avons calculé que $u_{indice}={valeur}$.'.format(indice=self.rang[2], valeur=termes[self.rang[2]].latex()))
         exo.append(ur'\end{enumerate}')
