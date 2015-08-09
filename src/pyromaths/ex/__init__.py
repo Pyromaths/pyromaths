@@ -113,7 +113,6 @@ def _exercises(pkg):
     from pyromaths.Values import data_dir
     # level defaults to description, then unknown
     if 'level' not in dir(pkg): pkg.level = u"Inconnu"
-    n = 0
     for _, name, ispkg in pkgutil.iter_modules(pkg.__path__, pkg.__name__ + '.'):
         # skip packages
         if ispkg: continue;
@@ -127,16 +126,15 @@ def _exercises(pkg):
                               else mod.level)
 
             dirlevel = os.path.split(pkg.__path__[0])[1]
-            thumb = os.path.join(data_dir(), 'ex', dirlevel, 'img', 'ex-%02d.png' % n)
+            if __isexercise(element) or __islegacy(element):
+                thumb = os.path.join(data_dir(), 'ex', dirlevel, 'img', "%s.png" % element.__name__)
             if __isexercise(element):
                 element.level = level
                 element.thumb = thumb
                 yield element
-                n += 1
             elif __islegacy(element):
                 element.level = level
                 yield __legacy(element, thumb)
-                n += 1
 
 def _subpackages(pkg):
     ''' List 'pkg' sub-packages. '''
