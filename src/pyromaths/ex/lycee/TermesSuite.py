@@ -654,7 +654,6 @@ class TermesDUneSuite(ex.TexExercise):
         #   première question de chacune des trois suites) ;
         # * `self.rang[1]` et `self.rang[2]` sont les rangs demandés pour les
         #   deux questions suivantes dans chacune des trois suites.
-        random.seed(4)
         self.rang = [random.randint(2, 7)] + random.sample(range(3, 7), 2)
 
         self.questions = [
