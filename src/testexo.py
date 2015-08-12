@@ -253,7 +253,10 @@ def do_lsexos(__options):
     """Perform the `lsexos` command."""
     def iter_names():
         for exo in match_exercise():
-            yield exo.__name__
+            if issubclass(exo, pyromaths.ex.LegacyExercise):
+                yield exo.function[0].__name__
+            elif issubclass(exo, pyromaths.ex.TexExercise):
+                yield exo.__name__
 
     for name in sorted(iter_names()):
         print(name)
