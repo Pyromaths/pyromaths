@@ -254,9 +254,14 @@ def do_lsexos(__options):
     def iter_names():
         for exo in match_exercise():
             if issubclass(exo, pyromaths.ex.LegacyExercise):
-                yield exo.function[0].__name__
+                name = exo.function[0].__name__
             elif issubclass(exo, pyromaths.ex.TexExercise):
-                yield exo.__name__
+                name = exo.__name__
+            for level in exo.level:
+                yield u"{}.{}".format(
+                    level,
+                    name
+                    )
 
     for name in sorted(iter_names()):
         print(name)
