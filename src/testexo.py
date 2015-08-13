@@ -21,18 +21,34 @@ LOGGER = logging.getLogger()
 
 VERSION = "0.1.0"
 
-def match_exercise(path):
-    """Return the exercises in `path`."""
-    exercises = []
+def match_exercise(path=None):
+    """Iterate the exercises in `path`.
+
+    If `path` is `None`, iterate every available exercices.
+    """
     levels = pyromaths.ex.load_levels()
     for level in levels:
         for exercise in levels[level]:
-            if (
-                    issubclass(exercise, pyromaths.ex.TexExercise) and exercise.__module__.startswith(path)
-                ) or (
-                    issubclass(exercise, pyromaths.ex.LegacyExercise) and exercise.module.startswith(path)
-                ):
-                exercises.append(exercise)
+            if path is not None:
+                if (
+                        issubclass(exercise, pyromaths.ex.TexExercise) and exercise.__module__.startswith(path)
+                    ) or (
+                        issubclass(exercise, pyromaths.ex.LegacyExercise) and exercise.module.startswith(path)
+                    ):
+                    yield exercise
+            else:
+                yield exercise
+
+def get_exercices(options):
+    exercises = {}
+    if not options.exercise:
+        options.exercise = [exercise_argument()]
+    for exo_option in options.exercise:
+        for exo in exo_option:
+            if exo not in exercises:
+                exercises[exo] = set()
+            exercises[exo] |= set(exo_option[exo])
+
     return exercises
 
 def exercise_argument(string=""):
@@ -145,10 +161,23 @@ def argument_parser():
         help='Exercices to check. If empty, all exercises are checked.'
         )
 
+    # List exos
+    lsexos = subparsers.add_parser(
+        'lsexos',
+        help=(
+            "List available exercises. Each line of the output can be used as an argument to other commands."
+            ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        )
+
+
     return parser
 
-def do_create(exercises, test_suite):
+def do_create(options):
     """Action for command line 'create'."""
+    exercises = get_exercices(options)
+    test_suite = pyromaths.ex.test.create_test_suite()
+
     for exo in exercises:
         if not exercises[exo]:
             seeds = set([0])
@@ -159,8 +188,11 @@ def do_create(exercises, test_suite):
                 test_suite.create_test(exo, seed)
     test_suite.write_testfiles()
 
-def do_remove(exercises, test_suite):
+def do_remove(options):
     """Action for command line 'remove'."""
+    exercises = get_exercices(options)
+    test_suite = pyromaths.ex.test.create_test_suite()
+
     for exo in exercises:
         if not exercises[exo]:
             seeds = test_suite.get_exercise(exo).seeds
@@ -171,8 +203,11 @@ def do_remove(exercises, test_suite):
                 test_suite.remove_test(exo, seed)
     test_suite.write_testfiles()
 
-def do_update(exercises, test_suite):
+def do_update(options):
     """Action for command line 'update'."""
+    exercises = get_exercices(options)
+    test_suite = pyromaths.ex.test.create_test_suite()
+
     for exo in exercises:
         if not exercises[exo]:
             seeds = test_suite.get_exercise(exo).seeds
@@ -190,8 +225,11 @@ def do_update(exercises, test_suite):
                 test_suite.create_test(exo, seed)
     test_suite.write_testfiles()
 
-def do_compile(exercises, test_suite):
+def do_compile(options):
     """Action for command line 'compile'."""
+    exercises = get_exercices(options)
+    test_suite = pyromaths.ex.test.create_test_suite()
+
     for exo in exercises:
         if not exercises[exo]:
             seeds = test_suite.get_exercise(exo).seeds
@@ -203,10 +241,31 @@ def do_compile(exercises, test_suite):
         for seed in seeds:
             exo_instance[seed].compile(movefile=True)
 
-def do_check(__exercises, test_suite):
+def do_check(options):
     """Run the tests"""
+    exercises = get_exercices(options)
+    test_suite = pyromaths.ex.test.create_test_suite()
+
     suite = unittest.TestSuite(list(test_suite.iter_tests()))
     unittest.TextTestRunner(verbosity=2).run(suite)
+
+def do_lsexos(__options):
+    """Perform the `lsexos` command."""
+    def iter_names():
+        for exo in match_exercise():
+            if issubclass(exo, pyromaths.ex.LegacyExercise):
+                name = exo.function[0].__name__
+            elif issubclass(exo, pyromaths.ex.TexExercise):
+                name = exo.__name__
+            for level in exo.level:
+                yield u"{}.{}".format(
+                    level,
+                    name
+                    )
+
+    for name in sorted(iter_names()):
+        print(name)
+
 
 COMMANDS = {
     "check": do_check,
@@ -214,24 +273,15 @@ COMMANDS = {
     "remove": do_remove,
     "compile": do_compile,
     "update": do_update,
+    "lsexos": do_lsexos,
     }
 
 def main():
     """Main function"""
     options = argument_parser().parse_args(sys.argv[1:])
-    test_suite = pyromaths.ex.test.create_test_suite()
-
-    exercises = {}
-    if not options.exercise:
-        options.exercise = [exercise_argument()]
-    for exo_option in options.exercise:
-        for exo in exo_option:
-            if exo not in exercises:
-                exercises[exo] = set()
-            exercises[exo] |= set(exo_option[exo])
 
     try:
-        COMMANDS[options.command](exercises, test_suite)
+        COMMANDS[options.command](options)
     except pyromaths.ex.test.ActionCancelAll:
         sys.exit(1)
 
