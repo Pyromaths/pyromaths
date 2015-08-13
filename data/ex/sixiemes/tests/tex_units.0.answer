@@ -1,0 +1,45 @@
+\exercice*
+{
+\psset{nodesepA = -1.5mm, linewidth = 0.6pt, linestyle = dotted, vref = -0.8mm}
+Effectuer les conversions suivantes :
+\begin{multicols}{2}\noindent
+\begin{enumerate}
+\item 86~hm=8\,600~m\par
+\begin{tabular}{c|c|c|c|c|c|c}
+km & hm & dam & m & dm & cm & mm \\ \hline
+8 & 6\Rnode{virg0}{\ }& 0& {0\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 0& 0& 0
+\end{tabular}
+\ncline{->}{virg0}{virg1}
+\item 46,5~L=465~dL\par
+\begin{tabular}{c|c|c|c|c|c}
+hL & daL & L & dL & cL & mL \\ \hline
+0 & 4& 6\Rnode{virg0}{\ }& {5\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 0& 0
+\end{tabular}
+\ncline{->}{virg0}{virg1}
+\item 91,7~dL=0,917~daL\par
+\begin{tabular}{c|c|c|c|c|c}
+hL & daL & L & dL & cL & mL \\ \hline
+0 & {0\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 9& 1\Rnode{virg0}{\ }& 7& 0
+\end{tabular}
+\ncline{->}{virg0}{virg1}
+\item 91,8~cg=0,091\,8~dag\par
+\begin{tabular}{c|c|c|c|c|c|c}
+kg & hg & dag & g & dg & cg & mg \\ \hline
+0 & 0& {0\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 0& 9& 1\Rnode{virg0}{\ }& 8
+\end{tabular}
+\ncline{->}{virg0}{virg1}
+\item 75,7~dag=0,757~kg\par
+\begin{tabular}{c|c|c|c|c|c|c}
+kg & hg & dag & g & dg & cg & mg \\ \hline
+{0\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}} & 7& 5\Rnode{virg0}{\ }& 7& 0& 0& 0
+\end{tabular}
+\ncline{->}{virg0}{virg1}
+\item 49,1~cg=0,491~g\par
+\begin{tabular}{c|c|c|c|c|c|c}
+kg & hg & dag & g & dg & cg & mg \\ \hline
+0 & 0& 0& {0\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 4& 9\Rnode{virg0}{\ }& 1
+\end{tabular}
+\ncline{->}{virg0}{virg1}
+\end{enumerate}
+\end{multicols}
+{

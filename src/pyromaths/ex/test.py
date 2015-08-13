@@ -1,10 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Pyromaths
-# Un programme en Python qui permet de créer des fiches d'exercices types de
-# mathématiques niveau collège ainsi que leur corrigé en LaTeX.
-# Copyright (C) 2006 -- Jérôme Ortais (jerome.ortais@pyromaths.org)
+# Copyright (C) 2015 -- Louis Paternault (spalax@gresille.org)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,368 +27,72 @@ does just as expected.
 """
 
 import codecs
-import json
-import os
+import glob
 import logging
+import os
 import random
 import shutil
 import tempfile
-import textwrap
 import unittest
 
 import pyromaths
-from pyromaths import ex
 from pyromaths.outils import System
 
 # Logging configuration
 logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger()
 
-def all2unicode(argument):
-    """Convert the argument to unicode. If the argument is a list, convert its content."""
-    if isinstance(argument, list):
-        return [all2unicode(item) for item in argument]
-    else:
-        return unicode(argument)
+def load_tests(*__args, **__kwargs):
+    """Return an `unittest.TestSuite` containing tests from all exercises."""
+    tests = TestPerformer()
+    return tests.as_unittest_suite([
+        (exo, tests.get_tested_seeds(exo))
+        for exo in tests.iter_id()
+        ])
 
-class ActionCancelAll(Exception):
-    """Cancel an action by user input."""
+class TestException(Exception):
+    """Generic exception for this module."""
     pass
 
-def fullclassname(argument):
-    """Return the full name of a python object.
-
-    That is, return its module name followed by its class name.
-    """
-    return "{}.{}".format(
-        argument.__module__,
-        argument.__class__.__name__,
-        )
-
-class Test(object):
-    """Generic test class.
-
-    All subclasses of this class are handle test creation, deletion,
-    performance of tests of some exercises.
-    """
-    pass
-
-class TestPackage(Test):
-    """Test of a package"""
-
-    def __init__(self):
-        super(TestPackage, self).__init__()
-        self.modules = {}
-
-    def read_testfiles(self):
-        """Read test files of exercises."""
-        for module in self:
-            self[module].read_testfile()
-
-    def write_testfiles(self):
-        """Write test files of exercises"""
-        for module in self:
-            self[module].write_testfile()
-
-    def add_exercise(self, exercise):
-        """Add an exercise to the test suite."""
-        self.add_module(exercise.__module__)
-        self[exercise.__module__].add_exercise(exercise)
-
-    def add_module(self, modulename):
-        """Create a sub module of this package."""
-        if modulename not in self:
-            self.modules[modulename] = TestModule(modulename)
-
-    def get_exercise(self, exercise):
-        """Return the :class:`TestExercise` instance corresponding to argument.
-        """
-        return self[exercise.__module__][exercise.__name__]
-
-    def has_test(self, exercise, seed):
-        """Return True iff there is a test to ``exercises`` with ``seed``."""
-        if exercise.__module__ not in self:
-            return False
-        return self[exercise.__module__].has_test(exercise, seed)
-
-    def create_test(self, exercise, seed):
-        """Create a test to ``exercise`` with ``seed``.
-
-        If such test already exists, it is replaced.
-        """
-        self.add_module(exercise.__module__)
-        self[exercise.__module__].create_test(exercise, seed)
-
-    def remove_test(self, exercise, seed):
-        """Remove test of ``exercise`` with ``seed``"""
-        if exercise.__module__ not in self:
-            return
-        self[exercise.__module__].remove_test(exercise, seed)
-
-    def __iter__(self):
-        return iter(self.modules)
-
-    def __getitem__(self, key):
-        return self.modules[key]
-
-    def iter_tests(self):
-        """Return an iterator over tests.
-
-        The iterator iterates over :class:`unittest.TestCase` instances.
-        """
-        for module in self:
-            for test in self[module].iter_tests():
-                yield test
-
-class TestModule(Test):
-    """Test of exercises of a module."""
-
-    def __init__(self, name):
-        super(TestModule, self).__init__()
-        self.name = name
-        self.exercises = {}
-
-    def create_test(self, exercise, seed):
-        """Create a test to ``exercise`` with ``seed``.
-
-        If such a test already exists, it is replaced.
-        """
-        self.add_exercise(exercise)
-        self[exercise].create_test(seed)
-
-    def remove_test(self, exercise, seed):
-        """Remove test of ``exercise`` with ``seed``"""
-        if exercise.__name__ not in self:
-            return
-        self[exercise].remove_test(seed)
-
-    def __getitem__(self, key):
-        if isinstance(key, type):
-            return self.exercises[key.__name__]
-        return self.exercises[key]
-
-    def has_test(self, exercise, seed):
-        """Return True iff there is a test to ``exercises`` with ``seed``."""
-        if exercise.__name__ not in self:
-            return False
-        return self[exercise].has_test(seed)
-
-    @property
-    def _testfile_name(self):
-        """Return the name of the file holding test results."""
-        return "{}.prt".format(os.path.join(*(
-            pyromaths.__path__
-            + [".."]
-            + self.name.split('.')
-            )))
-
-    def read_testfile(self):
-        """Read test files of exercises."""
-        if os.access(self._testfile_name, os.R_OK):
-            if os.stat(self._testfile_name)[6] != 0:  # File is not empty
-                with codecs.open(self._testfile_name, "r", "utf8") as testfile:
-                    for exercise, seeds in json.loads(testfile.read()).items():
-                        for seed in seeds:
-                            self[exercise].add_seed(int(seed), seeds[seed])
-
-    def write_testfile(self):
-        """Write test files of exercises"""
-        with codecs.open(self._testfile_name, "w", "utf8") as testfile:
-            json.dump(
-                self.dictionary(),
-                testfile,
-                ensure_ascii=False,
-                sort_keys=True,
-                indent=4,
-                )
-
-    def add_exercise(self, exercise):
-        """Add an exercise to the test suite."""
-        if exercise.__name__ not in self:
-            self.exercises[exercise.__name__] = TestExercise(exercise)
-
-    def __iter__(self):
-        return iter(self.exercises)
-
-    def iter_tests(self):
-        """Return an iterator over tests.
-
-        The iterator iterates over :class:`unittest.TestCase` instances.
-        """
-        for exercise in self:
-            for test in self[exercise].iter_tests():
-                yield test
-
-    def dictionary(self):
-        """Return a ``dict`` version of ``self``, suitable for json encoding.
-        """
-        return dict([
-            (name, exercise.dictionary())
-            for name, exercise
-            in self.exercises.items()
-            ])
-
-class TestExercise(Test):
-    """Test of an exercise"""
+class ExerciseNotFound(TestException):
+    """Name of exercise cannot be found in known exercises."""
 
     def __init__(self, exercise):
-        super(TestExercise, self).__init__()
+        super(ExerciseNotFound, self).__init__()
         self.exercise = exercise
-        self.seeds = {}
 
-    @property
-    def name(self):
-        """Name of the exercise.
+    def __str__(self):
+        return "Exercise '{}' not found.".format(self.exercise)
 
-        That is, name of the corresponding class.
-        """
-        return self.exercise.__name__
+def test_path(dirlevel, name, seed, choice):
+    """Return the path of file containing expected test result."""
+    return os.path.join(
+        pyromaths.Values.data_dir(),
+        'ex',
+        dirlevel,
+        'tests',
+        "%s.%s.%s" % (name, seed, choice)
+        )
 
-    @property
-    def fullname(self):
-        """Full name of the exercise.
-
-        That is, module and name of the corresponding class.
-        """
-        return ".".join([
-            self.exercise.__module__,
-            self.exercise.__name__,
-            ])
-
-    def add_seed(self, seed, expected=None):
-        """Add a test with a particular seed.
-
-        :param dict expected: The expected result, as a dictionray with keys
-            ``tex_statement`` and ``tex_answer``. If omitted, a
-            :class:`WIPTestSeed` is used, which does not inherit from
-            :class:`unittest.TestCase`, and represent a test which is being
-            produced: its expected output is not known yet.
-        """
-        if expected:
-            self.seeds[int(seed)] = create_exercise_test_case(
-                self.exercise,
-                seed,
-                expected,
-                )
-        else:
-            self.seeds[int(seed)] = WIPTestSeed(
-                self.exercise,
-                seed,
-                )
-
-    def remove_test(self, seed):
-        """Remove the test with ``seed``.
-
-        If no such test exists, silently return.
-        """
-        if seed in self.seeds:
-            if ask_confirm("Delete test {}[{}]".format(self.fullname, seed)):
-                del self.seeds[seed]
-
-    def create_test(self, seed):
-        """Create a test for ``seed``.
-
-        If test already exists, replace it.
-        """
-        LOGGER.info("Creating test for {}[{}]".format(self.exercise, seed))
-        self.add_seed(seed)
-        self[seed].show()
-        if ask_confirm("Is the test valid"):
-            self.add_seed(seed, self[seed].generate())
-
-    def has_test(self, seed):
-        """Return True iff there is a test for ``seed``."""
-        return seed in self
-
-    def __iter__(self):
-        return iter(self.seeds)
-
-    def iter_tests(self):
-        """Return an iterator over tests.
-
-        The iterator iterates over :class:`unittest.TestCase` instances.
-        """
-        for seed in self:
-            yield self[seed]
-
-    def __getitem__(self, key):
-        return self.seeds[key]
-
-    def dictionary(self):
-        """Return a ``dict`` version of ``self``, suitable for json encoding."""
-        return dict([
-            (seed, test.dictionary())
-            for seed, test in self.seeds.items()
-            if isinstance(test, unittest.TestCase)
-            ])
-
-def ask_confirm(message):
-    """Ask a confirmation for some message.
-
-    :rtype bool:
-    :return: True iff user agreed (answered ``y``), False if user did not
-        (answered ``n``).
-    :raises ActionCancelAll: if user cancelled, for all casess.
-    """
-    while True:
-        try:
-            answer = raw_input("{} (y/n/c/?) [?]? ".format(message))
-        except KeyboardInterrupt:
-            answer = 'c'
-        except EOFError:
-            answer = 'c'
-        if answer == 'y':
-            return True
-        elif answer == 'n':
-            return False
-        elif answer == 'c':
-            print
-            LOGGER.warning("Cancelling… Changes were not saved.")
-            raise ActionCancelAll()
-        print textwrap.dedent("""
-            [y]es: accept.
-            [n]o: reject.
-            [c]ancel: just this case.
-            [C]ancel: all cases (and lose changes made so far).
-            """)
-
-class WIPTestSeed(Test):
-    """Test in progress: expected output is not known yet."""
-
-    _tempdir = None
+class TestExercise(object):
+    """Test of an exercise"""
 
     def __init__(self, exercise, seed):
-        super(WIPTestSeed, self).__init__()
-
-        self.seed = seed
-        random.seed(seed)
-
         self.exercise = exercise
-        self.exercise_instance = exercise()
+        self.seed = seed
 
-    @property
-    def tempdir(self, *args, **kwargs):
-        """Return a temporary directory for this file, creating it if necessary
+    def show(self):
+        """Compile exercise, and display its result."""
+        self.compile(openpdf=1)
 
-        This directory will be removed when ``self`` is deleted.
-        """
-        if self._tempdir is None:
-            self._tempdir = tempfile.mkdtemp(*args, **kwargs)
-        return self._tempdir
-
-    def __del__(self):
-        if self._tempdir is not None:
-            shutil.rmtree(self._tempdir)
-        if hasattr(super(WIPTestSeed, self), "__del__"):
-            super(WIPTestSeed, self).__del__()
+    def get_exercise(self):
+        """Return an instanciated exercise."""
+        random.seed(self.seed)
+        return self.exercise()
 
     def compile(self, openpdf=0, movefile=False):
-        """Compile exercise (an produce a PDF file).
-
-        :rvalue: string
-        :returns: The path of the compiled file.
-        """
-        random.seed(self.seed)
+        """Compile exercise"""
+        tempdir = tempfile.mkdtemp()
 
         old_dir = os.path.abspath(os.getcwd())
         System.creation({
@@ -401,104 +102,141 @@ class WIPTestSeed(Test):
             'corrige': True,
             'niveau': "test",
             'nom_fichier': u'test.tex',
-            'chemin_fichier': self.tempdir,
-            'fiche_exo': os.path.join(self.tempdir, 'exercices.tex'),
-            'fiche_cor': os.path.join(self.tempdir, 'exercices-corrige.tex'),
+            'chemin_fichier': tempdir,
+            'fiche_exo': os.path.join(tempdir, 'exercises.tex'),
+            'fiche_cor': os.path.join(tempdir, 'exercises-corrige.tex'),
             'datadir': pyromaths.Values.data_dir(),
             'configdir': pyromaths.Values.configdir(),
             'modele': 'pyromaths.tex',
-            'liste_exos': [self.exercise_instance],
+            'liste_exos': [self.get_exercise()],
             'les_fiches': pyromaths.Values.lesfiches(),
             'openpdf': openpdf,
         })
         os.chdir(old_dir)
 
         if movefile:
-            destname = "{}.{}-{}.pdf".format(
-                self.exercise.__module__,
-                self.exercise.__name__,
+            destname = "{}-{}.pdf".format(
+                self.exercise.id(),
                 self.seed,
                 )
             shutil.move(
-                os.path.join(self.tempdir, 'exercices.pdf'),
+                os.path.join(tempdir, 'exercises.pdf'),
                 destname,
             )
         else:
-            destname = os.path.join(self.tempdir, 'exercices.pdf')
+            destname = os.path.join(tempdir, 'exercises.pdf')
 
         return destname
 
-    def show(self):
-        """Display exercise (compiling it before).
+    def test_path(self, name):
+        """Return the path of the file containing expected results."""
+        return test_path(
+            self.exercise.dirlevel,
+            self.exercise.name(),
+            self.seed,
+            name,
+            )
 
-        The corresponding PDF is displayed in a PDF viewer.
-        """
-        self.compile(openpdf=1)
+    def write(self):
+        """Write expected test results."""
+        exo = self.get_exercise()
+        with codecs.open(self.test_path("statement"), "w", "utf8") as statement:
+            statement.write(u"\n".join(exo.tex_statement()))
+        with codecs.open(self.test_path("answer"), "w", "utf8") as answer:
+            answer.write(u"\n".join(exo.tex_answer()))
 
-    def generate(self):
-        """Return the expected statement and answer, as a dictionary.
-        """
-        return {
-            "tex_statement": self.exercise_instance.tex_statement(),
-            "tex_answer": self.exercise_instance.tex_answer(),
-            }
+    def read(self, choice):
+        """Read expected test result."""
+        with codecs.open(self.test_path(choice), "r", "utf8") as file:
+            return file.read()
 
-def create_exercise_test_case(exercise, seed, expected):
-    """Return the `unittest.TestCase` for an exercise.
+    def remove(self):
+        """Remove test"""
+        os.remove(self.test_path("statement"))
+        os.remove(self.test_path("answer"))
 
-    :param TexExercise exercise: Exercise to test.
-    :param int seed: Random seed to use to test exercise.
-    :param dict expected: Expected output for the exercises.
-    """
-    class _TestSeed(WIPTestSeed, unittest.TestCase):
-        """Test an exercise, with a particular seed."""
+    def changed(self):
+        """Return `True` iff exercise has changed."""
+        exo = self.get_exercise()
+        if "\n".join(exo.tex_statement()) != self.read('statement'):
+            return True
+        if "\n".join(exo.tex_answer()) != self.read('answer'):
+            return True
+        return False
 
-        longMessage = True
+class UnittestExercise(unittest.TestCase):
+    """Test an exercise, with a particular seed."""
 
-        def __init__(self, seed):
-            super(_TestSeed, self).__init__(exercise, seed)
+    def __init__(self, test):
+        super(UnittestExercise, self).__init__()
+        self.test = test
 
-        def runTest(self):
-            """Perform test"""
-            self.assertListEqual(
-                all2unicode(self.exercise_instance.tex_statement()),
-                all2unicode(expected['tex_statement']),
-                )
+    def runTest(self):
+        """Perform test"""
+        exo = self.test.get_exercise()
 
-            self.assertListEqual(
-                all2unicode(self.exercise_instance.tex_answer()),
-                all2unicode(expected['tex_answer']),
-                )
+        self.assertListEqual(
+            exo.tex_statement(),
+            self.test.read('statement').split("\n"),
+            )
 
-        @staticmethod
-        def dictionary():
-            """Return a ``dict`` version of ``self``, for json encoding."""
-            return expected
+        self.assertListEqual(
+            exo.tex_answer(),
+            self.test.read('answer').split("\n"),
+            )
 
-    return type(
-        '{}.{}[{}]'.format(exercise.__module__, exercise.__name__, seed),
-        (_TestSeed,),
-        dict(_TestSeed.__dict__),
-        )(seed)
+class TestPerformer(object):
+    """Perform tests over every exercises"""
 
-def create_test_suite():
-    """Gather all exercise tests in a :class:`TestPackage` instance."""
-    tests = TestPackage()
-    for __level, exercises in ex.load_levels().iteritems():
-        for exo in exercises:
-            tests.add_exercise(exo)
-    tests.read_testfiles()
-    return tests
+    def __init__(self):
+        self.exercises = {}
+        levels = pyromaths.ex.load_levels()
+        for level in levels:
+            for exercise in levels[level]:
+                self.exercises[exercise.id()] = exercise
 
-def simple_runtest(test):
-    """Perform a single test, and return True iff it was successful."""
-    testrunner = unittest.TextTestRunner()
-    return testrunner.run(unittest.TestSuite([test])).wasSuccessful()
+    def iter_id(self):
+        """Iterate over exercise ids."""
+        return self.exercises.keys()
 
-def load_tests(*__args, **__kwargs):
-    """Return an `unittest.TestSuite` containing tests from all exercises."""
-    suite = unittest.TestSuite()
-    tests = create_test_suite()
-    for test in tests.iter_tests():
-        suite.addTest(test)
-    return suite
+    def get(self, exercise, seed):
+        """Return the `TestExercise` object corresponding to the arguments."""
+        if exercise not in self.exercises:
+            raise KeyError(exercise)
+        return TestExercise(self.exercises[exercise], seed)
+
+    def get_tested_seeds(self, exercise):
+        """Return seeds that are tested for this exercise"""
+        if exercise not in self.exercises:
+            raise ExerciseNotFound(exercise)
+        statement_seeds = [
+            os.path.basename(path).split(".")[1]
+            for path in glob.glob(test_path(
+                self.exercises[exercise].dirlevel,
+                self.exercises[exercise].name(),
+                '*',
+                'statement'
+                ))
+            ]
+        for seed in statement_seeds:
+            if os.path.exists(test_path(
+                    self.exercises[exercise].dirlevel,
+                    self.exercises[exercise].name(),
+                    seed,
+                    'answer',
+                )):
+                yield int(seed)
+
+    def iter_missing(self):
+        """Iterate over exercises that are not tested."""
+        for exercise in self.exercises:
+            if not list(self.get_tested_seeds(exercise)):
+                yield exercise
+
+    def as_unittest_suite(self, exercises):
+        """Return the tests, as a `unittest.TestSuite`."""
+        suite = unittest.TestSuite()
+        for exercise, seeds in exercises:
+            for seed in seeds:
+                suite.addTest(UnittestExercise(self.get(exercise, seed)))
+        return suite

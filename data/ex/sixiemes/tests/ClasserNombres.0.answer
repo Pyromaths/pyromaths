@@ -1,0 +1,9 @@
+\exercice*
+\begin{enumerate}
+\item Classer les nombres suivants dans l'ordre décroissant.\par    
+8,7 \kern1cm ; \kern1cm 8,43 \kern1cm ; \kern1cm 3,4 \kern1cm ; \kern1cm 8,548\par
+8,7 \kern1cm \textgreater \kern1cm 8,548 \kern1cm \textgreater \kern1cm 8,43 \kern1cm \textgreater \kern1cm 3,4
+\item Classer les nombres suivants dans l'ordre décroissant.\par    
+7,39 \kern1cm ; \kern1cm 7,6 \kern1cm ; \kern1cm 7,989 \kern1cm ; \kern1cm 3,7\par
+7,989 \kern1cm \textgreater \kern1cm 7,6 \kern1cm \textgreater \kern1cm 7,39 \kern1cm \textgreater \kern1cm 3,7
+\end{enumerate}
