@@ -634,7 +634,7 @@ class TermesDUneSuite(ex.TexExercise):
 
         exo.append(ur'\begin{enumerate}')
         exo.append(ur'  \item ${notation}$ est une suite de premier terme $u_{indice0}={terme0}$, et dont chaque terme (sauf le premier) est égal {suivant}.'.format(**self.questions[0].latex_params))
-        exo.append(ur'  \item ${notation}$ est la suite définie pour $n\geq{indice0}$ par $u_n={fonction}$.'.format(**self.questions[1].latex_params))
+        exo.append(ur'  \item ${notation}$ est la suite définie pour $n\geq{indice0}$ par : $u_n={fonction}$.'.format(**self.questions[1].latex_params))
         exo.append(textwrap.dedent(ur"""
             \item ${notation}$ est la suite définie pour $n\geq{indice0}$ par :
                 \[\left\{{\begin{{array}}{{l}}
@@ -669,13 +669,13 @@ class TermesDUneSuite(ex.TexExercise):
         for indice in range(0, self.rang[0]):
             enumeration.append(u"le {ordinal} terme est $u_{indice}$".format(ordinal=FRANCAIS_ORDINAL[indice+1], indice=self.questions[0].indice0+indice))
         exo.append(" ; ".join(enumeration) + ".")
-        exo.append(ur"Le terme demandé est donc $u_{}={}$.".format(self.rang[0] + self.questions[0].indice0 - 1, termes[self.rang[0] + self.questions[0].indice0 - 1].latex()))
-        exo.append(ur'\item Le terme de rang {indice} est $u_{indice}={valeur}$.'.format(indice=self.rang[1], valeur=termes[self.rang[1]].latex()))
-        exo.append(ur'\item Nous avons calculé que $u_{indice}={valeur}$.'.format(indice=self.rang[2], valeur=termes[self.rang[2]].latex()))
+        exo.append(ur"Le terme demandé est donc : $u_{}={}$.".format(self.rang[0] + self.questions[0].indice0 - 1, termes[self.rang[0] + self.questions[0].indice0 - 1].latex()))
+        exo.append(ur'\item Le terme de rang {indice} est : $u_{indice}={valeur}$.'.format(indice=self.rang[1], valeur=termes[self.rang[1]].latex()))
+        exo.append(ur'\item Nous avons calculé que : $u_{indice}={valeur}$.'.format(indice=self.rang[2], valeur=termes[self.rang[2]].latex()))
         exo.append(ur'\end{enumerate}')
 
         # Question 1
-        exo.append(ur'  \item La suite ${notation}$ est définie pour $n\geq{indice0}$ par $u_n={fonction}$.'.format(**self.questions[1].latex_params))
+        exo.append(ur'  \item La suite ${notation}$ est définie pour $n\geq{indice0}$ par : $u_n={fonction}$.'.format(**self.questions[1].latex_params))
         exo.append(ur"Elle est donc définie par son terme général : pour calculer un terme de rang $n$, on peut calculer directement l'image de $n$ par la suite.")
         exo.append(ur'\begin{enumerate}')
         exo.append(ur' \item Calcul du {} terme :'.format(FRANCAIS_ORDINAL[self.rang[0]]))
@@ -683,7 +683,7 @@ class TermesDUneSuite(ex.TexExercise):
         for indice in range(0, self.rang[0]):
             enumeration.append(u"le {ordinal} terme est $u_{indice}$".format(ordinal=FRANCAIS_ORDINAL[indice+1], indice=self.questions[1].indice0+indice))
         exo.append(" ; ".join(enumeration) + ".")
-        exo.append(ur"Le terme demandé est donc $u_{}=".format(self.rang[0] + self.questions[1].indice0 - 1))
+        exo.append(ur"Le terme demandé est donc : $u_{}=".format(self.rang[0] + self.questions[1].indice0 - 1))
         calcul = []
         for etape in self.questions[1].fonction.calcul(Entier(self.rang[0] + self.questions[1].indice0 - 1)):
             calcul.append(etape)
@@ -696,8 +696,8 @@ class TermesDUneSuite(ex.TexExercise):
             calcul = []
             for etape in self.questions[1].fonction.calcul(Entier(self.rang[1])):
                 calcul.append(etape)
-            exo.append(ur"Le terme demandé est donc $u_{{ {} }}=".format(self.rang[1]) + " = ".join(calcul) + ur"$.")
-            exo.append(ur"La solution est donc  $u_{{ {} }}={}$.".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1])).latex()))
+            exo.append(ur"Le terme demandé est donc : $u_{{ {} }}=".format(self.rang[1]) + " = ".join(calcul) + ur"$.")
+            exo.append(ur"La solution est donc  : $u_{{ {} }}={}$.".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1])).latex()))
         exo.append(ur"\item")
         if self.rang[0] + self.questions[1].indice0 - 1 == self.rang[2]:
             exo.append(ur"Ce terme a déjà été calculé, et $u_{{ {} }}={}$.".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2])).latex()))
@@ -706,7 +706,7 @@ class TermesDUneSuite(ex.TexExercise):
             for etape in self.questions[1].fonction.calcul(Entier(self.rang[2])):
                 calcul.append(etape)
             exo.append(ur"On a : $u_{{ {} }}=".format(self.rang[2]) + " = ".join(calcul) + ur"$.")
-            exo.append(ur"La solution est donc  $u_{{ {} }}={}$.".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2])).latex()))
+            exo.append(ur"La solution est donc  : $u_{{ {} }}={}$.".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2])).latex()))
         exo.append(ur'\end{enumerate}')
 
         # Question 2
@@ -737,9 +737,9 @@ class TermesDUneSuite(ex.TexExercise):
         for indice in range(0, self.rang[0]):
             enumeration.append(u"le {ordinal} terme est $u_{indice}$".format(ordinal=FRANCAIS_ORDINAL[indice+1], indice=self.questions[2].indice0+indice))
         exo.append(" ; ".join(enumeration) + ".")
-        exo.append(ur"Le terme demandé est donc $u_{}={}$.".format(self.rang[0] + self.questions[2].indice0 - 1, termes[self.rang[0] + self.questions[2].indice0 - 1].latex()))
-        exo.append(ur'\item Le terme de rang {indice} est $u_{indice}={valeur}$.'.format(indice=self.rang[1], valeur=termes[self.rang[1]].latex()))
-        exo.append(ur'\item Nous avons calculé que $u_{indice}={valeur}$.'.format(indice=self.rang[2], valeur=termes[self.rang[2]].latex()))
+        exo.append(ur"Le terme demandé est donc : $u_{}={}$.".format(self.rang[0] + self.questions[2].indice0 - 1, termes[self.rang[0] + self.questions[2].indice0 - 1].latex()))
+        exo.append(ur'\item Le terme de rang {indice} est : $u_{indice}={valeur}$.'.format(indice=self.rang[1], valeur=termes[self.rang[1]].latex()))
+        exo.append(ur'\item Nous avons calculé que : $u_{indice}={valeur}$.'.format(indice=self.rang[2], valeur=termes[self.rang[2]].latex()))
         exo.append(ur'\end{enumerate}')
 
         exo.append(ur'\end{enumerate}')
