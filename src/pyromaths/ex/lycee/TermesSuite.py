@@ -711,7 +711,7 @@ class TermesDUneSuite(ex.TexExercise):
 
         # Question 2
         exo.append(textwrap.dedent(ur"""
-            \item La suite ${notation}$ est définie de manière récursive, pour $n\geq{indice0}$, par :
+            \item La suite ${notation}$ est définie par récurrence, pour $n\geq{indice0}$, par :
                 \[\left\{{\begin{{array}}{{l}}
                   u_{indice0}={terme0}\\
                   \text{{Pour tout $n\geq{indice0}$ : }} u_{{n+1}}={fonction}.
