@@ -90,7 +90,7 @@ class TestExercise(object):
         random.seed(self.seed)
         return self.exercise()
 
-    def compile(self, openpdf=0, movefile=False):
+    def compile(self, openpdf=0, movefile=False, pipe=None):
         """Compile exercise"""
         tempdir = tempfile.mkdtemp()
 
@@ -111,6 +111,7 @@ class TestExercise(object):
             'liste_exos': [self.get_exercise()],
             'les_fiches': pyromaths.Values.lesfiches(),
             'openpdf': openpdf,
+            'pipe': pipe,
         })
         os.chdir(old_dir)
 

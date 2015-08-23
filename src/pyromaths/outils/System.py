@@ -133,6 +133,21 @@ def modify_config_file(fichier):
 #==============================================================
 #        Créer et lance la compilation des fichiers TeX
 #==============================================================
+def _preprocess_pipe(filename, pipe):
+    """Exécute chacune des commandes de `pipe` sur `filename`.
+
+    :param str filename: Nom du fichier LaTeX qui va être compilé.
+    :param list pipe: Liste de commandes à appliquer, sous la forme de chaînes
+        de caractères. Si ces chaînes contiennent `{}`, ceci est remplacé par
+        le nom du fichier ; sinon, il est ajouté à la fin de la commande.
+    """
+    from subprocess import call
+    for command in pipe:
+        formatted = command.format(filename)
+        if formatted == command:
+            formatted = '{} {}'.format(command, filename)
+        call(formatted, env=os.environ, shell=True)
+
 def creation(parametres):
     """Création et compilation des fiches d'exercices.
     parametres = {'fiche_exo': f0,
@@ -209,6 +224,7 @@ def creation(parametres):
     if parametres['creer_pdf']:
         from subprocess import call
 
+        _preprocess_pipe(os.path.join(dir0, '{}.tex'.format(f0noext)), parametres['pipe'])
         os.chdir(dir0)
         latexmkrc(f0noext)
         log = open('%s-pyromaths.log' % f0noext, 'w')

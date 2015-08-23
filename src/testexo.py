@@ -149,6 +149,17 @@ def argument_parser():
         nargs='*', type=exercise_argument, default=None,
         help='Exercises to compile. If empty, all exercises are compiled.'
         )
+    compile_parser.add_argument(
+        '-p', '--pipe',
+        nargs=1,
+        type=str,
+        action='append',
+        help=(
+            "Commands to run on the LaTeX file before compiling. String '{}' "
+            "is replaced by the file name; if not, it is appended at the end "
+            "of the string."
+            )
+        )
 
     # Check
     check = subparsers.add_parser(
@@ -252,12 +263,17 @@ def do_compile(options):
     """Action for command line 'compile'."""
     tests = TestPerformer()
 
+    if options.pipe is None:
+        options.pipe = []
+    else:
+        options.pipe = [item[0] for item in options.pipe]
+
     for exercise, seeds in options.exercise:
         if not seeds:
             seeds = [0]
         for seed in seeds:
             test = tests.get(exercise, seed)
-            test.compile(movefile=True)
+            test.compile(movefile=True, pipe=options.pipe)
 
 def do_check(options):
     """Run the tests"""
