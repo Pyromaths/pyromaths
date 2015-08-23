@@ -42,7 +42,7 @@ simplifiée.
 * Compilation d'un exercice (``testexo.py compile``) :
   Compile un exercice, et crée le PDF correspondant (énoncé et solution) dans le dossier courant. Cette commande est utile pour tester un exercice en cours de rédaction, plutôt que de passer par l'interface graphique.
 
-  Il est également possible de fournir des commandes à exécuter sur les fichiers LaTeX avant leur compilation. Ceci est utile pour déceler des erreurs de code LaTeX. Par exemple, la commande ``testexo.py compile -p more EXERCICE`` affiche le code LaTeX dans `more` avant compilation; la commande ``testexo.py compile -p vim EXERCICE`` édite le fichier avec `vim` avant compilation.
+  Il est également possible de fournir des commandes à exécuter sur les fichiers LaTeX avant leur compilation. Ceci est utile pour déceler des erreurs de code LaTeX. Par exemple, la commande ``testexo.py compile -p more EXERCICE`` affiche le code LaTeX dans `more` avant compilation; la commande ``testexo.py compile -p vim EXERCICE`` édite le fichier avec `vim` avant compilation. Ceci peut aussi être utilisé (en attendant une solution plus propre) pour garder une copie du fichier LaTeX en cas d'erreur de compilation, pour pouvoir l'analyser, ainsi que le log : ``testexo.py compile -p 'cp {} exercices.tex' EXERCICE``.
 
 * Liste des identifiants des exercices disponibles (``testexo.py lsexos``) :
   Affiche la liste des identifiants des exercices, pour retrouver facilement l'exercice en cours de travail.
