@@ -66,7 +66,7 @@ def div(pyromax):
     return (a * b, a)
 
 
-def main():
+def calcul_mental():
     exo = ["\\exercice", "Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     cor = ["\\exercice*", "Effectuer sans calculatrice :",
@@ -93,4 +93,4 @@ def main():
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
     return (exo, cor)
 
-main.description = u'Calcul mental'
+calcul_mental.description = u'Calcul mental'

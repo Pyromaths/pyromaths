@@ -169,7 +169,7 @@ def tex_liste_co(liste_coord):
         i = i + 1
     return tlc
 
-def main():
+def reperage():
     nbpts = 13
     noms_pts = (noms_sommets(nbpts))
     coord_pts = coordo_pts(nbpts)
@@ -215,4 +215,4 @@ def main():
     cor.append("}")
     return(exo, cor)
 
-main.description = u'Repérage'
+reperage.description = u'Repérage'

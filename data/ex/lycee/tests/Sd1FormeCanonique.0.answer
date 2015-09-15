@@ -1,0 +1,12 @@
+\exercice*
+Donner la forme canonique des polynômes $P$ , $Q$ , $R$ et $S$ .
+\begin{align*}
+P\,(x) &= x^{2}-16\,x+4 & Q\,(x) &= x^{2}+7\,x+8 & S\,(x) &= 4\,x^{2}-7\,x-3\\
+ &= \left( x-8\right) ^{2}-8^{2}+4 &  &= \left( x+\dfrac{7}{2}\right) ^{2}-\left(  \dfrac{7}{2} \right) ^{2}+8 &  &= 4\times \left( x^{2}-\dfrac{7}{4}\,x-\dfrac{3}{4}\right) \\
+ &= \left( x-8\right) ^{2}+64+4 &  &= \left( x+\dfrac{7}{2}\right) ^{2}+\dfrac{-49}{4}+\dfrac{8_{\times 4}}{1_{\times 4}} &  &= 4\times \left( \left( x-\dfrac{7}{8}\right) ^{2}-\left(  \dfrac{7}{8} \right) ^{2}+\dfrac{-3}{4}\right) \\
+\Aboxed{P\,(x) &= \left( x-8\right) ^{2}+68} &  &= \left( x+\dfrac{7}{2}\right) ^{2}+\dfrac{-49}{4}+\dfrac{32}{4} &  &= 4\times \left( \left( x-\dfrac{7}{8}\right) ^{2}+\dfrac{-49}{64}+\dfrac{-3_{\times 16}}{4_{\times 16}}\right) \\
+R\,(x) &= 25\,x^{2}-60\,x+36 & \Aboxed{Q\,(x) &= \left( x+\dfrac{7}{2}\right) ^{2}+\dfrac{-17}{4}} &  &= 4\times \left( \left( x-\dfrac{7}{8}\right) ^{2}+\dfrac{-49}{64}+\dfrac{-48}{64}\right) \\
+ &= \left( 5\,x-6\right) ^{2} & &  &  &= 4\times \left( \left( x-\dfrac{7}{8}\right) ^{2}+\dfrac{-97}{64}\right) \\
+ &= \left( 5\times \left( x-\dfrac{6}{5}\right) \right) ^{2} & &  &  &= 4\times \left( x-\dfrac{7}{8}\right) ^{2}+\dfrac{-97\times \cancel{4}}{\cancel{4}\times 16}\\
+\Aboxed{R\,(x) &= 25\times \left( x-\dfrac{6}{5}\right) ^{2}} & &  & \Aboxed{S\,(x) &= 4\times \left( x-\dfrac{7}{8}\right) ^{2}+\dfrac{-97}{16}}\\
+\end{align*}

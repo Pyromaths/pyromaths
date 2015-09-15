@@ -71,7 +71,7 @@ def moins_dec(pyromax):
 
 
 
-def main():
+def relatifs():
     exo = ["\\exercice", "Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     cor = ["\\exercice*", "Effectuer sans calculatrice :",
@@ -105,4 +105,4 @@ def main():
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
     return (exo, cor)
 
-main.description = u'Addition de relatifs'
+relatifs.description = u'Addition de relatifs'
