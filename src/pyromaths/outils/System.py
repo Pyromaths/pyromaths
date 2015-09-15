@@ -139,9 +139,13 @@ def _preprocess_pipe(filename, pipe):
     :param str filename: Nom du fichier LaTeX qui va être compilé.
     :param list pipe: Liste de commandes à appliquer, sous la forme de chaînes
         de caractères. Si ces chaînes contiennent `{}`, ceci est remplacé par
-        le nom du fichier ; sinon, il est ajouté à la fin de la commande.
+        le nom du fichier ; sinon, il est ajouté à la fin de la commande. Cet
+        élément peut aussi être `None`, auquel cas il correspond à une liste
+        vide.
     """
     from subprocess import call
+    if pipe is None:
+        pipe = []
     for command in pipe:
         formatted = command.format(filename)
         if formatted == command:

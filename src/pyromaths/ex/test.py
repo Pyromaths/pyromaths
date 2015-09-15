@@ -168,22 +168,30 @@ class TestExercise(object):
 class UnittestExercise(unittest.TestCase):
     """Test an exercise, with a particular seed."""
 
-    def __init__(self, test):
+    maxDiff = None
+
+    def __init__(self, exercise=None):
         super(UnittestExercise, self).__init__()
-        self.test = test
+        self.exercise = exercise
+
+    def shortDescription(self):
+        if self.exercise is None:
+            return super(UnittestExercise, self).shortDescription()
+        else:
+            return self.exercise.exercise.id()
 
     def runTest(self):
         """Perform test"""
-        exo = self.test.get_exercise()
+        exo = self.exercise.get_exercise()
 
-        self.assertListEqual(
-            exo.tex_statement(),
-            self.test.read('statement').split("\n"),
+        self.assertEqual(
+            u"\n".join(exo.tex_statement()),
+            self.exercise.read('statement'),
             )
 
-        self.assertListEqual(
-            exo.tex_answer(),
-            self.test.read('answer').split("\n"),
+        self.assertEqual(
+            u"\n".join(exo.tex_answer()),
+            self.exercise.read('answer'),
             )
 
 class TestPerformer(object):
@@ -239,5 +247,5 @@ class TestPerformer(object):
         suite = unittest.TestSuite()
         for exercise, seeds in exercises:
             for seed in seeds:
-                suite.addTest(UnittestExercise(self.get(exercise, seed)))
+                suite.addTest(UnittestExercise(exercise=self.get(exercise, seed)))
         return suite
