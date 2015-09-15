@@ -1,0 +1,16 @@
+\exercice
+Pour chacune des suites $u$ suivantes, calculer :
+ (a) le septième terme ;
+ (b) le terme de rang 6 ;
+ (c) $u_4$.
+\begin{enumerate}
+  \item $\left(u_n\right)$ est une suite de premier terme $u_1=-2$, et dont chaque terme (sauf le premier) est égal à l'inverse du précédent.
+  \item $u$ est la suite définie pour $n\geq1$ par : $u_n=\frac{ 3 }{ 5 }n-6$.
+
+\item $\left(u_n\right)$ est la suite définie pour $n\geq3$ par :
+    \[\left\{\begin{array}{l}
+      u_3=-5\\
+      \text{Pour tout $n\geq3$ : } u_{n+1}=\frac{ 4 }{ 5 }u_n.
+  \end{array}\right.\]
+
+\end{enumerate}
