@@ -1,0 +1,61 @@
+\exercice
+\begin{minipage}[]{\linewidth-8cm}
+\begin{enumerate}
+\item Déterminer graphiquement les nombres dérivés de la fonction $f$ en $\qquad x=-4 \qquad x=0 \qquad x=4$.
+\item On considère le tableau de valeurs suivant :\par
+\renewcommand{\arraystretch}{2}
+\begin{tabularx}{\linewidth}[t]{|*5{>{\centering\arraybackslash}X|}}
+\hline
+$x$ & $-5$ & $-1$ & $1$ & $5$ \\ \hline
+$g\,(x)$ & $-2$ & $0$ & $3$ & $-2$ \\ \hline
+$g'\,(x)$ & $3$ & $-2$ & $\dfrac{3}{4}$ & $0$ \\ \hline
+\end{tabularx}
+\begin{enumerate}
+\item Dans un nouveau repère, placer les points de la courbe $\mathcal{C}_g$ ainsi connus.
+\item Tracer les tangentes à $\mathcal{C}_g$ en ces points.
+\item Donner une allure possible de la courbe $\mathcal{C}_g$.
+\end{enumerate}
+\end{enumerate}
+\end{minipage}
+\hfill
+\begin{minipage}[]{7.5cm}
+\begin{asy}[width=\linewidth]
+import graph;
+import interpolate;
+import geometry;
+defaultpen(fontsize(9pt));
+real[] xpt={-6.1,-4,00,04,6.1};
+real[] ypt={00,-2,02,01,-2};
+real[] dy= {00,04,-1.5,00,00};
+real f(real t){return pwhermite(xpt,ypt,dy)(t);}
+path Cf=graph(f,-6.1,6.1);
+void tangente(int k,real lg=sqrt(1+dy[k]^2),real ld=lg, pen p=black+1, arrowbar arr=Arrows(SimpleHead,size=9pt)) {
+draw(((xpt[k],ypt[k])-lg*unit((1,dy[k])))--((xpt[k],ypt[k])+ld*unit((1,dy[k]))),p,arr);
+dot((xpt[k],ypt[k]));
+}
+xlimits(-6.1, 6.1);
+ylimits(-5.5, 5.5, Crop);
+xaxis(axis=BottomTop, p=invisible,
+ticks=Ticks(format="%", Step=1, extend=true,
+pTick=gray+.5pt, ptick=dotted)
+);
+yaxis(axis=LeftRight, p=invisible,
+ticks=Ticks(format="%", Step=1, extend=true,
+pTick=gray+.5pt, ptick=dotted)
+);
+xequals(L="$y$", 0, extend=false, arrow=Arrow(HookHead, size=9pt), p=black+1,
+ticks=Ticks(scale(.7)*Label(filltype=Fill(white)), Step=1, Size=3pt,
+end=false, endlabel=false, beginlabel=false, NoZero));
+yequals(L="$x$", 0, extend=false, arrow=Arrow(HookHead, size=9pt), p=black+1,
+ticks=Ticks(scale(.7)*Label(filltype=Fill(white)), Step=1, Size=3pt,
+end=false, endlabel=false, beginlabel=false, NoZero));
+labelx(L=scale(.7)*"$0$", (0,0), align=SW);
+label("$\mathcal C_f$", (-6, f(-6)), 1.5NE, brown);
+draw(Cf, brown+1.5);
+tangente(1,lg=sqrt(17));
+tangente(2,lg=sqrt(13));
+tangente(3,lg=sqrt(1));
+xlimits(-6.1, 6.1, Crop);
+ylimits(-5.5, 5.5, Crop);
+\end{asy}
+\end{minipage}

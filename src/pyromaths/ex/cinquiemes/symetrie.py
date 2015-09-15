@@ -102,7 +102,7 @@ def exo_quadrillage(f0, f1):
     pass
 
 
-def main():
+def symetrie():
     exo = ["\\exercice",
            u"Construire la symétrique de chacune des figures par rapport au point O en",
            "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
@@ -130,4 +130,4 @@ def main():
             cor.append("\\hfill")
     return (exo, cor)
 
-main.description = u'Symétrie centrale'
+symetrie.description = u'Symétrie centrale'

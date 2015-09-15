@@ -1,0 +1,64 @@
+\exercice
+\begin{enumerate}
+\item Quel est le sens de variation de la fonction $f$ ? Répondre par une phrase en précisant les intervalles.
+\item Tracer les tableaux de variation des fonctions $f$ et $g$.
+\end{enumerate}
+\begin{center}
+\begin{asy}
+ import graph;
+ import interpolate;
+ unitsize(5mm);
+defaultpen(fontsize(9pt));
+real[] xpt,ypt;
+real [] xpt={-5,-4,-3,-2,-1,00,01,02,03,04,05};
+real [] ypt={04,02,00,02,03,02,01,02,00,-1,-2};
+xlimits(-6.2, 6.2);
+ylimits(-5.2, 5.2);
+xaxis(axis=BottomTop, p=invisible,
+ticks=Ticks(format="%%", Step=1, extend=true,
+pTick=gray+.5, ptick=dotted)
+);
+yaxis(axis=LeftRight, p=invisible,
+ticks=Ticks(format="%%", Step=1, extend=true,
+pTick=gray+.5, ptick=dotted)
+);
+xequals(L="$y$", 0, extend=false, arrow=Arrow(HookHead, size=9pt), p=black+1,
+ticks=Ticks(scale(.7)*Label(filltype=Fill(white)), Step=1, Size=3pt,
+end=false, endlabel=false, beginlabel=false, NoZero));
+yequals(L="$x$", 0, extend=false, arrow=Arrow(HookHead, size=9pt), p=black+1,
+ticks=Ticks(scale(.7)*Label(filltype=Fill(white)), Step=1, Size=3pt,
+end=false, endlabel=false, beginlabel=false, NoZero));
+draw(graph(xpt,ypt,Hermite(monotonic)),brown+1.5);
+labelx(L=scale(.7)*"$0$", (0,0), align=SW);
+label(L="$\mathcal{C}_f$", (-5,4), align=SW);
+\end{asy}
+\kern1cm
+\begin{asy}
+ import graph;
+ import interpolate;
+ unitsize(5mm);
+defaultpen(fontsize(9pt));
+real[] xpt,ypt;
+real [] xpt={-5,-4,-3,-2,-1,00,01,02,03,04,05};
+real [] ypt={04,04,04,04,03,01,02,00,-4,-2,-1};
+xlimits(-6.2, 6.2);
+ylimits(-5.2, 5.2);
+xaxis(axis=BottomTop, p=invisible,
+ticks=Ticks(format="%%", Step=1, extend=true,
+pTick=gray+.5, ptick=dotted)
+);
+yaxis(axis=LeftRight, p=invisible,
+ticks=Ticks(format="%%", Step=1, extend=true,
+pTick=gray+.5, ptick=dotted)
+);
+xequals(L="$y$", 0, extend=false, arrow=Arrow(HookHead, size=9pt), p=black+1,
+ticks=Ticks(scale(.7)*Label(filltype=Fill(white)), Step=1, Size=3pt,
+end=false, endlabel=false, beginlabel=false, NoZero));
+yequals(L="$x$", 0, extend=false, arrow=Arrow(HookHead, size=9pt), p=black+1,
+ticks=Ticks(scale(.7)*Label(filltype=Fill(white)), Step=1, Size=3pt,
+end=false, endlabel=false, beginlabel=false, NoZero));
+draw(graph(xpt,ypt,Hermite(monotonic)),brown+1.5);
+labelx(L=scale(.7)*"$0$", (0,0), align=SW);
+label(L="$\mathcal{C}_g$", (-5,4), align=SE);
+\end{asy}
+\end{center}

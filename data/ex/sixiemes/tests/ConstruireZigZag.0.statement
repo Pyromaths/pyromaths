@@ -1,0 +1,53 @@
+\exercice
+Voici deux exemples de zigzags :\par
+\psset{unit=3.5mm,PointSymbol=none}
+\begin{pspicture}(-.4,-1)(16.4, 7.5)
+%\psgrid
+\pstGeonode[PosAngle=-96.00,PointSymbol=x](0.20, 0.20){A}
+\pstGeonode[PosAngle=-265.00](0.83, 6.17){B} \pstSegmentMark{A}{B}
+\pstGeonode[PosAngle=-87.50](2.48, 0.40){C} \pstSegmentMark{B}{C}
+\pstGeonode[PosAngle=-241.00](3.63, 6.29){D} \pstSegmentMark{C}{D}
+\pstGeonode[PosAngle=-90.00](9.23, 4.14){E} \pstSegmentMark{D}{E}
+\pstGeonode[PosAngle=-299.50](14.83, 6.29){F} \pstSegmentMark{E}{F}
+\pstGeonode[PosAngle=-80.00,PointSymbol=x](15.87, 0.38){G}
+\pstSegmentMark{F}{G}
+\pstMarkAngle[MarkAngleRadius=1.5]{A}{B}{C}{}
+\pstMarkAngle[MarkAngleRadius=1.5]{D}{C}{B}{}
+\pstMarkAngle[MarkAngleRadius=1.5]{C}{D}{E}{}
+\pstMarkAngle[MarkAngleRadius=1.5]{F}{E}{D}{}
+\pstMarkAngle[MarkAngleRadius=1.5]{E}{F}{G}{}
+\end{pspicture}
+\hspace{2cm}
+\begin{pspicture}(-.4,-1)(16.4, 7.5)
+\pstGeonode[PosAngle=-91.00,PointSymbol=x](0.20, 0.20){A}
+\pstGeonode[PosAngle=-263.50](0.30, 6.20){B} \pstSegmentMark{A}{B}
+\pstGeonode[PosAngle=-101.00](1.76, 0.38){C} \pstSegmentMark{B}{C}
+\pstGeonode[PosAngle=-259.00](5.28, 5.23){D} \pstSegmentMark{C}{D}
+\pstGeonode[PosAngle=-82.50](10.37, 2.05){E} \pstSegmentMark{D}{E}
+\pstGeonode[PosAngle=-286.00](14.46, 6.44){F} \pstSegmentMark{E}{F}
+\pstGeonode[PosAngle=-79.00,PointSymbol=x](15.61, 0.55){G}
+\pstSegmentMark{F}{G}
+\pstMarkAngle[MarkAngleRadius=1.5]{A}{B}{C}{}
+\pstMarkAngle[MarkAngleRadius=1.5]{D}{C}{B}{}
+\pstMarkAngle[MarkAngleRadius=1.5]{C}{D}{E}{}
+\pstMarkAngle[MarkAngleRadius=1.5]{F}{E}{D}{}
+\pstMarkAngle[MarkAngleRadius=1.5]{E}{F}{G}{}
+\end{pspicture}\par
+\psset{unit=1cm}
+Construire sur la figure ci-dessous les points $C$, $D$, $E$, $F$ et $G$ pour obtenir un zigzag tel que :\par
+$\widehat{ABC}=67\degres \qquad \widehat{BCD}=170\degres \qquad \widehat{CDE}=178\degres \qquad \widehat{DEF}=87\degres \qquad \widehat{EFG}=52\degres \qquad $\par
+Quand le travail est fait avec une bonne précision, les 
+droites $(AF)$ et $(BG)$ se coupent au c\oe ur de la cible.
+\begin{center}
+\fbox{
+\begin{pspicture}(-.4,-.4)(16.4, 5.5)
+
+\pstGeonode[PosAngle=-92.00, PointSymbol=x](0.20, 0.20){A} \pstGeonode[PosAngle=-171.50, PointSymbol=x](0.34, 4.20){B} \pstSegmentMark{A}{B}
+\pscircle[linecolor=Gray](7.72, 2.61){0.1}
+\pscircle[linecolor=Gray](7.72, 2.61){0.2}
+\pscircle[linecolor=Gray](7.72, 2.61){0.3}
+\pscircle[linecolor=Gray](7.72, 2.61){0.4}
+
+\end{pspicture}
+}
+\end{center}

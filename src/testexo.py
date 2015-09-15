@@ -1,5 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#
+# Copyright (C) 2015 -- Louis Paternault (spalax@gresille.org)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 """Pyromaths exercise regression tests
 
@@ -13,7 +29,7 @@ import logging
 import sys
 import unittest
 
-import pyromaths.ex.test
+from pyromaths.ex.test import TestPerformer, TestException
 
 # Logging configuration
 logging.basicConfig(level=logging.INFO)
@@ -21,19 +37,22 @@ LOGGER = logging.getLogger()
 
 VERSION = "0.1.0"
 
-def match_exercise(path):
-    """Return the exercises in `path`."""
-    exercises = []
-    levels = pyromaths.ex.load_levels()
-    for level in levels:
-        for exercise in levels[level]:
-            if (
-                    issubclass(exercise, pyromaths.ex.TexExercise) and exercise.__module__.startswith(path)
-                ) or (
-                    issubclass(exercise, pyromaths.ex.LegacyExercise) and exercise.module.startswith(path)
-                ):
-                exercises.append(exercise)
-    return exercises
+def ask_confirm(message):
+    """Ask a confirmation for some message.
+
+    :rtype bool:
+    :return: True iff user agreed (answered ``y``), False if user did not
+        (answered ``n``).
+    """
+    while True:
+        try:
+            answer = raw_input("{} (y/n) [n]? ".format(message))
+        except EOFError:
+            answer = 'n'
+        if answer == 'y':
+            return True
+        elif answer == 'n':
+            return False
 
 def exercise_argument(string=""):
     """Return the exercises matching ``string``.
@@ -45,10 +64,10 @@ def exercise_argument(string=""):
     """
     splitted = string.split(":")
     if len(splitted) == 1:
-        path = string
+        name = string
         seeds = []
     elif len(splitted) == 2:
-        path, seeds = string.split(":")
+        name, seeds = string.split(":")
         try:
             seeds = [int(seed) for seed in seeds.split(",")]
         except ValueError:
@@ -56,12 +75,7 @@ def exercise_argument(string=""):
     else:
         raise argparse.ArgumentTypeError("TODO")
 
-    if path.endswith(".py"):
-        path = path[:-3]
-
-    return dict([
-        (exo, seeds) for exo in match_exercise(path.replace('/', '.'))
-        ])
+    return (name, seeds)
 
 def argument_parser():
     """Return an argument parser"""
@@ -78,14 +92,21 @@ def argument_parser():
     # Create
     create = subparsers.add_parser(
         'create',
-        help='Create test given in argument. If not, create missing tests.',
+        help='Create test given in argument.',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         )
     create.add_argument(
         "exercise",
         metavar='EXERCISE[:SEED[,SEED]]',
-        nargs='*', type=exercise_argument, default=None,
-        help='Exercices to test. If empty, all exercises are tested.'
+        nargs='+', type=exercise_argument,
+        help='Exercises to test.'
+        )
+
+    # Missing
+    missing = subparsers.add_parser(
+        'missing',
+        help='Create missing tests.',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
         )
 
     # Remove
@@ -97,7 +118,7 @@ def argument_parser():
         "exercise",
         metavar='EXERCISE[:SEED[,SEED]]',
         nargs='+', type=exercise_argument, default=None,
-        help='Exercices to remove.',
+        help='Exercises to remove.',
         )
 
     # Update
@@ -113,7 +134,7 @@ def argument_parser():
         "exercise",
         metavar='EXERCISE[:SEED[,SEED]]',
         nargs='*', type=exercise_argument, default=None,
-        help='Exercices to test. If empty, all exercises are tested.'
+        help='Exercises to test. If empty, all exercises are tested.'
         )
 
     # Compile
@@ -126,7 +147,18 @@ def argument_parser():
         "exercise",
         metavar='EXERCISE[:SEED[,SEED]]',
         nargs='*', type=exercise_argument, default=None,
-        help='Exercices to compile. If empty, all exercises are compiled.'
+        help='Exercises to compile. If empty, all exercises are compiled.'
+        )
+    compile_parser.add_argument(
+        '-p', '--pipe',
+        nargs=1,
+        type=str,
+        action='append',
+        help=(
+            "Commands to run on the LaTeX file before compiling. String '{}' "
+            "is replaced by the file name; if not, it is appended at the end "
+            "of the string."
+            )
         )
 
     # Check
@@ -142,97 +174,141 @@ def argument_parser():
         "exercise",
         metavar='EXERCISE[:SEED[,SEED]]',
         nargs='*', type=exercise_argument, default=None,
-        help='Exercices to check. If empty, all exercises are checked.'
+        help='Exercises to check. If empty, all exercises are checked.'
         )
+
+    # List exos
+    lsexos = subparsers.add_parser(
+        'lsexos',
+        help=(
+            "List available exercises. Each line of the output can be used as "
+            "an argument to other commands."
+            ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        )
+
 
     return parser
 
-def do_create(exercises, test_suite):
+def do_create(options):
     """Action for command line 'create'."""
-    for exo in exercises:
-        if not exercises[exo]:
-            seeds = set([0])
-        else:
-            seeds = exercises[exo]
-        for seed in seeds:
-            if not test_suite.has_test(exo, seed):
-                test_suite.create_test(exo, seed)
-    test_suite.write_testfiles()
+    tests = TestPerformer()
 
-def do_remove(exercises, test_suite):
+    for exercise, seeds in options.exercise:
+        if not seeds:
+            seeds = [0]
+        for seed in seeds:
+            test = tests.get(exercise, seed)
+            test.show()
+            if ask_confirm("Is the test valid?"):
+                test.write()
+
+def do_missing(__options):
+    """Action for command line 'missing'."""
+    tests = TestPerformer()
+
+    for exercise in tests.iter_missing():
+        test = tests.get(exercise, 0)
+        test.show()
+        if ask_confirm("Is the test valid?"):
+            test.write()
+
+def do_remove(options):
     """Action for command line 'remove'."""
-    for exo in exercises:
-        if not exercises[exo]:
-            seeds = test_suite.get_exercise(exo).seeds
-        else:
-            seeds = exercises[exo]
-        for seed in list(seeds.keys()):
-            if test_suite.has_test(exo, seed):
-                test_suite.remove_test(exo, seed)
-    test_suite.write_testfiles()
+    tests = TestPerformer()
 
-def do_update(exercises, test_suite):
+    for exercise, seeds in options.exercise:
+        if not seeds:
+            seeds = tests.get_tested_seeds(exercise)
+        for seed in seeds:
+            if ask_confirm("Remove test {}:{}?".format(exercise, seed)):
+                tests.get(exercise, seed).remove()
+
+def get_exercise_list_or_all(tests, exercise_option):
+    """Return list of exercises provided by user, or every exercise.
+
+    - If user provided an exercise list, return a list of tuples `(exercise,
+      seeds)`.
+    - If user did not, return a list of tuples `(exercise, seeds)` for all
+      tests found in the data directory.
+    """
+    if exercise_option:
+        exercise_list = []
+        for exercise, seeds in exercise_option:
+            if seeds:
+                exercise_list.append((exercise, seeds))
+            else:
+                exercise_list.append((exercise, tests.get_tested_seeds(exercise)))
+    else:
+        exercise_list = [
+            (exo, tests.get_tested_seeds(exo))
+            for exo in tests.iter_id()
+            ]
+
+    return exercise_list
+
+def do_update(options):
     """Action for command line 'update'."""
-    for exo in exercises:
-        if not exercises[exo]:
-            seeds = test_suite.get_exercise(exo).seeds
-        else:
-            seeds = exercises[exo]
-        for seed in seeds:
-            exo_instance = test_suite.get_exercise(exo)
-            LOGGER.info(u"Testing exercise {}[{}]…".format(
-                exo_instance.name,
-                seed,
-                ))
-            if not pyromaths.ex.test.simple_runtest(
-                    exo_instance[seed]
-                ):
-                test_suite.create_test(exo, seed)
-    test_suite.write_testfiles()
+    tests = TestPerformer()
 
-def do_compile(exercises, test_suite):
+    for exercise, seeds in get_exercise_list_or_all(tests, options.exercise):
+        for seed in seeds:
+            test = tests.get(exercise, seed)
+            if test.changed():
+                test.show()
+                if ask_confirm("Is the test valid?"):
+                    test.write()
+
+def do_compile(options):
     """Action for command line 'compile'."""
-    for exo in exercises:
-        if not exercises[exo]:
-            seeds = test_suite.get_exercise(exo).seeds
-        else:
-            seeds = exercises[exo]
-        exo_instance = test_suite.get_exercise(exo)
-        if not exo_instance.seeds:
-            exo_instance.add_seed(0)
-        for seed in seeds:
-            exo_instance[seed].compile(movefile=True)
+    tests = TestPerformer()
 
-def do_check(__exercises, test_suite):
+    if options.pipe is None:
+        options.pipe = []
+    else:
+        options.pipe = [item[0] for item in options.pipe]
+
+    for exercise, seeds in options.exercise:
+        if not seeds:
+            seeds = [0]
+        for seed in seeds:
+            test = tests.get(exercise, seed)
+            test.compile(movefile=True, pipe=options.pipe)
+
+def do_check(options):
     """Run the tests"""
-    suite = unittest.TestSuite(list(test_suite.iter_tests()))
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    tests = TestPerformer()
+
+    unittest.TextTestRunner(verbosity=2).run(
+        tests.as_unittest_suite(
+            get_exercise_list_or_all(tests, options.exercise)
+            )
+        )
+
+def do_lsexos(__options):
+    """Perform the `lsexos` command."""
+    tests = TestPerformer()
+    for exo_id in tests.iter_id():
+        print exo_id
 
 COMMANDS = {
     "check": do_check,
-    "create": do_create,
-    "remove": do_remove,
     "compile": do_compile,
+    "create": do_create,
+    "lsexos": do_lsexos,
+    "missing": do_missing,
+    "remove": do_remove,
     "update": do_update,
     }
 
 def main():
     """Main function"""
     options = argument_parser().parse_args(sys.argv[1:])
-    test_suite = pyromaths.ex.test.create_test_suite()
-
-    exercises = {}
-    if not options.exercise:
-        options.exercise = [exercise_argument()]
-    for exo_option in options.exercise:
-        for exo in exo_option:
-            if exo not in exercises:
-                exercises[exo] = set()
-            exercises[exo] |= set(exo_option[exo])
 
     try:
-        COMMANDS[options.command](exercises, test_suite)
-    except pyromaths.ex.test.ActionCancelAll:
+        COMMANDS[options.command](options)
+    except TestException as error:
+        logging.error(error)
         sys.exit(1)
 
 if __name__ == "__main__":

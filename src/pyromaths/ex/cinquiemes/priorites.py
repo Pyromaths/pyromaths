@@ -223,7 +223,7 @@ def calcul(a, op, b, entier=1):  # retourne 'hp' (hors programme) ou le résulta
             return a / b
 
 
-def main():
+def priorites():
     nb = 9  # nombre de calculs
     exo = ["\\exercice",
            u"Calculer les expressions suivantes en détaillant les calculs.\n",
@@ -262,4 +262,4 @@ def main():
     cor.append("\\end{multicols}")
     return (exo, cor)
 
-main.description = u'Priorités opératoires'
+priorites.description = u'Priorités opératoires'
