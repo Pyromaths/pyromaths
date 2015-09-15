@@ -228,7 +228,7 @@ def creation(parametres):
     if parametres['creer_pdf']:
         from subprocess import call
 
-        _preprocess_pipe(os.path.join(dir0, '{}.tex'.format(f0noext)), parametres['pipe'])
+        _preprocess_pipe(os.path.join(dir0, '{}.tex'.format(f0noext)), parametres.get('pipe', None))
         os.chdir(dir0)
         latexmkrc(f0noext)
         log = open('%s-pyromaths.log' % f0noext, 'w')
