@@ -98,7 +98,7 @@ def _mac_opt():
     site_packages_unused = ['_osx_support', '_builtinSuites', 'Carbon',
                             'distutils', 'Finder', 'StdSuites','xml',
                             'getopt', 'repr', '_strptime','gettext', 'sets',
-                            '_threading_local', 'glob','base64', 'locale',
+                            '_threading_local','base64', 'locale',
                             'sre', 'bdb', 'optparse.', 'ssl', 'calendar', 'pdb',
                             'stringprep', 'cmd', 'pkg_resources', 'copy',
                             'platform', 'threading', 'dummy_thread', 'plistlib',
