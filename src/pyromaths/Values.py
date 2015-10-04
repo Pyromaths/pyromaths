@@ -64,9 +64,9 @@ else:
 
 VERSION = '15.02'
 COPYRIGHT_YEAR = strftime('%Y')
-COPYRIGHTS = u'© 2006 – %s Jérôme Ortais<br/>\n' \
+COPYRIGHTS = _(u'© 2006 – %s Jérôme Ortais<br/>\n' \
         u'<span style=" font-size:small;">Pyromaths est distribué sous ' \
-        u'licence GPL.</span>' % (COPYRIGHT_YEAR)
+        u'licence GPL.</span>') % (COPYRIGHT_YEAR)
 WEBSITE = 'http://www.pyromaths.org/'
 DATADIR = data_dir()
 ICONDIR = icon_dir()
@@ -76,7 +76,6 @@ CONFIGDIR = configdir()
 def lesfiches():
     """Charge et renvoie les fiches d'exercices"""
     fiches = []
-    ex.load()
-    for level, exercices in ex.levels.iteritems():
+    for level, exercices in ex.load_levels().iteritems():
         fiches.append([level, '', exercices])
     return fiches

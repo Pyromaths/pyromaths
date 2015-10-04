@@ -98,7 +98,7 @@ def _mac_opt():
     site_packages_unused = ['_osx_support', '_builtinSuites', 'Carbon',
                             'distutils', 'Finder', 'StdSuites','xml',
                             'getopt', 'repr', '_strptime','gettext', 'sets',
-                            '_threading_local', 'glob','base64', 'locale',
+                            '_threading_local','base64', 'locale',
                             'sre', 'bdb', 'optparse.', 'ssl', 'calendar', 'pdb',
                             'stringprep', 'cmd', 'pkg_resources', 'copy',
                             'platform', 'threading', 'dummy_thread', 'plistlib',
@@ -221,7 +221,7 @@ setup(
 if "py2app" in sys.argv:
     # py2app/setenv hack: replace executable with one appending several LaTeX
     # distributions locations to the path.
-    mactex   = "/usr/texbin:/usr/local/bin"
+    mactex   = "/Library/TeX/texbin:/usr/texbin:/usr/local/bin"
     macports = "/opt/local/bin:/opt/local/sbin"
     fink     = "/sw/bin"
     path     = "%s:%s:%s" % (mactex, macports, fink)

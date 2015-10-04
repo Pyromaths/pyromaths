@@ -129,7 +129,7 @@ def reponse3(pt2, ptc2, F1, F2):
 
     return tuple(rep)
 
-def main():
+def espace():
     """Face 1, Face 2"""
     noms_pts = (noms_sommets(8))
     F1 = noms_pts[0:4]
@@ -247,4 +247,4 @@ def main():
          "\\end{enumerate}"]
     return (exo, cor)
 
-main.description = u'Représentation dans l\'espace'
+espace.description = u'Représentation dans l\'espace'

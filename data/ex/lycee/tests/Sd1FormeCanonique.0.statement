@@ -1,0 +1,5 @@
+\exercice
+Donner la forme canonique des polynômes $P$ , $Q$ , $R$ et $S$ .
+\begin{align*}
+P\,(x) &= x^{2}-16\,x+4 & Q\,(x) &= x^{2}+7\,x+8 & R\,(x) &= 25\,x^{2}-60\,x+36 & S\,(x) &= 4\,x^{2}-7\,x-3 \\ 
+\end{align*}

@@ -169,11 +169,11 @@ def tex_liste_co(liste_coord):
         i = i + 1
     return tlc
 
-def main():
+def reperage():
     nbpts = 13
     noms_pts = (noms_sommets(nbpts))
     coord_pts = coordo_pts(nbpts)
-    voc = ['abscisse', u'ordonnée']
+    voc = [_('abscisse'), _(u'ordonnée')]
     rg1 = random.randrange(0, 2)
     rg2 = abs(rg1 - 1)
     while len(coord_pts) < nbpts:
@@ -181,9 +181,9 @@ def main():
     exo = ["\\exercice",
          "\\parbox{0.4\\linewidth}{",
          "\\begin{enumerate}",
-         u"\\item Donner les coordonnées des points %s, %s, %s, %s, %s et %s." % tuple(noms_pts[0:6]),
-         u"\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s" % noms_pts[6:12] + u" de coordonnées respectives %s, %s, %s, %s, %s et %s. " % tuple(tex_liste_co(coord_pts[6:12])),
-         u"\\item Placer dans le repère le point %s d'%s %s et d'%s %s" % (noms_pts[12], voc[rg1], decimaux(str(coord_pts[12][rg1])), voc[rg2], decimaux(str(coord_pts[12][rg2]))),
+         _(u"\\item Donner les coordonnées des points %s, %s, %s, %s, %s et %s.") % tuple(noms_pts[0:6]),
+         _(u"\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s") % noms_pts[6:12] + _(u" de coordonnées respectives %s, %s, %s, %s, %s et %s. ") % tuple(tex_liste_co(coord_pts[6:12])),
+         _(u"\\item Placer dans le repère le point %s d'%s %s et d'%s %s") % (noms_pts[12], voc[rg1], decimaux(str(coord_pts[12][rg1])), voc[rg2], decimaux(str(coord_pts[12][rg2]))),
          "\\end{enumerate}}\\hfill ",
          "\\parbox{0.55\\linewidth}{",
          "\\psset{unit=0.8cm}",
@@ -204,15 +204,15 @@ def main():
          "\\end{pspicture}}\\hfill",
          "\\parbox{0.5\\linewidth}{",
          "\\begin{enumerate}",
-         u"\\item Donner les coordonnées des points %s, %s, %s, %s, %s et %s." % tuple(noms_pts[0:6])]
+         _(u"\\item Donner les coordonnées des points %s, %s, %s, %s, %s et %s.") % tuple(noms_pts[0:6])]
     i = 0
     while i < 6:
-        cor.append(u"Les coordonnées du point %s sont %s \n" % (noms_pts[i], affiche_coord(coord_pts[i])))
+        cor.append(_(u"Les coordonnées du point %s sont %s \n") % (noms_pts[i], affiche_coord(coord_pts[i])))
         i = i + 1
-    cor[len(cor):len(cor)] = [u"\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s" % noms_pts[6:12] + u" de coordonnées respectives %s, %s, %s, %s, %s et %s. " % tuple(tex_liste_co(coord_pts[6:12])),
-         u"\\item Placer dans le repère le point %s d'%s %s et d'%s %s" % (noms_pts[12], voc[rg1], decimaux(str(coord_pts[12][rg1])), voc[rg2], decimaux(str(coord_pts[12][rg2]))),
+    cor[len(cor):len(cor)] = [_(u"\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s") % noms_pts[6:12] +       _(u" de coordonnées respectives %s, %s, %s, %s, %s et %s. ") % tuple(tex_liste_co(coord_pts[6:12])),
+         _(u"\\item Placer dans le repère le point %s d'%s %s et d'%s %s") % (noms_pts[12], voc[rg1], decimaux(str(coord_pts[12][rg1])), voc[rg2], decimaux(str(coord_pts[12][rg2]))),
          "\\end{enumerate}"]
     cor.append("}")
     return(exo, cor)
 
-main.description = u'Repérage'
+reperage.description = _(u'Repérage')

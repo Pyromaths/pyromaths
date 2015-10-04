@@ -32,10 +32,10 @@ from math import atan, cos, pi, sin
 def valeurs_quad2(nb_pts):
     vals = []
     for i in range(nb_pts):
-        angle = random.randrange((i * 360) / nb_pts, ((i + 1) * 360) / 
+        angle = random.randrange((i * 360) / nb_pts, ((i + 1) * 360) /
                                  nb_pts)
-        vals.append(((random.randrange(1, 7) * .5) * cos((angle * pi) / 
-                    180), (random.randrange(1, 7) * .5) * sin((angle * 
+        vals.append(((random.randrange(1, 7) * .5) * cos((angle * pi) /
+                    180), (random.randrange(1, 7) * .5) * sin((angle *
                     pi) / 180)))
     return vals
 
@@ -60,7 +60,7 @@ def centre_sym(vals):
     fin = 0
     while not fin:
         (fin, cpt) = (1, 0)
-        (o1, o2) = (random.randrange(-6, 7) * .5, random.randrange(-6, 7) * 
+        (o1, o2) = (random.randrange(-6, 7) * .5, random.randrange(-6, 7) *
                     .5)
         while fin and cpt < len(vals):
             fin = fin and -3 <= 2 * o1 - vals[cpt][0] <= 3 and -3 <= 2 * \
@@ -102,13 +102,13 @@ def exo_quadrillage(f0, f1):
     pass
 
 
-def main():
+def symetrie():
     exo = ["\\exercice",
-           u"Construire la symétrique de chacune des figures par rapport au point O en",
-           "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
+           _(u"Construire la symétrique de chacune des figures par rapport au point O en"),
+           _("utilisant le quadrillage :\\par", "\\psset{unit=.9cm}")]
     cor = ["\\exercice*",
-           u"Construire la symétrique de chacune des figures par rapport au point O en",
-           "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
+           _(u"Construire la symétrique de chacune des figures par rapport au point O en"),
+           _("utilisant le quadrillage :\\par", "\\psset{unit=.9cm}")]
     nbpts = 5
     langles = [0, 90, 45, 135]
     for i in range(3):
@@ -130,4 +130,4 @@ def main():
             cor.append("\\hfill")
     return (exo, cor)
 
-main.description = u'Symétrie centrale'
+symetrie.description = _(u'Symétrie centrale')

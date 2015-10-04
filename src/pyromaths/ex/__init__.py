@@ -7,9 +7,6 @@ import pkgutil
 import types
 import sys
 
-levels = {}
-
-
 class Exercise(object):
     ''' Base class for all exercise types. '''
 
@@ -19,6 +16,22 @@ class Exercise(object):
 
 class TexExercise(Exercise):
     ''' Exercise with TeX support. '''
+
+    @classmethod
+    def name(cls):
+        return cls.__name__
+
+    @classmethod
+    def thumb(cls):
+        from pyromaths.Values import data_dir
+        return os.path.join(data_dir(), 'ex', cls.dirlevel, 'img', "%s.png" % cls.name())
+
+    @classmethod
+    def id(cls):
+        return "{}.{}".format(
+            cls.dirlevel,
+            cls.name(),
+            )
 
     def tex_statement(self):
         ''' Return problem statement in TeX format. '''
@@ -33,11 +46,14 @@ class TexExercise(Exercise):
 class LegacyExercise(TexExercise):
     ''' Base class for legacy format exercise proxies. '''
 
-    _id = 0
     function = []
 
     def __init__(self):
         self.stat, self.ans = self.function[0]()
+
+    @classmethod
+    def name(cls):
+        return cls.function[0].__name__
 
     def tex_statement(self):
         return self.stat
@@ -45,17 +61,31 @@ class LegacyExercise(TexExercise):
     def tex_answer(self):
         return self.ans
 
+def __module(filename):
+    """Expect an absolute path, subpath of this module's path. Return a relative path."""
+    # Get root of this application
+    root = '/'.join(__file__.split('/')[:-len(__name__.split('.')) - 1])
+    # Get filename, relative to said root
+    relative = filename[len(root)+1:]
+    # Remove extension
+    relative = relative[:-len('.py')]
+    # Turn file system path into python package
+    relative = relative.replace('/', '.')
 
-def __legacy(function, thumb):
+    return relative
+
+def __legacy(function, dirlevel):
     ''' Create a new class proxying for a legacy exercise 'function'. '''
-    LegacyExercise._id += 1
     # Create a proxy class inheriting from LegacyExercise for this function
-    return type('LegacyExercise%u' % LegacyExercise._id,
+    module = __module(function.func_code.co_filename)
+    name = function.func_name.title().replace('_', '')
+    return type("{}.{}".format(module, name),
                 (LegacyExercise,),
                 dict(description=function.description,
                      level=function.level,
-                     thumb=thumb,
+                     module=module,
                      function=(function,),
+                     dirlevel=dirlevel,
                      )
                 )
 
@@ -99,10 +129,8 @@ def __import(name=__name__, parent=None):
 
 def _exercises(pkg):
     ''' List exercises in 'pkg' modules. '''
-    from pyromaths.Values import data_dir
     # level defaults to description, then unknown
     if 'level' not in dir(pkg): pkg.level = u"Inconnu"
-    n = 0
     for _, name, ispkg in pkgutil.iter_modules(pkg.__path__, pkg.__name__ + '.'):
         # skip packages
         if ispkg: continue;
@@ -115,17 +143,14 @@ def _exercises(pkg):
             level = __level(element.level if 'level' in dir(element)
                               else mod.level)
 
-            dirlevel = os.path.split(pkg.__path__[0])[1]
-            thumb = os.path.join(data_dir(), 'ex', dirlevel, 'img', 'ex-%02d.png' % n)
+            if __isexercise(element) or __islegacy(element):
+                dirlevel = os.path.split(pkg.__path__[0])[1]
+                element.level = level
             if __isexercise(element):
-                element.level = level
-                element.thumb = thumb
+                element.dirlevel = dirlevel
                 yield element
-                n += 1
             elif __islegacy(element):
-                element.level = level
-                yield __legacy(element, thumb)
-                n += 1
+                yield __legacy(element, dirlevel)
 
 def _subpackages(pkg):
     ''' List 'pkg' sub-packages. '''
@@ -134,17 +159,27 @@ def _subpackages(pkg):
         if not ispkg: continue;
         yield __import(name, pkg)
 
-def load(pkg=None, recursive=True):
+def load_levels(pkg=None, recursive=True):
     ''' Discover exercises. '''
+    levels = {}
     # target package defaults to this package (pyromaths.ex)
     if pkg is None: pkg = __import()
     # load package exercises
     for ex in _exercises(pkg):
         for lvl in ex.level:
             # new level? create its exercise list
-            if lvl not in levels.keys(): levels[lvl] = []
+            if lvl not in levels.keys():
+                levels[lvl] = []
             levels[lvl].append(ex)
 
-    if not recursive: return
-    # load sub-packages
-    for pk in _subpackages(pkg): load(pk)
+    if recursive:
+        # load sub-packages
+        for pk in _subpackages(pkg):
+            sublevels = load_levels(pk)
+            for lvl in sublevels:
+                if lvl in levels:
+                    levels[lvl].extend(sublevels[lvl])
+                else:
+                    levels[lvl] = sublevels[lvl]
+
+    return levels

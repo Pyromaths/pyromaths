@@ -4,6 +4,9 @@ Les tests des exercices
 L'outil ``testexo.py`` est conçu pour tester les exercises durant leur
 conception, et plus tard, pour vérifier la non régression.
 
+.. contents::
+   :local:
+
 Principe
 --------
 
@@ -37,21 +40,30 @@ simplifiée.
   Effectue les tests. Les tests sont aussi exécutés lorsqu'``unittest`` est appelé.
 
 * Compilation d'un exercice (``testexo.py compile``) :
-  Compile un exercice. Cette commande est utile pour tester un exercice en cours de rédaction, plutôt que de passer par l'interface graphique.
+  Compile un exercice, et crée le PDF correspondant (énoncé et solution) dans le dossier courant. Cette commande est utile pour tester un exercice en cours de rédaction, plutôt que de passer par l'interface graphique.
+
+  Il est également possible de fournir des commandes à exécuter sur les fichiers LaTeX avant leur compilation. Ceci est utile pour déceler des erreurs de code LaTeX. Par exemple, la commande ``testexo.py compile -p more EXERCICE`` affiche le code LaTeX dans `more` avant compilation; la commande ``testexo.py compile -p vim EXERCICE`` édite le fichier avec `vim` avant compilation. Ceci peut aussi être utilisé (en attendant une solution plus propre) pour garder une copie du fichier LaTeX en cas d'erreur de compilation, pour pouvoir l'analyser, ainsi que le log : ``testexo.py compile -p 'cp {} exercices.tex' EXERCICE``.
+
+* Liste des identifiants des exercices disponibles (``testexo.py lsexos``) :
+  Affiche la liste des identifiants des exercices, pour retrouver facilement l'exercice en cours de travail.
 
 
 Description des exercices
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Les exercices sur lesquels s'appliquent les commandes de ``testexo.py`` sont
-décrits comme ``pyromaths/ex/sixiemes/arrondi.py:4,6``, où
-``pyromaths/ex/sixiemes/arrondi.py`` est le chemin vers le module Python
-contenant l'exercice à tester, et ``4,6`` sont les graines du générateur
-aléatoire qui nous intéressent.
+décrits comme ``quatriemes.exo_pythagore:4,6``, où :
 
-Si le chemin est incomplet, tous les sous-modules sont testés. Si les graines
-sont omises, suivant le cas, soit tous les tests enregistrés sont considérés,
-soit la graine 0 est utilisée.
+* ``quatriemes`` est le niveau de l'exercice ;
+* ``exo_pythagore`` est l'identifiant de l'exercice (le nom de la fonction ou
+  de la classe qui le définit) ;
+* ``4,6`` sont les graines du générateur
+  aléatoire qui nous intéressent. Si les graines sont omises, suivant le cas,
+  soit tous les tests enregistrés sont considérés, soit la graine 0 est
+  utilisée.
+
+La liste des exercices disponibles peut être obtenue avec la commande
+``testexp.py lsexos``.
 
 Description complète
 ^^^^^^^^^^^^^^^^^^^^

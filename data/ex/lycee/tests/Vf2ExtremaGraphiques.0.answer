@@ -1,0 +1,19 @@
+\exercice*
+\begin{enumerate}
+\item 
+\begin{itemize}[leftmargin=*]
+\item Sur $[-5~;~5]$ , le \textbf{maximum} de $f$ est $y = 4$. Il est \textbf{atteint en} $x = -5$.
+\item Sur $[-5~;~5]$ , le \textbf{minimum} de $f$ est $y = -2$. Il est \textbf{atteint en} $x = 5$.
+\end{itemize}
+\item Sur $[0~;~3]$, le \textbf{minimum} de $f$ est $y = 0$. Il est \textbf{atteint en} $x = 3$. 
+\item 
+\begin{itemize}[leftmargin=*]
+\item Sur $[-5~;~5]$ , le \textbf{maximum} de $g$ est $y = 4$. Il est \textbf{atteint en} $x = -5$.
+\item Sur $[-5~;~5]$ , le \textbf{minimum} de $g$ est $y = -4$. Il est \textbf{atteint en} $x = 3$.
+\end{itemize}
+\item 
+\begin{itemize}[leftmargin=*]
+\item Sur $[-3~;~2]$ , le \textbf{maximum} de $g$ est $y = 4$. Il est \textbf{atteint en} $x = -3$.
+\item Sur $[-3~;~2]$ , le \textbf{minimum} de $g$ est $y = 0$. Il est \textbf{atteint en} $x = 2$.
+\end{itemize}
+\end{enumerate}

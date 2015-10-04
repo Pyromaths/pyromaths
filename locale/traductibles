@@ -1,0 +1,36 @@
+# Cette fichier comporte un liste des fichiers source qui ont des strings pour traduire.
+
+src/pyromaths/interface.py
+src/pyromaths/Values.py
+
+src/pyromaths/ex/cinquiemes/__init__.py
+src/pyromaths/ex/cinquiemes/aires.py
+src/pyromaths/ex/cinquiemes/construction.py
+src/pyromaths/ex/cinquiemes/fractions.py
+src/pyromaths/ex/cinquiemes/priorites.py
+src/pyromaths/ex/cinquiemes/proportionnalite.py
+src/pyromaths/ex/cinquiemes/relatifs.py
+src/pyromaths/ex/cinquiemes/reperage.py
+src/pyromaths/ex/cinquiemes/statistiques.py
+src/pyromaths/ex/cinquiemes/symetrie.py
+
+src/pyromaths/ex/examples/helloworld.py
+
+src/pyromaths/ex/lycee/__init__.py
+src/pyromaths/ex/lycee/CercleTrigo.py
+src/pyromaths/ex/lycee/Derivation.py
+### src/pyromaths/ex/lycee/equations.py
+src/pyromaths/ex/lycee/ExoPolynome.py
+src/pyromaths/ex/lycee/ExoSecondDegre.py
+src/pyromaths/ex/lycee/Fonction.py
+src/pyromaths/ex/lycee/SecondDegre.py
+src/pyromaths/ex/lycee/Statitisiques.py
+src/pyromaths/ex/lycee/VariationsFonctions.py
+src/pyromaths/ex/lycee/Vecteurs.py
+
+src/pyromaths/outils/Arithmetique.py
+src/pyromaths/outils/Priorites3.py
+src/pyromaths/outils/System.py
+src/pyromaths/outils/TestEnv.py
+src/pyromaths/outils/TexFiles.py
+src/pyromaths/outils/TeXMiseEnForme.py

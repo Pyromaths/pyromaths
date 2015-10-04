@@ -158,7 +158,7 @@ def verifie_calcul(listoperateurs, listoperandes, entier=1):
                     loperateurs[index + 1:].index(')'):
                     nbpar = p
             if loperateurs[index + 2] == ')':
-                a = calcul(loperandes[(index + 1) - nbpar], loperateurs[index + 
+                a = calcul(loperandes[(index + 1) - nbpar], loperateurs[index +
                            1], loperandes[(index + 2) - nbpar], entier)
                 if a != 'hp':
                     al = loperateurs[:index]
@@ -178,7 +178,7 @@ def verifie_calcul(listoperateurs, listoperandes, entier=1):
             if nbdiv:
                 indexd = loperateurs.index('/')
             index = min(indexm, indexd)
-            a = calcul(loperandes[index], loperateurs[index], loperandes[index + 
+            a = calcul(loperandes[index], loperateurs[index], loperandes[index +
                        1], entier)
             if a != 'hp':
                 al = loperateurs[:index]
@@ -223,7 +223,7 @@ def calcul(a, op, b, entier=1):  # retourne 'hp' (hors programme) ou le résulta
             return a / b
 
 
-def main():
+def priorites():
     nb = 9  # nombre de calculs
     exo = ["\\exercice",
            u"Calculer les expressions suivantes en détaillant les calculs.\n",
@@ -248,18 +248,18 @@ def main():
             i = i + 1
             for j in range(len(liste[0])):
                 if j == 0:
-                    exo.append("\\[ \\thenocalcul = %s \\]" % 
+                    exo.append("\\[ \\thenocalcul = %s \\]" %
                                affichage(liste[0][j], liste[1][j]))
                     exo.append('\\stepcounter{nocalcul}%')
                 if j == len(liste[0]) - 1:
-                    cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" % 
+                    cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" %
                                affichage(liste[0][j], liste[1][j]))
                     cor.append('\\stepcounter{nocalcul}%')
                 else:
-                    cor.append("\\[ \\thenocalcul = %s \\]" % 
+                    cor.append("\\[ \\thenocalcul = %s \\]" %
                                affichage(liste[0][j], liste[1][j]))
     exo.append("\\end{multicols}")
     cor.append("\\end{multicols}")
     return (exo, cor)
 
-main.description = u'Priorités opératoires'
+priorites.description = _(u'Priorités opératoires')

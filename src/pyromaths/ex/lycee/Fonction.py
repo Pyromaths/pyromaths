@@ -134,7 +134,7 @@ def tab_var(fonc, Intervalle=["-\\infty", "+\\infty"]):
     if isinstance(fonc, Polynome):
         return tab_var_poly(fonc, Intervalle[0], Intervalle[1])
     else:
-        return "Je ne sais pas étudier les variations de cette fonction."
+        return _("Je ne sais pas étudier les variations de cette fonction.")
 
 def tab_var_poly(P, borneinf="-\\infty" , bornesup=u"+\\infty"):
     Intervalle = [borneinf, bornesup]
@@ -179,10 +179,10 @@ def tab_var_poly(P, borneinf="-\\infty" , bornesup=u"+\\infty"):
         tab_var += tab_var_y
         return tab_var + "}$$\n"
     elif P.deg == 3:
-        return u"attends un peu pour le degré 3"
+        return _(u"attends un peu pour le degré 3")
         # #Les fonctions développées pour les équations du second degré doivent aider
     else:
-        return u"Degré trop élevé"
+        return _(u"Degré trop élevé")
             # #Cas particulier où P' a une racine évidente, ou polynome bicarré
 
 

@@ -59,10 +59,10 @@ class Histogramme(ex.TexExercise):
 
     def tex_statement(self):
         exo = [r'\exercice']
-        exo.append(u'Tracer l\'histogramme de la série ci-dessous :\\par')
+        exo.append(_(u'Tracer l\'histogramme de la série ci-dessous :\\par'))
         exo.append(r'\begin{tabularx}{.8\linewidth}[t]{|l|*{%s}{>{\centering\arraybackslash}X|}}' % len(self.classes))
-        exo.append(r'\hline Classe & %s \\' % " & ".join(listeToclasses(self.classes)))
-        exo.append(r'\hline Effectif & %s \\ \hline' % " & ".join([str(i) for i in self.effectifs]))
+        exo.append(_(r'\hline Classe & %s \\' % " & ").join(listeToclasses(self.classes)))
+        exo.append(_(r'\hline Effectif & %s \\ \hline') % " & ".join([str(i) for i in self.effectifs]))
         exo.append(r'\end{tabularx}')
         return exo
 

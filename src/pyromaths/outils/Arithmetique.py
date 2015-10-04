@@ -27,7 +27,7 @@ def pgcd(*n):
     """**pgcd**\ (*n*)
 
     Calcule le pgcd de plusieurs entiers entiers.
-    
+
     Merci à http://python.jpvweb.com/mesrecettespython/doku.php?id=pgcd_ppcm
 
     :param n: Les entiers dont on veut le pgcd
@@ -70,7 +70,7 @@ def ppcm(*n):
     """**ppcm**\ (*n*)
 
     Calcule le ppcm de plusieurs entiers.
-    
+
     Merci à http://python.jpvweb.com/mesrecettespython/doku.php?id=pgcd_ppcm
 
     :param n: Les entiers dont on veut le ppcm
@@ -220,7 +220,7 @@ def factoriseTex(n):
             corrige.append(text + '\\\\')
         corrige.append("\\end{align*}")
     else:
-        corrige = [str(n) + " est un nombre premier.\\par "]
+        corrige = [str(n) + _(" est un nombre premier.\\par ")]
 
     return (primes, corrige)
 

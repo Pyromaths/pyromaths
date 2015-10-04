@@ -43,12 +43,12 @@ class TeXMiseEnForme:
         if coef != 0 and abs(coef) != 1:
             if var == "":
                 if abs(coef) >= 1000:
-                    a = '\\nombre{%s}' % coef
+                    a = _('\\nombre{%s}') % coef
                 else:
                     a = "%s" % coef
             else:
                 if abs(coef) >= 1000:
-                    a = '\\nombre{%s}\\,%s' % (coef, var)
+                    a = _('\\nombre{%s}\\,%s') % (coef, var)
                 else:
                     a = '%s\\,%s' % (coef, var)
             if bplus and coef > 0:
