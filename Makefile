@@ -5,7 +5,7 @@
 ### CONFIG
 #
 # Pyromaths version
-VERSION ?= 15.02
+VERSION ?= 15.10
 # Archive format(s) produced by 'make src' (bztar,gztar,zip...)
 FORMATS ?= bztar,zip
 # Verbosity and logging
@@ -171,7 +171,7 @@ repo: deb
 	# update apt repository
 	$(clean)
 	cd $(BUILD)
-	dput -l pyromaths_$(VERSION)-1_amd64.changes
+	dput -l $(BUILD)/pyromaths_$(VERSION)-1_amd64.changes
 
 data/%.qm: data/%.ts
 	# Translate new/updated language files

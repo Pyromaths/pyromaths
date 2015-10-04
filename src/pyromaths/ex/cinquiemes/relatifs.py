@@ -72,9 +72,9 @@ def moins_dec(pyromax):
 
 
 def relatifs():
-    exo = [_("\\exercice", "Effectuer sans calculatrice :"),
+    exo = ["\\exercice", _("Effectuer sans calculatrice :"),
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
-    cor = [_("\\exercice*", "Effectuer sans calculatrice :"),
+    cor = ["\\exercice*", _("Effectuer sans calculatrice :"),
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     modules = (plus, moins,)
     modules_dec = (plus_dec, moins_dec,)

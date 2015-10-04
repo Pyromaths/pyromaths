@@ -1,3 +1,16 @@
+pyromaths (15.10-1) unstable; urgency=medium
+
+  * Boîtes de dialogue natives sur OS X
+  * Compatibilité avec OS X 10.11 El Capitan
+  * Nouvel exercice niveau 1reS : Calcul de termes d'une suite
+  * Création d'un outils `testexo.py`, ayant deux utilités :
+    * fournir des tests de non-régression pour les exercices ;
+    * permettre la compilation d'exercices en ligne de commande, ce qui est
+      utile lors de la création d'un nouvel exercice.
+  * Préparation de l'internationalisation de Pyromaths via gettext
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Sun, 04 Oct 2015 17:04:23 +0200
+
 pyromaths (15.02-1) trusty; urgency=medium
 
   * Nouvel exercice niveau sixième : Construire des angles de mesure donnée,

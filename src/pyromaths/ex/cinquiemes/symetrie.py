@@ -105,10 +105,10 @@ def exo_quadrillage(f0, f1):
 def symetrie():
     exo = ["\\exercice",
            _(u"Construire la symétrique de chacune des figures par rapport au point O en"),
-           _("utilisant le quadrillage :\\par", "\\psset{unit=.9cm}")]
+           _("utilisant le quadrillage :\\par"), "\\psset{unit=.9cm}"]
     cor = ["\\exercice*",
            _(u"Construire la symétrique de chacune des figures par rapport au point O en"),
-           _("utilisant le quadrillage :\\par", "\\psset{unit=.9cm}")]
+           _("utilisant le quadrillage :\\par"), "\\psset{unit=.9cm}"]
     nbpts = 5
     langles = [0, 90, 45, 135]
     for i in range(3):

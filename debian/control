@@ -4,7 +4,7 @@ Section: contrib/math
 Priority: optional
 Maintainer: Jérôme Ortais <jerome.ortais@pyromaths.org>
 Build-Depends: debhelper (>= 7), python
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 XS-Python-Version: current
 XB-Python-Version: ${python:Versions}
 Homepage: http://www.pyromaths.org/

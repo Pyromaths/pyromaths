@@ -38,6 +38,12 @@ from os.path import dirname, normpath, join, abspath, realpath
 
 from setuptools import setup, find_packages
 
+import gettext
+locale_dir = join(dirname(__file__), 'locale/')
+locale_dir = realpath(locale_dir)
+
+gettext.install('pyromaths', localedir=locale_dir, unicode=1)
+
 py2exe, innosetup = None, None
 try:
     import py2exe
@@ -64,9 +70,9 @@ def _unix_opt():
             ('share/pyromaths/images', ['data/images/pyromaths-banniere.png',
                                         'data/images/whatsthis.png']),
             ('share/pyromaths/templates', glob('data/templates/*.tex')),
-            ('share/pyromaths/packages',  glob('data/packages/*'))
+            # ('share/pyromaths/packages',  glob('data/packages/*'))
             ] + \
-            find_data_files('data/ex','share/pyromaths/ex/',['*/img/ex-*.png']),
+            find_data_files('data/ex','share/pyromaths/ex/',['*/img/*.png']),
             install_requires = ["lxml>=2.2.2"],
     )
 
@@ -120,8 +126,8 @@ def _mac_opt():
             ( 'data/images', ['data/images/pyromaths.png',
                      'data/images/whatsthis.png']),
             ('data/templates',        glob('data/templates/*.tex')),
-            ('data/packages',         glob('data/packages/*')),
-        ] + find_data_files('data/ex','data/ex/',['*/img/ex-*.png']),
+            # ('data/packages',         glob('data/packages/*')),
+        ] + find_data_files('data/ex','data/ex/',['*/img/*.png']),
         setup_requires = ['py2app>=0.7.3', 'lxml>=2.2.2'],
         options    = {'py2app': py2app},
     )
@@ -148,9 +154,8 @@ Name: "{commondesktop}\Pyromaths"; Filename: "{app}\pyromaths.exe"
             'data/images/whatsthis.png']
            ),
           (r'data/templates', glob(r'data/templates/*.tex')),
-          (r'data/packages', glob(r'data/packages/*')),
-          (r'data/packages', glob(r'data/packages/*')),
-        ] + find_data_files('data/ex','data/ex/',['*/img/ex-*.png']),
+          # (r'data/packages', glob(r'data/packages/*')),
+        ] + find_data_files('data/ex','data/ex/',['*/img/*.png']),
         zipfile = None,
         windows = [dict(script="pyromaths",
                         icon_resources=[(1, 'data/images/pyromaths.ico')],
@@ -164,7 +169,9 @@ Name: "{commondesktop}\Pyromaths"; Filename: "{app}\pyromaths.exe"
                                    includes     = ['sip', 'gzip', ],
                                    dll_excludes = ['msvcr90.dll', 'msvcp90.dll'],
                                    ),
-                       innosetup=dict(inno_script=inno_script, compressed=True)
+                       innosetup=dict(inno_script=inno_script,
+                                      bundle_vcr = False,
+                                      )
                        )
     )
 
@@ -205,7 +212,7 @@ setup(
     long_description = README,
     license     = "GPL",
     url         = "http://www.pyromaths.org",
-    download_url = "http://pyromaths.org/telecharger/",
+    download_url = "http://www.pyromaths.org/telecharger/",
     author      = u"Jérôme Ortais",
     author_email = "jerome.ortais@pyromaths.org",
     # python packages
