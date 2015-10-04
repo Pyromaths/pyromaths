@@ -105,8 +105,4 @@ def relatifs():
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
     return (exo, cor)
 
-<<<<<<< HEAD
-relatifs.description = u'Addition de relatifs'
-=======
-main.description = _(u'Addition de relatifs')
->>>>>>> pr/9
+relatifs.description = _(u'Addition de relatifs')
