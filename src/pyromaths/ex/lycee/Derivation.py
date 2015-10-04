@@ -86,8 +86,8 @@ class Fd1Tangentes(ex.TexExercise):
     '''
     classdocs
     '''
-    description = u'Nombre dérivé graphiquement'
-    level = u"1.1èreS"
+    description = _(u'Nombre dérivé graphiquement')
+    level = _(u"1.1èreS")
 
 
     def __init__(self):
@@ -106,8 +106,8 @@ class Fd1Tangentes(ex.TexExercise):
         exo = [r'\exercice']
         exo.append(r'\begin{minipage}[]{\linewidth-8cm}')
         exo.append(r'\begin{enumerate}')
-        exo.append(u'\\item Déterminer graphiquement les nombres dérivés de la fonction $f$ en $\qquad x=%s \qquad x=%s \qquad x=%s$.' % (self.lX1[1], self.lX1[2], self.lX1[3]))
-        exo.append(u'\\item On considère le tableau de valeurs suivant :\\par')
+        exo.append(_(u'\\item Déterminer graphiquement les nombres dérivés de la fonction $f$ en $\qquad x=%s \qquad x=%s \qquad x=%s$.') % (self.lX1[1], self.lX1[2], self.lX1[3]))
+        exo.append(_(u'\\item On considère le tableau de valeurs suivant :\\par'))
         exo.append(r'\renewcommand{\arraystretch}{2}')
         exo.append(r'\begin{tabularx}{\linewidth}[t]{|*5{>{\centering\arraybackslash}X|}}')
         exo.append(r'\hline')
@@ -116,9 +116,9 @@ class Fd1Tangentes(ex.TexExercise):
         exo.append('$g\'\\,(x)$ & $%s$ \\\\ \\hline' % ("$ & $".join([str(a) for a in self.dY2[1:-1]])))
         exo.append(r'\end{tabularx}')
         exo.append(r'\begin{enumerate}')
-        exo.append(u'\\item Dans un nouveau repère, placer les points de la courbe $\\mathcal{C}_g$ ainsi connus.')
-        exo.append(u'\\item Tracer les tangentes à $\\mathcal{C}_g$ en ces points.')
-        exo.append(u'\\item Donner une allure possible de la courbe $\\mathcal{C}_g$.')
+        exo.append(_(u'\\item Dans un nouveau repère, placer les points de la courbe $\\mathcal{C}_g$ ainsi connus.'))
+        exo.append(_(u'\\item Tracer les tangentes à $\\mathcal{C}_g$ en ces points.'))
+        exo.append(_(u'\\item Donner une allure possible de la courbe $\\mathcal{C}_g$.'))
         exo.append(r'\end{enumerate}')
         exo.append(r'\end{enumerate}')
         exo.append(r'\end{minipage}')
@@ -172,7 +172,7 @@ class Fd1Tangentes(ex.TexExercise):
             if isinstance(dY2[i], Fraction): dY2[i] = 1. * dY2[i].n / dY2[i].d
         exo = [r'\exercice*']
         exo.append(r'\begin{enumerate}')
-        exo.append(u'\\item  On lit graphiquement le coefficient directeur de chacune des tangentes en ces points.\par')
+        exo.append(_(u'\\item  On lit graphiquement le coefficient directeur de chacune des tangentes en ces points.\par'))
         exo.append(u'$f\'\\,(%s)=%s \\qquad f\'\\,(%s)=%s \\qquad f\'\\,(%s)=%s$.' % (self.lX1[1], self.dY1[1], self.lX1[2], self.dY1[2], self.lX1[3], self.dY1[3]))
         exo.append(u'\\item')
         exo.append(r'\begin{asy}[height=6.5cm]')

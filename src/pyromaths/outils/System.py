@@ -54,9 +54,9 @@ def create_config_file():
     root = etree.Element("pyromaths")
 
     child = etree.SubElement(root, "options")
-    etree.SubElement(child, "nom_fichier").text = "exercices"
+    etree.SubElement(child, "nom_fichier").text = _("exercices")
     etree.SubElement(child, "chemin_fichier").text = "%s" % HOME
-    etree.SubElement(child, "titre_fiche").text = u"Fiche de révisions"
+    etree.SubElement(child, "titre_fiche").text = _(u"Fiche de révisions")
     etree.SubElement(child, "corrige").text = "True"
     etree.SubElement(child, "pdf").text = "True"
     etree.SubElement(child, "unpdf").text = "False"
@@ -64,7 +64,7 @@ def create_config_file():
 
     child = etree.SubElement(root, "informations")
     etree.SubElement(child, "version").text = VERSION
-    etree.SubElement(child, "description").text = u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran."
+    etree.SubElement(child, "description").text = _(u"Pyromaths est un programme qui permet de générer des fiches d’exercices de mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au format pdf qui peuvent ensuite être imprimés ou lus sur écran.")
     etree.SubElement(child, "icone").text = "pyromaths.ico"
 
     subchild = etree.SubElement(child, "auteur")
@@ -184,7 +184,7 @@ def creation(parametres):
         if parametres['creer_unpdf']:
             f0.write("\\label{LastPage}\n")
             f0.write("\\newpage\n")
-            f0.write(u"\\currentpdfbookmark{Le corrigé des exercices}{Corrigé}\n")
+            f0.write(_(u"\\currentpdfbookmark{Le corrigé des exercices}{Corrigé}\n"))
             f0.write("\\lhead{\\textsl{{\\footnotesize Page \\thepage/ \\pageref{LastCorPage}}}}\n")
             f0.write("\\setcounter{page}{1} ")
             f0.write("\\setcounter{exo}{0}\n")

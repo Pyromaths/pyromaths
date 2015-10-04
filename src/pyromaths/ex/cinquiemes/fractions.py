@@ -28,9 +28,9 @@ from pyromaths.outils.Priorites3 import texify, priorites
 
 
 def fractions_egales():
-    exo = ["\\exercice", u"Compléter :", "\\begin{multicols}{4}",
+    exo = ["\\exercice", _(u"Compléter :"), "\\begin{multicols}{4}",
            "  \\begin{enumerate}"]
-    cor = ["\\exercice*", u"Compléter :", "\\begin{multicols}{4}",
+    cor = ["\\exercice*", _(u"Compléter :"), "\\begin{multicols}{4}",
            "  \\begin{enumerate}"]
     for dummy in range(8):
         n = d = 1
@@ -54,13 +54,13 @@ def fractions_egales():
         else:
             solution.insert(4, c)
             solution.insert(3, c)
-        exo.append("\\item $\\dfrac{%s}{%s}=\\dfrac{%s}{%s}$" % 
+        exo.append("\\item $\\dfrac{%s}{%s}=\\dfrac{%s}{%s}$" %
                    tuple(enonce))
         if cas:
-            cor.append("\\item $\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}=\\dfrac{%s}{%s}$" % 
+            cor.append("\\item $\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}=\\dfrac{%s}{%s}$" %
                        tuple(solution))
         else:
-            cor.append("\\item $\\dfrac{%s}{%s}=\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}$" % 
+            cor.append("\\item $\\dfrac{%s}{%s}=\\dfrac{%s_{(\\times %s)}}{%s_{(\\times %s)}}$" %
                        tuple(solution))
     exo.extend(["  \\end{enumerate}", "\end{multicols}\n"])
     cor.extend(["  \\end{enumerate}", "\end{multicols}\n"])
@@ -77,46 +77,46 @@ def valeurs_somme():
         op = "+-"[random.randrange(2)]
         n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
         if op == "-" and 1 - n2 / d2 > 0:
-            l.append('1 %s Fraction(%s, %s)' % (op, n2, d2))
+            l.append(_('1 %s Fraction(%s, %s)') % (op, n2, d2))
         else:
-            l.append('Fraction(%s, %s) %s 1' % (n2, d2, op))
+            l.append(_('Fraction(%s, %s) %s 1') % (n2, d2, op))
 
     for dummy in range(2):
         op = "+-"[random.randrange(2)]
         n1 = random.randrange(2, 11)
         n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
         if op == "-" and n1 - n2 / d2 > 0:
-            l.append('%s %s Fraction(%s, %s)' % (n1, op, n2, d2))
+            l.append(_('%s %s Fraction(%s, %s)') % (n1, op, n2, d2))
         else:
-            l.append('Fraction(%s, %s) %s %s' % (n2, d2, op, n1))
+            l.append(_('Fraction(%s, %s) %s %s') % (n2, d2, op, n1))
 
     op = "+-"[random.randrange(2)]
     n1 = random.randrange(1, 11)
     n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
     if op == "-" and n1 - n2 > 0:
-        l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n1, d2, op, n2, d2))
+        l.append(_('Fraction(%s, %s) %s Fraction(%s, %s)') % (n1, d2, op, n2, d2))
     else:
-        l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n2, d2, op, n1, d2))
+        l.append(_('Fraction(%s, %s) %s Fraction(%s, %s)') % (n2, d2, op, n1, d2))
 
     for dummy in range(3):
         op = "+-"[random.randrange(2)]
         n1, d1 = random.randrange(1, 11), random.randrange(2, 11)
         n2, d2 = random.randrange(1, 11), random.randrange(2, 11) * d1
         if op == "-" and n1 / d1 - n2 / d2 > 0:
-            l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n1, d1, op, n2, d2))
+            l.append(_('Fraction(%s, %s) %s Fraction(%s, %s)') % (n1, d1, op, n2, d2))
         else:
-            l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n2, d2, op, n1, d1))
+            l.append(_('Fraction(%s, %s) %s Fraction(%s, %s)') % (n2, d2, op, n1, d1))
 
     random.shuffle(l)
     return l
 
 
 def sommes_fractions():
-    exo = ["\\exercice",
-           u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible).",
+    exo = [_("\\exercice"),
+           _(u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible)."),
            "\\begin{multicols}{4}", "  \\begin{enumerate}"]
-    cor = ["\\exercice*",
-           u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible).",
+    cor = [_("\\exercice*"),
+           _(u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible)."),
            "\\begin{multicols}{4}", "  \\begin{enumerate}"]
     lexo = valeurs_somme()
     for question in lexo:
@@ -133,7 +133,7 @@ def sommes_fractions():
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
     return (exo, cor)
 
-sommes_fractions.description = u'Sommes de fractions'
+sommes_fractions.description = _(u'Sommes de fractions')
 
 
 def valeurs_produit():
@@ -151,16 +151,16 @@ def valeurs_produit():
             n2 = random.randrange(1, 11)
             d2 = random.randrange(2, 11)
 
-        l.append('Fraction(%s, %s)*Fraction(%s,%s)' % (n1 * a, d1 * b, n2 * b, d2 * a))
+        l.append(_('Fraction(%s, %s)*Fraction(%s,%s)') % (n1 * a, d1 * b, n2 * b, d2 * a))
 
     return l
 
 def produits_fractions():
     exo = ["\\exercice",
-           u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible).",
+           _(u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible)."),
            "\\begin{multicols}{4}", "  \\begin{enumerate}"]
     cor = ["\\exercice*",
-           u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible).",
+           _(u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible)."),
            "\\begin{multicols}{4}", "  \\begin{enumerate}"]
     lexo = valeurs_produit()
     for question in lexo:
@@ -178,4 +178,4 @@ def produits_fractions():
 
     return (exo, cor)
 
-produits_fractions.description = u'Produits de fractions'
+produits_fractions.description = _(u'Produits de fractions')
