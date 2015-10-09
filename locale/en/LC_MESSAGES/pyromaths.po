@@ -19,31 +19,31 @@ msgstr ""
 
 #: src/pyromaths/interface.py:69
 msgid "Créer"
-msgstr ""
+msgstr "Create"
 
 #: src/pyromaths/interface.py:76 src/pyromaths/interface.py:319
 msgid "Quitter"
-msgstr ""
+msgstr "Quit"
 
 #: src/pyromaths/interface.py:83
 msgid "Réinitialiser"
-msgstr ""
+msgstr "Reset"
 
 #: src/pyromaths/interface.py:116
 msgid "Options"
-msgstr ""
+msgstr "Options"
 
 #: src/pyromaths/interface.py:137
 msgid "Nom par défaut du fichier : "
-msgstr ""
+msgstr "Default filename"
 
 #: src/pyromaths/interface.py:143
 msgid "Chemin par défaut pour enregistrer les fichiers : "
-msgstr ""
+msgstr "Default path"
 
 #: src/pyromaths/interface.py:149
 msgid "Titre de la fiche d'exercices : "
-msgstr ""
+msgstr "Exercise sheet title"
 
 #: src/pyromaths/interface.py:175
 msgid "Parcourir"

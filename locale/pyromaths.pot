@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-13 13:12+0200\n"
+"POT-Creation-Date: 2015-10-09 17:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,118 +17,118 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/pyromaths/interface.py:69
+#: src/pyromaths/interface.py:68
 msgid "Créer"
 msgstr ""
 
-#: src/pyromaths/interface.py:76 src/pyromaths/interface.py:319
+#: src/pyromaths/interface.py:75 src/pyromaths/interface.py:318
 msgid "Quitter"
 msgstr ""
 
-#: src/pyromaths/interface.py:83
+#: src/pyromaths/interface.py:82
 msgid "Réinitialiser"
 msgstr ""
 
-#: src/pyromaths/interface.py:116
+#: src/pyromaths/interface.py:115
 msgid "Options"
 msgstr ""
 
-#: src/pyromaths/interface.py:137
+#: src/pyromaths/interface.py:136
 msgid "Nom par défaut du fichier : "
 msgstr ""
 
-#: src/pyromaths/interface.py:143
+#: src/pyromaths/interface.py:142
 msgid "Chemin par défaut pour enregistrer les fichiers : "
 msgstr ""
 
-#: src/pyromaths/interface.py:149
+#: src/pyromaths/interface.py:148
 msgid "Titre de la fiche d'exercices : "
 msgstr ""
 
-#: src/pyromaths/interface.py:175
+#: src/pyromaths/interface.py:174
 msgid "Parcourir"
 msgstr ""
 
-#: src/pyromaths/interface.py:203
+#: src/pyromaths/interface.py:202
 msgid "Créer le corrigé"
 msgstr ""
 
-#: src/pyromaths/interface.py:204
+#: src/pyromaths/interface.py:203
 msgid "Pyromaths doit-il créer la fiche de correction détaillée?"
 msgstr ""
 
-#: src/pyromaths/interface.py:212
+#: src/pyromaths/interface.py:211
 msgid "Créer le pdf"
 msgstr ""
 
-#: src/pyromaths/interface.py:213
+#: src/pyromaths/interface.py:212
 msgid "Pyromaths doit-il créer les fiches au format pdf ?"
 msgstr ""
 
-#: src/pyromaths/interface.py:220
+#: src/pyromaths/interface.py:219
 msgid "Créer un seul pdf"
 msgstr ""
 
-#: src/pyromaths/interface.py:221
+#: src/pyromaths/interface.py:220
 msgid "Le corrigé et les exercices doivent-ils être dans le même document ?"
 msgstr ""
 
-#: src/pyromaths/interface.py:237
+#: src/pyromaths/interface.py:236
 msgid "Niveau :"
 msgstr ""
 
-#: src/pyromaths/interface.py:243
+#: src/pyromaths/interface.py:242
 msgid "Modèle de mise en page :"
 msgstr ""
 
-#: src/pyromaths/interface.py:257
+#: src/pyromaths/interface.py:256
 msgid "Classe de 6\\ieme"
 msgstr ""
 
-#: src/pyromaths/interface.py:258
+#: src/pyromaths/interface.py:257
 msgid "Classe de 5\\ieme"
 msgstr ""
 
-#: src/pyromaths/interface.py:259
+#: src/pyromaths/interface.py:258
 msgid "Classe de 4\\ieme"
 msgstr ""
 
-#: src/pyromaths/interface.py:260
+#: src/pyromaths/interface.py:259
 msgid "Classe de 3\\ieme"
 msgstr ""
 
-#: src/pyromaths/interface.py:261
+#: src/pyromaths/interface.py:260
 #, python-brace-format
 msgid "Classe de 2\\up{nde}"
 msgstr ""
 
-#: src/pyromaths/interface.py:295
+#: src/pyromaths/interface.py:294
 msgid "Enregistrer dans les préférences"
 msgstr ""
 
-#: src/pyromaths/interface.py:316
+#: src/pyromaths/interface.py:315
 msgid "Fichier"
 msgstr ""
 
-#: src/pyromaths/interface.py:324
+#: src/pyromaths/interface.py:323
 msgid "Aide"
 msgstr ""
 
-#: src/pyromaths/interface.py:327
+#: src/pyromaths/interface.py:326
 msgid "Accéder au site"
 msgstr ""
 
-#: src/pyromaths/interface.py:331
+#: src/pyromaths/interface.py:330
 msgid "À propos"
 msgstr ""
 
-#: src/pyromaths/interface.py:353
+#: src/pyromaths/interface.py:352
 msgid ""
 "Pour avoir un aperçu d'un exercice, positionner le curseur de la souris sur "
 "le point d'interrogation."
 msgstr ""
 
-#: src/pyromaths/interface.py:372
+#: src/pyromaths/interface.py:371
 #, python-format
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -209,43 +209,36 @@ msgid ""
 "</html>"
 msgstr ""
 
-#: src/pyromaths/interface.py:432
+#: src/pyromaths/interface.py:431
 msgid "À propos de Pyromaths"
 msgstr ""
 
-#: src/pyromaths/interface.py:439
+#: src/pyromaths/interface.py:438
 msgid "Attention !"
 msgstr ""
 
-#: src/pyromaths/interface.py:440
+#: src/pyromaths/interface.py:439
 msgid "Veuillez sélectionner des exercices..."
 msgstr ""
 
-#: src/pyromaths/interface.py:521
+#: src/pyromaths/interface.py:520
 msgid "Dossier où créer les fiches"
 msgstr ""
 
-#: src/pyromaths/interface.py:587
+#: src/pyromaths/interface.py:586
 msgid "Choisissez l'ordre des exercices"
 msgstr ""
 
-#: src/pyromaths/interface.py:628 src/pyromaths/interface.py:633
-#: src/pyromaths/interface.py:640
-msgid "Enregistrer sous..."
-msgstr ""
-
-#: src/pyromaths/interface.py:630 src/pyromaths/interface.py:635
-#: src/pyromaths/interface.py:643 src/pyromaths/interface.py:648
-msgid "Documents Tex (*.tex)"
-msgstr ""
-
-#: src/pyromaths/interface.py:642 src/pyromaths/interface.py:647
-#: src/pyromaths/interface.py:650
+#: src/pyromaths/interface.py:634 src/pyromaths/interface.py:637
 #, python-format
 msgid "%s-corrige.tex"
 msgstr ""
 
-#: src/pyromaths/interface.py:703
+#: src/pyromaths/interface.py:635
+msgid "Documents Tex (*.tex)"
+msgstr ""
+
+#: src/pyromaths/interface.py:690
 msgid "Choisissez le nombre d'exercices de ce type à créer."
 msgstr ""
 
@@ -286,6 +279,10 @@ msgid ""
 "Calculer l'aire de la couronne circulaire (partie colorée) comprise entre "
 "les deux cercles en arrondissant le résultat au $\\unit{cm^2}$ le plus "
 "proche."
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/aires.py:62
+msgid "\\par\\dotfill{}\\\\\n"
 msgstr ""
 
 #: src/pyromaths/ex/cinquiemes/aires.py:64
@@ -810,7 +807,6 @@ msgid "Fraction(%s, %s) %s Fraction(%s, %s)"
 msgstr ""
 
 #: src/pyromaths/ex/cinquiemes/fractions.py:115
-#: src/pyromaths/ex/cinquiemes/relatifs.py:75
 msgid "\\exercice"
 msgstr ""
 
@@ -824,7 +820,6 @@ msgid ""
 msgstr ""
 
 #: src/pyromaths/ex/cinquiemes/fractions.py:118
-#: src/pyromaths/ex/cinquiemes/relatifs.py:77
 msgid "\\exercice*"
 msgstr ""
 
@@ -977,6 +972,11 @@ msgstr ""
 #: src/pyromaths/ex/cinquiemes/proportionnalite.py:166
 #: src/pyromaths/ex/cinquiemes/proportionnalite.py:168
 msgid "Détermine la valeur des cases vides"
+msgstr ""
+
+#: src/pyromaths/ex/cinquiemes/relatifs.py:75
+#: src/pyromaths/ex/cinquiemes/relatifs.py:77
+msgid "Effectuer sans calculatrice :"
 msgstr ""
 
 #: src/pyromaths/ex/cinquiemes/relatifs.py:108
@@ -2753,7 +2753,7 @@ msgid ""
 "format pdf qui peuvent ensuite être imprimés ou lus sur écran."
 msgstr ""
 
-#: src/pyromaths/outils/System.py:168
+#: src/pyromaths/outils/System.py:187
 msgid "\\currentpdfbookmark{Le corrigé des exercices}{Corrigé}\n"
 msgstr ""
 
