@@ -25,9 +25,13 @@ To display help:
 """
 
 import argparse
+import gettext
 import logging
 import sys
 import unittest
+
+# Quick and dirty definition of `_` as the identity function
+gettext.install('pyromaths', unicode=1)
 
 from pyromaths.ex.test import TestPerformer, TestException
 
