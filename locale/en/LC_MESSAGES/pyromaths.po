@@ -3,19 +3,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-13 13:12+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2016-09-07 20:10+0000\n"
+"Last-Translator: Jérôme <jerome.ortais@pyromaths.org>\n"
+"Language-Team: English "
+"<http://127.0.0.1:8002/projects/pyromaths/software/en/>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.8\n"
 
 #: src/pyromaths/interface.py:69
 msgid "Créer"
@@ -35,19 +37,19 @@ msgstr "Options"
 
 #: src/pyromaths/interface.py:137
 msgid "Nom par défaut du fichier : "
-msgstr "Default filename"
+msgstr "Default filename: "
 
 #: src/pyromaths/interface.py:143
 msgid "Chemin par défaut pour enregistrer les fichiers : "
-msgstr "Default path"
+msgstr "Default path: "
 
 #: src/pyromaths/interface.py:149
 msgid "Titre de la fiche d'exercices : "
-msgstr "Exercise sheet title"
+msgstr "Exercise sheet title: "
 
 #: src/pyromaths/interface.py:175
 msgid "Parcourir"
-msgstr ""
+msgstr "Browse"
 
 #: src/pyromaths/interface.py:203
 msgid "Créer le corrigé"
