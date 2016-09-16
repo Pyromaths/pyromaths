@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2015 -- Louis Paternault (spalax@gresille.org)
+# Copyright (C) 2016 -- Louis Paternault (spalax@gresille.org)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,13 +27,14 @@ To display help:
 import argparse
 import gettext
 import logging
+import random
 import sys
 import unittest
 
 # Quick and dirty definition of `_` as the identity function
 gettext.install('pyromaths', unicode=1)
 
-from pyromaths.ex.test import TestPerformer, TestException
+from pyromaths.ex.test import TestPerformer, TestException, compile
 
 # Logging configuration
 logging.basicConfig(level=logging.INFO)
@@ -164,6 +165,14 @@ def argument_parser():
             "of the string."
             )
         )
+    compile_parser.add_argument(
+        '-o', '--output',
+        type=str,
+        default='exercice.pdf',
+        help=(
+            "Output filename. Default is 'exercice.pdf'."
+            ),
+        )
 
     # Check
     check = subparsers.add_parser(
@@ -272,12 +281,18 @@ def do_compile(options):
     else:
         options.pipe = [item[0] for item in options.pipe]
 
+    exercise_list = []
     for exercise, seeds in options.exercise:
         if not seeds:
-            seeds = [0]
+            seeds = [random.randint(0, sys.maxint)]
         for seed in seeds:
-            test = tests.get(exercise, seed)
-            test.compile(movefile=True, pipe=options.pipe)
+            exercise_list.append(tests.get(exercise, seed).get_exercise())
+
+    compile(
+        exercise_list,
+        destname=options.output,
+        pipe=options.pipe,
+        )
 
 def do_check(options):
     """Run the tests"""

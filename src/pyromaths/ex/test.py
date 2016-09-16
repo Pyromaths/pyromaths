@@ -74,6 +74,46 @@ def test_path(dirlevel, name, seed, choice):
         "%s.%s.%s" % (name, seed, choice)
         )
 
+def compile(exercise_list, openpdf=False, destname=None, pipe=None):
+    """Compile exercise list as a pdf, and return the resulting pdf name.
+
+    :param openpdf: Open pdf at the end of compilation.
+    :param str destname: Destination name (use ``None`` to use the default name).
+    :param list pipe: List of commands executed on the tex file before compilation.
+    """
+    tempdir = tempfile.mkdtemp()
+
+    old_dir = os.path.abspath(os.getcwd())
+    System.creation({
+        'creer_pdf': True,
+        'creer_unpdf': True,
+        'titre': u"Fiche de révisions",
+        'corrige': True,
+        'niveau': "test",
+        'nom_fichier': u'test.tex',
+        'chemin_fichier': tempdir,
+        'fiche_exo': os.path.join(tempdir, 'exercises.tex'),
+        'fiche_cor': os.path.join(tempdir, 'exercises-corrige.tex'),
+        'datadir': pyromaths.Values.data_dir(),
+        'configdir': pyromaths.Values.configdir(),
+        'modele': 'pyromaths.tex',
+        'liste_exos': exercise_list,
+        'les_fiches': pyromaths.Values.lesfiches(),
+        'openpdf': openpdf,
+        'pipe': pipe,
+    })
+    os.chdir(old_dir)
+
+    if destname:
+        shutil.move(
+            os.path.join(tempdir, 'exercises.pdf'),
+            destname,
+        )
+    else:
+        destname = os.path.join(tempdir, 'exercises.pdf')
+
+    return destname
+
 class TestExercise(object):
     """Test of an exercise"""
 
@@ -90,44 +130,9 @@ class TestExercise(object):
         random.seed(self.seed)
         return self.exercise()
 
-    def compile(self, openpdf=0, movefile=False, pipe=None):
+    def compile(self, openpdf=0):
         """Compile exercise"""
-        tempdir = tempfile.mkdtemp()
-
-        old_dir = os.path.abspath(os.getcwd())
-        System.creation({
-            'creer_pdf': True,
-            'creer_unpdf': True,
-            'titre': u"Fiche de révisions",
-            'corrige': True,
-            'niveau': "test",
-            'nom_fichier': u'test.tex',
-            'chemin_fichier': tempdir,
-            'fiche_exo': os.path.join(tempdir, 'exercises.tex'),
-            'fiche_cor': os.path.join(tempdir, 'exercises-corrige.tex'),
-            'datadir': pyromaths.Values.data_dir(),
-            'configdir': pyromaths.Values.configdir(),
-            'modele': 'pyromaths.tex',
-            'liste_exos': [self.get_exercise()],
-            'les_fiches': pyromaths.Values.lesfiches(),
-            'openpdf': openpdf,
-            'pipe': pipe,
-        })
-        os.chdir(old_dir)
-
-        if movefile:
-            destname = "{}-{}.pdf".format(
-                self.exercise.id(),
-                self.seed,
-                )
-            shutil.move(
-                os.path.join(tempdir, 'exercises.pdf'),
-                destname,
-            )
-        else:
-            destname = os.path.join(tempdir, 'exercises.pdf')
-
-        return destname
+        return compile([self.get_exercise()], openpdf=openpdf)
 
     def test_path(self, name):
         """Return the path of the file containing expected results."""
