@@ -21,20 +21,20 @@
 
 To display help:
 
-> testexo --help
+> python -m pyromaths.cli.test --help
 """
 
 import argparse
 import gettext
 import logging
-import random
 import sys
 import unittest
 
 # Quick and dirty definition of `_` as the identity function
 gettext.install('pyromaths', unicode=1)
 
-from pyromaths.ex.test import TestPerformer, TestException, compile
+from pyromaths.cli import exercise_argument, PyromathsException
+from pyromaths.ex.test import TestPerformer
 
 # Logging configuration
 logging.basicConfig(level=logging.INFO)
@@ -58,29 +58,6 @@ def ask_confirm(message):
             return True
         elif answer == 'n':
             return False
-
-def exercise_argument(string=""):
-    """Return the exercises matching ``string``.
-
-    :param str string: a string, option of one of `testexo` commands.
-    :rtype: dict
-    :return: A dictionary with exercises as keys, and sets of integers (seeds)
-    as values.
-    """
-    splitted = string.split(":")
-    if len(splitted) == 1:
-        name = string
-        seeds = []
-    elif len(splitted) == 2:
-        name, seeds = string.split(":")
-        try:
-            seeds = [int(seed) for seed in seeds.split(",")]
-        except ValueError:
-            raise argparse.ArgumentTypeError("Seeds must be a comma separated list of integers.")
-    else:
-        raise argparse.ArgumentTypeError("Seeds must be a comma separated list of integers.")
-
-    return (name, seeds)
 
 def argument_parser():
     """Return an argument parser"""
@@ -108,7 +85,7 @@ def argument_parser():
         )
 
     # Missing
-    missing = subparsers.add_parser(
+    missing = subparsers.add_parser( # pylint: disable=unused-variable
         'missing',
         help='Create missing tests.',
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -142,38 +119,6 @@ def argument_parser():
         help='Exercises to test. If empty, all exercises are tested.'
         )
 
-    # Compile
-    compile_parser = subparsers.add_parser(
-        'compile',
-        help='Compile some exercises.',
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        )
-    compile_parser.add_argument(
-        "exercise",
-        metavar='EXERCISE[:SEED[,SEED]]',
-        nargs='*', type=exercise_argument, default=None,
-        help='Exercises to compile. If empty, all exercises are compiled.'
-        )
-    compile_parser.add_argument(
-        '-p', '--pipe',
-        nargs=1,
-        type=str,
-        action='append',
-        help=(
-            "Commands to run on the LaTeX file before compiling. String '{}' "
-            "is replaced by the file name; if not, it is appended at the end "
-            "of the string."
-            )
-        )
-    compile_parser.add_argument(
-        '-o', '--output',
-        type=str,
-        default='exercice.pdf',
-        help=(
-            "Output filename. Default is 'exercice.pdf'."
-            ),
-        )
-
     # Check
     check = subparsers.add_parser(
         'check',
@@ -190,17 +135,6 @@ def argument_parser():
         help='Exercises to check. If empty, all exercises are checked.'
         )
 
-    # List exos
-    lsexos = subparsers.add_parser(
-        'lsexos',
-        help=(
-            "List available exercises. Each line of the output can be used as "
-            "an argument to other commands."
-            ),
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        )
-
-
     return parser
 
 def do_create(options):
@@ -216,7 +150,7 @@ def do_create(options):
             if ask_confirm("Is the test valid?"):
                 test.write()
 
-def do_missing(__options):
+def do_missing(options): # pylint: disable=unused-argument
     """Action for command line 'missing'."""
     tests = TestPerformer()
 
@@ -272,28 +206,6 @@ def do_update(options):
                 if ask_confirm("Is the test valid?"):
                     test.write()
 
-def do_compile(options):
-    """Action for command line 'compile'."""
-    tests = TestPerformer()
-
-    if options.pipe is None:
-        options.pipe = []
-    else:
-        options.pipe = [item[0] for item in options.pipe]
-
-    exercise_list = []
-    for exercise, seeds in options.exercise:
-        if not seeds:
-            seeds = [random.randint(0, sys.maxint)]
-        for seed in seeds:
-            exercise_list.append(tests.get(exercise, seed).get_exercise())
-
-    compile(
-        exercise_list,
-        destname=options.output,
-        pipe=options.pipe,
-        )
-
 def do_check(options):
     """Run the tests"""
     tests = TestPerformer()
@@ -304,29 +216,23 @@ def do_check(options):
             )
         )
 
-def do_lsexos(__options):
-    """Perform the `lsexos` command."""
-    tests = TestPerformer()
-    for exo_id in tests.iter_id():
-        print(exo_id)
-
 COMMANDS = {
     "check": do_check,
-    "compile": do_compile,
     "create": do_create,
-    "lsexos": do_lsexos,
     "missing": do_missing,
     "remove": do_remove,
     "update": do_update,
     }
 
-def main():
+def main(argv=None):
     """Main function"""
-    options = argument_parser().parse_args(sys.argv[1:])
+    if argv is None:
+        argv = sys.argv[1:]
+    options = argument_parser().parse_args(argv)
 
     try:
         COMMANDS[options.command](options)
-    except TestException as error:
+    except PyromathsException as error:
         logging.error(error)
         sys.exit(1)
 

@@ -37,6 +37,7 @@ import unittest
 
 import pyromaths
 from pyromaths.outils import System
+from pyromaths.cli import PyromathsException
 
 # Logging configuration
 logging.basicConfig(level=logging.INFO)
@@ -50,11 +51,7 @@ def load_tests(*__args, **__kwargs):
         for exo in tests.iter_id()
         ])
 
-class TestException(Exception):
-    """Generic exception for this module."""
-    pass
-
-class ExerciseNotFound(TestException):
+class ExerciseNotFound(PyromathsException):
     """Name of exercise cannot be found in known exercises."""
 
     def __init__(self, exercise):
@@ -74,8 +71,8 @@ def test_path(dirlevel, name, seed, choice):
         "%s.%s.%s" % (name, seed, choice)
         )
 
-def compile(exercise_list, openpdf=False, destname=None, pipe=None):
-    """Compile exercise list as a pdf, and return the resulting pdf name.
+def generate(exercise_list, openpdf=False, destname=None, pipe=None):
+    """Generate exercise list as a pdf, and return the resulting pdf name.
 
     :param openpdf: Open pdf at the end of compilation.
     :param str destname: Destination name (use ``None`` to use the default name).
@@ -122,17 +119,17 @@ class TestExercise(object):
         self.seed = seed
 
     def show(self):
-        """Compile exercise, and display its result."""
-        self.compile(openpdf=1)
+        """Generate exercise, and display its result."""
+        self.generate(openpdf=1)
 
     def get_exercise(self):
         """Return an instanciated exercise."""
         random.seed(self.seed)
         return self.exercise()
 
-    def compile(self, openpdf=0):
-        """Compile exercise"""
-        return compile([self.get_exercise()], openpdf=openpdf)
+    def generate(self, openpdf=0):
+        """Generate exercise"""
+        return generate([self.get_exercise()], openpdf=openpdf)
 
     def test_path(self, name):
         """Return the path of the file containing expected results."""
@@ -153,8 +150,8 @@ class TestExercise(object):
 
     def read(self, choice):
         """Read expected test result."""
-        with codecs.open(self.test_path(choice), "r", "utf8") as file:
-            return file.read()
+        with codecs.open(self.test_path(choice), "r", "utf8") as result:
+            return result.read()
 
     def remove(self):
         """Remove test"""

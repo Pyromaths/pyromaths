@@ -1,3 +1,8 @@
+Version (unreleased)
+* L'outils `testexo.py` a été renommé en `pyromaths.cli`.
+  * C'est désormais une interface en ligne de commandes à Pyromaths
+  * Il s'appelle avec `python -m pyromaths.cli`
+
 Version 15.10
 * Boîtes de dialogue natives sur OS X
 * Compatibilité avec OS X 10.11 El Capitan
