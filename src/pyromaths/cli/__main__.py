@@ -103,12 +103,25 @@ def argument_parser():
         )
     test.add_argument('args', nargs=argparse.REMAINDER)
 
+    # GUI
+    gui = subparsers.add_parser(
+        'gui',
+        help='Launch the pyromaths graphical user interface.',
+        )
+    gui.add_argument('args', nargs=argparse.REMAINDER)
+
     return parser
 
 def do_test(options):
     """Action for command line 'test'."""
     from pyromaths.cli.test import __main__
     sys.exit(__main__.main(options.args))
+
+def do_gui(options):
+    """Action for command line 'gui'."""
+    from pyromaths import pyromaths
+    sys.argv = ["pyromaths"] + sys.argv[2:]
+    pyromaths.main()
 
 def do_generate(options):
     """Action for command line 'generate'."""
@@ -142,6 +155,7 @@ COMMANDS = {
     "generate": do_generate,
     "lsexos": do_lsexos,
     "test": do_test,
+    "gui": do_gui,
     }
 
 def main():
