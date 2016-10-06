@@ -308,7 +308,7 @@ def do_lsexos(__options):
     """Perform the `lsexos` command."""
     tests = TestPerformer()
     for exo_id in tests.iter_id():
-        print exo_id
+        print(exo_id)
 
 COMMANDS = {
     "check": do_check,
