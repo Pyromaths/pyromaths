@@ -73,8 +73,8 @@ def argument_parser():
     generate_parser.add_argument(
         "exercise",
         metavar='EXERCISE[:SEED[,SEED]]',
-        nargs='*', type=exercise_argument, default=None,
-        help='Exercises to generate. If empty, all exercises are generated.'
+        nargs='+', type=exercise_argument, default=None,
+        help='Exercises to generate.'
         )
     generate_parser.add_argument(
         '-p', '--pipe',
