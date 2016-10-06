@@ -76,9 +76,9 @@ def exercise_argument(string=""):
         try:
             seeds = [int(seed) for seed in seeds.split(",")]
         except ValueError:
-            raise argparse.ArgumentTypeError("TODO")
+            raise argparse.ArgumentTypeError("Seeds must be a comma separated list of integers.")
     else:
-        raise argparse.ArgumentTypeError("TODO")
+        raise argparse.ArgumentTypeError("Seeds must be a comma separated list of integers.")
 
     return (name, seeds)
 
