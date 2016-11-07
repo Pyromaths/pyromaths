@@ -1,7 +1,8 @@
-Version (unreleased)
+Version (16.11)
 * L'outils `testexo.py` a été renommé en `pyromaths.cli`.
   * C'est désormais une interface en ligne de commandes à Pyromaths
   * Il s'appelle avec `python -m pyromaths.cli`
+* remplacement de la commande  \CheckedBox du paquet wasysym par une commande personnelle \checkedbox
 
 Version 15.10
 * Boîtes de dialogue natives sur OS X

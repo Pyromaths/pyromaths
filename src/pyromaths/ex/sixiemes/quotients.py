@@ -28,7 +28,7 @@ def valeurs_diviseurs():
     diviseurs = [2, 3, 5, 9, 10]
     liste = []
     for dummy in range(5):
-        liste.append(diviseurs.pop(random.randrange(len(diviseurs))) * 
+        liste.append(diviseurs.pop(random.randrange(len(diviseurs))) *
                      random.randrange(11, 100))
     return liste
 
@@ -40,9 +40,9 @@ def liste_diviseurs(l):
         reponse.extend([[l[i]]])
         for j in range(len(diviseurs)):
             if l[i] % diviseurs[j]:  # n'est pas divisible
-                reponse[i].append("$\\Square$")
+                reponse[i].append("$\\square$")
             else:
-                reponse[i].append("$\\CheckedBox$")
+                reponse[i].append("$\\checkedbox$")
     return reponse
 
 
@@ -53,10 +53,10 @@ def Divisible():
     exo = ["\\exercice", u'Cocher les bonnes réponses :\\par']
     cor = ["\\exercice*", u'Cocher les bonnes réponses :\\par']
 
-    exo.append("\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par 3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}")
-    cor.append("\\begin{tabular}{c@{ est divisible : \kern1cm}r@{ par 2\\kern1cm}r@{ par 3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}")
+    exo.append("\\begin{tabular}{c@{ est divisible : \kern1cm}l@{ par 2\\kern1cm}l@{ par 3\\kern1cm}l@{ par 5\\kern1cm}l@{ par 9\\kern1cm}l@{ par 10}}")
+    cor.append("\\begin{tabular}{c@{ est divisible : \kern1cm}l@{ par 2\\kern1cm}l@{ par 3\\kern1cm}l@{ par 5\\kern1cm}l@{ par 9\\kern1cm}l@{ par 10}}")
     for i in range(len(l)):
-        exo.append("%s & $\\square$ & $\\square$ & $\\square$ & $\\square$ & $\\square$ \\\\" % 
+        exo.append("%s & $\\square$ & $\\square$ & $\\square$ & $\\square$ & $\\square$ \\\\" %
                  l[i])
         cor.append("%s & %s & %s & %s & %s & %s \\\\" % tuple(reponse[i]))
     exo.append("\\end{tabular}")
