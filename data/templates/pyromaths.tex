@@ -76,24 +76,26 @@
   {\penalty-130\styleexo[Corrigé de l'exercice]}%
   {\penalty-130\styleexo[Exercice]}%
   }
+\newcommand{\checkedbox}[0]{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0pt}$\checkmark$}}
 \makeatother
 \newlength{\ltxt}
-\newcounter{fig}
-\newcommand{\checkedbox}[0]{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0pt}$\checkmark$}}
-\newcommand{\figureadroite}[2]{
-\setlength{\ltxt}{\linewidth}
-  \setbox\thefig=\hbox{#1}
-  \addtolength{\ltxt}{-\wd\thefig}
+\newsavebox{\mybox}
+\newlength{\wdofmybox}
+\newcommand{\figureadroite}[2]{%
+  \setlength{\ltxt}{\linewidth}
+  \sbox{\mybox}{\hbox{#1}}
+  \settowidth{\wdofmybox}{\usebox{\mybox}}
+  \addtolength{\ltxt}{-\wdofmybox}
   \addtolength{\ltxt}{-10pt}
   \begin{minipage}{\ltxt}
     #2
   \end{minipage}
   \hfill
-  \begin{minipage}{\wd\thefig}
+  \begin{minipage}{\wdofmybox}
     #1
   \end{minipage}
-  \refstepcounter{fig}
 }
+
 \count1=\year \count2=\year \ifnum\month<8\advance\count1by-1\else\advance\count2by1\fi
 \pagestyle{fancy}
 \cfoot{\textsl{\footnotesize{Année \number\count1/\number\count2}}}
