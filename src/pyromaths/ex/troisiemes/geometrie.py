@@ -126,8 +126,6 @@ def inegalite_triangulaire(a):  # renvoie 1 si c'est un triangle, 0 sinon
 def thales(exo, cor):
     typeexo = [-1, 1]
     random.shuffle(typeexo)
-    exo.append("\\begin{multicols}{2}")
-    cor.append("\\begin{multicols}{2}")
     for i in range(2):
         arrondi = random.randrange(1, 4)
         text_arrondi = ['dix', 'cent', 'mill'][arrondi - 1] + u'ième'
@@ -136,21 +134,20 @@ def thales(exo, cor):
             valeurs = valeurs_thales(70, typeexo[i])  # les longueurs en mm
             if valeurs:
                 break
-        exo.append(tex_enonce_thales(noms, valeurs, text_arrondi))
+        exo.append(r"\figureadroite{%")
+        cor.append(r"\figureadroite{%")
         exo.append(tex_fig_thales(noms, valeurs))
+        cor.append(tex_fig_thales(noms, valeurs))
+        exo.append("}{%")
+        cor.append("}{%")
+        exo.append(tex_enonce_thales(noms, valeurs, text_arrondi))
         cor.append(tex_enonce_thales(noms, valeurs, text_arrondi))
-        cor.append(tex_fig_thales(noms, valeurs) +
-                 "\n\\par\\dotfill{}")
+        exo.append(r"}\par")
+        cor.append(r"}\par")
         cor.append(tex_resolution_thales0(noms))
         cor.append(tex_resolution_thales1(noms, valeurs))
         cor.append(tex_resolution_thales2(noms, valeurs))
         cor.append(tex_resolution_thales3(noms, valeurs, arrondi))
-        if not i:
-            exo.append("\\columnbreak")
-            cor.append("\\columnbreak")
-        else:
-            exo.append("\\end{multicols}")
-            cor.append("\\end{multicols}")
 
 def long_val(noms, valeurs):  # renvoie un tuple contenant les noms des segments et leur longueur puis les noms des longueurs a calculer
     liste = []
@@ -202,11 +199,11 @@ def creer_noms(noms, i):
 
 def tex_enonce_thales(noms, valeurs, text_arrondi):
     texte = \
-            u'Sur la figure ci-dessous, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par\n' % \
+            u'Sur la figure ci-contre, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par\n' % \
         (lAB(noms[1:3]), lAB(noms[3:5]))
     liste = long_val(noms, valeurs)
     texte += \
-        'On donne $%s=\\unit[%s]{cm},\\quad %s=\\unit[%s]{cm}, \\quad %s=\\unit[%s]{cm}\\quad\\text{et}\\quad %s~=~\\unit[%s]{cm}$.\\par\n' % \
+        'On donne $%s=\\unit[%s]{cm}$ \\quad $%s=\\unit[%s]{cm}$ \\quad $%s=\\unit[%s]{cm}$ \\quad $%s~=~\\unit[%s]{cm}$.\\par\n' % \
         tuple(liste[0:8])
     texte += 'Calculer $%s$ et $%s$, ' % tuple(liste[8:10])
     texte += u'arrondies au %s.' % text_arrondi
@@ -214,10 +211,8 @@ def tex_enonce_thales(noms, valeurs, text_arrondi):
 
 
 def tex_resolution_thales0(n):
-    return u"""Les points $%s$,~ $%s$,~ $%s$ et $%s$, $%s$, $%s$ sont alignés et les droites $(%s)$ et $(%s)$ sont parallèles.\\par
-D'après le \\textbf{théorème de Thalès} :
-$\\qquad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$
-""" % \
+    return u"""Les points $%s$, $%s$, $%s$ et $%s$, $%s$, $%s$ sont alignés et les droites $(%s)$ et $(%s)$ sont parallèles.\\par
+D'après le \\textbf{théorème de Thalès} : $\\quad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$""" % \
         (
         n[0],
         n[3],
@@ -260,10 +255,10 @@ def tex_resolution_thales1(n, v):
             donnees = (creer_noms(n, r + 3), creer_noms(n, r + 6), '-',
                        creer_noms(n, r), nombre(v[r + 3]))
     if donnees:
-        return '\\vspace{1ex}\\par\nDe plus $%s=%s%s%s=\\unit[%s]{cm}$' % \
+        return u'\\par\\medskip\nDe plus $%s=%s%s%s=\\unit[%s]{cm}$, d\'où' % \
             donnees
     else:
-        return ''
+        return u'\\quad d\'où'
 
 
 def tex_resolution_thales2(n, v):
@@ -277,7 +272,7 @@ def tex_resolution_thales2(n, v):
             donnees.append(nombre(v[i + 3]))
         else:
             donnees.append(creer_noms(n, i + 3))
-    return '\\[\\frac{%s}{%s}=\\frac{%s}{%s}=\\frac{%s}{%s}\\]' % \
+    return '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}$\\par' % \
         tuple(donnees)
 
 
@@ -321,10 +316,10 @@ def tex_resolution_thales3(n, v, arrondi):
                                valeur_exacte(((v[r] * 1.0) * v[i + 3]) /
                                v[r + 3], approx=arrondi)])
     texte = \
-        '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n' % \
+        '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\hfill' % \
         tuple(donnees[0:9])
     texte = texte + \
-        '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n' % \
+        '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n' % \
         tuple(donnees[9:18])
     return texte
 
@@ -397,15 +392,12 @@ def fig_thales(noms, valeurs):
 def tex_fig_thales(noms, valeurs):
     donnees = fig_thales(noms, valeurs)
     enonce = \
-        '''\\begin{center}
-\\psset{PointSymbol=none,unit=%s}
+        '''\\psset{PointSymbol=none,unit=%s}
 \\begin{pspicture}(%s,%s)(%s,%s)
 \\SpecialCoor
 \\pstTriangle[PosAngleA=%s, PosAngleB=-45, PosAngleC=%s, PointNameA=%s, PointNameB=%s, PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
 \\pstTriangle[PosAngleB=%s, PosAngleC=%s, PointSymbolA=none, PointNameA=none, PointNameB=%s, PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
-\\end{pspicture}
-\\end{center}
-''' % donnees
+\\end{pspicture}''' % donnees
     return enonce
 
 
@@ -601,7 +593,7 @@ def resolution_rec_thales0(n, v):
 
 
 def tex_resolution_rec_thales0(n, v):
-    return u"""Les points $%s$, $%s$, $%s$~ et $%s$, $%s$, $%s$ sont alignés dans le même ordre.\\par
+    return u"""Les points $%s$, $%s$, $%s$ et $%s$, $%s$, $%s$ sont alignés dans le même ordre.\\par
 De plus $%s=%s%s%s=\\unit[%s]{cm}$.\\par
 """ % \
         resolution_rec_thales0(n, v)
