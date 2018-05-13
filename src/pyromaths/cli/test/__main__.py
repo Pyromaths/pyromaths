@@ -189,7 +189,7 @@ def get_exercise_list_or_all(tests, exercise_option):
     else:
         exercise_list = [
             (exo, tests.get_tested_seeds(exo))
-            for exo in tests.iter_id()
+            for exo in tests.iter_names()
             ]
 
     return exercise_list

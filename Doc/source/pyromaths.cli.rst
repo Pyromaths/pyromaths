@@ -47,9 +47,8 @@ Description des exercices
 =========================
 
 Les exercices sur lesquels s'appliquent les commandes de ``pyromaths-cli`` sont
-décrits comme ``quatriemes.exo_pythagore:4,6``, où :
+décrits comme ``exo_pythagore:4,6``, où :
 
-* ``quatriemes`` est le niveau de l'exercice ;
 * ``exo_pythagore`` est l'identifiant de l'exercice (le nom de la fonction ou
   de la classe qui le définit) ;
 * ``4,6`` sont les graines du générateur

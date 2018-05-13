@@ -184,7 +184,7 @@ class UnittestExercise(unittest.TestCase):
         if self.exercise is None:
             return super(UnittestExercise, self).shortDescription()
         else:
-            return self.exercise.exercise.id()
+            return self.exercise.exercise.name()
 
     def runTest(self):
         """Perform test"""
@@ -208,10 +208,10 @@ class TestPerformer(object):
         levels = pyromaths.ex.load_levels()
         for level in levels:
             for exercise in levels[level]:
-                self.exercises[exercise.id()] = exercise
+                self.exercises[exercise.name()] = exercise
 
-    def iter_id(self):
-        """Iterate over exercise ids."""
+    def iter_names(self):
+        """Iterate over exercise names."""
         return self.exercises.keys()
 
     def get(self, exercise, seed):

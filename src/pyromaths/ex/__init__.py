@@ -26,13 +26,6 @@ class TexExercise(Exercise):
         from pyromaths.Values import data_dir
         return os.path.join(data_dir(), 'ex', cls.dirlevel, 'img', "%s.png" % cls.name())
 
-    @classmethod
-    def id(cls):
-        return "{}.{}".format(
-            cls.dirlevel,
-            cls.name(),
-            )
-
     def tex_statement(self):
         ''' Return problem statement in TeX format. '''
         raise NotImplementedError()
