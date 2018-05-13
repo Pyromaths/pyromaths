@@ -481,7 +481,14 @@ def exo_ages():
     exo.append(_(u"\\item Calculer les fréquences de chaque classe d'âges."))
     cor.append(_(u"\\item Calculer les fréquences de chaque classe d'âges.\\par"))
 
-    titres = [_(u"Classes d'âges", u"$0 \\leq n \\leq 20$", u"$20 \\leq n \\leq 40$", u"$40 \\leq n \\leq 60$", u"$60 \\leq n \\leq 80$", u"$80 \\geq n$")]
+    titres = [
+        _(u"Classes d'âges"),
+        _(u"$0 \\leq n \\leq 20$"),
+        _(u"$20 \\leq n \\leq 40$"),
+        _(u"$40 \\leq n \\leq 60$"),
+        _(u"$60 \\leq n \\leq 80$"),
+        _(u"$80 \\geq n$"),
+        ]
 
     liste_pgcd = [pgcd(frequences[i], frequences[i + 1]) for i in range(len(frequences) - 2)]
     liste_pgcd.sort()
