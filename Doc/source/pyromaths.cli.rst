@@ -8,6 +8,24 @@ pour controler le rendu au fur et à mesure du développement.
 
 .. contents::
    :local:
+   :depth: 2
+
+Exécution
+=========
+
+Il y a deux manières d'appeler ce programme, qui sont équivalentes.
+
+* En laissant Python rechercher le module correspondant.  Ceci suppose que le module `pyromaths` est dans le `PYTHONPATH`.
+
+  .. code-block:: sh
+
+    python -m pyromaths.cli
+
+* En exécutant un fichier situé dans le répertoire `utils`. Le `PYTHONPATH` est automatiquement géré ; c'est utile si vous n'arrivez pas à le faire vous-même, ou si vous n'avez pas compris la phrase précédente.
+
+  .. code-block:: sh
+
+    python utils/pyromaths-cli.py
 
 Commandes disponibles
 =====================
