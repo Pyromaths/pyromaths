@@ -55,8 +55,8 @@ def argument_parser():
     subparsers.dest = 'command'
 
     # List exos
-    lsexos = subparsers.add_parser( # pylint: disable=unused-variable
-        'lsexos',
+    ls = subparsers.add_parser( # pylint: disable=unused-variable
+        'ls',
         help=(
             "List available exercises. Each line of the output can be used as "
             "an argument to other commands."
@@ -145,15 +145,15 @@ def do_generate(options):
         pipe=options.pipe,
         )
 
-def do_lsexos(options): # pylint: disable=unused-argument
-    """Perform the `lsexos` command."""
+def do_ls(options): # pylint: disable=unused-argument
+    """Perform the `ls` command."""
     tests = TestPerformer()
     for exo_id in tests.iter_id():
         print(exo_id) # pylint: disable=superfluous-parens
 
 COMMANDS = {
     "generate": do_generate,
-    "lsexos": do_lsexos,
+    "ls": do_ls,
     "test": do_test,
     "gui": do_gui,
     }

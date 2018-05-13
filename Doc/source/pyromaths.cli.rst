@@ -35,7 +35,7 @@ Commandes disponibles
 
   Il est également possible de fournir des commandes à exécuter sur les fichiers LaTeX avant leur compilation. Ceci est utile pour déceler des erreurs de code LaTeX. Par exemple, la commande ``python -m pyromaths.cli compile -p more EXERCICE`` affiche le code LaTeX dans `more` avant compilation; la commande ``python -m pyromaths.cli compile -p vim EXERCICE`` édite le fichier avec `vim` avant compilation. Ceci peut aussi être utilisé (en attendant une solution plus propre) pour garder une copie du fichier LaTeX en cas d'erreur de compilation, pour pouvoir l'analyser, ainsi que le log : ``python -m pyromaths.cli compile -p 'cp {} exercices.tex' EXERCICE``.
 
-* Liste des identifiants des exercices disponibles (``python -m pyromaths.cli lsexos``) :
+* Liste des identifiants des exercices disponibles (``python -m pyromaths.cli ls``) :
   Affiche la liste des identifiants des exercices, pour retrouver facilement l'exercice en cours de travail. Plus d'informations sont données dans la partie :ref:`id_exos`.
 
 * Test des exercices (``python -m pyromaths.cli test``) :
@@ -58,7 +58,7 @@ décrits comme ``quatriemes.exo_pythagore:4,6``, où :
   utilisée.
 
 La liste des exercices disponibles peut être obtenue avec la commande
-``python -m pyromaths.cli lsexos``.
+``python -m pyromaths.cli ls``.
 
 
 .. _pyrotests:
