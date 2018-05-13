@@ -1,0 +1,5497 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Pilar Embid Giner <embid_mar@gva.es>, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-23 13:57+0200\n"
+"PO-Revision-Date: 2016-06-10 13:39+0200\n"
+"Last-Translator: Pilar Embid Giner <embid_mar@gva.es>\n"
+"Language-Team: LliureX\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#: src/pyromaths/interface.py:68
+msgid "Créer"
+msgstr "Crea"
+
+#: src/pyromaths/interface.py:75 src/pyromaths/interface.py:318
+msgid "Quitter"
+msgstr "Ix"
+
+#: src/pyromaths/interface.py:82
+msgid "Réinitialiser"
+msgstr "Reinicialitza"
+
+#: src/pyromaths/interface.py:115
+msgid "Options"
+msgstr "Opcions"
+
+#: src/pyromaths/interface.py:136
+msgid "Nom par défaut du fichier : "
+msgstr "Nom per defecte del fitxer: "
+
+#: src/pyromaths/interface.py:142
+msgid "Chemin par défaut pour enregistrer les fichiers : "
+msgstr "Carpeta per defecte on guardar els fitxers:"
+
+#: src/pyromaths/interface.py:148
+msgid "Titre de la fiche d'exercices : "
+msgstr "Títol de la fitxa d'exercicis:"
+
+#: src/pyromaths/interface.py:174
+msgid "Parcourir"
+msgstr "Explora"
+
+#: src/pyromaths/interface.py:202
+msgid "Créer le corrigé"
+msgstr "Crea el solucionari"
+
+#: src/pyromaths/interface.py:203
+msgid "Pyromaths doit-il créer la fiche de correction détaillée?"
+msgstr "Voleu que el Pyromaths cree el solucionari?"
+
+#: src/pyromaths/interface.py:211
+msgid "Créer le pdf"
+msgstr "Crea el PDF"
+
+#: src/pyromaths/interface.py:212
+msgid "Pyromaths doit-il créer les fiches au format pdf ?"
+msgstr "Voleu crear les fitxes en format PDF?"
+
+#: src/pyromaths/interface.py:219
+msgid "Créer un seul pdf"
+msgstr "Crea un únic PDF"
+
+#: src/pyromaths/interface.py:220
+msgid "Le corrigé et les exercices doivent-ils être dans le même document ?"
+msgstr "Voleu col·locar el solucionari i els exercicis en el mateix fitxer?"
+
+#: src/pyromaths/interface.py:236
+msgid "Niveau :"
+msgstr "Nivell:"
+
+#: src/pyromaths/interface.py:242
+msgid "Modèle de mise en page :"
+msgstr "Model de pàgina:"
+
+#: src/pyromaths/interface.py:256
+msgid "Classe de 6\\ieme"
+msgstr "Curs 6é de Primària"
+
+#: src/pyromaths/interface.py:257
+msgid "Classe de 5\\ieme"
+msgstr "Curs 1r d'ESO"
+
+#: src/pyromaths/interface.py:258
+msgid "Classe de 4\\ieme"
+msgstr "Curs 2n d'ESO"
+
+#: src/pyromaths/interface.py:259
+msgid "Classe de 3\\ieme"
+msgstr "Curs 3r d'ESO"
+
+#: src/pyromaths/interface.py:260
+#, python-brace-format
+msgid "Classe de 2\\up{nde}"
+msgstr "Curs 4t d'ESO \\up{nde}"
+
+#: src/pyromaths/interface.py:294
+msgid "Enregistrer dans les préférences"
+msgstr "Guarda les preferències"
+
+#: src/pyromaths/interface.py:315
+msgid "Fichier"
+msgstr "Fitxer"
+
+#: src/pyromaths/interface.py:323
+msgid "Aide"
+msgstr "Ajuda"
+
+#: src/pyromaths/interface.py:326
+msgid "Accéder au site"
+msgstr "Accedeix al lloc"
+
+#: src/pyromaths/interface.py:330
+msgid "À propos"
+msgstr "Quant a"
+
+#: src/pyromaths/interface.py:352
+msgid ""
+"Pour avoir un aperçu d'un exercice, positionner le curseur de la souris sur "
+"le point d'interrogation."
+msgstr "Per a veure'n un exemple, col·loqueu el cursor sobre la interrogació."
+
+#: src/pyromaths/interface.py:371
+#, python-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html>\n"
+"  <head>\n"
+"    <meta name=\"qrichtext\" content=\"1\" />\n"
+"    <style type=\"text/css\">\n"
+"      p, li { white-space: pre-wrap; align:\"justify\"; margin-top:0px; "
+"margin-bottom:0px; margin-left:0px; margin-right:5px; -qt-block-indent:0; "
+"text-indent:0px; }\n"
+"    </style>\n"
+"  </head>\n"
+"  <body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; "
+"font-style:normal;\" bgcolor=\"#f9efbe\">\n"
+"    <p align=\"center\">\n"
+"    <img src=\"%s\" />\n"
+"    <br /><br />\n"
+"    <span style=\"font-weight:600;\">Version %s</span>\n"
+"    </p>\n"
+"    <p>\n"
+"    <span style=\" font-weight:600;\">Pyromaths</span> est un programme qui "
+"permet de créer des  fiches d'exercices types de mathématiques niveau "
+"collège avec leur corrigé.\n"
+"    </p>\n"
+"    <p>\n"
+"    Les fiches sont produites au format LaTeX. Pyromaths lance ensuite les "
+"commandes nécessaires à la production de fichiers pdf (latex - dvips - "
+"ps2pdf) et les ouvre.\n"
+"    </p>\n"
+"    <p align=\"center\">\n"
+"    <span style=\" text-decoration: underline;\">Remerciements à&nbsp;:</"
+"span>\n"
+"    </p>\n"
+"    <p>\n"
+"    <ul style=\"-qt-list-indent:1;\">\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">David Robert</span> pour l'idée de "
+"départ&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Yves Gesnel</span> pour le portage "
+"de Pyromaths sur Mac OS X et la conception d'exercices&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Arnaud Kientz</span> pour ses "
+"graphismes, son implication dans le code de Pyromaths et son amitié&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Guillaume Barthélémy</span> pour ses "
+"exercices&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Nicolas Bissonnier</span> pour son "
+"arrivée dans l'équipe de développement&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Didier Roche</span> pour "
+"l'intégration de Pyromaths dans les dépôts Ubuntu&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Olivier Cornu</span> pour son "
+"travail sur l'API exercice et sur la diffusion de Pyromaths via Makefile et "
+"Setup.py&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Jacqueline Gouguenheim-Desloy</span> "
+"a porté Pyromaths sur Mac OS X à ses débuts. Son soutien et son amitié nous "
+"ont été précieux. Sa disparition est une perte douloureuse pour la "
+"communauté du logiciel libre.\n"
+"      </li>\n"
+"    </ul>\n"
+"    </p>\n"
+"    <p align=\"center\">\n"
+"    %s\n"
+"    </p>\n"
+"  </body>\n"
+"</html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-"
+"html40/strict.dtd\">\n"
+"<html>\n"
+"  <head>\n"
+"    <meta name=\"qrichtext\" content=\"1\" />\n"
+"    <style type=\"text/css\">\n"
+"      p, li { white-space: pre-wrap; align:\"justify\"; margin-top:0px; "
+"margin-bottom:0px; margin-left:0px; margin-right:5px; -qt-block-indent:0; "
+"text-indent:0px; }\n"
+"    </style>\n"
+"  </head>\n"
+"  <body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; "
+"font-style:normal;\" bgcolor=\"#f9efbe\">\n"
+"    <p align=\"center\">\n"
+"    <img src=\"%s\" />\n"
+"    <br /><br />\n"
+"    <span style=\"font-weight:600;\">Versió %s</span>\n"
+"    </p>\n"
+"    <p>\n"
+"    El <span style=\" font-weight:600;\">Pyromaths</span> és un programa que "
+"permet crear fitxes d'exercicis matemàtics de nivell escolar amb les "
+"solucions\n"
+"    </p>\n"
+"    <p>\n"
+"    Les fitxes es creen en format LaTeX. El Pyromaths executa a continuació "
+"les ordres necessàries per a crear fitxers PDF (latex - dvips - ps2pdf) i "
+"els obri.\n"
+"    </p>\n"
+"    <p align=\"center\">\n"
+"    <span style=\" text-decoration: underline;\">Agraïments a&nbsp;:</span>\n"
+"    </p>\n"
+"    <p>\n"
+"    <ul style=\"-qt-list-indent:1;\">\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">David Robert</span> per la idea "
+"inicial&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Yves Gesnel</span> per l'adaptació del "
+"Pyromaths al Mac OS X i la concepció dels exercicis&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Arnaud Kientz</span> pel disseny "
+"gràfic, la implicació en el codi del Pyromaths i la seua amistat&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Guillaume Barthélémy</span> pels "
+"exercicis&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Nicolas Bissonnier</span> per "
+"incorporar-se a l'equip&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Didier Roche</span> per la integració "
+"del Pyromaths als repositoris d'Ubuntu&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Olivier Cornu</span> pel seu treball "
+"sobre l'API dels exercicis i sobre la difusió del Pyromaths a través de "
+"Makefile i Setup.py&nbsp;;\n"
+"      </li>\n"
+"      <li>\n"
+"      <span style=\" font-weight:600;\">Jacqueline Gouguenheim-Desloy</span> "
+"que ha portat el Pyromaths al Mac OS X a l'inici. La seua ajuda i amistat "
+"han sigut molt valuoses. La seua desaparició és una pèrdua dolorosa per a la "
+"comunitat del programari lliure.\n"
+"      </li>\n"
+"    </ul>\n"
+"    </p>\n"
+"    <p align=\"center\">\n"
+"    %s\n"
+"    </p>\n"
+"  </body>\n"
+"</html>"
+
+#: src/pyromaths/interface.py:431
+msgid "À propos de Pyromaths"
+msgstr "Quant al Pyromaths"
+
+#: src/pyromaths/interface.py:438
+msgid "Attention !"
+msgstr "Atenció!"
+
+#: src/pyromaths/interface.py:439
+msgid "Veuillez sélectionner des exercices..."
+msgstr "Seleccioneu exercicis..."
+
+#: src/pyromaths/interface.py:520
+msgid "Dossier où créer les fiches"
+msgstr "Carpeta on crear les fitxes"
+
+#: src/pyromaths/interface.py:586
+msgid "Choisissez l'ordre des exercices"
+msgstr "Seleccioneu l'ordre dels exercicis"
+
+#: src/pyromaths/interface.py:635 src/pyromaths/interface.py:638
+#, python-format
+msgid "%s-corrige.tex"
+msgstr "%s-solucionari.tex"
+
+#: src/pyromaths/interface.py:636
+msgid "Documents Tex (*.tex)"
+msgstr "Documents Tex (*.tex)"
+
+#: src/pyromaths/interface.py:691
+msgid "Choisissez le nombre d'exercices de ce type à créer."
+msgstr "Trieu el nombre d'exercicis d'aquest tipus que voleu crear."
+
+#: src/pyromaths/Values.py:67
+#, python-format
+msgid ""
+"© 2006 – %s Jérôme Ortais<br/>\n"
+"<span style=\" font-size:small;\">Pyromaths est distribué sous licence GPL.</"
+"span>"
+msgstr ""
+"© 2006 – %s Jérôme Ortais<br/>\n"
+"<span style=\" font-size:small;\">El Pyromaths és una distribució amb "
+"llicència GPL.</span>"
+
+#: src/pyromaths/ex/sixiemes/aires.py:46 src/pyromaths/ex/sixiemes/aires.py:56
+#: src/pyromaths/ex/sixiemes/aires.py:88 src/pyromaths/ex/sixiemes/aires.py:109
+#: src/pyromaths/ex/sixiemes/aires.py:135
+#: src/pyromaths/ex/sixiemes/aires.py:169
+#, python-format
+msgid ""
+"{\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{figure %s}}"
+msgstr ""
+"{\\psframebox[linecolor=white, fillcolor=white, fillstyle=solid]{figure %s}}"
+
+#: src/pyromaths/ex/sixiemes/aires.py:47 src/pyromaths/ex/sixiemes/aires.py:57
+#, python-format
+msgid "Aire de la figure %s : $%s = %s$~unités d'aire"
+msgstr "Àrea de la figura %s: $%s = %s$~unitats d'àrea"
+
+#: src/pyromaths/ex/sixiemes/aires.py:93 src/pyromaths/ex/sixiemes/aires.py:112
+#: src/pyromaths/ex/sixiemes/aires.py:139
+#: src/pyromaths/ex/sixiemes/aires.py:175
+#, python-format
+msgid "Aire de la figure %s : "
+msgstr "Àrea de la figura %s: "
+
+#: src/pyromaths/ex/sixiemes/aires.py:94
+msgid "c'est l'aire du rectangle en pointillés.\\par\n"
+msgstr "és igual a l'àrea del rectangle marcat sobre la figura.\\par\n"
+
+#: src/pyromaths/ex/sixiemes/aires.py:95
+#, python-format
+msgid "$%s = %s$~unités d'aire"
+msgstr "$%s = %s$~unitats d'àrea"
+
+#: src/pyromaths/ex/sixiemes/aires.py:113
+#: src/pyromaths/ex/sixiemes/aires.py:140
+msgid "c'est la moitié de l'aire du rectangle en pointillés.\\par\n"
+msgstr ""
+"és igual a la meitat de l'àrea del rectangle marcat sobre la figura.\\par\n"
+
+#: src/pyromaths/ex/sixiemes/aires.py:114
+#: src/pyromaths/ex/sixiemes/aires.py:141
+#, python-format
+msgid "$(%s) \\div 2= %s$~unités d'aire"
+msgstr "$(%s) \\div 2= %s$~unitats d'àrea"
+
+#: src/pyromaths/ex/sixiemes/aires.py:176
+msgid "on calcule l'aire du rectangle en pointillés et on soustrait "
+msgstr "és l'àrea del rectangle marcat sobre la figura, menys "
+
+#: src/pyromaths/ex/sixiemes/aires.py:177
+#, python-brace-format
+msgid "les aires des triangles rectangles \\pscirclebox{1}, "
+msgstr "les àrees dels triangles rectangles \\pscirclebox{1}, "
+
+#: src/pyromaths/ex/sixiemes/aires.py:178
+#, python-brace-format
+msgid "\\pscirclebox{2} et \\pscirclebox{3}.\\par\n"
+msgstr "\\pscirclebox{2} i \\pscirclebox{3}.\\par\n"
+
+#: src/pyromaths/ex/sixiemes/aires.py:182
+#, python-format
+msgid "= %s$~unités d'aire"
+msgstr "= %s$~unitats d'àrea"
+
+#: src/pyromaths/ex/sixiemes/aires.py:208
+msgid ""
+"\\rput[l](0.6,0.25){\\psframebox[linecolor=white, fillcolor=white, "
+"fillstyle=solid]{unité d'aire}}\n"
+msgstr ""
+"\\rput[l](0.6,0.25){\\psframebox[linecolor=white, fillcolor=white, "
+"fillstyle=solid]{unitat d'àrea}}\n"
+
+#: src/pyromaths/ex/sixiemes/aires.py:235
+#: src/pyromaths/ex/sixiemes/aires.py:236
+msgid ""
+"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :"
+"\\par"
+msgstr ""
+"Calculeu l'àrea de cadascuna de les figures següents en la unitat d'àrea "
+"donada:\\par"
+
+#: src/pyromaths/ex/sixiemes/aires.py:242
+msgid "Aires et quadrillage"
+msgstr "Àrees en quadrícula"
+
+#: src/pyromaths/ex/sixiemes/angles.py:251
+#: src/pyromaths/ex/sixiemes/angles.py:252
+msgid ""
+"Nommer, mesurer et donner la nature de chacun des angles suivants :\\par "
+msgstr "Anomena, mesura i indica el tipus de cadascun dels angles següents:\\par"
+
+#: src/pyromaths/ex/sixiemes/angles.py:257
+msgid "Mesurer des angles"
+msgstr "Mesura d'angles"
+
+#: src/pyromaths/ex/sixiemes/angles.py:261
+msgid "Construire des angles"
+msgstr "Construcció d'angles"
+
+#: src/pyromaths/ex/sixiemes/angles.py:349
+msgid ""
+"Construire sur la figure ci-dessous les points $C$, $D$, $E$, $F$ et $G$ "
+"pour obtenir un zigzag tel que :\\par"
+msgstr ""
+"Construïu sobre la figure següent els punts $C$, $D$, $E$, $F$ i $G$ per a "
+"obtindre un zig-zag de manera que:\\par"
+
+#: src/pyromaths/ex/sixiemes/angles.py:355
+msgid "Quand le travail est fait avec une bonne précision, les "
+msgstr "Quan el treball s'ha fet amb precisió, les "
+
+#: src/pyromaths/ex/sixiemes/angles.py:358
+msgid "droites $(AG)$ et $(BF)$ se coupent au c\\oe ur de la cible.\\par"
+msgstr "rectes $(AG)$ i $(BF)$ es tallen al centre de la diana.\\par"
+
+#: src/pyromaths/ex/sixiemes/angles.py:360
+msgid "droites $(AF)$ et $(BG)$ se coupent au c\\oe ur de la cible."
+msgstr "rectes $(AF)$ i $(BG)$ es tallen al centre de la diana.\\par"
+
+#: src/pyromaths/ex/sixiemes/angles.py:368
+msgid "Voici deux exemples de zigzags :\\par"
+msgstr "Vegeu ací dos exemples de zig-zags:\\par"
+
+#: src/pyromaths/ex/sixiemes/arrondi.py:29
+msgid "au millième"
+msgstr "a les mil·lèsimes"
+
+#: src/pyromaths/ex/sixiemes/arrondi.py:29
+msgid "au centième"
+msgstr "a les centèsimes"
+
+#: src/pyromaths/ex/sixiemes/arrondi.py:29
+msgid "au dixième"
+msgstr "a les dècimes"
+
+#: src/pyromaths/ex/sixiemes/arrondi.py:29
+msgid "à l'unité"
+msgstr "a les unitats"
+
+#: src/pyromaths/ex/sixiemes/arrondi.py:31
+msgid "à la dizaine de milliers"
+msgstr "a les desenes de miler"
+
+#: src/pyromaths/ex/sixiemes/arrondi.py:33
+msgid " par défaut"
+msgstr " per defecte"
+
+#: src/pyromaths/ex/sixiemes/arrondi.py:33
+msgid " par excès"
+msgstr " per excés"
+
+#: src/pyromaths/ex/sixiemes/arrondi.py:38
+msgid "Arrondir des nombres décimaux"
+msgstr "Arredoniment de decimals"
+
+#: src/pyromaths/ex/sixiemes/arrondi.py:60
+msgid "\\item Arrondir "
+msgstr "\\item Arredoneix"
+
+#: src/pyromaths/ex/sixiemes/arrondi.py:82
+msgid "\\item L'encadrement de "
+msgstr "\\item L'aproximació de "
+
+#: src/pyromaths/ex/sixiemes/arrondi.py:86
+msgid "On en déduit que son arrondi "
+msgstr "Se'n dedueix que l'arredoniment"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:432
+#: src/pyromaths/ex/sixiemes/decimaux.py:435
+msgid "\\item Écrire en chiffres les nombres suivants."
+msgstr "\\item Escriviu en xifres els nombres següents."
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:441
+#: src/pyromaths/ex/sixiemes/decimaux.py:444
+msgid ""
+"\\item Écrire en lettres les nombres suivants (sans utiliser le mot ``virgule"
+"\")."
+msgstr ""
+"\\item Escriviu en lletra els nombres següents (sense utilitzar la paraula "
+"``coma\")."
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:455
+msgid "Écrire un nombre décimal"
+msgstr "Escriptura d'un nombre decimal"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:593
+#: src/pyromaths/ex/sixiemes/decimaux.py:600
+#: src/pyromaths/ex/sixiemes/decimaux.py:687
+#: src/pyromaths/ex/sixiemes/decimaux.py:694
+msgid "Effectuer les conversions suivantes :"
+msgstr "Realitzeu les conversions següents:"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:637
+msgid "Conversions unités"
+msgstr "Conversió d'unitats"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:698
+#, python-format
+msgid "^%s"
+msgstr "^%s"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:727
+msgid "Conversions unités d'aires"
+msgstr "Conversió d'unitats d'àrees"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:731
+msgid "Conversions unités de volumes"
+msgstr "Conversió d'unitats de volum"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:793
+msgid "dixièmes"
+msgstr "dècimes"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:793
+msgid "centièmes"
+msgstr "centèsimes"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:793
+msgid "millièmes"
+msgstr "mil·lèsimes"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:818
+#: src/pyromaths/ex/sixiemes/decimaux.py:821
+#, python-format
+msgid ""
+"Placer une virgule (en ajoutant éventuellement des zéros) dans            le "
+"nombre %s de telle sorte que :"
+msgstr ""
+"Col·loqueu la coma (afegiu zeros, si cal) en el nombre %s de manera que:"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:828
+#: src/pyromaths/ex/sixiemes/decimaux.py:830
+#, python-format
+msgid "\\item le chiffre %s soit le chiffre des %s : "
+msgstr "\\item la xifra %s siga la xifra de les %s: "
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:872
+msgid "Placer une virgule"
+msgstr "Col·locació de la coma decimal"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:921
+#: src/pyromaths/ex/sixiemes/decimaux.py:923
+#: src/pyromaths/ex/cinquiemes/fractions.py:31
+#: src/pyromaths/ex/cinquiemes/fractions.py:33
+msgid "Compléter :"
+msgstr "Completeu:"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:934
+msgid "Écriture fractionnaire ou décimale"
+msgstr "Escriptura en forma fraccionària o decimal"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:986
+#: src/pyromaths/ex/sixiemes/decimaux.py:988
+msgid "Compléter avec un nombre décimal :"
+msgstr "Completeu amb el nombre decimal resultant:"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:999
+msgid "Décomposition de décimaux"
+msgstr "Descomposició de nombres decimals"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:1028
+msgid "décroissant"
+msgstr "decreixent (de major a menor)"
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:1029
+#: src/pyromaths/ex/sixiemes/decimaux.py:1031
+#, python-format
+msgid "\\item Classer les nombres suivants dans l'ordre %s.\\par    "
+msgstr "\\item Classifiqueu els nombres següents en l'ordre %s.\\par  "
+
+#: src/pyromaths/ex/sixiemes/decimaux.py:1064
+msgid "Classer des nombres décimaux"
+msgstr "Ordenació de decimals"
+
+#: src/pyromaths/ex/sixiemes/droites.py:200
+#: src/pyromaths/ex/sixiemes/droites.py:205
+msgid "Compléter les pointillés et les figures :\\par"
+msgstr ""
+"Completeu els buits indicant si són rectes (\\;), semirectes (\\;] [\\;) o "
+"segments [\\;] i dibuixeu la figura:\\par"
+
+#: src/pyromaths/ex/sixiemes/droites.py:209
+#, python-brace-format
+msgid "\\textbf{Phrase} & \\textbf{Figure} \\tabularnewline \\hline"
+msgstr "\\textbf{Frase} & \\textbf{Figura} \\tabularnewline \\hline"
+
+#: src/pyromaths/ex/sixiemes/droites.py:219
+msgid "Droites, demi-droites, segments"
+msgstr "Rectes, semirectes, segments"
+
+#: src/pyromaths/ex/sixiemes/droites.py:297
+#, python-format
+msgid ""
+"\\item Tracer la droite perpendiculaire à la droite $(%s%s)$ passant par $%s$"
+msgstr ""
+"\\item Traceu la recta perpendicular a la recta $(%s%s)$ que passa per $%s$"
+
+#: src/pyromaths/ex/sixiemes/droites.py:298
+#, python-format
+msgid "\\item Tracer la droite parallèle à la droite $(%s%s)$ passant par $%s$"
+msgstr ""
+"\\item Traceu la recta paral·lela a la recta $(%s%s)$ que passa per $%s$"
+
+#: src/pyromaths/ex/sixiemes/droites.py:316
+#: src/pyromaths/ex/sixiemes/droites.py:317
+msgid "Réaliser les figures suivantes :\\par"
+msgstr "Realitzeu les figures següents:\\par"
+
+#: src/pyromaths/ex/sixiemes/droites.py:330
+msgid "Droites perpendiculaires et parallèles"
+msgstr "Rectes perpendiculars i paral·leles"
+
+#: src/pyromaths/ex/sixiemes/droites.py:534
+#: src/pyromaths/ex/sixiemes/droites.py:539
+msgid ""
+"\\multicolumn{1}{|c|}{\\bf Données} & \\multicolumn{1}{|c|}{\\bf Figure "
+"codée}"
+msgstr ""
+"\\multicolumn{1}{|c|}{\\bf Dades} & \\multicolumn{1}{|c|}{\\bf Representació}"
+
+#: src/pyromaths/ex/sixiemes/droites.py:535
+#: src/pyromaths/ex/sixiemes/droites.py:540
+msgid ""
+"& \\multicolumn{1}{|c|}{\\bf Propriété} & \\multicolumn{1}{|c|}{\\bf "
+"Conclusion}\\\\"
+msgstr ""
+"& \\multicolumn{1}{|c|}{\\bf Propietat} & \\multicolumn{1}{|c|}{\\bf "
+"Conclusió}\\\\"
+
+#: src/pyromaths/ex/sixiemes/droites.py:570
+msgid ""
+"Si deux droites sont parallèles, alors toute parallèle à l'une est parallèle "
+"à l'autre. &"
+msgstr ""
+"Si dos rectes són paral·leles, aleshores tota recta paral·lela a l'una és "
+"paral·lela a l'altra. &"
+
+#: src/pyromaths/ex/sixiemes/droites.py:605
+msgid ""
+"Si deux droites sont parallèles, alors toute perpendiculaire à l'une est "
+"perpendiculaire à l'autre. &"
+msgstr ""
+"Si dos rectes són paral·leles, aleshores tota recta perpendicular a l'una és "
+"perpendicular a l'altra. &"
+
+#: src/pyromaths/ex/sixiemes/droites.py:638
+msgid ""
+"Si deux droites sont perpendiculaires à une même troisième alors elles sont "
+"parallèles entre elles. &"
+msgstr ""
+"Si dos rectes són perpendiculars a una altra tercera, aleshores les dos "
+"rectes són paral·leles entre si. &"
+
+#: src/pyromaths/ex/sixiemes/droites.py:652
+#: src/pyromaths/ex/sixiemes/droites.py:653
+msgid ""
+"Compléter le tableau suivant :\\par Les droites en gras sont parallèles."
+"\\par "
+msgstr ""
+"Completeu la taula següent:\\par Les rectes en negreta són paral·leles.\\par"
+
+#: src/pyromaths/ex/sixiemes/droites.py:658
+msgid "Propriétés sur les droites"
+msgstr "Propietats de les rectes"
+
+#: src/pyromaths/ex/sixiemes/espace.py:145
+#, python-format
+msgid "%s, %s, %s et %s sont les arêtes perpendiculaires à %s."
+msgstr "%s, %s, %s i %s són les arestes perpendiculars a %s."
+
+#: src/pyromaths/ex/sixiemes/espace.py:146
+#, python-format
+msgid "%s, %s et %s sont les arêtes parallèles à %s."
+msgstr "%s, %s i %s són les arestes paral·leles a %s."
+
+#: src/pyromaths/ex/sixiemes/espace.py:148
+#: src/pyromaths/ex/sixiemes/espace.py:195
+#, python-format
+msgid "Les figures 1 et 2 représentent le même cube %s%s%s%s%s%s%s%s.\\\\ "
+msgstr "Les figures 1 i 2 representen el mateix cub %s%s%s%s%s%s%s%s.\\\\"
+
+#: src/pyromaths/ex/sixiemes/espace.py:190
+#: src/pyromaths/ex/sixiemes/espace.py:242
+msgid "\\item Compléter les sommets manquants de la figure 2."
+msgstr "\\item Completeu els vèrtex que falten en la figure 2."
+
+#: src/pyromaths/ex/sixiemes/espace.py:191
+#, python-format
+msgid "\\item Donner toutes les arêtes perpendiculaires à [%s%s]."
+msgstr "\\item Trobeu totes les arestes perpendiculars a [%s%s]."
+
+#: src/pyromaths/ex/sixiemes/espace.py:192
+#, python-format
+msgid "\\item Donner toutes les arêtes parallèles à [%s%s]."
+msgstr "\\item Trobeu totes les arestes paral·leles a [%s%s]."
+
+#: src/pyromaths/ex/sixiemes/espace.py:243
+#, python-format
+msgid "\\item Donner toutes les arêtes perpendiculaires à [%s%s].\\par "
+msgstr "\\item Trobeu totes les arestes perpendiculars a [%s%s].\\par"
+
+#: src/pyromaths/ex/sixiemes/espace.py:245
+#, python-format
+msgid "\\item Donner toutes les arêtes parallèles à [%s%s]. \\par "
+msgstr "\\item Trobeu totes les arestes paral·leles a [%s%s]. \\par"
+
+#: src/pyromaths/ex/sixiemes/espace.py:250
+msgid "Représentation dans l'espace"
+msgstr "Representació en l'espai"
+
+#: src/pyromaths/ex/sixiemes/fractions.py:166
+#: src/pyromaths/ex/sixiemes/fractions.py:168
+#, python-format
+msgid "\\item Colorer $\\frac{%s}{%s}$ de ce rectangle.\\par"
+msgstr "\\item Pinta la fracció $\\frac{%s}{%s}$ d'aquest rectangle.\\par"
+
+#: src/pyromaths/ex/sixiemes/fractions.py:190
+msgid "Fractions partage"
+msgstr "Representació de fraccions"
+
+#: src/pyromaths/ex/sixiemes/fractions.py:263
+msgid "ièmes"
+msgstr "s"
+
+#: src/pyromaths/ex/sixiemes/fractions.py:286
+#, python-format
+msgid "\\item 1 unité = \\ldots %s"
+msgstr "\\item 1 unitat = \\underline{\\hspace*{1 cm}} %s"
+
+#: src/pyromaths/ex/sixiemes/fractions.py:287
+#, python-format
+msgid "\\item 1 unité = \\ldots~%s"
+msgstr "\\item 1 unitat = \\underline{\\hspace*{1 cm}}~%s"
+
+#: src/pyromaths/ex/sixiemes/fractions.py:288
+#: src/pyromaths/ex/sixiemes/fractions.py:290
+#, python-format
+msgid "\\item %s unités = \\ldots~%s"
+msgstr "\\item %s unitats = \\underline{\\hspace*{1 cm}}~%s"
+
+#: src/pyromaths/ex/sixiemes/fractions.py:292
+#: src/pyromaths/ex/sixiemes/fractions.py:293
+#, python-format
+msgid "\\item 1 unité = %s %s"
+msgstr "\\item 1 unitat = \\underline{\\textbf{%s}} %s"
+
+#: src/pyromaths/ex/sixiemes/fractions.py:294
+#: src/pyromaths/ex/sixiemes/fractions.py:296
+#, python-format
+msgid "\\item %s unités = %s %s"
+msgstr "\\item %s unitats = \\underline{\\textbf{%s}} %s"
+
+#: src/pyromaths/ex/sixiemes/fractions.py:359
+#: src/pyromaths/ex/sixiemes/fractions.py:363
+msgid "\\item Compléter :"
+msgstr "\\item Completeu:"
+
+#: src/pyromaths/ex/sixiemes/fractions.py:369
+#: src/pyromaths/ex/sixiemes/fractions.py:376
+msgid ""
+"\\item Sur la demi-droite ci-dessous, placer les points d'abscisse donnée :"
+msgstr ""
+"\\item En la semirecta d'ací davall col·loqueu els punts de l'abscissa "
+"donada:"
+
+#: src/pyromaths/ex/sixiemes/fractions.py:384
+#: src/pyromaths/ex/sixiemes/fractions.py:389
+msgid "\\item Compléter les abscisses des points suivants :"
+msgstr "\\item Completeu les abscisses dels punts següents:"
+
+#: src/pyromaths/ex/sixiemes/fractions.py:406
+msgid "Fractions et abscisses"
+msgstr "Fraccions en la recta numèrica"
+
+#: src/pyromaths/ex/sixiemes/__init__.py:23
+msgid "6.Sixième"
+msgstr "6é de Primària"
+
+#: src/pyromaths/ex/sixiemes/operations.py:151
+#: src/pyromaths/ex/sixiemes/operations.py:153
+#, python-format
+msgid "\\item La somme des termes %s et %s.\\par"
+msgstr "\\item La suma dels termes %s i %s.\\par"
+
+#: src/pyromaths/ex/sixiemes/operations.py:182
+#: src/pyromaths/ex/sixiemes/operations.py:184
+#, python-format
+msgid "\\item La différence des termes %s et %s.\\par"
+msgstr "\\item La diferència dels termes %s i %s.\\par"
+
+#: src/pyromaths/ex/sixiemes/operations.py:232
+#: src/pyromaths/ex/sixiemes/operations.py:234
+#, python-format
+msgid "\\item Le produit des facteurs %s et %s.\\par"
+msgstr "\\item El producte dels factors %s i %s.\\par"
+
+#: src/pyromaths/ex/sixiemes/operations.py:237
+msgid "\\item Première méthode :\\par"
+msgstr "\\item Primer mètode:\\par"
+
+#: src/pyromaths/ex/sixiemes/operations.py:248
+msgid "\\item Seconde méthode :\\par"
+msgstr "\\item Segon mètode:\\par"
+
+#: src/pyromaths/ex/sixiemes/operations.py:283
+#: src/pyromaths/ex/sixiemes/operations.py:284
+msgid "Poser et effectuer les opérations suivantes."
+msgstr "Col·loqueu-ne un davall de l'altre i efectueu les operacions següents."
+
+#: src/pyromaths/ex/sixiemes/operations.py:296
+msgid "Poser des opérations (sauf divisions)"
+msgstr "Càlcul de decimals (excepte divisions)"
+
+#: src/pyromaths/ex/sixiemes/operations.py:361
+#: src/pyromaths/ex/sixiemes/operations.py:362
+#: src/pyromaths/ex/cinquiemes/relatifs.py:75
+#: src/pyromaths/ex/cinquiemes/relatifs.py:77
+#: src/pyromaths/ex/quatriemes/calcul_mental.py:70
+#: src/pyromaths/ex/quatriemes/calcul_mental.py:72
+msgid "Effectuer sans calculatrice :"
+msgstr "Realitzeu sense calculadora:"
+
+#: src/pyromaths/ex/sixiemes/operations.py:372
+#: src/pyromaths/ex/quatriemes/calcul_mental.py:96
+msgid "Calcul mental"
+msgstr "Càlcul mental"
+
+#: src/pyromaths/ex/sixiemes/operations.py:461
+#: src/pyromaths/ex/sixiemes/operations.py:462
+msgid "Compléter sans calculatrice :"
+msgstr "Completeu sense calculadora:"
+
+#: src/pyromaths/ex/sixiemes/operations.py:472
+msgid "Produits, quotients par 10, 100, 1000"
+msgstr "Productes i divisions per 10, 100, 1000"
+
+#: src/pyromaths/ex/sixiemes/quotients.py:53
+#: src/pyromaths/ex/sixiemes/quotients.py:54
+msgid "Cocher les bonnes réponses :\\par"
+msgstr "Marqueu les respostes correctes:\\par"
+
+#: src/pyromaths/ex/sixiemes/quotients.py:56
+#: src/pyromaths/ex/sixiemes/quotients.py:57
+msgid ""
+"\\begin{tabular}{c@{ est divisible : \\kern1cm}r@{ par 2\\kern1cm}r@{ par "
+"3\\kern1cm}r@{ par 5\\kern1cm}r@{ par 9\\kern1cm}r@{ par 10}}"
+msgstr ""
+"\\begin{tabular}{c@{ és divisible: \\kern1cm}r@{ per 2\\kern1cm}r@{ per "
+"3\\kern1cm}r@{ per 5\\kern1cm}r@{ per 9\\kern1cm}r@{ per 10}}"
+
+#: src/pyromaths/ex/sixiemes/quotients.py:66
+msgid "Multiples de 2, 3, 5, 9, 10"
+msgstr "Divisibilitat entre 2, 3, 5, 9, 10"
+
+#: src/pyromaths/ex/sixiemes/symetrie.py:74
+#: src/pyromaths/ex/sixiemes/symetrie.py:75
+msgid ""
+"Construire la symétrique de chacune des figures par rapport à la droite en"
+msgstr ""
+"Dibuixeu en la quadrícula la simètrica de cadascuna de les figures respecte"
+
+#: src/pyromaths/ex/sixiemes/symetrie.py:74
+#: src/pyromaths/ex/sixiemes/symetrie.py:75
+#: src/pyromaths/ex/cinquiemes/symetrie.py:108
+#: src/pyromaths/ex/cinquiemes/symetrie.py:111
+msgid "utilisant le quadrillage :\\par"
+msgstr "utilitzant la quadrícula:\\par"
+
+#: src/pyromaths/ex/sixiemes/symetrie.py:110
+msgid "Symétrie et quadrillages"
+msgstr "Simetries axials"
+
+#: src/pyromaths/ex/cinquiemes/__init__.py:23
+msgid "5.Cinquième"
+msgstr "5. 1r d'ESO"
+
+#: src/pyromaths/ex/cinquiemes/aires.py:44
+msgid "rayons"
+msgstr "radi"
+
+#: src/pyromaths/ex/cinquiemes/aires.py:46
+msgid "diamètres"
+msgstr "diàmetres"
+
+#: src/pyromaths/ex/cinquiemes/aires.py:51
+#, python-format
+msgid ""
+"\\begin{minipage}{4cm}\n"
+"\\begin{pspicture}(-2,-2)(2,2)\n"
+"\\pscircle[fillstyle=solid](0,0){1.5}\n"
+"\\pscircle[fillstyle=solid, fillcolor=white](0,0){1}\n"
+"\\psdots[dotstyle=x](0,0)\n"
+"\\rput(0.3;60){$O$}\n"
+"\\end{pspicture}\n"
+"\\end{minipage}\\hfill\n"
+"\\begin{minipage}{13cm}\n"
+"On considère deux cercles de centre $O$ et de %s respectifs $\\unit[%s]{cm}$ "
+"et $\\unit[%s]{cm}$.\\par\n"
+"Calculer l'aire de la couronne circulaire (partie colorée) comprise entre "
+"les deux cercles en arrondissant le résultat au $\\unit{cm^2}$ le plus "
+"proche."
+msgstr ""
+"\\begin{minipage}{4cm}\n"
+"\\begin{pspicture}(-2,-2)(2,2)\n"
+"\\pscircle[fillstyle=solid](0,0){1.5}\n"
+"\\pscircle[fillstyle=solid, fillcolor=white](0,0){1}\n"
+"\\psdots[dotstyle=x](0,0)\n"
+"\\rput(0.3;60){$O$}\n"
+"\\end{pspicture}\n"
+"\\end{minipage}\\hfill\n"
+"\\begin{minipage}{13cm}\n"
+"Es donen dos cercles de centre $O$ i de %s $\\unit[%s]{cm}$ i $\\unit[%s]{cm}$ "
+"respectivament.\\par\n"
+"Calculeu l'àrea de la corona circular (part  acolorida) compresa entre els "
+"dos cercles, i arredoniu el resultat al $\\unit{cm^2}$ més pròxim."
+
+#: src/pyromaths/ex/cinquiemes/aires.py:64
+msgid "Aire d'un il couronne circulaire"
+msgstr "Àrea d'una corona circular"
+
+#: src/pyromaths/ex/cinquiemes/aires.py:65
+#, python-format
+msgid ""
+"On considère deux cercles de centre $$O$$ et de %s respectifs $$%s\\, cm$$ "
+"et $$%s\\, cm$$.\n"
+"Calculer l'aire de la couronne circulaire comprise entre les deux cercles en "
+"arrondissant le résultat au $$cm^2$$ le plus proche (Utiliser $$\\pi = 3,14$"
+"$).\n"
+msgstr ""
+"Es donen dos cercles de centre $$O$$ i de %s $$%s\\, cm$$ i $$%s\\, cm$$ "
+"respectivament.\n"
+"Calculeu l'àrea de la corona circular compresa entre els dos cercles, "
+"arredonint el resultat al $$cm^2$$ més pròxim (Utilitzeu $$\\pi = 3,14$$).\n"
+
+#: src/pyromaths/ex/cinquiemes/aires.py:68
+msgid "Son aire est de _____ $$cm^2$$"
+msgstr "L'àrea és de _____ $$cm^2$$"
+
+#: src/pyromaths/ex/cinquiemes/aires.py:69
+msgid "\\par\\dotfill{}\\\\\n"
+msgstr "\\par\\dotfill{}\\\\\n"
+
+#: src/pyromaths/ex/cinquiemes/aires.py:71
+#: src/pyromaths/ex/cinquiemes/aires.py:73
+#, python-format, python-brace-format
+msgid "On calcule l'aire du disque de rayon $\\unit[%s]{cm}$:"
+msgstr "Es calcula l'àrea del cercle de radi $\\unit[%s]{cm}$:"
+
+#: src/pyromaths/ex/cinquiemes/aires.py:72
+#: src/pyromaths/ex/cinquiemes/aires.py:77
+#: src/pyromaths/ex/cinquiemes/aires.py:79
+#, python-format
+msgid ""
+"\\[\\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\\]"
+msgstr ""
+"\\[\\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\\]"
+
+#: src/pyromaths/ex/cinquiemes/aires.py:74
+#, python-format
+msgid ""
+"\\[ \\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\\]"
+msgstr ""
+"\\[ \\pi \\times %s^2 = \\pi \\times %s \\times %s = \\unit[%s \\pi]{cm^2}\\]"
+
+#: src/pyromaths/ex/cinquiemes/aires.py:76
+#: src/pyromaths/ex/cinquiemes/aires.py:78
+#, python-format, python-brace-format
+msgid ""
+"Un disque de diamètre $\\unit[%s]{cm}$ a pour rayon $%s \\div 2 = \\unit[%s]"
+"{cm}$. Calculons son aire:"
+msgstr ""
+"Un cercle de diàmetre $\\unit[%s]{cm}$ té de radi $%s \\div 2 = \\unit[%s]"
+"{cm}$. Calculeu-ne l'àrea:"
+
+#: src/pyromaths/ex/cinquiemes/aires.py:80
+#, python-format, python-brace-format
+msgid ""
+"L'aire $\\mathcal{A}$ de la couronne est obtenue en retranchant l'aire du "
+"disque de rayon  $\\unit[%s]{cm}$  à l'aire du disque de rayon  $\\unit[%s]"
+"{cm}$:"
+msgstr ""
+"L'àrea $\\mathcal{A}$ de la corona s'obté restant l'àrea del cercle de radi  "
+"$\\unit[%s]{cm}$ a l'àrea del cercle de radi $\\unit[%s]{cm}$:"
+
+#: src/pyromaths/ex/cinquiemes/aires.py:82
+#, python-format
+msgid "L'aire exacte de la couronne est $\\unit[%s \\pi]{cm^2}$."
+msgstr "L'àrea exacta de la corona és $\\unit[%s \\pi]{cm^2}$."
+
+#: src/pyromaths/ex/cinquiemes/aires.py:83
+msgid "En prenant 3,14 comme valeur approchée du nombre $\\pi$, on obtient :"
+msgstr "Agafant 3,14 com a valor aproximat del nombre $\\pi$, s'obté:"
+
+#: src/pyromaths/ex/cinquiemes/aires.py:92
+msgid "Aire de disques"
+msgstr "Àrea d'una corona circular"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:72
+msgid "Construction de triangles"
+msgstr "Construcció de triangles"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:80
+#: src/pyromaths/ex/cinquiemes/construction.py:81
+#, python-format, python-brace-format
+msgid ""
+"\\item Trace un triangle $%s$ équilatéral de côté $\\unit[%s]{cm}$.\\par"
+msgstr ""
+"\\item Dibuixeu un triangle $%s$ equilàter de costat $\\unit[%s]{cm}$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:107
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]"
+"{cm}$ et $\\widehat{%s%s%s}=%s\\degres$"
+msgstr ""
+"\\item Dibuixeu un triangle $%s$ de manera que $%s%s=\\unit[%s]{cm}$, $%s%"
+"s=\\unit[%s]{cm}$ i $\\widehat{%s%s%s}=%s\\degres$"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:109
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]"
+"{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
+msgstr ""
+"\\item Dibuixeu un triangle $%s$ de manera que $%s%s=\\unit[%s]{cm}$, $%s%"
+"s=\\unit[%s]{cm}$ i $\\widehat{%s%s%s}=%s\\degres$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:135
+#: src/pyromaths/ex/cinquiemes/construction.py:160
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s"
+"%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$"
+msgstr ""
+"\\item Dibuixeu un triangle $%s$ de manera que $%s%s=\\unit[%s]{cm}$,  "
+"$\\widehat{%s%s%s}=%s\\degres$ i $\\widehat{%s%s%s}=%s\\degres$"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:137
+#: src/pyromaths/ex/cinquiemes/construction.py:162
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s"
+"%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$\\par"
+msgstr ""
+"\\item Dibuixeu un triangle $%s$ de manera que $%s%s=\\unit[%s]{cm}$,  "
+"$\\widehat{%s%s%s}=%s\\degres$ i $\\widehat{%s%s%s}=%s\\degres$\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:164
+#, python-format
+msgid "On doit d'abord calculer la mesure de $\\widehat{%s%s%s}$.\\\\"
+msgstr "Cal dibuixar, en primer lloc, la mesura de $\\widehat{%s%s%s}$.\\\\"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:166
+#, python-format
+msgid ""
+"Or la somme des trois angles d'un triangle est égale à 180\\degres donc $"
+"\\widehat{%s%s%s}=180\\degres-%s\\degres-%s\\degres=%s\\degres$.\\par"
+msgstr ""
+"Ara bé, com que la suma dels tres angles d'un triangle és igual a 180\\degres "
+"fem $\\widehat{%s%s%s}=180\\degres-%s\\degres-%s\\degres=%s\\degres$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:191
+#: src/pyromaths/ex/cinquiemes/construction.py:220
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$,  $\\widehat{%s%s%s}=%s\\degres$."
+msgstr ""
+"\\item Dibuixeu un triangle $%s$ isòsceles en $%s$ de manera que $%s%s=\\unit["
+"%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$."
+
+#: src/pyromaths/ex/cinquiemes/construction.py:193
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$,  $\\widehat{%s%s%s}=%s\\degres$. \\par"
+msgstr ""
+"\\item Dibuixeu un triangle $%s$ isòsceles en $%s$ de manera que $%s%s=\\unit["
+"%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$. \\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:195
+#, python-format
+msgid ""
+"Comme $%s%s%s$ est un triangle isocèle en $%s$, je sais que les angles "
+"adjacents à la base sont de même mesure donc $\\widehat{%s%s%s}=\\widehat{%s"
+"%s%s}=%s\\degres$.\\par"
+msgstr ""
+"Com que $%s%s%s$ és un triangle isòsceles en $%s$, els angles adjacents a la "
+"base són de la mateixa mida, per tant $\\widehat{%s%s%s}=\\widehat{%s%s%s}=%"
+"s\\degres$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:222
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ isocèle en $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$,  $\\widehat{%s%s%s}=%s\\degres$.\\par"
+msgstr ""
+"\\item Dibuixeu un triangle $%s$ isòsceles en $%s$ de manera que $%s%s=\\unit["
+"%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:224
+#, python-format
+msgid ""
+"Comme $%s%s%s$ est un triangle isocèle en $%s$, je sais que les angles "
+"adjacents à la base sont de même mesure donc $\\widehat{%s%s%s}=\\widehat{%s"
+"%s%s}$.\\par"
+msgstr ""
+"Com que $%s%s%s$ és un triangle isòsceles en $%s$, els angles adjacents a la "
+"base tenen la mateixa mida, per tant $\\widehat{%s%s%s}=\\widehat{%s%s%"
+"s}$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:226
+#, python-format
+msgid ""
+"De plus, je sais que la somme des mesures des trois angles d'un triangle est "
+"égale à 180\\degres \\\\ donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}"
+"=(180\\degres-%s\\degres)\\div 2=%s\\degres$. \\par"
+msgstr ""
+"A més, se sap que la suma de les mesures dels tres angles d'un triangle és "
+"igual a 180\\degres \\\\ per tant, $\\widehat{%s%s%s}=\\widehat{%s%s%s}"
+"=(180\\degres-%s\\degres)\\div 2=%s\\degres$. \\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:253
+#: src/pyromaths/ex/cinquiemes/construction.py:255
+#, python-format
+msgid ""
+"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
+msgstr ""
+"\\item Dibuixeu un triangle $%s$ rectangle en $%s$ de manera que $%s%s=\\unit["
+"%s]{cm}$ i $\\widehat{%s%s%s}=%s\\degres$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:258
+#, python-format
+msgid ""
+"Je sais que dans un triangle rectangle, les deux angles aigus sont "
+"complémentaires \\\\ donc $\\widehat{%s%s%s}=90\\degres-%s\\degres=%s\\degres"
+"$.\\par"
+msgstr ""
+"Se sap que en un triangle rectangle, els dos angles aguts són "
+"complementaris, \\\\ per tant, $\\widehat{%s%s%s}=90\\degres-%s\\degres=%s"
+"\\degres$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:271
+#: src/pyromaths/ex/cinquiemes/construction.py:308
+#: src/pyromaths/ex/cinquiemes/construction.py:413
+#: src/pyromaths/ex/cinquiemes/construction.py:450
+#: src/pyromaths/ex/cinquiemes/construction.py:495
+#: src/pyromaths/ex/cinquiemes/construction.py:539
+#: src/pyromaths/ex/cinquiemes/construction.py:565
+#: src/pyromaths/ex/cinquiemes/construction.py:611
+#: src/pyromaths/ex/cinquiemes/construction.py:666
+#: src/pyromaths/ex/cinquiemes/construction.py:787
+#: src/pyromaths/ex/cinquiemes/construction.py:831
+#, python-format, python-brace-format
+msgid "\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"
+msgstr "\\item Es dibuixa el segment $[%s%s]$ de mida $\\unit[%s]{cm}$;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:272
+#: src/pyromaths/ex/cinquiemes/construction.py:273
+#, python-format
+msgid ""
+"\\item puis la demi-droite $[%s%s)$ en traçant l'angle~$\\widehat{%s%s%s}$ ;"
+msgstr "\\item després la semirecta $[%s%s)$ en l'angle~$\\widehat{%s%s%s}$;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:291
+#, python-format, python-brace-format
+msgid ""
+"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$,  $%s%s=\\unit[%s]{cm}$.\\par"
+msgstr ""
+"\\item Dibuixeu un triangle $%s$ rectangle en $%s$ de manera que $%s%s=\\unit["
+"%s]{cm}$,  $%s%s=\\unit[%s]{cm}$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:293
+#, python-format, python-brace-format
+msgid ""
+"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$, $%s%s=\\unit[%s]{cm}$.\\par"
+msgstr ""
+"\\item Dibuixeu un triangle $%s$ rectangle en $%s$ de manera que $%s%s=\\unit["
+"%s]{cm}$, $%s%s=\\unit[%s]{cm}$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:309
+#: src/pyromaths/ex/cinquiemes/construction.py:414
+#: src/pyromaths/ex/cinquiemes/construction.py:451
+#, python-format
+msgid "\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;"
+msgstr "\\item traceu l'angle recte $\\widehat{%s%s%s}$ ;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:310
+#, python-format
+msgid ""
+"\\item enfin, je reporte au compas la longueur \\mbox{$%s%s=\\unit[%s]{cm}$} "
+"à partir de $%s$."
+msgstr ""
+"\\item obriu el compàs a la mida \\mbox{$%s%s=\\unit[%s]{cm}$} i fent clic "
+"al punt $%s$ feu una marca."
+
+#: src/pyromaths/ex/cinquiemes/construction.py:373
+msgid "Construction de parallélogrammes"
+msgstr "Construcció de paral·lelograms"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:391
+#: src/pyromaths/ex/cinquiemes/construction.py:393
+#, python-format, python-brace-format
+msgid ""
+"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $%s%s="
+"\\unit[%s]{cm}$.\\par"
+msgstr ""
+"\\item Dibuixeu un rectangle $%s$ de manera que $%s%s=\\unit[%s]{cm}$ i $%s%"
+"s=\\unit[%s]{cm}$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:415
+#, python-format, python-brace-format
+msgid ""
+"\\item je reporte au compas la longueur $%s%s=\\unit[%s]{cm}$ à partir de $%s"
+"$ ;"
+msgstr ""
+"\\item obriu el compàs $%s%s=\\unit[%s]{cm}$ i fent clic al punt $%s$ feu "
+"una marca"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:416
+#, python-format
+msgid ""
+"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour placer le "
+"point $%s$."
+msgstr ""
+"\\item dibuixeu, finalment, els angles rectes en $%s$ i en $%s$ per a trobar "
+"el punt $%s$."
+
+#: src/pyromaths/ex/cinquiemes/construction.py:431
+#: src/pyromaths/ex/cinquiemes/construction.py:433
+#: src/pyromaths/ex/cinquiemes/construction.py:516
+#: src/pyromaths/ex/cinquiemes/construction.py:518
+#, python-format
+msgid ""
+"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s"
+"%s%s}=%s\\degres$.\\par"
+msgstr ""
+"\\item Dibuixeu un rectangle $%s$ de manera que $%s%s=\\unit[%s]{cm}$ i "
+"$\\widehat{%s%s%s}=%s\\degres$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:452
+#, python-format
+msgid ""
+"\\item la demi-droite $[%s%s)$ en mesurant $\\widehat{%s%s%s}=%s\\degres$."
+msgstr ""
+"\\item la semirecta $[%s%s)$ de manera que mesure l'angle $\\widehat{%s%s%s}="
+"%s\\degres$."
+
+#: src/pyromaths/ex/cinquiemes/construction.py:453
+#, python-format
+msgid ""
+"\\item je trace enfin les angles droit en $%s$ et en $%s$ pour placer le "
+"point $%s$."
+msgstr ""
+"\\item dibuixeu, finalment, els angles rectes en $%s$ i en $%s$ per a trobar "
+"el punt $%s$."
+
+#: src/pyromaths/ex/cinquiemes/construction.py:468
+#: src/pyromaths/ex/cinquiemes/construction.py:470
+#, python-format
+msgid ""
+"\\item Trace un rectangle $%s$ de centre $%s$ tel que $%s%s=\\unit[%s]{cm}$ "
+"et $\\widehat{%s%s%s}=%s\\degres$.\\par"
+msgstr ""
+"\\item Dibuixeu un rectangle $%s$ de centre $%s$ de manera que $%s%s=\\unit[%"
+"s]{cm}$ i $\\widehat{%s%s%s}=%s\\degres$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:496
+#, python-format
+msgid ""
+"\\item le centre du rectangle est le milieu des diagonales donc $%s$ est le "
+"milieu de $[%s%s]$ ;"
+msgstr ""
+"\\item el centre del rectangle és a la meitat de les diagonals, per tant $%s"
+"$ és al mig de $[%s%s]$ ;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:497
+#, python-format
+msgid ""
+"\\item je trace la diagonale $(%s%s)$ passant par $%s$ en mesurant \\mbox{$"
+"\\widehat{%s%s%s}=%s\\degres$} ;"
+msgstr ""
+"\\item dibuixeu la diagonal $(%s%s)$ que passe per $%s$ de mida "
+"\\mbox{$\\widehat{%s%s%s}=%s\\degres$} ;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:499
+#, python-format, python-brace-format
+msgid ""
+"\\item Comme les diagonales du rectangle sont de même longueur, je reporte "
+"les longueurs $%s%s=%s%s=\\unit[%s]{cm}$."
+msgstr ""
+"\\item Com que les diagonals del rectangle són iguals, es pren la mateixa "
+"mida $%s%s=%s%s=\\unit[%s]{cm}$."
+
+#: src/pyromaths/ex/cinquiemes/construction.py:540
+#, python-format
+msgid ""
+"\\item la demi-droite $[%s%s)$ en mesurant \\mbox{$\\widehat{%s%s%s}=%s"
+"\\degres$} ;"
+msgstr ""
+"\\item la semirecta $[%s%s)$ de manera que mesure l'angle \\mbox{$"
+"\\widehat{%s%s%s}=%s\\degres$ ;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:541
+#, python-format
+msgid "\\item puis la perpendiculaire à $[%s%s)$ passant par~$%s$ ;"
+msgstr "\\item després la perpendicular a $[%s%s)$ que passa per~$%s$ ;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:542
+#, python-format
+msgid ""
+"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour placer le "
+"point~$%s$."
+msgstr ""
+"\\item dibuixeu, finalment, els angles rectes en $%s$ i en $%s$ per a trobar "
+"el punt $%s$."
+
+#: src/pyromaths/ex/cinquiemes/construction.py:560
+#: src/pyromaths/ex/cinquiemes/construction.py:562
+#: src/pyromaths/ex/cinquiemes/construction.py:605
+#: src/pyromaths/ex/cinquiemes/construction.py:607
+#, python-format
+msgid ""
+"\\item Trace un parallélogramme $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s="
+"\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
+msgstr ""
+"\\item Dibuixeu un paral·lelogram $%s$ de manera que $%s%s=\\unit[%s]{cm}$, $%"
+"s%s=\\unit[%s]{cm}$ i $\\widehat{%s%s%s}=%s\\degres$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:566
+#, python-format
+msgid ""
+"\\item je mesure l'angle  $\\widehat{%s%s%s}=%s\\degres$ puis je place le "
+"point~$%s$ ;"
+msgstr ""
+"\\item traceu l'angle de $\\widehat{%s%s%s}=%s\\degres$ i després marqueu el "
+"punt~$%s$ ;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:567
+#, python-format
+msgid ""
+"\\item enfin je reporte les longueurs $%s%s=%s%s$ et $%s%s=%s%s$ pour place "
+"le point~$%s$."
+msgstr ""
+"\\item finalment, porteu amb el compàs les longituds $%s%s=%s%s$ i $%s%s=%s%s"
+"$ per a trobar el punt~$%s$."
+
+#: src/pyromaths/ex/cinquiemes/construction.py:612
+#, python-format
+msgid ""
+"\\item je trace la demi-droite $[%s%s)$ en mesurant $\\widehat{%s%s%s}=%s"
+"\\degres$ ;"
+msgstr ""
+"\\item traceu la semirecta $[%s%s)$ de manera que mesure l'angle $"
+"\\widehat{%s%s%s}=%s\\degres$ ;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:613
+#, python-format, python-brace-format
+msgid "\\item je place le point $%s$ en mesurant $%s%s=\\unit[%s]{cm}$ ;"
+msgstr ""
+"\\item marqueu el punt $%s$ la mida del qual siga $%s%s=\\unit[%s]{cm}$ ;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:614
+#, python-format
+msgid ""
+"\\item je construis le point $%s$ en reportant au compas $%s%s=%s%s$ et $%s"
+"%s=%s%s$."
+msgstr ""
+"\\item trobeu el punt $%s$ utilitzant el compàs de manera que $%s%s=%s%s$ i $"
+"%s%s=%s%s$."
+
+#: src/pyromaths/ex/cinquiemes/construction.py:661
+#: src/pyromaths/ex/cinquiemes/construction.py:663
+#, python-format
+msgid ""
+"\\item Trace un parallélogramme $%s$ de centre $%s$ tel que $%s%s=\\unit[%s]"
+"{cm}$, $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
+msgstr ""
+"\\item Dibuixeu un paral·lelogram $%s$ de centre $%s$ de manera que $%s%"
+"s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$ i $\\widehat{%s%s%s}=%s\\degres$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:667
+#, python-format, python-brace-format
+msgid ""
+"\\item Dans un parallélogramme les diagonales se coupent en leur milieu donc "
+"$%s%s=%s%s=\\unit[%s]{cm}$ et $%s%s=%s%s=\\unit[%s]{cm}$ ;"
+msgstr ""
+"\\item En un paral·lelogram les diagonals es tallen a la meitat, per tant, $"
+"%s%s=%s%s=\\unit[%s]{cm}$ i $%s%s=%s%s=\\unit[%s]{cm}$ ;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:694
+#: src/pyromaths/ex/cinquiemes/construction.py:696
+#, python-format, python-brace-format
+msgid ""
+"\\item Trace un losange $%s$  tel que $%s%s=\\unit[%s]{cm}$ et $%s%s="
+"\\unit[%s]{cm}$.\\par"
+msgstr ""
+"\\item Dibuixeu un rombe $%s$ de manera que $%s%s=\\unit[%s]{cm}$ i $%s%"
+"s=\\unit[%s]{cm}$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:699
+#, python-format
+msgid "Je note $%s$ le centre du losange.\\par"
+msgstr "Anomenem $%s$ al centre del rombe.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:719
+#, python-format
+msgid ""
+"Les diagonales du losange se coupent perpendiculairement en leur milieu~$%s"
+"$ ;  on a donc :"
+msgstr ""
+"Les diagonals del rombe es tallen perpendicularment per la meitat que és, a "
+"més, el centre del rombe~$%s$, per tant, hi ha:"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:738
+#: src/pyromaths/ex/cinquiemes/construction.py:740
+#, python-format
+msgid ""
+"\\item Trace un losange $%s$  tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s"
+"%s%s}=%s\\degres$.\\par"
+msgstr ""
+"\\item Dibuixeu un rombe $%s$  de manera que $%s%s=\\unit[%s]{cm}$ i "
+"$\\widehat{%s%s%s}=%s\\degres$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:743
+#, python-format, python-brace-format
+msgid ""
+"Les quatre côtés du losange sont de même longueur donc $%s%s=%s%s=%s%s=%s%s="
+"\\unit[%s]{cm}$ ;"
+msgstr ""
+"Els quatre costats del rombe són iguals, per tant, $%s%s=%s%s=%s%s=%s%s="
+"\\unit[%s]{cm}$ ;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:745
+#, python-format
+msgid ""
+"\\item On trace le côté $[%s%s]$ puis on mesure l'angle $\\widehat{%s%s%s}=%s"
+"\\degres$ ;"
+msgstr ""
+"\\item Al segment $[%s%s]$ es traça l'angle $\\widehat{%s%s%s}$ de $%s"
+"\\degres$ ;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:746
+#, python-format
+msgid ""
+"\\item ensuite on reporte au compas les longueurs $%s%s$ et $%s%s$ pour "
+"construire le point $%s$."
+msgstr ""
+"\\item utilitzeu el compàs amb les mides $%s%s$ i $%s%s$ per a trobar el "
+"punt $%s$."
+
+#: src/pyromaths/ex/cinquiemes/construction.py:778
+#: src/pyromaths/ex/cinquiemes/construction.py:780
+#: src/pyromaths/ex/cinquiemes/construction.py:818
+#: src/pyromaths/ex/cinquiemes/construction.py:820
+#, python-format
+msgid ""
+"\\item Trace un losange $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s"
+"%s}=%s\\degres$.\\par"
+msgstr ""
+"\\item Dibuixeu un rombe $%s$ de manera que $%s%s=\\unit[%s]{cm}$ i $\\widehat{"
+"%s%s%s}=%s\\degres$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:783
+#, python-format
+msgid ""
+" Comme $%s$ est un losange, je sais que $\\widehat{%s%s%s}=\\widehat{%s%s%s}="
+"\\widehat{%s%s%s}=\\widehat{%s%s%s}=%s\\degres$."
+msgstr ""
+" Com que $%s$ és un rombe, se sap que $\\widehat{%s%s%s}=\\widehat{%s%s%s}="
+"\\widehat{%s%s%s}=\\widehat{%s%s%s}=%s\\degres$."
+
+#: src/pyromaths/ex/cinquiemes/construction.py:788
+#: src/pyromaths/ex/cinquiemes/construction.py:789
+#: src/pyromaths/ex/cinquiemes/construction.py:832
+#: src/pyromaths/ex/cinquiemes/construction.py:833
+#, python-format
+msgid ""
+"\\item je trace $\\widehat{%s%s%s}$ et $\\widehat{%s%s%s}$ pour construire "
+"le point $%s$ ;"
+msgstr ""
+"\\item traceu els angles $\\widehat{%s%s%s}$ i $\\widehat{%s%s%s}$ per a "
+"trobar el punt $%s$ ;"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:824
+#, python-format
+msgid ""
+"Les quatre côtés du losange sont de même longueur donc $%s%s=%s%s=%s%s=%s%s$."
+"\\par"
+msgstr ""
+"Els quatre costats del rombe són iguals, per tant, $%s%s=%s%s=%s%s=%s%s$."
+"\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:825
+#, python-format
+msgid ""
+"Ainsi, le triangle $%s%s%s$ est isocèle en $%s$ et je peux calculer la "
+"mesure des angles $\\widehat{%s%s%s}=\\widehat{%s%s%s}$.\\par"
+msgstr ""
+"Aleshores, el triangle $%s%s%s$ és isòsceles en $%s$ i la mesura dels angles "
+"és $\\widehat{%s%s%s}=\\widehat{%s%s%s}$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:827
+msgid ""
+"Dans un triangle, la somme des angles du triangle est égale à 180\\degres\\\\"
+msgstr "En un triangle, la suma dels seus angles és 180\\degres\\\\"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:828
+#, python-format
+msgid ""
+"donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=(180\\degres-%s)\\div2=%s\\degres$"
+msgstr ""
+"per tant $\\widehat{%s%s%s}=\\widehat{%s%s%s}=(180\\degres-%s)\\div2=%s"
+"\\degres$"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:866
+#: src/pyromaths/ex/cinquiemes/construction.py:868
+#, python-format, python-brace-format
+msgid "\\item Trace un carré $%s$  tel que $%s%s=\\unit[%s]{cm}$.\\par"
+msgstr "\\item Dibuixeu un quadrat $%s$  de manera que $%s%s=\\unit[%s]{cm}$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:871
+#, python-format
+msgid "Je note $%s$ le centre du carré.\\par"
+msgstr "Anomenem $%s$ al centre del quadrat.\\par"
+
+#: src/pyromaths/ex/cinquiemes/construction.py:872
+#, python-format
+msgid ""
+" Les diagonales du carré se coupent perpendiculairement en leur milieu $%s$ "
+"donc on a :"
+msgstr ""
+" Les diagonals del quadrat es tallen perpendicularment al centre $%s$, per "
+"tant, hi ha:"
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:80
+#, python-format
+msgid "1 %s Fraction(%s, %s)"
+msgstr "1 %s fracció(%s, %s)"
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:82
+#, python-format
+msgid "Fraction(%s, %s) %s 1"
+msgstr "Fracció(%s, %s) %s 1"
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:89
+#, python-format
+msgid "%s %s Fraction(%s, %s)"
+msgstr "%s %s fracció(%s, %s)"
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:91
+#, python-format
+msgid "Fraction(%s, %s) %s %s"
+msgstr "Fracció(%s, %s) %s %s"
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:97
+#: src/pyromaths/ex/cinquiemes/fractions.py:99
+#: src/pyromaths/ex/cinquiemes/fractions.py:106
+#: src/pyromaths/ex/cinquiemes/fractions.py:108
+#, python-format
+msgid "Fraction(%s, %s) %s Fraction(%s, %s)"
+msgstr "Fracció(%s, %s) %s fracció(%s, %s)"
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:115
+msgid "\\exercice"
+msgstr "\\exercici"
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:116
+#: src/pyromaths/ex/cinquiemes/fractions.py:119
+#: src/pyromaths/ex/cinquiemes/fractions.py:160
+#: src/pyromaths/ex/cinquiemes/fractions.py:163
+msgid ""
+"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une "
+"fraction la plus simple possible (ou d’un entier lorsque c’est possible)."
+msgstr ""
+"Feu el càlcul tot detallant cada pas realitzat. Doneu el resultat en forma "
+"de fracció irreductible (o un enter quan siga possible). "
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:118
+msgid "\\exercice*"
+msgstr "\\exercici*"
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:136
+msgid "Sommes de fractions"
+msgstr "Sumes i restes de fraccions"
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:154
+#, python-format
+msgid "Fraction(%s, %s)*Fraction(%s,%s)"
+msgstr "Fracció(%s, %s)*fracció(%s,%s)"
+
+#: src/pyromaths/ex/cinquiemes/fractions.py:181
+msgid "Produits de fractions"
+msgstr "Producte de fraccions"
+
+#: src/pyromaths/ex/cinquiemes/priorites.py:265
+msgid "Priorités opératoires"
+msgstr "Jerarquia de les operacions"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:103
+#, python-format, python-brace-format
+msgid ""
+"\\exercice Sur ce plan, la longueur $%s$ mesure en réalité \\unit[%s]{m} :\n"
+msgstr "\\exercice En l'habitació real, la longitud $%s$ s'ha mesurat i el resultat "
+"és de \\unit[%s]{m}:\n"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:106
+msgid "\\item Déterminer l'échelle de ce plan."
+msgstr "\\item Mesureu amb un regle i determineu l'escala d'aquest plànol."
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:107
+#, python-format
+msgid "\\item Déterminer les longueurs réelles $%s$, $%s$ et $%s$."
+msgstr ""
+"\\item Mesureu amb un regle i determineu les longituds reals $%s$, $%s$ i $%s"
+"$."
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:109
+#, python-format, python-brace-format
+msgid ""
+"\\exercice* Sur ce plan, la longueur $%s$ mesure en réalité \\unit[%s]"
+"{m} : \n"
+msgstr "\\exercice* En l'habitació real, la longitud $%s$ s'ha mesurat i el resultat "
+"és de \\unit[%s]{m}:\n"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:112
+msgid "\\item Déterminer l'échelle de ce plan.\\par"
+msgstr "\\item Mesureu amb un regle i determineu l'escala d'aquest plànol.\\par"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:113
+#, python-format, python-brace-format
+msgid "Sur le plan, je mesure que $%s=\\unit[%s]{cm}$.\\par"
+msgstr "En el pla, s'ha mesurat que $%s=\\unit[%s]{cm}$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:114
+#, python-format, python-brace-format
+msgid "Or on sait que en réalité $%s = \\unit[%s]{m} = \\unit[%s]{cm}$"
+msgstr "Com que en realitat $%s = \\unit[%s]{m} = \\unit[%s]{cm}$"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:115
+#, python-format
+msgid " et  $%s \\div %s = %s$.\\par"
+msgstr " , aleshores l'escala és  $%s \\div %s = %s$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:116
+#, python-format
+msgid "L'échelle de ce plan est donc $1/%s^e$."
+msgstr "De manera que l'escala d'aquest plànol és $1/%s^e$."
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:117
+#, python-format
+msgid "\\item Déterminer les longueurs réelles $%s$, $%s$ et $%s$.\n"
+msgstr ""
+"\\item Mesureu amb un regle i determineu les longituds reals $%s$, $%s$ i $%s"
+"$.\n"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:118
+msgid "Grâce à la question précédente, je peux compléter le tableau :\n"
+msgstr "Gràcies a la resposta anterior, es pot completar la taula:\n"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:122
+#, python-format
+msgid "Sur le plan (en cm)  & %s & %s & %s & %s &\\rnode{plan1}{}\\\\"
+msgstr "En el pla (en cm)  & %s & %s & %s & %s &\\rnode{plan1}{}\\\\"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:124
+#, python-format
+msgid "En réalité (en cm)  & %s & %s & %s & %s &\\rnode{plan2}{}\\\\"
+msgstr "En la realitat (en cm)  & %s & %s & %s & %s &\\rnode{plan2}{}\\\\"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:128
+msgid "Pour conclure, on convertit ses longueurs en m :\\par"
+msgstr "Per acabar, cal convertir les longituds a metres:\\par"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:135
+msgid "Échelles"
+msgstr "Escales"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:139
+msgid "Cerises"
+msgstr "Cireres"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:139
+msgid "Tomates"
+msgstr "Tomaques"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:139
+msgid "Pommes"
+msgstr "Pomes"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:139
+msgid "Poires"
+msgstr "Peres"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:139
+msgid "Raisin"
+msgstr "Raïm"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:139
+msgid "Oranges"
+msgstr "Taronges"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:147
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:148
+msgid "prix"
+msgstr "preu"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:153
+#, python-format
+msgid "%s (en kg) & %s & %s &  %s  \\\\"
+msgstr "%s (en kg) & %s & %s &  %s  \\\\"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:155
+#, python-format
+msgid "%s (en \\euro)  & %s &  %s  & %s \\\\"
+msgstr "%s (en \\euro)  & %s &  %s  & %s \\\\"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:160
+#, python-format
+msgid "%s (en kg) & %s & %s &  \\bf %s  \\\\"
+msgstr "%s (en kg) & %s & %s &  \\bf %s  \\\\"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:162
+#, python-format
+msgid "%s (en \\euro)  & %s &  \\bf %s  & %s \\\\"
+msgstr "%s (en \\euro)  & %s &  \\bf %s  & %s \\\\"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:165
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:167
+msgid ""
+"\\exercice Le prix à payer est proportionnel à la masse de fruits achetés."
+"\\par"
+msgstr ""
+"\\exercice En una fruiteria, el preu és directament proporcional al pes de "
+"les fruites comprades.\\par"
+
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:166
+#: src/pyromaths/ex/cinquiemes/proportionnalite.py:168
+msgid "Détermine la valeur des cases vides"
+msgstr "Segons aquesta relació completeu la taula següent:"
+
+#: src/pyromaths/ex/cinquiemes/relatifs.py:108
+msgid "Addition de relatifs"
+msgstr "Sumes i restes relatives"
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:176
+msgid "abscisse"
+msgstr "abscissa"
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:176
+msgid "ordonnée"
+msgstr "ordenada"
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:184
+#: src/pyromaths/ex/cinquiemes/reperage.py:207
+#, python-format
+msgid "\\item Donner les coordonnées des points %s, %s, %s, %s, %s et %s."
+msgstr "\\item Trobeu les coordenades dels punts %s, %s, %s, %s, %s i %s."
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:185
+#: src/pyromaths/ex/cinquiemes/reperage.py:212
+#, python-format
+msgid "\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s"
+msgstr "\\item Localitzeu indicant-ne el nom els punts %s, %s, %s, %s, %s i %s"
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:185
+#: src/pyromaths/ex/cinquiemes/reperage.py:212
+#, python-format
+msgid " de coordonnées respectives %s, %s, %s, %s, %s et %s. "
+msgstr " les coordenades respectives són %s, %s, %s, %s, %s i %s. "
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:186
+#: src/pyromaths/ex/cinquiemes/reperage.py:213
+#, python-format
+msgid "\\item Placer dans le repère le point %s d'%s %s et d'%s %s"
+msgstr "\\item Localitzeu indicant-ne el nom el punt %s d'%s %s i d'%s %s"
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:210
+#, python-format
+msgid "Les coordonnées du point %s sont %s \n"
+msgstr "Les coordenades del punt %s són %s \n"
+
+#: src/pyromaths/ex/cinquiemes/reperage.py:218
+msgid "Repérage"
+msgstr "Coordenades de punts"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:49
+msgid "Effectifs"
+msgstr "Recompte"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:68
+#: src/pyromaths/ex/cinquiemes/statistiques.py:190
+msgid "Fréquences (\\%)"
+msgstr "Freqüències (\\%)"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:198
+#, python-format
+msgid ""
+"Comme 10\\% sont représentés par 1cm, il faut diviser chaque fréquence par "
+"10 pour obtenir la longueur (arrondie au dixième) du bâton à dessiner :"
+"\\par\n"
+msgstr "Com que 10\\% està representat per 1 cm, cal dividir cada freqüència entre 10 "
+"(arredonint a la dècima) per a obtindre l'altura de la barra que s'ha de "
+"dibuixar:\\\\par\\n\n"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:200
+msgid "Hauteur (cm)"
+msgstr "Altura (cm)"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:206
+msgid ""
+"Comme il y a $360^{\\circ}$ dans un cercle pour représenter 100\\%, il faut "
+"multiplier chaque fréquence par 3,6 pour connaître son angle (arrondi au "
+"degré) de représentation dans le diagramme :\\par\n"
+msgstr "Com que hi ha $360^{\\circ}$ en un cercle per a representar el 100\\%, cal "
+"multiplicar cada freqüència per 3,6 (arredonint a graus) per a conéixer-ne "
+"l'angle de representació en el diagrama:\\par\n"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:208
+#: src/pyromaths/ex/cinquiemes/statistiques.py:216
+msgid "Angle (Degrés)"
+msgstr "Angle (graus)"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:214
+msgid ""
+"Comme il y a $180^{\\circ}$ dans un cercle pour représenter 100\\%, il faut "
+"multiplier chaque fréquence par 1,8 pour connaître son angle (arrondi au "
+"degré) de représentation dans le diagramme :\\par\n"
+msgstr "Com que hi ha $180^{\\circ}$ en un cercle per a representar el 100\\%, cal "
+"multiplicar cada freqüència per 1,8 (arredonint a graus) per a conéixer-ne "
+"l'angle de representació en el diagrama:\\par\n"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:247
+#: src/pyromaths/ex/cinquiemes/statistiques.py:248
+msgid "Chiffres"
+msgstr "Xifres"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:250
+#: src/pyromaths/ex/cinquiemes/statistiques.py:251
+msgid ""
+"Voici une liste de chiffres choisis au hasard dans les décimales de $\\pi$ :"
+"\\par"
+msgstr ""
+"S'ha triat a l'atzar una seqüència de les xifres decimals del nombre "
+"$\\pi$:\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:256
+#: src/pyromaths/ex/cinquiemes/statistiques.py:257
+#: src/pyromaths/ex/cinquiemes/statistiques.py:414
+#: src/pyromaths/ex/cinquiemes/statistiques.py:415
+msgid ""
+"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent "
+"être arrondies au centième.\\par"
+msgstr ""
+"\\item Completeu la taula següent, sabent que les freqüències s'han "
+"d'arredonir a les centèsimes.\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:261
+#: src/pyromaths/ex/cinquiemes/statistiques.py:418
+msgid ""
+"Chaque effectif se complète en comptant le nombre d'apparition de chaque "
+"chiffre dans la liste de l'énoncé."
+msgstr ""
+"El recompte es completa indicant el nombre d'aparicions de cada xifra en la "
+"llista de l'enunciat."
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:262
+msgid ""
+"Comme les chiffres sont rangés par 20, on voit assez rapidement que le "
+"nombre total de chiffres est de "
+msgstr ""
+"Com que les xifres estan col·locades de 20 en 20, es veu fàcilment que el "
+"nombre total de xifres és de "
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:263
+#: src/pyromaths/ex/cinquiemes/statistiques.py:420
+msgid ""
+"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise "
+"par le nombre total de chiffres, puis il ne faut pas oublier d'arrondir au "
+"centième.\\par\n"
+msgstr "Per al càlcul de les freqüències, es multiplica la casella per 100, i es "
+"divideix pel nombre total de xifres, després cal arredonir el resultat a les "
+"centèsimes.\\par\n"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:264
+#: src/pyromaths/ex/cinquiemes/statistiques.py:421
+msgid "Par exemple pour la fréquence du chiffre 1 : $\\dfrac{"
+msgstr "Per exemple la freqüència de la xifra 1 és: $\\dfrac{"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:269
+msgid ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Représenter la répartition des "
+"chiffres dans un diagramme en bâtons avec 1~cm pour 10\\%."
+msgstr ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Representeu la freqüència de les "
+"xifres en un diagrama en barres amb 1~cm per cada 10\\%."
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:270
+msgid ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Représenter la répartition des "
+"chiffres dans un diagramme en bâtons avec 1~cm pour 10\\%.\\par"
+msgstr ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Representeu la freqüència de les "
+"xifres en un diagrama en barres amb 1~cm per cada 10\\%.\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:274
+#: src/pyromaths/ex/cinquiemes/statistiques.py:275
+#: src/pyromaths/ex/cinquiemes/statistiques.py:403
+#: src/pyromaths/ex/cinquiemes/statistiques.py:404
+#: src/pyromaths/ex/cinquiemes/statistiques.py:427
+#: src/pyromaths/ex/cinquiemes/statistiques.py:428
+msgid "Valeurs"
+msgstr "Valors"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:294
+msgid "Classes de notes"
+msgstr "Notes del curs"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:296
+#: src/pyromaths/ex/cinquiemes/statistiques.py:297
+msgid ""
+"Voici un tableau regroupant les notes d'une classe lors d'un contrôle :\\par"
+msgstr ""
+"Es té una taula en què s'han agrupat les notes sobre 20 de l'examen d'un "
+"curs:\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:303
+msgid "Notes"
+msgstr "Notes"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:311
+#: src/pyromaths/ex/cinquiemes/statistiques.py:312
+msgid ""
+"\\item Compléter le tableau ci-dessous afin de regrouper les notes par "
+"classes et effectuer le calcul des fréquences arrondies au centième :\\par"
+msgstr ""
+"\\item Completeu la taula següent amb les notes del curs i calculeu les "
+"freqüències arredonint a les centèsimes:\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:328
+msgid ""
+"Chaque effectif se complète en comptant le nombre d'apparition de chaque "
+"note dans le tableau de l'énoncé."
+msgstr ""
+"El recompte es completa sumant les notes de la taula de l'enunciat que hi ha "
+"dins de la franja corresponent."
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:329
+msgid ""
+"Le nombre de notes du contrôle, qui est aussi le nombre d'élèves, est donc "
+"de "
+msgstr ""
+"El nombre total de notes de l'examen, és també el nombre total d'alumnes del "
+"curs, que és de"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:330
+msgid ""
+"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise "
+"par le nombre total de notes, puis il ne faut pas oublier d'arrondir au "
+"centième.\\par\n"
+msgstr "Per al càlcul de les freqüències, es multiplica la casella per 100, i es "
+"divideix pel nombre total d'alumnes, després cal arredonir el resultat a les "
+"centèsimes.\\par\n"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:331
+msgid ""
+"Par exemple pour la fréquence des notes dans la première classe : $\\dfrac{"
+msgstr "Per exemple, la freqüència de les notes en el primer grup és $\\dfrac{"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:343
+#: src/pyromaths/ex/cinquiemes/statistiques.py:344
+msgid ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Combien d'élèves ont une note "
+"strictement inférieure à "
+msgstr ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Quants alumnes tenen una nota "
+"estrictament inferior a"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:343
+#: src/pyromaths/ex/cinquiemes/statistiques.py:344
+msgid " ? Supérieure ou égale à "
+msgstr " ? Superior o igual a "
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:374
+msgid ""
+"D'après le tableau rempli précédemment, le nombre d'élèves ayant une note "
+"strictement inférieure à "
+msgstr ""
+"Segons la taula mostrada anteriorment, el nombre d'alumnes que tenen una "
+"nota estrictament inferior a"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:375
+msgid " sont tous les élèves comptés dans les classes situées à gauche de "
+msgstr ""
+" és la suma de les caselles dels alumnes que es troben a l'esquerra (inclosa "
+"aquesta) de la casella amb el $<$ i"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:376
+msgid ". En effectuant le total des élèves de ces classes, on obtient : "
+msgstr ". El total d'alumnes que compleixen el criteri indicat és de "
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:376
+#: src/pyromaths/ex/cinquiemes/statistiques.py:379
+msgid " élèves.\\par"
+msgstr " alumnes.\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:378
+msgid ""
+"La réponse à la seconde question se fait de même en comptant tous les "
+"effectifs des élèves se situant à droite de "
+msgstr ""
+"La resposta a la segona pregunta es fa sumant igualment totes les caselles "
+"però les que hi ha a la dreta (inclosa aquesta) de la casella amb el $\\leq$ "
+"i "
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:379
+msgid "Le résultat est donc : "
+msgstr "El resultat és de"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:406
+#: src/pyromaths/ex/cinquiemes/statistiques.py:407
+msgid ""
+"Voici une liste des résultats obtenus en lançant plusieurs fois un dé à six "
+"faces :\\par"
+msgstr ""
+"Es té una llista dels resultats obtinguts en llançar diverses vegades un dau "
+"de sis cares:\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:419
+msgid ""
+"Comme les chiffres sont rangés par 25, on voit assez rapidement que le "
+"nombre total de chiffres est de "
+msgstr ""
+"Com que les xifres estan col·locades de 25 en 25, es veu fàcilment que el "
+"nombre total de xifres és de "
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:424
+#: src/pyromaths/ex/cinquiemes/statistiques.py:425
+msgid ""
+"\\item Représenter la répartition des chiffres dans un diagramme en bâtons "
+"avec 1cm pour 10\\%.\\par"
+msgstr ""
+"\\item Representeu la freqüència de les xifres en un diagrama de barres amb "
+"1 cm per cada 10\\%.\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:461
+msgid "circulaire"
+msgstr "circular"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:463
+msgid "semi-circulaire"
+msgstr "semicircular"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:470
+msgid "Ages"
+msgstr "Edats"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:470
+msgid "<20 ans"
+msgstr "<20 anys"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:470
+msgid "20 - 40 ans"
+msgstr "20 - 40 anys"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:470
+msgid "40 - 60 ans"
+msgstr "40 - 60 anys"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:470
+msgid "60 - 80 ans"
+msgstr "60 - 80 anys"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:470
+msgid ">80 ans"
+msgstr ">80 anys"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:477
+#: src/pyromaths/ex/cinquiemes/statistiques.py:478
+#: src/pyromaths/ex/cinquiemes/statistiques.py:492
+msgid "Le diagramme "
+msgstr "El diagrama"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:477
+#: src/pyromaths/ex/cinquiemes/statistiques.py:478
+msgid ""
+" ci-dessus représente les différentes fréquences des classes d'âges dans une "
+"certaine région.\\par"
+msgstr ""
+" de més amunt representa les diverses freqüències dels grups d'edat en una "
+"regió determinada.\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:481
+msgid "\\item Calculer les fréquences de chaque classe d'âges."
+msgstr "\\item Calculeu la freqüència de cada grup d'edat."
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:482
+msgid "\\item Calculer les fréquences de chaque classe d'âges.\\par"
+msgstr "\\item Calculeu la freqüència de cada grup d'edat.\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:484
+msgid "Classes d'âges"
+msgstr "Grups d'edat"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:492
+msgid " est partagé en "
+msgstr " està dividit en"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:492
+msgid " parts symbolisées par des lignes grises en pointillés.\\par"
+msgstr " parts indicades per les línies grises discontínues.\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:493
+msgid "On en déduit que chacune de ces parts représente $\\dfrac{100}{"
+msgstr "Se'n dedueix que cadascuna de les parts representa el $\\dfrac{100}{"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:493
+msgid ""
+"\\%$, puis en comptant le nombre de parts dans chaque classe, on obtient le "
+"tableau suivant :\\par"
+msgstr ""
+"\\%$, després comptant el nombre de parts en cada grup, s'obté la taula "
+"següent:\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:497
+msgid "\\item Sachant que la population étudiée est composée de "
+msgstr "\\item Sabent que la població estudiada està composta de"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:497
+msgid " personnes, calculer les effectifs de chaque classe d'âges."
+msgstr ""
+" persones, realitzeu una taula que continga el nombre de persones i la "
+"freqüència de cada grup d'edat."
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:498
+msgid ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Sachant que la population étudiée "
+"est composée de "
+msgstr ""
+"\\item[$\\blacktriangleright$\\textbf{2.}] Sabent que la població estudiada "
+"està composta de"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:498
+msgid " personnes, calculer les effectifs de chaque classe d'âges.\\par"
+msgstr ""
+" persones, realitzeu una taula que continga el nombre de persones i la "
+"freqüència de cada grup d'edat.\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:500
+msgid "Sachant que la classe des moins de vingt ans est composée de "
+msgstr "Sabent que el grup de menys de 20 anys està compost de"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:500
+msgid " personnes, on peut calculer l'effectif concerné :\\par"
+msgstr ""
+" persones, es pot calcular el nombre de persones que formen el grup "
+"especificat i omplir-ne la casella corresponent:\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:502
+msgid ""
+"Avec le même type de calcul, on obtient les effectifs des autres classes, "
+"résumés dans le tableau ci-dessous :"
+msgstr ""
+"Amb el mateix tipus de càlcul, s'aconsegueix completar les caselles dels "
+"altres grups.\\par El resultat és la taula següent:"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:518
+msgid ""
+"\\item Les données du vote du délégué de classe ont été malheureusement "
+"partiellement perdues, mais on a réussi à regrouper les informations du "
+"tableau ci-dessous (sachant que chaque élève a voté) :"
+msgstr ""
+"\\item Per desgràcia s'han perdut parcialment les dades de l'elecció del "
+"delegat/da de classe i només s'ha pogut recuperar la informació que hi ha a "
+"la taula següent (a més, se sap que tot l'alumnat ha votat):"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:519
+msgid ""
+"\\item Les données du vote du délégué de classe ont été malheureusement "
+"partiellement perdues, mais on a réussi à regrouper les informations du "
+"tableau ci-dessous (sachant que chaque élève a voté) :\\par"
+msgstr ""
+"\\item Per desgràcia s'han perdut parcialment les dades de l'elecció del "
+"delegat/da de classe i només s'ha pogut recuperar la informació que hi ha a "
+"la taula següent (a més, se sap que tot l'alumnat ha votat):\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Vincent"
+msgstr "Vicent"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Sophia"
+msgstr "Sofia"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Karim"
+msgstr "Karim"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Denise"
+msgstr "Dolors"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Aline"
+msgstr "Alícia"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Jonathan"
+msgstr "Joan"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Isabelle"
+msgstr "Isabel"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Thomas"
+msgstr "Tomàs"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Léna"
+msgstr "Laia"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Matteo"
+msgstr "Mateu"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Céline"
+msgstr "Carme"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Antoine"
+msgstr "Andreu"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Julie"
+msgstr "Júlia"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Rémy"
+msgstr "Robert"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Caroline"
+msgstr "Carolina"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Yann"
+msgstr "Ismael"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Muriel"
+msgstr "Manel"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Patrick"
+msgstr "Patrícia"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:534
+msgid "Mélanie"
+msgstr "Mireia"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:536
+msgid "Elève"
+msgstr "Alumne"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:543
+#: src/pyromaths/ex/cinquiemes/statistiques.py:544
+msgid ""
+"Sachant qu'il y a 25 élèves dans la classe, compléter alors le tableau ci-"
+"dessus.\\par"
+msgstr ""
+"Sabent que hi ha 25 alumnes en la classe, completeu la taula següent.\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:552
+#, python-format
+msgid ""
+"Comme il y a 25 élèves dans la classe, ce qui représente 100 \\% des votes, "
+"il faut diviser la fréquence connue pour trouver l'effectif d'élèves ayant "
+"voté pour "
+msgstr ""
+"Com que hi ha 25 alumnes en la classe, cosa que representa el 100 \\% dels "
+"vots, a partir de la freqüència coneguda de"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:552
+msgid " et on trouve : "
+msgstr ""
+" es multiplica per 25 i es divideix per 100 (simplificat és un quart) per a "
+"saber-ne el nombre de votants, és a dir,"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:553
+#: src/pyromaths/ex/cinquiemes/statistiques.py:555
+msgid "$ élève(s) pour "
+msgstr "$ alumne(s) van votar per "
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:554
+msgid "Ensuite, pour trouver l'effectif d'élèves ayant voté pour "
+msgstr ""
+"A continuació, per a completar les caselles dels alumnes que han votat per"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:554
+msgid ", il suffit de soustraire à 25 les effectifs connus :\\par"
+msgstr ""
+", n'hi ha prou amb restar a 25 el nombre de vots dels altres candidats:\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:556
+msgid ""
+"Enfin, pour le calcul des fréquences manquantes, il faut multiplier chaque "
+"effectif par 4, ce qui fourni le tableau ci-dessous.\\par"
+msgstr ""
+"Finalment, per al càlcul de les freqüències que falten, cal multiplicar cada "
+"casella de recompte per 100, i dividir-la entre el nombre total de 25, de "
+"manera que:\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:560
+#: src/pyromaths/ex/cinquiemes/statistiques.py:561
+msgid ""
+"\\item Représenter la répartition des votes dans un diagramme circulaire de "
+"rayon 3 cm.\\par"
+msgstr ""
+"\\item Representeu la freqüència dels vots en un diagrama circular de radi 3 "
+"cm.\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:589
+#, python-format
+msgid ""
+"\\renewcommand{\\arraystretch}{1.8}\n"
+"        \\item On a demandé aux élèves d'une classe de cinquième combien de "
+"temps par semaine était consacré à leur sport favori.\\par\n"
+"        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Durée t (en h)&  $0 \\le "
+"t < 1$ & $1 \\le t  < 2$ & $2 \\le t  < 3$ & $3 \\le t  < 4$ &  $4 \\le t  < "
+"5$ & $5 \\le t  < 6$ & $6 \\le t  < 7$ \\\\\\hline Effectif & %s & %s & %s & "
+"%s & %s & %s & %s \\\\\\hline \\end{tabular}\\par\n"
+"        À partir de ce tableau, construire un  histogramme pour représenter "
+"ces données.\\par"
+msgstr ""
+"\\renewcommand{\\arraystretch}{1.8}\n"
+"        \\item S'ha preguntat a l'alumnat de 1r d'ESO quant de temps per "
+"setmana dedica al seu esport preferit.\\par\n"
+"        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Temps t (en h)&  $0 \\le t < "
+"1$ & $1 \\le t  < 2$ & $2 \\le t  < 3$ & $3 \\le t  < 4$ &  $4 \\le t  < 5$ & "
+"$5 \\le t  < 6$ & $6 \\le t  < 7$ \\\\\\hline Nre. de respostes & %s & %s & %s & "
+"%s & %s & %s & %s \\\\\\hline \\end{tabular}\\par\n"
+"        A partir d'aquesta taula, construïu un  histograma per a representar "
+"aquestes dades.\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:594
+#, python-format
+msgid ""
+"\\item On a demandé aux élèves quel était leur sport préféré. %s élèves "
+"préfèrent le basket-ball, %s le tennis, %s le football et %s le judo. "
+"Construire un diagramme circulaire représentant cette répartion.\\par"
+msgstr ""
+"\\item S'ha preguntat a l'alumnat quin és el seu esport preferit. %s alumnes "
+"prefereixen el bàsquet, %s el tennis, %s el futbol i %s el judo. Construïu "
+"un diagrama de sectors per a representar aquestes respostes.\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:601
+#, python-format
+msgid ""
+"\\begin{minipage}{10cm}\n"
+"    \\begin{pspicture}(0,-1)(8.5,9.5)\n"
+"    \\psaxes[showorigin=false]{->}(7.5,8.5)\n"
+"    \\psset{fillstyle=solid, linewidth=0.5pt}\n"
+"    \\psframe(0,0)(1,%s)\n"
+"    \\psframe(1,0)(2,%s)\n"
+"    \\psframe(2,0)(3,%s)\n"
+"    \\psframe(3,0)(4,%s)\n"
+"    \\psframe(4,0)(5,%s)\n"
+"    \\psframe(5,0)(6,%s)\n"
+"    \\psframe(6,0)(7,%s)\n"
+"    \\rput(-0.2,-0.425){$0$}\n"
+"    \\rput(8.3,0){Durée}\n"
+"    \\rput(0,8.8){Effectif}\n"
+"    \\end{pspicture}\n"
+"    \\end{minipage}\n"
+"    \\begin{minipage}{6cm}\n"
+"    Sur l'axe horizontal, on représente les durées en heures et, sur l'axe "
+"vertical, on représente les effectifs.\n"
+"    \\end{minipage}"
+msgstr ""
+"\\begin{minipage}{10cm}\n"
+"    \\begin{pspicture}(0,-1)(8.5,9.5)\n"
+"    \\psaxes[showorigin=false]{->}(7.5,8.5)\n"
+"    \\psset{fillstyle=solid, linewidth=0.5pt}\n"
+"    \\psframe(0,0)(1,%s)\n"
+"    \\psframe(1,0)(2,%s)\n"
+"    \\psframe(2,0)(3,%s)\n"
+"    \\psframe(3,0)(4,%s)\n"
+"    \\psframe(4,0)(5,%s)\n"
+"    \\psframe(5,0)(6,%s)\n"
+"    \\psframe(6,0)(7,%s)\n"
+"    \\rput(-0.2,-0.425){$0$}\n"
+"    \\rput(8.3,0){Temps}\n"
+"    \\rput(0,8.8){Nre. de respostes}\n"
+"    \\end{pspicture}\n"
+"    \\end{minipage}\n"
+"    \\begin{minipage}{6cm}\n"
+"    Sobre l'eix horitzontal, es representa el temps en hores i, sobre l'eix "
+"vertical, es representa el nre. de respostes.\n"
+"    \\end{minipage}"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:621
+#, python-format
+msgid ""
+"L'effectif total est égal à $ %s + %s + %s + %s = 30$. La mesure d'angle "
+"d'un secteur circulaire est proportionnelle à l'effectif du sport qu'il "
+"représente. Le coefficient de proportionnalité est égal au quotient de "
+"l'effectif total par 360\\degre c'est à dire $360 \\div 30=12$.\\par"
+msgstr ""
+"El nombre de respostes totals és de $ %s + %s + %s + %s = 30$. La mesura de "
+"l'angle d'un sector circular és proporcional al nombre donat de respostes de "
+"l'esport que representa. El coeficient de proporcionalitat és igual al "
+"quocient de 360\\degre entre el nombre total de respostes, és a dir, $360 "
+"\\div 30=12$.\\par"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:622
+#, python-format
+msgid ""
+"\\renewcommand\\tabcolsep{10pt}\n"
+"    \\begin{tabular}{|l|c|c|c|c|c|c}\n"
+"    \\cline{1-6}\n"
+"    Sport favori  & Basket-ball & Tennis & Football & Judo & Total &"
+"\\rnode{plan1}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    Effectif & %s & %s & %s & %s & 30 &\\rnode{plan1}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    Mesure (en degré)  & \\bf%s & \\bf%s & \\bf%s & \\bf%s & 360 &"
+"\\rnode{plan2}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    \\end{tabular}\n"
+"    \\ncbar{->}{plan1}{plan2}\\Aput{$\\times 12$}\\par\n"
+"    \\begin{minipage}{6cm}\n"
+"    En utilisant les mesures d'angles obtenues dans le tableau de "
+"proportionnalité, on trace le diagramme circulaire.\n"
+"    \\end{minipage}"
+msgstr ""
+"\\renewcommand\\tabcolsep{10pt}\n"
+"    \\begin{tabular}{|l|c|c|c|c|c|c}\n"
+"    \\cline{1-6}\n"
+"    Esport preferit  & Bàsquet & Tennis & Futbol & Judo & Total "
+"&\\rnode{plan1}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    Nre. de respostes & %s & %s & %s & %s & 30 &\\rnode{plan1}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    Mesura (en graus)  & \\bf%s & \\bf%s & \\bf%s & \\bf%s & 360 "
+"&\\rnode{plan2}{}\\\\\n"
+"    \\cline{1-6}\n"
+"    \\end{tabular}\n"
+"    \\ncbar{->}{plan1}{plan2}\\Aput{$\\times 12$}\\par\n"
+"    \\begin{minipage}{6cm}\n"
+"    Utilitzant les mesures dels angles obtinguts en la taula de "
+"proporcionalitat, es traça el diagrama de sectors.\n"
+"    \\end{minipage}"
+
+#: src/pyromaths/ex/cinquiemes/statistiques.py:678
+msgid "Statistiques"
+msgstr "Estadística"
+
+#: src/pyromaths/ex/cinquiemes/symetrie.py:107
+#: src/pyromaths/ex/cinquiemes/symetrie.py:110
+msgid ""
+"Construire la symétrique de chacune des figures par rapport au point O en"
+msgstr "Construïu la simètrica respecte del centre O de les figures següents,"
+
+#: src/pyromaths/ex/cinquiemes/symetrie.py:133
+msgid "Symétrie centrale"
+msgstr "Simetria central"
+
+#: src/pyromaths/ex/examples/helloworld.py:13
+msgid "Hello, world corrigé!"
+msgstr "Hola món!"
+
+#: src/pyromaths/ex/lycee/__init__.py:23
+msgid "2.Lycée"
+msgstr "2. 4t d'ESO"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:160
+#, python-format
+msgid "$%s\\degres$"
+msgstr "$%s\\degres$"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:211
+#, python-format
+msgid ""
+"\\item Convertir les cinq mesures suivantes en radians : %s, %s, %s, %s et "
+"%s."
+msgstr ""
+"\\item Convertiu a radians i simplifiqueu les mesures d'angles següents: %s, "
+"%s, %s, %s i %s."
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:212
+#, python-format
+msgid ""
+"\\item Convertir les cinq mesures suivantes en degrés : %s, %s, %s, %s et "
+"%s~rad."
+msgstr ""
+"\\item Convertiu a graus les mesures d'angles següents: %s, %s, %s, %s i %"
+"s~rad."
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:213
+#, python-format
+msgid ""
+"\\item Déterminer les mesures principales des angles suivants en radians : "
+"%s, %s, %s, %s et %s~rad."
+msgstr ""
+"\\item Determineu en radians les mesures dels angles equivalents entre $0$ i "
+"$-\\pi$ dels angles següents: %s, %s, %s, %s i %s~rad."
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:214
+#: src/pyromaths/ex/lycee/CercleTrigo.py:243
+msgid ""
+"\\item Des angles ont été placés sur le cercle trigonométrique ci-dessous, "
+"représentés en rouge par les points $M_0$, $M_1$, $M_2$ et $M_3$. Lire leurs "
+"mesures principales en radians"
+msgstr ""
+"\\item S'han indicat uns angles sobre el cercle trigonomètric de davall, "
+"representats en roig pels punts $M_0$, $M_1$, $M_2$ i $M_3$. Escriviu-ne les "
+"mesures entre $0$ i $-\\pi$ en radians."
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:215
+#: src/pyromaths/ex/lycee/CercleTrigo.py:244
+msgid ""
+"( les lignes vertes, grises et bleues représentent des angles multiples de $"
+"\\dfrac{\\pi}{3}$, de $\\dfrac{\\pi}{4}$ et de $\\dfrac{\\pi}{5}$ ).\\par"
+msgstr ""
+"( les línies verdes, grises i blaves representen els angles múltiples de $"
+"\\dfrac{\\pi}{3}$, de $\\dfrac{\\pi}{4}$ i de $\\dfrac{\\pi}{5}$ ).\\par"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:217
+#: src/pyromaths/ex/lycee/CercleTrigo.py:250
+#, python-format
+msgid ""
+"\\item Placer les angles suivants sur le cercle trigonométrique : %s, %s, %s "
+"et %s~rad.\\par"
+msgstr ""
+"\\item Simplifiqueu i col·loqueu els angles següents sobre el cercle "
+"trigonomètric: %s, %s, %s et %s~rad.\\par"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:222
+#, python-format
+msgid ""
+"\\item Convertir les cinq mesures suivantes en radians : %s, %s, %s, %s et "
+"%s.\\par"
+msgstr ""
+"\\item Convertiu a radians i simplifiqueu les mesures d'angles següents: %s, "
+"%s, %s, %s i %s.\\par"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:224
+msgid ""
+"La conversion est en fait une simple règle de proportionnalité : il faut "
+"multiplier par $\\dfrac{\\pi}{180}$.\\par"
+msgstr ""
+"La conversió es realitza amb una regla de tres simple directa: cal "
+"multiplicar per $\\dfrac{\\pi}{180}$.\\par"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:225
+msgid "Par exemple pour la première mesure, on obtient avec simplification : $"
+msgstr "Per exemple, per a la primera mesura, es calcula i simplifica: $"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:226
+#: src/pyromaths/ex/lycee/CercleTrigo.py:241
+#, python-format
+msgid ""
+"De même pour les autres mesures, on trouve alors respectivement : %s~rad, "
+"%s~rad, %s~rad, %s~rad et %s~rad."
+msgstr ""
+"Finalment, s'obté respectivament: %s~rad, %s~rad, %s~rad, %s~rad i %s~rad."
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:228
+#, python-format
+msgid ""
+"\\item Convertir les cinq mesures suivantes en degrés : %s, %s, %s, %s et "
+"%s~rad.\\par"
+msgstr ""
+"\\item Convertiu a graus les mesures d'angles següents: %s, %s, %s, %s i %"
+"s~rad.\\par"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:230
+msgid ""
+"On effectue alors la proportionnalité inverse : il faut multiplier par $"
+"\\dfrac{180}{\\pi}$.\\par"
+msgstr ""
+"Es realitza la proporcionalitat inversa: només cal multiplicar per "
+"$\\dfrac{180}{\\pi}$.\\par"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:231
+#, python-format
+msgid ""
+"Après simplification, voici les résultats : %s\\degres, %s\\degres, %s"
+"\\degres, %s\\degres et %s\\degres."
+msgstr ""
+"Després de simplificar, aquests són els resultats: %s\\degres, %s\\degres, %"
+"s\\degres, %s\\degres i %s\\degres."
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:233
+#, python-format
+msgid ""
+"\\item Déterminer les mesures principales des angles suivants en radians : "
+"%s, %s, %s, %s et %s~rad.\\par"
+msgstr ""
+"\\item Determineu en radians les mesures dels angles equivalents entre $0$ i "
+"$-\\pi$ dels angles següents: %s, %s, %s, %s i %s~rad.\\par"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:238
+msgid ""
+"Une mesure d'angle en radians est définie modulo $2\\pi$, c'est-à-dire que "
+"l'ajout ou la suppression d'un tour ( qui vaut $2\\pi$ ou 360\\degres ) ne "
+"change pas un angle.\\par"
+msgstr ""
+"La mesura d'un angle en radians està definida pels girs complets de mòdul "
+"$2\\pi$, és a dir, que sumar o restar un gir complet (que són $2\\pi$ o "
+"360\\degres ) no canvia l'angle.\\par"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:239
+msgid ""
+"Concrètement, avec le premier angle de la question, on remarque que :\\par"
+msgstr "Concretament, en el primer angle de la qüestió, s'observa que:\\par"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:246
+#: src/pyromaths/ex/lycee/CercleTrigo.py:252
+msgid ""
+"Les réponses sont directement données sur le cercle trigonométrique ci-"
+"dessous :\\par"
+msgstr ""
+"Les respostes s'han donat directament sobre el cercle trigonomètric que hi "
+"ha a continuació:\\par"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:249
+#, python-format
+msgid ""
+"Les points $M_0$, $M_1$, $M_2$ et $M_3$ définissent alors respectivement les "
+"angles %s, %s, %s et %s~rad."
+msgstr ""
+"Els punts $M_0$, $M_1$, $M_2$ i $M_3$ defineixen respectivament els angles %"
+"s, %s, %s i %s~rad."
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:255
+msgid ""
+"Ajoutons une simple remarque pour la dernière mesure, qui n'est pas "
+"principale : il faut effectuer en premier lieu une simplification, comme à "
+"la question 3. On obtient alors :\\par"
+msgstr ""
+"Una indicació sobre el càlcul de l'últim angle: aquest no és un angle entre "
+"$0$ i $-\\pi$. Per tant cal simplificar-lo, com en la qüestió 3. Aleshores "
+"s'obté:\\par"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:261
+msgid "Cercle trigonométrique"
+msgstr "Cercle trigonomètric"
+
+#: src/pyromaths/ex/lycee/CercleTrigo.py:262
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:113
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:268
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:399
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:640
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:799
+#: src/pyromaths/ex/lycee/Vecteurs.py:304
+msgid "2.Seconde"
+msgstr "2. 4t d'ESO"
+
+#: src/pyromaths/ex/lycee/Derivation.py:89
+msgid "Nombre dérivé graphiquement"
+msgstr "Nombre derivat gràficament"
+
+#: src/pyromaths/ex/lycee/Derivation.py:90
+#: src/pyromaths/ex/lycee/ExoPolynome.py:95
+#: src/pyromaths/ex/lycee/ExoPolynome.py:174
+#: src/pyromaths/ex/lycee/ExoPolynome.py:209
+#: src/pyromaths/ex/lycee/ExoPolynome.py:264
+#: src/pyromaths/ex/lycee/ExoPolynome.py:284
+#: src/pyromaths/ex/lycee/SecondDegre.py:70
+#: src/pyromaths/ex/lycee/SecondDegre.py:207
+#: src/pyromaths/ex/lycee/SecondDegre.py:329
+#: src/pyromaths/ex/lycee/SecondDegre.py:371
+#: src/pyromaths/ex/lycee/SecondDegre.py:412
+#: src/pyromaths/ex/lycee/SecondDegre.py:432
+#: src/pyromaths/ex/lycee/SecondDegre.py:475
+#: src/pyromaths/ex/lycee/SecondDegre.py:512
+msgid "1.1èreS"
+msgstr "1. 1r Batxillerat"
+
+#: src/pyromaths/ex/lycee/Derivation.py:109
+#, python-format
+msgid ""
+"\\item Déterminer graphiquement les nombres dérivés de la fonction $f$ en $"
+"\\qquad x=%s \\qquad x=%s \\qquad x=%s$."
+msgstr ""
+"\\item Determineu gràficament els nombres derivats de la funció $f$ en "
+"$\\qquad x=%s \\qquad x=%s \\qquad x=%s$."
+
+#: src/pyromaths/ex/lycee/Derivation.py:110
+msgid "\\item On considère le tableau de valeurs suivant :\\par"
+msgstr "\\item Es dóna la taula de valors següent:\\par"
+
+#: src/pyromaths/ex/lycee/Derivation.py:119
+#, python-brace-format
+msgid ""
+"\\item Dans un nouveau repère, placer les points de la courbe $\\mathcal{C}_g"
+"$ ainsi connus."
+msgstr ""
+"\\item En un sistema de coordenades nou, situeu els punts de la corba "
+"$\\mathcal{C}_g$ així coneguts."
+
+#: src/pyromaths/ex/lycee/Derivation.py:120
+#, python-brace-format
+msgid "\\item Tracer les tangentes à $\\mathcal{C}_g$ en ces points."
+msgstr "\\item Dibuixeu les tangents a $\\mathcal{C}_g$ en aquests punts."
+
+#: src/pyromaths/ex/lycee/Derivation.py:121
+#, python-brace-format
+msgid "\\item Donner une allure possible de la courbe $\\mathcal{C}_g$."
+msgstr "\\item Dibuixeu una representació possible de la corba $\\mathcal{C}_g$."
+
+#: src/pyromaths/ex/lycee/Derivation.py:175
+msgid ""
+"\\item  On lit graphiquement le coefficient directeur de chacune des "
+"tangentes en ces points.\\par"
+msgstr ""
+"\\item  Observeu gràficament el coeficient director de cadascuna de les "
+"tangents en aquests punts.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:54
+#: src/pyromaths/ex/lycee/ExoPolynome.py:55
+msgid "Résoudre les équations suivantes :"
+msgstr "Resoleu les equacions següents:"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:94
+msgid "Équations 2° degré"
+msgstr "Equacions de 2n grau"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:111
+msgid "Factoriser les polynômes suivants :"
+msgstr "Factoritzeu els polinomis següents:"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:122
+#, python-format
+msgid "\\item Factoriser  $%s(%s)=%s$ à l'aide d'une identité remarquable."
+msgstr "\\item Factoritzeu  $%s(%s)=%s$ amb l'ajuda d'una identitat notable."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:123
+#, python-format
+msgid "\\item Factoriser $%s(%s)=%s$"
+msgstr "\\item Factoritzeu $%s(%s)=%s$"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:139
+#: src/pyromaths/ex/lycee/ExoPolynome.py:151
+#: src/pyromaths/ex/lycee/ExoPolynome.py:166
+#, python-format
+msgid "\\item Factoriser $%s(%s)=%s$\\par"
+msgstr "\\item Factoritzeu $%s(%s)=%s$\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:173
+msgid "Factorisations 2° degré"
+msgstr "Factoritzacions de 2n grau"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:208
+msgid "Factorisations degré 3"
+msgstr "Factoritzacions de 3r grau"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:253
+#, python-format
+msgid "\\item Étudier le signe du polynôme $%s=%s$ sur $I=%s$."
+msgstr "\\item Estudieu els signes del polinomi $%s=%s$ en $I=%s$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:254
+#, python-format
+msgid "\\item Étudier le signe du polynôme $%s=%s$ sur $I=%s$.\\par"
+msgstr "\\item Estudieu els signes del polinomi $%s=%s$ en $I=%s$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:263
+msgid "Étude de signe"
+msgstr "Estudi de signes"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:283
+msgid "Sens de variations"
+msgstr "Intervals de monotonia"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:284
+msgid "0.Term STG"
+msgstr "0.2n Batxillerat"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:302
+msgid "Étude de fonctions"
+msgstr "Estudi de funcions"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:303
+msgid "0.Term S"
+msgstr "0.2n Batxillerat"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:346
+#: src/pyromaths/ex/lycee/ExoPolynome.py:348
+#, python-format
+msgid ""
+"\\item On considère la fonction $%s$ définie sur $I=[%s~;~%s]$ par $%s(%s)="
+"\\dfrac{%s}{%s}$."
+msgstr ""
+"\\item Es considera la funció $%s$ definida en $I=[%s~;~%s]$ per $%s(%"
+"s)=\\dfrac{%s}{%s}$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:351
+#: src/pyromaths/ex/lycee/ExoPolynome.py:352
+#, python-format
+msgid "\\item Justifier que $%s$ est définie et dérivable sur $I$."
+msgstr "\\item Comproveu que $%s$ està definida i és derivable en $I$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:353
+#, python-format
+msgid " Pour déterminer la valeur interdite, on doit résoudre $%s=0$."
+msgstr ""
+" Per a determinar el valor que no pertany al domini, cal resoldre $%s=0$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:371
+#, python-format
+msgid ""
+"Or $%s$ n'est pas dans l'intervalle $[%s~;~%s]$ et comme $%s$ est un "
+"quotient de polynômes, alors $%s$ est définie et dérivable sur $I$."
+msgstr ""
+"Com que $%s$ no pertany a l'interval $[%s~;~%s]$ i $%s$ és una fracció de "
+"polinomis, aleshores $%s$ està definida i és derivable en tot $I$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:373
+#: src/pyromaths/ex/lycee/ExoPolynome.py:375
+#, python-format
+msgid "\\item Déterminer $%s'(%s)$ pour tout $%s\\in[%s~;~%s]$."
+msgstr "\\item Calculeu $%s'(%s)$ per a tot $%s\\in[%s~;~%s]$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:378
+#, python-format
+msgid "\\item En déduire le sens de variations de $%s$ sur $I$."
+msgstr "\\item Estudia la monotonia de $%s$ en $I$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:379
+#, python-format
+msgid "\\item En déduire le sens de variations de $%s$ sur $I$.\\par"
+msgstr "\\item Estudia la monotonia de $%s$ en $I$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:381
+#: src/pyromaths/ex/lycee/ExoPolynome.py:537
+#, python-format
+msgid " Comme $%s$ est un carré, il est toujours positif.\\\\"
+msgstr " Com que $%s$ està elevat al quadrat, sempre és positiu.\\\\"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:389
+#: src/pyromaths/ex/lycee/ExoPolynome.py:543
+#, python-format
+msgid ""
+" De plus, $%s<0$ donc pour tout $%s$ de $I$, $%s'(%s)<0$. Ainsi, on obtient "
+"\\par"
+msgstr ""
+" A més, com que $%s<0$ per a tot $%s$ de $I$, $%s'(%s)<0$. Així s'obté \\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:405
+#, python-format
+msgid " De plus, $%s>0$ donc pour tout $%s$ de $I$, $%s'(%s)>0$.\\par"
+msgstr " A més, com que $%s>0$ per a tot $%s$ de $I$, $%s'(%s)>0$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:421
+#: src/pyromaths/ex/lycee/ExoPolynome.py:575
+#, python-format
+msgid " Je ne sais pas faire avec un tel numérateur $%s$."
+msgstr " Jo no sé resoldre-ho amb el numerador $%s$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:465
+#: src/pyromaths/ex/lycee/ExoPolynome.py:467
+#, python-format
+msgid ""
+"\\item On considère la fonction $%s$ définie  par $%s(%s)=\\dfrac{%s}{%s}$."
+msgstr ""
+"\\item Es considera la funció $%s$ definida  per $%s(%s)=\\dfrac{%s}{%s}$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:470
+#, python-format
+msgid "\\item Déterminer l'ensemble de définition $\\mathcal{D}_{%s}$ de $%s$."
+msgstr "\\item Calculeu el domini $\\mathcal{D}_{%s}$ de la funció $%s$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:471
+#, python-format
+msgid ""
+"\\item Déterminer l'ensemble de définition $\\mathcal{D}_{%s}$ de $%s$.\\par"
+msgstr "\\item Calculeu el domini $\\mathcal{D}_{%s}$ de la funció $%s$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:472
+#, python-format
+msgid ""
+" La fonction rationnelle $%s$ est définie et dérivable en $%s$ si $%s\\neq0$."
+msgstr ""
+" La funció racional $%s$ està definida i és derivable en $%s$ si $%s\\neq0$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:479
+#, python-format
+msgid ""
+"On en déduit que $\\mathcal{D}_{%s}=\\mathcal{D'}_{%s}=]-\\infty~;~"
+"%s[\\cup]%s~;~+\\infty[$."
+msgstr ""
+"Se'n dedueix que $\\mathcal{D}_{%s}=\\mathcal{D'}_{%s}=]-\\infty~;~%s[\\cup]%"
+"s~;~+\\infty[$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:481
+#: src/pyromaths/ex/lycee/ExoPolynome.py:483
+#, python-format
+msgid "\\item Déterminer $%s'(%s)$ pour tout $%s\\in\\mathcal{D'}_{%s}$."
+msgstr "\\item Calculeu $%s'(%s)$ per a tot $%s\\in\\mathcal{D'}_{%s}$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:486
+#: src/pyromaths/ex/lycee/ExoPolynome.py:487
+#, python-format
+msgid ""
+"\\item Déterminer les limites de $%s$ aux bornes de $\\mathcal{D}_{%s}$."
+msgstr ""
+"\\item Calculeu els límits de $%s$ als extrems del $\\mathcal{D}_{%s}$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:523
+#, python-format
+msgid "De plus, $%s>0$ si $%s<%s$"
+msgstr "A més, $%s>0$ si $%s<%s$"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:524
+#, python-format
+msgid "et  $%s<0$ si $%s>%s$.\\\\"
+msgstr "\\; i  $%s<0$ si $%s>%s$.\\\\"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:526
+#, python-format
+msgid "De plus, $%s<0$ si $%s<%s$"
+msgstr "A més, $%s<0$ si $%s<%s$"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:527
+#, python-format
+msgid "et  $%s>0$ si $%s>%s$.\\\\"
+msgstr "\\; i  $%s>0$ si $%s>%s$.\\\\"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:534
+#, python-format
+msgid ""
+"\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$."
+msgstr "\\item Realitzeu la taula de monotonia de $%s$ en $\\mathcal{D}_{%s}$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:535
+#, python-format
+msgid ""
+"\\item Dresser le tableau de variations de $%s$ sur $\\mathcal{D}_{%s}$.\\par"
+msgstr ""
+"\\item Realitzeu la taula de monotonia de $%s$ en $\\mathcal{D}_{%s}$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:559
+#, python-format
+msgid " De plus, $%s>0$ donc pour tout $%s$ de $I$, $%s'(%s)>0$. \\par"
+msgstr " A més, com que $%s>0$ per a tot $%s$ de $I$, $%s'(%s)>0$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:611
+#: src/pyromaths/ex/lycee/ExoPolynome.py:612
+#, python-format
+msgid ""
+"\\item Étudier le sens de variations de $%s$ définie par $%s(x)=%s$ sur $%s$."
+msgstr "\\item Estudieu la monotonia de $%s$ definida per $%s(x)=%s$ en $%s$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:615
+#, python-format
+msgid ""
+"Je dois étudier le signe de $%s'(%s)$ qui est un polynôme du second degré."
+"\\par"
+msgstr ""
+"S'ha d'estudiar el signe de $%s'(%s)$ que és un polinomi de segon grau.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:627
+#, python-format
+msgid "Donc la fonction polynômiale $%s$ est décroissante sur $%s$."
+msgstr "Per tant, la funció polinòmica $%s$ és decreixent en $%s$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:629
+#, python-format
+msgid "Donc la fonction polynômiale $%s$ est croissante sur $%s$."
+msgstr "Per tant, la funció polinòmica $%s$ és creixent en $%s$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:631
+#, python-format
+msgid "On obtient ainsi le tableau de variation de $%s$.\\par"
+msgstr "Així s'obté la taula de variació de $%s$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:707
+#, python-format
+msgid ""
+"Comme $\\Delta <0$, $%s(%s)$ ne s'annule pas et est toujours du signe de $a$"
+msgstr ""
+"Com que $\\Delta <0$, $%s(%s)$ no s'anul·la i sempre és del mateix signe de "
+"$a$"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:708
+msgid "Ainsi "
+msgstr "De manera que s'agafa un punt i se'n comprova el signe.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:716
+#, python-format
+msgid ""
+"Comme $\\Delta =0$, $%s(%s)$ s'annule une seule fois pour $%s_0=%s$ et est "
+"toujours du signe de $a$.\\par"
+msgstr ""
+"Com que $\\Delta =0$, $%s(%s)$ s'anul·la només una vegada en $%s_0=%s$ i en "
+"cada interval es troba el signe de $a$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:727
+#, python-format
+msgid "Or $%s$ n'est pas dans l'intervalle $%s$ donc "
+msgstr "A més, $%s$ no és a l'interval $%s$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:750
+#, python-format
+msgid "Comme $\\Delta >0$, $%s(%s)$ est du signe de $-a$ entre les racines."
+msgstr ""
+"Com que $\\Delta >0$, es determinen els signes del polinomi $%s(%s)$ en cada "
+"interval."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:793
+#, python-format
+msgid "\\par Or $%s$ et $%s$ ne sont pas dans $%s$."
+msgstr "\\par A més, $%s$ i $%s$ no són a l'interval $%s$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:796
+#: src/pyromaths/ex/lycee/ExoPolynome.py:798
+#, python-format
+msgid "\\par Or $%s$ n'est pas dans $%s$."
+msgstr "\\par A més, $%s$ no és a l'interval $%s$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1002
+#, python-format
+msgid "\\item Soit $%s =%s $"
+msgstr "\\item Siga $%s =%s $"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1003
+#, python-format
+msgid "\\item Soit $%s=%s $)"
+msgstr "\\item Siga $%s=%s $)"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1010
+#, python-format
+msgid "\\item Vérifier si $%s $ possède une racine évidente."
+msgstr "\\item Trobeu una arrel entera de $%s $."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1012
+#, python-format
+msgid "\\item Vérifier que $%s$ est une racine de $%s$."
+msgstr "\\item Comproveu que $%s$ és una arrel de $%s$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1013
+#, python-format
+msgid "\\item Factoriser $%s $."
+msgstr "\\item Factoritzeu $%s $."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1021
+#, python-format
+msgid ""
+"On remarque que $%s$ peut se factoriser par $%s$ et $%s=%s\\left(%s\\right)$"
+msgstr ""
+"Observeu que $%s$ es pot factoritzar entre $%s$ i $%s=%s\\left(%s\\right)$"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1023
+#, python-format
+msgid ""
+"On remarque que $%s$ peut se factoriser par $%s^2$ et $%s=%s^2\\left(%s"
+"\\right)$"
+msgstr ""
+"Observeu que $%s$ es pot factoritzar entre $%s^2$ i $%s=%s^2\\left(%s"
+"\\right)$"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1029
+#, python-format
+msgid "Comme $%s(%s)=0$, on peut diviser $%s$ par $%s$"
+msgstr "Com que $%s(%s)=0$, es pot dividir $%s$ entre $%s$"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1032
+#, python-format
+msgid "\\item On doit maintenant factoriser le polynome $%s_2=%s$\\\\"
+msgstr "\\item Ara cal factoritzar el polinomi del quocient $%s_2=%s$\\\\"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1036
+#, python-format
+msgid "On en conclue donc que $%s="
+msgstr "De manera que finalment $%s="
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1072
+#, python-format
+msgid "On ne peut pas factoriser $%s(%s)$."
+msgstr "No es pot factoritzar $%s(%s)$."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1074
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1085
+msgid "On peut donc écrire "
+msgstr "Aleshores la factorització és"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1101
+#, python-format
+msgid "Je calcule $\\Delta=%s^2-4\\times %s\\times %s=%s$"
+msgstr "Es calcula el discriminant $\\Delta=%s^2-4\\times %s\\times %s=%s$"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1103
+#, python-format
+msgid " et $%s=%s$.\\par"
+msgstr " i $%s=%s$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1108
+#, python-format
+msgid "Comme $\\Delta <0$, $%s(%s)$ n'a pas de racines."
+msgstr "Com que $\\Delta <0$, $%s(%s)$ no té arrels."
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1110
+#, python-format
+msgid "Comme $\\Delta=0$, $%s(%s)$ a une seule racine $%s_0=%s=%s$.\\par"
+msgstr "Com que $\\Delta=0$, $%s(%s)$ té una única arrel $%s_0=%s=%s$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1113
+#, python-format
+msgid "Comme $\\Delta>0$, $%s(%s)$ a deux racines :"
+msgstr "Com que $\\Delta>0$, $%s(%s)$ té dos arrels:"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1135
+#, python-format
+msgid "Les racines de $%s$ sont $%s_1=%s$ et $%s_2=%s$.\\par"
+msgstr "Les arrels de $%s$ són $%s_1=%s$ i $%s_2=%s$.\\par"
+
+#: src/pyromaths/ex/lycee/ExoPolynome.py:1138
+#, python-format
+msgid "Les racines de $%s$ sont $%s_1=%s=%s$ et $%s_2=%s=%s$."
+msgstr "Les arrels de $%s$ són $%s_1=%s=%s$ i $%s_2=%s=%s$."
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:10
+#, python-brace-format
+msgid ""
+"\\exercice\n"
+"           \\begin{multicols}{2}\n"
+"           \\noindent Question 1 : Chercher les racines des polynômes "
+"suivants :\\par\n"
+msgstr ""
+"\\exercici\n"
+"           \\begin{multicols}{2}\n"
+"           \\noindent Qüestió 1: Busqueu les arrels dels polinomis "
+"següents:\\par\n"
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:13
+#, python-brace-format
+msgid ""
+"\\exercice*\n"
+"           \\begin{multicols}{2}\n"
+"\\ \\noindent Question 1 : Chercher les racines des polynômes suivants :"
+"\\par\n"
+msgstr ""
+"\\exercici*\n"
+"           \\begin{multicols}{2}\n"
+"\\ \\noindent Qüestió 1: Busqueu les arrels dels polinomis següents:\\par\n"
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:44
+msgid "\\par a) On calcule le discriminant : $\\Delta = "
+msgstr "\\par a) Calculeu el discriminant: $\\Delta = "
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:45
+msgid "\\par Comme le discrimimant est $"
+msgstr "\\par Com que el discriminant és $"
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:45
+msgid "$, on en déduit que ce polynôme possède $"
+msgstr "$, es dedueix que aquest polinomi té $"
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:45
+msgid "$ racines."
+msgstr "$ arrels."
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:47
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:48
+msgid "\\par Question 2 : Résoudre les inéquations suivantes : "
+msgstr "\\par Qüestió 2: Resoleu les inequacions següents:"
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:60
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:61
+msgid "\\par Question 3 : Trouver deux nombres sachant que leur somme est "
+msgstr "\\par Qüestió 3: Trobeu dos nombres la suma dels quals siga"
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:60
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:61
+msgid " et leur produit "
+msgstr " i el seu producte"
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:63
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:64
+msgid ""
+"\\par Question 4 : Trouver les dimensions d'un rectangle, sachant que son "
+"périmètre est "
+msgstr ""
+"\\par Qüestió 4: Trobeu les dimensions d'un rectangle, sabent que el "
+"perímetre és"
+
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:63
+#: src/pyromaths/ex/lycee/ExoSecondDegre.py:64
+msgid " et son aire "
+msgstr " i la seua àrea"
+
+#: src/pyromaths/ex/lycee/Fonction.py:137
+msgid "Je ne sais pas étudier les variations de cette fonction."
+msgstr "Jo puc estudiar la monotonia d'aquesta funció."
+
+#: src/pyromaths/ex/lycee/Fonction.py:182
+msgid "attends un peu pour le degré 3"
+msgstr "espereu un poc per a la de grau 3"
+
+#: src/pyromaths/ex/lycee/Fonction.py:185
+msgid "Degré trop élevé"
+msgstr "El grau és massa elevat."
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:69
+msgid "Forme canonique"
+msgstr "Forma canònica"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:156
+#: src/pyromaths/ex/lycee/SecondDegre.py:172
+msgid "Donner la forme canonique des polynômes $P$ , $Q$ , $R$ et $S$ ."
+msgstr "Doneu la forma canònica dels polinomis $P$ , $Q$ , $R$ i $S$."
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:206
+msgid "Racines d'un polynôme de degré 2"
+msgstr "Arrels d'un polinomi de segon grau"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:231
+msgid "Déterminer les racines des polynômes :"
+msgstr "Determineu les arrels dels polinomis:"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:244
+msgid "Déterminer les racines des polynômes :\\par"
+msgstr "Determineu les arrels dels polinomis:\\par"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:271
+#: src/pyromaths/ex/lycee/SecondDegre.py:312
+#, python-format
+msgid "\\underline{Les racines de $%s$ sont }\\fbox{$%s$}"
+msgstr "\\underline{Les arrels de $%s$ són }\\fbox{$%s$}"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:273
+#, python-format
+msgid "\\underline{L'unique racine de $%s$ est }\\fbox{$%s$}"
+msgstr "\\underline{L'única arrel de $%s$ és }\\fbox{$%s$}"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:279
+#, python-format
+msgid ""
+"car un carré est toujours positif.\\par\n"
+"\\underline{$%s$ n'a donc pas de racine.}"
+msgstr ""
+"ja que un quadrat és sempre positiu.\\par\n"
+"\\underline{$%s$ no té, per tant, arrel.}"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:283
+#, python-format
+msgid ""
+"On calcule le discriminant de $%s$ avec $a=%s$, $b=%s$ et $c=%s$ :\\par"
+"\\medskip"
+msgstr ""
+"Calculeu el discriminant de $%s$ amb $a=%s$, $b=%s$ i $c=%s$:\\par\\medskip"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:312
+msgid "$}\\underline{ et }\\fbox{$"
+msgstr "$}\\underline{ i }\\fbox{$"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:358
+msgid "Résoudre les équations :"
+msgstr "Resoleu les equacions:"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:402
+#, python-format
+msgid "\\item Déterminer le signe du polynôme $P\\,(x) = %s$"
+msgstr "\\item Determineu el signe del polinomi $P\\,(x) = %s$"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:403
+#, python-format
+msgid ""
+"\\item Le polynôme $Q\\,(x) = %s$ admet deux racines $%s$ et $%s\\,$. "
+"Dresser son tableau de signes."
+msgstr ""
+"\\item El polinomi $Q\\,(x) = %s$ admet dos arrels $%s$ i $%s\\,$. Realitzeu la "
+"taula de signes."
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:405
+#, python-format
+msgid ""
+"\\item Le polynôme $R\\,(x) = %s$ admet deux racines $%s$ et $%s\\,$. "
+"Dresser son tableau de signes."
+msgstr ""
+"\\item El polinomi $R\\,(x) = %s$ admet dos arrels $%s$ i $%s\\,$. Realitzeu la "
+"taula de signes."
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:425
+#, python-format
+msgid "Résoudre l'inéquation : $\\qquad \\cfrac{%s}{%s} %s 0$"
+msgstr "Resoleu la inequació: $\\qquad \\cfrac{%s}{%s} %s 0$"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:466
+#, python-format
+msgid ""
+"\\item Le polynôme $\\quad P\\,(x) = %s \\quad$ admet deux racines $%s$ et $"
+"%s\\,$. Donner sa forme factorisée.\n"
+msgstr "\\item El polinomi $\\quad P\\,(x) = %s \\quad$ admet dos arrels $%s$ i $%s\\,$. "
+"Doneu la forma factoritzada.\n"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:468
+#, python-format
+msgid ""
+"\\item Factoriser si possible les polynômes $\\quad Q\\,(x) = %s\\quad$ et $"
+"\\quad R\\,(x) = %s$.\n"
+msgstr "\\item Factoritzeu si és possible els polinomis $\\quad Q\\,(x) = %s\\quad$ i "
+"$\\quad R\\,(x) = %s$.\n"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:502
+#, python-format
+msgid ""
+"On donne les polynômes $\\quad p\\,(x) = %s \\quad$ et $\\quad Q\\,(x) = %s$."
+msgstr "Es donen els polinomis $\\quad p\\,(x) = %s \\quad$ i $\\quad Q\\,(x) = %s$."
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:504
+msgid ""
+"\\item Donner les caractéristiques de leurs courbes respectives (sommet, "
+"intersections avec les axes du repère)."
+msgstr ""
+"\\item Doneu les característiques de les corbes respectives (vèrtex, "
+"interseccions amb els eixos de coordenades)."
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:505
+msgid "\\item Tracer l’allure de ces deux courbes sur un même graphique."
+msgstr ""
+"\\item Dibuixeu la representació d'aquestes dos corbes en una mateixa "
+"gràfica."
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:539
+#, python-format
+msgid ""
+"\\item On donne le polynôme $\\quad P\\,(x) = %s\\quad$ où $m$ est un réel."
+"\\par"
+msgstr ""
+"\\item Es dóna el polinomi $\\quad P\\,(x) = %s\\quad$ en el qual $m$ és un "
+"nombre real.\\par"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:541
+#, python-format
+msgid "Quelles sont les valeurs de $m$ pour lesquelles $P$ %s ?\n"
+msgstr "Quins són els valors de $m$ per als quals $P$ %s?\n"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:541
+msgid "a une seule racine"
+msgstr "té una única arrel"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:541
+msgid "n'a pas de racine"
+msgstr "no té arrel"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:542
+msgid "a deux racines distinctes"
+msgstr "té dos arrels diferents"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:545
+#, python-format
+msgid ""
+"\\item Soit $a$ un réel différent de $%s$. On donne $Q\\,(x) = %s$.\\par\n"
+msgstr "\\item Siga $a$ un nombre real diferent de $%s$. Es dóna $Q\\,(x) = %s$.\\par\n"
+
+#: src/pyromaths/ex/lycee/SecondDegre.py:546
+#, python-format
+msgid "Déterminer $a$ pour que $%s$ soit une racine de $Q$.\n"
+msgstr "Calculeu $a$ perquè $%s$ siga una arrel de $Q$.\n"
+
+#: src/pyromaths/ex/lycee/Statitisiques.py:62
+msgid "Tracer l'histogramme de la série ci-dessous :\\par"
+msgstr "Dibuixeu l'histograma de la sèrie ací davall:\\par"
+
+#: src/pyromaths/ex/lycee/Statitisiques.py:64
+#, python-format
+msgid "\\hline Classe & %s \\\\"
+msgstr "\\hline Classe & %s \\\\"
+
+#: src/pyromaths/ex/lycee/Statitisiques.py:65
+#, python-format
+msgid "\\hline Effectif & %s \\\\ \\hline"
+msgstr "\\hline Efectiu & %s \\\\ \\hline"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:112
+msgid "Sens et Tableau de variations"
+msgstr "Intervals i taula de monotonia"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:126
+msgid ""
+"\\item Quel est le sens de variation de la fonction $f$ ? Répondre par une "
+"phrase en précisant les intervalles."
+msgstr ""
+"\\item Quin és l'interval de monotonia de la funció $f$? Responeu amb una "
+"frase que precise els intervals."
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:127
+msgid "\\item Tracer les tableaux de variation des fonctions $f$ et $g$."
+msgstr "\\item Dibuixeu les taules de monotonia de les funcions $f$ i $g$."
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:188
+msgid "\\item la fonction $f$ est"
+msgstr "\\item la funció $f$ és"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:189
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:192
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:195
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:737
+msgid "décroissante"
+msgstr "decreixent"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:189
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:191
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:196
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:737
+msgid "croissante"
+msgstr "creixent"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:189
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:193
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:197
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:737
+msgid "constante"
+msgstr "constant"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:194
+msgid "variation non attendue"
+msgstr "variació no esperada"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:267
+msgid "Extrema et représentation graphique"
+msgstr "Extrems en la representació gràfica"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:309
+msgid "\\item Quels sont les extrema de la fonction $f$ ?"
+msgstr "\\item Quins són els extrems de la funció $f$?"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:310
+#, python-format
+msgid "\\item Quel est le %s de $f$ sur l'intervalle $[%s~;~%s]$ ?"
+msgstr "\\item Quin és el %s de $f$ en l'interval $[%s~;~%s]$?"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:311
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:414
+msgid "\\item Quels sont les extrema de la fonction $g$ ?"
+msgstr "\\item Quins són els extrems de la funció $g$?"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:312
+#, python-format
+msgid "\\item Quels sont les extrema de $g$ sur l'intervalle $[%s~;~%s]$ ?"
+msgstr "\\item Quins són els extrems de $g$ en l'interval $[%s~;~%s]$?"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:376
+#, python-format
+msgid ""
+"\\item Sur $[%s~;~%s]$ , le \\textbf{maximum} de $f$ est $y = %s$. Il est "
+"\\textbf{atteint en} $x = %s$."
+msgstr ""
+"\\item En $[%s~;~%s]$ , el \\textbf{maximum} de $f$ és $y = %s$. És "
+"\\textbf{atteint en} $x = %s$."
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:377
+#, python-format
+msgid ""
+"\\item Sur $[%s~;~%s]$ , le \\textbf{minimum} de $f$ est $y = %s$. Il est "
+"\\textbf{atteint en} $x = %s$."
+msgstr ""
+"\\item En $[%s~;~%s]$ , el \\textbf{minimum} de $f$ és $y = %s$. És "
+"\\textbf{atteint en} $x = %s$."
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:381
+#, python-format
+msgid ""
+"\\item Sur $[%s~;~%s]$, le \\textbf{%s} de $f$ est $y = %s$. Il est "
+"\\textbf{atteint en} $x = %s$. "
+msgstr ""
+"\\item En $[%s~;~%s]$, el \\textbf{%s} de $f$ és $y = %s$. És \\textbf{atteint "
+"en} $x = %s$. "
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:385
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:391
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:516
+#, python-format
+msgid ""
+"\\item Sur $[%s~;~%s]$ , le \\textbf{maximum} de $g$ est $y = %s$. Il est "
+"\\textbf{atteint en} $x = %s$."
+msgstr ""
+"\\item En $[%s~;~%s]$ , el \\textbf{maximum} de $g$ és $y = %s$. És "
+"\\textbf{atteint en} $x = %s$."
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:386
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:392
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:517
+#, python-format
+msgid ""
+"\\item Sur $[%s~;~%s]$ , le \\textbf{minimum} de $g$ est $y = %s$. Il est "
+"\\textbf{atteint en} $x = %s$."
+msgstr ""
+"\\item En $[%s~;~%s]$ , el \\textbf{minimum} de $g$ és $y = %s$. És "
+"\\textbf{atteint en} $x = %s$."
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:398
+msgid "Tableaux de variations et courbe"
+msgstr "Taula de monotonia i corba"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:410
+msgid ""
+"\\item Pour chaque question, répondre avec une phrase en précisant les "
+"intervalles.\\vspace{-2ex}"
+msgstr ""
+"\\item Per a cada qüestió, responeu amb una frase que precise els "
+"intervals.\\vspace{-2ex}"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:413
+msgid "\\item Quel est le signe de la fonction $f$ ?"
+msgstr "\\item Quin és el signe de la funció $f$?"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:417
+msgid ""
+"\\item Tracer une représentation graphique de $f$ et $g$ sur leurs ensembles "
+"de définition."
+msgstr ""
+"\\item Dibuixeu una representació gràfica de $f$ i $g$ en els seus dominis de "
+"funció."
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:512
+#, python-format
+msgid ""
+"\\item La fonction $f$ est \\textbf{négative} sur %s et \\textbf{positive} "
+"sur %s."
+msgstr ""
+"\\item La funció $f$ és \\textbf{négative} en %s i \\textbf{positive} en %s."
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:639
+msgid "Comparer des images à partir du sens de variation"
+msgstr "Comparació de funcions a partir d'intervals de monotonia"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:671
+msgid ""
+"\\item À partir du tableau de variation ci-dessous, recopier et compléter "
+"les égalités ou inégalités suivantes en justifiant :\\vspace{-2ex}"
+msgstr ""
+"\\item A partir de la taula de monotonia següent, torneu a copiar i completeu "
+"les igualtats o desigualtats següents justificant:\\vspace{-2ex}"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:679
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:680
+#, python-format
+msgid "\\item Peut-on comparer l’image des nombres $%s$ et $%s$ ? Justifier."
+msgstr ""
+"\\item Es poden comparar les funcions dels nombres $%s$ i $%s$? Justifiqueu "
+"la resposta."
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:737
+#, python-format
+msgid ""
+"\\item $f\\,(%s) %s f\\,(%s)$ car $%s < %s$ et $f$ est %s sur $[%s~;~%s]$."
+msgstr "\\item $f\\,(%s) %s f\\,(%s)$ ja que $%s < %s$ i $f$ és %s en $[%s~;~%s]$."
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:741
+#, python-format
+msgid ""
+"\\item $f\\,(%s) %s f\\,(%s)$ car d’après le signe de la fonction $f\\,(%s) "
+"%s 0$ et $f\\,(%s) %s 0$ (par contre, on ne peut pas utiliser le sens de "
+"variation qui change sur l’intervalle $[%s~;~%s]$)."
+msgstr ""
+"\\item $f\\,(%s) %s f\\,(%s)$ ja que segons el signe de la funció $f\\,(%s) %s "
+"0$ i $f\\,(%s) %s 0$ (en canvi, no es pot utilitzar l'interval de monotonia "
+"que canvia en l'interval $[%s~;~%s]$)."
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:746
+#, python-format
+msgid ""
+"\\item On ne peut pas comparer $f\\,(%s)$ et $f\\,(%s)$ car la fonction $f$ "
+"n'est pas monotone (elle change de sens de variation) sur $[%s~;~%s]$."
+msgstr ""
+"\\item No es pot comparar $f\\,(%s)$ i $f\\,(%s)$ ja que la funció $f$ no és "
+"monòtona (canvia d'interval de monotonia) sur $[%s~;~%s]$."
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:798
+msgid "Extrema locaux à partir du tableau de variation"
+msgstr "Extrems locals en la taula de monotonia"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:822
+msgid ""
+"\\item À partir du tableau de variation de la fonction $f$, compléter les "
+"égalités ou inégalités suivantes :\\vspace{-2ex}"
+msgstr ""
+"\\item A partir de la taula de monotonia de la funció $f$, completeu les "
+"igualtats o desigualtats següents:\\vspace{-2ex}"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:832
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:833
+#, python-format
+msgid ""
+"\\item Donner un encadrement de la fonction $f$ sur l’intervalle $[%s~;~%s]$."
+msgstr ""
+"\\item Doneu la fita superior i inferior de la funció $f$ en l’interval $[%"
+"s~;~%s]$."
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:892
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:893
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:894
+#, python-format
+msgid "\\item Pour $x \\in [%s~;~%s],\\quad f\\,(x) %s %s$"
+msgstr "\\item Per a $x \\in [%s~;~%s],\\quad f\\,(x) %s %s$"
+
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:899
+#: src/pyromaths/ex/lycee/VariationsFonctions.py:900
+#, python-format
+msgid "\\item Sur $[%s~;~%s],\\quad %s \\le f\\,(x) \\le %s$."
+msgstr "\\item En $[%s~;~%s],\\quad %s \\le f\\,(x) \\le %s$."
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:230
+#: src/pyromaths/ex/lycee/Vecteurs.py:231
+#, python-brace-format
+msgid ""
+"On se place dans un repère orthonormé et on considère les vecteurs $"
+"\\overrightarrow{u}$, $\\overrightarrow{v}$, et $\\overrightarrow{w}$ ci-"
+"dessous."
+msgstr ""
+"En l'anterior sistema de coordenades ortonormals s'han situat els vectors "
+"$\\overrightarrow{u}$, $\\overrightarrow{v}$, i $\\overrightarrow{w}$ de "
+"davall."
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:236
+#: src/pyromaths/ex/lycee/Vecteurs.py:237
+#, python-brace-format
+msgid ""
+"\\item Lire les coordonnées de chacun des vecteurs $\\overrightarrow{u}$, $"
+"\\overrightarrow{v}$, et $\\overrightarrow{w}$."
+msgstr ""
+"\\item Calculeu les coordenades de cadascun dels vectors "
+"$\\overrightarrow{u}$, $\\overrightarrow{v}$, i $\\overrightarrow{w}$."
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:240
+#, python-brace-format
+msgid ""
+"Un petit rappel : l'abscisse d'un vecteur est la différence d'abscisse entre "
+"le fin et le début du vecteur.                  Concernant le vecteur $"
+"\\overrightarrow{u}$, son abscisse est $"
+msgstr ""
+"Nota: L'abscissa d'un vector és la diferència entre l'abscissa del punt "
+"d'arribada menys la del punt d'eixida del vector.                  Amb "
+"referència al vector $\\overrightarrow{u}$, l'abscissa és $"
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:242
+#, python-brace-format
+msgid ""
+"$.                  Donc les coordonnées de $\\overrightarrow{u}$ sont $("
+msgstr ""
+"$.                  Per tant, les coordenades de $\\overrightarrow{u}$ són $("
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:243
+msgid ""
+" )$.                  Des pointillés ont été ajoutés sur la figure pour "
+"faciliter la lecture des coordonnées."
+msgstr ""
+" )$.                  S'han afegit unes marques a la figura per a facilitar "
+"la lectura de les coordenades."
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:245
+#, python-brace-format
+msgid "De même, les coordonnées de $\\overrightarrow{v}$ sont $("
+msgstr "Igualment, les coordenades de $\\overrightarrow{v}$ són $("
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:245
+#, python-brace-format
+msgid ""
+" )$                  et les coordonnées de $\\overrightarrow{w}$ sont $("
+msgstr " )$                  i les coordenades de $\\overrightarrow{w}$ són $("
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:248
+#: src/pyromaths/ex/lycee/Vecteurs.py:249
+#, python-brace-format
+msgid ""
+"\\item Placer un point B de sorte que le vecteur $\\overrightarrow{AB}$ soit "
+"égal à $"
+msgstr ""
+"\\item Col·loqueu un punt B de manera que el vector $\\overrightarrow{AB}$ "
+"siga igual a $"
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:252
+msgid ""
+"Le plus simple pour répondre à cette question est de calculer les "
+"coordonnées du vecteur $"
+msgstr ""
+"La manera més senzilla de respondre a aquesta pregunta és calcular les "
+"coordenades del vector $."
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:253
+msgid "Cela se fait en multipliant les coordonnées de $\\overrightarrow{"
+msgstr "Això es fa multiplicant les coordenades de $\\overrightarrow{"
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:253
+msgid "$, ce qui donne comme résultat $("
+msgstr "$, la qual cosa dóna com a resultat $("
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:254
+msgid ""
+"En partant du point A et en respectant ces coordonnées, on dessine un "
+"vecteur (en bleu sur la figure ci-dessus) qui indique l'emplacement du point "
+"B."
+msgstr ""
+"Partint del punt A i respectant les coordenades; es dibuixa un vector (en "
+"blau a la figura d'ací damunt) que indica la situació del punt B."
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:256
+#: src/pyromaths/ex/lycee/Vecteurs.py:257
+#, python-brace-format
+msgid ""
+"\\item Calculer les normes de chacun des vecteurs $\\overrightarrow{u}$, $"
+"\\overrightarrow{v}$, et $\\overrightarrow{w}$."
+msgstr ""
+"\\item Calculeu el mòdul de cadascun dels vectors $\\overrightarrow{u}$, $"
+"\\overrightarrow{v}$, i $\\overrightarrow{w}$."
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:277
+msgid "De la même manière, on obtient :"
+msgstr "De la mateixa manera s'obté:"
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:284
+#: src/pyromaths/ex/lycee/Vecteurs.py:286
+#, python-brace-format
+msgid ""
+"\\item Dessiner des représentants des vecteurs $\\overrightarrow{u}+"
+"\\overrightarrow{v}$, $\\overrightarrow{u}-\\overrightarrow{v}$, $"
+"\\overrightarrow{u}-\\overrightarrow{w}$                  et $"
+"\\overrightarrow{v}+\\overrightarrow{w}$."
+msgstr ""
+"\\item Dibuixeu les representacions dels vectors "
+"$\\overrightarrow{u}+\\overrightarrow{v}$, "
+"$\\overrightarrow{u}-\\overrightarrow{v}$, "
+"$\\overrightarrow{u}-\\overrightarrow{w}$                  i "
+"$\\overrightarrow{v}+\\overrightarrow{w}$."
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:290
+msgid ""
+"Pour dessiner les sommes ou différences de vecteurs, il faut les mettre "
+"\"bouts à bouts\",                  comme sur les figures qui suivent :\\par"
+msgstr ""
+"Per a dibuixar la suma o la diferència de vectors, cal posar-los \"on acabe "
+"el primer comença el segon\",                  com es mostra a "
+"continuació:\\par"
+
+#: src/pyromaths/ex/lycee/Vecteurs.py:303
+msgid "Vecteurs"
+msgstr "Vectors"
+
+#: src/pyromaths/ex/quatriemes/__init__.py:23
+msgid "4.Quatrième"
+msgstr "2n d'ESO"
+
+#: src/pyromaths/ex/quatriemes/calcul_mental.py:35
+#, python-format
+msgid "\\item $%s %s %s = \\ldots\\ldots$"
+msgstr "\\item $%s %s %s = \\underline{\\hspace*{0.5 cm}}$"
+
+#: src/pyromaths/ex/quatriemes/calcul_mental.py:37
+#, python-format
+msgid "\\item $%s %s %s = \\mathbf{%s}$"
+msgstr "\\item $%s %s %s = \\underline{\\mathbf{%s}}$"
+
+#: src/pyromaths/ex/quatriemes/calcul_mental.py:40
+#, python-format
+msgid "\\item $%s %s \\ldots\\ldots = %s$"
+msgstr "\\item $%s %s \\underline{\\hspace*{0.5 cm}} = %s$"
+
+#: src/pyromaths/ex/quatriemes/calcul_mental.py:42
+#, python-format
+msgid "\\item $%s %s \\mathbf{%s} = %s$"
+msgstr "\\item $%s %s \\underline{\\mathbf{%s} = %s$"
+
+#: src/pyromaths/ex/quatriemes/calcul_mental.py:45
+#, python-format
+msgid "\\item $\\ldots\\ldots %s %s = %s$"
+msgstr "\\item $\\underline{\\hspace*{0.5 cm}} %s %s = %s$"
+
+#: src/pyromaths/ex/quatriemes/calcul_mental.py:47
+#, python-format
+msgid "\\item $\\mathbf{%s} %s %s = %s$"
+msgstr "\\item $\\underline{\\mathbf{%s}} %s %s = %s$"
+
+#: src/pyromaths/ex/quatriemes/fractions.py:90
+#: src/pyromaths/ex/quatriemes/fractions.py:93
+msgid ""
+"Calculer en détaillant les étapes. Donner le résultat sous la forme d'une "
+"fraction la plus simple possible (ou d'un entier lorsque c'est possible)."
+msgstr ""
+"Feu el càlcul tot detallant cada pas realitzat. Doneu el resultat en forma "
+"de fracció irreductible (o un enter quan siga possible)."
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:98
+#, python-brace-format, python-format
+msgid ""
+"    \\item Soit $%s$ un triangle rectangle en $%s$ tel que :\\par\n"
+"$%s=\\unit[%s]{cm}$ et $%s=\\unit[%s]{cm}$.\\par\n"
+"Calculer la longueur $%s$."
+msgstr ""
+"    \\item Siga $%s$ un triangle rectangle en $%s$ de manera que:\\par\n"
+"$%s=\\unit[%s]{cm}$ i $%s=\\unit[%s]{cm}$.\\par\n"
+"Calculeu la longitud de $%s$."
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:106
+#, python-format
+msgid "Le triangle $%s$ est rectangle en $%s$.\\par"
+msgstr "El triangle $%s$ és rectangle en $%s$.\\par"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:108
+#, python-format
+msgid "Son hypoténuse est $[%s]$.\\par"
+msgstr "La hipotenusa és $[%s]$.\\par"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:109
+#: src/pyromaths/ex/quatriemes/geometrie.py:209
+msgid "D'après le \\textbf{théorème de Pythagore} :"
+msgstr "Segons el \\textbf{teorema de Pitàgores}:"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:112
+#: src/pyromaths/ex/quatriemes/geometrie.py:213
+#, python-format
+msgid "\\[%s^2=%s^2-%s^2\\kern1cm\\text{(On cherche }%s)\\]"
+msgstr "\\[%s^2=%s^2-%s^2\\kern1cm\\text{(Es busca }%s)\\]"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:137
+#, python-format
+msgid "\\[ \\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]"
+msgstr "\\[ \\boxed{\\text{Per tant }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:142
+#: src/pyromaths/ex/quatriemes/geometrie.py:238
+#: src/pyromaths/ex/quatriemes/geometrie.py:243
+#, python-format
+msgid "\\[\\boxed{\\text{Donc }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]"
+msgstr "\\[\\boxed{\\text{Per tant }%s=\\sqrt{%s}=\\unit[%s]{cm}}\\]"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:152
+msgid "Théorème de Pythagore"
+msgstr "Teorema de Pitàgores"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:186
+#, python-format
+msgid ""
+"\\begin{minipage}{4cm}\n"
+"\\begin{pspicture}(-2,-2)(2,2)\n"
+"\\SpecialCoor\\psset{PointSymbol=none}\n"
+"\\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){a}\n"
+"\\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){b}\n"
+"\\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){c}\n"
+"\\pspolygon(a)(b)(c)\\pscircle(0,0){1.5}\n"
+"\\rput(1.8;%s){$\\big(\\mathcal{C}\\big)$}\n"
+"\\end{pspicture}\n"
+"\\end{minipage}\\hfill\n"
+"\\begin{minipage}{13cm}\n"
+"$\\big(\\mathcal{C}\\big)$ est un cercle de diamètre $[%s]$ et $%s$ est un "
+"point de $\\big(\\mathcal{C}\\big)$.\\par\n"
+"On donne $%s=\\unit[%s]{cm}$ et $%s=\\unit[%s]{cm}$.\\par\n"
+"Calculer la longueur $%s$."
+msgstr ""
+"\\begin{minipage}{4cm}\n"
+"\\begin{pspicture}(-2,-2)(2,2)\n"
+"\\SpecialCoor\\psset{PointSymbol=x}\n"
+"\\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){a}\n"
+"\\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){b}\n"
+"\\pstGeonode[PointName=%s,PosAngle=%s](1.5;%s){c}\n"
+"\\pspolygon(a)(b)(c)\\pscircle(0,0){1.5}\n"
+"\\rput(1.8;%s){$\\big(\\mathcal{C}\\big)$}\n"
+"\\end{pspicture}\n"
+"\\end{minipage}\\hfill\n"
+"\\begin{minipage}{13cm}\n"
+"$\\big(\\mathcal{C}\\big)$ és una circumferència de diàmetre $[%s]$ i $%s$ és "
+"un punt de $\\big(\\mathcal{C}\\big)$.\\par\n"
+"Es dóna $%s=\\unit[%s]{cm}\\text{ i }%s=\\unit[%s]{cm}$.\\par\n"
+"Calculeu la longitud de $%s$."
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:205
+#, python-format
+msgid "$[%s]$ est le diamètre du cercle circonscrit au triangle $%s$.\\par"
+msgstr ""
+"$[%s]$ és el diàmetre de la circumferència circumscrita en el triangle $%"
+"s$.\\par"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:207
+#, python-format
+msgid "\\fbox{Donc le triangle %s est rectangle en %s.}\\\\\n"
+msgstr "\\fbox{Per tant el triangle %s és rectangle en %s per estar en la "
+"diagonal.}\\\\\n"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:210
+#, python-format
+msgid ""
+"\\[%s^2=%s^2+%s^2\\kern1cm\\text{(car }[%s]\\text{ est "
+"\\emph{l'hypoténuse})}\\]"
+msgstr ""
+"\\[%s^2=%s^2+%s^2\\kern1cm\\text{(ja que }[%s]\\text{ és \\emph{la "
+"hipotenusa})}\\]"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:250
+msgid "Cercle et théorème de Pythagore"
+msgstr "'Cercle i teorema de Pitàgores'"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:274
+#, python-format, python-brace-format
+msgid ""
+"Soit $%s$ un triangle tel que : $\\quad %s=\\unit[%s]{cm}\\quad$, $\\quad %s="
+"\\unit[%s]{cm}\\quad$ et $\\quad %s=\\unit[%s]{cm}$.\\par\n"
+"Quelle est la nature du triangle $%s$?\n"
+msgstr ""
+"Siga $%s$ un triangle de manera que: $\\quad %s=\\unit[%s]{cm}\\quad$, $\\quad %"
+"s=\\unit[%s]{cm}\\quad$ i $\\quad %s=\\unit[%s]{cm}$.\\par\n"
+"De quina classe és el triangle $%s$?\n"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:281
+#, python-format
+msgid "Le triangle %s n'est ni isocèle, ni équilatéral.\\par\n"
+msgstr "Estudiem el triangle %s, que no és ni isòsceles, ni equilàter.\\par\n"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:287
+#, python-format
+msgid ""
+"\\bullet %s^2=%s^2=%s\\qquad\\text{(}[%s]\\text{ est le plus grand côté.)}\\"
+"\\\n"
+msgstr ""
+"\\bullet\\, %s^2=%s^2=%s\\qquad\\text{(}[%s]\\text{ és el costat més llarg.)}\\\\"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:294
+#, python-format
+msgid ""
+"Donc $%s^2=%s^2+%s^2$.\\par\n"
+"D'après la \\textbf{réciproque du théorème de Pythagore},\n"
+"\\fbox{le triangle $%s$ est rectangle en $%s$.}"
+msgstr ""
+"Per tant $%s^2=%s^2+%s^2$.\\par\n"
+"Segons la \\textbf{recíproc del teorema de Pitàgores},\n"
+"\\fbox{el triangle $%s$ és un triangle %s.}"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:300
+msgid "Réciproque du théorème de Pythagore"
+msgstr "El recíproc del teorema de Pitàgores"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:416
+#: src/pyromaths/ex/troisiemes/geometrie.py:418
+msgid "Théorème de Thalès"
+msgstr "Teorema de Tales"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:469
+#, python-format
+msgid ""
+"{Sur la figure ci-contre, les droites $(%s)$ et $(%s)$ sont parallèles."
+"\\par\n"
+msgstr "{En la figura adjunta, les rectes $(%s)$ i $(%s)$ són paral·leles.\\par\n"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:473
+#, python-brace-format, python-format
+msgid ""
+"On donne $%s=\\unit[%s]{cm}$,$\\quad %s=\\unit[%s]{cm}$, $\\quad %s="
+"\\unit[%s]{cm}\\quad$ et $\\quad %s~=~\\unit[%s]{cm}$.\\par\n"
+msgstr "Es dóna $%s=\\unit[%s]{cm}$,$\\quad %s=\\unit[%s]{cm}$, \\quad %s=\\unit[%"
+"s]{cm}\\quad$ i $\\quad %s~=~\\unit[%s]{cm}$.\\par\n"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:475
+#: src/pyromaths/ex/troisiemes/geometrie.py:211
+#, python-format
+msgid "Calculer $%s$ et $%s$, "
+msgstr "Calculeu $%s$ i $%s$,"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:476
+#, python-format
+msgid "arrondies au %s}\n"
+msgstr "arredonit a les %s}\n"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:481
+#, python-format
+msgid ""
+"Dans le triangle $%s$,~ $%s$ est sur le côté $[%s]$,~\n"
+"$%s$ est sur le côté $[%s]$ et les droites $(%s)$ et $(%s)$ sont\n"
+"parallèles.\\par\n"
+"D'après le \\textbf{théorème de Thalès} :\n"
+"$\\qquad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$"
+msgstr ""
+"\\par\\dotfill{}\\par\n"
+"En el triangle $%s$,~ $%s$ es troba al segment $[%s]$,~ \n"
+"$%s$ al segment $[%s]$ i les rectes $(%s)$ i $(%s)$ són\n"
+"paral·leles.\\par\n"
+"Segons el \\textbf{teorema de Tales}:\n"
+"$\\qquad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:527
+#, python-format
+msgid "\\vspace{1ex}\\par De plus $%s=%s%s%s=\\unit[%s]{cm}$\n"
+msgstr "\\vspace{1ex} Com que $%s=%s%s%s=\\unit[%s]{cm}$, aleshores"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:587
+#, python-format
+msgid ""
+"$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad \\boxed{%s=\\cfrac{%s"
+"\\times %s}{%s}%s}$\\par\n"
+" "
+msgstr ""
+"De $\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ s'obté $\\quad \\boxed{%s="
+"\\cfrac{%s\\times %s}{%s}%s}$\\par\n"
+" "
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:589
+#: src/pyromaths/ex/troisiemes/geometrie.py:324
+#: src/pyromaths/ex/troisiemes/geometrie.py:327
+#, python-format
+msgid ""
+"$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad\\boxed{%s=\\cfrac{%s"
+"\\times %s}{%s}%s}$\\par\n"
+msgstr ""
+"$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$, per tant, $\\quad\\boxed{%s="
+"\\cfrac{%s\\times %s}{%s}%s}$\\par\n"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:707
+msgid "Cosinus d'un angle aigu"
+msgstr "Cosinus d'un angle agut"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:728
+#: src/pyromaths/ex/troisiemes/geometrie.py:691
+#, python-format
+msgid "la longueur $%s$"
+msgstr "la longitud $%s$"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:733
+#: src/pyromaths/ex/troisiemes/geometrie.py:696
+#, python-format
+msgid "la mesure de l'angle $%s$"
+msgstr "la mesura de l'angle $%s$"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:743
+#: src/pyromaths/ex/quatriemes/geometrie.py:746
+#: src/pyromaths/ex/quatriemes/geometrie.py:758
+#: src/pyromaths/ex/quatriemes/geometrie.py:763
+#: src/pyromaths/ex/troisiemes/geometrie.py:720
+#: src/pyromaths/ex/troisiemes/geometrie.py:723
+#, python-format
+msgid "\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par"
+msgstr "\\item $%s$ és un triangle rectangle en $%s$ de manera que:\\par"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:745
+#: src/pyromaths/ex/quatriemes/geometrie.py:748
+#: src/pyromaths/ex/quatriemes/geometrie.py:760
+#: src/pyromaths/ex/quatriemes/geometrie.py:765
+#: src/pyromaths/ex/troisiemes/geometrie.py:706
+#: src/pyromaths/ex/troisiemes/geometrie.py:709
+#: src/pyromaths/ex/troisiemes/geometrie.py:722
+#: src/pyromaths/ex/troisiemes/geometrie.py:725
+#, python-format
+msgid ""
+"%s et %s.\\par\n"
+"Calculer %s, arrondie au %s.\\par"
+msgstr ""
+"%s i %s.\\par\n"
+"Calculeu %s, arredonit a les %s.\\par"
+
+#: src/pyromaths/ex/quatriemes/geometrie.py:749
+#: src/pyromaths/ex/quatriemes/geometrie.py:767
+#: src/pyromaths/ex/troisiemes/geometrie.py:711
+#, python-format
+msgid "Dans le triangle $%s$ rectangle en $%s$,"
+msgstr "En el triangle $%s$ rectangle en $%s$,"
+
+#: src/pyromaths/ex/quatriemes/litteral.py:55
+#: src/pyromaths/ex/quatriemes/litteral.py:57
+msgid "Réduire, si possible, les expressions suivantes :"
+msgstr "Reduïu, si és possible, les expressions següents:"
+
+#: src/pyromaths/ex/quatriemes/litteral.py:76
+msgid "Bases du calcul littéral"
+msgstr "Càlcul bàsic de monomis"
+
+#: src/pyromaths/ex/quatriemes/litteral.py:116
+#: src/pyromaths/ex/quatriemes/litteral.py:118
+#: src/pyromaths/ex/quatriemes/litteral.py:162
+#: src/pyromaths/ex/quatriemes/litteral.py:164
+msgid "Développer et réduire chacune des expressions littérales suivantes :"
+msgstr "Expandiu i reduïu les expressions literals següents:"
+
+#: src/pyromaths/ex/quatriemes/litteral.py:130
+msgid "Distributivité"
+msgstr "Distributiva amb monomis"
+
+#: src/pyromaths/ex/quatriemes/litteral.py:175
+msgid "Double distributivité"
+msgstr "Doble distributiva amb monomis"
+
+#: src/pyromaths/ex/quatriemes/litteral.py:200
+#: src/pyromaths/ex/quatriemes/litteral.py:202
+msgid "Réduire chacune des expressions littérales suivantes :"
+msgstr "Reduïu les expressions literals següents:"
+
+#: src/pyromaths/ex/quatriemes/litteral.py:213
+msgid "Soustraire une expression entre parenthèses"
+msgstr "Subtracció d'una expressió entre parèntesis"
+
+#: src/pyromaths/ex/quatriemes/litteral.py:304
+msgid "Réduire des expressions littérales"
+msgstr "Reducció d'expressions literals"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:62
+#: src/pyromaths/ex/quatriemes/puissances.py:66
+msgid "Compléter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :"
+msgstr ""
+"Escriviu-los en una única potència de la forma $a^n$, sent $a$ i $n$ nombres "
+"enters:"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:77
+#, python-format
+msgid "\\item $%s^{%s} \\times %s^{%s} = \\dotfill$"
+msgstr "\\item $%s^{%s} \\times %s^{%s} = \\dotfill$"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:79
+#: src/pyromaths/ex/quatriemes/puissances.py:86
+#, python-format
+msgid "\\item $%s^{%s}\\times%s^{%s}="
+msgstr "\\item $%s^{%s}\\times%s^{%s}="
+
+#: src/pyromaths/ex/quatriemes/puissances.py:84
+#, python-format
+msgid "\\item $%s^{%s}\\times%s^{%s}=\\dotfill$"
+msgstr "\\item $%s^{%s}\\times%s^{%s}=\\dotfill$"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:89
+#, python-format
+msgid "\\item $(%s^{%s})^{%s}=\\dotfill$"
+msgstr "\\item $(%s^{%s})^{%s}=\\dotfill$"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:97
+#, python-format
+msgid "\\item $\\dfrac{%s^{%s}}{%s^{%s}}=\\dotfill$"
+msgstr "\\item $\\dfrac{%s^{%s}}{%s^{%s}}=\\dotfill$"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:146
+#: src/pyromaths/ex/quatriemes/puissances.py:150
+msgid "Écrire sous la forme d'une puissance de 10 puis donner l'écriture"
+msgstr "Escriviu en forma de potència de 10 i després calculeu-la"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:147
+#: src/pyromaths/ex/quatriemes/puissances.py:151
+msgid " décimale de ces nombres :"
+msgstr " per a donar-ne el nombre decimal:"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:166
+#, python-format
+msgid "\\item $10^{%s} \\times 10^{%s} = \\dotfill$"
+msgstr "\\item $10^{%s} \\times 10^{%s} = \\dotfill$"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:168
+#, python-format
+msgid "\\item $10^{%s}\\times 10^{%s}="
+msgstr "\\item $10^{%s}\\times 10^{%s}="
+
+#: src/pyromaths/ex/quatriemes/puissances.py:176
+#, python-format
+msgid "\\item $(10^{%s})^{%s}=\\dotfill$"
+msgstr "\\item $(10^{%s})^{%s}=\\dotfill$"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:179
+#, python-format
+msgid "10^{%s \\times %s}="
+msgstr "10^{%s \\times %s}="
+
+#: src/pyromaths/ex/quatriemes/puissances.py:186
+#, python-format
+msgid "\\item $\\dfrac{10^{%s}}{10^{%s}}=\\dotfill$"
+msgstr "\\item $\\dfrac{10^{%s}}{10^{%s}}=\\dotfill$"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:199
+msgid "Propriétés sur les puissances de 10"
+msgstr "Propietats de les potències de 10"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:222
+#: src/pyromaths/ex/quatriemes/puissances.py:226
+msgid "Compléter par le nombre qui convient :"
+msgstr "Completeu-los amb la potència de 10 adequada perquè estiguen en notació "
+"científica:\n"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:236
+#, python-format
+msgid "\\item $%s=%s\\times\\dotfill$"
+msgstr "\\item $%s=%s\\, \\times\\, \\dotfill$"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:238
+#, python-format
+msgid "\\item $%s=%s\\times\\mathbf{10^{%s}}$"
+msgstr "\\item $%s~=~%s~\\times~\\underline{\\mathbf{10^{%s}}}$"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:242
+#, python-format
+msgid "\\item $%s\\times\\dotfill=%s$"
+msgstr "\\item $%s\\times\\dotfill=%s$"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:244
+#, python-format
+msgid "\\item $%s\\times\\mathbf{10^{%s}}=%s$"
+msgstr "\\item $%s~\\times~\\underline{\\mathbf{10^{%s}}}~=~%s$"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:252
+msgid "Écritures scientifiques"
+msgstr "Notació científica"
+
+#: src/pyromaths/ex/quatriemes/puissances.py:262
+#: src/pyromaths/ex/quatriemes/puissances.py:265
+#: src/pyromaths/ex/troisiemes/puissances.py:134
+#: src/pyromaths/ex/troisiemes/puissances.py:136
+msgid ""
+"Calculer les expressions suivantes et donner l'écriture scientifique du "
+"résultat."
+msgstr ""
+"Calculeu les expressions següents i doneu el resultat en notació científica."
+
+#: src/pyromaths/ex/quatriemes/puissances.py:298
+msgid "Puissances de 10"
+msgstr "Potències de 10"
+
+#: src/pyromaths/ex/troisiemes/affine.py:206
+msgid " l'image de "
+msgstr " la imatge de"
+
+#: src/pyromaths/ex/troisiemes/affine.py:206
+msgid " un nombre qui a pour image "
+msgstr " un nombre que té per imatge"
+
+#: src/pyromaths/ex/troisiemes/affine.py:206
+msgid " un antécédent de "
+msgstr " el valor la imatge del qual és"
+
+#: src/pyromaths/ex/troisiemes/affine.py:207
+msgid " est l'image de "
+msgstr " és la imatge de"
+
+#: src/pyromaths/ex/troisiemes/affine.py:207
+msgid " a pour image "
+msgstr " té per imatge "
+
+#: src/pyromaths/ex/troisiemes/affine.py:207
+msgid " est un antécédent de "
+msgstr " és el valor la imatge del qual és"
+
+#: src/pyromaths/ex/troisiemes/affine.py:213
+#: src/pyromaths/ex/troisiemes/affine.py:226
+msgid "Donner "
+msgstr "Indiqueu"
+
+#: src/pyromaths/ex/troisiemes/affine.py:213
+#: src/pyromaths/ex/troisiemes/affine.py:226
+msgid " par la fonction "
+msgstr " en la funció"
+
+#: src/pyromaths/ex/troisiemes/affine.py:214
+#: src/pyromaths/ex/troisiemes/affine.py:227
+msgid " par la \\hbox{fonction "
+msgstr " en la \\hbox{fonction "
+
+#: src/pyromaths/ex/troisiemes/affine.py:262
+msgid "Tracer la droite représentative ($d_"
+msgstr "Dibuixeu la recta i anomeneu-la ($d_"
+
+#: src/pyromaths/ex/troisiemes/affine.py:263
+msgid "On sait que $"
+msgstr "Se sap que $"
+
+#: src/pyromaths/ex/troisiemes/affine.py:263
+msgid "$ et $"
+msgstr "$ i $"
+
+#: src/pyromaths/ex/troisiemes/affine.py:334
+msgid "Déterminer l'expression de la fonction $"
+msgstr "Determineu l'expressió de la funció $"
+
+#: src/pyromaths/ex/troisiemes/affine.py:334
+msgid "$ représentée ci-contre par la droite ($d_"
+msgstr "$ representada per la recta dibuixada ($d_"
+
+#: src/pyromaths/ex/troisiemes/affine.py:335
+msgid ""
+"On lit l'ordonnée à l'origine et le coefficient de la fonction affine sur le "
+"graphique.\\\\ "
+msgstr ""
+"Observeu l'ordenada $b$ a l'origen i el pendent $a$ de la funció afí sobre "
+"el gràfic.\\\\ "
+
+#: src/pyromaths/ex/troisiemes/affine.py:336
+msgid "avec $b="
+msgstr "amb $b="
+
+#: src/pyromaths/ex/troisiemes/affine.py:336
+msgid "$ et $a="
+msgstr "$ i $a="
+
+#: src/pyromaths/ex/troisiemes/affine.py:337
+msgid "L'expression de la fonction $"
+msgstr "L'expressió de la funció $"
+
+#: src/pyromaths/ex/troisiemes/affine.py:337
+msgid "$ est $"
+msgstr "$ és $"
+
+#: src/pyromaths/ex/troisiemes/affine.py:360
+#: src/pyromaths/ex/troisiemes/affine.py:381
+msgid "($d_1$) est la droite représentative de la fonction $"
+msgstr "($d_1$) és la recta que representa la funció $"
+
+#: src/pyromaths/ex/troisiemes/affine.py:431
+msgid "Fonctions affines"
+msgstr "Funcions afins"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:46
+#: src/pyromaths/ex/troisiemes/arithmetique.py:49
+msgid "\\item Donner la décomposition"
+msgstr "\\item Escriviu la descomposició"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:47
+#: src/pyromaths/ex/troisiemes/arithmetique.py:50
+msgid " en facteurs premiers des nombres suivants, et préciser quand il"
+msgstr " en factors primers els nombres següents, i indiqueu quan"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:48
+#: src/pyromaths/ex/troisiemes/arithmetique.py:51
+msgid " s'agit d'un nombre premier :\\par"
+msgstr " es tracta d'un nombre primer:\\par"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:88
+#: src/pyromaths/ex/troisiemes/arithmetique.py:91
+msgid "\\item En déduire le PGCD et le PPCM des nombres "
+msgstr "\\item Calculeu el MCD i el MCM dels nombres"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:89
+#: src/pyromaths/ex/troisiemes/arithmetique.py:92
+#: src/pyromaths/ex/troisiemes/arithmetique.py:96
+#: src/pyromaths/ex/troisiemes/arithmetique.py:109
+#: src/pyromaths/ex/troisiemes/arithmetique.py:236
+#: src/pyromaths/ex/troisiemes/arithmetique.py:284
+msgid " et "
+msgstr " i "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:95
+msgid "D'après la question 1), on sait que les nombres "
+msgstr "Segons la qüestió 1), se sap que els nombres"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:97
+msgid " ont comme facteurs premiers communs : "
+msgstr " tenen com a factors primers comuns: "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:108
+msgid "On en déduit que le PGCD des nombres "
+msgstr "Se'n deduïx que el MCD dels nombres "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:110
+msgid " est : "
+msgstr " és: "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:115
+#: src/pyromaths/ex/troisiemes/arithmetique.py:191
+msgid " \\times "
+msgstr " \\times "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:125
+#: src/pyromaths/ex/troisiemes/arithmetique.py:129
+msgid " est un multiple de "
+msgstr " és un múltiple de"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:126
+#: src/pyromaths/ex/troisiemes/arithmetique.py:130
+msgid ", donc leur PPCM est directement "
+msgstr ", aleshores el MCM és directament "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:133
+msgid "Il existe plusieurs méthodes pour calculer le PPCM de "
+msgstr "Hi ha diversos mètodes per a calcular el MCM de"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:134
+msgid " et de "
+msgstr " i de "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:136
+msgid "En voici deux :"
+msgstr "Vegem-ne dos:"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:139
+msgid "\\item On peut simplement utiliser la formule :"
+msgstr "\\item Es pot utilitzar senzillament la fórmula:"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:140
+msgid "$a \\times b = PGCD(a;~b) \\times PPCM(a;~b)$.\\par"
+msgstr "$a \\times b = MCD(a;~b) \\times MCM(a;~b)$.\\par"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:141
+msgid "Donc : $PPCM("
+msgstr "Per tant $MCD("
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:147
+msgid "\\item On peut aussi multiplier un nombre par les \"facteurs "
+msgstr "\\item També es pot multiplicar un nombre pels \"factors "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:148
+msgid "complémentaires\" de l'autre.\n"
+msgstr "complementaris\" de l'altre.\n"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:148
+msgid "Ces \"facteurs "
+msgstr "Aquests \"factors"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:149
+msgid "complémentaires\" sont les facteurs qui complètent le PGCD pour "
+msgstr "complementaris\" són els factors que completen el MCD fins a"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:150
+msgid "former le nombre.\\par"
+msgstr "que formen el nombre.\\par"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:152
+msgid "Comme $PGCD("
+msgstr "Com el $MCD("
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:166
+msgid "$, alors les \"facteurs complémentaires\" de $"
+msgstr "$, aleshores els \"factors complementaris\" de $"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:168
+msgid "$, alors le \"facteur complémentaire\" de $"
+msgstr "$, aleshores el \"factor complementari\" de $"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:189
+msgid "On en déduit que $PPCM("
+msgstr "Se'n deduïx que el $MCM("
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:204
+msgid "\\item Quel est le plus petit nombre par lequel il faut "
+msgstr "\\item Quin és el nombre més xicotet pel qual cal  "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:205
+msgid "multiplier "
+msgstr "multiplicador"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:206
+msgid " pour obtenir un carré parfait ?"
+msgstr " per a obtindre un quadrat perfecte ?"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:208
+msgid " \\item Pour obtenir un carré parfait, il faut que sa "
+msgstr " \\item Per a obtindre un quadrat perfecte, cal que la seua "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:209
+msgid "décomposition en facteurs premiers ne contienne que des facteurs "
+msgstr "descomposició en factors primers només conté factors "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:210
+msgid "apparaissant un nombre pair de fois. D'après la question 1, "
+msgstr "repetits un nombre par de vegades.\\par Segons la qüestió 1),"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:211
+msgid "la décomposition en facteurs premiers de "
+msgstr "la descomposició en factors primers de "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:217
+msgid " est lui-même, car c'est un nombre premier."
+msgstr " és ell mateix, ja que és un nombre primer."
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:219
+msgid ""
+" est : \\par\n"
+"$"
+msgstr ""
+" és\\par\n"
+"$"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:222
+msgid "Il faut donc encore multiplier ce nombre par "
+msgstr "Cal, doncs, multiplicar aquest nombre per"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:228
+msgid " le facteur "
+msgstr " el factor"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:230
+msgid " les facteurs "
+msgstr " els factors"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:240
+msgid "Le nombre cherché est par conséquent "
+msgstr "De manera que el nombre buscat és el"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:241
+msgid " et le carré parfait obtenu est "
+msgstr " i el quadrat perfecte obtingut és"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:245
+msgid "\\item Rendre la fraction $\\dfrac{"
+msgstr "\\item Simplifiqueu la fracció $\\dfrac{"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:246
+msgid "}$ irréductible."
+msgstr "}$ a la irreductible."
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:248
+msgid "\\item Le moyen le plus rapide de simplifier cette fraction est"
+msgstr "\\item El camí més ràpid per a simplificar aquesta fracció és "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:249
+msgid "de diviser le numérateur et le dénominateur par leur PGCD."
+msgstr "dividint el numerador i el denominador pel seu MCD."
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:250
+msgid " D'après la question 2),  PGCD("
+msgstr " Segons la qüestió 2),  el MCD("
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:252
+msgid ", donc on obtient :\\par"
+msgstr ", per tant, s'obté:\\par"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:262
+msgid "\\item Calculer $\\dfrac{"
+msgstr "\\item Calculeu $\\dfrac{"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:282
+msgid ""
+"\\item Il faut mettre les fractions au même dénominateur. Grâceà la question "
+"2), nous avons déjà un dénominateur commun : "
+msgstr ""
+"\\item Cal reduir les fraccions a un comú denominador. Gràcies a la pregunta "
+"2), ja tenim un comú denominador:"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:284
+msgid "le PPCM des nombres "
+msgstr " comú~: el MCM dels nombres "
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:285
+msgid ", qui est par définition le plus petit"
+msgstr ", que és per definició el menor"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:286
+msgid "multiple commun de ces deux nombres.\\par"
+msgstr "múltiple comú dels dos nombres.\\par"
+
+#: src/pyromaths/ex/troisiemes/arithmetique.py:302
+msgid "Arithmétique"
+msgstr "Aritmètica del MCD i MCM"
+
+#: src/pyromaths/ex/troisiemes/developpements.py:47
+#: src/pyromaths/ex/troisiemes/developpements.py:51
+msgid "Développer chacune des expressions littérales suivantes :"
+msgstr "Expandiu les expressions literals següents:"
+
+#: src/pyromaths/ex/troisiemes/developpements.py:83
+msgid "Identités remarquables"
+msgstr "Identitats notables"
+
+#: src/pyromaths/ex/troisiemes/equations.py:152
+#: src/pyromaths/ex/troisiemes/equations.py:154
+msgid "Résoudre l'équation : "
+msgstr "Resoleu l'equació:"
+
+#: src/pyromaths/ex/troisiemes/equations.py:166
+#, python-format
+msgid "\\fbox{La solution de cette équation est $%s$\\,.}"
+msgstr "\\fbox{La solució d'aquesta equació és $%s$\\,.}"
+
+#: src/pyromaths/ex/troisiemes/equations.py:176
+msgid "Équation"
+msgstr "Equacions"
+
+#: src/pyromaths/ex/troisiemes/factorisations.py:45
+#: src/pyromaths/ex/troisiemes/factorisations.py:47
+msgid "Factoriser chacune des expressions littérales suivantes :"
+msgstr "Factoritzeu les expressions literals següents:"
+
+#: src/pyromaths/ex/troisiemes/factorisations.py:150
+msgid "Factorisations"
+msgstr "Factoritzacions"
+
+#: src/pyromaths/ex/troisiemes/fractions.py:419
+#: src/pyromaths/ex/troisiemes/fractions.py:421
+msgid ""
+"Calculer les expressions suivantes et donner le résultat sous la forme d'une "
+"fraction irréductible."
+msgstr ""
+"Calculeu les expressions següents i doneu el resultat en forma d'una fracció "
+"irreductible."
+
+#: src/pyromaths/ex/troisiemes/fractions.py:434
+msgid "Fractions"
+msgstr "Fraccions"
+
+#: src/pyromaths/ex/troisiemes/geometrie.py:205
+#, python-format
+msgid ""
+"Sur la figure ci-dessous, les droites $(%s)\\text{ et }(%s)$ sont parallèles."
+"\\par\n"
+msgstr ""
+"En la figura adjunta, les rectes $(%s)\\text{ i }(%s)$ són paral·leles."
+"\\par\n"
+
+#: src/pyromaths/ex/troisiemes/geometrie.py:209
+#, python-brace-format, python-format
+msgid ""
+"On donne $%s=\\unit[%s]{cm},\\quad %s=\\unit[%s]{cm}, \\quad %s=\\unit[%s]"
+"{cm}\\quad\\text{et}\\quad %s~=~\\unit[%s]{cm}$.\\par\n"
+msgstr "Es dóna $%s=\\unit[%s]{cm},\\quad %s=\\unit[%s]{cm}, \\quad %s=\\unit[%"
+"s]{cm}\\quad\\text{i}\\quad %s~=~\\unit[%s]{cm}$.\\par\n"
+
+#: src/pyromaths/ex/troisiemes/geometrie.py:217
+#, python-format
+msgid ""
+"Les points $%s$,~ $%s$,~ $%s$ et $%s$, $%s$, $%s$ sont alignés et les "
+"droites $(%s)$ et $(%s)$ sont parallèles.\\par\n"
+"D'après le \\textbf{théorème de Thalès} :\n"
+"$\\qquad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$\n"
+msgstr ""
+"Els punts $%s$,~ $%s$,~ $%s$ i $%s$, $%s$, $%s$ estan alineats i les rectes "
+"$(%s)$ i $(%s)$ són paral·leles.\\par\n"
+"Segons el \\textbf{teorema de Tales}:\n"
+"$\\qquad\\mathbf{\\cfrac{%s}{%s}=\\cfrac{%s}{%s}=\\cfrac{%s}{%s}}$\n"
+
+#: src/pyromaths/ex/troisiemes/geometrie.py:263
+#, python-format
+msgid ""
+"\\vspace{1ex}\\par\n"
+"De plus $%s=%s%s%s=\\unit[%s]{cm}$"
+msgstr ""
+"\\vspace{1ex}\\par\n"
+"Com que $%s=%s%s%s=\\unit[%s]{cm}$, aleshores"
+
+#: src/pyromaths/ex/troisiemes/geometrie.py:572
+#, python-format, python-brace-format
+msgid ""
+"Sur la figure ci-contre, on donne $%s=\\unit[%s]{cm}$, $%s=\\unit[%s]{cm}$, $"
+"%s=\\unit[%s]{cm}$ et $%s=\\unit[%s]{cm}$.\\par\n"
+"Démontrer que les droites $(%s)$ et $(%s)$ sont parallèles.\n"
+msgstr ""
+"De la figura adjunta es coneixen les mesures $%s=\\unit[%s]{cm}$, $%s=\\unit[%"
+"s]{cm}$, $%s=\\unit[%s]{cm}$ i $%s=\\unit[%s]{cm}$.\\par\n"
+"Demostreu que les rectes $(%s)$ i $(%s)$ són paral·leles.\n"
+
+#: src/pyromaths/ex/troisiemes/geometrie.py:604
+#, python-format, python-brace-format
+msgid ""
+"Les points $%s$, $%s$, $%s$~ et $%s$, $%s$, $%s$ sont alignés dans le même "
+"ordre.\\par\n"
+"De plus $%s=%s%s%s=\\unit[%s]{cm}$.\\par\n"
+msgstr ""
+"Els punts $%s$, $%s$, $%s$~ i $%s$, $%s$, $%s$ estan alineats en el mateix "
+"ordre.\\par\n"
+"A més, $%s=%s%s%s=\\unit[%s]{cm}$.\\par\n"
+
+#: src/pyromaths/ex/troisiemes/geometrie.py:624
+#, python-format
+msgid "=\\cfrac{%s_{\\div%s}}{%s_{\\div%s}}"
+msgstr "=\\cfrac{%s_{\\div%s}}{%s_{\\div%s}}"
+
+#: src/pyromaths/ex/troisiemes/geometrie.py:639
+#, python-format
+msgid ""
+"$\\left.\n"
+"\\renewcommand{\\arraystretch}{2}\n"
+"\\begin{array}{l}\n"
+"\\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s\\\\\n"
+"    \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s\n"
+"\\end{array}\n"
+"\\right\\rbrace$\n"
+"Donc $\\cfrac{%s}{%s}=\\cfrac{%s}{%s}$\\,.\\par\n"
+"D'après la \\textbf{réciproque du théorème de Thalès}, \\fbox{les droites "
+"$(%s)$ et $(%s)$ sont parallèles.}\n"
+msgstr ""
+"$\\left.\n"
+"\\renewcommand{\\arraystretch}{2}\n"
+"\\begin{array}{l}\n"
+" \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s\\\\\n"
+"    \\bullet\\cfrac{%s}{%s}=\\cfrac{%s}{%s}%s\n"
+"\\end{array}\n"
+"\\right\\rbrace$\n"
+"Per tant $\\cfrac{%s}{%s}=\\cfrac{%s}{%s}$\\,.\\par\n"
+"Segons la \\textbf{recíproca del teorema de Thales}, \\fbox{les rectes "
+"$(%s)$ i $(%s)$ són paral·leles.}\n"
+
+#: src/pyromaths/ex/troisiemes/geometrie.py:656
+msgid "Réciproque du théorème de Thalès"
+msgstr "El recíproc del teorema de Tales"
+
+#: src/pyromaths/ex/troisiemes/geometrie.py:704
+#: src/pyromaths/ex/troisiemes/geometrie.py:707
+#, python-format
+msgid "\\item $%s$ est un triangle rectangle en $%s$ tel que :\\par "
+msgstr "\\item $%s$ és un triangle rectangle en $%s$ de manera que:\\par"
+
+#: src/pyromaths/ex/troisiemes/geometrie.py:749
+#, python-format
+msgid "\\[ \\boxed{%s=%s^{-1}\\left(\\cfrac{%s}{%s}\\right) %s\\degres} \\]"
+msgstr "\\[ \\boxed{%s=%s^{-1}\\left(\\cfrac{%s}{%s}\\right) %s\\degres} \\]"
+
+#: src/pyromaths/ex/troisiemes/geometrie.py:761
+#, python-format
+msgid "\\[ \\boxed{%s=%s%s\\times %s %s } \\]"
+msgstr "\\[ \\boxed{%s=%s%s\\times %s %s } \\]"
+
+#: src/pyromaths/ex/troisiemes/geometrie.py:811
+msgid "Trigonométrie"
+msgstr "Trigonometria"
+
+#: src/pyromaths/ex/troisiemes/__init__.py:23
+msgid "3.Troisième"
+msgstr "3. 3r d'ESO"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:111
+#, python-format
+msgid "Polynome(%s, \"x\", details=0)"
+msgstr "Polinomi(%s, \"x\", details=0)"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:138
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:143
+#, python-format
+msgid "\\item Quelle est l'image de $%s$ par la fonction $f$ ?"
+msgstr "\\item Quina és la imatge de $%s$ per a la funció $f$?"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:145
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:146
+#, python-format
+msgid "\\item Quelle est l'image de $%s$ par la fonction $g$ ?"
+msgstr "\\item Quina és la imatge de $%s$ per a la funció $g$?"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:148
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:149
+#, python-format
+msgid "\\item Calculer $f\\,(%s)$."
+msgstr "\\item Calculeu $f\\,(%s)$."
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:151
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:152
+#, python-format
+msgid "\\item Calculer $g\\,(%s)$."
+msgstr "\\item Calculeu $g\\,(%s)$."
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:156
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:164
+msgid ""
+"\\item Voici un tableau de valeurs correspondant à une fonction $h$.\\par"
+msgstr "\\item Es té una taula de valors corresponent a una funció $h$.\\par"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:176
+#, python-format
+msgid "Quelle est l'image de $%s$ par la fonction $h$ ?"
+msgstr "Quina és la imatge de $%s$ per a la funció $h$?"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:177
+#, python-format
+msgid "Quel est l'antécédent de $%s$ par la fonction $h$ ?"
+msgstr "Quin és l'antecedent de $%s$ per a la funció $h$?"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:178
+#, python-format
+msgid "Compléter : $h\\,(%s)=\\ldots\\ldots$"
+msgstr "Completeu: $h\\,(%s)=\\ldots\\ldots$"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:179
+#, python-format
+msgid "Compléter : $h\\,(\\ldots\\ldots)=%s$"
+msgstr "Completeu: $h\\,(\\ldots\\ldots)=%s$"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:183
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:224
+#, python-format
+msgid "\\item %s"
+msgstr "\\item %s"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:185
+#, python-format
+msgid "\\item L'image de $%s$ par la fonction $h$ est $\\mathbf{%s}$."
+msgstr "\\item La imatge de $%s$ per a la funció $h$ és $\\mathbf{%s}$."
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:187
+#, python-format
+msgid "\\item Un antécédent de $%s$ par la fonction $h$ est $\\mathbf{%s}$."
+msgstr "\\item Un antecedent de $%s$ per a la funció $h$ és $\\mathbf{%s}$."
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:189
+#, python-format
+msgid "\\item $h\\,(%s)=\\mathbf{%s}$."
+msgstr "\\item $h\\,(%s)=\\mathbf{%s}$."
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:191
+#, python-format
+msgid "\\item $h\\,(\\mathbf{%s})=%s$."
+msgstr "\\item $h\\,(\\mathbf{%s})=%s$."
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:197
+msgid "\\item Le graphique ci-dessous représente une fonction $k$ : \\par"
+msgstr "\\item La gràfica següent representa una funció $k$: \\par"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:204
+msgid "\\item Le graphique ci-après représente une fonction $k$ : \\par"
+msgstr "\\item La gràfica següent representa una funció $k$: \\par"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:217
+#, python-format
+msgid "Quelle est l'image de $%s$ par la fonction $k$ ?"
+msgstr "Quina és la imatge de $%s$ per a la funció $k$?"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:218
+#, python-format
+msgid "Donner un antécédent de %s par la fonction $k$."
+msgstr "Indiqueu un antecedent de %s per a la funció $k$."
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:219
+#, python-format
+msgid "Compléter : $k\\,(%s)=\\ldots\\ldots$"
+msgstr "Completeu: $k\\,(%s)=\\ldots\\ldots$"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:220
+#, python-format
+msgid "Compléter : $k\\,(\\ldots\\ldots)=%s$"
+msgstr "Completeu: $k\\,(\\ldots\\ldots)=%s$"
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:226
+#, python-format
+msgid "\\item L'image de $%s$ par la fonction $k$ est $\\mathbf{%s}$."
+msgstr "\\item La imatge de $%s$ per a la funció $k$ és $\\mathbf{%s}$."
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:228
+#, python-format
+msgid "\\item Un antécédent de $%s$ par la fonction $k$ est $\\mathbf{%s}$."
+msgstr "\\item Un antecedent de $%s$ per a la funció $k$ és $\\mathbf{%s}$."
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:230
+#, python-format
+msgid "\\item $k\\,(%s)=\\mathbf{%s}$."
+msgstr "\\item $k\\,(%s)=\\mathbf{%s}$."
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:232
+#, python-format
+msgid "\\item $k\\,(\\mathbf{%s})=%s$."
+msgstr "\\item $k\\,(\\mathbf{%s})=%s$."
+
+#: src/pyromaths/ex/troisiemes/notion_de_fonction.py:244
+msgid "Bilan sur la notion de fonction"
+msgstr "Avaluació del concepte de funció"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:32
+#: src/pyromaths/ex/troisiemes/pgcd.py:34
+#: src/pyromaths/ex/troisiemes/pgcd.py:37
+#: src/pyromaths/ex/troisiemes/pgcd.py:39
+#: src/pyromaths/ex/troisiemes/pgcd.py:42
+#: src/pyromaths/ex/troisiemes/pgcd.py:44
+#: src/pyromaths/ex/troisiemes/pgcd.py:50
+#: src/pyromaths/ex/troisiemes/pgcd.py:56
+msgid "} et \\nombre{"
+msgstr "} i \\nombre{"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:33
+msgid ""
+"} se terminent tous les deux par zéro donc ils sont divisibles par 10.\\par\n"
+msgstr "} acaben els dos en zero, per tant, són divisibles per 10.\\par\n"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:35
+#: src/pyromaths/ex/troisiemes/pgcd.py:40
+#: src/pyromaths/ex/troisiemes/pgcd.py:45
+#: src/pyromaths/ex/troisiemes/pgcd.py:51
+#: src/pyromaths/ex/troisiemes/pgcd.py:57
+msgid "} ne sont donc pas premiers entre eux"
+msgstr ""
+"} tenen un divisor comú (diferent de l'1), per tant, no són nombres primers "
+"entre si."
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:38
+msgid "} sont deux nombres pairs donc ils sont divisibles par 2.\\par\n"
+msgstr "} són dos nombres parells, per tant, són divisibles per 2.\\par\n"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:43
+msgid ""
+"} se terminent tous les deux par zéro ou cinq donc ils sont divisibles par 5."
+"\\par\n"
+msgstr ""
+"} acaben els dos en zero o cinc, per tant, són divisibles per 5.\\par\n"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:47
+#: src/pyromaths/ex/troisiemes/pgcd.py:53
+msgid "La somme des chiffres de \\nombre{"
+msgstr "La suma de les xifres de \\nombre{"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:48
+#: src/pyromaths/ex/troisiemes/pgcd.py:54
+msgid "} et celle de \\nombre{"
+msgstr "} i aquella de \\nombre{"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:49
+msgid "} sont divisibles par neuf donc ils sont divisibles par 9.\\par\n"
+msgstr ""
+"} són divisibles per nou, per tant, els nombres inicials són divisibles per "
+"9.\\par\n"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:94
+#, python-format
+msgid "\\nombre{%s}=\\nombre{%s}\\times\\nombre{%s}+\\nombre{%s}"
+msgstr "\\nombre{%s}=\\nombre{%s}\\times\\nombre{%s}+\\nombre{%s}"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:96
+#, python-format
+msgid ""
+"\\fbox{Donc le \\textsc{pgcd} de \\nombre{%s} et \\nombre{%s} est %s}.\n"
+msgstr ""
+"\\fbox{De manera que el \\textsc{MCD} de \\nombre{%s} i \\nombre{%s} és "
+"%s}.\n"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:102
+#, python-format
+msgid ""
+"\\begin{align*}\n"
+"\\cfrac{\\nombre{%s}}{\\nombre{%s}} &= \\cfrac{\\nombre{%s}\\div%s}"
+"{\\nombre{%s}\\div%s}\\\\\n"
+"      &= \\boxed{\\cfrac{\\nombre{%s}}{\\nombre{%s}}}\n"
+"\\end{align*}"
+msgstr ""
+"\\begin{align*}\n"
+"\\cfrac{\\nombre{%s}}{\\nombre{%s}} &= \\cfrac{\\nombre{%s}\\div%s}{\\nombre{%"
+"s}\\div%s}\\\\\n"
+"      &= \\boxed{\\cfrac{\\nombre{%s}}{\\nombre{%s}}}\n"
+"\\end{align*}"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:110
+#, python-format
+msgid ""
+"\\item Les nombres \\nombre{%s} et \\nombre{%s} sont-ils premiers entre "
+"eux ?  "
+msgstr "\\item Els nombres \\nombre{%s} i \\nombre{%s} són primers entre si ?"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:111
+#, python-format
+msgid ""
+"\\item Calculer le plus grand commun diviseur (\\textsc{pgcd}) de "
+"\\nombre{%s} et \\nombre{%s}."
+msgstr ""
+"\\item Calculeu el màxim comú divisor (\\textsc{MCD}) de \\nombre{%s} i "
+"\\nombre{%s}."
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:112
+#, python-format
+msgid ""
+"\\item Simplifier la fraction $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ pour la "
+"rendre irréductible en indiquant la méthode.\n"
+msgstr ""
+"\\item Simplifiqueu la fracció $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ per a "
+"fer-la irreductible i indiqueu els divisors utilitzats."
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:116
+#, python-format
+msgid ""
+"\\item Les nombres \\nombre{%s} et \\nombre{%s} sont-ils premiers entre eux ?"
+"\\par "
+msgstr ""
+"\\item Els nombres \\nombre{%s} i \\nombre{%s} són primers entre si ?\\par\n"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:118
+#, python-format
+msgid ""
+"\\item Calculer le plus grand commun diviseur (\\textsc{pgcd}) de "
+"\\nombre{%s} et \\nombre{%s}.\\par"
+msgstr ""
+"\\item Calculeu el màxim comú divisor (\\textsc{MCD}) de \\nombre{%s} i "
+"\\nombre{%s}.\\par"
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:119
+#, python-format
+msgid ""
+"On calcule le \\textsc{pgcd} des nombres \\nombre{%s} et \\nombre{%s} en "
+"utilisant l'algorithme d'Euclide."
+msgstr ""
+"Es calcula el \\textsc{MCD} dels nombres \\nombre{%s} i \\nombre{%s} "
+"utilitzant l'algoritme d'Euclides."
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:125
+#, python-format
+msgid ""
+"\\item Simplifier la fraction $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ pour la "
+"rendre irréductible en indiquant la méthode."
+msgstr ""
+"\\item Simplifiqueu la fracció $\\cfrac{\\nombre{%s}}{\\nombre{%s}}$ per a "
+"fer-la irreductible i indiqueu els divisors utilitzats."
+
+#: src/pyromaths/ex/troisiemes/pgcd.py:130
+msgid "PGCD"
+msgstr "MCD"
+
+#: src/pyromaths/ex/troisiemes/proba.py:27
+msgid "bleue"
+msgstr "blau"
+
+#: src/pyromaths/ex/troisiemes/proba.py:27
+msgid "rouge"
+msgstr "roja"
+
+#: src/pyromaths/ex/troisiemes/proba.py:27
+msgid "jaune"
+msgstr "blanc"
+
+#: src/pyromaths/ex/troisiemes/proba.py:27
+msgid "verte"
+msgstr "verd"
+
+#: src/pyromaths/ex/troisiemes/proba.py:27
+msgid "marron"
+msgstr "marró"
+
+#: src/pyromaths/ex/troisiemes/proba.py:27
+msgid "orange"
+msgstr "taronja"
+
+#: src/pyromaths/ex/troisiemes/proba.py:28
+msgid "B"
+msgstr "B"
+
+#: src/pyromaths/ex/troisiemes/proba.py:28
+msgid "R"
+msgstr "R"
+
+#: src/pyromaths/ex/troisiemes/proba.py:28
+msgid "J"
+msgstr "J"
+
+#: src/pyromaths/ex/troisiemes/proba.py:28
+msgid "V"
+msgstr "V"
+
+#: src/pyromaths/ex/troisiemes/proba.py:28
+msgid "M"
+msgstr "M"
+
+#: src/pyromaths/ex/troisiemes/proba.py:28
+msgid "O"
+msgstr "O"
+
+#: src/pyromaths/ex/troisiemes/proba.py:49
+#: src/pyromaths/ex/troisiemes/proba.py:63
+#, python-format
+msgid ""
+"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule"
+"%s %s%s (%s), indiscernables au toucher. On tire successivement et sans "
+"remise deux boules."
+msgstr ""
+"En una urna, hi ha %s bola%s %s%s (%s), %s bola%s %s%s (%s) i %s bola%s %s%s "
+"(%s), indistingibles al tacte. Es trauen dos boles successivament i sense "
+"retornar-les."
+
+#: src/pyromaths/ex/troisiemes/proba.py:51
+#, python-format
+msgid ""
+"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?"
+msgstr "\\item Quina és la probabilitat que la primera bola siga %s?"
+
+#: src/pyromaths/ex/troisiemes/proba.py:52
+msgid ""
+"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire."
+msgstr ""
+"\\item Construïu un diagrama d'arbre que descriga les probabilitats d'aquest "
+"experiment aleatori."
+
+#: src/pyromaths/ex/troisiemes/proba.py:53
+#, python-format
+msgid ""
+"\\item Quelle est la probabilité que la première boule soit %s et la "
+"deuxième soit %s?"
+msgstr ""
+"\\item Quina és la probabilitat que la primera bola siga %s i la segona siga "
+"%s?"
+
+#: src/pyromaths/ex/troisiemes/proba.py:54
+#, python-format
+msgid "\\item Quelle est la probabilité que la deuxième boule soit %s ?"
+msgstr "\\item Quina és la probabilitat que la segona bola siga %s ?"
+
+#: src/pyromaths/ex/troisiemes/proba.py:58
+#: src/pyromaths/ex/troisiemes/proba.py:59
+#, python-format
+msgid "\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}+"
+msgstr "\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}+"
+
+#: src/pyromaths/ex/troisiemes/proba.py:60
+#, python-format
+msgid "\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}="
+msgstr "\\dfrac{%s}{%s}\\times \\dfrac{%s}{%s}="
+
+#: src/pyromaths/ex/troisiemes/proba.py:66
+#, python-format
+msgid ""
+"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?"
+"\\par "
+msgstr "\\item Quina és la probabilitat que la primera bola siga %s?\\par"
+
+#: src/pyromaths/ex/troisiemes/proba.py:67
+#, python-format
+msgid "Il y a %s boules dans l'urne dont %s boule%s %s%s. \\par"
+msgstr "Hi ha %s boles en l'urna de les quals %s bola%s són %s%s. \\par"
+
+#: src/pyromaths/ex/troisiemes/proba.py:68
+#, python-format
+msgid ""
+" La probabilité de tirer une boule %s au premier tirage est donc $\\dfrac{%s}"
+"{%s}$."
+msgstr ""
+" La probabilitat de traure una bola %s a la primera tirada és, per tant, $"
+"\\dfrac{%s}{%s}$."
+
+#: src/pyromaths/ex/troisiemes/proba.py:69
+msgid ""
+"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire."
+"\\\\ [0,3cm] "
+msgstr ""
+"\\item Construïu un diagrama d'arbre que descriga les probabilitats d'aquest "
+"experiment aleatori.\\\\ [0,3 cm]"
+
+#: src/pyromaths/ex/troisiemes/proba.py:97
+#, python-format
+msgid ""
+"\\item Quelle est la probabilité que la première boule soit %s et la "
+"deuxième soit %s?\\par"
+msgstr ""
+"\\item Quina és la probabilitat que la primera bola siga %s i la segona siga "
+"%s?\\par"
+
+#: src/pyromaths/ex/troisiemes/proba.py:98
+msgid "On utilise l'arbre construit précédemment.\\par"
+msgstr "S'utilitza el diagrama en arbre construït anteriorment.\\par"
+
+#: src/pyromaths/ex/troisiemes/proba.py:99
+#, python-format
+msgid "$p(%s,%s)=%s \\times %s = %s$\\par"
+msgstr "$p(%s,%s)=%s \\times %s = %s$\\par"
+
+#: src/pyromaths/ex/troisiemes/proba.py:103
+#, python-format
+msgid ""
+"La probabilité que la première boule soit %s et la deuxième soit %s est "
+"égale à $\\dfrac{%s}{%s}$."
+msgstr ""
+"La probabilitat que la primera bola siga %s i la segona %s és igual a $"
+"\\dfrac{%s}{%s}$."
+
+#: src/pyromaths/ex/troisiemes/proba.py:104
+#, python-format
+msgid "\\item Quelle est la probabilité que la deuxième boule soit %s ?\\par"
+msgstr "\\item Quina és la probabilitat que la segona bola siga %s?\\par"
+
+#: src/pyromaths/ex/troisiemes/proba.py:105
+#, python-format
+msgid "On note (?, %s) l'évènement: la deuxième boule tirée est %s. \\par"
+msgstr ""
+"Cal sumar els esdeveniments (?, %s) del diagrama d'arbre, és a dir, els que "
+"la segona bola siga %s. \\par"
+
+#: src/pyromaths/ex/troisiemes/proba.py:119
+msgid "Probabilités"
+msgstr "Probabilitat"
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:72
+msgid "Lors d'un voyage scolaire, les élèves sont répartis dans deux bus :"
+msgstr "En un viatge escolar, l'alumnat s'ha repartit en dos autobusos:"
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:73
+#, python-format
+msgid ""
+"Au collège Dubois, il y a $%s$ élèves en quatrièmes et $%s$ élèves en "
+"troisièmes."
+msgstr ""
+"En un centre escolar hi ha $%s$ alumnes de quart i $%s$ alumnes de tercer."
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:76
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:78
+#, python-format
+msgid "\\item Bus A : %s élèves dont %s %s de garçons."
+msgstr "\\item Autobús A: %s alumnes, dels quals %s %s són xics."
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:77
+#, python-format
+msgid "\\item $%s$ %s des élèves de quatrièmes possèdent un ordinateur ;"
+msgstr "\\item El $%s$ %s de l'alumnat de quart té un ordinador;"
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:79
+#, python-format
+msgid "\\item $%s$ %s des élèves de troisièmes possèdent un ordinateur ;"
+msgstr "\\item El $%s$ %s de l'alumnat de tercer té un ordinador;"
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:82
+msgid "Quel est, sur l'ensemble des deux bus, le pourcentage de garçons ?\\par"
+msgstr "Quin és el percentatge de xics sobre el total dels dos autobusos?"
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:83
+msgid "Quel est le pourcentage des élèves qui possèdent un ordinateur ?\\par"
+msgstr "Quin és el percentatge d'alumnes de tot el centre que té un ordinador?"
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:87
+#, python-format
+msgid "Dans le bus A, il y a $\\cfrac{%s \\times %s}{100} = %s$ garçons.\\par"
+msgstr "A l'autobús A, hi ha $\\cfrac{%s \\times %s}{100} = %s$ xics.\\par"
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:88
+#, python-format
+msgid "Dans le bus B, il y a $\\cfrac{%s \\times %s}{100} = %s$ garçons.\\par"
+msgstr "A l'autobús B, hi ha $\\cfrac{%s \\times %s}{100} = %s$ xics.\\par"
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:89
+#, python-format
+msgid ""
+"On en déduit qu'il y a $%s + %s = %s$ garçons sur un total de $%s + %s = %s "
+"$ élèves.\\par"
+msgstr ""
+"Se'n deduïx que hi van $%s + %s = %s$ xics d'un total de $%s + %s = %s $ "
+"alumnes.\\par"
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:91
+#, python-format
+msgid ""
+" Le pourcentage de garçons sur l'ensemble des deux bus est donc de $"
+"\\cfrac{%s}{%s}\\times 100 %s %s%s$"
+msgstr ""
+" El percentatge de xics sobre el total dels dos autobusos és d'un $"
+"\\cfrac{%s}{%s}\\times 100 %s %s%s$"
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:94
+#, python-format
+msgid ""
+"En quatrièmes, $\\cfrac{%s \\times %s}{100} = %s$ élèves possèdent un "
+"ordinateur.\\par"
+msgstr ""
+"A quart, $\\cfrac{%s \\cdot %s}{100} = %s$ alumnes tenen un ordinador.\\par"
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:95
+#, python-format
+msgid ""
+"En troisièmes, $\\cfrac{%s \\times %s}{100} = %s$ élèves possèdent un "
+"ordinateur.\\par"
+msgstr ""
+"A tercer, $\\cfrac{%s \\cdot %s}{100} = %s$ alumnes tenen un ordinador.\\par"
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:96
+#, python-format
+msgid ""
+"On en déduit qu'il y a $%s + %s = %s$ élèves qui possèdent un ordinateur sur "
+"un total de $%s + %s = %s $ élèves.\\par"
+msgstr ""
+"Se'n deduïx que hi ha $%s + %s = %s$ alumnes que tenen un ordinador d'un "
+"total de $%s + %s = %s $ alumnes.\\par"
+
+#: src/pyromaths/ex/troisiemes/proportionnalite.py:98
+#, python-format
+msgid ""
+" Le pourcentage d'élèves possédant un ordinateur est donc de $\\cfrac{%s}"
+"{%s}\\times 100 %s %s%s$"
+msgstr ""
+" El percentatge total d'alumnes que tenen un ordinador és d'un $\\cfrac{%s}"
+"{%s}\\times 100 %s %s%s$"
+
+#: src/pyromaths/ex/troisiemes/puissances.py:160
+msgid "Puissances"
+msgstr "Potències"
+
+#: src/pyromaths/ex/troisiemes/racines.py:204
+#: src/pyromaths/ex/troisiemes/racines.py:208
+#, python-brace-format
+msgid ""
+"\\item Calculer les expressions suivantes et donner le résultat sous la "
+"forme $a\\,\\sqrt{b}$ avec $a$ et $b$ entiers, $b$ le plus petit possible."
+msgstr ""
+"\\item Calculeu les expressions següents i doneu el resultat en forma $a\\,"
+"\\sqrt{b}$ amb $a$ i $b$ enters, $b$ el més xicotet possible."
+
+#: src/pyromaths/ex/troisiemes/racines.py:219
+#: src/pyromaths/ex/troisiemes/racines.py:222
+#, python-brace-format
+msgid ""
+"\\item Calculer les expressions suivantes et donner le résultat sous la "
+"forme $a+b\\,\\sqrt{c}$ avec $a$, $b$ et $c$ entiers."
+msgstr ""
+"\\item Calculeu les expressions següents i doneu el resultat en forma $a+b\\,"
+"\\sqrt{c}$ amb $a$, $b$ i $c$ enters."
+
+#: src/pyromaths/ex/troisiemes/racines.py:233
+#: src/pyromaths/ex/troisiemes/racines.py:236
+msgid ""
+"\\item Calculer les expressions suivantes et donner le résultat sous la "
+"forme d'un nombre entier.\n"
+msgstr ""
+"\\item Calculeu les expressions següents i doneu el resultat en forma d'un "
+"nombre enter.\n"
+
+#: src/pyromaths/ex/troisiemes/racines.py:251
+msgid "Racines carrées"
+msgstr "Arrels quadrades"
+
+#: src/pyromaths/ex/troisiemes/systemes.py:227
+msgid "\\quad\\text{\\footnotesize On ajoute les deux lignes}"
+msgstr "\\quad\\text{\\footnotesize Se sumen les dos línies}"
+
+#: src/pyromaths/ex/troisiemes/systemes.py:237
+#, python-format
+msgid ""
+"\\underline{La solution de ce système d'équations est $(x;~y)=(%s;~"
+"%s)$.}\\par"
+msgstr ""
+"\\underline{La solució d'aquest sistema d'equacions és $(x;~y)=(%s;~%"
+"s)$.}\\par"
+
+#: src/pyromaths/ex/troisiemes/systemes.py:239
+msgid "{Vérification : $"
+msgstr "{Verificació: $"
+
+#: src/pyromaths/ex/troisiemes/systemes.py:243
+#: src/pyromaths/ex/troisiemes/systemes.py:244
+msgid "Résoudre le système d'équations suivant :"
+msgstr "Resoleu el sistema d'equacions següent:"
+
+#: src/pyromaths/ex/troisiemes/systemes.py:248
+msgid "Système d'équations"
+msgstr "Sistema d'equacions"
+
+#: src/pyromaths/outils/Arithmetique.py:223
+msgid " est un nombre premier.\\par "
+msgstr " és un nombre primer.\\par "
+
+#: src/pyromaths/outils/Priorites3.py:593
+msgid "Polynome("
+msgstr "Polinomi("
+
+#: src/pyromaths/outils/Priorites3.py:646
+#, python-format
+msgid "Le résultat %s a un format inattendu"
+msgstr "El resultat %s té un format inesperat."
+
+#: src/pyromaths/outils/Priorites3.py:760
+#: src/pyromaths/outils/Priorites3.py:761
+msgid "indice"
+msgstr "indice"
+
+#: src/pyromaths/outils/Priorites3.py:760
+#: src/pyromaths/outils/Priorites3.py:761
+msgid "cancel"
+msgstr "cancel"
+
+#: src/pyromaths/outils/Priorites3.py:935
+msgid "On ne devrait pas rencontrer de fraction non simplifiée ici"
+msgstr "No s'hauria de trobar ací cap fracció sense simplificar."
+
+#: src/pyromaths/outils/Polynomes.py:55
+msgid ""
+"\n"
+" On a $$"
+msgstr ""
+"\n"
+" Aleshores $$"
+
+#: src/pyromaths/outils/Polynomes.py:55
+msgid "\\right) \\times \\left("
+msgstr "\\right) \\times \\left("
+
+#: src/pyromaths/outils/System.py:57
+msgid "exercices"
+msgstr "exercicis"
+
+#: src/pyromaths/outils/System.py:59
+msgid "Fiche de révisions"
+msgstr "Fitxa d'exercicis"
+
+#: src/pyromaths/outils/System.py:67
+msgid ""
+"Pyromaths est un programme qui permet de générer des fiches d’exercices de "
+"mathématiques de collège ainsi que leur corrigé. Il crée des fichiers au "
+"format pdf qui peuvent ensuite être imprimés ou lus sur écran."
+msgstr ""
+"El Pyromaths és un programa que permet crear fitxes d’exercicis de "
+"matemàtiques de nivell escolar amb el solucionari. Crea els fitxers en "
+"format PDF, que, tot seguit, es poden imprimir o llegir en pantalla."
+
+#: src/pyromaths/outils/System.py:187
+msgid "\\currentpdfbookmark{Le corrigé des exercices}{Corrigé}\n"
+msgstr "\\currentpdfbookmark{La solució dels exercicis}{Solucionari}\n"
+
+#: src/pyromaths/outils/TestEnv.py:38
+msgid ""
+"Impossible de lire le fichier de configuration.Veuillez vérifier ce dernier "
+"ou faire remonter l'erreur sur le forum de Pyromaths."
+msgstr ""
+"No s'ha pogut llegir el fitxer de configuració. Reviseu-lo o informeu de "
+"l'error al fòrum del Pyromaths."
+
+#: src/pyromaths/outils/TexFiles.py:47
+msgid "problème"
+msgstr "problema"
+
+#: src/pyromaths/outils/TexFiles.py:60
+msgid "indente tout ce qui suit \begin{...}"
+msgstr "sagna tot el que segueix \\begin{...}"
+
+#: src/pyromaths/outils/TexFiles.py:63
+msgid "desindente tout ce qui suit \\end{...}"
+msgstr "elimina els sagnats de tot el que segueix \\end{...}"
+
+#: src/pyromaths/outils/TeXMiseEnForme.py:46
+#, python-format
+msgid "\\nombre{%s}"
+msgstr "\\nombre{%s}"
+
+#: src/pyromaths/outils/TeXMiseEnForme.py:51
+#, python-format
+msgid "\\nombre{%s}\\,%s"
+msgstr "\\nombre{%s}\\,%s"
+
+#: src/pyromaths/classes/Fractions.py:110
+#, python-format
+msgid "Mauvais usage de l'étiquettes \"r\" dans %r"
+msgstr "No s'han utilitzat correctament les etiquetes \"r\" en %r"
+
+#: src/pyromaths/classes/Fractions.py:213
+#: src/pyromaths/classes/Fractions.py:306
+#: src/pyromaths/classes/Fractions.py:408
+#, python-format
+msgid "Format incorrect : %s"
+msgstr "El format és incorrecte: %s"
+
+#: src/pyromaths/classes/PolynomesCollege.py:75
+#, python-format
+msgid "Le nom de la variable (%s) est incorrect pour le Polynôme %s"
+msgstr "El nom de la variable (%s) és incorrecte per al polinomi %s."
+
+#: src/pyromaths/classes/PolynomesCollege.py:153
+#, python-format
+msgid "Not Implemented : Coefficient %s"
+msgstr "No està implementat: coeficient %s"
+
+#: src/pyromaths/classes/PolynomesCollege.py:675
+msgid "Type non prévu. Bogue en perspective !"
+msgstr "Tipus no previst. Corregiu en perspectiva."
+
+#: src/pyromaths/classes/PolynomesCollege.py:736
+msgid "Opération non valide : x // 0"
+msgstr "L'operació no és vàlida: x // 0"
+
+#: src/pyromaths/classes/PolynomesCollege.py:738
+msgid "Division non définie : 0 // 0"
+msgstr "La divisió no s'ha definit: 0 // 0"
+
+#: src/pyromaths/classes/PolynomesCollege.py:978
+#, python-format
+msgid ""
+"Pyromaths ne sait manipuler que deux polynômes de même variable : %s et %s"
+msgstr ""
+"El Pyromaths només sap manipular dos polinomis de la mateixa variable: %s i "
+"%s."
+
+#: src/pyromaths/classes/PolynomesCollege.py:1125
+#, python-format
+msgid "%s n'est pas un Polynome et ne peut être factorisé"
+msgstr "%s no és un polinomi i no es pot factoritzar"
+
+#: src/pyromaths/classes/Racine.py:18
+msgid ""
+"Erreur de définition ! Le radicande doit être positif et l'indice un nombre "
+"entier !"
+msgstr ""
+"Error de definició. El radical ha de ser positiu i l'índex un nombre enter."
+
+#: src/pyromaths/classes/SquareRoot.py:66
+msgid "Le radicande doit être un nombre positif."
+msgstr "El radical ha de ser un nombre positiu."
+
+#: src/pyromaths/classes/SquareRoot.py:72
+#: src/pyromaths/classes/SquareRoot.py:341
+#, python-format
+msgid "Not Implemented : SquareRoot(%s)"
+msgstr "No està implementat: SquareRoot(%s)"
+
+#: src/pyromaths/classes/Terme.py:6
+msgid "Erreur de définition ! La puissance doit être un nombre relatif !"
+msgstr "Error de definició. La potència ha de ser un nombre relatiu."
