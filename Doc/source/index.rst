@@ -8,16 +8,16 @@ Bienvenue !
 
 Ce document a pour objectif d'essayer de documenter le code de Pyromaths afin de permettre à un maximum de développeurs de participer au développement de Pyromaths en sachant quels modules sont déjà développés.
 
-Contenu :
+Table des matières
+==================
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     :numbered:
 
     intro.rst
-    pyromaths.classes.rst
-    pyromaths.outils.rst
-    pyromaths.ex.troisiemes.rst
+    pyromaths.api
+    pyromaths.ex.troisiemes
     pyromaths.cli
 
 
