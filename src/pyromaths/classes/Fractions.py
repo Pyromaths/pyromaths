@@ -33,15 +33,15 @@ class Fraction():
     même dénominateur 'r' ou une simplification 's'
 
     >>> from pyromaths.classes.Fractions import Fraction
-    >>> Fraction(5,6)
+    >>> repr(Fraction(5,6))
     Fraction(5, 6)
-    >>> Fraction('x',6)
+    >>> repr(Fraction('x',6))
     Fraction("x", 6)
-    >>> Fraction(3.4)
+    >>> repr(Fraction(3.4))
     Fraction(34, 10)
-    >>> Fraction(3.0, 4.0)
+    >>> repr(Fraction(3.0, 4.0))
     Fraction(3, 4)
-    >>> Fraction(Fraction(1,3))
+    >>> repr(Fraction(Fraction(1,3)))
     Fraction(1, 3)
 
     """
@@ -74,21 +74,21 @@ class Fraction():
         Renvoie une version LaTeX de la :class:`Fraction`.
             >>> from pyromaths.classes.Fractions import Fraction
             >>> str(Fraction(8,1))
-            '8'
+            8
             >>> str(Fraction(5,6))
-            '\\dfrac{5}{6}'
+            \dfrac{5}{6}
             >>> str(Fraction('-5*2', '3*2', 'r'))
-            '\\dfrac{-5_{\\times 2}}{3_{\\times 2}}'
+            \dfrac{-5_{\times 2}}{3_{\times 2}}
             >>> str(Fraction('5*-7*2', '11*2*5', 's'))
-            '\\dfrac{\\cancel{5}\\times \\left( -7\\right) \\times \\cancel{2}}{11\\times \\cancel{2}\\times \\cancel{5}}'
+            \dfrac{\cancel{5}\times \left( -7\right) \times \cancel{2}}{11\times \cancel{2}\times \cancel{5}}
             >>> str(Fraction('-144', '22', 's'))
-            '\\dfrac{-72\\times \\cancel{2}}{11\\times \\cancel{2}}'
+            \dfrac{-72\times \cancel{2}}{11\times \cancel{2}}
             >>> from pyromaths.classes.SquareRoot import SquareRoot
             >>> str(Fraction(SquareRoot([[-10, None], [-1, 80]]), -2))
-            '\\dfrac{-10-\\sqrt{80}}{-2}'
+            \dfrac{-10-\sqrt{80}}{-2}
             >>> str(Fraction(SquareRoot([[-10, None], [-4, 5]]), -2, 's'))
-            '\\dfrac{\\left( 5+2\\,\\sqrt{5}\\right) \\times \\cancel{-2}}{1\\times \\cancel{-2}}'
-            
+            \dfrac{\left( 5+2\,\sqrt{5}\right) \times \cancel{-2}}{1\times \cancel{-2}}
+
         :rtype: string
         """
         from pyromaths.outils.Priorites3 import splitting
@@ -136,11 +136,11 @@ class Fraction():
 
             >>> from pyromaths.classes.Fractions import Fraction
             >>> repr(Fraction(5,6))
-            'Fraction(5, 6)'
+            Fraction(5, 6)
             >>> repr(Fraction('-72*2', '11*2', 'r'))
-            'Fraction("-72*2", "11*2", "r")'
+            Fraction("-72*2", "11*2", "r")
             >>> repr(Fraction('-72*2', '11*2', 's'))
-            'Fraction("-72*2", "11*2", "s")'
+            Fraction("-72*2", "11*2", "s")
 
         :rtype: string
         """
@@ -175,13 +175,13 @@ class Fraction():
 
         >>> from pyromaths.classes.Fractions import Fraction
         >>> Fraction(2,5) + Fraction(2,10)
-        'Fraction("2*2", "5*2", "r")+Fraction(2, 10)'
+        Fraction("2*2", "5*2", "r")+Fraction(2, 10)
         >>> Fraction(2,20) + Fraction(2,10)
-        'Fraction(2, 20)+Fraction("2*2", "10*2", "r")'
-        >>> Fraction(5,10) + Fraction(2,10)
+        Fraction(2, 20)+Fraction("2*2", "10*2", "r")
+        >>> repr(Fraction(5,10) + Fraction(2,10))
         Fraction(7, 10)
         >>> Fraction(5,7) + Fraction(2,10)
-        'Fraction("5*10", "7*10", "r")+Fraction("2*7", "10*7", "r")'
+        Fraction("5*10", "7*10", "r")+Fraction("2*7", "10*7", "r")
 
         :param: other
         :type: Fraction ou string
@@ -260,7 +260,7 @@ class Fraction():
 
         >>> from pyromaths.classes.Fractions import Fraction
         >>> 3 + Fraction(2,5)
-        'Fraction("3*5", "1*5", "r")+Fraction(2, 5)'
+        Fraction("3*5", "1*5", "r")+Fraction(2, 5)
 
         :param: other
         :type: real ou integer
@@ -356,15 +356,15 @@ class Fraction():
         *other* peut être une chaîne représentant une fraction, un entier ou un réel.
 
         >>> from pyromaths.classes.Fractions import Fraction
-        >>> Fraction(2,5) * Fraction(2,10)
+        >>> repr(Fraction(2,5) * Fraction(2,10))
         Fraction("2*2", "5*2*5", "s")
-        >>> Fraction(2,5) * 4
+        >>> repr(Fraction(2,5) * 4)
         Fraction(8, 5)
-        >>> Fraction(63,20) * Fraction(8,27)
+        >>> repr(Fraction(63,20) * Fraction(8,27))
         Fraction("9*7*4*2", "4*5*9*3", "s")
-        >>> Fraction(24,12) * 12
+        >>> repr(Fraction(24,12) * 12)
         Fraction("24*12", "12*1", "s")
-        >>> 12*Fraction(24,12)
+        >>> repr(12*Fraction(24,12))
         Fraction("12*24", "1*12", "s")
 
         :param: other
@@ -486,9 +486,9 @@ class Fraction():
         *other* peut être une chaîne représentant une fraction, un entier ou un réel.
 
         >>> from pyromaths.classes.Fractions import Fraction
-        >>> Fraction(2,5) / Fraction(10,2)
+        >>> repr(Fraction(2,5) / Fraction(10,2))
         'Fraction(2, 5)*Fraction(2, 10)'
-        >>> Fraction(2,5) / 4
+        >>> repr(Fraction(2,5) / 4)
         'Fraction(2, 5)*Fraction(1, 4)'
 
         :param: other
@@ -505,9 +505,9 @@ class Fraction():
         ``p.__rdiv__(q)`` est équivalent à ``p / q``  calcule le produit de l'objet p par la fraction q.
 
         *other* peut être un entier ou un réel.
-        
+
         >>> from pyromaths.classes.Fractions import Fraction
-        >>> 1/Fraction(1,3)
+        >>> repr(1/Fraction(1,3))
         '1*Fraction(3, 1)'
 
         Pour plus de détails, voir :py:func:`__radd__`"""
@@ -519,7 +519,7 @@ class Fraction():
         ``__invert__(p)`` est équivalent à ``~p`` calcule l'inverse de la fraction p.
 
         >>> from pyromaths.classes.Fractions import Fraction
-        >>> ~Fraction(8,27)
+        >>> repr(~Fraction(8,27))
         Fraction(27, 8)
         """
         return Fraction(self.d, self.n)
@@ -530,7 +530,7 @@ class Fraction():
         ``__neg__(p)`` est équivalent à ``-p`` calcule l'opposé de la fraction p.
 
         >>> from pyromaths.classes.Fractions import Fraction
-        >>> -Fraction(8,27)
+        >>> repr(-Fraction(8,27))
         Fraction(-8, 27)
         """
         if self.code: self = self.traitement()
@@ -542,7 +542,7 @@ class Fraction():
         ``__pos__(p)`` est équivalent à ``+p`` Renvoie la fraction p.
 
         >>> from pyromaths.classes.Fractions import Fraction
-        >>> +Fraction(8,27)
+        >>> repr(+Fraction(8,27))
         Fraction(8, 27)
         """
         return Fraction(self.n, self.d)
@@ -553,7 +553,7 @@ class Fraction():
         ``p__pow__(q)`` est équivalent à ``p**q`` calcule p à la puissance q.
 
         >>> from pyromaths.classes.Fractions import Fraction
-        >>> Fraction(2,3)**4
+        >>> repr(Fraction(2,3)**4)
         Fraction(16, 81)
 
         :param: n
@@ -624,9 +624,9 @@ class Fraction():
         Retourne une version réduite de la fraction, ie calcule le numérateur et le dénominateur
 
             >>> from pyromaths.classes.Fractions import Fraction
-            >>> Fraction.reduit(Fraction(2*4,5*4))
+            >>> repr(Fraction.reduit(Fraction(2*4,5*4)))
             Fraction(8, 20)
-            >>> Fraction.reduit(Fraction('2*4', '5*4'))
+            >>> repr(Fraction.reduit(Fraction('2*4', '5*4')))
             Fraction(8, 20)
 
         :param type: Fraction
@@ -642,9 +642,9 @@ class Fraction():
         Retourne une version irréductible de la fraction
 
             >>> from pyromaths.classes.Fractions import Fraction
-            >>> Fraction.simplifie(Fraction(2*4,5*4))
+            >>> repr(Fraction.simplifie(Fraction(2*4,5*4)))
             Fraction(2, 5)
-            >>> Fraction.simplifie(Fraction('2*4','5*4'))
+            >>> repr(Fraction.simplifie(Fraction('2*4','5*4')))
             Fraction(2, 5)
 
         :param type: Fraction
@@ -682,7 +682,7 @@ class Fraction():
         Retourne une décomposition de la fraction afin de la simplifier
 
             >>> from pyromaths.classes.Fractions import Fraction
-            >>> Fraction.decompose(Fraction(8,20))
+            >>> repr(Fraction.decompose(Fraction(8,20)))
             Fraction("2*4", "5*4", "s")
 
         :param type: Fraction
@@ -715,17 +715,17 @@ class Fraction():
     def traitement(self, final=False):
         """**traitement**\ (*object*,\ *self*)
 
-        Finit la mise au même dénominatuer ou la simplicfication de la fraction.
+        Finit la mise au même dénominateur ou la simplification de la fraction.
         Si *final* est vrai, alors essaie de simplifier la fraction.
 
             >>> from pyromaths.classes.Fractions import Fraction
-            >>> Fraction("3*4", "3*7", "r").traitement()
+            >>> repr(Fraction("3*4", "3*7", "r").traitement())
             Fraction(12, 21)
-            >>> Fraction("3*4", "3*7", "s").traitement()
+            >>> repr(Fraction("3*4", "3*7", "s").traitement())
             Fraction(4, 7)
-            >>> Fraction(12, 21).traitement()
+            >>> repr(Fraction(12, 21).traitement())
             Fraction(12, 21)
-            >>> Fraction(12, 21).traitement(True)
+            >>> repr(Fraction(12, 21).traitement(True))
             Fraction("4*3", "7*3", "s")
 
         :param: final
@@ -747,5 +747,5 @@ class Fraction():
             return Fraction(n // s, d // s)
         if final:
             return self.decompose()
-        "Pas de traitement spécifique nécessaire"
+        # Pas de traitement spécifique nécessaire
         return self

@@ -14,7 +14,6 @@
 import sys, os, locale
 locale.setlocale(locale.LC_TIME,'')
 
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -34,6 +33,16 @@ from pyromaths.Values import VERSION, COPYRIGHT_YEAR
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.todo', 'sphinx.ext.mathjax', 'sphinx.ext.ifconfig', 'sphinx.ext.viewcode', 'sphinx.ext.doctest', 'sphinxarg.ext']
 #, 'sphinxarg.ext']
+
+import textwrap
+doctest_global_setup = textwrap.dedent("""\
+    def _print(arg):
+        print(arg)
+    import sys
+    sys.displayhook = _print
+    sys.__displayhook__ = _print
+    """)
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

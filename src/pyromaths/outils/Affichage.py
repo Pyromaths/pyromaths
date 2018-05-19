@@ -49,15 +49,15 @@ def tex_coef(coef, var='', bplus=0, bpn=0, bpc=0):
 
     >>> from pyromaths.outils import Affichage
     >>> Affichage.tex_coef(5,'x')
-    '5\\,x'
+    5\,x
     >>> Affichage.tex_coef(5,'x',1)
-    '+5\\,x'
+    +5\,x
     >>> Affichage.tex_coef(-5,'x',0,1)
-    '\\left( -5\\,x\\right)'
+    \left( -5\,x\right)
     >>> Affichage.tex_coef(1,'x',0,1,1)
-    'x'
+    x
     >>> Affichage.tex_coef(5,'x',0,1,1)
-    '\\left( 5\\,x\\right)'
+    \left( 5\,x\right)
 
     :rtype: string
     """
@@ -126,10 +126,10 @@ def TeX(nombre, parenthese=False, terme=False, fractex="\\dfrac"):
 
     >>> from pyromaths.outils import Affichage
     >>> from pyromaths.classes.Fractions import Fraction
-    >>> Affichage.TeX(Fraction(7,3))
-    '\\dfrac{7}{3} '
-    >>> Affichage.TeX(Fraction(7,3),fractex='\\frac')
-    '\\frac{7}{3} '
+    >>> Affichage.TeX(Fraction(7,3)).strip()
+    \dfrac{7}{3}
+    >>> Affichage.TeX(Fraction(7,3),fractex='\\frac').strip()
+    \frac{7}{3}
 
     :rtype: string
     """

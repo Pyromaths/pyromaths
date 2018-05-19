@@ -38,13 +38,13 @@ class Polynome():
         - 3 : comme 2 et détaille les produits : 2x*3x=2*3*x*x
 
         >>> from pyromaths.classes.PolynomesCollege import Polynome
-        >>> Polynome([[2,2],[3,1],[4,0]], 'z')
+        >>> repr(Polynome([[2,2],[3,1],[4,0]], 'z'))
         Polynome([[2, 2], [3, 1], [4, 0]], "z", 0)
-        >>> Polynome("2y^2+3y+4")
+        >>> repr(Polynome("2y^2+3y+4"))
         Polynome([[2, 2], [3, 1], [4, 0]], "y", 0)
-        >>> Polynome([[1, 1], [2, 2]])
+        >>> repr(Polynome([[1, 1], [2, 2]]))
         Polynome([[1, 1], [2, 2]], "x", 0)
-        >>> Polynome("Fraction(1,7)x^2-Fraction(3,8)x-1")
+        >>> repr(Polynome("Fraction(1,7)x^2-Fraction(3,8)x-1"))
         Polynome([[Fraction(1, 7), 2], [Fraction(-3, 8), 1], [-1, 0]], "x", 0)
     """
 
@@ -108,7 +108,7 @@ class Polynome():
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
             >>> repr(Polynome([[2,2],[3,1],[4,0]], 'z'))
-            'Polynome([[2, 2], [3, 1], [4, 0]], "z", 0)'
+            Polynome([[2, 2], [3, 1], [4, 0]], "z", 0)
 
         :rtype: string
         """
@@ -120,9 +120,9 @@ class Polynome():
         Renvoie une version LaTeX du polynôme.
             >>> from pyromaths.classes.PolynomesCollege import Polynome
             >>> str(Polynome([[2,2],[3,1],[4,0]], 'z'))
-            '2\\,z^{2}+3\\,z+4'
+            2\,z^{2}+3\,z+4
             >>> str(Polynome("y^2-Fraction(3,2)y-1"))
-            'y^{2}-\\dfrac{3}{2}\\,y-1'
+            y^{2}-\dfrac{3}{2}\,y-1
             >>> from pyromaths.classes.Fractions import Fraction
             >>> print(Polynome([[1, 1], [Fraction(-5, 1), 0]]))
             x-5
@@ -189,7 +189,7 @@ class Polynome():
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
             >>> Polynome("4+x-x^2+x^3-2x^5")(-5)
-            '4-5-(-5)**2+(-5)**3-2*(-5)**5'
+            4-5-(-5)**2+(-5)**3-2*(-5)**5
 
         :param: valeur
         :type: integer, float or Fraction
@@ -255,7 +255,7 @@ class Polynome():
             >>> from pyromaths.classes.PolynomesCollege import Polynome
             >>> p = Polynome("2y+3y^2+4")
             >>> del p[1]
-            >>> p
+            >>> repr(p)
             Polynome([[2, 1], [4, 0]], "y", 0)
 
         :rtype: Polynome
@@ -272,7 +272,7 @@ class Polynome():
             >>> from pyromaths.classes.PolynomesCollege import Polynome
             >>> p=Polynome("2y+3y^2+4")
             >>> p += Polynome('-y+6')
-            >>> p
+            >>> repr(p)
             Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], "y", 0)
 
         :rtype: Polynome
@@ -328,7 +328,7 @@ class Polynome():
         *other* peut être une chaîne représentant un polynôme.
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> Polynome("2y+3y^2+4", details=2)+Polynome('-y+6', details=2)
+            >>> repr(Polynome("2y+3y^2+4", details=2)+Polynome('-y+6', details=2))
             Polynome([[3, 2], [2, 1], [-1, 1], [4, 0], [6, 0]], "y", 2)
 
         :param: other
@@ -349,7 +349,7 @@ class Polynome():
 
         >>> from pyromaths.classes.PolynomesCollege import Polynome
         >>> from pyromaths.classes.Fractions import Fraction
-        >>> Fraction(5,4)+Polynome("3x")
+        >>> repr(Fraction(5,4)+Polynome("3x"))
         Polynome([[3, 1], [Fraction(5, 4), 0]], "x", 0)
 
         :param: other
@@ -370,13 +370,13 @@ class Polynome():
         *other* peut être une chaîne représentant un polynôme.
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> Polynome("2y+3y^2+4")-Polynome('-y+6')
+            >>> repr(Polynome("2y+3y^2+4")-Polynome('-y+6'))
             'Polynome([[2, 1], [3, 2], [4, 0]], "y", 0)+Polynome([[1, 1], [-6, 0]], "y", 0)'
-            >>> Polynome("3y^2+2y+4")-Polynome('-y+6')
+            >>> repr(Polynome("3y^2+2y+4")-Polynome('-y+6'))
             'Polynome([[3, 2], [2, 1], [4, 0]], "y", 0)+Polynome([[1, 1], [-6, 0]], "y", 0)'
-            >>> Polynome("x+6")-Polynome("3x")
+            >>> repr(Polynome("x+6")-Polynome("3x"))
             Polynome([[-2, 1], [6, 0]], "x", 0)
-            >>> Polynome("x+6",details=2)-Polynome("3x",details=2)
+            >>> repr(Polynome("x+6",details=2)-Polynome("3x",details=2))
             Polynome([[1, 1], [-3, 1], [6, 0]], "x", 2)
 
         :param: other
@@ -412,12 +412,12 @@ class Polynome():
         ``p.__rsub__(q)`` est équivalent à ``q - p``
 
         >>> from pyromaths.classes.PolynomesCollege import Polynome
-        >>> 1-Polynome([[-4, 1], [-9, 2], [-5, 0]], "x")
+        >>> repr(1-Polynome([[-4, 1], [-9, 2], [-5, 0]], "x"))
         'Polynome([[1, 0]], "x", 0)+Polynome([[4, 1], [9, 2], [5, 0]], "x", 0)'
         >>> from pyromaths.classes.Fractions import Fraction
-        >>> Fraction(5,4)-Polynome("3x")
+        >>> repr(Fraction(5,4)-Polynome("3x"))
         Polynome([[-3, 1], [Fraction(5, 4), 0]], "x", 0)
-        >>> Fraction(5,4)-Polynome("-3x")
+        >>> repr(Fraction(5,4)-Polynome("-3x"))
         Polynome([[3, 1], [Fraction(5, 4), 0]], "x", 0)
 
         :param: other
@@ -441,7 +441,7 @@ class Polynome():
         Renvoie l'opposé d'un polynôme.
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> -Polynome("2y+3y^2+4")
+            >>> repr(-Polynome("2y+3y^2+4"))
             Polynome([[-2, 1], [-3, 2], [-4, 0]], "y", 0)
 
         :rtype: Polynome
@@ -460,7 +460,7 @@ class Polynome():
         Renvoie le polynôme.
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> +Polynome("2y+3y^2+4")
+            >>> repr(+Polynome("2y+3y^2+4"))
             Polynome([[2, 1], [3, 2], [4, 0]], "y", 0)
 
         :rtype: Polynome
@@ -486,13 +486,13 @@ class Polynome():
         sinon les produits sont explicités.
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> Polynome('3x+4', details=0)*Polynome('2x+5', details=0)
+            >>> repr(Polynome('3x+4', details=0)*Polynome('2x+5', details=0))
             'Polynome([[6, 2]], "x", 0)+Polynome([[15, 1]], "x", 0)+Polynome([[8, 1]], "x", 0)+Polynome([[20, 0]], "x", 0)'
-            >>> Polynome('3x', details=1)*Polynome('2x+5', details=1)
+            >>> repr(Polynome('3x', details=1)*Polynome('2x+5', details=1))
             'Polynome([[3, 1]], "x", 1)*Polynome([[2, 1]], "x", 1)+Polynome([[3, 1]], "x", 1)*Polynome([[5, 0]], "x", 1)'
-            >>> Polynome('3x', details=3) * Polynome('2x', details=3)
+            >>> repr(Polynome('3x', details=3) * Polynome('2x', details=3))
             "Polynome([[3, 0]], var = 'x', details=3)*Polynome([[1, 1]], var = 'x', details=3)*Polynome([[2, 0]], var = 'x', details=3)*Polynome([[1, 1]], var = 'x', details=3)"
-            >>> Polynome('3', details=3)*Polynome('x', details=3)
+            >>> repr(Polynome('3', details=3)*Polynome('x', details=3))
             Polynome([[3, 1]], "x", 3)
 
         :param: other
@@ -784,9 +784,9 @@ class Polynome():
         **TODO :** si ``n == 2`` et ``len(p) > 2``, bug
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> Polynome("2y+4")**2
+            >>> repr(Polynome("2y+4")**2)
             'Polynome([[2, 1]], "y", 0)**2+2*Polynome([[2, 1]], "y", 0)*Polynome([[4, 0]], "y", 0)+Polynome([[4, 0]], "y", 0)**2'
-            >>> Polynome("2y")**3
+            >>> repr(Polynome("2y")**3)
             Polynome([[8, 3]], "y", 0)
 
         :rtype: string ou Polynome
@@ -861,7 +861,7 @@ class Polynome():
         monômes de degré supérieur.
 
             >>> from pyromaths.classes.PolynomesCollege import Polynome
-            >>> Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], "y").ordonne()
+            >>> repr(Polynome([[2, 1], [3, 2], [4, 0], [-1, 1], [6, 0]], "y").ordonne())
             Polynome([[3, 2], [2, 1], [-1, 1], [4, 0], [6, 0]], "y", 0)
 
         :param type: Polynome

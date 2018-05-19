@@ -29,7 +29,7 @@ Created on 19 déc. 2014
 from pyromaths.outils.Arithmetique import carrerise
 from pyromaths.outils.decimaux import decimaux
 from pyromaths.outils import Priorites3
-# from pyromaths.classes.Fractions import Fraction
+from pyromaths import classes
 
 from math import sqrt
 class SquareRoot():
@@ -41,7 +41,7 @@ class SquareRoot():
     Cette définition permet d'utiliser pyromaths.outils.Priorites3
     
     >>> from pyromaths.classes.SquareRoot import SquareRoot
-    >>> SquareRoot(-4,[-2,1],[3,45],[-1,7],8)
+    >>> repr(SquareRoot(-4,[-2,1],[3,45],[-1,7],8))
     SquareRoot([[-4, None], [-2, 1], [3, 45], [-1, 7], [8, None]])
     '''
 
@@ -76,7 +76,7 @@ class SquareRoot():
 
         >>> from pyromaths.classes.SquareRoot import SquareRoot
         >>> str(SquareRoot([[-4, None], [-2, 1], [3, 45], [-1, 7], [8, None]]))
-        '-4-2\\,\\sqrt{1}+3\\,\\sqrt{45}-\\sqrt{7}+8'
+        -4-2\,\sqrt{1}+3\,\sqrt{45}-\sqrt{7}+8
 
         :rtype: String
         """
@@ -86,7 +86,7 @@ class SquareRoot():
             if isinstance(coef, (float, int)):
                 if coef > 0: return "+" + decimaux(coef)
                 else: return decimaux(coef)
-            if isinstance(coef, Fraction):
+            if isinstance(coef, classes.Fractions.Fraction):
                 if isinstance(coef.n, int) and isinstance(coef.d, int) and coef.n < 0 and coef.d > 0:
                     return "-" + str(Fraction(-coef.n, coef.d, coef.code))
                 return "+" + str(coef)
@@ -115,11 +115,11 @@ class SquareRoot():
     def __repr__(self):
         """Renvoie une chaîne de caractère représentant un :mod:`SquareRoot`
         évaluable pour créer un :mod:`SquareRoot`.
-        
+
         >>> from pyromaths.classes.SquareRoot import SquareRoot
         >>> repr(SquareRoot(-4, [-2, 1], [3, 45], [-1, 7], 8))
-        'SquareRoot([[-4, None], [-2, 1], [3, 45], [-1, 7], [8, None]])'
-        
+        SquareRoot([[-4, None], [-2, 1], [3, 45], [-1, 7], [8, None]])
+
         :rtype: String
         """
         return "SquareRoot(%s)" % self.racines
@@ -155,7 +155,7 @@ class SquareRoot():
         """Renvoie la somme d'un objet SquareRoot et d'un nombre.
         
         >>> from pyromaths.classes.SquareRoot import SquareRoot
-        >>> SquareRoot([3,45],3)+SquareRoot([2,45])
+        >>> repr(SquareRoot([3,45],3)+SquareRoot([2,45]))
         SquareRoot([[3, None], [5, 45]])
         
         :rtype: SquareRoot
@@ -169,7 +169,7 @@ class SquareRoot():
     def __radd__(self, other):
         """
         >>> from pyromaths.classes.SquareRoot import SquareRoot
-        >>> 2+SquareRoot([3,45],3)
+        >>> repr(2+SquareRoot([3,45],3))
         SquareRoot([[5, None], [3, 45]])
 
         :rtype: SquareRoot
@@ -197,9 +197,9 @@ class SquareRoot():
         """ Renvoie la valeur absolue d'un objet SquareRoot
         
         >>> from pyromaths.classes.SquareRoot import SquareRoot
-        >>> abs(SquareRoot([5, 5], [-2, 7]))
+        >>> repr(abs(SquareRoot([5, 5], [-2, 7])))
         SquareRoot([[5, 5], [-2, 7]])
-        >>> abs(SquareRoot([-5, 5], [2, 7]))
+        >>> repr(abs(SquareRoot([-5, 5], [2, 7])))
         SquareRoot([[5, 5], [-2, 7]])
        
         :rtype: SquareRoot
@@ -216,7 +216,7 @@ class SquareRoot():
         """Multiplie un objet SquareRoot par un nombre.
         
         >>> from pyromaths.classes.SquareRoot import SquareRoot
-        >>> SquareRoot([3,45],3)*SquareRoot([2,45],-1)
+        >>> repr(SquareRoot([3,45],3)*SquareRoot([2,45],-1))
         SquareRoot([['6*45', None], [-3, 45], [6, 45], [-3, None]])
         """
         if not isinstance(other, SquareRoot):
@@ -247,7 +247,7 @@ class SquareRoot():
     def __rmul__(self, other):
         """
         >>> from pyromaths.classes.SquareRoot import SquareRoot
-        >>> 5*SquareRoot([3,45],3)
+        >>> repr(5*SquareRoot([3,45],3))
         SquareRoot([[15, 45], [15, None]])
 
         :rtype: SquareRoot
@@ -259,7 +259,7 @@ class SquareRoot():
         Division entière par un entier
         
         >>> from pyromaths.classes.SquareRoot import SquareRoot
-        >>> SquareRoot([10, 8], [15, 5])//5
+        >>> repr(SquareRoot([10, 8], [15, 5])//5)
         SquareRoot([[2, 8], [3, 5]])
 
         :rtype: SquareRoot
@@ -319,7 +319,7 @@ class SquareRoot():
         
         >>> from pyromaths.classes.SquareRoot import SquareRoot
         >>> SquareRoot([5, 8]).Decompose()
-        'SquareRoot([[5, 4]])*SquareRoot([[1, 2]])'
+        SquareRoot([[5, 4]])*SquareRoot([[1, 2]])
 
         :rtype: string
         """
@@ -345,13 +345,13 @@ class SquareRoot():
         Additionne les nombres rationnels et décompose les racines carrées.
          
         >>> from pyromaths.classes.SquareRoot import SquareRoot
-        >>> SquareRoot([[3, 9]]).simplifie()
+        >>> repr(SquareRoot([[3, 9]]).simplifie())
         '3*3'
-        >>> SquareRoot(-2, [-2, 1], [3, 1], [-1, 7], 8).simplifie()
+        >>> repr(SquareRoot(-2, [-2, 1], [3, 1], [-1, 7], 8).simplifie())
         SquareRoot([[6, None], [1, 1], [-1, 7]])
-        >>> SquareRoot(-2, [-2, 1], [3, 45], [-1, 7], 8).simplifie()
+        >>> repr(SquareRoot(-2, [-2, 1], [3, 45], [-1, 7], 8).simplifie())
         SquareRoot([[6, None], [-2, 1], [3, 45], [-1, 7]])
-        >>> SquareRoot([-2,1],[3,45]).simplifie()
+        >>> repr(SquareRoot([-2,1],[3,45]).simplifie())
         '-2+SquareRoot([[3, 9]])*SquareRoot([[1, 5]])'
         
         :rtype: SquareRoot ou String

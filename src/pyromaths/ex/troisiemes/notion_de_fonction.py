@@ -77,7 +77,7 @@ def Lagrange(points):
     >>> Priorites3.priorites(p)[-1]
     ['Polynome([[Fraction(5, 48), 4], [Fraction(1, 8), 3], [Fraction(-23, 12), 2], [Fraction(-3, 2), 1], [Fraction(4, 1), 0]], "x", 0)']
     >>> Priorites3.plotify(Priorites3.priorites(p)[-1])
-    '5/48*x^4+1/8*x^3-23/12*x^2-3/2*x^1+4/1'
+    5/48*x^4+1/8*x^3-23/12*x^2-3/2*x^1+4/1
     """
     PIL = []
     for i in range(len(points)):

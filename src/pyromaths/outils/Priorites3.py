@@ -43,9 +43,9 @@ def cherche_classe(calcul, index):
     >>> from pyromaths.classes.Fractions import Fraction
     >>> from pyromaths.outils import Priorites3
     >>> Priorites3.cherche_classe('Polynome([[-4, 2]], "x")-Polynome([[-5, 1], [4, 2], [1, 0]], "x")+Polynome([[6,  0], [5, 1]], "x")', 5)
-    'Polynome([[-5, 1], [4, 2], [1, 0]], "x")'
+    Polynome([[-5, 1], [4, 2], [1, 0]], "x")
     >>> Priorites3.cherche_classe('Polynome([[-4, 2]], "x")+Fraction(3,2)+Polynome([[6,  0], [5, 1]], "x")', 5)
-    'Fraction(3,2)'
+    Fraction(3,2)
 
     :rtype: string
     """
@@ -88,12 +88,12 @@ def cherche_decimal(calcul, index):
     >>> from pyromaths.outils import Priorites3
     >>> p = '-Polynome([[-4, 2]], "x")*6**2+3'
     >>> Priorites3.cherche_decimal(p, 1)
-    '4'
+    4
     >>> p = '-6*(-11)*(-5)'
     >>> Priorites3.cherche_decimal(p, 1)
-    '6'
+    6
     >>> Priorites3.cherche_decimal(p, 0)
-    '6'
+    6
 
     **TODO :** vérifier ces deux derniers exemples. Je pense que je devrais récupérer -6
 
@@ -152,12 +152,12 @@ def cherche_operateur(calcul, index):
 
     >>> from pyromaths.outils import Priorites3
     >>> Priorites3.cherche_operateur('-Polynome([[-4, 2]], "x")*6**2+3', 1)
-    '-'
+    -
     >>> p = '-6*(-11)*(-5)'
     >>> Priorites3.cherche_operateur(p, 1)
-    '*'
+    *
     >>> Priorites3.cherche_operateur(p, 0)
-    '-'
+    -
 
     :rtype: string
     """
@@ -322,7 +322,7 @@ def recherche_parentheses(calcul):
 
     >>> from pyromaths.outils import Priorites3
     >>> Priorites3.recherche_parentheses(['-6', '*', '(-11)', '*', '(-5)'])
-    >>>
+    None
     >>> Priorites3.recherche_parentheses(['-9', '-', '6', '*', '(', '(-2)', '-', '4', ')'])
     (4, 9)
 
@@ -384,7 +384,7 @@ def recherche_operation(calcul, op, l_interdit, debut=0):
     >>> from pyromaths.outils import Priorites3
     >>> c = ['-6', '**', '(-11)', '*', '(-5)']
     >>> Priorites3.recherche_operation(c, "*", ("**", "/"))
-    >>>
+    None
     >>> c = ['-9', '-', '6', '*', '2', '-', '4']
     >>> Priorites3.recherche_operation(c, "*", ("**", "/"))
     3
@@ -886,7 +886,7 @@ def plotify(calcul):
 
     >>> from pyromaths.outils import Priorites3
     >>> Priorites3.plotify('Polynome([[Fraction(-5, 192), 4], [Fraction(2, 96), 3], [Fraction(41, 48), 2], [Fraction(-7, 12), 1], [-4, 0]], "x", False)')
-    '-5/192*x^4+2/96*x^3+41/48*x^2-7/12*x^1-4'
+    -5/192*x^4+2/96*x^3+41/48*x^2-7/12*x^1-4
 
     :rtype: str
     """
