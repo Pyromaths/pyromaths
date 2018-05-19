@@ -24,7 +24,7 @@ class TexExercise(Exercise):
     @classmethod
     def thumb(cls):
         from pyromaths.Values import data_dir
-        return os.path.join(data_dir(), 'ex', cls.dirlevel, 'img', "%s.png" % cls.name())
+        return os.path.join(data_dir(), 'ex', 'img', "%s.png" % cls.name())
 
     def tex_statement(self):
         ''' Return problem statement in TeX format. '''

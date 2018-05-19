@@ -94,8 +94,7 @@ def main():
         ''' Create all exercise thumbnails. '''
         import random
         random.seed(0)
-        dirlevel = os.path.split(pkg.__path__[0])[1]
-        imgdir = join(_param['datadir'], 'ex', dirlevel, 'img')
+        imgdir = join(_param['datadir'], 'ex', 'img')
         print "IMGDIR : ", imgdir
         try:
             os.mkdir(os.path.join(imgdir, 'tmp'))

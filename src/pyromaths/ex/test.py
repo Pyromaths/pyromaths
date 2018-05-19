@@ -65,12 +65,11 @@ class ExerciseNotFound(PyromathsException):
     def __str__(self):
         return "Exercise '{}' not found.".format(self.exercise)
 
-def test_path(dirlevel, name, seed, choice):
+def test_path(name, seed, choice):
     """Return the path of file containing expected test result."""
     return os.path.join(
         pyromaths.Values.data_dir(),
         'ex',
-        dirlevel,
         'tests',
         "%s.%s.%s" % (name, seed, choice)
         )
@@ -138,7 +137,6 @@ class TestExercise(object):
     def test_path(self, name):
         """Return the path of the file containing expected results."""
         return test_path(
-            self.exercise.dirlevel,
             self.exercise.name(),
             self.seed,
             name,
@@ -227,7 +225,6 @@ class TestPerformer(object):
         statement_seeds = [
             os.path.basename(path).split(".")[1]
             for path in glob.glob(test_path(
-                self.exercises[exercise].dirlevel,
                 self.exercises[exercise].name(),
                 '*',
                 'statement'
@@ -235,7 +232,6 @@ class TestPerformer(object):
             ]
         for seed in statement_seeds:
             if os.path.exists(test_path(
-                    self.exercises[exercise].dirlevel,
                     self.exercises[exercise].name(),
                     seed,
                     'answer',
