@@ -52,7 +52,7 @@ def load_tests(*__args, **__kwargs):
     tests = TestPerformer()
     return tests.as_unittest_suite([
         (exo, tests.get_tested_seeds(exo))
-        for exo in tests.iter_id()
+        for exo in tests.iter_names()
         ])
 
 class ExerciseNotFound(PyromathsException):
