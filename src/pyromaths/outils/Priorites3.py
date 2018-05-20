@@ -522,10 +522,10 @@ def recherche_neg(calcul):
             break
         else:
             ind += 1
-    if debut is not None and (debut + 2 == fin or (debut + 2 < fin and
-        calcul[debut + 2] != "**")):
+    if debut is not None and (debut + 2 == fin or (debut + 2 < fin and calcul[debut + 2] != "**")):
         return (debut, debut + 2)
-    else: return None
+    else:
+        return None
 
 def effectue_calcul(calcul):
     """**effectue_calcul**\ (*calcul*)
@@ -684,7 +684,9 @@ def priorites(calcul):
 
     >>> from pyromaths.outils import Priorites3
     >>> Priorites3.priorites('-1+5-(-5)+(-6)*1')
-    [['4', '+', '5', '-', '6'], ['9', '-', '6'], ['3']]
+    [['-1', '+', '5', '+', '5', '-', '6'], ['9', '-', '6'], ['3']]
+    >>> Priorites3.priorites('-5**2+6')
+    [['-', '25', '+', '6'], ['-25', '+', '6'], ['-19']]
     >>> Priorites3.priorites('Polynome([[Fraction(6, 7), 0]], "x")*Polynome([[Fraction(1,3), 1], [1,0]], "x")')
     [['Polynome([[Fraction(6, 21, "s"), 1]], "x", 0)', '+', 'Polynome([[Fraction(6, 7), 0]], "x", 0)'], ['Polynome([[Fraction(2, 7), 1], [Fraction(6, 7), 0]], "x", 0)']]
     >>> Priorites3.priorites('-Fraction(-6,1)/Fraction(-4,1)')
@@ -692,7 +694,8 @@ def priorites(calcul):
 
     :rtype: list
     """
-    calcul = splitting(calcul)
+    #calcul = splitting(calcul)
+    calcul = split_calcul(calcul)
     solution = []
     while len(calcul) > 1:
         s = effectue_calcul(calcul)
