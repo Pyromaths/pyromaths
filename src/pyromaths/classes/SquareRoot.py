@@ -211,6 +211,52 @@ class SquareRoot():
         if t > 0: return self
         else: return -self
 
+    def evaluate(self, other):
+        t, t2 = 0, 0
+        for e in self.racines:
+            if e[1] == None:
+                t += e[0]
+            else:
+                t += e[0] * sqrt(e[1])
+        if isinstance(other, SquareRoot):
+            for e in other.racines:
+                if e[1] == None:
+                    t2 += e[0]
+                else:
+                    t2 += e[0] * sqrt(e[1])
+        else:
+            t2=other
+        return t, t2
+
+    def __lt__(self, other):
+        t, t2 = self.evaluate(other)
+        if t<t2: return True
+        else: return False
+
+    def __le__(self, other):
+        t, t2 = self.evaluate(other)
+        if t<=t2: return True
+        else: return False
+
+    def __eq__(self, other):
+        t, t2 = self.evaluate(other)
+        if t==t2: return True
+        else: return False
+
+    def __ne__(self, other):
+        t, t2 = self.evaluate(other)
+        if t!=t2: return True
+        else: return False
+
+    def __gt__(self, other):
+        t, t2 = self.evaluate(other)
+        if t>t2: return True
+        else: return False
+
+    def __ge__(self, other):
+        t, t2 = self.evaluate(other)
+        if t>=t2: return True
+        else: return False
 
     def __mul__(self, other):
         """Multiplie un objet SquareRoot par un nombre.
