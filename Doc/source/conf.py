@@ -43,6 +43,7 @@ doctest_global_setup = textwrap.dedent("""\
     sys.__displayhook__ = _print
     """)
 
+todo_include_todos = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
