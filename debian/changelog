@@ -1,3 +1,32 @@
+pyromaths (18.5.6-1) bionic; urgency=medium
+
+  * Problème à la compilation des sources sur le ppa
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Tue, 22 May 2018 22:27:09 +0200
+
+pyromaths (18.5.2-1) bionic; urgency=medium
+
+  * Problème à la compilation des sources sur le ppa
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Tue, 22 May 2018 19:48:02 +0200
+
+pyromaths (18.5.1-1) bionic; urgency=medium
+
+  * Correction pour la création du dépôt ppa
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Mon, 21 May 2018 09:26:29 +0200
+
+pyromaths (18.5-1) bionic; urgency=medium
+
+  * Corrections de bugs
+  * L'outils `testexo.py` a été renommé en `pyromaths.cli`.
+  * C'est désormais une interface en ligne de commandes à Pyromaths
+  * Il s'appelle avec `python -m pyromaths.cli`
+  * remplacement de la commande  \CheckedBox du paquet wasysym par une commande
+    personnelle \checkedbox
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Sun, 20 May 2018 22:40:51 +0200
+
 pyromaths (15.10-1) unstable; urgency=medium
 
   * Boîtes de dialogue natives sur OS X

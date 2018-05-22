@@ -5,12 +5,12 @@
 ### CONFIG
 #
 # Pyromaths version
-VERSION ?= 15.10
+VERSION ?= 18.5.6
 # Archive format(s) produced by 'make src' (bztar,gztar,zip...)
 FORMATS ?= bztar,zip
 # Verbosity and logging
-OUT     ?= > /dev/null       # uncomment: quieter output
-#OUT     ?= >> log            # uncomment: log output to file
+#OUT     ?= > /dev/null       # uncomment: quieter output
+OUT     ?= >> /tmp/log            # uncomment: log output to file
 
 ### ENVIRONMENT VARIABLES
 #
@@ -162,16 +162,21 @@ deb: min
 	    mv pyromaths-$(VERSION) $(BUILDIR)                            &&\
 	    mv pyromaths-$(VERSION).tar.bz2 pyromaths_$(VERSION).orig.tar.bz2
 	cp -r debian $(BUILDIR)
-	cd $(BUILDIR) && debuild clean $(OUT)
-	cd $(BUILDIR) && debuild -kB39EE5B6 $(OUT) || exit 0
+	cd $(BUILDIR) && debuild -i -D -tc -kB39EE5B6 $(OUT) || exit 0
 	mkdir -p $(DIST)
-	cp $(BUILD)/pyromaths_$(VERSION)-*_all.deb $(DIST)
+	mv $(BUILD)/pyromaths_$(VERSION)-*_all.deb $(DIST)
 
-repo: deb
+repo: min
 	# update apt repository
 	$(clean)
+	cd $(BUILD) && tar -xjf pyromaths-$(VERSION).tar.bz2              &&\
+	    mv pyromaths-$(VERSION) $(BUILDIR)                            &&\
+	    mv pyromaths-$(VERSION).tar.bz2 pyromaths_$(VERSION).orig.tar.bz2
+	cp -r debian $(BUILDIR)
+	cd $(BUILDIR) && debuild -i -tc -kB39EE5B6 -S $(OUT)
 	cd $(BUILD)
-	dput -l $(BUILD)/pyromaths_$(VERSION)-1_amd64.changes
+	#dput -l $(BUILD)/pyromaths_$(VERSION)-1_amd64.changes
+	dput -l -f ppa:jerome-ortais/ppa $(BUILD)/pyromaths_$(VERSION)-1_source.changes
 
 data/%.qm: data/%.ts
 	# Translate new/updated language files

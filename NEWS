@@ -1,4 +1,4 @@
-Version (16.11)
+Version 18.05
 * L'outils `testexo.py` a été renommé en `pyromaths.cli`.
   * C'est désormais une interface en ligne de commandes à Pyromaths
   * Il s'appelle avec `python -m pyromaths.cli`

@@ -5,11 +5,15 @@ PYROPATH=$(cd `dirname $0` && cd .. && pwd)
 # Install build dependencies (if needed)
 if [ ! -f /usr/bin/debuild ];
 then
-    sudo apt-get install devscripts equivs
+    sudo apt-get install devscripts equivs python-setuptools
 fi
 if [ ! -f /usr/bin/rpm ];
 then
     sudo apt-get install rpm
+fi
+if [ ! -f /usr/lib/python2.7/dist-packages/sphinxarg/ext.py ];
+then
+    sudo apt install python-sphinx-argparse
 fi
 
 # Update pyromaths version
