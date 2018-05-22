@@ -221,16 +221,16 @@ Conversions
       >>> float(Fraction(5, 6))
       0.833333333333
 
-* Conversion en entier (:func:`Fraction.__int__`)
-
-  .. warning::
-
-     Bizarre, bizarre… Voir `la discussion sur le forum <http://forum.pyromaths.org/viewtopic.php?f=19&t=398>`__.
+* Conversion en entier (:func:`Fraction.__int__`). Cette méthode ne fonctionne que si la fraction est égale à un nombre entier. Sinon, elle lève une exception.
 
   .. doctest:: fraction
 
+      >>> int(Fraction(15, 5))
+      5
       >>> int(Fraction(15, 6))
-      15
+        ...
+      AssertionError: La fraction n'est pas un nombre entier !
+
 
 
 LaTeX
