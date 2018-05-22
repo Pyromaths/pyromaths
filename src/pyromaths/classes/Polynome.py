@@ -39,7 +39,7 @@ class Polynome:
         self.var = var  # Lettre pour la var
         liste_reduite = {}
         if isinstance(liste_coeff, str):
-            liste_coeff = str_Polynome(liste_coeff, var)
+            liste_coeff = _str_Polynome(liste_coeff, var)
         elif isinstance(liste_coeff, list):
             liste_coeff = dict((i, liste_coeff[i])for i in range(len(liste_coeff)))
         elif isinstance(liste_coeff, int) or isinstance(liste_coeff, Fraction) or isinstance(liste_coeff, float):
@@ -79,6 +79,12 @@ class Polynome:
         '''renvoie une str pour un affichage python'''
         return self.TeX(var=self.var)
 
+    def __repr__(self):
+        return '{classe}({coef}, var="{var}")'.format(
+                classe=self.__class__.__name__,
+                coef=repr(self.dictio),
+                var=self.var,
+                )
 
     def TeX(self, var='', display=True, parenthese=False):
         '''renvoie une chaine de caractere imprimant les fractions dans TeX'''
@@ -289,7 +295,7 @@ class Polynome:
             result[i + 1] = Fraction(1, int(i + 1)) * self.dictio[i]
         return Polynome(result, self.var)
 
-def str_Polynome(string, var='x'):
+def _str_Polynome(string, var='x'):
     '''str -> dict'''
     # TODO reconnaitre les coefficients fractionnaires
     resultat = []

@@ -1,6 +1,8 @@
 Les classes de Pyromaths
 ========================
 
+.. currentmodule:: pyromaths.classes
+
 .. toctree::
     :maxdepth: 2
 

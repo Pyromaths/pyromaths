@@ -63,3 +63,10 @@ class Poly2:
     def print_signe(self, signe):
         return str(self) + " " + signe + " 0"
 
+    def __repr__(self):
+        return "{}({}, {}, {})".format(
+            self.__class__.__name__,
+            repr(self.a),
+            repr(self.b),
+            repr(self.c),
+            )
