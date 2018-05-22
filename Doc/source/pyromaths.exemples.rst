@@ -699,14 +699,14 @@ Opérations
   .. doctest:: polynomedegre2
 
      >>> repr(Poly2(2, 3, 4))
-     Poly2(2, 3, 4)
+     TODO
 
 * Différence (:func:`Poly2.__sub__`, :func:`Poly2.__rsub__`).
 
   .. doctest:: polynomedegre2
 
      >>> repr(Poly2(2, 3, 4))
-     Poly2(2, 3, 4)
+     TODO
 
 LaTeX
 """""
@@ -716,14 +716,14 @@ LaTeX
   .. doctest:: polynomedegre2
 
      >>> repr(Poly2(2, 3, 4))
-     Poly2(2, 3, 4)
+     TODO
 
 * Comparaison (:func:`Poly2.print_signe`).
 
   .. doctest:: polynomedegre2
 
      >>> repr(Poly2(2, 3, 4))
-     Poly2(2, 3, 4)
+     TODO
 
 .. TODO::
 
