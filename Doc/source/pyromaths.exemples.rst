@@ -247,31 +247,6 @@ LaTeX
      >>> str(Fraction('-5*2', '3*2', 'r'))
      \dfrac{-5_{\times 2}}{3_{\times 2}}
 
-.. _calculs_etapes_fractions:
-
-Calculs avec étapes
-"""""""""""""""""""
-
-.. currentmodule:: pyromaths.outils.Fractions
-
-.. warning::
-
-    Ces fonctions sont peut-être obsolètes. Voir `la discussion sur le forum <http://forum.pyromaths.org/viewtopic.php?f=19&t=399>`__.
-
-    Si ces fonctions sont supprimées, supprimer aussi la référence à cette partie plus haut dans la page.
-
-* Somme et Différence (:func:`EffectueSommeFractions`). Pour choisir l'opération, utiliser comme argument ``s="+"`` ou ``s="-"``.
-
-  .. code-block:: python
-
-    >>> EffectueSommeFractions(Fraction(5, 6), Fraction(2, 3), "+", "AVANT", u"APRÈS")
-    ???
-
-
-.. TODO::
-
-   À supprimer, ou compléter avec :func:`EffectueProduitFractions` et :func:`EffectueQuotientFractions`.
-
 Polynômes
 ---------
 
@@ -741,7 +716,6 @@ LaTeX
 
     - ``classes/Racine.py``
     - ``classes/SquareRoot.py``
-    - ``classes/Terme.py``
     - ``classes/Vecteurs.py``
     - ``outils/Affichage.py``
     - ``outils/Arithmetique.py``
@@ -749,5 +723,4 @@ LaTeX
     - ``outils/Geometrie.py``
     - ``outils/Polynomes.py``
     - ``outils/Priorites3.py``
-    - ``outils/TeXMiseEnForme.py``
     - ``outils/decimaux.py``
