@@ -1,17 +1,15 @@
 Source: pyromaths
-Distribution: unstable
+Maintainer: Jérôme Ortais <jerome.ortais@pyromaths.org>
 Section: contrib/math
 Priority: optional
-Maintainer: Jérôme Ortais <jerome.ortais@pyromaths.org>
-Build-Depends: debhelper (>= 7), python
-Standards-Version: 3.9.6
-XS-Python-Version: current
-XB-Python-Version: ${python:Versions}
+Build-Depends: debhelper (>= 7), dh-python, python:any | python-all:any | python-dev:any | python-all-dev:any, python-setuptools
+XS-Python-Version: >= 2.7
+Standards-Version: 4.1.4
 Homepage: http://www.pyromaths.org/
 
 Package: pyromaths
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}, python-qt4, python-lxml, texlive-pstricks, texlive-latex-base, texlive-latex-extra, texlive-fonts-recommended, texlive-latex-recommended, latexmk, asymptote, texlive-pictures, texlive-lang-french
+Depends: ${python:Depends}, ${misc:Depends}, python-qt4, python-lxml, texlive-pstricks, texlive-latex-base, texlive-latex-extra, texlive-fonts-recommended, texlive-latex-recommended, latexmk, asymptote, texlive-pictures, texlive-lang-french
 Description: Exerciseur de mathématiques créant des fiches LaTeX
  Pyromaths est un programme qui a pour but de créer des exercices
  type de mathématiques niveau collège et lycée ainsi que leur corrigé. C'est
