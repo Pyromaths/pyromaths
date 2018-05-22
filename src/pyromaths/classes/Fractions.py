@@ -613,7 +613,7 @@ class Fraction():
 
     def __int__(self):
         assert self.n % self.d == 0, "La fraction n'est pas un nombre entier !"
-        return int(self.n)
+        return int(self.n / self.d)
 
     def reduit(self):
         """**reduit**\ (*object*)
