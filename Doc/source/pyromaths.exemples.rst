@@ -1,10 +1,20 @@
 API par l'exemple
 =================
 
-.. contents::
-   :local:
 
 Cette section est à lire si vous vous posez la question : *« Quels outils existent pour me faciliter l'écriture de nouveaux exercices ? »*
+
+.. warning::
+
+   L'utilisation des outils présentés ici est à double tranchant.
+
+   - C'est un gain de temps. Ils implémentent des procédures techniques et longues (pas forcément compliquées, mais avec des tas de cas particuliers à prendre en compte) ; ils existent depuis des années, et sont déjà utilisés par d'autres exercices, donc fonctionnent plus ou moins.
+   - Ils ont été écrit il y a longtemps, par des personnes qui n'ont pas forcément une solide formation ou une grande expérience en informatique, et ils souffrent d'une dette technologique. Leurs auteurs ne sont plus forcément actifs dans le projet, donc seule la lecture du code et des trop rares commentaires permettent de les comprendre. Ils n'ont pas ou très peu de tests unitaires, donc il est très risqué de les modifier (même pour corriger un bug), car il est difficile de savoir ce qui sera cassé par ce changement.
+
+   À vous de voir ce que vous en faîtes !
+
+.. contents::
+   :local:
 
 Fractions
 ---------
