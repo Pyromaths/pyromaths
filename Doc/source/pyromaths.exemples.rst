@@ -501,12 +501,170 @@ Polynômes (collège)
 
    from pyromaths.classes.PolynomesCollege import *
 
-* TODO (:func:`Polynome.TODO`).
+Constructeur
+""""""""""""
+
+* Constructeur (:func:`Polynome.__init__`).
 
   .. doctest:: polynomescollege
 
      >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
      Polynome([[-3, 2], [2, 1], [1, 0]], "x", 0)
+
+* TODO Options du constructeur
+
+Caractéristiques
+""""""""""""""""
+
+* Accès aux coefficients (:func:`Polynome.__getitem__`, :func:`Polynome.__delitem__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Nombre de monômes (:func:`Polynome.__len__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Degré (:func:`Polynome.__degre__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+Opérations
+""""""""""
+
+* Somme (:func:`Polynome.__add__`, :func:`Polynome.__radd__`, :func:`Polynome.__iadd__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Comparaison (:func:`Polynome.__eq__`, :func:`Polynome.__ne__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Différence (:func:`Polynome.__sub__`, :func:`Polynome.__rsub__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Opposé (:func:`Polynome.__neg__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Positif (:func:`Polynome.__pos__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Produit (:func:`Polynome.__mul__`, :func:`Polynome.__rmul__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Modulo (:func:`Polynome.__mod__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Dividende (:func:`Polynome.__floordiv__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Puissance (:func:`Polynome.__pow__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+
+Opérations spécifiques
+""""""""""""""""""""""
+
+* Calcul d'images (:func:`Polynome.__call__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Dérivée (:func:`Polynome.derive`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Caractère réductible (:func:`Polynome.reductible`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Caractère ordonnable (:func:`Polynome.ordonnable`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Ordonne (:func:`Polynome.ordonne`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Réduction (partielle) (:func:`Polynome.nreduction`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+* Factorisation (:func:`factoriser`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
+
+LaTeX
+"""""
+
+* Conversion en LaTeX (:func:`Polynome.__str__`).
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     TODO
 
 .. _polynomes_degre2:
 
@@ -521,7 +679,46 @@ Polynômes du second degré
 
    from pyromaths.classes.SecondDegre import *
 
-* TODO (:func:`Polynome.TODO`).
+Constructeur
+""""""""""""
+
+* TODO (:func:`Poly2.__init__`).
+
+  .. doctest:: polynomedegre2
+
+     >>> repr(Poly2(2, 3, 4))
+     Poly2(2, 3, 4)
+
+* TODO Options du constructeur
+
+Opérations
+""""""""""
+
+* Somme (:func:`Poly2.__add__`, :func:`Poly2.__radd__`).
+
+  .. doctest:: polynomedegre2
+
+     >>> repr(Poly2(2, 3, 4))
+     Poly2(2, 3, 4)
+
+* Différence (:func:`Poly2.__sub__`, :func:`Poly2.__rsub__`).
+
+  .. doctest:: polynomedegre2
+
+     >>> repr(Poly2(2, 3, 4))
+     Poly2(2, 3, 4)
+
+LaTeX
+"""""
+
+* Conversion en LaTeX (:func:`Poly2.__str__`).
+
+  .. doctest:: polynomedegre2
+
+     >>> repr(Poly2(2, 3, 4))
+     Poly2(2, 3, 4)
+
+* Comparaison (:func:`Poly2.print_signe`).
 
   .. doctest:: polynomedegre2
 
@@ -532,9 +729,7 @@ Polynômes du second degré
 
     Liste des fichiers dans lesquels aller chercher des classes et fonctions à documenter.
 
-    - ``classes/PolynomesCollege.py``
     - ``classes/Racine.py``
-    - ``classes/SecondDegre.py``
     - ``classes/SquareRoot.py``
     - ``classes/Terme.py``
     - ``classes/Vecteurs.py``
