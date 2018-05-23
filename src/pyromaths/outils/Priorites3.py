@@ -760,8 +760,8 @@ def texify(liste_calculs):
     from pyromaths.classes.SquareRoot import SquareRoot
     from Affichage import decimaux
     ls = []
-    enluminures = {_('indice'): r'_{', _('cancel'):r'\cancel{'}
-    isEnlumine = {_('indice'): False, _('cancel'):False}
+    enluminures = {'indice': r'_{', 'cancel':r'\cancel{'}
+    isEnlumine = {'indice': False, 'cancel':False}
     for calcul in liste_calculs:
         if isinstance(calcul, basestring): calcul = splitting(calcul)
         s = ""
