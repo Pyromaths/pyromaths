@@ -33,6 +33,13 @@ import sys
 # Quick and dirty definition of `_` as the identity function
 gettext.install('pyromaths', unicode=1)
 
+from os.path import dirname, realpath, split, join
+from os import pardir
+basedir = dirname(realpath(__file__))
+_path, _dir = split(basedir)
+sys.path[0] = realpath(join(_path, pardir))
+exec ("from pyromaths import pyromaths")
+
 from pyromaths.cli import exercise_argument, PyromathsException
 from pyromaths.ex.test import TestPerformer, generate
 

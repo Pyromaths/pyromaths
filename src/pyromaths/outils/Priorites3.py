@@ -274,13 +274,16 @@ def splitting(calcul):
     ['-6', '*', '(-11)', '*', '(-5)']
     >>> Priorites3.splitting("Fraction(1,7)x^2-Fraction(3,8)x-1")
     ['Fraction(1,7)', 'x', '^', '2', '-', 'Fraction(3,8)', 'x', '-', '1']
+    >>> splitting('-7**2')
+    ['-', '7', '**', '2']
 
     :rtype: list
     """
     if calcul == "": return []
     l = split_calcul(calcul)
     if l[0] == "+" and len(l) > 1: l[0] += l.pop(1)
-    elif l[0] == "-" and len(l) > 1 and l[1][0] in "0123456789": l[0] += l.pop(1)
+    elif l[0] == "-" and len(l) > 1 and l[1][0] in "0123456789":
+        if len(l)==2 or (len(l)>2 and l[2]!="**" and l[2]!="^"): l[0] += l.pop(1)
     j = 0
     while j < len(l):
         op, i, t = l[j], 0, []
@@ -694,8 +697,8 @@ def priorites(calcul):
 
     :rtype: list
     """
-    #calcul = splitting(calcul)
-    calcul = split_calcul(calcul)
+    calcul = splitting(calcul)
+    #calcul = split_calcul(calcul)
     solution = []
     while len(calcul) > 1:
         s = effectue_calcul(calcul)
