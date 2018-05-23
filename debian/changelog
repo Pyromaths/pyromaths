@@ -1,3 +1,9 @@
+pyromaths (18.5.7-1) bionic; urgency=medium
+
+  * Correction de bugs
+
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Wed, 23 May 2018 18:32:38 +0200
+
 pyromaths (18.5.6-1) bionic; urgency=medium
 
   * Problème à la compilation des sources sur le ppa
