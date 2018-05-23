@@ -21,7 +21,7 @@
 #
 
 import random
-from pyromaths.outils.Fractions import Fraction
+from pyromaths.classes.Fractions import Fraction
 
 def proba(exo, cor):
     couleur = ['bleue', 'rouge', 'jaune', 'verte', 'marron', 'orange']
@@ -48,9 +48,9 @@ def proba(exo, cor):
         plur3 = ""
     exos = [u"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule%s %s%s (%s), indiscernables au toucher. On tire successivement et sans remise deux boules." % (n1, plur1, c1, plur1, i1, n2, plur2, c2, plur2, i2, n3, plur3, c3, plur3, i3),
     "\\begin{enumerate}",
-    u"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?" % c2,
+    u"\\item Quelle est la probabilité de tirer une boule %s au premier tirage ?" % c2,
     u"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire.",
-    u"\\item Quelle est la probabilité que la première boule soit %s et la deuxième soit %s?" % (c3, c2),
+    u"\\item Quelle est la probabilité que la première boule soit %s et la deuxième soit %s ?" % (c3, c2),
     u"\\item Quelle est la probabilité que la deuxième boule soit %s ?" % c1,
     "\\end{enumerate}"]
     tot = n1 + n2 + n3
@@ -63,7 +63,7 @@ def proba(exo, cor):
     cors = [u"Dans une urne, il y a %s boule%s %s%s (%s), %s boule%s %s%s (%s) et %s boule%s %s%s (%s), indiscernables au toucher. On tire successivement et sans remise deux boules." % (n1, plur1, c1, plur1, i1, n2, plur2, c2, plur2, i2, n3, plur3, c3, plur3, i3),
 
          "\\begin{enumerate}",
-         u"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?\\par " % c2,
+         u"\\item Quelle est la probabilité de tirer une boule %s au premier tirage ?\\par " % c2,
          "Il y a %s boules dans l'urne dont %s boule%s %s%s. \\par" % (tot, n2, plur2, c2, plur2),
          u" La probabilité de tirer une boule %s au premier tirage est donc $\\dfrac{%s}{%s}$." % (c2, n2, tot),
          u"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire.\\\ [0,3cm] ",
@@ -94,16 +94,17 @@ def proba(exo, cor):
          "\\rput(60,0){%s} \\rput(70,0){%s} \\rput(80,0){%s}" % (i1, i2, i3),
          "\\end{pspicture}",
          "\\vspace{0.3cm}",
-         u"\\item Quelle est la probabilité que la première boule soit %s et la deuxième soit %s?\\par" % (c3, c2),
-         u"On utilise l'arbre construit précédemment.\\par",
-         "$p(%s,%s)=%s \\times %s = %s$\\par" % \
+         u"\\item Quelle est la probabilité que la première boule soit %s et la deuxième soit %s ?\\par" % (c3, c2),
+         u"On note $(\\mathrm %s~,~\\mathrm %s)$ l'évènement: \\og{}la première boule tirée est %s et la deuxième tirée est %s\\fg{} et " % (i3,i2,c3,c2),
+         u"on utilise l'arbre construit précédemment.\\par",
+         "$p\\,(\\mathrm %s~,~\\mathrm %s)=%s \\times %s = %s$\\par" % \
                 (i3, i2, str(Fraction(n3, tot)),
                  str(Fraction(n2, tot - 1)),
                  str(Fraction(n3 * n2, tot * (tot - 1)))),
          u"La probabilité que la première boule soit %s et la deuxième soit %s est égale à $\\dfrac{%s}{%s}$." % (c3, c2, n3 * n2, tot * (tot - 1)),
          u"\\item Quelle est la probabilité que la deuxième boule soit %s ?\\par" % c1,
-         u"On note (?, %s) l'évènement: la deuxième boule tirée est %s. \\par" % (i1, c1),
-         "$p(?,%s)=p(%s,%s)+p(%s,%s)+p(%s,%s,)=" % (i1, i1, i1, i2, i1, i3, i1) + p41 + p42 + p43 + result4 + "$",
+         u"On note $(?~,~\\mathrm %s)$ l'évènement: \\og{}la deuxième boule tirée est %s\\fg{}. \\par" % (i1, c1),
+         "$p\\,(?~,~\\mathrm %s)=p\\,(\\mathrm %s~,~\\mathrm %s)+p\\,(\\mathrm %s~,~\\mathrm %s)+p\\,(\\mathrm %s~,~\\mathrm %s)=" % (i1, i1, i1, i2, i1, i3, i1) + p41 + p42 + p43 + result4 + "$",
          "\\end{enumerate}"]
     for st in exos:
         exo.append(st)
