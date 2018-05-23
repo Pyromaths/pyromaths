@@ -13,6 +13,10 @@ Cette section est à lire si vous vous posez la question : *« Quels outils exi
 
    À vous de voir ce que vous en faîtes !
 
+.. note::
+
+    Le type de la valeur retournée par plusieurs de ces méthodes est soit une classe (:class:`Fraction`, :class:`Polynome`, etc.), soit une chaîne de caractère, qui peut ensuite être manipulée avec le module :mod:`pyromaths.outils.Priorites3`.
+
 .. contents::
    :local:
 
@@ -58,10 +62,7 @@ Opérations mathématiques
 
 .. note::
 
-    * Pour la plupart des opérations, le résultat n'est pas simplifié. Voir la partie :ref:`operations_specifiques_fractions`.
-    * Le type de la valeur retournée par ces méthode est soit une :class:`Fraction`, soit une chaîne de caractère, qui peut ensuite être manipulée avec le module :mod:`pyromaths.outils.Priorites3`.
-
-La partie :ref:`calculs_etapes_fractions` décrit quelques fonctions utiles pour détailler les calculs de certaines opérations sur les fractions.
+    Pour la plupart des opérations, le résultat n'est pas simplifié. Voir la partie :ref:`operations_specifiques_fractions`.
 
 * Somme (:func:`Fraction.__add__` et :func:`Fraction.__radd__`).
 
@@ -226,8 +227,9 @@ Conversions
   .. doctest:: fraction
 
       >>> int(Fraction(15, 5))
-      5
+      3
       >>> int(Fraction(15, 6))
+      Traceback (most recent call last):
         ...
       AssertionError: La fraction n'est pas un nombre entier !
 
@@ -246,6 +248,8 @@ LaTeX
      8
      >>> str(Fraction('-5*2', '3*2', 'r'))
      \dfrac{-5_{\times 2}}{3_{\times 2}}
+
+.. _polynomes:
 
 Polynômes
 ---------
@@ -478,9 +482,7 @@ Conversion en LaTeX
 Polynômes (collège)
 -------------------
 
-.. TODO::
-
-   À compléter
+Cette classe vise à manipuler les polynômes avec un niveau collège. Elle inclut par exemple des outils pour détailler des calculs.
 
 .. testsetup:: polynomescollege
 
@@ -495,8 +497,37 @@ Constructeur
 
      >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
      Polynome([[-3, 2], [2, 1], [1, 0]], "x", 0)
+     >>> repr(Polynome("2x^4-3+x^3"))
+     Polynome([[2, 4], [-3, 0], [1, 3]], "x", 0)
 
-* TODO Options du constructeur
+* Les monômes peuvent se repéter.
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 2], [1, 2]]))
+     Polynome([[-3, 2], [2, 2], [1, 2]], "x", 0)
+
+* La variable du polynôme peut être changée avec l'argument ``var``.
+
+  .. doctest:: polynomescollege
+
+     >>> str(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     -3\,x^{2}+2\,x+1
+     >>> str(Polynome([[-3, 2], [2, 1], [1, 0]], var="z"))
+     -3\,z^{2}+2\,z+1
+
+* L'argument ``details`` décrit le niveau de détails voulus dans les développements et réductions.
+
+  .. doctest:: polynomescollege
+
+     >>> repr(Polynome([[-3, 2], [2, 2], [1, 0]], details=0).nreduction())
+     Polynome([[-1, 2], [1, 0]], "x", 0)
+     >>> repr(Polynome([[-3, 2], [2, 2], [1, 0]], details=3).nreduction())
+     Polynome([['-3+2', 2], [1, 0]], "x", 3)
+     >>> repr(Polynome([[2, 1], [1, 0]], details=0) + Polynome([[2, 1], [1, 0]], details=0))
+     Polynome([[4, 1], [2, 0]], "x", 0)
+     >>> repr(Polynome([[2, 1], [1, 0]], details=3) + Polynome([[2, 1], [1, 0]], details=3))
+     Polynome([[2, 1], [2, 1], [1, 0], [1, 0]], "x", 3)
 
 Caractéristiques
 """"""""""""""""
@@ -505,22 +536,24 @@ Caractéristiques
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> Polynome([[-3, 2], [2, 1], [1, 0]])[0]
+     [-3, 2]
+     >>> Polynome([[-3, 2], [2, 1], [1, 0]])[1]
+     [2, 1]
 
 * Nombre de monômes (:func:`Polynome.__len__`).
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> len(Polynome([[-3, 1], [2, 1], [1, 0]]))
+     3
 
-* Degré (:func:`Polynome.__degre__`).
+* Degré (:func:`Polynome.degre`).
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> Polynome([[-3, 2], [2, 1], [1, 0]]).degre()
+     2
 
 Opérations
 """"""""""
@@ -529,117 +562,161 @@ Opérations
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]) + Polynome([[2, 2], [-1, 0]]))
+     Polynome([[-1, 2], [2, 1]], "x", 0)
 
-* Comparaison (:func:`Polynome.__eq__`, :func:`Polynome.__ne__`).
+* Comparaison (:func:`Polynome.__eq__`, :func:`Polynome.__ne__`). Les polynômes sont ordonnés avant comparaison, mais pas réduits.
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> Polynome([[-3, 2], [2, 1], [1, 0]]) == Polynome([[-3, 2], [1, 0], [2, 1]])
+     True
+     >>> Polynome([[1, 1], [1, 1]]) == Polynome([[2, 1]])
+     False
 
 * Différence (:func:`Polynome.__sub__`, :func:`Polynome.__rsub__`).
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]) - Polynome([[2, 1]]))
+     Polynome([[-3, 2], [1, 0]], "x", 0)
 
 * Opposé (:func:`Polynome.__neg__`).
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> repr(-Polynome([[-3, 2], [2, 1], [1, 0]]))
+     Polynome([[3, 2], [-2, 1], [-1, 0]], "x", 0)
 
 * Positif (:func:`Polynome.__pos__`).
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> repr(+Polynome([[-3, 2], [2, 1], [1, 0]]))
+     Polynome([[-3, 2], [2, 1], [1, 0]], "x", 0)
 
-* Produit (:func:`Polynome.__mul__`, :func:`Polynome.__rmul__`).
+* Produit (:func:`Polynome.__mul__`, :func:`Polynome.__rmul__`). Le résultat dépend de la valeur de l'attribut ``details`` (définit dans le constructeur). Le résultat n'est pas réduit.
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> Polynome([[2, 1], [1, 0]]) * Polynome([[1, 1], [1, 0]])
+     Polynome([[2, 2]], "x", 0)+Polynome([[2, 1]], "x", 0)+Polynome([[1, 1]], "x", 0)+Polynome([[1, 0]], "x", 0)
+     >>> Polynome([[2, 1], [1, 0]], details=0) * Polynome([[1, 1], [1, 0]])
+     Polynome([[2, 2]], "x", 0)+Polynome([[2, 1]], "x", 0)+Polynome([[1, 1]], "x", 0)+Polynome([[1, 0]], "x", 0)
+     >>> Polynome([[2, 1], [1, 0]], details=1) * Polynome([[1, 1], [1, 0]])
+     Polynome([[2, 1]], "x", 1)*Polynome([[1, 1]], "x", 1)+Polynome([[2, 1]], "x", 1)*Polynome([[1, 0]], "x", 1)+Polynome([[1, 0]], "x", 1)*Polynome([[1, 1]], "x", 1)+Polynome([[1, 0]], "x", 1)*Polynome([[1, 0]], "x", 1)
 
 * Modulo (:func:`Polynome.__mod__`).
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> Polynome([[-3, 2], [2, 1], [1, 0]]) % Polynome([[1, 1]])
+     1
 
 * Dividende (:func:`Polynome.__floordiv__`).
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]) // Polynome([[1, 1]]))
+     Polynome([[-3, 1], [2, 0]], "x", 0)
 
 * Puissance (:func:`Polynome.__pow__`).
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> Polynome([[2, 1], [1, 0]])**2
+     Polynome([[2, 1]], "x", 0)**2+2*Polynome([[2, 1]], "x", 0)*Polynome([[1, 0]], "x", 0)+Polynome([[1, 0]], "x", 0)**2
+
 
 
 Opérations spécifiques
 """"""""""""""""""""""
 
-* Calcul d'images (:func:`Polynome.__call__`).
+* Calcul d'images (:func:`Polynome.__call__`). Cette méthode ne calcule rien, mais renvoie le calcul à effectuer.
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> Polynome([[-3, 2], [2, 1], [1, 0]])(2)
+     -3*2**2+2*2+1
+     >>> Polynome([[-3, 2], [2, 1], [1, 0]])("z")
+     -3*'z'**2+2*'z'+1
+     >>> # Les parenthèses ne sont pas ajoutées pour les arguments « composés »
+     >>> Polynome([[-3, 2], [2, 1], [1, 0]])("z+1")
+     -3*'z+1'**2+2*'z+1'+1
+
 
 * Dérivée (:func:`Polynome.derive`).
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]).derive())
+     Polynome([[-6, 1], [2, 0]], "x", 0)
 
-* Caractère réductible (:func:`Polynome.reductible`).
+
+
+* Caractère réductible ou ordonnable (:func:`Polynome.reductible`).
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> Polynome([[-3, 2], [2, 1], [1, 1]]).reductible()
+     True
+     >>> Polynome([[-3, 2], [2, 1], [1, 0]]).reductible()
+     False
 
 * Caractère ordonnable (:func:`Polynome.ordonnable`).
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> Polynome([[-3, 2], [2, 1], [1, 0]]).ordonnable()
+     False
+     >>> Polynome([[-3, 1], [2, 2], [1, 0]]).ordonnable()
+     True
 
 * Ordonne (:func:`Polynome.ordonne`).
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> repr(Polynome([[-3, 2], [2, 3], [1, 0]]))
+     Polynome([[-3, 2], [2, 3], [1, 0]], "x", 0)
 
-* Réduction (partielle) (:func:`Polynome.nreduction`).
+
+* Réduction (partielle) (:func:`Polynome.nreduction`). Le résultat dépend de la valeur de l'attribut ``details`` du constructeur.
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> repr(Polynome([[-3, 2], [2, 2], [1, 0]], details=0).nreduction())
+     Polynome([[-1, 2], [1, 0]], "x", 0)
+     >>> repr(Polynome([[-3, 2], [2, 2], [1, 0]], details=1).nreduction())
+     Polynome([[-1, 2], [1, 0]], "x", 1)
+     >>> repr(Polynome([[-3, 2], [2, 2], [1, 0]], details=2).nreduction())
+     Polynome([['-3+2', 2], [1, 0]], "x", 2)
+     >>> repr(Polynome([[-3, 2], [2, 2], [1, 0]], details=3).nreduction())
+     Polynome([['-3+2', 2], [1, 0]], "x", 3)
 
 * Factorisation (:func:`factoriser`).
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> factoriser("Polynome('4x^2+12x+9')")
+     Polynome([[2.0, 1]], "x", 0)**2+2*Polynome([[2.0, 1]], "x", 0)*Polynome([[3.0, 0]], "x", 0)+Polynome([[3.0, 0]], "x", 0)**2
+     >>> factoriser("Polynome('-4x^2+12x-9')")
+     -(Polynome([[2.0, 1]], "x", 0)**2-2*Polynome([[2.0, 1]], "x", 0)*Polynome([[3.0, 0]], "x", 0)+Polynome([[3.0, 0]], "x", 0)**2)
+     >>> factoriser("Polynome('4x^2-9')")
+     Polynome([[SquareRoot([[1, 4]]), 1]], "x", 0)**2-Polynome([[SquareRoot([[1, 9]]), 0]], "x", 0)**2
+     >>> factoriser("Polynome('3x^2-5')")
+     Polynome([[SquareRoot([[1, 3]]), 1]], "x", 0)**2-Polynome([[SquareRoot([[1, 5]]), 0]], "x", 0)**2
+     >>> factoriser("Polynome('4x^2')")
+     Polynome([[2.0, 1]], "x", 0)**2
+     >>> factoriser("Polynome('4x')")
+     None
+     >>> factoriser("Polynome('x+1')*Polynome('x+2')+Polynome('x+1')*Polynome('x+3')")
+     Polynome([[1, 1], [1, 0]], "x", 0)*(Polynome([[1, 1], [2, 0]], "x", 0)+Polynome([[1, 1], [3, 0]], "x", 0))
+     >>> factoriser("Polynome('x+1')*Polynome('x+2')+Polynome('x+1')")
+     Polynome([[1, 1], [1, 0]], "x", 0)*Polynome([[1, 1], [2, 0]], "x", 0)+Polynome([[1, 1], [1, 0]], "x", 0)*1
+     >>> factoriser("Polynome('x+1')*Polynome('x+2')+Polynome('x+1')**2")
+     Polynome([[1, 1], [1, 0]], "x", 0)*Polynome([[1, 1], [2, 0]], "x", 0)+Polynome([[1, 1], [1, 0]], "x", 0)*Polynome([[1, 1], [1, 0]], "x", 0)
+     >>> factoriser("Polynome('x+1')**2-Polynome([[81, 0]], 'x', 3)")
+     Polynome([[1, 1], [1, 0]], "x", 0)**2-Polynome([[9.0, 0]], "x", 3)**2
 
 LaTeX
 """""
@@ -648,17 +725,18 @@ LaTeX
 
   .. doctest:: polynomescollege
 
-     >>> repr(Polynome([[-3, 2], [2, 1], [1, 0]]))
-     TODO
+     >>> str(Polynome([[-3, 2], [2, 1], [1, 0]]))
+     -3\,x^{2}+2\,x+1
+     >>> str(Polynome([[-3, 2], [2, 1], [1, 0]], var="z"))
+     -3\,z^{2}+2\,z+1
+
 
 .. _polynomes_degre2:
 
 Polynômes du second degré
 -------------------------
 
-.. TODO::
-
-   À compléter
+Cette classe est moins générique que la classe :ref:`polynomes` décrite plus haut, mais elle permet de faire des opérations spécifiques aux polynômes de degré 2.
 
 .. testsetup:: polynomedegre2
 
@@ -667,14 +745,21 @@ Polynômes du second degré
 Constructeur
 """"""""""""
 
-* TODO (:func:`Poly2.__init__`).
+* Constructeur (:func:`Poly2.__init__`). Les arguments sont les valeurs des coefficients `a`, `b`, `c` du polynôme noté `ax²+bx+c`.
 
   .. doctest:: polynomedegre2
 
      >>> repr(Poly2(2, 3, 4))
      Poly2(2, 3, 4)
 
-* TODO Options du constructeur
+* L'argument `a` doit être non nul.
+
+  .. doctest:: polynomedegre2
+
+     >>> Poly2(0, 3, 4)
+     Traceback (most recent call last):
+         ...
+     AssertionError: "Erreur de définition ! a doit être différent de 0."
 
 Opérations
 """"""""""
@@ -683,15 +768,15 @@ Opérations
 
   .. doctest:: polynomedegre2
 
-     >>> repr(Poly2(2, 3, 4))
-     TODO
+     >>> repr(Poly2(2, 3, 4) + Poly2(1, 1, 0))
+     Poly2(3, 4, 4)
 
 * Différence (:func:`Poly2.__sub__`, :func:`Poly2.__rsub__`).
 
   .. doctest:: polynomedegre2
 
-     >>> repr(Poly2(2, 3, 4))
-     TODO
+     >>> repr(Poly2(2, 3, 4) - Poly2(1, 0, 1))
+     Poly2(1, 3, 3)
 
 LaTeX
 """""
@@ -700,15 +785,15 @@ LaTeX
 
   .. doctest:: polynomedegre2
 
-     >>> repr(Poly2(2, 3, 4))
-     TODO
+     >>> str(Poly2(2, 3, 4))
+     2x^2+3x+4
 
 * Comparaison (:func:`Poly2.print_signe`).
 
   .. doctest:: polynomedegre2
 
-     >>> repr(Poly2(2, 3, 4))
-     TODO
+     >>> Poly2(2, 3, 4).print_signe("\leq")
+     2x^2+3x+4 \leq 0
 
 .. TODO::
 

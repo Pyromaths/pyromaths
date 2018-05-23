@@ -8,8 +8,7 @@ from pyromaths.outils.decimaux import suppr0  # , suppr0list
 class Poly2:
     """Classe pour les polynômes du second degré."""
     def __init__(self, a, b, c):
-        if a == 0:
-            print "Erreur de définition ! a doit être différent de 0."
+        assert a != 0, u"Erreur de définition ! a doit être différent de 0."
         self.a = a
         self.b = b
         self.c = c
