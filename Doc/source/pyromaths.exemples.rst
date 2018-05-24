@@ -815,11 +815,13 @@ Nombres
      >>> suppr0(2)
      2
 
-* Conversion de décimaux en chaîne de caractères (:func:`decimaux`). Avec l'option `mathenv`, le décimal est destiné à être affiché dans un environnement mathématique.
+* Conversion de décimaux en chaîne de caractères (:func:`decimaux`). Avec l'option `mathenv`, le décimal est destiné à être affiché dans un environnement mathématique. L'argument peut être une chaîne de caractères ou un :class:`Float`.
 
   .. doctest::
 
      >>> from pyromaths.outils.decimaux import decimaux
+     >>> decimaux(-2.8)
+     -2,8
      >>> decimaux("2")
      2
      >>> decimaux("-2.67")
@@ -829,12 +831,120 @@ Nombres
      >>> decimaux("34e-1")
      3,4
      >>> decimaux("34e-1", mathenv=True)
-     3,4
+     3{,}4
      >>> decimaux("1234567890")
      1\,234\,567\,890
      >>> # Le "e" est optionnel, mais considérez cela comme un bug.
      >>> decimaux("34-1")
      3,4
+
+.. currentmodule:: pyromaths.outils.Affichage
+
+.. testsetup:: affichage
+
+   from pyromaths.outils.Affichage import *
+
+* Affichage d'un monôme de degré 1 (:func:`tex_coef`). Les options (avec les valeurs par défaut) sont :
+
+  - ``var=""`` : Variable. Par défaut, aucune variable n'est utilisée ;
+  - ``bplus=False``: Ajouter un "+" devant, si nécessaire ;
+  - ``bpn=False``: Ajouter des parenthèses, si nécessaire pour un produit (n'ajoute pas de parenthèses autour de `5x`, mais le fait pour `-5x`) ;
+  - ``bpc=False``: Ajouter des parenthèses, si nécessaire pour une puissance (n'ajoute pas de parenthèses autour de `x`, mais le fait pour `5x`).
+
+  .. doctest:: affichage
+
+     >>> # Variable
+     >>> tex_coef(5)
+     5
+     >>> tex_coef(5, var='x')
+     5\,x
+     >>> tex_coef(5, var='y')
+     5\,y
+     >>> # Signe +
+     >>> tex_coef(5, var='x', bplus=True)
+     +5\,x
+     >>> tex_coef(-5, var='x', bplus=True)
+     -5\,x
+     >>> # Parenthèses, si nécessaire pour un produit
+     >>> tex_coef(5, var='x', bpn=True)
+     5\,x
+     >>> tex_coef(-5, var='x', bpn=True)
+     \left( -5\,x\right)
+     >>> # Parenthèses, si nécessaire pour une puissance
+     >>> tex_coef(1, var='x', bpn=True, bpc=True)
+     x
+     >>> tex_coef(5, var='x', bpn=True, bpc=True)
+     \left( 5\,x\right)
+
+* Affichage de nombres décimaux, radicaux, fractionnaires, infini (:func:`TeX`). Des raccourcis sont disponibles avec les commandes suivantes. Les arguments (avec les valeurs par défaut) sont :
+
+  - ``parenthese=False`` : Affiche des parenthèses si nécessaire (autour d'un nombre négatif, par exemple).
+  - ``terme=False`` : Affiche le signe ``+`` pour un nombre positif.
+  - ``fractex='\dfrac'`` : Définit la commande à utiliser pour afficher les fractions.
+
+  .. doctest:: affichage
+
+     >>> TeX(Fraction(7,3)).strip()
+     \dfrac{7}{3}
+     >>> TeX(Fraction(7,3), fractex='\\frac').strip()
+     \frac{7}{3}
+     >>> TeX(3).strip()
+     3
+     >>> TeX(3, terme=True)
+     +3
+     >>> TeX(-1).strip()
+     -1
+     >>> TeX(-1, parenthese=True)
+     \left(-1\right)
+
+* Formate le nombre avec :func:`TeX`, sauf s'il est égal à 0 (:func:`TeXz`).
+
+  .. doctest:: affichage
+
+     >>> TeXz(0) == ""
+     True
+     >>> TeXz(2.4)
+     2,4
+
+* Raccourci pour `TeX(nombre, terme=True)` (:func:`tTeX`)
+
+  .. doctest:: affichage
+
+     >>> TeX(3)
+     3
+     >>> tTeX(3)
+     +3
+
+* Raccourci pour `TeX(nombre, parenthese=True) (:func:`pTeX`)
+
+  .. doctest:: affichage
+
+     >>> TeX(-2)
+     -2
+     >>> pTeX(-2)
+     \left(-2\right)
+     >>> pTeX(2)
+     2
+
+* Raccourci pour `TeX(nombre, fractex="\\frac")` (:func:`fTeX`)
+
+  .. doctest:: affichage
+
+     >>> TeX(Fraction(6, 7)).strip()
+     \dfrac{6}{7}
+     >>> fTeX(Fraction(6, 7)).strip()
+     \frac{6}{7}
+
+* Racine carrée (:func:`radicalTeX`)
+
+  .. doctest:: affichage
+
+     >>> radicalTeX("4.12")
+     \sqrt{4,12}
+     >>> radicalTeX(4.12)
+     \sqrt{4,12}
+     >>> radicalTeX(4000000000000)
+     \sqrt{4\,000\,000\,000\,000}
 
 .. TODO::
 
@@ -843,7 +953,6 @@ Nombres
     - ``classes/Racine.py``
     - ``classes/SquareRoot.py``
     - ``classes/Vecteurs.py``
-    - ``outils/Affichage.py``
     - ``outils/Arithmetique.py``
     - ``outils/Conversions.py``
     - ``outils/Geometrie.py``
