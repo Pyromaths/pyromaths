@@ -529,6 +529,29 @@ Constructeur
      >>> repr(Polynome([[2, 1], [1, 0]], details=3) + Polynome([[2, 1], [1, 0]], details=3))
      Polynome([[2, 1], [2, 1], [1, 0], [1, 0]], "x", 3)
 
+* Constructeur à partir d'une liste de points, en utilisant l'interpolation de Lagrange (:func:`Lagrange`). Ce polynôme est davantage destiné à être tracé qu'à être utilisé pour des calculs.
+
+  .. doctest:: polynomescollege
+
+    >>> Lagrange(((2,0), (4,2)))
+    0+Fraction(2, 2)*Polynome("x-2", details = 0)
+    >>> # Tracé d'un polynôme avec psplot
+    >>> from pyromaths.outils.Priorites3 import plotify, priorites
+    >>> plotify(priorites(Lagrange(((2,0), (4,2))))[-1])
+    1*x^1-2
+
+* Choix de points pour un polynôme de Lagrange (:func:`choix_points`).
+  Renvoie un tuple contenant `nb` coordonnées sous forme de tuple telles que les abscisses et ordonnées sont distinctes, comprises entre `min` et `max`, une abscisse n'est jamais égale à une ordonnée et la coordonnée (b, a) n'est pas listée si la coordonnée (a, b) existe.
+
+  .. doctest:: polynomescollege
+
+    >>> import random
+    >>> random.seed(0)
+    None
+    >>> choix_points(-4, 4, nb=5)
+    ((-4, 1), (-3, -1), (-1, -4), (0, -3), (1, 0))
+
+
 Caractéristiques
 """"""""""""""""
 

@@ -17,7 +17,6 @@ Table des matières
 
     intro.rst
     pyromaths.api
-    pyromaths.ex.troisiemes
     pyromaths.cli
 
 

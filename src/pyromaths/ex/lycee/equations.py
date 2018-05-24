@@ -28,13 +28,11 @@ Created on 1 janv. 2015
 from pyromaths import ex
 from random import randrange
 from math import sqrt
-from pyromaths.ex.troisiemes import notion_de_fonction
 from pyromaths.outils import Priorites3
-from pyromaths.classes.PolynomesCollege import Polynome
+from pyromaths.classes.PolynomesCollege import Polynome, Lagrange
 from pyromaths.classes.Fractions import Fraction
 
 if __name__ == '__main__':
-    from pyromaths.ex.troisiemes import notion_de_fonction
     from pyromaths.outils import Priorites3
 
     pass
@@ -83,7 +81,7 @@ class EquationGraphique(ex.TexExercise):
             #=======================================================================
             y = [y[1], y[1], y[1], y[0], y[0], y[0]]
             self.points = list([(l1[i], y[i]) for i in range(6)])
-            p = notion_de_fonction.Lagrange(self.points)
+            p = Lagrange(self.points)
             self.polynome = eval(Priorites3.priorites(p)[-1][0])
             End = True
             for val in range(13):
