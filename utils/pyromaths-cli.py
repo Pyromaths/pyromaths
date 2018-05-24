@@ -22,7 +22,7 @@ import os
 import runpy
 import sys
 
-sys.path.insert(0, os.path.realpath(os.path.join(os.path.abspath(os.path.dirname(__file__)), "..", "src")))
+sys.path.insert(0, os.path.realpath(os.path.join(os.path.abspath(os.path.dirname(__file__)), os.pardir, "src")))
 
 if __name__ == "__main__":
     runpy.run_module("pyromaths.cli", run_name="__main__")
