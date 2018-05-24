@@ -274,7 +274,7 @@ def splitting(calcul):
     ['-6', '*', '(-11)', '*', '(-5)']
     >>> Priorites3.splitting("Fraction(1,7)x^2-Fraction(3,8)x-1")
     ['Fraction(1,7)', 'x', '^', '2', '-', 'Fraction(3,8)', 'x', '-', '1']
-    >>> splitting('-7**2')
+    >>> Priorites3.splitting('-7**2')
     ['-', '7', '**', '2']
 
     :rtype: list
@@ -687,7 +687,7 @@ def priorites(calcul):
 
     >>> from pyromaths.outils import Priorites3
     >>> Priorites3.priorites('-1+5-(-5)+(-6)*1')
-    [['-1', '+', '5', '+', '5', '-', '6'], ['9', '-', '6'], ['3']]
+    [['4', '+', '5', '-', '6'], ['9', '-', '6'], ['3']]
     >>> Priorites3.priorites('-5**2+6')
     [['-', '25', '+', '6'], ['-25', '+', '6'], ['-19']]
     >>> Priorites3.priorites('Polynome([[Fraction(6, 7), 0]], "x")*Polynome([[Fraction(1,3), 1], [1,0]], "x")')
