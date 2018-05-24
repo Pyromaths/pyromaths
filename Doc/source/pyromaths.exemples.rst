@@ -795,6 +795,47 @@ LaTeX
      >>> Poly2(2, 3, 4).print_signe("\leq")
      2x^2+3x+4 \leq 0
 
+Conversion en LaTeX
+-------------------
+
+Nombres
+"""""""
+
+.. currentmodule:: pyromaths.outils.decimaux
+
+* Nombres entiers (:func:`suppr0`) : Convertit en entier un flottant égal à un entier.
+
+  .. doctest::
+
+     >>> from pyromaths.outils.decimaux import suppr0
+     >>> suppr0(2.2)
+     2.2
+     >>> suppr0(2.0)
+     2
+     >>> suppr0(2)
+     2
+
+* Conversion de décimaux en chaîne de caractères (:func:`decimaux`). Avec l'option `mathenv`, le décimal est destiné à être affiché dans un environnement mathématique.
+
+  .. doctest::
+
+     >>> from pyromaths.outils.decimaux import decimaux
+     >>> decimaux("2")
+     2
+     >>> decimaux("-2.67")
+     -2,67
+     >>> decimaux("2e1")
+     20
+     >>> decimaux("34e-1")
+     3,4
+     >>> decimaux("34e-1", mathenv=True)
+     3,4
+     >>> decimaux("1234567890")
+     1\,234\,567\,890
+     >>> # Le "e" est optionnel, mais considérez cela comme un bug.
+     >>> decimaux("34-1")
+     3,4
+
 .. TODO::
 
     Liste des fichiers dans lesquels aller chercher des classes et fonctions à documenter.
@@ -808,4 +849,3 @@ LaTeX
     - ``outils/Geometrie.py``
     - ``outils/Polynomes.py``
     - ``outils/Priorites3.py``
-    - ``outils/decimaux.py``
