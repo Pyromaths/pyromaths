@@ -148,7 +148,7 @@ def do_generate(options):
 def do_ls(options): # pylint: disable=unused-argument
     """Perform the `ls` command."""
     tests = TestPerformer()
-    for name in sorted(tests.iter_names()):
+    for name in sorted(tests.iter_names(), key=str.lower):
         print(name) # pylint: disable=superfluous-parens
 
 COMMANDS = {
