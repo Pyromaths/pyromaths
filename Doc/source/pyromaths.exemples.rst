@@ -946,6 +946,101 @@ Nombres
      >>> radicalTeX(4000000000000)
      \sqrt{4\,000\,000\,000\,000}
 
+Calculs avec étapes
+-------------------
+
+.. currentmodule:: pyromaths.outils.Priorites3
+
+.. testsetup:: priorites3
+
+   from pyromaths.outils.Priorites3 import *
+
+* Teste si l'argument est une valeur, c'est à dire un entier, un réel, un polynôme, une fraction, une racine carrée.  (:func:`EstNombre`) Attention : (-11) est considéré comme un nombre.
+
+  .. doctest:: priorites3
+
+    >>> EstNombre('-15')
+    True
+    >>> EstNombre('Polynome([[-4, 2]], "x")')
+    True
+
+* Partitionne la chaîne de caractères pour obtenir une liste d'opérateurs, de parenthèses, de polynômes et de nombres puis arrange la liste des opérandes et opérateurs (:func:`splitting`)
+
+  .. doctest:: priorites3
+
+    >>> splitting('-Polynome([[-4, 2]], "x")*6**2+3')
+    ['-', 'Polynome([[-4, 2]], "x")', '*', '6', '**', '2', '+', '3']
+    >>> splitting('-6*(-11)*(-5)')
+    ['-6', '*', '(-11)', '*', '(-5)']
+    >>> splitting("Fraction(1,7)x^2-Fraction(3,8)x-1")
+    ['Fraction(1,7)', 'x', '^', '2', '-', 'Fraction(3,8)', 'x', '-', '1']
+    >>> splitting('-7**2')
+    ['-', '7', '**', '2']
+
+* Recherche les premières parenthèses (éventuellement intérieures) dans une expression (:func:`recherche_parentheses`)
+
+  .. doctest:: priorites3
+
+    >>> recherche_parentheses(['-6', '*', '(-11)', '*', '(-5)'])
+    None
+    >>> recherche_parentheses(['-9', '-', '6', '*', '(', '(-2)', '-', '4', ')'])
+    (4, 9)
+
+* Effectue une étape du calcul en respectant les priorités (:func:`effectue_calcul`).
+
+  .. warning::
+
+    Je (auteur de cette documentation) ne sais pas comment s'utilise la valeur de retour de cette fonction. Dans les cas très simple, elle peut être convertie en LaTeX en concaténant les chaînes de caractères ; les cas compliqués ne semblent pas être utilisés dans les exercices déjà écrits.
+
+  .. doctest:: priorites3
+
+    >>> effectue_calcul(['-5', '-', '(', '(-6)', '-', '1', '+', '(-3)', ')', '*', '(-1)'])
+    ['-5', '-', '(', '-7', '-', '3', ')', '*', '(-1)']
+    >>> effectue_calcul(['-5', '-', '(', '-7', '-', '3', ')', '*', '(-1)'])
+    ['-5', '-', '-10', '*', '(-1)']
+    >>> effectue_calcul(['-5', '-', '-10', '*', '(-1)'])
+    ['-5', '-', '10']
+    >>> effectue_calcul(['-5', '-', '10'])
+    ['-15']
+    >>> effectue_calcul(['-', 'Polynome("x-1")', '*', '2'])
+    ['-', '(', 'Polynome([[2, 1]], "x", 0)', '+', 'Polynome([[-2, 0]], "x", 0)', ')']
+    >>> effectue_calcul(['4', '*', 'Polynome("x+1")', '**', '2'])
+    ['4', '*', '(', 'Polynome([[1, 1]], "x", 0)', '**', '2', '+', '2', '*', 'Polynome([[1, 1]], "x", 0)', '*', 'Polynome([[1, 0]], "x", 0)', '+', 'Polynome([[1, 0]], "x", 0)', '**', '2', ')']
+
+* Effectue un enchaînement d'opérations contenues dans calcul en respectant les priorités et en détaillant les étapes (:func:`priorites`). La valeur de retour peut ensuite être convertie en LaTeX en utilisant la fonction :ref:`texify() <texify>`, décrite ci-après.
+
+  .. doctest:: priorites3
+
+    >>> priorites('-1+5-(-5)+(-6)*1')
+    [['4', '+', '5', '-', '6'], ['9', '-', '6'], ['3']]
+    >>> priorites('-5**2+6')
+    [['-', '25', '+', '6'], ['-25', '+', '6'], ['-19']]
+    >>> priorites('Polynome([[Fraction(6, 7), 0]], "x")*Polynome([[Fraction(1,3), 1], [1,0]], "x")')
+    [['Polynome([[Fraction(6, 21, "s"), 1]], "x", 0)', '+', 'Polynome([[Fraction(6, 7), 0]], "x", 0)'], ['Polynome([[Fraction(2, 7), 1], [Fraction(6, 7), 0]], "x", 0)']]
+    >>> priorites('-Fraction(-6,1)/Fraction(-4,1)')
+    [['-', '(', 'Fraction(-6, 1)', '*', 'Fraction(1, -4)', ')'], ['-', 'Fraction("2*-3", "2*-2", "s")'], ['Fraction(-3, 2)']]
+
+.. _texify:
+
+* Convertit la liste de chaînes de caractères contenant des polynômes en liste de chaînes de caractères au format TeX (:func:`texify`)
+
+  .. doctest:: priorites3
+
+    >>> from pyromaths.classes.PolynomesCollege import Polynome
+    >>> texify([['4', '+', '5', '-', '6'], ['9', '-', '6'], ['3']])
+    ['4+5-6', '9-6', '3']
+    >>> texify(priorites('(-7)+8-Polynome([[-4, 1], [-9, 2], [-5, 0]], "x")'))
+    ['1-\\left( -4\\,x-9\\,x^{2}-5\\right) ', '1+4\\,x+9\\,x^{2}+5', '9\\,x^{2}+4\\,x+6']
+    >>> texify([['Fraction(5,6)', '**', '2']])
+    ['\\left(  \\dfrac{5}{6} \\right) ^{2}']
+
+* Convertit la chaîne de caractères contenant des polynômes en une chaîne de caractères au format psplot (:func:`plotify`)
+
+  .. doctest:: priorites3
+
+    >>> plotify('Polynome([[Fraction(-5, 192), 4], [Fraction(2, 96), 3], [Fraction(41, 48), 2], [Fraction(-7, 12), 1], [-4, 0]], "x", False)')
+    -5/192*x^4+2/96*x^3+41/48*x^2-7/12*x^1-4
+
 .. TODO::
 
     Liste des fichiers dans lesquels aller chercher des classes et fonctions à documenter.
@@ -957,4 +1052,3 @@ Nombres
     - ``outils/Conversions.py``
     - ``outils/Geometrie.py``
     - ``outils/Polynomes.py``
-    - ``outils/Priorites3.py``
