@@ -7,6 +7,10 @@ import pkgutil
 import types
 import sys
 
+import jinja2
+
+from pyromaths import Values
+
 class Exercise(object):
     ''' Base class for all exercise types. '''
 
@@ -176,3 +180,56 @@ def load_levels(pkg=None, recursive=True):
                     levels[lvl] = sublevels[lvl]
 
     return levels
+
+################################################################################
+# Exercices créés à partir de templates Jinja2
+
+TEMPLATEDIR = os.path.join(
+    Values.data_dir(),
+    "ex",
+    "templates",
+    )
+
+class Jinja2Exercice(TexExercise):
+    """Exercice utilisant un template jinja2."""
+
+    def __init__(self):
+        super(Jinja2Exercice, self).__init__()
+        self.context = {}
+
+    @property
+    def environment(self):
+        """Création de l'environnement Jinja2, duquel sera chargé le template."""
+        environment = jinja2.Environment(
+            loader=jinja2.FileSystemLoader(TEMPLATEDIR)
+        )
+        environment.block_start_string = '(*'
+        environment.block_end_string = '*)'
+        environment.variable_start_string = '(('
+        environment.variable_end_string = '))'
+        environment.comment_start_string = '(% comment %)'
+        environment.comment_end_string = '(% endcomment %)'
+        environment.line_comment_prefix = '%!'
+        environment.trim_blocks = True
+        environment.lstrip_blocks = True
+
+        return environment
+
+    @property
+    def statement_name(self):
+        """Nom du fichier de l'énoncé (sans le répertoire)."""
+        return os.path.join("{}-statement.tex".format(self.__class__.__name__))
+
+    @property
+    def answer_name(self):
+        """Nom du fichier du corrigé (sans le répertoire)."""
+        return os.path.join("{}-answer.tex".format(self.__class__.__name__))
+
+    def tex_statement(self):
+        """Génération de l'énoncé"""
+        return [self.environment.get_template(self.statement_name).render(self.context)]
+
+    def tex_answer(self):
+        """Génération du corrigé"""
+        return [self.environment.get_template(self.answer_name).render(self.context)]
+

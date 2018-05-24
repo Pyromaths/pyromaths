@@ -1,0 +1,11 @@
+\exercice
+On considère un graphe probabiliste d'ordre 2, dont la matrice de transition est :
+
+\[
+M=\begin{pmatrix}
+0,95 & 0,05 \\
+0,45 & 0,55 \\
+\end{pmatrix}
+\]
+
+On note $P=\begin{pmatrix}x&y\end{pmatrix}$ l'état stable de ce graphe. Déterminer $x$ et $y$.

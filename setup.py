@@ -58,6 +58,8 @@ sys.path[0] = realpath(_path)
 from pyromaths.Values import VERSION
 print "Version ", VERSION
 
+COMMON_INSTALL_REQUIRES = ['jinja2']
+
 def _unix_opt():
     '''UNIX/Linux: generate Python eggs and RPM packages.'''
     return dict(
@@ -73,7 +75,7 @@ def _unix_opt():
             # ('share/pyromaths/packages',  glob('data/packages/*'))
             ] + \
             find_data_files('data/ex','share/pyromaths/ex/',['img/*.png']),
-            install_requires = ["lxml>=2.2.2"],
+            install_requires = COMMON_INSTALL_REQUIRES + ["lxml>=2.2.2"],
     )
 
 def _mac_opt():
@@ -126,8 +128,9 @@ def _mac_opt():
                      'data/images/whatsthis.png']),
             ('data/templates',        glob('data/templates/*.tex')),
             # ('data/packages',         glob('data/packages/*')),
-        ] + find_data_files('data/ex','data/ex/',['img/*.png']),
+        ] + find_data_files('data/ex','data/ex/',['img/*.png', 'templates/*.tex']),
         setup_requires = ['py2app>=0.7.3', 'lxml>=2.2.2'],
+        install_requires = COMMON_INSTALL_REQUIRES,
         options    = {'py2app': py2app},
     )
 
@@ -161,6 +164,7 @@ Name: "{commondesktop}\Pyromaths"; Filename: "{app}\pyromaths.exe"
                         )
                    ],
         setup_requires = ['py2exe'],
+        install_requires = COMMON_INSTALL_REQUIRES,
         options = dict(py2exe=dict(compressed   = True,
                                    optimize     = 2,
                                    bundle_files = 3,
