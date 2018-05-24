@@ -23,24 +23,12 @@
 
 import re
 
-def printlist(liste):
-    """Affiche chaque élément d'une liste, ligne par ligne."""
-    for element in liste:
-        print(element)
-    return False
-
 def suppr0(nombre):
     """Supprime le zéro inutile après la virgule d'un float, si c'est possible."""
     if round(nombre, 0) == nombre:
         return int(nombre)
     else:
         return nombre
-
-def suppr0list(liste):
-    """Supprime le zéro inutile après la virgule des éléments d'une liste de floats, si c'est possible."""
-    for element in liste:
-        element = suppr0(element)
-    return liste
 
 #---------------------------------------------------------------------
 # Affichages des nombres décimaux

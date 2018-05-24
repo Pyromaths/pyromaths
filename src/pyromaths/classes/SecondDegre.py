@@ -3,7 +3,7 @@
 # import random
 # from pyromaths.outils.Arithmetique import factorise, carrerise
 # from math import sqrt
-from pyromaths.outils.decimaux import suppr0  # , suppr0list
+from pyromaths.outils.decimaux import suppr0
 
 class Poly2:
     """Classe pour les polynômes du second degré."""
