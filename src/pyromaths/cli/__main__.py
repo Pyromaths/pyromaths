@@ -110,6 +110,13 @@ def argument_parser():
         )
     gui.add_argument('args', nargs=argparse.REMAINDER)
 
+    # Dummy
+    dummy = subparsers.add_parser(
+        'dummy',
+        help='Generate a dummy LaTeX file.',
+        )
+    dummy.add_argument('args', nargs=argparse.REMAINDER)
+
     return parser
 
 def do_test(options):
@@ -122,6 +129,11 @@ def do_gui(options):
     from pyromaths import pyromaths
     sys.argv = ["pyromaths"] + sys.argv[2:]
     pyromaths.main()
+
+def do_dummy(options):
+    """Action for command line 'dummy'."""
+    from . import dummy
+    dummy.main()
 
 def do_generate(options):
     """Action for command line 'generate'."""
@@ -156,6 +168,7 @@ COMMANDS = {
     "ls": do_ls,
     "test": do_test,
     "gui": do_gui,
+    "dummy": do_dummy,
     }
 
 def main():
