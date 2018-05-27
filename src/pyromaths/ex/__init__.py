@@ -9,8 +9,6 @@ import sys
 
 import jinja2
 
-from pyromaths import Values
-
 class Exercise(object):
     ''' Base class for all exercise types. '''
 
@@ -184,11 +182,13 @@ def load_levels(pkg=None, recursive=True):
 ################################################################################
 # Exercices créés à partir de templates Jinja2
 
-TEMPLATEDIR = os.path.join(
-    Values.data_dir(),
-    "ex",
-    "templates",
-    )
+def templatedir():
+    from pyromaths import Values
+    return os.path.join(
+        Values.data_dir(),
+        "ex",
+        "templates",
+        )
 
 class Jinja2Exercice(TexExercise):
     """Exercice utilisant un template jinja2."""
@@ -201,7 +201,7 @@ class Jinja2Exercice(TexExercise):
     def environment(self):
         """Création de l'environnement Jinja2, duquel sera chargé le template."""
         environment = jinja2.Environment(
-            loader=jinja2.FileSystemLoader(TEMPLATEDIR)
+            loader=jinja2.FileSystemLoader(templatedir())
         )
         environment.block_start_string = '(*'
         environment.block_end_string = '*)'
