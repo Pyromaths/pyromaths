@@ -1,3 +1,5 @@
+.. _pyromaths-cli:
+
 ==============================
 Interface en ligne de commande
 ==============================

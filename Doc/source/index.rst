@@ -16,6 +16,7 @@ Table des matières
     :numbered:
 
     intro.rst
+    ecrire
     pyromaths.api
     pyromaths.cli
 

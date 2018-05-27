@@ -1,0 +1,149 @@
+%%!TEX TS-program = latex
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc} % UTF-8
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % Prévient un bug d'affichage evince lié à [T1]{fontenc}
+\usepackage[frenchb]{babel} % francisation
+\usepackage{adjustbox}
+\usepackage[fleqn]{amsmath} % aligne le mode maths à gauche
+\usepackage{amssymb} % the amsfont symbols
+\usepackage[table, usenames, svgnames]{xcolor} % Couleurs
+\usepackage{multicol} % Multi-colonnes
+\usepackage{fancyhdr} % Mise en page, en-tête et pied de page
+\usepackage{calc} % Opérations
+\usepackage{marvosym} % Martin Vogels Symbole (\EUR)
+\usepackage{cancel} % draw diagonal lines
+\usepackage{units} % typesetting units and nice fractions
+\usepackage[autolanguage]{numprint} % écrituredes virgules
+\usepackage{tabularx} % creates a paragraph-like column whose width
+% automatically expands
+\usepackage{wrapfig} % allows figures or tables to have text wrapped around
+\usepackage{pst-eucl, pst-plot} % figures géométriques
+\usepackage{enumitem}
+\usepackage{wasysym} % Symbole Euro
+\usepackage{mathtools} % Encadrement dans align*
+\usepackage[inline]{asymptote}
+\usepackage{tkz-tab}
+\usetikzlibrary{external} % set up externalization
+\tikzexternalize[shell escape=-enable-write18] % activate externalisation
+\tikzset{%
+  external/system call={%
+    latex \tikzexternalcheckshellescape -halt-on-error
+    -interaction=batchmode -jobname "\image" "\texsource" &&
+    dvips -o "\image".ps "\image".dvi &&
+    ps2eps -f "\image.ps"
+    }
+  }
+
+%\usepackage{textcomp}
+
+\usepackage[a4paper, dvips, left=1.5cm, right=1.5cm, top=2cm,%
+bottom=2cm, marginpar=5mm, marginparsep=5pt]{geometry}
+\newcounter{exo}
+\frenchbsetup{StandardItemLabels} % remet \textbullet pour les listes
+\setlength{\headheight}{18pt}
+\setlength{\fboxsep}{5pt}
+\setlength\parindent{0em}
+\setlength\mathindent{0em}
+\setlength{\columnsep}{30pt}
+\usepackage[bookmarks=true, bookmarksnumbered=true, ps2pdf, pagebackref=true,%
+colorlinks=true,linkcolor=blue,plainpages=true,unicode]{hyperref}
+\hypersetup{pdfauthor={Jérôme Ortais},pdfsubject={Exercices de
+    mathématiques},pdftitle={Exercices créés par Pyromaths, un logiciel libre
+    en Python sous licence GPL}}
+
+\def\pshlabel#1{\psframebox*[fillcolor=White,framearc=.2]{\footnotesize $#1$}}
+\def\psvlabel#1{\psframebox*[fillcolor=White,framearc=.2]{\footnotesize $#1$}}
+
+\makeatletter
+\newcommand\styleexo[1][]{
+  \renewcommand{\theenumi}{\arabic{enumi}}
+  \renewcommand{\labelenumi}{$\blacktriangleright$\textbf{\theenumi.}}
+  \renewcommand{\theenumii}{\alph{enumii}}
+  \renewcommand{\labelenumii}{\textbf{\theenumii)}}
+  {\fontfamily{pag}\fontseries{b}\selectfont \underline{#1 \theexo}}
+  \par\@afterheading\vspace{0.5\baselineskip minus 0.2\baselineskip}}
+\newcommand*\exercice{%
+  \psset{unit=1cm, dash=4pt 4pt, PointName=default,linecolor=Maroon,
+    dotstyle=x, linestyle=solid, hatchcolor=Peru, gridcolor=Olive,
+    subgridcolor=Olive, fillcolor=Peru}
+  %\ifthenelse{\equal{\theexo}{0}}{}{\filbreak}
+  \refstepcounter{exo}%
+  \stepcounter{nocalcul}%
+  \par\addvspace{1.5\baselineskip minus 1\baselineskip}%
+  \@ifstar%
+  {\penalty-130\styleexo[Corrigé de l'exercice]}%
+  {\penalty-130\styleexo[Exercice]}%
+  }
+\newcommand{\checkedbox}[0]{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0pt}$\checkmark$}}
+\makeatother
+\newlength{\ltxt}
+\newsavebox{\mybox}
+\newlength{\wdofmybox}
+\newcommand{\figureadroite}[2]{%
+  \setlength{\ltxt}{\linewidth}
+  \sbox{\mybox}{\hbox{#1}}
+  \settowidth{\wdofmybox}{\usebox{\mybox}}
+  \addtolength{\ltxt}{-\wdofmybox}
+  \addtolength{\ltxt}{-10pt}
+  \begin{minipage}{\ltxt}
+    #2
+  \end{minipage}
+  \hfill
+  \begin{minipage}{\wdofmybox}
+    #1
+  \end{minipage}
+  }
+
+\count1=\year \count2=\year
+\ifnum\month<8\advance\count1by-1\else\advance\count2by1\fi
+\pagestyle{fancy}
+\cfoot{\textsl{\footnotesize{Année \number\count1/\number\count2}}}
+\rfoot{\textsl{\tiny{http://www.pyromaths.org}}}
+\lhead{\textsl{\footnotesize{Page \thepage/ \pageref{LastPage}}}}
+\chead{\Large{\textsc{Modèle}}}
+\rhead{\textsl{\footnotesize{Modèle}}}
+
+\begin{document}
+  \currentpdfbookmark{Les énoncés des exercices}{Énoncés}
+  \newcounter{nocalcul}[exo]
+  \renewcommand{\thenocalcul}{\Alph{nocalcul}}
+  \raggedcolumns
+  \setlength{\columnseprule}{0.5pt}
+
+  \
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % DÉBUT DE L'ÉNONCÉ
+  \exercice
+
+  Déterminer les solutions de l'équation $3x+2=-x-1$. Si nécessaire, les solutions seront arrondies au centième.
+
+  % FIN DE L'ÉNONCÉ
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \label{LastPage}
+  \newpage
+  \currentpdfbookmark{Le corrigé des exercices}{Corrigé}
+  \lhead{\textsl{{\footnotesize Page \thepage/ \pageref{LastCorPage}}}}
+  \setcounter{page}{1} \setcounter{exo}{0}
+
+  \
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % DÉBUT DU CORRIGÉ
+  \exercice*
+
+  \begin{align*}
+    3x+2 &= -x-1 \\
+    3x+x &= -1-2 \\
+    4x &= -3 \\
+    x &= -\frac{3}{4} \\
+    x &= -0,75
+  \end{align*}
+
+  L'unique solution est $x=-0,75$.
+
+  % FIN DU CORRIGÉ
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \label{LastCorPage}
+\end{document}
