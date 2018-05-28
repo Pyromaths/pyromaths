@@ -222,13 +222,22 @@ Cela peut se corriger en utilisant un `filter` personnalisé.
 Utilisation de `filters` personnalisées
 =======================================
 
-Deux problèmes sont visibles dans le corrigé défini précédemment : le nombre à virgule est écrit avec un point et (cela se voit dans certains cas), dans le cas d'un résultat entier, le code produit ``2.0`` plutôt que ``2`` (cela est dû à Python qui manipule des flottants, et écrit donc la première version pour insister sur le type flottant plutôt qu'entier).
+Deux problèmes existent dans le corrigé défini précédemment.
+
+- Le nombre à virgule est écrit avec un point et (cela se voit dans certains cas), dans le cas d'un résultat entier, le code produit ``2.0`` plutôt que ``2`` (cela est dû à Python qui manipule des flottants, et écrit donc la première version pour insister sur le type flottant plutôt qu'entier).
+- Le signe utilisé pour donner la solution est :math:`\approx`, que la solution soit exacte ou non.
 
 .. currentmodule:: pyromaths.outils.decimaux
 
-Heureusement, deux fonctions du module :mod:`pyromaths.outils.decimaux` existent dans Pyromaths pour corriger cela : :func:`suppr0` permet de supprimer le `.0` à la fin d'un flottant lorsque c'est utile, et :func:`decimaux` permet de représenter un nombre décimal en respectant les conventions françaises. Encore faut-il que ces fonctions soient accessibles depuis le `template` LaTeX.
+Heureusement, deux fonctions du module :mod:`pyromaths.outils.decimaux` existent dans Pyromaths pour corriger le premier problème : :func:`suppr0` permet de supprimer le `.0` à la fin d'un flottant lorsque c'est utile, et :func:`decimaux` permet de représenter un nombre décimal en respectant les conventions françaises. Encore faut-il que ces fonctions soient accessibles depuis le `template` LaTeX.
 
 TODO
+
+http://jinja.pocoo.org/docs/2.10/api/#custom-filters
+
+Pour corriger le second, TODO.
+
+http://jinja.pocoo.org/docs/2.10/api/#custom-tests
 
 
 Gestion des cas particuliers

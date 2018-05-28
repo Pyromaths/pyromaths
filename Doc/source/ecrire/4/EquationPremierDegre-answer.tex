@@ -1,0 +1,24 @@
+\exercice*
+
+\begin{align*}
+  (( a )) x (( "%+d"|format(b) )) &= (( c )) x (( "%+d"|format(d) )) \\
+  (( a )) x (( "%+d"|format(-c) ))x &= (( d )) (( "%+d"|format(-b) )) \\
+  (( a - c )) x &= (( d - b )) \\
+  x &= \frac{(( d - b ))}{(( a - c ))} \\
+  x &
+        (* if (d-b)/(a-c) == ((d-b)/(a-c))|int *)
+            =
+        (* else *)
+            \approx
+        (* endif *)
+        (( ((d-b)/(a-c)) | round(2) | suppr0 | decimaux ))
+\end{align*}
+
+L'unique solution est
+$x
+(* if (d-b)/(a-c) == ((d-b)/(a-c))|int *)
+    =
+(* else *)
+    \approx
+(* endif *)
+(( ((d-b)/(a-c)) | round(2) | suppr0 | decimaux ))$.
