@@ -189,6 +189,7 @@ Du côté de LaTeX, nous allons profiter de la bibliothèque jinja2 pour utilise
 L'énoncé est assez simple : il suffit de faire appel aux variables du contexte.
 
 .. literalinclude::  ecrire/3/EquationPremierDegre-statement.tex
+   :language: latex
    :linenos:
 
 Dans ce code, ``(( a ))`` et ``(( c ))`` sont remplacés par les valeurs des variables ``a`` et ``c`` du contexte, et ``(( "%+d"|format(b) ))`` est remplacé par le résultat du code Python ``"%+d" % b``, ce qui a pour effet d'écrire l'entier ``b`` *avec son signe* (qu'il soit positif ou négatif).
@@ -196,6 +197,7 @@ Dans ce code, ``(( a ))`` et ``(( c ))`` sont remplacés par les valeurs des var
 La rédaction du corrigé se fait de la même manière, en remarquant que le code ``(( d - b ))``, par exemple, est remplacé par le résultat du calcul ``d - b``. Notons également l'utilisation de ``(( ((d-b)/(a-c)) | round(2) ))``, qui permet d'arrondir le résultat du calcul ``(d-b)/(a-c)`` à deux chiffres après la virgule. L'ensemble de ces fonctions (``format``, ``round``, etc.), que jinja2 appelle `filters`, est décrit `dans la documentation officielle <http://jinja.pocoo.org/docs/2.10/templates/#list-of-builtin-filters>`__.
 
 .. literalinclude::  ecrire/3/EquationPremierDegre-answer.tex
+   :language: latex
    :linenos:
 
 Débuggage
@@ -213,42 +215,110 @@ Cette option permet de définir des commandes (du shell) qui seront executées s
 Bilan
 -----
 
-Nous avons produit l'exercice :download:`exercice.pdf <ecrire/3/exercice.pdf>`. Il fonctionne, mais il y a un petit problème dans le corrigé : le résultat (arrondi) est écrit à l'anglaise, avec un point au lieu d'une virgule.
+Nous avons produit l'exercice :download:`exercice.pdf <ecrire/3/exercice.pdf>`. Il fonctionne, mais il y a un petit problème dans le corrigé : le résultat (arrondi) est écrit à l'anglaise, avec un point au lieu d'une virgule. De plus, même dans le cas d'une solution exacte, le signe :math:`\approx` est utilisé.
 
-.. image:: ecrire/3/corrige.png
+.. figure:: ecrire/3/corrige.png
+   :align: center
 
-Cela peut se corriger en utilisant un `filter` personnalisé.
+Cela peut se corriger en plongeant un peu plus dans la documentation de jinja2.
 
-Utilisation de `filters` personnalisées
-=======================================
+Structures de contrôle, et `filters` personnalisés
+==================================================
 
 Deux problèmes existent dans le corrigé défini précédemment.
 
-- Le nombre à virgule est écrit avec un point et (cela se voit dans certains cas), dans le cas d'un résultat entier, le code produit ``2.0`` plutôt que ``2`` (cela est dû à Python qui manipule des flottants, et écrit donc la première version pour insister sur le type flottant plutôt qu'entier).
+- Le nombre à virgule est écrit avec un point et, dans le cas d'un résultat entier (ce qui n'est pas le cas ici), le code produit ``2.0`` plutôt que ``2`` (cela est dû à Python qui manipule des flottants, et écrit donc la première version pour insister sur le type flottant plutôt qu'entier).
 - Le signe utilisé pour donner la solution est :math:`\approx`, que la solution soit exacte ou non.
+
+`Filters` personnalisés
+-----------------------
 
 .. currentmodule:: pyromaths.outils.decimaux
 
 Heureusement, deux fonctions du module :mod:`pyromaths.outils.decimaux` existent dans Pyromaths pour corriger le premier problème : :func:`suppr0` permet de supprimer le `.0` à la fin d'un flottant lorsque c'est utile, et :func:`decimaux` permet de représenter un nombre décimal en respectant les conventions françaises. Encore faut-il que ces fonctions soient accessibles depuis le `template` LaTeX.
 
-TODO
+Ajoutons la méthode suivante à la classe :class:`~pyromaths.ex.troisiemes.equation.EquationPremierDegre` :
 
-http://jinja.pocoo.org/docs/2.10/api/#custom-filters
+.. literalinclude::  ecrire/4/equation.py
+   :linenos:
+   :lineno-start: 47
+   :lines: 47-54
 
-Pour corriger le second, TODO.
+Celle-ci a pour effet d'ajouter à l'environnement jinja2 les deux fonctions :func:`suppr0` et :func:`decimaux` comme des `filters`, qui sont alors accessibles depuis le `template`.
 
-http://jinja.pocoo.org/docs/2.10/api/#custom-tests
+.. literalinclude::  ecrire/4/EquationPremierDegre-answer.tex
+   :language: latex
+   :lineno-start: 14
+   :lines: 14
 
+Pour plus d'information sur les `filters` personnalisés, voir `la documentation officielle <http://jinja.pocoo.org/docs/2.10/api/#custom-filters>`__.
+
+Structures de contrôles
+-----------------------
+
+Pour corriger le second, il suffit de tester si la solution est exacte ou non. Pour cela, nous testons si la solution (multipliée par 100) est égale à la partie entière de la solution, multipliée par 100 elle aussi.
+
+.. literalinclude::  ecrire/4/EquationPremierDegre-answer.tex
+   :language: latex
+   :lineno-start: 9
+   :lines: 9-13
+
+Pour tester si la solution est exacte, nous aurions aussi pu définir un `test personnalisé <http://jinja.pocoo.org/docs/2.10/api/#custom-tests>`__.
+
+D'autres structures de contrôle sont disponibles ; elles sont détaillées dans `la documentation officielle <http://jinja.pocoo.org/docs/2.10/templates/#list-of-control-structures>`__.
+
+Bilan
+-----
+
+La source de la correction est maintenant celle-ci.
+
+.. literalinclude::  ecrire/4/EquationPremierDegre-answer.tex
+   :linenos:
+   :language: latex
+
+Elle produit :download:`ce résultat <ecrire/4/exercice.pdf>`. Notre exercice est quasiment terminé, non ? Non ! Car voici… *(musique terrifiante)* les cas particuliers…
 
 Gestion des cas particuliers
 ============================
 
+Deux cas particuliers posent problème ici.
+
+- Dans certains cas (par exemple ``utils/pyromaths-cli.py generate EquationPremierDegre:15``, les deux coefficients :math:`a` et :math:`c` de l'équation :math:`ax+b=cx+d` sont égaux, et notre programme, qui suppose qu'il existe une solution unique, essaye de la calculer, et divise par 0.
+- Dans d'autres cas (par exemple ``utils/pyromaths-cli.py generate EquationPremierDegre:18``, le programme affiche :math:`1x` (ou :math:`-1x`) alors que :math:`x` (ou :math:`-x`) suffirait, comme dans l'exemple suivant.
+
+.. figure:: ecrire/5/1x.png
+   :align: center
+
+Il y a trois manières de résoudre ces problèmes. Elles ne sont pas exclusives, et il en existe d'autres.
+
+Prise en compte avec Python
+---------------------------
+
 TODO
 
-- Erreurs (`1x`, `2x+0`, division par 0)
-  - Prendre en compte les cas particuliers avec jinja2
-  - Prendre en compte les cas particuliers en python
-  - S'arranger pour qu'il n'y ait pas de cas particuliers
+Prise en compte avec Jinja2
+---------------------------
+
+TODO
+
+Suppression des cas particuliers
+--------------------------------
+
+La méthode la plus confortable dans les cas simples est d'exclure les cas particuliers. Pour cela, au lieu d'accepter n'importe quel tirage de nos coefficients, s'ils ne nous conviennent pas, nous recommençons.
+
+Avec cette méthode, pas besoin de toucher aux `templates` : nous modifions simplement le constructeur de la classe :class:`~pyromaths.ex.troisiemes.equation.EquationPremierDegre`.
+
+.. literalinclude::  ecrire/5.3/equation.py
+   :linenos:
+   :lineno-start: 37
+   :lines: 37-59
+
+Bilan
+-----
+
+Supprimer les cas particuliers est sans doute le plus confortable pour écrire un exercice. Mais c'est aussi moins riche pour les élèves.
+
+Il n'y a pas de meilleure solution ici ; faites ce qui vous paraît le moins pire.
 
 Finalisation
 ============
