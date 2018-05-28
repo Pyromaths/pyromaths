@@ -73,9 +73,10 @@ Déplacez ce fichier dans un répertoire temporaire, et modifiez-le pour écrire
 
 Ne modifiez que les lignes qui correspondent à l'énoncé ou au corrigé. En particulier, ne modifiez pas le préambule.
 
-Ce fichier doit être compilé avec `latex`, puis converti en pdf avec `dvipdf`. À la fin de cette étape, nous obtenons l'énoncé suivant (:download:`tex <ecrire/1exercices.tex>`, :download:`pdf <ecrire/1exercices.pdf>`).
+Ce fichier doit être compilé avec `latex`, puis converti en pdf avec `dvipdf`. À la fin de cette étape, nous obtenons l'énoncé suivant (:download:`tex <ecrire/1/exercices.tex>`, :download:`pdf <ecrire/1/exercices.pdf>`).
 
-.. literalinclude::  ecrire/1exercices.tex
+.. literalinclude::  ecrire/1/exercices.tex
+   :language: latex
    :linenos:
    :lineno-start: 115
    :lines: 115-146
@@ -92,7 +93,8 @@ Code Python
 
 Le code Python de l'exercice doit être placé dans un des sous-dossiers de ``src/pyromaths/ex/``. Dans notre cas, ce sera ``src/pyromaths/ex/troisiemes``. Ensuite, modifiez un des fichiers `.py` déjà existant, ou créez-en un nouveau. Gardez une certaine logique : un exercice sur Pythagore a sa place dans le même fichier qu'un autre exercice sur Pythagore ; un exercice de trigonométrie n'a pas sa place dans un fichier ``matrices.py``. Dans notre cas, nous crréons un nouveau fichier contenant le code suivant.
 
-.. literalinclude:: ecrire/2equation.py
+.. literalinclude:: ecrire/2/equation.py
+   :language: python
    :linenos:
 
 Modifiez les parties suivantes :
@@ -105,16 +107,18 @@ Modifiez les parties suivantes :
 Code LaTeX
 ----------
 
-Le code LaTeX, quant à lui, doit être placé dans le répertoire ``data/ex/templates``, dans deux fichiers au nom de votre exercices. Reprenez votre fichier :download:`exercices.tex <ecrire/1exercices.tex>`, et extrayez les lignes correspondant à l'énoncé, que vous écrivez dans le fichier :download:`EquationPremierDegre-statement.tex <ecrire/2equation-statement.tex>`, et celles correspondant au corrigé dans le fichier :download:`EquationPremierDegre-answer.tex <ecrire/2equation-answer.tex>`.
+Le code LaTeX, quant à lui, doit être placé dans le répertoire ``data/ex/templates``, dans deux fichiers au nom de votre exercices. Reprenez votre fichier :download:`exercices.tex <ecrire/1/exercices.tex>`, et extrayez les lignes correspondant à l'énoncé, que vous écrivez dans le fichier :download:`EquationPremierDegre-statement.tex <ecrire/2/EquationPremierDegre-statement.tex>`, et celles correspondant au corrigé dans le fichier :download:`EquationPremierDegre-answer.tex <ecrire/2/EquationPremierDegre-answer.tex>`.
 
-L'énoncé est alors dans le fichier :download:`EquationPremierDegre-statement.tex <ecrire/2equation-statement.tex>`.
+L'énoncé est alors dans le fichier :download:`EquationPremierDegre-statement.tex <ecrire/2/EquationPremierDegre-statement.tex>`.
 
-.. literalinclude:: ecrire/2equation-statement.tex
+.. literalinclude:: ecrire/2/EquationPremierDegre-statement.tex
+   :language: latex
    :linenos:
 
-Le corrigé est dans le fichier :download:`EquationPremierDegre-answer.tex <ecrire/2equation-answer.tex>`
+Le corrigé est dans le fichier :download:`EquationPremierDegre-answer.tex <ecrire/2/EquationPremierDegre-answer.tex>`
 
-.. literalinclude:: ecrire/2equation-answer.tex
+.. literalinclude:: ecrire/2/EquationPremierDegre-answer.tex
+   :language: latex
    :linenos:
 
 Génération de l'exercice
@@ -126,7 +130,7 @@ Vous pouvez maintenant tester la génération de votre exercice, en exécutant l
 
    utils/pyromaths-cli.py generate EquationPremierDegre
 
-Vous obtenez alors le fichier :download:`exercice.pdf <ecrire/2equation.pdf>`.
+Vous obtenez alors le fichier :download:`exercice.pdf <ecrire/2/exercices.pdf>`.
 
 Bilan
 -----
