@@ -207,9 +207,8 @@ class Jinja2Exercice(TexExercise):
         environment.block_end_string = '*)'
         environment.variable_start_string = '(('
         environment.variable_end_string = '))'
-        environment.comment_start_string = '(% comment %)'
-        environment.comment_end_string = '(% endcomment %)'
-        environment.line_comment_prefix = '%!'
+        environment.comment_start_string = '(% '
+        environment.comment_end_string = ' %)'
         environment.trim_blocks = True
         environment.lstrip_blocks = True
 
