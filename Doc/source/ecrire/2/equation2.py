@@ -5,7 +5,7 @@
 # Un programme en Python qui permet de créer des fiches d'exercices types de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
 #
-# Copyright (C) 2018 -- Jérôme Ortais (jerome.ortais@pyromaths.org)
+# Copyright (C) 2018 -- Louis Paternault (spalax+python@gresille.org)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 
 from pyromaths.ex import Jinja2Exercice
 
-class EquationPremierDegre(Jinja2Exercice):
+class EquationPremierDegre2(Jinja2Exercice):
 
     description = u"Résolution d'équations du premier degré à coefficients entiers."
     level = u'3.Troisième'

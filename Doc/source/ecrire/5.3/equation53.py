@@ -5,7 +5,7 @@
 # Un programme en Python qui permet de créer des fiches d'exercices types de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
 #
-# Copyright (C) 2018 -- Jérôme Ortais (jerome.ortais@pyromaths.org)
+# Copyright (C) 2018 -- Louis Paternault (spalax+python@gresille.org)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,24 +29,38 @@ import random
 from pyromaths.ex import Jinja2Exercice
 from pyromaths.outils.decimaux import decimaux, suppr0
 
-class EquationPremierDegre(Jinja2Exercice):
+class EquationPremierDegre53(Jinja2Exercice):
 
     description = u"Résolution d'équations du premier degré à coefficients entiers."
     level = u'3.Troisième'
 
     def __init__(self):
-        super(EquationPremierDegre, self).__init__()
+        super(EquationPremierDegre53, self).__init__()
+
+        while True:
+            a = random.choice([1, -1]) * random.randint(2, 9)
+            b = random.choice([1, -1]) * random.randint(2, 9)
+            c = random.choice([1, -1]) * random.randint(2, 9)
+            d = random.choice([1, -1]) * random.randint(2, 9)
+
+            if abs(a-c) == 1:
+                # 1x ou -1x sera affiché à un moment ou à un autre. Nous excluons ce cas.
+                continue
+            if a == c:
+                # Aucune solution, ou une infinité de solutions. Nous excluons ce cas.
+                continue
+            break
 
         self.context = {
-            "a": random.choice([1, -1]) * (random.choice(range(1, 10))),
-            "b": random.choice([1, -1]) * (random.choice(range(1, 10))),
-            "c": random.choice([1, -1]) * (random.choice(range(1, 10))),
-            "d": random.choice([1, -1]) * (random.choice(range(1, 10))),
+            "a": a,
+            "b": b,
+            "c": c,
+            "d": d,
             }
 
     @property
     def environment(self):
-        environment = super(EquationPremierDegre, self).environment
+        environment = super(EquationPremierDegre53, self).environment
         environment.filters.update({
             'decimaux': decimaux,
             'suppr0': suppr0,
