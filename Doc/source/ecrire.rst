@@ -163,9 +163,9 @@ Dans cette partie, pour générer l'exercice et suivre votre travail, la command
 
 .. code-block:: shell
 
-   $ utils/pyromaths-cli.py generate EquationPremierDegre3:33
+   $ utils/pyromaths-cli.py generate EquationPremierDegre3:2
 
-Remarquez que par rapport à la commande utilisée dans la partie précédente, un ``:33`` a été ajouté à la fin de la ligne. Il correspond à la graine (`seed`) du générateur pseudo-aléatoire.
+Remarquez que par rapport à la commande utilisée dans la partie précédente, un ``:2`` a été ajouté à la fin de la ligne. Il correspond à la graine (`seed`) du générateur pseudo-aléatoire.
 
 .. note::
 
@@ -175,11 +175,11 @@ Remarquez que par rapport à la commande utilisée dans la partie précédente, 
 
   Nous gardons le même système, mais au lieu de commencer à la première décimale de π, nous utilisons désormais sur l'heure courante : si le programme est lancé à 13h37, nous utilisons alors les décimales de π à partir de la 1337e. Ainsi, deux exécutions successives donneront deux exercices différents.
 
-  C'est mieux. Mais quand nous créerons notre exercices, nous allons générer encore et encore un exercice, et nous aimerions toujours générer le même (cela facilitera le développement, pour ne pas être perturbé par des valeurs numériques qui changent ; pour qu'un bug introduit par une valeur numérique spécifique n'apparaisse et ne disparaisse pas aléatoirement). Du coup, nous imposons le début de la séquence aléatoire : c'est la signification du ``:33`` ajouté à la fin de la ligne de commande.
+  C'est mieux. Mais quand nous créerons notre exercices, nous allons générer encore et encore un exercice, et nous aimerions toujours générer le même (cela facilitera le développement, pour ne pas être perturbé par des valeurs numériques qui changent ; pour qu'un bug introduit par une valeur numérique spécifique n'apparaisse et ne disparaisse pas aléatoirement). Du coup, nous imposons le début de la séquence aléatoire : c'est la signification du ``:2`` ajouté à la fin de la ligne de commande.
 
   C'est un peu plus compliqué en réalité, mais dans les grande lignes, c'est ainsi qu'un ordinateur génère du hasard. Plus d'informations, par exemple, dans l'article de Wikipédia `Pseudorandom generator <https://en.wikipedia.org/wiki/Pseudorandom_generator>`__.
 
-Si nous voulons générer un autre exercice, il suffit de transformer le ``EquationPremierDegre3:33`` en ``EquationPremierDegre3:1729``, ``EquationPremierDegre3:0123456789``, ou n'importe quel nombre de votre choix.
+Si nous voulons générer un autre exercice, il suffit de transformer le ``EquationPremierDegre3:2`` en ``EquationPremierDegre3:1729``, ``EquationPremierDegre3:0123456789``, ou n'importe quel nombre de votre choix.
 
 Code Python
 -----------
@@ -241,7 +241,7 @@ Cette option permet de définir des commandes (du shell) qui seront executées s
 Bilan
 -----
 
-Nous avons produit l'exercice :download:`exercice.pdf <ecrire/3/exercice.pdf>`. Il fonctionne, mais il y a un petit problème dans le corrigé : le résultat (arrondi) est écrit à l'anglaise, avec un point au lieu d'une virgule. De plus, même dans le cas d'une solution exacte, le signe :math:`\approx` est utilisé.
+Nous avons produit l'exercice :download:`exercice.pdf <ecrire/3/exercice.pdf>`. Il fonctionne, mais il y a deux problèmes dans le corrigé : d'une part, alors que la solution est exacte, le signe :math:`\approx` est utilisé ; d'autre part, bien que la solution soit entière, le code a produit ``3,0`` plutôt que ``3``.
 
 .. figure:: ecrire/3/corrige.png
    :align: center
@@ -253,7 +253,7 @@ Structures de contrôle, et `filters` personnalisés
 
 Deux problèmes existent dans le corrigé défini précédemment.
 
-- Le nombre à virgule est écrit avec un point et, dans le cas d'un résultat entier (ce qui n'est pas le cas ici), le code produit ``2.0`` plutôt que ``2`` (cela est dû à Python qui manipule des flottants, et écrit donc la première version pour insister sur le type flottant plutôt qu'entier).
+- Le code produit ``3,0`` plutôt que ``3`` (cela est dû à Python qui manipule des flottants, et écrit donc la première version pour insister sur le type flottant plutôt qu'entier).
 - Le signe utilisé pour donner la solution est :math:`\approx`, que la solution soit exacte ou non.
 
 `Filters` personnalisés
@@ -261,16 +261,16 @@ Deux problèmes existent dans le corrigé défini précédemment.
 
 .. currentmodule:: pyromaths.outils.decimaux
 
-Heureusement, deux fonctions du module :mod:`pyromaths.outils.decimaux` existent dans Pyromaths pour corriger le premier problème : :func:`suppr0` permet de supprimer le `.0` à la fin d'un flottant lorsque c'est utile, et :func:`decimaux` permet de représenter un nombre décimal en respectant les conventions françaises. Encore faut-il que ces fonctions soient accessibles depuis le `template` LaTeX.
+Heureusement, une fonction du module :mod:`pyromaths.outils.decimaux` existe pour corriger le premier problème : :func:`suppr0` permet de supprimer le `.0` à la fin d'un flottant lorsque c'est utile. Encore faut-il que cette fonction soit accessible depuis le `template` LaTeX.
 
 Ajoutons la méthode suivante à la classe :class:`~pyromaths.ex.troisiemes.equation.EquationPremierDegre4` :
 
 .. literalinclude::  ecrire/4/equation4.py
    :linenos:
    :lineno-start: 47
-   :lines: 47-54
+   :lines: 47-53
 
-Celle-ci a pour effet d'ajouter à l'environnement jinja2 les deux fonctions :func:`suppr0` et :func:`decimaux` comme des `filters`, qui sont alors accessibles depuis le `template`.
+Celle-ci a pour effet d'ajouter à l'environnement jinja2 la fonction :func:`suppr0` comme un `filter`, qui est alors accessible depuis le `template`.
 
 .. literalinclude::  ecrire/4/EquationPremierDegre4-answer.tex
    :language: latex
@@ -343,7 +343,7 @@ Puisque les cas particuliers sont traités avec Jinja2, le code Python est rédu
 .. literalinclude::  ecrire/5.2/equation52.py
    :linenos:
    :lineno-start: 32
-   :lines: 32-54
+   :lines: 32-53
 
 Le code LaTeX, en revanche, est plus fourni.
 

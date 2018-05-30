@@ -27,7 +27,7 @@
 import random
 
 from pyromaths.ex import Jinja2Exercice
-from pyromaths.outils.decimaux import decimaux, suppr0
+from pyromaths.outils.decimaux import suppr0
 
 class EquationPremierDegre51(Jinja2Exercice):
 
@@ -63,13 +63,13 @@ class EquationPremierDegre51(Jinja2Exercice):
         else:
             calculs.append(r"{}x &= {}\\".format(a-c, d-b))
             calculs.append(r"x&=\frac{{ {} }}{{ {} }}\\".format(d-b, a-c))
-            solution = decimaux(suppr0(round(float(d-b)/float(a-c), 2)))
+            solution = suppr0(round(float(d-b)/float(a-c), 2))
             if 100*(float(d-b)/float(a-c)) == int(100 * float(d-b)/float(a-c)):
-                calculs.append(r"x&={}\\".format(solution))
-                conclusion = r"L'unique solution est $x = {}$.".format(solution)
+                calculs.append(r"x&=\numprint{{{}}}\\".format(solution))
+                conclusion = r"L'unique solution est $x = \numprint{{{}}}$.".format(solution)
             else:
-                calculs.append(r"x&\approx{}\\".format(solution))
-                conclusion = r"L'unique solution est $x \approx {}$.".format(solution)
+                calculs.append(r"x&\approx\numprint{{{}}}\\".format(solution))
+                conclusion = r"L'unique solution est $x \approx \numprint{{{}}}$.".format(solution)
         self.context = {
             "a": a,
             "b": b,

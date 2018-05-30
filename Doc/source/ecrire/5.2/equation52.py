@@ -27,7 +27,7 @@
 import random
 
 from pyromaths.ex import Jinja2Exercice
-from pyromaths.outils.decimaux import decimaux, suppr0
+from pyromaths.outils.decimaux import suppr0
 
 class EquationPremierDegre52(Jinja2Exercice):
 
@@ -48,7 +48,6 @@ class EquationPremierDegre52(Jinja2Exercice):
     def environment(self):
         environment = super(EquationPremierDegre52, self).environment
         environment.filters.update({
-            'decimaux': decimaux,
             'suppr0': suppr0,
             })
         return environment
