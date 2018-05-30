@@ -61,7 +61,9 @@ def ask_confirm(message):
 
 def argument_parser():
     """Return an argument parser"""
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        prog="pyromaths-cli test",
+        )
     parser.add_argument(
         '-v', '--version',
         action='version',
