@@ -44,7 +44,9 @@ VERSION = "0.1.0"
 
 def argument_parser():
     """Return an argument parser"""
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        prog='pyromaths-cli',
+        )
     parser.add_argument(
         '-v', '--version',
         action='version',

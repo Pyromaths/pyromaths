@@ -109,4 +109,3 @@ Description complète
 .. argparse::
     :module: pyromaths.cli.test.__main__
     :func: argument_parser
-    :prog: pyromaths.cli.test.__main__.py
