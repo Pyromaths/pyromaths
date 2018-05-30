@@ -4,31 +4,31 @@ Puisque $P$ est l'état stable, alors $P=P\times M$.
 \begin{align*}
     P\times M &= \begin{pmatrix}x&y\end{pmatrix}\times
 \begin{pmatrix}
-0,95 & 0,05 \\
-0,45 & 0,55 \\
+  \numprint{0.95} & \numprint{0.05} \\
+  \numprint{0.45} & \numprint{0.55} \\
 \end{pmatrix}\\
 &= \begin{pmatrix}
-0,95 x + 0,45 y & 0,05 x + 0,55 y
+  \numprint{0.95} x + \numprint{0.45} y & \numprint{0.05} x + \numprint{0.55} y
 \end{pmatrix}
 \end{align*}
 
-Or $\begin{pmatrix}x&y\end{pmatrix}=P=P\times M$, donc les coefficients des matrices sont deux à deux égaux, donc $x=0,95 x + 0,45 y$.
+Or $\begin{pmatrix}x&y\end{pmatrix}=P=P\times M$, donc les coefficients des matrices sont deux à deux égaux, donc $x=\numprint{0.95} x + \numprint{0.45} y$.
 
 D'autre part, puisque $P$ est un état probabiliste, alors $x+y=1$, donc $y=1-x$. Donc, en remplaçant $y$ par $1-x$ dans l'équation précédente, on obtient :
 
 \begin{align*}
-x &= 0,95 x + 0,45 (1-x) \\
-x &= 0,95 x + 0,45 - 0,45x\\
-x-0,95 x +0,45x &= 0,45\\
-(1-0,95+0,45)x &= 0,45\\
-0,5 x &= 0,45\\
-x &= \frac{0,45}{0,5}\\
-x &= 0,9
+  x &= \numprint{0.95} x + \numprint{0.45} (1-x) \\
+  x &= \numprint{0.95} x + \numprint{0.45} - \numprint{0.45}x\\
+  x-\numprint{0.95} x +\numprint{0.45}x &= \numprint{0.45}\\
+  (1-\numprint{0.95}+\numprint{0.45})x &= \numprint{0.45}\\
+  \numprint{0.5} x &= \numprint{0.45}\\
+  x &= \frac{\numprint{0.45}}{\numprint{0.5}}\\
+x &= \numprint{0.9}
 \end{align*}
 
-Enfin, puisque $y=1-x$, alors $y=1-0,9=0,1$.
+Enfin, puisque $y=1-x$, alors $y=1-\numprint{0.9}=\numprint{0.1}$.
 
 L'unique état stable de ce graphe est donc $\begin{pmatrix}
-0,9 &
-0,1
+\numprint{0.9} &
+\numprint{0.1}
 \end{pmatrix}$.

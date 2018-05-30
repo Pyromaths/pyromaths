@@ -25,7 +25,6 @@
 """Exercice de Terminale ES, spécialité : Déterminer un état stable en utilisant un système."""
 import random
 
-from pyromaths.outils.decimaux import decimaux
 from pyromaths.ex import Jinja2Exercice
 
 # Liste des coefficients de la diagonale de la matrice de transition qui
@@ -70,11 +69,3 @@ class EtatStableSysteme2(Jinja2Exercice):
             "a": ab[0],
             "b": ab[1],
             }
-
-    @property
-    def environment(self):
-        environment = super(EtatStableSysteme2, self).environment
-        environment.filters.update({
-            'decimal': decimaux,
-            })
-        return environment

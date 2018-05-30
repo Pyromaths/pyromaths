@@ -4,31 +4,31 @@ Puisque $P$ est l'état stable, alors $P=P\times M$.
 \begin{align*}
     P\times M &= \begin{pmatrix}x&y\end{pmatrix}\times
 \begin{pmatrix}
-(( a | decimal )) & (( (1-a) | decimal )) \\
-(( (1-b) | decimal )) & (( b | decimal )) \\
+  \numprint{(( a ))} & \numprint{(( 1-a ))} \\
+  \numprint{(( 1-b ))} & \numprint{(( b ))} \\
 \end{pmatrix}\\
 &= \begin{pmatrix}
-(( a | decimal )) x + (( (1-b) | decimal )) y & (( (1-a) | decimal )) x + (( b | decimal )) y
+  \numprint{(( a ))} x + \numprint{(( 1-b ))} y & \numprint{(( 1-a ))} x + \numprint{(( b ))} y
 \end{pmatrix}
 \end{align*}
 
-Or $\begin{pmatrix}x&y\end{pmatrix}=P=P\times M$, donc les coefficients des matrices sont deux à deux égaux, donc $x=(( a | decimal )) x + (( (1-b) | decimal )) y$.
+Or $\begin{pmatrix}x&y\end{pmatrix}=P=P\times M$, donc les coefficients des matrices sont deux à deux égaux, donc $x=\numprint{(( a ))} x + \numprint{(( 1-b ))} y$.
 
 D'autre part, puisque $P$ est un état probabiliste, alors $x+y=1$, donc $y=1-x$. Donc, en remplaçant $y$ par $1-x$ dans l'équation précédente, on obtient :
 
 \begin{align*}
-x &= (( a | decimal )) x + (( (1-b) | decimal )) (1-x) \\
-x &= (( a | decimal )) x + (( (1-b) | decimal )) - (( (1-b) | decimal ))x\\
-x-(( a | decimal )) x +(( (1-b) | decimal ))x &= (( (1-b) | decimal ))\\
-(1-(( a | decimal ))+(( (1-b) | decimal )))x &= (( (1-b) | decimal ))\\
-(( (2-a-b) | decimal )) x &= (( (1-b) | decimal ))\\
-x &= \frac{(( (1-b) | decimal ))}{(( (2-a-b) | decimal ))}\\
-x &= (( ((1-b)/(2-a-b)) | decimal ))
+  x &= \numprint{(( a ))} x + \numprint{(( 1-b ))} (1-x) \\
+  x &= \numprint{(( a ))} x + \numprint{(( 1-b ))} - \numprint{(( 1-b ))}x\\
+  x-\numprint{(( a ))} x +\numprint{(( 1-b ))}x &= \numprint{(( 1-b ))}\\
+  (1-\numprint{(( a ))}+\numprint{(( 1-b ))})x &= \numprint{(( 1-b ))}\\
+  \numprint{(( 2-a-b ))} x &= \numprint{(( 1-b ))}\\
+  x &= \frac{\numprint{(( 1-b ))}}{\numprint{(( 2-a-b ))}}\\
+x &= \numprint{(( ((1-b)/(2-a-b)) ))}
 \end{align*}
 
-Enfin, puisque $y=1-x$, alors $y=1-(( ((1-b)/(2-a-b)) | decimal ))=(( ((1-a)/(2-a-b)) | decimal ))$.
+Enfin, puisque $y=1-x$, alors $y=1-\numprint{(( ((1-b)/(2-a-b)) ))}=\numprint{(( ((1-a)/(2-a-b)) ))}$.
 
 L'unique état stable de ce graphe est donc $\begin{pmatrix}
-(( ((1-b)/(2-a-b)) | decimal )) &
-(( ((1-a)/(2-a-b)) | decimal ))
+\numprint{(( ((1-b)/(2-a-b)) ))} &
+\numprint{(( ((1-a)/(2-a-b)) ))}
 \end{pmatrix}$.
