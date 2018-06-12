@@ -44,7 +44,7 @@ def mise_en_forme(file):
         cline = cline.strip()
         indent = trouve_indentation(cline, indent, lline)
         if indent < 0:
-            print _("problème")
+            print _(u"problème")
         if cline:
             chaine, indent = traite_chaine(cline, indent)
             new_tex.extend(chaine)
