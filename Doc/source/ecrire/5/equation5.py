@@ -27,41 +27,27 @@
 import random
 
 from pyromaths.ex import Jinja2Exercice
-from pyromaths.outils.decimaux import suppr0
+from pyromaths.outils.jinja2 import facteur
 
-class EquationPremierDegre53(Jinja2Exercice):
+class EquationPremierDegre5(Jinja2Exercice):
 
     description = u"Résolution d'équations du premier degré à coefficients entiers."
     level = u'3.Troisième'
 
     def __init__(self):
-        super(EquationPremierDegre53, self).__init__()
-
-        while True:
-            a = random.choice([1, -1]) * random.randint(2, 9)
-            b = random.choice([1, -1]) * random.randint(2, 9)
-            c = random.choice([1, -1]) * random.randint(2, 9)
-            d = random.choice([1, -1]) * random.randint(2, 9)
-
-            if abs(a-c) == 1:
-                # 1x ou -1x sera affiché à un moment ou à un autre. Nous excluons ce cas.
-                continue
-            if a == c:
-                # Aucune solution, ou une infinité de solutions. Nous excluons ce cas.
-                continue
-            break
+        super(EquationPremierDegre5, self).__init__()
 
         self.context = {
-            "a": a,
-            "b": b,
-            "c": c,
-            "d": d,
+            "a": random.choice([1, -1]) * random.randint(2, 9),
+            "b": random.choice([1, -1]) * random.randint(2, 9),
+            "c": random.choice([1, -1]) * random.randint(2, 9),
+            "d": random.choice([1, -1]) * random.randint(2, 9),
             }
 
     @property
     def environment(self):
-        environment = super(EquationPremierDegre53, self).environment
+        environment = super(EquationPremierDegre5, self).environment
         environment.filters.update({
-            'suppr0': suppr0,
+            'facteur': facteur,
             })
         return environment

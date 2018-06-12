@@ -27,15 +27,15 @@
 import random
 
 from pyromaths.ex import Jinja2Exercice
-from pyromaths.outils.decimaux import suppr0
+from pyromaths.outils.jinja2 import facteur
 
-class EquationPremierDegre51(Jinja2Exercice):
+class EquationPremierDegre61(Jinja2Exercice):
 
     description = u"Résolution d'équations du premier degré à coefficients entiers."
     level = u'3.Troisième'
 
     def __init__(self):
-        super(EquationPremierDegre51, self).__init__()
+        super(EquationPremierDegre61, self).__init__()
 
         a = random.choice([1, -1]) * random.randint(2, 9)
         b = random.choice([1, -1]) * random.randint(2, 9)
@@ -63,13 +63,13 @@ class EquationPremierDegre51(Jinja2Exercice):
         else:
             calculs.append(r"{}x &= {}\\".format(a-c, d-b))
             calculs.append(r"x&=\frac{{ {} }}{{ {} }}\\".format(d-b, a-c))
-            solution = suppr0(round(float(d-b)/float(a-c), 2))
+            solution = facteur(float(d-b)/float(a-c), "2")
             if 100*(float(d-b)/float(a-c)) == int(100 * float(d-b)/float(a-c)):
-                calculs.append(r"x&=\numprint{{{}}}\\".format(solution))
-                conclusion = r"L'unique solution est $x = \numprint{{{}}}$.".format(solution)
+                calculs.append(r"x&={}\\".format(solution))
+                conclusion = r"L'unique solution est $x = {}$.".format(solution)
             else:
-                calculs.append(r"x&\approx\numprint{{{}}}\\".format(solution))
-                conclusion = r"L'unique solution est $x \approx \numprint{{{}}}$.".format(solution)
+                calculs.append(r"x&\approx{}\\".format(solution))
+                conclusion = r"L'unique solution est $x \approx {}$.".format(solution)
         self.context = {
             "a": a,
             "b": b,
