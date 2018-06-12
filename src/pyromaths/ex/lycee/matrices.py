@@ -26,6 +26,7 @@
 import random
 
 from pyromaths.ex import Jinja2Exercice
+from pyromaths.outils.jinja2 import facteur
 
 # Liste des coefficients de la diagonale de la matrice de transition qui
 # donnent des états stables dont la valeur exacte a au plus trois décimales.
@@ -69,3 +70,11 @@ class EtatStableSysteme2(Jinja2Exercice):
             "a": ab[0],
             "b": ab[1],
             }
+
+    @property
+    def environment(self):
+        environment = super(EtatStableSysteme2, self).environment
+        environment.filters.update({
+            'facteur': facteur,
+            })
+        return environment
