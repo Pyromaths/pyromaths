@@ -26,7 +26,7 @@
 import random
 
 from pyromaths.ex import Jinja2Exercice
-from pyromaths.outils.jinja2 import facteur
+from pyromaths.outils.jinja2 import facteur, matrice
 
 # Liste des coefficients de la diagonale de la matrice de transition qui
 # donnent des états stables dont la valeur exacte a au plus trois décimales.
@@ -76,5 +76,61 @@ class EtatStableSysteme2(Jinja2Exercice):
         environment = super(EtatStableSysteme2, self).environment
         environment.filters.update({
             'facteur': facteur,
+            })
+        return environment
+
+class InterpolationMatrices(Jinja2Exercice):
+    # Plus ou moins inspiré du sujet de bac ES Amérique du Nord, juin 2015.
+
+    description = u"Interpolation polynomiale en utilisant des matrices"
+    level = u"0.TermES"
+
+    def __init__(self):
+        super(InterpolationMatrices, self).__init__()
+
+        X = [None, None, None]
+        while len(set(X)) != 3:
+            X = sorted([
+                random.randint(2, 9),
+                random.randint(2, 9),
+                random.randint(2, 9),
+                ])
+
+        a = b = c = 0
+        while len(set([a, b, c])) != 3:
+            a = random.choice([1, -1]) * random.randint(2, 19)
+            b = random.choice([1, -1]) * random.randint(2, 19)
+            c = random.choice([1, -1]) * random.randint(2, 19)
+        if random.randint(0, 1) == 1:
+            a = float(a) / 10
+            b = float(b) / 10
+            c = float(c) / 10
+
+        M = [
+            [X[0]**2, X[0], 1],
+            [X[1]**2, X[1], 1],
+            [X[2]**2, X[2], 1],
+            ]
+        Y = [
+            a * X[0]**2 + b * X[0] + c,
+            a * X[1]**2 + b * X[1] + c,
+            a * X[2]**2 + b * X[2] + c,
+            ]
+
+        self.context = {
+            "X": X,
+            "Y": Y,
+            "A": [a, b, c],
+            "M": M,
+            "x": random.randint(10, 19),
+            }
+
+    @property
+    def environment(self):
+        environment = super(InterpolationMatrices, self).environment
+        environment.filters.update({
+            'facteur': facteur,
+            'matrice': matrice,
+            'zip': zip,
             })
         return environment

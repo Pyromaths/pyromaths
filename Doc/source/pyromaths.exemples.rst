@@ -1193,6 +1193,12 @@ Jinja2
         >>> facteur(2, court="p*x")
         '\\numprint{2}x'
 
+* Affichage de matrices
+
+    .. doctest:: jinja2
+        >>> matrice([[1, 2], [3, 4]])
+        u'\\begin{pmatrix}\\numprint{1} & \\numprint{2}\\\\\\numprint{3} & \\numprint{4}\\\\\\end{pmatrix}'
+
 .. TODO::
 
     Liste des fichiers dans lesquels aller chercher des classes et fonctions à documenter.

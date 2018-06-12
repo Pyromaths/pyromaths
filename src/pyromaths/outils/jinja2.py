@@ -25,6 +25,7 @@
 """
 
 import math
+import numbers
 
 def facteur(nombre, court="",
             parentheses=False,
@@ -261,3 +262,33 @@ def facteur(nombre, court="",
         absolu=strabsolu,
         variable=variable,
         )
+
+def iter_facteurs(liste, short):
+    """Applique :func:`facteur` à une liste de nombres.
+
+    - Les éléments peuvent être des nombres, ou pas (auquel cas la fonction :func:`str` est appliquée).
+    - L'argument ``short`` est transmis à :func:`facteur`.
+    """
+    for element in liste:
+        if isinstance(element, numbers.Number):
+            yield facteur(element, short)
+        else:
+            yield str(element)
+
+def matrice(listes, short=""):
+    r"""Renvoit le code LaTeX d'une matrice.
+
+    - La matrice est sous la forme d'une liste de lignes (où chaque ligne est une liste de coefficients).
+    - L'argument ``short`` est transmis à :func:`facteur`.
+
+    >>> matrice([[1, 2], [3, 4]])
+    u'\\begin{pmatrix}\\numprint{1} & \\numprint{2}\\\\\\numprint{3} & \\numprint{4}\\\\\\end{pmatrix}'
+    """
+    text = u""
+    text += r"\begin{pmatrix}"
+    for ligne in listes:
+        text += " & ".join(iter_facteurs(ligne, short))
+        text += r"\\"
+    text += r"\end{pmatrix}"
+
+    return text
