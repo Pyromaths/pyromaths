@@ -65,6 +65,11 @@ def argument_parser():
             ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
         )
+    ls.add_argument(
+        "-v", "--verbose",
+        help="Affiche davantage de détails.",
+        action="store_true",
+        )
 
     # Generate
     generate_parser = subparsers.add_parser(
@@ -151,7 +156,10 @@ def do_ls(options): # pylint: disable=unused-argument
     """Perform the `ls` command."""
     tests = TestPerformer()
     for name in sorted(tests.iter_names()):
-        print(name) # pylint: disable=superfluous-parens
+        if options.verbose:
+            print(u"{}: {}".format(name, tests.exercises[name].description)) # pylint: disable=superfluous-parens
+        else:
+            print(name) # pylint: disable=superfluous-parens
 
 COMMANDS = {
     "generate": do_generate,
