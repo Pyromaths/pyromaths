@@ -1,0 +1,26 @@
+\exercice
+On considère le trinôme du second degré $f: x\mapsto \numprint{-2}\,x^2 -\numprint{6}\,x +\numprint{80}$.
+
+\begin{enumerate}
+\item
+\begin{enumerate}
+    \item Montrer que pour tout $x\in\mathbb{R}$, on a : $f\,(x)=\numprint{-2} \,\left( x -\numprint{5} \right) \, \left( x +\numprint{8} \right) $.
+    \item Montrer que pour tout $x\in\mathbb{R}$, on a : $f\,(x)=\numprint{-2} \,\left( x +\numprint{1.5} \right)^2 +\numprint{84.5}$.
+\end{enumerate}
+\item Résoudre les équations suivantes en choisissant la forme appropriée de $f$.
+\begin{enumerate}
+\item $f\,(x)=0$
+\item $f\,(x)=\numprint{80}$
+\item $f\,(x)=\numprint{84.5}$
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Dresser le tableau de variations de $f$.
+\item Dresser le tableau de signes de $f$.
+\end{enumerate}
+\item Répondre aux questions suivantes en utilisant le tableau de signes ou de variations.
+\begin{enumerate}
+\item Résoudre $f(x)\geqslant0$.
+\item Quel est l'extremum de $f$ ? Est-ce un maximum ou un minimum ? Pour quelle valeur de $x$ est-il atteint ?
+\end{enumerate}
+\end{enumerate}

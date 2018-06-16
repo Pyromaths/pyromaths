@@ -21,16 +21,12 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from pyromaths import ex
 import functools
-from math import sqrt
 import random
-from pyromaths.outils import Priorites3
 import textwrap
-from pyromaths.classes.Fractions import Fraction
-from pyromaths.classes.PolynomesCollege import Polynome, factoriser
-from pyromaths.classes.SquareRoot import SquareRoot
-from pyromaths.outils.Arithmetique import carrerise, pgcd, valeur_alea
+
+from pyromaths import ex
+from pyromaths.outils.Arithmetique import pgcd
 
 FRANCAIS_ORDINAL = {
     1: u"premier",

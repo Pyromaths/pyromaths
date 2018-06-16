@@ -1,0 +1,64 @@
+\exercice*
+\begin{enumerate}
+
+  \item
+    \begin{enumerate}
+      \item
+        \begin{itemize}
+          \item Puisque $A\,( (( X[0]|facteur ))~;~(( Y[0]|facteur )) )$ est sur la courbe de $f$, alors $f\,( (( X[0]|facteur )) )=(( Y[0]|facteur ))$, soit
+            $a \times (( X[0]|facteur ))^2+b\times (( X[0]|facteur ))+c=(( Y[0]|facteur ))$,
+            c'est-à-dire $(( (X[0]**2)|facteur(variable="a") )) + (( X[0]|facteur(variable="b") )) + c = (( Y[0]|facteur ))$.
+          \item De même, puisque $B\,( (( X[1]|facteur ))~;~(( Y[1]|facteur )) )$ est sur la courbe de $f$, alors $f\,( (( X[1]|facteur )) )=(( Y[1]|facteur ))$, soit
+            $a \times (( X[1]|facteur ))^2+b\times (( X[1]|facteur ))+c=(( Y[1]|facteur ))$,
+            c'est-à-dire $(( (X[1]**2)|facteur(variable="a") )) + (( X[1]|facteur(variable="b") )) + c = (( Y[1]|facteur ))$.
+          \item Enfin, puisque $C\,( (( X[2]|facteur ))~;~(( Y[2]|facteur )) )$ est sur la courbe de $f$, alors $f\,( (( X[2]|facteur )) )=(( Y[2]|facteur ))$, soit
+            $a \times (( X[2]|facteur ))^2+b\times (( X[2]|facteur ))+c=(( Y[2]|facteur ))$,
+            c'est-à-dire $(( (X[2]**2)|facteur(variable="a") )) + (( X[2]|facteur(variable="b") )) + c = (( Y[2]|facteur ))$.
+        \end{itemize}
+
+        On en déduit le système suivant :
+        \[ \left\{\begin{array}{rcl}
+            (( (X[0]**2)|facteur(variable="a") )) + (( X[0]|facteur(variable="b") )) + c &=& (( Y[0]|facteur )) \\
+            (( (X[1]**2)|facteur(variable="a") )) + (( X[1]|facteur(variable="b") )) + c &=& (( Y[1]|facteur )) \\
+            (( (X[2]**2)|facteur(variable="a") )) + (( X[2]|facteur(variable="b") )) + c &=& (( Y[2]|facteur )) \\
+        \end{array}\right.\]
+      \item
+
+\begin{align*}
+        \left\{\begin{array}{rcl}
+            (( (X[0]**2)|facteur(variable="a") )) + (( X[0]|facteur(variable="b") )) + c &=& (( Y[0]|facteur )) \\
+            (( (X[1]**2)|facteur(variable="a") )) + (( X[1]|facteur(variable="b") )) + c &=& (( Y[1]|facteur )) \\
+            (( (X[2]**2)|facteur(variable="a") )) + (( X[2]|facteur(variable="b") )) + c &=& (( Y[2]|facteur )) \\
+        \end{array}\right.
+&\iff
+\begin{pmatrix}
+(( (X[0]**2)|facteur(variable="a") )) + (( X[0]|facteur(variable="b") )) + c \\
+(( (X[1]**2)|facteur(variable="a") )) + (( X[1]|facteur(variable="b") )) + c \\
+(( (X[2]**2)|facteur(variable="a") )) + (( X[2]|facteur(variable="b") )) + c \\
+\end{pmatrix} = (( Y|zip|matrice ))\\
+&\iff
+(( M|matrice)) \times (( [["a"], ["b"], ["c"]]|matrice )) = (( Y|zip|matrice )) \\
+&\iff M\, X=R
+\end{align*}
+
+        Avec : $M= (( M|matrice ))$, $X= (( [["a"], ["b"], ["c"]]|matrice ))$ et $R= (( Y|zip|matrice ))$.
+    \end{enumerate}
+  \item
+    Comme $M$ est inversible, et que $M\,X = R$, alors $X = M^{-1}\times R$.
+
+    À la calculatrice, on obtient
+    $M^{-1}\times R=(( M|matrice ))^{-1}\times ((Y|zip|matrice)) = (( A|zip|matrice ))$.
+
+    Ainsi, $a=(( A[0]|facteur ))$, $b=(( A[1]|facteur ))$, et $c=(( A[2]|facteur ))$.
+  \item
+En utilisant les valeurs de $a$, $b$, et $c$ calculées précédemment, nous connaissons l'expression de la fonction : $f\,(x) = (( A[0]|facteur("X") ))  (( A[1]|facteur("sox*"))) (( A[2]|facteur("so") ))$.
+
+Nous pouvons maintenant calculer l'image de $(( x|facteur ))$ par cette fonction :
+\begin{align*}
+f\,( (( x|facteur )) )
+&= (( A[0]|facteur )) \times (( x|facteur ))^2 (( A[1]|facteur("so") )) \times (( x|facteur)) (( A[2]|facteur("so") ))\\
+&= (( (A[0]*x**2+A[1]*x+A[2])|facteur ))
+\end{align*}
+Donc $f\,( (( x|facteur )) ) = (( (A[0]*x**2+A[1]*x+A[2])|facteur ))$.
+\end{enumerate}
+

@@ -1,0 +1,41 @@
+\exercice*
+
+\begin{align*}
+  (( a )) x (( "%+d"|format(b) )) &= (( c )) x (( "%+d"|format(d) )) \\
+  (( a )) x (( "%+d"|format(-c) ))x &= (( d )) (( "%+d"|format(-b) )) \\
+  (* if a == c *)
+    0 &= (( d - b )) \\
+  (* else *)
+    (* if a - c == 1 *)
+      % Rien
+    (* elif a - c == -1 *)
+      -x &= (( d - b )) \\
+      -1 \times -x &= -1 \times (( d - b )) \\
+    (* else *)
+      (( a - c )) x &= (( d - b )) \\
+      x &= \frac{(( d - b ))}{(( a - c ))} \\
+    (* endif *)
+    x &
+         (* if 100*(d-b)/(a-c) == (100*(d-b)/(a-c))|int *)
+             =
+         (* else *)
+             \approx
+         (* endif *)
+         (( ((d-b)/(a-c)) | facteur("2") ))
+  (* endif *)
+\end{align*}
+
+(* if a == c and b == d *)
+  Puisque $0=0$ est toujours vrai, l'équation a une infinité de solutions : tous les nombres réels.
+(* elif a == c and b != d *)
+  Puisque $0=((d - b))$ est toujours faux, l'équation n'a pas de solutions.
+(* else *)
+  L'unique solution est
+  $x
+  (* if 100*(d-b)/(a-c) == (100*(d-b)/(a-c))|int *)
+      =
+  (* else *)
+      \approx
+  (* endif *)
+  (( ((d-b)/(a-c)) | facteur("2") ))$.
+(* endif *)

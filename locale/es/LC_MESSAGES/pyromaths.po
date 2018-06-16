@@ -2566,7 +2566,7 @@ msgid "Sens de variations"
 msgstr "Las variaciones en el significado"
 
 #: src/pyromaths/ex/lycee/ExoPolynome.py:284
-msgid "0.Term STG"
+msgid "0.Term STMG"
 msgstr "0.2º Bachillerato"
 
 #: src/pyromaths/ex/lycee/ExoPolynome.py:302

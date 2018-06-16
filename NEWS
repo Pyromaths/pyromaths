@@ -1,3 +1,13 @@
+Version 18.06
+* Nouvel exercice niveau terminale ES (spécialité) : Déterminer l'état stable d'un graphe probabiliste (en utilisant un système d'équations).
+* Nouvel exercice niveau terminale ES (spécialité) : Résoudre un système d'équations en utilisant les matrices.
+* Nouvel exercice niveau seconde : Bilan sur les trinômes.
+* Création d'une nouvelle classe d'exercices (rétro-compatible), pour faciliter l'écriture d'exercices en utilisant le moteur de templates jinja2.
+* Documentation : Ajout d'une page d'exemples.
+* Documentation : Ajout d'un tutoriel pour la création de nouveaux exercices.
+* Mise à jour de `cree-vignettes.py` (utilisé pour créer les vignettes des exercices).
+* Nettoyage du code ; petites corrections de bug ; améliorations diverses.
+
 Version 18.05
 * L'outils `testexo.py` a été renommé en `pyromaths.cli`.
   * C'est désormais une interface en ligne de commandes à Pyromaths

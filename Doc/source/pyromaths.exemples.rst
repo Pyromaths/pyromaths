@@ -1064,6 +1064,141 @@ Calculs avec étapes
     >>> plotify('Polynome([[Fraction(-5, 192), 4], [Fraction(2, 96), 3], [Fraction(41, 48), 2], [Fraction(-7, 12), 1], [-4, 0]], "x", False)')
     -5/192*x^4+2/96*x^3+41/48*x^2-7/12*x^1-4
 
+Jinja2
+------
+
+:ref:`Ce module <pyromaths.outils.jinja2>` fournit des outils à utiliser avec les templates `jinja2 <http://jinja2.pocoo.org>`__ (voir le :ref:`tutoriel de création d'exercices <ecrire>` pour plus d'informations).
+
+.. currentmodule:: pyromaths.outils.jinja2
+
+.. testsetup:: jinja2
+
+   from pyromaths.outils.jinja2 import *
+
+* Affichage de facteurs
+
+
+  - Cas de base
+
+      .. doctest:: jinja2
+
+        >>> facteur(2)
+        '\\numprint{2}'
+        >>> facteur(2.0)
+        '\\numprint{2}'
+        >>> facteur(2.3)
+        '\\numprint{2.3}'
+
+  - Arrondi
+
+      .. doctest:: jinja2
+
+        >>> facteur(12345.6789, arrondi=None)
+        '\\numprint{12345.6789}'
+        >>> facteur(12345.6789, arrondi=0)
+        '\\numprint{12346}'
+        >>> facteur(12345.6789, arrondi=2)
+        '\\numprint{12345.68}'
+        >>> facteur(.6789, arrondi=0)
+        '\\numprint{1}'
+        >>> facteur(.6789, arrondi=2)
+        '\\numprint{0.68}'
+
+    - Affichage (ou non) des zéros à la fin du nombre
+
+      .. doctest:: jinja2
+
+        >>> facteur(12345.6789, arrondi=None, zero=True)
+        '\\numprint{12345.6789}'
+        >>> facteur(12345, arrondi=2, zero=True)
+        '\\numprint{12345.00}'
+        >>> facteur(12345, arrondi=2, zero=False)
+        '\\numprint{12345}'
+        >>> facteur(12345.7, arrondi=2, zero=True)
+        '\\numprint{12345.70}'
+        >>> facteur(12345.7, arrondi=2, zero=False)
+        '\\numprint{12345.7}'
+
+    - Ajout de parenthèses si le nombre est négatif
+
+      .. doctest:: jinja2
+
+        >>> facteur(-2, parentheses=True)
+        '\\left(\\numprint{-2}\\right)'
+        >>> facteur(2, parentheses=True)
+        '\\numprint{2}'
+
+    - Affichage du signe `+`
+
+      .. doctest:: jinja2
+
+        >>> facteur(-2, signe=True)
+        '\\numprint{-2}'
+        >>> facteur(2, signe=True)
+        '\\numprint{+2}'
+        >>> facteur(2, signe=False)
+        '\\numprint{2}'
+
+    - Si le signe est une opération (et non pas un opérateur unaire, l'afficher à l'extérieur de ``\numprint{}``.
+
+      .. doctest:: jinja2
+
+        >>> facteur(-2, operation=False)
+        '\\numprint{-2}'
+        >>> facteur(2, signe=True, operation=False)
+        '\\numprint{+2}'
+        >>> facteur(-2, operation=True)
+        '-\\numprint{2}'
+        >>> facteur(2, signe=True, operation=True)
+        '+\\numprint{2}'
+
+    - Ne pas afficher un produit par 1 ; seulement le signe avec -1 ; ou rien avec 0.
+
+      .. doctest:: jinja2
+
+        >>> facteur(1, produit=True, variable="x")
+        '+x'
+        >>> facteur(-1, produit=True, variable="x")
+        '-x'
+        >>> facteur(0, produit=True, variable="x")
+        ''
+
+    - Variable
+
+      .. doctest:: jinja2
+
+        >>> facteur(2, variable='x')
+        '\\numprint{2}x'
+        >>> facteur(-1, produit=True, variable='x')
+        '-x'
+
+    - Version courte des arguments
+
+      .. doctest:: jinja2
+
+        >>> facteur(-2, court="2zXo")
+        '-\\numprint{2.00}x^2'
+        >>> facteur(-2, court="2zXp")
+        '\\left(\\numprint{-2.00}x^2\\right)'
+        >>> facteur(-2, court="2zY")
+        '\\numprint{-2.00}y^2'
+        >>> facteur(-1, court="y*")
+        '-y'
+        >>> facteur(1, court="p*x")
+        'x'
+        >>> facteur(-1, court="p*x")
+        '\\left(-x\\right)'
+        >>> facteur(-2, court="p*x")
+        '\\left(\\numprint{-2}x\\right)'
+        >>> facteur(2, court="p*x")
+        '\\numprint{2}x'
+
+* Affichage de matrices
+
+    .. doctest:: jinja2
+        >>> matrice([[1, 2], [3, 4]])
+        u'\\begin{pmatrix}\\numprint{1} & \\numprint{2}\\\\\\numprint{3} & \\numprint{4}\\\\\\end{pmatrix}'
+
 .. TODO::
 
     Liste des fichiers dans lesquels aller chercher des classes et fonctions à documenter.

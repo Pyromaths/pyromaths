@@ -2808,7 +2808,7 @@ msgid "Sens de variations"
 msgstr "Intervals de monotonia"
 
 #: src/pyromaths/ex/lycee/ExoPolynome.py:284
-msgid "0.Term STG"
+msgid "0.Term STMG"
 msgstr "0.2n Batxillerat"
 
 #: src/pyromaths/ex/lycee/ExoPolynome.py:302
