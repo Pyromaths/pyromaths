@@ -23,6 +23,8 @@
 #
 
 """Exercice de Terminale ES, spécialité : Déterminer un état stable en utilisant un système."""
+
+import decimal
 import random
 
 from pyromaths.ex import Jinja2Exercice
@@ -97,14 +99,21 @@ class InterpolationMatrices(Jinja2Exercice):
                 ])
 
         a = b = c = 0
-        while len(set([a, b, c])) != 3:
-            a = random.choice([1, -1]) * random.randint(2, 19)
-            b = random.choice([1, -1]) * random.randint(2, 19)
-            c = random.choice([1, -1]) * random.randint(2, 19)
+        while True:
+            a = decimal.Decimal(random.choice([1, -1]) * random.randint(2, 19))
+            b = decimal.Decimal(random.choice([1, -1]) * random.randint(2, 19))
+            c = decimal.Decimal(random.choice([1, -1]) * random.randint(2, 19))
+
+            if len(set([a, b, c])) != 3:
+                continue
+            if 10 in (abs(a), abs(b), abs(c)):
+                continue
+            break
+
         if random.randint(0, 1) == 1:
-            a = float(a) / 10
-            b = float(b) / 10
-            c = float(c) / 10
+            a = a / 10
+            b = b / 10
+            c = c / 10
 
         M = [
             [X[0]**2, X[0], 1],
