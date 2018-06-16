@@ -1,60 +1,63 @@
+\exercice*
 \begin{enumerate}
 
   \item
     \begin{enumerate}
       \item
         \begin{itemize}
-          \item Puisque $A( \numprint{4} ; \numprint{-75} )$ est sur la courbe de $f$, alors $f( \numprint{4} )=\numprint{-75}$, soit
+          \item Puisque $A\,( \numprint{4}~;~\numprint{-75} )$ est sur la courbe de $f$, alors $f\,( \numprint{4} )=\numprint{-75}$, soit
             $a \times \numprint{4}^2+b\times \numprint{4}+c=\numprint{-75}$,
-            c'est-à-dire $\numprint{16}a + \numprint{4}b + c = \numprint{-75}$.
-          \item De même, puisque $B( \numprint{5} ; \numprint{-126} )$ est sur la courbe de $f$, alors $f( \numprint{5} )=\numprint{-126}$, soit
+            c'est-à-dire $\numprint{16}\,a + \numprint{4}\,b + c = \numprint{-75}$.
+          \item De même, puisque $B\,( \numprint{5}~;~\numprint{-126} )$ est sur la courbe de $f$, alors $f\,( \numprint{5} )=\numprint{-126}$, soit
             $a \times \numprint{5}^2+b\times \numprint{5}+c=\numprint{-126}$,
-            c'est-à-dire $\numprint{25}a + \numprint{5}b + c = \numprint{-126}$.
-          \item Enfin, puisque $C( \numprint{6} ; \numprint{-191} )$ est sur la courbe de $f$, alors $f( \numprint{6} )=\numprint{-191}$, soit
+            c'est-à-dire $\numprint{25}\,a + \numprint{5}\,b + c = \numprint{-126}$.
+          \item Enfin, puisque $C\,( \numprint{6}~;~\numprint{-191} )$ est sur la courbe de $f$, alors $f\,( \numprint{6} )=\numprint{-191}$, soit
             $a \times \numprint{6}^2+b\times \numprint{6}+c=\numprint{-191}$,
-            c'est-à-dire $\numprint{36}a + \numprint{6}b + c = \numprint{-191}$.
+            c'est-à-dire $\numprint{36}\,a + \numprint{6}\,b + c = \numprint{-191}$.
         \end{itemize}
 
         On en déduit le système suivant :
         \[ \left\{\begin{array}{rcl}
-            \numprint{16}a + \numprint{4}b + c &=& \numprint{-75} \\
-            \numprint{25}a + \numprint{5}b + c &=& \numprint{-126} \\
-            \numprint{36}a + \numprint{6}b + c &=& \numprint{-191} \\
+            \numprint{16}\,a + \numprint{4}\,b + c &=& \numprint{-75} \\
+            \numprint{25}\,a + \numprint{5}\,b + c &=& \numprint{-126} \\
+            \numprint{36}\,a + \numprint{6}\,b + c &=& \numprint{-191} \\
         \end{array}\right.\]
       \item
 
 \begin{align*}
         \left\{\begin{array}{rcl}
-            \numprint{16}a + \numprint{4}b + c &=& \numprint{-75} \\
-            \numprint{25}a + \numprint{5}b + c &=& \numprint{-126} \\
-            \numprint{36}a + \numprint{6}b + c &=& \numprint{-191} \\
+            \numprint{16}\,a + \numprint{4}\,b + c &=& \numprint{-75} \\
+            \numprint{25}\,a + \numprint{5}\,b + c &=& \numprint{-126} \\
+            \numprint{36}\,a + \numprint{6}\,b + c &=& \numprint{-191} \\
         \end{array}\right.
 &\iff
 \begin{pmatrix}
-\numprint{16}a + \numprint{4}b + c \\
-\numprint{25}a + \numprint{5}b + c \\
-\numprint{36}a + \numprint{6}b + c \\
+\numprint{16}\,a + \numprint{4}\,b + c \\
+\numprint{25}\,a + \numprint{5}\,b + c \\
+\numprint{36}\,a + \numprint{6}\,b + c \\
 \end{pmatrix} = \begin{pmatrix}\numprint{-75}\\\numprint{-126}\\\numprint{-191}\\\end{pmatrix}\\
 &\iff
 \begin{pmatrix}\numprint{16} & \numprint{4} & \numprint{1}\\\numprint{25} & \numprint{5} & \numprint{1}\\\numprint{36} & \numprint{6} & \numprint{1}\\\end{pmatrix} \times \begin{pmatrix}a\\b\\c\\\end{pmatrix} = \begin{pmatrix}\numprint{-75}\\\numprint{-126}\\\numprint{-191}\\\end{pmatrix} \\
-&\iff M X=R
+&\iff M\, X=R
 \end{align*}
 
         Avec : $M= \begin{pmatrix}\numprint{16} & \numprint{4} & \numprint{1}\\\numprint{25} & \numprint{5} & \numprint{1}\\\numprint{36} & \numprint{6} & \numprint{1}\\\end{pmatrix}$, $X= \begin{pmatrix}a\\b\\c\\\end{pmatrix}$ et $R= \begin{pmatrix}\numprint{-75}\\\numprint{-126}\\\numprint{-191}\\\end{pmatrix}$.
     \end{enumerate}
   \item
-    Comme $M$ est inversible, et que $MX = R$, alors $X = M^{-1}\times R$. À la calculatrice, on obtient
-$M^{-1}\times R=\begin{pmatrix}\numprint{16} & \numprint{4} & \numprint{1}\\\numprint{25} & \numprint{5} & \numprint{1}\\\numprint{36} & \numprint{6} & \numprint{1}\\\end{pmatrix}^{-1}\times \begin{pmatrix}\numprint{-75}\\\numprint{-126}\\\numprint{-191}\\\end{pmatrix} = \begin{pmatrix}\numprint{-7}\\\numprint{12}\\\numprint{-11}\\\end{pmatrix}$.
+    Comme $M$ est inversible, et que $M\,X = R$, alors $X = M^{-1}\times R$.
+
+    À la calculatrice, on obtient
+    $M^{-1}\times R=\begin{pmatrix}\numprint{16} & \numprint{4} & \numprint{1}\\\numprint{25} & \numprint{5} & \numprint{1}\\\numprint{36} & \numprint{6} & \numprint{1}\\\end{pmatrix}^{-1}\times \begin{pmatrix}\numprint{-75}\\\numprint{-126}\\\numprint{-191}\\\end{pmatrix} = \begin{pmatrix}\numprint{-7}\\\numprint{12}\\\numprint{-11}\\\end{pmatrix}$.
 
     Ainsi, $a=\numprint{-7}$, $b=\numprint{12}$, et $c=\numprint{-11}$.
   \item
-En utilisant les valeurs de $a$, $b$, et $c$ calculées précédemment, nous connaissons l'expression de la fonction : $f(x) = \numprint{-7}x^2 + \numprint{12}x + \numprint{-11}$.
+En utilisant les valeurs de $a$, $b$, et $c$ calculées précédemment, nous connaissons l'expression de la fonction : $f\,(x) = \numprint{-7}\,x^2  +\numprint{12}\,x -\numprint{11}$.
 
 Nous pouvons maintenant calculer l'image de $\numprint{17}$ par cette fonction :
 \begin{align*}
-f( \numprint{17} )
-&= \numprint{-7} \times \numprint{17}^2 + \numprint{12} \times \numprint{17} + \numprint{-11}\\
+f\,( \numprint{17} )
+&= \numprint{-7} \times \numprint{17}^2 +\numprint{12} \times \numprint{17} -\numprint{11}\\
 &= \numprint{-1830}
 \end{align*}
-Donc $f( \numprint{17} ) = \numprint{-1830}$.
+Donc $f\,( \numprint{17} ) = \numprint{-1830}$.
 \end{enumerate}
