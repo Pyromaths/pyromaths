@@ -8,18 +8,18 @@ On considère le trinôme du second degré $f: x\mapsto (( a|facteur("X") )) (( 
     \item Soit $x\in\mathbb{R}$. Alors :
         \begin{align*}
             (( a|facteur )) \,\left( x (( -x1|facteur("so") )) \right) \, \left( x (( -x2|facteur("so") )) \right)
-            &= (( a|facteur )) \,\left(x\times x (( -x1|facteur("so") ))\times x (( -x2|facteur("so") ))\times x (( -x1|facteur("so") ))\times (( -x2|facteur("p") )) \right) \\
+            &= (( a|facteur )) \,\left(x\times{} x (( -x1|facteur("so") ))\times{} x (( -x2|facteur("so") ))\times{} x (( -x1|facteur("so") ))\times{} (( -x2|facteur("p") )) \right) \\
             &= (( a|facteur )) \,\left(x^2 (( (-x1-x2)|facteur("so*x") )) (( (x1*x2)|facteur("so*") ))\right) \\
-            &= (( a|facteur("X") )) (( a|facteur("so") ))\times(( (-x1-x2)|facteur("px") )) (( a|facteur("so") ))\times(( (x1*x2)|facteur("p") )) \\
+            &= (( a|facteur ))\times{} (( 1|facteur("p*X") )) (( a|facteur("so") ))\times{} (( (-x1-x2)|facteur("p*x") )) (( a|facteur("so") ))\times{} (( (x1*x2)|facteur("p") )) \\
             &= (( a|facteur("X") )) (( b|facteur("so*x") )) (( c|facteur("so") ))\\
             &= f\,(x)
         \end{align*}
     \item Soit $x\in\mathbb{R}$. Alors :
         \begin{align*}
             (( a|facteur ))\,\left( x (( -alpha|facteur("so") )) \right)^2 (( beta|facteur("so") ))
-            &= (( a|facteur ))\,\left( x^2 (( (-signealpha*2)|facteur("so") ))\times (( absalpha|facteur )) \times x + (( absalpha|facteur ))^2\right) (( beta|facteur("so") ))\\
-            &= (( a|facteur ))\,\left( x^2 (( (-alpha*2)|facteur("sox") )) + (( (absalpha**2)|facteur ))\right) (( beta|facteur("so") ))\\
-            &=  (( a|facteur("X") )) (( a|facteur("so") ))\times (( (-alpha*2)|facteur("px") )) (( a|facteur("so") ))\times (( (absalpha**2)|facteur )) (( beta|facteur("so") ))\\
+            &= (( a|facteur ))\,\left( x^2 (( (-signealpha*2)|facteur("so") ))\times{} (( absalpha|facteur )) \times{} x + (( absalpha|facteur ))^2\right) (( beta|facteur("so") ))\\
+            &= (( a|facteur ))\,\left( x^2 (( (-alpha*2)|facteur("so*x") )) + (( (absalpha**2)|facteur ))\right) (( beta|facteur("so") ))\\
+            &=  (( a|facteur ))\times{} (( 1|facteur("p*X") )) (( a|facteur("so") ))\times{} (( (-alpha*2)|facteur("p*x") )) (( a|facteur("so") ))\times{} (( (absalpha**2)|facteur )) (( beta|facteur("so") ))\\
             &= (( a|facteur("X") )) (( b|facteur("so*x") )) (( (a*absalpha**2)|facteur("so") )) (( beta|facteur("so") ))\\
             &= (( a|facteur("X") )) (( b|facteur("so*x") )) (( c|facteur("so") ))\\
             &= f\,(x)
@@ -43,7 +43,7 @@ f\,(x) &= (( c|facteur )) \\
 Nous pouvons maintenant factoriser le membre de gauche par $x$, ce qui nous donnera une équation produit nul.
 \begin{align*}
 (( a|facteur("X") )) (( b|facteur("so*x") )) &= 0 \\
-(( a|facteur("x") ))\times x (( b|facteur("so") ))\times x &= 0 \\
+(( a|facteur("x") ))\times{} x (( b|facteur("so") ))\times{} x &= 0 \\
 x\,\left( (( a|facteur("x") )) (( b|facteur("so") )) \right) &= 0 \\
 \end{align*}
 \begin{align*}
@@ -74,8 +74,8 @@ Il y a donc une unique solution $x=(( alpha|facteur ))$.
 (* if a > 0 *) positif (* else *) négatif (* endif *),
 donc la fonction est 
 (* if a > 0 *) décroissante puis croissante (* else *) croissante puis décroissante (* endif *).
-De plus, l'absisse du sommet est $-\frac{(( b|facteur ))}{2\times(( a|facteur("p") ))}$, soit $(( alpha|facteur ))$, et
-$f\,( (( alpha|facteur )) )=(( a|facteur ))\times(( alpha|facteur("p") ))^2 (( b|facteur("so") ))\times (( alpha|facteur("p") )) (( c|facteur("so") ))=(( beta|facteur ))$.
+De plus, l'absisse du sommet est $-\frac{(( b|facteur ))}{2\times{}(( a|facteur("p") ))}$, soit $(( alpha|facteur ))$, et
+$f\,( (( alpha|facteur )) )=(( a|facteur ))\times{}(( alpha|facteur("p") ))^2 (( b|facteur("so") ))\times{} (( alpha|facteur("p") )) (( c|facteur("so") ))=(( beta|facteur ))$.
 Le tableau de variations est donc :
 \begin{center}
     \begin{tikzpicture}
