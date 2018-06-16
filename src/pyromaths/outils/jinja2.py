@@ -248,13 +248,26 @@ def facteur(nombre, court="",
         else:
             strabsolu = "{}.{}".format(entier, decimal)
 
+    # Ajoute une espace fine entre les coefficients et les variables
+    if variable:
+        if absolu != 1 : variable= r'\,'+variable
+        else: absolu=""
+
     # Ajout éventuel des parenthèses
-    if parentheses and nombre < 0:
-        formatter = r"\left(\numprint{{{signe}{absolu}}}{variable}\right)"
-    elif operation:
-        formatter = r"{signe}\numprint{{{absolu}}}{variable}"
-    else:
-        formatter = r"\numprint{{{signe}{absolu}}}{variable}"
+    if absolu:
+        if parentheses and nombre < 0:
+            formatter = r"\left(\numprint{{{signe}{absolu}}}{variable}\right)"
+        elif operation:
+            formatter = r"{signe}\numprint{{{absolu}}}{variable}"
+        else:
+            formatter = r"\numprint{{{signe}{absolu}}}{variable}"
+    else: # supprime le 1 devant la variable
+        if parentheses and nombre < 0:
+            formatter = r"\left({signe}{variable}\right)"
+        elif operation:
+            formatter = r"{signe}{variable}"
+        else:
+            formatter = r"{signe}{variable}"
 
     # Enfin !
     return formatter.format(

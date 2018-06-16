@@ -1851,7 +1851,7 @@ msgid "Sens de variations"
 msgstr ""
 
 #: src/pyromaths/ex/lycee/ExoPolynome.py:284
-msgid "0.Term STG"
+msgid "0.Term STMG"
 msgstr ""
 
 #: src/pyromaths/ex/lycee/ExoPolynome.py:302

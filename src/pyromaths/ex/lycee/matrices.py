@@ -59,7 +59,7 @@ CANDIDATS = [
 class EtatStableSysteme2(Jinja2Exercice):
 
     description = u"Recherche d'état stable (avec un système)"
-    level = u"0.TermES"
+    level = u"0.Term ES"
 
     def __init__(self):
         super(EtatStableSysteme2, self).__init__()
@@ -83,7 +83,7 @@ class InterpolationMatrices(Jinja2Exercice):
     # Plus ou moins inspiré du sujet de bac ES Amérique du Nord, juin 2015.
 
     description = u"Interpolation polynomiale en utilisant des matrices"
-    level = u"0.TermES"
+    level = u"0.Term ES"
 
     def __init__(self):
         super(InterpolationMatrices, self).__init__()
