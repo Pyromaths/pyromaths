@@ -51,12 +51,12 @@
 
     Ainsi, $a=(( A[0]|facteur ))$, $b=(( A[1]|facteur ))$, et $c=(( A[2]|facteur ))$.
   \item
-En utilisant les valeurs de $a$, $b$, et $c$ calculées précédemment, nous connaissons l'expression de la fonction : $f\,(x) = (( A[0]|facteur("X") ))  (( A[1]|facteur("x", signe=True))) (( A[2]|facteur(signe=True) ))$.
+En utilisant les valeurs de $a$, $b$, et $c$ calculées précédemment, nous connaissons l'expression de la fonction : $f\,(x) = (( A[0]|facteur("X") ))  (( A[1]|facteur("sox*"))) (( A[2]|facteur("so") ))$.
 
 Nous pouvons maintenant calculer l'image de $(( x|facteur ))$ par cette fonction :
 \begin{align*}
 f\,( (( x|facteur )) )
-&= (( A[0]|facteur )) \times (( x|facteur ))^2 (( A[1]|facteur(signe=True) )) \times (( x|facteur)) (( A[2]|facteur(signe=True) ))\\
+&= (( A[0]|facteur )) \times (( x|facteur ))^2 (( A[1]|facteur("so") )) \times (( x|facteur)) (( A[2]|facteur("so") ))\\
 &= (( (A[0]*x**2+A[1]*x+A[2])|facteur ))
 \end{align*}
 Donc $f\,( (( x|facteur )) ) = (( (A[0]*x**2+A[1]*x+A[2])|facteur ))$.
