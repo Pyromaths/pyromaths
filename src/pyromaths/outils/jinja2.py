@@ -95,6 +95,8 @@ def facteur(nombre, court="",
         '\\numprint{2}'
         >>> facteur(2.3)
         '\\numprint{2.3}'
+        >>> facteur(-122.0)
+        '\\numprint{-122}'
 
     Arrondi
         >>> facteur(12345.6789, arrondi=None)
@@ -151,20 +153,22 @@ def facteur(nombre, court="",
         '-x'
         >>> facteur(0, produit=True, variable="x")
         ''
+        >>> facteur(1, produit=False, variable="x")
+        '\\numprint{1}\\,x'
 
     Variable
         >>> facteur(2, variable='x')
-        '\\numprint{2}x'
+        '\\numprint{2}\\,x'
         >>> facteur(-1, produit=True, variable='x')
         '-x'
 
     Version courte des arguments
         >>> facteur(-2, court="2zXo")
-        '-\\numprint{2.00}x^2'
+        '-\\numprint{2.00}\\,x^2'
         >>> facteur(-2, court="2zXp")
-        '\\left(\\numprint{-2.00}x^2\\right)'
+        '\\left(\\numprint{-2.00}\\,x^2\\right)'
         >>> facteur(-2, court="2zY")
-        '\\numprint{-2.00}y^2'
+        '\\numprint{-2.00}\\,y^2'
         >>> facteur(-1, court="y*")
         '-y'
         >>> facteur(1, court="p*x")
@@ -172,9 +176,9 @@ def facteur(nombre, court="",
         >>> facteur(-1, court="p*x")
         '\\left(-x\\right)'
         >>> facteur(-2, court="p*x")
-        '\\left(\\numprint{-2}x\\right)'
+        '\\left(\\numprint{-2}\\,x\\right)'
         >>> facteur(2, court="p*x")
-        '\\numprint{2}x'
+        '\\numprint{2}\\,x'
         >>> facteur(1, court="s*x")
         '+x'
 
@@ -248,26 +252,17 @@ def facteur(nombre, court="",
         else:
             strabsolu = "{}.{}".format(entier, decimal)
 
-    # Ajoute une espace fine entre les coefficients et les variables
+    # Ajout éventuel d'une espace devant la variable
     if variable:
-        if absolu != 1 : variable= r'\,'+variable
-        else: absolu=""
+        variable = r"\," + variable
 
     # Ajout éventuel des parenthèses
-    if absolu:
-        if parentheses and nombre < 0:
-            formatter = r"\left(\numprint{{{signe}{absolu}}}{variable}\right)"
-        elif operation:
-            formatter = r"{signe}\numprint{{{absolu}}}{variable}"
-        else:
-            formatter = r"\numprint{{{signe}{absolu}}}{variable}"
-    else: # supprime le 1 devant la variable
-        if parentheses and nombre < 0:
-            formatter = r"\left({signe}{variable}\right)"
-        elif operation:
-            formatter = r"{signe}{variable}"
-        else:
-            formatter = r"{signe}{variable}"
+    if parentheses and nombre < 0:
+        formatter = r"\left(\numprint{{{signe}{absolu}}}{variable}\right)"
+    elif operation:
+        formatter = r"{signe}\numprint{{{absolu}}}{variable}"
+    else:
+        formatter = r"\numprint{{{signe}{absolu}}}{variable}"
 
     # Enfin !
     return formatter.format(
