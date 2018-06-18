@@ -5,7 +5,7 @@ PYROPATH=$(cd `dirname $0` && cd .. && pwd)
 # Install build dependencies (if needed)
 if [ ! -f /usr/bin/debuild ];
 then
-    sudo apt-get install devscripts equivs python-setuptools
+    sudo apt-get install devscripts equivs python-setuptools dh-python
 fi
 if [ ! -f /usr/bin/rpm ];
 then
