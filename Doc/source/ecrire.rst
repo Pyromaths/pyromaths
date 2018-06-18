@@ -39,7 +39,7 @@ Les personnes pressées peuvent jeter un œil à deux exercices implémentés da
 
 - un exemple plus complexe (avec cas particuliers) : bilan sur les polynômes du second degré en seconde.
 
-    - :download:`code Python <../../src/pyromaths/ex/lycee/seconddegre.py>` ;
+    - :download:`code Python <../../src/pyromaths/ex/lycee/SecondDegre.py>` ;
     - :download:`template de l'énoncé <../../data/ex/templates/BilanTrinomeSansDiscriminant-statement.tex>` ;
     - :download:`template de la solution <../../data/ex/templates/BilanTrinomeSansDiscriminant-answer.tex>`.
 

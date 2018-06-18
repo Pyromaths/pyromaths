@@ -28,7 +28,6 @@ Fractions
 .. testsetup:: fraction
 
    from pyromaths.classes.Fractions import *
-   from pyromaths.outils.Fractions import *
 
 
 Création
@@ -949,7 +948,7 @@ Nombres
      >>> pTeX(2)
      2
 
-* Raccourci pour `TeX(nombre, fractex="\\frac")` (:func:`fTeX`)
+* Raccourci pour `TeX(nombre, fractex="\frac")` (:func:`fTeX`)
 
   .. doctest:: affichage
 
@@ -1083,121 +1082,121 @@ Jinja2
       .. doctest:: jinja2
 
         >>> facteur(2)
-        '\\numprint{2}'
+        \numprint{2}
         >>> facteur(2.0)
-        '\\numprint{2}'
+        \numprint{2}
         >>> facteur(2.3)
-        '\\numprint{2.3}'
+        \numprint{2.3}
 
   - Arrondi
 
       .. doctest:: jinja2
 
         >>> facteur(12345.6789, arrondi=None)
-        '\\numprint{12345.6789}'
+        \numprint{12345.6789}
         >>> facteur(12345.6789, arrondi=0)
-        '\\numprint{12346}'
+        \numprint{12346}
         >>> facteur(12345.6789, arrondi=2)
-        '\\numprint{12345.68}'
+        \numprint{12345.68}
         >>> facteur(.6789, arrondi=0)
-        '\\numprint{1}'
+        \numprint{1}
         >>> facteur(.6789, arrondi=2)
-        '\\numprint{0.68}'
+        \numprint{0.68}
 
     - Affichage (ou non) des zéros à la fin du nombre
 
       .. doctest:: jinja2
 
         >>> facteur(12345.6789, arrondi=None, zero=True)
-        '\\numprint{12345.6789}'
+        \numprint{12345.6789}
         >>> facteur(12345, arrondi=2, zero=True)
-        '\\numprint{12345.00}'
+        \numprint{12345.00}
         >>> facteur(12345, arrondi=2, zero=False)
-        '\\numprint{12345}'
+        \numprint{12345}
         >>> facteur(12345.7, arrondi=2, zero=True)
-        '\\numprint{12345.70}'
+        \numprint{12345.70}
         >>> facteur(12345.7, arrondi=2, zero=False)
-        '\\numprint{12345.7}'
+        \numprint{12345.7}
 
     - Ajout de parenthèses si le nombre est négatif
 
       .. doctest:: jinja2
 
         >>> facteur(-2, parentheses=True)
-        '\\left(\\numprint{-2}\\right)'
+        \left(\numprint{-2}\right)
         >>> facteur(2, parentheses=True)
-        '\\numprint{2}'
+        \numprint{2}
 
     - Affichage du signe `+`
 
       .. doctest:: jinja2
 
         >>> facteur(-2, signe=True)
-        '\\numprint{-2}'
+        \numprint{-2}
         >>> facteur(2, signe=True)
-        '\\numprint{+2}'
+        \numprint{+2}
         >>> facteur(2, signe=False)
-        '\\numprint{2}'
+        \numprint{2}
 
-    - Si le signe est une opération (et non pas un opérateur unaire, l'afficher à l'extérieur de ``\numprint{}``.
+    - Si le signe est une opération (et non pas un opérateur unaire, lafficher à lextérieur de ``\numprint{}``.
 
       .. doctest:: jinja2
 
         >>> facteur(-2, operation=False)
-        '\\numprint{-2}'
+        \numprint{-2}
         >>> facteur(2, signe=True, operation=False)
-        '\\numprint{+2}'
+        \numprint{+2}
         >>> facteur(-2, operation=True)
-        '-\\numprint{2}'
+        -\numprint{2}
         >>> facteur(2, signe=True, operation=True)
-        '+\\numprint{2}'
+        +\numprint{2}
 
     - Ne pas afficher un produit par 1 ; seulement le signe avec -1 ; ou rien avec 0.
 
       .. doctest:: jinja2
 
         >>> facteur(1, produit=True, variable="x")
-        '+x'
+        x
         >>> facteur(-1, produit=True, variable="x")
-        '-x'
+        -x
         >>> facteur(0, produit=True, variable="x")
-        ''
+        <BLANKLINE>
 
     - Variable
 
       .. doctest:: jinja2
 
-        >>> facteur(2, variable='x')
-        '\\numprint{2}x'
-        >>> facteur(-1, produit=True, variable='x')
-        '-x'
+        >>> facteur(2, variable="x")
+        \numprint{2}\,x
+        >>> facteur(-1, produit=True, variable="x")
+        -x
 
     - Version courte des arguments
 
       .. doctest:: jinja2
 
         >>> facteur(-2, court="2zXo")
-        '-\\numprint{2.00}x^2'
+        -\numprint{2.00}\,x^2
         >>> facteur(-2, court="2zXp")
-        '\\left(\\numprint{-2.00}x^2\\right)'
+        \left(\numprint{-2.00}\,x^2\right)
         >>> facteur(-2, court="2zY")
-        '\\numprint{-2.00}y^2'
+        \numprint{-2.00}\,y^2
         >>> facteur(-1, court="y*")
-        '-y'
+        -y
         >>> facteur(1, court="p*x")
-        'x'
+        x
         >>> facteur(-1, court="p*x")
-        '\\left(-x\\right)'
+        \left(-x\right)
         >>> facteur(-2, court="p*x")
-        '\\left(\\numprint{-2}x\\right)'
+        \left(\numprint{-2}\,x\right)
         >>> facteur(2, court="p*x")
-        '\\numprint{2}x'
+        \numprint{2}\,x
 
 * Affichage de matrices
 
     .. doctest:: jinja2
         >>> matrice([[1, 2], [3, 4]])
-        u'\\begin{pmatrix}\\numprint{1} & \\numprint{2}\\\\\\numprint{3} & \\numprint{4}\\\\\\end{pmatrix}'
+        \begin{pmatrix}\numprint{1} & \numprint{2}\\\numprint{3} & \numprint{4}\\\end{pmatrix}
 
 .. TODO::
 

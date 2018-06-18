@@ -1,4 +1,4 @@
-pyromaths (18.6-1) bionic; urgency=medium
+pyromaths (18.6.2-1) bionic; urgency=medium
 
   [ Jérôme Ortais ]
   * Nouvel exercice niveau terminale ES (spécialité) : Déterminer l'état stable d'un graphe probabiliste (en utilisant un système d'équations).
@@ -10,7 +10,7 @@ pyromaths (18.6-1) bionic; urgency=medium
   * Mise à jour de `cree-vignettes.py` (utilisé pour créer les vignettes des exercices).
   * Nettoyage du code ; petites corrections de bug ; améliorations diverses.
 
- -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Sun, 17 Jun 2018 20:21:32 +0200
+ -- Jérôme Ortais <jerome.ortais@pyromaths.org>  Mon, 18 Jun 2018 19:54:54 +0200
 
 pyromaths (18.5.7-1) bionic; urgency=medium
 
