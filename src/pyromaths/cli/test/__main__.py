@@ -205,6 +205,7 @@ def do_update(options):
             test = tests.get(exercise, seed)
             if test.changed():
                 test.show()
+                test.print_diff()
                 if ask_confirm("Is the test valid?"):
                     test.write()
 

@@ -27,6 +27,7 @@ does just as expected.
 """
 
 import codecs
+import difflib
 import gettext
 import glob
 import logging
@@ -168,6 +169,28 @@ class TestExercise(object):
         if "\n".join(exo.tex_answer()) != self.read('answer'):
             return True
         return False
+
+    def print_diff(self):
+        """Print the diff between old and new test."""
+        exo = self.get_exercise()
+        if "\n".join(exo.tex_statement()) != self.read('statement'):
+            print("Statement:")
+            for line in difflib.unified_diff(
+                    self.read('statement'),
+                    "\n".join(exo.tex_statement()),
+                    fromfile='Old statement',
+                    tofile='New statement',
+                    ):
+                print(line)
+        if "\n".join(exo.tex_answer()) != self.read('answer'):
+            print("Answer:")
+            for line in difflib.unified_diff(
+                    self.read('answer').splitlines(),
+                    "\n".join(exo.tex_answer()).splitlines(),
+                    fromfile='Old answer',
+                    tofile='New answer',
+                    ):
+                print(line)
 
 class UnittestExercise(unittest.TestCase):
     """Test an exercise, with a particular seed."""
