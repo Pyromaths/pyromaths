@@ -115,7 +115,7 @@ def _mac_opt():
     # py2app
     py2app = dict(plist    = plist,
                   iconfile = 'data/images/pyromaths.icns',
-                  includes = ['gzip', 'cPickle'],
+                  includes = ['gzip'],
                   packages = ['pyromaths.ex'],
                   excludes = excludes,
                   argv_emulation = True,
