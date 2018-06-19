@@ -21,5 +21,5 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 from __future__ import unicode_literals
-description = u'4.Quatrième'
+description = '4.Quatrième'
 level = description

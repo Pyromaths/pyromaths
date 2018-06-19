@@ -96,7 +96,7 @@ def exo_racines_degre2():
     return exo, cor
 
 exo_racines_degre2.description = _(u'Équations 2° degré')
-exo_racines_degre2.level = _(u'1.1èreS')
+exo_racines_degre2.level = _('1.1reS')
 
 
 def exo_factorisation_degre2():
@@ -175,7 +175,7 @@ def exo_factorisation_degre2():
     return exo, cor
 
 exo_factorisation_degre2.description = _(u'Factorisations 2° degré')
-exo_factorisation_degre2.level = _(u'1.1èreS')
+exo_factorisation_degre2.level = _('1.1reS')
 
 
 def exo_factorisation_degre3():
@@ -210,7 +210,7 @@ def exo_factorisation_degre3():
     return exo, cor
 
 exo_factorisation_degre3.description = _(u'Factorisations degré 3')
-exo_factorisation_degre3.level = _(u'1.1èreS')
+exo_factorisation_degre3.level = _('1.1reS')
 
 
 def exo_tableau_de_signe():
@@ -265,7 +265,7 @@ def exo_tableau_de_signe():
     return exo, cor
 
 exo_tableau_de_signe.description = _(u'Étude de signe')
-exo_tableau_de_signe.level = _(u'1.1èreS')
+exo_tableau_de_signe.level = _('1.1reS')
 
 
 def exo_variation():
@@ -285,7 +285,7 @@ def exo_variation():
     return exo, cor
 
 exo_variation.description = _(u"Sens de variations")
-exo_variation.level = [_(u"1.1èreS"), _(u"0.Term STMG")]
+exo_variation.level = [_("1.1reS"), _("0.Term STMG")]
 
 
 def exo_variation_lim():
@@ -304,7 +304,7 @@ def exo_variation_lim():
     return exo, cor
 
 exo_variation_lim.description = _(u"Étude de fonctions")
-exo_variation_lim.level = _(u"0.Term S")
+exo_variation_lim.level = _("0.Term S")
 
 def quest_fonctions_rationnelles():
     from pyromaths.classes.Fractions import Fraction

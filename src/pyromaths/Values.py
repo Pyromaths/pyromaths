@@ -46,19 +46,18 @@ def icon_dir():
 
 if name == 'nt':
     def home():
-        return str(environ['USERPROFILE'], getfilesystemencoding())
+        return environ['USERPROFILE']
     def configdir():
-        return join(str(environ['APPDATA'], getfilesystemencoding()),
-                "pyromaths")
+        return join(environ['APPDATA'], "pyromaths")
 elif sys.platform == "darwin":  # Cas de Mac OS X.
     def home():
-        return str(environ['HOME'], getfilesystemencoding())
+        return environ['HOME']
     def configdir():
         return join(home(), "Library", "Application Support", "Pyromaths")
 else:
     def home():
         try:
-            return str(environ['HOME'], getfilesystemencoding())
+            return environ['HOME']
         except KeyError:
             # Pyromaths en ligne, l'user apache n'a pas de $HOME
             return ""
