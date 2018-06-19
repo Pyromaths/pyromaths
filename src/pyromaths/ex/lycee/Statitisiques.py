@@ -42,7 +42,7 @@ class Histogramme(ex.TexExercise):
     classdocs
     '''
     # description = u'Construire un histogramme'
-    # level = u"2.Seconde"
+    # level = "2.Seconde"
 
 
     def __init__(self):

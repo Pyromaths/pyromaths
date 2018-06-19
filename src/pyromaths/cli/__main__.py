@@ -33,7 +33,7 @@ import random
 import sys
 
 # Quick and dirty definition of `_` as the identity function
-gettext.install('pyromaths', str=1)
+gettext.install('pyromaths')
 
 from pyromaths.cli import exercise_argument, PyromathsException
 from pyromaths.ex.test import TestPerformer, generate

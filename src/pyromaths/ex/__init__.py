@@ -128,11 +128,12 @@ def __import(name=__name__, parent=None):
 def _exercises(pkg):
     ''' List exercises in 'pkg' modules. '''
     # level defaults to description, then unknown
-    if 'level' not in dir(pkg): pkg.level = u"Inconnu"
+    if 'level' not in dir(pkg): pkg.level = "Inconnu"
     for _, name, ispkg in pkgutil.iter_modules(pkg.__path__, pkg.__name__ + '.'):
         # skip packages
         if ispkg: continue;
         # import module
+        print(name,pkg)
         mod = __import(name, pkg)
         if 'level' not in dir(mod): mod.level = pkg.level
         # search exercises in module
