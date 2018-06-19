@@ -89,98 +89,99 @@ def facteur(nombre, court="",
     :Exemples:
 
     Cas de base
+        >>> from pyromaths.outils.jinja2 import facteur
         >>> facteur(2)
-        '\\numprint{2}'
+        \numprint{2}
         >>> facteur(2.0)
-        '\\numprint{2}'
+        \numprint{2}
         >>> facteur(2.3)
-        '\\numprint{2.3}'
+        \numprint{2.3}
         >>> facteur(-122.0)
-        '\\numprint{-122}'
+        \numprint{-122}
 
     Arrondi
         >>> facteur(12345.6789, arrondi=None)
-        '\\numprint{12345.6789}'
+        \numprint{12345.6789}
         >>> facteur(12345.6789, arrondi=0)
-        '\\numprint{12346}'
+        \numprint{12346}
         >>> facteur(12345.6789, arrondi=2)
-        '\\numprint{12345.68}'
+        \numprint{12345.68}
         >>> facteur(.6789, arrondi=0)
-        '\\numprint{1}'
+        \numprint{1}
         >>> facteur(.6789, arrondi=2)
-        '\\numprint{0.68}'
+        \numprint{0.68}
 
     Zéro
         >>> facteur(12345.6789, arrondi=None, zero=True)
-        '\\numprint{12345.6789}'
+        \numprint{12345.6789}
         >>> facteur(12345, arrondi=2, zero=True)
-        '\\numprint{12345.00}'
+        \numprint{12345.00}
         >>> facteur(12345, arrondi=2, zero=False)
-        '\\numprint{12345}'
+        \numprint{12345}
         >>> facteur(12345.7, arrondi=2, zero=True)
-        '\\numprint{12345.70}'
+        \numprint{12345.70}
         >>> facteur(12345.7, arrondi=2, zero=False)
-        '\\numprint{12345.7}'
+        \numprint{12345.7}
 
     Parenthèse
         >>> facteur(-2, parentheses=True)
-        '\\left(\\numprint{-2}\\right)'
+        \left(\numprint{-2}\right)
         >>> facteur(2, parentheses=True)
-        '\\numprint{2}'
+        \numprint{2}
 
     Signe
         >>> facteur(-2, signe=True)
-        '\\numprint{-2}'
+        \numprint{-2}
         >>> facteur(2, signe=True)
-        '\\numprint{+2}'
+        \numprint{+2}
         >>> facteur(2, signe=False)
-        '\\numprint{2}'
+        \numprint{2}
 
     Opération
         >>> facteur(-2, operation=False)
-        '\\numprint{-2}'
+        \numprint{-2}
         >>> facteur(2, signe=True, operation=False)
-        '\\numprint{+2}'
+        \numprint{+2}
         >>> facteur(-2, operation=True)
-        '-\\numprint{2}'
+        -\numprint{2}
         >>> facteur(2, signe=True, operation=True)
-        '+\\numprint{2}'
+        +\numprint{2}
 
     Produit
         >>> facteur(1, produit=True, variable="x")
-        'x'
+        x
         >>> facteur(-1, produit=True, variable="x")
-        '-x'
+        -x
         >>> facteur(0, produit=True, variable="x")
-        ''
+        <BLANKLINE>
         >>> facteur(1, produit=False, variable="x")
-        '\\numprint{1}\\,x'
+        \numprint{1}\,x
 
     Variable
-        >>> facteur(2, variable='x')
-        '\\numprint{2}\\,x'
-        >>> facteur(-1, produit=True, variable='x')
-        '-x'
+        >>> facteur(2, variable="x")
+        \numprint{2}\,x
+        >>> facteur(-1, produit=True, variable="x")
+        -x
 
     Version courte des arguments
         >>> facteur(-2, court="2zXo")
-        '-\\numprint{2.00}\\,x^2'
+        -\numprint{2.00}\,x^2
         >>> facteur(-2, court="2zXp")
-        '\\left(\\numprint{-2.00}\\,x^2\\right)'
+        \left(\numprint{-2.00}\,x^2\right)
         >>> facteur(-2, court="2zY")
-        '\\numprint{-2.00}\\,y^2'
+        \numprint{-2.00}\,y^2
         >>> facteur(-1, court="y*")
-        '-y'
+        -y
         >>> facteur(1, court="p*x")
-        'x'
+        x
         >>> facteur(-1, court="p*x")
-        '\\left(-x\\right)'
+        \left(-x\right)
         >>> facteur(-2, court="p*x")
-        '\\left(\\numprint{-2}\\,x\\right)'
+        \left(\numprint{-2}\,x\right)
         >>> facteur(2, court="p*x")
-        '\\numprint{2}\\,x'
+        \numprint{2}\,x
         >>> facteur(1, court="s*x")
-        '+x'
+        +x
 
     """
 
@@ -289,8 +290,9 @@ def matrice(listes, short=""):
     - La matrice est sous la forme d'une liste de lignes (où chaque ligne est une liste de coefficients).
     - L'argument ``short`` est transmis à :func:`facteur`.
 
+    >>> from pyromaths.outils.jinja2 import matrice
     >>> matrice([[1, 2], [3, 4]])
-    u'\\begin{pmatrix}\\numprint{1} & \\numprint{2}\\\\\\numprint{3} & \\numprint{4}\\\\\\end{pmatrix}'
+    \begin{pmatrix}\numprint{1} & \numprint{2}\\\numprint{3} & \numprint{4}\\\end{pmatrix}
     """
     text = u""
     text += r"\begin{pmatrix}"

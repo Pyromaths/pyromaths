@@ -74,7 +74,7 @@ def _unix_opt():
             ('share/pyromaths/templates', glob('data/templates/*.tex')),
             # ('share/pyromaths/packages',  glob('data/packages/*'))
             ] + \
-            find_data_files('data/ex','share/pyromaths/ex/',['img/*.png']),
+            find_data_files('data/ex','share/pyromaths/ex/',['img/*.png', 'templates/*.tex']),
             install_requires = COMMON_INSTALL_REQUIRES + ["lxml>=2.2.2"],
     )
 
@@ -157,7 +157,7 @@ Name: "{commondesktop}\Pyromaths"; Filename: "{app}\pyromaths.exe"
            ),
           (r'data/templates', glob(r'data/templates/*.tex')),
           # (r'data/packages', glob(r'data/packages/*')),
-        ] + find_data_files('data/ex','data/ex/',['img/*.png']),
+        ] + find_data_files('data/ex','data/ex/',['img/*.png', 'templates/*.tex']),
         zipfile = None,
         windows = [dict(script="pyromaths",
                         icon_resources=[(1, 'data/images/pyromaths.ico')],
