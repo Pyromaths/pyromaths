@@ -43,10 +43,10 @@ def main():
     from Values import CONFIGDIR
 
     import interface
-    from PyQt4 import QtGui
-    class StartQT4(QtGui.QMainWindow, interface.Ui_MainWindow):
+    from PyQt5 import QtGui, QtWidgets
+    class StartQT4(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         def __init__(self, parent=None):
-            QtGui.QWidget.__init__(self, parent)
+            QtWidgets.QWidget.__init__(self, parent)
             self.ui = interface.Ui_MainWindow()
             self.ui.setupUi(self)
 
@@ -64,11 +64,11 @@ def main():
     packagesdir = join(CONFIGDIR, "packages")
     if not isdir(packagesdir): makedirs(packagesdir)
 
-    app = QtGui.QApplication(argv)
+    app = QtWidgets.QApplication(argv)
     pyromaths = StartQT4()
 
     # Intégration de QTranslator
-    from PyQt4.QtCore import QTranslator
+    from PyQt5.QtCore import QTranslator
     translator = QTranslator()
     translator.load("qtmac_fr", "data")
     app.installTranslator(translator)
