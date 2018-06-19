@@ -99,16 +99,16 @@ def _mac_opt():
                  'QtXml', 'QtXmlPatterns', 'phonon']
     lib_dynload_unused = ['_AE', '_codecs_cn', '_codecs_hk', '_codecs_2022',
                           '_codecs_iso2022', '_codecs_jp', '_codecs_kr',
-                          '_codecs_tw', '_Evt', '_File', '_hashlib', '_heapq',
+                          '_codecs_tw', '_Evt', '_File', '_heapq',
                           '_locale', '_multibytecodec', '_Res','_ssl', 'array',
-                          'bz2', 'cPickle', 'datetime', 'gestalt', 'MacOS',
+                          'bz2', 'datetime', 'gestalt', 'MacOS',
                           'pyexpat', 'rurce', 'strop', 'unicodedata']
     site_packages_unused = ['_osx_support', '_builtinSuites', 'Carbon',
                             'distutils', 'Finder', 'StdSuites','xml','getopt', 
                             'repr', '_strptime', 'sets', '_threading_local',
-                            'base64', 'sre', 'bdb', 'optparse.', 'ssl',
+                            'sre', 'bdb', 'optparse.', 'ssl',
                             'calendar', 'pdb', 'stringprep', 'cmd',
-                            'pkg_resources', 'platform', 'threading',
+                            'pkg_resources', 'platform',
                             'dummy_thread', 'plistlib', 'quopri', 'doctest',
                             'ntpath', 'OpenSSL','os2emxpath', 'PyQt4.uic']
     excludes = lib_dynload_unused + site_packages_unused + ['PyQt4.%s' % f for f in qt_unused]
