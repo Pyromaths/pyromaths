@@ -1195,6 +1195,7 @@ Jinja2
 * Affichage de matrices
 
     .. doctest:: jinja2
+
         >>> matrice([[1, 2], [3, 4]])
         \begin{pmatrix}\numprint{1} & \numprint{2}\\\numprint{3} & \numprint{4}\\\end{pmatrix}
 
