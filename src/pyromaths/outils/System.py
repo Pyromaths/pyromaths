@@ -216,7 +216,7 @@ def creation(parametres):
     dir0 = os.path.dirname(exo)
     dir1 = os.path.dirname(cor)
     import socket
-    if socket.gethostname() == "sd-27355.pyromaths.org":
+    if socket.gethostname() == "sd-94439.pyromaths.org":
         # Chemin complet pour Pyromaths en ligne car pas d'accents
         f0noext = os.path.splitext(exo)[0].encode(sys.getfilesystemencoding())
         f1noext = os.path.splitext(cor)[0].encode(sys.getfilesystemencoding())
@@ -232,8 +232,8 @@ def creation(parametres):
         os.chdir(dir0)
         latexmkrc(f0noext)
         log = open('%s-pyromaths.log' % f0noext, 'w')
-        if socket.gethostname() == "sd-27355.pyromaths.org":
-            os.environ['PATH'] += os.pathsep + "/usr/local/texlive/2014/bin/x86_64-linux"
+        if socket.gethostname() == "sd-94439.pyromaths.org":
+            os.environ['PATH'] += os.pathsep + "/usr/local/texlive/2016/bin/x86_64-linux"
             call(["latexmk", "-shell-escape", "-silent", "-interaction=nonstopmode", "-output-directory=%s" % dir0, "-pdfps", "%s.tex" % f0noext], env=os.environ, stdout=log)
             call(["latexmk", "-c", "-silent", "-output-directory=%s" % dir0], env=os.environ, stdout=log)
         elif os.name == 'nt':
@@ -256,8 +256,8 @@ def creation(parametres):
             os.chdir(dir1)
             latexmkrc(f1noext)
             log = open('%s-pyromaths.log' % f1noext, 'w')
-            if socket.gethostname() == "sd-27355.pyromaths.org":
-                os.environ['PATH'] += os.pathsep + "/usr/local/texlive/2014/bin/x86_64-linux"
+            if socket.gethostname() == "sd-94439.pyromaths.org":
+                os.environ['PATH'] += os.pathsep + "/usr/local/texlive/2016/bin/x86_64-linux"
                 call(["latexmk", "-shell-escape", "-silent", "-interaction=nonstopmode", "-output-directory=%s" % dir1, "-pdfps", "%s.tex" % f1noext], env=os.environ, stdout=log)
                 call(["latexmk", "-c", "-silent", "-output-directory=%s" % dir1], env=os.environ, stdout=log)
             elif os.name == 'nt':
