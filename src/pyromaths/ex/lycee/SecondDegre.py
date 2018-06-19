@@ -28,6 +28,7 @@ from pyromaths.classes.Fractions import Fraction
 from pyromaths.classes.PolynomesCollege import Polynome, factoriser
 from pyromaths.classes.SquareRoot import SquareRoot
 from pyromaths.outils.Arithmetique import carrerise, pgcd, valeur_alea
+from functools import reduce
 
 """Exercice de seconde : Chapitre Second degré."""
 

@@ -26,6 +26,7 @@ from collections import Counter
 from pyromaths.classes.SquareRoot import SquareRoot
 from pyromaths.outils.Priorites3 import EstNombre, texify
 from __builtin__ import str
+from functools import reduce
 
 class Fraction():
     """Cette classe crée la notion de fractions.

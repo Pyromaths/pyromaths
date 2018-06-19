@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-import random
+from __future__ import absolute_import
+# -*- coding: utf-8 -*-
+from . import random
 import textwrap
 
 from pyromaths import ex

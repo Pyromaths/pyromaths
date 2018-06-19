@@ -1,13 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
+from __future__ import absolute_import
 from time import strftime
 from os.path import normpath, dirname, exists, abspath, join
 from os import environ, name
 from sys import executable, getfilesystemencoding
 import sys
 # import pkgutil, types
-import ex
+from . import ex
 
 def we_are_frozen():
     """Returns whether we are frozen via py2exe.

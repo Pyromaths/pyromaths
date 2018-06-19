@@ -23,6 +23,7 @@ To display help:
 
 > python -m pyromaths.cli --help
 """
+from __future__ import print_function
 
 import argparse
 import gettext
@@ -154,7 +155,7 @@ def do_generate(options):
     exercise_list = []
     for exercise, seeds in options.exercise:
         if not seeds:
-            seeds = [random.randint(0, sys.maxint)]
+            seeds = [random.randint(0, sys.maxsize)]
         for seed in seeds:
             exercise_list.append(tests.get(exercise, seed).get_exercise())
 

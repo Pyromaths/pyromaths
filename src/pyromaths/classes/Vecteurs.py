@@ -22,9 +22,10 @@
 #
 
 
+from __future__ import absolute_import
 import math
 import random
-from Racine import simplifie_racine
+from .Racine import simplifie_racine
 
 class Vecteur:
 

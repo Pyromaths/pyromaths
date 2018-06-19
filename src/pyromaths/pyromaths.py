@@ -20,6 +20,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
+from __future__ import absolute_import
 import gettext
 from sys import argv, exit
 import sys
@@ -38,11 +39,11 @@ def main():
     gettext.install('pyromaths', localedir=locale_dir, unicode=1)
 
 
-    from outils.System import create_config_file, modify_config_file
-    from outils.TestEnv import test
-    from Values import CONFIGDIR
+    from .outils.System import create_config_file, modify_config_file
+    from .outils.TestEnv import test
+    from .Values import CONFIGDIR
 
-    import interface
+    from . import interface
     from PyQt4 import QtGui
     class StartQT4(QtGui.QMainWindow, interface.Ui_MainWindow):
         def __init__(self, parent=None):

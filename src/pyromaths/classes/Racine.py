@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
+from __future__ import absolute_import
 from pyromaths.outils.decimaux import decimaux
 from pyromaths.outils.Arithmetique import carrerise, pgcd, ppcm, factor
 from math import sqrt
-from Fractions import Fraction
+from .Fractions import Fraction
 
 def produitfacteurs(facteurs):
     """Affiche sous forme de produit les éléments d'une liste."""
@@ -15,7 +17,7 @@ def produitfacteurs(facteurs):
 class Racine:
     def __init__(self, radicande, coeff=1, indice=2):
         if (radicande < 0) or not (isinstance(indice, int)):
-            print "Erreur de définition ! Le radicande doit être positif et l'indice un nombre entier !"
+            print("Erreur de définition ! Le radicande doit être positif et l'indice un nombre entier !")
         self.radicande = radicande
         self.indice = indice  # Nombre entier
         self.coeff = coeff  # Coeff devant la racine

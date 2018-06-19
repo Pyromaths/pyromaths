@@ -20,11 +20,12 @@
 # along with this program; if notPopen, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
+from __future__ import absolute_import
 from PyQt4 import QtGui, QtCore
 import os, lxml, codecs, sys
-from outils import System
-from Values import CONFIGDIR, DATADIR, COPYRIGHTS, VERSION, ICONDIR
-from Values import lesfiches
+from .outils import System
+from .Values import CONFIGDIR, DATADIR, COPYRIGHTS, VERSION, ICONDIR
+from .Values import lesfiches
 from operator import itemgetter
 
 class Ui_MainWindow(object):

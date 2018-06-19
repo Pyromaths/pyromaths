@@ -72,8 +72,8 @@ def __module(filename):
 def __legacy(function, dirlevel):
     ''' Create a new class proxying for a legacy exercise 'function'. '''
     # Create a proxy class inheriting from LegacyExercise for this function
-    module = __module(function.func_code.co_filename)
-    name = function.func_name.title().replace('_', '')
+    module = __module(function.__code__.co_filename)
+    name = function.__name__.title().replace('_', '')
     return type("{}.{}".format(module, name),
                 (LegacyExercise,),
                 dict(description=function.description,

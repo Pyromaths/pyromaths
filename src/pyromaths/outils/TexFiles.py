@@ -19,6 +19,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
+from __future__ import print_function
 import codecs
 def mise_en_forme(file):
     """
@@ -44,7 +45,7 @@ def mise_en_forme(file):
         cline = cline.strip()
         indent = trouve_indentation(cline, indent, lline)
         if indent < 0:
-            print _(u"problème")
+            print(_(u"problème"))
         if cline:
             chaine, indent = traite_chaine(cline, indent)
             new_tex.extend(chaine)

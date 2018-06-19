@@ -26,6 +26,7 @@ from pyromaths.classes.SquareRoot import SquareRoot
 from pyromaths.classes.Fractions import Fraction
 
 from random import *
+from functools import reduce
 
 class Polynome():
     """ Cette classe crée la notion de polynômes.

@@ -25,6 +25,7 @@
 #----------------------------------------------------------------------
 
 # from Affichage import decimaux
+from __future__ import absolute_import
 from pyromaths.outils import Arithmetique
 
 
@@ -761,7 +762,7 @@ def texify(liste_calculs):
     from pyromaths.classes.PolynomesCollege import Polynome
     from pyromaths.classes.Fractions import Fraction
     from pyromaths.classes.SquareRoot import SquareRoot
-    from Affichage import decimaux
+    from .Affichage import decimaux
     ls = []
     enluminures = {'indice': r'_{', 'cancel':r'\cancel{'}
     isEnlumine = {'indice': False, 'cancel':False}
@@ -898,7 +899,7 @@ def plotify(calcul):
     """
     from pyromaths.classes.PolynomesCollege import Polynome
     from pyromaths.classes.Fractions import Fraction
-    from Affichage import decimaux
+    from .Affichage import decimaux
 
     if isinstance(calcul, basestring): calcul = splitting(calcul)
     s = ""

@@ -25,6 +25,7 @@ This module gather tests from all exercises. Running:
 
 does just as expected.
 """
+from __future__ import print_function
 
 import codecs
 import difflib

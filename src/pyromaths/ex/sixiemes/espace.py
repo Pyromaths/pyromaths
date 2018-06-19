@@ -92,11 +92,11 @@ def reponse2(pt1, ptc1, F1, F2):
     rep = []
     connects = connect(pt1, F1, F2)
     for pt in connects:
-        if pt <> ptc1:
+        if pt != ptc1:
             rep.append('[' + pt1 + pt + ']')
     connects2 = connect(ptc1, F1, F2)
     for pt in connects2:
-        if pt <> pt1:
+        if pt != pt1:
             rep.append('[' + ptc1 + pt + ']')
     rep.append('[' + pt1 + ptc1 + ']')
     return tuple(rep)

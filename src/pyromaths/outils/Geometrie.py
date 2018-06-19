@@ -21,9 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+from __future__ import absolute_import
 import math
 from random import randrange
-from Conversions import degres, radians
+from .Conversions import degres, radians
 def choix_points(n):
     """
     choisit n points parmi A, B, C, ..., Z
