@@ -37,7 +37,7 @@ def main():
     locale_dir = join(dirname(__file__), '../../locale/')
     locale_dir = realpath(locale_dir)
 
-    gettext.install('pyromaths', localedir=locale_dir, str=1)
+    gettext.install('pyromaths', localedir=locale_dir, unicode=1)
 
 
     from .outils.System import create_config_file, modify_config_file

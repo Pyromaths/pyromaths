@@ -41,7 +41,7 @@ import tempfile
 import unittest
 
 # Quick and dirty definition of `_` as the identity function
-gettext.install('pyromaths', str=1)
+gettext.install('pyromaths', unicode=1)
 
 import pyromaths
 from pyromaths.outils import System

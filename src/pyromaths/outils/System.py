@@ -76,7 +76,7 @@ def create_config_file():
     etree.SubElement(subchild, "email").text = u"jerome.ortais@pyromaths.org"
     etree.SubElement(subchild, "site").text = "http://www.pyromaths.org"
 
-    return etree.tostring(root, pretty_print=True, encoding=str)
+    return etree.tostring(root, pretty_print=True, encoding=unicode)
 
 def indent(elem, level=0):
     """Indente correctement les fichiers xml.
