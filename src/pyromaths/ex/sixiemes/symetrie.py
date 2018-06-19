@@ -21,6 +21,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import chr
+from builtins import range
+from past.utils import old_div
 import random
 from math import atan, cos, pi, sin
 
@@ -32,27 +37,27 @@ from math import atan, cos, pi, sin
 def valeurs_quad2(nb_pts):
     vals = []
     for i in range(nb_pts):
-        angle = random.randrange((i * 360) / nb_pts, ((i + 1) * 360) / 
-                                 nb_pts)
-        vals.append(((random.randrange(1, 7) * .5) * cos((angle * pi) / 
-                    180), (random.randrange(1, 7) * .5) * sin((angle * 
-                    pi) / 180)))
+        angle = random.randrange(old_div((i * 360), nb_pts), old_div(((i + 1) * 360), 
+                                 nb_pts))
+        vals.append(((random.randrange(1, 7) * .5) * cos(old_div((angle * pi), 
+                    180)), (random.randrange(1, 7) * .5) * sin(old_div((angle * 
+                    pi), 180))))
     return vals
 
 
 def valeurs_quad(nb_pts):
     vals = []
     for i in range(nb_pts):
-        (alpha, beta) = ((i * 360) / nb_pts, ((i + 1) * 360) / nb_pts)
+        (alpha, beta) = (old_div((i * 360), nb_pts), old_div(((i + 1) * 360), nb_pts))
         (x, y, angle) = (0, 0, 0)
         while x == 0 or angle < alpha or angle > beta:
             (x, y) = (random.randrange(-6, 7) * .5, random.randrange(-6,
                       7) * .5)
             if x > 0:
-                angle = int((atan((y * 1.0) / x) * 180) / pi + 360) % \
+                angle = int(old_div((atan(old_div((y * 1.0), x)) * 180), pi) + 360) % \
                     360
             if x < 0:
-                angle = int((atan((y * 1.0) / x) * 180) / pi + 180)
+                angle = int(old_div((atan(old_div((y * 1.0), x)) * 180), pi) + 180)
         vals.append((x, y))
     return vals
 

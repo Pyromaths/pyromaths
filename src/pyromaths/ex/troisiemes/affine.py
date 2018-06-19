@@ -23,6 +23,10 @@
 
 # fonction affine 3e
 # from math import *
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from past.utils import old_div
 from math import sqrt
 from pyromaths.classes.Fractions import Fraction  # fractions pyromaths
 from pyromaths.classes.PolynomesCollege import Polynome
@@ -39,12 +43,12 @@ def extreme(a, b, xmin, xmax, ymin, ymax):
     x2 = float(b[0])
     y1 = float(a[1])
     y2 = float(b[1])
-    coef = float((y1 - y2) / (x1 - x2))
+    coef = float(old_div((y1 - y2), (x1 - x2)))
     if coef != 0:
-        xsort1 = float(x1 + (ymin - y1) / coef)  # abscisse du point d'ordonnée ymin
+        xsort1 = float(x1 + old_div((ymin - y1), coef))  # abscisse du point d'ordonnée ymin
         if xsort1 >= xmin and xsort1 <= xmax and not(xsort1, ymin) in res:
             res.append((xsort1, ymin))
-        xsort2 = float(x2 + (ymax - y2) / coef)  # abscisse du point d'ordonnée ymax
+        xsort2 = float(x2 + old_div((ymax - y2), coef))  # abscisse du point d'ordonnée ymax
         if xsort2 >= xmin and xsort2 <= xmax and not(xsort2, ymax) in res:
             res.append((xsort2, ymax))
         ysort1 = float(y1 + coef * (xmin - x1))  # ordonnée du point d'abscisse xmin
@@ -60,7 +64,7 @@ def extreme(a, b, xmin, xmax, ymin, ymax):
 def vecdir(A, B):
     # retourne sous forme de liste le vecteur directeur normé de la droite (AB)
     norm = sqrt((B[0] - A[0]) ** 2 + (B[1] - A[1]) ** 2)
-    u = [(B[0] - A[0]) / norm, (B[1] - A[1]) / norm]
+    u = [old_div((B[0] - A[0]), norm), old_div((B[1] - A[1]), norm)]
     if u[0] < 0:
         u[0] = -u[0]
         u[1] = -u[1]
@@ -89,7 +93,7 @@ def validec(A, B):
 
 def doublefleche(A, B):
     # trace une flèche "double" de justification en pointillés
-    mid = (float((A[0] + B[0])) / 2, float((A[1] + B[1])) / 2)
+    mid = (old_div(float((A[0] + B[0])), 2), old_div(float((A[1] + B[1])), 2))
     res1 = "\\psline[linestyle=dashed,linewidth=1.1pt]{->}" + str(A) + str(mid) + '\n '
     res2 = "\\psline[linestyle=dashed,linewidth=1.1pt]{->}" + str(mid) + str(B)
     res = res1 + res2
@@ -99,10 +103,10 @@ def doublefleche(A, B):
     return res
 
 def couple () :
-    A = (float(random.randrange(-8, 9)) / 2, float(random.randrange(-8, 9)) / 2)
-    B = (float(random.randrange(-8, 9)) / 2, float(random.randrange(-8, 9)) / 2)
+    A = (old_div(float(random.randrange(-8, 9)), 2), old_div(float(random.randrange(-8, 9)), 2))
+    B = (old_div(float(random.randrange(-8, 9)), 2), old_div(float(random.randrange(-8, 9)), 2))
     while not validec(A, B):
-        B = (float(random.randrange(-8, 9)) / 2, float(random.randrange(-8, 9)) / 2)
+        B = (old_div(float(random.randrange(-8, 9)), 2), old_div(float(random.randrange(-8, 9)), 2))
     return (A, B)
 
 def coupletrace () :
@@ -114,19 +118,19 @@ def coupletrace () :
 
 def couples ():
     # génère 6 points. Chaque couple correspondra a une droite ( (AB)(CD)(EF)).
-    A = (float(random.randrange(-8, 9)) / 2, float(random.randrange(-8, 9)) / 2)
-    B = (float(random.randrange(-8, 9)) / 2, float(random.randrange(-8, 9)) / 2)
+    A = (old_div(float(random.randrange(-8, 9)), 2), old_div(float(random.randrange(-8, 9)), 2))
+    B = (old_div(float(random.randrange(-8, 9)), 2), old_div(float(random.randrange(-8, 9)), 2))
     while not validedroite(A, B):
-        B = (float(random.randrange(-8, 9)) / 2, float(random.randrange(-8, 9)) / 2)
+        B = (old_div(float(random.randrange(-8, 9)), 2), old_div(float(random.randrange(-8, 9)), 2))
     C = (0, float(random.randrange(-4, 5)))
     while not (validec(A, C) and validec(B, C)):
         C = (0, float(random.randrange(-4, 5)))
     D = (float(random.randrange(-4, 5)), float(random.randrange(-4, 5)))
     while not (validec(A, D) and validec(B, D) and validedroite(C, D)) :
         D = (float(random.randrange(-4, 5)), float(random.randrange(-4, 5)))
-    E = (0, float(random.randrange(-8, 9)) / 2)
+    E = (0, old_div(float(random.randrange(-8, 9)), 2))
     while not (validec(A, E) and validec(B, E) and validec(C, E) and validec(D, E)):
-        E = (0, float(random.randrange(-8, 9)) / 2)
+        E = (0, old_div(float(random.randrange(-8, 9)), 2))
     F = (float(random.randrange(-4, 5)), float(random.randrange(-4, 5)))
     while not (validec(A, F) and validec(B, F) and validec(C, F) and validec(D, F)and validedroite(E, F)):
         F = (float(random.randrange(-4, 5)), float(random.randrange(-4, 5)))
@@ -303,15 +307,15 @@ def exprfonc(f, i, A, B):
 
     if float(B[0]) < 0 :
         mid11 = float(B[0]) - 0.75
-        mid12 = float((B[1] + A[1])) / 2  # milieu de la flèche verticale
+        mid12 = old_div(float((B[1] + A[1])), 2)  # milieu de la flèche verticale
     else:
         mid11 = float(B[0]) + 0.75
-        mid12 = float((B[1] + A[1])) / 2
-    if float(B[0]) * float(u.d / u.n) > 0 :
-        mid21 = float((A[0] + B[0])) / 2
+        mid12 = old_div(float((B[1] + A[1])), 2)
+    if float(B[0]) * float(old_div(u.d, u.n)) > 0 :
+        mid21 = old_div(float((A[0] + B[0])), 2)
         mid22 = A[1] - 0.6  # milieu de la flèche horizontale
     else :
-        mid21 = float((A[0] + B[0])) / 2
+        mid21 = old_div(float((A[0] + B[0])), 2)
         mid22 = A[1] + 0.5
     if mid12 < 0 and mid12 > -0.8:
         mid12 = -1

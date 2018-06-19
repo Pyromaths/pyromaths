@@ -21,6 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+from __future__ import unicode_literals
+from builtins import range
 from pyromaths.outils import Arithmetique
 from pyromaths.outils.Affichage import TeX, tex_coef
 

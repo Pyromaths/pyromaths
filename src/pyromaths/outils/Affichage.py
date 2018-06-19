@@ -22,6 +22,8 @@
 #
 
 # import re
+from __future__ import unicode_literals
+from builtins import str
 from pyromaths.classes import Racine
 from pyromaths.classes.Fractions import Fraction
 

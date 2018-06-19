@@ -22,6 +22,11 @@
 #
 # from pyromaths.outils import ecrit_tex, valeur_alea, signe, pgcd, ppcm
 
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from past.utils import old_div
 import random
 
 def valeurs(nb, entier=1):  # renvoie les 2 listes contenant les opérateurs et les opérandes.
@@ -92,7 +97,7 @@ def valeurs(nb, entier=1):  # renvoie les 2 listes contenant les opérateurs et 
     if entier:
         loperandes = [random.randrange(12) + 2 for i in range(nb)]
     else:
-        loperandes = [((random.randrange(88) + 12) * 1.0) / 10 for i in
+        loperandes = [old_div(((random.randrange(88) + 12) * 1.0), 10) for i in
                       range(nb)]
     return (loperateurs, loperandes)
 
@@ -220,7 +225,7 @@ def calcul(a, op, b, entier=1):  # retourne 'hp' (hors programme) ou le résulta
         elif not entier and (a * 1000) % (b * 100):
             return 'hp'
         else:
-            return a / b
+            return old_div(a, b)
 
 
 def priorites():

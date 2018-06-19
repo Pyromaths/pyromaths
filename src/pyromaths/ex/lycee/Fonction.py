@@ -20,6 +20,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from past.utils import old_div
 from random import randrange
 
 def genere_points(xmin, xmax, ymin, ymax, simple=False):
@@ -58,7 +63,7 @@ def bezier(simple=False, xmin=-15, xmax=15, ymin=-12, ymax=12):
         elif liste_points[i - 1][1] > liste_points[i][1]:
             points.append(liste_points[i])
     deltaxx = 0.3 * (points[1][0] - points[0][0])
-    nderiv = float(points[1][1] - points[0][1]) / (points[1][0] - points[0][0])
+    nderiv = old_div(float(points[1][1] - points[0][1]), (points[1][0] - points[0][0]))
     apres = [(points[0][0] + 0.5, points[0][1] + deltaxx * nderiv)]
     avant = []
     if points[0][1] < points[1][1]:
@@ -80,7 +85,7 @@ def bezier(simple=False, xmin=-15, xmax=15, ymin=-12, ymax=12):
             y_variation.append(points[i][1])
             variation += '-'
         else:
-            nderiv = float(points[i - 1][1] - points[i + 1][1]) / (points[i - 1][0] - points[i + 1][0])
+            nderiv = old_div(float(points[i - 1][1] - points[i + 1][1]), (points[i - 1][0] - points[i + 1][0]))
         deltax = 0.3 * (points[i - 1][0] - points[i][0])
         deltaxx = 0.3 * (points[i + 1][0] - points[i][0])
         avant.append((points[i][0] + deltax, points[i][1] + deltax * nderiv))
@@ -90,7 +95,7 @@ def bezier(simple=False, xmin=-15, xmax=15, ymin=-12, ymax=12):
     for i in range(len(points) - 1):
         string += str(apres[i]) + str(avant[i]) + str(points[i + 1])
     textbezier = "\\input{tabvar}\n\
-                \psset{unit=" + str(14.0 / largeur) + "cm}\n\
+                \psset{unit=" + str(old_div(14.0, largeur)) + "cm}\n\
                 \\begin{pspicture}"
     textbezier += "(" + str(xmin) + "," + str(ymin) + ")(" + str(liste_points[-1][0]) + "," + str(ymax) + ")\n"
     textbezier += "\psgrid[subgriddiv=0,griddots=10,gridlabels=0pt]\n\
@@ -154,7 +159,7 @@ def tab_var_poly(P, borneinf="-\\infty" , bornesup=u"+\\infty"):
             tab_var += "\\tx{f(" + P.var + ")}& &\\fd&\\cr\n"
         return tab_var + "}$$\n"
     elif P.deg == 2:
-        alpha = -P.dictio[1] / (2 * P.dictio[2])
+        alpha = old_div(-P.dictio[1], (2 * P.dictio[2]))
         extremum = P(alpha)
         if (borneinf == "-\\infty" or Intervalle[0] < alpha) and\
            (Intervalle[1] == "+\\infty" or Intervalle[1] > alpha):

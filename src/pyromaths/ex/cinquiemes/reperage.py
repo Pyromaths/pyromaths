@@ -1,3 +1,5 @@
+from __future__ import division
+from __future__ import unicode_literals
 # Pyromaths
 # -*- coding: utf-8 -*-
 #
@@ -20,6 +22,10 @@
 # along with this program; if notPopen, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
+from builtins import chr
+from builtins import str
+from builtins import range
+from past.utils import old_div
 import random
 from pyromaths.outils.Affichage import decimaux
 
@@ -96,31 +102,31 @@ def coordo_pts(nb):
         if j == 600:
             # Correction d'un bug
             l, i, j = [], 0, 0
-        a = float(random.randrange(-9, 10)) / 2
-        b = float(random.randrange(-9, 10)) / 2
+        a = old_div(float(random.randrange(-9, 10)), 2)
+        b = old_div(float(random.randrange(-9, 10)), 2)
         if ((a, b) not in l) and valide((a, b), l)and quadrant((a, b), l):
             l.append((a, b))
             i = i + 1
     if nb >= 4:
-        a = float(random.randrange(-9, 10)) / 2
+        a = old_div(float(random.randrange(-9, 10)), 2)
         while not valide((0, a), l):
-            a = float(random.randrange(-9, 10)) / 2
+            a = old_div(float(random.randrange(-9, 10)), 2)
         rg = random.randrange(0, len(l) - 1)
         l[rg:rg] = [(0, a)]
         i = i + 1
 
     if nb >= 5:
-        b = float(random.randrange(-9, 10)) / 2
+        b = old_div(float(random.randrange(-9, 10)), 2)
         while not valide((b, 0), l):
-            b = float(random.randrange(-9, 10)) / 2
+            b = old_div(float(random.randrange(-9, 10)), 2)
         rg = random.randrange(0, len(l) - 1)
         l[rg:rg] = [(b, 0)]
         i = i + 1
 
 
     while i >= 6 and i < nb and i < 10:
-        a = float(random.randrange(-9, 10)) / 2
-        b = float(random.randrange(-9, 10)) / 2
+        a = old_div(float(random.randrange(-9, 10)), 2)
+        b = old_div(float(random.randrange(-9, 10)), 2)
         j = j + 1
         if j == 600:
             break
@@ -128,23 +134,23 @@ def coordo_pts(nb):
             l.append((a, b))
             i = i + 1
     if nb >= 11 and len(l) == 10:
-        a = float(random.randrange(-9, 10)) / 2
+        a = old_div(float(random.randrange(-9, 10)), 2)
         while not valide((0, a), l):
-            a = float(random.randrange(-9, 10)) / 2
+            a = old_div(float(random.randrange(-9, 10)), 2)
         rg = random.randrange(6, len(l) - 1)
         l[rg:rg] = [(0, a)]
         i = i + 1
     if nb >= 11 and len(l) == 11:
-        b = float(random.randrange(-9, 10)) / 2
+        b = old_div(float(random.randrange(-9, 10)), 2)
         while not valide((b, 0), l):
-            b = float(random.randrange(-9, 10)) / 2
+            b = old_div(float(random.randrange(-9, 10)), 2)
         rg = random.randrange(6, len(l) - 1)
         l[rg:rg] = [(b, 0)]
         i = i + 1
 
     while i >= 12 and i < nb :
-        a = float(random.randrange(-9, 10)) / 2
-        b = float(random.randrange(-9, 10)) / 2
+        a = old_div(float(random.randrange(-9, 10)), 2)
+        b = old_div(float(random.randrange(-9, 10)), 2)
         k = k + 1
         if k == 600:
             break

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
+from builtins import str
 import sys, os, codecs
 from pyromaths.classes.SecondDegre import Poly2
 from pyromaths.outils.Arithmetique import *

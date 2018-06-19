@@ -23,7 +23,10 @@
 
 """Outils à utiliser avec les exercices utilisant Jinja2.
 """
+from __future__ import unicode_literals
 
+from builtins import str
+from builtins import range
 import math
 import numbers
 

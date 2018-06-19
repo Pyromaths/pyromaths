@@ -21,6 +21,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from past.utils import old_div
 import math
 import random
 from pyromaths.outils import Arithmetique, Affichage
@@ -416,22 +421,22 @@ def tex_formule_dix(l, exo, cor):
                      (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],
                      1)))
             cor.append('\\item $%s \\div %s = \\mathbf{%s}$' % (Affichage.decimaux(l[0],
-                     1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] / 
-                     l[1], 1)))
+                     1), Affichage.decimaux(l[1], 1), Affichage.decimaux(old_div(l[0], 
+                     l[1]), 1)))
         elif alea > 0:
             exo.append('\\item $%s \\quad\\div\\quad \\dotfill \\quad = \\quad %s$' % 
-                     (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[0] / 
-                     l[1], 1)))
+                     (Affichage.decimaux(l[0], 1), Affichage.decimaux(old_div(l[0], 
+                     l[1]), 1)))
             cor.append('\\item $%s \\div \\mathbf{%s} = %s$' % (Affichage.decimaux(l[0],
-                     1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] / 
-                     l[1], 1)))
+                     1), Affichage.decimaux(l[1], 1), Affichage.decimaux(old_div(l[0], 
+                     l[1]), 1)))
         else:
             exo.append('\\item $\\dotfill \\quad\\div\\quad %s \\quad = \\quad %s$' % 
-                     (Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] / 
-                     l[1], 1)))
+                     (Affichage.decimaux(l[1], 1), Affichage.decimaux(old_div(l[0], 
+                     l[1]), 1)))
             cor.append('\\item $\\mathbf{%s} \\div %s = %s$' % (Affichage.decimaux(l[0],
-                     1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] / 
-                     l[1], 1)))
+                     1), Affichage.decimaux(l[1], 1), Affichage.decimaux(old_div(l[0], 
+                     l[1]), 1)))
 
 
 def valeurs10(nb):  # renvoie nb valeur de chaque type : *10, /10, *0.1

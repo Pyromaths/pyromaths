@@ -24,6 +24,8 @@
 # Pyromaths : Poser des opérations
 #----------------------------------------------------------------------
 
+from __future__ import unicode_literals
+from builtins import range
 from pyromaths.outils import Arithmetique
 from pyromaths.outils.Affichage import tex_coef
 import random

@@ -21,6 +21,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from past.utils import old_div
 import math, random
 
 def pgcd(*n):
@@ -104,7 +109,7 @@ def premier(n):
 
     :rtype: boolean
     """
-    return not [x for x in xrange(2, int(math.sqrt(n)) + 1)
+    return not [x for x in range(2, int(math.sqrt(n)) + 1)
                 if n % x == 0]
 
 def eratosthene(n):
@@ -121,7 +126,7 @@ def eratosthene(n):
 
     :rtype: list
     """
-    return [x for x in xrange(2, n) if premier(x)]
+    return [x for x in range(2, n) if premier(x)]
 
 
 def factor(n):
@@ -141,12 +146,12 @@ def factor(n):
     :rtype: list
     """
     premiers = []
-    candidats = xrange(2, n + 1)
+    candidats = list(range(2, n + 1))
     candidat = 2
     while not premiers and candidat in candidats:
         if n % candidat == 0 and premier(candidat):
             premiers.append(candidat)
-            premiers = premiers + factor(n / candidat)
+            premiers = premiers + factor(old_div(n, candidat))
         candidat += 1
     return premiers
 
@@ -175,7 +180,7 @@ def factorise(n):
         if n % candidate == 0:
             primes.append(candidate)
             primes_etapes.append(str(candidate))
-            n = n / candidate
+            n = old_div(n, candidate)
             if n == 1:
                 break
             primes_etapes.append(str(n))
@@ -250,7 +255,7 @@ def carrerise(n):
             if (primes.count(element) % 2 == 1):
                 q[element] = 1
         ncar = 1
-        for element in q.iterkeys():
+        for element in list(q.keys()):
             ncar *= element
     return ncar
 

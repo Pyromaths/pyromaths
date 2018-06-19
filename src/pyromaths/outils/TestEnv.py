@@ -30,6 +30,7 @@
 # lecture de pyromaths.xml
 # écriture dans le dossier de destination
 
+from __future__ import unicode_literals
 from os.path import isfile, join
 
 def test(gui):

@@ -21,6 +21,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from past.utils import old_div
 import random
 from pyromaths.outils import Affichage, Arithmetique
 #===============================================================================
@@ -498,11 +503,11 @@ def nbre_to_dict(nbre , div0, div1, exposant):
             nb_dict[i] = "\\textcolor{red}{0}"
     curseur = 1 + exposant * (div0 + 1)
     while nbre % 10 == 0:
-        nbre = nbre / 10
+        nbre = old_div(nbre, 10)
         curseur -= 1
     while nbre > 0:
         chiffre = nbre % 10
-        nbre = (nbre - chiffre) / 10
+        nbre = old_div((nbre - chiffre), 10)
         nb_dict[curseur] = "\\textcolor{blue}{%s}" % chiffre
         curseur -= 1
     return nb_dict
@@ -735,9 +740,9 @@ def choix_nombres():
         for j in range(i + 1):
             n = n + random.randrange(1, 10) * 10 ** (-(j + 1))
         nb.append(n)
-    n = random.randrange(10) + random.randrange(10) / 10.0
+    n = random.randrange(10) + old_div(random.randrange(10), 10.0)
     while n == nb[0]:
-        n = random.randrange(10) + random.randrange(10) / 10.0
+        n = random.randrange(10) + old_div(random.randrange(10), 10.0)
     nb.append(n)
     return nb
 

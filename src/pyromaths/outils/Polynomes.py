@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from past.utils import old_div
 from pyromaths.classes.Polynome import Polynome
 from .Arithmetique import pgcd
 
@@ -11,7 +16,7 @@ from random import randint, randrange
 def TeX_division(dividende, diviseur):
     '''renvoie une chaine de caractere TeX pour afficher la division en détail'''
 #     quotient = Polynome({0:0})
-    texquotient, restera = dividende / diviseur
+    texquotient, restera = old_div(dividende, diviseur)
     reste = dividende
     diviseur_degre = diviseur.deg
     sauve = min(dividende.puiss + restera.puiss)
@@ -28,7 +33,7 @@ def TeX_division(dividende, diviseur):
         for dummy in range(i):
             string += " &"
         ajout_quotient_deg = reste.deg - diviseur_degre
-        facteur = reste.dictio[max(0, reste.deg)] / diviseur.dictio[diviseur.deg]
+        facteur = old_div(reste.dictio[max(0, reste.deg)], diviseur.dictio[diviseur.deg])
         ajout_quotient = Polynome({ajout_quotient_deg:facteur}, var=dividende.var)
         soustrait_reste = ajout_quotient * diviseur
         string += tab_print(soustrait_reste, diviseur_degre + 1 - sauve, parenthese=True)
@@ -116,7 +121,7 @@ def poly_racines_fractionnaires(rac_min, rac_max, denom1, X):
             break
     pol2 = pol2.simplifie()
     simplifie = abs(pgcd(pgcd(int(pol2[0]), int(pol2[1])), int(pol2[2])))
-    pol2 = pol2 / simplifie
+    pol2 = old_div(pol2, simplifie)
     return pol2.simplifie()
 def poly_racines_entieres(rac_min, rac_max, X, a1=1):
     

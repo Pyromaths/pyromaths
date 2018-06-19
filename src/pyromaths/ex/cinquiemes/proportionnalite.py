@@ -19,6 +19,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import range
+from past.utils import old_div
 from random import randint, randrange
 from pyromaths.outils.decimaux import decimaux
 
@@ -64,7 +68,7 @@ def exo_echelles():
     enonce = reponses.pop(choix)
 
     # sur la deuxième ligne du tableau, on écrit en cm, en gras, les nombres calculés
-    tab_reels = [ "\\bf"*(i != choix) + decimaux(reels[i] / 10.0) for i in range(4)]
+    tab_reels = [ "\\bf"*(i != choix) + decimaux(old_div(reels[i], 10.0)) for i in range(4)]
 
     # Pour placer les quatre lettres sur le plan
     cotation_couleur = [["a", ""],
@@ -100,18 +104,18 @@ def exo_echelles():
               "\\end{pspicture}"]
 
 
-    exo = [_(u"\\exercice Sur ce plan, la longueur $%s$ mesure en réalité \\unit[%s]{m} :\n") % (enonce, decimaux(reels[choix] / 1000.0))] \
+    exo = [_(u"\\exercice Sur ce plan, la longueur $%s$ mesure en réalité \\unit[%s]{m} :\n") % (enonce, decimaux(old_div(reels[choix], 1000.0)))] \
           + figure + \
            ["\\begin{enumerate}",
            _(u"\\item Déterminer l'échelle de ce plan."),
            _(u"\\item Déterminer les longueurs réelles $%s$, $%s$ et $%s$.") % (reponses[0], reponses[1], reponses[2]),
             "\\end{enumerate}"]
-    cor = [_(u"\\exercice* Sur ce plan, la longueur $%s$ mesure en réalité \\unit[%s]{m} : \n") % (enonce, decimaux(reels[choix] / 1000.0))] \
+    cor = [_(u"\\exercice* Sur ce plan, la longueur $%s$ mesure en réalité \\unit[%s]{m} : \n") % (enonce, decimaux(old_div(reels[choix], 1000.0)))] \
            + figure + \
           ["\\begin{enumerate}",
            _(u"\\item Déterminer l'échelle de ce plan.\\par"),
-           _(u"Sur le plan, je mesure que $%s=\\unit[%s]{cm}$.\\par") % (enonce, decimaux(plan[choix] / 10.0)),
-           _(u"Or on sait que en réalité $%s = \\unit[%s]{m} = \\unit[%s]{cm}$") % (enonce, decimaux(reels[choix] / 1000.0), decimaux(reels[choix] / 10.0)),
+           _(u"Sur le plan, je mesure que $%s=\\unit[%s]{cm}$.\\par") % (enonce, decimaux(old_div(plan[choix], 10.0))),
+           _(u"Or on sait que en réalité $%s = \\unit[%s]{m} = \\unit[%s]{cm}$") % (enonce, decimaux(old_div(reels[choix], 1000.0)), decimaux(old_div(reels[choix], 10.0))),
            _(u" et  $%s \\div %s = %s$.\\par") % (decimaux(reels[choix]), decimaux(plan[choix]), decimaux(echelle)),
            _(u"L'échelle de ce plan est donc $1/%s^e$.") % echelle,
            _(u"\\item Déterminer les longueurs réelles $%s$, $%s$ et $%s$.\n") % (reponses[0], reponses[1], reponses[2]),
@@ -119,7 +123,7 @@ def exo_echelles():
            "\\begin{tabular}{|l|c|c|c|c|c}",
            ("\\multicolumn{1}{c}{}" + "&\\multicolumn{1}{c}{$%s$}"*4 + "\\\\") % ("a", "b", "c", "d"),
            "\\cline{1-5}",
-           _("Sur le plan (en cm)  & %s & %s & %s & %s &\\rnode{plan1}{}\\\\") % tuple(map(lambda n:decimaux(n / 10.0), plan)),
+           _("Sur le plan (en cm)  & %s & %s & %s & %s &\\rnode{plan1}{}\\\\") % tuple([decimaux(old_div(n, 10.0)) for n in plan]),
            "\\cline{1-5}",
            _(u"En réalité (en cm)  & %s & %s & %s & %s &\\rnode{plan2}{}\\\\") % tuple(tab_reels),
            "\\cline{1-5}",
@@ -127,7 +131,7 @@ def exo_echelles():
            "\\ncbar{->}{plan1}{plan2}\\Aput{$\\times %s$}" % echelle,
            _(u"Pour conclure, on convertit ses longueurs en m :\\par"),
            "$$a = \\unit[%s]{m} \\quad ; \\quad b = \\unit[%s]{m} \\quad ; \\quad c  = \\unit[%s]{m} \\quad ; \\quad d =\\unit[%s]{m}$$"\
-                   % tuple(map(lambda n:decimaux(n / 1000.0), reels)),
+                   % tuple([decimaux(old_div(n, 1000.0)) for n in reels]),
            "\\end{enumerate}"]
 
     return exo, cor
@@ -138,10 +142,10 @@ exo_echelles.description = _(u'Échelles')
 def exo_fruits():
     fruit = [_("Cerises"), _("Tomates"), _("Pommes"), _("Poires"), _("Raisin"), _("Oranges")][randrange(6)]
     while 1:
-        a, b, c = randint(10, 50) / 10.0, randint(10, 50) / 10.0, randint(10, 50) / 10.0
+        a, b, c = old_div(randint(10, 50), 10.0), old_div(randint(10, 50), 10.0), old_div(randint(10, 50), 10.0)
         if a != b and a != c and b != c:
             break
-    tarif = randint(20, 50) / 10.0
+    tarif = old_div(randint(20, 50), 10.0)
     fruits_c = (fruit, a, b, c)
     fruits_e = (fruit, decimaux(a), decimaux(b), "")
     prix_c = (_("prix"), decimaux(fruits_c[1] * tarif), decimaux(fruits_c[2] * tarif), decimaux(fruits_c[3] * tarif))

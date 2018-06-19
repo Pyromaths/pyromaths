@@ -26,6 +26,10 @@
 
 # from Affichage import decimaux
 from __future__ import absolute_import
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from past.builtins import basestring
 from pyromaths.outils import Arithmetique
 
 
@@ -772,7 +776,7 @@ def texify(liste_calculs):
         puiss = 0
         for index in range(len(calcul)):
             el = calcul[index]
-            for cle in isEnlumine.keys():
+            for cle in list(isEnlumine.keys()):
                 if isEnlumine[cle] and (not isinstance(el, list) or el[1] != cle):
                     s += '}'
                     isEnlumine[cle] = False
@@ -865,7 +869,7 @@ def texify(liste_calculs):
             if puiss == 1 and s[-1] != r"{":
                 puiss = 0
                 s += "}"
-        for cle in isEnlumine.keys():
+        for cle in list(isEnlumine.keys()):
             if isEnlumine[cle] and (not isinstance(el, list) or el[1] != cle):
                 s += '}'
         s = s.replace("**{", "^{")

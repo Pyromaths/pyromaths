@@ -25,7 +25,10 @@ Créé le 9 déc. 2013
 
 .. sectionauthor:: Jérôme Ortais <jerome.ortais@pyromaths.org>
 '''
+from __future__ import unicode_literals
 
+from builtins import str
+from builtins import range
 from random import shuffle, randrange
 
 from pyromaths.classes.PolynomesCollege import Lagrange, choix_points

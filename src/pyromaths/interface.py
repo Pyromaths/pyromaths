@@ -21,6 +21,12 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 from __future__ import absolute_import
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from past.utils import old_div
+from builtins import object
 from PyQt4 import QtGui, QtCore
 import os, lxml, codecs, sys
 from .outils import System
@@ -443,12 +449,12 @@ class Ui_MainWindow(object):
             parametres = {
                 'creer_pdf': self.checkBox_pdf.isChecked(),
                 'creer_unpdf': self.checkBox_unpdf.isChecked() and self.checkBox_unpdf.isEnabled(),
-                'titre': unicode(self.titre_fiche.text()),
+                'titre': str(self.titre_fiche.text()),
                 'corrige': self.checkBox_corrige.isChecked(),
-                'niveau': unicode(self.comboBox_niveau.currentText()),
-                'nom_fichier': unicode(self.nom_fichier.text()),
-                'chemin_fichier': unicode(self.chemin_fichier.text()),
-                'modele': unicode(self.comboBox_modele.currentText() + '.tex'),
+                'niveau': str(self.comboBox_niveau.currentText()),
+                'nom_fichier': str(self.nom_fichier.text()),
+                'chemin_fichier': str(self.chemin_fichier.text()),
+                'modele': str(self.comboBox_modele.currentText() + '.tex'),
                 'datadir': DATADIR,
                 'configdir': CONFIGDIR
                          }
@@ -491,13 +497,13 @@ class Ui_MainWindow(object):
         tree = lxml.etree.parse(self.configfile)
         root = tree.getroot()
         options = root.find('options')
-        options .find('nom_fichier').text = unicode(self.nom_fichier.text())
-        options .find('chemin_fichier').text = unicode(self.chemin_fichier.text())
-        options .find('titre_fiche').text = unicode(self.titre_fiche.text())
+        options .find('nom_fichier').text = str(self.nom_fichier.text())
+        options .find('chemin_fichier').text = str(self.chemin_fichier.text())
+        options .find('titre_fiche').text = str(self.titre_fiche.text())
         options .find('corrige').text = str(self.checkBox_corrige.isChecked())
         options .find('pdf').text = str(self.checkBox_pdf.isChecked())
         options .find('unpdf').text = str(self.checkBox_unpdf.isChecked())
-        options .find('modele').text = unicode(self.comboBox_modele.currentText() + '.tex')
+        options .find('modele').text = str(self.comboBox_modele.currentText() + '.tex')
 
         f = codecs.open(self.configfile, encoding='utf-8', mode='w')
         f.write(lxml.etree.tostring(root, pretty_print=True, encoding="UTF-8",
@@ -624,13 +630,13 @@ def valide(liste, LesFiches, parametres):
     saveas = QtGui.QFileDialog()
     filename = System.supprime_extension(parametres['nom_fichier'],
                                          '.tex')
-    f0 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
+    f0 = str(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(parametres['chemin_fichier'],
                              u'%s.tex' % filename), "Documents Tex (*.tex)"))
     if f0:
         System.ajoute_extension(f0, '.tex')
         if corrige and not parametres['creer_unpdf']:
-            f1 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
+            f1 = str(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(os.path.dirname(f0),
                 _(u"%s-corrige.tex") % os.path.splitext(os.path.basename(f0))[0]),
                 _("Documents Tex (*.tex)")))
@@ -671,8 +677,8 @@ class Tab(QtGui.QWidget):
         spacer = QtGui.QSpacerItem(20, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         for i in range(nb_exos):
             self.add_exercise(i, onchange)
-            self.layout.addItem(spacer, (nb_exos + 1) / 2, 0, 1, 1)
-            self.layout.addItem(spacer, (nb_exos + 1) / 2, 1, 1, 1)
+            self.layout.addItem(spacer, old_div((nb_exos + 1), 2), 0, 1, 1)
+            self.layout.addItem(spacer, old_div((nb_exos + 1), 2), 1, 1, 1)
         # Ajoute ce tab au widget parent
         parent.addTab(self.scroll, self.titre)
 
@@ -707,7 +713,7 @@ class Tab(QtGui.QWidget):
         layout.addItem(spacer)
         layout.addItem(spacer)
         # Ajoute cet exercice à l'onglet
-        self.layout.addLayout(layout, i / 2, i % 2, 1, 1)
+        self.layout.addLayout(layout, old_div(i, 2), i % 2, 1, 1)
 
     def reset(self):
         """Remet les compteurs à zéro"""

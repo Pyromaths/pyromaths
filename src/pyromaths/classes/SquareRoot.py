@@ -26,13 +26,19 @@ Created on 19 déc. 2014
 
 @author: jerome
 '''
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from builtins import object
+from past.utils import old_div
 from pyromaths.outils.Arithmetique import carrerise
 from pyromaths.outils.decimaux import decimaux
 from pyromaths.outils import Priorites3
 from pyromaths import classes
 
 from math import sqrt
-class SquareRoot():
+class SquareRoot(object):
     '''
     Définit la classe SquareRoot permettant de manipuler des racines carrées.
     
@@ -383,7 +389,7 @@ class SquareRoot():
                 return '%r*%r' % (racine[0], int(sqrt(racine[1])))
             if complement == racine[1]:
                 return repr(self)
-            return '%r*%r' % (SquareRoot([racine[0], racine[1] / complement]), SquareRoot([1, complement]))
+            return '%r*%r' % (SquareRoot([racine[0], old_div(racine[1], complement)]), SquareRoot([1, complement]))
         raise ValueError(u'Not Implemented : SquareRoot(%s)' % racine)
 
     def simplifie(self):

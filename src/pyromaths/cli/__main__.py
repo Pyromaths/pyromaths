@@ -24,6 +24,7 @@ To display help:
 > python -m pyromaths.cli --help
 """
 from __future__ import print_function
+from __future__ import unicode_literals
 
 import argparse
 import gettext
@@ -32,7 +33,7 @@ import random
 import sys
 
 # Quick and dirty definition of `_` as the identity function
-gettext.install('pyromaths', unicode=1)
+gettext.install('pyromaths', str=1)
 
 from pyromaths.cli import exercise_argument, PyromathsException
 from pyromaths.ex.test import TestPerformer, generate

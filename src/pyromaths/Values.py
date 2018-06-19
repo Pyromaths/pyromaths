@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 #
 from __future__ import absolute_import
+from __future__ import unicode_literals
+from builtins import str
 from time import strftime
 from os.path import normpath, dirname, exists, abspath, join
 from os import environ, name
@@ -23,7 +25,7 @@ def data_dir():
             path = 'data'
         elif sys.platform == 'darwin':
             path = '../Resources/data'
-        return join(normpath(dirname(unicode(executable,
+        return join(normpath(dirname(str(executable,
                                              getfilesystemencoding()))), path)
     # We're alive
     # Are we running from the sources?
@@ -44,19 +46,19 @@ def icon_dir():
 
 if name == 'nt':
     def home():
-        return unicode(environ['USERPROFILE'], getfilesystemencoding())
+        return str(environ['USERPROFILE'], getfilesystemencoding())
     def configdir():
-        return join(unicode(environ['APPDATA'], getfilesystemencoding()),
+        return join(str(environ['APPDATA'], getfilesystemencoding()),
                 "pyromaths")
 elif sys.platform == "darwin":  # Cas de Mac OS X.
     def home():
-        return unicode(environ['HOME'], getfilesystemencoding())
+        return str(environ['HOME'], getfilesystemencoding())
     def configdir():
         return join(home(), "Library", "Application Support", "Pyromaths")
 else:
     def home():
         try:
-            return unicode(environ['HOME'], getfilesystemencoding())
+            return str(environ['HOME'], getfilesystemencoding())
         except KeyError:
             # Pyromaths en ligne, l'user apache n'a pas de $HOME
             return ""
@@ -77,6 +79,6 @@ CONFIGDIR = configdir()
 def lesfiches():
     """Charge et renvoie les fiches d'exercices"""
     fiches = []
-    for level, exercices in ex.load_levels().iteritems():
+    for level, exercices in list(ex.load_levels().items()):
         fiches.append([level, '', exercices])
     return fiches

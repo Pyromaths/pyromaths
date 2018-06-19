@@ -26,7 +26,9 @@ This module gather tests from all exercises. Running:
 does just as expected.
 """
 from __future__ import print_function
+from __future__ import unicode_literals
 
+from builtins import object
 import codecs
 import difflib
 import gettext
@@ -39,7 +41,7 @@ import tempfile
 import unittest
 
 # Quick and dirty definition of `_` as the identity function
-gettext.install('pyromaths', unicode=1)
+gettext.install('pyromaths', str=1)
 
 import pyromaths
 from pyromaths.outils import System
@@ -234,7 +236,7 @@ class TestPerformer(object):
 
     def iter_names(self):
         """Iterate over exercise names."""
-        return self.exercises.keys()
+        return list(self.exercises.keys())
 
     def get(self, exercise, seed):
         """Return the `TestExercise` object corresponding to the arguments."""

@@ -25,6 +25,9 @@ Created on 21 janv. 2015
 
 @author: jerome
 '''
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
 from pyromaths import ex
 from random import randrange
 def listeToclasses(liste):

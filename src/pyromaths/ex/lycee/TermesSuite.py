@@ -21,6 +21,12 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from builtins import object
+from past.utils import old_div
 import functools
 import random
 import textwrap
@@ -72,7 +78,7 @@ def signe(nombre):
         return -1
     raise ValueError
 
-class Fraction:
+class Fraction(object):
     def __init__(self, numerateur, denominateur, signe=1):
         self.signe = signe
         self.numerateur = numerateur
@@ -97,8 +103,8 @@ class Fraction:
             return Entier(self.signe * self.numerateur / self.denominateur)
         diviseur = pgcd(self.numerateur, self.denominateur)
         return Fraction(
-                self.numerateur/diviseur,
-                self.denominateur/diviseur,
+                old_div(self.numerateur,diviseur),
+                old_div(self.denominateur,diviseur),
                 self.signe,
                 )
 
@@ -108,7 +114,7 @@ class Fraction:
 
 
 @functools.total_ordering
-class Entier:
+class Entier(object):
     def __init__(self, valeur):
         self.valeur = valeur
 
@@ -169,7 +175,7 @@ FRACTIONS = [
         Fraction(4, 5),
         ]
 
-class Fonction:
+class Fonction(object):
 
     def calcul(self, argument):
         raise NotImplementedError()
@@ -425,14 +431,14 @@ class FrancaisGeometrique(Fonction):
             denominateur = raison.denominateur * argument.denominateur
             yield ur"\frac{{ {} }}{{ {} }}".format(numerateur, denominateur)
             if numerateur % denominateur == 0:
-                yield Entier(numerateur / denominateur).latex()
+                yield Entier(old_div(numerateur, denominateur)).latex()
                 return
 
             diviseur = pgcd(numerateur, denominateur)
             if diviseur == 1:
                 return
 
-            yield Fraction(numerateur/diviseur, denominateur/diviseur).latex()
+            yield Fraction(old_div(numerateur,diviseur), old_div(denominateur,diviseur)).latex()
 
     def resultat(self, argument):
         if isinstance(argument, Entier) and isinstance(self.raison, Entier):
@@ -447,9 +453,9 @@ class FrancaisGeometrique(Fonction):
             numerateur = argument.numerateur * raison.numerateur
             denominateur = raison.denominateur * argument.denominateur
             if numerateur % denominateur == 0:
-                return Entier(numerateur / denominateur)
+                return Entier(old_div(numerateur, denominateur))
             diviseur = pgcd(numerateur, denominateur)
-            return Fraction(numerateur/diviseur, denominateur/diviseur)
+            return Fraction(old_div(numerateur,diviseur), old_div(denominateur,diviseur))
 
 class FrancaisArithmetique(Fonction):
 
@@ -613,7 +619,7 @@ class TermesDUneSuite(ex.TexExercise):
         #   première question de chacune des trois suites) ;
         # * `self.rang[1]` et `self.rang[2]` sont les rangs demandés pour les
         #   deux questions suivantes dans chacune des trois suites.
-        self.rang = [random.randint(2, 7)] + random.sample(range(3, 7), 2)
+        self.rang = [random.randint(2, 7)] + random.sample(list(range(3, 7)), 2)
 
         self.questions = [
                 Francais(random.randint(0, min(self.rang[1:])-1)),
@@ -648,7 +654,7 @@ class TermesDUneSuite(ex.TexExercise):
         exo.append(ur"  \item Selon l'énoncé, le premier terme de ${notation}$ est $u_{indice0}={terme0}$. Puisque chaque terme (sauf le premier) est égal {suivant}, on a :".format(**self.questions[0].latex_params))
         termes = dict([(self.questions[0].indice0, self.questions[0].terme0)])
         calcul_termes = []
-        for indice in xrange(self.questions[0].indice0, max(self.rang[0] + self.questions[0].indice0 - 1, self.rang[1], self.rang[2])):
+        for indice in range(self.questions[0].indice0, max(self.rang[0] + self.questions[0].indice0 - 1, self.rang[1], self.rang[2])):
             calcul = ur"$u_{indice}={fonction}".format(
                 indice=indice+1,
                 fonction=self.questions[0].fonction.expression("u_{}".format(indice)),
@@ -715,7 +721,7 @@ class TermesDUneSuite(ex.TexExercise):
               """).format(**self.questions[2].latex_params))
         termes = dict([(self.questions[2].indice0, self.questions[2].terme0)])
         calcul_termes = []
-        for indice in xrange(self.questions[2].indice0, max(self.rang[0] + self.questions[2].indice0 - 1, self.rang[1], self.rang[2])):
+        for indice in range(self.questions[2].indice0, max(self.rang[0] + self.questions[2].indice0 - 1, self.rang[1], self.rang[2])):
             calcul = ur"u_{indice} &= {fonction}".format(
                 indice=indice+1,
                 fonction=self.questions[2].fonction.expression("u_{}".format(indice)),

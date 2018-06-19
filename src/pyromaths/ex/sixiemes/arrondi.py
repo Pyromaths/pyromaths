@@ -20,6 +20,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import range
+from past.utils import old_div
 from random import randint, shuffle
 import textwrap
 
@@ -49,10 +53,10 @@ class ArrondirNombreDecimal(ex.TexExercise):
         # Valeur approchée par défaut 
         # Arrondi = la « meilleure » valeur approchée
         # et ne paraît employé ici correctement
-        self.nombres = [(hasard[0]) / (10 ** (-self.choix_precision[0] + 4)),
-                (hasard[1]) / (10 ** (-self.choix_precision[1] + 4)),
-                (hasard[2]) / (10 ** (-self.choix_precision[2] + 4)),
-                (hasard[3]) / (10 ** (-self.choix_precision[3] + 4))]
+        self.nombres = [old_div((hasard[0]), (10 ** (-self.choix_precision[0] + 4))),
+                old_div((hasard[1]), (10 ** (-self.choix_precision[1] + 4))),
+                old_div((hasard[2]), (10 ** (-self.choix_precision[2] + 4))),
+                old_div((hasard[3]), (10 ** (-self.choix_precision[3] + 4)))]
 
     def tex_statement(self):
         exo = ["\\exercice", '\\begin{enumerate}']

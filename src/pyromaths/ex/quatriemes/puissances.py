@@ -21,6 +21,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from past.utils import old_div
 from pyromaths.outils.Arithmetique import pgcd, valeur_alea
 from pyromaths.outils.Affichage import decimaux, tex_coef
 from random import choice, randrange
@@ -229,7 +234,7 @@ def ecr_sc():
     for dummy in range(6):
         a = val_sc()
         exp = int(floor(log10(a)))
-        a_sc = (a * 1.) / 10 ** exp
+        a_sc = old_div((a * 1.), 10 ** exp)
         s_a = decimaux(a, 1)
         s_a_sc = decimaux(a_sc, 1)
         if randrange(2):  # forme : a=a_sc*...
@@ -270,7 +275,7 @@ def exo_puissances():
     cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_0(valeurs[i]).translate(sd))
     cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_1(valeurs[i]).translate(sd))
     cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_2(valeurs[i]).translate(sd))
-    if int(floor(log10(((valeurs[i][0] * valeurs[i][1]) * 1.) / valeurs[i][2]))) != \
+    if int(floor(log10(old_div(((valeurs[i][0] * valeurs[i][1]) * 1.), valeurs[i][2])))) != \
         0:
         cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_3(valeurs[i]).translate(sd))
     cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" % 
@@ -285,8 +290,8 @@ def exo_puissances():
                i]).translate(sd))
     cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_2(valeurs[1 - 
                i]).translate(sd))
-    if int(floor(log10(((valeurs[1 - i][0] * valeurs[1 - i][1]) * 1.) / 
-           valeurs[1 - i][2]))) != 0:
+    if int(floor(log10(old_div(((valeurs[1 - i][0] * valeurs[1 - i][1]) * 1.), 
+           valeurs[1 - i][2])))) != 0:
         cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_3(valeurs[1 - 
                    i]).translate(sd))
         cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" % 
@@ -316,39 +321,39 @@ def tex_puissances_1(a):
 
 def tex_puissances_2(a):
     if isinstance(a, tuple):
-        if ((a[0] * a[1]) * 1.) / a[2] == (a[0] * a[1]) / a[2]:
+        if old_div(((a[0] * a[1]) * 1.), a[2]) == old_div((a[0] * a[1]), a[2]):
             if a[5] * a[6] < 0:
                 return '\\nombre{%s} \\times 10^{%s-(%s)}' % \
-                    verifie_type(((a[0] * a[1]) / a[2], a[3] + a[4], a[5] * 
+                    verifie_type((old_div((a[0] * a[1]), a[2]), a[3] + a[4], a[5] * 
                                  a[6]))
             else:
-                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type(((a[0] * 
-                        a[1]) / a[2], a[3] + a[4], a[5] * a[6]))
+                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type((old_div((a[0] * 
+                        a[1]), a[2]), a[3] + a[4], a[5] * a[6]))
         else:
             if a[5] * a[6] < 0:
                 return '\\nombre{%s} \\times 10^{%s-(%s)}' % \
-                    verifie_type((((a[0] * a[1]) * 1.) / a[2], a[3] + a[4],
+                    verifie_type((old_div(((a[0] * a[1]) * 1.), a[2]), a[3] + a[4],
                                  a[5] * a[6]))
             else:
-                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type((((a[0] * 
-                        a[1]) * 1.) / a[2], a[3] + a[4], a[5] * a[6]))
+                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type((old_div(((a[0] * 
+                        a[1]) * 1.), a[2]), a[3] + a[4], a[5] * a[6]))
 
 
 def tex_puissances_3(a):
     from math import floor, log10
-    b = int(floor(log10(((a[0] * a[1]) * 1.) / a[2])))
+    b = int(floor(log10(old_div(((a[0] * a[1]) * 1.), a[2]))))
     if isinstance(a, tuple) and b != 0:
         return '\\nombre{%s}  \\times 10^{%s} \\times 10^{%s}' % \
-            verifie_type(((((a[0] * a[1]) * 1.) / a[2]) / 10 ** b, b, (a[3] + 
+            verifie_type((old_div((old_div(((a[0] * a[1]) * 1.), a[2])), 10 ** b), b, (a[3] + 
                          a[4]) - a[5] * a[6]))
 
 
 def tex_puissances_4(a):
     from math import floor, log10
-    b = int(floor(log10(((a[0] * a[1]) * 1.) / a[2])))
+    b = int(floor(log10(old_div(((a[0] * a[1]) * 1.), a[2]))))
     if isinstance(a, tuple):
-        return '\\nombre{%s}  \\times 10^{%s}' % verifie_type(((((a[0] * 
-                a[1]) * 1.) / a[2]) / 10 ** b, (b + a[3] + a[4]) - a[5] * 
+        return '\\nombre{%s}  \\times 10^{%s}' % verifie_type((old_div((old_div(((a[0] * 
+                a[1]) * 1.), a[2])), 10 ** b), (b + a[3] + a[4]) - a[5] * 
                 a[6]))
 
 
@@ -367,7 +372,7 @@ def valeurs_puissances():  # renvoie un tuple contenant les valeurs pour les deu
     (maxi, emax) = (10, 2)
     while True:
         (b1, b2) = (valeur_alea(2, maxi), valeur_alea(2, maxi))
-        (b1, b2) = (b1 / pgcd(b1, b2), b2 / pgcd(b1, b2))
+        (b1, b2) = (old_div(b1, pgcd(b1, b2)), old_div(b2, pgcd(b1, b2)))
         if b1 != 1 and b2 != 1:
             break
     while True:
@@ -376,7 +381,7 @@ def valeurs_puissances():  # renvoie un tuple contenant les valeurs pour les deu
                     emax))
         n3 = ((b1 * b2) * choice((2, 4, 5, 8))) * 10 ** randrange(-emax,
                 emax)
-        if int(floor(log10(((n1 * n2) * 1.) / n3))) != 0 and n1 != 1 and \
+        if int(floor(log10(old_div(((n1 * n2) * 1.), n3)))) != 0 and n1 != 1 and \
             n2 != 1 and n3 != 1:
             break
     (e1, e2, e3, e4) = (valeur_alea(-10, 10), valeur_alea(-10, 10),
@@ -384,7 +389,7 @@ def valeurs_puissances():  # renvoie un tuple contenant les valeurs pour les deu
     a = verifie_type((n1, n2, n3, e1, e2, e3, e4))
     while True:
         (b1, b2) = (valeur_alea(2, maxi), valeur_alea(2, maxi))
-        (b1, b2) = (b1 / pgcd(b1, b2), b2 / pgcd(b1, b2))
+        (b1, b2) = (old_div(b1, pgcd(b1, b2)), old_div(b2, pgcd(b1, b2)))
         if b1 != 1 and b2 != 1:
             break
     (n1, n2) = ((b1 * valeur_alea(2, maxi)) * 10 ** randrange(-emax, emax + 

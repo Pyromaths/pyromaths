@@ -23,7 +23,9 @@ To display help:
 
 > python -m pyromaths.cli.test --help
 """
+from __future__ import unicode_literals
 
+from builtins import input
 import argparse
 import gettext
 import logging
@@ -31,7 +33,7 @@ import sys
 import unittest
 
 # Quick and dirty definition of `_` as the identity function
-gettext.install('pyromaths', unicode=1)
+gettext.install('pyromaths', str=1)
 
 from pyromaths.cli import exercise_argument, PyromathsException
 from pyromaths.ex.test import TestPerformer
@@ -51,7 +53,7 @@ def ask_confirm(message):
     """
     while True:
         try:
-            answer = raw_input("{} (y/n) [n]? ".format(message))
+            answer = eval(input("{} (y/n) [n]? ".format(message)))
         except EOFError:
             answer = 'n'
         if answer == 'y':

@@ -21,6 +21,12 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from builtins import object
+from past.utils import old_div
 if __name__ == "__main__":
     import sys, os
     sys.path.append(os.path.join('..'))
@@ -33,7 +39,7 @@ import re
 # from pyromaths.outils.Affichage import pTeX, TeX, radicalTeX, fTeX, Fractions, tTeX
 from pyromaths.outils.Affichage import TeX, tTeX
 
-class Polynome:
+class Polynome(object):
     '''Classe de polynôme pour le lycee'''
     def __init__(self, liste_coeff, var="x"):
         self.var = var  # Lettre pour la var
@@ -44,7 +50,7 @@ class Polynome:
             liste_coeff = dict((i, liste_coeff[i])for i in range(len(liste_coeff)))
         elif isinstance(liste_coeff, int) or isinstance(liste_coeff, Fraction) or isinstance(liste_coeff, float):
             liste_coeff = {0:liste_coeff}
-        for i in liste_coeff.iterkeys():
+        for i in list(liste_coeff.keys()):
             if liste_coeff[i] != 0:
                 if isinstance(liste_coeff[i], (RacineDegre2, Fraction)):
                     #===========================================================
@@ -56,7 +62,7 @@ class Polynome:
         if liste_reduite == {} or liste_coeff == []:
             liste_reduite = {0:0}
         self.dictio = liste_reduite
-        self.puiss = liste_reduite.keys()
+        self.puiss = list(liste_reduite.keys())
         self.puiss.sort(reverse=True)
         self.deg = self.degre()
         self.degre_max = max(0, self.deg)
@@ -66,7 +72,7 @@ class Polynome:
 
     def degre(self):
         degre = float("-inf")
-        for i in self.dictio.iterkeys():
+        for i in list(self.dictio.keys()):
             if i > degre and self.dictio[i] != 0:
                 degre = i
         return degre
@@ -147,8 +153,8 @@ class Polynome:
     def __mul__(self, other):
         if isinstance(other, Polynome):
             result = Polynome({0:0}, var=self.var)
-            for i in self.dictio.iterkeys():
-                for j in other.dictio.iterkeys():
+            for i in list(self.dictio.keys()):
+                for j in list(other.dictio.keys()):
                     exposant = i + j
                     coefficient = self.dictio[i] * other.dictio[j]
                     result = result + Polynome({exposant:coefficient}, var=self.var)
@@ -171,7 +177,7 @@ class Polynome:
     def __pow__(self, other):
         if isinstance(other, int) and other >= 0:
             result = Polynome({0:1}, self.var)
-            for dummy in xrange(other):
+            for dummy in range(other):
                 result *= self
             return result
 
@@ -196,14 +202,14 @@ class Polynome:
         if isinstance(other, int):
             return Fraction(1, other) * self
         elif isinstance(other, Fraction) or isinstance(other, float)or isinstance(other, RacineDegre2):
-            return (1 / other) * self
+            return (old_div(1, other)) * self
         else:
             quotient = Polynome({}, var=self.var)
             reste = self
             diviseur_degre = other.deg
             while diviseur_degre <= reste.deg:
                 ajout_quotient_deg = reste.deg - diviseur_degre
-                facteur = reste.dictio[reste.deg] / other.dictio[other.deg]
+                facteur = old_div(reste.dictio[reste.deg], other.dictio[other.deg])
                 ajout_quotient = Polynome({ajout_quotient_deg:facteur}, var=self.var)
                 quotient = quotient + ajout_quotient
                 soustrait_reste = ajout_quotient * other
@@ -231,7 +237,7 @@ class Polynome:
             return self.TeX(var=x)
         else:
             result = 0
-            for i in self.dictio.iterkeys():
+            for i in list(self.dictio.keys()):
                 result = result + self[i] * x ** i
             if isinstance(result, str):
                 result = eval(Priorites3.priorites(result)[-1][0])
@@ -259,11 +265,11 @@ class Polynome:
 
     def factorise(self, TeX=False, racines=[0, -1, 1, 2, -2]):
         facteurs = [Polynome({0:self.dictio[self.deg]}, var=self.var)]
-        developpe, reste = self / facteurs[0]
+        developpe, reste = old_div(self, facteurs[0])
         for r in racines:
             while developpe(r) == 0:
                 rac = -r
-                developpe, reste = developpe / Polynome({1:1, 0:rac}, var=self.var)
+                developpe, reste = old_div(developpe, Polynome({1:1, 0:rac}, var=self.var))
                 facteurs = facteurs + [Polynome({1:1, 0:rac})]
         if TeX:
             stringTeX = ""
@@ -283,7 +289,7 @@ class Polynome:
 
     def derive(self):
         result = {}
-        for i in self.dictio.iterkeys():
+        for i in list(self.dictio.keys()):
             if i == 0:
                 result[0] = 0
             else:
@@ -291,7 +297,7 @@ class Polynome:
         return Polynome(result, self.var)
     def primitive(self):
         result = {}
-        for i in self.dictio.iterkeys():
+        for i in list(self.dictio.keys()):
             result[i + 1] = Fraction(1, int(i + 1)) * self.dictio[i]
         return Polynome(result, self.var)
 

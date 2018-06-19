@@ -21,14 +21,22 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+from __future__ import division
+from __future__ import unicode_literals
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import range
+from builtins import object
+from past.utils import old_div
 from pyromaths.outils.Arithmetique import pgcd, ppcm
 from collections import Counter
 from pyromaths.classes.SquareRoot import SquareRoot
 from pyromaths.outils.Priorites3 import EstNombre, texify
-from __builtin__ import str
+from builtins import str
 from functools import reduce
 
-class Fraction():
+class Fraction(object):
     """Cette classe crée la notion de fractions.
     code permet de préciser si une décomposition a pour objectif une mise au
     même dénominateur 'r' ou une simplification 's'
@@ -248,7 +256,7 @@ class Fraction():
         Écrit la fraction self avec le dénominateur denominateur
         """
         if denominateur != self.d:
-            return Fraction("%s*%s" % (self.n, denominateur / self.d), "%s*%s" % (self.d, denominateur / self.d), "r")
+            return Fraction("%s*%s" % (self.n, old_div(denominateur, self.d)), "%s*%s" % (self.d, old_div(denominateur, self.d)), "r")
         else:
             return self
 
@@ -434,7 +442,7 @@ class Fraction():
                 lepgcdtmp = pgcd(lnum[i], lepgcd)
                 if lepgcdtmp != 1: num.append("%r*%r" % (lepgcdtmp, lnum[i] // lepgcdtmp))
                 else: num.append("%r" % lnum[i])
-                lepgcd = lepgcd / lepgcdtmp
+                lepgcd = old_div(lepgcd, lepgcdtmp)
                 i += 1
         i, lepgcd = 0, s
         while i < len(lden):
@@ -445,7 +453,7 @@ class Fraction():
                 lepgcdtmp = pgcd(lden[i], lepgcd)
                 if lepgcdtmp != 1: den.append("%r*%r" % (lepgcdtmp, lden[i] // lepgcdtmp))
                 else: den.append("%r" % lden[i])
-                lepgcd = lepgcd / lepgcdtmp
+                lepgcd = old_div(lepgcd, lepgcdtmp)
                 i += 1
         num, den = "*".join(num), "*".join(den)
         while num[:2] == "1*": num = num[2:]
@@ -614,7 +622,7 @@ class Fraction():
 
     def __int__(self):
         assert self.n % self.d == 0, "La fraction n'est pas un nombre entier !"
-        return int(self.n / self.d)
+        return int(old_div(self.n, self.d))
 
     def reduit(self):
         """**reduit**\ (*object*)

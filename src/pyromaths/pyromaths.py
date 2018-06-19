@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 import gettext
 from sys import argv, exit
 import sys
@@ -36,7 +37,7 @@ def main():
     locale_dir = join(dirname(__file__), '../../locale/')
     locale_dir = realpath(locale_dir)
 
-    gettext.install('pyromaths', localedir=locale_dir, unicode=1)
+    gettext.install('pyromaths', localedir=locale_dir, str=1)
 
 
     from .outils.System import create_config_file, modify_config_file

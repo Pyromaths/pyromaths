@@ -21,6 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import range
+from past.utils import old_div
 from random import randrange
 from pyromaths.classes.Polynome import Polynome, TeX, RacineDegre2
 from pyromaths.classes.Racine import simplifie_racine
@@ -434,7 +438,7 @@ def quest_fonctions_rationnelles_sur_R():
     rac_min = -9
     rac_max = 9
     b1 = b2 = a1 = a2 = 0
-    while b1 == 0 or b2 == 0 or a1 == 0 or a2 == 0 or a1 * (-float(b2) / a1) + b1 == 0 or (a1 * b2 / a2 - b1) == 0:
+    while b1 == 0 or b2 == 0 or a1 == 0 or a2 == 0 or a1 * (old_div(-float(b2), a1)) + b1 == 0 or (a1 * b2 / a2 - b1) == 0:
         # (a1*b2/a2 - b1)==0 on teste que la racine de Q n'annule pas P donc on ne peut pas simplifier
         b1 = randint(rac_min, rac_max)
         b2 = randint(rac_min, rac_max)
@@ -828,7 +832,7 @@ def factorise_identites_remarquables(pol1, sgns, var='', racines=True):
     X = Polynome({1:1}, var)
     a1 = pgcd(int(pol1[0]), pgcd(int(pol1[1]), int(pol1[2])))  # du signe de a=pol1[2]
     if a1 != 1 or a1 != -1:
-        pol2 = pol1 / a1
+        pol2 = old_div(pol1, a1)
     else:
         pol2 = pol1
     # coeff=coeff/int(math.sqrt(a1))
@@ -840,7 +844,7 @@ def factorise_identites_remarquables(pol1, sgns, var='', racines=True):
 
     factorisation = []
     if a1 != 1:
-        pol_temp = (pol1 / a1).simplifie()
+        pol_temp = (old_div(pol1, a1)).simplifie()
         pol_temp.var = var
         factorisation.append("%s \\times\\big[ %s \\big]" % (TeX(a1), pol_temp))
         facteur2 = "%s\\times \\big[" % (TeX(a1))
@@ -872,7 +876,7 @@ def factorise_identites_remarquables(pol1, sgns, var='', racines=True):
     facteur3 = ""
     if a1 != 1:
         facteur3 += TeX(a1)
-    sgns = sgns / 2
+    sgns = old_div(sgns, 2)
     if sgns:  # (cx-b)² ou (cx+b)²
         liste_racines = [Fraction(-(sgns)) * b / c]
         facteur3 += "{(%s)}^2" % (c * X + sgns * b)
@@ -1016,7 +1020,7 @@ def factorisation_degre3(E, nomE, exo=[], cor=[], racines=[0, 1, -1, 2, -2]):
     if x0 == 0:
         degre_facteur = min(E.puiss)
         # degre_facteur=1
-        E2 = (E / (X ** degre_facteur))[0]
+        E2 = (old_div(E, (X ** degre_facteur)))[0]
         if degre_facteur == 1:
             cor.append(_("On remarque que $%s$ peut se factoriser par $%s$ et $%s=%s\\left(%s\\right)$") % (nomE, var, nomE, var, E2))
         elif degre_facteur == 2:
@@ -1028,7 +1032,7 @@ def factorisation_degre3(E, nomE, exo=[], cor=[], racines=[0, 1, -1, 2, -2]):
     else:
         cor.append(_("Comme $%s(%s)=0$, on peut diviser $%s$ par $%s$") % (nomE, TeX(x0), nomE, X - x0))
         cor.append(TeX_division(E, (X - x0)) + "")
-        E2, reste = E / (X - x0)
+        E2, reste = old_div(E, (X - x0))
     cor.append(_("\\item On doit maintenant factoriser le polynome $%s_2=%s$\\\\") % (nomE, E2))
     delta, simplrac, racines, str_racines, factorisation = factorisation_degre2(E2, factorisation=True)
     cor = redaction_factorisation(E2, nomP=nomE + "_2", exo=[], cor=cor)[1]

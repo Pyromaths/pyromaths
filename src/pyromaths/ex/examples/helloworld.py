@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from pyromaths import ex
 
 class HelloWorld(ex.TexExercise):

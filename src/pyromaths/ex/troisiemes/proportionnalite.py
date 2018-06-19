@@ -19,6 +19,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
+from __future__ import division
+from __future__ import unicode_literals
+from past.utils import old_div
 from random import randint, shuffle, randrange
 from pyromaths.outils.decimaux import decimaux
 # from pyromaths.outils.Geometrie import cotation, cotation_h
@@ -30,10 +33,10 @@ def choix_valeurs(min_prct, max_prct, min_nbre, max_nbre):
         shuffle(decomp100)
         prct = decomp100[0] * decomp100[1] * decomp100[2]  # qui donne 2, 4, 5, 10, 20, 25 ou 50
         tot = decomp100[3] * decomp100[4] * decomp100[5]
-        if (max_prct / prct != 0) and (max_nbre / tot != 0):
+        if (old_div(max_prct, prct) != 0) and (old_div(max_nbre, tot) != 0):
             break
-    prct = randint(max(min_prct / prct, 1), (max_prct / prct)) * prct
-    tot = tot * randint(max(min_nbre / tot, 1) , (max_nbre / tot))
+    prct = randint(max(old_div(min_prct, prct), 1), (old_div(max_prct, prct))) * prct
+    tot = tot * randint(max(old_div(min_nbre, tot), 1) , (old_div(max_nbre, tot)))
     return prct, tot
     
 def proportionnalite_3eme():

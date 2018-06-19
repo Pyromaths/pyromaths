@@ -1,6 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
+from __future__ import unicode_literals
+from past.builtins import basestring
+from builtins import object
 import inspect
 import os
 import pkgutil
@@ -163,7 +166,7 @@ def load_levels(pkg=None, recursive=True):
     for ex in _exercises(pkg):
         for lvl in ex.level:
             # new level? create its exercise list
-            if lvl not in levels.keys():
+            if lvl not in list(levels.keys()):
                 levels[lvl] = []
             levels[lvl].append(ex)
 

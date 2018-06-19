@@ -22,6 +22,12 @@
 #
 
 from __future__ import absolute_import
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import chr
+from builtins import range
+from builtins import object
+from past.utils import old_div
 import math
 from random import randrange
 from .Conversions import degres, radians
@@ -162,11 +168,11 @@ couples_pythagore = (
 
 def trouve_couples_pythagore(max):
     ls = []
-    for i in xrange(26):
-        for j in xrange(i - 1):
+    for i in range(26):
+        for j in range(i - 1):
             a = i
             b = j + 1
-            for k in xrange(140):
+            for k in range(140):
                 x = (2 * k + 1) * (a ** 2 - b ** 2)
                 y = (2 * k + 1) * (2 * a * b)
                 z = (2 * k + 1) * (a ** 2 + b ** 2)
@@ -228,7 +234,7 @@ def cotation_h(A, B, longueur, couleur="", unite="cm"):
 #                        listecouples.append(tuple(listeinter))
 #
 #    return tuple(listecouples)
-class Metapost:
+class Metapost(object):
 
     def __init__(self):
         self.text = []
@@ -277,10 +283,10 @@ class Metapost:
         # on donne les trois longueurs des 3 côtés
 
         if a and b and c:
-            alpha = degres(math.acos(((b ** 2 + c ** 2) - a ** 2 * 1.) / ((2 * 
-                     b) * c)))
-            beta = degres(math.acos(((c ** 2 + a ** 2) - b ** 2 * 1.) / ((2 * 
-                    c) * a)))
+            alpha = degres(math.acos(old_div(((b ** 2 + c ** 2) - a ** 2 * 1.), ((2 * 
+                     b) * c))))
+            beta = degres(math.acos(old_div(((c ** 2 + a ** 2) - b ** 2 * 1.), ((2 * 
+                    c) * a))))
         elif a and b and gamma:
 
         # Un angle et les deux côtés adjacents
@@ -320,29 +326,29 @@ class Metapost:
 
             pass  # on sait faire
         elif beta and gamma and a:
-            c = (a * math.sin((gamma * math.pi) / 180)) / math.sin(((beta + 
-                    gamma) * math.pi) / 180)
+            c = old_div((a * math.sin(old_div((gamma * math.pi), 180))), math.sin(old_div(((beta + 
+                    gamma) * math.pi), 180)))
             alpha = (180 - beta) - gamma
         elif alpha and gamma and b:
-            c = (b * math.sin((gamma * math.pi) / 180)) / math.sin(((alpha + 
-                    gamma) * math.pi) / 180)
+            c = old_div((b * math.sin(old_div((gamma * math.pi), 180))), math.sin(old_div(((alpha + 
+                    gamma) * math.pi), 180)))
             beta = (180 - alpha) - gamma
         elif a and alpha and beta:
 
         # Deux angles et un côté non commun
 
-            c = (a * math.sin(((alpha + beta) * math.pi) / 180)) / math.sin((alpha * 
-                    math.pi) / 180)
+            c = old_div((a * math.sin(old_div(((alpha + beta) * math.pi), 180))), math.sin(old_div((alpha * 
+                    math.pi), 180)))
         elif a and alpha and gamma:
-            c = (a * math.sin((gamma * math.pi) / 180)) / math.sin((alpha * 
-                    math.pi) / 180)
+            c = old_div((a * math.sin(old_div((gamma * math.pi), 180))), math.sin(old_div((alpha * 
+                    math.pi), 180)))
             beta = (180 - alpha) - gamma
         elif b and beta and alpha:
-            c = (b * math.sin(((alpha + beta) * math.pi) / 180)) / math.sin((beta * 
-                    math.pi) / 180)
+            c = old_div((b * math.sin(old_div(((alpha + beta) * math.pi), 180))), math.sin(old_div((beta * 
+                    math.pi), 180)))
         elif b and beta and gamma:
-            c = (b * math.sin((gamma * math.pi) / 180)) / math.sin((beta * 
-                    math.pi) / 180)
+            c = old_div((b * math.sin(old_div((gamma * math.pi), 180))), math.sin(old_div((beta * 
+                    math.pi), 180)))
             alpha = (180 - beta) - gamma
         elif c and alpha and gamma:
             beta = (180 - alpha) - gamma
@@ -386,22 +392,22 @@ class Metapost:
 
     def triangle_angle_cotes_adjacents(self, a, b, gamma):
         c = math.sqrt(a ** 2 + b ** 2 - 2 * a * b * math.cos(radians(gamma)))
-        alpha = 90. - gamma / 2 + degres(math.atan((((a - b) * 1.) / (a + b)) / 
-                math.tan(radians(gamma / 2))))
-        beta = 90. - gamma / 2 - degres(math.atan((a - b) * 1. / (a + b) / 
-                math.tan(radians(gamma / 2))))
+        alpha = 90. - old_div(gamma, 2) + degres(math.atan(old_div((old_div(((a - b) * 1.), (a + b))), 
+                math.tan(radians(old_div(gamma, 2))))))
+        beta = 90. - old_div(gamma, 2) - degres(math.atan((a - b) * 1. / (a + b) / 
+                math.tan(radians(old_div(gamma, 2)))))
         return (c, beta, alpha)
 
     def triangle_angle_cote_adjacent_cote_oppose(self, b, c, beta):
-        if b <= c * math.sin((beta * math.pi) / 180):
+        if b <= c * math.sin(old_div((beta * math.pi), 180)):
             alpha = gamma = a = 0  # Pas possible de résoudre
         else:
-            gamma = degres(math.asin(((c * math.sin((beta * math.pi) / 180)) / 
-                     b) * 1.))
+            gamma = degres(math.asin((old_div((c * math.sin(old_div((beta * math.pi), 180))), 
+                     b)) * 1.))
             alpha = (180 - beta) - gamma
-            a = math.sqrt(b ** 2 - c ** 2 * math.sin((beta * math.pi) / 
-                          180) ** 2) + c * math.cos((beta * math.pi) / 
-                    180)
+            a = math.sqrt(b ** 2 - c ** 2 * math.sin(old_div((beta * math.pi), 
+                          180)) ** 2) + c * math.cos(old_div((beta * math.pi), 
+                    180))
         return (a, alpha, gamma)
 
 

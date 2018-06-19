@@ -2,6 +2,12 @@
 
 from __future__ import print_function
 from __future__ import absolute_import
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from builtins import object
+from past.utils import old_div
 from pyromaths.outils.decimaux import decimaux
 from pyromaths.outils.Arithmetique import carrerise, pgcd, ppcm, factor
 from math import sqrt
@@ -14,7 +20,7 @@ def produitfacteurs(facteurs):
         prodfacteurs += str(element) + ' \\times '
     return prodfacteurs[:-7]
 
-class Racine:
+class Racine(object):
     def __init__(self, radicande, coeff=1, indice=2):
         if (radicande < 0) or not (isinstance(indice, int)):
             print("Erreur de définition ! Le radicande doit être positif et l'indice un nombre entier !")
@@ -57,17 +63,17 @@ class Racine:
 
     def __div__(self, other):
         if (isinstance(other, float)) or (isinstance(other, int)):
-            return Racine(self.radicande, self.coeff / other, self.indice)
+            return Racine(self.radicande, old_div(self.coeff, other), self.indice)
         elif self.indice == other.indice:
-            return Racine(self.radicande / float(other.radicande), self.coeff / float(other.coeff), self.indice)
+            return Racine(old_div(self.radicande, float(other.radicande)), old_div(self.coeff, float(other.coeff)), self.indice)
         else:
             return str(self) + ' / ' + str(other)
 
     def __rdiv__(self, other):
         if (isinstance(other, float)) or (isinstance(other, int)):
-            return Racine(self.radicande, other / float(self.coeff * self.radicande), self.indice)
+            return Racine(self.radicande, old_div(other, float(self.coeff * self.radicande)), self.indice)
         elif self.indice == other.indice:
-            return Racine(other.radicande / float(self.radicande), other.coeff / float(self.coeff), self.indice)
+            return Racine(old_div(other.radicande, float(self.radicande)), old_div(other.coeff, float(self.coeff)), self.indice)
         else:
             return str(other) + ' / ' + str(self)
 
@@ -143,7 +149,7 @@ def tTeX(n):
 
 
 
-class RacineDegre2:
+class RacineDegre2(object):
     def __init__(self, numerateur=0, denominateur=1, coeff=1, radicande=0):
         """Constructeur de la forme (a+c*racine(d))/b"""
         self.numerateur = numerateur  # a
@@ -240,8 +246,8 @@ class RacineDegre2:
                     return NotImplemented
 
             denominateur = ppcm(premier.denominateur, second.denominateur)
-            facteur1 = denominateur / premier.denominateur
-            facteur2 = denominateur / second.denominateur
+            facteur1 = old_div(denominateur, premier.denominateur)
+            facteur2 = old_div(denominateur, second.denominateur)
             # if self.radicande==other.radicande:
             coeff = premier.coeff * facteur1 * (premier.radicande != 0) + second.coeff * facteur2 * (second.radicande != 0)
             if coeff == 0:
@@ -295,7 +301,7 @@ class RacineDegre2:
             result = result * self
         return result
     def __float__(self):
-        return (self.numerateur + self.coeff * sqrt(self.radicande)) / self.denominateur
+        return old_div((self.numerateur + self.coeff * sqrt(self.radicande)), self.denominateur)
     def __cmp__(self, other):
         comp = float(self) - float(other)
         if comp > 0:

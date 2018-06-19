@@ -22,6 +22,11 @@
 # import sys, os
 # sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from past.utils import old_div
 import random
 from pyromaths.outils import Affichage
 def boxes():
@@ -63,7 +68,7 @@ def parallelogramme(dim, n_fig):
     dimensions dim et numérote la figure avec n_fig"""
     base_h = random.randrange(2)
     if base_h:
-        tab = random.randrange(1, min(dim[0] / 2, dim[0] - 3)) * (-1) ** random.randrange(2)
+        tab = random.randrange(1, min(old_div(dim[0], 2), dim[0] - 3)) * (-1) ** random.randrange(2)
         if tab > 0:
             s0, s1, s2, s3 = (tab, 0), (dim[0], 0), (dim[0] - tab, dim[1]), (0,
                     dim[1])
@@ -73,7 +78,7 @@ def parallelogramme(dim, n_fig):
                     dim[1])
             frame0, frame1 = s0, (dim[0] + tab, dim[1])
     else:
-        tab = random.randrange(1, min(dim[1] / 2, dim[1] - 3)) * (-1) ** random.randrange(2)
+        tab = random.randrange(1, min(old_div(dim[1], 2), dim[1] - 3)) * (-1) ** random.randrange(2)
         if tab > 0:
             s0, s1, s2, s3 = (0, tab), (dim[0], 0), (dim[0], dim[1] - tab), (0,
                     dim[1])
@@ -112,7 +117,7 @@ def triangle_rectangle(dim, n_fig):
     s = "Aire de la figure %s : " % n_fig
     s += u"c'est la moitié de l'aire du rectangle en pointillés.\\par\n"
     s += u"$(%s) \\div 2= %s$~unités d'aire" % (aire_rectangle(dim)[0],
-            Affichage.decimaux(aire_rectangle(dim)[1] / 2., 1))
+            Affichage.decimaux(old_div(aire_rectangle(dim)[1], 2.), 1))
     return f, fc, s
 
 def triangle_base(dim, n_fig):
@@ -139,7 +144,7 @@ def triangle_base(dim, n_fig):
     s = "Aire de la figure %s : " % n_fig
     s += u"c'est la moitié de l'aire du rectangle en pointillés.\\par\n"
     s += u"$(%s) \\div 2= %s$~unités d'aire" % (aire_rectangle(dim)[0],
-            Affichage.decimaux(aire_rectangle(dim)[1] / 2., 1))
+            Affichage.decimaux(old_div(aire_rectangle(dim)[1], 2.), 1))
     return f, fc, s
 
 def triangle_qcq(dim, n_fig):
@@ -180,8 +185,8 @@ def triangle_qcq(dim, n_fig):
             (aire_rectangle(dim)[0], aire_rectangle(s0, s1)[0],
                     aire_rectangle(s1, s2)[0], aire_rectangle(s2, s0)[0])
     s += u"= %s$~unités d'aire" % Affichage.decimaux(aire_rectangle(dim)[1] - 
-            aire_rectangle(s0, s1)[1] / 2. - aire_rectangle(s0, s2)[1] / 2. - 
-            aire_rectangle(s1, s2)[1] / 2., 1)
+            old_div(aire_rectangle(s0, s1)[1], 2.) - old_div(aire_rectangle(s0, s2)[1], 2.) - 
+            old_div(aire_rectangle(s1, s2)[1], 2.), 1)
     return f, fc, s
 
 def aire_rectangle(pos1, pos2=(0, 0)):
@@ -195,7 +200,7 @@ def isobarycentre(*args):
     nbarg = len(args) * 1.
     isobar = [0, 0]
     for i in args:
-        isobar = [isobar[0] + i[0] / nbarg, isobar[1] + i[1] / nbarg]
+        isobar = [isobar[0] + old_div(i[0], nbarg), isobar[1] + old_div(i[1], nbarg)]
     return tuple(isobar)
 
 def figure():

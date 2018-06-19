@@ -30,6 +30,10 @@
 # #- simplifier des sommes
 # #- problèmes de colinéarité
 
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import str
+from past.utils import old_div
 from pyromaths.classes.Vecteurs import randvect, Vecteur
 from pyromaths.classes.Racine import simplifie_racine
 import math
@@ -51,17 +55,17 @@ def pair(n):
 def AffNom(u, crd=0):
     '''Renvoie les coordonnées pour l'affichage du nom du vecteur u.'''
     if u.x == 0 and math.fabs(u.y) > 2:
-        coord = (0, u.y / 2)
+        coord = (0, old_div(u.y, 2))
     elif u.x == 0:
-        coord = (-0.5, u.y / 2)
+        coord = (-0.5, old_div(u.y, 2))
     elif u.y == 0 and math.fabs(u.x) > 2:
-        coord = (u.x / 2, 0)
+        coord = (old_div(u.x, 2), 0)
     elif u.y == 0:
-        coord = (u.x / 2, -0.5)
+        coord = (old_div(u.x, 2), -0.5)
     elif math.fabs(u.x) + math.fabs(u.y) < 3:
-        coord = (u.x / 2.0 + 0.5, u.y / 2.0 + 0.5)
+        coord = (old_div(u.x, 2.0) + 0.5, old_div(u.y, 2.0) + 0.5)
     else:
-        coord = (u.x / 2, u.y / 2)
+        coord = (old_div(u.x, 2), old_div(u.y, 2))
     return str(coord[0]) + "," + str(coord[1])
 
 def ChoixVecteur(u, v, w, x, y):
@@ -86,7 +90,7 @@ def repr_somme(u, v, u1, u2, cor, larg=0):
         if (a.x > 0):
             departx = 0
         elif (a.x == 0):
-            departx = -u.x / 2.0 + math.fabs(u.x) / 2
+            departx = old_div(-u.x, 2.0) + old_div(math.fabs(u.x), 2)
         else:
             departx = max(math.fabs(u.x), math.fabs(a.x))
     else:
@@ -100,7 +104,7 @@ def repr_somme(u, v, u1, u2, cor, larg=0):
         if (a.y > 0):
             departy = 0
         elif (a.y == 0):
-            departy = -u.y / 2.0 + math.fabs(u.y) / 2
+            departy = old_div(-u.y, 2.0) + old_div(math.fabs(u.y), 2)
         else:
             departy = max(math.fabs(u.y), math.fabs(a.y))
     else:

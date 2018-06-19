@@ -21,6 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import range
+from past.utils import old_div
 from pyromaths.outils.Arithmetique import pgcd, factoriseTex, carrerise
 from pyromaths.outils.Affichage import decimaux
 from random import randint, shuffle
@@ -119,7 +123,7 @@ def Arithmetique():
     temp += decimaux(fauxpgcd * pgcdcompl) + ".$\\par"
     cor.append(temp)
 
-    vraippcm = (listenombres[1] * listenombres[2]) / (fauxpgcd * pgcdcompl)
+    vraippcm = old_div((listenombres[1] * listenombres[2]), (fauxpgcd * pgcdcompl))
 
     if (listenombres[1] % listenombres[2] == 0):
         cor.append(decimaux(listenombres[1]) + u" est un multiple de " + 
@@ -175,7 +179,7 @@ def Arithmetique():
             else:
                 temp += decimaux(factornb1[j])
 
-        factcompl = factoriseTex(listenombres[1] / (fauxpgcd * pgcdcompl))[0]
+        factcompl = factoriseTex(old_div(listenombres[1], (fauxpgcd * pgcdcompl)))[0]
 
         if len(factcompl) == 1:
             temp += u"$ est : "
@@ -253,8 +257,8 @@ def Arithmetique():
     cor.append(u"$\dfrac{" + decimaux(listenombres[1]) + "{\\scriptstyle \\div " + 
             decimaux(fauxpgcd * pgcdcompl) + "}}{" + decimaux(listenombres[2]) + 
             "{\\scriptstyle \\div " + decimaux(fauxpgcd * pgcdcompl) + 
-            "}} = \dfrac{" + decimaux(listenombres[1] / (fauxpgcd * pgcdcompl)) + 
-            "}{" + decimaux(listenombres[2] / (fauxpgcd * pgcdcompl)) + "}.$")
+            "}} = \dfrac{" + decimaux(old_div(listenombres[1], (fauxpgcd * pgcdcompl))) + 
+            "}{" + decimaux(old_div(listenombres[2], (fauxpgcd * pgcdcompl))) + "}.$")
 
     # ## Question 5
 
@@ -263,8 +267,8 @@ def Arithmetique():
             decimaux(listenombres[1]) + "} + \\dfrac{" + decimaux(num[1]) + "}{" + 
             decimaux(listenombres[2]) + "}$.")
 
-    mult1 = vraippcm / listenombres[1]
-    mult2 = vraippcm / listenombres[2]
+    mult1 = old_div(vraippcm, listenombres[1])
+    mult2 = old_div(vraippcm, listenombres[2])
 
     num1 = mult1 * num[0]
     num2 = mult2 * num[1]
@@ -273,8 +277,8 @@ def Arithmetique():
 
     if simplfin != 1:
         simpl = "{\\scriptstyle \\div " + decimaux(simplfin) + "}"
-        result = " = \\dfrac{" + decimaux((num1 + num2) / simplfin) + "}{" + \
-              decimaux((vraippcm) / simplfin) + "}"
+        result = " = \\dfrac{" + decimaux(old_div((num1 + num2), simplfin)) + "}{" + \
+              decimaux(old_div((vraippcm), simplfin)) + "}"
     else:
         simpl = ""
         result = ""

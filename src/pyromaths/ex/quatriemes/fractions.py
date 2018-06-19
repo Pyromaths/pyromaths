@@ -21,6 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+from __future__ import division
+from __future__ import unicode_literals
+from builtins import range
+from past.utils import old_div
 from pyromaths.outils import Arithmetique
 from pyromaths.outils.Priorites3 import texify, priorites
 import random
@@ -32,7 +36,7 @@ def valeurs_somme_positive():
 
     op = "+-"[random.randrange(2)]
     n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
-    if op == "-" and 1 - n2 / d2 > 0:
+    if op == "-" and 1 - old_div(n2, d2) > 0:
         l.append('1 %s Fraction(%s, %s)' % (op, n2, d2))
     else:
         l.append('Fraction(%s, %s) %s 1' % (n2, d2, op))
@@ -40,15 +44,15 @@ def valeurs_somme_positive():
     op = "+-"[random.randrange(2)]
     n1 = random.randrange(2, 11)
     n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
-    if op == "-" and n1 - n2 / d2 > 0:
+    if op == "-" and n1 - old_div(n2, d2) > 0:
         l.append('%s %s Fraction(%s, %s)' % (n1, op, n2, d2))
     else:
         l.append('Fraction(%s, %s) %s %s' % (n2, d2, op, n1))
 
     op = "+-"[random.randrange(2)]
-    n1 = random.randrange(1, 9) + random.randrange(1, 9) / 10.
+    n1 = random.randrange(1, 9) + old_div(random.randrange(1, 9), 10.)
     n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
-    if op == "-" and n1 - n2 / d2 > 0:
+    if op == "-" and n1 - old_div(n2, d2) > 0:
         l.append('%s %s Fraction(%s, %s)' % (n1, op, n2, d2))
     else:
         l.append('Fraction(%s, %s) %s %s' % (n2, d2, op, n1))
@@ -64,7 +68,7 @@ def valeurs_somme_positive():
     op = "+-"[random.randrange(2)]
     n1, d1 = random.randrange(1, 11), random.randrange(2, 11)
     n2, d2 = random.randrange(1, 11), random.randrange(2, 11) * d1
-    if op == "-" and n1 / d1 - n2 / d2 > 0:
+    if op == "-" and old_div(n1, d1) - old_div(n2, d2) > 0:
         l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n1, d1, op, n2, d2))
     else:
         l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n2, d2, op, n1, d1))
@@ -77,7 +81,7 @@ def valeurs_somme_positive():
             n1, d1 = random.randrange(1, 11), random.randrange(2, 11)
             n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
             lepgcd = Arithmetique.pgcd(d1, d2)
-        if op == "-" and n1 / d1 - n2 / d2 > 0:
+        if op == "-" and old_div(n1, d1) - old_div(n2, d2) > 0:
             l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n1, d1, op, n2, d2))
         else:
             l.append('Fraction(%s, %s) %s Fraction(%s, %s)' % (n2, d2, op, n1, d1))

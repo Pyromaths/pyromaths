@@ -22,6 +22,9 @@
 #
 
 from __future__ import print_function
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
 import sys, os, codecs
 from lxml import etree
 from lxml import _elementpath as DONTUSE  # Astuce pour inclure lxml dans Py2exe
@@ -73,7 +76,7 @@ def create_config_file():
     etree.SubElement(subchild, "email").text = u"jerome.ortais@pyromaths.org"
     etree.SubElement(subchild, "site").text = "http://www.pyromaths.org"
 
-    return etree.tostring(root, pretty_print=True, encoding=unicode)
+    return etree.tostring(root, pretty_print=True, encoding=str)
 
 def indent(elem, level=0):
     """Indente correctement les fichiers xml.
@@ -128,7 +131,7 @@ def modify_config_file(fichier):
                 oldtag.text = element.text
     if modifie:
         f = codecs.open(os.path.join(CONFIGDIR, "pyromaths.xml"), encoding='utf-8', mode='w')
-        f.write(etree.tostring(indent(oldroot), pretty_print=True, encoding=unicode))
+        f.write(etree.tostring(indent(oldroot), pretty_print=True, encoding=str))
         f.close()
 
 #==============================================================
@@ -163,8 +166,8 @@ def creation(parametres):
                   'titre': unicode(self.lineEdit_titre.text()),
                   'niveau': unicode(self.comboBox_niveau.currentText()),
                 }"""
-    exo = unicode(parametres['fiche_exo'])
-    cor = unicode(parametres['fiche_cor'])
+    exo = str(parametres['fiche_exo'])
+    cor = str(parametres['fiche_cor'])
     f0 = codecs.open(exo, encoding='utf-8', mode='w')
     f1 = codecs.open(cor, encoding='utf-8', mode='w')
 

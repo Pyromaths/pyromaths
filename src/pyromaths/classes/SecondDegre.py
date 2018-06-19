@@ -3,9 +3,12 @@
 # import random
 # from pyromaths.outils.Arithmetique import factorise, carrerise
 # from math import sqrt
+from __future__ import unicode_literals
+from builtins import str
+from builtins import object
 from pyromaths.outils.decimaux import suppr0
 
-class Poly2:
+class Poly2(object):
     """Classe pour les polynômes du second degré."""
     def __init__(self, a, b, c):
         assert a != 0, u"Erreur de définition ! a doit être différent de 0."
