@@ -27,12 +27,19 @@ from builtins import str
 from builtins import range
 from past.utils import old_div
 from builtins import object
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
 import os, lxml, codecs, sys
 from .outils import System
 from .Values import CONFIGDIR, DATADIR, COPYRIGHTS, VERSION, ICONDIR
 from .Values import lesfiches
 from operator import itemgetter
+
+try:
+    QString = unicode
+except NameError:
+    # Python 3
+    QString = str
 
 class Ui_MainWindow(object):
     def __init__(self, *args, **kwargs):
@@ -57,48 +64,48 @@ class Ui_MainWindow(object):
         MainWindow.setFont(font)
 #         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         ## Widget principal
-        self.centralwidget = QtGui.QWidget(MainWindow)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
         MainWindow.setCentralWidget(self.centralwidget)
         ## Grille principale
-        self.gridLayout = QtGui.QGridLayout(self.centralwidget)
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
 
         #============================================================
         #        Boutons créer, quitter et annuler
         #============================================================
         ## Conteneur vertical
-        self.verticalLayout = QtGui.QVBoxLayout()
-        self.verticalLayout.setMargin(9)
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setContentsMargins(9, 9, 9, 9)
         self.gridLayout.addLayout(self.verticalLayout, 0, 1, 1, 1)
         ## Bouton Créer
-        self.pushButton_ok = QtGui.QPushButton(self.centralwidget)
+        self.pushButton_ok = QtWidgets.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_ok)
         self.pushButton_ok.setText(_(u"Créer"))
         if sys.platform != "darwin":  # Cas de Mac OS X.
             self.pushButton_ok.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
-        QtCore.QObject.connect(self.pushButton_ok, QtCore.SIGNAL("clicked()"), self.creer_les_exercices)
+        self.pushButton_ok.clicked.connect(self.creer_les_exercices)
         ## Bouton Quitter
-        self.pushButton_quit = QtGui.QPushButton(self.centralwidget)
+        self.pushButton_quit = QtWidgets.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_quit)
         self.pushButton_quit.setText(_("Quitter"))
         if sys.platform != "darwin":  # Cas de Mac OS X.
             self.pushButton_quit.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
-        QtCore.QObject.connect(self.pushButton_quit, QtCore.SIGNAL("clicked()"), QtGui.qApp, QtCore.SLOT("quit()"))
+        self.pushButton_quit.clicked.connect(QtWidgets.QApplication.quit)
         ## Bouton Réinitialiser
-        self.pushButton_erase = QtGui.QPushButton(self.centralwidget)
+        self.pushButton_erase = QtWidgets.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_erase)
         self.pushButton_erase.setText(_(u"Réinitialiser"))
         if sys.platform != "darwin":  # Cas de Mac OS X.
             self.pushButton_erase.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
-        QtCore.QObject.connect(self.pushButton_erase, QtCore.SIGNAL("clicked()"), self.effacer_choix_exercices)
+        self.pushButton_erase.clicked.connect(self.effacer_choix_exercices)
         ## Espace Vertical
-        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
 
         #============================================================
         #        Onglets de la zone centrale
         #============================================================
         ## Construction d'une zone d'onglet
-        self.tabWidget = QtGui.QTabWidget(self.centralwidget)
+        self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setAutoFillBackground(True)
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
 
@@ -116,13 +123,13 @@ class Ui_MainWindow(object):
         #        Onglet options
         #============================================================
         ## Creation d'une zone de scroll
-        self.tab_option_scroll = QtGui.QScrollArea(self.tabWidget)
-        self.tab_option_scroll.setFrameStyle(QtGui.QFrame.StyledPanel)
+        self.tab_option_scroll = QtWidgets.QScrollArea(self.tabWidget)
+        self.tab_option_scroll.setFrameStyle(QtWidgets.QFrame.StyledPanel)
         self.tab_option_scroll.setWidgetResizable(True)
         self.tabWidget.addTab(self.tab_option_scroll, _("Options"))
         ############## Onglet options
 
-        self.tab_options = QtGui.QWidget(self.tab_option_scroll)
+        self.tab_options = QtWidgets.QWidget(self.tab_option_scroll)
         if sys.platform != "darwin":  # Cas de Mac OS X.
             self.tab_options.setStyleSheet("background-color: rgb(251, 245, 225);")
         self.tab_option_scroll.setWidget(self.tab_options)
@@ -130,64 +137,64 @@ class Ui_MainWindow(object):
 
 
 
-        self.gridLayout_2 = QtGui.QGridLayout(self.tab_options)
-        self.horizontalLayout_options1 = QtGui.QHBoxLayout()
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.tab_options)
+        self.horizontalLayout_options1 = QtWidgets.QHBoxLayout()
 
         ############## Layout pour les noms d'options, en haut à gauche
 
-        self.verticalLayout_16 = QtGui.QVBoxLayout()
+        self.verticalLayout_16 = QtWidgets.QVBoxLayout()
 
         ############## Label nom du fichier
 
-        self.opt_nom_fichier = QtGui.QLabel(self.tab_options)
+        self.opt_nom_fichier = QtWidgets.QLabel(self.tab_options)
         self.opt_nom_fichier.setText(_(u"Nom par défaut du fichier : "))
         self.verticalLayout_16.addWidget(self.opt_nom_fichier)
 
         ############## Label chemin par défaut pour l'enregistrement des fichiers
 
-        self.opt_chemin_fichier = QtGui.QLabel(self.tab_options)
+        self.opt_chemin_fichier = QtWidgets.QLabel(self.tab_options)
         self.opt_chemin_fichier.setText(_(u"Chemin par défaut pour enregistrer les fichiers : "))
         self.verticalLayout_16.addWidget(self.opt_chemin_fichier)
 
         ############## Label titre des fiches
 
-        self.opt_titre_fiche = QtGui.QLabel(self.tab_options)
+        self.opt_titre_fiche = QtWidgets.QLabel(self.tab_options)
         self.opt_titre_fiche.setText(_("Titre de la fiche d'exercices : "))
         self.verticalLayout_16.addWidget(self.opt_titre_fiche)
         self.horizontalLayout_options1.addLayout(self.verticalLayout_16)
 
         ############## Layout pour les noms d'options, en haut à droite
 
-        self.verticalLayout_17 = QtGui.QVBoxLayout()
+        self.verticalLayout_17 = QtWidgets.QVBoxLayout()
 
         ############## LineEdit nom du fichier
 
-        self.nom_fichier = QtGui.QLineEdit(self.tab_options)
+        self.nom_fichier = QtWidgets.QLineEdit(self.tab_options)
         self.nom_fichier.setText(self.config['nom_fichier'])
         self.nom_fichier.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.verticalLayout_17.addWidget(self.nom_fichier)
 
         ############## LineEdit chemin par défaut pour l'enregistrement des fichiers
 
-        self.horizontalLayout_chemin_fichier = QtGui.QHBoxLayout()
-        self.chemin_fichier = QtGui.QLineEdit(self.tab_options)
+        self.horizontalLayout_chemin_fichier = QtWidgets.QHBoxLayout()
+        self.chemin_fichier = QtWidgets.QLineEdit(self.tab_options)
         self.chemin_fichier.setText(self.config['chemin_fichier'])
         self.chemin_fichier.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.horizontalLayout_chemin_fichier.addWidget(self.chemin_fichier)
 
         ############## Bouton parcourir
 
-        self.pushButton_parcourir = QtGui.QPushButton(self.tab_options)
+        self.pushButton_parcourir = QtWidgets.QPushButton(self.tab_options)
         self.pushButton_parcourir.setText(_("Parcourir"))
         if sys.platform != "darwin":  # Cas de Mac OS X.
             self.pushButton_parcourir.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
         self.horizontalLayout_chemin_fichier.addWidget(self.pushButton_parcourir)
         self.verticalLayout_17.addLayout(self.horizontalLayout_chemin_fichier)
-        QtCore.QObject.connect(self.pushButton_parcourir, QtCore.SIGNAL("clicked()"), self.option_parcourir)
+        self.pushButton_parcourir.clicked.connect(self.option_parcourir)
 
         ############## LineEdit titre des fiches
 
-        self.titre_fiche = QtGui.QLineEdit(self.tab_options)
+        self.titre_fiche = QtWidgets.QLineEdit(self.tab_options)
         self.titre_fiche.setText(self.config['titre_fiche'])
         self.titre_fiche.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.verticalLayout_17.addWidget(self.titre_fiche)
@@ -196,25 +203,25 @@ class Ui_MainWindow(object):
 
         ############## Ligne de séparation
 
-        self.line = QtGui.QFrame(self.tab_options)
-        self.line.setFrameShape(QtGui.QFrame.HLine)
-        self.line.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line = QtWidgets.QFrame(self.tab_options)
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.gridLayout_2.addWidget(self.line, 1, 0, 1, 2)
-        self.horizontalLayout_3 = QtGui.QHBoxLayout()
-        self.verticalLayout_21 = QtGui.QVBoxLayout()
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.verticalLayout_21 = QtWidgets.QVBoxLayout()
 
         ############## CheckBox "corrigés ou non"
 
-        self.checkBox_corrige = QtGui.QCheckBox(self.tab_options)
+        self.checkBox_corrige = QtWidgets.QCheckBox(self.tab_options)
         self.checkBox_corrige.setText(_(u"Créer le corrigé"))
         self.checkBox_corrige.setToolTip(_(u"Pyromaths doit-il créer la fiche de correction détaillée?"))
         self.checkBox_corrige.setChecked(int(self.config['corrige']))
         self.verticalLayout_21.addWidget(self.checkBox_corrige)
-        QtCore.QObject.connect(self.checkBox_corrige, QtCore.SIGNAL("stateChanged(int)"), self.option_corrige)
+        self.checkBox_corrige.stateChanged[int].connect(self.option_corrige)
 
         ############## CheckBox "pdf ou non"
 
-        self.checkBox_pdf = QtGui.QCheckBox(self.tab_options)
+        self.checkBox_pdf = QtWidgets.QCheckBox(self.tab_options)
         self.checkBox_pdf.setText(_(u"Créer le pdf"))
         self.checkBox_pdf.setToolTip(_(u"Pyromaths doit-il créer les fiches au format pdf ?"))
         self.checkBox_pdf.setChecked(int(self.config['pdf']))
@@ -222,7 +229,7 @@ class Ui_MainWindow(object):
 
         ############## CheckBox "pdf ou non"
 
-        self.checkBox_unpdf = QtGui.QCheckBox(self.tab_options)
+        self.checkBox_unpdf = QtWidgets.QCheckBox(self.tab_options)
         self.checkBox_unpdf.setText(_(u"Créer un seul pdf"))
         self.checkBox_unpdf.setToolTip(_(u"Le corrigé et les exercices doivent-ils être dans le même document ?"))
         self.checkBox_unpdf.setChecked(int(self.config['unpdf']))
@@ -231,21 +238,21 @@ class Ui_MainWindow(object):
         ############## Espace
 
         self.horizontalLayout_3.addLayout(self.verticalLayout_21)
-        spacerItem13 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem13)
-        self.verticalLayout_20 = QtGui.QVBoxLayout()
-        self.horizontalLayout_2 = QtGui.QHBoxLayout()
-        self.verticalLayout_18 = QtGui.QVBoxLayout()
+        self.verticalLayout_20 = QtWidgets.QVBoxLayout()
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.verticalLayout_18 = QtWidgets.QVBoxLayout()
 
         ############## Label niveau
 
-        self.opt_niveau = QtGui.QLabel(self.tab_options)
+        self.opt_niveau = QtWidgets.QLabel(self.tab_options)
         self.opt_niveau.setText(_("Niveau :"))
         self.verticalLayout_18.addWidget(self.opt_niveau)
 
         ############## Label Modèle
 
-        self.label_modele = QtGui.QLabel(self.tab_options)
+        self.label_modele = QtWidgets.QLabel(self.tab_options)
         self.label_modele.setText(_(u"Modèle de mise en page :"))
         # self.label_modele.setEnabled(False)
         self.verticalLayout_18.addWidget(self.label_modele)
@@ -253,11 +260,11 @@ class Ui_MainWindow(object):
 
         ############## Layout pour les noms d'options, en bas à droite
 
-        self.verticalLayout_19 = QtGui.QVBoxLayout()
+        self.verticalLayout_19 = QtWidgets.QVBoxLayout()
 
         ############## ComboBox niveau
 
-        self.comboBox_niveau = QtGui.QComboBox(self.tab_options)
+        self.comboBox_niveau = QtWidgets.QComboBox(self.tab_options)
         self.comboBox_niveau.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.comboBox_niveau.setEditable(True)  # l’utilisateur peut entrer son propre texte
         self.comboBox_niveau.addItem(_("Classe de 6\\ieme"))
@@ -269,7 +276,7 @@ class Ui_MainWindow(object):
 
         ############## ComboBox modèles
 
-        self.comboBox_modele = QtGui.QComboBox(self.tab_options)
+        self.comboBox_modele = QtWidgets.QComboBox(self.tab_options)
         self.comboBox_modele.setStyleSheet("background-color: rgb(255, 255, 255);")
         modeles = os.listdir(os.path.join(DATADIR, 'templates'))
         modeles_home = os.listdir(os.path.join(CONFIGDIR, 'templates'))
@@ -283,7 +290,7 @@ class Ui_MainWindow(object):
                 count += 1
         for element in modeles_home:
             if os.path.splitext(element)[1] == ".tex":
-                self.comboBox_modele.addItem(QtCore.QString())
+                self.comboBox_modele.addItem(QString())
                 self.comboBox_modele.setItemText(count, str(element[:len(element) - 4]))
                 if element == self.config['modele']:
                     self.comboBox_modele.setCurrentIndex(count)
@@ -297,46 +304,46 @@ class Ui_MainWindow(object):
 
         ############## Bouton enregistrer
 
-        self.pushButton_enr_opt = QtGui.QPushButton(self.tab_options)
+        self.pushButton_enr_opt = QtWidgets.QPushButton(self.tab_options)
         self.pushButton_enr_opt.setText(_(u"Enregistrer dans les préférences"))
         if sys.platform != "darwin":  # Cas de Mac OS X.
             self.pushButton_enr_opt.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(243, 165, 30, 255), stop:1 rgba(255, 247, 177, 255));")
-        QtCore.QObject.connect(self.pushButton_enr_opt, QtCore.SIGNAL("clicked()"), self.enregistrer_config)
+        self.pushButton_enr_opt.clicked.connect(self.enregistrer_config)
 
         self.gridLayout_2.addWidget(self.pushButton_enr_opt, 4, 1, 1, 1)
-        spacerItem14 = QtGui.QSpacerItem(20, 177, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        spacerItem14 = QtWidgets.QSpacerItem(20, 177, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_2.addItem(spacerItem14, 3, 1, 1, 1)
-        spacerItem15 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem15, 4, 0, 1, 1)
 
         #============================================================
         #        Barre de menus et de status
         #============================================================
         ## Construction de la barre
-        self.menubar = QtGui.QMenuBar(MainWindow)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 700, 22))
         MainWindow.setMenuBar(self.menubar)
         ## Menu Fichier
         if sys.platform != "darwin":  # Cas de Mac OS X.
-                self.menuFichier = QtGui.QMenu(self.menubar)
+                self.menuFichier = QtWidgets.QMenu(self.menubar)
                 self.menuFichier.setTitle(_("Fichier"))
         ## Action Quitter
-        self.actionQuitter = QtGui.QAction(MainWindow)
+        self.actionQuitter = QtWidgets.QAction(MainWindow)
         self.actionQuitter.setText(_("Quitter"))
         self.actionQuitter.setShortcut('Ctrl+Q')
-        QtCore.QObject.connect(self.actionQuitter, QtCore.SIGNAL("triggered()"), QtGui.qApp, QtCore.SLOT("quit()"))
+        self.actionQuitter.triggered.connect(QtWidgets.QApplication.quit)
         ## Menu Aide
-        self.menu_propos = QtGui.QMenu(self.menubar)
+        self.menu_propos = QtWidgets.QMenu(self.menubar)
         self.menu_propos.setTitle(_("Aide"))
         ## Action Accéder au site
-        self.actionAcceder_au_site = QtGui.QAction(MainWindow)
+        self.actionAcceder_au_site = QtWidgets.QAction(MainWindow)
         self.actionAcceder_au_site.setText(_(u"Accéder au site"))
-        QtCore.QObject.connect(self.actionAcceder_au_site, QtCore.SIGNAL("triggered()"), self.site)
+        self.actionAcceder_au_site.triggered.connect(self.site)
         ## Action À propos
-        self.action_a_propos = QtGui.QAction(MainWindow)
+        self.action_a_propos = QtWidgets.QAction(MainWindow)
         self.action_a_propos.setText(_(u"À propos"))
-        self.action_a_propos.setMenuRole(QtGui.QAction.AboutRole)
-        QtCore.QObject.connect(self.action_a_propos, QtCore.SIGNAL("triggered()"), self.about)
+        self.action_a_propos.setMenuRole(QtWidgets.QAction.AboutRole)
+        self.action_a_propos.triggered.connect(self.about)
         ## Construction du menu
         if sys.platform != "darwin":
             self.menuFichier.addSeparator()
@@ -352,10 +359,10 @@ class Ui_MainWindow(object):
         #        Barre d'état
         #============================================================
         ## Construction de la barre d'état
-        self.statusbar = QtGui.QStatusBar(MainWindow)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
         MainWindow.setStatusBar(self.statusbar)
         ## Message d'aide
-        self.statusbar_label= QtGui.QLabel(self.statusbar)
+        self.statusbar_label= QtWidgets.QLabel(self.statusbar)
         self.statusbar_label.setText(_(u"Pour avoir un aperçu d'un exercice, positionner le curseur de la souris sur le point d'interrogation."))
         self.statusbar.addWidget(self.statusbar_label,1)
 
@@ -368,7 +375,7 @@ class Ui_MainWindow(object):
     # ## Gestion des erreurs
     def erreur_critique(self, message):
         """Dialogue si pyromaths.xml est défectueux."""
-        reply = QtGui.QMessageBox.critical(self, "Erreur critique", message)
+        reply = QtWidgets.QMessageBox.critical(self, "Erreur critique", message)
         if reply:
             sys.exit(1)
 
@@ -435,16 +442,17 @@ class Ui_MainWindow(object):
             banniere = os.path.join(DATADIR, 'images', 'pyromaths.png')
         else:
             banniere = os.path.join(DATADIR, 'images', 'pyromaths-banniere.png')
-        QtGui.QMessageBox.about(self.centralwidget, _(u'À propos de Pyromaths'), text % (banniere, VERSION, COPYRIGHTS))
+        # self.setGeometry(10,10,620,200)
+        QtWidgets.QMessageBox.about(None, _(u'À propos de Pyromaths'), text % (banniere, VERSION, COPYRIGHTS))
 
     def creer_les_exercices(self):
         """Vérifie si la liste d'exercices n'est pas vide puis sélectionne les noms des fichiers exercices et
         corrigés"""
         self.valide_options()
         if self.liste_creation == [] :
-            QtGui.QMessageBox.warning(None, _('Attention !'),
+            QtWidgets.QMessageBox.warning(None, _('Attention !'),
                     _(u"Veuillez sélectionner des exercices..."),
-                    QtGui.QMessageBox.Ok)
+                    QtWidgets.QMessageBox.Ok)
         else:
             parametres = {
                 'creer_pdf': self.checkBox_pdf.isChecked(),
@@ -466,9 +474,9 @@ class Ui_MainWindow(object):
                 niveau = self.liste_creation[i][0]
                 exo = self.liste_creation[i][1]
                 liste.append(self.lesfiches[niveau][2][exo])
-            self.List = QtGui.QListWidget()
+            self.List = QtWidgets.QListWidget()
             for i in range(len(liste)):
-                item = QtGui.QListWidgetItem(liste[i].description)
+                item = QtWidgets.QListWidgetItem(liste[i].description)
                 item.setFlags(QtCore.Qt.ItemIsEnabled |
                               QtCore.Qt.ItemIsSelectable |
                               QtCore.Qt.ItemIsDragEnabled)
@@ -524,8 +532,8 @@ class Ui_MainWindow(object):
         return config
 
     def option_parcourir(self):
-        d0 = QtGui.QFileDialog().getExistingDirectory (None, _(u"Dossier où créer les fiches"),
-                                                       self.config['chemin_fichier'], QtGui.QFileDialog.ShowDirsOnly)
+        d0 = QtWidgets.QFileDialog().getExistingDirectory (None, _(u"Dossier où créer les fiches"),
+                                                       self.config['chemin_fichier'], QtWidgets.QFileDialog.ShowDirsOnly)
         if d0:
             self.chemin_fichier.setText(d0)
 
@@ -570,7 +578,7 @@ QCoreApplication::exec: The event loop is already runningteur avec le dictionnai
 #        Classe ChoixOrdreExos
 #================================================================
 
-class ChoixOrdreExos(QtGui.QDialog):
+class ChoixOrdreExos(QtWidgets.QDialog):
     """À appeler de la façon suivante :
     form = ChoixOrdreExos(liste, LesFiches, parametres)
     Permet de choisir l'ordre dans lequel les exercices vont apparaître
@@ -589,26 +597,26 @@ class ChoixOrdreExos(QtGui.QDialog):
         self.lesfiches = LesFiches
         self.parametres = parametres
         self.List = liste
-        QtGui.QDialog.__init__(self, parent)
+        QtWidgets.QDialog.__init__(self, parent)
         self.setWindowTitle(_("Choisissez l'ordre des exercices"))
-        layout = QtGui.QHBoxLayout()
+        layout = QtWidgets.QHBoxLayout()
 
-        buttonBox = QtGui.QDialogButtonBox()
+        buttonBox = QtWidgets.QDialogButtonBox()
         buttonBox.setOrientation(QtCore.Qt.Vertical)
-        buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel | QtGui.QDialogButtonBox.Ok)
+        buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok)
 
         self.List.setAlternatingRowColors(True)
         self.List.setDragEnabled(True)
         self.List.setAcceptDrops(True)
-        self.List.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
+        self.List.setDragDropMode(QtWidgets.QAbstractItemView.InternalMove)
         self.List.setDropIndicatorShown(True)
 
         layout.addWidget(self.List)
         layout.addWidget(buttonBox)
         self.setLayout(layout)
 
-        QtCore.QObject.connect(buttonBox, QtCore.SIGNAL("accepted()"), self.accept)
-        QtCore.QObject.connect(buttonBox, QtCore.SIGNAL("rejected()"), self.close)
+        buttonBox.accepted.connect(self.accept)
+        buttonBox.rejected.connect(self.close)
 
     def accept(self):
         """Écrit une liste contenant la liste des exercices dans l'ordre choisit par l'utilisateur et demande à
@@ -627,22 +635,28 @@ def valide(liste, LesFiches, parametres):
     #============================================================
     #        Choix des noms des fichiers exercices et corrigés
     #============================================================
-    saveas = QtGui.QFileDialog()
-    filename = System.supprime_extension(parametres['nom_fichier'],
-                                         '.tex')
-    f0 = str(saveas.getSaveFileName(None, "Enregistrer sous...",
-                os.path.join(parametres['chemin_fichier'],
-                             u'%s.tex' % filename), "Documents Tex (*.tex)"))
+    filename = System.supprime_extension(parametres['nom_fichier'], '.tex')
+    options = QFileDialog.Options()
+    options |= QFileDialog.DontUseNativeDialog
+    f0, _ = QFileDialog.getSaveFileName(None,"Enregistrer sous...",
+        os.path.join(parametres['chemin_fichier'], u'%s.tex' % filename),
+        "Documents Tex (*.tex);;All Files(*)",
+        options=options)
+    # f0 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
+                # os.path.join(parametres['chemin_fichier'],
+                             # u'%s.tex' % filename), "Documents Tex (*.tex)"))[0]
+    print(f0)
+    print(os.path.splitext(os.path.basename(f0))[0])
     if f0:
         System.ajoute_extension(f0, '.tex')
         if corrige and not parametres['creer_unpdf']:
             f1 = str(saveas.getSaveFileName(None, "Enregistrer sous...",
                 os.path.join(os.path.dirname(f0),
                 _(u"%s-corrige.tex") % os.path.splitext(os.path.basename(f0))[0]),
-                _("Documents Tex (*.tex)")))
+                _("Documents Tex (*.tex)")))[0]
         else:
-            f1 = os.path.join(os.path.dirname(f0), _(u"%s-corrige.tex") %
-                              os.path.splitext(os.path.basename(f0))[0])
+            f1 = os.path.join(os.path.dirname(f0),
+                    os.path.splitext(os.path.basename(f0))[0] + "-corrige.tex")
         if f1:
             if corrige:
                 System.ajoute_extension(f1, '.tex')
@@ -656,25 +670,25 @@ def valide(liste, LesFiches, parametres):
 #        Classe Tab
 #================================================================
 
-class Tab(QtGui.QWidget):
+class Tab(QtWidgets.QWidget):
     """Gère les onglets permettant de sélectionner des exercices"""
 
     def __init__(self, parent, level, onchange):
-        QtGui.QWidget.__init__(self)  # Initialise la super-classe
+        QtWidgets.QWidget.__init__(self)  # Initialise la super-classe
         self.titre = level[0]
         self.exos = level[2]
-        self.scroll = QtGui.QScrollArea(self)
-        self.scroll.setFrameStyle(QtGui.QFrame.StyledPanel)
+        self.scroll = QtWidgets.QScrollArea(self)
+        self.scroll.setFrameStyle(QtWidgets.QFrame.StyledPanel)
         self.scroll.setWidgetResizable(True)
-        self.widget = QtGui.QWidget(self.scroll)
+        self.widget = QtWidgets.QWidget(self.scroll)
         self.scroll.setWidget(self.widget)
         if sys.platform != "darwin":  # Cas de Mac OS X.
             self.widget.setStyleSheet("background-color: rgb(251, 245, 225);")
-        self.layout = QtGui.QGridLayout(self.widget)
+        self.layout = QtWidgets.QGridLayout(self.widget)
         self.spinBox = []
         # Crée les widgets des exercices
         nb_exos = len(self.exos)
-        spacer = QtGui.QSpacerItem(20, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        spacer = QtWidgets.QSpacerItem(20, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         for i in range(nb_exos):
             self.add_exercise(i, onchange)
             self.layout.addItem(spacer, old_div((nb_exos + 1), 2), 0, 1, 1)
@@ -686,30 +700,30 @@ class Tab(QtGui.QWidget):
 
     def add_exercise(self, i, onchange):
         """Ajoute l'exercice n°i à cet onglet"""
-        layout = QtGui.QHBoxLayout()
+        layout = QtWidgets.QHBoxLayout()
         # SpinBox
-        spinBox = QtGui.QSpinBox(self.widget)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        spinBox = QtWidgets.QSpinBox(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(40)
         sizePolicy.setVerticalStretch(30)
         sizePolicy.setHeightForWidth(spinBox.sizePolicy().hasHeightForWidth())
         spinBox.setSizePolicy(sizePolicy)
         spinBox.setToolTip(_(u"Choisissez le nombre d\'exercices de ce type à créer."))
         spinBox.setStyleSheet("background-color: rgb(255, 255, 255);")
-        QtCore.QObject.connect(spinBox, QtCore.SIGNAL("valueChanged(int)"), onchange)
+        spinBox.valueChanged[int].connect(onchange)
         self.spinBox.append(spinBox)
         layout.addWidget(spinBox)
         # Image
-        img = QtGui.QLabel(self.widget)
+        img = QtWidgets.QLabel(self.widget)
         img.setText(r'<img src="%s"/>' % os.path.join(DATADIR, 'images', 'whatsthis.png'))
         img.setToolTip(r'<img src="%s"/>' % self.exos[i].thumb())
         layout.addWidget(img)
         # Label
-        label = QtGui.QLabel(self.widget)
+        label = QtWidgets.QLabel(self.widget)
         label.setText(self.exos[i].description)
         layout.addWidget(label)
         # Espacements
-        spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         layout.addItem(spacer)
         layout.addItem(spacer)
         # Ajoute cet exercice à l'onglet
