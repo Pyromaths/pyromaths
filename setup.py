@@ -99,7 +99,7 @@ def _mac_opt():
                  'QtXml', 'QtXmlPatterns', 'phonon']
     lib_dynload_unused = ['_AE', '_codecs_cn', '_codecs_hk', '_codecs_2022',
                           '_codecs_iso2022', '_codecs_jp', '_codecs_kr',
-                          '_codecs_tw', '_Evt', '_File', '_hashlib', '_heapq',
+                          '_codecs_tw', '_Evt', '_File', '_heapq',
                           '_locale', '_multibytecodec', '_Res','_ssl', 'array',
                           'bz2', 'cPickle', 'datetime', 'gestalt', 'MacOS',
                           'pyexpat', 'rurce', 'strop', 'unicodedata']
@@ -115,7 +115,7 @@ def _mac_opt():
     # py2app
     py2app = dict(plist    = plist,
                   iconfile = 'data/images/pyromaths.icns',
-                  includes = ['gzip'],
+                  includes = ['gzip', 'threading', 'cPickle', 'base64'],
                   packages = ['pyromaths.ex'],
                   excludes = excludes,
                   argv_emulation = True,
