@@ -9,7 +9,7 @@ import os
 import pkgutil
 import types
 import sys
-
+import importlib
 import jinja2
 
 class Exercise(object):
@@ -123,7 +123,8 @@ def __import(name=__name__, parent=None):
     elif not isinstance(parent, basestring):
         # assume 'parent' is a package instance
         parent = parent.__name__
-    return __import__(name, fromlist=parent)
+    return importlib.import_module(name)
+    # return __import__(name, fromlist=parent)
 
 def _exercises(pkg):
     ''' List exercises in 'pkg' modules. '''
@@ -133,7 +134,6 @@ def _exercises(pkg):
         # skip packages
         if ispkg: continue;
         # import module
-        print(name,pkg)
         mod = __import(name, pkg)
         if 'level' not in dir(mod): mod.level = pkg.level
         # search exercises in module

@@ -32,8 +32,17 @@ import logging
 import random
 import sys
 
+from os.path import join, dirname, realpath
+import gettext
+
+locale_dir = join(dirname(__file__), '../../../locale/')
+locale_dir = realpath(locale_dir)
+
+gettext.bindtextdomain('pyromaths', locale_dir)
+gettext.textdomain('pyromaths')
+_ = gettext.gettext
 # Quick and dirty definition of `_` as the identity function
-gettext.install('pyromaths')
+#gettext.install('pyromaths')
 
 from pyromaths.cli import exercise_argument, PyromathsException
 from pyromaths.ex.test import TestPerformer, generate

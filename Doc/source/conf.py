@@ -20,7 +20,7 @@ locale.setlocale(locale.LC_TIME,'')
 sys.path.insert(0, os.path.abspath('../../src/'))
 
 import gettext
-gettext.install('pyromaths', unicode=1)
+gettext.install('pyromaths')
 
 from pyromaths.Values import VERSION, COPYRIGHT_YEAR
 

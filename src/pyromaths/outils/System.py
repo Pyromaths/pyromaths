@@ -220,15 +220,16 @@ def creation(parametres):
     dir0 = os.path.dirname(exo)
     dir1 = os.path.dirname(cor)
     import socket
-    if socket.gethostname() == "sd-27355.pyromaths.org":
+    if socket.gethostname() == "sd-94439.pyromaths.org":
         # Chemin complet pour Pyromaths en ligne car pas d'accents
         f0noext = os.path.splitext(exo)[0].encode(sys.getfilesystemencoding())
         f1noext = os.path.splitext(cor)[0].encode(sys.getfilesystemencoding())
     else:
         # Pas le chemin pour les autres, au cas où il y aurait un accent dans
         # le chemin (latex ne gère pas le 8 bits)
-        f0noext = os.path.splitext(os.path.basename(exo))[0].encode(sys.getfilesystemencoding())
-        f1noext = os.path.splitext(os.path.basename(cor))[0].encode(sys.getfilesystemencoding())
+        f0noext = os.path.splitext(os.path.basename(exo))[0]
+        f1noext = os.path.splitext(os.path.basename(cor))[0]
+    print("!!!",f0noext, exo)
     if parametres['creer_pdf']:
         from subprocess import call
 
@@ -236,16 +237,16 @@ def creation(parametres):
         os.chdir(dir0)
         latexmkrc(f0noext)
         log = open('%s-pyromaths.log' % f0noext, 'w')
-        if socket.gethostname() == "sd-27355.pyromaths.org":
-            os.environ['PATH'] += os.pathsep + "/usr/local/texlive/2014/bin/x86_64-linux"
+        if socket.gethostname() == "sd-94439.pyromaths.org":
+            os.environ['PATH'] += os.pathsep + "/usr/local/texlive/2016/bin/x86_64-linux"
             call(["latexmk", "-shell-escape", "-silent", "-interaction=nonstopmode", "-output-directory=%s" % dir0, "-pdfps", "%s.tex" % f0noext], env=os.environ, stdout=log)
             call(["latexmk", "-c", "-silent", "-output-directory=%s" % dir0], env=os.environ, stdout=log)
         elif os.name == 'nt':
-            call(["latexmk", "-pdfps", "-shell-escape", "-silent", "-interaction=nonstopmode", "%s.tex" % f0noext], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
+            call(["latexmk", "%s.tex" % f0noext], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
             call(["latexmk", "-silent", "-c"], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
         else:
-            call(["latexmk", "-pdfps", "-shell-escape", "-silent", "-interaction=nonstopmode", "%s.tex" % f0noext], stdout=log)
-            call(["latexmk", "-silent", "-c", "-f"], stdout=log)
+            call(["latexmk", "-silent", "%s.tex" % f0noext], stdout=log)
+            call(["latexmk", "-silent", "-c"], stdout=log)
         log.close()
         nettoyage(f0noext)
         if not "openpdf" in parametres or parametres["openpdf"]:
@@ -260,16 +261,16 @@ def creation(parametres):
             os.chdir(dir1)
             latexmkrc(f1noext)
             log = open('%s-pyromaths.log' % f1noext, 'w')
-            if socket.gethostname() == "sd-27355.pyromaths.org":
-                os.environ['PATH'] += os.pathsep + "/usr/local/texlive/2014/bin/x86_64-linux"
+            if socket.gethostname() == "sd-94439.pyromaths.org":
+                os.environ['PATH'] += os.pathsep + "/usr/local/texlive/2016/bin/x86_64-linux"
                 call(["latexmk", "-shell-escape", "-silent", "-interaction=nonstopmode", "-output-directory=%s" % dir1, "-pdfps", "%s.tex" % f1noext], env=os.environ, stdout=log)
                 call(["latexmk", "-c", "-silent", "-output-directory=%s" % dir1], env=os.environ, stdout=log)
             elif os.name == 'nt':
                 call(["latexmk", "%s.tex" % f1noext], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
                 call(["latexmk", "-c"], env={"PATH": os.environ['PATH'], "WINDIR": os.environ['WINDIR'], 'USERPROFILE': os.environ['USERPROFILE']}, stdout=log)
             else:
-                call(["latexmk", "%s.tex" % f1noext], stdout=log)
-                call(["latexmk", "-c"], stdout=log)
+                call(["latexmk", "-silent", "%s.tex" % f1noext], stdout=log)
+                call(["latexmk", "-silent", "-c"], stdout=log)
             log.close()
             nettoyage(f1noext)
             if not "openpdf" in parametres or parametres["openpdf"]:
@@ -291,7 +292,9 @@ def latexmkrc(basefilename):
     latexmkrc.write('add_cus_dep("asy","eps",0,"asy");\n')
     latexmkrc.write('add_cus_dep("asy","pdf",0,"asy");\n')
     latexmkrc.write('add_cus_dep("asy","tex",0,"asy");\n')
-    latexmkrc.write('push @generated_exts, \'pre\', \'dvi\', \'ps\', \'auxlock\', \'fdb_latexmk\', \'fls\', \'out\', \'aux\';\n')
+    #latexmkrc.write('push @generated_exts, \'pre\', \'dvi\', \'ps\', \'auxlock\', \'fdb_latexmk\', \'fls\', \'out\', \'aux\';\n')
+    latexmkrc.write('$cleanup_mode = 2;\n')
+    #latexmkrc.write('@generated_exts = qw(4ct 4tc acn acr alg aux auxlock bbl dvi eps fls glg glo gls idv idx ind ist lg lof lot nav net out pre ps ptc run.xml snm thm tmp toc vrb xdv xref);')
     latexmkrc.write('$clean_ext .= " %R-?.tex %R-??.tex %R-figure*.dpth %R-figure*.dvi %R-figure*.eps %R-figure*.log %R-figure*.md5 %R-figure*.pre %R-figure*.ps %R-figure*.asy %R-*.asy %R-*_0.eps %R-*.pre";')
     latexmkrc.close()
 
@@ -300,8 +303,8 @@ def nettoyage(basefilename):
     #try:
     #    os.remove('latexmkrc')
     #except OSError:
-    #        pass
-    if os.path.getsize('%s.pdf' % basefilename) > 1000 :
+    #        pass)
+    if os.path.getsize('{}.pdf'.format(basefilename)) > 1000 :
         for ext in ('.log', '-pyromaths.log'):
             try:
                 os.remove(basefilename + ext)

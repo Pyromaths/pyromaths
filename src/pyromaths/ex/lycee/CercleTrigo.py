@@ -113,7 +113,7 @@ def cercle_trigo(code=0,*args):
         else:
             figure += "\\rput("+str(round(1.25*cos(f),2))+","+str(round(1.25*sin(f),2))+"){$M_"+str(idx)+"$}\n"
             idx += 1
-    figure += """\\uput[dl](0,0){$O$}
+    figure += r"""\uput[dl](0,0){$O$}
     \uput[dr](1,0){$I$}
     \uput[ul](0,1){$J$}"""
     figure += "\n\\end{pspicture}"

@@ -66,9 +66,9 @@ FRANCAIS_MULTIPLE = {
     10: u"à dix fois le",
     }
 NOTATIONS = [
-    ur"u",
-    ur"\left(u_n\right)",
-    ur"\left(u_n\right)_{n\in\mathbb{N}}",
+    "u",
+    r"\left(u_n\right)",
+    r"\left(u_n\right)_{n\in\mathbb{N}}",
     ]
 
 def signe(nombre):
@@ -92,7 +92,7 @@ class Fraction(object):
                 signe = ""
             else:
                 signe = "-"
-            return ur"{}\frac{{ {} }}{{ {} }}".format(
+            return r"{}\frac{{ {} }}{{ {} }}".format(
                     signe,
                     self.numerateur,
                     self.denominateur,
@@ -192,7 +192,7 @@ class Lineaire(Fonction):
         self.coeff = random.choice(FRACTIONS)
 
     def expression(self, variable):
-        return ur"{coeff}{variable}".format(
+        return r"{coeff}{variable}".format(
             coeff=self.coeff.latex(),
             variable=variable,
             )
@@ -200,10 +200,10 @@ class Lineaire(Fonction):
     def calcul(self, argument):
         if isinstance(argument, Entier):
             if float(argument) < 0:
-                arg = ur"\left( {} \right)".format(argument.latex())
+                arg = r"\left( {} \right)".format(argument.latex())
             else:
                 arg = argument.latex()
-            yield self.expression(ur"\times " + arg)
+            yield self.expression(r"\times " + arg)
             if isinstance(self.coeff.simplifie(), Fraction):
                 yield Fraction(
                             self.coeff.numerateur * argument.valeur,
@@ -214,7 +214,7 @@ class Lineaire(Fonction):
             else:
                 yield self.resultat(argument).latex()
         else:
-            yield self.expression(ur"\times " + argument.latex())
+            yield self.expression(r"\times " + argument.latex())
             yield Fraction(
                 self.coeff.numerateur * argument.numerateur,
                 self.coeff.denominateur * argument.denominateur,
@@ -243,7 +243,7 @@ class Affine(Fonction):
         self.ordonnee = Entier(ordonnee)
 
     def expression(self, variable):
-        return ur"{coeff}{variable}{ordonnee}".format(
+        return r"{coeff}{variable}{ordonnee}".format(
             coeff=self.coeff.latex(),
             ordonnee=self.ordonnee.latex("+"),
             variable=variable,
@@ -251,13 +251,13 @@ class Affine(Fonction):
 
     def calcul(self, argument):
         if float(argument) < 0:
-            arg = ur"\left( {} \right)".format(argument.latex())
+            arg = r"\left( {} \right)".format(argument.latex())
         else:
             arg = argument.latex()
-        yield self.expression(ur"\times " + arg)
+        yield self.expression(r"\times " + arg)
         if isinstance(argument, Entier):
             if isinstance(self.coeff.simplifie(), Fraction):
-                yield ur"{fraction} {signe} \frac{{ {ordonnee} \times {denom} }}{{ {denom} }}".format(
+                yield r"{fraction} {signe} \frac{{ {ordonnee} \times {denom} }}{{ {denom} }}".format(
                         fraction=Fraction(
                             self.coeff.numerateur * argument.valeur,
                             self.coeff.denominateur,
@@ -266,13 +266,13 @@ class Affine(Fonction):
                         denom=self.coeff.denominateur,
                         signe=Entier(self.coeff.denominateur * self.ordonnee.valeur).latex("+")[0],
                         )
-                yield ur"\frac{{ {gauche} {droite} }}{{ {denom} }}".format(
+                yield r"\frac{{ {gauche} {droite} }}{{ {denom} }}".format(
                         gauche=self.coeff.numerateur * argument.valeur,
                         droite=Entier(self.coeff.denominateur * self.ordonnee.valeur).latex("+"),
                         denom=self.coeff.denominateur,
                         )
         else:
-            yield ur"{} + \frac{{ {} \times {} }}{{ {} }}".format(
+            yield r"{} + \frac{{ {} \times {} }}{{ {} }}".format(
                 Fraction(
                     self.coeff.numerateur * argument.numerateur,
                     self.coeff.denominateur * argument.denominateur,
@@ -281,7 +281,7 @@ class Affine(Fonction):
                 self.coeff.denominateur * argument.denominateur,
                 self.coeff.denominateur * argument.denominateur,
                 )
-            yield ur"\frac{{ {} {} }}{{ {} }}".format(
+            yield r"\frac{{ {} {} }}{{ {} }}".format(
                 self.coeff.numerateur * argument.numerateur,
                 Entier(self.ordonnee.valeur * self.coeff.denominateur * argument.denominateur).latex("+"),
                 self.coeff.denominateur * argument.denominateur,
@@ -303,7 +303,7 @@ class FractionProduit(Fonction):
         self.denominateur = Entier(random.randint(2, 10))
 
     def expression(self, variable):
-        return ur"\frac{{ {numerateur}^{variable} }}{{ {denominateur}{variable} }}".format(
+        return r"\frac{{ {numerateur}^{variable} }}{{ {denominateur}{variable} }}".format(
                 numerateur=self.numerateur.latex("-"),
                 denominateur=self.denominateur.latex("-"),
                 variable=variable,
@@ -311,16 +311,16 @@ class FractionProduit(Fonction):
 
     def calcul(self, argument):
         if argument.valeur < 0:
-            arg2 = ur"\left( {} \right)".format(argument.latex())
+            arg2 = r"\left( {} \right)".format(argument.latex())
         else:
             arg2 = argument.latex()
-        yield ur"\frac{{ {numerateur}^{{ {argument} }}}}{{ {denominateur}\times{arg2} }}".format(
+        yield r"\frac{{ {numerateur}^{{ {argument} }}}}{{ {denominateur}\times{arg2} }}".format(
                 numerateur=self.numerateur.latex(),
                 denominateur=self.denominateur.latex(),
                 argument=argument.latex(),
                 arg2=arg2,
             )
-        yield ur"\frac{{ {} }}{{ {} }}".format(
+        yield r"\frac{{ {} }}{{ {} }}".format(
                 self.numerateur.valeur ** argument.valeur,
                 self.denominateur.valeur * argument.valeur,
                 )
@@ -347,21 +347,21 @@ class Trinome(Fonction):
         self.coef = [Entier(i) for i in coef]
 
     def expression(self, variable):
-        return ur"{coef[2]}{variable}^2{coef[1]}{variable}{coef[0]}".format(
+        return r"{coef[2]}{variable}^2{coef[1]}{variable}{coef[0]}".format(
             coef=[self.coef[0].latex("+"), self.coef[1].latex("+"), self.coef[2].latex("-")],
             variable=variable,
             )
 
     def calcul(self, argument):
         if argument < 0:
-            texargument = ur"\left{{ {variable} }}".format(argument.latex())
+            texargument = r"\left{{ {variable} }}".format(argument.latex())
         else:
             texargument = argument.latex()
-        yield ur"{coef[2]}\times{argument}^2{coef[1]}\times{argument}{coef[0]}".format(
+        yield r"{coef[2]}\times{argument}^2{coef[1]}\times{argument}{coef[0]}".format(
             coef=[self.coef[0].latex("+"), self.coef[1].latex("+"), self.coef[2].latex("-")],
             argument=texargument,
             )
-        yield ur"{}{}{}".format(
+        yield r"{}{}{}".format(
             Entier(self.coef[2].valeur * argument.valeur**2).latex(),
             Entier(self.coef[1].valeur * argument.valeur).latex("+"),
             Entier(self.coef[0].valeur).latex("+")
@@ -385,7 +385,7 @@ class IdentiteTranslatee(Fonction):
         self.ordonnee = Entier(ordonnee)
 
     def expression(self, variable):
-        return ur"{variable}{ordonnee}".format(
+        return r"{variable}{ordonnee}".format(
             variable=variable,
             ordonnee=self.ordonnee.latex("+"),
             )
@@ -414,10 +414,10 @@ class FrancaisGeometrique(Fonction):
 
     def expression(self, variable):
         # L'argument est du code LaTeX
-        return ur"{} {}".format(self.raison.latex(), variable)
+        return r"{} {}".format(self.raison.latex(), variable)
 
     def calcul(self, argument):
-        yield ur"{} \times {}".format(self.raison.latex(), argument.latex())
+        yield r"{} \times {}".format(self.raison.latex(), argument.latex())
         resultat = self.resultat(argument).latex()
         if isinstance(resultat, Entier):
             yield self.resultat(argument).latex()
@@ -429,7 +429,7 @@ class FrancaisGeometrique(Fonction):
                 raison = Fraction(raison.valeur, 1)
             numerateur = argument.numerateur * raison.numerateur
             denominateur = raison.denominateur * argument.denominateur
-            yield ur"\frac{{ {} }}{{ {} }}".format(numerateur, denominateur)
+            yield r"\frac{{ {} }}{{ {} }}".format(numerateur, denominateur)
             if numerateur % denominateur == 0:
                 yield Entier(old_div(numerateur, denominateur)).latex()
                 return
@@ -473,7 +473,7 @@ class FrancaisArithmetique(Fonction):
 
     def expression(self, variable):
         # L'argument est du code LaTeX
-        return ur"{} {}".format(variable, Entier(self.raison).latex("+"))
+        return r"{} {}".format(variable, Entier(self.raison).latex("+"))
 
     def calcul(self, argument):
         yield self.expression(argument.latex())
@@ -491,9 +491,9 @@ class FrancaisOppose(Fonction):
     def expression(self, variable):
         # L'argument est du code LaTeX
         if variable < 0:
-            return ur"-\left({}\right)".format(variable)
+            return r"-\left({}\right)".format(variable)
         else:
-            return ur"-{}".format(variable)
+            return r"-{}".format(variable)
 
     def calcul(self, argument):
         yield Entier(-argument.valeur).latex("-")
@@ -511,14 +511,14 @@ class FrancaisInverse(Fonction):
 
     def expression(self, variable):
         # L'argument est du code LaTeX
-        return ur"\frac{{1}}{{ {} }}".format(variable)
+        return r"\frac{{1}}{{ {} }}".format(variable)
 
     def calcul(self, argument):
         yield self.expression(argument.latex())
         if isinstance(argument, Entier) and argument > 0:
             pass
         elif isinstance(argument, Entier) and argument < 0:
-            yield ur"-{}".format(self.expression((-argument).latex()))
+            yield r"-{}".format(self.expression((-argument).latex()))
         elif isinstance(argument, Fraction):
             yield self.resultat(argument).latex()
         else:
@@ -585,7 +585,7 @@ class General(Question):
     def latex_params(self):
         return {
             'indice0': self.indice0,
-            'fonction': self.fonction.expression(ur"n"),
+            'fonction': self.fonction.expression(r"n"),
             'notation': self.notation,
             }
 
@@ -605,7 +605,7 @@ class Recursif(Question):
         return {
             'indice0': self.indice0,
             'terme0': self.terme0.latex("-"),
-            'fonction': self.fonction.expression(ur"u_n"),
+            'fonction': self.fonction.expression(r"u_n"),
             'notation': self.notation,
             }
 
@@ -629,33 +629,33 @@ class TermesDUneSuite(ex.TexExercise):
 
     def tex_statement(self):
         exo = [r'\exercice']
-        exo.append(ur'Pour chacune des suites $u$ suivantes, calculer :')
-        exo.append(ur' (a) le {} terme ;'.format(FRANCAIS_ORDINAL[self.rang[0]]))
-        exo.append(ur' (b) le terme de rang {} ;'.format(self.rang[1]))
-        exo.append(ur' (c) $u_{}$.'.format(self.rang[2]))
+        exo.append(r'Pour chacune des suites $u$ suivantes, calculer :')
+        exo.append(r' (a) le {} terme ;'.format(FRANCAIS_ORDINAL[self.rang[0]]))
+        exo.append(r' (b) le terme de rang {} ;'.format(self.rang[1]))
+        exo.append(r' (c) $u_{}$.'.format(self.rang[2]))
 
-        exo.append(ur'\begin{enumerate}')
-        exo.append(ur'  \item ${notation}$ est une suite de premier terme $u_{indice0}={terme0}$, et dont chaque terme (sauf le premier) est égal {suivant}.'.format(**self.questions[0].latex_params))
-        exo.append(ur'  \item ${notation}$ est la suite définie pour $n\geq{indice0}$ par : $u_n={fonction}$.'.format(**self.questions[1].latex_params))
-        exo.append(textwrap.dedent(ur"""
+        exo.append(r'\begin{enumerate}')
+        exo.append(r'  \item ${notation}$ est une suite de premier terme $u_{indice0}={terme0}$, et dont chaque terme (sauf le premier) est égal {suivant}.'.format(**self.questions[0].latex_params))
+        exo.append(r'  \item ${notation}$ est la suite définie pour $n\geq{indice0}$ par : $u_n={fonction}$.'.format(**self.questions[1].latex_params))
+        exo.append(textwrap.dedent(r"""
             \item ${notation}$ est la suite définie pour $n\geq{indice0}$ par :
                 \[\left\{{\begin{{array}}{{l}}
                   u_{indice0}={terme0}\\
                   \text{{Pour tout $n\geq{indice0}$ : }} u_{{n+1}}={fonction}.
               \end{{array}}\right.\]
               """).format(**self.questions[2].latex_params))
-        exo.append(ur'\end{enumerate}')
+        exo.append(r'\end{enumerate}')
         return exo
 
     def tex_answer(self):
         exo = [r'\exercice*']
-        exo.append(ur'\begin{enumerate}')
+        exo.append(r'\begin{enumerate}')
         # Question 0
-        exo.append(ur"  \item Selon l'énoncé, le premier terme de ${notation}$ est $u_{indice0}={terme0}$. Puisque chaque terme (sauf le premier) est égal {suivant}, on a :".format(**self.questions[0].latex_params))
+        exo.append(r"  \item Selon l'énoncé, le premier terme de ${notation}$ est $u_{indice0}={terme0}$. Puisque chaque terme (sauf le premier) est égal {suivant}, on a :".format(**self.questions[0].latex_params))
         termes = dict([(self.questions[0].indice0, self.questions[0].terme0)])
         calcul_termes = []
         for indice in range(self.questions[0].indice0, max(self.rang[0] + self.questions[0].indice0 - 1, self.rang[1], self.rang[2])):
-            calcul = ur"$u_{indice}={fonction}".format(
+            calcul = r"$u_{indice}={fonction}".format(
                 indice=indice+1,
                 fonction=self.questions[0].fonction.expression("u_{}".format(indice)),
                 )
@@ -665,54 +665,54 @@ class TermesDUneSuite(ex.TexExercise):
             termes[indice+1] = self.questions[0].fonction.resultat(termes[indice])
             calcul_termes.append(calcul)
         exo.append(" ; ".join(calcul_termes) + ".")
-        exo.append(ur'\begin{enumerate}')
-        exo.append(ur' \item Calcul du {} terme :'.format(FRANCAIS_ORDINAL[self.rang[0]]))
+        exo.append(r'\begin{enumerate}')
+        exo.append(r' \item Calcul du {} terme :'.format(FRANCAIS_ORDINAL[self.rang[0]]))
         enumeration = []
         for indice in range(0, self.rang[0]):
             enumeration.append(u"le {ordinal} terme est $u_{indice}$".format(ordinal=FRANCAIS_ORDINAL[indice+1], indice=self.questions[0].indice0+indice))
         exo.append(" ; ".join(enumeration) + ".")
-        exo.append(ur"Le terme demandé est donc : $u_{}={}$.".format(self.rang[0] + self.questions[0].indice0 - 1, termes[self.rang[0] + self.questions[0].indice0 - 1].latex()))
-        exo.append(ur'\item Le terme de rang {indice} est : $u_{indice}={valeur}$.'.format(indice=self.rang[1], valeur=termes[self.rang[1]].latex()))
-        exo.append(ur'\item Nous avons calculé que : $u_{indice}={valeur}$.'.format(indice=self.rang[2], valeur=termes[self.rang[2]].latex()))
-        exo.append(ur'\end{enumerate}')
+        exo.append(r"Le terme demandé est donc : $u_{}={}$.".format(self.rang[0] + self.questions[0].indice0 - 1, termes[self.rang[0] + self.questions[0].indice0 - 1].latex()))
+        exo.append(r'\item Le terme de rang {indice} est : $u_{indice}={valeur}$.'.format(indice=self.rang[1], valeur=termes[self.rang[1]].latex()))
+        exo.append(r'\item Nous avons calculé que : $u_{indice}={valeur}$.'.format(indice=self.rang[2], valeur=termes[self.rang[2]].latex()))
+        exo.append(r'\end{enumerate}')
 
         # Question 1
-        exo.append(ur'  \item La suite ${notation}$ est définie pour $n\geq{indice0}$ par : $u_n={fonction}$.'.format(**self.questions[1].latex_params))
-        exo.append(ur"Elle est donc définie par son terme général : pour calculer un terme de rang $n$, on peut calculer directement l'image de $n$ par la suite.")
-        exo.append(ur'\begin{enumerate}')
-        exo.append(ur' \item Calcul du {} terme :'.format(FRANCAIS_ORDINAL[self.rang[0]]))
+        exo.append(r'  \item La suite ${notation}$ est définie pour $n\geq{indice0}$ par : $u_n={fonction}$.'.format(**self.questions[1].latex_params))
+        exo.append(r"Elle est donc définie par son terme général : pour calculer un terme de rang $n$, on peut calculer directement l'image de $n$ par la suite.")
+        exo.append(r'\begin{enumerate}')
+        exo.append(r' \item Calcul du {} terme :'.format(FRANCAIS_ORDINAL[self.rang[0]]))
         enumeration = []
         for indice in range(0, self.rang[0]):
             enumeration.append(u"le {ordinal} terme est $u_{indice}$".format(ordinal=FRANCAIS_ORDINAL[indice+1], indice=self.questions[1].indice0+indice))
         exo.append(" ; ".join(enumeration) + ".")
-        exo.append(ur"Le terme demandé est donc : $u_{}=".format(self.rang[0] + self.questions[1].indice0 - 1))
+        exo.append(r"Le terme demandé est donc : $u_{}=".format(self.rang[0] + self.questions[1].indice0 - 1))
         calcul = []
         for etape in self.questions[1].fonction.calcul(Entier(self.rang[0] + self.questions[1].indice0 - 1)):
             calcul.append(etape)
-        exo.append(u" = ".join(calcul) + ur"$.")
-        exo.append(ur"La solution est $u_{{ {} }}={}$.".format(self.rang[0] + self.questions[1].indice0 - 1, self.questions[1].fonction.resultat(Entier(self.rang[0] + self.questions[1].indice0 - 1)).latex()))
-        exo.append(ur"\item Le terme de rang {rang} est $u_{{ {rang} }}$.".format(rang=self.rang[1]))
+        exo.append(u" = ".join(calcul) + r"$.")
+        exo.append(r"La solution est $u_{{ {} }}={}$.".format(self.rang[0] + self.questions[1].indice0 - 1, self.questions[1].fonction.resultat(Entier(self.rang[0] + self.questions[1].indice0 - 1)).latex()))
+        exo.append(r"\item Le terme de rang {rang} est $u_{{ {rang} }}$.".format(rang=self.rang[1]))
         if self.rang[0] + self.questions[1].indice0 - 1 == self.rang[1]:
-            exo.append(ur"Ce terme a déjà été calculé, et $u_{{ {} }}={}$.".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1])).latex()))
+            exo.append(r"Ce terme a déjà été calculé, et $u_{{ {} }}={}$.".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1])).latex()))
         else:
             calcul = []
             for etape in self.questions[1].fonction.calcul(Entier(self.rang[1])):
                 calcul.append(etape)
-            exo.append(ur"Le terme demandé est donc : $u_{{ {} }}=".format(self.rang[1]) + " = ".join(calcul) + ur"$.")
-            exo.append(ur"La solution est donc  : $u_{{ {} }}={}$.".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1])).latex()))
-        exo.append(ur"\item")
+            exo.append(r"Le terme demandé est donc : $u_{{ {} }}=".format(self.rang[1]) + " = ".join(calcul) + r"$.")
+            exo.append(r"La solution est donc  : $u_{{ {} }}={}$.".format(self.rang[1], self.questions[1].fonction.resultat(Entier(self.rang[1])).latex()))
+        exo.append(r"\item")
         if self.rang[0] + self.questions[1].indice0 - 1 == self.rang[2]:
-            exo.append(ur"Ce terme a déjà été calculé, et $u_{{ {} }}={}$.".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2])).latex()))
+            exo.append(r"Ce terme a déjà été calculé, et $u_{{ {} }}={}$.".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2])).latex()))
         else:
             calcul = []
             for etape in self.questions[1].fonction.calcul(Entier(self.rang[2])):
                 calcul.append(etape)
-            exo.append(ur"On a : $u_{{ {} }}=".format(self.rang[2]) + " = ".join(calcul) + ur"$.")
-            exo.append(ur"La solution est donc  : $u_{{ {} }}={}$.".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2])).latex()))
-        exo.append(ur'\end{enumerate}')
+            exo.append(r"On a : $u_{{ {} }}=".format(self.rang[2]) + " = ".join(calcul) + r"$.")
+            exo.append(r"La solution est donc  : $u_{{ {} }}={}$.".format(self.rang[2], self.questions[1].fonction.resultat(Entier(self.rang[2])).latex()))
+        exo.append(r'\end{enumerate}')
 
         # Question 2
-        exo.append(textwrap.dedent(ur"""
+        exo.append(textwrap.dedent(r"""
             \item La suite ${notation}$ est définie par récurrence, pour $n\geq{indice0}$, par :
                 \[\left\{{\begin{{array}}{{l}}
                   u_{indice0}={terme0}\\
@@ -722,7 +722,7 @@ class TermesDUneSuite(ex.TexExercise):
         termes = dict([(self.questions[2].indice0, self.questions[2].terme0)])
         calcul_termes = []
         for indice in range(self.questions[2].indice0, max(self.rang[0] + self.questions[2].indice0 - 1, self.rang[1], self.rang[2])):
-            calcul = ur"u_{indice} &= {fonction}".format(
+            calcul = r"u_{indice} &= {fonction}".format(
                 indice=indice+1,
                 fonction=self.questions[2].fonction.expression("u_{}".format(indice)),
                 )
@@ -730,19 +730,19 @@ class TermesDUneSuite(ex.TexExercise):
                 calcul += " =" + etape
             termes[indice+1] = self.questions[2].fonction.resultat(termes[indice])
             calcul_termes.append(calcul)
-        exo.append(ur"\begin{align*}")
-        exo.append(ur" \\".join(calcul_termes))
-        exo.append(ur"\end{align*}")
-        exo.append(ur'\begin{enumerate}')
-        exo.append(ur' \item Calcul du {} terme :'.format(FRANCAIS_ORDINAL[self.rang[0]]))
+        exo.append(r"\begin{align*}")
+        exo.append(r" \\".join(calcul_termes))
+        exo.append(r"\end{align*}")
+        exo.append(r'\begin{enumerate}')
+        exo.append(r' \item Calcul du {} terme :'.format(FRANCAIS_ORDINAL[self.rang[0]]))
         enumeration = []
         for indice in range(0, self.rang[0]):
             enumeration.append(u"le {ordinal} terme est $u_{indice}$".format(ordinal=FRANCAIS_ORDINAL[indice+1], indice=self.questions[2].indice0+indice))
         exo.append(" ; ".join(enumeration) + ".")
-        exo.append(ur"Le terme demandé est donc : $u_{}={}$.".format(self.rang[0] + self.questions[2].indice0 - 1, termes[self.rang[0] + self.questions[2].indice0 - 1].latex()))
-        exo.append(ur'\item Le terme de rang {indice} est : $u_{indice}={valeur}$.'.format(indice=self.rang[1], valeur=termes[self.rang[1]].latex()))
-        exo.append(ur'\item Nous avons calculé que : $u_{indice}={valeur}$.'.format(indice=self.rang[2], valeur=termes[self.rang[2]].latex()))
-        exo.append(ur'\end{enumerate}')
+        exo.append(r"Le terme demandé est donc : $u_{}={}$.".format(self.rang[0] + self.questions[2].indice0 - 1, termes[self.rang[0] + self.questions[2].indice0 - 1].latex()))
+        exo.append(r'\item Le terme de rang {indice} est : $u_{indice}={valeur}$.'.format(indice=self.rang[1], valeur=termes[self.rang[1]].latex()))
+        exo.append(r'\item Nous avons calculé que : $u_{indice}={valeur}$.'.format(indice=self.rang[2], valeur=termes[self.rang[2]].latex()))
+        exo.append(r'\end{enumerate}')
 
-        exo.append(ur'\end{enumerate}')
+        exo.append(r'\end{enumerate}')
         return exo

@@ -33,7 +33,6 @@ from pyromaths import ex
 from pyromaths.outils.Arithmetique import pgcd
 from pyromaths.classes.Fractions import Fraction
 from random import randrange, shuffle
-from string import zfill
 
 def InitPoints(minimum=-6.1, maximum=6.1, nbval=3):
     dY = []
@@ -132,9 +131,9 @@ class Fd1Tangentes(ex.TexExercise):
         exo.append(r'import interpolate;')
         exo.append(r'import geometry;')
         exo.append(r'defaultpen(fontsize(9pt));')
-        exo.append(r'real[] xpt={%s};' % (",".join([zfill(str(a), 2) for a in self.lX1])))
-        exo.append(r'real[] ypt={%s};' % (",".join([zfill(str(a), 2) for a in self.lY1])))
-        exo.append(r'real[] dy= {%s};' % (",".join([zfill(str(a), 2) for a in dY1])))
+        exo.append(r'real[] xpt={%s};' % (",".join([str(a).zfill(2) for a in self.lX1])))
+        exo.append(r'real[] ypt={%s};' % (",".join([str(a).zfill(2) for a in self.lY1])))
+        exo.append(r'real[] dy= {%s};' % (",".join([str(a).zfill(2) for a in dY1])))
         exo.append(r'real f(real t){return pwhermite(xpt,ypt,dy)(t);}')
         exo.append(r'path Cf=graph(f,-6.1,6.1);')
         exo.append(r'void tangente(int k,real lg=sqrt(1+dy[k]^2),real ld=lg, pen p=black+1, arrowbar arr=Arrows(SimpleHead,size=9pt)) {')
@@ -183,9 +182,9 @@ class Fd1Tangentes(ex.TexExercise):
         exo.append(r'import interpolate;')
         exo.append(r'import geometry;')
         exo.append(r'defaultpen(fontsize(9pt));')
-        exo.append(r'real[] xpt={%s};' % (",".join([zfill(str(a), 2) for a in self.lX2])))
-        exo.append(r'real[] ypt={%s};' % (",".join([zfill(str(a), 2) for a in self.lY2])))
-        exo.append(r'real[] dy= {%s};' % (",".join([zfill(str(a), 2) for a in dY2])))
+        exo.append(r'real[] xpt={%s};' % (",".join([str(a).zfill(2) for a in self.lX2])))
+        exo.append(r'real[] ypt={%s};' % (",".join([str(a).zfill( 2) for a in self.lY2])))
+        exo.append(r'real[] dy= {%s};' % (",".join([str(a).zfill(2) for a in dY2])))
         exo.append(r'real f(real t){return pwhermite(xpt,ypt,dy)(t);}')
         exo.append(r'path Cf=graph(f,-6.1,6.1);')
         exo.append(r'void tangente(int k,real lg=sqrt(1+dy[k]^2),real ld=lg, pen p=black+1, arrowbar arr=Arrows(SimpleHead,size=9pt)) {')

@@ -421,13 +421,13 @@ class Ui_MainWindow(object):
       <span style=" font-weight:600;">Guillaume Barthélémy</span> pour ses exercices&nbsp;;
       </li>
       <li>
-      <span style=" font-weight:600;">Nicolas Bissonnier</span> pour son arrivée dans l'équipe de développement&nbsp;;
-      </li>
-      <li>
       <span style=" font-weight:600;">Didier Roche</span> pour l'intégration de Pyromaths dans les dépôts Ubuntu&nbsp;;
       </li>
       <li>
       <span style=" font-weight:600;">Olivier Cornu</span> pour son travail sur l'API exercice et sur la diffusion de Pyromaths via Makefile et Setup.py&nbsp;;
+      </li>
+      <li>
+      <span style=" font-weight:600;">Louis Paternault</span> pour son travail sur Pyromaths&nbsp;;
       </li>
       <li>
       <span style=" font-weight:600;">Jacqueline Gouguenheim-Desloy</span> a porté Pyromaths sur Mac OS X à ses débuts. Son soutien et son amitié nous ont été précieux. Sa disparition est une perte douloureuse pour la communauté du logiciel libre.

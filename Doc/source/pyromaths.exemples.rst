@@ -814,8 +814,8 @@ LaTeX
 
   .. doctest:: polynomedegre2
 
-     >>> Poly2(2, 3, 4).print_signe("\leq")
-     2x^2+3x+4 \leq 0
+     >>> Poly2(2, 3, 4).print_signe("\leqslant")
+     2x^2+3x+4 \leqslant 0
 
 Conversion en LaTeX
 -------------------

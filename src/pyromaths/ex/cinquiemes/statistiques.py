@@ -296,7 +296,7 @@ def exo_notes():
         classes += [[val, val + len_classe]]
         val = val + len_classe
 
-    titres = [_(u"Classes de notes")] + [u"$" + str(f[0]) + u" \leq n < " + str(f[1]) + u"$" for f in classes[:-1]] + [u"$" + str(classes[-1][0]) + u" \leq n \leq 20$"]
+    titres = [_(u"Classes de notes")] + [u"$" + str(f[0]) + u" \leqslant n < " + str(f[1]) + u"$" for f in classes[:-1]] + [u"$" + str(classes[-1][0]) + u" \leqslant n \leqslant 20$"]
 
     exo.append(_(u"Voici un tableau regroupant les notes d'une classe lors d'un contrôle :\\par"))
     cor.append(_(u"Voici un tableau regroupant les notes d'une classe lors d'un contrôle :\\par"))
@@ -488,11 +488,11 @@ def exo_ages():
 
     titres = [
         _(u"Classes d'âges"),
-        _(u"$0 \\leq n \\leq 20$"),
-        _(u"$20 \\leq n \\leq 40$"),
-        _(u"$40 \\leq n \\leq 60$"),
-        _(u"$60 \\leq n \\leq 80$"),
-        _(u"$80 \\geq n$"),
+        _(u"$0 \\leqslant n \\leqslant 20$"),
+        _(u"$20 \\leqslant n \\leqslant 40$"),
+        _(u"$40 \\leqslant n \\leqslant 60$"),
+        _(u"$60 \\leqslant n \\leqslant 80$"),
+        _(u"$80 \\geqslant n$"),
         ]
 
     liste_pgcd = [pgcd(frequences[i], frequences[i + 1]) for i in range(len(frequences) - 2)]
