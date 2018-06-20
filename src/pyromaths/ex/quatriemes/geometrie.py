@@ -27,9 +27,9 @@ from builtins import range
 from past.utils import old_div
 import random
 from math import acos, asin, atan, pi, sin, cos, tan
+from fractions import Fraction
 
 from pyromaths.outils.Geometrie import couples_pythagore, choix_points
-
 
 #
 # ------------------- THEOREME DE PYTHAGORE -------------------
@@ -40,8 +40,7 @@ def fig_tr_rect(lg):
         b = a + 180
     else:
         b = a - 180
-    c = old_div((int((180 - old_div(((2 * acos(old_div((lg[1] * 1.0), lg[2]))) * 180), pi)) *
-         100) * 1.0), 100) + a
+    c = float(Fraction(int((180 - 2 * acos(lg[1] * 1.0 / lg[2]) * 180 / pi) * 100), 100) + a)
     if c < 0:
         c = c + 360
     return (str(a), str(b), str(c))
@@ -103,8 +102,7 @@ def exo_pythagore():
             """    \\item Soit $%s$ un triangle rectangle en $%s$ tel que :\\par
 $%s=\\unit[%s]{cm}$ et $%s=\\unit[%s]{cm}$.\\par
 Calculer la longueur $%s$.""" % \
-            enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
-                             long1)
+            enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0, long1)
         exo.append(enonce)
         cor.append(enonce)
         cor.append("\\par\\dotfill{}\\par\n")
@@ -202,8 +200,7 @@ def exo_triangle_cercle():
 $\\big(\\mathcal{C}\\big)$ est un cercle de diamètre $[%s]$ et $%s$ est un point de $\\big(\\mathcal{C}\\big)$.\\par
 On donne $%s=\\unit[%s]{cm}$ et $%s=\\unit[%s]{cm}$.\\par
 Calculer la longueur $%s$.""" % \
-        enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
-                         long1, diam=1)
+        enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0, long1, diam=1)
     exo.append(enonce)
     cor.append(enonce)
     cor.append("\\par\\dotfill{}\\\\\n")
@@ -335,16 +332,15 @@ def valeurs_thales(pyromax):
     valeurs = [0, 0, 0, 0, 0, 0, 0, 0]
     for i in range(3):
         if liste[i]:
-            valeurs[i] = old_div(random.randrange(15, pyromax), 10.0)
+            valeurs[i] = random.randrange(15, pyromax)
         if liste[i + 3] and liste[i]:
-            valeurs[i + 3] = old_div(random.randrange(5, valeurs[i] * 10 - 9), \
-                10.0)
+            valeurs[i + 3] = random.randrange(5, valeurs[i] - 9)
         elif liste[i + 3]:
-            valeurs[i + 3] = old_div(random.randrange(5, pyromax), 10.0)
+            valeurs[i + 3] = random.randrange(5, pyromax)
     if liste[6]:
-        valeurs[6] = old_div(random.randrange(5, pyromax), 10.0)
+        valeurs[6] = random.randrange(5, pyromax)
     if liste[7]:
-        valeurs[7] = old_div(random.randrange(5, pyromax), 10.0)
+        valeurs[7] = random.randrange(5, pyromax)
 
     #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # type_thales=valeur_alea(-1,1) # -1 si papillon, 1 si triangle
@@ -360,24 +356,19 @@ def valeurs_thales(pyromax):
 def test_valeurs_thales(valeurs, rapport, type_thales):
     v = [valeurs[i] for i in range(8)]
     if rapport[0] // 3 == 0 and rapport[1] // 3 == 2:  # On donne AB et EB
-        v[rapport[0] + 3] = (v[rapport[0]] - v[rapport[1]]) * \
-            type_thales
-    elif rapport[0] // 3 == 1 and rapport[1] // 3 == 2:
-
-                                                # On donne AE et EB
-
+        v[rapport[0] + 3] = (v[rapport[0]] - v[rapport[1]]) * type_thales
+    elif rapport[0] // 3 == 1 and rapport[1] // 3 == 2: # On donne AE et EB
         v[rapport[0] - 3] = v[rapport[0]] * type_thales + v[rapport[1]]
     if v[rapport[0] % 3]:  # rapport est AE/AB
-        rapp = old_div((v[rapport[0] % 3 + 3] * 1.0), v[rapport[0] % 3])
+        rapp = Fraction(v[rapport[0] % 3 + 3], v[rapport[0] % 3])
     else:
         rapp = 0
     for i in range(3):
         if not v[i] and rapp:
-            v[i] = old_div(v[i + 3], rapp)
+            v[i] = v[i + 3] / rapp
         elif not v[i + 3]:
             v[i + 3] = v[i] * rapp
-    if inegalite_triangulaire(v[0:3]) and inegalite_triangulaire(v[3:6]) and \
-        .3 < rapp < .7:
+    if inegalite_triangulaire(v[0:3]) and inegalite_triangulaire(v[3:6]) and .3 < rapp < .7:
         return v
     else:
         return 0
@@ -385,12 +376,12 @@ def test_valeurs_thales(valeurs, rapport, type_thales):
 
 def inegalite_triangulaire(a):  # renvoie 1 si c'est un triangle, 0 sinon
     vrai = 0
-    coef = 1.2  # evite les triangles trop ecrases
+    coef = Fraction(12,10)  # evite les triangles trop ecrases
     if a[0] > a[1] and a[0] > a[2]:
         if a[1] + a[2] > coef * a[0]:
             vrai = 1
     elif a[1] > a[0] and a[1] > a[2]:
-        if a[0] + a[2] > coef * a[1]:
+        if a[1] + a[2] > coef * a[1]:
             vrai = 1
     elif a[2] > a[0] and a[2] > a[1]:
         if a[0] + a[1] > coef * a[2]:
@@ -529,8 +520,7 @@ def tex_resolution_thales1(n, v):
             donnees = (creer_noms(n, r + 3), creer_noms(n, r + 6), '-',
                        creer_noms(n, r), nombre(v[r + 3]))
     if donnees:
-        return '\\vspace{1ex}\\par De plus $%s=%s%s%s=\\unit[%s]{cm}$\n' % \
-            donnees
+        return '\\vspace{1ex}\\par De plus $%s=%s%s%s=\\unit[%s]{cm}$\n' % donnees
     else:
         return ''
 
@@ -575,19 +565,14 @@ def tex_resolution_thales3(n, v, arrondi):
     donnees = []
     for i in range(3):
         if i != r:
-            donnees.extend([nom_ou_valeur(n, v, r), nom_ou_valeur(n, v,
-                           r + 3), nom_ou_valeur(n, v, i), nom_ou_valeur(n,
-                           v, i + 3)])
+            donnees.extend([nom_ou_valeur(n, v, r), nom_ou_valeur(n, v, r + 3), nom_ou_valeur(n, v, i),
+                            nom_ou_valeur(n, v, i + 3)])
             if v[i]:  # on cherche i+3
-                donnees.extend([creer_noms(n, i + 3), nombre(v[i]),
-                               nombre(v[r + 3]), nombre(v[r]),
-                               valeur_exacte(old_div(((v[i] * 1.0) * v[r + 3]),
-                               v[r]), approx=arrondi)])
+                donnees.extend([creer_noms(n, i + 3), nombre(v[i]), nombre(v[r + 3]), nombre(v[r]),
+                                valeur_exacte(v[i] * v[r + 3] / v[r], approx=arrondi)])
             else:
-                donnees.extend([creer_noms(n, i), nombre(v[i + 3]),
-                               nombre(v[r]), nombre(v[r + 3]),
-                               valeur_exacte(old_div(((v[r] * 1.0) * v[i + 3]),
-                               v[r + 3]), approx=arrondi)])
+                donnees.extend([creer_noms(n, i), nombre(v[i + 3]), nombre(v[r]), nombre(v[r + 3]),
+                                valeur_exacte(v[r] * v[i + 3] / v[r + 3], approx=arrondi)])
     texte = \
         '$\\cfrac{%s}{%s}=\\cfrac{%s}{%s}\\quad$ donc $\\quad \\boxed{%s=\\cfrac{%s\\times %s}{%s}%s}$\\par\n ' % tuple(donnees[0:9])
     texte = texte + \
@@ -614,8 +599,7 @@ def tex_resolution_thales3(n, v, arrondi):
 def fig_thales(noms, valeurs):
     v = test_valeurs_thales(valeurs[0:8], valeurs[8][0], valeurs[8][1])
     type_thales = valeurs[8][1]
-    angle = old_div(int(old_div(((100.0 * acos(old_div(((v[0] ** 2 + v[1] ** 2) - v[2] ** 2), ((2 *
-                v[0]) * v[1])))) * 180), pi)), 100.0)
+    angle = int(100 * acos((v[0] ** 2 + v[1] ** 2 - v[2] ** 2) / (2 * v[0] * v[1])) * 180 / pi) / 100
     v = [old_div(int(v[i] * 100), 100.0) for i in range(8)]
     mini_x = old_div(int(100.0 * min(0, v[1] * cos(old_div((angle * pi), 180)), v[3] *
                  type_thales, (v[4] * cos(old_div((angle * pi), 180))) *
@@ -851,3 +835,5 @@ def valeurs_trigo():
         else:
             v = (v, (trigo, 0, l[0], l[3]))
     return v
+
+#TODO: utils/pyromaths-cli.py generate exo_thales:1 plante sur l'arcos (ligne 605)

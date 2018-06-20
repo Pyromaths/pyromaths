@@ -168,7 +168,7 @@ def NombreEnLettres(n, France=True):
 def nombreATrouver():
     """a contient la liste des nombres à créer où il peut ne pas y avoir de
     centaines, de centaines de milliers, d'unités ou de milliers"""
-
+    from decimal import Decimal
     a = [random.randrange(100) + random.randrange(1000) * 10 ** 3,
          random.randrange(1000) + random.randrange(100) * 10 ** 3,
          random.randrange(1000) * 10 ** 3, random.randrange(1000)]
@@ -179,10 +179,10 @@ def nombreATrouver():
         n = a[i]
         if n % 1000:  # il y a des unités dans le nombre
             e = random.randrange(1, 4)
-            lnb.append(n * 10 ** (-e))
+            lnb.append(n / Decimal(10 ** (e)))
         else:
             e = random.randrange(4, 7)
-            lnb.append(n * 10 ** (-e))
+            lnb.append(n / Decimal(10 ** (e)))
     for i in range(8):
         liste.append(lnb.pop(random.randrange(len(lnb))))
     return liste
@@ -210,8 +210,7 @@ def EcritNombreDecimal(n):
             txt = txt + u' unité et '
         if e > 1:
             txt = txt + u' unités et '
-        txt = txt + NombreEnLettres(d) + partieDec[len(str(n).split('.')[1]) - 
-                1]
+        txt = txt + NombreEnLettres(d) + partieDec[len(str(n).split('.')[1]) - 1]
         if d > 1:
             txt = txt + 's'
     return txt

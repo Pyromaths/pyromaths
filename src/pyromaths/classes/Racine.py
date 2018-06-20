@@ -61,7 +61,7 @@ class Racine(object):
     def __rmul__(self, other):
         return self * other
 
-    def __div__(self, other):
+    def __truediv__(self, other):
         if (isinstance(other, float)) or (isinstance(other, int)):
             return Racine(self.radicande, old_div(self.coeff, other), self.indice)
         elif self.indice == other.indice:
@@ -69,7 +69,7 @@ class Racine(object):
         else:
             return str(self) + ' / ' + str(other)
 
-    def __rdiv__(self, other):
+    def __rtruediv__(self, other):
         if (isinstance(other, float)) or (isinstance(other, int)):
             return Racine(self.radicande, old_div(other, float(self.coeff * self.radicande)), self.indice)
         elif self.indice == other.indice:
@@ -289,9 +289,9 @@ class RacineDegre2(object):
                             radicande)
     def __invert__(self):
         return self.denominateur * RacineDegre2(self.numerateur, self.numerateur ** 2 - self.coeff ** 2 * self.radicande, -self.coeff, self.radicande)
-    def __div__(self, other):
+    def __truediv__(self, other):
         return self * ~other
-    def __rdiv__(self, other):
+    def __rtruediv__(self, other):
         return ~self * other
     def __rmul__(self, other):
         return self * other
@@ -302,11 +302,19 @@ class RacineDegre2(object):
         return result
     def __float__(self):
         return old_div((self.numerateur + self.coeff * sqrt(self.radicande)), self.denominateur)
-    def __cmp__(self, other):
-        comp = float(self) - float(other)
-        if comp > 0:
-            return 1
-        elif comp < 0:
-            return -1
-        else:
-            return 0
+    def __lt__(self, other):
+        if float(self) - float(other) < 0: return True
+        else: return False
+    def __eq__(self, other):
+        return float(self) == float(other)
+    def __ne__(self, other):
+        return not self == other
+    def __gt__(self, other):
+        if float(self) - float(other) > 0: return True
+        else: return False
+    def __ge__(self, other):
+        if float(self) - float(other) >= 0: return True
+        else: return False
+    def __le__(self, other):
+        if float(self) - float(other) <= 0: return True
+        else: return False

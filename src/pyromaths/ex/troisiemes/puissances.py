@@ -133,7 +133,7 @@ def valeurs_puissances():  # renvoie un tuple contenant les valeurs pour les deu
     return (a, b)
 
 def tex_puissances():
-    sd = string.maketrans('.', ',')  # convertit les . en , (separateur decimal)
+    sd = str.maketrans('.', ',')  # convertit les . en , (separateur decimal)
     valeurs = valeurs_puissances()
     i = randrange(2)
     exo = ['\\exercice''', u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat."]

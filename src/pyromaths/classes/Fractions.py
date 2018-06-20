@@ -487,7 +487,7 @@ class Fraction(object):
         return Fraction(other) * self
 
     # def __truediv__(self, fraction): # pour Python 3
-    def __div__(self, other):
+    def __truediv__(self, other):
         """*object*\ .\ **__div__**\ (*other*)
 
         ``p.__div__(q)`` est équivalent à ``p / q``  calcule le quotient de deux fractions.
@@ -508,10 +508,10 @@ class Fraction(object):
             other = Fraction(other)
         return "%r*%r" % (self, ~other)
 
-    def __rdiv__(self, other):
-        """*object*\ .\ **__rdiv__**\ (*other*)
+    def __rtruediv__(self, other):
+        """*object*\ .\ **__rtruediv__**\ (*other*)
 
-        ``p.__rdiv__(q)`` est équivalent à ``p / q``  calcule le produit de l'objet p par la fraction q.
+        ``p.__rtruediv__(q)`` est équivalent à ``p / q``  calcule le produit de l'objet p par la fraction q.
 
         *other* peut être un entier ou un réel.
 
@@ -575,12 +575,13 @@ class Fraction(object):
         return self.n // self.d
 
     def __lt__(self, other):
+        print(repr(self), other)
         if isinstance(other, int) or isinstance(other, float):
             other = Fraction(other)
-        if other.d * self.d > 0:
-            return self.n * other.d < self.d * other.n
+        if other.traitement().d * self.traitement().d > 0:
+            return self.traitement().n * other.traitement().d < self.traitement().d * other.traitement().n
         else :
-            return not(self.n * other.d < self.d * other.n)
+            return not(self.traitement().n * other.traitement().d < self.traitement().d * other.traitement().n)
 
     def __le__(self, other):
         if isinstance(other, int) or isinstance(other, float):
@@ -618,7 +619,8 @@ class Fraction(object):
             return not(self.n * other.d >= self.d * other.n)
 
     def __float__(self):
-        return 1.0 * self.n / self.d
+        f = self.traitement()
+        return f.n/f.d
 
     def __int__(self):
         assert self.n % self.d == 0, "La fraction n'est pas un nombre entier !"

@@ -800,7 +800,7 @@ def texify(liste_calculs):
                          p.monomes[0][0] < 0 or \
                          (p.monomes[0][0] != 1 and isinstance(p.monomes[0][0], Fraction) and p.monomes[0][0].d != 1)) and q and q == "**"):
                     s += "(" + str(p) + ")"
-                elif s and s[-1] == "+" and p.monomes[0][0] < 0:
+                elif s and s[-1] == "+" and type(p.monomes[0][0]) == int and p.monomes[0][0] < 0:
                     s = s[:-1]
                     s += str(p)
                 else:

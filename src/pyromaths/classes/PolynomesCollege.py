@@ -687,7 +687,7 @@ class Polynome(object):
     def _divide(self, other):
         """*object*\ .\ **div**\ (*other*)
 
-        ``p.__div__(q)`` est équivalent à ``p / q``
+        ``p.__truediv__(q)`` est équivalent à ``p / q``
 
         Renvoie (self // other, self % other) deux polynomes où le premier élément est le quotient et le second
         le reste de la division euclidienne de self par other.

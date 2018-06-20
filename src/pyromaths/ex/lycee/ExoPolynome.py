@@ -832,7 +832,7 @@ def factorise_identites_remarquables(pol1, sgns, var='', racines=True):
     X = Polynome({1:1}, var)
     a1 = pgcd(int(pol1[0]), pgcd(int(pol1[1]), int(pol1[2])))  # du signe de a=pol1[2]
     if a1 != 1 or a1 != -1:
-        pol2 = old_div(pol1, a1)
+        pol2 = pol1 / a1
     else:
         pol2 = pol1
     # coeff=coeff/int(math.sqrt(a1))
@@ -844,7 +844,7 @@ def factorise_identites_remarquables(pol1, sgns, var='', racines=True):
 
     factorisation = []
     if a1 != 1:
-        pol_temp = (old_div(pol1, a1)).simplifie()
+        pol_temp = (pol1 / a1).simplifie()
         pol_temp.var = var
         factorisation.append("%s \\times\\big[ %s \\big]" % (TeX(a1), pol_temp))
         facteur2 = "%s\\times \\big[" % (TeX(a1))

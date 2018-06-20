@@ -63,7 +63,7 @@ class Vecteur(object):
         '''Négatif d'un vecteur'''
         return -1 * self
 
-    def __div__(self, c):
+    def __truediv__(self, c):
         if isinstance(c, float) or isinstance(c, int):
             return Vecteur(old_div(self.x, float(c)), old_div(self.y, float(c)))
 

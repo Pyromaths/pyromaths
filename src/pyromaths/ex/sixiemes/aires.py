@@ -31,9 +31,9 @@ import random
 from pyromaths.outils import Affichage
 def boxes():
     """Crée les boites pour insérer les figures dans un environnement 36x16"""
-    b0x, b0y = random.randint(5, int(2 * 36 / 3 - 1)), random.randint(5, int(2 * 16 / 3 + 1))
-    b1x, b1y = random.randint(5, int(2 * (36 - b0x) / 3 - 1)), random.randint(5, int(2 * 16 / 3 + 1))
-    b2x, b2y = 36 - b0x - b1x - 2, random.randint(5, int(2 * 16 / 3 + 1))
+    b0x, b0y = random.randrange(5, 2 * old_div(36, 3) - 1), random.randrange(5, 2 * old_div(16, 3) + 1)
+    b1x, b1y = random.randrange(5, 2 * old_div((36 - b0x), 3) - 1), random.randrange(5, 2 * old_div(16, 3) + 1)
+    b2x, b2y = 36 - b0x - b1x - 2, random.randrange(5, int(2 * old_div(16, 3) + 1))
     b3x, b3y = b0x, 16 - b0y - 1
     b4x, b4y = b1x, 16 - b1y - 1
     b5x, b5y = b2x, 16 - b2y - 1

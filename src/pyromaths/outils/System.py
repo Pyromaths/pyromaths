@@ -229,12 +229,12 @@ def creation(parametres):
         # le chemin (latex ne gère pas le 8 bits)
         f0noext = os.path.splitext(os.path.basename(exo))[0]
         f1noext = os.path.splitext(os.path.basename(cor))[0]
-    print("!!!",f0noext, exo)
     if parametres['creer_pdf']:
         from subprocess import call
 
         _preprocess_pipe(os.path.join(dir0, '{}.tex'.format(f0noext)), parametres.get('pipe', None))
         os.chdir(dir0)
+        print(dir0)
         latexmkrc(f0noext)
         log = open('%s-pyromaths.log' % f0noext, 'w')
         if socket.gethostname() == "sd-94439.pyromaths.org":

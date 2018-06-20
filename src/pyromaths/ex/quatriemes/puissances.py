@@ -262,7 +262,7 @@ ecr_sc.description = u'Écritures scientifiques'
 
 def exo_puissances():
     from math import floor, log10
-    sd = string.maketrans('.', ',')  # convertit les . en , (separateur decimal)
+    sd = str.maketrans('.', ',')  # convertit les . en , (separateur decimal)
     exo = ["\\exercice",
            u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat.",
            "\\begin{multicols}{2}", "  \\noindent%"]

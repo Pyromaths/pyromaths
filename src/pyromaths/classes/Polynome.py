@@ -198,7 +198,7 @@ class Polynome(object):
     def __rmul__(self, nombre):
         return self * Polynome({0:nombre})
 
-    def __div__(self, other):
+    def __truediv__(self, other):
         if isinstance(other, int):
             return Fraction(1, other) * self
         elif isinstance(other, Fraction) or isinstance(other, float)or isinstance(other, RacineDegre2):

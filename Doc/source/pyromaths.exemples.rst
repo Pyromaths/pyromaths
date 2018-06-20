@@ -94,7 +94,7 @@ Opérations mathématiques
     >>> repr(Fraction(2,5) * 4)
     Fraction(8, 5)
 
-* Quotient (:func:`Fraction.__div__` et :func:`Fraction.__rdiv__`)
+* Quotient (:func:`Fraction.__div__` et :func:`Fraction.__rtruediv__`)
 
   .. doctest:: fraction
 
