@@ -296,6 +296,7 @@ class Sd2aRacines(ex.TexExercise):
             m = list(pol[i])
             shuffle(m)
             pol[i] = m
+            print(str(Polynome(pol[i], "x")))
         self.exercice = pol
 
     def tex_statement(self):
@@ -346,8 +347,8 @@ class Sd2aRacines(ex.TexExercise):
             elif len(m) == 2 and m[0][1] == 2 and m[1][1] == 0 and m[0][0] * m[1][0] > 0:
                 question[i].append('$' + noms[i] + str(Polynome(m, 'x')) + r'$\par')
                 question[i][-1] = question[i][-1].replace('&', '')
-                if m[1][0] > 0: question[i].append('$' + noms[i][:7] + ' \\ge %r$' % m[1][0])
-                else: question[i].append('$' + noms[i][:7] + ' \\le %r$' % m[1][0])
+                if m[1][0] > 0: question[i].append('$' + noms[i][:7] + ' \\geqslant %r$' % m[1][0])
+                else: question[i].append('$' + noms[i][:7] + ' \\leqslant %r$' % m[1][0])
                 question[i].append(_(u'car un carré est toujours positif.\\par\n\\underline{$%s$ n\'a donc pas de racine.}') % (noms[i].rstrip(r' &= ')))
             else:
                 question[i].append('$' + noms[i] + str(Polynome(m, 'x')) + r'\quad$')
@@ -355,8 +356,12 @@ class Sd2aRacines(ex.TexExercise):
                 question[i].append(_(u'On calcule le discriminant de $%s$ avec $a=%s$, $b=%s$ et $c=%s$ :\\par\\medskip') % (noms[i].rstrip(r' &= '), m[0][0], m[1][0], m[2][0]))
                 question[i].append(r'\begin{tabularx}{\linewidth}[t]{XXX}')
                 question[i].append(r'{$\! \begin{aligned}')
-                sol = [[str(m[1][0]), '**', '2', '-', '4', '*', str(m[0][0]), '*', str(m[2][0])]]
-                sol.extend(Priorites3.priorites('%s**2-4*%s*%s' % (m[1][0], m[0][0], m[2][0])))
+                if m[1][0]>0:
+                    sol = [[str(m[1][0]), '**', '2', '-', '4', '*', str(m[0][0]), '*', str(m[2][0])]]
+                    sol.extend(Priorites3.priorites('%s**2-4*%s*%s' % (m[1][0], m[0][0], m[2][0])))
+                else:
+                    sol = [['(', str(m[1][0]), ')', '**', '2', '-', '4', '*', str(m[0][0]), '*', str(m[2][0])]]
+                    sol.extend(Priorites3.priorites('(%s)**2-4*%s*%s' % (m[1][0], m[0][0], m[2][0])))
                 solTeX = Priorites3.texify(sol)
                 for s in solTeX:
                     question[i].append(u'\\Delta &= %s\\\\' % s)
@@ -364,6 +369,7 @@ class Sd2aRacines(ex.TexExercise):
                 question[i].append(r'&')
                 question[i].append(r'{$\! \begin{aligned}')
                 delta = sol[-1][0]
+                print(sol)
                 sol = [['Fraction(SquareRoot([[%s, None], [-1, %s]]),\'2*%s\')' % (-m[1][0], delta, m[0][0])]]
                 sol.extend(Priorites3.priorites(sol[0][0]))
                 sol = Priorites3.texify(sol)
