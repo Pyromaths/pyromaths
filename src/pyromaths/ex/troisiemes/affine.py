@@ -39,22 +39,22 @@ from pyromaths.outils import Priorites3
 def extreme(a, b, xmin, xmax, ymin, ymax):
 # donne les extremités de la droite passant par a et b (coordonnées)
     res = []
-    x1 = float(a[0])
-    x2 = float(b[0])
-    y1 = float(a[1])
-    y2 = float(b[1])
-    coef = float(old_div((y1 - y2), (x1 - x2)))
+    x1 = a[0]
+    x2 = b[0]
+    y1 = a[1]
+    y2 = b[1]
+    coef = (y1 - y2) / (x1 - x2)
     if coef != 0:
-        xsort1 = float(x1 + old_div((ymin - y1), coef))  # abscisse du point d'ordonnée ymin
+        xsort1 = x1 + (ymin - y1) / coef  # abscisse du point d'ordonnée ymin
         if xsort1 >= xmin and xsort1 <= xmax and not(xsort1, ymin) in res:
             res.append((xsort1, ymin))
-        xsort2 = float(x2 + old_div((ymax - y2), coef))  # abscisse du point d'ordonnée ymax
+        xsort2 = x2 + (ymax - y2) / coef  # abscisse du point d'ordonnée ymax
         if xsort2 >= xmin and xsort2 <= xmax and not(xsort2, ymax) in res:
             res.append((xsort2, ymax))
-        ysort1 = float(y1 + coef * (xmin - x1))  # ordonnée du point d'abscisse xmin
+        ysort1 = y1 + coef * (xmin - x1)  # ordonnée du point d'abscisse xmin
         if ysort1 >= ymin and ysort1 <= ymax and not (xmin, ysort1)in res:
             res.append((xmin, ysort1))
-        ysort2 = float(y2 + coef * (xmax - x2))  # ordonnée du point d'abscisse xmax
+        ysort2 = y2 + coef * (xmax - x2)  # ordonnée du point d'abscisse xmax
         if ysort2 >= ymin and ysort2 <= ymax and not(xmax, ysort2) in res:
             res.append((xmax, ysort2))
     else:
@@ -64,36 +64,33 @@ def extreme(a, b, xmin, xmax, ymin, ymax):
 def vecdir(A, B):
     # retourne sous forme de liste le vecteur directeur normé de la droite (AB)
     norm = sqrt((B[0] - A[0]) ** 2 + (B[1] - A[1]) ** 2)
-    u = [old_div((B[0] - A[0]), norm), old_div((B[1] - A[1]), norm)]
+    u = [(B[0] - A[0]) / norm, (B[1] - A[1]) / norm]
     if u[0] < 0:
         u[0] = -u[0]
         u[1] = -u[1]
     return u
 
 def validedroite(A, B):
-    # valide le choix du couple A B pour qu'ils ne soient pas "collés",
-    # la droite (AB) ne sera ni horizontale ni verticale
-
-    rep = True
-    if abs(A[0] - B[0]) <= 1 and abs(A[1] - B[1]) <= 1:
-        rep = False
+    """ valide le choix du couple A B pour qu'ils ne soient pas "collés",
+    la droite (AB) ne sera ni horizontale ni verticale"""
+    if abs(A[0] - B[0]) < 1 and abs(A[1] - B[1]) < 1:
+        return False
     if A[0] == B[0] or A[1] == B[1]:
-        rep = False
+        return False
     if abs(A[0] - B[0]) < 1 or abs(A[1] - B[1]) < 1:
-        rep = False
-    return rep
+        return False
+    return True
 
 
 def validec(A, B):
     # valide le choix du couple A B pour qu'ils ne soient pas "collés"
-    rep = True
-    if abs(A[0] - B[0]) <= 1 and abs(A[1] - B[1]) <= 1:
-        rep = False
-    return rep
+    if abs(A[0] - B[0]) < 1 and abs(A[1] - B[1]) < 1:
+        return False
+    else: return True
 
 def doublefleche(A, B):
     # trace une flèche "double" de justification en pointillés
-    mid = (old_div(float((A[0] + B[0])), 2), old_div(float((A[1] + B[1])), 2))
+    mid = ((A[0] + B[0]) / 2, (A[1] + B[1]) / 2)
     res1 = "\\psline[linestyle=dashed,linewidth=1.1pt]{->}" + str(A) + str(mid) + '\n '
     res2 = "\\psline[linestyle=dashed,linewidth=1.1pt]{->}" + str(mid) + str(B)
     res = res1 + res2
@@ -103,37 +100,37 @@ def doublefleche(A, B):
     return res
 
 def couple () :
-    A = (old_div(float(random.randrange(-8, 9)), 2), old_div(float(random.randrange(-8, 9)), 2))
-    B = (old_div(float(random.randrange(-8, 9)), 2), old_div(float(random.randrange(-8, 9)), 2))
+    A = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) /2)
+    B = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) / 2)
     while not validec(A, B):
-        B = (old_div(float(random.randrange(-8, 9)), 2), old_div(float(random.randrange(-8, 9)), 2))
+        B = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) / 2)
     return (A, B)
 
 def coupletrace () :
-    A = (0, float(random.randrange(-4, 5)))
-    B = (float(random.randrange(-4, 5)), float(random.randrange(-4, 5)))
+    A = (0, random.randrange(-4, 5))
+    B = (random.randrange(-4, 5), random.randrange(-4, 5))
     while not validec(A, B):
-        B = (float(random.randrange(-4, 5)), float(random.randrange(-4, 5)))
+        B = (random.randrange(-4, 5), random.randrange(-4, 5))
     return (A, B)
 
 def couples ():
-    # génère 6 points. Chaque couple correspondra a une droite ( (AB)(CD)(EF)).
-    A = (old_div(float(random.randrange(-8, 9)), 2), old_div(float(random.randrange(-8, 9)), 2))
-    B = (old_div(float(random.randrange(-8, 9)), 2), old_div(float(random.randrange(-8, 9)), 2))
+    # génère 6 points. Chaque couple correspondra a une droite ((AB), (CD) et (EF)).
+    A = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) /2)
+    B = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) / 2)
     while not validedroite(A, B):
-        B = (old_div(float(random.randrange(-8, 9)), 2), old_div(float(random.randrange(-8, 9)), 2))
-    C = (0, float(random.randrange(-4, 5)))
+        B = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) / 2)
+    C = (0, random.randrange(-4, 5))
     while not (validec(A, C) and validec(B, C)):
-        C = (0, float(random.randrange(-4, 5)))
-    D = (float(random.randrange(-4, 5)), float(random.randrange(-4, 5)))
+        C = (0, random.randrange(-4, 5))
+    D = (random.randrange(-4, 5), random.randrange(-4, 5))
     while not (validec(A, D) and validec(B, D) and validedroite(C, D)) :
-        D = (float(random.randrange(-4, 5)), float(random.randrange(-4, 5)))
-    E = (0, old_div(float(random.randrange(-8, 9)), 2))
+        D = (random.randrange(-4, 5), random.randrange(-4, 5))
+    E = (0, random.randrange(-8, 9) /2)
     while not (validec(A, E) and validec(B, E) and validec(C, E) and validec(D, E)):
-        E = (0, old_div(float(random.randrange(-8, 9)), 2))
-    F = (float(random.randrange(-4, 5)), float(random.randrange(-4, 5)))
+        E = (0, random.randrange(-8, 9) / 2)
+    F = (random.randrange(-4, 5), random.randrange(-4, 5))
     while not (validec(A, F) and validec(B, F) and validec(C, F) and validec(D, F)and validedroite(E, F)):
-        F = (float(random.randrange(-4, 5)), float(random.randrange(-4, 5)))
+        F = (random.randrange(-4, 5), random.randrange(-4, 5))
     return (A, B, C, D, E, F)
 
 def tracedroite(A, B, xmin, xmax, ymin, ymax):
@@ -193,7 +190,7 @@ def isint(x):
 def isdemi(x):
     # est-ce une moitié d'entier
     res = False
-    x = float(x) * 2
+    x = x * 2
     if isint(x):
         res = True
 
@@ -257,9 +254,9 @@ def tracefonc(f, i, A, B, xmin, xmax, ymin, ymax):
     if isinstance(u, int) or u.d == 1:
         x1 = decimaux(B[0])
     else:
-        B = (u.d, u.n + float(A[1]))
+        B = (u.d, u.n + A[1])
         if not dansrep(B, xmin, xmax, ymin, ymax):
-            B = (-u.d, -u.n + float(A[1]))
+            B = (-u.d, -u.n + A[1])
         x1 = decimaux(str(B[0]))
     l = Priorites3.texify([Polynome([[u, 1], [A[1], 0]], "x")(B[0])])
     l.extend(Priorites3.texify(Priorites3.priorites(Polynome([[u, 1], [A[1], 0]], "x")(B[0]))))
@@ -305,17 +302,17 @@ def exprfonc(f, i, A, B):
     else:
         deltax = decimaux(str(A[0] - B[0]))
 
-    if float(B[0]) < 0 :
-        mid11 = float(B[0]) - 0.75
-        mid12 = old_div(float((B[1] + A[1])), 2)  # milieu de la flèche verticale
+    if B[0] < 0 :
+        mid11 = B[0] - 0.75
+        mid12 = (B[1] + A[1]) / 2  # milieu de la flèche verticale
     else:
-        mid11 = float(B[0]) + 0.75
-        mid12 = old_div(float((B[1] + A[1])), 2)
-    if float(B[0]) * float(old_div(u.d, u.n)) > 0 :
-        mid21 = old_div(float((A[0] + B[0])), 2)
+        mid11 = B[0] + 0.75
+        mid12 = (B[1] + A[1]) / 2
+    if B[0] * u.d / u.n > 0 :
+        mid21 = (A[0] + B[0])/ 2
         mid22 = A[1] - 0.6  # milieu de la flèche horizontale
     else :
-        mid21 = old_div(float((A[0] + B[0])), 2)
+        mid21 = (A[0] + B[0]) / 2
         mid22 = A[1] + 0.5
     if mid12 < 0 and mid12 > -0.8:
         mid12 = -1
