@@ -26,7 +26,6 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from builtins import str
 from builtins import range
-from past.utils import old_div
 from builtins import object
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
@@ -692,8 +691,8 @@ class Tab(QtWidgets.QWidget):
         spacer = QtWidgets.QSpacerItem(20, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         for i in range(nb_exos):
             self.add_exercise(i, onchange)
-            self.layout.addItem(spacer, old_div((nb_exos + 1), 2), 0, 1, 1)
-            self.layout.addItem(spacer, old_div((nb_exos + 1), 2), 1, 1, 1)
+            self.layout.addItem(spacer, (nb_exos + 1) // 2, 0, 1, 1)
+            self.layout.addItem(spacer, (nb_exos + 1) // 2, 1, 1, 1)
         # Ajoute ce tab au widget parent
         parent.addTab(self.scroll, self.titre)
 
@@ -728,7 +727,7 @@ class Tab(QtWidgets.QWidget):
         layout.addItem(spacer)
         layout.addItem(spacer)
         # Ajoute cet exercice à l'onglet
-        self.layout.addLayout(layout, old_div(i, 2), i % 2, 1, 1)
+        self.layout.addLayout(layout, i // 2, i % 2, 1, 1)
 
     def reset(self):
         """Remet les compteurs à zéro"""
