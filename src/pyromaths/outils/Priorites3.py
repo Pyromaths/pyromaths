@@ -793,13 +793,17 @@ def texify(liste_calculs):
                 * {*,-}(2x+3) ou {*,-}(-2x)
                 * (2x+3)*...
                 * (2x+1)**2"""
-                if (s and s[-1] in "*-" and (len(p) > 1 or p.monomes[0][0] < 0)) \
+                if type(p.monomes[0][0])==str:
+                    a=eval(priorites(p.monomes[0][0])[0][-1])
+                else:
+                    a=p.monomes[0][0]
+                if (s and s[-1] in "*-" and (len(p) > 1 or a < 0)) \
                     or (q and q == "*" and len(p) > 1) \
-                    or ((len(p) > 1 or (p.monomes[0][0] != 1 and p.monomes[0][1] > 0) or \
-                         p.monomes[0][0] < 0 or \
-                         (p.monomes[0][0] != 1 and isinstance(p.monomes[0][0], Fraction) and p.monomes[0][0].d != 1)) and q and q == "**"):
+                    or ((len(p) > 1 or (a != 1 and p.monomes[0][1] > 0) or \
+                         a < 0 or \
+                         (a != 1 and isinstance(a, Fraction) and a.d != 1)) and q and q == "**"):
                     s += "(" + str(p) + ")"
-                elif s and s[-1] == "+" and type(p.monomes[0][0]) == int and p.monomes[0][0] < 0:
+                elif s and s[-1] == "+" and type(a) == int and a < 0:
                     s = s[:-1]
                     s += str(p)
                 else:

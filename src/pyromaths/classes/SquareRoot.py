@@ -285,7 +285,7 @@ class SquareRoot(object):
         for e in self.racines:
             for f in other.racines:
                 if e[1] == None or f[1] == None:
-                    lprod.append([e[0] * f[0], max(e[1], f[1])])
+                    lprod.append([e[0] * f[0], e[1] or f[1]])
                 elif e[1] == f[1]:
                     lprod.append(['%r*%r' % (e[0] * f[0], e[1]), None])
                 elif carrerise(e[1]) == 1 or carrerise(f[1]) == 1:
@@ -458,3 +458,15 @@ class SquareRoot(object):
                 s += '+' + decomposee
         s = s.lstrip('+')
         return s
+
+    def __float__(self):
+        value=0
+        for item in self.racines:
+            if item[1]!=None:
+                if type(item[0])==str:
+                    value = value + float(eval(item[0])) * sqrt(item[1])
+                else:
+                    value = value + item[0]*sqrt(item[1])
+            else:
+                value = value + item[0]
+        return value
