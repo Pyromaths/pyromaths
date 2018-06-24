@@ -37,7 +37,7 @@ def suppr0(nombre):
 #---------------------------------------------------------------------
 def decimaux(nb, mathenv=0):
     pattern = re.compile(r"^(-?\d+)\.*(\d*)e?([\+\-]?\d*)$")
-    entiere, decimale, exposant = pattern.search(str(nb)).groups()
+    entiere, decimale, exposant = pattern.search(format(nb, ".15g")).groups() #arrondit les floats
     if exposant:
         if int(exposant) > 0:
             if int(exposant) < len(decimale):

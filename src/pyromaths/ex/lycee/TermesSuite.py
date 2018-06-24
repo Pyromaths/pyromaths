@@ -26,7 +26,6 @@ from __future__ import unicode_literals
 from builtins import str
 from builtins import range
 from builtins import object
-from past.utils import old_div
 import functools
 import random
 import textwrap
@@ -103,8 +102,8 @@ class Fraction(object):
             return Entier(self.signe * self.numerateur / self.denominateur)
         diviseur = pgcd(self.numerateur, self.denominateur)
         return Fraction(
-                old_div(self.numerateur,diviseur),
-                old_div(self.denominateur,diviseur),
+                self.numerateur // diviseur,
+                self.denominateur // diviseur,
                 self.signe,
                 )
 
@@ -431,14 +430,14 @@ class FrancaisGeometrique(Fonction):
             denominateur = raison.denominateur * argument.denominateur
             yield r"\frac{{ {} }}{{ {} }}".format(numerateur, denominateur)
             if numerateur % denominateur == 0:
-                yield Entier(old_div(numerateur, denominateur)).latex()
+                yield Entier(numerateur //  denominateur).latex()
                 return
 
             diviseur = pgcd(numerateur, denominateur)
             if diviseur == 1:
                 return
 
-            yield Fraction(old_div(numerateur,diviseur), old_div(denominateur,diviseur)).latex()
+            yield Fraction(numerateur // diviseur, denominateur // diviseur).latex()
 
     def resultat(self, argument):
         if isinstance(argument, Entier) and isinstance(self.raison, Entier):
@@ -453,9 +452,9 @@ class FrancaisGeometrique(Fonction):
             numerateur = argument.numerateur * raison.numerateur
             denominateur = raison.denominateur * argument.denominateur
             if numerateur % denominateur == 0:
-                return Entier(old_div(numerateur, denominateur))
+                return Entier(numerateur //  denominateur)
             diviseur = pgcd(numerateur, denominateur)
-            return Fraction(old_div(numerateur,diviseur), old_div(denominateur,diviseur))
+            return Fraction(numerateur // diviseur, denominateur // diviseur)
 
 class FrancaisArithmetique(Fonction):
 

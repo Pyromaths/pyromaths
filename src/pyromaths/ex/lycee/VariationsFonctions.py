@@ -24,7 +24,6 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import str
 from builtins import range
-from past.utils import old_div
 from pyromaths import ex
 from random import randrange, shuffle
 #===============================================================================
@@ -592,8 +591,8 @@ def elements_intervalle(variations, sens):
         index = randrange(len(variations))
         if variations[index][0] == sens:
             break
-    x0 = decimaux(old_div(randrange(50 * variations[index][1] // 6 + 10 * variations[index][2] // 6, 20 * variations[index][1] // 3 + 10 * variations[index][2] // 3 + 1), 10.), True)
-    x1 = decimaux(old_div(randrange(10 * variations[index][1] // 3 + 20 * variations[index][2] // 3, 10 * variations[index][1] // 6 + 50 * variations[index][2] // 6, +1), 10.), True)
+    x0 = decimaux(randrange(50 * variations[index][1] // 6 + 10 * variations[index][2] // 6, 20 * variations[index][1] // 3 + 10 * variations[index][2] // 3 + 1) / 10, True)
+    x1 = decimaux(randrange(10 * variations[index][1] // 3 + 20 * variations[index][2] // 3, 10 * variations[index][1] // 6 + 50 * variations[index][2] // 6, +1) / 10, True)
     return [x0, x1, [variations[index][1], variations[index][2]]]
 
 def non_monotone(variations, lX, lY, signe):
@@ -612,17 +611,17 @@ def non_monotone(variations, lX, lY, signe):
                 i1 = tirage.pop(randrange(len(tirage)))
         except ValueError:
             return None
-        x0 = old_div(randrange(10 * variations[i0][1] + 1, 10 * variations[i0][2]), 10.)
-        x1 = old_div(randrange(10 * variations[i1][1] + 1, 10 * variations[i1][2]), 10.)
+        x0 = randrange(10 * variations[i0][1] + 1, 10 * variations[i0][2]) / 10
+        x1 = randrange(10 * variations[i1][1] + 1, 10 * variations[i1][2]) / 10
         for i in range(len(lX)):
             if x0 <= lX[i]:
                 if x0 == lX[i]: y0 = lY[i]
-                else: y0 = old_div((lY[i - 1] + lY[i]), 2.)
+                else: y0 = (lY[i - 1] + lY[i]) / 2
                 break
         for i in range(len(lX)):
             if x1 <= lX[i]:
                 if x1 == lX[i]: y1 = lY[i]
-                else: y1 = old_div((lY[i - 1] + lY[i]), 2.)
+                else: y1 = (lY[i - 1] + lY[i]) / 2
                 break
         if signe and y0 * y1 <= 0: return ([x0, y0], [x1, y1])
         if not signe and y0 * y1 > 0:
@@ -762,17 +761,17 @@ def extrema_locaux(variations, lX, lY):
         tirage = [a for a in range(len(variations))]
         i0 = tirage.pop(randrange(len(tirage)))
         i1 = tirage.pop(randrange(len(tirage)))
-        x0 = old_div(randrange(10 * variations[i0][1] + 1, 10 * variations[i0][2]), 10.)
-        x1 = old_div(randrange(10 * variations[i1][1] + 1, 10 * variations[i1][2]), 10.)
+        x0 = randrange(10 * variations[i0][1] + 1, 10 * variations[i0][2]) / 10
+        x1 = randrange(10 * variations[i1][1] + 1, 10 * variations[i1][2]) / 10
         for i in range(len(lX)):
             if x0 <= lX[i]:
                 if x0 == lX[i]: y0 = lY[i]
-                else: y0 = old_div((lY[i - 1] + lY[i]), 2.)
+                else: y0 = (lY[i - 1] + lY[i]) / 2
                 break
         for i in range(len(lX)):
             if x1 <= lX[i]:
                 if x1 == lX[i]: y1 = lY[i]
-                else: y1 = old_div((lY[i - 1] + lY[i]), 2.)
+                else: y1 = (lY[i - 1] + lY[i]) / 2
                 break
         extremums = [100, -100]
         # extremums = [min(variations[i0][1], variations[i1][1]), max(variations[i0][2], variations[i1][2])]

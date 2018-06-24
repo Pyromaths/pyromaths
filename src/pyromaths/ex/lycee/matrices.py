@@ -26,7 +26,6 @@
 from __future__ import division
 from __future__ import unicode_literals
 
-from past.utils import old_div
 from decimal import Decimal
 import random
 
@@ -114,9 +113,9 @@ class InterpolationMatrices(Jinja2Exercice):
             break
 
         if random.randint(0, 1) == 1:
-            a = old_div(a, 10)
-            b = old_div(b, 10)
-            c = old_div(c, 10)
+            a = a //  10
+            b = b //  10
+            c = c //  10
 
         M = [
             [X[0]**2, X[0], 1],

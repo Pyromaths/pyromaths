@@ -24,14 +24,13 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import str
 from builtins import range
-from past.utils import old_div
 from pyromaths import ex
-from math import sqrt
+#from math import sqrt
 from random import shuffle, randrange
 from pyromaths.outils import Priorites3
 from pyromaths.classes.Fractions import Fraction
 from pyromaths.classes.PolynomesCollege import Polynome, factoriser
-from pyromaths.classes.SquareRoot import SquareRoot
+#from pyromaths.classes.SquareRoot import SquareRoot
 from pyromaths.outils.Arithmetique import carrerise, pgcd, valeur_alea
 from functools import reduce
 
@@ -64,7 +63,7 @@ class BilanTrinomeSansDiscriminant(Jinja2Exercice):
             b = -a * (x1 + x2)
             c = a * x1 * x2
 
-            alpha = old_div(-b,(2*a))
+            alpha = -b // (2*a)
             beta = a * (alpha**2) + b * alpha + c
 
             if alpha == 0 or beta == 0:
@@ -84,7 +83,7 @@ class BilanTrinomeSansDiscriminant(Jinja2Exercice):
             "x2": x2,
             "alpha": alpha,
             "absalpha": abs(alpha), # Valeur absolue de alpha
-            "signealpha": old_div(alpha,abs(alpha)), # Signe de alpha (qui est non nul)
+            "signealpha": alpha // abs(alpha), # Signe de alpha (qui est non nul)
             "beta": beta,
             }
 
@@ -166,11 +165,11 @@ class Sd1FormeCanonique(ex.TexExercise):
     def resolution(self, m, pre=[], post=[]):
         sgn = '+-'[m[1][0] < 0]
         if isinstance(m[1][0], Fraction):
-            b = Priorites3.priorites(old_div(abs(m[1][0]), 2))[-1][0]
+            b = Priorites3.priorites(abs(m[1][0]) // 2)[-1][0]
         elif m[1][0] % 2:
             b = 'Fraction(%s, 2)' % abs(m[1][0])
         else:
-            b = old_div(abs(m[1][0]), 2)
+            b = abs(m[1][0]) // 2
         fc = ['Polynome("%sx%s%s")' % (m[0][0], sgn, b), '**', '2']
         reste = ['-']
         if m[2][0] > 0 or isinstance(m[2][0], Fraction):
@@ -456,8 +455,8 @@ class Sd3aSigne(ex.TexExercise):
         while val[2].d == 1:
             val = [valeur_alea(-9, 9), valeur_alea(-9, 9)]
             val.append(Fraction(valeur_alea(-9, 9), val[0]))
-        sgn = old_div(-val[0], abs(val[0]))
-        pol = [[val[0], 2], [old_div((-val[0] * (val[1] * val[2].d + val[2].n)), val[2].d), 1], [old_div((val[0] * val[1] * val[2].n), val[2].d), 0]]
+        sgn = -val[0] // abs(val[0])
+        pol = [[val[0], 2], [(-val[0] * (val[1] * val[2].d + val[2].n)) // val[2].d, 1], [(val[0] * val[1] * val[2].n) // val[2].d, 0]]
         shuffle(pol)
         exercice.append([pol, val[1], val[2]])
 
@@ -466,7 +465,7 @@ class Sd3aSigne(ex.TexExercise):
         while isinstance(val[2], int) or val[2].d == 1:
             val = [sgn * valeur_alea(-9, 9), valeur_alea(-9, 9)]
             val.append(Fraction(valeur_alea(-9, 9), val[0]))
-        pol = [[val[0], 2], [old_div((-val[0] * (val[1] * val[2].d + val[2].n)), val[2].d), 1], [old_div((val[0] * val[1] * val[2].n), val[2].d), 0]]
+        pol = [[val[0], 2], [(-val[0] * (val[1] * val[2].d + val[2].n)) // val[2].d, 1], [(val[0] * val[1] * val[2].n) // val[2].d, 0]]
         shuffle(pol)
         exercice.append([pol, val[1], val[2]])
 
@@ -513,7 +512,7 @@ class Sd4Factorisation(ex.TexExercise):
             val = [valeur_alea(-9, 9), valeur_alea(-9, 9)]
             val.append(Fraction(valeur_alea(-9, 9), val[0]))
 
-        pol = [[val[0], 2], [old_div((-val[0] * (val[1] * val[2].d + val[2].n)), val[2].d), 1], [old_div((val[0] * val[1] * val[2].n), val[2].d), 0]]
+        pol = [[val[0], 2], [(-val[0] * (val[1] * val[2].d + val[2].n)) // val[2].d, 1], [(val[0] * val[1] * val[2].n) // val[2].d, 0]]
         shuffle(pol)
         exercice = [[list(pol), val[1], val[2]]]
 
@@ -552,7 +551,7 @@ class Sd5Caracteristiques(ex.TexExercise):
     def __init__(self):
         val = [valeur_alea(-9, 9), valeur_alea(-9, 9) , valeur_alea(-9, 9)]
         pol = Polynome([[val[0], 2], [(-val[0] * (val[1] + val[2])), 1], [(val[0] * val[1] * val[2]), 0]])
-        while val[2] == val[1] or abs(val[0] * val[1] * val[2]) > 10 or abs(eval(pol(old_div((val[1] + val[2]), 2.)))) > 10:
+        while val[2] == val[1] or abs(val[0] * val[1] * val[2]) > 10 or abs(eval(pol((val[1] + val[2]) / 2))) > 10:
             val = [valeur_alea(-9, 9), valeur_alea(-9, 9) , valeur_alea(-9, 9)]
             pol = Polynome([[val[0], 2], [(-val[0] * (val[1] + val[2])), 1], [(val[0] * val[1] * val[2]), 0]])
         val = [[val[0], 2], [(-val[0] * (val[1] + val[2])), 1], [(val[0] * val[1] * val[2]), 0]]
@@ -598,7 +597,7 @@ class Sd6Parametre(ex.TexExercise):
         v = [randrange(-4, 5) for dummy in range(6)]
         while v[0] == 0 or v[2] == v[4] == 0 or reduce(lambda x, y: x * y, v) != 0 or v[2] == v[3] == 0 or v[4] == v[5] == 0:
             v = [randrange(-4, 5) for dummy in range(6)]
-        lp = [str(Polynome([[old_div(v[2 * i], pgcd(v[2 * i], v[2 * i + 1])), 1], [old_div(v[2 * i + 1], pgcd(v[2 * i], v[2 * i + 1])), 0]], "a")) for i in range(3)]
+        lp = [str(Polynome([[v[2 * i] // pgcd(v[2 * i], v[2 * i + 1]), 1], [v[2 * i + 1] // pgcd(v[2 * i], v[2 * i + 1]), 0]], "a")) for i in range(3)]
         pol = Polynome([[lp[0], 2], [lp[1], 1], [lp[2], 0]])
         vi = Fraction(-v[1], v[0])
         racine = randrange(-4, 5)

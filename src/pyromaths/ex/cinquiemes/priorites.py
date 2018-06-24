@@ -97,8 +97,7 @@ def valeurs(nb, entier=1):  # renvoie les 2 listes contenant les opérateurs et 
     if entier:
         loperandes = [random.randrange(12) + 2 for i in range(nb)]
     else:
-        loperandes = [old_div(((random.randrange(88) + 12) * 1.0), 10) for i in
-                      range(nb)]
+        loperandes = [(random.randrange(88) + 12)  / 10 for i in range(nb)]
     return (loperateurs, loperandes)
 
 
@@ -225,7 +224,7 @@ def calcul(a, op, b, entier=1):  # retourne 'hp' (hors programme) ou le résulta
         elif not entier and (a * 1000) % (b * 100):
             return 'hp'
         else:
-            return old_div(a, b)
+            return a // b
 
 
 def priorites():

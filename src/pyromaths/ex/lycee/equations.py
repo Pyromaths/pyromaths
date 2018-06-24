@@ -23,9 +23,8 @@ from __future__ import division
 from __future__ import unicode_literals
 from future import standard_library
 standard_library.install_aliases()
-from builtins import str
+# from builtins import str
 from builtins import range
-from past.utils import old_div
 from builtins import str
 '''
 Created on 1 janv. 2015
@@ -76,9 +75,9 @@ class EquationGraphique(ex.TexExercise):
                     l1.pop(randrange(len(l1)))
                 if l1[2] - l1[1] > 3 and l1[1] - l1[0] > 3: encore = False
             pos = randrange(2)
-            l2 = old_div(randrange(1, 4), 2.)
+            l2 = randrange(1, 4) / 2
             l2 = [l1[pos] + l2, l1[pos + 1] - l2]
-            l3 = [old_div((l1[(pos + 1) % 2] + l1[(pos + 1) % 2 + 1]), 2.)]
+            l3 = [(l1[(pos + 1) % 2] + l1[(pos + 1) % 2 + 1]) / 2]
             l1.extend(l2)
             l1.extend(l3)
             y = [randrange(2) * (-1) ** randrange(2), randrange(3, 5) * (-1) ** randrange(2)]

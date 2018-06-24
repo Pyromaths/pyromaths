@@ -24,7 +24,6 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import str
 from builtins import range
-from past.utils import old_div
 from builtins import object
 from pyromaths.outils.decimaux import decimaux
 from pyromaths.outils import Priorites3
@@ -1062,7 +1061,7 @@ def factoriser(calcul):
         elif len(poly) == 3:
             a = repr(Polynome([[sqrt(abs(poly[0][0])), poly[0][1] // 2]], poly.var, poly.details))
             b = repr(Polynome([[sqrt(abs(poly[2][0])), poly[2][1] // 2]], poly.var, poly.details))
-            if not poly[0][1] % 2 and not poly[2][1] % 2 and (old_div(poly[0][1], 2) + old_div(poly[2][1], 2) == poly[1][1]):
+            if not poly[0][1] % 2 and not poly[2][1] % 2 and (poly[0][1] // 2 + poly[2][1] // 2 == poly[1][1]):
                 # Ça ressemble à l'une des deux premières indentités remarquables
                 if poly[0][0] * poly[2][0] > 0 and poly[0][0] * poly[1][0] > 0 and \
                       4 * poly[0][0] * poly[2][0] == poly[1][0] ** 2:
