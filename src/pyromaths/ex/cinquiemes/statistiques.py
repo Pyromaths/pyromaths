@@ -106,7 +106,7 @@ def diagramme_tex(typed=2, val=[[], []], aide=0):
         diag += u"\\psaxes[Dx=1,dx=1,Dy=10,dy=1]{->}(0,0)(" + str(grad) + ",11)\n"
 
         for f in range(len(val[1])):
-            diag += u"\\psline[linewidth=0.1,linecolor=green](" + val[0][f + 1] + ",0)(" + val[0][f + 1] + "," + str(old_div(val[1][f], 10.0)) + ")\n"
+            diag += u"\\psline[linewidth=0.1,linecolor=green](" + val[0][f + 1] + ",0)(" + val[0][f + 1] + "," + str(val[1][f] / 10) + ")\n"
 
         diag += u"\\rput(0,11.2){\\small Fréquences (\\%)}\n"
         diag += u"\\rput(" + str(grad + 0.5) + ",0){\\small " + val[0][0] + "}\n"
@@ -124,12 +124,12 @@ def diagramme_tex(typed=2, val=[[], []], aide=0):
 
         for v in range(len(val[1]) - 1):
             diag += u"\\pswedge[fillstyle=solid,fillcolor=" + couleur[v % 12] + "](0,0){3}{" + str(debut) + "}{" + str(fin) + "}\n"
-            diag_texte += u"\\rput[r]{" + str(old_div((debut + fin), 2.0)) + "}(" + str(3 * round(cos(radians(old_div((debut + fin), 2.0))), 2)) + "," + str(3 * round(sin(radians(old_div((debut + fin), 2.0))), 2)) + "){\\small \\bfseries{" + val[0][v + 1] + "}}\n"
+            diag_texte += u"\\rput[r]{" + str((debut + fin) / 2) + "}(" + str(3 * round(cos(radians((debut + fin) / 2)), 2)) + "," + str(3 * round(sin(radians((debut + fin) / 2)), 2)) + "){\\small \\bfseries{" + val[0][v + 1] + "}}\n"
             debut = fin
             fin += round(val[1][v + 1] * 3.6, 0)
             liste_fin.append(fin)
         diag += u"\\pswedge[fillstyle=solid,fillcolor=" + couleur[(len(val[1]) - 1) % 12] + "](0,0){3}{" + str(debut) + "}{360}\n"
-        diag_texte += u"\\rput[r]{" + str(old_div((debut + fin), 2.0)) + "}(" + str(3 * round(cos(radians(old_div((debut + fin), 2.0))), 2)) + "," + str(3 * round(sin(radians(old_div((debut + fin), 2.0))), 2)) + "){\\small \\bfseries{" + val[0][-1] + "}}\n"
+        diag_texte += u"\\rput[r]{" + str((debut + fin) / 2) + "}(" + str(3 * round(cos(radians((debut + fin) / 2)), 2)) + "," + str(3 * round(sin(radians((debut + fin) / 2)), 2)) + "){\\small \\bfseries{" + val[0][-1] + "}}\n"
 
         if aide != 0:
             temp = [int(3.6 * v) for v in val[1]]
@@ -157,12 +157,12 @@ def diagramme_tex(typed=2, val=[[], []], aide=0):
 
         for v in range(len(val[1]) - 1):
             diag += u"\\pswedge[fillstyle=solid,fillcolor=" + couleur[v % 12] + "](0,0){3}{" + str(debut) + "}{" + str(fin) + "}\n"
-            diag_texte += u"\\rput[r]{" + str(old_div((debut + fin), 2.0)) + "}(" + str(3 * round(cos(radians(old_div((debut + fin), 2.0))), 2)) + "," + str(3 * round(sin(radians(old_div((debut + fin), 2.0))), 2)) + "){\\small \\bfseries{" + val[0][v + 1] + "}}\n"  # FIX problème hauteur textes superposés
+            diag_texte += u"\\rput[r]{" + str((debut + fin) / 2) + "}(" + str(3 * round(cos(radians((debut + fin) / 2)), 2)) + "," + str(3 * round(sin(radians((debut + fin) / 2)), 2)) + "){\\small \\bfseries{" + val[0][v + 1] + "}}\n"  # FIX problème hauteur textes superposés
             debut = fin
             fin += round(val[1][v + 1] * 1.8, 0)
             liste_fin.append(fin)
         diag += u"\\pswedge[fillstyle=solid,fillcolor=" + couleur[(len(val[1]) - 1) % 12] + "](0,0){3}{" + str(debut) + "}{180}\n"
-        diag_texte += u"\\rput[r]{" + str(old_div((debut + fin), 2.0)) + "}(" + str(3 * round(cos(radians(old_div((debut + fin), 2.0))), 2)) + "," + str(3 * round(sin(radians(old_div((debut + fin), 2.0))), 2)) + "){\\small \\bfseries{" + val[0][-1] + "}}\n"
+        diag_texte += u"\\rput[r]{" + str((debut + fin) / 2) + "}(" + str(3 * round(cos(radians((debut + fin) / 2)), 2)) + "," + str(3 * round(sin(radians((debut + fin) / 2)), 2)) + "){\\small \\bfseries{" + val[0][-1] + "}}\n"
 
         if aide != 0:
             temp = [int(1.8 * v) for v in val[1]]
@@ -204,7 +204,7 @@ def tableau_diagramme_tex(typed=2, val=[[], []], larg="c"):
         tab = texte + tab
         tab += _(u"Hauteur (cm)")
         for frequence in val[1]:
-            tab += " & " + decimaux(round(old_div(frequence, 10.0), 1))
+            tab += " & " + decimaux(round(frequence / 10, 1))
         tab += " & 10 \\\\\\hline\n"
 
     elif typed == 2:  # Diagramme circulaire
@@ -498,7 +498,7 @@ def exo_ages():
     liste_pgcd = [pgcd(frequences[i], frequences[i + 1]) for i in range(len(frequences) - 2)]
     liste_pgcd.sort()
     pourcent = liste_pgcd[0]
-    parts = old_div(100, pourcent)
+    parts = 100 // pourcent
     effectifs = [f * population / 100 for f in frequences]
 
     cor.append(_(u"Le diagramme ") + diagramme_texte + _(u" est partagé en ") + str(parts) + _(u" parts symbolisées par des lignes grises en pointillés.\\par"))
@@ -555,16 +555,16 @@ def exo_vote():
     exo.append(_(u"Sachant qu'il y a 25 élèves dans la classe, compléter alors le tableau ci-dessus.\\par"))
     cor.append(_(u"Sachant qu'il y a 25 élèves dans la classe, compléter alors le tableau ci-dessus.\\par"))
 
-    effectifs[idx] = old_div(freq1, 4)
+    effectifs[idx] = freq1 // 4
     idx2 = effectifs.index(-1)
-    effectifs[idx2] = 25 - eff1 - eff2 - old_div(freq1, 4)
+    effectifs[idx2] = 25 - eff1 - eff2 - freq1 // 4
     frequences = [ 4 * f for f in effectifs ]
 
     cor.append("\\par")
     cor.append(_(u"Comme il y a 25 élèves dans la classe, ce qui représente 100 \\% des votes, il faut diviser la fréquence connue pour trouver l'effectif d'élèves ayant voté pour ") + titres[idx + 1] + _(" et on trouve : "))
-    cor.append(u"$\\dfrac{" + str(freq1) + "}{4}=" + str(old_div(freq1, 4)) + _(u"$ élève(s) pour ") + titres[idx + 1] + ".\\par")
+    cor.append(u"$\\dfrac{" + str(freq1) + "}{4}=" + str(freq1 // 4) + _(u"$ élève(s) pour ") + titres[idx + 1] + ".\\par")
     cor.append(_(u"Ensuite, pour trouver l'effectif d'élèves ayant voté pour ") + titres[idx2 + 1] + _(u", il suffit de soustraire à 25 les effectifs connus :\\par"))
-    cor.append(u"$25 - " + str(eff1) + " - " + str(eff2) + " - " + str(old_div(freq1, 4)) + " = " + str(effectifs[idx2]) + _(u"$ élève(s) pour ") + titres[idx2 + 1] + ".\\par")
+    cor.append(u"$25 - " + str(eff1) + " - " + str(eff2) + " - " + str(freq1 // 4) + " = " + str(effectifs[idx2]) + _(u"$ élève(s) pour ") + titres[idx2 + 1] + ".\\par")
     cor.append(_(u"Enfin, pour le calcul des fréquences manquantes, il faut multiplier chaque effectif par 4, ce qui fourni le tableau ci-dessous.\\par"))
 
     cor.append(tableau_tex(titres, ">{\\centering}p{2.1cm}", 1, 1, [effectifs, frequences]))

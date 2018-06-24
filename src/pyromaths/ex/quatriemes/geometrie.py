@@ -24,7 +24,6 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import str
 from builtins import range
-from past.utils import old_div
 import random
 from math import acos, asin, atan, pi, sin, cos, tan
 from fractions import Fraction
@@ -40,7 +39,7 @@ def fig_tr_rect(lg):
         b = a + 180
     else:
         b = a - 180
-    c = float(Fraction(int((180 - 2 * acos(lg[1] * 1.0 / lg[2]) * 180 / pi) * 100), 100) + a)
+    c = float(Fraction(int((180 - 2 * acos(lg[1] * 1 / lg[2]) * 180 / pi) * 100), 100) + a)
     if c < 0:
         c = c + 360
     return (str(a), str(b), str(c))
@@ -90,7 +89,7 @@ def exo_pythagore():
     for j in range(2):
         while True:
             longueurs = couples_pythagore[random.randrange(len(couples_pythagore))]
-            longueurs = [old_div(longueurs[i], 10.0) for i in range(3)]
+            longueurs = [longueurs[i] / 10 for i in range(3)]
             if inegalite_triangulaire(longueurs):
                 break
         noms = choix_points(3)
@@ -176,7 +175,7 @@ def exo_triangle_cercle():
     cor = ["\\exercice*"]
     while True:
         longueurs = couples_pythagore[random.randrange(len(couples_pythagore))]
-        longueurs = [old_div(longueurs[i], 10.0) for i in range(3)]
+        longueurs = [longueurs[i] / 10 for i in range(3)]
         if inegalite_triangulaire(longueurs):
             break
     noms = choix_points(3)
@@ -262,7 +261,7 @@ def exo_reciproque_pythagore():
     cor = ["\\exercice*"]
     while True:
         longueurs = couples_pythagore[random.randrange(len(couples_pythagore))]
-        longueurs = [old_div(longueurs[i], 10.0) for i in range(3)]
+        longueurs = [longueurs[i] / 10 for i in range(3)]
         if inegalite_triangulaire(longueurs):
             break
     noms = choix_points(3)
@@ -600,17 +599,13 @@ def fig_thales(noms, valeurs):
     v = test_valeurs_thales(valeurs[0:8], valeurs[8][0], valeurs[8][1])
     type_thales = valeurs[8][1]
     angle = int(100 * acos((v[0] ** 2 + v[1] ** 2 - v[2] ** 2) / (2 * v[0] * v[1])) * 180 / pi) / 100
-    v = [old_div(int(v[i] * 100), 100.0) for i in range(8)]
-    mini_x = old_div(int(100.0 * min(0, v[1] * cos(old_div((angle * pi), 180)), v[3] *
-                 type_thales, (v[4] * cos(old_div((angle * pi), 180))) *
-                 type_thales)), 100.0) - 1.5
-    mini_y = old_div(int(100.0 * min(0, (v[4] * sin(old_div((angle * pi), 180))) *
-                 type_thales)), 100.0) - 1.5
-    maxi_x = old_div(int(100.0 * max(v[0], v[1] * cos(old_div((angle * pi), 180)))), \
-        100.0) + 1.5
-    maxi_y = old_div(int((100.0 * v[1]) * sin(old_div((angle * pi), 180))), 100.0) + .5
-    echelle = old_div(int(old_div(400, max(abs(mini_x) + maxi_x, abs(mini_y) + maxi_y))), \
-        100.0)
+    v = [int(v[i] * 100) / 100 for i in range(8)]
+    mini_x = int(100 * min(0, v[1] * cos(angle * pi / 180), v[3] * type_thales, (v[4] * cos(angle * pi / 180)) *
+                 type_thales)) / 100 - 1.5
+    mini_y = int(100 * min(0, v[4] * sin(angle * pi / 180) * type_thales)) / 100 - 1.5
+    maxi_x = int(100 * max(v[0], v[1] * cos(angle * pi / 180))) / 100 + 1.5
+    maxi_y = int(100 * v[1] * sin(angle * pi / 180)) / 100 + .5
+    echelle = int(400 / max(abs(mini_x) + maxi_x, abs(mini_y) + maxi_y)) / 100
     if type_thales == 1:
         return (
             echelle,
@@ -773,11 +768,11 @@ def resolution_trigo(v2, l2, arrondi):
         cor.append('\\[ %s%s=\\cfrac{%s}{%s} \\]' % (f[0], l2[4],
                    nombre(v2[1][1]), nombre(v2[1][2])))
         if f[0] == '\\sin':
-            r = old_div((asin(old_div(v2[1][1], v2[1][2])) * 180), pi)
+            r = asin(v2[1][1] / v2[1][2]) * 180 / pi
         elif f[0] == '\\cos':
-            r = old_div((acos(old_div(v2[1][1], v2[1][2])) * 180), pi)
+            r = acos(v2[1][1] / v2[1][2]) * 180 / pi
         else:
-            r = old_div((atan(old_div(v2[1][1], v2[1][2])) * 180), pi)
+            r = atan(v2[1][1] / v2[1][2]) * 180 / pi
         cor.append(r'\[ \boxed{%s=%s^{-1}\left(\cfrac{%s}{%s}\right) %s\degres} \]' %
                    (l2[4], f[0], nombre(v2[1][1]), nombre(v2[1][2]),
                    valeur_exacte(r, approx=arrondi, unit=0)))
@@ -785,11 +780,11 @@ def resolution_trigo(v2, l2, arrondi):
         cor.append('\\[ %s%s=\\cfrac{%s}{%s} \\]' % (f[0], v2[1][3],
                    v2[0][f[1]], nombre(v2[1][2])))
         if f[0] == '\\sin':
-            r = sin(old_div((v2[1][3] * pi), 180))
+            r = sin(v2[1][3] * pi / 180)
         elif f[0] == '\\cos':
-            r = cos(old_div((v2[1][3] * pi), 180))
+            r = cos(v2[1][3] * pi / 180)
         else:
-            r = tan(old_div((v2[1][3] * pi), 180))
+            r = tan(v2[1][3] * pi / 180)
         r = r * v2[1][2]
         cor.append(r'\[ \boxed{%s=%s%s\times %s %s} \]' %
                    (v2[0][f[1]], f[0], v2[1][3], nombre(v2[1][2]),
@@ -798,12 +793,12 @@ def resolution_trigo(v2, l2, arrondi):
         cor.append('\\[ %s%s=\\cfrac{%s}{%s} \\]' % (f[0], v2[1][3],
                    nombre(v2[1][1]), v2[0][f[2]]))
         if f[0] == '\\sin':
-            r = sin(old_div((v2[1][3] * pi), 180))
+            r = sin(v2[1][3] * pi / 180)
         elif f[0] == '\\cos':
-            r = cos(old_div((v2[1][3] * pi), 180))
+            r = cos(v2[1][3] * pi / 180)
         else:
-            r = tan(old_div((v2[1][3] * pi), 180))
-        r = old_div(v2[1][1], r)
+            r = tan(v2[1][3] * pi / 180)
+        r = v2[1][1] / r
         cor.append(r'\[ \boxed{%s=\cfrac{%s}{%s%s} %s} \]' %
                    (v2[0][f[2]], nombre(v2[1][1]), f[0], v2[1][3],
                    valeur_exacte(r, approx=arrondi)))
@@ -815,7 +810,7 @@ def angle(s, n):  # renvoie \\widehat{ABC} où s est la liste des 3 sommets du t
 
 
 def valeurs_trigo():
-    l = [old_div(random.randrange(10, 121), 10.0) for dummy in range(3)]
+    l = [random.randrange(10, 121) / 10 for dummy in range(3)]
     l.sort()
     l.append(random.randrange(15, 76))
     trigo = 1

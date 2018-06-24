@@ -27,7 +27,6 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import str
 from builtins import object
-from past.utils import old_div
 import math
 import random
 from .Racine import simplifie_racine
@@ -65,7 +64,7 @@ class Vecteur(object):
 
     def __truediv__(self, c):
         if isinstance(c, float) or isinstance(c, int):
-            return Vecteur(old_div(self.x, float(c)), old_div(self.y, float(c)))
+            return Vecteur(self.x / c, self.y / c)
 
     def __abs__(self):
         '''Retourne la norme du vecteur sous la forme coeff,radicande où sqrt(n)=coeff*sqrt(radicande)'''

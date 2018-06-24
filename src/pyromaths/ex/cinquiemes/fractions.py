@@ -25,7 +25,6 @@
 from __future__ import division
 from __future__ import unicode_literals
 from builtins import range
-from past.utils import old_div
 import random
 from pyromaths.outils import Arithmetique
 from pyromaths.outils.Priorites3 import texify, priorites
@@ -80,7 +79,7 @@ def valeurs_somme():
     for dummy in range(2):
         op = "+-"[random.randrange(2)]
         n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
-        if op == "-" and 1 - old_div(n2, d2) > 0:
+        if op == "-" and 1 - n2 // d2 > 0:
             l.append(_('1 %s Fraction(%s, %s)') % (op, n2, d2))
         else:
             l.append(_('Fraction(%s, %s) %s 1') % (n2, d2, op))
@@ -89,7 +88,7 @@ def valeurs_somme():
         op = "+-"[random.randrange(2)]
         n1 = random.randrange(2, 11)
         n2, d2 = random.randrange(1, 11), random.randrange(2, 11)
-        if op == "-" and n1 - old_div(n2, d2) > 0:
+        if op == "-" and n1 - n2 // d2 > 0:
             l.append(_('%s %s Fraction(%s, %s)') % (n1, op, n2, d2))
         else:
             l.append(_('Fraction(%s, %s) %s %s') % (n2, d2, op, n1))
@@ -106,7 +105,7 @@ def valeurs_somme():
         op = "+-"[random.randrange(2)]
         n1, d1 = random.randrange(1, 11), random.randrange(2, 11)
         n2, d2 = random.randrange(1, 11), random.randrange(2, 11) * d1
-        if op == "-" and old_div(n1, d1) - old_div(n2, d2) > 0:
+        if op == "-" and n1 // d1 - n2 // d2 > 0:
             l.append(_('Fraction(%s, %s) %s Fraction(%s, %s)') % (n1, d1, op, n2, d2))
         else:
             l.append(_('Fraction(%s, %s) %s Fraction(%s, %s)') % (n2, d2, op, n1, d1))

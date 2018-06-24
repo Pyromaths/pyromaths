@@ -27,7 +27,6 @@
 from __future__ import division
 from __future__ import unicode_literals
 from builtins import range
-from past.utils import old_div
 from pyromaths.outils import Arithmetique
 from pyromaths.outils.Affichage import TeX, tex_coef
 import random
@@ -64,12 +63,12 @@ def moins(pyromax):
     return (a + b, a)
 
 def plus_dec(pyromax):
-    (a, b) = (old_div(Arithmetique.valeur_alea(-10 * pyromax, 10 * pyromax), 10.0), old_div(Arithmetique.valeur_alea(-10 * pyromax, 10 * pyromax), 10.0))
+    (a, b) = (Arithmetique.valeur_alea(-10 * pyromax, 10 * pyromax) / 10, Arithmetique.valeur_alea(-10 * pyromax, 10 * pyromax) / 10)
     return (a, b)
 
 
 def moins_dec(pyromax):
-    (a, b) = (old_div(Arithmetique.valeur_alea(-10 * pyromax, 10 * pyromax), 10.0), old_div(Arithmetique.valeur_alea(-10 * pyromax, 10 * pyromax), 10.0))
+    (a, b) = (Arithmetique.valeur_alea(-10 * pyromax, 10 * pyromax) / 10, Arithmetique.valeur_alea(-10 * pyromax, 10 * pyromax) / 10)
     return (a + b, a)
 
 

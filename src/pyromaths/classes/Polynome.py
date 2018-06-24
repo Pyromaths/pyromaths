@@ -26,7 +26,6 @@ from __future__ import unicode_literals
 from builtins import str
 from builtins import range
 from builtins import object
-from past.utils import old_div
 if __name__ == "__main__":
     import sys, os
     sys.path.append(os.path.join('..'))
@@ -202,14 +201,14 @@ class Polynome(object):
         if isinstance(other, int):
             return Fraction(1, other) * self
         elif isinstance(other, Fraction) or isinstance(other, float)or isinstance(other, RacineDegre2):
-            return (old_div(1, other)) * self
+            return self // other
         else:
             quotient = Polynome({}, var=self.var)
             reste = self
             diviseur_degre = other.deg
             while diviseur_degre <= reste.deg:
                 ajout_quotient_deg = reste.deg - diviseur_degre
-                facteur = old_div(reste.dictio[reste.deg], other.dictio[other.deg])
+                facteur = reste.dictio[reste.deg] // other.dictio[other.deg]
                 ajout_quotient = Polynome({ajout_quotient_deg:facteur}, var=self.var)
                 quotient = quotient + ajout_quotient
                 soustrait_reste = ajout_quotient * other
@@ -265,11 +264,11 @@ class Polynome(object):
 
     def factorise(self, TeX=False, racines=[0, -1, 1, 2, -2]):
         facteurs = [Polynome({0:self.dictio[self.deg]}, var=self.var)]
-        developpe, reste = old_div(self, facteurs[0])
+        developpe, reste = self // facteurs[0]
         for r in racines:
             while developpe(r) == 0:
                 rac = -r
-                developpe, reste = old_div(developpe, Polynome({1:1, 0:rac}, var=self.var))
+                developpe, reste = developpe // Polynome({1:1, 0:rac}, var=self.var)
                 facteurs = facteurs + [Polynome({1:1, 0:rac})]
         if TeX:
             stringTeX = ""

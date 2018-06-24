@@ -256,7 +256,7 @@ class Fraction(object):
         Écrit la fraction self avec le dénominateur denominateur
         """
         if denominateur != self.d:
-            return Fraction("%s*%s" % (self.n, old_div(denominateur, self.d)), "%s*%s" % (self.d, old_div(denominateur, self.d)), "r")
+            return Fraction("%s*%s" % (self.n, denominateur // self.d), "%s*%s" % (self.d, denominateur // self.d), "r")
         else:
             return self
 
@@ -442,7 +442,7 @@ class Fraction(object):
                 lepgcdtmp = pgcd(lnum[i], lepgcd)
                 if lepgcdtmp != 1: num.append("%r*%r" % (lepgcdtmp, lnum[i] // lepgcdtmp))
                 else: num.append("%r" % lnum[i])
-                lepgcd = old_div(lepgcd, lepgcdtmp)
+                lepgcd = lepgcd // lepgcdtmp
                 i += 1
         i, lepgcd = 0, s
         while i < len(lden):
@@ -453,7 +453,7 @@ class Fraction(object):
                 lepgcdtmp = pgcd(lden[i], lepgcd)
                 if lepgcdtmp != 1: den.append("%r*%r" % (lepgcdtmp, lden[i] // lepgcdtmp))
                 else: den.append("%r" % lden[i])
-                lepgcd = old_div(lepgcd, lepgcdtmp)
+                lepgcd = lepgcd // lepgcdtmp
                 i += 1
         num, den = "*".join(num), "*".join(den)
         while num[:2] == "1*": num = num[2:]
@@ -624,7 +624,7 @@ class Fraction(object):
 
     def __int__(self):
         assert self.n % self.d == 0, "La fraction n'est pas un nombre entier !"
-        return int(old_div(self.n, self.d))
+        return int(self.n / self.d)
 
     def reduit(self):
         """**reduit**\ (*object*)

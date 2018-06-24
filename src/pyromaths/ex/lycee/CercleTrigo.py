@@ -24,10 +24,9 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import str
 from builtins import range
-from past.utils import old_div
 import random
 from math import cos, sin, radians, pi
-from pyromaths.outils.decimaux import decimaux
+# from pyromaths.outils.decimaux import decimaux
 from pyromaths.outils.Arithmetique import pgcd
 
 div180 = [[1,180],[2,90],[3,60],[4,45],[5,36],[6,30],[9,20],[10,18],[12,15]]
@@ -37,12 +36,12 @@ div180 = [[1,180],[2,90],[3,60],[4,45],[5,36],[6,30],[9,20],[10,18],[12,15]]
 def deg2rad(n):
     """Effectue la conversion de degrés entre 0 et 360° vers radians."""
     p = pgcd(n,180)
-    return [old_div(n,p),old_div(180,p)]
+    return [n // p,180 // p]
 
 def simprad(liste):
     """Simplifie la fraction d'un angle en radians. Le paramètre est une liste d'entiers, pour représenter une fraction."""
     p = pgcd(liste[0],liste[1])
-    return [old_div(f,p) for f in liste]
+    return [f // p for f in liste]
 
 def rad2deg(liste):
     """Effectue la conversion de radians entre 0 et 2pi vers degrés. Le paramètre est une liste d'entiers, pour représenter une fraction."""
@@ -92,10 +91,10 @@ def cercle_trigo(code=0,*args):
     idx = 0
     if not code:
         for a in range(11):
-            if old_div((a+1),6.0) not in [0.5,1,1.5]:
+            if (a+1) / 6 not in [0.5,1,1.5]:
                 figure += "\\psline[linecolor=LightSkyBlue,linestyle=dashed](0,0)("+str(round(cos((a+1)*pi/6),2))+","+str(round(sin((a+1)*pi/6),2))+")\n"
         for a in range(9):
-            if old_div((a+1),5.0) not in [0.5,1,1.5]:
+            if (a+1) / 5 not in [0.5,1,1.5]:
                 figure += "\\psline[linecolor=LightSlateGray,linestyle=dashed](0,0)("+str(round(cos((a+1)*pi/5),2))+","+str(round(sin((a+1)*pi/5),2))+")\n"
         for a in range(4):
             figure += "\\psline[linecolor=LightGreen,linestyle=dashed](0,0)("+str(round(cos((2*a+1)*pi/4),2))+","+str(round(sin((2*a+1)*pi/4),2))+")\n"
@@ -238,7 +237,7 @@ def cercle_trigonometrique():
     cor.append(_(u"\\item Déterminer les mesures principales des angles suivants en radians : %s, %s, %s, %s et %s~rad.\\par") %(tuple(mes_rad_tex[5:10])))
 
     rep = mes_princ(radq3[0])
-    nb_tours = old_div((radq3[0][0]-rep[0]),(2*radq3[0][1]))
+    nb_tours = (radq3[0][0]-rep[0]) // (2*radq3[0][1])
 
     cor.append(_(u"Une mesure d'angle en radians est définie modulo $2\\pi$, c'est-à-dire que l'ajout ou la suppression d'un tour ( qui vaut $2\\pi$ ou 360\\degres ) ne change pas un angle.\\par"))
     cor.append(_(u"Concrètement, avec le premier angle de la question, on remarque que :\\par"))
