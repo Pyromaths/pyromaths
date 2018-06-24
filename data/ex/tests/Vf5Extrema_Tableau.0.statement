@@ -3,21 +3,23 @@
 \item À partir du tableau de variation de la fonction $f$, compléter les égalités ou inégalités suivantes :\vspace{-2ex}
 \begin{multicols}{2}
 \begin{enumerate}
-\item Pour $x \in [-9~;~4],\quad f\,(x) \ge \ldots{}$
-\item Pour $x \in [-9~;~4],\quad f\,(x) \le \ldots{}$
-\item Pour $x \in [-8{,}3~;~-5{,}2],\quad f\,(x) \ge \ldots{}$
+\item Pour $x \in \interval{-7}{6},\quad f\,(x) \geqslant{} \ldots{}$
+\item Pour $x \in \interval{-7}{6},\quad f\,(x) \leqslant{} \ldots{}$
+\item Pour $x \in \interval{-2{,}8}{1{,}6},\quad f\,(x) \geqslant{} \ldots{}$
 \end{enumerate}
 \end{multicols}
 \item
 \begin{enumerate}
-\item Donner un encadrement de la fonction $f$ sur l’intervalle $[-9~;~4]$.
-\item Donner un encadrement de la fonction $f$ sur l’intervalle $[-8{,}6~;~-5{,}2]$.
+\item Donner un encadrement de la fonction $f$ sur l’intervalle $\interval{-7}{6}$.
+\item Donner un encadrement de la fonction $f$ sur l’intervalle $\interval{-2{,}7}{-1{,}5}$.
 \end{enumerate}
 \end{enumerate}
 \begin{center}
 \begin{tikzpicture}[scale=1]
-\tkzTabInit[lgt=1.2,espcl=2]{$x$/1,$f\,(x)$/3}{$-9$,$-8$,$-5$,$-3$,$3$,$4$}
-\tkzTabVar{+/$-3$,+/ \raisebox{-2.7cm}{}\raisebox{-1.5cm}{$-4$},+/ \raisebox{-2.7cm}{}\raisebox{-1.5cm}{$-4$},-/$-6$,+/$3$,-/$1$}
-\tkzTabVal{4}{5}{0.5}{\scriptsize $1$}{$0$}
+\tkzTabInit[lgt=1.2,espcl=2]{$x$/1,$f\,(x)$/3}{$-7$,$-6$,$-5$,$-2$,$2$,$6$}
+\tkzTabVar{+/$-5$,-/$-6$,-/$-6$,+/$3$,-/$-4$,+/$4$}
+\tkzTabVal{3}{4}{0.5}{\scriptsize $-3$}{$0$}
+\tkzTabVal{4}{5}{0.5}{\scriptsize $0$}{$0$}
+\tkzTabVal{5}{6}{0.5}{\scriptsize $5$}{$0$}
 \end{tikzpicture}
 \end{center}

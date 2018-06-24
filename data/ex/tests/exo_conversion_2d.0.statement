@@ -2,11 +2,11 @@
 Effectuer les conversions suivantes :
 \begin{multicols}{3}\noindent
 \begin{enumerate}
-\item $\unit[86]{dam^2}=\unit[\dotfill]{hm^2}$
-\item $\unit[5,6]{dm^2}=\unit[\dotfill]{dam^2}$
-\item $\unit[52,9]{cm^2}=\unit[\dotfill]{m^2}$
-\item $\unit[35,4]{m^2}=\unit[\dotfill]{hm^2}$
-\item $\unit[91,8]{dm^2}=\unit[\dotfill]{mm^2}$
-\item $\unit[37,9]{cm^2}=\unit[\dotfill]{dm^2}$
+\item $\unit[96,5]{dam^2}=\unit[\dotfill]{dm^2}$
+\item $\unit[59,8]{dam^2}=\unit[\dotfill]{m^2}$
+\item $\unit[4,67]{dam^2}=\unit[\dotfill]{hm^2}$
+\item $\unit[8,74]{dm^2}=\unit[\dotfill]{mm^2}$
+\item $\unit[3,57]{dam^2}=\unit[\dotfill]{km^2}$
+\item $\unit[8,48]{m^2}=\unit[\dotfill]{dm^2}$
 \end{enumerate}
 \end{multicols}

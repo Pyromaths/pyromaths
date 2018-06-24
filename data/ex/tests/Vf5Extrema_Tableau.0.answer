@@ -3,14 +3,14 @@
 \item
 \begin{multicols}{2}
 \begin{enumerate}
-\item Pour $x \in [-9~;~4],\quad f\,(x) \ge -6$
-\item Pour $x \in [-9~;~4],\quad f\,(x) \le 3$
-\item Pour $x \in [-8{,}3~;~-5{,}2],\quad f\,(x) \ge -4$
+\item Pour $x \in \interval{-7}{6},\quad f\,(x) \geqslant{} -6$
+\item Pour $x \in \interval{-7}{6},\quad f\,(x) \leqslant{} 4$
+\item Pour $x \in \interval{-2{,}8}{1{,}6},\quad f\,(x) \geqslant{} -4$
 \end{enumerate}
 \end{multicols}
 \item
 \begin{enumerate}
-\item Sur $[-9~;~4],\quad -6 \le f\,(x) \le 3$.
-\item Sur $[-8{,}6~;~-5{,}2],\quad -4 \le f\,(x) \le -3$.
+\item Sur $\interval{-7}{6},\quad -6 \leqslant{} f\,(x) \leqslant{} 4$.
+\item Sur $\interval{-2{,}7}{-1{,}5},\quad 0 \leqslant{} f\,(x) \leqslant{} 3$.
 \end{enumerate}
 \end{enumerate}

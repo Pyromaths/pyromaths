@@ -4,40 +4,40 @@
 Effectuer les conversions suivantes :
 \begin{multicols}{2}\noindent
 \begin{enumerate}
-\item 86~hm=8\,600~m\par
+\item 96,5~km=9\,650~dam\par
 \begin{tabular}{c|c|c|c|c|c|c}
 km & hm & dam & m & dm & cm & mm \\ \hline
-8 & 6\Rnode{virg0}{\ }& 0& {0\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 0& 0& 0
+96\Rnode{virg0}{\ } & 5& {0\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 0& 0& 0& 0
 \end{tabular}
 \ncline{->}{virg0}{virg1}
-\item 46,5~L=465~dL\par
-\begin{tabular}{c|c|c|c|c|c}
-hL & daL & L & dL & cL & mL \\ \hline
-0 & 4& 6\Rnode{virg0}{\ }& {5\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 0& 0
+\item 62,4~dam=624~m\par
+\begin{tabular}{c|c|c|c|c|c|c}
+km & hm & dam & m & dm & cm & mm \\ \hline
+0 & 6& 2\Rnode{virg0}{\ }& {4\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 0& 0& 0
 \end{tabular}
 \ncline{->}{virg0}{virg1}
-\item 91,7~dL=0,917~daL\par
-\begin{tabular}{c|c|c|c|c|c}
-hL & daL & L & dL & cL & mL \\ \hline
-0 & {0\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 9& 1\Rnode{virg0}{\ }& 7& 0
-\end{tabular}
-\ncline{->}{virg0}{virg1}
-\item 91,8~cg=0,091\,8~dag\par
+\item 4,67~hg=46,7~dag\par
 \begin{tabular}{c|c|c|c|c|c|c}
 kg & hg & dag & g & dg & cg & mg \\ \hline
-0 & 0& {0\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 0& 9& 1\Rnode{virg0}{\ }& 8
+0 & 4\Rnode{virg0}{\ }& {6\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 7& 0& 0& 0
 \end{tabular}
 \ncline{->}{virg0}{virg1}
-\item 75,7~dag=0,757~kg\par
+\item 2,44~dag=244~dg\par
 \begin{tabular}{c|c|c|c|c|c|c}
 kg & hg & dag & g & dg & cg & mg \\ \hline
-{0\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}} & 7& 5\Rnode{virg0}{\ }& 7& 0& 0& 0
+0 & 0& 2\Rnode{virg0}{\ }& 4& {4\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 0& 0
 \end{tabular}
 \ncline{->}{virg0}{virg1}
-\item 49,1~cg=0,491~g\par
+\item 8,23~km=823\,000~cm\par
 \begin{tabular}{c|c|c|c|c|c|c}
-kg & hg & dag & g & dg & cg & mg \\ \hline
-0 & 0& 0& {0\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 4& 9\Rnode{virg0}{\ }& 1
+km & hm & dam & m & dm & cm & mm \\ \hline
+8\Rnode{virg0}{\ } & 2& 3& 0& 0& {0\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}}& 0
+\end{tabular}
+\ncline{->}{virg0}{virg1}
+\item 17,6~dm=0,001\,76~km\par
+\begin{tabular}{c|c|c|c|c|c|c}
+km & hm & dam & m & dm & cm & mm \\ \hline
+{0\Rnode{virg1}{\textcolor{red}{ \LARGE ,}}} & 0& 0& 1& 7\Rnode{virg0}{\ }& 6& 0
 \end{tabular}
 \ncline{->}{virg0}{virg1}
 \end{enumerate}

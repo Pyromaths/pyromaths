@@ -24,7 +24,6 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import str
 from builtins import range
-from past.builtins import basestring
 from past.utils import old_div
 from builtins import object
 from pyromaths.outils.decimaux import decimaux
@@ -65,7 +64,7 @@ class Polynome(object):
             self.monomes = monomes.monomes
             self.var = monomes.var
             self.details = monomes.details
-        elif isinstance(monomes, basestring):
+        elif isinstance(monomes, str):
             # Gère la construction des polynôme à partir d'une chaîne de caractères
             self.details = details
             listmonomes = []
@@ -345,7 +344,7 @@ class Polynome(object):
         :type: Polynome ou string *évaluable comme Polynome*
         :rtype: Polynome
         """
-#         if isinstance(other, basestring):
+#         if isinstance(other, str):
 #             other = eval(other)
         for other in others:
             other = self._convert_other(other)
@@ -366,7 +365,7 @@ class Polynome(object):
         :type: Polynome ou string *évaluable comme Polynome*
         :rtype: Polynome
         """
-        if isinstance(other, basestring):
+        if isinstance(other, str):
             other = eval(other)
         other = self._convert_other(other)
         return other + self

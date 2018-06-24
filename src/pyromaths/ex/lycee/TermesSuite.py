@@ -490,7 +490,7 @@ class FrancaisOppose(Fonction):
 
     def expression(self, variable):
         # L'argument est du code LaTeX
-        if variable < 0:
+        if variable.startswith("-"):
             return r"-\left({}\right)".format(variable)
         else:
             return r"-{}".format(variable)

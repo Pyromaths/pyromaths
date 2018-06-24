@@ -27,7 +27,7 @@ from __future__ import division
 from __future__ import unicode_literals
 
 from past.utils import old_div
-import decimal
+from decimal import Decimal
 import random
 
 from pyromaths.ex import Jinja2Exercice
@@ -36,28 +36,28 @@ from pyromaths.outils.jinja2 import facteur, matrice
 # Liste des coefficients de la diagonale de la matrice de transition qui
 # donnent des états stables dont la valeur exacte a au plus trois décimales.
 CANDIDATS = [
-        [.45, .30],
-        [.50, .25],
-        [.55, .20],
-        [.55, .25],
-        [.60, .15],
-        [.65, .10],
-        [.70, .05],
-        [.70, .10],
-        [.70, .50],
-        [.70, .55],
-        [.75, .45],
-        [.80, .40],
-        [.80, .70],
-        [.85, .40],
-        [.85, .55],
-        [.85, .65],
-        [.85, .75],
-        [.90, .30],
-        [.95, .55],
-        [.95, .65],
-        [.95, .80],
-        [.95, .85],
+        [".45", ".3 "],
+        [".5 ", ".25"],
+        [".55", ".2 "],
+        [".55", ".25"],
+        [".6 ", ".15"],
+        [".65", ".1 "],
+        [".7 ", ".05"],
+        [".7 ", ".1 "],
+        [".7 ", ".5 "],
+        [".7 ", ".55"],
+        [".75", ".45"],
+        [".8 ", ".4 "],
+        [".8 ", ".7 "],
+        [".85", ".4 "],
+        [".85", ".55"],
+        [".85", ".65"],
+        [".85", ".75"],
+        [".9 ", ".3 "],
+        [".95", ".55"],
+        [".95", ".65"],
+        [".95", ".8 "],
+        [".95", ".85"],
         ]
 
 
@@ -72,8 +72,8 @@ class EtatStableSysteme2(Jinja2Exercice):
         ab = random.choice(CANDIDATS)
         random.shuffle(ab)
         self.context = {
-            "a": ab[0],
-            "b": ab[1],
+            "a": Decimal(ab[0]),
+            "b": Decimal(ab[1]),
             }
 
     @property
@@ -103,9 +103,9 @@ class InterpolationMatrices(Jinja2Exercice):
 
         a = b = c = 0
         while True:
-            a = decimal.Decimal(random.choice([1, -1]) * random.randint(2, 19))
-            b = decimal.Decimal(random.choice([1, -1]) * random.randint(2, 19))
-            c = decimal.Decimal(random.choice([1, -1]) * random.randint(2, 19))
+            a = Decimal(random.choice([1, -1]) * random.randint(2, 19))
+            b = Decimal(random.choice([1, -1]) * random.randint(2, 19))
+            c = Decimal(random.choice([1, -1]) * random.randint(2, 19))
 
             if len(set([a, b, c])) != 3:
                 continue

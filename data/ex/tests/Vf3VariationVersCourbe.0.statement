@@ -12,15 +12,17 @@
 \begin{center}
 \begin{tabular}[t]{ll}
 \begin{tikzpicture}[scale=1]
-\tkzTabInit[lgt=1.2,espcl=1.2]{$x$/1,$f\,(x)$/3}{$-5$,$-3$,$-1$,$1$,$2$,$5$}
-\tkzTabVar{+/$4$,-/$0$,+/$3$,-/$1$,+/$2$,-/$-2$}
-\tkzTabVal{5}{6}{0.5}{\scriptsize $3$}{$0$}
+\tkzTabInit[lgt=1.2,espcl=1.2]{$x$/1,$f\,(x)$/3}{$-5$,$-3$,$0$,$2$,$3$,$5$}
+\tkzTabVar{-/$2$,+/$4$,-/$-3$,+/$0$,-/$-4$,+/$-2$}
+\tkzTabVal{2}{3}{0.5}{\scriptsize $-1$}{$0$}
 \end{tikzpicture}
 &
 \begin{tikzpicture}[scale=1]
-\tkzTabInit[lgt=1.2,espcl=1.2]{$x$/1,$g\,(x)$/3}{$-5$,$-2$,$0$,$1$,$3$,$5$}
-\tkzTabVar{+/$4$,+/$4$,-/$1$,+/$2$,-/$-4$,+/$-1$}
-\tkzTabVal{4}{5}{0.5}{\scriptsize $2$}{$0$}
+\tkzTabInit[lgt=1.2,espcl=1.2]{$x$/1,$g\,(x)$/3}{$-5$,$-2$,$0$,$3$,$5$}
+\tkzTabVar{-/$-1$,+/$4$,+/$4$,-/$-4$,+/$1$}
+\tkzTabVal{1}{2}{0.5}{\scriptsize $-4$}{$0$}
+\tkzTabVal{3}{4}{0.5}{\scriptsize $2$}{$0$}
+\tkzTabVal{4}{5}{0.5}{\scriptsize $4$}{$0$}
 \end{tikzpicture}
 \end{tabular}
 \end{center}

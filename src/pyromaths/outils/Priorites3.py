@@ -29,7 +29,6 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 from builtins import str
 from builtins import range
-from past.builtins import basestring
 from pyromaths.outils import Arithmetique
 
 
@@ -647,7 +646,7 @@ def effectue_calcul(calcul):
                     sol = eval('(' + calc[0] + ')**' + calc[2])
                 else:
                     sol = eval("".join(calc))
-                if isinstance(sol, basestring): sol = splitting(sol)
+                if isinstance(sol, str): sol = splitting(sol)
                 elif isinstance(sol, (int, float)): sol = [str(sol)]
                 elif isinstance(sol, (Polynome, Fraction, SquareRoot)): sol = [repr(sol)]
                 else :
@@ -771,7 +770,7 @@ def texify(liste_calculs):
     enluminures = {'indice': r'_{', 'cancel':r'\cancel{'}
     isEnlumine = {'indice': False, 'cancel':False}
     for calcul in liste_calculs:
-        if isinstance(calcul, basestring): calcul = splitting(calcul)
+        if isinstance(calcul, str): calcul = splitting(calcul)
         s = ""
         puiss = 0
         for index in range(len(calcul)):
@@ -905,7 +904,7 @@ def plotify(calcul):
     from pyromaths.classes.Fractions import Fraction
     from .Affichage import decimaux
 
-    if isinstance(calcul, basestring): calcul = splitting(calcul)
+    if isinstance(calcul, str): calcul = splitting(calcul)
     s = ""
     puiss = 0
     for i in range(len(calcul)):

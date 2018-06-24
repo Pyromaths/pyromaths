@@ -26,6 +26,7 @@ from __future__ import unicode_literals
 from builtins import str
 from builtins import range
 from past.utils import old_div
+from decimal import Decimal
 import random
 from pyromaths.outils import Affichage, Arithmetique
 #===============================================================================
@@ -334,8 +335,8 @@ def tex_units():
             u = tuple([units[unit] for i in range(7)])
         else:
             u = tuple([units[unit] for i in range(6)])
-        nb0 = Affichage.decimaux(a * 10 ** p, 0)
-        nb1 = Affichage.decimaux(a * 10 ** ((p + div1) - div0),
+        nb0 = Affichage.decimaux(a * Decimal(10) ** p, 0)
+        nb1 = Affichage.decimaux(a * Decimal(10) ** ((p + div1) - div0),
                 0)
         exo.append("\\item %s~%s%s=\dotfill~%s%s" % (nb0, division[div0],
                  units[unit], division[div1], units[unit]))
@@ -474,8 +475,8 @@ def tex_conversion(exo, cor, exposant, u):
         if (div0 - div1) in [-2, -1, 1, 2]:
             # pas trop loin car ça fait de très longs nombres
             break
-    nb0 = a * 10 ** p
-    nb1 = nb0 * 10 ** (exposant * (div1 - div0))
+    nb0 = a * Decimal(10) ** p
+    nb1 = nb0 * Decimal(10) ** (exposant * (div1 - div0))
 
     exo.append("\\item $\\unit[%s]{%s}=\\unit[\\dotfill]{%s}$" % 
             (Affichage.decimaux(nb0), u[div0], u[div1]))
@@ -615,28 +616,28 @@ def choix_trou_frac(exo, cor, n1, p1):
     p2 = random.randrange(2)  # sert à compliquer un peu l'exercice
     if i > 1:
         exo.append('\\item $\\cfrac{%s}{%s}=\\ldots$' % 
-                (Affichage.decimaux(n1 * 10 ** p2),
-                    Affichage.decimaux(10 ** (p1 + p2))))
+                (Affichage.decimaux(n1 * Decimal(10) ** p2),
+                    Affichage.decimaux(Decimal(10) ** (p1 + p2))))
         cor.append('\\item $\\cfrac{%s}{%s}=\\mathbf{%s}$' % 
-                (Affichage.decimaux(n1 * 10 ** p2),
-                    Affichage.decimaux(10 ** (p1 + p2)),
-                    Affichage.decimaux(n1 * 10 ** (-p1), 1)))
+                (Affichage.decimaux(n1 * Decimal(10) ** p2),
+                    Affichage.decimaux(Decimal(10) ** (p1 + p2)),
+                    Affichage.decimaux(n1 * Decimal(10) ** (-p1), 1)))
     elif i > 0:
         exo.append('\\item $\\cfrac{%s}{\ldots}=%s$' % 
-                (Affichage.decimaux(n1 * 10 ** p2),
-        Affichage.decimaux(n1 * 10 ** (-p1), 1)))
+                (Affichage.decimaux(n1 * Decimal(10) ** p2),
+        Affichage.decimaux(n1 * Decimal(10) ** (-p1), 1)))
         cor.append('\\item $\\cfrac{%s}{\\mathbf{%s}}=%s$' % 
-                (Affichage.decimaux(n1 * 10 ** p2),
-        Affichage.decimaux(10 ** (p1 + p2)), \
-                Affichage.decimaux(n1 * 10 ** (-p1), 1)))
+                (Affichage.decimaux(n1 * Decimal(10) ** p2),
+        Affichage.decimaux(Decimal(10) ** (p1 + p2)), \
+                Affichage.decimaux(n1 * Decimal(10) ** (-p1), 1)))
     else:
         exo.append('\\item $\\cfrac{\ldots}{%s}=%s$' % 
-                (Affichage.decimaux(10 ** (p1 + p2)),
-        Affichage.decimaux(n1 * 10 ** (-p1), 1)))
+                (Affichage.decimaux(Decimal(10) ** (p1 + p2)),
+        Affichage.decimaux(n1 * Decimal(10) ** (-p1), 1)))
         cor.append('\\item $\\cfrac{\\mathbf{%s}}{%s}=%s$' % 
-                (Affichage.decimaux(n1 * 10 ** p2),
-                    Affichage.decimaux(10 ** (p1 + p2)),
-                    Affichage.decimaux(n1 * 10 ** (-p1), 1)))
+                (Affichage.decimaux(n1 * Decimal(10) ** p2),
+                    Affichage.decimaux(Decimal(10) ** (p1 + p2)),
+                    Affichage.decimaux(n1 * Decimal(10) ** (-p1), 1)))
 
 def tex_frac(exo, cor):
     for dummy in range(6):

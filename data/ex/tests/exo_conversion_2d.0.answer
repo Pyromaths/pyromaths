@@ -5,27 +5,27 @@
 Effectuer les conversions suivantes :
 \begin{multicols}{2}\noindent
 \begin{enumerate}
-\item $\unit[86]{dam^2}=\unit[0,86]{hm^2}$\vspace{1ex}\par
-\item $\unit[5,6]{dm^2}=\unit[0,000\,56]{dam^2}$\vspace{1ex}\par
-\item $\unit[52,9]{cm^2}=\unit[0,005\,29]{m^2}$\vspace{1ex}\par
-\item $\unit[35,4]{m^2}=\unit[0,003\,54]{hm^2}$\vspace{1ex}\par
-\item $\unit[91,8]{dm^2}=\unit[918\,000]{mm^2}$\vspace{1ex}\par
-\item $\unit[37,9]{cm^2}=\unit[0,379]{dm^2}$\vspace{1ex}\par
+\item $\unit[96,5]{dam^2}=\unit[965\,000]{dm^2}$\vspace{1ex}\par
+\item $\unit[59,8]{dam^2}=\unit[5\,980]{m^2}$\vspace{1ex}\par
+\item $\unit[4,67]{dam^2}=\unit[0,046\,7]{hm^2}$\vspace{1ex}\par
+\item $\unit[8,74]{dm^2}=\unit[87\,400]{mm^2}$\vspace{1ex}\par
+\item $\unit[3,57]{dam^2}=\unit[0,000\,357]{km^2}$\vspace{1ex}\par
+\item $\unit[8,48]{m^2}=\unit[848]{dm^2}$\vspace{1ex}\par
 \end{enumerate}
 \end{multicols}
 \begin{tabular}{*{13}{p{3.5mm}|}p{3.5mm}}
  \multicolumn{2}{c|}{$\rm km^2$} & \multicolumn{2}{c|}{$\rm hm^2$} & \multicolumn{2}{c|}{$\rm dam^2$} & \multicolumn{2}{c|}{$\rm m^2$} & \multicolumn{2}{c|}{$\rm dm^2$} & \multicolumn{2}{c|}{$\rm cm^2$} &\multicolumn{2}{c}{$\rm mm^2$}\\ \hline
- & & & {\textcolor{red}{0}\Rnode{virg1}{\virgule}}& \textcolor{blue}{8}& \textcolor{blue}{6}\Rnode{virg0}{\ }& & & & & & & & 
+ & & & & \textcolor{blue}{9}& \textcolor{blue}{6}\Rnode{virg0}{\ }& \textcolor{blue}{5}& \textcolor{red}{0}& \textcolor{red}{0}& {\textcolor{red}{0}\Rnode{virg1}{\virgule}}& & & & 
 \ncline{->}{virg0}{virg1} \\
- & & & & & {\textcolor{red}{0}\Rnode{virg1}{\virgule}}& \textcolor{red}{0}& \textcolor{red}{0}& \textcolor{red}{0}& \textcolor{blue}{5}\Rnode{virg0}{\ }& \textcolor{blue}{6}& & & 
+ & & & & \textcolor{blue}{5}& \textcolor{blue}{9}\Rnode{virg0}{\ }& \textcolor{blue}{8}& {\textcolor{red}{0}\Rnode{virg1}{\virgule}}& & & & & & 
 \ncline{->}{virg0}{virg1} \\
- & & & & & & & {\textcolor{red}{0}\Rnode{virg1}{\virgule}}& \textcolor{red}{0}& \textcolor{red}{0}& \textcolor{blue}{5}& \textcolor{blue}{2}\Rnode{virg0}{\ }& \textcolor{blue}{9}& 
+ & & & {\textcolor{red}{0}\Rnode{virg1}{\virgule}}& \textcolor{red}{0}& \textcolor{blue}{4}\Rnode{virg0}{\ }& \textcolor{blue}{6}& \textcolor{blue}{7}& & & & & & 
 \ncline{->}{virg0}{virg1} \\
- & & & {\textcolor{red}{0}\Rnode{virg1}{\virgule}}& \textcolor{red}{0}& \textcolor{red}{0}& \textcolor{blue}{3}& \textcolor{blue}{5}\Rnode{virg0}{\ }& \textcolor{blue}{4}& & & & & 
+ & & & & & & & & & \textcolor{blue}{8}\Rnode{virg0}{\ }& \textcolor{blue}{7}& \textcolor{blue}{4}& \textcolor{red}{0}& {\textcolor{red}{0}\Rnode{virg1}{\virgule}}
 \ncline{->}{virg0}{virg1} \\
- & & & & & & & & \textcolor{blue}{9}& \textcolor{blue}{1}\Rnode{virg0}{\ }& \textcolor{blue}{8}& \textcolor{red}{0}& \textcolor{red}{0}& {\textcolor{red}{0}\Rnode{virg1}{\virgule}}
+ & {\textcolor{red}{0}\Rnode{virg1}{\virgule}}& \textcolor{red}{0}& \textcolor{red}{0}& \textcolor{red}{0}& \textcolor{blue}{3}\Rnode{virg0}{\ }& \textcolor{blue}{5}& \textcolor{blue}{7}& & & & & & 
 \ncline{->}{virg0}{virg1} \\
- & & & & & & & & & {\textcolor{red}{0}\Rnode{virg1}{\virgule}}& \textcolor{blue}{3}& \textcolor{blue}{7}\Rnode{virg0}{\ }& \textcolor{blue}{9}& 
+ & & & & & & & \textcolor{blue}{8}\Rnode{virg0}{\ }& \textcolor{blue}{4}& {\textcolor{blue}{8}\Rnode{virg1}{\virgule}}& & & & 
 \ncline{->}{virg0}{virg1} \\
 \end{tabular}
 }

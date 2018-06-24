@@ -3,18 +3,20 @@
 \item À partir du tableau de variation ci-dessous, recopier et compléter les égalités ou inégalités suivantes en justifiant :\vspace{-2ex}
 \begin{multicols}{3}
 \begin{enumerate}
-\item $f\,(-4{,}9) \ldots{} f\,(-4{,}4)$
-\item $f\,(4{,}2) \ldots{} f\,(4{,}6)$
-\item $f\,(1{,}2) \ldots{} f\,(1{,}6)$
+\item $f\,(-6{,}7) \ldots{} f\,(-6{,}3)$
+\item $f\,(2{,}9) \ldots{} f\,(4{,}7)$
+\item $f\,(-5{,}8) \ldots{} f\,(-5{,}3)$
 \end{enumerate}\vspace{-2ex}
 \end{multicols}
-\item Peut-on comparer l’image des nombres $-0,4$ et $2,3$ ? Justifier.
-\item Peut-on comparer l’image des nombres $4,8$ et $-4,5$ ? Justifier.
+\item Peut-on comparer l’image des nombres $-6,4$ et $2,1$ ? Justifier.
+\item Peut-on comparer l’image des nombres $4,1$ et $-2,7$ ? Justifier.
 \end{enumerate}
 \begin{center}
 \begin{tikzpicture}[scale=1]
-\tkzTabInit[lgt=1.2,espcl=2]{$x$/1,$f\,(x)$/3}{$-5$,$-4$,$1$,$2$,$4$,$5$}
-\tkzTabVar{+/$-3$,-/$-4$,+/$5$,+/$5$,-/$0$,+/$1$}
-\tkzTabVal{2}{3}{0.5}{\scriptsize $-2$}{$0$}
+\tkzTabInit[lgt=1.2,espcl=2]{$x$/1,$f\,(x)$/3}{$-7$,$-6$,$-5$,$-2$,$2$,$6$}
+\tkzTabVar{+/$-5$,-/$-6$,-/$-6$,+/$3$,-/$-4$,+/$4$}
+\tkzTabVal{3}{4}{0.5}{\scriptsize $-3$}{$0$}
+\tkzTabVal{4}{5}{0.5}{\scriptsize $0$}{$0$}
+\tkzTabVal{5}{6}{0.5}{\scriptsize $5$}{$0$}
 \end{tikzpicture}
 \end{center}

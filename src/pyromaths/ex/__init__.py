@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 #
 from __future__ import unicode_literals
-from past.builtins import basestring
 from builtins import object
 import inspect
 import os
@@ -92,7 +91,7 @@ def __hasdescription(obj):
     if 'description' not in dir(obj): return False
     description = obj.__dict__['description']
     # description must be some kind of string (preferably unicode)
-    if not isinstance(description, basestring): return False
+    if not isinstance(description, str): return False
     return True
 
 def __islegacy(obj):
@@ -112,7 +111,7 @@ def __level(level):
 
 def __import(name=__name__, parent=None):
     ''' Import 'name' from 'parent' package. '''
-    if not isinstance(name, basestring):
+    if not isinstance(name, str):
         name = name.__name__
     # parent is None: assume 'name' is a package name
     # hack tout moche pour l'import des exercices dans la version Windows de Pyromaths :
@@ -120,7 +119,7 @@ def __import(name=__name__, parent=None):
     # alors que les exercices cinquiemes.aires ne doivent être appelés qu'ainsi.
     if "." not in name and hasattr(sys, "frozen"): name = "pyromaths.ex." + name
     if parent is None: parent = name
-    elif not isinstance(parent, basestring):
+    elif not isinstance(parent, str):
         # assume 'parent' is a package instance
         parent = parent.__name__
     return importlib.import_module(name)

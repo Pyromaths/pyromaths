@@ -3,8 +3,8 @@ On considère un graphe probabiliste d'ordre 2, dont la matrice de transition es
 
 \[
 M=\begin{pmatrix}
-  \numprint{0.95} & \numprint{0.05} \\
-  \numprint{0.45} & \numprint{0.55} \\
+  \numprint{0.8} & \numprint{0.2} \\
+  \numprint{0.3} & \numprint{0.7} \\
 \end{pmatrix}
 \]
 

@@ -1,44 +1,44 @@
 \exercice*
 \begin{enumerate}
-  \item Selon l'énoncé, le premier terme de $\left(u_n\right)$ est $u_1=-2$. Puisque chaque terme (sauf le premier) est égal à l'inverse du précédent, on a :
-$u_2=\frac{1}{ u_1 } =\frac{1}{ -2 } =-\frac{1}{ 2 }$ ; $u_3=\frac{1}{ u_2 } =\frac{1}{ -\frac{ 1 }{ 2 } } =-2$ ; $u_4=\frac{1}{ u_3 } =\frac{1}{ -2 } =-\frac{1}{ 2 }$ ; $u_5=\frac{1}{ u_4 } =\frac{1}{ -\frac{ 1 }{ 2 } } =-2$ ; $u_6=\frac{1}{ u_5 } =\frac{1}{ -2 } =-\frac{1}{ 2 }$ ; $u_7=\frac{1}{ u_6 } =\frac{1}{ -\frac{ 1 }{ 2 } } =-2$.
+  \item Selon l'énoncé, le premier terme de $\left(u_n\right)$ est $u_1=2$. Puisque chaque terme (sauf le premier) est égal à l'opposé du précédent, on a :
+$u_2=-u_1 =-2$ ; $u_3=-u_2 =2$ ; $u_4=-u_3 =-2$ ; $u_5=-u_4 =2$ ; $u_6=-u_5 =-2$.
 \begin{enumerate}
- \item Calcul du septième terme :
-le premier terme est $u_1$ ; le deuxième terme est $u_2$ ; le troisième terme est $u_3$ ; le quatrième terme est $u_4$ ; le cinquième terme est $u_5$ ; le sixième terme est $u_6$ ; le septième terme est $u_7$.
-Le terme demandé est donc : $u_7=-2$.
-\item Le terme de rang 6 est : $u_6=-\frac{ 1 }{ 2 }$.
-\item Nous avons calculé que : $u_4=-\frac{ 1 }{ 2 }$.
+ \item Calcul du cinquième terme :
+le premier terme est $u_1$ ; le deuxième terme est $u_2$ ; le troisième terme est $u_3$ ; le quatrième terme est $u_4$ ; le cinquième terme est $u_5$.
+Le terme demandé est donc : $u_5=2$.
+\item Le terme de rang 6 est : $u_6=-2$.
+\item Nous avons calculé que : $u_3=2$.
 \end{enumerate}
-  \item La suite $u$ est définie pour $n\geq1$ par : $u_n=\frac{ 3 }{ 5 }n-6$.
+  \item La suite $\left(u_n\right)$ est définie pour $n\geq1$ par : $u_n=n-4$.
 Elle est donc définie par son terme général : pour calculer un terme de rang $n$, on peut calculer directement l'image de $n$ par la suite.
 \begin{enumerate}
- \item Calcul du septième terme :
-le premier terme est $u_1$ ; le deuxième terme est $u_2$ ; le troisième terme est $u_3$ ; le quatrième terme est $u_4$ ; le cinquième terme est $u_5$ ; le sixième terme est $u_6$ ; le septième terme est $u_7$.
-Le terme demandé est donc : $u_7=
-\frac{ 3 }{ 5 }\times 7-6 = \frac{ 21 }{ 5 } - \frac{ 6 \times 5 }{ 5 } = \frac{ 21 -30 }{ 5 } = \frac{ -9 }{ 5 }$.
-La solution est $u_{ 7 }=\frac{ -9 }{ 5 }$.
+ \item Calcul du cinquième terme :
+le premier terme est $u_1$ ; le deuxième terme est $u_2$ ; le troisième terme est $u_3$ ; le quatrième terme est $u_4$ ; le cinquième terme est $u_5$.
+Le terme demandé est donc : $u_5=
+5-4 = 1$.
+La solution est $u_{ 5 }=1$.
 \item Le terme de rang 6 est $u_{ 6 }$.
-Le terme demandé est donc : $u_{ 6 }=\frac{ 3 }{ 5 }\times 6-6 = \frac{ 18 }{ 5 } - \frac{ 6 \times 5 }{ 5 } = \frac{ 18 -30 }{ 5 } = \frac{ -12 }{ 5 }$.
-La solution est donc  : $u_{ 6 }=\frac{ -12 }{ 5 }$.
+Le terme demandé est donc : $u_{ 6 }=6-4 = 2$.
+La solution est donc  : $u_{ 6 }=2$.
 \item
-On a : $u_{ 4 }=\frac{ 3 }{ 5 }\times 4-6 = \frac{ 12 }{ 5 } - \frac{ 6 \times 5 }{ 5 } = \frac{ 12 -30 }{ 5 } = \frac{ -18 }{ 5 }$.
-La solution est donc  : $u_{ 4 }=\frac{ -18 }{ 5 }$.
+On a : $u_{ 3 }=3-4 = -1$.
+La solution est donc  : $u_{ 3 }=-1$.
 \end{enumerate}
 
-\item La suite $\left(u_n\right)$ est définie par récurrence, pour $n\geq3$, par :
+\item La suite $u$ est définie par récurrence, pour $n\geq1$, par :
     \[\left\{\begin{array}{l}
-      u_3=-5\\
-      \text{Pour tout $n\geq3$ : } u_{n+1}=\frac{ 4 }{ 5 }u_n.
+      u_1=-7\\
+      \text{Pour tout $n\geq1$ : } u_{n+1}=\frac{ 1 }{ 5 }u_n.
   \end{array}\right.\]
 
 \begin{align*}
-u_4 &= \frac{ 4 }{ 5 }u_3 =\frac{ 4 }{ 5 }\times \left( -5 \right) =\frac{ -20 }{ 5 } =-4 \\u_5 &= \frac{ 4 }{ 5 }u_4 =\frac{ 4 }{ 5 }\times \left( -4 \right) =\frac{ -16 }{ 5 } \\u_6 &= \frac{ 4 }{ 5 }u_5 =\frac{ 4 }{ 5 }\times \frac{ -16 }{ 5 } =\frac{ -64 }{ 25 } \\u_7 &= \frac{ 4 }{ 5 }u_6 =\frac{ 4 }{ 5 }\times \frac{ -64 }{ 25 } =\frac{ -256 }{ 125 } \\u_8 &= \frac{ 4 }{ 5 }u_7 =\frac{ 4 }{ 5 }\times \frac{ -256 }{ 125 } =\frac{ -1024 }{ 625 } \\u_9 &= \frac{ 4 }{ 5 }u_8 =\frac{ 4 }{ 5 }\times \frac{ -1024 }{ 625 } =\frac{ -4096 }{ 3125 }
+u_2 &= \frac{ 1 }{ 5 }u_1 =\frac{ 1 }{ 5 }\times \left( -7 \right) =\frac{ -7 }{ 5 } \\u_3 &= \frac{ 1 }{ 5 }u_2 =\frac{ 1 }{ 5 }\times \frac{ -7 }{ 5 } =\frac{ -7 }{ 25 } \\u_4 &= \frac{ 1 }{ 5 }u_3 =\frac{ 1 }{ 5 }\times \frac{ -7 }{ 25 } =\frac{ -7 }{ 125 } \\u_5 &= \frac{ 1 }{ 5 }u_4 =\frac{ 1 }{ 5 }\times \frac{ -7 }{ 125 } =\frac{ -7 }{ 625 } \\u_6 &= \frac{ 1 }{ 5 }u_5 =\frac{ 1 }{ 5 }\times \frac{ -7 }{ 625 } =\frac{ -7 }{ 3125 }
 \end{align*}
 \begin{enumerate}
- \item Calcul du septième terme :
-le premier terme est $u_3$ ; le deuxième terme est $u_4$ ; le troisième terme est $u_5$ ; le quatrième terme est $u_6$ ; le cinquième terme est $u_7$ ; le sixième terme est $u_8$ ; le septième terme est $u_9$.
-Le terme demandé est donc : $u_9=\frac{ -4096 }{ 3125 }$.
-\item Le terme de rang 6 est : $u_6=\frac{ -64 }{ 25 }$.
-\item Nous avons calculé que : $u_4=-4$.
+ \item Calcul du cinquième terme :
+le premier terme est $u_1$ ; le deuxième terme est $u_2$ ; le troisième terme est $u_3$ ; le quatrième terme est $u_4$ ; le cinquième terme est $u_5$.
+Le terme demandé est donc : $u_5=\frac{ -7 }{ 625 }$.
+\item Le terme de rang 6 est : $u_6=\frac{ -7 }{ 3125 }$.
+\item Nous avons calculé que : $u_3=\frac{ -7 }{ 25 }$.
 \end{enumerate}
 \end{enumerate}

@@ -2,11 +2,11 @@
 Effectuer les conversions suivantes :
 \begin{multicols}{3}\noindent
 \begin{enumerate}
-\item $\unit[86]{dam^3}=\unit[\dotfill]{hm^3}$
-\item $\unit[5,6]{dm^3}=\unit[\dotfill]{dam^3}$
-\item $\unit[52,9]{cm^3}=\unit[\dotfill]{m^3}$
-\item $\unit[35,4]{m^3}=\unit[\dotfill]{hm^3}$
-\item $\unit[91,8]{dm^3}=\unit[\dotfill]{mm^3}$
-\item $\unit[37,9]{cm^3}=\unit[\dotfill]{dm^3}$
+\item $\unit[96,5]{dam^3}=\unit[\dotfill]{dm^3}$
+\item $\unit[59,8]{dam^3}=\unit[\dotfill]{m^3}$
+\item $\unit[4,67]{dam^3}=\unit[\dotfill]{hm^3}$
+\item $\unit[8,74]{dm^3}=\unit[\dotfill]{mm^3}$
+\item $\unit[3,57]{dam^3}=\unit[\dotfill]{km^3}$
+\item $\unit[8,48]{m^3}=\unit[\dotfill]{dm^3}$
 \end{enumerate}
 \end{multicols}

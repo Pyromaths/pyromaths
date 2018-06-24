@@ -1,16 +1,16 @@
 \exercice
-Placer une virgule (en ajoutant éventuellement des zéros) dans            le nombre 452378 de telle sorte que :
+Placer une virgule (en ajoutant éventuellement des zéros) dans            le nombre 694187 de telle sorte que :
 \begin{enumerate}
-\item le chiffre 7 soit le chiffre des dizaines : 
+\item le chiffre 1 soit le chiffre des millièmes : 
 \dotfill
-\item le chiffre 2 soit le chiffre des dixièmes : 
+\item le chiffre 4 soit le chiffre des unités : 
 \dotfill
-\item le chiffre 8 soit le chiffre des unités : 
+\item le chiffre 4 soit le chiffre des centièmes : 
 \dotfill
-\item le chiffre 5 soit le chiffre des millièmes : 
+\item le chiffre 9 soit le chiffre des centaines : 
 \dotfill
-\item le chiffre 3 soit le chiffre des milliers : 
+\item le chiffre 4 soit le chiffre des milliers : 
 \dotfill
-\item le chiffre 8 soit le chiffre des centièmes : 
+\item le chiffre 6 soit le chiffre des dixièmes : 
 \dotfill
 \end{enumerate}

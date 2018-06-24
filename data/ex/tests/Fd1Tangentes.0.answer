@@ -1,23 +1,23 @@
 \exercice*
 \begin{enumerate}
 \item  On lit graphiquement le coefficient directeur de chacune des tangentes en ces points.\par
-$f'\,(-4)=4 \qquad f'\,(0)=\dfrac{-3}{2} \qquad f'\,(4)=0$.
+$f'\,(-3)=\dfrac{1}{3} \qquad f'\,(1)=0 \qquad f'\,(3)=-4$.
 \item
 \begin{asy}[height=6.5cm]
 import graph;
 import interpolate;
 import geometry;
 defaultpen(fontsize(9pt));
-real[] xpt={-6.1,-5,-1,01,05,6.1};
-real[] ypt={02,-2,00,03,-2,-3};
-real[] dy= {00,03,-2,0.75,00,00};
+real[] xpt={-6.1,-3,-2,02,05,6.1};
+real[] ypt={01,-1,00,03,03,03};
+real[] dy= {00,00,-0.6666666666666666,01,01,00};
 real f(real t){return pwhermite(xpt,ypt,dy)(t);}
 path Cf=graph(f,-6.1,6.1);
 void tangente(int k,real lg=sqrt(1+dy[k]^2),real ld=lg, pen p=black+1, arrowbar arr=Arrows(SimpleHead,size=9pt)) {
 draw(((xpt[k],ypt[k])-lg*unit((1,dy[k])))--((xpt[k],ypt[k])+ld*unit((1,dy[k]))),p,arr);
 dot((xpt[k],ypt[k]));
 }
-xlimits(-6.1, 6.1);
+xlimits(-4.1, 6.1);
 ylimits(-5.5, 5.5, Crop);
 xaxis(axis=BottomTop, p=invisible,
 ticks=Ticks(format="%", Step=1, extend=true,
@@ -36,11 +36,11 @@ end=false, endlabel=false, beginlabel=false, NoZero));
 labelx(L=scale(.7)*"$0$", (0,0), align=SW);
 label("$\mathcal C_f$", (-6, f(-6)), 1.5NE, brown);
 draw(Cf, brown+1);
-tangente(1,lg=sqrt(10));
-tangente(2,lg=sqrt(5));
-tangente(3,lg=sqrt(25));
-tangente(4,lg=sqrt(1));
-xlimits(-6.1, 6.1, Crop);
+tangente(1,lg=sqrt(1));
+tangente(2,lg=sqrt(13));
+tangente(3,lg=sqrt(2));
+tangente(4,lg=sqrt(2));
+xlimits(-4.1, 6.1, Crop);
 ylimits(-5.5, 5.5, Crop);
 \end{asy}
 \end{enumerate}

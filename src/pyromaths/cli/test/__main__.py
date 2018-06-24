@@ -53,7 +53,7 @@ def ask_confirm(message):
     """
     while True:
         try:
-            answer = eval(input("{} (y/n) [n]? ".format(message)))
+            answer = input("{} (y/n) [n]? ".format(message))
         except EOFError:
             answer = 'n'
         if answer == 'y':

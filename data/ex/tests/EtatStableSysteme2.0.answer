@@ -4,31 +4,31 @@ Puisque $P$ est l'état stable, alors $P=P\times M$.
 \begin{align*}
     P\times M &= \begin{pmatrix}x&y\end{pmatrix}\times
 \begin{pmatrix}
-  \numprint{0.95} & \numprint{0.05} \\
-  \numprint{0.45} & \numprint{0.55} \\
+  \numprint{0.8} & \numprint{0.2} \\
+  \numprint{0.3} & \numprint{0.7} \\
 \end{pmatrix}\\
 &= \begin{pmatrix}
-  \numprint{0.95}\,x + \numprint{0.45}\,y & \numprint{0.05}\,x + \numprint{0.55}\,y
+  \numprint{0.8}\,x + \numprint{0.3}\,y & \numprint{0.2}\,x + \numprint{0.7}\,y
 \end{pmatrix}
 \end{align*}
 
-Or $\begin{pmatrix}x&y\end{pmatrix}=P=P\times M$, donc les coefficients des matrices sont deux à deux égaux, donc $x=\numprint{0.95}\,x + \numprint{0.45}\,y$.
+Or $\begin{pmatrix}x&y\end{pmatrix}=P=P\times M$, donc les coefficients des matrices sont deux à deux égaux, donc $x=\numprint{0.8}\,x + \numprint{0.3}\,y$.
 
 D'autre part, puisque $P$ est un état probabiliste, alors $x+y=1$, donc $y=1-x$. Donc, en remplaçant $y$ par $1-x$ dans l'équation précédente, on obtient :
 
 \begin{align*}
-  x &= \numprint{0.95}\,x + \numprint{0.45}\,(1-x) \\
-  x &= \numprint{0.95}\,x + \numprint{0.45} - \numprint{0.45}\,x\\
-  x-\numprint{0.95}\,x +\numprint{0.45}\,x &= \numprint{0.45}\\
-  (1-\numprint{0.95}+\numprint{0.45}) \,x &= \numprint{0.45}\\
-  \numprint{0.5}\,x &= \numprint{0.45}\\
-  x &= \frac{\numprint{0.45}}{\numprint{0.5}}\\
-x &= \numprint{0.9}
+  x &= \numprint{0.8}\,x + \numprint{0.3}\,(1-x) \\
+  x &= \numprint{0.8}\,x + \numprint{0.3} - \numprint{0.3}\,x\\
+  x-\numprint{0.8}\,x +\numprint{0.3}\,x &= \numprint{0.3}\\
+  (1-\numprint{0.8}+\numprint{0.3}) \,x &= \numprint{0.3}\\
+  \numprint{0.5}\,x &= \numprint{0.3}\\
+  x &= \frac{\numprint{0.3}}{\numprint{0.5}}\\
+x &= \numprint{0.6}
 \end{align*}
 
-Enfin, puisque $y=1-x$, alors $y=1-\numprint{0.9}=\numprint{0.1}$.
+Enfin, puisque $y=1-x$, alors $y=1-\numprint{0.6}=\numprint{0.4}$.
 
 L'unique état stable de ce graphe est donc $\begin{pmatrix}
-\numprint{0.9} &
-\numprint{0.1}
+\numprint{0.6} &
+\numprint{0.4}
 \end{pmatrix}$.

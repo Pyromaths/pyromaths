@@ -2,10 +2,10 @@
 \begin{enumerate}
 \item
 \begin{enumerate}
-\item $f\,(-4{,}9) > f\,(-4{,}4)$ car $-4{,}9 < -4{,}4$ et $f$ est décroissante sur $[-5~;~-4]$.
-\item $f\,(4{,}2) < f\,(4{,}6)$ car $4{,}2 < 4{,}6$ et $f$ est croissante sur $[4~;~5]$.
-\item $f\,(1{,}2) = f\,(1{,}6)$ car $1{,}2 < 1{,}6$ et $f$ est constante sur $[1~;~2]$.
+\item $f\,(-6{,}7) > f\,(-6{,}3)$ car $-6{,}7 < -6{,}3$ et $f$ est décroissante sur $\interval{-7}{-6}$.
+\item $f\,(2{,}9) < f\,(4{,}7)$ car $2{,}9 < 4{,}7$ et $f$ est croissante sur $\interval{2}{6}$.
+\item $f\,(-5{,}8) = f\,(-5{,}3)$ car $-5{,}8 < -5{,}3$ et $f$ est constante sur $\interval{-6}{-5}$.
 \end{enumerate}
-\item On ne peut pas comparer $f\,(-0{,}4)$ et $f\,(2{,}3)$ car la fonction $f$ n'est pas monotone (elle change de sens de variation) sur $[-0{,}4~;~2{,}3]$.
-\item $f\,(4{,}8) > f\,(-4{,}5)$ car d’après le signe de la fonction $f\,(4{,}8) > 0$ et $f\,(-4{,}5) < 0$ (par contre, on ne peut pas utiliser le sens de variation qui change sur l’intervalle $[-4{,}5~;~4{,}8]$).
+\item On ne peut pas comparer $f\,(-6{,}4)$ et $f\,(2{,}1)$ car la fonction $f$ n'est pas monotone (elle change de sens de variation) sur $\interval{-6{,}4}{2{,}1}$.
+\item $f\,(4{,}1) < f\,(-2{,}7)$ car d’après le signe de la fonction $f\,(4{,}1) < 0$ et $f\,(-2{,}7) > 0$ (par contre, on ne peut pas utiliser le sens de variation qui change sur l’intervalle $\interval{-2{,}7}{4{,}1}$).
 \end{enumerate}
