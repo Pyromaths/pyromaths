@@ -10,21 +10,21 @@ several platforms. Packages should be functional, although further optimization
 may be operated by other scripts (see: pkg/README).
 
 Python source and bynary eggs (all platforms):
-    $ python setup.py [sdist|bdist|bdist_egg] [options...]
+    $ python3 setup.py [sdist|bdist|bdist_egg] [options...]
 
 RPM package (UNIX/Linux):
     $ ./setup.py bdist_rpm [options...]
 
 Self-contained application (Mac OS X):
-    $ python setup.py py2app [options...]
+    $ python3 setup.py py2app [options...]
 
 Self-contained application (Windows):
-    $ python setup.py py2exe [options...]
-    $ python setup.py innosetup [options...]
+    $ python3 setup.py py2exe [options...]
+    $ python3 setup.py innosetup [options...]
 
 Help and options:
-    $ python setup.py --help
-    $ python setup.py --help-commands
+    $ python3 setup.py --help
+    $ python3 setup.py --help-commands
 
 Created on 13 avr. 2013
 @author: Olivier Cornu <o.cornu@gmail.com>

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copyright (C) 2015 -- Louis Paternault (spalax@gresille.org)
@@ -21,7 +21,7 @@
 
 This module gather tests from all exercises. Running:
 
-    python -m unittest discover
+    python3 -m unittest discover
 
 does just as expected.
 """

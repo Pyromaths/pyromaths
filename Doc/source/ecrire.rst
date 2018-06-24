@@ -58,7 +58,7 @@ Connaissances
 Créer un exercice pour Pyromaths nécessite de savoir utiliser un minimum :
 
 - :math:`LaTeX` ;
-- Python (version 2) ;
+- Python (version 3) ;
 - git.
 
 Une connaissance de la bibliothèque Python `jinja2 <http://jinja2.pocoo.org>`__ est un plus, mais les bases s'apprennent rapidement et sont décrites plus loins dans ce document.

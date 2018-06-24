@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copyright (C) 2016-2018 -- Louis Paternault (spalax@gresille.org)
@@ -21,7 +21,7 @@
 
 To display help:
 
-> python -m pyromaths.cli --help
+> python3 -m pyromaths.cli --help
 """
 from __future__ import print_function
 from __future__ import unicode_literals

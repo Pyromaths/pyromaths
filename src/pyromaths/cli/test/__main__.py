@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copyright (C) 2016 -- Louis Paternault (spalax@gresille.org)
@@ -21,7 +21,7 @@
 
 To display help:
 
-> python -m pyromaths.cli.test --help
+> python3 -m pyromaths.cli.test --help
 """
 from __future__ import unicode_literals
 
@@ -33,7 +33,7 @@ import sys
 import unittest
 
 # Quick and dirty definition of `_` as the identity function
-gettext.install('pyromaths', str=1)
+gettext.install('pyromaths')
 
 from pyromaths.cli import exercise_argument, PyromathsException
 from pyromaths.ex.test import TestPerformer
@@ -127,7 +127,7 @@ def argument_parser():
     check = subparsers.add_parser(
         'check',
         help=(
-            "Test exercises (equivalent to `python -m unittest discover`, "
+            "Test exercises (equivalent to `python3 -m unittest discover`, "
             "for exercises only)."
             ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
