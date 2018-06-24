@@ -2,40 +2,37 @@
 Déterminer les racines des polynômes :\par
 \begin{tabularx}{\linewidth}[t]{XX}
 {$\! \begin{aligned}
-P\,(x) &= 6\,x^{2}+7\,x\\
-&=x\times \left( 6\,x+7\right) 
+P\,(x) &= -6\,x^{2}-x\\
+&=-x\times \left( 6\,x+1\right) 
 \end{aligned}$}\par
-\underline{Les racines de $P\,(x)$ sont }\fbox{$0$}\underline{ et }\fbox{$\dfrac{-7}{6}$}
+\underline{Les racines de $P\,(x)$ sont }\fbox{$0$}\underline{ et }\fbox{$\dfrac{-1}{6}$}
 &
-{$\! \begin{aligned}
-R\,(x) &= 4\,x^{2}-64\\
-&=\left( \sqrt{4}\,x\right) ^{2}-\sqrt{64}^{2}\\
-&=\left( \sqrt{4}\,x+\sqrt{64}\right) \times \left( \sqrt{4}\,x-\sqrt{64}\right) \\
-&=\left( 2\,x+8\right) \times \left( 2\,x-8\right) 
-\end{aligned}$}\par
-\underline{Les racines de $R\,(x)$ sont }\fbox{$-4$}\underline{ et }\fbox{$4$}
+$Q\,(x) = 8\,x^{2}+4$\par
+$Q\,(x)  \geqslant 4$
+car un carré est toujours positif.\par
+\underline{$Q\,(x)$ n'a donc pas de racine.}
 \end{tabularx}\par\medskip
-$Q\,(x) = x^{2}+12\,x-9\quad$
-On calcule le discriminant de $Q\,(x)$ avec $a=1$, $b=12$ et $c=-9$ :\par\medskip
+$R\,(x) = x^{2}-2\,x-8\quad$
+On calcule le discriminant de $R\,(x)$ avec $a=1$, $b=-2$ et $c=-8$ :\par\medskip
 \begin{tabularx}{\linewidth}[t]{XXX}
 {$\! \begin{aligned}
-\Delta &= 12^{2}-4\times 1\times \left( -9\right) \\
-\Delta &= 144-\left( -36\right) \\
-\Delta &= 180\\
+\Delta &= \left( -2\right) ^{2}-4\times 1\times \left( -8\right) \\
+\Delta &= 4-\left( -32\right) \\
+\Delta &= 36\\
 \end{aligned}$}
 &
 {$\! \begin{aligned}
-x_1 &= \dfrac{-12-\sqrt{180}}{2\times 1}\\
-x_1 &= \dfrac{-12-\sqrt{36}\times \sqrt{5}}{2}\\
-x_1 &= \dfrac{\left (  -6-3\,\sqrt{5}\right )  \times \cancel{2}}{1\times \cancel{2}}\\
-x_1 &= -6-3\,\sqrt{5}\\
+x_1 &= \dfrac{2-\sqrt{36}}{2\times 1}\\
+x_1 &= \dfrac{2-6}{2}\\
+x_1 &= \dfrac{-2\times \cancel{2}}{1\times \cancel{2}}\\
+x_1 &= -2\\
 \end{aligned}$}
 &
 {$\! \begin{aligned}
-x_2 &= \dfrac{-12+\sqrt{180}}{2\times 1}\\
-x_2 &= \dfrac{-12+\sqrt{36}\times \sqrt{5}}{2}\\
-x_2 &= \dfrac{\left (  -6+3\,\sqrt{5}\right )  \times \cancel{2}}{1\times \cancel{2}}\\
-x_2 &= -6+3\,\sqrt{5}\\
+x_2 &= \dfrac{2+\sqrt{36}}{2\times 1}\\
+x_2 &= \dfrac{2+6}{2}\\
+x_2 &= \dfrac{4\times \cancel{2}}{1\times \cancel{2}}\\
+x_2 &= 4\\
 \end{aligned}$}
 \end{tabularx}\par
-\underline{Les racines de $Q\,(x)$ sont }\fbox{$-6-3\,\sqrt{5}$}\underline{ et }\fbox{$-6+3\,\sqrt{5}$}
+\underline{Les racines de $R\,(x)$ sont }\fbox{$-2$}\underline{ et }\fbox{$4$}

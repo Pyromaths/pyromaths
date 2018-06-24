@@ -1,5 +1,5 @@
 \exercice
 Déterminer les racines des polynômes :
 \begin{align*}
-P\,(x) &= 6\,x^{2}+7\,x & Q\,(x) &= 12\,x-9+x^{2} & R\,(x) &= -64+4\,x^{2}
+P\,(x) &= -6\,x^{2}-x & Q\,(x) &= 8\,x^{2}+4 & R\,(x) &= -2\,x-8+x^{2}
 \end{align*}
