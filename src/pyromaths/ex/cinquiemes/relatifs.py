@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 #
 # Pyromaths
 # Un programme en Python qui permet de créer des fiches d'exercices types de

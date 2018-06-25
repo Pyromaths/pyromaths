@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
+
 # Pyromaths
 # Un programme en Python qui permet de créer des fiches d'exercices types de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
@@ -635,12 +634,12 @@ class TermesDUneSuite(ex.TexExercise):
 
         exo.append(r'\begin{enumerate}')
         exo.append(r'  \item ${notation}$ est une suite de premier terme $u_{indice0}={terme0}$, et dont chaque terme (sauf le premier) est égal {suivant}.'.format(**self.questions[0].latex_params))
-        exo.append(r'  \item ${notation}$ est la suite définie pour $n\geq{indice0}$ par : $u_n={fonction}$.'.format(**self.questions[1].latex_params))
+        exo.append(r'  \item ${notation}$ est la suite définie pour $n\geqslant {indice0}$ par : $u_n={fonction}$.'.format(**self.questions[1].latex_params))
         exo.append(textwrap.dedent(r"""
-            \item ${notation}$ est la suite définie pour $n\geq{indice0}$ par :
+            \item ${notation}$ est la suite définie pour $n\geqslant {indice0}$ par :
                 \[\left\{{\begin{{array}}{{l}}
                   u_{indice0}={terme0}\\
-                  \text{{Pour tout $n\geq{indice0}$ : }} u_{{n+1}}={fonction}.
+                  \text{{Pour tout $n\geqslant {indice0}$ : }} u_{{n+1}}={fonction}.
               \end{{array}}\right.\]
               """).format(**self.questions[2].latex_params))
         exo.append(r'\end{enumerate}')
@@ -676,7 +675,7 @@ class TermesDUneSuite(ex.TexExercise):
         exo.append(r'\end{enumerate}')
 
         # Question 1
-        exo.append(r'  \item La suite ${notation}$ est définie pour $n\geq{indice0}$ par : $u_n={fonction}$.'.format(**self.questions[1].latex_params))
+        exo.append(r'  \item La suite ${notation}$ est définie pour $n\geqslant {indice0}$ par : $u_n={fonction}$.'.format(**self.questions[1].latex_params))
         exo.append(r"Elle est donc définie par son terme général : pour calculer un terme de rang $n$, on peut calculer directement l'image de $n$ par la suite.")
         exo.append(r'\begin{enumerate}')
         exo.append(r' \item Calcul du {} terme :'.format(FRANCAIS_ORDINAL[self.rang[0]]))
@@ -712,10 +711,10 @@ class TermesDUneSuite(ex.TexExercise):
 
         # Question 2
         exo.append(textwrap.dedent(r"""
-            \item La suite ${notation}$ est définie par récurrence, pour $n\geq{indice0}$, par :
+            \item La suite ${notation}$ est définie par récurrence, pour $n\geqslant {indice0}$, par :
                 \[\left\{{\begin{{array}}{{l}}
                   u_{indice0}={terme0}\\
-                  \text{{Pour tout $n\geq{indice0}$ : }} u_{{n+1}}={fonction}.
+                  \text{{Pour tout $n\geqslant {indice0}$ : }} u_{{n+1}}={fonction}.
               \end{{array}}\right.\]
               """).format(**self.questions[2].latex_params))
         termes = dict([(self.questions[2].indice0, self.questions[2].terme0)])

@@ -1490,9 +1490,9 @@ msgid ""
 "\\renewcommand{\\arraystretch}{1.8}\n"
 "        \\item On a demandé aux élèves d'une classe de cinquième combien de "
 "temps par semaine était consacré à leur sport favori.\\par\n"
-"        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Durée t (en h)&  $0 \\le "
-"t < 1$ & $1 \\le t  < 2$ & $2 \\le t  < 3$ & $3 \\le t  < 4$ &  $4 \\le t  < "
-"5$ & $5 \\le t  < 6$ & $6 \\le t  < 7$ \\\\\\hline Effectif & %s & %s & %s & "
+"        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Durée t (en h)&  $0 \\leqslant{} "
+"t < 1$ & $1 \\leqslant{} t  < 2$ & $2 \\leqslant{} t  < 3$ & $3 \\leqslant{} t  < 4$ &  $4 \\leqslant{} t  < "
+"5$ & $5 \\leqslant{} t  < 6$ & $6 \\leqslant{} t  < 7$ \\\\\\hline Effectif & %s & %s & %s & "
 "%s & %s & %s & %s \\\\\\hline \\end{tabular}\\par\n"
 "        À partir de ce tableau, construire un  histogramme pour représenter "
 "ces données.\\par"
@@ -2599,7 +2599,7 @@ msgstr ""
 #: src/pyromaths/ex/lycee/VariationsFonctions.py:899
 #: src/pyromaths/ex/lycee/VariationsFonctions.py:900
 #, python-format
-msgid "\\item Sur $[%s~;~%s],\\quad %s \\le f\\,(x) \\le %s$."
+msgid "\\item Sur $[%s~;~%s],\\quad %s \\leqslant{} f\\,(x) \\leqslant{} %s$."
 msgstr ""
 
 #: src/pyromaths/ex/lycee/Vecteurs.py:230

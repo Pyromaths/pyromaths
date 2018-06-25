@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
+
 # Pyromaths
 # Un programme en Python qui permet de créer des fiches d'exercices types de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
@@ -25,7 +24,6 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import str
 from builtins import range
-from past.utils import old_div
 import math
 import random
 from pyromaths.outils import Arithmetique, Affichage
@@ -403,70 +401,55 @@ def tex_formule_dix(l, exo, cor):
     if l[2] == '*':
         alea = random.randrange(0, 5)
         if alea > 1:
-            exo.append('\\item $%s \\quad\\times\\quad %s \\quad = \\quad \\dotfill$' % 
-                     (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],
-                     1)))
+            exo.append('\\item $%s \\quad\\times\\quad %s \\quad = \\quad \\dotfill$' %
+                       (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1], 1)))
             cor.append('\\item $%s \\times %s = \\mathbf{%s}$' % 
-                     (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],
-                     1), Affichage.decimaux(l[0] * l[1], 1)))
+                       (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] * l[1], 1)))
         elif alea > 0:
-            exo.append('\\item $%s \\quad\\times\\quad \\dotfill \\quad = \\quad %s$' % 
-                     (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[0] * 
-                     l[1], 1)))
-            cor.append('\\item $%s \\times \\mathbf{%s} = %s$' % 
-                     (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],
-                     1), Affichage.decimaux(l[0] * l[1], 1)))
+            exo.append('\\item $%s \\quad\\times\\quad \\dotfill \\quad = \\quad %s$' %
+                       (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[0] * l[1], 1)))
+            cor.append('\\item $%s \\times \\mathbf{%s} = %s$' %
+                       (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] * l[1], 1)))
         else:
-            exo.append('\\item $\\dotfill \\quad\\times\\quad %s \\quad = \\quad %s$' % 
-                     (Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] * 
-                     l[1], 1)))
-            cor.append('\\item $\\mathbf{%s} \\times %s = %s$' % 
-                     (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],
-                     1), Affichage.decimaux(l[0] * l[1], 1)))
+            exo.append('\\item $\\dotfill \\quad\\times\\quad %s \\quad = \\quad %s$' %
+                       (Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] * l[1], 1)))
+            cor.append('\\item $\\mathbf{%s} \\times %s = %s$' %
+                       (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] * l[1], 1)))
     else:
         alea = random.randrange(0, 5)
         if alea > 1:
-            exo.append('\\item $%s \\quad\\div\\quad %s \\quad = \\quad \\dotfill$' % 
-                     (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],
-                     1)))
-            cor.append('\\item $%s \\div %s = \\mathbf{%s}$' % (Affichage.decimaux(l[0],
-                     1), Affichage.decimaux(l[1], 1), Affichage.decimaux(old_div(l[0], 
-                     l[1]), 1)))
+            exo.append('\\item $%s \\quad\\div\\quad %s \\quad = \\quad \\dotfill$' %
+                       (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1], 1)))
+            cor.append('\\item $%s \\div %s = \\mathbf{%s}$' % (Affichage.decimaux(l[0],1), Affichage.decimaux(l[1], 1),
+                                                                Affichage.decimaux(l[0] / l[1], 1)))
         elif alea > 0:
-            exo.append('\\item $%s \\quad\\div\\quad \\dotfill \\quad = \\quad %s$' % 
-                     (Affichage.decimaux(l[0], 1), Affichage.decimaux(old_div(l[0], 
-                     l[1]), 1)))
-            cor.append('\\item $%s \\div \\mathbf{%s} = %s$' % (Affichage.decimaux(l[0],
-                     1), Affichage.decimaux(l[1], 1), Affichage.decimaux(old_div(l[0], 
-                     l[1]), 1)))
+            exo.append('\\item $%s \\quad\\div\\quad \\dotfill \\quad = \\quad %s$' %
+                       (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[0] / l[1], 1)))
+            cor.append('\\item $%s \\div \\mathbf{%s} = %s$' % (Affichage.decimaux(l[0], 1),
+                                                                Affichage.decimaux(l[1], 1),
+                                                                Affichage.decimaux(l[0] / l[1], 1)))
         else:
-            exo.append('\\item $\\dotfill \\quad\\div\\quad %s \\quad = \\quad %s$' % 
-                     (Affichage.decimaux(l[1], 1), Affichage.decimaux(old_div(l[0], 
-                     l[1]), 1)))
-            cor.append('\\item $\\mathbf{%s} \\div %s = %s$' % (Affichage.decimaux(l[0],
-                     1), Affichage.decimaux(l[1], 1), Affichage.decimaux(old_div(l[0], 
-                     l[1]), 1)))
+            exo.append('\\item $\\dotfill \\quad\\div\\quad %s \\quad = \\quad %s$' %
+                       (Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] / l[1], 1)))
+            cor.append('\\item $\\mathbf{%s} \\div %s = %s$' % (Affichage.decimaux(l[0], 1),
+                                                                Affichage.decimaux(l[1], 1),
+                                                                Affichage.decimaux(l[0] / l[1], 1)))
 
 
 def valeurs10(nb):  # renvoie nb valeur de chaque type : *10, /10, *0.1
     l = []
     for i in range(nb):
         if random.randrange(0, 1):
-            l.append((Arithmetique.valeur_alea(111, 999) * 10 ** random.randrange(-3,
-                     0), 10 ** (i + 1), '*'))
+            l.append((Arithmetique.valeur_alea(111, 999) * 10 ** random.randrange(-3, 0), 10 ** (i + 1), '*'))
         else:
-            l.append((10 ** (i + 1), Arithmetique.valeur_alea(111, 999) * 10 ** 
-                     random.randrange(-3, 0), '*'))
+            l.append((10 ** (i + 1), Arithmetique.valeur_alea(111, 999) * 10 **random.randrange(-3, 0), '*'))
     for i in range(nb):
-        l.append((Arithmetique.valeur_alea(111, 999) * 10 ** random.randrange(-3,
-                 0), 10 ** (i + 1), '/'))
+        l.append((Arithmetique.valeur_alea(111, 999) * 10 ** random.randrange(-3, 0), 10 ** (i + 1), '/'))
     for i in range(nb):
         if random.randrange(0, 1):
-            l.append((Arithmetique.valeur_alea(111, 999) * 10 ** random.randrange(-3,
-                     0), 10 ** (-i - 1), '*'))
+            l.append((Arithmetique.valeur_alea(111, 999) * 10 ** random.randrange(-3, 0), 10 ** (-i - 1), '*'))
         else:
-            l.append((10 ** (-i - 1), Arithmetique.valeur_alea(111, 999) * 10 ** 
-                     random.randrange(-3, 0), '*'))
+            l.append((10 ** (-i - 1), Arithmetique.valeur_alea(111, 999) * 10 **random.randrange(-3, 0), '*'))
     return l
 
 

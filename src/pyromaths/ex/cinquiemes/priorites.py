@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 #
 # Pyromaths
 # Un programme en Python qui permet de créer des fiches d'exercices types de
@@ -26,7 +25,6 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import str
 from builtins import range
-from past.utils import old_div
 import random
 from pyromaths.ex import LegacyExercise
 

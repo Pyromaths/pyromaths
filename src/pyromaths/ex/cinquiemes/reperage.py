@@ -1,8 +1,3 @@
-from __future__ import division
-from __future__ import unicode_literals
-# Pyromaths
-# -*- coding: utf-8 -*-
-#
 # Pyromaths
 # Un programme en Python qui permet de créer des fiches d'exercices types de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
@@ -22,6 +17,8 @@ from __future__ import unicode_literals
 # along with this program; if notPopen, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
+from __future__ import division
+from __future__ import unicode_literals
 from builtins import chr
 from builtins import str
 from builtins import range

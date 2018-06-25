@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
+
 # Pyromaths
 # Un programme en Python qui permet de créer des fiches d'exercices types de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
@@ -36,8 +35,9 @@ def suppr0(nombre):
 # Affichages des nombres décimaux
 #---------------------------------------------------------------------
 def decimaux(nb, mathenv=0):
+    """nb est un float ou une str"""
     pattern = re.compile(r"^(-?\d+)\.*(\d*)e?([\+\-]?\d*)$")
-    entiere, decimale, exposant = pattern.search(format(nb, ".15g")).groups() #arrondit les floats
+    entiere, decimale, exposant = pattern.search(format(float(nb), ".15g")).groups() #arrondit les floats
     if exposant:
         if int(exposant) > 0:
             if int(exposant) < len(decimale):

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
+
 # Pyromaths
 # Un programme en Python qui permet de créer des fiches d'exercices types de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
@@ -287,7 +286,6 @@ def _exo_puissances():
     cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_0(valeurs[i]).translate(sd))
     cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_1(valeurs[i]).translate(sd))
     cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_2(valeurs[i]).translate(sd))
-    print(valeurs[i][0], valeurs[i][1],valeurs[i][2])
     if int(floor(log10(valeurs[i][0] * valeurs[i][1] / valeurs[i][2]))) !=  0:
         cor.append("\\[ \\thenocalcul = %s \\]" % tex_puissances_3(valeurs[i]).translate(sd))
     cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" % tex_puissances_4(valeurs[i]).translate(sd))

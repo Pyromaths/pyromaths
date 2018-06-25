@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Pyromaths documentation build configuration file, created by
 # sphinx-quickstart on Fri May 17 09:31:13 2013.
 #

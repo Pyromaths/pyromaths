@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
+
 # Pyromaths
 # Un programme en Python qui permet de créer des fiches d'exercices types de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
@@ -24,13 +23,16 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import unicode_literals
-from builtins import chr
-from builtins import range
-from builtins import object
-from past.utils import old_div
+
 import math
+from builtins import chr
+from builtins import object
+from builtins import range
 from random import randrange
+
 from .Conversions import degres, radians
+
+
 def choix_points(n):
     """
     choisit n points parmi A, B, C, ..., Z
@@ -42,6 +44,7 @@ def choix_points(n):
     for i in range(n):
         liste.append(points.pop(randrange(len(points))))
     return liste
+
 
 couples_pythagore = (
     (12, 16, 20),
@@ -164,7 +167,8 @@ couples_pythagore = (
     (28, 195, 197),
     (56, 192, 200),
     (120, 160, 200),
-    )
+)
+
 
 def trouve_couples_pythagore(max):
     ls = []
@@ -188,25 +192,30 @@ def trouve_couples_pythagore(max):
             cpt += 1
     return tuple(ls)
 
-#----------------------------------------------------
+
+# ----------------------------------------------------
 # Cotation des longeurs sur une figure psTricks
 # A, B sont les coordonnées de deux points
 # cotation_h écrit au dessus du segment
-#----------------------------------------------------
+# ----------------------------------------------------
 
 def cotation(A, B, longueur, couleur="", unite="cm"):
     (xA, yA) = A
     (xB, yB) = B
     if couleur != "":
         couleur = "\\color{%s}" % couleur
-    return u"\\pcline[linestyle=none](%.3f,%.3f)(%.3f,%.3f)  \\bput{:U}{%s\\unit[%s]{%s}}" % (xA, yA, xB, yB, couleur, longueur, unite)
+    return u"\\pcline[linestyle=none](%.3f,%.3f)(%.3f,%.3f)  \\bput{:U}{%s\\unit[%s]{%s}}" % (
+        xA, yA, xB, yB, couleur, longueur, unite)
+
 
 def cotation_h(A, B, longueur, couleur="", unite="cm"):
     (xA, yA) = A
     (xB, yB) = B
     if couleur != "":
         couleur = "\\color{%s}" % couleur
-    return u"\\pcline[linestyle=none](%.3f,%.3f)(%.3f,%.3f)  \\aput{:U}{%s\\unit[%s]{%s}}" % (xA, yA, xB, yB, couleur, longueur, unite)
+    return u"\\pcline[linestyle=none](%.3f,%.3f)(%.3f,%.3f)  \\aput{:U}{%s\\unit[%s]{%s}}" % (
+        xA, yA, xB, yB, couleur, longueur, unite)
+
 
 # def trouve_couples_pythagore(valeurmax):
 #    (liste, listecouples) = ([], [])
@@ -245,19 +254,19 @@ class Metapost(object):
         return self
 
     def triangle(
-        self,
-        A,
-        B,
-        C,
-        a=0,
-        b=0,
-        c=0,
-        alpha=0,
-        beta=0,
-        gamma=0,
-        rotation=0,
-        angledroit=0,
-        ):
+            self,
+            A,
+            B,
+            C,
+            a=0,
+            b=0,
+            c=0,
+            alpha=0,
+            beta=0,
+            gamma=0,
+            rotation=0,
+            angledroit=0,
+    ):
         """Construit un triangle en metapost quelles que soient les données.
         La base est le côté [AB] de longueur c.
 
@@ -283,72 +292,53 @@ class Metapost(object):
         # on donne les trois longueurs des 3 côtés
 
         if a and b and c:
-            alpha = degres(math.acos(old_div(((b ** 2 + c ** 2) - a ** 2 * 1.), ((2 * 
-                     b) * c))))
-            beta = degres(math.acos(old_div(((c ** 2 + a ** 2) - b ** 2 * 1.), ((2 * 
-                    c) * a))))
+            alpha = degres(math.acos(b ** 2 + c ** 2 - a ** 2 / (2 * b * c)))
+            beta = degres(math.acos(c ** 2 + a ** 2 - b ** 2 / (2 * c * a)))
         elif a and b and gamma:
 
-        # Un angle et les deux côtés adjacents
+            # Un angle et les deux côtés adjacents
 
-            (c, beta, alpha) = self.triangle_angle_cotes_adjacents(a, b,
-                    gamma)
+            (c, beta, alpha) = self.triangle_angle_cotes_adjacents(a, b, gamma)
         elif b and c and alpha:
-            (a, gamma, beta) = self.triangle_angle_cotes_adjacents(b, c,
-                    alpha)
+            (a, gamma, beta) = self.triangle_angle_cotes_adjacents(b, c, alpha)
         elif c and a and beta:
-            (b, alpha, gamma) = self.triangle_angle_cotes_adjacents(c, a,
-                    beta)
+            (b, alpha, gamma) = self.triangle_angle_cotes_adjacents(c, a, beta)
         elif b and c and beta:
 
-        # Un angle, le côté opposé et un côté adjacent
+            # Un angle, le côté opposé et un côté adjacent
 
-            (a, alpha, gamma) = self.triangle_angle_cote_adjacent_cote_oppose(b,
-                    c, beta)
+            (a, alpha, gamma) = self.triangle_angle_cote_adjacent_cote_oppose(b, c, beta)
         elif b and a and beta:
-            (c, gamma, alpha) = self.triangle_angle_cote_adjacent_cote_oppose(b,
-                    a, beta)
+            (c, gamma, alpha) = self.triangle_angle_cote_adjacent_cote_oppose(b, a, beta)
         elif a and b and alpha:
-            (c, gamma, beta) = self.triangle_angle_cote_adjacent_cote_oppose(a,
-                    b, alpha)
+            (c, gamma, beta) = self.triangle_angle_cote_adjacent_cote_oppose(a, b, alpha)
         elif a and c and alpha:
-            (b, beta, gamma) = self.triangle_angle_cote_adjacent_cote_oppose(a,
-                    c, alpha)
+            (b, beta, gamma) = self.triangle_angle_cote_adjacent_cote_oppose(a, c, alpha)
         elif c and a and gamma:
-            (b, beta, alpha) = self.triangle_angle_cote_adjacent_cote_oppose(c,
-                    a, gamma)
+            (b, beta, alpha) = self.triangle_angle_cote_adjacent_cote_oppose(c, a, gamma)
         elif c and b and gamma:
-            (a, alpha, beta) = self.triangle_angle_cote_adjacent_cote_oppose(c,
-                    b, gamma)
+            (a, alpha, beta) = self.triangle_angle_cote_adjacent_cote_oppose(c, b, gamma)
         elif alpha and beta and c:
 
-        # Deux angles et le côté commun
+            # Deux angles et le côté commun
 
             pass  # on sait faire
         elif beta and gamma and a:
-            c = old_div((a * math.sin(old_div((gamma * math.pi), 180))), math.sin(old_div(((beta + 
-                    gamma) * math.pi), 180)))
+            c = a * math.sin(gamma * math.pi / 180) / math.sin((beta + gamma) * math.pi / 180)
             alpha = (180 - beta) - gamma
         elif alpha and gamma and b:
-            c = old_div((b * math.sin(old_div((gamma * math.pi), 180))), math.sin(old_div(((alpha + 
-                    gamma) * math.pi), 180)))
+            c = b * math.sin(gamma * math.pi / 180) / math.sin((alpha + gamma) * math.pi / 180)
             beta = (180 - alpha) - gamma
         elif a and alpha and beta:
-
-        # Deux angles et un côté non commun
-
-            c = old_div((a * math.sin(old_div(((alpha + beta) * math.pi), 180))), math.sin(old_div((alpha * 
-                    math.pi), 180)))
+            # Deux angles et un côté non commun
+            c = a * math.sin((alpha + beta) * math.pi / 180) / math.sin(alpha * math.pi / 180)
         elif a and alpha and gamma:
-            c = old_div((a * math.sin(old_div((gamma * math.pi), 180))), math.sin(old_div((alpha * 
-                    math.pi), 180)))
+            c = a * math.sin(gamma * math.pi / 180) / math.sin(alpha * math.pi / 180)
             beta = (180 - alpha) - gamma
         elif b and beta and alpha:
-            c = old_div((b * math.sin(old_div(((alpha + beta) * math.pi), 180))), math.sin(old_div((beta * 
-                    math.pi), 180)))
+            c = b * math.sin((alpha + beta) * math.pi / 180) / math.sin(beta * math.pi / 180)
         elif b and beta and gamma:
-            c = old_div((b * math.sin(old_div((gamma * math.pi), 180))), math.sin(old_div((beta * 
-                    math.pi), 180)))
+            c = b * math.sin(gamma * math.pi / 180) / math.sin(beta * math.pi / 180)
             alpha = (180 - beta) - gamma
         elif c and alpha and gamma:
             beta = (180 - alpha) - gamma
@@ -356,7 +346,6 @@ class Metapost(object):
             alpha = (180 - beta) - gamma
         alpha = alpha + rotation
         beta = beta - rotation
-
 
         self.text.append("  %s= (%s*u, 0) rotated %s;\n" % (B, c, rotation))
         self.text.append("  %s = %s + whatever*dir(%s);\n" % (C, A, alpha))
@@ -377,48 +366,30 @@ class Metapost(object):
                 self.text.append("      5*unitvector(%s-%s))--(%s+5*unitvector(%s-%s));\n" % (B, C, C, B, C))
             for i in range(3):
                 if marques[i]:
-                    self.text.append("  m3:=unitvector(%s-%s) rotated 90;\n" % (points[(i + 1) % 3], points[(i + 2) % 3]))
+                    self.text.append(
+                        "  m3:=unitvector(%s-%s) rotated 90;\n" % (points[(i + 1) % 3], points[(i + 2) % 3]))
                     self.text.append("  $:=image(\n")
-                    self.text.append("    label(btex %s etex rotated angle(%s-%s),(%s+%s)/2+2mm*m3);\n" % (marques[i], points[(i + 1) % 3], points[(i + 2) % 3], points[(i + 1) % 3], points[(i + 2) % 3]))
+                    self.text.append("    label(btex %s etex rotated angle(%s-%s),(%s+%s)/2+2mm*m3);\n" % (
+                        marques[i], points[(i + 1) % 3], points[(i + 2) % 3], points[(i + 1) % 3], points[(i + 2) % 3]))
                     self.text.append("    );\n  draw $;\n")
         self.text.append("  label.llft(btex $%s$ etex, %s);\n" % (A, A))
         self.text.append("  label.lrt(btex $%s$ etex, %s);\n" % (B, B))
         self.text.append("  label.top(btex $%s$ etex, %s);\n" % (C, C))
-        self.text.append("""endfig;
-
-""")
+        self.text.append("endfig;\n\n")
         self.num = self.num + 1
         return self
 
     def triangle_angle_cotes_adjacents(self, a, b, gamma):
         c = math.sqrt(a ** 2 + b ** 2 - 2 * a * b * math.cos(radians(gamma)))
-        alpha = 90. - old_div(gamma, 2) + degres(math.atan(old_div((old_div(((a - b) * 1.), (a + b))), 
-                math.tan(radians(old_div(gamma, 2))))))
-        beta = 90. - old_div(gamma, 2) - degres(math.atan((a - b) * 1. / (a + b) / 
-                math.tan(radians(old_div(gamma, 2)))))
+        alpha = 90. - gamma / 2 + degres(math.atan((a - b) / (a + b)) / math.tan(radians(gamma / 2)))
+        beta = 90. - gamma / 2 - degres(math.atan((a - b) / (a + b) / math.tan(radians(gamma / 2))))
         return (c, beta, alpha)
 
     def triangle_angle_cote_adjacent_cote_oppose(self, b, c, beta):
-        if b <= c * math.sin(old_div((beta * math.pi), 180)):
+        if b <= c * math.sin(beta * math.pi / 180):
             alpha = gamma = a = 0  # Pas possible de résoudre
         else:
-            gamma = degres(math.asin((old_div((c * math.sin(old_div((beta * math.pi), 180))), 
-                     b)) * 1.))
+            gamma = degres(math.asin(c * math.sin(beta * math.pi / 180)) / b)
             alpha = (180 - beta) - gamma
-            a = math.sqrt(b ** 2 - c ** 2 * math.sin(old_div((beta * math.pi), 
-                          180)) ** 2) + c * math.cos(old_div((beta * math.pi), 
-                    180))
+            a = math.sqrt(b ** 2 - c ** 2 * math.sin(beta * math.pi / 180) ** 2) + c * math.cos(beta * math.pi / 180)
         return (a, alpha, gamma)
-
-
-# fig = Metapost()
-# fig = Metapost.triangle(
-    # fig, "A", "B",  "C", a=3, b=4.2, c=4.2, rotation=10, angledroit=1)
-# fig = Metapost.triangle(
-    # fig, "D", "E",  "F", a=4, b=5.7, c=6.5, rotation=90, angledroit=1)
-# fig = Metapost.triangle(
-    # fig, "G", "H",  "I", a=3.5, b=3.5, c=3.5, rotation=0, angledroit=1)
-# fig = Metapost.triangle(
-    # fig, "J", "K",  "L", a=4, b=4.5, c=4.5, rotation=30, angledroit=1)
-# fig = Metapost.fin(fig)
-# print string.join(fig.text, "")

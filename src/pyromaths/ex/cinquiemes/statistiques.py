@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
+
 # Pyromaths
 # Un programme en Python qui permet de créer des fiches d'exercices types de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
@@ -24,7 +23,6 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import str
 from builtins import range
-from past.utils import old_div
 import random
 from math import cos, sin, radians
 from pyromaths.outils.decimaux import decimaux
@@ -267,7 +265,7 @@ def exo_pi():
     cor.append(_(u"Chaque effectif se complète en comptant le nombre d'apparition de chaque chiffre dans la liste de l'énoncé."))
     cor.append(_(u"Comme les chiffres sont rangés par 20, on voit assez rapidement que le nombre total de chiffres est de ") + str(nb_dec) + ".\\par")
     cor.append(_(u"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise par le nombre total de chiffres, puis il ne faut pas oublier d'arrondir au centième.\\par\n"))
-    cor.append(_(u"Par exemple pour la fréquence du chiffre 1 : $\\dfrac{") + decimaux(effectifs[0]) + "\\times 100}{" + str(nb_dec) + "} \\approx " + decimaux(frequences[0]) + "$.\\par")
+    cor.append(_(u"Par exemple pour la fréquence du chiffre 1 : $\\dfrac{") + decimaux(effectifs[0]) + "\\times 100}{" + str(nb_dec) + "} \\simeq " + decimaux(frequences[0]) + "$.\\par")
     cor.append("\\end{enumerate}")
     cor.append(tableau_cor)
     exo.append("\\begin{enumerate}")
@@ -334,7 +332,7 @@ def exo_notes():
     cor.append(_(u"Chaque effectif se complète en comptant le nombre d'apparition de chaque note dans le tableau de l'énoncé."))
     cor.append(_(u"Le nombre de notes du contrôle, qui est aussi le nombre d'élèves, est donc de ") + str(nb_eleves) + ".\\par")
     cor.append(_(u"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise par le nombre total de notes, puis il ne faut pas oublier d'arrondir au centième.\\par\n"))
-    cor.append(_(u"Par exemple pour la fréquence des notes dans la première classe : $\\dfrac{") + decimaux(classes_effectifs[0]) + "\\times 100}{" + str(nb_eleves) + "} \\approx " + decimaux(frequences[0]) + "$.\\par")
+    cor.append(_(u"Par exemple pour la fréquence des notes dans la première classe : $\\dfrac{") + decimaux(classes_effectifs[0]) + "\\times 100}{" + str(nb_eleves) + "} \\simeq " + decimaux(frequences[0]) + "$.\\par")
     cor.append(u"\\end{enumerate}")
     cor.append(tableau_tex(titres, ">{\\centering\\arraybackslash}p{2.1cm}", 1, 1, [classes_effectifs, frequences]))
 
@@ -424,7 +422,7 @@ def exo_de():
     cor.append(_(u"Chaque effectif se complète en comptant le nombre d'apparition de chaque chiffre dans la liste de l'énoncé."))
     cor.append(_(u"Comme les chiffres sont rangés par 25, on voit assez rapidement que le nombre total de chiffres est de ") + str(nb_simul) + ".\\par")
     cor.append(_(u"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise par le nombre total de chiffres, puis il ne faut pas oublier d'arrondir au centième.\\par\n"))
-    cor.append(_(u"Par exemple pour la fréquence du chiffre 1 : $\\dfrac{") + str(effectifs[0]) + "\\times 100}{" + str(nb_simul) + "} \\approx " + decimaux(frequences[0]) + "$.\\par")
+    cor.append(_(u"Par exemple pour la fréquence du chiffre 1 : $\\dfrac{") + str(effectifs[0]) + "\\times 100}{" + str(nb_simul) + "} \\simeq " + decimaux(frequences[0]) + "$.\\par")
     cor.append(tableau_cor)
     cor.append(u"\\bigskip")
     exo.append(_(u"\\item Représenter la répartition des chiffres dans un diagramme en bâtons avec 1cm pour 10\\%.\\par"))
@@ -601,7 +599,7 @@ def exo_sport():
     question1 = \
         _(u"""\\renewcommand{\\arraystretch}{1.8}
         \\item On a demandé aux élèves d'une classe de cinquième combien de temps par semaine était consacré à leur sport favori.\\par
-        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Durée t (en h)&  $0 \\le t < 1$ & $1 \\le t  < 2$ & $2 \\le t  < 3$ & $3 \\le t  < 4$ &  $4 \\le t  < 5$ & $5 \\le t  < 6$ & $6 \\le t  < 7$ \\\\\\hline Effectif & %s & %s & %s & %s & %s & %s & %s \\\\\\hline \\end{tabular}\\par
+        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Durée t (en h)&  $0 \\leqslant{} t < 1$ & $1 \\leqslant{} t  < 2$ & $2 \\leqslant{} t  < 3$ & $3 \\leqslant{} t  < 4$ &  $4 \\leqslant{} t  < 5$ & $5 \\leqslant{} t  < 6$ & $6 \\leqslant{} t  < 7$ \\\\\\hline Effectif & %s & %s & %s & %s & %s & %s & %s \\\\\\hline \\end{tabular}\\par
         À partir de ce tableau, construire un  histogramme pour représenter ces données.\\par""") % (h1, h2, h3, h4, h5, h6, h7)
     question2 = \
         _(u"""\\item On a demandé aux élèves quel était leur sport préféré. %s élèves préfèrent le basket-ball, %s le tennis, %s le football et %s le judo. Construire un diagramme circulaire représentant cette répartion.\\par""") % (basket, tennis, football, judo)

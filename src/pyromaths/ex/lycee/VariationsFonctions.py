@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
+
 # Pyromaths
 # Un programme en Python qui permet de créer des fiches d'exercices types de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
@@ -898,7 +897,7 @@ class Vf5Extrema_Tableau(ex.TexExercise):
         extr = extrema(self.lX, self.lY, [self.lX[0], self.lX[-1]])
         exo.append(_(r'\item Pour $x \in \interval{%s}{%s},\quad f\,(x) %s %s$') % (self.lX[0], self.lX[-1], self.inegalites[0], extr['\\leqslant{}' == self.inegalites[0]][1]))
         exo.append(_(r'\item Pour $x \in \interval{%s}{%s},\quad f\,(x) %s %s$') % (self.lX[0], self.lX[-1], self.inegalites[1], extr['\\leqslant{}' == self.inegalites[1]][1]))
-        exo.append(_(r'\item Pour $x \in \interval{%s}{%s},\quad f\,(x) %s %s$') % (decimaux(self.comparaison[0][0][0], 1), decimaux(self.comparaison[0][1][0], 1), self.inegalites[2], self.comparaison[0][2]['\\le' == self.inegalites[2]]))
+        exo.append(_(r'\item Pour $x \in \interval{%s}{%s},\quad f\,(x) %s %s$') % (decimaux(self.comparaison[0][0][0], 1), decimaux(self.comparaison[0][1][0], 1), self.inegalites[2], self.comparaison[0][2]['\\leqslant{}' == self.inegalites[2]]))
         exo.append(r'\end{enumerate}')
         exo.append(r'\end{multicols}')
         exo.append(r'\item')

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
+
 # Pyromaths
 # Un programme en Python qui permet de créer des fiches d'exercices types de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
@@ -23,11 +22,14 @@
 
 from __future__ import division
 from __future__ import unicode_literals
-from builtins import str
-from builtins import range
+
 from builtins import object
+from builtins import range
+from builtins import str
+
 if __name__ == "__main__":
     import sys, os
+
     sys.path.append(os.path.join('..'))
 
 # from .Racine import simplifie_racine, RacineDegre2, sqrt
@@ -38,28 +40,30 @@ import re
 # from pyromaths.outils.Affichage import pTeX, TeX, radicalTeX, fTeX, Fractions, tTeX
 from pyromaths.outils.Affichage import TeX, tTeX
 
+
 class Polynome(object):
     '''Classe de polynôme pour le lycee'''
+
     def __init__(self, liste_coeff, var="x"):
         self.var = var  # Lettre pour la var
         liste_reduite = {}
         if isinstance(liste_coeff, str):
             liste_coeff = _str_Polynome(liste_coeff, var)
         elif isinstance(liste_coeff, list):
-            liste_coeff = dict((i, liste_coeff[i])for i in range(len(liste_coeff)))
+            liste_coeff = dict((i, liste_coeff[i]) for i in range(len(liste_coeff)))
         elif isinstance(liste_coeff, int) or isinstance(liste_coeff, Fraction) or isinstance(liste_coeff, float):
-            liste_coeff = {0:liste_coeff}
+            liste_coeff = {0: liste_coeff}
         for i in list(liste_coeff.keys()):
             if liste_coeff[i] != 0:
                 if isinstance(liste_coeff[i], (RacineDegre2, Fraction)):
-                    #===========================================================
+                    # ===========================================================
                     # print liste_coeff[i]
-                    #===========================================================
+                    # ===========================================================
                     liste_reduite[i] = liste_coeff[i].simplifie()
                 else:
                     liste_reduite[i] = Fraction(liste_coeff[i], 1)
         if liste_reduite == {} or liste_coeff == []:
-            liste_reduite = {0:0}
+            liste_reduite = {0: 0}
         self.dictio = liste_reduite
         self.puiss = list(liste_reduite.keys())
         self.puiss.sort(reverse=True)
@@ -86,10 +90,10 @@ class Polynome(object):
 
     def __repr__(self):
         return '{classe}({coef}, var="{var}")'.format(
-                classe=self.__class__.__name__,
-                coef=repr(self.dictio),
-                var=self.var,
-                )
+            classe=self.__class__.__name__,
+            coef=repr(self.dictio),
+            var=self.var,
+        )
 
     def TeX(self, var='', display=True, parenthese=False):
         '''renvoie une chaine de caractere imprimant les fractions dans TeX'''
@@ -98,13 +102,13 @@ class Polynome(object):
         exposants = [] + self.puiss
         premier = 1
         string = ''
-        #=======================================================================
+        # =======================================================================
         # if display:
         #     fractex="\\dfrac"
         # else:
         #     fractex="\\frac"
-        #=======================================================================
-        for exposant in exposants :
+        # =======================================================================
+        for exposant in exposants:
             if premier:
                 if self[exposant] == 1 and exposant != 0:
                     string = ''
@@ -135,12 +139,13 @@ class Polynome(object):
             return string
 
     def __add__(self, other):
-        if isinstance(other, int) or isinstance(other, float) or  isinstance(other, Fraction) or isinstance(other, RacineDegre2):
-            return self +Polynome({0:other}, var=self.var)
-        result = {0:0}
+        if isinstance(other, int) or isinstance(other, float) or isinstance(other, Fraction) or isinstance(other,
+                                                                                                           RacineDegre2):
+            return self + Polynome({0: other}, var=self.var)
+        result = {0: 0}
         liste1 = self.puiss
         liste2 = other.puiss
-        for i in liste1 :
+        for i in liste1:
             s = self.dictio.get(i) + other.dictio.get(i, 0)
             if s != 0:
                 result[i] = s
@@ -151,19 +156,21 @@ class Polynome(object):
 
     def __mul__(self, other):
         if isinstance(other, Polynome):
-            result = Polynome({0:0}, var=self.var)
+            result = Polynome({0: 0}, var=self.var)
             for i in list(self.dictio.keys()):
                 for j in list(other.dictio.keys()):
                     exposant = i + j
                     coefficient = self.dictio[i] * other.dictio[j]
-                    result = result + Polynome({exposant:coefficient}, var=self.var)
+                    result = result + Polynome({exposant: coefficient}, var=self.var)
             return result
         else:
             return self * Polynome(other)
+
     def __ne__(self, other):
-        return not(self == other)
+        return not (self == other)
+
     def __eq__(self, other):
-        if (isinstance(other, int) or isinstance(other, Fraction) or isinstance(other, float)):
+        if isinstance(other, int) or isinstance(other, Fraction) or isinstance(other, float):
             if self.degre_max == 0 and self[0] == other:
                 return True
             else:
@@ -175,32 +182,32 @@ class Polynome(object):
 
     def __pow__(self, other):
         if isinstance(other, int) and other >= 0:
-            result = Polynome({0:1}, self.var)
+            result = Polynome({0: 1}, self.var)
             for dummy in range(other):
                 result *= self
             return result
 
     def __radd__(self, other):
         if isinstance(other, int) or isinstance(other, float) or isinstance(other, Fraction):
-            return self +Polynome({0:other}, var=self.var)
-        return self +other
+            return self + Polynome({0: other}, var=self.var)
+        return self + other
 
     def __sub__(self, other):
-        return self +(-other)
+        return self + (-other)
 
     def __rsub__(self, other):
-        return -(self -other)
+        return -(self - other)
 
     def __neg__(self):
-        return self * Polynome({0:-1}, var=self.var)
+        return self * Polynome({0: -1}, var=self.var)
 
     def __rmul__(self, nombre):
-        return self * Polynome({0:nombre})
+        return self * Polynome({0: nombre})
 
     def __truediv__(self, other):
         if isinstance(other, int):
             return Fraction(1, other) * self
-        elif isinstance(other, Fraction) or isinstance(other, float)or isinstance(other, RacineDegre2):
+        elif isinstance(other, Fraction) or isinstance(other, float) or isinstance(other, RacineDegre2):
             return self // other
         else:
             quotient = Polynome({}, var=self.var)
@@ -208,12 +215,13 @@ class Polynome(object):
             diviseur_degre = other.deg
             while diviseur_degre <= reste.deg:
                 ajout_quotient_deg = reste.deg - diviseur_degre
-                facteur = reste.dictio[reste.deg] // other.dictio[other.deg]
-                ajout_quotient = Polynome({ajout_quotient_deg:facteur}, var=self.var)
+                facteur = reste.dictio[reste.deg] / other.dictio[other.deg]
+                ajout_quotient = Polynome({ajout_quotient_deg: facteur}, var=self.var)
                 quotient = quotient + ajout_quotient
                 soustrait_reste = ajout_quotient * other
                 reste = reste - soustrait_reste
             return quotient, reste
+
     def simplifie(self):
         result = {}
         for i in self.puiss:
@@ -223,7 +231,7 @@ class Polynome(object):
                 result[i] = self[i]
         return Polynome(result)
 
-    def __call__(self, x,):
+    def __call__(self, x, ):
         '''renvoie la Fraction ou l'int P(x)'''
         if x == float("inf") or x == float("-inf"):
             if self.degre_max == 0:
@@ -263,23 +271,23 @@ class Polynome(object):
         return listerac
 
     def factorise(self, TeX=False, racines=[0, -1, 1, 2, -2]):
-        facteurs = [Polynome({0:self.dictio[self.deg]}, var=self.var)]
+        facteurs = [Polynome({0: self.dictio[self.deg]}, var=self.var)]
         developpe, reste = self // facteurs[0]
         for r in racines:
             while developpe(r) == 0:
                 rac = -r
-                developpe, reste = developpe // Polynome({1:1, 0:rac}, var=self.var)
-                facteurs = facteurs + [Polynome({1:1, 0:rac})]
+                developpe, reste = developpe // Polynome({1: 1, 0: rac}, var=self.var)
+                facteurs = facteurs + [Polynome({1: 1, 0: rac})]
         if TeX:
             stringTeX = ""
-            if not(facteurs[0] == Polynome({0:1}, var=self.var)):
+            if not (facteurs[0] == Polynome({0: 1}, var=self.var)):
                 stringTeX += facteurs[0].TeX()
             for i in facteurs[1:]:
                 if i[0] != 0:
                     stringTeX += "\\left(" + i.TeX() + "\\right) \\times "
                 else:
                     stringTeX += i.TeX() + " \\times "
-            if developpe == Polynome({0:1}, var=self.var):
+            if developpe == Polynome({0: 1}, var=self.var):
                 return stringTeX[:-7]
             else:
                 return stringTeX + "\\left(" + developpe.TeX() + "\\right)"
@@ -294,11 +302,13 @@ class Polynome(object):
             else:
                 result[i - 1] = int(i) * self[i]
         return Polynome(result, self.var)
+
     def primitive(self):
         result = {}
         for i in list(self.dictio.keys()):
             result[i + 1] = Fraction(1, int(i + 1)) * self.dictio[i]
         return Polynome(result, self.var)
+
 
 def _str_Polynome(string, var='x'):
     '''str -> dict'''
@@ -337,24 +347,3 @@ def _str_Polynome(string, var='x'):
                 else:
                     termes[int(a[1])] = coeff * Fraction(eval(a[0]))
     return termes
-
-if __name__ == "__main__":
-    from TEST.imprimetest import *
-    X = Polynome("x")
-    P = Polynome({2:4, 1:8, 0:1, 3:0})
-# #    Q=Polynome({2:-4,0:-1,1:8})
-# #    R=Polynome({3:1,2:1,1:-2})
-# #    D=Polynome({1:1,0:2})
-# #    F=Polynome("x-4")
-# #    FF=Polynome("x^2-3")
-# #    Divi=FF*F+7
-# #    FR=Polynome({3:Fraction(2,3),2:Fraction(2,3),1:Fraction(-4,3)})
-# #    print "P=", P
-# #    print "Q=", Q
-# #    print "R=", R
-# #    print "FR=",FR
-# #    R_facteur=R.factorise()
-# #    print "R=",R.factorise(TeX=True)
-# #    #TeX_division(R,D)
-# #    print Divi*Polynome("x^3")-28*X
-# #    #imprime_TeX(TeX_division(Divi*Polynome("x^3")-28*X,F*X))

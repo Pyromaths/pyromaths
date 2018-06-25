@@ -261,7 +261,7 @@ Cette option permet de définir des commandes (du shell) qui seront executées s
 Bilan
 -----
 
-Nous avons produit l'exercice :download:`exercice.pdf <ecrire/3/exercice.pdf>`. Il fonctionne, mais il y a trois problèmes dans le corrigé : premièrement, alors que la solution est exacte, le signe :math:`\approx` est utilisé ; ensuite, bien que la solution soit entière, le code a produit ``3,0`` plutôt que ``3`` ; enfin, un troisième problème n'apparaît pas ici, mais sera expliqué et résolu plus loin dans ce document.
+Nous avons produit l'exercice :download:`exercice.pdf <ecrire/3/exercice.pdf>`. Il fonctionne, mais il y a trois problèmes dans le corrigé : premièrement, alors que la solution est exacte, le signe :math:`\simeq` est utilisé ; ensuite, bien que la solution soit entière, le code a produit ``3,0`` plutôt que ``3`` ; enfin, un troisième problème n'apparaît pas ici, mais sera expliqué et résolu plus loin dans ce document.
 
 .. figure:: ecrire/3/corrige.png
    :align: center
@@ -271,7 +271,7 @@ Nous avons produit l'exercice :download:`exercice.pdf <ecrire/3/exercice.pdf>`. 
 Structures de contrôle
 ======================
 
-Dans la correction de l'exercice, le signe utilisé pour donner la solution est :math:`\approx`, que la solution soit exacte ou non. Cela peut être corrigé avec une structure de contrôle.
+Dans la correction de l'exercice, le signe utilisé pour donner la solution est :math:`\simeq`, que la solution soit exacte ou non. Cela peut être corrigé avec une structure de contrôle.
 
 Structures de contrôles
 -----------------------

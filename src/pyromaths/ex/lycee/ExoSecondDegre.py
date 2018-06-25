@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from __future__ import unicode_literals
 from pyromaths.outils.Arithmetique import *
 
@@ -45,13 +43,13 @@ def exo_second_degre():
     exo += _(u"\\par Question 2 : Résoudre les inéquations suivantes : ")
     cor += _(u"\\par Question 2 : Résoudre les inéquations suivantes : ")
 
-    exo += "\\par a)$" + pol5[1].print_signe("\\le") + "$\n"
-    exo += "\\par b)$" + pol6[1].print_signe("\\ge") + "$\n"
+    exo += "\\par a)$" + pol5[1].print_signe("\\leqslant{}") + "$\n"
+    exo += "\\par b)$" + pol6[1].print_signe("\\geqslant{}") + "$\n"
     exo += "\\par c)$" + pol7[1].print_signe(">") + "$\n"
     exo += "\\par d)$" + pol8[1].print_signe("<") + "$\n"
 
-    cor += "\\par a)$" + pol5[1].print_signe("\\le") + "$\n"
-    cor += "\\par b)$" + pol6[1].print_signe("\\ge") + "$\n"
+    cor += "\\par a)$" + pol5[1].print_signe("\\leqslant{}") + "$\n"
+    cor += "\\par b)$" + pol6[1].print_signe("\\geqslant{}") + "$\n"
     cor += "\\par c)$" + pol7[1].print_signe(">") + "$\n"
     cor += "\\par d)$" + pol8[1].print_signe("<") + "$\n"
 
