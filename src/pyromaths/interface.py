@@ -31,7 +31,7 @@ from PyQt5.QtWidgets import QFileDialog, QMessageBox
 import os, lxml, codecs, sys
 from .outils import System
 from .Values import CONFIGDIR, DATADIR, COPYRIGHTS, VERSION, ICONDIR
-from .Values import lesfiches
+from .Values import exercices
 from operator import itemgetter
 
 try:
@@ -42,8 +42,8 @@ except NameError:
 
 class Ui_MainWindow(object):
     def __init__(self, *args, **kwargs):
-        super(Ui_MainWindow, self).__init__(*args, **kwargs)
-        self.lesfiches = lesfiches()
+        super().__init__(*args, **kwargs)
+        self.exercices = exercices()
 
     def setupUi(self, MainWindow):
         #============================================================
@@ -109,13 +109,10 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
 
         #============================================================
-        #        Remplissage des 4 niveaux
+        #        Remplissage des niveaux
         #============================================================
         self.tabs = []
-        self.lesfiches.sort(key=itemgetter(0), reverse=True)
-        MESFICHES = [[self.lesfiches[i][0][2:], '', self.lesfiches[i][2]] for i in range(len(self.lesfiches))]
-
-        for level in MESFICHES:
+        for level in self.exercices:
             self.tabs.append(Tab(self.tabWidget, level, self.setNbExos))
 
         #============================================================
@@ -472,10 +469,10 @@ class Ui_MainWindow(object):
             for i in range(len(self.liste_creation)):
                 niveau = self.liste_creation[i][0]
                 exo = self.liste_creation[i][1]
-                liste.append(self.lesfiches[niveau][2][exo])
+                liste.append(self.exercices[niveau][1][exo])
             self.List = QtWidgets.QListWidget()
             for i in range(len(liste)):
-                item = QtWidgets.QListWidgetItem(liste[i].description)
+                item = QtWidgets.QListWidgetItem(liste[i].description())
                 item.setFlags(QtCore.Qt.ItemIsEnabled |
                               QtCore.Qt.ItemIsSelectable |
                               QtCore.Qt.ItemIsDragEnabled)
@@ -487,9 +484,9 @@ class Ui_MainWindow(object):
             if bmono:
                 # S'il ny a qu'un seul type d'exercices, pas la peine de choisir
                 # l'ordre
-                valide(self.List, self.lesfiches, parametres)
+                valide(self.List, self.exercices, parametres)
             else:
-                form = ChoixOrdreExos(self.List, self.lesfiches, parametres, self.centralwidget)
+                form = ChoixOrdreExos(self.List, self.exercices, parametres, self.centralwidget)
                 form.exec_()
 
     def effacer_choix_exercices(self):
@@ -549,7 +546,7 @@ class Ui_MainWindow(object):
         niveau = 0
         self.liste_creation = []
         for pkg_no in range(len(self.tabs)):
-            for box in range(len(self.lesfiches[pkg_no][2])):
+            for box in range(len(self.exercices[pkg_no][1])):
                 qte = self.tabs[pkg_no].spinBox[box].value()
                 for dummy in range(qte):
                     self.liste_creation.append((pkg_no, box))
@@ -579,7 +576,7 @@ QCoreApplication::exec: The event loop is already runningteur avec le dictionnai
 
 class ChoixOrdreExos(QtWidgets.QDialog):
     """À appeler de la façon suivante :
-    form = ChoixOrdreExos(liste, LesFiches, parametres)
+    form = ChoixOrdreExos(liste, exercices, parametres)
     Permet de choisir l'ordre dans lequel les exercices vont apparaître
     parametres = {'fiche_exo':
                   'fiche_cor':
@@ -592,8 +589,8 @@ class ChoixOrdreExos(QtWidgets.QDialog):
                   'chemin_fichier':
                  }"""
 
-    def __init__(self, liste, LesFiches, parametres, parent=None):
-        self.lesfiches = LesFiches
+    def __init__(self, liste, exercices, parametres, parent=None):
+        self.exercices = exercices
         self.parametres = parametres
         self.List = liste
         QtWidgets.QDialog.__init__(self, parent)
@@ -620,10 +617,10 @@ class ChoixOrdreExos(QtWidgets.QDialog):
     def accept(self):
         """Écrit une liste contenant la liste des exercices dans l'ordre choisit par l'utilisateur et demande à
         celui-ci les noms de fichiers pour les exercices et les corrigés"""
-        valide(self.List, self.lesfiches, self.parametres)
+        valide(self.List, self.exercices, self.parametres)
         self.close()
 
-def valide(liste, LesFiches, parametres):
+def valide(liste, exercices, parametres):
     """ Permet de choisir les noms et emplacements des fichiers tex, les écrits
     et lance la compilation LaTex"""
     corrige = parametres['corrige']
@@ -637,22 +634,21 @@ def valide(liste, LesFiches, parametres):
     filename = System.supprime_extension(parametres['nom_fichier'], '.tex')
     options = QFileDialog.Options()
     options |= QFileDialog.DontUseNativeDialog
-    f0, _ = QFileDialog.getSaveFileName(None,"Enregistrer sous...",
+    f0, _ignored = QFileDialog.getSaveFileName(None,"Enregistrer sous...",
         os.path.join(parametres['chemin_fichier'], u'%s.tex' % filename),
         "Documents Tex (*.tex);;All Files(*)",
         options=options)
     # f0 = unicode(saveas.getSaveFileName(None, "Enregistrer sous...",
                 # os.path.join(parametres['chemin_fichier'],
                              # u'%s.tex' % filename), "Documents Tex (*.tex)"))[0]
-    print(f0)
-    print(os.path.splitext(os.path.basename(f0))[0])
     if f0:
         System.ajoute_extension(f0, '.tex')
         if corrige and not parametres['creer_unpdf']:
-            f1 = str(saveas.getSaveFileName(None, "Enregistrer sous...",
-                os.path.join(os.path.dirname(f0),
-                _(u"%s-corrige.tex") % os.path.splitext(os.path.basename(f0))[0]),
-                _("Documents Tex (*.tex)")))[0]
+            f1 = QFileDialog.getSaveFileName(None, "Enregistrer sous...",
+                os.path.join(os.path.dirname(f0), _(u"%s-corrige.tex") % os.path.splitext(os.path.basename(f0))[0]),
+                _("Documents Tex (*.tex)"),
+                options=options,
+                )[0]
         else:
             f1 = os.path.join(os.path.dirname(f0),
                     os.path.splitext(os.path.basename(f0))[0] + "-corrige.tex")
@@ -662,7 +658,6 @@ def valide(liste, LesFiches, parametres):
             parametres ['fiche_exo'] = f0
             parametres ['fiche_cor'] = f1
             parametres ['liste_exos'] = lesexos
-            parametres ['les_fiches'] = LesFiches
             System.creation(parametres)
 
 #================================================================
@@ -675,7 +670,7 @@ class Tab(QtWidgets.QWidget):
     def __init__(self, parent, level, onchange):
         QtWidgets.QWidget.__init__(self)  # Initialise la super-classe
         self.titre = level[0]
-        self.exos = level[2]
+        self.exos = level[1]
         self.scroll = QtWidgets.QScrollArea(self)
         self.scroll.setFrameStyle(QtWidgets.QFrame.StyledPanel)
         self.scroll.setWidgetResizable(True)
@@ -719,7 +714,7 @@ class Tab(QtWidgets.QWidget):
         layout.addWidget(img)
         # Label
         label = QtWidgets.QLabel(self.widget)
-        label.setText(self.exos[i].description)
+        label.setText(self.exos[i].description())
         layout.addWidget(label)
         # Espacements
         spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)

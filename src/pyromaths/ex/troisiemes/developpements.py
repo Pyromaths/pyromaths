@@ -26,9 +26,10 @@ from random import randrange, shuffle
 from pyromaths.classes.Fractions import Fraction
 from pyromaths.outils import Priorites3
 from pyromaths.outils.Arithmetique import pgcd
+from pyromaths.ex import LegacyExercise
 
 
-def id_rem():
+def _id_rem():
     """Génère un exercice de développement des 3 identités remarquables avec une situation piège.
     Dans un premier temps, on n'utilise que des nombres entiers, puis des fractions, puis l'opposé 
     d'une expression littérale.
@@ -82,4 +83,8 @@ def id_rem4(a, b, details=2):
     return 'Polynome([[%r, 1], [%r, 0]], details=%s) * Polynome([[%r, 1], [%r, 0]], details=%s)' % (a, (-1) ** sgn * b, details, b, (-1) ** (sgn + 1) * a, details)
 
 
-id_rem.description = u'Identités remarquables'
+class id_rem(LegacyExercise):
+    """Identités remarquables"""
+
+    tags = ["Troisième"]
+    function = _id_rem

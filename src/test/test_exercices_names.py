@@ -10,10 +10,5 @@ class UniqueName(unittest.TestCase):
 
         levels = pyromaths.ex.load_levels()
         for level in levels:
-            names = []
-            for exercice in levels[level]:
-                if issubclass(exercice, pyromaths.ex.LegacyExercise):
-                    names.append(exercice.function[0].__name__)
-                else:
-                    names.append(exercice.__name__)
-            self.assertEqual(len(names), len(set(names)))
+            names = [exo.name for exo in levels[level]]
+        self.assertEqual(len(names), len(set(names)))

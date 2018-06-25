@@ -52,9 +52,10 @@ def racines(p, lracines):
     d = float(eval(Priorites3.priorites(delta)[-1][0]))
     return (-float(q[1][0]) + sqrt(d)) / 2 / float(q[0][0]), (-float(q[1][0]) - sqrt(d)) / 2 / float(q[0][0])
 
-class EquationGraphique(ex.TexExercise):
-    # description = _(u'Résolution graphique d\'équations')
-    # level = _(u"2.Seconde")
+class _EquationGraphique(ex.TexExercise):
+    """Résolution graphique d'équations"""
+
+    tags = ["Seconde"]
 
     def __init__(self):
         """
@@ -118,4 +119,4 @@ class EquationGraphique(ex.TexExercise):
         # print racines(self.polynome, [self.points[i][0] for i in range(3)])
         # print racines(self.polynome, [self.points[i][0] for i in range(3, 6)])
         #=======================================================================
-        return exo
+        return "\n".join(exo)

@@ -27,6 +27,7 @@ import random
 from math import cos, sin, radians
 from pyromaths.outils.decimaux import decimaux
 from pyromaths.outils.Arithmetique import pgcd
+from pyromaths.ex import LegacyExercise
 
 def tableau_tex(titres, larg="c", eff=1, freq=1, val=[[], []], total=1):
     """Génère le tableau des effectifs (liste val[1]) et fréquences (liste val[2])."""
@@ -659,7 +660,7 @@ def exo_sport():
     cor.append(u"\\end{enumerate}")
     return (exo, cor)
 
-def statistiques():
+def _statistiques():
     """Construit au hasard l'un des six types d'exos de statistiques."""
     global exo, cor
 
@@ -685,4 +686,8 @@ def statistiques():
 
     return (exo, cor)
 
-statistiques.description = _(u'Statistiques')
+class statistiques(LegacyExercise):
+    """Statistiques"""
+
+    tags = ["Cinquième"]
+    function = _statistiques

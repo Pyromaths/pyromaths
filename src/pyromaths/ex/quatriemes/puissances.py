@@ -27,6 +27,7 @@ from builtins import range
 from pyromaths.outils.Arithmetique import pgcd, valeur_alea
 from pyromaths.outils.Affichage import decimaux, tex_coef
 from random import choice, randrange
+from pyromaths.ex import LegacyExercise
 import string
 
 
@@ -60,7 +61,7 @@ def tex_proprietes_val(exp_max, nb_max, typeexo):
     return (nb1, exp1, nb2, exp2)
 
 
-def tex_proprietes():
+def _tex_proprietes():
     exo = ["\\exercice",
            u"Compléter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :",
            "\\begin{multicols}{4}", "  \\noindent%",
@@ -108,7 +109,11 @@ def tex_proprietes():
     cor.append("\\end{multicols}\n")
     return (exo, cor)
 
-tex_proprietes.description = u'Propriétés sur les puissances'
+class tex_proprietes(LegacyExercise):
+    """Propriétés sur les puissances"""
+
+    tags = ["Quatrième"]
+    function = _tex_proprietes
 
 
 # ----PROPRIETES AVEC 10
@@ -144,7 +149,7 @@ def tex_proprietes_neg_val(exp_max, nb_max, typeexo):
     return (nb1, exp1, nb2, exp2)
 
 
-def tex_proprietes_neg():
+def _tex_proprietes_neg():
     exo = ["\\exercice",
            u"Écrire sous la forme d'une puissance de 10 puis donner l'écriture",
            u" décimale de ces nombres :", "\\begin{multicols}{2}",
@@ -199,7 +204,11 @@ def tex_proprietes_neg():
     cor.append("\\end{multicols}\n")
     return (exo, cor)
 
-tex_proprietes_neg.description = u'Propriétés sur les puissances de 10'
+class tex_proprietes_neg(LegacyExercise):
+    """Propriétés sur les puissances de 10"""
+
+    tags = ["Quatrième"]
+    function = _tex_proprietes_neg
 
 
 #------------------------------------------------------------------------------
@@ -220,7 +229,7 @@ def val_sc():
     return a
 
 
-def ecr_sc():
+def _ecr_sc():
     from math import log10, floor
     exo = ["\\exercice", u"Compléter par le nombre qui convient :",
            "\\begin{multicols}{3}", "  \\noindent%",
@@ -252,13 +261,17 @@ def ecr_sc():
     cor.append("\\end{multicols}\n")
     return (exo, cor)
 
-ecr_sc.description = u'Écritures scientifiques'
+class ecr_sc(LegacyExercise):
+    """Écritures scientifiques"""
+
+    tags = ["Quatrième"]
+    function = _ecr_sc
 
 
 # ------------------- PUISSANCES de 10 -------------------
 
 
-def exo_puissances():
+def _exo_puissances():
     from math import floor, log10
     sd = str.maketrans('.', ',')  # convertit les . en , (separateur decimal)
     exo = ["\\exercice",
@@ -289,7 +302,11 @@ def exo_puissances():
     cor.append("\\end{multicols}\n")
     return (exo, cor)
 
-exo_puissances.description = u'Puissances de 10'
+class exo_puissances(LegacyExercise):
+    """Puissances de 10"""
+
+    tags = ["Quatrième"]
+    function = _exo_puissances
 
 
 def tex_puissances_0(a):

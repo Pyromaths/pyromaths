@@ -62,7 +62,7 @@ class ExerciseNotFound(PyromathsException):
     """Name of exercise cannot be found in known exercises."""
 
     def __init__(self, exercise):
-        super(ExerciseNotFound, self).__init__()
+        super().__init__()
         self.exercise = exercise
 
     def __str__(self):
@@ -101,7 +101,6 @@ def generate(exercise_list, openpdf=False, destname=None, pipe=None):
         'configdir': pyromaths.Values.configdir(),
         'modele': 'pyromaths.tex',
         'liste_exos': exercise_list,
-        'les_fiches': pyromaths.Values.lesfiches(),
         'openpdf': openpdf,
         'pipe': pipe,
     })
@@ -149,9 +148,9 @@ class TestExercise(object):
         """Write expected test results."""
         exo = self.get_exercise()
         with codecs.open(self.test_path("statement"), "w", "utf8") as statement:
-            statement.write(u"\n".join(exo.tex_statement()))
+            statement.write(exo.tex_statement())
         with codecs.open(self.test_path("answer"), "w", "utf8") as answer:
-            answer.write(u"\n".join(exo.tex_answer()))
+            answer.write(exo.tex_answer())
 
     def read(self, choice):
         """Read expected test result."""
@@ -166,29 +165,29 @@ class TestExercise(object):
     def changed(self):
         """Return `True` iff exercise has changed."""
         exo = self.get_exercise()
-        if "\n".join(exo.tex_statement()) != self.read('statement'):
+        if exo.tex_statement() != self.read('statement'):
             return True
-        if "\n".join(exo.tex_answer()) != self.read('answer'):
+        if exo.tex_answer() != self.read('answer'):
             return True
         return False
 
     def print_diff(self):
         """Print the diff between old and new test."""
         exo = self.get_exercise()
-        if "\n".join(exo.tex_statement()) != self.read('statement'):
+        if exo.tex_statement() != self.read('statement'):
             print("Statement:")
             for line in difflib.unified_diff(
                     self.read('statement'),
-                    "\n".join(exo.tex_statement()),
+                    exo.tex_statement(),
                     fromfile='Old statement',
                     tofile='New statement',
                     ):
                 print(line)
-        if "\n".join(exo.tex_answer()) != self.read('answer'):
+        if exo.tex_answer() != self.read('answer'):
             print("Answer:")
             for line in difflib.unified_diff(
                     self.read('answer').splitlines(),
-                    "\n".join(exo.tex_answer()).splitlines(),
+                    exo.tex_answer().splitlines(),
                     fromfile='Old answer',
                     tofile='New answer',
                     ):
@@ -200,12 +199,12 @@ class UnittestExercise(unittest.TestCase):
     maxDiff = None
 
     def __init__(self, exercise=None):
-        super(UnittestExercise, self).__init__()
+        super().__init__()
         self.exercise = exercise
 
     def shortDescription(self):
         if self.exercise is None:
-            return super(UnittestExercise, self).shortDescription()
+            return super().shortDescription()
         else:
             return self.exercise.exercise.name()
 
@@ -214,12 +213,12 @@ class UnittestExercise(unittest.TestCase):
         exo = self.exercise.get_exercise()
 
         self.assertEqual(
-            u"\n".join(exo.tex_statement()),
+            exo.tex_statement(),
             self.exercise.read('statement'),
             )
 
         self.assertEqual(
-            u"\n".join(exo.tex_answer()),
+            exo.tex_answer(),
             self.exercise.read('answer'),
             )
 

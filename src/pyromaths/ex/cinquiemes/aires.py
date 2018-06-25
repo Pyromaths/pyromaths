@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 from builtins import str
 import random
 from pyromaths.outils.decimaux import decimaux
+from pyromaths.ex import LegacyExercise
 
 #
 # ------------------- Aire de disques -------------------
@@ -34,7 +35,7 @@ def arrondir(nombre):
     return int(partie_entiere) + (int(partie_decimale[0]) >= 5)
 
 
-def exo_aire_diques():
+def _exo_aire_diques():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
     rayon1 = 2 * (random.randrange(33) + 1)
@@ -81,4 +82,8 @@ Calculer l'aire de la couronne circulaire (partie colorée) comprise entre les d
     cor.append("\\end{minipage}\n")
     return (exo, cor)
 
-exo_aire_diques.description = _('Aire de disques')
+class exo_aire_diques(LegacyExercise):
+    """Aire de disques"""
+
+    tags = ["Cinquième"]
+    function = _exo_aire_diques

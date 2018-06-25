@@ -25,6 +25,7 @@ from __future__ import unicode_literals
 
 from builtins import range
 from random import randint, shuffle
+from pyromaths.ex import LegacyExercise
 
 from pyromaths.outils.Affichage import decimaux
 from pyromaths.outils.Arithmetique import pgcd, factoriseTex, carrerise
@@ -43,7 +44,7 @@ premiers = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,
             947, 953, 967, 971, 977, 983, 991, 997]  # # Liste de longueur 168
 
 
-def Arithmetique():
+def _Arithmetique():
     """Exercice de décomposition de nombres en facteurs premiers, puis de
     recherche du PGCD et du PPCM, et d'applications aux fractions"""
 
@@ -304,5 +305,8 @@ def Arithmetique():
 
     return (exo, cor)
 
+class Arithmetique(LegacyExercise):
+    """Arithmétique"""
 
-Arithmetique.description = u'Arithmétique'
+    tags = ["Troisième"]
+    function = _Arithmetique

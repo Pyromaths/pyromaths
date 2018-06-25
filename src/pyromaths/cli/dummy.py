@@ -35,9 +35,11 @@ logging.basicConfig(
 class DummyExercise(TexExercise):
     """Faux exercice, servant de modèle pour les nouveaux exercices."""
 
+    tags = []
+
     def tex_statement(self):
-        return [textwrap.dedent(ur"""\
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        return textwrap.dedent(ur"""\
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % DÉBUT DE L'ÉNONCÉ
             \exercice
 
@@ -45,10 +47,10 @@ class DummyExercise(TexExercise):
 
             % FIN DE L'ÉNONCÉ
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        """)]
+        """)
 
     def tex_answer(self):
-        return [textwrap.dedent(ur"""\
+        return textwrap.dedent(ur"""\
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % DÉBUT DU CORRIGÉ
             \exercice*
@@ -57,12 +59,11 @@ class DummyExercise(TexExercise):
 
             % FIN DU CORRIGÉ
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        """)]
+        """)
 
 PARAMETRES = {
     'nom_fichier': u'exercices',
     'corrige': True,
-    'les_fiches': [[u'0.modele', '', [DummyExercise]]],
     'fiche_exo': os.path.join(os.getcwd(), "exercices.tex"),
     'creer_unpdf': True,
     'configdir': CONFIGDIR,

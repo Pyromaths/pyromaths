@@ -235,7 +235,7 @@ def reponses(exo, cor, lpoints, lnoms):
     exo.append("\\end{tabularx}")
 
 
-def MesureAngles():
+def _MesureAngles():
     nb_angles = 4
     (xmax, ymax) = (18, 8)  # taille de l'image en cm
     lnoms = []
@@ -256,11 +256,16 @@ def MesureAngles():
     reponses(exo, cor, lpoints, lnoms)
     return (exo, cor)
 
-MesureAngles.description = u'Mesurer des angles'
+class MesureAngles(ex.LegacyExercise):
+    """Mesurer des angles"""
+
+    tags = ["Sixième"]
+    function = _MesureAngles
 
 class ConstruireZigZag(ex.TexExercise):
+    """Construire des angles"""
 
-    description = u'Construire des angles'
+    tags = ["Sixième"]
 
     def __init__(self):
         """ Crée une liste de nbp points situés à la distance lg les uns des
@@ -406,7 +411,7 @@ class ConstruireZigZag(ex.TexExercise):
         exo.append(self.tex_place_les_points_zigzag(corrige=False))
         exo.append(r'\end{pspicture}')
         exo.append('}\n\\end{center}')
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         exo = [r'\exercice*']
@@ -414,5 +419,5 @@ class ConstruireZigZag(ex.TexExercise):
         exo.append(self.tex_place_les_points_zigzag(corrige=True))
         exo.append(r'\end{pspicture}')
         exo.append('}\n\\end{center}')
-        return exo
+        return "\n".join(exo)
 

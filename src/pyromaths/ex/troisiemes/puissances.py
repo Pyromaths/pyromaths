@@ -27,9 +27,9 @@ import math
 from builtins import range
 from builtins import str
 from random import choice, randrange
-
+import string, math
+from pyromaths.ex import LegacyExercise
 from pyromaths.outils.Arithmetique import pgcd, valeur_alea
-
 
 #
 # ------------------- PUISSANCES -------------------
@@ -123,7 +123,7 @@ def valeurs_puissances():  # renvoie un tuple contenant les valeurs pour les deu
     return a, b
 
 
-def tex_puissances():
+def _tex_puissances():
     sd = str.maketrans('.', ',')  # convertit les . en , (separateur decimal)
     valeurs = valeurs_puissances()
     i = randrange(2)
@@ -152,4 +152,8 @@ def tex_puissances():
     return exo, cor
 
 
-tex_puissances.description = u'Puissances'
+class tex_puissances(LegacyExercise):
+    """Puissances"""
+
+    tags = ["Troisième"]
+    function = _tex_puissances

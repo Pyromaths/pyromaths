@@ -35,9 +35,9 @@ precision = [u'au millième', u'au centième', u'au dixième', u'à l\'unité',
 supinf = ['', u' par défaut', u' par excès']
 
 class ArrondirNombreDecimal(ex.TexExercise):
-    """ Exercice d'arrondis avec les encadrements. """
+    """Arrondir des nombres décimaux"""
 
-    description = u'Arrondir des nombres décimaux'
+    tags = ["Sixième"]
 
     def __init__(self):
         hasard = [valide_hasard() for dummy in range(4)]
@@ -63,7 +63,7 @@ class ArrondirNombreDecimal(ex.TexExercise):
                     precision[self.choix_precision[k]] + supinf[self.choix_supinf[k]] + 
                     '.')
         exo.append("\\end{enumerate}")
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         cor = ["\\exercice*", '\\begin{enumerate}']
@@ -89,7 +89,7 @@ class ArrondirNombreDecimal(ex.TexExercise):
                     precision[self.choix_precision[k]] + ' ' + supinf[self.choix_supinf[k]] + 
                     ' est : ' + decimaux(solution) + '.')
         cor.append("\\end{enumerate}")
-        return cor
+        return "\n".join(cor)
 
 def valide_hasard():
     """renvoie un nombre float non multiple de 10000"""

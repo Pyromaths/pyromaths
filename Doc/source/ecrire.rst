@@ -225,7 +225,7 @@ Du côté de :math:`LaTeX`, nous allons profiter de la bibliothèque jinja2 pour
    - les variables peuvent être évaluées avec des doubles parenthèses. Pour insérer la valeur de la variable ``a`` du contexte, il faut utiliser ``(( a ))`` ;
    - des structures de contrôle (condition, boucle) peuvent être utilisées entourées par ``(*`` et ``*)``.
 
-   Notons que les chaînes définissant ces blocs ont été modifiées par rapport aux chaînes initiales, car trop proches de la syntaxe :math:`LaTeX`. Ceci est documenté sur `le site officiel <http://jinja.pocoo.org/docs/2.10/api/#jinja2.Environment>`__, et mis en œuvre dans la classe :class:`pyromaths.ex.Jinja2Exercice`.
+   Notons que les chaînes définissant ces blocs ont été modifiées par rapport aux chaînes initiales, car trop proches de la syntaxe :math:`LaTeX`. Ceci est documenté sur `le site officiel <http://jinja.pocoo.org/docs/2.10/api/#jinja2.Environment>`__, et mis en œuvre dans la classe :class:`pyromaths.ex.Jinja2Exercise`.
 
    .. literalinclude:: ../../src/pyromaths/ex/__init__.py
       :linenos:

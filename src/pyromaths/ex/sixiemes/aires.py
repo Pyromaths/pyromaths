@@ -29,7 +29,7 @@ from builtins import range
 from builtins import str
 
 from pyromaths.outils import Affichage
-
+from pyromaths.ex import LegacyExercise
 
 def boxes():
     """Crée les boites pour insérer les figures dans un environnement 36x16"""
@@ -249,7 +249,7 @@ def figure():
     return "\n".join(exo), "\n".join(cor)
 
 
-def aires():
+def _aires():
     exo = ["\\exercice", u"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
     cor = ["\\exercice*", u"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
     exercice = figure()
@@ -258,4 +258,8 @@ def aires():
     return exo, cor
 
 
-aires.description = u'Aires et quadrillage'
+class aires(LegacyExercise):
+    """Aires et quadrillage"""
+
+    tags = ["Sixième"]
+    function = _aires

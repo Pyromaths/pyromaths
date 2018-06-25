@@ -27,6 +27,7 @@ from builtins import range
 import math
 import random
 from pyromaths.outils import Arithmetique, Affichage
+from pyromaths.ex import LegacyExercise
 
 #===============================================================================
 # Poser des opérations
@@ -277,7 +278,7 @@ def tex_produit(exo, cor):
     cor.append((u'\\[ \\boxed{%s} \\] ').expandtabs(2 * 3) % (formule))
 
 
-def Operations():
+def _Operations():
     nb_exos = 3
     tex_exos = (tex_somme, tex_difference, tex_produit)
 
@@ -296,7 +297,11 @@ def Operations():
     cor.append('\\end{multicols}')
     return (exo, cor)
 
-Operations.description = u'Poser des opérations (sauf divisions)'
+class Operations(LegacyExercise):
+    """Poser des opérations (sauf divisions)"""
+
+    tags = ["Sixième"]
+    function = _Operations
 
 
 #===============================================================================
@@ -360,7 +365,7 @@ def div(valeurmax):
 
 
 
-def CalculMental():
+def _CalculMental():
     exo = ["\\exercice", 'Effectuer sans calculatrice :', '\\begin{multicols}{4}\\noindent', '\\begin{enumerate}']
     cor = ["\\exercice*", 'Effectuer sans calculatrice :', '\\begin{multicols}{4}\\noindent', '\\begin{enumerate}']
 
@@ -372,7 +377,11 @@ def CalculMental():
     cor.append('\\end{multicols}')
     return (exo, cor)
 
-CalculMental.description = u'Calcul mental'
+class CalculMental(LegacyExercise):
+    """Calcul mental"""
+
+    tags = ["Sixième"]
+    function = _CalculMental
 
 
 #===============================================================================
@@ -445,7 +454,7 @@ def valeurs10(nb):  # renvoie nb valeur de chaque type : *10, /10, *0.1
 
 
 
-def ProduitPuissanceDix():
+def _ProduitPuissanceDix():
     exo = ["\\exercice", u'Compléter sans calculatrice :', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
     cor = ["\\exercice*", u'Compléter sans calculatrice :', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
 
@@ -457,4 +466,8 @@ def ProduitPuissanceDix():
     cor.append('\\end{multicols}')
     return (exo, cor)
 
-ProduitPuissanceDix.description = u'Produits, quotients par 10, 100, 1000'
+class ProduitPuissanceDix(LegacyExercise):
+    """Produits, quotients par 10, 100, 1000"""
+
+    tags = ["Sixième"]
+    function = _ProduitPuissanceDix

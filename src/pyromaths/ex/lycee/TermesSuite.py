@@ -549,7 +549,7 @@ class Question(object):
 class Francais(Question):
 
     def __init__(self, indice0):
-        super(Francais, self).__init__(indice0)
+        super().__init__(indice0)
         self.terme0 = Entier(random.randint(-10, 10))
         self.fonction = random.choice([
             FrancaisGeometrique,
@@ -570,7 +570,7 @@ class Francais(Question):
 class General(Question):
 
     def __init__(self, indice0):
-        super(General, self).__init__(indice0)
+        super().__init__(indice0)
         self.fonction = random.choice([
             FractionProduit,
             Trinome,
@@ -590,7 +590,7 @@ class General(Question):
 class Recursif(Question):
 
     def __init__(self, indice0):
-        super(Recursif, self).__init__(indice0)
+        super().__init__(indice0)
         self.terme0 = Entier(random.randint(-10, 10))
         self.fonction = random.choice([
             Affine,
@@ -608,9 +608,9 @@ class Recursif(Question):
             }
 
 class TermesDUneSuite(ex.TexExercise):
+    """Termes d'une suite"""
 
-    description = u"Termes d'une suite"
-    level = "1.1reS"
+    tags = ["1èreS"]
 
     def __init__(self):
         # * `self.rang[0]` désigne l'ordinal du premier terme demandé (pour la
@@ -643,7 +643,7 @@ class TermesDUneSuite(ex.TexExercise):
               \end{{array}}\right.\]
               """).format(**self.questions[2].latex_params))
         exo.append(r'\end{enumerate}')
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         exo = [r'\exercice*']
@@ -743,4 +743,4 @@ class TermesDUneSuite(ex.TexExercise):
         exo.append(r'\end{enumerate}')
 
         exo.append(r'\end{enumerate}')
-        return exo
+        return "\n".join(exo)

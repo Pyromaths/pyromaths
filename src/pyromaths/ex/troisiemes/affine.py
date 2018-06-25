@@ -32,6 +32,7 @@ from math import sqrt
 from pyromaths.classes.Fractions import Fraction  # fractions pyromaths
 from pyromaths.classes.PolynomesCollege import Polynome
 from pyromaths.outils import Priorites3
+from pyromaths.ex import LegacyExercise
 from pyromaths.outils.Affichage import decimaux
 
 
@@ -345,7 +346,7 @@ def exprfonc(f, i, A, B):
     return l
 
 
-def affine():
+def _affine():
     # Génère l'exercice
     xmin, xmax, ymin, ymax = -5, 5, -5, 5
     f = ['f', 'g', 'h', 'k', 'l', 'u']
@@ -430,5 +431,8 @@ def affine():
            "\\vspace{0.45cm}"]
     return exo, cor
 
+class affine(LegacyExercise):
+    """Fonctions affines"""
 
-affine.description = u'Fonctions affines'
+    tags = ["Troisième"]
+    function = _affine

@@ -27,7 +27,7 @@ from __future__ import unicode_literals
 from decimal import Decimal
 import random
 
-from pyromaths.ex import Jinja2Exercice
+from pyromaths.ex import Jinja2Exercise
 from pyromaths.outils.jinja2 import facteur, matrice
 
 # Liste des coefficients de la diagonale de la matrice de transition qui
@@ -58,13 +58,13 @@ CANDIDATS = [
         ]
 
 
-class EtatStableSysteme2(Jinja2Exercice):
+class EtatStableSysteme2(Jinja2Exercise):
+    """Recherche d'état stable (avec un système)"""
 
-    description = u"Recherche d'état stable (avec un système)"
-    level = "0.Term ES"
+    tags = ["Term ES"]
 
     def __init__(self):
-        super(EtatStableSysteme2, self).__init__()
+        super().__init__()
 
         ab = random.choice(CANDIDATS)
         random.shuffle(ab)
@@ -75,20 +75,20 @@ class EtatStableSysteme2(Jinja2Exercice):
 
     @property
     def environment(self):
-        environment = super(EtatStableSysteme2, self).environment
+        environment = super().environment
         environment.filters.update({
             'facteur': facteur,
             })
         return environment
 
-class InterpolationMatrices(Jinja2Exercice):
+class InterpolationMatrices(Jinja2Exercise):
+    """Interpolation polynomiale en utilisant des matrices"""
     # Plus ou moins inspiré du sujet de bac ES Amérique du Nord, juin 2015.
 
-    description = u"Interpolation polynomiale en utilisant des matrices"
-    level = "0.Term ES"
+    tags = ["Term ES"]
 
     def __init__(self):
-        super(InterpolationMatrices, self).__init__()
+        super().__init__()
 
         X = [None, None, None]
         while len(set(X)) != 3:
@@ -136,7 +136,7 @@ class InterpolationMatrices(Jinja2Exercice):
 
     @property
     def environment(self):
-        environment = super(InterpolationMatrices, self).environment
+        environment = super().environment
         environment.filters.update({
             'facteur': facteur,
             'matrice': matrice,

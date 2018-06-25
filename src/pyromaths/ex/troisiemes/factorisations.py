@@ -25,8 +25,9 @@ from builtins import range
 from random import randrange, shuffle
 from pyromaths.outils import Priorites3
 from pyromaths.classes.PolynomesCollege import factoriser
+from pyromaths.ex import LegacyExercise
 
-def factorisation():
+def _factorisation():
     """Génère un exercice de factorisation utilisant les identités remarquables ou
     la distributivité
     """
@@ -149,4 +150,8 @@ def facteur_commun3(lcoeff, details=1, diff=False):
         poly += lpolynomes[i]
     return poly
 
-factorisation.description = u'Factorisations'
+class factorisation(LegacyExercise):
+    """Factorisations"""
+
+    tags = ["Troisième"]
+    function = _factorisation

@@ -27,6 +27,7 @@ from builtins import range
 from decimal import Decimal
 import random
 from pyromaths.outils import Affichage, Arithmetique
+from pyromaths.ex import LegacyExercise
 #===============================================================================
 # Écrire un nombre en lettres ou en chiffres
 #===============================================================================
@@ -233,7 +234,7 @@ def EcritEnLettre(exo, cor):
         cor.append(EcritNombreDecimal(lnb[i]) + '')
 
 
-def EcrireNombreLettre():
+def _EcrireNombreLettre():
     exo = ["\\exercice", "\\begin{enumerate}",
             u'\\item Écrire en chiffres les nombres suivants.',
             '\\begin{enumerate}']
@@ -258,7 +259,11 @@ def EcrireNombreLettre():
     cor.append('\\end{enumerate}')
     return (exo, cor)
 
-EcrireNombreLettre.description = u'Écrire un nombre décimal'
+class EcrireNombreLettre(LegacyExercise):
+    """Écrire un nombre décimal"""
+
+    tags = ["Sixième"]
+    function = _EcrireNombreLettre
 
 
 #===============================================================================
@@ -308,7 +313,7 @@ def valeurs_units():
         # div0 unité 0
         # div1 unité converti
 
-def tex_units():
+def _tex_units():
     """
     Écrit l'exercice sur les conversions d'unités et le corrigé au format
     LaTeX
@@ -360,7 +365,11 @@ def tex_units():
     cor.append('{')
     return (exo, cor)
 
-tex_units.description = u'Conversions unités'
+class tex_units(LegacyExercise):
+    """Conversions unités"""
+
+    tags = ["Sixième"]
+    function = _tex_units
 
 
 def tex_tableau(cor, div0, div1, u, nblist, chf_unite):
@@ -448,13 +457,23 @@ def exo_conversion(exposant):
     # C'est fini
     return (exo, cor)
 
-def exo_conversion_2d():
+def _exo_conversion_2d():
     return exo_conversion(2)
-exo_conversion_2d.description = u"Conversions unités d'aires"
 
-def exo_conversion_3d():
+class exo_conversion_2d(LegacyExercise):
+    """Conversions unités d'aires"""
+
+    tags = ["Sixième"]
+    function = _exo_conversion_2d
+
+def _exo_conversion_3d():
     return exo_conversion(3)
-exo_conversion_3d.description = u"Conversions unités de volumes"
+
+class exo_conversion_3d(LegacyExercise):
+    """Conversions unités de volumes"""
+
+    tags = ["Sixième"]
+    function = _exo_conversion_3d
 
 
 def tex_conversion(exo, cor, exposant, u):
@@ -588,14 +607,18 @@ def ecrit_nombre_decimal(dec, index):
     return strnb
 
 
-def PlaceVirgule():
+def _PlaceVirgule():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
 
     tex_place_virgule(exo, cor)
     return (exo, cor)
 
-PlaceVirgule.description = u'Placer une virgule'
+class PlaceVirgule(LegacyExercise):
+    """Placer une virgule"""
+
+    tags = ["Sixième"]
+    function = _PlaceVirgule
 
 
 #===============================================================================
@@ -643,7 +666,7 @@ def tex_frac(exo, cor):
         choix_trou_frac(exo, cor, nombre, puissance)
 
 
-def EcritureFractionnaire():
+def _EcritureFractionnaire():
     exo = ["\\exercice", u"Compléter :", '\\begin{multicols}{3}\\noindent',
             '\\begin{enumerate}']
     cor = ["\\exercice*", u"Compléter :", '\\begin{multicols}{3}\\noindent',
@@ -657,7 +680,11 @@ def EcritureFractionnaire():
     cor.append('\\end{multicols}')
     return (exo, cor)
 
-EcritureFractionnaire.description = u'Écriture fractionnaire ou décimale'
+class EcritureFractionnaire(LegacyExercise):
+    """Écriture fractionnaire ou décimale"""
+
+    tags = ["Sixième"]
+    function = _EcritureFractionnaire
 
 
 #===============================================================================
@@ -708,7 +735,7 @@ def tex_dec(exo, cor):
         exo.append(txt + txt_exo)
         cor.append(txt + txt_cor)
 
-def Decomposition():
+def _Decomposition():
     exo = ["\\exercice", u"Compléter avec un nombre décimal :",
             '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
     cor = ["\\exercice*", u"Compléter avec un nombre décimal :",
@@ -722,7 +749,11 @@ def Decomposition():
     cor.append('\\end{multicols}')
     return (exo, cor)
 
-Decomposition.description = u'Décomposition de décimaux'
+class Decomposition(LegacyExercise):
+    """Décomposition de décimaux"""
+
+    tags = ["Sixième"]
+    function = _Decomposition
 
 
 #===============================================================================
@@ -778,7 +809,7 @@ def classer(exo, cor):
 
 
 
-def ClasserNombres():
+def _ClasserNombres():
     exo = ["\\exercice", '\\begin{enumerate}']
     cor = ["\\exercice*", '\\begin{enumerate}']
     classer(exo, cor)
@@ -787,4 +818,8 @@ def ClasserNombres():
     cor.append('\\end{enumerate}')
     return (exo, cor)
 
-ClasserNombres.description = u'Classer des nombres décimaux'
+class ClasserNombres(LegacyExercise):
+    """Classer des nombres décimaux"""
+
+    tags = ["Sixième"]
+    function = _ClasserNombres

@@ -27,6 +27,7 @@ import random
 from builtins import chr
 from builtins import range
 from math import atan, cos, pi, sin
+from pyromaths.ex import LegacyExercise
 
 
 # ===============================================================================
@@ -71,7 +72,7 @@ def place_pts(vals, angle):
     return "".join(txt)
 
 
-def SymetrieQuadrillage():
+def _SymetrieQuadrillage():
     exo = ["\\exercice", u"Construire la symétrique de chacune des figures par rapport à la droite en",
            "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
     cor = ["\\exercice*", u"Construire la symétrique de chacune des figures par rapport à la droite en",
@@ -111,4 +112,8 @@ def SymetrieQuadrillage():
     return exo, cor
 
 
-SymetrieQuadrillage.description = u'Symétrie et quadrillages'
+class SymetrieQuadrillage(LegacyExercise):
+    """Symétrie et quadrillages"""
+
+    tags = ["Sixième"]
+    function = _SymetrieQuadrillage

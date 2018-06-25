@@ -28,6 +28,7 @@ from . import fractions
 from pyromaths.classes.PolynomesCollege import Polynome
 from pyromaths.outils.Affichage import TeX, tex_coef
 from pyromaths.outils.Priorites3 import texify
+from pyromaths.ex import LegacyExercise
 
 #
 # ------------------- ÉQUATIONS -------------------
@@ -168,11 +169,15 @@ def equations(exo, cor, valeurs):  # resolution d'une equation
     cor.append(u'\\fbox{La solution de cette équation est $%s$\\,.}' %
              sol)
 
-def tex_equations():
+def _tex_equations():
     vals = valeurs(10)
     exo = ['\\exercice']
     cor = ['\\exercice*']
     equations(exo, cor, vals)
     return (exo, cor)
 
-tex_equations.description = u'Équation'
+class tex_equations(LegacyExercise):
+    """Équation"""
+
+    tags = ["Troisième"]
+    function = _tex_equations

@@ -26,6 +26,7 @@ from __future__ import unicode_literals
 from builtins import str
 from builtins import range
 import random
+from pyromaths.ex import LegacyExercise
 
 def valeurs(nb, entier=1):  # renvoie les 2 listes contenant les opérateurs et les opérandes.
     listoperateurs = [
@@ -225,7 +226,7 @@ def calcul(a, op, b, entier=1):  # retourne 'hp' (hors programme) ou le résulta
             return a // b
 
 
-def priorites():
+def _priorites():
     nb = 9  # nombre de calculs
     exo = ["\\exercice",
            u"Calculer les expressions suivantes en détaillant les calculs.\n",
@@ -264,4 +265,8 @@ def priorites():
     cor.append("\\end{multicols}")
     return (exo, cor)
 
-priorites.description = _(u'Priorités opératoires')
+class priorites(LegacyExercise):
+    """Priorités opératoires"""
+
+    tags = ["Cinquième"]
+    function = _priorites

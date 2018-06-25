@@ -24,15 +24,15 @@
 
 import random
 
-from pyromaths.ex import Jinja2Exercice
+from pyromaths.ex import Jinja2Exercise
 
-class EquationPremierDegre4(Jinja2Exercice):
+class EquationPremierDegre4(Jinja2Exercise):
+    """Résolution d'équations du premier degré à coefficients entiers."""
 
-    description = u"Résolution d'équations du premier degré à coefficients entiers."
-    level = u'3.Troisième'
+    tags = ['Troisième']
 
     def __init__(self):
-        super(EquationPremierDegre4, self).__init__()
+        super().__init__()
 
         self.context = {
             "a": random.choice([1, -1]) * random.randint(2, 9),

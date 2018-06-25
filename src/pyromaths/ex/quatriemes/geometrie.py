@@ -30,6 +30,7 @@ from math import acos, asin, atan, pi, sin, cos, tan
 
 from fractions import Fraction
 from pyromaths.outils.Geometrie import couples_pythagore, choix_points
+from pyromaths.ex import LegacyExercise
 
 
 #
@@ -81,7 +82,7 @@ def enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
         )
 
 
-def exo_pythagore():
+def _exo_pythagore():
     types_exercice = [[2, random.randrange(2)], [0, 1]]
     random.shuffle(types_exercice)
     random.shuffle(types_exercice[0])
@@ -154,8 +155,11 @@ Calculer la longueur $%s$.""" % \
     cor.append("\\end{enumerate}\n\\end{multicols}\n")
     return (exo, cor)
 
+class exo_pythagore(LegacyExercise):
+    """Théorème de Pythagore"""
 
-exo_pythagore.description = u'Théorème de Pythagore'
+    tags = ["Quatrième"]
+    function = _exo_pythagore
 
 
 def nom_triangle(noms):  # renvoie le nom du triangle dans un ordre aleatoire
@@ -174,7 +178,7 @@ def cotes_sommets(noms):  # renvoie les noms des 3 cotes du triangle en finissan
 #
 
 
-def exo_triangle_cercle():
+def _exo_triangle_cercle():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
     while True:
@@ -252,8 +256,11 @@ Calculer la longueur $%s$.""" % \
     cor.append("\\end{minipage}\n")
     return (exo, cor)
 
+class exo_triangle_cercle(LegacyExercise):
+    """Cercle et théorème de Pythagore"""
 
-exo_triangle_cercle.description = u'Cercle et théorème de Pythagore'
+    tags = ["Quatrième"]
+    function = _exo_triangle_cercle
 
 
 #
@@ -261,7 +268,7 @@ exo_triangle_cercle.description = u'Cercle et théorème de Pythagore'
 #
 
 
-def exo_reciproque_pythagore():
+def _exo_reciproque_pythagore():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
     while True:
@@ -304,8 +311,11 @@ D'après la \\textbf{réciproque du théorème de Pythagore},
                (c[2], c[0], c[1], nom_tr, noms[2]))
     return (exo, cor)
 
+class exo_reciproque_pythagore(LegacyExercise):
+    """Réciproque du théorème de Pythagore"""
 
-exo_reciproque_pythagore.description = u'Réciproque du théorème de Pythagore'
+    tags = ["Quatrième"]
+    function = _exo_reciproque_pythagore
 
 
 #
@@ -395,7 +405,7 @@ def inegalite_triangulaire(a):  # renvoie 1 si c'est un triangle, 0 sinon
     return vrai
 
 
-def exo_thales():
+def _exo_thales():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
     noms = choix_points(5)  # les noms des sommets
@@ -415,8 +425,11 @@ def exo_thales():
     cor.append(tex_resolution_thales3(noms, valeurs, arrondi))
     return (exo, cor)
 
+class exo_thales(LegacyExercise):
+    """Théorème de Thalès"""
 
-exo_thales.description = u'Théorème de Thalès'
+    tags = ["Quatrième"]
+    function = _exo_thales
 
 
 def long_val(noms,
@@ -687,7 +700,7 @@ def tex_fig_thales(noms, valeurs):
 #
 
 
-def exo_trigo():
+def _exo_trigo():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
     s = choix_points(6)
@@ -699,8 +712,11 @@ def exo_trigo():
     cor.extend(l2)
     return (exo, cor)
 
+class exo_trigo(LegacyExercise):
+    """Cosinus d\'un angle aigu"""
 
-exo_trigo.description = u'Cosinus d\'un angle aigu'
+    tags = ["Quatrième"]
+    function = _exo_trigo
 
 
 def enonce_trigo(v):

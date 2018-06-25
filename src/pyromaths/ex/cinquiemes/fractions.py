@@ -27,9 +27,10 @@ from builtins import range
 import random
 from pyromaths.outils import Arithmetique
 from pyromaths.outils.Priorites3 import texify, priorites
+from pyromaths.ex import LegacyExercise
 
 
-def fractions_egales():
+def _fractions_egales():
     exo = ["\\exercice", _(u"Compléter :"), "\\begin{multicols}{4}",
            "  \\begin{enumerate}"]
     cor = ["\\exercice*", _(u"Compléter :"), "\\begin{multicols}{4}",
@@ -68,11 +69,15 @@ def fractions_egales():
     cor.extend(["  \\end{enumerate}", "\end{multicols}\n"])
     return (exo, cor)
 
-fractions_egales.description = u'Fractions égales'
+class fractions_egales(LegacyExercise):
+    """Fractions égales"""
+
+    tags = ["Cinquième"]
+    function = _fractions_egales
 
 
 def valeurs_somme():
-    """Travail sur les sommes de fractions en cinquième"""
+    """Travail sur les sommes de fractions en Cinquième"""
     l = []
 
     for dummy in range(2):
@@ -113,7 +118,7 @@ def valeurs_somme():
     return l
 
 
-def sommes_fractions():
+def _sommes_fractions():
     exo = [_("\\exercice"),
            _(u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible)."),
            "\\begin{multicols}{4}", "  \\begin{enumerate}"]
@@ -135,7 +140,11 @@ def sommes_fractions():
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
     return (exo, cor)
 
-sommes_fractions.description = _(u'Sommes de fractions')
+class sommes_fractions(LegacyExercise):
+    """Sommes de fractions"""
+
+    tags = ["Cinquième"]
+    function = _sommes_fractions
 
 
 def valeurs_produit():
@@ -157,7 +166,7 @@ def valeurs_produit():
 
     return l
 
-def produits_fractions():
+def _produits_fractions():
     exo = ["\\exercice",
            _(u"Calculer en détaillant les étapes. Donner le résultat sous la forme d’une fraction la plus simple possible (ou d’un entier lorsque c’est possible)."),
            "\\begin{multicols}{4}", "  \\begin{enumerate}"]
@@ -180,4 +189,8 @@ def produits_fractions():
 
     return (exo, cor)
 
-produits_fractions.description = _(u'Produits de fractions')
+class produits_fractions(LegacyExercise):
+    """Produits de fractions"""
+
+    tags = ["Cinquième"]
+    function = _produits_fractions

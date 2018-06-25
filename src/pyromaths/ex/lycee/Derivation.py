@@ -84,11 +84,9 @@ def InitPoints(minimum=-6.1, maximum=6.1, nbval=3):
 
 
 class Fd1Tangentes(ex.TexExercise):
-    '''
-    classdocs
-    '''
-    description = _(u'Nombre dérivé graphiquement')
-    level = _(u"1.1èreS")
+    """Nombre dérivé graphiquement"""
+
+    tags = ["1èreS"]
 
 
     def __init__(self):
@@ -165,7 +163,7 @@ class Fd1Tangentes(ex.TexExercise):
         exo.append(r'ylimits(-5.5, 5.5, Crop);')
         exo.append(r'\end{asy}')
         exo.append(r'\end{minipage}')
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         dY2 = list(self.dY2)
@@ -217,4 +215,4 @@ class Fd1Tangentes(ex.TexExercise):
         exo.append(r'ylimits(-5.5, 5.5, Crop);')
         exo.append(r'\end{asy}')
         exo.append(r'\end{enumerate}')
-        return exo
+        return "\n".join(exo)

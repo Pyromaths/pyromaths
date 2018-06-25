@@ -25,6 +25,7 @@ from builtins import chr
 from builtins import range
 import random
 import math
+from pyromaths.ex import LegacyExercise
 
 #===============================================================================
 # Fractions partage
@@ -148,7 +149,7 @@ def diviseurs(n):
     return l
 
 
-def FractionPartage():
+def _FractionPartage():
     exo = ["\\exercice", '\\begin{multicols}{2}', '\\begin{enumerate}']
     cor = ["\\exercice*", '\\begin{multicols}{2}', '\\begin{enumerate}']
 
@@ -189,7 +190,11 @@ def FractionPartage():
     cor.append('\\end{multicols}')
     return (exo, cor)
 
-FractionPartage.description = u'Fractions partage'
+class FractionPartage(LegacyExercise):
+    """Fractions partage"""
+
+    tags = ["Sixième"]
+    function = _FractionPartage
 
 
 #===============================================================================
@@ -353,7 +358,7 @@ def trouve_abscisses(exo, cor, div, subd, lnum):
              subd) // div, subd))
 
 
-def QuestionsAbscisses():
+def _QuestionsAbscisses():
     exo = ["\\exercice"]
     cor = ["\\exercice*"]
     (origine, div, subd, lpts, npts, lnum) = valeurs_abscisses()
@@ -405,4 +410,8 @@ def QuestionsAbscisses():
     cor.append("\\end{pspicture}")
     return (exo, cor)
 
-QuestionsAbscisses.description = u'Fractions et abscisses'
+class QuestionsAbscisses(LegacyExercise):
+    """Fractions et abscisses"""
+
+    tags = ["Sixième"]
+    function = _QuestionsAbscisses

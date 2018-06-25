@@ -26,6 +26,7 @@ from builtins import chr
 from builtins import range
 import random
 from math import atan, cos, pi, sin
+from pyromaths.ex import LegacyExercise
 
 #===============================================================================
 # Symétrique d'une figure par rapport à une droite avec quadrillage
@@ -102,7 +103,7 @@ def exo_quadrillage(f0, f1):
     pass
 
 
-def symetrie():
+def _symetrie():
     exo = ["\\exercice",
            _(u"Construire la symétrique de chacune des figures par rapport au point O en"),
            _("utilisant le quadrillage :\\par"), "\\psset{unit=.9cm}"]
@@ -130,4 +131,8 @@ def symetrie():
             cor.append("\\hfill")
     return (exo, cor)
 
-symetrie.description = _(u'Symétrie centrale')
+class symetrie(LegacyExercise):
+    """Symétrie centrale"""
+
+    tags = ["Cinquième"]
+    function = _symetrie

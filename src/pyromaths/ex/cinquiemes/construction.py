@@ -26,6 +26,7 @@ from pyromaths.outils import Geometrie as geo
 import random, math
 from pyromaths.outils.Affichage import decimaux
 from pyromaths.outils.Geometrie import cotation, cotation_h
+from pyromaths.ex import LegacyExercise
 from decimal import Decimal
 
 # trigo en degré
@@ -43,7 +44,7 @@ def shuffle_nom(polygone):
         nom += polygone[i]
     return nom
 
-def exo_triangle(test=False):
+def _exo_triangle(test=False):
     questions = [quest_equilateral,
            quest_LAL,
            quest_ALA,
@@ -72,7 +73,11 @@ def exo_triangle(test=False):
     cor.append("\\end{enumerate}")
     return exo, cor
 
-exo_triangle.description = _(u'Construction de triangles')
+class exo_triangle(LegacyExercise):
+    """Construction de triangles"""
+
+    tags = ["Cinquième"]
+    function = _exo_triangle
 
 
 def quest_equilateral(exo, cor):
@@ -331,7 +336,7 @@ def quest_rectangle_hypo_cote(exo, cor):
 #
 ###################################################################################################
 
-def exo_quadrilatere(test=False):
+def _exo_quadrilatere(test=False):
 
     exo = ["\\exercice",
          "\\begin{enumerate}"]
@@ -373,7 +378,11 @@ def exo_quadrilatere(test=False):
     cor.append("\\end{enumerate}")
     return exo, cor
 
-exo_quadrilatere.description = _(u'Construction de parallélogrammes')
+class exo_quadrilatere(LegacyExercise):
+    """Construction de parallélogrammes"""
+
+    tags = ["Cinquième"]
+    function = _exo_quadrilatere
 
 ################################################################
 

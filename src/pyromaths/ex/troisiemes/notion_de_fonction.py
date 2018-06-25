@@ -31,6 +31,7 @@ from builtins import range
 from random import shuffle, randrange
 
 from pyromaths.classes.PolynomesCollege import Lagrange, choix_points
+from pyromaths.ex import LegacyExercise
 
 if __name__ == '__main__':
     pass
@@ -59,7 +60,7 @@ def corrige(nom, fct, ant):
     sol.append('\\fbox{$%s\\,(%s)=%s$}\\\\\n' % (nom, ant, res[-1]))
     return sol
 
-def notion_fonction():
+def _notion_fonction():
     """Créé un exercice bilan sur la notion de fonction"""
     from pyromaths.classes.PolynomesCollege import Polynome
     from pyromaths.outils import Priorites3
@@ -177,5 +178,10 @@ def notion_fonction():
     cor.append(r"\end{multicols}")
 
     return exo, cor
-notion_fonction.description = u'Bilan sur la notion de fonction'
+
+class notion_fonction(LegacyExercise):
+    """Bilan sur la notion de fonction"""
+
+    tags = ["Troisième"]
+    function = _notion_fonction
 

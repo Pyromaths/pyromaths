@@ -24,16 +24,15 @@
 
 import random
 
-from pyromaths.ex import Jinja2Exercice
+from pyromaths.ex import Jinja2Exercise
 from pyromaths.outils.jinja2 import facteur
 
-class EquationPremierDegre62(Jinja2Exercice):
-
-    description = u"Résolution d'équations du premier degré à coefficients entiers."
-    level = u'3.Troisième'
+class EquationPremierDegre62(Jinja2Exercise):
+    """Résolution d'équations du premier degré à coefficients entiers."""
+    tags = ['Troisième']
 
     def __init__(self):
-        super(EquationPremierDegre62, self).__init__()
+        super().__init__()
 
         self.context = {
             "a": random.choice([1, -1]) * random.randint(2, 9),
@@ -44,7 +43,7 @@ class EquationPremierDegre62(Jinja2Exercice):
 
     @property
     def environment(self):
-        environment = super(EquationPremierDegre62, self).environment
+        environment = super().environment
         environment.filters.update({
             'facteur': facteur,
             })

@@ -179,7 +179,7 @@ def do_ls(options): # pylint: disable=unused-argument
     tests = TestPerformer()
     for name in sorted(tests.iter_names(), key=str.lower):
         if options.verbose:
-            print(u"{}: {}".format(name, tests.exercises[name].description)) # pylint: disable=superfluous-parens
+            print(u"{}: {}".format(name, tests.exercises[name].description())) # pylint: disable=superfluous-parens
         else:
             print(name) # pylint: disable=superfluous-parens
 
