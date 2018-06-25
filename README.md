@@ -1,8 +1,8 @@
 # Le dépôt de Pyromaths a été transféré sur [Framagit](https://framagit.org/pyromaths/pyromaths).
 
-Veuillez reconfigurer votre accès au dépôt : `git remote set-url origin https://framagit.org/pyromaths/pyromaths.git`
+**Veuillez reconfigurer votre accès au dépôt : `git remote set-url origin https://framagit.org/pyromaths/pyromaths.git`**
 
-Ce dépôt n'est plus maintenu et ne sera pas mis à jour.
+**Ce dépôt n'est plus maintenu et ne sera pas mis à jour.**
 
 
 *[Pyromaths](http://pyromaths.org/) est un programme qui a pour but de créer des exercices type de mathématiques niveau collège et lycée ainsi que leur corrigé. C'est ce qu'on appelle parfois un exerciseur. Contrairement à de nombreux autres projets, Pyromaths a pour objectif de proposer une correction véritablement détaillée des exercices proposés et pas seulement une solution.*
