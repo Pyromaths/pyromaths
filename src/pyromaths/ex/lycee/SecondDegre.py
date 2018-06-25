@@ -235,7 +235,7 @@ class Sd1FormeCanonique(ex.TexExercise):
             else: sol += r' \\ '
         exo.append(sol)
         exo.append(r'\end{align*}')
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         exo = [r'\exercice*']
@@ -270,7 +270,7 @@ class Sd1FormeCanonique(ex.TexExercise):
                     sol += r' & '
             exo.append(sol)
         exo.append(r'\end{align*}')
-        return exo
+        return "\n".join(exo)
 
 class Sd2aRacines(ex.TexExercise):
     #TODO: ./utils/pyromaths-cli.py generate Sd2aRacines:1, 2 et 3 ne fonctionnent pas
@@ -310,7 +310,7 @@ class Sd2aRacines(ex.TexExercise):
             if i < 2: r += ' & '
         exo.append(r)
         exo.append('\\end{align*}')
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         exo = [r'\exercice*']
@@ -399,7 +399,7 @@ class Sd2aRacines(ex.TexExercise):
             question[1].insert(0, r'&')
             question[1].append(r'\end{tabularx}\par\medskip')
         for i in range(3): exo.extend(question[i])
-        return exo
+        return "\n".join(exo)
 
 class _Sd2bEquations(ex.TexExercise):
     """Équations et polynômes de degré 2"""
@@ -443,7 +443,7 @@ class _Sd2bEquations(ex.TexExercise):
                 exo.append(r'\cfrac{%s}{%s} &= %s & ' % (Polynome(e[0]), Polynome(e[1]), Polynome(e[2])))
         exo[-1] = exo[-1][:-3]  # Suppression du dernier  " &"
         exo.append('\\end{align*}')
-        return exo
+        return "\n".join(exo)
 
 class _Sd3aSigne(ex.TexExercise):
     """Signe d'un polynôme de degré 2"""
@@ -486,7 +486,7 @@ class _Sd3aSigne(ex.TexExercise):
         exo.append(_(u'\\item Le polynôme $R\\,(x) = %s$ admet deux racines $%s$ et $%s\\,$. Dresser son tableau de signes.') \
             % (Polynome(self.exercice[2][0]), self.exercice[2][1], self.exercice[2][2]))
         exo.append('\\end{enumerate}')
-        return exo
+        return "\n".join(exo)
 
 class _Sd3bInequations(ex.TexExercise):
     """Inéquations et polynômes de degré 2"""
@@ -508,7 +508,7 @@ class _Sd3bInequations(ex.TexExercise):
         exo.append(_(u'Résoudre l\'inéquation : $\qquad \\cfrac{%s}{%s} %s 0$') % (Polynome(self.exercice[0]),
                                                                                   Polynome(self.exercice[1]),
                                                                                   self.exercice[2]))
-        return exo
+        return "\n".join(exo)
 
 class _Sd4Factorisation(ex.TexExercise):
     """Racines et factorisation d'un polynôme de degré 2"""
@@ -553,7 +553,7 @@ class _Sd4Factorisation(ex.TexExercise):
         exo.append(_(u'\\item Factoriser si possible les polynômes $\quad Q\\,(x) = %s\\quad$ et $\\quad R\\,(x) = %s$.\n') % (Polynome(self.exercice[1][0]), Polynome(self.exercice[1][1])))
         exo.append(r'\end{enumerate}')
 
-        return exo
+        return "\n".join(exo)
 
 class _Sd5Caracteristiques(ex.TexExercise):
     """Caractéristiques d'une parabole"""
@@ -592,7 +592,7 @@ class _Sd5Caracteristiques(ex.TexExercise):
         exo.append(_(u'\\item Tracer l’allure de ces deux courbes sur un même graphique.'))
         exo.append(r'\end{enumerate}')
 
-        return exo
+        return "\n".join(exo)
 
 class _Sd6Parametre(ex.TexExercise):
     """Polynôme paramétré de degré 2"""
@@ -635,4 +635,4 @@ class _Sd6Parametre(ex.TexExercise):
         exo.append(_(u'Déterminer $a$ pour que $%s$ soit une racine de $Q$.\n') % self.exercice[1][2])
         exo.append(r'\end{enumerate}')
 
-        return exo
+        return "\n".join(exo)

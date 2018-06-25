@@ -179,9 +179,9 @@ def creation(parametres):
     for exercice in parametres['liste_exos']:
         # write exercise's TeX code (question & answer) to files
         f0.write("\n")
-        f0.writelines(line + "\n" for line in exercice.tex_statement())
+        f0.writelines(exercice.tex_statement())
         f1.write("\n")
-        f1.writelines(line + "\n" for line in exercice.tex_answer())
+        f1.writelines(exercice.tex_answer())
 
 
     if parametres['creer_pdf']:

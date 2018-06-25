@@ -120,4 +120,4 @@ class _EquationGraphique(ex.TexExercise):
         # print racines(self.polynome, [self.points[i][0] for i in range(3)])
         # print racines(self.polynome, [self.points[i][0] for i in range(3, 6)])
         #=======================================================================
-        return exo
+        return "\n".join(exo)

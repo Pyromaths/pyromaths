@@ -117,8 +117,7 @@ def md5sum(exo):
     """Calcule et renvoit le hash md5sum de l'énoncé 0 de l'exercice."""
     random.seed(0)
     return hashlib.md5(
-        "\n"
-        .join(exo().tex_statement())
+        exo().tex_statement()
         .encode(errors="backslashreplace")
         ).hexdigest()
 

@@ -644,7 +644,7 @@ class TermesDUneSuite(ex.TexExercise):
               \end{{array}}\right.\]
               """).format(**self.questions[2].latex_params))
         exo.append(r'\end{enumerate}')
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         exo = [r'\exercice*']
@@ -744,4 +744,4 @@ class TermesDUneSuite(ex.TexExercise):
         exo.append(r'\end{enumerate}')
 
         exo.append(r'\end{enumerate}')
-        return exo
+        return "\n".join(exo)

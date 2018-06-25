@@ -164,7 +164,7 @@ class Fd1Tangentes(ex.TexExercise):
         exo.append(r'ylimits(-5.5, 5.5, Crop);')
         exo.append(r'\end{asy}')
         exo.append(r'\end{minipage}')
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         dY2 = list(self.dY2)
@@ -216,4 +216,4 @@ class Fd1Tangentes(ex.TexExercise):
         exo.append(r'ylimits(-5.5, 5.5, Crop);')
         exo.append(r'\end{asy}')
         exo.append(r'\end{enumerate}')
-        return exo
+        return "\n".join(exo)

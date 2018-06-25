@@ -183,7 +183,7 @@ class Vf1SensEtTableau(ex.TexExercise):
         exo.append(r'\end{asy}')
         exo.append(r'\end{center}')
 
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         exo = [r'\exercice*']
@@ -253,7 +253,7 @@ class Vf1SensEtTableau(ex.TexExercise):
         exo.append(r'\end{tabular}')
         exo.append(r'\end{enumerate}')
 
-        return exo
+        return "\n".join(exo)
 
 def extrema(lX, lY, intervalle):
     extremums = [[None, 1000], [None, -1000]]
@@ -369,7 +369,7 @@ class Vf2ExtremaGraphiques(ex.TexExercise):
         exo.append(r'label(L="$\mathcal{C}_g$", (%s,%s), align=%s);' % (self.lX[0], self.lY2[0], ('SE', 'NW', 'SW')[self.variations2[0][0]]))
         exo.append(r'\end{asy}')
         exo.append(r'\end{center}')
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         exo = [r'\exercice*']
@@ -396,7 +396,7 @@ class Vf2ExtremaGraphiques(ex.TexExercise):
         exo.append(_(u'\\item Sur $\interval{%s}{%s}$ , le \\textbf{minimum} de $g$ est $y = %s$. Il est \\textbf{atteint en} $x = %s$.') % (self.intervalle2[0], self.intervalle2[1], extr[0][1], extr[0][0]))
         exo.append(r'\end{itemize}')
         exo.append(r'\end{enumerate}')
-        return exo
+        return "\n".join(exo)
 
 class Vf3VariationVersCourbe(ex.TexExercise):
     """Tableaux de variations et courbe"""
@@ -474,7 +474,7 @@ class Vf3VariationVersCourbe(ex.TexExercise):
         exo.append(r'\end{tabular}')
         exo.append(r'\end{center}')
 
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         exo = [r'\exercice*']
@@ -585,7 +585,7 @@ class Vf3VariationVersCourbe(ex.TexExercise):
         exo.append(r'\end{tabular}')
         exo.append(r'\end{center}')
         exo.append(r'\end{enumerate}')
-        return exo
+        return "\n".join(exo)
 
 def elements_intervalle(variations, sens):
     """Renvoie deux nombres appartenant à un intervalle sur lequel la fonction est monotone, ainsi que l'intervalle monotone auquel ils appartiennent"""
@@ -732,7 +732,7 @@ class Vf4ComparerImages(ex.TexExercise):
                         break
         exo.append(r'\end{tikzpicture}')
         exo.append(r'\end{center}')
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         exo = [r'\exercice*']
@@ -752,7 +752,7 @@ class Vf4ComparerImages(ex.TexExercise):
                 exo.append(_(u'\\item On ne peut pas comparer $f\\,(%s)$ et $f\\,(%s)$ car la fonction $f$ n\'est pas monotone (elle change de sens de variation) sur $\interval{%s}{%s}$.') % \
                            (decimaux(self.non_comparable[i][0][0], 1), decimaux(self.non_comparable[i][1][0], 1), decimaux(self.non_comparable[i][0][0], 1), decimaux(self.non_comparable[i][1][0], 1)))
         exo.append(r'\end{enumerate}')
-        return exo
+        return "\n".join(exo)
 
 def extrema_locaux(variations, lX, lY):
     """Donne un intervalle sur lequel la fonction n'est pas monotone et ou les extrema
@@ -887,7 +887,7 @@ class Vf5Extrema_Tableau(ex.TexExercise):
                         break
         exo.append(r'\end{tikzpicture}')
         exo.append(r'\end{center}')
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         exo = [r'\exercice*']
@@ -908,4 +908,4 @@ class Vf5Extrema_Tableau(ex.TexExercise):
         exo.append(r'\end{enumerate}')
         exo.append(r'\end{enumerate}')
 
-        return exo
+        return "\n".join(exo)

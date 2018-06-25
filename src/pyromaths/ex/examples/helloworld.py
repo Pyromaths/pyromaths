@@ -10,10 +10,16 @@ class HelloWorld(ex.TexExercise):
     tags = ["exemple"]
 
     def tex_statement(self):
-        return ['\\exercice', 'Hello, world!']
+        return r"""
+            \exercice
+            Hello, world!
+            """
 
     def tex_answer(self):
-        return ['\\exercice*', _('Hello, world corrigé!')]
+        return r"""
+            \exercice*
+            Hello, world corrigé !
+            """
 
 class RandomHelloWorld(ex.TexExercise):
     """Exemple RandomHelloWorld"""
@@ -24,7 +30,13 @@ class RandomHelloWorld(ex.TexExercise):
         self.times = random.randint(2, 10)
 
     def tex_statement(self):
-        return ['\\exercice', '%u times hello, World!' % self.times]
+        return r"""
+            \exercice
+            {} times hello, World!
+            """.format(self.times)
 
     def tex_answer(self):
-        return ['\\exercice*', '%u times goodbye, World!' % self.times]
+        return r"""
+            \exercice*
+            {} times goodbye, World!
+            """.format(self.times)

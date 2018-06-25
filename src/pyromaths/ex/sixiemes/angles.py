@@ -414,7 +414,7 @@ class ConstruireZigZag(ex.TexExercise):
         exo.append(self.tex_place_les_points_zigzag(corrige=False))
         exo.append(r'\end{pspicture}')
         exo.append('}\n\\end{center}')
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         exo = [r'\exercice*']
@@ -422,5 +422,5 @@ class ConstruireZigZag(ex.TexExercise):
         exo.append(self.tex_place_les_points_zigzag(corrige=True))
         exo.append(r'\end{pspicture}')
         exo.append('}\n\\end{center}')
-        return exo
+        return "\n".join(exo)
 

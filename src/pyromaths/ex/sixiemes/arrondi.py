@@ -65,7 +65,7 @@ class ArrondirNombreDecimal(ex.TexExercise):
                     precision[self.choix_precision[k]] + supinf[self.choix_supinf[k]] + 
                     '.')
         exo.append("\\end{enumerate}")
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         cor = ["\\exercice*", '\\begin{enumerate}']
@@ -91,7 +91,7 @@ class ArrondirNombreDecimal(ex.TexExercise):
                     precision[self.choix_precision[k]] + ' ' + supinf[self.choix_supinf[k]] + 
                     ' est : ' + decimaux(solution) + '.')
         cor.append("\\end{enumerate}")
-        return cor
+        return "\n".join(cor)
 
 def valide_hasard():
     """renvoie un nombre float non multiple de 10000"""

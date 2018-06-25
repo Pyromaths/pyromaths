@@ -44,13 +44,13 @@ class LegacyExercise(TexExercise):
     """
 
     def __init__(self):
-        self.stat, self.ans = self.function()
+        self.stat, self.ans = self.__class__.function()
 
     def tex_statement(self):
-        return self.stat
+        return "\n".join(self.stat)
 
     def tex_answer(self):
-        return self.ans
+        return "\n".join(self.ans)
 
 def __module(filename):
     """Expect an absolute path, subpath of this module's path. Return a relative path."""
@@ -179,9 +179,9 @@ class Jinja2Exercise(TexExercise):
 
     def tex_statement(self):
         """Génération de l'énoncé"""
-        return [self.environment.get_template(self.statement_name).render(self.context)]
+        return self.environment.get_template(self.statement_name).render(self.context)
 
     def tex_answer(self):
         """Génération du corrigé"""
-        return [self.environment.get_template(self.answer_name).render(self.context)]
+        return self.environment.get_template(self.answer_name).render(self.context)
 

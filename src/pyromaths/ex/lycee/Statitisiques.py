@@ -65,7 +65,7 @@ class _Histogramme(ex.TexExercise):
         exo.append(_(r'\hline Classe & %s \\' % " & ").join(listeToclasses(self.classes)))
         exo.append(_(r'\hline Effectif & %s \\ \hline') % " & ".join([str(i) for i in self.effectifs]))
         exo.append(r'\end{tabularx}')
-        return exo
+        return "\n".join(exo)
 
     def tex_answer(self):
         exo = [r'\exercice*']
@@ -110,4 +110,4 @@ class _Histogramme(ex.TexExercise):
         exo.append(r'histogram(tabxi,tabhi,low=0,bars=true,p1+opacity(0),p2);')
         exo.append(r'\end{asy}')
         exo.append(r'\end{center}')
-        return exo
+        return "\n".join(exo)
