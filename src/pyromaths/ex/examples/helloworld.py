@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+import random
+
 from pyromaths import ex
 
-class _HelloWorld(ex.TexExercise):
+class HelloWorld(ex.TexExercise):
     """Exemple d'exercice"""
 
     # Supprimer le tiret bas _ pour « activer » l'exercice.
@@ -14,3 +14,17 @@ class _HelloWorld(ex.TexExercise):
 
     def tex_answer(self):
         return ['\\exercice*', _('Hello, world corrigé!')]
+
+class RandomHelloWorld(ex.TexExercise):
+    """Exemple RandomHelloWorld"""
+
+    tags = ["exemple"]
+
+    def __init__(self):
+        self.times = random.randint(2, 10)
+
+    def tex_statement(self):
+        return ['\\exercice', '%u times hello, World!' % self.times]
+
+    def tex_answer(self):
+        return ['\\exercice*', '%u times goodbye, World!' % self.times]
