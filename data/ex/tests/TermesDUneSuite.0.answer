@@ -9,7 +9,7 @@ Le terme demandé est donc : $u_5=2$.
 \item Le terme de rang 6 est : $u_6=-2$.
 \item Nous avons calculé que : $u_3=2$.
 \end{enumerate}
-  \item La suite $\left(u_n\right)$ est définie pour $n\geq1$ par : $u_n=n-4$.
+  \item La suite $\left(u_n\right)$ est définie pour $n\geqslant{}1$ par : $u_n=n-4$.
 Elle est donc définie par son terme général : pour calculer un terme de rang $n$, on peut calculer directement l'image de $n$ par la suite.
 \begin{enumerate}
  \item Calcul du cinquième terme :
@@ -25,10 +25,10 @@ On a : $u_{ 3 }=3-4 = -1$.
 La solution est donc  : $u_{ 3 }=-1$.
 \end{enumerate}
 
-\item La suite $u$ est définie par récurrence, pour $n\geq1$, par :
+\item La suite $u$ est définie par récurrence, pour $n\geqslant{}1$, par :
     \[\left\{\begin{array}{l}
       u_1=-7\\
-      \text{Pour tout $n\geq1$ : } u_{n+1}=\frac{ 1 }{ 5 }u_n.
+      \text{Pour tout $n\geqslant{}1$ : } u_{n+1}=\frac{ 1 }{ 5 }u_n.
   \end{array}\right.\]
 
 \begin{align*}

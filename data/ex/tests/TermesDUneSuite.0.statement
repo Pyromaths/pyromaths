@@ -5,12 +5,12 @@ Pour chacune des suites $u$ suivantes, calculer :
  (c) $u_3$.
 \begin{enumerate}
   \item $\left(u_n\right)$ est une suite de premier terme $u_1=2$, et dont chaque terme (sauf le premier) est égal à l'opposé du précédent.
-  \item $\left(u_n\right)$ est la suite définie pour $n\geq1$ par : $u_n=n-4$.
+  \item $\left(u_n\right)$ est la suite définie pour $n\geqslant{}1$ par : $u_n=n-4$.
 
-\item $u$ est la suite définie pour $n\geq1$ par :
+\item $u$ est la suite définie pour $n\geqslant{}1$ par :
     \[\left\{\begin{array}{l}
       u_1=-7\\
-      \text{Pour tout $n\geq1$ : } u_{n+1}=\frac{ 1 }{ 5 }u_n.
+      \text{Pour tout $n\geqslant{}1$ : } u_{n+1}=\frac{ 1 }{ 5 }u_n.
   \end{array}\right.\]
 
 \end{enumerate}

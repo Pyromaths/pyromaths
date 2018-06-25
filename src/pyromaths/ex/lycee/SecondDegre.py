@@ -494,7 +494,7 @@ class Sd3bInequations(ex.TexExercise):
         shuffle(pol2)
         p = [pol, pol2]
         shuffle(p)
-        p.append(['<', '>', '\\le', '\\ge'][randrange(4)])
+        p.append(['<', '>', '\\leqslant{}', '\\geqslant{}'][randrange(4)])
         self.exercice = p
 
     def tex_statement(self):

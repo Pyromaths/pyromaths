@@ -599,7 +599,7 @@ def exo_sport():
     question1 = \
         _(u"""\\renewcommand{\\arraystretch}{1.8}
         \\item On a demandé aux élèves d'une classe de cinquième combien de temps par semaine était consacré à leur sport favori.\\par
-        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Durée t (en h)&  $0 \\le t < 1$ & $1 \\le t  < 2$ & $2 \\le t  < 3$ & $3 \\le t  < 4$ &  $4 \\le t  < 5$ & $5 \\le t  < 6$ & $6 \\le t  < 7$ \\\\\\hline Effectif & %s & %s & %s & %s & %s & %s & %s \\\\\\hline \\end{tabular}\\par
+        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Durée t (en h)&  $0 \\leqslant{} t < 1$ & $1 \\leqslant{} t  < 2$ & $2 \\leqslant{} t  < 3$ & $3 \\leqslant{} t  < 4$ &  $4 \\leqslant{} t  < 5$ & $5 \\leqslant{} t  < 6$ & $6 \\leqslant{} t  < 7$ \\\\\\hline Effectif & %s & %s & %s & %s & %s & %s & %s \\\\\\hline \\end{tabular}\\par
         À partir de ce tableau, construire un  histogramme pour représenter ces données.\\par""") % (h1, h2, h3, h4, h5, h6, h7)
     question2 = \
         _(u"""\\item On a demandé aux élèves quel était leur sport préféré. %s élèves préfèrent le basket-ball, %s le tennis, %s le football et %s le judo. Construire un diagramme circulaire représentant cette répartion.\\par""") % (basket, tennis, football, judo)

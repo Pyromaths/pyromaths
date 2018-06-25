@@ -1968,14 +1968,14 @@ msgstr "\\item Representar el reparto de votos dentro de un diagrama circular de
 msgid ""
 "\\renewcommand{\\arraystretch}{1.8}\n"
 "        \\item On a demandé aux élèves d'une classe de cinquième combien de temps par semaine était consacré à leur sport favori.\\par\n"
-"        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Durée t (en h)&  $0 \\le t < 1$ & $1 \\le t  < 2$ & $2 \\le t  < 3$ & $3 \\le t  < 4$ &  "
-"$4 \\le t  < 5$ & $5 \\le t  < 6$ & $6 \\le t  < 7$ \\\\\\hline Effectif & %s & %s & %s & %s & %s & %s & %s \\\\\\hline \\end{tabular}\\par\n"
+"        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Durée t (en h)&  $0 \\leqslant t < 1$ & $1 \\leqslant t  < 2$ & $2 \\leqslant t  < 3$ & $3 \\leqslant t  < 4$ &  "
+"$4 \\leqslant t  < 5$ & $5 \\leqslant t  < 6$ & $6 \\leqslant t  < 7$ \\\\\\hline Effectif & %s & %s & %s & %s & %s & %s & %s \\\\\\hline \\end{tabular}\\par\n"
 "        À partir de ce tableau, construire un  histogramme pour représenter ces données.\\par"
 msgstr ""
 "\\renewcommand{\\arraystretch}{1.8}\n"
 "        \\item Se ha preguntado a los alumnos de una clase de 1º de ESO cuanto tiempo por semana dedican a su deporte favorito.\\par\n"
-"        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Duración t (en h)&  $0 \\le t < 1$ & $1 \\le t  < 2$ & $2 \\le t  < 3$ & $3 \\le t  < 4$ "
-"&  $4 \\le t  < 5$ & $5 \\le t  < 6$ & $6 \\le t  < 7$ \\\\\\hline Total & %s & %s & %s & %s & %s & %s & %s \\\\\\hline \\end{tabular}\\par\n"
+"        \\begin{tabular}{|c|c|c|c|c|c|c|c|}\\hline Duración t (en h)&  $0 \\leqslant t < 1$ & $1 \\leqslant t  < 2$ & $2 \\leqslant t  < 3$ & $3 \\leqslant t  < 4$ "
+"&  $4 \\leqslant t  < 5$ & $5 \\leqslant t  < 6$ & $6 \\leqslant t  < 7$ \\\\\\hline Total & %s & %s & %s & %s & %s & %s & %s \\\\\\hline \\end{tabular}\\par\n"
 "        A partir de esta tabla, construir un histograma para representar estos datos.\\par"
 
 #: src/pyromaths/ex/cinquiemes/statistiques.py:594
@@ -2400,25 +2400,25 @@ msgstr ""
 
 #: src/pyromaths/ex/lycee/TermesSuite.py:637
 #, python-brace-format
-msgid "  \\item ${notation}$ est la suite définie pour $n\\geq{indice0}$ par : $u_n={fonction}$."
-msgstr "  \\item ${notation}$ es una secuencia definida para $n\\geq{indice0}$ por : $u_n={fonction}$."
+msgid "  \\item ${notation}$ est la suite définie pour $n\\geqslant{indice0}$ par : $u_n={fonction}$."
+msgstr "  \\item ${notation}$ es una secuencia definida para $n\\geqslant{indice0}$ por : $u_n={fonction}$."
 
 #: src/pyromaths/ex/lycee/TermesSuite.py:638
 #, python-brace-format
 msgid ""
 "\n"
-"            \\item ${notation}$ est la suite définie pour $n\\geq{indice0}$ par :\n"
+"            \\item ${notation}$ est la suite définie pour $n\\geqslant{indice0}$ par :\n"
 "                \\[\\left\\{{\\begin{{array}}{{l}}\n"
 "                  u_{indice0}={terme0}\\\\\n"
-"                  _(u\\text{{Pour tout $n\\geq{indice0}$ :) }} u_{{n+1}}={fonction}.\n"
+"                  _(u\\text{{Pour tout $n\\geqslant{indice0}$ :) }} u_{{n+1}}={fonction}.\n"
 "              \\end{{array}}\\right.\\]\n"
 "              "
 msgstr ""
 "\n"
-"            \\item ${notation}$ es secuencia definida para $n\\geq{indice0}$ por :\n"
+"            \\item ${notation}$ es secuencia definida para $n\\geqslant{indice0}$ por :\n"
 "                \\[\\left\\{{\\begin{{array}}{{l}}\n"
 "                  u_{indice0}={terme0}\\\\\n"
-"                  _(u\\text{{ Para todo $n\\geq{indice0}$ :) }} u_{{n+1}}={fonction}.\n"
+"                  _(u\\text{{ Para todo $n\\geqslant{indice0}$ :) }} u_{{n+1}}={fonction}.\n"
 "              \\end{{array}}\\right.\\]"
 
 #: src/pyromaths/ex/lycee/TermesSuite.py:652
@@ -2455,8 +2455,8 @@ msgstr "\\item Calculamos que : $u_{indice}={valeur}$."
 
 #: src/pyromaths/ex/lycee/TermesSuite.py:678
 #, python-brace-format
-msgid "  \\item La suite ${notation}$ est définie pour $n\\geq{indice0}$ par : $u_n={fonction}$."
-msgstr "  \\item La secuencia ${notation}$ esta definida para $n\\geq{indice0}$ por : $u_n={fonction}$."
+msgid "  \\item La suite ${notation}$ est définie pour $n\\geqslant{indice0}$ par : $u_n={fonction}$."
+msgstr "  \\item La secuencia ${notation}$ esta definida para $n\\geqslant{indice0}$ por : $u_n={fonction}$."
 
 #: src/pyromaths/ex/lycee/TermesSuite.py:679
 msgid ""
@@ -2497,18 +2497,18 @@ msgstr "En un : $u_{{ {} }}="
 #, python-brace-format
 msgid ""
 "\n"
-"            \\item La suite ${notation}$ est définie par récurrence, pour $n\\geq{indice0}$, par :\n"
+"            \\item La suite ${notation}$ est définie par récurrence, pour $n\\geqslant{indice0}$, par :\n"
 "                \\[\\left\\{{\\begin{{array}}{{l}}\n"
 "                  u_{indice0}={terme0}_(u\\\\\n"
-"                  \\text{{Pour tout $n\\geq{indice0}$ : }} u_{{n+1}}={fonction}).\n"
+"                  \\text{{Pour tout $n\\geqslant{indice0}$ : }} u_{{n+1}}={fonction}).\n"
 "              \\end{{array}}\\right.\\]\n"
 "              "
 msgstr ""
 "\n"
-"            \\item La secuencia ${notation}$ esta definida por recurrencia,  para $n\\geq{indice0}$, por :\n"
+"            \\item La secuencia ${notation}$ esta definida por recurrencia,  para $n\\geqslant{indice0}$, por :\n"
 "                \\[\\left\\{{\\begin{{array}}{{l}}\n"
 "                  u_{indice0}={terme0}_(u\\\\\n"
-"                  \\text{{Para todo $n\\geq{indice0}$ : }} u_{{n+1}}={fonction}).\n"
+"                  \\text{{Para todo $n\\geqslant{indice0}$ : }} u_{{n+1}}={fonction}).\n"
 "              \\end{{array}}\\right.\\]\n"
 "              "
 
@@ -3274,8 +3274,8 @@ msgstr "\\item Para $x \\in [%s~;~%s],\\quad f\\,(x) %s %s$"
 
 #: src/pyromaths/ex/lycee/VariationsFonctions.py:899 src/pyromaths/ex/lycee/VariationsFonctions.py:900
 #, python-format
-msgid "\\item Sur $[%s~;~%s],\\quad %s \\le f\\,(x) \\le %s$."
-msgstr "\\item En $[%s~;~%s],\\quad %s \\le f\\,(x) \\le %s$."
+msgid "\\item Sur $[%s~;~%s],\\quad %s \\leqslant f\\,(x) \\leqslant %s$."
+msgstr "\\item En $[%s~;~%s],\\quad %s \\leqslant f\\,(x) \\leqslant %s$."
 
 #: src/pyromaths/ex/lycee/Vecteurs.py:230 src/pyromaths/ex/lycee/Vecteurs.py:231
 #, python-brace-format
