@@ -261,5 +261,5 @@ def _aires():
 class aires(LegacyExercise):
     """Aires et quadrillage"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _aires

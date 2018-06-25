@@ -250,5 +250,5 @@ def _tex_systemes():
 class tex_systemes(LegacyExercise):
     """Système d\'équations"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _tex_systemes

@@ -112,7 +112,7 @@ def _tex_proprietes():
 class tex_proprietes(LegacyExercise):
     """Propriétés sur les puissances"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _tex_proprietes
 
 
@@ -207,7 +207,7 @@ def _tex_proprietes_neg():
 class tex_proprietes_neg(LegacyExercise):
     """Propriétés sur les puissances de 10"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _tex_proprietes_neg
 
 
@@ -264,7 +264,7 @@ def _ecr_sc():
 class ecr_sc(LegacyExercise):
     """Écritures scientifiques"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _ecr_sc
 
 
@@ -305,7 +305,7 @@ def _exo_puissances():
 class exo_puissances(LegacyExercise):
     """Puissances de 10"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _exo_puissances
 
 

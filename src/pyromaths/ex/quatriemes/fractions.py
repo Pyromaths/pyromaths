@@ -30,7 +30,7 @@ import random
 # from pyromaths.classes.Fractions import Fraction  # Classe Fractions de pyromaths
 
 def valeurs_somme_positive():
-    """Travail sur les sommes de fractions en quatrième"""
+    """Travail sur les sommes de fractions en Quatrième"""
     l = []
 
     op = "+-"[random.randrange(2)]
@@ -113,7 +113,7 @@ def _sommes_fractions_positives():
 class sommes_fractions_positives(LegacyExercise):
     """Sommes de positifs en écriture fractionnaire"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _sommes_fractions_positives
 
 #===============================================================================

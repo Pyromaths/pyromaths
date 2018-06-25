@@ -253,5 +253,5 @@ def _tex_racines():
 class tex_racines(LegacyExercise):
     """Racines carrées"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _tex_racines

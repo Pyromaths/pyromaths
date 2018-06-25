@@ -268,5 +268,5 @@ def _priorites():
 class priorites(LegacyExercise):
     """Priorités opératoires"""
 
-    tags = ["cinquième"]
+    tags = ["Cinquième"]
     function = _priorites

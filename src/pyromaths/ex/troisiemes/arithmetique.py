@@ -308,5 +308,5 @@ def _Arithmetique():
 class Arithmetique(LegacyExercise):
     """Arithmétique"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _Arithmetique

@@ -134,5 +134,5 @@ def _symetrie():
 class symetrie(LegacyExercise):
     """Symétrie centrale"""
 
-    tags = ["cinquième"]
+    tags = ["Cinquième"]
     function = _symetrie

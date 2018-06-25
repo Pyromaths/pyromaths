@@ -259,13 +259,13 @@ def _MesureAngles():
 class MesureAngles(ex.LegacyExercise):
     """Mesurer des angles"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _MesureAngles
 
 class ConstruireZigZag(ex.TexExercise):
     """Construire des angles"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
 
     def __init__(self):
         """ Crée une liste de nbp points situés à la distance lg les uns des

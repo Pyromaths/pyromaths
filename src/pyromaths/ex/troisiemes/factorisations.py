@@ -153,5 +153,5 @@ def facteur_commun3(lcoeff, details=1, diff=False):
 class factorisation(LegacyExercise):
     """Factorisations"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _factorisation

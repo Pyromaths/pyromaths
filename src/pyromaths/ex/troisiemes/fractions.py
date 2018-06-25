@@ -436,5 +436,5 @@ def _tex_fractions():
 class tex_fractions(LegacyExercise):
     """Fractions"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _tex_fractions

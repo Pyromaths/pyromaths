@@ -155,5 +155,5 @@ def _tex_puissances():
 class tex_puissances(LegacyExercise):
     """Puissances"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _tex_puissances

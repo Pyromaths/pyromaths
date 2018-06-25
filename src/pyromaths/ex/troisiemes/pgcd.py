@@ -133,5 +133,5 @@ def _tex_pgcd():
 class tex_pgcd(LegacyExercise):
     """PGCD"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _tex_pgcd

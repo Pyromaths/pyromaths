@@ -64,7 +64,6 @@ class DummyExercise(TexExercise):
 PARAMETRES = {
     'nom_fichier': u'exercices',
     'corrige': True,
-    'les_fiches': [[u'0.modele', '', [DummyExercise]]],
     'fiche_exo': os.path.join(os.getcwd(), "exercices.tex"),
     'creer_unpdf': True,
     'configdir': CONFIGDIR,

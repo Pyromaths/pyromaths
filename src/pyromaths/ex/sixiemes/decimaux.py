@@ -262,7 +262,7 @@ def _EcrireNombreLettre():
 class EcrireNombreLettre(LegacyExercise):
     """Écrire un nombre décimal"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _EcrireNombreLettre
 
 
@@ -368,7 +368,7 @@ def _tex_units():
 class tex_units(LegacyExercise):
     """Conversions unités"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _tex_units
 
 
@@ -463,7 +463,7 @@ def _exo_conversion_2d():
 class exo_conversion_2d(LegacyExercise):
     """Conversions unités d'aires"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _exo_conversion_2d
 
 def _exo_conversion_3d():
@@ -472,7 +472,7 @@ def _exo_conversion_3d():
 class exo_conversion_3d(LegacyExercise):
     """Conversions unités de volumes"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _exo_conversion_3d
 
 
@@ -617,7 +617,7 @@ def _PlaceVirgule():
 class PlaceVirgule(LegacyExercise):
     """Placer une virgule"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _PlaceVirgule
 
 
@@ -683,7 +683,7 @@ def _EcritureFractionnaire():
 class EcritureFractionnaire(LegacyExercise):
     """Écriture fractionnaire ou décimale"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _EcritureFractionnaire
 
 
@@ -752,7 +752,7 @@ def _Decomposition():
 class Decomposition(LegacyExercise):
     """Décomposition de décimaux"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _Decomposition
 
 
@@ -821,5 +821,5 @@ def _ClasserNombres():
 class ClasserNombres(LegacyExercise):
     """Classer des nombres décimaux"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _ClasserNombres

@@ -79,7 +79,7 @@ def _reduire():
 class reduire(LegacyExercise):
     """Bases du calcul littéral"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _reduire
 
 def _distributivite():
@@ -137,7 +137,7 @@ def _distributivite():
 class distributivite(LegacyExercise):
     """Distributivité"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _distributivite
 
 def _double_distributivite():
@@ -186,7 +186,7 @@ def _double_distributivite():
 class double_distributivite(LegacyExercise):
     """Double distributivité"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _double_distributivite
 
 def _soustraction():
@@ -228,7 +228,7 @@ def _soustraction():
 class soustraction(LegacyExercise):
     """Soustraire une expression entre parenthèses"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _soustraction
 
 def valeurs_reduire_somme(nbval=4):
@@ -324,7 +324,7 @@ def _exo_comptable():
 class exo_comptable(LegacyExercise):
     """Réduire des expressions littérales"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _exo_comptable
 
 #===============================================================================

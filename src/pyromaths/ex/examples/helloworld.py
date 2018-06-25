@@ -2,7 +2,7 @@ import random
 
 from pyromaths import ex
 
-class HelloWorld(ex.TexExercise):
+class _HelloWorld(ex.TexExercise):
     """Exemple d'exercice"""
 
     # Supprimer le tiret bas _ pour « activer » l'exercice.
@@ -21,7 +21,7 @@ class HelloWorld(ex.TexExercise):
             Hello, world corrigé !
             """
 
-class RandomHelloWorld(ex.TexExercise):
+class _RandomHelloWorld(ex.TexExercise):
     """Exemple RandomHelloWorld"""
 
     tags = ["exemple"]

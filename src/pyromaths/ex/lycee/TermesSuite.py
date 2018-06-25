@@ -610,7 +610,7 @@ class Recursif(Question):
 class TermesDUneSuite(ex.TexExercise):
     """Termes d'une suite"""
 
-    tags = ["1reS"]
+    tags = ["1èreS"]
 
     def __init__(self):
         # * `self.rang[0]` désigne l'ordinal du premier terme demandé (pour la

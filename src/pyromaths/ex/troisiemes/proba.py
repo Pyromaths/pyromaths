@@ -121,5 +121,5 @@ def _tex_proba():
 class tex_proba(LegacyExercise):
     """Probabilités"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _tex_proba

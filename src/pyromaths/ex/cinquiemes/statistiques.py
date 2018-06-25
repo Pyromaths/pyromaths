@@ -689,5 +689,5 @@ def _statistiques():
 class statistiques(LegacyExercise):
     """Statistiques"""
 
-    tags = ["cinquième"]
+    tags = ["Cinquième"]
     function = _statistiques

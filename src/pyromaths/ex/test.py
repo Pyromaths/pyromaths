@@ -101,7 +101,6 @@ def generate(exercise_list, openpdf=False, destname=None, pipe=None):
         'configdir': pyromaths.Values.configdir(),
         'modele': 'pyromaths.tex',
         'liste_exos': exercise_list,
-        'les_fiches': pyromaths.Values.lesfiches(),
         'openpdf': openpdf,
         'pipe': pipe,
     })

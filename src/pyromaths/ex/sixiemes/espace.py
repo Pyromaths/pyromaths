@@ -251,5 +251,5 @@ def _espace():
 class espace(LegacyExercise):
     """Représentation dans l\'espace"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _espace

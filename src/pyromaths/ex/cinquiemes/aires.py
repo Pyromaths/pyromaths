@@ -85,5 +85,5 @@ Calculer l'aire de la couronne circulaire (partie colorée) comprise entre les d
 class exo_aire_diques(LegacyExercise):
     """Aire de disques"""
 
-    tags = ["cinquième"]
+    tags = ["Cinquième"]
     function = _exo_aire_diques

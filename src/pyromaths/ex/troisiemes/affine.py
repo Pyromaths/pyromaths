@@ -434,5 +434,5 @@ def _affine():
 class affine(LegacyExercise):
     """Fonctions affines"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _affine

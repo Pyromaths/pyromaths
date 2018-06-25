@@ -300,7 +300,7 @@ def _Operations():
 class Operations(LegacyExercise):
     """Poser des opérations (sauf divisions)"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _Operations
 
 
@@ -380,7 +380,7 @@ def _CalculMental():
 class CalculMental(LegacyExercise):
     """Calcul mental"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _CalculMental
 
 
@@ -469,5 +469,5 @@ def _ProduitPuissanceDix():
 class ProduitPuissanceDix(LegacyExercise):
     """Produits, quotients par 10, 100, 1000"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _ProduitPuissanceDix

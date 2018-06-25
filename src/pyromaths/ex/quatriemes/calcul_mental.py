@@ -98,5 +98,5 @@ def _calcul_mental():
 class calcul_mental(LegacyExercise):
     """Calcul mental"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _calcul_mental

@@ -372,7 +372,7 @@ def _tex_thales():
 class tex_thales(LegacyExercise):
     """Théorème de Thalès"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _tex_thales
 
 
@@ -569,7 +569,7 @@ def _tex_reciproque_thales():
 class tex_reciproque_thales(LegacyExercise):
     """Réciproque du théorème de Thalès"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _tex_reciproque_thales
 
 #
@@ -729,5 +729,5 @@ def _tex_trigo():
 class tex_trigo(LegacyExercise):
     """Trigonométrie"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _tex_trigo

@@ -179,5 +179,5 @@ def _tex_equations():
 class tex_equations(LegacyExercise):
     """Équation"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _tex_equations

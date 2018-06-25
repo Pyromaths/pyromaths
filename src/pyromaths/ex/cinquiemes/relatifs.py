@@ -111,5 +111,5 @@ def _relatifs():
 class relatifs(LegacyExercise):
     """Addition de relatifs"""
 
-    tags = ["cinquième"]
+    tags = ["Cinquième"]
     function = _relatifs

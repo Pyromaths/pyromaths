@@ -72,12 +72,12 @@ def _fractions_egales():
 class fractions_egales(LegacyExercise):
     """Fractions égales"""
 
-    tags = ["cinquième"]
+    tags = ["Cinquième"]
     function = _fractions_egales
 
 
 def valeurs_somme():
-    """Travail sur les sommes de fractions en cinquième"""
+    """Travail sur les sommes de fractions en Cinquième"""
     l = []
 
     for dummy in range(2):
@@ -143,7 +143,7 @@ def _sommes_fractions():
 class sommes_fractions(LegacyExercise):
     """Sommes de fractions"""
 
-    tags = ["cinquième"]
+    tags = ["Cinquième"]
     function = _sommes_fractions
 
 
@@ -192,5 +192,5 @@ def _produits_fractions():
 class produits_fractions(LegacyExercise):
     """Produits de fractions"""
 
-    tags = ["cinquième"]
+    tags = ["Cinquième"]
     function = _produits_fractions

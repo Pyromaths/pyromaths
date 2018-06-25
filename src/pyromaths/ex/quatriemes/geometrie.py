@@ -158,7 +158,7 @@ Calculer la longueur $%s$.""" % \
 class exo_pythagore(LegacyExercise):
     """Théorème de Pythagore"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _exo_pythagore
 
 
@@ -259,7 +259,7 @@ Calculer la longueur $%s$.""" % \
 class exo_triangle_cercle(LegacyExercise):
     """Cercle et théorème de Pythagore"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _exo_triangle_cercle
 
 
@@ -314,7 +314,7 @@ D'après la \\textbf{réciproque du théorème de Pythagore},
 class exo_reciproque_pythagore(LegacyExercise):
     """Réciproque du théorème de Pythagore"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _exo_reciproque_pythagore
 
 
@@ -428,7 +428,7 @@ def _exo_thales():
 class exo_thales(LegacyExercise):
     """Théorème de Thalès"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _exo_thales
 
 
@@ -715,7 +715,7 @@ def _exo_trigo():
 class exo_trigo(LegacyExercise):
     """Cosinus d\'un angle aigu"""
 
-    tags = ["quatrième"]
+    tags = ["Quatrième"]
     function = _exo_trigo
 
 

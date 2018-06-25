@@ -193,7 +193,7 @@ def _FractionPartage():
 class FractionPartage(LegacyExercise):
     """Fractions partage"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _FractionPartage
 
 
@@ -413,5 +413,5 @@ def _QuestionsAbscisses():
 class QuestionsAbscisses(LegacyExercise):
     """Fractions et abscisses"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _QuestionsAbscisses

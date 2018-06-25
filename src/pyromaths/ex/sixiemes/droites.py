@@ -223,7 +223,7 @@ def _Droites():
 class Droites(LegacyExercise):
     """Droites, demi-droites, segments"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _Droites
 
 
@@ -338,7 +338,7 @@ def _Perpendiculaires():
 class Perpendiculaires(LegacyExercise):
     """Droites perpendiculaires et parallèles"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _Perpendiculaires
 
 
@@ -662,5 +662,5 @@ def _Proprietes():
 class Proprietes(LegacyExercise):
     """Propriétés sur les droites"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _Proprietes

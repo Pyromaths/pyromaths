@@ -97,7 +97,7 @@ def _exo_racines_degre2():
 class exo_racines_degre2(LegacyExercise):
     """Équations 2° degré"""
 
-    tags = ["1reS"]
+    tags = ["1èreS"]
     function = _exo_racines_degre2
 
 
@@ -179,7 +179,7 @@ def _exo_factorisation_degre2():
 class exo_factorisation_degre2(LegacyExercise):
     """Factorisations 2° degré"""
 
-    tags = ["1reS"]
+    tags = ["1èreS"]
     function = _exo_factorisation_degre2
 
 
@@ -217,7 +217,7 @@ def _exo_factorisation_degre3():
 class exo_factorisation_degre3(LegacyExercise):
     """Factorisations degré 3"""
 
-    tags = ["1reS"]
+    tags = ["1èreS"]
     function = _exo_factorisation_degre3
 
 
@@ -275,7 +275,7 @@ def _exo_tableau_de_signe():
 class exo_tableau_de_signe(LegacyExercise):
     """Étude de signe"""
 
-    tags = ["1reS"]
+    tags = ["1èreS"]
     function = _exo_tableau_de_signe
 
 
@@ -298,7 +298,7 @@ def _exo_variation():
 class exo_variation(LegacyExercise):
     """Sens de variations"""
 
-    tags = ["1reS", "Term STMG"]
+    tags = ["1èreS", "Term STMG"]
     function = _exo_variation
 
 

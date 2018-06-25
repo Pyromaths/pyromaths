@@ -221,5 +221,5 @@ def _reperage():
 class reperage(LegacyExercise):
     """Repérage"""
 
-    tags = ["cinquième"]
+    tags = ["Cinquième"]
     function = _reperage

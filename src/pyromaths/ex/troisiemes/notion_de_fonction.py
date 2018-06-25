@@ -182,6 +182,6 @@ def _notion_fonction():
 class notion_fonction(LegacyExercise):
     """Bilan sur la notion de fonction"""
 
-    tags = ["troisième"]
+    tags = ["Troisième"]
     function = _notion_fonction
 

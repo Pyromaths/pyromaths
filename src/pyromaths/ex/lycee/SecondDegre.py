@@ -139,7 +139,7 @@ def creerPolydegre2(nb_racines=2, rac_radical=True, rac_quotient=False):
 class Sd1FormeCanonique(ex.TexExercise):
     """Forme canonique"""
 
-    tags = ["1reS"]
+    tags = ["1èreS"]
 
     def __init__(self):
         m = [[1, 2], [2 * randrange(1, 10) * (-1) ** randrange(2), 1], [randrange(1, 10) * (-1) ** randrange(2), 0]]
@@ -278,7 +278,7 @@ class Sd2aRacines(ex.TexExercise):
     #TODO: ./utils/pyromaths-cli.py generate Sd2aRacines:1, 2 et 3 ne fonctionnent pas
     """Racines d'un polynôme de degré 2"""
 
-    tags = ["1reS"]
+    tags = ["1èreS"]
 
     def __init__(self):
         pol = [creerPolydegre2(nb_racines=2, rac_radical=True, rac_quotient=False)]
@@ -406,7 +406,7 @@ class Sd2aRacines(ex.TexExercise):
 class _Sd2bEquations(ex.TexExercise):
     """Équations et polynômes de degré 2"""
 
-    tags = ["1reS"]
+    tags = ["1èreS"]
 
     def __init__(self):
         pol = [creerPolydegre2(nb_racines=2, rac_radical=False, rac_quotient=False)]
@@ -450,7 +450,7 @@ class _Sd2bEquations(ex.TexExercise):
 class _Sd3aSigne(ex.TexExercise):
     """Signe d'un polynôme de degré 2"""
 
-    tags = ["1reS"]
+    tags = ["1èreS"]
 
     def __init__(self):
         pol = [[valeur_alea(-9, 9), 2 - dummy] for dummy in range(3)]
@@ -493,7 +493,7 @@ class _Sd3aSigne(ex.TexExercise):
 class _Sd3bInequations(ex.TexExercise):
     """Inéquations et polynômes de degré 2"""
 
-    tags = ["1reS"]
+    tags = ["1èreS"]
 
     def __init__(self):
         pol = creerPolydegre2(nb_racines=2, rac_radical=False, rac_quotient=False).monomes
@@ -515,7 +515,7 @@ class _Sd3bInequations(ex.TexExercise):
 class _Sd4Factorisation(ex.TexExercise):
     """Racines et factorisation d'un polynôme de degré 2"""
 
-    tags = ["1reS"]
+    tags = ["1èreS"]
 
     def __init__(self):
         val = [valeur_alea(-9, 9), valeur_alea(-9, 9)]
@@ -560,7 +560,7 @@ class _Sd4Factorisation(ex.TexExercise):
 class _Sd5Caracteristiques(ex.TexExercise):
     """Caractéristiques d'une parabole"""
 
-    tags = ["1reS"]
+    tags = ["1èreS"]
 
     def __init__(self):
         val = [valeur_alea(-9, 9), valeur_alea(-9, 9) , valeur_alea(-9, 9)]
@@ -599,7 +599,7 @@ class _Sd5Caracteristiques(ex.TexExercise):
 class _Sd6Parametre(ex.TexExercise):
     """Polynôme paramétré de degré 2"""
 
-    tags = ["1reS"]
+    tags = ["1èreS"]
 
     def __init__(self):
         [a, b, c, d] = [randrange(-5, 6) for dummy in range(4)]

@@ -37,7 +37,7 @@ supinf = ['', u' par défaut', u' par excès']
 class ArrondirNombreDecimal(ex.TexExercise):
     """Arrondir des nombres décimaux"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
 
     def __init__(self):
         hasard = [valide_hasard() for dummy in range(4)]

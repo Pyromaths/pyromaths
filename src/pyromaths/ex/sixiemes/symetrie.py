@@ -115,5 +115,5 @@ def _SymetrieQuadrillage():
 class SymetrieQuadrillage(LegacyExercise):
     """Symétrie et quadrillages"""
 
-    tags = ["sixième"]
+    tags = ["Sixième"]
     function = _SymetrieQuadrillage
