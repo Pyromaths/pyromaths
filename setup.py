@@ -1,5 +1,5 @@
-#!/usr/bin/python
-# -*- coding: utf8 -*-
+#!/usr/bin/env python3
+
 """
 Build script for pyromaths.
 
