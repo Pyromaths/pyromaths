@@ -27,7 +27,6 @@ standard_library.install_aliases()
 from builtins import str
 from builtins import range
 from builtins import object
-from past.utils import old_div
 from pyromaths.outils.Arithmetique import pgcd, ppcm
 from collections import Counter
 from pyromaths.classes.SquareRoot import SquareRoot
@@ -574,7 +573,6 @@ class Fraction(object):
         return self.n // self.d
 
     def __lt__(self, other):
-        print(repr(self), other)
         if isinstance(other, int) or isinstance(other, float):
             other = Fraction(other)
         if other.traitement().d * self.traitement().d > 0:

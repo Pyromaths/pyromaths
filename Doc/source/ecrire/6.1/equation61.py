@@ -66,8 +66,8 @@ class EquationPremierDegre61(Jinja2Exercice):
                 calculs.append(r"x&={}\\".format(solution))
                 conclusion = r"L'unique solution est $x = {}$.".format(solution)
             else:
-                calculs.append(r"x&\approx{}\\".format(solution))
-                conclusion = r"L'unique solution est $x \approx {}$.".format(solution)
+                calculs.append(r"x&\simeq{}\\".format(solution))
+                conclusion = r"L'unique solution est $x \simeq {}$.".format(solution)
         self.context = {
             "a": a,
             "b": b,

@@ -24,7 +24,6 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import chr
 from builtins import range
-from past.utils import old_div
 import random
 import math
 
@@ -156,9 +155,9 @@ def tex_figure(liste, lpoints, points_coord, nodesep=0):
 
 def coord_points(lpoints):
     """Définit les ordonnées de trois points nommés dont les noms sont dans lpoints"""
-    ordonnees = [old_div(random.randrange(5, 16), 10.)for i in range(3)]
+    ordonnees = [random.randrange(5, 16) / 10 for i in range(3)]
     while abs(2 * ordonnees[1] - ordonnees[0] - ordonnees[2]) < .5:
-        ordonnees = [old_div(random.randrange(5, 16), 10.)for i in range(3)]
+        ordonnees = [random.randrange(5, 16) / 10 for i in range(3)]
     random.shuffle(ordonnees)
     for i in range(3):
         ordonnees.insert(2 * i + 1, lpoints[i])
@@ -273,12 +272,12 @@ def noms_sommets(nb):  # renvoie nb noms de sommets
 def cree_coordonnees(longueur=3):
     from math import floor
     alpha = random.randrange(180)
-    k0 = old_div(random.randrange(50, 100), 100.0)
+    k0 = random.randrange(50, 100) / 100
     a0 = alpha + random.randrange(30, 120)
-    k1 = old_div(random.randrange(50, 100), 100.0)
+    k1 = random.randrange(50, 100) / 100
     a1 = alpha + random.randrange(210, 300)
-    return (longueur,alpha, longueur, alpha + 180, old_div(floor((k0* 10) * longueur), 
-            10.0), a0, old_div(floor((k1 * 10) * longueur), 10.0), a1)
+    return (longueur,alpha, longueur, alpha + 180, floor((k0* 10) * longueur) / 10, a0,
+            floor((k1 * 10) * longueur) / 10, a1)
 
 
 def enonce_perp(exo, cor):
@@ -353,54 +352,46 @@ def fonction(angle, xa, ya, dist=0, droite='par'):
     @param droite: 'par' pour une parallèle et 'per' pour une perpendiculaire
     """
 
-    angle_rad = old_div((angle * math.pi), 180)
+    angle_rad = (angle * math.pi) / 180
     if droite == 'par':
-        coef = old_div(math.floor(math.tan(angle_rad) * 1000), 1000.0)
-        ord_or = old_div(math.floor(((ya - xa * math.tan(angle_rad)) - old_div(dist, 
-                            math.cos(angle_rad))) * 1000), 1000.0)
+        coef = math.floor(math.tan(angle_rad) * 1000) / 1000
+        ord_or = math.floor((ya - xa * math.tan(angle_rad) - dist / math.cos(angle_rad)) * 1000) / 1000
         return '{x %s mul %s add}' % (coef, ord_or)
     else:
-        coef = old_div(math.floor(old_div(-1000, math.tan(angle_rad))), 1000.0)
+        coef = math.floor(-1000 / math.tan(angle_rad)) / 1000
         return '{x %s mul}' % coef
 
 
 def PointInter(angle, xa, ya, dist=0):
-    angle_rad = old_div((angle * math.pi), 180)
-    coef1 = old_div(math.floor(math.tan(angle_rad) * 1000), 1000.0)
-    ord_or1 = old_div(math.floor(((ya - xa * math.tan(angle_rad)) - old_div(dist, math.cos(angle_rad))) * 
-                         1000), 1000.0)
-    coef2 = old_div(math.floor(old_div(-1000, math.tan(angle_rad))), 1000.0)
-    x = old_div(ord_or1, (coef2 - coef1))
+    angle_rad = (angle * math.pi) / 180
+    coef1 = math.floor(math.tan(angle_rad) * 1000) / 1000
+    ord_or1 = math.floor((ya - xa * math.tan(angle_rad)) - dist / math.cos(angle_rad) * 1000) / 1000
+    coef2 = math.floor(-1000 / math.tan(angle_rad)) / 1000
+    x = ord_or1 // (coef2 - coef1)
     y = x * coef2
-    return ',PosAngle=%s](%s,%s)' % (45 + angle, old_div(math.floor(x * 1000), 
-            1000.0), old_div(math.floor(y * 1000), 1000.0))
+    return ',PosAngle=%s](%s,%s)' % (45 + angle, math.floor(x * 1000) / 1000, math.floor(y * 1000) / 1000)
 
 
 def Points(angle, xa, ya, dist=0):
-    angle_rad = old_div((angle * math.pi), 180)
-    coef = old_div(math.floor(math.tan(angle_rad) * 1000), 1000.0)
-    ord_or = old_div(math.floor(((ya - xa * math.tan(angle_rad)) - old_div(dist, math.cos(angle_rad))) * 
-                        1000), 1000.0)
+    angle_rad = (angle * math.pi) / 180
+    coef = math.floor(math.tan(angle_rad) * 1000) / 1000
+    ord_or = math.floor((ya - xa * math.tan(angle_rad) - dist / math.cos(angle_rad)) * 1000) / 1000
     lpos = []
     if -1.5 < -2 * coef + ord_or < 1.5:
         x = -1.5
-        y = old_div(math.floor((x * coef + ord_or) * 1000), 1000.0)
+        y = math.floor((x * coef + ord_or) * 1000) / 1000
         lpos.append('(%s,%s)' % (x, y))
     if -1.5 < 2 * coef + ord_or < 1.5:
         x = 1.5
-        y = old_div(math.floor((x * coef + ord_or) * 1000), 1000.0)
+        y = math.floor((x * coef + ord_or) * 1000) / 1000
         lpos.append('(%s,%s)' % (x, y))
-    if -2.1 < old_div((1.5 - ya + old_div(dist, math.cos(angle_rad)) + xa * math.tan(angle_rad)), \
-        math.tan(angle_rad)) < 2.1:
+    if -2.1 < (1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / math.tan(angle_rad) < 2.1:
         y = 1.1
-        x = old_div(math.floor((old_div((y - ya + old_div(dist, math.cos(angle_rad)) + xa * math.tan(angle_rad)), 
-                       math.tan(angle_rad))) * 1000), 1000.0)
+        x = math.floor(((y - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / math.tan(angle_rad)) * 1000) / 1000
         lpos.append('(%s,%s)' % (x, y))
-    if -2.1 < old_div((-1.5 - ya + old_div(dist, math.cos(angle_rad)) + xa * math.tan(angle_rad)), \
-        math.tan(angle_rad)) < 2.1:
+    if -2.1 < (-1.5 - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / math.tan(angle_rad) < 2.1:
         y = -1.1
-        x = old_div(math.floor((old_div((y - ya + old_div(dist, math.cos(angle_rad)) + xa * math.tan(angle_rad)), 
-                       math.tan(angle_rad))) * 1000), 1000.0)
+        x = math.floor(((y - ya + dist / math.cos(angle_rad) + xa * math.tan(angle_rad)) / math.tan(angle_rad)) * 1000) / 1000
         lpos.append('(%s,%s)' % (x, y))
     return lpos
 
@@ -458,11 +449,11 @@ def figure(angle, xa, ya, dist, lpoints, noms, par_per, dist2=0):
                         (angle + 45, lpoints[0], lpoints[1], pts[0], pts[1]))
             pts = Points(angle, xa, ya, dist)
             ltxt.append('\\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{b1}%s{b2}' % 
-                        (angle - old_div((45.0 * dist), abs(dist)), lpoints[2],
+                        (angle - (45.0 * dist) / abs(dist), lpoints[2],
                         lpoints[3], pts[0], pts[1]))
             pts = Points(angle, xa, ya, dist2)
             ltxt.append('\\pstGeonode[PointSymbol=x,PosAngle=%s,PointName={%s,%s}]%s{c1}%s{c2}' % 
-                        (angle - old_div((45.0 * dist2), abs(dist2)), lpoints[4],
+                        (angle - (45.0 * dist2) / abs(dist2), lpoints[4],
                         lpoints[5], pts[0], pts[1]))
     else:
 
@@ -484,12 +475,12 @@ def figure(angle, xa, ya, dist, lpoints, noms, par_per, dist2=0):
                         (angle + 45, lpoints[0], pts[0], pts[1]))
             pts = Points(angle, xa, ya, dist)
             ltxt.append('\\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{b1}%s{b2}' % 
-                        (angle - old_div((45.0 * dist), abs(dist)), lpoints[1],
+                        (angle - (45.0 * dist) / abs(dist), lpoints[1],
                         pts[0], pts[1]))
                         # FIXME list index out of range
             pts = Points(angle, xa, ya, dist2)
             ltxt.append('\\pstGeonode[PointSymbol=none,PosAngle=%s,PointName={%s,none}]%s{c1}%s{c2}' % 
-                        (angle - old_div((45.0 * dist2), abs(dist2)), lpoints[2],
+                        (angle - (45.0 * dist2) / abs(dist2), lpoints[2],
                         pts[0], pts[1]))
     if par_per != 2:
         if angle < 90:
@@ -515,17 +506,17 @@ def valeurs_figures(par_per):
         for dummy in range(3):
             lpoints.append('(d_%s)' % lindices.pop(random.randrange(len(lindices))))
     angle = random.randrange(1, 90) + 90 * random.randrange(2)
-    xa = old_div(random.randrange(-5, 5), 10.0)
-    ya = old_div(random.randrange(-3, 3), 10.0)
+    xa = random.randrange(-5, 5) / 10
+    ya = random.randrange(-3, 3) / 10
     if random.randrange(2):
-        dist = old_div(random.randrange(4, 9), 10.0)
+        dist = random.randrange(4, 9) / 10
     else:
-        dist = old_div(-random.randrange(4, 9), 10.0)
+        dist = -random.randrange(4, 9) / 10
     if par_per == 2:
         if dist > 0:
-            dist2 = old_div(-random.randrange(4, 9), 10.0)
+            dist2 = -random.randrange(4, 9) / 10
         else:
-            dist2 = old_div(random.randrange(4, 9), 10.0)
+            dist2 = random.randrange(4, 9) / 10
         return (angle, xa, ya, dist, lpoints, noms, dist2)
     else:
         return (angle, xa, ya, dist, lpoints, noms)

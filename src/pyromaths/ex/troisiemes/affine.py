@@ -24,19 +24,19 @@
 # from math import *
 from __future__ import division
 from __future__ import unicode_literals
+
+import random
 from builtins import str
-from past.utils import old_div
 from math import sqrt
+
 from pyromaths.classes.Fractions import Fraction  # fractions pyromaths
 from pyromaths.classes.PolynomesCollege import Polynome
-from pyromaths.outils.Affichage import decimaux
-import random
-import pyromaths.outils.Priorites3
 from pyromaths.outils import Priorites3
+from pyromaths.outils.Affichage import decimaux
 
 
 def extreme(a, b, xmin, xmax, ymin, ymax):
-# donne les extremités de la droite passant par a et b (coordonnées)
+    # donne les extremités de la droite passant par a et b (coordonnées)
     res = []
     x1 = a[0]
     x2 = b[0]
@@ -45,20 +45,21 @@ def extreme(a, b, xmin, xmax, ymin, ymax):
     coef = (y1 - y2) / (x1 - x2)
     if coef != 0:
         xsort1 = x1 + (ymin - y1) / coef  # abscisse du point d'ordonnée ymin
-        if xsort1 >= xmin and xsort1 <= xmax and not(xsort1, ymin) in res:
+        if xsort1 >= xmin and xsort1 <= xmax and not (xsort1, ymin) in res:
             res.append((xsort1, ymin))
         xsort2 = x2 + (ymax - y2) / coef  # abscisse du point d'ordonnée ymax
-        if xsort2 >= xmin and xsort2 <= xmax and not(xsort2, ymax) in res:
+        if xsort2 >= xmin and xsort2 <= xmax and not (xsort2, ymax) in res:
             res.append((xsort2, ymax))
         ysort1 = y1 + coef * (xmin - x1)  # ordonnée du point d'abscisse xmin
-        if ysort1 >= ymin and ysort1 <= ymax and not (xmin, ysort1)in res:
+        if ysort1 >= ymin and ysort1 <= ymax and not (xmin, ysort1) in res:
             res.append((xmin, ysort1))
         ysort2 = y2 + coef * (xmax - x2)  # ordonnée du point d'abscisse xmax
-        if ysort2 >= ymin and ysort2 <= ymax and not(xmax, ysort2) in res:
+        if ysort2 >= ymin and ysort2 <= ymax and not (xmax, ysort2) in res:
             res.append((xmax, ysort2))
     else:
         res = [(xmin, y1), (xmax, y1)]
     return res
+
 
 def vecdir(A, B):
     # retourne sous forme de liste le vecteur directeur normé de la droite (AB)
@@ -68,6 +69,7 @@ def vecdir(A, B):
         u[0] = -u[0]
         u[1] = -u[1]
     return u
+
 
 def validedroite(A, B):
     """ valide le choix du couple A B pour qu'ils ne soient pas "collés",
@@ -85,7 +87,9 @@ def validec(A, B):
     # valide le choix du couple A B pour qu'ils ne soient pas "collés"
     if abs(A[0] - B[0]) < 1 and abs(A[1] - B[1]) < 1:
         return False
-    else: return True
+    else:
+        return True
+
 
 def doublefleche(A, B):
     # trace une flèche "double" de justification en pointillés
@@ -98,23 +102,26 @@ def doublefleche(A, B):
 
     return res
 
-def couple () :
-    A = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) /2)
+
+def couple():
+    A = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) / 2)
     B = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) / 2)
     while not validec(A, B):
         B = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) / 2)
     return (A, B)
 
-def coupletrace () :
+
+def coupletrace():
     A = (0, random.randrange(-4, 5))
     B = (random.randrange(-4, 5), random.randrange(-4, 5))
     while not validec(A, B):
         B = (random.randrange(-4, 5), random.randrange(-4, 5))
     return (A, B)
 
-def couples ():
+
+def couples():
     # génère 6 points. Chaque couple correspondra a une droite ((AB), (CD) et (EF)).
-    A = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) /2)
+    A = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) / 2)
     B = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) / 2)
     while not validedroite(A, B):
         B = (random.randrange(-8, 9) / 2, random.randrange(-8, 9) / 2)
@@ -122,27 +129,30 @@ def couples ():
     while not (validec(A, C) and validec(B, C)):
         C = (0, random.randrange(-4, 5))
     D = (random.randrange(-4, 5), random.randrange(-4, 5))
-    while not (validec(A, D) and validec(B, D) and validedroite(C, D)) :
+    while not (validec(A, D) and validec(B, D) and validedroite(C, D)):
         D = (random.randrange(-4, 5), random.randrange(-4, 5))
-    E = (0, random.randrange(-8, 9) /2)
+    E = (0, random.randrange(-8, 9) / 2)
     while not (validec(A, E) and validec(B, E) and validec(C, E) and validec(D, E)):
         E = (0, random.randrange(-8, 9) / 2)
     F = (random.randrange(-4, 5), random.randrange(-4, 5))
-    while not (validec(A, F) and validec(B, F) and validec(C, F) and validec(D, F)and validedroite(E, F)):
+    while not (validec(A, F) and validec(B, F) and validec(C, F) and validec(D, F) and validedroite(E, F)):
         F = (random.randrange(-4, 5), random.randrange(-4, 5))
     return (A, B, C, D, E, F)
+
 
 def tracedroite(A, B, xmin, xmax, ymin, ymax):
     # trace la droite (AB)
     l = extreme(A, B, xmin, xmax, ymin, ymax)
     return "\\psline " + str(l[0]) + str(l[1])
 
+
 def dansrep(A, xmin, xmax, ymin, ymax):
-# Si le points est dans le repère
+    # Si le points est dans le repère
     res = False
     if A[0] > xmin and A[0] < xmax and A[1] > ymin and A[1] < ymax:
         res = True
     return res
+
 
 def nomdroite(i, coordo):
     # place le nom de la droite (d_i) sur le graphique aux coordonnées coordo
@@ -157,6 +167,7 @@ def nomdroite(i, coordo):
     else:
         y = 0
     return "\\rput" + str((x, y)) + "{($d_" + str(i) + "$)}"
+
 
 def nom3droites(A, B, C, D, E, F, xmin, xmax, ymin, ymax):
     # place le nom des droites (AB), (CD), (EF) dans le graphique
@@ -175,9 +186,10 @@ def nom3droites(A, B, C, D, E, F, xmin, xmax, ymin, ymax):
     l3 = extreme(E, F, xmin, xmax, ymin, ymax)
     if validec(l1[0], l3[0]) and validec(memo, l3[0]):
         res.append(nomdroite(3, l3[0]))
-    else :
+    else:
         res.append(nomdroite(3, l3[1]))
     return res
+
 
 def isint(x):
     # est entier?
@@ -185,6 +197,7 @@ def isint(x):
     if int(x) == x:
         res = True
     return res
+
 
 def isdemi(x):
     # est-ce une moitié d'entier
@@ -195,10 +208,12 @@ def isdemi(x):
 
     return res
 
+
 def coefdir(A, B):
     # donne le coefficient directeur x/y sous forme de liste [x,y]
     # Si y=1 on ecrira x sinon on écrira la fraction x/y
     return Fraction.simplifie(Fraction(B[1] - A[1], B[0] - A[0]))
+
 
 def anteimage(fonc, A, B):
     # Génère la 1ère question et sa réponse
@@ -210,8 +225,9 @@ def anteimage(fonc, A, B):
     if i == 1:
         j = i + random.randrange(0, 2)
     res = []
-    res.append('Donner ' + l[j] + '$' + decimaux(str(A[i])) + '$' + ' par la fonction ' + '\\textit{' + fonc + '}.')
-    res.append('$' + decimaux(str(A[abs(i - 1)])) + '$' + lcor[j] + '$' + decimaux(str(A[i])) + '$' + ' par la \\hbox{fonction ' + '\\textit{' + fonc + '}}.')
+    res.append('Donner ' + l[j] + '$' + decimaux(A[i]) + '$' + ' par la fonction ' + '\\textit{' + fonc + '}.')
+    res.append('$' + decimaux(A[abs(i - 1)]) + '$' + lcor[j] + '$' + decimaux(
+        A[i]) + '$' + ' par la \\hbox{fonction ' + '\\textit{' + fonc + '}}.')
     if i == 0:
         res.append(doublefleche((A[0], 0), A))
         res.append(doublefleche(A, (0, A[1])))
@@ -223,8 +239,9 @@ def anteimage(fonc, A, B):
     j = i
     if i == 1:
         j = i + random.randrange(0, 2)
-    res.append('Donner ' + l[j] + '$' + decimaux(str(B[i])) + '$' + ' par la fonction ' + '\\textit{' + fonc + '}.')
-    res.append('$' + decimaux(str(B[abs(i - 1)])) + '$' + lcor[j] + '$' + decimaux(str(B[i])) + '$' + ' par la \\hbox{fonction ' + '\\textit{' + fonc + '}}.')
+    res.append('Donner ' + l[j] + '$' + decimaux(B[i]) + '$' + ' par la fonction ' + '\\textit{' + fonc + '}.')
+    res.append('$' + decimaux(B[abs(i - 1)]) + '$' + lcor[j] + '$' + decimaux(
+        B[i]) + '$' + ' par la \\hbox{fonction ' + '\\textit{' + fonc + '}}.')
     if i == 0:
         res.append(doublefleche((B[0], 0), B))
         res.append(doublefleche(B, (0, B[1])))
@@ -232,6 +249,7 @@ def anteimage(fonc, A, B):
         res.append(doublefleche((0, B[1]), B))
         res.append(doublefleche(B, (B[0], 0)))
     return res
+
 
 def tracefonc(f, i, A, B, xmin, xmax, ymin, ymax):
     """**tracefonc\ (*f*\ , *i*\ , *A*\ , *B*\ , *xmin*\ , *xmax*\ , *ymin*\ , *ymax*\ )
@@ -256,61 +274,43 @@ def tracefonc(f, i, A, B, xmin, xmax, ymin, ymax):
         B = (u.d, u.n + A[1])
         if not dansrep(B, xmin, xmax, ymin, ymax):
             B = (-u.d, -u.n + A[1])
-        x1 = decimaux(str(B[0]))
+        x1 = decimaux(B[0])
     l = Priorites3.texify([Polynome([[u, 1], [A[1], 0]], "x")(B[0])])
     l.extend(Priorites3.texify(Priorites3.priorites(Polynome([[u, 1], [A[1], 0]], "x")(B[0]))))
-    l = [u'Tracer la droite représentative ($d_' + str(i) + '$) de la fonction $' + f + ':x\\longmapsto ' + str(Polynome([[u, 1], [A[1], 0]], "x")) + '$.',
-       'On sait que $' + f + '(0)=' + decimaux(str(A[1])) + '$ et $' + f + '(' + x1 + ')=' + "=".join(l) + "$.",
-       '\\psdot [dotsize=4.5pt,dotstyle=x]' + str(A),
-       '\\psdot [dotsize=4.5pt,dotstyle=x]' + str(B),
-       ]
+    l = [u'Tracer la droite représentative ($d_' + str(i) + '$) de la fonction $' + f + ':x\\longmapsto ' + str(
+        Polynome([[u, 1], [A[1], 0]], "x")) + '$.',
+         'On sait que $' + f + '(0)=' + decimaux(A[1]) + '$ et $' + f + '(' + x1 + ')=' + "=".join(l) + "$.",
+         '\\psdot [dotsize=4.5pt,dotstyle=x]' + str(A),
+         '\\psdot [dotsize=4.5pt,dotstyle=x]' + str(B),
+         ]
     return l
 
+
 def exprfonc(f, i, A, B):
-# Génère la 3e question.
-# A est sur l'axe des ordonnées, f est le nom de la fonction
+    # Génère la 3e question.
+    # A est sur l'axe des ordonnées, f est le nom de la fonction
     u = coefdir(A, B)
     if isinstance(u, int): u = Fraction(u, 1)
     Polynome([[u, 1], [A[1], 0]], "x")(B[0])
-    #===========================================================================
-    # if A[1] >= 0:
-    #     b = '+' + decimaux(str(A[1]))
-    # else:
-    #     b = decimaux(str(A[1]))
-    # if u.d == 1:
-    #     coef = decimaux(str(u.n))
-    #     if u.n == -1:
-    #         coef = '-'  # utilisé dans l'expression de la fonction
-    #     if u.n == 1:
-    #         coef = ''
-    #     coefres = decimaux(str(u.n))  # résultat utilisé pour a
-    # else:
-    #     if u.n > 0:
-    #         coef = '\\dfrac{' + decimaux(str(u.n)) + '}{' + decimaux(str(u.d)) + '}'
-    #     else:
-    #         coef = '-\\dfrac{' + decimaux(str(abs(u.n))) + '}{' + decimaux(str(u.d)) + '}'
-    #     coefres = coef
-    #===========================================================================
-
     if A[1] - B[1] > 0:
-        deltay = '+' + decimaux(str(A[1] - B[1]))
-    else :
-        deltay = decimaux(str(A[1] - B[1]))
-    if A[0] - B[0] > 0:
-        deltax = '+' + decimaux(str(A[0] - B[0]))
+        deltay = '+' + decimaux(A[1] - B[1])
     else:
-        deltax = decimaux(str(A[0] - B[0]))
+        deltay = decimaux(A[1] - B[1])
+    if A[0] - B[0] > 0:
+        deltax = '+' + decimaux(A[0] - B[0])
+    else:
+        deltax = decimaux(A[0] - B[0])
 
-    if B[0] < 0 :
+    if B[0] < 0:
         mid11 = B[0] - 0.75
         mid12 = (B[1] + A[1]) / 2  # milieu de la flèche verticale
     else:
         mid11 = B[0] + 0.75
         mid12 = (B[1] + A[1]) / 2
-    if B[0] * u.d / u.n > 0 :
-        mid21 = (A[0] + B[0])/ 2
+    if B[0] * u.d / u.n > 0:
+        mid21 = (A[0] + B[0]) / 2
         mid22 = A[1] - 0.6  # milieu de la flèche horizontale
-    else :
+    else:
         mid21 = (A[0] + B[0]) / 2
         mid22 = A[1] + 0.5
     if mid12 < 0 and mid12 > -0.8:
@@ -331,14 +331,16 @@ def exprfonc(f, i, A, B):
         mid22 = 0.5
     mid1 = (mid11, mid12)
     mid2 = (mid21, mid22)
-    l = [u'Déterminer l\'expression de la fonction $' + f + u'$ représentée ci-contre par la droite ($d_' + str(i) + '$).',
-       u'On lit l\'ordonnée à l\'origine et le coefficient de la fonction affine sur le graphique.\\\ ',
-       '$' + f + '(x)=a\\,x+b$ ' + 'avec $b=' + decimaux(str(A[1])) + '$ et $a=' + '\\dfrac{' + deltay + '}{' + deltax + '}=' + str(u) + '$.\\\ ',
-       'L\'expression de la fonction $' + f + '$ est $' + f + '(x)=' + str(Polynome([[u, 1], [A[1], 0]], "x")) + '$.',
-       doublefleche(B, (B[0], A[1])),
-       doublefleche((B[0], A[1]), A),
-       '\\rput' + str(mid1) + '{(' + deltay + ')}',
-       '\\rput' + str(mid2) + '{(' + deltax + ')}']
+    l = [u'Déterminer l\'expression de la fonction $' + f + u'$ représentée ci-contre par la droite ($d_' + str(
+        i) + '$).',
+         u'On lit l\'ordonnée à l\'origine et le coefficient de la fonction affine sur le graphique.\\\ ',
+         '$' + f + '(x)=a\\,x+b$ ' + 'avec $b=' + decimaux(
+             A[1]) + '$ et $a=' + '\\dfrac{' + deltay + '}{' + deltax + '}=' + str(u) + '$.\\\ ',
+         'L\'expression de la fonction $' + f + '$ est $' + f + '(x)=' + str(Polynome([[u, 1], [A[1], 0]], "x")) + '$.',
+         doublefleche(B, (B[0], A[1])),
+         doublefleche((B[0], A[1]), A),
+         '\\rput' + str(mid1) + '{(' + deltay + ')}',
+         '\\rput' + str(mid2) + '{(' + deltax + ')}']
 
     return l
 
@@ -357,75 +359,76 @@ def affine():
     l3 = exprfonc(fonc3, 3, E, F)
     noms = nom3droites(A, B, C, D, E, F, xmin, xmax, ymin, ymax)
     exo = ["\\exercice", "\\parbox{0.5\\linewidth}{",
-         u"($d_1$) est la droite représentative de la fonction $" + fonc1 + "$.",
-         "\\begin{enumerate}",
-         "\\item " + l[0],
-         "\\item " + l[4],
-         "\\item " + l2[0],
-         "\\item " + l3[0],
-         "\\end{enumerate}}\\hfill",
-         "\\parbox{0.45\\linewidth}{",
-         "\\psset{unit=0.8cm}",
-         "\\begin{pspicture}" + str((xmin, ymin)) + str((xmax, ymax)),
-         "\\psgrid[subgriddiv=2, gridlabels=8pt](0,0)" + str((xmin, ymin)) + str((xmax, ymax)),
-         "\\psline[linewidth=1.2pt]{->}" + str((xmin, 0)) + str((xmax, 0)),
-         "\\psline[linewidth=1.2pt]{->}" + str((0, ymin)) + str((0, ymax)),
-         tracedroite(A, B, xmin, xmax, ymin, ymax),
-         noms[0],
-         tracedroite(E, F, xmin, xmax, ymin, ymax),
-         noms[2],
-         "\\end{pspicture}}"]
+           u"($d_1$) est la droite représentative de la fonction $" + fonc1 + "$.",
+           "\\begin{enumerate}",
+           "\\item " + l[0],
+           "\\item " + l[4],
+           "\\item " + l2[0],
+           "\\item " + l3[0],
+           "\\end{enumerate}}\\hfill",
+           "\\parbox{0.45\\linewidth}{",
+           "\\psset{unit=0.8cm}",
+           "\\begin{pspicture}" + str((xmin, ymin)) + str((xmax, ymax)),
+           "\\psgrid[subgriddiv=2, gridlabels=8pt](0,0)" + str((xmin, ymin)) + str((xmax, ymax)),
+           "\\psline[linewidth=1.2pt]{->}" + str((xmin, 0)) + str((xmax, 0)),
+           "\\psline[linewidth=1.2pt]{->}" + str((0, ymin)) + str((0, ymax)),
+           tracedroite(A, B, xmin, xmax, ymin, ymax),
+           noms[0],
+           tracedroite(E, F, xmin, xmax, ymin, ymax),
+           noms[2],
+           "\\end{pspicture}}"]
 
     cor = ["\\exercice*", "\\setlength{\\columnsep}{2mm}",
-         "\\begin{multicols}{2}\\noindent \\small",
-         u"($d_1$) est la droite représentative de la fonction $" + fonc1 + "$.",
-         "\\begin{enumerate}",
-         "\\item " + l[1],
-         "\\item " + l[5],
-         "\\item\n\\begin{flushleft}\n" + l2[1] + "\n\\end{flushleft}",
-         "\\item\n\\begin{flushleft}\n" + l3[1],
-         l3[2],
-         l3[3] + "\n\\end{flushleft}",
-         "\\end{enumerate}",
-         "\\end{multicols}",
-         "\\vspace{0.45cm}",
-         "\\begin{minipage}{0.5\\linewidth}",
-         "\\psset{unit=0.7cm}",
-         "\\begin{center}",
-         "\\begin{pspicture}" + str((xmin, ymin)) + str((xmax, ymax)),
-         "\\psgrid[subgriddiv=2, gridlabels=8pt](0,0)" + str((xmin, ymin)) + str((xmax, ymax)),
-         "\\psline[linewidth=1.2pt]{->}" + str((xmin, 0)) + str((xmax, 0)),
-         "\\psline[linewidth=1.2pt]{->}" + str((0, ymin)) + str((0, ymax)),
-         tracedroite(A, B, xmin, xmax, ymin, ymax),
-         noms[0],
-         tracedroite(C, D, xmin, xmax, ymin, ymax),
-         noms[1],
-         l[2],
-         l[3],
-         l[6],
-         l[7],
-         l2[2],
-         l2[3],
-         "\\end{pspicture}",
-         "\\end{center}",
-         "\\end{minipage}",
-         "\\begin{minipage}{0.5\\linewidth}",
-         "\\psset{unit=0.7cm}",
-         "\\begin{center}",
-         "\\begin{pspicture}" + str((xmin, ymin)) + str((xmax, ymax)),
-         "\\psgrid[subgriddiv=2, gridlabels=8pt](0,0)" + str((xmin, ymin)) + str((xmax, ymax)),
-         "\\psline[linewidth=1.2pt]{->}" + str((xmin, 0)) + str((xmax, 0)),
-         "\\psline[linewidth=1.2pt]{->}" + str((0, ymin)) + str((0, ymax)),
-         tracedroite(E, F, xmin, xmax, ymin, ymax),
-         noms[2],
-         l3[4],
-         l3[5],
-         l3[6],
-         l3[7],
-         "\\end{pspicture}",
-         "\\end{center}",
-         "\\end{minipage}",
-         "\\vspace{0.45cm}"]
+           "\\begin{multicols}{2}\\noindent \\small",
+           u"($d_1$) est la droite représentative de la fonction $" + fonc1 + "$.",
+           "\\begin{enumerate}",
+           "\\item " + l[1],
+           "\\item " + l[5],
+           "\\item\n\\begin{flushleft}\n" + l2[1] + "\n\\end{flushleft}",
+           "\\item\n\\begin{flushleft}\n" + l3[1],
+           l3[2],
+           l3[3] + "\n\\end{flushleft}",
+           "\\end{enumerate}",
+           "\\end{multicols}",
+           "\\vspace{0.45cm}",
+           "\\begin{minipage}{0.5\\linewidth}",
+           "\\psset{unit=0.7cm}",
+           "\\begin{center}",
+           "\\begin{pspicture}" + str((xmin, ymin)) + str((xmax, ymax)),
+           "\\psgrid[subgriddiv=2, gridlabels=8pt](0,0)" + str((xmin, ymin)) + str((xmax, ymax)),
+           "\\psline[linewidth=1.2pt]{->}" + str((xmin, 0)) + str((xmax, 0)),
+           "\\psline[linewidth=1.2pt]{->}" + str((0, ymin)) + str((0, ymax)),
+           tracedroite(A, B, xmin, xmax, ymin, ymax),
+           noms[0],
+           tracedroite(C, D, xmin, xmax, ymin, ymax),
+           noms[1],
+           l[2],
+           l[3],
+           l[6],
+           l[7],
+           l2[2],
+           l2[3],
+           "\\end{pspicture}",
+           "\\end{center}",
+           "\\end{minipage}",
+           "\\begin{minipage}{0.5\\linewidth}",
+           "\\psset{unit=0.7cm}",
+           "\\begin{center}",
+           "\\begin{pspicture}" + str((xmin, ymin)) + str((xmax, ymax)),
+           "\\psgrid[subgriddiv=2, gridlabels=8pt](0,0)" + str((xmin, ymin)) + str((xmax, ymax)),
+           "\\psline[linewidth=1.2pt]{->}" + str((xmin, 0)) + str((xmax, 0)),
+           "\\psline[linewidth=1.2pt]{->}" + str((0, ymin)) + str((0, ymax)),
+           tracedroite(E, F, xmin, xmax, ymin, ymax),
+           noms[2],
+           l3[4],
+           l3[5],
+           l3[6],
+           l3[7],
+           "\\end{pspicture}",
+           "\\end{center}",
+           "\\end{minipage}",
+           "\\vspace{0.45cm}"]
     return exo, cor
+
 
 affine.description = u'Fonctions affines'

@@ -1,21 +1,23 @@
 from __future__ import division
 from __future__ import unicode_literals
-from builtins import str
+
 from builtins import range
-from past.utils import old_div
+from builtins import str
+from random import randint, randrange
+
 from pyromaths.classes.Polynome import Polynome
 from .Arithmetique import pgcd
 
-from random import randint, randrange
+
 # from math import *
 
 
-#--------------outils pour la class Polynome----------------------
+# --------------outils pour la class Polynome----------------------
 
 def TeX_division(dividende, diviseur):
     '''renvoie une chaine de caractere TeX pour afficher la division en détail'''
-#     quotient = Polynome({0:0})
-    texquotient, restera = old_div(dividende, diviseur)
+    #     quotient = Polynome({0:0})
+    texquotient, restera = dividende / diviseur
     reste = dividende
     diviseur_degre = diviseur.deg
     sauve = min(dividende.puiss + restera.puiss)
@@ -32,8 +34,8 @@ def TeX_division(dividende, diviseur):
         for dummy in range(i):
             string += " &"
         ajout_quotient_deg = reste.deg - diviseur_degre
-        facteur = old_div(reste.dictio[max(0, reste.deg)], diviseur.dictio[diviseur.deg])
-        ajout_quotient = Polynome({ajout_quotient_deg:facteur}, var=dividende.var)
+        facteur = reste.dictio[max(0, reste.deg)] / diviseur.dictio[diviseur.deg]
+        ajout_quotient = Polynome({ajout_quotient_deg: facteur}, var=dividende.var)
         soustrait_reste = ajout_quotient * diviseur
         string += tab_print(soustrait_reste, diviseur_degre + 1 - sauve, parenthese=True)
         for dummy in range(longueur - i - diviseur.deg + sauve):
@@ -48,7 +50,7 @@ def TeX_division(dividende, diviseur):
         for dummy in range(i):
             string += " &"
         i = i + delta
-#         prochain = 1
+        #         prochain = 1
         string += tab_print(reste, min(diviseur.deg + 1, reste.degre_max + 1) + delta - sauve, debut=delta)
         # fait descendre les monome du dividende
         for dummy in range(longueur - i - diviseur.deg + sauve):
@@ -64,6 +66,8 @@ def TeX_division(dividende, diviseur):
             string += "+\\left(" + restera.TeX() + "\\right)"
     string += "$$"
     return string
+
+
 def tab_print(polynome, longueur=0, parenthese=False, debut=0):
     '''utilisé par TeX_division pour décaler le reste dans la partie gauche'''
     degre = polynome.degre_max + debut
@@ -87,9 +91,10 @@ def tab_print(polynome, longueur=0, parenthese=False, debut=0):
             if k != 1 and k != 0:
                 string += u"^" + str(k)
             if longueur - i == 1:
-                    string += fin
+                string += fin
             string += " & "
     return string
+
 
 ########################################################
 #
@@ -102,11 +107,13 @@ def tab_print(polynome, longueur=0, parenthese=False, debut=0):
 def poly_racines_quelconques(abs_a, abs_b, abs_c, X):
     '''renvoie un polynome de degré 2'''
     '''abs_a,abs_b,abs_c sont des entiers positifs majorant les valeurs absolues de a, b ,c'''
-    
+
     a3 = (2 * randrange(2) - 1) * randrange(1, abs_a + 1)
     b3 = randrange(abs_b)
     c3 = randrange(-abs_c, abs_c)
     return a3 * X ** 2 + b3 * X + c3
+
+
 def poly_racines_fractionnaires(rac_min, rac_max, denom1, X):
     '''renvoie un polynome de degré2 à racines fractionnaires '''
     '''les racines sont comprises entre rac_min et rac_max'''
@@ -114,22 +121,24 @@ def poly_racines_fractionnaires(rac_min, rac_max, denom1, X):
     while 1:
         # pour éviter P=77x^2
         a2 = 2 * randrange(2) - 1  # a2=-1 ou 1
-        p2facteur = [randint(1, denom1) * X - randint(rac_min, rac_max)for dummy in range(2)]
+        p2facteur = [randint(1, denom1) * X - randint(rac_min, rac_max) for dummy in range(2)]
         pol2 = a2 * p2facteur[0] * p2facteur[1]
         if pol2[1] != 0 and pol2[0] != 0:
             break
     pol2 = pol2.simplifie()
     simplifie = abs(pgcd(pgcd(int(pol2[0]), int(pol2[1])), int(pol2[2])))
-    pol2 = old_div(pol2, simplifie)
+    pol2 = pol2 / simplifie
     return pol2.simplifie()
+
+
 def poly_racines_entieres(rac_min, rac_max, X, a1=1):
-    
     while 1:
         p1facteur = [X - randrange(rac_min, rac_max) for dummy in range(2)]
         pol1 = a1 * p1facteur[0] * p1facteur[1]
         if pol1[1] != 0 or pol1[1] != 0:
             break
     return pol1
+
 
 def poly_id_remarquables(rac_min, rac_max, X):
     '''Renvoie un polynome obtenu par une identité remarquable'''
@@ -143,23 +152,26 @@ def poly_id_remarquables(rac_min, rac_max, X):
         racine = randrange(rac_min, rac_max)
         if coeff != 0 and racine != 0:
             break
-    sgns = [[-1, 1][randrange(2)]for dummy in range(2)]
+    sgns = [[-1, 1][randrange(2)] for dummy in range(2)]
     p1facteur = [coeff * X + sgns[i] * racine for i in range(2)]
-    return a * p1facteur[0] * p1facteur[1], sum(sgns)   
-        # sum(sgns) permet de connaître l'identité remarquable
-        # -2 => (a-b)²
-        # +2 => (a+b)²
-        # 0 => (a-b)(a+b)
+    return a * p1facteur[0] * p1facteur[1], sum(sgns)
+    # sum(sgns) permet de connaître l'identité remarquable
+    # -2 => (a-b)²
+    # +2 => (a+b)²
+    # 0 => (a-b)(a+b)
 
-#----------polynome de degré 3-------------
+
+# ----------polynome de degré 3-------------
 def poly_degre3_racines_entieres(rac_min, rac_max, X, racines=[-2, -1, 0, 1, 2]):
     racine_evidente = racines[randrange(len(racines))]
     return (X - racine_evidente) * poly_racines_entieres(rac_min, rac_max, X)
+
+
 def poly_degre3_racines_fractionnaires(rac_min, rac_max, denom1, X, racines=[-2, -1, 0, 1, 2]):
     racine_evidente = racines[randrange(len(racines))]
     return (X - racine_evidente) * poly_racines_fractionnaires(rac_min, rac_max, denom1, X)
+
+
 def poly_degre3_racines_quelconques(abs_a, abs_b, abs_c, X, racines=[-2, -1, 0, 1, 2]):
     racine_evidente = racines[randrange(len(racines))]
     return (X - racine_evidente) * poly_racines_quelconques(abs_a=1, abs_b=10, abs_c=10, X=X)
-
-

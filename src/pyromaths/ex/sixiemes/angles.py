@@ -24,7 +24,6 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import chr
 from builtins import range
-from past.utils import old_div
 import math
 from random import randrange
 from pyromaths.outils import Geometrie
@@ -34,8 +33,8 @@ from pyromaths import ex
 def eq_droites(A, B):
     (xA, yA) = A
     (xB, yB) = B
-    a = old_div(((yB - yA) * 1.0), (xB - xA))
-    b = old_div(((xB * yA - xA * yB) * 1.0), (xB - xA))
+    a = (yB - yA) / (xB - xA)
+    b = (xB * yA - xA * yB) / (xB - xA)
     return (a, b)
 
 
@@ -50,8 +49,8 @@ def inter_droites(A, B, C, D):
         xI = A[0]
         yI = A[1]
     else:
-        xI = old_div(((b2 - b1) * 1.0), (a1 - a2))
-        yI = old_div(((a1 * b2 - a2 * b1) * 1.0), (a1 - a2))
+        xI = (b2 - b1) / (a1 - a2)
+        yI = (a1 * b2 - a2 * b1) / (a1 - a2)
     return (xI, yI)
 
 
@@ -62,7 +61,7 @@ def dist_pt_droite(A, B, C):
 
     (a, b) = eq_droites(A, B)
     (xC, yC) = C
-    d = old_div((abs(a * xC - yC + b) * 1.0), math.sqrt(a ** 2 + 1))
+    d = abs(a * xC - yC + b) / math.sqrt(a ** 2 + 1)
     return d
 
 
@@ -84,8 +83,8 @@ def coord_projete(A, B, C):
     (xB, yB) = B
     (xC, yC) = C
     n = dist_points(A, B)
-    p = old_div((xB - xA), n)
-    q = old_div((yB - yA), n)
+    p = (xB - xA) // n
+    q = (yB - yA) // n
     s = p * (xC - xA) + q * (yC - yA)
     return (xA + s * p, yA + s * q)
 
@@ -147,17 +146,16 @@ def cree_angles(nb_angles, xmax, ymax):
     lpoints = []
     cpt = 0  # evite une boucle infinie
     while len(lpoints) < nb_angles and cpt < 1000:
-        (xA, yA) = (old_div(randrange(5, xmax * 10), 10.0), old_div(randrange(5, ymax *
-                    10), 10.0))
+        (xA, yA) = (randrange(5, xmax * 10) / 10, randrange(5, ymax * 10) / 10)
         alpha = randrange(360)  # angle entre un côté et l'horizontal
-        if len(lpoints) < old_div(nb_angles, 2):
+        if len(lpoints) < nb_angles // 2:
             beta = randrange(90, 180)  # crée un angle droit ou obtus
         else:
             beta = randrange(0, 75) + 15  # crée un angle aigu (entre 15° et 89°)
-        xB = xA + lg_seg * math.cos(old_div((alpha * math.pi), 180))
-        yB = yA + lg_seg * math.sin(old_div((alpha * math.pi), 180))
-        xC = xA + lg_seg * math.cos(old_div(((alpha + beta) * math.pi), 180))
-        yC = yA + lg_seg * math.sin(old_div(((alpha + beta) * math.pi), 180))
+        xB = xA + lg_seg * math.cos((alpha * math.pi) / 180)
+        yB = yA + lg_seg * math.sin((alpha * math.pi) / 180)
+        xC = xA + lg_seg * math.cos(((alpha + beta) * math.pi) / 180)
+        yC = yA + lg_seg * math.sin(((alpha + beta) * math.pi) / 180)
         (A, B, C) = ((xA, yA), (xB, yB), (xC, yC))
         if xA != xB and xA != xC and .5 < xB < xmax and .5 < yB < ymax and \
             .5 < xC < xmax and .5 < yC < ymax and verifie_angle(lpoints,
@@ -174,7 +172,7 @@ def cree_angles(nb_angles, xmax, ymax):
 def PosAngle(alpha, beta):
     """retourne les angles pour placer les points sur la figure"""
 
-    A = (alpha + old_div(beta, 2.0) + 180) % 360
+    A = (alpha + beta / 2 + 180) % 360
     B = (alpha - 90) % 360
     C = (alpha + beta + 90) % 360
     return (A, B, C)
@@ -303,7 +301,7 @@ class ConstruireZigZag(ex.TexExercise):
                 (self.angles_absolus[0] - 180, self.points[0][0], self.points[0][1], chr(65))
         if not corrige:
             exo += "\\pstGeonode[PosAngle=%.2f, PointSymbol=x](%.2f, %.2f){B} " % \
-                (self.angles_absolus[1] + old_div(self.angles_relatifs[1], 2.) - 180, self.points[1][0], self.points[1][1])
+                (self.angles_absolus[1] + self.angles_relatifs[1] / 2 - 180, self.points[1][0], self.points[1][1])
             exo += "\pstSegmentMark{A}{B}\n"
         x1, y1 = inter_droites(self.points[0], self.points[-1], self.points[1], self.points[-2])
         if 0 < x1 < 18 and 0 < y1 < self.lg + 2:
@@ -312,15 +310,15 @@ class ConstruireZigZag(ex.TexExercise):
             x1, y1 = inter_droites(self.points[0], self.points[-2], self.points[1], self.points[-1])
             cas = 1
         for i in range(1, 5):
-            exo += "\pscircle[linecolor=Gray](%.2f, %.2f){%.1f}\n" % (x1, y1, old_div(i, 10.))
+            exo += "\pscircle[linecolor=Gray](%.2f, %.2f){%.1f}\n" % (x1, y1, i / 10)
         if corrige:
             for i in range(1, len(self.angles_relatifs)):
                 if self.angles_absolus[i - 1] > self.angles_absolus[i]:
                     exo += "\\pstGeonode[PosAngle=%.2f](%.2f, %.2f){%s} " % \
-                            (self.angles_absolus[i] - old_div(self.angles_relatifs[i], 2.) - 180, self.points[i][0], self.points[i][1], chr(i + 65))
+                            (self.angles_absolus[i] - self.angles_relatifs[i] / 2 - 180, self.points[i][0], self.points[i][1], chr(i + 65))
                 else:
                     exo += "\\pstGeonode[PosAngle=%.2f](%.2f, %.2f){%s} " % \
-                            (self.angles_absolus[i] + old_div(self.angles_relatifs[i], 2.) - 180, self.points[i][0], self.points[i][1], chr(i + 65))
+                            (self.angles_absolus[i] + self.angles_relatifs[i] / 2 - 180, self.points[i][0], self.points[i][1], chr(i + 65))
 
                 exo += "\pstSegmentMark{%s}{%s}\n" % (chr(i + 64), chr(i + 65))
             exo += "\\pstGeonode[PosAngle=%.2f, PointSymbol=x](%.2f, %.2f){%s} " % \
