@@ -107,7 +107,7 @@ def exo_factorisation_degre2():
     rac_min = -10
     rac_max = 10
 
-    # X est le polynome P(x)=x pour faciliter la construction des polynômes,
+    # X est le polynôme P(x)=x pour faciliter la construction des polynômes,
     inconnues = ['x', 'y', 'z', 't']
     nom_poly = ['P', 'Q', 'R', 'S']
 
@@ -189,7 +189,7 @@ def exo_factorisation_degre3():
 #     abs_a = 1
 #     abs_b = 10
 #     abs_c = 10
-    # X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
+    # X est le polynôme P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
 #     inconnues = ['x', 'y', 'z', 't']
 #     nom_poly = ['P', 'Q', 'R', 'S']
     exo = ["\\exercice",
@@ -222,7 +222,7 @@ def exo_tableau_de_signe():
     abs_a = 1
     abs_b = 10
     abs_c = 10
-    # X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
+    # X est le polynôme P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
 #     inconnues = ['x', 'y', 'z', 't']
 #     nom_poly = ['P', 'Q', 'R', 'S']
     borneinf = -5  # float("-inf")
@@ -338,7 +338,7 @@ def quest_fonctions_rationnelles():
         Intervalle = [borneinf, bornesup]
 
     # dérivée
-    numerateur = "%s\\times%s-%s\\times%s" % (P.derive().TeX(parenthese=True), Q.TeX(parenthese=True),
+    numerateur = "%s\\times{}%s-%s\\times{}%s" % (P.derive().TeX(parenthese=True), Q.TeX(parenthese=True),
                                           P.TeX(parenthese=True), Q.derive().TeX(parenthese=True))
     numerateur_simplifie = (P.derive() * Q - P * Q.derive()).simplifie()
     denominateur = u"%s^2" % (Q.TeX(parenthese=True))
@@ -452,7 +452,7 @@ def quest_fonctions_rationnelles_sur_R():
 #     TeXintervalle = "\\mathbb R"
 
     # dérivée
-    numerateur = "%s\\times%s-%s\\times%s" % (P.derive().TeX(parenthese=True), Q.TeX(parenthese=True),
+    numerateur = "%s\\times{}%s-%s\\times{}%s" % (P.derive().TeX(parenthese=True), Q.TeX(parenthese=True),
                                           P.TeX(parenthese=True), Q.derive().TeX(parenthese=True))
     numerateur_simplifie = (P.derive() * Q - P * Q.derive()).simplifie()
     # VI = (-Q[0] * Fraction(1) / Q[1]).simplifie()
@@ -602,7 +602,7 @@ def quest_variation_degre3(borneinf=float("-inf"), bornesup=float("+inf")):
 #     abs_a = 6
 #     abs_b = 10
     abs_c = 10
-    # X est le polynome P=x pour faciliter la construction des polynômes,
+    # X est le polynôme P=x pour faciliter la construction des polynômes,
 #     inconnues = ['x', 'y', 'z', 't']
 #     nom_poly = ['P', 'Q', 'R', 'S']
     var = "x"
@@ -824,7 +824,7 @@ def tableau_de_signe(P, nomP, delta, racines, cor, borneinf=float("-inf"), borne
         return str_variables, str_signes, str_valeurs, signes, ligne_valeurs
 
 def factorise_identites_remarquables(pol1, sgns, var='', racines=True):
-    '''Factorise un polynomes grâce aux identités remarquables'''
+    '''Factorise un polynôme grâce aux identités remarquables'''
     from pyromaths.classes.Fractions import Fraction
     if var == '':
         var = pol1.var
@@ -845,8 +845,8 @@ def factorise_identites_remarquables(pol1, sgns, var='', racines=True):
     if a1 != 1:
         pol_temp = (pol1 / a1).simplifie()
         pol_temp.var = var
-        factorisation.append("%s \\times\\big[ %s \\big]" % (TeX(a1), pol_temp))
-        facteur2 = "%s\\times \\big[" % (TeX(a1))
+        factorisation.append("%s \\times{}\\big[ %s \\big]" % (TeX(a1), pol_temp))
+        facteur2 = "%s\\times{} \\big[" % (TeX(a1))
     else:
         facteur2 = ""
     if c != 1:
@@ -855,15 +855,15 @@ def factorise_identites_remarquables(pol1, sgns, var='', racines=True):
         facteur2 += u"%s^2" % var
     if sgns:
         if sgns == -2:  # -2 => (a-b)²
-            facteur2 += "-2 \\times "
+            facteur2 += "-2 \\times{} "
         else:  # +2 => (a+b)²
-            facteur2 += "+2 \\times "
+            facteur2 += "+2 \\times{} "
         if c == 1:
             facteur2 += var
         else:
             facteur2 += TeX(c) + var
         b = int(sqrt(pol2[0]))
-        facteur2 += " \\times %s +" % (TeX(b))
+        facteur2 += " \\times{} %s +" % (TeX(b))
     else:
         # a²-b²
         facteur2 += "-"
@@ -897,7 +897,7 @@ def racines_degre2(P):
             liste_racines = [x0.simplifie()]
         else:
             liste_racines = [x0]
-        liste_str_racines = ["\\dfrac{-%s}{2\\times %s}" % (pTeX(P[1]), pTeX(P[2]))]
+        liste_str_racines = ["\\dfrac{-%s}{2\\times{} %s}" % (pTeX(P[1]), pTeX(P[2]))]
         simplrac = [False]
     elif delta > 0:
         simplrac, strx1, x1, strx2, x2 = listeracines(P[2], P[1], delta, parentheses=False)
@@ -923,8 +923,8 @@ def listeracines(a, b, delta, parentheses=False):
     b = int(b)
 #     parenthesex1 = parenthesex2 = True  # par défaut
     # simplrac=True
-    strx1 = "\\dfrac{-%s-\\sqrt{%s}}{2\\times %s}" % (pTeX(b), TeX(delta), pTeX(a))
-    strx2 = "\\dfrac{-%s+\\sqrt{%s}}{2\\times %s}" % (pTeX(b), TeX(delta), pTeX(a))
+    strx1 = "\\dfrac{-%s-\\sqrt{%s}}{2\\times{} %s}" % (pTeX(b), TeX(delta), pTeX(a))
+    strx2 = "\\dfrac{-%s+\\sqrt{%s}}{2\\times{} %s}" % (pTeX(b), TeX(delta), pTeX(a))
     # #on a strx1<strx2
     coeff, radicande = simplifie_racine(delta)
 
@@ -971,7 +971,7 @@ def factorisation_degre2(P, factorisation=True):
             racines = [x0.simplifie()]
         else:
             racines = [x0]
-        str_racines = ["\\dfrac{-%s}{2\\times %s}" % (pTeX(P[1]), pTeX(P[2]))]
+        str_racines = ["\\dfrac{-%s}{2\\times{} %s}" % (pTeX(P[1]), pTeX(P[2]))]
 
 
         P0 = "%s-%s" % (var, pTeX(racines[0]))
@@ -1019,7 +1019,7 @@ def factorisation_degre3(E, nomE, exo=[], cor=[], racines=[0, 1, -1, 2, -2]):
     if x0 == 0:
         degre_facteur = min(E.puiss)
         # degre_facteur=1
-        E2 = (E // (X ** degre_facteur))[0]
+        E2 = (E / (X ** degre_facteur))[0]
         if degre_facteur == 1:
             cor.append(_("On remarque que $%s$ peut se factoriser par $%s$ et $%s=%s\\left(%s\\right)$") % (nomE, var, nomE, var, E2))
         elif degre_facteur == 2:
@@ -1031,8 +1031,8 @@ def factorisation_degre3(E, nomE, exo=[], cor=[], racines=[0, 1, -1, 2, -2]):
     else:
         cor.append(_("Comme $%s(%s)=0$, on peut diviser $%s$ par $%s$") % (nomE, TeX(x0), nomE, X - x0))
         cor.append(TeX_division(E, (X - x0)) + "")
-        E2, reste = E // (X - x0)
-    cor.append(_("\\item On doit maintenant factoriser le polynome $%s_2=%s$\\\\") % (nomE, E2))
+        E2, reste = E / (X - x0)
+    cor.append(_("\\item On doit maintenant factoriser le polynôme $%s_2=%s$\\\\") % (nomE, E2))
     delta, simplrac, racines, str_racines, factorisation = factorisation_degre2(E2, factorisation=True)
     cor = redaction_factorisation(E2, nomP=nomE + "_2", exo=[], cor=cor)[1]
     cor.append("\\par")
@@ -1048,10 +1048,10 @@ def factorisation_degre3(E, nomE, exo=[], cor=[], racines=[0, 1, -1, 2, -2]):
         cor.append(TeX(E[3]))
     if delta < 0:
         # P1 = factorisation[-1][0]
-        E_factorise = "%s\\times%s$" % (P0, E2)
+        E_factorise = "%s\\times{}%s$" % (P0, E2)
     elif delta == 0:
         P1 = factorisation[-1][0]
-        E_factorise = "%s\\times{\\left(%s\\right)}^2$" % (P0, P1)
+        E_factorise = "%s\\times{}{\\left(%s\\right)}^2$" % (P0, P1)
     else:
         P1 = factorisation[-1][0]
         P2 = factorisation[-1][1]
@@ -1079,7 +1079,7 @@ def redaction_factorisation(P, nomP="P", exo=[], cor=[]):
         for etape in factorisation:
             ligne_factorisation += " = "
             if P[2] != 1:
-                ligne_factorisation += "%s \\times " % (TeX(P[2]))
+                ligne_factorisation += "%s \\times{} " % (TeX(P[2]))
 
             ligne_factorisation += "{\\left(%s\\right)}^2" % (etape[0])
         ligne_factorisation += "$$"
@@ -1090,7 +1090,7 @@ def redaction_factorisation(P, nomP="P", exo=[], cor=[]):
         for etape in factorisation:
             ligne_factorisation += " = "
             if P[2] != 1:
-                ligne_factorisation += "%s \\times " % (TeX(P[2]))
+                ligne_factorisation += "%s \\times{} " % (TeX(P[2]))
             if len(etape) == 1:
                 ligne_factorisation += etape[0]
             else:
@@ -1101,7 +1101,7 @@ def redaction_factorisation(P, nomP="P", exo=[], cor=[]):
 
 def redaction_racines(P, nomP, var, cor=[]):
     delta, simpl_delta, liste_racines, liste_str_racines = racines_degre2(P)
-    ligne_delta = _(u"Je calcule $\\Delta=%s^2-4\\times %s\\times %s=%s$") % (pTeX(P[1]), pTeX(P[2]), pTeX(P[0]), TeX(delta))
+    ligne_delta = _(u"Je calcule $\\Delta=%s^2-4\\times{} %s\\times{} %s=%s$") % (pTeX(P[1]), pTeX(P[2]), pTeX(P[0]), TeX(delta))
     if simpl_delta[0]:
         ligne_delta += _(" et $%s=%s$.\\par") % (radicalTeX(delta), simpl_delta[1])
     else:

@@ -23,41 +23,38 @@
 
 from __future__ import division
 from __future__ import unicode_literals
+
+import random
 from builtins import chr
 from builtins import range
-from past.utils import old_div
-import random
 from math import atan, cos, pi, sin
 
-#===============================================================================
+
+# ===============================================================================
 # Symétrique d'une figure par rapport à une droite avec quadrillage
-#===============================================================================
+# ===============================================================================
 
 
 def valeurs_quad2(nb_pts):
     vals = []
     for i in range(nb_pts):
-        angle = random.randrange(old_div((i * 360), nb_pts), old_div(((i + 1) * 360), 
-                                 nb_pts))
-        vals.append(((random.randrange(1, 7) * .5) * cos(old_div((angle * pi), 
-                    180)), (random.randrange(1, 7) * .5) * sin(old_div((angle * 
-                    pi), 180))))
+        angle = random.randrange(i * 360 // nb_pts, (i + 1) * 360 // nb_pts)
+        vals.append((random.randrange(1, 7) * .5 * cos(angle * pi / 180),
+                     random.randrange(1, 7) * .5 * sin(angle * pi / 180)))
     return vals
 
 
 def valeurs_quad(nb_pts):
     vals = []
     for i in range(nb_pts):
-        (alpha, beta) = (old_div((i * 360), nb_pts), old_div(((i + 1) * 360), nb_pts))
+        (alpha, beta) = ((i * 360) // nb_pts, ((i + 1) * 360) // nb_pts)
         (x, y, angle) = (0, 0, 0)
         while x == 0 or angle < alpha or angle > beta:
-            (x, y) = (random.randrange(-6, 7) * .5, random.randrange(-6,
-                      7) * .5)
+            (x, y) = (random.randrange(-6, 7) * .5, random.randrange(-6, 7) * .5)
             if x > 0:
-                angle = int(old_div((atan(old_div((y * 1.0), x)) * 180), pi) + 360) % \
-                    360
+                angle = int(atan(y / x) * 180 / pi + 360) % 360
             if x < 0:
-                angle = int(old_div((atan(old_div((y * 1.0), x)) * 180), pi) + 180)
+                angle = int(atan(y / x) * 180 / pi + 180)
         vals.append((x, y))
     return vals
 
@@ -72,12 +69,14 @@ def place_pts(vals, angle):
     txt.append("\n\\pspolygon[linecolor=Maroon, linewidth=1pt]")
     for i in range(len(vals)):
         txt.append("(%s)" % chr(i + 97))
-    return ("").join(txt)
+    return "".join(txt)
 
 
 def SymetrieQuadrillage():
-    exo = ["\\exercice", u"Construire la symétrique de chacune des figures par rapport à la droite en", "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
-    cor = ["\\exercice*", u"Construire la symétrique de chacune des figures par rapport à la droite en", "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
+    exo = ["\\exercice", u"Construire la symétrique de chacune des figures par rapport à la droite en",
+           "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
+    cor = ["\\exercice*", u"Construire la symétrique de chacune des figures par rapport à la droite en",
+           "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
 
     nbpts = 5
     langles = [0, 90, 45, 135]
@@ -110,6 +109,7 @@ def SymetrieQuadrillage():
         if j < 2:
             exo.append("\\hfill")
             cor.append("\\hfill")
-    return (exo, cor)
+    return exo, cor
+
 
 SymetrieQuadrillage.description = u'Symétrie et quadrillages'

@@ -26,7 +26,6 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import str
 from builtins import range
-from past.utils import old_div
 import random
 
 def valeurs(nb, entier=1):  # renvoie les 2 listes contenant les opérateurs et les opérandes.

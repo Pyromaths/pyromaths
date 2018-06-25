@@ -24,7 +24,6 @@ from __future__ import division
 from __future__ import unicode_literals
 from builtins import str
 from builtins import range
-from past.utils import old_div
 import random
 from math import cos, sin, radians
 from pyromaths.outils.decimaux import decimaux
@@ -266,7 +265,7 @@ def exo_pi():
     cor.append(_(u"Chaque effectif se complète en comptant le nombre d'apparition de chaque chiffre dans la liste de l'énoncé."))
     cor.append(_(u"Comme les chiffres sont rangés par 20, on voit assez rapidement que le nombre total de chiffres est de ") + str(nb_dec) + ".\\par")
     cor.append(_(u"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise par le nombre total de chiffres, puis il ne faut pas oublier d'arrondir au centième.\\par\n"))
-    cor.append(_(u"Par exemple pour la fréquence du chiffre 1 : $\\dfrac{") + decimaux(effectifs[0]) + "\\times 100}{" + str(nb_dec) + "} \\approx " + decimaux(frequences[0]) + "$.\\par")
+    cor.append(_(u"Par exemple pour la fréquence du chiffre 1 : $\\dfrac{") + decimaux(effectifs[0]) + "\\times 100}{" + str(nb_dec) + "} \\simeq " + decimaux(frequences[0]) + "$.\\par")
     cor.append("\\end{enumerate}")
     cor.append(tableau_cor)
     exo.append("\\begin{enumerate}")
@@ -333,7 +332,7 @@ def exo_notes():
     cor.append(_(u"Chaque effectif se complète en comptant le nombre d'apparition de chaque note dans le tableau de l'énoncé."))
     cor.append(_(u"Le nombre de notes du contrôle, qui est aussi le nombre d'élèves, est donc de ") + str(nb_eleves) + ".\\par")
     cor.append(_(u"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise par le nombre total de notes, puis il ne faut pas oublier d'arrondir au centième.\\par\n"))
-    cor.append(_(u"Par exemple pour la fréquence des notes dans la première classe : $\\dfrac{") + decimaux(classes_effectifs[0]) + "\\times 100}{" + str(nb_eleves) + "} \\approx " + decimaux(frequences[0]) + "$.\\par")
+    cor.append(_(u"Par exemple pour la fréquence des notes dans la première classe : $\\dfrac{") + decimaux(classes_effectifs[0]) + "\\times 100}{" + str(nb_eleves) + "} \\simeq " + decimaux(frequences[0]) + "$.\\par")
     cor.append(u"\\end{enumerate}")
     cor.append(tableau_tex(titres, ">{\\centering\\arraybackslash}p{2.1cm}", 1, 1, [classes_effectifs, frequences]))
 
@@ -423,7 +422,7 @@ def exo_de():
     cor.append(_(u"Chaque effectif se complète en comptant le nombre d'apparition de chaque chiffre dans la liste de l'énoncé."))
     cor.append(_(u"Comme les chiffres sont rangés par 25, on voit assez rapidement que le nombre total de chiffres est de ") + str(nb_simul) + ".\\par")
     cor.append(_(u"Pour le calcul des fréquences, on multiplie l'effectif par 100, et on divise par le nombre total de chiffres, puis il ne faut pas oublier d'arrondir au centième.\\par\n"))
-    cor.append(_(u"Par exemple pour la fréquence du chiffre 1 : $\\dfrac{") + str(effectifs[0]) + "\\times 100}{" + str(nb_simul) + "} \\approx " + decimaux(frequences[0]) + "$.\\par")
+    cor.append(_(u"Par exemple pour la fréquence du chiffre 1 : $\\dfrac{") + str(effectifs[0]) + "\\times 100}{" + str(nb_simul) + "} \\simeq " + decimaux(frequences[0]) + "$.\\par")
     cor.append(tableau_cor)
     cor.append(u"\\bigskip")
     exo.append(_(u"\\item Représenter la répartition des chiffres dans un diagramme en bâtons avec 1cm pour 10\\%.\\par"))

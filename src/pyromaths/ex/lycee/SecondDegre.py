@@ -22,17 +22,19 @@
 #
 from __future__ import division
 from __future__ import unicode_literals
-from builtins import str
+
 from builtins import range
-from pyromaths import ex
-#from math import sqrt
-from random import shuffle, randrange
-from pyromaths.outils import Priorites3
-from pyromaths.classes.Fractions import Fraction
-from pyromaths.classes.PolynomesCollege import Polynome, factoriser
-#from pyromaths.classes.SquareRoot import SquareRoot
-from pyromaths.outils.Arithmetique import carrerise, pgcd, valeur_alea
+from builtins import str
 from functools import reduce
+# from math import sqrt
+from random import shuffle, randrange
+
+from pyromaths import ex
+from pyromaths.classes.Fractions import Fraction
+from pyromaths.classes.SquareRoot import SquareRoot
+from pyromaths.classes.PolynomesCollege import Polynome, factoriser
+from pyromaths.outils import Priorites3
+from pyromaths.outils.Arithmetique import carrerise, pgcd, valeur_alea
 
 """Exercice de seconde : Chapitre Second degré."""
 
@@ -46,9 +48,9 @@ def signe(nombre):
     if nombre < 0:
         return "-"
     return "+"
+dummy=SquareRoot([1,1]) # Pour que l'IDE sache que l'import de SquareRoot est obligatoire
 
 class BilanTrinomeSansDiscriminant(Jinja2Exercice):
-
     description = u"Bilan sur les trinômes"
     level = "2.Seconde"
 
@@ -165,7 +167,7 @@ class Sd1FormeCanonique(ex.TexExercise):
     def resolution(self, m, pre=[], post=[]):
         sgn = '+-'[m[1][0] < 0]
         if isinstance(m[1][0], Fraction):
-            b = Priorites3.priorites(abs(m[1][0]) // 2)[-1][0]
+            b = Priorites3.priorites(abs(m[1][0]) / 2)[-1][0]
         elif m[1][0] % 2:
             b = 'Fraction(%s, 2)' % abs(m[1][0])
         else:

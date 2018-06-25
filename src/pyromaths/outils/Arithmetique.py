@@ -23,10 +23,12 @@
 
 from __future__ import division
 from __future__ import unicode_literals
-from builtins import str
+
+import math
+import random
 from builtins import range
-from past.utils import old_div
-import math, random
+from builtins import str
+
 
 def pgcd(*n):
     """**pgcd**\ (*n*)
@@ -151,7 +153,7 @@ def factor(n):
     while not premiers and candidat in candidats:
         if n % candidat == 0 and premier(candidat):
             premiers.append(candidat)
-            premiers = premiers + factor(old_div(n, candidat))
+            premiers = premiers + factor(n //  candidat)
         candidat += 1
     return premiers
 
@@ -180,7 +182,7 @@ def factorise(n):
         if n % candidate == 0:
             primes.append(candidate)
             primes_etapes.append(str(candidate))
-            n = old_div(n, candidate)
+            n = n //  candidate
             if n == 1:
                 break
             primes_etapes.append(str(n))

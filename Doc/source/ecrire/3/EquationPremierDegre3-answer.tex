@@ -5,7 +5,7 @@
   (( a )) x (( "%+d"|format(-c) ))x &= (( d )) (( "%+d"|format(-b) )) \\
   (( a - c )) x &= (( d - b )) \\
   x &= \frac{(( d - b ))}{(( a - c ))} \\
-  x &\approx \numprint{(( ((d-b)/(a-c)) | round(2) ))}
+  x &\simeq \numprint{(( ((d-b)/(a-c)) | round(2) ))}
 \end{align*}
 
-L'unique solution est $x\approx\numprint{(( ((d-b)/(a-c)) | round(2) ))}$.
+L'unique solution est $x\simeq\numprint{(( ((d-b)/(a-c)) | round(2) ))}$.
