@@ -177,8 +177,8 @@ class TestExercise(object):
         if exo.tex_statement() != self.read('statement'):
             print("Statement:")
             for line in difflib.unified_diff(
-                    self.read('statement'),
-                    exo.tex_statement(),
+                    self.read('statement').splitlines(),
+                    exo.tex_statement().splitlines(),
                     fromfile='Old statement',
                     tofile='New statement',
                     ):

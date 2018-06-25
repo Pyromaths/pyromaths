@@ -767,22 +767,18 @@ def choix_nombres():
     for i in range(3):
         n = unite
         for j in range(i + 1):
-            n = n + random.randrange(1, 10) * 10 ** (-(j + 1))
+            n = n + random.randrange(1, 10) * Decimal(10) ** (-(j + 1))
         nb.append(n)
-    n = random.randrange(10) + random.randrange(10) / 10
+    n = random.randrange(10) + Decimal(random.randrange(10)) / 10
     while n == nb[0]:
-        n = random.randrange(10) + random.randrange(10) / 10
+        n = random.randrange(10) + Decimal(random.randrange(10)) / 10
     nb.append(n)
     return nb
 
 
-def classer(exo, cor):
+def classer(exo, cor, ordre):
     lnb = choix_nombres()
     random.shuffle(lnb)
-    if random.randrange(2):
-        ordre = "croissant"
-    else:
-        ordre = u"décroissant"
     exo.append("\\item Classer les nombres suivants dans l'ordre %s.\\par    " % 
              ordre)
     cor.append("\\item Classer les nombres suivants dans l'ordre %s.\\par    " % 
@@ -807,13 +803,11 @@ def classer(exo, cor):
         phrase += Affichage.decimaux(lnb[i], 0)
     cor.append(phrase)
 
-
-
 def _ClasserNombres():
     exo = ["\\exercice", '\\begin{enumerate}']
     cor = ["\\exercice*", '\\begin{enumerate}']
-    classer(exo, cor)
-    classer(exo, cor)
+    classer(exo, cor, "croissant")
+    classer(exo, cor, "décroissant")
     exo.append('\\end{enumerate}')
     cor.append('\\end{enumerate}')
     return (exo, cor)

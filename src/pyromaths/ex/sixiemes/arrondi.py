@@ -51,10 +51,10 @@ class ArrondirNombreDecimal(ex.TexExercise):
         # Valeur approchée par défaut 
         # Arrondi = la « meilleure » valeur approchée
         # et ne paraît employé ici correctement
-        self.nombres = [hasard[0] // 10 ** (-self.choix_precision[0] + 4),
-                        hasard[1] // 10 ** (-self.choix_precision[1] + 4),
-                        hasard[2] // 10 ** (-self.choix_precision[2] + 4),
-                        hasard[3] // 10 ** (-self.choix_precision[3] + 4)]
+        self.nombres = [hasard[0] / 10 ** (-self.choix_precision[0] + 4),
+                        hasard[1] / 10 ** (-self.choix_precision[1] + 4),
+                        hasard[2] / 10 ** (-self.choix_precision[2] + 4),
+                        hasard[3] / 10 ** (-self.choix_precision[3] + 4)]
 
     def tex_statement(self):
         exo = ["\\exercice", '\\begin{enumerate}']

@@ -27,6 +27,7 @@ from builtins import str
 from functools import reduce
 # from math import sqrt
 from random import shuffle, randrange
+from decimal import Decimal
 
 from pyromaths import ex
 from pyromaths.classes.Fractions import Fraction
@@ -58,14 +59,14 @@ class BilanTrinomeSansDiscriminant(Jinja2Exercise):
         super().__init__()
 
         while True:
-            a = float(random.choice([-1, 1]) * random.choice([0.5, 2]))
-            x1 = float(random.choice([-1, 1]) * random.randint(2, 15))
-            x2 = float(random.choice([-1, 1]) * random.randint(2, 15))
+            a = Decimal(random.choice([-1, 1]) * random.choice([0.5, 2]))
+            x1 = Decimal(random.choice([-1, 1]) * random.randint(2, 15))
+            x2 = Decimal(random.choice([-1, 1]) * random.randint(2, 15))
 
             b = -a * (x1 + x2)
             c = a * x1 * x2
 
-            alpha = -b // (2*a)
+            alpha = -b / (2*a)
             beta = a * (alpha**2) + b * alpha + c
 
             if alpha == 0 or beta == 0:
@@ -85,7 +86,7 @@ class BilanTrinomeSansDiscriminant(Jinja2Exercise):
             "x2": x2,
             "alpha": alpha,
             "absalpha": abs(alpha), # Valeur absolue de alpha
-            "signealpha": alpha // abs(alpha), # Signe de alpha (qui est non nul)
+            "signealpha": alpha / abs(alpha), # Signe de alpha (qui est non nul)
             "beta": beta,
             }
 
