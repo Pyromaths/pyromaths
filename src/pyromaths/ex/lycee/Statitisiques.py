@@ -37,13 +37,11 @@ def listeToclasses(liste):
         result[-2] = result[-2] + r' ~;~ %s[$' % (l + eval(result[-2][2:]))
     result.pop(-1)
     return result
-class Histogramme(ex.TexExercise):
-    '''
-    classdocs
-    '''
-    # description = u'Construire un histogramme'
-    # level = "2.Seconde"
 
+class _Histogramme(ex.TexExercise):
+    """Construire un histogramme"""
+
+    tags = ["Seconde"]
 
     def __init__(self):
         '''

@@ -28,6 +28,7 @@ import random
 from math import cos, sin, radians, pi
 # from pyromaths.outils.decimaux import decimaux
 from pyromaths.outils.Arithmetique import pgcd
+from pyromaths.ex import LegacyExercise
 
 div180 = [[1,180],[2,90],[3,60],[4,45],[5,36],[6,30],[9,20],[10,18],[12,15]]
 
@@ -150,7 +151,7 @@ def findrad(itv=1, neg=0, denom_simple=1):
 
     return [num,denom] # FIX Simplifier ?
 
-def cercle_trigonometrique():
+def _cercle_trigonometrique():
     """Exercice de la fiche."""
 
     exo = ["\\exercice"]
@@ -262,5 +263,8 @@ def cercle_trigonometrique():
 
     return exo, cor
 
-cercle_trigonometrique.description = _(u"Cercle trigonométrique")
-cercle_trigonometrique.level = _(u"2.Seconde")
+class cercle_trigonometrique(LegacyExercise):
+    """Cercle trigonométrique"""
+
+    tags = ["Seconde"]
+    function = _cercle_trigonometrique

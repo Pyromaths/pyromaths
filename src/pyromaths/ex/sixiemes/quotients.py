@@ -24,6 +24,7 @@
 from __future__ import unicode_literals
 from builtins import range
 import random
+from pyromaths.ex import LegacyExercise
 
 
 def valeurs_diviseurs():
@@ -48,7 +49,7 @@ def liste_diviseurs(l):
     return reponse
 
 
-def Divisible():
+def _Divisible():
     l = valeurs_diviseurs()
     reponse = liste_diviseurs(l)
 
@@ -65,4 +66,8 @@ def Divisible():
     cor.append("\\end{tabular}")
     return (exo, cor)
 
-Divisible.description = u'Multiples de 2, 3, 5, 9, 10'
+class Divisible(LegacyExercise):
+    """Multiples de 2, 3, 5, 9, 10"""
+
+    tags = ["sixième"]
+    function = _Divisible

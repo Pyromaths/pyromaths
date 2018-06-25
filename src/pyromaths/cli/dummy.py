@@ -36,6 +36,8 @@ logging.basicConfig(
 class DummyExercise(TexExercise):
     """Faux exercice, servant de modèle pour les nouveaux exercices."""
 
+    tags = []
+
     def tex_statement(self):
         return [textwrap.dedent(ur"""\
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -25,6 +25,7 @@ from __future__ import unicode_literals
 from builtins import range
 from pyromaths.outils import Arithmetique
 from pyromaths.outils.Affichage import TeX, tex_coef
+from pyromaths.ex import LegacyExercise
 
 # #
 ##------------------- MÉTHODE PAR COMBINAISON -------------------
@@ -240,11 +241,15 @@ def systemes(exo, cor, v):
              v[2])
     cor.append(u'{Vérification : $' + tex_verification(v) + '$}')
 
-def tex_systemes():
+def _tex_systemes():
     valeurs = choix_valeurs(10)
     exo = ['\\exercice', u"Résoudre le système d'équations suivant :"]
     cor = ['\\exercice*', u"Résoudre le système d'équations suivant :"]
     systemes(exo, cor, valeurs)
     return (exo, cor)
 
-tex_systemes.description = u'Système d\'équations'
+class tex_systemes(LegacyExercise):
+    """Système d\'équations"""
+
+    tags = ["troisième"]
+    function = _tex_systemes

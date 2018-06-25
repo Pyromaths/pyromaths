@@ -29,6 +29,8 @@ from builtins import range
 from past.utils import old_div
 import random
 from pyromaths.outils import Affichage
+from pyromaths.ex import LegacyExercise
+
 def boxes():
     """Crée les boites pour insérer les figures dans un environnement 36x16"""
     b0x, b0y = random.randrange(5, 2 * old_div(36, 3) - 1), random.randrange(5, 2 * old_div(16, 3) + 1)
@@ -235,7 +237,7 @@ def figure():
     cor.append("\\end{enumerate}")
     return("\n".join(exo), "\n".join(cor))
 
-def aires():
+def _aires():
     exo = ["\\exercice", u"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
     cor = ["\\exercice*", u"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
     exercice = figure()
@@ -243,4 +245,8 @@ def aires():
     cor.append(exercice[1])
     return(exo, cor)
 
-aires.description = u'Aires et quadrillage'
+class aires(LegacyExercise):
+    """Aires et quadrillage"""
+
+    tags = ["sixième"]
+    function = _aires

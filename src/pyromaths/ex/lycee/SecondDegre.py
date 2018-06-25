@@ -38,7 +38,7 @@ from functools import reduce
 
 import random
 
-from pyromaths.ex import Jinja2Exercice
+from pyromaths.ex import Jinja2Exercise
 from pyromaths.outils.jinja2 import facteur
 
 def signe(nombre):
@@ -47,13 +47,13 @@ def signe(nombre):
         return "-"
     return "+"
 
-class BilanTrinomeSansDiscriminant(Jinja2Exercice):
+class BilanTrinomeSansDiscriminant(Jinja2Exercise):
+    """Bilan sur les trinômes"""
 
-    description = u"Bilan sur les trinômes"
-    level = "2.Seconde"
+    tags = ["Seconde"]
 
     def __init__(self):
-        super(BilanTrinomeSansDiscriminant, self).__init__()
+        super().__init__()
 
         while True:
             a = float(random.choice([-1, 1]) * random.choice([0.5, 2]))
@@ -89,7 +89,7 @@ class BilanTrinomeSansDiscriminant(Jinja2Exercice):
 
     @property
     def environment(self):
-        environment = super(BilanTrinomeSansDiscriminant, self).environment
+        environment = super().environment
         environment.filters.update({
             'facteur': facteur,
             'min': min,
@@ -135,9 +135,9 @@ def creerPolydegre2(nb_racines=2, rac_radical=True, rac_quotient=False):
         return Polynome(pol)
 
 class Sd1FormeCanonique(ex.TexExercise):
+    """Forme canonique"""
 
-    description = _(u'Forme canonique')
-    level = _("1.1reS")
+    tags = ["1reS"]
 
     def __init__(self):
         m = [[1, 2], [2 * randrange(1, 10) * (-1) ** randrange(2), 1], [randrange(1, 10) * (-1) ** randrange(2), 0]]
@@ -274,8 +274,10 @@ class Sd1FormeCanonique(ex.TexExercise):
 
 class Sd2aRacines(ex.TexExercise):
     #TODO: ./utils/pyromaths-cli.py generate Sd2aRacines:1, 2 et 3 ne fonctionnent pas
-    description = _(u'Racines d\'un polynôme de degré 2')
-    level = _("1.1reS")
+    """Racines d'un polynôme de degré 2"""
+
+    tags = ["1reS"]
+
     def __init__(self):
         pol = [creerPolydegre2(nb_racines=2, rac_radical=True, rac_quotient=False)]
         pol.append(creerPolydegre2(nb_racines=1))
@@ -399,9 +401,11 @@ class Sd2aRacines(ex.TexExercise):
         for i in range(3): exo.extend(question[i])
         return exo
 
-class Sd2bEquations(ex.TexExercise):
-    # description = u'Équations et polynômes de degré 2'
-    level = _("1.1reS")
+class _Sd2bEquations(ex.TexExercise):
+    """Équations et polynômes de degré 2"""
+
+    tags = ["1reS"]
+
     def __init__(self):
         pol = [creerPolydegre2(nb_racines=2, rac_radical=False, rac_quotient=False)]
         pol.append(creerPolydegre2(nb_racines=1))
@@ -441,9 +445,11 @@ class Sd2bEquations(ex.TexExercise):
         exo.append('\\end{align*}')
         return exo
 
-class Sd3aSigne(ex.TexExercise):
-    # description = u'Signe d\'un polynôme de degré 2'
-    level = _("1.1reS")
+class _Sd3aSigne(ex.TexExercise):
+    """Signe d'un polynôme de degré 2"""
+
+    tags = ["1reS"]
+
     def __init__(self):
         pol = [[valeur_alea(-9, 9), 2 - dummy] for dummy in range(3)]
         while pol[1][0] ** 2 - 4 * pol[0][0] * pol[2][0] >= 0:
@@ -482,9 +488,11 @@ class Sd3aSigne(ex.TexExercise):
         exo.append('\\end{enumerate}')
         return exo
 
-class Sd3bInequations(ex.TexExercise):
-    # description = u'Inéquations et polynômes de degré 2'
-    level = _("1.1reS")
+class _Sd3bInequations(ex.TexExercise):
+    """Inéquations et polynômes de degré 2"""
+
+    tags = ["1reS"]
+
     def __init__(self):
         pol = creerPolydegre2(nb_racines=2, rac_radical=False, rac_quotient=False).monomes
         pol2 = [[valeur_alea(-9, 9), 1], [valeur_alea(-9, 9), 0]]
@@ -502,9 +510,11 @@ class Sd3bInequations(ex.TexExercise):
                                                                                   self.exercice[2]))
         return exo
 
-class Sd4Factorisation(ex.TexExercise):
-    # description = u'Racines et factorisation d\'un polynôme de degré 2'
-    level = _("1.1reS")
+class _Sd4Factorisation(ex.TexExercise):
+    """Racines et factorisation d'un polynôme de degré 2"""
+
+    tags = ["1reS"]
+
     def __init__(self):
         val = [valeur_alea(-9, 9), valeur_alea(-9, 9)]
         val.append(Fraction(valeur_alea(-9, 9), val[0]))
@@ -545,9 +555,11 @@ class Sd4Factorisation(ex.TexExercise):
 
         return exo
 
-class Sd5Caracteristiques(ex.TexExercise):
-    # description = u'Caractéristiques d\'une parabole'
-    level = _("1.1reS")
+class _Sd5Caracteristiques(ex.TexExercise):
+    """Caractéristiques d'une parabole"""
+
+    tags = ["1reS"]
+
     def __init__(self):
         val = [valeur_alea(-9, 9), valeur_alea(-9, 9) , valeur_alea(-9, 9)]
         pol = Polynome([[val[0], 2], [(-val[0] * (val[1] + val[2])), 1], [(val[0] * val[1] * val[2]), 0]])
@@ -582,9 +594,11 @@ class Sd5Caracteristiques(ex.TexExercise):
 
         return exo
 
-class Sd6Parametre(ex.TexExercise):
-    # description = u'Polynôme paramétré de degré 2'
-    level = _("1.1reS")
+class _Sd6Parametre(ex.TexExercise):
+    """Polynôme paramétré de degré 2"""
+
+    tags = ["1reS"]
+
     def __init__(self):
         [a, b, c, d] = [randrange(-5, 6) for dummy in range(4)]
         while a == 0 or c == 0 or a ** 2 * d - a * b * c + c ** 2 < 0 or carrerise(a ** 2 * d - a * b * c + c ** 2) != 1:

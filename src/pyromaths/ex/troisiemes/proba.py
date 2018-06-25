@@ -24,6 +24,7 @@ from __future__ import unicode_literals
 from builtins import str
 import random
 from pyromaths.classes.Fractions import Fraction
+from pyromaths.ex import LegacyExercise
 
 def proba(exo, cor):
     couleur = ['bleue', 'rouge', 'jaune', 'verte', 'marron', 'orange']
@@ -113,10 +114,14 @@ def proba(exo, cor):
     for st in cors:
         cor.append(st)
 
-def tex_proba():
+def _tex_proba():
     exo = ['\\exercice']
     cor = ['\\exercice*']
     proba(exo, cor)
     return (exo, cor)
 
-tex_proba.description = u'Probabilités'
+class tex_proba(LegacyExercise):
+    """Probabilités"""
+
+    tags = ["troisième"]
+    function = _tex_proba

@@ -32,11 +32,12 @@ from pyromaths.outils.Polynomes import poly_racines_entieres, poly_racines_fract
 # from pyromaths.outils.decimaux import decimaux
 from pyromaths.outils.Affichage import pTeX, radicalTeX, fTeX
 from pyromaths.outils.Arithmetique import pgcd
+from pyromaths.ex import LegacyExercise
 from math import sqrt
 
 
 
-def exo_racines_degre2():
+def _exo_racines_degre2():
     '''exercice recherche de racines second degré'''
 
     exo = ["\\exercice"]
@@ -94,11 +95,14 @@ def exo_racines_degre2():
     cor.append("\\end{enumerate}")
     return exo, cor
 
-exo_racines_degre2.description = _(u'Équations 2° degré')
-exo_racines_degre2.level = _('1.1reS')
+class exo_racines_degre2(LegacyExercise):
+    """Équations 2° degré"""
+
+    tags = ["1reS"]
+    function = _exo_racines_degre2
 
 
-def exo_factorisation_degre2():
+def _exo_factorisation_degre2():
     '''exercice recherche de racines second degré'''
 
     exo = ["\\exercice"]
@@ -173,11 +177,14 @@ def exo_factorisation_degre2():
     cor.append("\\end{enumerate}")
     return exo, cor
 
-exo_factorisation_degre2.description = _(u'Factorisations 2° degré')
-exo_factorisation_degre2.level = _('1.1reS')
+class exo_factorisation_degre2(LegacyExercise):
+    """Factorisations 2° degré"""
+
+    tags = ["1reS"]
+    function = _exo_factorisation_degre2
 
 
-def exo_factorisation_degre3():
+def _exo_factorisation_degre3():
     '''exercice de factorisation degre3'''
 
     # intervalle pour les racines entières ou fractionnaire
@@ -208,11 +215,14 @@ def exo_factorisation_degre3():
     cor.append("\\end{enumerate}")
     return exo, cor
 
-exo_factorisation_degre3.description = _(u'Factorisations degré 3')
-exo_factorisation_degre3.level = _('1.1reS')
+class exo_factorisation_degre3(LegacyExercise):
+    """Factorisations degré 3"""
+
+    tags = ["1reS"]
+    function = _exo_factorisation_degre3
 
 
-def exo_tableau_de_signe():
+def _exo_tableau_de_signe():
     # intervalle pour les racines entières ou fractionnaire
     rac_min = -10
     rac_max = 10
@@ -263,11 +273,14 @@ def exo_tableau_de_signe():
     cor.append("\\end{enumerate}")
     return exo, cor
 
-exo_tableau_de_signe.description = _(u'Étude de signe')
-exo_tableau_de_signe.level = _('1.1reS')
+class exo_tableau_de_signe(LegacyExercise):
+    """Étude de signe"""
+
+    tags = ["1reS"]
+    function = _exo_tableau_de_signe
 
 
-def exo_variation():
+def _exo_variation():
 
     exo = ["\\exercice",
          "\\begin{enumerate}"]
@@ -283,11 +296,14 @@ def exo_variation():
     cor.append("\\end{enumerate}")
     return exo, cor
 
-exo_variation.description = _(u"Sens de variations")
-exo_variation.level = [_("1.1reS"), _("0.Term STMG")]
+class exo_variation(LegacyExercise):
+    """Sens de variations"""
+
+    tags = ["1reS", "Term STMG"]
+    function = _exo_variation
 
 
-def exo_variation_lim():
+def _exo_variation_lim():
     """Étude de fonctions avec calculs de limites"""
     exo = ["\\exercice",
          "\\begin{enumerate}"]
@@ -302,8 +318,11 @@ def exo_variation_lim():
     cor.append("\\end{enumerate}")
     return exo, cor
 
-exo_variation_lim.description = _(u"Étude de fonctions")
-exo_variation_lim.level = _("0.Term S")
+class exo_variation_lim(LegacyExercise):
+    """Étude de fonctions"""
+
+    tags = ["Term S"]
+    function = _exo_variation_lim
 
 def quest_fonctions_rationnelles():
     from pyromaths.classes.Fractions import Fraction

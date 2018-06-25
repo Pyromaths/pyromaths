@@ -29,6 +29,7 @@ from builtins import range
 from pyromaths.outils import Arithmetique
 from pyromaths.outils.Affichage import tex_coef
 import random
+from pyromaths.ex import LegacyExercise
 
 
 def choix_trou(nb1, nb2, tot, operateur, exo, cor):
@@ -68,7 +69,7 @@ def div(pyromax):
     return (a * b, a)
 
 
-def calcul_mental():
+def _calcul_mental():
     exo = ["\\exercice", "Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     cor = ["\\exercice*", "Effectuer sans calculatrice :",
@@ -95,4 +96,8 @@ def calcul_mental():
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
     return (exo, cor)
 
-calcul_mental.description = u'Calcul mental'
+class calcul_mental(LegacyExercise):
+    """Calcul mental"""
+
+    tags = ["quatrième"]
+    function = _calcul_mental

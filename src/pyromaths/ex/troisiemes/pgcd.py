@@ -25,6 +25,7 @@ from __future__ import unicode_literals
 from builtins import str
 from builtins import range
 import random
+from pyromaths.ex import LegacyExercise
 
 #
 # ------------------- PGCD -------------------
@@ -106,7 +107,7 @@ def tex_simplifie_fraction_pgcd(a):  # renvoie l'ecriture au format tex de la si
 \\cfrac{\\nombre{%s}}{\\nombre{%s}} &= \\cfrac{\\nombre{%s}\\div%s}{\\nombre{%s}\\div%s}\\\\\n      &= \\boxed{\\cfrac{\\nombre{%s}}{\\nombre{%s}}}
 \\end{align*}''' % a
 
-def tex_pgcd():
+def _tex_pgcd():
     nombres = valeurs_pgcd()
     exo = ['\\exercice']
     exo.append('\\begin{enumerate}')
@@ -130,4 +131,8 @@ def tex_pgcd():
     cor.append('\\end{enumerate}')
     return (exo, cor)
 
-tex_pgcd.description = u'PGCD'
+class tex_pgcd(LegacyExercise):
+    """PGCD"""
+
+    tags = ["troisième"]
+    function = _tex_pgcd

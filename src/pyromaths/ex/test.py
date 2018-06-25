@@ -63,7 +63,7 @@ class ExerciseNotFound(PyromathsException):
     """Name of exercise cannot be found in known exercises."""
 
     def __init__(self, exercise):
-        super(ExerciseNotFound, self).__init__()
+        super().__init__()
         self.exercise = exercise
 
     def __str__(self):
@@ -201,12 +201,12 @@ class UnittestExercise(unittest.TestCase):
     maxDiff = None
 
     def __init__(self, exercise=None):
-        super(UnittestExercise, self).__init__()
+        super().__init__()
         self.exercise = exercise
 
     def shortDescription(self):
         if self.exercise is None:
-            return super(UnittestExercise, self).shortDescription()
+            return super().shortDescription()
         else:
             return self.exercise.exercise.name()
 

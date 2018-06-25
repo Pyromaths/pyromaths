@@ -24,6 +24,7 @@ from __future__ import unicode_literals
 from builtins import range
 from random import randint, randrange
 from pyromaths.outils.decimaux import decimaux
+from pyromaths.ex import LegacyExercise
 
 def ncotation(A, B, longueur, couleur=""):
     """trace une flèche et inscrit horizontalement, dessous, la longueur entre A et B
@@ -43,7 +44,7 @@ def ncotation_h(A, B, longueur, couleur=""):
     return u"\\ncline[linestyle=dashed, offset = 1.5, linewidth = 0.4pt %s]{<->}{%s}{%s}  \\Aput{%s %s}" % (linecouleur, A, B, couleur, longueur)
 
 
-def exo_echelles():
+def _exo_echelles():
     """À partir d'un plan tracé, déterminer l'échelle et des longueurs déterminées."""
 
     # Échelle
@@ -135,7 +136,11 @@ def exo_echelles():
 
     return exo, cor
 
-exo_echelles.description = _(u'Échelles')
+class exo_echelles(LegacyExercise):
+    """Échelles"""
+
+    tags = ["cinquième"]
+    function = _exo_echelles
 
 
 def exo_fruits():

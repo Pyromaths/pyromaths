@@ -37,6 +37,7 @@ from pyromaths.classes.Vecteurs import randvect, Vecteur
 from pyromaths.classes.Racine import simplifie_racine
 import math
 from random import randint, shuffle
+from pyromaths.ex import LegacyExercise
 
 def dist_bords(a, b):
     '''Calcule les distances minimales d'un point de coordonnées (a,b) aux bords du cadre, selon l'axe x et y.'''
@@ -145,7 +146,7 @@ def repr_somme(u, v, u1, u2, cor, larg=0):
     cor.append(u"\\end{pspicture*}")
     return largeur  # # récupérer la largeur pour éviter d'aligner des figures trop larges sur la feuille
 
-def vecteurs_add():
+def _vecteurs_add():
     '''Exercice sur la définition des vecteurs et leurs sommes.'''
     t = None
     while not t:
@@ -303,5 +304,8 @@ def vecteurs_add():
 
     return exo, cor
 
-vecteurs_add.description = _(u"Vecteurs")
-vecteurs_add.level = _(u"2.Seconde")
+class vecteurs_add(LegacyExercise):
+    """Vecteurs"""
+
+    tags = ["Seconde"]
+    function = _vecteurs_add

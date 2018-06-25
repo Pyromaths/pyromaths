@@ -2,10 +2,12 @@
 from __future__ import unicode_literals
 from pyromaths import ex
 
-class HelloWorld(ex.TexExercise):
+class _HelloWorld(ex.TexExercise):
+    """Exemple d'exercice"""
 
-    # Un-comment to show this exercise:
-#    description = u'Exemple HelloWorld'
+    # Supprimer le tiret bas _ pour « activer » l'exercice.
+
+    tags = ["exemple"]
 
     def tex_statement(self):
         return ['\\exercice', 'Hello, world!']

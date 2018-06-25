@@ -28,6 +28,7 @@ from builtins import range
 from past.utils import old_div
 import random
 import math
+from pyromaths.ex import LegacyExercise
 
 
 def nodesep(ligne):
@@ -194,7 +195,7 @@ def tex_ligne_tableau(exo, cor, ligne):
     cor.append('\\hline')
 
 
-def Droites():
+def _Droites():
     """
     Écrit les 5 lignes du tableau
     @param exo: fichier d'exercices
@@ -221,7 +222,11 @@ def Droites():
     cor.append('\\end{tabularx}')
     return (exo, cor)
 
-Droites.description = u'Droites, demi-droites, segments'
+class Droites(LegacyExercise):
+    """Droites, demi-droites, segments"""
+
+    tags = ["sixième"]
+    function = _Droites
 
 
 #------------------------------------------------------------------------------
@@ -317,7 +322,7 @@ def enonce_perp(exo, cor):
     cor.append('\\end{enumerate}')
 
 
-def Perpendiculaires():
+def _Perpendiculaires():
     exo = ["\\exercice", u"Réaliser les figures suivantes :\\par", '\\begin{multicols}{2}']
     cor = ["\\exercice*", u"Réaliser les figures suivantes :\\par", '\\begin{multicols}{2}']
 
@@ -332,7 +337,11 @@ def Perpendiculaires():
     cor.append('\\end{multicols}')
     return (exo, cor)
 
-Perpendiculaires.description = u'Droites perpendiculaires et parallèles'
+class Perpendiculaires(LegacyExercise):
+    """Droites perpendiculaires et parallèles"""
+
+    tags = ["sixième"]
+    function = _Perpendiculaires
 
 
 #------------------------------------------------------------------------------
@@ -653,11 +662,15 @@ def enonce_prop(exo, cor):
     cor.append('\\end{tabularx}')
 
 
-def Proprietes():
+def _Proprietes():
     exo = ["\\exercice", u"Compléter le tableau suivant :\\par Les droites en gras sont parallèles.\\par """]
     cor = ["\\exercice*", u"Compléter le tableau suivant :\\par Les droites en gras sont parallèles.\\par """]
 
     enonce_prop(exo, cor)
     return (exo, cor)
 
-Proprietes.description = u'Propriétés sur les droites'
+class Proprietes(LegacyExercise):
+    """Propriétés sur les droites"""
+
+    tags = ["sixième"]
+    function = _Proprietes

@@ -43,7 +43,7 @@ except NameError:
 
 class Ui_MainWindow(object):
     def __init__(self, *args, **kwargs):
-        super(Ui_MainWindow, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.lesfiches = lesfiches()
 
     def setupUi(self, MainWindow):

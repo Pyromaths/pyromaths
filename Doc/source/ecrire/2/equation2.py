@@ -24,9 +24,9 @@
 
 """Équations du premier degré"""
 
-from pyromaths.ex import Jinja2Exercice
+from pyromaths.ex import Jinja2Exercise
 
-class EquationPremierDegre2(Jinja2Exercice):
+class EquationPremierDegre2(Jinja2Exercise):
+    """Résolution d'équations du premier degré à coefficients entiers."""
 
-    description = u"Résolution d'équations du premier degré à coefficients entiers."
-    level = u'3.Troisième'
+    tags = ['Troisième']

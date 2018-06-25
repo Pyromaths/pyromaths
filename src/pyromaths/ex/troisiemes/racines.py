@@ -26,6 +26,7 @@ from builtins import range
 from pyromaths.outils import Arithmetique
 import random
 from pyromaths.outils.Affichage import tex_coef
+from pyromaths.ex import LegacyExercise
 
 # carres=[2,3,5,6,7,10,11,13,15,17,19]
 
@@ -200,7 +201,7 @@ def exo_entier1(exo, cor, v):
     cor.append(u'\\[ \\thenocalcul = ' + '\\frac{%s\\times %s}{%s\\times %s}' % v[0:4] + '\\] ')
     cor.append(u'\\[ \\boxed{\\thenocalcul = ' + '%s' % (((v[0] * v[1]) // v[2]) // v[3]) + '} \\] ')
 
-def tex_racines():
+def _tex_racines():
     exo = ['\\exercice']
     exo.append('\\begin{enumerate}')
     exo.append(u'\\item Calculer les expressions suivantes et donner le résultat sous la forme $a\\,\\sqrt{b}$ avec $a$ et $b$ entiers, $b$ le plus petit possible.')
@@ -250,4 +251,8 @@ def tex_racines():
     cor.append('\\end{enumerate}')
     return (exo, cor)
 
-tex_racines.description = u'Racines carrées'
+class tex_racines(LegacyExercise):
+    """Racines carrées"""
+
+    tags = ["troisième"]
+    function = _tex_racines

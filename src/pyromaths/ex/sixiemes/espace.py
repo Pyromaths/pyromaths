@@ -27,6 +27,7 @@ from builtins import chr
 from builtins import range
 import random
 # from pyromaths.outils.Affichage import decimaux
+from pyromaths.ex import LegacyExercise
 
 def noms_sommets(nb):
     """Renvoie nb noms de sommets"""
@@ -133,7 +134,7 @@ def reponse3(pt2, ptc2, F1, F2):
 
     return tuple(rep)
 
-def espace():
+def _espace():
     """Face 1, Face 2"""
     noms_pts = (noms_sommets(8))
     F1 = noms_pts[0:4]
@@ -251,4 +252,8 @@ def espace():
          "\\end{enumerate}"]
     return (exo, cor)
 
-espace.description = u'Représentation dans l\'espace'
+class espace(LegacyExercise):
+    """Représentation dans l\'espace"""
+
+    tags = ["sixième"]
+    function = _espace

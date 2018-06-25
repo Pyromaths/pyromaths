@@ -27,6 +27,7 @@ from builtins import range
 from past.utils import old_div
 import random
 from math import acos, asin, atan, pi, sin, cos, tan
+from pyromaths.ex import LegacyExercise
 
 from . import fractions
 from pyromaths.outils.Arithmetique import valeur_alea, pgcd
@@ -406,13 +407,17 @@ def tex_fig_thales(noms, valeurs):
     return enonce
 
 
-def tex_thales():
+def _tex_thales():
     exo = ['\\exercice']
     cor = ['\\exercice*']
     thales(exo, cor)
     return (exo, cor)
 
-tex_thales.description = u'Théorème de Thalès'
+class tex_thales(LegacyExercise):
+    """Théorème de Thalès"""
+
+    tags = ["troisième"]
+    function = _tex_thales
 
 
 #
@@ -644,13 +649,17 @@ D'après la \\textbf{réciproque du théorème de Thalès}, \\fbox{les droites $
 """ % \
         d
 
-def tex_reciproque_thales():
+def _tex_reciproque_thales():
     exo = ['\\exercice']
     cor = ['\\exercice*']
     rec_thales(exo, cor)
     return (exo, cor)
 
-tex_reciproque_thales.description = u'Réciproque du théorème de Thalès'
+class tex_reciproque_thales(LegacyExercise):
+    """Réciproque du théorème de Thalès"""
+
+    tags = ["troisième"]
+    function = _tex_reciproque_thales
 
 
 #
@@ -799,10 +808,14 @@ def valeurs_trigo():
             v = (v, (trigo, 0, l[0], l[3]))
     return v
 
-def tex_trigo():
+def _tex_trigo():
     exo = ['\\exercice']
     cor = ['\\exercice*']
     trigo_init(exo, cor)
     return (exo, cor)
 
-tex_trigo.description = u'Trigonométrie'
+class tex_trigo(LegacyExercise):
+    """Trigonométrie"""
+
+    tags = ["troisième"]
+    function = _tex_trigo

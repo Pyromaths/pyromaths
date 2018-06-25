@@ -37,9 +37,9 @@ precision = [u'au millième', u'au centième', u'au dixième', u'à l\'unité',
 supinf = ['', u' par défaut', u' par excès']
 
 class ArrondirNombreDecimal(ex.TexExercise):
-    """ Exercice d'arrondis avec les encadrements. """
+    """Arrondir des nombres décimaux"""
 
-    description = u'Arrondir des nombres décimaux'
+    tags = ["sixième"]
 
     def __init__(self):
         hasard = [valide_hasard() for dummy in range(4)]

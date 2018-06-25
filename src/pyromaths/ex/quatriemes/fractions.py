@@ -26,6 +26,7 @@ from __future__ import unicode_literals
 from builtins import range
 from pyromaths.outils import Arithmetique
 from pyromaths.outils.Priorites3 import texify, priorites
+from pyromaths.ex import LegacyExercise
 import random
 # from pyromaths.classes.Fractions import Fraction  # Classe Fractions de pyromaths
 
@@ -88,7 +89,7 @@ def valeurs_somme_positive():
     random.shuffle(l)
     return l
 
-def sommes_fractions_positives():
+def _sommes_fractions_positives():
     exo = ["\\exercice",
            u"Calculer en détaillant les étapes. Donner le résultat sous la forme d'une fraction la plus simple possible (ou d'un entier lorsque c'est possible).",
            "\\begin{multicols}{4}", "  \\begin{enumerate}"]
@@ -110,7 +111,11 @@ def sommes_fractions_positives():
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
     return (exo, cor)
 
-sommes_fractions_positives.description = u'Sommes de positifs en écriture fractionnaire'
+class sommes_fractions_positives(LegacyExercise):
+    """Sommes de positifs en écriture fractionnaire"""
+
+    tags = ["quatrième"]
+    function = _sommes_fractions_positives
 
 #===============================================================================
 # def sommes_fractions_4e(op, level):

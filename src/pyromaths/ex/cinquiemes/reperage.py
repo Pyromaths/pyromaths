@@ -27,6 +27,7 @@ from builtins import str
 from builtins import range
 import random
 from pyromaths.outils.Affichage import decimaux
+from pyromaths.ex import LegacyExercise
 
 def noms_sommets(nb):
     """Renvoie nb noms de sommets"""
@@ -174,7 +175,7 @@ def tex_liste_co(liste_coord):
         i = i + 1
     return tlc
 
-def reperage():
+def _reperage():
     nbpts = 13
     noms_pts = (noms_sommets(nbpts))
     coord_pts = coordo_pts(nbpts)
@@ -220,4 +221,8 @@ def reperage():
     cor.append("}")
     return(exo, cor)
 
-reperage.description = _(u'Repérage')
+class reperage(LegacyExercise):
+    """Repérage"""
+
+    tags = ["cinquième"]
+    function = _reperage

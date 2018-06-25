@@ -25,6 +25,7 @@ from __future__ import unicode_literals
 from builtins import range
 from pyromaths.outils.Arithmetique import ppcm, pgcd, signe, valeur_alea
 from random import randrange
+from pyromaths.ex import LegacyExercise
 
 #
 # ------------------- FRACTIONS -------------------
@@ -409,7 +410,7 @@ def valeurs_quotient_frac():  # cree 4 fractions et un tuple de signes (+,+)
     return ((n1, d1), (n2, 1), (n3, d3), (n4, 1), (s1, s2))
 
 
-def tex_fractions():
+def _tex_fractions():
     nb_exos = 3
     tex_exos = (tex_somme_prod,
                 tex_prod_parenth,
@@ -433,4 +434,8 @@ def tex_fractions():
             cor.append('\\end{multicols}')
     return (exo, cor)
 
-tex_fractions.description = u'Fractions'
+class tex_fractions(LegacyExercise):
+    """Fractions"""
+
+    tags = ["troisième"]
+    function = _tex_fractions

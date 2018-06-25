@@ -30,6 +30,7 @@ from builtins import range
 from pyromaths.outils import Arithmetique
 from pyromaths.outils.Affichage import TeX, tex_coef
 import random
+from pyromaths.ex import LegacyExercise
 
 
 def choix_trou(nb1, nb2, tot, operateur, exo, cor):
@@ -74,7 +75,7 @@ def moins_dec(pyromax):
 
 
 
-def relatifs():
+def _relatifs():
     exo = ["\\exercice", _("Effectuer sans calculatrice :"),
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     cor = ["\\exercice*", _("Effectuer sans calculatrice :"),
@@ -108,4 +109,8 @@ def relatifs():
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
     return (exo, cor)
 
-relatifs.description = _(u'Addition de relatifs')
+class relatifs(LegacyExercise):
+    """Addition de relatifs"""
+
+    tags = ["cinquième"]
+    function = _relatifs

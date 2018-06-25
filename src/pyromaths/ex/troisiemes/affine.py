@@ -34,6 +34,7 @@ from pyromaths.outils.Affichage import decimaux
 import random
 import pyromaths.outils.Priorites3
 from pyromaths.outils import Priorites3
+from pyromaths.ex import LegacyExercise
 
 
 def extreme(a, b, xmin, xmax, ymin, ymax):
@@ -344,7 +345,7 @@ def exprfonc(f, i, A, B):
     return l
 
 
-def affine():
+def _affine():
     # Génère l'exercice
     xmin, xmax, ymin, ymax = -5, 5, -5, 5
     f = ['f', 'g', 'h', 'k', 'l', 'u']
@@ -429,4 +430,8 @@ def affine():
          "\\vspace{0.45cm}"]
     return exo, cor
 
-affine.description = u'Fonctions affines'
+class affine(LegacyExercise):
+    """Fonctions affines"""
+
+    tags = ["troisième"]
+    function = _affine

@@ -29,6 +29,7 @@ from past.utils import old_div
 from pyromaths.outils.Arithmetique import pgcd, valeur_alea
 from random import choice, randrange
 import string, math
+from pyromaths.ex import LegacyExercise
 
 #
 # ------------------- PUISSANCES -------------------
@@ -132,7 +133,7 @@ def valeurs_puissances():  # renvoie un tuple contenant les valeurs pour les deu
     b = verifie_type((n1, n2, n3, e1, e2, e3, e4))
     return (a, b)
 
-def tex_puissances():
+def _tex_puissances():
     sd = str.maketrans('.', ',')  # convertit les . en , (separateur decimal)
     valeurs = valeurs_puissances()
     i = randrange(2)
@@ -162,4 +163,8 @@ def tex_puissances():
     cor.append('\\end{multicols}')
     return (exo, cor)
 
-tex_puissances.description = u'Puissances'
+class tex_puissances(LegacyExercise):
+    """Puissances"""
+
+    tags = ["troisième"]
+    function = _tex_puissances

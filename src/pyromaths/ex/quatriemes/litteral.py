@@ -28,6 +28,7 @@ from builtins import chr
 from builtins import range
 from pyromaths.outils.Priorites3 import texify, priorites, splitting
 from random import randrange, shuffle
+from pyromaths.ex import LegacyExercise
 
 def valeurs_reduire():
     """Travail sur les bases du calcul littéral en quatrième"""
@@ -53,7 +54,7 @@ def valeurs_reduire():
     p2 = "Polynome(\"%s%s^%s\", details=3)" % (a2, var, deg2)
     return p1 + op + p2
 
-def reduire():
+def _reduire():
     """Travail sur les bases du calcul littéral en quatrième"""
     exo = ["\\exercice", u"Réduire, si possible, les expressions suivantes :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
@@ -76,9 +77,13 @@ def reduire():
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
     return (exo, cor)
 
-reduire.description = u'Bases du calcul littéral'
+class reduire(LegacyExercise):
+    """Bases du calcul littéral"""
 
-def distributivite():
+    tags = ["quatrième"]
+    function = _reduire
+
+def _distributivite():
     """Crée un exercice permettant de s'entrainer sur la distributivité
     """
     lcalc, expr = [], []
@@ -130,9 +135,13 @@ def distributivite():
     cor.append("\\end{multicols}")
     return exo, cor
 
-distributivite.description = u'Distributivité'
+class distributivite(LegacyExercise):
+    """Distributivité"""
 
-def double_distributivite():
+    tags = ["quatrième"]
+    function = _distributivite
+
+def _double_distributivite():
     """Crée un exercice permettant de s'entrainer sur la double distributivité
     """
     lcalc, expr = [], []
@@ -175,9 +184,13 @@ def double_distributivite():
     exo.append("\\end{multicols}")
     return exo, cor
 
-double_distributivite.description = u'Double distributivité'
+class double_distributivite(LegacyExercise):
+    """Double distributivité"""
 
-def soustraction():
+    tags = ["quatrième"]
+    function = _double_distributivite
+
+def _soustraction():
     """Réduction d'expressions du type 5a+3-(5+a)
     """
     lcalc, expr = [], []
@@ -213,7 +226,11 @@ def soustraction():
     cor.append("\\end{multicols}")
     return exo, cor
 
-soustraction.description = u'Soustraire une expression entre parenthèses'
+class soustraction(LegacyExercise):
+    """Soustraire une expression entre parenthèses"""
+
+    tags = ["quatrième"]
+    function = _soustraction
 
 def valeurs_reduire_somme(nbval=4):
     """Réduire une somme de quatre monômes de degrés 0 et 1"""
@@ -224,7 +241,7 @@ def valeurs_reduire_somme(nbval=4):
     l = [[randrange(1, 11) * (-1) ** randrange(2), (i + 1) % 2] for i in range(nbval)]
     return "Polynome(%s, var=\"%s\", details=3)" % (l, var)
 
-def exo_comptable():
+def _exo_comptable():
     """Exercice tiré de l'excellent ouvrage Des maths ensemble et pour chacun quatrième
     """
     exo = ["\\exercice", u"Le principe est le suivant : l'extrémité de chaque flèche indique la somme de la ligne ou de la colonne correspondante. Compléter, sachant que $x$ représente un nombre quelconque et que le contenu des deux cases grises doit être le même.\\par"]
@@ -304,7 +321,13 @@ def exo_comptable():
     cor.append(u"\\end{multicols}")
 
     return exo, cor
-exo_comptable.description = u'Réduire des expressions littérales'
+
+class exo_comptable(LegacyExercise):
+    """Réduire des expressions littérales"""
+
+    tags = ["quatrième"]
+    function = _exo_comptable
+
 #===============================================================================
 #
 # def reduire_expressions():
